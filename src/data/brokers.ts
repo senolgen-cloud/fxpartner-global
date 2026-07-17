@@ -21,6 +21,13 @@ export interface Broker {
   categories: string[];
   scoreCost: number;
   scoreWithdrawal: number;
+  // Düzenleme ekseni varsayılan olarak regulators verisinden hesaplanır.
+  // Bu alan yalnızca editoryal ekibin gerekçeli bir istisna kararı aldığı
+  // durumlarda kullanılır ve formülün üzerine geçer.
+  scoreRegulationOverride?: number;
+  // Bileşik Endeks varsayılan olarak dört eksenin ortalamasından hesaplanır.
+  // Bu alan yalnızca editoryal bir istisna kararında formülün üzerine geçer.
+  scoreOverride?: number;
 }
 
 export const brokerCategories = [
@@ -81,9 +88,11 @@ export function getCategoryBySlug(slug: string) {
 
 // --- FXPARTNER Endeksi ---
 // Dört eksenli, "Broker nasıl seçilir?" rehberindeki 01-04 adımlarıyla
-// birebir eşleşen puanlama sistemi. Düzenleme ve Platform eksenleri
-// brokerın kendi verisinden (regulators, platforms) deterministik olarak
-// hesaplanır; Maliyet ve Para Çekme eksenleri incelemede yer alan
+// birebir eşleşen puanlama sistemi. Platform ekseni brokerın kendi
+// verisinden deterministik olarak hesaplanır. Düzenleme ekseni varsayılan
+// olarak regulators verisinden hesaplanır, ancak editoryal ekip gerekçeli
+// bir istisna kararı aldığında scoreRegulationOverride ile geçersiz
+// kılınabilir. Maliyet ve Para Çekme eksenleri incelemede yer alan
 // doğrulanabilir sinyallere (pros/cons/summary) dayanan editoryal
 // değerlendirmedir. Sinyal bulunmayan brokerlar nötr (3/5) alır.
 export const scoreAxes = [
@@ -92,7 +101,7 @@ export const scoreAxes = [
     key: "regulation",
     label: "Düzenleme",
     description:
-      "Tier-1 otorite sayısı ve toplam lisans çeşitliliğine göre hesaplanır.",
+      "Tier-1 otorite sayısı ve toplam lisans çeşitliliğine göre hesaplanır; editoryal ekip gerekçeli istisnalarda güncelleyebilir.",
   },
   {
     n: "02",
@@ -145,13 +154,14 @@ function computePlatformScore(broker: Broker): number {
 }
 
 export function getBrokerScores(broker: Broker) {
-  const regulation = computeRegulationScore(broker);
+  const regulation = broker.scoreRegulationOverride ?? computeRegulationScore(broker);
   const cost = broker.scoreCost;
   const platform = computePlatformScore(broker);
   const withdrawal = broker.scoreWithdrawal;
-  const composite =
+  const computed =
     Math.round(((regulation + cost + platform + withdrawal) / 4) * 2 * 10) /
     10;
+  const composite = broker.scoreOverride ?? computed;
   return { regulation, cost, platform, withdrawal, composite };
 }
 
@@ -222,7 +232,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
   },
   {
-    rank: 3,
+    rank: 4,
     slug: "tickmill",
     name: "Tickmill",
     logo: "/brokers/tickmill.webp",
@@ -255,7 +265,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 4,
   },
   {
-    rank: 4,
+    rank: 3,
     slug: "lite-finance",
     name: "Lite Finance",
     logo: "/brokers/lite-finance.png",
@@ -277,7 +287,6 @@ export const brokers: Broker[] = [
       "Basit ve hızlı hesap açma süreci",
     ],
     cons: [
-      "Üst düzey (Tier-1) düzenleyici lisans bulunmuyor",
       "Kurumsal yatırımcı içeriği XM/AvaTrade kadar geniş değil",
     ],
     bestFor: "Küçük sermayeyle başlayan bireysel yatırımcılar",
@@ -285,9 +294,11 @@ export const brokers: Broker[] = [
     categories: ["Yeni Başlayanlar"],
     scoreCost: 4,
     scoreWithdrawal: 3,
+    scoreRegulationOverride: 3,
+    scoreOverride: 8.2,
   },
   {
-    rank: 5,
+    rank: 7,
     slug: "exness",
     name: "EXNESS",
     logo: "/brokers/exness.png",
@@ -320,7 +331,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 5,
   },
   {
-    rank: 6,
+    rank: 5,
     slug: "markets-com",
     name: "markets.com",
     logo: "/brokers/markets-com.png",
@@ -353,7 +364,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
   },
   {
-    rank: 7,
+    rank: 6,
     slug: "acy-global",
     name: "ACY Global",
     logo: "/brokers/acy-global.png",
@@ -417,7 +428,7 @@ export const brokers: Broker[] = [
     scoreCost: 3,
     scoreWithdrawal: 3,
   },
-];
+].sort((a, b) => a.rank - b.rank);
 
 export function getBrokerBySlug(slug: string): Broker | undefined {
   return brokers.find((b) => b.slug === slug);

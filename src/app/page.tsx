@@ -32,7 +32,7 @@ const steps = [
 const faqs = [
   {
     q: "FXPARTNER Endeksi nedir, nasıl hesaplanıyor?",
-    a: "FXPARTNER Endeksi, aşağıdaki 01-04 rehberindeki dört kritere (Düzenleme, Maliyet, Platform, Para Çekme) göre 0-10 arası hesaplanan bileşik bir puandır. Düzenleme ve Platform eksenleri brokerın lisans ve platform verisinden otomatik hesaplanır; Maliyet ve Para Çekme eksenleri incelemede yer alan doğrulanabilir sinyallere dayanan editoryal değerlendirmedir — özel bir sinyal bulunmayan brokerlar bu eksende nötr puan alır. Endeks, yıldız puanından bağımsız ayrı bir ölçümdür; ikisi farklı şeyleri yansıtabilir.",
+    a: "FXPARTNER Endeksi, aşağıdaki 01-04 rehberindeki dört kritere (Düzenleme, Maliyet, Platform, Para Çekme) göre 0-10 arası hesaplanan bileşik bir puandır. Platform ekseni brokerın platform verisinden otomatik hesaplanır. Düzenleme ekseni varsayılan olarak lisans verisinden hesaplanır; editoryal ekip gerekçeli bir istisna kararı aldığında bu puanı güncelleyebilir. Maliyet ve Para Çekme eksenleri incelemede yer alan doğrulanabilir sinyallere dayanan editoryal değerlendirmedir — özel bir sinyal bulunmayan brokerlar bu eksende nötr puan alır. Endeks, yıldız puanından bağımsız ayrı bir ölçümdür; ikisi farklı şeyleri yansıtabilir.",
   },
   {
     q: "Bu sıralama nasıl belirleniyor?",
