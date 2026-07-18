@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, JetBrains_Mono } from "next/font/google";
+import BonusPopup from "@/components/BonusPopup";
 import "./globals.css";
 
 const geist = Geist({
@@ -30,6 +31,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-paper text-text-dark">
         {children}
+        <BonusPopup />
       </body>
     </html>
   );
