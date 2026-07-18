@@ -493,6 +493,37 @@ export const brokers: Broker[] = [
     scoreCost: 3,
     scoreWithdrawal: 3,
   },
+  {
+    rank: 11,
+    slug: "ic-markets",
+    name: "IC Markets",
+    tagline: "Ham ECN spread ve TradingView entegrasyonu",
+    rating: 4.7,
+    founded: 2007,
+    minDeposit: "$200",
+    maxLeverage: "1:500*",
+    regulators: ["ASIC", "CySEC", "FSA (Seychelles)"],
+    platforms: ["MT4", "MT5", "cTrader", "TradingView"],
+    headquarters: "Sydney, Avustralya",
+    referralUrl: "https://ic.com/?camp=69888",
+    summary:
+      "IC Markets (yeni markasıyla IC), 2007'den bu yana faaliyette olan, ham ECN spread konusunda sektör lideri kabul edilen, ASIC ve CySEC dahil güçlü çoklu düzenleyici lisansa sahip köklü bir brokerdır. FXPARTNER ortak kodu ile hesap açılabilir.",
+    pros: [
+      "2007'den beri faaliyette, ham ECN spread konusunda sektör lideri",
+      "ASIC, CySEC ve FSA dahil güçlü çoklu düzenleyici lisans",
+      "MT4/MT5/cTrader/TradingView geniş platform desteği",
+      "Trustpilot'ta 55.000+ değerlendirme ile 4.8/5 puan",
+    ],
+    cons: [
+      "200 USD minimum yatırım, düşük bariyerli brokerlara göre yüksek",
+      "2024'te CySEC'ten kaldıraç kısıtlamalarını aşma ve maliyet şeffaflığı ihlalleri nedeniyle toplam 250.000 EUR ceza aldı",
+    ],
+    bestFor: "Ham spread ve kurumsal düzeyde yürütme arayan deneyimli/algoritmik yatırımcılar",
+    accentNote: "En düşük ham spread",
+    categories: ["Düşük Spread", "Kurumsal Güven"],
+    scoreCost: 5,
+    scoreWithdrawal: 4,
+  },
 ].sort((a, b) => a.rank - b.rank);
 
 export function getBrokerBySlug(slug: string): Broker | undefined {

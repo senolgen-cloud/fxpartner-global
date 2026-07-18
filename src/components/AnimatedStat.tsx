@@ -27,8 +27,8 @@ export default function AnimatedStat({
     ).matches;
 
     if (prefersReduced) {
-      const id = requestAnimationFrame(() => setDisplay(value));
-      return () => cancelAnimationFrame(id);
+      setDisplay(value);
+      return;
     }
 
     let started = false;
