@@ -396,6 +396,7 @@ export const brokers: Broker[] = [
     rank: 8,
     slug: "versus-trade",
     name: "Versus Trade",
+    logo: "/brokers/versus-trade.jpg",
     tagline: "MetaTrader 5 üzerinden yüksek kaldıraçlı CFD işlemleri",
     rating: 3.0,
     founded: 2024,
