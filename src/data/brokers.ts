@@ -524,6 +524,37 @@ export const brokers: Broker[] = [
     scoreCost: 5,
     scoreWithdrawal: 4,
   },
+  {
+    rank: 12,
+    slug: "exclusive-markets",
+    name: "Exclusive Markets",
+    tagline: "MT4/MT5 üzerinden yüksek kaldıraçlı offshore CFD işlemleri",
+    rating: 2.0,
+    founded: 2011,
+    minDeposit: "$200",
+    maxLeverage: "1:2000*",
+    regulators: ["FSA (Seychelles)", "FSCA"],
+    platforms: ["MT4", "MT5"],
+    headquarters: "Mahé, Seyşeller",
+    referralUrl: "http://www.exclusivemarkets.com/register?ib=12214908",
+    summary:
+      "Exclusive Markets, 2011'de kurulan, yalnızca offshore (FSA Seyşeller ve FSCA) lisansına sahip bir CFD brokerdır. Bağımsız inceleme kaynaklarında düşük güven skoru ve tekrarlayan para çekme şikayetleriyle anılmaktadır; hesap açmadan önce bu riskleri dikkatle değerlendirmenizi öneririz.",
+    pros: [
+      "1:2000'e kadar yüksek kaldıraç seçeneği",
+      "5.000'den fazla enstrüman ile geniş ürün yelpazesi",
+      "MT4/MT5 desteği",
+    ],
+    cons: [
+      "Sadece offshore (FSA Seyşeller + FSCA) lisansı var, Tier-1 düzenleme bulunmuyor",
+      "WikiFX saha araştırmasında belirtilen Kıbrıs/Seyşeller adreslerinde fiziksel varlık doğrulanamadı",
+      "Bağımsız inceleme sitelerinde düşük güven skoru (WikiFX 2,38/10; ForexBrokerz 1,50/5) ve tekrarlayan para çekme/donmuş bakiye şikayetleri bildirilmiştir",
+    ],
+    bestFor: "Riski tam olarak kabul eden, yüksek kaldıraç arayan deneyimli yatırımcılar",
+    accentNote: "Yüksek kaldıraç seçeneği",
+    categories: ["Yüksek Kaldıraç"],
+    scoreCost: 3,
+    scoreWithdrawal: 1,
+  },
 ].sort((a, b) => a.rank - b.rank);
 
 export function getBrokerBySlug(slug: string): Broker | undefined {
