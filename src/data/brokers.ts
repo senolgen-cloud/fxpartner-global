@@ -36,7 +36,6 @@ export const brokerCategories = [
   "Yüksek Kaldıraç",
   "Kurumsal Güven",
   "Çoklu Platform",
-  "Algoritmik Trading",
 ] as const;
 
 export type BrokerCategory = (typeof brokerCategories)[number];
@@ -69,11 +68,6 @@ export const categoryInfo: Record<
     slug: "coklu-platform",
     description:
       "MT4/MT5'in yanı sıra kendi geliştirdiği web, mobil veya cTrader gibi ek platform seçenekleri sunan brokerlar.",
-  },
-  "Algoritmik Trading": {
-    slug: "algoritmik-trading",
-    description:
-      "EA (Expert Advisor) desteği, VPS ve otomatik strateji altyapısına uygun brokerlar.",
   },
 };
 
@@ -298,7 +292,7 @@ export const brokers: Broker[] = [
     scoreOverride: 8.2,
   },
   {
-    rank: 7,
+    rank: 6,
     slug: "exness",
     name: "EXNESS",
     logo: "/brokers/exness.png",
@@ -364,39 +358,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
   },
   {
-    rank: 6,
-    slug: "acy-global",
-    name: "ACY Global",
-    logo: "/brokers/acy-global.png",
-    tagline: "2.200+ enstrüman, EA-dostu MT4/MT5 altyapısı",
-    rating: 4.0,
-    founded: 2014,
-    minDeposit: "$50",
-    maxLeverage: "1:500*",
-    regulators: ["ASIC"],
-    platforms: ["MT4", "MT5"],
-    headquarters: "Avustralya",
-    referralUrl: "https://bit.ly/acy-global",
-    summary:
-      "ACY Global, 2.200'den fazla enstrüman, EA-dostu MT4/MT5 altyapısı ve ücretsiz VPS desteğiyle otomatik (algoritmik) trade sistemlerine uygun bir seçenektir. Bu içerik kamuya açık kaynaklardan (ACY resmi regülasyon sayfası, WikiFX, Trustpilot, FxScouts, FXEmpire) derlenmiştir.",
-    pros: [
-      "2.200+ enstrüman ile geniş ürün yelpazesi",
-      "EA (algoritmik) stratejilere uygun altyapı",
-      "Ücretsiz VPS desteği",
-      "ASIC düzenlemesi altında faaliyet",
-    ],
-    cons: [
-      "FXPARTNER'e özel ortak kodu/bonus bulunmuyor",
-      "Marka bilinirliği diğer köklü brokerlara göre daha sınırlı",
-    ],
-    bestFor: "Otomatik/algoritmik trading yapan yatırımcılar",
-    accentNote: "En geniş enstrüman yelpazesi",
-    categories: ["Algoritmik Trading"],
-    scoreCost: 3,
-    scoreWithdrawal: 3,
-  },
-  {
-    rank: 8,
+    rank: 7,
     slug: "fxpro",
     name: "FxPro",
     logo: "/brokers/fxpro.png",
