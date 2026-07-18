@@ -462,6 +462,37 @@ export const brokers: Broker[] = [
     scoreCost: 4,
     scoreWithdrawal: 3,
   },
+  {
+    rank: 10,
+    slug: "easymarkets",
+    name: "easyMarkets",
+    tagline: "Sabit spread ve garantili risk yönetimi araçları",
+    rating: 4.2,
+    founded: 2001,
+    minDeposit: "$25",
+    maxLeverage: "1:2000*",
+    regulators: ["CySEC", "ASIC", "FSA (Seychelles)", "FSC (BVI)", "FSCA"],
+    platforms: ["MT4", "MT5", "easyMarkets App"],
+    headquarters: "Limassol, Kıbrıs",
+    referralUrl: "https://lnd.easy-markets.com/int/en/refer-a-friend/?ref_id=8433E3",
+    summary:
+      "easyMarkets, 2001'den bu yana faaliyette olan, CySEC ve ASIC dahil 5 düzenleyici lisansa sahip köklü bir brokerdır. Sektörde nadir bulunan garantili stop-loss ve garantili negatif bakiye koruması sunar. FXPARTNER ortak kodu ile hesap açılabilir.",
+    pros: [
+      "2001'den beri faaliyette, 20+ yıllık sektör deneyimi",
+      "CySEC ve ASIC dahil 5 düzenleyici lisans",
+      "Garantili Stop-Loss ve garantili negatif bakiye koruması",
+      "$25 gibi düşük minimum yatırım",
+    ],
+    cons: [
+      "En düşük spreadler için Premium/VIP hesapta $2.000-$10.000 minimum yatırım gerekiyor",
+      "Kendi platformunda otomatik (EA) trading veya üçüncü parti eklenti desteği yok",
+    ],
+    bestFor: "Sabit spread ve garantili risk yönetimi araçları arayan yeni başlayanlar",
+    accentNote: "En güvenli risk yönetimi araçları",
+    categories: ["Yeni Başlayanlar", "Kurumsal Güven"],
+    scoreCost: 3,
+    scoreWithdrawal: 3,
+  },
 ].sort((a, b) => a.rank - b.rank);
 
 export function getBrokerBySlug(slug: string): Broker | undefined {

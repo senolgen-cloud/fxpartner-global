@@ -6,17 +6,16 @@ import RatingStars from "./RatingStars";
 import TrustIndex from "./TrustIndex";
 
 function getMonogram(name: string): string {
-  const words = name.trim().split(/\s+/);
+  const camelSplit = name
+    .trim()
+    .replace(/([a-zçğıöşü])([A-ZÇĞİÖŞÜ])/g, "$1 $2");
+  const words = camelSplit.split(/\s+/);
   if (words.length > 1) {
     return words
       .map((w) => w[0])
       .join("")
       .slice(0, 2)
       .toUpperCase();
-  }
-  const capitals = name.match(/[A-ZÇĞİÖŞÜ]/g);
-  if (capitals && capitals.length >= 2) {
-    return capitals.slice(0, 2).join("").toUpperCase();
   }
   return name.slice(0, 2).toUpperCase();
 }
