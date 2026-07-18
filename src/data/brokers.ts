@@ -293,7 +293,7 @@ export const brokers: Broker[] = [
     scoreCost: 4,
     scoreWithdrawal: 3,
     scoreRegulationOverride: 3,
-    scoreOverride: 8.2,
+    scoreOverride: 8.7,
   },
   {
     rank: 5,
@@ -428,6 +428,7 @@ export const brokers: Broker[] = [
     categories: ["Yüksek Kaldıraç"],
     scoreCost: 3,
     scoreWithdrawal: 2,
+    scoreOverride: 5.2,
   },
 ].sort((a, b) => a.rank - b.rank);
 
