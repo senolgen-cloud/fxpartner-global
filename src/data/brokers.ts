@@ -184,6 +184,7 @@ export const brokers: Broker[] = [
       "FXPARTNER ortak kodu ile VIP avantajlar",
       "Çoklu düzenleyici lisans (ASIC, CySEC)",
       "Negatif bakiye koruması",
+      "7/24 ortalama 1-2 dakikada para çekim",
     ],
     cons: [
       "Ham fiyat (raw spread) hesap seçeneği sınırlı",
@@ -193,8 +194,7 @@ export const brokers: Broker[] = [
     accentNote: "En çok tercih edilen",
     categories: ["Yeni Başlayanlar"],
     scoreCost: 5,
-    scoreWithdrawal: 3,
-    scoreOverride: 9.6,
+    scoreWithdrawal: 5,
   },
   {
     rank: 2,
@@ -227,6 +227,7 @@ export const brokers: Broker[] = [
     categories: ["Kurumsal Güven", "Çoklu Platform"],
     scoreCost: 3,
     scoreWithdrawal: 3,
+    scoreOverride: 9.0,
   },
   {
     rank: 4,
@@ -295,7 +296,7 @@ export const brokers: Broker[] = [
     scoreOverride: 8.2,
   },
   {
-    rank: 6,
+    rank: 5,
     slug: "exness",
     name: "EXNESS",
     logo: "/brokers/exness.png",
@@ -326,9 +327,10 @@ export const brokers: Broker[] = [
     categories: ["Yüksek Kaldıraç", "Düşük Spread"],
     scoreCost: 5,
     scoreWithdrawal: 5,
+    scoreOverride: 8.2,
   },
   {
-    rank: 5,
+    rank: 6,
     slug: "markets-com",
     name: "markets.com",
     logo: "/brokers/markets-com.png",
