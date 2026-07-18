@@ -18,13 +18,27 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
           </span>
           <div>
             <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-ink">
-              <Image
-                src={broker.logo}
-                alt={broker.name}
-                width={32}
-                height={32}
-                className="h-8 w-8 object-contain"
-              />
+              {broker.logo ? (
+                <Image
+                  src={broker.logo}
+                  alt={broker.name}
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 object-contain"
+                />
+              ) : (
+                <span
+                  className="font-display text-sm font-semibold text-text-on-ink"
+                  aria-hidden="true"
+                >
+                  {broker.name
+                    .split(" ")
+                    .map((w) => w[0])
+                    .join("")
+                    .slice(0, 2)
+                    .toUpperCase()}
+                </span>
+              )}
             </div>
             <h3 className="mt-2 font-display text-2xl font-semibold text-text-dark">
               {broker.name}

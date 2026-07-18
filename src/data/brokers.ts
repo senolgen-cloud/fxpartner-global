@@ -2,7 +2,9 @@ export interface Broker {
   rank: number;
   slug: string;
   name: string;
-  logo: string;
+  // Resmi bir logo dosyası eklenene kadar boş bırakılabilir; kart bu
+  // durumda broker adının baş harflerinden bir monogram gösterir.
+  logo?: string;
   tagline: string;
   rating: number; // out of 5
   founded: number;
@@ -389,6 +391,39 @@ export const brokers: Broker[] = [
     categories: ["Yüksek Kaldıraç", "Kurumsal Güven"],
     scoreCost: 3,
     scoreWithdrawal: 3,
+  },
+  {
+    rank: 8,
+    slug: "versus-trade",
+    name: "Versus Trade",
+    tagline: "MetaTrader 5 üzerinden yüksek kaldıraçlı CFD işlemleri",
+    rating: 3.0,
+    founded: 2024,
+    minDeposit: "$10",
+    maxLeverage: "1:2000*",
+    regulators: ["FSC (Mauritius)"],
+    platforms: ["MT5"],
+    headquarters: "Saint Lucia",
+    referralUrl: "https://one.versustrade.link/links/go/48280?pid=98691",
+    summary:
+      "Versus Trade, 2024'te kurulan, MetaTrader 5 altyapısı ve kendine özgü 'Versus Pairs' ürünüyle öne çıkan yeni nesil bir CFD brokerdır. Mauritius FSC lisansı altında faaliyet gösterir; FXPARTNER ortak kodu ile hesap açılabilir.",
+    pros: [
+      "10 USD ile düşük minimum yatırım",
+      "1:2000'e kadar yüksek kaldıraç seçeneği",
+      "MetaTrader 5 üzerinde hızlı ECN/STP emir gerçekleştirme",
+      "Benzersiz 'Versus Pairs' işlem ürünü",
+    ],
+    cons: [
+      "2024'te kurulmuş, kısa faaliyet geçmişi",
+      "Yalnızca offshore (Mauritius FSC) lisansı var, Tier-1 düzenleme bulunmuyor",
+      "Bazı kullanıcı yorumlarında para çekme/kâr iptali şikayetleri bildirilmiştir",
+      "Sadece MT5 sunuyor, MT4 desteği yok",
+    ],
+    bestFor: "Yüksek kaldıraç arayan, riskin farkında olan deneyimli yatırımcılar",
+    accentNote: "En yeni nesil platform",
+    categories: ["Yüksek Kaldıraç"],
+    scoreCost: 3,
+    scoreWithdrawal: 2,
   },
 ].sort((a, b) => a.rank - b.rank);
 
