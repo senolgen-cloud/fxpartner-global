@@ -227,10 +227,10 @@ export const brokers: Broker[] = [
     categories: ["Kurumsal Güven", "Çoklu Platform"],
     scoreCost: 3,
     scoreWithdrawal: 3,
-    scoreOverride: 9.0,
+    scoreOverride: 9.2,
   },
   {
-    rank: 4,
+    rank: 5,
     slug: "tickmill",
     name: "Tickmill",
     logo: "/brokers/tickmill.webp",
@@ -293,10 +293,10 @@ export const brokers: Broker[] = [
     scoreCost: 4,
     scoreWithdrawal: 3,
     scoreRegulationOverride: 3,
-    scoreOverride: 8.7,
+    scoreOverride: 9.1,
   },
   {
-    rank: 5,
+    rank: 6,
     slug: "exness",
     name: "EXNESS",
     logo: "/brokers/exness.png",
@@ -330,7 +330,7 @@ export const brokers: Broker[] = [
     scoreOverride: 8.2,
   },
   {
-    rank: 6,
+    rank: 10,
     slug: "markets-com",
     name: "markets.com",
     logo: "/brokers/markets-com.png",
@@ -363,7 +363,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
   },
   {
-    rank: 7,
+    rank: 8,
     slug: "fxpro",
     name: "FxPro",
     logo: "/brokers/fxpro.png",
@@ -396,7 +396,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
   },
   {
-    rank: 8,
+    rank: 11,
     slug: "versus-trade",
     name: "Versus Trade",
     logo: "/brokers/versus-trade.jpg",
@@ -431,7 +431,7 @@ export const brokers: Broker[] = [
     scoreOverride: 5.2,
   },
   {
-    rank: 9,
+    rank: 7,
     slug: "thinkmarkets",
     name: "ThinkMarkets",
     tagline: "MT4, MT5 ve ThinkTrader ile 4.000+ enstrüman",
@@ -463,7 +463,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
   },
   {
-    rank: 10,
+    rank: 9,
     slug: "easymarkets",
     name: "easyMarkets",
     tagline: "Sabit spread ve garantili risk yönetimi araçları",
@@ -494,7 +494,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
   },
   {
-    rank: 11,
+    rank: 4,
     slug: "ic-markets",
     name: "IC Markets",
     tagline: "Ham ECN spread ve TradingView entegrasyonu",
