@@ -113,17 +113,19 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
                 ))}
               </div>
 
-              <div className="mt-2 flex flex-wrap gap-2">
-                {broker.categories.map((c) => (
-                  <Link
-                    key={c}
-                    href={`/kategoriler/${categoryInfo[c as BrokerCategory].slug}`}
-                    className="rounded-full border border-signal/30 px-2.5 py-1 font-mono text-[11px] text-signal transition-colors hover:border-signal hover:bg-signal/10"
-                  >
-                    {c}
-                  </Link>
-                ))}
-              </div>
+              {broker.categories.length > 0 && (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {broker.categories.map((c) => (
+                    <Link
+                      key={c}
+                      href={`/kategoriler/${categoryInfo[c as BrokerCategory].slug}`}
+                      className="rounded-full border border-signal/30 px-2.5 py-1 font-mono text-[11px] text-signal transition-colors hover:border-signal hover:bg-signal/10"
+                    >
+                      {c}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="mt-6 shrink-0 rounded-2xl border border-hairline-light bg-paper p-5 lg:mt-0">

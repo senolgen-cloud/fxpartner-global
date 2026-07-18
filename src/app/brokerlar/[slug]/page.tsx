@@ -159,22 +159,24 @@ export default async function BrokerDetailPage({
               </div>
             </div>
 
-            <div className="mt-6">
-              <h2 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                Kategoriler
-              </h2>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {broker.categories.map((c) => (
-                  <Link
-                    key={c}
-                    href={`/kategoriler/${categoryInfo[c as BrokerCategory].slug}`}
-                    className="rounded-full border border-signal/30 px-3 py-1.5 font-mono text-xs text-signal transition-colors hover:border-signal hover:bg-signal/10"
-                  >
-                    {c}
-                  </Link>
-                ))}
+            {broker.categories.length > 0 && (
+              <div className="mt-6">
+                <h2 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
+                  Kategoriler
+                </h2>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {broker.categories.map((c) => (
+                    <Link
+                      key={c}
+                      href={`/kategoriler/${categoryInfo[c as BrokerCategory].slug}`}
+                      className="rounded-full border border-signal/30 px-3 py-1.5 font-mono text-xs text-signal transition-colors hover:border-signal hover:bg-signal/10"
+                    >
+                      {c}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="mt-12 grid gap-8 sm:grid-cols-2">
               <div>
