@@ -192,8 +192,9 @@ export const brokers: Broker[] = [
     bestFor: "Yeni başlayanlar ve eğitim odaklı yatırımcılar",
     accentNote: "En çok tercih edilen",
     categories: ["Yeni Başlayanlar"],
-    scoreCost: 4,
+    scoreCost: 5,
     scoreWithdrawal: 3,
+    scoreOverride: 9.6,
   },
   {
     rank: 2,
