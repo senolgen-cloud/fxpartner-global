@@ -61,12 +61,13 @@ export default function BonusPopup() {
             id="bonus-popup-title"
             className="mt-3 font-display text-3xl font-semibold leading-tight text-text-on-ink"
           >
-            %100&apos;e varan hoşgeldin bonusu
+            Yeni hesap açanlara özel %100 bonus
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-text-on-ink-muted">
             FXPARTNER ortak kodu ile {broker.name}{" "}
-            hesabı açanlar, mevduat bonusu kampanyalarından faydalanabilir.
-            Bonus oranı, hesap tipine ve bulunduğunuz ülkeye göre değişir.
+            hesabı açan yeni yatırımcılara özel %100 mevduat bonusu
+            uygulanır. Bonus oranı, hesap tipine ve bulunduğunuz ülkeye göre
+            değişir.
           </p>
 
           <div className="mt-6 flex flex-col gap-3">
