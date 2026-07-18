@@ -430,6 +430,38 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 2,
     scoreOverride: 5.2,
   },
+  {
+    rank: 9,
+    slug: "thinkmarkets",
+    name: "ThinkMarkets",
+    tagline: "MT4, MT5 ve ThinkTrader ile 4.000+ enstrüman",
+    rating: 4.4,
+    founded: 2010,
+    minDeposit: "$0",
+    maxLeverage: "1:500*",
+    regulators: ["FCA", "ASIC", "CySEC", "FSCA"],
+    platforms: ["MT4", "MT5", "ThinkTrader"],
+    headquarters: "Londra / Melbourne",
+    referralUrl:
+      "https://www.welcome-partner.thinkmarkets.com/?cid=0&pid=290469&type=1&redirecturl=https://portal.thinkmarkets.com/account/individual",
+    summary:
+      "ThinkMarkets, FCA, ASIC ve CySEC dahil güçlü çoklu düzenleyici lisansları, Standard hesapta 0 USD minimum yatırımı ve kendi geliştirdiği ThinkTrader platformuyla 4.000'den fazla enstrümana erişim sunan köklü bir brokerdır. FXPARTNER ortak kodu ile hesap açılabilir.",
+    pros: [
+      "FCA, ASIC ve CySEC dahil güçlü çoklu düzenleyici lisans",
+      "Standard hesapta 0 USD minimum yatırım",
+      "4.000+ enstrüman ile geniş ürün yelpazesi",
+      "ThinkTrader'da bulut tabanlı uyarılar ve özel göstergeler",
+    ],
+    cons: [
+      "Standard/ThinkZero/ThinkTrader hesap seçenekleri yeni başlayanlar için kafa karıştırıcı olabilir",
+      "Cent/mikro hesap seçeneği yok, aylık 20 USD hareketsizlik ücreti uygulanabilir",
+    ],
+    bestFor: "Güçlü düzenleme ve geniş enstrüman yelpazesi arayan deneyimli yatırımcılar",
+    accentNote: "En geniş enstrüman yelpazesi",
+    categories: ["Kurumsal Güven", "Çoklu Platform"],
+    scoreCost: 4,
+    scoreWithdrawal: 3,
+  },
 ].sort((a, b) => a.rank - b.rank);
 
 export function getBrokerBySlug(slug: string): Broker | undefined {

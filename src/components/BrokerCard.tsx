@@ -5,6 +5,22 @@ import { categoryInfo } from "@/data/brokers";
 import RatingStars from "./RatingStars";
 import TrustIndex from "./TrustIndex";
 
+function getMonogram(name: string): string {
+  const words = name.trim().split(/\s+/);
+  if (words.length > 1) {
+    return words
+      .map((w) => w[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase();
+  }
+  const capitals = name.match(/[A-ZÇĞİÖŞÜ]/g);
+  if (capitals && capitals.length >= 2) {
+    return capitals.slice(0, 2).join("").toUpperCase();
+  }
+  return name.slice(0, 2).toUpperCase();
+}
+
 export default function BrokerCard({ broker }: { broker: Broker }) {
   return (
     <article className="group relative border-b border-hairline-light py-10 first:pt-0 last:border-b-0">
@@ -31,12 +47,7 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
                   className="font-display text-sm font-semibold text-text-on-ink"
                   aria-hidden="true"
                 >
-                  {broker.name
-                    .split(" ")
-                    .map((w) => w[0])
-                    .join("")
-                    .slice(0, 2)
-                    .toUpperCase()}
+                  {getMonogram(broker.name)}
                 </span>
               )}
             </div>
