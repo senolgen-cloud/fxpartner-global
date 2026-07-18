@@ -7,6 +7,7 @@ import ComparisonTable from "@/components/ComparisonTable";
 import Reveal from "@/components/Reveal";
 import AnimatedStat from "@/components/AnimatedStat";
 import HeroChart from "@/components/HeroChart";
+import TradingVideo from "@/components/TradingVideo";
 import { brokers } from "@/data/brokers";
 
 const steps = [
@@ -239,6 +240,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <TradingVideo />
 
         {/* FAQ */}
         <section id="sss" className="bg-paper">

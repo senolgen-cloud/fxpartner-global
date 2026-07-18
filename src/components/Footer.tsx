@@ -58,6 +58,11 @@ export default function Footer() {
                 </a>
               </li>
               <li>
+                <a href="#egitim-videosu" className="transition-colors hover:text-text-on-ink">
+                  Eğitim Videosu
+                </a>
+              </li>
+              <li>
                 <a href="#sss" className="transition-colors hover:text-text-on-ink">
                   Sıkça Sorulan Sorular
                 </a>
