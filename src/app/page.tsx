@@ -6,7 +6,7 @@ import BrokerList from "@/components/BrokerList";
 import ComparisonTable from "@/components/ComparisonTable";
 import Reveal from "@/components/Reveal";
 import AnimatedStat from "@/components/AnimatedStat";
-import HeroChart from "@/components/HeroChart";
+import HeroVideo from "@/components/HeroVideo";
 import TradingVideo from "@/components/TradingVideo";
 import { brokers } from "@/data/brokers";
 
@@ -74,7 +74,7 @@ export default function Home() {
             aria-hidden="true"
             className="hero-glow-gold pointer-events-none absolute -right-16 top-10 h-[360px] w-[360px] rounded-full bg-gold/20 blur-[110px]"
           />
-          <HeroChart />
+          <HeroVideo />
 
           <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-28">
             <Reveal>

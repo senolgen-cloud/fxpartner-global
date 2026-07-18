@@ -127,20 +127,6 @@ button {
   animation: glow-drift-b 20s ease-in-out infinite;
 }
 
-/* --- Hero price-chart backdrop --- */
-@keyframes chart-drift {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.chart-track {
-  animation: chart-drift 40s linear infinite;
-}
-
 /* --- Signal pulse dot --- */
 @keyframes signal-pulse {
   0% {
@@ -172,7 +158,6 @@ button {
   .ticker-track,
   .hero-glow-signal,
   .hero-glow-gold,
-  .chart-track,
   .signal-dot {
     animation: none;
   }
