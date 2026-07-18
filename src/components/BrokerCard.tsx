@@ -22,7 +22,7 @@ function getMonogram(name: string): string {
 
 export default function BrokerCard({ broker }: { broker: Broker }) {
   return (
-    <article className="group relative border-b border-hairline-light py-10 first:pt-0 last:border-b-0">
+    <article className="lift-on-hover group relative border-b border-hairline-light py-10 first:pt-0 last:border-b-0">
       <div className="flex flex-col gap-8 md:flex-row md:items-start">
         <div className="flex shrink-0 items-start gap-5 md:w-56">
           <span
@@ -136,7 +136,7 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
               href={broker.referralUrl}
               target="_blank"
               rel="noopener noreferrer sponsored"
-              className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
+              className="lift-on-hover rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft hover:shadow-lg hover:shadow-ink/20"
             >
               Hesap Aç
             </a>

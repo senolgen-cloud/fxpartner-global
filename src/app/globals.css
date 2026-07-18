@@ -80,8 +80,95 @@ button {
   animation: ticker-scroll 32s linear infinite;
 }
 
+/* --- Scroll-reveal --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Hero ambient glow --- */
+@keyframes glow-drift-a {
+  0%,
+  100% {
+    transform: translate(-8%, -6%) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate(6%, 4%) scale(1.15);
+    opacity: 0.8;
+  }
+}
+
+@keyframes glow-drift-b {
+  0%,
+  100% {
+    transform: translate(6%, 8%) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(-8%, -4%) scale(1.2);
+    opacity: 0.65;
+  }
+}
+
+.hero-glow-signal {
+  animation: glow-drift-a 16s ease-in-out infinite;
+}
+
+.hero-glow-gold {
+  animation: glow-drift-b 20s ease-in-out infinite;
+}
+
+/* --- Signal pulse dot --- */
+@keyframes signal-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--signal) 55%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 7px color-mix(in srgb, var(--signal) 0%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--signal) 0%, transparent);
+  }
+}
+
+.signal-dot {
+  animation: signal-pulse 2.4s ease-out infinite;
+}
+
+/* --- Hover lift --- */
+.lift-on-hover {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease;
+}
+
+.lift-on-hover:hover {
+  transform: translateY(-3px);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .ticker-track {
+  .ticker-track,
+  .hero-glow-signal,
+  .hero-glow-gold,
+  .signal-dot {
     animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .lift-on-hover:hover {
+    transform: none;
   }
 }

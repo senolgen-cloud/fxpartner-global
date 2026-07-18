@@ -79,7 +79,7 @@ export default function Footer() {
           <p className="mt-3">
             <strong className="text-text-on-ink-muted">Ortaklık bildirimi:</strong> FXPARTNER,
             bu sayfada listelenen brokerların bir kısmıyla ortaklık/referans
-            ilişkisi içindedir ve "Hesap Aç" bağlantıları üzerinden açılan
+            ilişkisi içindedir ve &ldquo;Hesap Aç&rdquo; bağlantıları üzerinden açılan
             hesaplardan komisyon elde edebilir. Bu durum ilgili karta ayrıca
             not düşülmüştür ve sıralama/puanlama kriterlerini etkilemez.
           </p>

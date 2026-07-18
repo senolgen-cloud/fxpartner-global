@@ -4,6 +4,8 @@ import Ticker from "@/components/Ticker";
 import Highlights from "@/components/Highlights";
 import BrokerList from "@/components/BrokerList";
 import ComparisonTable from "@/components/ComparisonTable";
+import Reveal from "@/components/Reveal";
+import AnimatedStat from "@/components/AnimatedStat";
 import { brokers } from "@/data/brokers";
 
 const steps = [
@@ -61,75 +63,101 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="bg-ink text-text-on-ink">
-          <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-            <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              2026 Broker Rehberi
-            </span>
-            <h1 className="mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
-              Forex brokerlarını okumadan önce, aralarındaki farkı öğrenin.
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              XM, AvaTrade, Lite Finance ve dünyanın önde gelen diğer
-              brokerlarını düzenleme, maliyet, platform ve para çekme
-              hızına göre tek bir yerde karşılaştırdık.
-            </p>
-            <div className="mt-9 flex flex-wrap items-center gap-4">
-              <a
-                href="#brokerlar"
-                className="rounded-full bg-signal px-6 py-3 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong"
-              >
-                Sıralamayı Gör
-              </a>
-              <a
-                href="#karsilastirma"
-                className="rounded-full border border-hairline px-6 py-3 text-sm font-medium text-text-on-ink transition-colors hover:border-text-on-ink"
-              >
-                Karşılaştırma Tablosu
-              </a>
-            </div>
+        <section className="relative overflow-hidden bg-ink text-text-on-ink">
+          <div
+            aria-hidden="true"
+            className="hero-glow-signal pointer-events-none absolute -left-24 -top-24 h-[420px] w-[420px] rounded-full bg-signal/25 blur-[110px]"
+          />
+          <div
+            aria-hidden="true"
+            className="hero-glow-gold pointer-events-none absolute -right-16 top-10 h-[360px] w-[360px] rounded-full bg-gold/20 blur-[110px]"
+          />
 
-            <dl className="mt-16 grid grid-cols-2 gap-6 border-t border-hairline pt-8 sm:grid-cols-4">
-              <div>
-                <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  İncelenen Broker
-                </dt>
-                <dd className="tabular-stat mt-1 font-display text-3xl font-semibold">
-                  {brokers.length}
-                </dd>
+          <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-28">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-signal">
+                <span
+                  aria-hidden="true"
+                  className="signal-dot h-1.5 w-1.5 rounded-full bg-signal"
+                />
+                2026 Broker Rehberi
+              </span>
+            </Reveal>
+
+            <Reveal delay={90}>
+              <h1 className="mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
+                Forex brokerlarını okumadan önce, aralarındaki farkı öğrenin.
+              </h1>
+            </Reveal>
+
+            <Reveal delay={180}>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
+                XM, AvaTrade, Lite Finance ve dünyanın önde gelen diğer
+                brokerlarını düzenleme, maliyet, platform ve para çekme
+                hızına göre tek bir yerde karşılaştırdık.
+              </p>
+            </Reveal>
+
+            <Reveal delay={270}>
+              <div className="mt-9 flex flex-wrap items-center gap-4">
+                <a
+                  href="#brokerlar"
+                  className="lift-on-hover rounded-full bg-signal px-6 py-3 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
+                >
+                  Sıralamayı Gör
+                </a>
+                <a
+                  href="#karsilastirma"
+                  className="lift-on-hover rounded-full border border-hairline px-6 py-3 text-sm font-medium text-text-on-ink transition-colors hover:border-text-on-ink"
+                >
+                  Karşılaştırma Tablosu
+                </a>
               </div>
-              <div>
-                <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  Düzenleyici Otorite
-                </dt>
-                <dd className="tabular-stat mt-1 font-display text-3xl font-semibold">
-                  12+
-                </dd>
-              </div>
-              <div>
-                <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  En Düşük Giriş
-                </dt>
-                <dd className="tabular-stat mt-1 font-display text-3xl font-semibold">
-                  $5
-                </dd>
-              </div>
-              <div>
-                <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  Karşılaştırma Kriteri
-                </dt>
-                <dd className="tabular-stat mt-1 font-display text-3xl font-semibold">
-                  6
-                </dd>
-              </div>
-            </dl>
+            </Reveal>
+
+            <Reveal delay={360}>
+              <dl className="mt-16 grid grid-cols-2 gap-6 border-t border-hairline pt-8 sm:grid-cols-4">
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                    İncelenen Broker
+                  </dt>
+                  <dd className="mt-1 font-display text-3xl font-semibold">
+                    <AnimatedStat value={brokers.length} />
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                    Düzenleyici Otorite
+                  </dt>
+                  <dd className="mt-1 font-display text-3xl font-semibold">
+                    <AnimatedStat value={12} suffix="+" />
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                    En Düşük Giriş
+                  </dt>
+                  <dd className="mt-1 font-display text-3xl font-semibold">
+                    <AnimatedStat value={5} prefix="$" />
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                    Karşılaştırma Kriteri
+                  </dt>
+                  <dd className="mt-1 font-display text-3xl font-semibold">
+                    <AnimatedStat value={6} />
+                  </dd>
+                </div>
+              </dl>
+            </Reveal>
           </div>
         </section>
 
         {/* Ranked broker list */}
         <section id="brokerlar" className="bg-paper-high">
           <div className="mx-auto max-w-6xl px-6 py-20">
-            <div className="max-w-2xl">
+            <Reveal className="max-w-2xl">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
                 Sıralama
               </span>
@@ -140,7 +168,7 @@ export default function Home() {
                 Her broker; düzenleme gücü, maliyet yapısı, platform desteği
                 ve yatırımcı profiline uygunluğuna göre değerlendirildi.
               </p>
-            </div>
+            </Reveal>
 
             <div className="mt-12">
               <BrokerList brokers={brokers} />
@@ -151,7 +179,7 @@ export default function Home() {
         {/* Comparison table */}
         <section id="karsilastirma" className="bg-ink">
           <div className="mx-auto max-w-6xl px-6 py-20">
-            <div className="max-w-2xl">
+            <Reveal className="max-w-2xl">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
                 Yan Yana
               </span>
@@ -161,10 +189,10 @@ export default function Home() {
               <p className="mt-4 text-text-on-ink-muted">
                 Karar vermeden önce temel rakamları tek bakışta görün.
               </p>
-            </div>
-            <div className="mt-10">
+            </Reveal>
+            <Reveal delay={120} className="mt-10">
               <ComparisonTable />
-            </div>
+            </Reveal>
             <p className="mt-6 max-w-2xl font-mono text-xs leading-relaxed text-text-on-ink-muted">
               * Kaldıraç ve minimum yatırım rakamları hesap tipine ve
               yatırımcının bulunduğu ülkeye göre değişiklik gösterebilir.
@@ -177,7 +205,7 @@ export default function Home() {
         {/* How to choose */}
         <section id="nasil-secilir" className="bg-paper-high">
           <div className="mx-auto max-w-6xl px-6 py-20">
-            <div className="max-w-2xl">
+            <Reveal className="max-w-2xl">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
                 Rehber
               </span>
@@ -189,10 +217,10 @@ export default function Home() {
                 <strong className="font-medium text-text-dark">FXPARTNER Endeksi</strong>{" "}
                 olarak 0-10 arası puanlanır.
               </p>
-            </div>
+            </Reveal>
             <div className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2">
-              {steps.map((step) => (
-                <div key={step.n} className="flex gap-5">
+              {steps.map((step, i) => (
+                <Reveal key={step.n} delay={i * 90} className="flex gap-5">
                   <span className="font-display text-3xl font-light text-signal">
                     {step.n}
                   </span>
@@ -204,7 +232,7 @@ export default function Home() {
                       {step.body}
                     </p>
                   </div>
-                </div>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -213,16 +241,18 @@ export default function Home() {
         {/* FAQ */}
         <section id="sss" className="bg-paper">
           <div className="mx-auto max-w-3xl px-6 py-20">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
-              SSS
-            </span>
-            <h2 className="mt-3 font-display text-3xl font-semibold text-text-dark md:text-4xl">
-              Sıkça sorulan sorular
-            </h2>
+            <Reveal>
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
+                SSS
+              </span>
+              <h2 className="mt-3 font-display text-3xl font-semibold text-text-dark md:text-4xl">
+                Sıkça sorulan sorular
+              </h2>
+            </Reveal>
             <div className="mt-10 divide-y divide-hairline-light border-t border-hairline-light">
               {faqs.map((faq) => (
                 <details key={faq.q} className="group py-5">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-medium text-text-dark">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-medium text-text-dark transition-colors group-open:text-signal">
                     {faq.q}
                     <span className="shrink-0 font-mono text-sm text-text-muted transition-transform group-open:rotate-45">
                       +
