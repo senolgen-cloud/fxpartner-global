@@ -237,7 +237,7 @@ export async function GET(request: Request) {
           <span style={{ fontSize: 14, color: TEXT_ON_INK_MUTED }}>
             Kaynak: CoinGecko (gercek zamanli) · FXPARTNER tarafindan otomatik hesaplanmistir
           </span>
-          <span style={{ fontSize: 15, color: TEXT_ON_INK, fontWeight: 600 }}>fxpartner.tr</span>
+          <span style={{ fontSize: 15, color: TEXT_ON_INK, fontWeight: 600 }}>fxpartner.global</span>
         </div>
       </div>
     ),

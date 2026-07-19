@@ -16,7 +16,7 @@ jobs:
       - name: Trigger market-update
         run: |
           curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            https://fxpartner-global.vercel.app/api/cron/market-update
+            https://fxpartner.global/api/cron/market-update
 
   news-update:
     if: github.event.schedule == '*/30 * * * *' || github.event_name == 'workflow_dispatch'
@@ -25,4 +25,4 @@ jobs:
       - name: Trigger news-update
         run: |
           curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            https://fxpartner-global.vercel.app/api/cron/news-update
+            https://fxpartner.global/api/cron/news-update

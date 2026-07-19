@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
   const ma20 = sma(closes, 20)[last];
   const rsiValue = rsi(closes, 14)[last];
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.tr";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
   const imageUrl = `${siteUrl}/api/og/market-chart?symbol=${symbolId}`;
 
   const aboveMA10 = ma10 !== null && currentPrice >= ma10;
@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
     `Fiyat MA10'un ${aboveMA10 ? "uzerinde" : "altinda"}, MA20'nin ${aboveMA20 ? "uzerinde" : "altinda"}. ` +
     `RSI(14) ${rsiValue !== null ? rsiValue.toFixed(1) : "-"} ile ${rsiZone}.\n\n` +
     `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n` +
-    `fxpartner.tr`;
+    `fxpartner.global`;
 
   const result = await sendTelegramPhoto(imageUrl, caption);
   return NextResponse.json({ ok: true, symbol: symbolId, result });

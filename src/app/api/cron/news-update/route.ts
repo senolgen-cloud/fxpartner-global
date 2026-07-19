@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
       `<b>${titleTr}</b>\n\n${descTr}\n\n` +
       `Kaynak: ${item.source}\n` +
       `<a href="${item.link}">Orijinal haberi oku</a>\n\n` +
-      `fxpartner.tr | Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.`;
+      `fxpartner.global | Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.`;
 
     await sendTelegramMessage(text);
     await markAsPosted(item.guid);
