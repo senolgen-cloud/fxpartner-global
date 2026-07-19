@@ -1,0 +1,28 @@
+name: Telegram content cron
+
+on:
+  schedule:
+    # Market snapshot chart — every 2 hours
+    - cron: "0 */2 * * *"
+    # News scan — every 30 minutes
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+jobs:
+  market-update:
+    if: github.event.schedule == '0 */2 * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger market-update
+        run: |
+          curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            https://fxpartner-global.vercel.app/api/cron/market-update
+
+  news-update:
+    if: github.event.schedule == '*/30 * * * *' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger news-update
+        run: |
+          curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            https://fxpartner-global.vercel.app/api/cron/news-update
