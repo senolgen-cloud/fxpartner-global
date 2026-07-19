@@ -6,6 +6,12 @@ import Footer from "@/components/Footer";
 import RatingStars from "@/components/RatingStars";
 import { brokers, getBrokerBySlug, categoryInfo, type BrokerCategory } from "@/data/brokers";
 import TrustIndex from "@/components/TrustIndex";
+import CommentForm from "@/components/CommentForm";
+import { auth } from "@/auth";
+import { db } from "@/db";
+import { comments as commentsTable, users as usersTable } from "@/db/schema";
+import { eq, desc } from "drizzle-orm";
+import { flagEmoji } from "@/lib/country";
 
 export function generateStaticParams() {
   return brokers.map((b) => ({ slug: b.slug }));
@@ -35,6 +41,21 @@ export default async function BrokerDetailPage({
   if (!broker) notFound();
 
   const otherBrokers = brokers.filter((b) => b.slug !== broker.slug).slice(0, 3);
+
+  const session = await auth();
+  const brokerComments = await db
+    .select({
+      id: commentsTable.id,
+      body: commentsTable.body,
+      rating: commentsTable.rating,
+      createdAt: commentsTable.createdAt,
+      userName: usersTable.name,
+      userCountry: usersTable.country,
+    })
+    .from(commentsTable)
+    .innerJoin(usersTable, eq(commentsTable.userId, usersTable.id))
+    .where(eq(commentsTable.brokerSlug, broker.slug))
+    .orderBy(desc(commentsTable.createdAt));
 
   return (
     <>
@@ -216,6 +237,44 @@ export default async function BrokerDetailPage({
                 official website before trading.
               </p>
             </div>
+          </div>
+        </section>
+
+        <section className="bg-paper-high">
+          <div className="mx-auto max-w-4xl px-6 py-16">
+            <h2 className="font-display text-2xl font-semibold text-text-dark">
+              Comments ({brokerComments.length})
+            </h2>
+
+            <div className="mt-6">
+              <CommentForm brokerSlug={broker.slug} signedIn={Boolean(session?.user)} />
+            </div>
+
+            {brokerComments.length > 0 && (
+              <div className="mt-8 divide-y divide-hairline-light border-t border-hairline-light">
+                {brokerComments.map((c) => (
+                  <div key={c.id} className="py-5">
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium text-text-dark">
+                        {c.userName || "FXPARTNER user"}
+                      </span>
+                      {c.userCountry && <span aria-hidden="true">{flagEmoji(c.userCountry)}</span>}
+                      {c.rating && (
+                        <span className="font-mono text-xs text-gold">{c.rating}/5</span>
+                      )}
+                      <span className="font-mono text-xs text-text-muted">
+                        {new Date(c.createdAt).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </span>
+                    </div>
+                    <p className="mt-2 text-[15px] leading-relaxed text-text-dark/90">{c.body}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 

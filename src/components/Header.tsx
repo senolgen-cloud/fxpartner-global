@@ -1,14 +1,17 @@
 import Link from "next/link";
+import { auth } from "@/auth";
 
 const navLinks = [
   { href: "/#brokers", label: "Broker Rankings" },
   { href: "/categories", label: "Categories" },
-  { href: "/#comparison", label: "Comparison" },
-  { href: "/#how-to-choose", label: "How to Choose" },
+  { href: "/blacklist", label: "Risk Warnings" },
+  { href: "/complaint", label: "Complaint" },
   { href: "/#faq", label: "FAQ" },
 ];
 
-export default function Header() {
+export default async function Header() {
+  const session = await auth();
+
   return (
     <header className="sticky top-0 z-40 border-b border-hairline bg-ink/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -31,12 +34,20 @@ export default function Header() {
             </a>
           ))}
         </nav>
-        <a
-          href="#brokers"
-          className="rounded-full bg-signal px-4 py-2 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong"
-        >
-          Compare Brokers
-        </a>
+        <div className="flex items-center gap-3">
+          <Link
+            href={session?.user ? "/account" : "/account/login"}
+            className="hidden text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink sm:inline"
+          >
+            {session?.user ? "My Account" : "Sign In"}
+          </Link>
+          <a
+            href="#brokers"
+            className="rounded-full bg-signal px-4 py-2 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong"
+          >
+            Compare Brokers
+          </a>
+        </div>
       </div>
     </header>
   );

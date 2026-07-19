@@ -46,3 +46,18 @@ export async function sendTelegramPhoto(photoUrl: string, caption: string) {
     parse_mode: "HTML",
   });
 }
+
+// One-time, expiring invite link to the VIP group — generated per user on
+// request rather than sharing one static link, so it can't be leaked/reused
+// by non-members.
+export async function createVipInviteLink(name: string): Promise<string> {
+  const vipChatId = process.env.TELEGRAM_VIP_CHAT_ID;
+  if (!vipChatId) throw new Error("TELEGRAM_VIP_CHAT_ID is not set");
+  const result = await callTelegram("createChatInviteLink", {
+    chat_id: vipChatId,
+    name: name.slice(0, 32),
+    member_limit: 1,
+    expire_date: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
+  });
+  return result.invite_link as string;
+}

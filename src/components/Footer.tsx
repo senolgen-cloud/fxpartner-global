@@ -47,6 +47,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/blacklist" className="transition-colors hover:text-text-on-ink">
+                  Risk Warnings
+                </Link>
+              </li>
+              <li>
+                <Link href="/complaint" className="transition-colors hover:text-text-on-ink">
+                  File a Complaint
+                </Link>
+              </li>
+              <li>
                 <a href="#comparison" className="transition-colors hover:text-text-on-ink">
                   Comparison Table
                 </a>

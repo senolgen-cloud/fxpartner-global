@@ -46,3 +46,8 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# CLI-installed agent skill definitions (e.g. Vercel/Neon integration), not app code
+.agents/
+.claude/skills/
+skills-lock.json
