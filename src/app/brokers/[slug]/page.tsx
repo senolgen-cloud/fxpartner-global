@@ -20,7 +20,7 @@ export async function generateMetadata({
   const broker = getBrokerBySlug(slug);
   if (!broker) return {};
   return {
-    title: `${broker.name} İncelemesi | FXPARTNER`,
+    title: `${broker.name} Review | FXPARTNER`,
     description: broker.summary,
   };
 }
@@ -43,15 +43,15 @@ export default async function BrokerDetailPage({
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-4xl px-6 py-16">
             <Link
-              href="/#brokerlar"
+              href="/#brokers"
               className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              ← Tüm brokerlar
+              ← All brokers
             </Link>
             <div className="mt-6 flex flex-wrap items-start justify-between gap-6">
               <div>
                 <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-                  #{String(broker.rank).padStart(2, "0")} sırada
+                  Ranked #{String(broker.rank).padStart(2, "0")}
                 </span>
                 <h1 className="mt-3 font-display text-4xl font-semibold md:text-5xl">
                   {broker.name}
@@ -70,10 +70,10 @@ export default async function BrokerDetailPage({
                   rel="noopener noreferrer sponsored"
                   className="rounded-full bg-signal px-6 py-3 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong"
                 >
-                  Hesap Aç
+                  Open Account
                 </a>
                 <span className="font-mono text-[10px] text-text-on-ink-muted">
-                  Ortaklık linki{broker.partnerCode ? ` · Kod: ${broker.partnerCode}` : ""}
+                  Affiliate link{broker.partnerCode ? ` · Code: ${broker.partnerCode}` : ""}
                 </span>
               </div>
             </div>
@@ -97,7 +97,7 @@ export default async function BrokerDetailPage({
             <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 border-y border-hairline-light py-6 sm:grid-cols-3">
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                  Min. Yatırım
+                  Min. Deposit
                 </dt>
                 <dd className="tabular-stat mt-1 font-mono text-lg text-text-dark">
                   {broker.minDeposit}
@@ -105,7 +105,7 @@ export default async function BrokerDetailPage({
               </div>
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                  Maks. Kaldıraç
+                  Max. Leverage
                 </dt>
                 <dd className="tabular-stat mt-1 font-mono text-lg text-text-dark">
                   {broker.maxLeverage}
@@ -113,7 +113,7 @@ export default async function BrokerDetailPage({
               </div>
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                  Kuruluş
+                  Founded
                 </dt>
                 <dd className="tabular-stat mt-1 font-mono text-lg text-text-dark">
                   {broker.founded}
@@ -121,7 +121,7 @@ export default async function BrokerDetailPage({
               </div>
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                  Merkez
+                  Headquarters
                 </dt>
                 <dd className="mt-1 font-mono text-lg text-text-dark">
                   {broker.headquarters}
@@ -129,7 +129,7 @@ export default async function BrokerDetailPage({
               </div>
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                  Platformlar
+                  Platforms
                 </dt>
                 <dd className="mt-1 font-mono text-lg text-text-dark">
                   {broker.platforms.join(" / ")}
@@ -137,7 +137,7 @@ export default async function BrokerDetailPage({
               </div>
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                  En Uygun
+                  Best For
                 </dt>
                 <dd className="mt-1 text-sm text-text-dark">{broker.bestFor}</dd>
               </div>
@@ -145,7 +145,7 @@ export default async function BrokerDetailPage({
 
             <div className="mt-8">
               <h2 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                Düzenleyici Kurumlar
+                Regulators
               </h2>
               <div className="mt-3 flex flex-wrap gap-2">
                 {broker.regulators.map((r) => (
@@ -162,13 +162,13 @@ export default async function BrokerDetailPage({
             {broker.categories.length > 0 && (
               <div className="mt-6">
                 <h2 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                  Kategoriler
+                  Categories
                 </h2>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {broker.categories.map((c) => (
                     <Link
                       key={c}
-                      href={`/kategoriler/${categoryInfo[c as BrokerCategory].slug}`}
+                      href={`/categories/${categoryInfo[c as BrokerCategory].slug}`}
                       className="rounded-full border border-signal/30 px-3 py-1.5 font-mono text-xs text-signal transition-colors hover:border-signal hover:bg-signal/10"
                     >
                       {c}
@@ -181,7 +181,7 @@ export default async function BrokerDetailPage({
             <div className="mt-12 grid gap-8 sm:grid-cols-2">
               <div>
                 <h2 className="font-display text-xl font-semibold text-signal">
-                  Artıları
+                  Pros
                 </h2>
                 <ul className="mt-4 space-y-3">
                   {broker.pros.map((pro) => (
@@ -194,7 +194,7 @@ export default async function BrokerDetailPage({
               </div>
               <div>
                 <h2 className="font-display text-xl font-semibold text-alert">
-                  Eksileri
+                  Cons
                 </h2>
                 <ul className="mt-4 space-y-3">
                   {broker.cons.map((con) => (
@@ -209,11 +209,11 @@ export default async function BrokerDetailPage({
 
             <div className="mt-14 rounded-2xl border border-hairline-light bg-paper p-6">
               <p className="text-sm leading-relaxed text-text-muted">
-                <strong className="text-text-dark">Not:</strong> Yukarıdaki
-                bilgiler genel bilgilendirme amaçlıdır; hesap tipine ve
-                bulunduğunuz ülkeye göre şartlar değişebilir. İşlem yapmadan
-                önce {broker.name} resmi sitesinden güncel koşulları
-                doğrulamanızı öneririz.
+                <strong className="text-text-dark">Note:</strong> The
+                information above is for general informational purposes;
+                terms may vary by account type and your country. We
+                recommend verifying current conditions on {broker.name}&apos;s
+                official website before trading.
               </p>
             </div>
           </div>
@@ -222,13 +222,13 @@ export default async function BrokerDetailPage({
         <section className="bg-paper">
           <div className="mx-auto max-w-4xl px-6 py-16">
             <h2 className="font-display text-2xl font-semibold text-text-dark">
-              Diğer brokerlara göz atın
+              Explore other brokers
             </h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-3">
               {otherBrokers.map((b) => (
                 <Link
                   key={b.slug}
-                  href={`/brokerlar/${b.slug}`}
+                  href={`/brokers/${b.slug}`}
                   className="rounded-xl border border-hairline-light p-5 transition-colors hover:border-text-dark"
                 >
                   <span className="font-mono text-xs text-signal">

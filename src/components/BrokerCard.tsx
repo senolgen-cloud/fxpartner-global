@@ -70,7 +70,7 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
               <dl className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 border-y border-hairline-light py-4 sm:grid-cols-4">
                 <div>
                   <dt className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-muted">
-                    Min. Yatırım
+                    Min. Deposit
                   </dt>
                   <dd className="tabular-stat mt-1 font-mono text-sm text-text-dark">
                     {broker.minDeposit}
@@ -78,7 +78,7 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
                 </div>
                 <div>
                   <dt className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-muted">
-                    Maks. Kaldıraç
+                    Max. Leverage
                   </dt>
                   <dd className="tabular-stat mt-1 font-mono text-sm text-text-dark">
                     {broker.maxLeverage}
@@ -86,7 +86,7 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
                 </div>
                 <div>
                   <dt className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-muted">
-                    Platformlar
+                    Platforms
                   </dt>
                   <dd className="mt-1 font-mono text-sm text-text-dark">
                     {broker.platforms.join(" / ")}
@@ -94,7 +94,7 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
                 </div>
                 <div>
                   <dt className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-muted">
-                    Kuruluş
+                    Founded
                   </dt>
                   <dd className="tabular-stat mt-1 font-mono text-sm text-text-dark">
                     {broker.founded}
@@ -118,7 +118,7 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
                   {broker.categories.map((c) => (
                     <Link
                       key={c}
-                      href={`/kategoriler/${categoryInfo[c as BrokerCategory].slug}`}
+                      href={`/categories/${categoryInfo[c as BrokerCategory].slug}`}
                       className="rounded-full border border-signal/30 px-2.5 py-1 font-mono text-[11px] text-signal transition-colors hover:border-signal hover:bg-signal/10"
                     >
                       {c}
@@ -140,20 +140,20 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
               rel="noopener noreferrer sponsored"
               className="lift-on-hover rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft hover:shadow-lg hover:shadow-ink/20"
             >
-              Hesap Aç
+              Open Account
             </a>
             <Link
-              href={`/brokerlar/${broker.slug}`}
+              href={`/brokers/${broker.slug}`}
               className="rounded-full border border-hairline-light px-5 py-2.5 text-sm font-medium text-text-dark transition-colors hover:border-text-dark"
             >
-              Detaylı İnceleme →
+              Full Review →
             </Link>
             <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-gold">
               {broker.accentNote}
             </span>
           </div>
           <p className="mt-3 font-mono text-[10px] text-text-muted">
-            Ortaklık linki{broker.partnerCode ? ` · Ortak Kodu: ${broker.partnerCode}` : ""} · T&Cs Apply
+            Affiliate link{broker.partnerCode ? ` · Partner Code: ${broker.partnerCode}` : ""} · T&Cs Apply
           </p>
         </div>
       </div>

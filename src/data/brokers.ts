@@ -2,8 +2,8 @@ export interface Broker {
   rank: number;
   slug: string;
   name: string;
-  // Resmi bir logo dosyası eklenene kadar boş bırakılabilir; kart bu
-  // durumda broker adının baş harflerinden bir monogram gösterir.
+  // Can stay empty until a real logo file is added; the card falls back
+  // to a monogram made from the broker name's initials in that case.
   logo?: string;
   tagline: string;
   rating: number; // out of 5
@@ -23,21 +23,22 @@ export interface Broker {
   categories: string[];
   scoreCost: number;
   scoreWithdrawal: number;
-  // Düzenleme ekseni varsayılan olarak regulators verisinden hesaplanır.
-  // Bu alan yalnızca editoryal ekibin gerekçeli bir istisna kararı aldığı
-  // durumlarda kullanılır ve formülün üzerine geçer.
+  // The Regulation axis is derived from the regulators list by default.
+  // This field only exists for cases where the editorial team makes a
+  // reasoned exception and overrides the formula.
   scoreRegulationOverride?: number;
-  // Bileşik Endeks varsayılan olarak dört eksenin ortalamasından hesaplanır.
-  // Bu alan yalnızca editoryal bir istisna kararında formülün üzerine geçer.
+  // The composite Index score is the average of the four axes by
+  // default. This field only exists for a reasoned editorial exception
+  // that overrides the formula.
   scoreOverride?: number;
 }
 
 export const brokerCategories = [
-  "Yeni Başlayanlar",
-  "Düşük Spread",
-  "Yüksek Kaldıraç",
-  "Kurumsal Güven",
-  "Çoklu Platform",
+  "Beginners",
+  "Low Spread",
+  "High Leverage",
+  "Institutional Trust",
+  "Multi-Platform",
 ] as const;
 
 export type BrokerCategory = (typeof brokerCategories)[number];
@@ -46,30 +47,30 @@ export const categoryInfo: Record<
   BrokerCategory,
   { slug: string; description: string }
 > = {
-  "Yeni Başlayanlar": {
-    slug: "yeni-baslayanlar",
+  Beginners: {
+    slug: "beginners",
     description:
-      "Düşük minimum yatırım ve sade hesap açma süreciyle forex'e ilk adımı atanlara uygun brokerlar.",
+      "Brokers suited to a first step into forex, with a low minimum deposit and a simple account-opening process.",
   },
-  "Düşük Spread": {
-    slug: "dusuk-spread",
+  "Low Spread": {
+    slug: "low-spread",
     description:
-      "Ham fiyata yakın spread ve şeffaf komisyon yapısıyla işlem maliyetini önceliklendiren brokerlar.",
+      "Brokers that prioritize trading cost, with near-raw spreads and a transparent commission structure.",
   },
-  "Yüksek Kaldıraç": {
-    slug: "yuksek-kaldirac",
+  "High Leverage": {
+    slug: "high-leverage",
     description:
-      "Daha yüksek kaldıraç seçenekleri sunan, aktif ve deneyimli traderlara yönelik brokerlar.",
+      "Brokers offering higher leverage options, aimed at active and experienced traders.",
   },
-  "Kurumsal Güven": {
-    slug: "kurumsal-guven",
+  "Institutional Trust": {
+    slug: "institutional-trust",
     description:
-      "Çok sayıda üst düzey (Tier-1) düzenleyici otorite altında faaliyet gösteren, kurumsal ölçekli brokerlar.",
+      "Institutional-scale brokers operating under multiple top-tier (Tier-1) regulatory authorities.",
   },
-  "Çoklu Platform": {
-    slug: "coklu-platform",
+  "Multi-Platform": {
+    slug: "multi-platform",
     description:
-      "MT4/MT5'in yanı sıra kendi geliştirdiği web, mobil veya cTrader gibi ek platform seçenekleri sunan brokerlar.",
+      "Brokers offering additional platform options beyond MT4/MT5, such as their own web, mobile, or cTrader.",
   },
 };
 
@@ -82,43 +83,43 @@ export function getCategoryBySlug(slug: string) {
   return { name, ...info };
 }
 
-// --- FXPARTNER Endeksi ---
-// Dört eksenli, "Broker nasıl seçilir?" rehberindeki 01-04 adımlarıyla
-// birebir eşleşen puanlama sistemi. Platform ekseni brokerın kendi
-// verisinden deterministik olarak hesaplanır. Düzenleme ekseni varsayılan
-// olarak regulators verisinden hesaplanır, ancak editoryal ekip gerekçeli
-// bir istisna kararı aldığında scoreRegulationOverride ile geçersiz
-// kılınabilir. Maliyet ve Para Çekme eksenleri incelemede yer alan
-// doğrulanabilir sinyallere (pros/cons/summary) dayanan editoryal
-// değerlendirmedir. Sinyal bulunmayan brokerlar nötr (3/5) alır.
+// --- FXPARTNER Index ---
+// A four-axis scoring system that maps directly to the 01-04 steps in the
+// "How to choose a broker" guide. The Platform axis is computed
+// deterministically from the broker's own data. The Regulation axis is
+// derived from the regulators list by default, but can be overridden via
+// scoreRegulationOverride when the editorial team makes a reasoned
+// exception. The Cost and Withdrawal axes are editorial judgments based
+// on verifiable signals in the review (pros/cons/summary). Brokers with
+// no signal get a neutral score (3/5).
 export const scoreAxes = [
   {
     n: "01",
     key: "regulation",
-    label: "Düzenleme",
+    label: "Regulation",
     description:
-      "Tier-1 otorite sayısı ve toplam lisans çeşitliliğine göre hesaplanır; editoryal ekip gerekçeli istisnalarda güncelleyebilir.",
+      "Calculated from the number of Tier-1 authorities and overall license diversity; the editorial team may update it for reasoned exceptions.",
   },
   {
     n: "02",
     key: "cost",
-    label: "Maliyet",
+    label: "Cost",
     description:
-      "Spread, komisyon ve minimum yatırım şeffaflığına dair editoryal değerlendirme.",
+      "Editorial assessment of spread, commission, and minimum-deposit transparency.",
   },
   {
     n: "03",
     key: "platform",
     label: "Platform",
     description:
-      "Sunulan işlem platformu sayısı ve çeşitliliğine göre hesaplanır.",
+      "Calculated from the number and variety of trading platforms offered.",
   },
   {
     n: "04",
     key: "withdrawal",
-    label: "Para Çekme",
+    label: "Withdrawals",
     description:
-      "İncelemede doğrulanabilir para çekme hız/şeffaflık sinyallerine dayanır; sinyal yoksa nötr puan atanır.",
+      "Based on verifiable withdrawal speed/transparency signals found in the review; a neutral score is assigned when no signal exists.",
   },
 ] as const;
 
@@ -167,32 +168,32 @@ export const brokers: Broker[] = [
     slug: "xm",
     name: "XM Global",
     logo: "/brokers/xm.png",
-    tagline: "MT4, MT5 ve XM App üzerinden işlem imkanı",
+    tagline: "Trade via MT4, MT5, and the XM App",
     rating: 4.8,
     founded: 2009,
     minDeposit: "$5",
     maxLeverage: "1:1000*",
     regulators: ["ASIC", "CySEC", "DFSA", "FSC (Belize)"],
     platforms: ["MT4", "MT5", "XM App"],
-    headquarters: "Kıbrıs / Avustralya",
+    headquarters: "Cyprus / Australia",
     referralUrl: "https://affs.click/gvaLg",
     partnerCode: "FXPARTNER",
     summary:
-      "XM, geniş kapsamlı eğitim materyalleri, düzenli canlı webinarlar ve çok düşük bir minimum yatırım tutarıyla FXPARTNER topluluğunda en çok tercih edilen brokerdır. FXPARTNER ortak kodu ile açılan hesaplar VIP avantajlardan faydalanabilir.",
+      "XM is the most-chosen broker in the FXPARTNER community, thanks to extensive educational material, regular live webinars, and a very low minimum deposit. Accounts opened with the FXPARTNER partner code get access to VIP perks.",
     pros: [
-      "5 USD gibi düşük minimum yatırım",
-      "FXPARTNER ortak kodu ile VIP avantajlar",
-      "Çoklu düzenleyici lisans (ASIC, CySEC)",
-      "Negatif bakiye koruması",
-      "7/24 ortalama 1-2 dakikada para çekim",
+      "Low minimum deposit of $5",
+      "VIP perks with the FXPARTNER partner code",
+      "Multiple regulatory licenses (ASIC, CySEC)",
+      "Negative balance protection",
+      "24/7 withdrawals, averaging 1-2 minutes",
     ],
     cons: [
-      "Ham fiyat (raw spread) hesap seçeneği sınırlı",
-      "Bölgeye göre kaldıraç oranları değişkenlik gösterir",
+      "Limited raw-spread account options",
+      "Leverage ratios vary by region",
     ],
-    bestFor: "Yeni başlayanlar ve eğitim odaklı yatırımcılar",
-    accentNote: "En çok tercih edilen",
-    categories: ["Yeni Başlayanlar"],
+    bestFor: "Beginners and education-focused investors",
+    accentNote: "Most chosen",
+    categories: ["Beginners"],
     scoreCost: 5,
     scoreWithdrawal: 5,
   },
@@ -201,30 +202,30 @@ export const brokers: Broker[] = [
     slug: "avatrade",
     name: "AvaTrade",
     logo: "/brokers/avatrade.jpg",
-    tagline: "Kurumsal güven, geniş düzenleme ağı",
+    tagline: "Institutional trust, wide regulatory footprint",
     rating: 4.5,
     founded: 2006,
     minDeposit: "$100",
     maxLeverage: "1:400*",
     regulators: ["Central Bank of Ireland", "ASIC", "FSCA", "ADGM"],
     platforms: ["MT4", "MT5", "AvaTradeGO", "WebTrader"],
-    headquarters: "İrlanda",
+    headquarters: "Ireland",
     referralUrl: "https://tracking.avapartner.com/yRwAAA",
     summary:
-      "AvaTrade, dünya genelinde 9'dan fazla düzenleyici otorite altında faaliyet gösteren, sabit spread seçeneği ve sosyal/kopya trading altyapısı sunan kurumsal ölçekli bir brokerdır. FXPARTNER üzerinden özel bonus kampanyalarına erişilebilir.",
+      "AvaTrade is an institutional-scale broker operating under more than 9 regulatory authorities worldwide, offering fixed-spread accounts and social/copy-trading infrastructure. Special bonus campaigns are available through FXPARTNER.",
     pros: [
-      "9+ düzenleyici lisans ile geniş güvenlik ağı",
-      "FXPARTNER'e özel bonus kampanyaları",
-      "Sabit ve değişken spread seçenekleri",
-      "Kendi mobil platformu AvaTradeGO",
+      "Wide safety net with 9+ regulatory licenses",
+      "FXPARTNER-exclusive bonus campaigns",
+      "Fixed and variable spread options",
+      "Its own mobile platform, AvaTradeGO",
     ],
     cons: [
-      "Minimum yatırım XM'e göre daha yüksek",
-      "İşlem başına komisyon bazı hesap tiplerinde mevcut",
+      "Higher minimum deposit than XM",
+      "Per-trade commission on some account types",
     ],
-    bestFor: "Kurumsal güven ve kopya trading arayanlar",
-    accentNote: "En çok düzenlenen",
-    categories: ["Kurumsal Güven", "Çoklu Platform"],
+    bestFor: "Traders seeking institutional trust and copy trading",
+    accentNote: "Most regulated",
+    categories: ["Institutional Trust", "Multi-Platform"],
     scoreCost: 3,
     scoreWithdrawal: 3,
     scoreOverride: 9.2,
@@ -234,31 +235,31 @@ export const brokers: Broker[] = [
     slug: "tickmill",
     name: "Tickmill",
     logo: "/brokers/tickmill.webp",
-    tagline: "MetaTrader platformları ve düşük spread",
+    tagline: "MetaTrader platforms and low spreads",
     rating: 4.5,
     founded: 2014,
     minDeposit: "$100",
     maxLeverage: "1:500*",
     regulators: ["FCA", "CySEC", "FSA (Seychelles)", "Labuan FSA"],
     platforms: ["MT4", "MT5"],
-    headquarters: "Birleşik Krallık",
+    headquarters: "United Kingdom",
     referralUrl: "https://tickmill.link/4vvHCRK",
     partnerCode: "IB45254758",
     summary:
-      "Tickmill, düşük maliyetli Pro hesapları, hoşgeldin ve marj bonusları ile FCA dahil üst düzey düzenleyici altyapısıyla maliyet bilinci yüksek yatırımcılara hitap eder. FXPARTNER VIP ortak kodu ile ek avantajlar sunulur.",
+      "Tickmill appeals to cost-conscious investors with low-cost Pro accounts, welcome and margin bonuses, and top-tier regulatory backing that includes the FCA. Additional perks are available with the FXPARTNER VIP partner code.",
     pros: [
-      "Pro hesaplarda düşük ham spread + komisyon",
-      "Hoşgeldin ve marj bonusları",
-      "FCA dahil üst düzey düzenleyici lisanslar",
-      "Hızlı ve şeffaf para yatırma/çekme süreçleri",
+      "Low raw spreads + commission on Pro accounts",
+      "Welcome and margin bonuses",
+      "Top-tier regulatory licenses, including the FCA",
+      "Fast and transparent deposit/withdrawal process",
     ],
     cons: [
-      "Classic hesap tipinde minimum yatırım göreceli yüksek",
-      "Eğitim içerikleri XM kadar kapsamlı değil",
+      "Relatively high minimum deposit on the Classic account type",
+      "Educational content isn't as extensive as XM's",
     ],
-    bestFor: "Maliyet bilinci yüksek, aktif işlem yapan yatırımcılar",
-    accentNote: "En güçlü bonus programı",
-    categories: ["Düşük Spread", "Kurumsal Güven"],
+    bestFor: "Cost-conscious, active traders",
+    accentNote: "Strongest bonus program",
+    categories: ["Low Spread", "Institutional Trust"],
     scoreCost: 5,
     scoreWithdrawal: 4,
   },
@@ -267,29 +268,29 @@ export const brokers: Broker[] = [
     slug: "lite-finance",
     name: "Lite Finance",
     logo: "/brokers/lite-finance.png",
-    tagline: "1:1000'e kadar seçilebilir kaldıraç",
+    tagline: "Selectable leverage up to 1:1000",
     rating: 4.5,
     founded: 2005,
     minDeposit: "$10",
     maxLeverage: "1:1000*",
-    regulators: ["Offshore lisans"],
+    regulators: ["Offshore license"],
     platforms: ["MT4", "MT5", "LiteFinance WebTerminal"],
-    headquarters: "Kıbrıs",
+    headquarters: "Cyprus",
     referralUrl: "https://litefinance-tr.org/?uid=667827970",
     summary:
-      "Lite Finance, cent hesaplar, yüksek kaldıraç seçenekleri ve düşük minimum yatırım tutarıyla özellikle küçük sermayeyle başlamak isteyen yatırımcılar arasında popülerdir. FXPARTNER'e özel bonus ve promosyonlardan faydalanılabilir.",
+      "Lite Finance is popular with investors who want to start with a small amount of capital, thanks to cent accounts, high leverage options, and a low minimum deposit. FXPARTNER-exclusive bonuses and promotions are available.",
     pros: [
-      "10 USD ile hesap açma imkanı",
-      "FXPARTNER'e özel bonus ve promosyonlar",
-      "Cent hesap seçeneği ile düşük riskli pratik",
-      "Basit ve hızlı hesap açma süreci",
+      "Open an account with as little as $10",
+      "FXPARTNER-exclusive bonuses and promotions",
+      "Cent account option for low-risk practice",
+      "Simple and fast account-opening process",
     ],
     cons: [
-      "Kurumsal yatırımcı içeriği XM/AvaTrade kadar geniş değil",
+      "Institutional-investor content isn't as extensive as XM/AvaTrade",
     ],
-    bestFor: "Küçük sermayeyle başlayan bireysel yatırımcılar",
-    accentNote: "En düşük bariyer",
-    categories: ["Yeni Başlayanlar"],
+    bestFor: "Individual investors starting with small capital",
+    accentNote: "Lowest barrier to entry",
+    categories: ["Beginners"],
     scoreCost: 4,
     scoreWithdrawal: 3,
     scoreRegulationOverride: 3,
@@ -300,31 +301,31 @@ export const brokers: Broker[] = [
     slug: "exness",
     name: "EXNESS",
     logo: "/brokers/exness.png",
-    tagline: "Sıfıra yakın spread ve anında para çekme",
+    tagline: "Near-zero spreads and instant withdrawals",
     rating: 4.3,
     founded: 2008,
     minDeposit: "$10",
-    maxLeverage: "Sınırsız*",
+    maxLeverage: "Unlimited*",
     regulators: ["FCA", "CySEC", "FSCA", "FSC (Mauritius)"],
     platforms: ["MT4", "MT5", "Exness Terminal"],
-    headquarters: "Kıbrıs",
+    headquarters: "Cyprus",
     referralUrl: "https://one.exnessonelink.com/a/nt8xpejsow",
     partnerCode: "nt8xpejsow",
     summary:
-      "Exness, anlık para çekim süreleri, sıfıra yakın spread seçenekleri ve esnek/sınırsıza kadar kaldıraç seçenekleriyle özellikle aktif traderlar arasında öne çıkar. FXPARTNER ortak kodu ile hesap açanlar özel avantajlara erişebilir.",
+      "Exness stands out among active traders for its instant withdrawal times, near-zero spread options, and flexible leverage that can go up to unlimited. Accounts opened with the FXPARTNER partner code get access to special perks.",
     pros: [
-      "Anlık/otomatik para çekim süreçleri",
-      "Bazı hesap tiplerinde sınırsıza yakın kaldıraç",
-      "10 USD ile düşük giriş bariyeri",
-      "FXPARTNER ayrıcalıklarına erişim imkanı",
+      "Instant/automated withdrawal processing",
+      "Near-unlimited leverage on some account types",
+      "Low entry barrier with a $10 minimum deposit",
+      "Access to FXPARTNER perks",
     ],
     cons: [
-      "Çok yüksek kaldıraç deneyimsiz yatırımcılar için risklidir",
-      "Hesap tipi çeşitliliği ilk bakışta kafa karıştırıcı olabilir",
+      "Very high leverage is risky for inexperienced investors",
+      "The variety of account types can be confusing at first glance",
     ],
-    bestFor: "Aktif işlem hacmi yüksek deneyimli traderlar",
-    accentNote: "En hızlı para çekim vurgusu",
-    categories: ["Yüksek Kaldıraç", "Düşük Spread"],
+    bestFor: "Experienced traders with high trading volume",
+    accentNote: "Fastest withdrawal emphasis",
+    categories: ["High Leverage", "Low Spread"],
     scoreCost: 5,
     scoreWithdrawal: 5,
     scoreOverride: 8.2,
@@ -334,31 +335,31 @@ export const brokers: Broker[] = [
     slug: "markets-com",
     name: "markets.com",
     logo: "/brokers/markets-com.png",
-    tagline: "Web, mobil, MT4 ve MT5 platform seçenekleri",
+    tagline: "Web, mobile, MT4, and MT5 platform options",
     rating: 4.0,
     founded: 2008,
     minDeposit: "$100",
     maxLeverage: "1:300*",
     regulators: ["CySEC", "FSC (BVI)"],
-    platforms: ["Marketsx (Web)", "Mobil", "MT4", "MT5"],
-    headquarters: "Kıbrıs / BVI",
+    platforms: ["Marketsx (Web)", "Mobile", "MT4", "MT5"],
+    headquarters: "Cyprus / BVI",
     referralUrl: "https://refer.markets.com/2R72MI",
     partnerCode: "2R72MI",
     summary:
-      "markets.com, kendi geliştirdiği Marketsx platformu ile web, mobil ve MetaTrader seçeneklerini bir arada sunan köklü bir brokerdır. FXPARTNER ortak kodu ile özel avantajlara erişilebilir.",
+      "markets.com is a well-established broker combining its own Marketsx platform with web, mobile, and MetaTrader options in one place. Special perks are available with the FXPARTNER partner code.",
     pros: [
-      "Kendi geliştirdiği Marketsx web platformu",
-      "FXPARTNER ortak kodu ile özel avantajlar",
-      "MT4/MT5 ve mobil uygulama desteği",
-      "Geniş enstrüman yelpazesi (forex, hisse, emtia, endeks)",
+      "Its own Marketsx web platform",
+      "Special perks with the FXPARTNER partner code",
+      "MT4/MT5 and mobile app support",
+      "Wide instrument range (forex, stocks, commodities, indices)",
     ],
     cons: [
-      "Tier-1 düzenleme kapsamı diğer brokerlara göre daha dar",
-      "Bazı bölgelerde hizmet kısıtlaması olabilir",
+      "Narrower Tier-1 regulatory coverage than other brokers",
+      "Service may be restricted in some regions",
     ],
-    bestFor: "Kendi platformunu tercih eden çok yönlü yatırımcılar",
-    accentNote: "En çok yönlü platform",
-    categories: ["Çoklu Platform"],
+    bestFor: "Versatile investors who prefer a proprietary platform",
+    accentNote: "Most versatile platform",
+    categories: ["Multi-Platform"],
     scoreCost: 3,
     scoreWithdrawal: 3,
   },
@@ -367,31 +368,31 @@ export const brokers: Broker[] = [
     slug: "fxpro",
     name: "FxPro",
     logo: "/brokers/fxpro.png",
-    tagline: "MT4, MT5 ve FxPro App üzerinden işlem imkanı",
+    tagline: "Trade via MT4, MT5, and the FxPro App",
     rating: 3.5,
     founded: 2006,
     minDeposit: "$100",
     maxLeverage: "1:2000*",
     regulators: ["FCA", "CySEC", "FSCA", "SCB (Bahamas)"],
     platforms: ["MT4", "MT5", "cTrader", "FxPro App"],
-    headquarters: "Birleşik Krallık / Kıbrıs",
+    headquarters: "United Kingdom / Cyprus",
     referralUrl: "https://bit.ly/fxpro-turkiye",
     partnerCode: "2qhvb5Zx2",
     summary:
-      "FxPro, FCA dahil üst düzey düzenleyici lisansları, geniş platform desteği (MT4, MT5, cTrader, FxPro App) ve bazı hesap tiplerinde 1:2000'e kadar yüksek kaldıraç seçenekleriyle köklü bir brokerdır.",
+      "FxPro is a well-established broker with top-tier regulatory licenses including the FCA, broad platform support (MT4, MT5, cTrader, FxPro App), and leverage up to 1:2000 on some account types.",
     pros: [
-      "FCA dahil üst düzey düzenleyici lisanslar",
-      "MT4/MT5/cTrader/FxPro App geniş platform desteği",
-      "Bazı hesaplarda 1:2000'e kadar yüksek kaldıraç",
-      "20 yılı aşkın sektör deneyimi",
+      "Top-tier regulatory licenses, including the FCA",
+      "Broad platform support across MT4/MT5/cTrader/FxPro App",
+      "Leverage up to 1:2000 on some accounts",
+      "Over 20 years of industry experience",
     ],
     cons: [
-      "Puanı diğer FXPARTNER partnerlerine göre daha düşük",
-      "Bazı hesap tiplerinde komisyon yapısı karmaşık olabilir",
+      "Scores lower than other FXPARTNER partners",
+      "Commission structure can be complex on some account types",
     ],
-    bestFor: "Yüksek kaldıraç ve çoklu platform arayan deneyimli yatırımcılar",
-    accentNote: "En yüksek kaldıraç seçeneği",
-    categories: ["Yüksek Kaldıraç", "Kurumsal Güven"],
+    bestFor: "Experienced investors seeking high leverage and multiple platforms",
+    accentNote: "Highest leverage option",
+    categories: ["High Leverage", "Institutional Trust"],
     scoreCost: 3,
     scoreWithdrawal: 3,
   },
@@ -400,7 +401,7 @@ export const brokers: Broker[] = [
     slug: "versus-trade",
     name: "Versus Trade",
     logo: "/brokers/versus-trade.jpg",
-    tagline: "MetaTrader 5 üzerinden yüksek kaldıraçlı CFD işlemleri",
+    tagline: "High-leverage CFD trading on MetaTrader 5",
     rating: 3.0,
     founded: 2024,
     minDeposit: "$10",
@@ -410,22 +411,22 @@ export const brokers: Broker[] = [
     headquarters: "Saint Lucia",
     referralUrl: "https://one.versustrade.link/links/go/48280?pid=98691",
     summary:
-      "Versus Trade, 2024'te kurulan, MetaTrader 5 altyapısı ve kendine özgü 'Versus Pairs' ürünüyle öne çıkan yeni nesil bir CFD brokerdır. Mauritius FSC lisansı altında faaliyet gösterir; FXPARTNER ortak kodu ile hesap açılabilir.",
+      "Versus Trade is a next-generation CFD broker founded in 2024, notable for its MetaTrader 5 infrastructure and its own 'Versus Pairs' product. It operates under a Mauritius FSC license; accounts can be opened with the FXPARTNER partner code.",
     pros: [
-      "10 USD ile düşük minimum yatırım",
-      "1:2000'e kadar yüksek kaldıraç seçeneği",
-      "MetaTrader 5 üzerinde hızlı ECN/STP emir gerçekleştirme",
-      "Benzersiz 'Versus Pairs' işlem ürünü",
+      "Low minimum deposit of $10",
+      "High leverage up to 1:2000",
+      "Fast ECN/STP order execution on MetaTrader 5",
+      "Unique 'Versus Pairs' trading product",
     ],
     cons: [
-      "2024'te kurulmuş, kısa faaliyet geçmişi",
-      "Yalnızca offshore (Mauritius FSC) lisansı var, Tier-1 düzenleme bulunmuyor",
-      "Bazı kullanıcı yorumlarında para çekme/kâr iptali şikayetleri bildirilmiştir",
-      "Sadece MT5 sunuyor, MT4 desteği yok",
+      "Founded in 2024, short operating history",
+      "Only an offshore (Mauritius FSC) license, no Tier-1 regulation",
+      "Some user reviews report complaints about withdrawal/profit cancellations",
+      "Only offers MT5, no MT4 support",
     ],
-    bestFor: "Yüksek kaldıraç arayan, riskin farkında olan deneyimli yatırımcılar",
-    accentNote: "En yeni nesil platform",
-    categories: ["Yüksek Kaldıraç"],
+    bestFor: "Experienced, risk-aware investors seeking high leverage",
+    accentNote: "Newest-generation platform",
+    categories: ["High Leverage"],
     scoreCost: 3,
     scoreWithdrawal: 2,
     scoreOverride: 5.2,
@@ -434,31 +435,31 @@ export const brokers: Broker[] = [
     rank: 7,
     slug: "thinkmarkets",
     name: "ThinkMarkets",
-    tagline: "MT4, MT5 ve ThinkTrader ile 4.000+ enstrüman",
+    tagline: "4,000+ instruments via MT4, MT5, and ThinkTrader",
     rating: 4.4,
     founded: 2010,
     minDeposit: "$0",
     maxLeverage: "1:500*",
     regulators: ["FCA", "ASIC", "CySEC", "FSCA"],
     platforms: ["MT4", "MT5", "ThinkTrader"],
-    headquarters: "Londra / Melbourne",
+    headquarters: "London / Melbourne",
     referralUrl:
       "https://www.welcome-partner.thinkmarkets.com/?cid=0&pid=290469&type=1&redirecturl=https://portal.thinkmarkets.com/account/individual",
     summary:
-      "ThinkMarkets, FCA, ASIC ve CySEC dahil güçlü çoklu düzenleyici lisansları, Standard hesapta 0 USD minimum yatırımı ve kendi geliştirdiği ThinkTrader platformuyla 4.000'den fazla enstrümana erişim sunan köklü bir brokerdır. FXPARTNER ortak kodu ile hesap açılabilir.",
+      "ThinkMarkets is a well-established broker with strong multi-regulatory licensing including the FCA, ASIC, and CySEC, a $0 minimum deposit on the Standard account, and access to more than 4,000 instruments through its own ThinkTrader platform. Accounts can be opened with the FXPARTNER partner code.",
     pros: [
-      "FCA, ASIC ve CySEC dahil güçlü çoklu düzenleyici lisans",
-      "Standard hesapta 0 USD minimum yatırım",
-      "4.000+ enstrüman ile geniş ürün yelpazesi",
-      "ThinkTrader'da bulut tabanlı uyarılar ve özel göstergeler",
+      "Strong multi-regulatory licensing including FCA, ASIC, and CySEC",
+      "$0 minimum deposit on the Standard account",
+      "Wide product range with 4,000+ instruments",
+      "Cloud-based alerts and custom indicators in ThinkTrader",
     ],
     cons: [
-      "Standard/ThinkZero/ThinkTrader hesap seçenekleri yeni başlayanlar için kafa karıştırıcı olabilir",
-      "Cent/mikro hesap seçeneği yok, aylık 20 USD hareketsizlik ücreti uygulanabilir",
+      "The Standard/ThinkZero/ThinkTrader account options can be confusing for beginners",
+      "No cent/micro account option; a $20 monthly inactivity fee may apply",
     ],
-    bestFor: "Güçlü düzenleme ve geniş enstrüman yelpazesi arayan deneyimli yatırımcılar",
-    accentNote: "En geniş enstrüman yelpazesi",
-    categories: ["Kurumsal Güven", "Çoklu Platform"],
+    bestFor: "Experienced investors seeking strong regulation and a wide instrument range",
+    accentNote: "Widest instrument range",
+    categories: ["Institutional Trust", "Multi-Platform"],
     scoreCost: 4,
     scoreWithdrawal: 3,
   },
@@ -466,30 +467,30 @@ export const brokers: Broker[] = [
     rank: 9,
     slug: "easymarkets",
     name: "easyMarkets",
-    tagline: "Sabit spread ve garantili risk yönetimi araçları",
+    tagline: "Fixed spreads and guaranteed risk-management tools",
     rating: 4.2,
     founded: 2001,
     minDeposit: "$25",
     maxLeverage: "1:2000*",
     regulators: ["CySEC", "ASIC", "FSA (Seychelles)", "FSC (BVI)", "FSCA"],
     platforms: ["MT4", "MT5", "easyMarkets App"],
-    headquarters: "Limassol, Kıbrıs",
+    headquarters: "Limassol, Cyprus",
     referralUrl: "https://lnd.easy-markets.com/int/en/refer-a-friend/?ref_id=8433E3",
     summary:
-      "easyMarkets, 2001'den bu yana faaliyette olan, CySEC ve ASIC dahil 5 düzenleyici lisansa sahip köklü bir brokerdır. Sektörde nadir bulunan garantili stop-loss ve garantili negatif bakiye koruması sunar. FXPARTNER ortak kodu ile hesap açılabilir.",
+      "easyMarkets is a well-established broker operating since 2001, holding 5 regulatory licenses including CySEC and ASIC. It offers guaranteed stop-loss and guaranteed negative balance protection, both rare in the industry. Accounts can be opened with the FXPARTNER partner code.",
     pros: [
-      "2001'den beri faaliyette, 20+ yıllık sektör deneyimi",
-      "CySEC ve ASIC dahil 5 düzenleyici lisans",
-      "Garantili Stop-Loss ve garantili negatif bakiye koruması",
-      "$25 gibi düşük minimum yatırım",
+      "Operating since 2001, 20+ years of industry experience",
+      "5 regulatory licenses, including CySEC and ASIC",
+      "Guaranteed Stop-Loss and guaranteed negative balance protection",
+      "Low minimum deposit of $25",
     ],
     cons: [
-      "En düşük spreadler için Premium/VIP hesapta $2.000-$10.000 minimum yatırım gerekiyor",
-      "Kendi platformunda otomatik (EA) trading veya üçüncü parti eklenti desteği yok",
+      "The lowest spreads require a $2,000-$10,000 minimum deposit on Premium/VIP accounts",
+      "No automated (EA) trading or third-party plugin support on its own platform",
     ],
-    bestFor: "Sabit spread ve garantili risk yönetimi araçları arayan yeni başlayanlar",
-    accentNote: "En güvenli risk yönetimi araçları",
-    categories: ["Yeni Başlayanlar", "Kurumsal Güven"],
+    bestFor: "Beginners seeking fixed spreads and guaranteed risk-management tools",
+    accentNote: "Safest risk-management tools",
+    categories: ["Beginners", "Institutional Trust"],
     scoreCost: 3,
     scoreWithdrawal: 3,
   },
@@ -497,30 +498,30 @@ export const brokers: Broker[] = [
     rank: 4,
     slug: "ic-markets",
     name: "IC Markets",
-    tagline: "Ham ECN spread ve TradingView entegrasyonu",
+    tagline: "Raw ECN spreads and TradingView integration",
     rating: 4.7,
     founded: 2007,
     minDeposit: "$200",
     maxLeverage: "1:500*",
     regulators: ["ASIC", "CySEC", "FSA (Seychelles)"],
     platforms: ["MT4", "MT5", "cTrader", "TradingView"],
-    headquarters: "Sydney, Avustralya",
+    headquarters: "Sydney, Australia",
     referralUrl: "https://ic.com/?camp=69888",
     summary:
-      "IC Markets (yeni markasıyla IC), 2007'den bu yana faaliyette olan, ham ECN spread konusunda sektör lideri kabul edilen, ASIC ve CySEC dahil güçlü çoklu düzenleyici lisansa sahip köklü bir brokerdır. FXPARTNER ortak kodu ile hesap açılabilir.",
+      "IC Markets (rebranded as IC) is a well-established broker operating since 2007, widely regarded as an industry leader in raw ECN spreads, with strong multi-regulatory licensing including ASIC and CySEC. Accounts can be opened with the FXPARTNER partner code.",
     pros: [
-      "2007'den beri faaliyette, ham ECN spread konusunda sektör lideri",
-      "ASIC, CySEC ve FSA dahil güçlü çoklu düzenleyici lisans",
-      "MT4/MT5/cTrader/TradingView geniş platform desteği",
-      "Trustpilot'ta 55.000+ değerlendirme ile 4.8/5 puan",
+      "Operating since 2007, an industry leader in raw ECN spreads",
+      "Strong multi-regulatory licensing including ASIC, CySEC, and FSA",
+      "Broad platform support across MT4/MT5/cTrader/TradingView",
+      "4.8/5 rating from 55,000+ reviews on Trustpilot",
     ],
     cons: [
-      "200 USD minimum yatırım, düşük bariyerli brokerlara göre yüksek",
-      "2024'te CySEC'ten kaldıraç kısıtlamalarını aşma ve maliyet şeffaflığı ihlalleri nedeniyle toplam 250.000 EUR ceza aldı",
+      "The $200 minimum deposit is high compared to low-barrier brokers",
+      "Fined a total of €250,000 by CySEC in 2024 for leverage-limit and cost-transparency violations",
     ],
-    bestFor: "Ham spread ve kurumsal düzeyde yürütme arayan deneyimli/algoritmik yatırımcılar",
-    accentNote: "En düşük ham spread",
-    categories: ["Düşük Spread", "Kurumsal Güven"],
+    bestFor: "Experienced/algorithmic investors seeking raw spreads and institutional-grade execution",
+    accentNote: "Lowest raw spreads",
+    categories: ["Low Spread", "Institutional Trust"],
     scoreCost: 5,
     scoreWithdrawal: 4,
   },
@@ -528,7 +529,7 @@ export const brokers: Broker[] = [
     rank: 12,
     slug: "lhfx",
     name: "LHFX",
-    tagline: "MT5 üzerinden düşük bariyerli, ücretsiz para yatırma/çekme",
+    tagline: "Low-barrier MT5 trading with free deposits/withdrawals",
     rating: 2.8,
     founded: 2020,
     minDeposit: "$10",
@@ -538,19 +539,19 @@ export const brokers: Broker[] = [
     headquarters: "Port Louis, Mauritius",
     referralUrl: "https://lhfx.com/signup?ref=1543",
     summary:
-      "LHFX (eski adıyla LonghornFX), 2025'te yeniden markalanan, yalnızca offshore (FSC Mauritius ve FSCA) lisansına sahip bir CFD brokerdır. Bağımsız yorumlarda para yatırma/çekme kolaylığı övülürken, slippage ve para çekme gecikmelerine dair şikayetler de bildirilmiştir; hesap açmadan önce bu riskleri değerlendirmenizi öneririz.",
+      "LHFX (formerly LonghornFX) is a CFD broker rebranded in 2025, holding only offshore licenses (FSC Mauritius and FSCA). Independent reviews praise the ease of deposits/withdrawals, but also report complaints about slippage and withdrawal delays; we recommend weighing these risks before opening an account.",
     pros: [
-      "10 USD gibi düşük minimum yatırım",
-      "Yatırma/çekme işlemlerinde ek ücret yok",
-      "Scalping, hedging ve EA (algoritmik) trading'e izin veriyor",
+      "Low minimum deposit of $10",
+      "No extra fees on deposits/withdrawals",
+      "Allows scalping, hedging, and EA (algorithmic) trading",
     ],
     cons: [
-      "Sadece offshore (FSC Mauritius + FSCA) lisansı var, Tier-1 düzenleme bulunmuyor",
-      "2025'te LonghornFX'ten LHFX'e marka değişikliği yaptı; kısa ve karışık bir kurumsal geçmişi var",
-      "Bağımsız yorumlarda slippage/emir manipülasyonu iddiaları, para çekme gecikmeleri ve bonus reklamlarına dair şikayetler bildirilmiştir",
+      "Only offshore (FSC Mauritius + FSCA) licenses, no Tier-1 regulation",
+      "Rebranded from LonghornFX to LHFX in 2025; a short and mixed corporate history",
+      "Independent reviews report allegations of slippage/order manipulation, withdrawal delays, and complaints about bonus advertising",
     ],
-    bestFor: "Düşük bariyer arayan, riskin farkında olan yatırımcılar",
-    accentNote: "Ücretsiz para yatırma/çekme",
+    bestFor: "Risk-aware investors seeking a low barrier to entry",
+    accentNote: "Free deposits/withdrawals",
     categories: [],
     scoreCost: 3,
     scoreWithdrawal: 2,
@@ -559,30 +560,30 @@ export const brokers: Broker[] = [
     rank: 13,
     slug: "exclusive-markets",
     name: "Exclusive Markets",
-    tagline: "MT4/MT5 üzerinden yüksek kaldıraçlı offshore CFD işlemleri",
+    tagline: "High-leverage offshore CFD trading via MT4/MT5",
     rating: 2.0,
     founded: 2011,
     minDeposit: "$200",
     maxLeverage: "1:2000*",
     regulators: ["FSA (Seychelles)", "FSCA"],
     platforms: ["MT4", "MT5"],
-    headquarters: "Mahé, Seyşeller",
+    headquarters: "Mahé, Seychelles",
     referralUrl: "http://www.exclusivemarkets.com/register?ib=12214908",
     summary:
-      "Exclusive Markets, 2011'de kurulan, yalnızca offshore (FSA Seyşeller ve FSCA) lisansına sahip bir CFD brokerdır. Bağımsız inceleme kaynaklarında düşük güven skoru ve tekrarlayan para çekme şikayetleriyle anılmaktadır; hesap açmadan önce bu riskleri dikkatle değerlendirmenizi öneririz.",
+      "Exclusive Markets is a CFD broker founded in 2011, holding only offshore licenses (FSA Seychelles and FSCA). Independent review sources note a low trust score and recurring withdrawal complaints; we recommend carefully weighing these risks before opening an account.",
     pros: [
-      "1:2000'e kadar yüksek kaldıraç seçeneği",
-      "5.000'den fazla enstrüman ile geniş ürün yelpazesi",
-      "MT4/MT5 desteği",
+      "High leverage up to 1:2000",
+      "Wide product range with over 5,000 instruments",
+      "MT4/MT5 support",
     ],
     cons: [
-      "Sadece offshore (FSA Seyşeller + FSCA) lisansı var, Tier-1 düzenleme bulunmuyor",
-      "WikiFX saha araştırmasında belirtilen Kıbrıs/Seyşeller adreslerinde fiziksel varlık doğrulanamadı",
-      "Bağımsız inceleme sitelerinde düşük güven skoru (WikiFX 2,38/10; ForexBrokerz 1,50/5) ve tekrarlayan para çekme/donmuş bakiye şikayetleri bildirilmiştir",
+      "Only offshore (FSA Seychelles + FSCA) licenses, no Tier-1 regulation",
+      "WikiFX's on-site investigation could not verify a physical presence at the listed Cyprus/Seychelles addresses",
+      "Independent review sites report a low trust score (WikiFX 2.38/10; ForexBrokerz 1.50/5) and recurring withdrawal/frozen-balance complaints",
     ],
-    bestFor: "Riski tam olarak kabul eden, yüksek kaldıraç arayan deneyimli yatırımcılar",
-    accentNote: "Yüksek kaldıraç seçeneği",
-    categories: ["Yüksek Kaldıraç"],
+    bestFor: "Experienced investors who fully accept the risk and seek high leverage",
+    accentNote: "High leverage option",
+    categories: ["High Leverage"],
     scoreCost: 3,
     scoreWithdrawal: 1,
   },

@@ -3,7 +3,7 @@ export default function RatingStars({ rating }: { rating: number }) {
   const hasHalf = rating - full >= 0.5;
 
   return (
-    <div className="flex items-center gap-1.5" aria-label={`${rating} üzerinden 5 puan`}>
+    <div className="flex items-center gap-1.5" aria-label={`${rating} out of 5 stars`}>
       <div className="flex gap-0.5" aria-hidden="true">
         {Array.from({ length: 5 }).map((_, i) => {
           const filled = i < full;

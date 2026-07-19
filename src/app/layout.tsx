@@ -14,9 +14,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FXPARTNER | Forex Broker Karşılaştırma ve İncelemeleri",
+  title: "FXPARTNER | Forex Broker Comparison and Reviews",
   description:
-    "XM, AvaTrade, Tickmill, Lite Finance, EXNESS ve daha fazlası — güvenilirlik, spread, kaldıraç ve platform desteğine göre karşılaştırılmış forex broker incelemeleri. FXPARTNER ekosisteminin bir parçasıdır.",
+    "XM, AvaTrade, Tickmill, Lite Finance, EXNESS, and more — forex broker reviews compared by trustworthiness, spread, leverage, and platform support. Part of the FXPARTNER ecosystem.",
 };
 
 export default function RootLayout({
@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="tr"
+      lang="en"
       className={`${geist.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-text-dark">

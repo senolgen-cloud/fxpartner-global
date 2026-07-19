@@ -25,7 +25,7 @@ export default function BrokerList({ brokers }: { brokers: Broker[] }) {
               : "border-hairline-light text-text-muted hover:border-text-dark hover:text-text-dark"
           }`}
         >
-          Tümü
+          All
         </button>
         {brokerCategories.map((category) => (
           <button
@@ -46,7 +46,7 @@ export default function BrokerList({ brokers }: { brokers: Broker[] }) {
       <div className="mt-8">
         {filtered.length === 0 ? (
           <p className="py-10 text-sm text-text-muted">
-            Bu kategoride henüz broker bulunmuyor.
+            No brokers in this category yet.
           </p>
         ) : (
           filtered.map((broker) => <BrokerCard key={broker.slug} broker={broker} />)

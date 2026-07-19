@@ -7,18 +7,18 @@ const VIDEO_URL = `https://www.youtube.com/watch?v=${VIDEO_ID}`;
 
 export default function TradingVideo() {
   return (
-    <section id="egitim-videosu" className="border-t border-hairline-light bg-paper">
+    <section id="video" className="border-t border-hairline-light bg-paper">
       <div className="mx-auto max-w-4xl px-6 py-20">
         <Reveal>
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
-            Eğitim
+            Education
           </span>
           <h2 className="mt-3 font-display text-3xl font-semibold text-text-dark md:text-4xl">
-            Forex&apos;e giriş: temel kavramlar
+            Getting started with forex: the basics
           </h2>
           <p className="mt-4 max-w-2xl text-text-muted">
-            Broker karşılaştırmaya geçmeden önce, piyasanın temel işleyişini
-            özetleyen kısa bir video.
+            A short video covering how the market works, before you dive
+            into comparing brokers.
           </p>
         </Reveal>
 
@@ -37,9 +37,9 @@ export default function TradingVideo() {
         </Reveal>
 
         <p className="mt-3 font-mono text-xs text-text-muted">
-          Kaynak: {CHANNEL_NAME} (YouTube). Bu video FXPARTNER tarafından
-          üretilmemiştir; genel bilgilendirme amaçlıdır ve yatırım tavsiyesi
-          değildir.
+          Source: {CHANNEL_NAME} (YouTube). This video was not produced by
+          FXPARTNER; it is for general information only and is not
+          investment advice.
         </p>
         <a
           href={VIDEO_URL}
@@ -47,7 +47,7 @@ export default function TradingVideo() {
           rel="noopener noreferrer"
           className="mt-1 inline-block font-mono text-xs text-signal transition-colors hover:text-signal-strong"
         >
-          Orijinal videoyu YouTube&apos;da izle →
+          Watch the original video on YouTube →
         </a>
       </div>
     </section>

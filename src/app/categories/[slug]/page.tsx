@@ -21,7 +21,7 @@ export async function generateMetadata({
   const category = getCategoryBySlug(slug);
   if (!category) return {};
   return {
-    title: `${category.name} Brokerları | FXPARTNER`,
+    title: `${category.name} Brokers | FXPARTNER`,
     description: category.description,
   };
 }
@@ -44,10 +44,10 @@ export default async function CategoryPage({
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
             <Link
-              href="/kategoriler"
+              href="/categories"
               className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              ← Tüm kategoriler
+              ← All categories
             </Link>
             <h1 className="mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
               {category.name}
@@ -56,7 +56,7 @@ export default async function CategoryPage({
               {category.description}
             </p>
             <p className="tabular-stat mt-6 font-mono text-xs uppercase tracking-[0.15em] text-signal">
-              {matches.length} broker bu kategoride
+              {matches.length} brokers in this category
             </p>
           </div>
         </section>
@@ -65,7 +65,7 @@ export default async function CategoryPage({
           <div className="mx-auto max-w-6xl px-6 py-16">
             {matches.length === 0 ? (
               <p className="text-sm text-text-muted">
-                Bu kategoride henüz broker bulunmuyor.
+                No brokers in this category yet.
               </p>
             ) : (
               matches.map((broker) => (

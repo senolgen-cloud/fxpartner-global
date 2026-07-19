@@ -13,46 +13,46 @@ import { brokers } from "@/data/brokers";
 const steps = [
   {
     n: "01",
-    title: "Düzenlemeyi kontrol edin",
-    body: "FCA, ASIC veya CySEC gibi üst düzey (Tier-1) otoriteler tarafından denetlenen brokerlar, fon güvenliği açısından daha güçlü bir çerçeve sunar.",
+    title: "Check the regulation",
+    body: "Brokers overseen by top-tier (Tier-1) authorities like the FCA, ASIC, or CySEC offer a stronger framework for the safety of your funds.",
   },
   {
     n: "02",
-    title: "Maliyet yapısını karşılaştırın",
-    body: "Spread, komisyon ve gecelik swap oranlarını birlikte değerlendirin — düşük spread bazen yüksek komisyonla dengelenir.",
+    title: "Compare the cost structure",
+    body: "Weigh spread, commission, and overnight swap rates together — a low spread is sometimes offset by a higher commission.",
   },
   {
     n: "03",
-    title: "Platform ve araçları test edin",
-    body: "Demo hesap açarak MT4, MT5 veya cTrader arayüzünün kendi stratejinize uygun olup olmadığını görün.",
+    title: "Test the platform and tools",
+    body: "Open a demo account to see whether the MT4, MT5, or cTrader interface fits your own strategy.",
   },
   {
     n: "04",
-    title: "Para çekme sürecini deneyin",
-    body: "Küçük bir yatırımla başlayıp ilk çekim talebinin hızını ve şeffaflığını gözlemlemek, uzun vadeli güveni test etmenin en iyi yoludur.",
+    title: "Try the withdrawal process",
+    body: "Starting with a small deposit and watching the speed and transparency of your first withdrawal request is the best way to test long-term trust.",
   },
 ];
 
 const faqs = [
   {
-    q: "FXPARTNER Endeksi nedir, nasıl hesaplanıyor?",
-    a: "FXPARTNER Endeksi, aşağıdaki 01-04 rehberindeki dört kritere (Düzenleme, Maliyet, Platform, Para Çekme) göre 0-10 arası hesaplanan bileşik bir puandır. Platform ekseni brokerın platform verisinden otomatik hesaplanır. Düzenleme ekseni varsayılan olarak lisans verisinden hesaplanır; editoryal ekip gerekçeli bir istisna kararı aldığında bu puanı güncelleyebilir. Maliyet ve Para Çekme eksenleri incelemede yer alan doğrulanabilir sinyallere dayanan editoryal değerlendirmedir — özel bir sinyal bulunmayan brokerlar bu eksende nötr puan alır. Endeks, yıldız puanından bağımsız ayrı bir ölçümdür; ikisi farklı şeyleri yansıtabilir.",
+    q: "What is the FXPARTNER Index and how is it calculated?",
+    a: "The FXPARTNER Index is a composite score from 0-10, calculated from the four criteria in the 01-04 guide below (Regulation, Cost, Platform, Withdrawals). The Platform axis is computed automatically from the broker's platform data. The Regulation axis is derived from license data by default; the editorial team may update this score when it makes a reasoned exception. The Cost and Withdrawals axes are editorial judgments based on verifiable signals found in the review — brokers with no specific signal get a neutral score on that axis. The Index is a separate measure from the star rating; the two can reflect different things.",
   },
   {
-    q: "Bu sıralama nasıl belirleniyor?",
-    a: "Düzenleme kalitesi, maliyet şeffaflığı, platform çeşitliliği ve kullanıcı deneyimine dair genel kriterler esas alınarak oluşturulmuş bir değerlendirmedir. FXPARTNER, listelenen brokerların bir kısmıyla ortaklık/referans ilişkisi içindedir ve hesap açılışlarından komisyon elde edebilir; bu durum sayfadaki her broker kartında ayrıca belirtilir.",
+    q: "How is this ranking determined?",
+    a: "It's an assessment based on general criteria around regulatory quality, cost transparency, platform variety, and fit for the investor's profile. FXPARTNER has a partnership/referral relationship with some of the listed brokers and may earn a commission on account openings; this is noted separately on each broker card.",
   },
   {
-    q: "Hangi broker yeni başlayanlar için en uygun?",
-    a: "Düşük minimum yatırım ve geniş eğitim içeriği arayanlar için XM genellikle daha kolay bir başlangıç sunar; Lite Finance de düşük bariyeriyle öne çıkar.",
+    q: "Which broker is best for beginners?",
+    a: "For a low minimum deposit and extensive educational content, XM generally offers an easier start; Lite Finance also stands out for its low barrier to entry.",
   },
   {
-    q: "Kaldıraç oranları neden ülkeye göre değişiyor?",
-    a: "AB ve İngiltere gibi bölgelerde ESMA/FCA düzenlemeleri perakende yatırımcılar için kaldıracı sınırlarken, offshore lisanslı hesaplarda çok daha yüksek oranlar sunulabilir. Bu sayfadaki rakamlar bölgeye göre değişebilir.",
+    q: "Why do leverage ratios vary by country?",
+    a: "In regions like the EU and UK, ESMA/FCA regulations cap leverage for retail investors, while offshore-licensed accounts can offer much higher ratios. The figures on this page may vary by region.",
   },
   {
-    q: "Bu site yatırım tavsiyesi veriyor mu?",
-    a: "Hayır. İçerik yalnızca genel bilgilendirme amaçlıdır; kişisel yatırım tavsiyesi değildir. Karar vermeden önce kendi araştırmanızı yapmanız ve gerekirse bir uzmana danışmanız önerilir.",
+    q: "Does this site give investment advice?",
+    a: "No. The content is for general informational purposes only and is not personal investment advice. You should do your own research and consult a professional if needed before making a decision.",
   },
 ];
 
@@ -83,37 +83,37 @@ export default function Home() {
                   aria-hidden="true"
                   className="signal-dot h-1.5 w-1.5 rounded-full bg-signal"
                 />
-                2026 Broker Rehberi
+                2026 Broker Guide
               </span>
             </Reveal>
 
             <Reveal delay={90}>
               <h1 className="mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
-                Forex brokerlarını okumadan önce, aralarındaki farkı öğrenin.
+                Learn the difference between forex brokers before you pick one.
               </h1>
             </Reveal>
 
             <Reveal delay={180}>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-                XM, AvaTrade, Lite Finance ve dünyanın önde gelen diğer
-                brokerlarını düzenleme, maliyet, platform ve para çekme
-                hızına göre tek bir yerde karşılaştırdık.
+                We compared XM, AvaTrade, Lite Finance, and other leading
+                brokers worldwide in one place, by regulation, cost,
+                platform, and withdrawal speed.
               </p>
             </Reveal>
 
             <Reveal delay={270}>
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <a
-                  href="#brokerlar"
+                  href="#brokers"
                   className="lift-on-hover rounded-full bg-signal px-6 py-3 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
                 >
-                  Sıralamayı Gör
+                  See the Rankings
                 </a>
                 <a
-                  href="#karsilastirma"
+                  href="#comparison"
                   className="lift-on-hover rounded-full border border-hairline px-6 py-3 text-sm font-medium text-text-on-ink transition-colors hover:border-text-on-ink"
                 >
-                  Karşılaştırma Tablosu
+                  Comparison Table
                 </a>
               </div>
             </Reveal>
@@ -122,7 +122,7 @@ export default function Home() {
               <dl className="mt-16 grid grid-cols-2 gap-6 border-t border-hairline pt-8 sm:grid-cols-4">
                 <div>
                   <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    İncelenen Broker
+                    Brokers Reviewed
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold">
                     <AnimatedStat value={brokers.length} />
@@ -130,7 +130,7 @@ export default function Home() {
                 </div>
                 <div>
                   <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    Düzenleyici Otorite
+                    Regulatory Authorities
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold">
                     <AnimatedStat value={12} suffix="+" />
@@ -138,7 +138,7 @@ export default function Home() {
                 </div>
                 <div>
                   <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    En Düşük Giriş
+                    Lowest Entry
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold">
                     <AnimatedStat value={5} prefix="$" />
@@ -146,7 +146,7 @@ export default function Home() {
                 </div>
                 <div>
                   <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    Karşılaştırma Kriteri
+                    Comparison Criteria
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold">
                     <AnimatedStat value={6} />
@@ -158,18 +158,19 @@ export default function Home() {
         </section>
 
         {/* Ranked broker list */}
-        <section id="brokerlar" className="bg-paper-high">
+        <section id="brokers" className="bg-paper-high">
           <div className="mx-auto max-w-6xl px-6 py-20">
             <Reveal className="max-w-2xl">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
-                Sıralama
+                Rankings
               </span>
               <h2 className="mt-3 font-display text-3xl font-semibold text-text-dark md:text-4xl">
-                2026&apos;nın en çok tercih edilen {brokers.length} forex brokerı
+                The {brokers.length} most-chosen forex brokers of 2026
               </h2>
               <p className="mt-4 text-text-muted">
-                Her broker; düzenleme gücü, maliyet yapısı, platform desteği
-                ve yatırımcı profiline uygunluğuna göre değerlendirildi.
+                Each broker was assessed on regulatory strength, cost
+                structure, platform support, and fit for different investor
+                profiles.
               </p>
             </Reveal>
 
@@ -180,45 +181,44 @@ export default function Home() {
         </section>
 
         {/* Comparison table */}
-        <section id="karsilastirma" className="bg-ink">
+        <section id="comparison" className="bg-ink">
           <div className="mx-auto max-w-6xl px-6 py-20">
             <Reveal className="max-w-2xl">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-                Yan Yana
+                Side by Side
               </span>
               <h2 className="mt-3 font-display text-3xl font-semibold text-text-on-ink md:text-4xl">
-                Karşılaştırma tablosu
+                Comparison table
               </h2>
               <p className="mt-4 text-text-on-ink-muted">
-                Karar vermeden önce temel rakamları tek bakışta görün.
+                See the key numbers at a glance before you decide.
               </p>
             </Reveal>
             <Reveal delay={120} className="mt-10">
               <ComparisonTable />
             </Reveal>
             <p className="mt-6 max-w-2xl font-mono text-xs leading-relaxed text-text-on-ink-muted">
-              * Kaldıraç ve minimum yatırım rakamları hesap tipine ve
-              yatırımcının bulunduğu ülkeye göre değişiklik gösterebilir.
-              İşlem yapmadan önce brokerin resmi sitesinden güncel şartları
-              doğrulayın.
+              * Leverage and minimum deposit figures may vary by account type
+              and the investor&apos;s country. Verify current terms on the
+              broker&apos;s official website before trading.
             </p>
           </div>
         </section>
 
         {/* How to choose */}
-        <section id="nasil-secilir" className="bg-paper-high">
+        <section id="how-to-choose" className="bg-paper-high">
           <div className="mx-auto max-w-6xl px-6 py-20">
             <Reveal className="max-w-2xl">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
-                Rehber
+                Guide
               </span>
               <h2 className="mt-3 font-display text-3xl font-semibold text-text-dark md:text-4xl">
-                Broker nasıl seçilir?
+                How to choose a broker?
               </h2>
               <p className="mt-4 text-text-muted">
-                Bu dört kriter, her broker profilinde{" "}
-                <strong className="font-medium text-text-dark">FXPARTNER Endeksi</strong>{" "}
-                olarak 0-10 arası puanlanır.
+                These four criteria are scored from 0-10 on every broker
+                profile as the{" "}
+                <strong className="font-medium text-text-dark">FXPARTNER Index</strong>.
               </p>
             </Reveal>
             <div className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2">
@@ -244,14 +244,14 @@ export default function Home() {
         <TradingVideo />
 
         {/* FAQ */}
-        <section id="sss" className="bg-paper">
+        <section id="faq" className="bg-paper">
           <div className="mx-auto max-w-3xl px-6 py-20">
             <Reveal>
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
-                SSS
+                FAQ
               </span>
               <h2 className="mt-3 font-display text-3xl font-semibold text-text-dark md:text-4xl">
-                Sıkça sorulan sorular
+                Frequently asked questions
               </h2>
             </Reveal>
             <div className="mt-10 divide-y divide-hairline-light border-t border-hairline-light">

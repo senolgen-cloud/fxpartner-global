@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 const navLinks = [
-  { href: "/#brokerlar", label: "Broker Sıralaması" },
-  { href: "/kategoriler", label: "Kategoriler" },
-  { href: "/#karsilastirma", label: "Karşılaştırma" },
-  { href: "/#nasil-secilir", label: "Nasıl Seçilir" },
-  { href: "/#sss", label: "SSS" },
+  { href: "/#brokers", label: "Broker Rankings" },
+  { href: "/categories", label: "Categories" },
+  { href: "/#comparison", label: "Comparison" },
+  { href: "/#how-to-choose", label: "How to Choose" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 export default function Header() {
@@ -17,7 +17,7 @@ export default function Header() {
             FXPARTNER
           </span>
           <span className="hidden font-mono text-[11px] uppercase tracking-[0.2em] text-text-on-ink-muted sm:inline">
-            Broker Rehberi
+            Broker Guide
           </span>
         </Link>
         <nav className="hidden items-center gap-7 md:flex">
@@ -32,10 +32,10 @@ export default function Header() {
           ))}
         </nav>
         <a
-          href="#brokerlar"
+          href="#brokers"
           className="rounded-full bg-signal px-4 py-2 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong"
         >
-          Broker Karşılaştır
+          Compare Brokers
         </a>
       </div>
     </header>

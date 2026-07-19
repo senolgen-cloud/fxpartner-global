@@ -11,27 +11,26 @@ export default function Footer() {
               FXPARTNER
             </span>
             <p className="mt-3 max-w-sm text-sm leading-relaxed">
-              Forex brokerlarını düzenleme, maliyet ve platform desteğine göre
-              karşılaştıran bir inceleme kaynağıdır. Yatırım tavsiyesi
-              niteliği taşımaz.
+              A review resource comparing forex brokers by regulation, cost,
+              and platform support. Not investment advice.
             </p>
             <p className="mt-4 max-w-sm text-sm leading-relaxed">
-              Erdem Torun tarafından kurulan FXPARTNER eğitim ve CopyTrade
-              ekosisteminin bir parçasıdır.
+              Part of the FXPARTNER education and CopyTrade ecosystem,
+              founded by Erdem Torun.
             </p>
           </div>
           <div>
             <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink">
-              Broker İncelemeleri
+              Broker Reviews
             </h3>
             <ul className="mt-4 space-y-2 text-sm">
               {brokers.slice(0, 5).map((b) => (
                 <li key={b.slug}>
                   <Link
-                    href={`/brokerlar/${b.slug}`}
+                    href={`/brokers/${b.slug}`}
                     className="transition-colors hover:text-text-on-ink"
                   >
-                    {b.name} İncelemesi
+                    {b.name} Review
                   </Link>
                 </li>
               ))}
@@ -39,32 +38,32 @@ export default function Footer() {
           </div>
           <div>
             <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink">
-              Kaynaklar
+              Resources
             </h3>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
-                <Link href="/kategoriler" className="transition-colors hover:text-text-on-ink">
-                  Broker Kategorileri
+                <Link href="/categories" className="transition-colors hover:text-text-on-ink">
+                  Broker Categories
                 </Link>
               </li>
               <li>
-                <a href="#karsilastirma" className="transition-colors hover:text-text-on-ink">
-                  Karşılaştırma Tablosu
+                <a href="#comparison" className="transition-colors hover:text-text-on-ink">
+                  Comparison Table
                 </a>
               </li>
               <li>
-                <a href="#nasil-secilir" className="transition-colors hover:text-text-on-ink">
-                  Broker Nasıl Seçilir
+                <a href="#how-to-choose" className="transition-colors hover:text-text-on-ink">
+                  How to Choose a Broker
                 </a>
               </li>
               <li>
-                <a href="#egitim-videosu" className="transition-colors hover:text-text-on-ink">
-                  Eğitim Videosu
+                <a href="#video" className="transition-colors hover:text-text-on-ink">
+                  Educational Video
                 </a>
               </li>
               <li>
-                <a href="#sss" className="transition-colors hover:text-text-on-ink">
-                  Sıkça Sorulan Sorular
+                <a href="#faq" className="transition-colors hover:text-text-on-ink">
+                  Frequently Asked Questions
                 </a>
               </li>
             </ul>
@@ -73,22 +72,24 @@ export default function Footer() {
 
         <div className="mt-12 border-t border-hairline pt-6 text-xs leading-relaxed text-text-on-ink-muted/80">
           <p>
-            <strong className="text-text-on-ink-muted">Risk uyarısı:</strong> Kaldıraçlı
-            forex ve türev ürün işlemleri yüksek risk içerir ve yatırdığınız
-            sermayenin tamamını kaybetmenize neden olabilir. Bu sayfadaki
-            içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.
-            Minimum yatırım, kaldıraç ve düzenleme bilgileri ülkeye ve hesap
-            tipine göre değişebilir; işlem yapmadan önce güncel şartları
-            brokerin resmi sitesinden doğrulayın.
+            <strong className="text-text-on-ink-muted">Risk warning:</strong> Trading
+            leveraged forex and derivative products carries a high level of
+            risk and can result in the loss of all your invested capital.
+            The content on this page is for general informational purposes
+            only and does not constitute investment advice. Minimum deposit,
+            leverage, and regulatory information may vary by country and
+            account type; verify current terms on the broker&apos;s official
+            website before trading.
           </p>
           <p className="mt-3">
-            <strong className="text-text-on-ink-muted">Ortaklık bildirimi:</strong> FXPARTNER,
-            bu sayfada listelenen brokerların bir kısmıyla ortaklık/referans
-            ilişkisi içindedir ve &ldquo;Hesap Aç&rdquo; bağlantıları üzerinden açılan
-            hesaplardan komisyon elde edebilir. Bu durum ilgili karta ayrıca
-            not düşülmüştür ve sıralama/puanlama kriterlerini etkilemez.
+            <strong className="text-text-on-ink-muted">Affiliate disclosure:</strong> FXPARTNER
+            has a partnership/referral relationship with some of the brokers
+            listed on this page and may earn a commission on accounts opened
+            through &ldquo;Open Account&rdquo; links. This is noted separately on the
+            relevant card and does not affect our ranking or scoring
+            criteria.
           </p>
-          <p className="mt-3">© {new Date().getFullYear()} FXPARTNER. Tüm hakları saklıdır.</p>
+          <p className="mt-3">© {new Date().getFullYear()} FXPARTNER. All rights reserved.</p>
         </div>
       </div>
     </footer>

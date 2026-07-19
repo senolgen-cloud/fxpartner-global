@@ -11,19 +11,19 @@ export default function ComparisonTable() {
               Broker
             </th>
             <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-gold">
-              Endeks
+              Index
             </th>
             <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
-              Puan
+              Rating
             </th>
             <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
-              Min. Yatırım
+              Min. Deposit
             </th>
             <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
-              Maks. Kaldıraç
+              Max. Leverage
             </th>
             <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
-              Düzenleme
+              Regulation
             </th>
             <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
               Platform
@@ -70,10 +70,10 @@ export default function ComparisonTable() {
               </td>
               <td className="px-5 py-4 text-right">
                 <Link
-                  href={`/brokerlar/${b.slug}`}
+                  href={`/brokers/${b.slug}`}
                   className="font-mono text-xs text-signal transition-colors hover:text-text-on-ink"
                 >
-                  İncele →
+                  View →
                 </Link>
               </td>
             </tr>

@@ -47,7 +47,7 @@ export default function BonusPopup() {
         <button
           type="button"
           onClick={close}
-          aria-label="Kapat"
+          aria-label="Close"
           className="absolute right-4 top-4 font-mono text-lg text-text-on-ink-muted transition-colors hover:text-text-on-ink"
         >
           ×
@@ -55,19 +55,18 @@ export default function BonusPopup() {
 
         <div className="p-7">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-            {broker.name} Kampanyası
+            {broker.name} Promotion
           </span>
           <h2
             id="bonus-popup-title"
             className="mt-3 font-display text-3xl font-semibold leading-tight text-text-on-ink"
           >
-            Yeni hesap açanlara özel %100 bonus
+            100% bonus for new accounts
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-text-on-ink-muted">
-            FXPARTNER ortak kodu ile {broker.name}{" "}
-            hesabı açan yeni yatırımcılara özel %100 mevduat bonusu
-            uygulanır. Bonus oranı, hesap tipine ve bulunduğunuz ülkeye göre
-            değişir.
+            New investors who open a {broker.name}{" "}
+            account with the FXPARTNER partner code get a 100% deposit
+            bonus. The bonus rate varies by account type and country.
           </p>
 
           <div className="mt-6 flex flex-col gap-3">
@@ -78,21 +77,21 @@ export default function BonusPopup() {
               onClick={close}
               className="rounded-full bg-signal px-5 py-3 text-center text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong"
             >
-              Hesap Aç ve Bonusu İncele
+              Open Account and Claim Bonus
             </a>
             <button
               type="button"
               onClick={close}
               className="text-center font-mono text-xs uppercase tracking-[0.1em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              Şimdi değil
+              Not now
             </button>
           </div>
 
           <p className="mt-5 font-mono text-[10px] leading-relaxed text-text-on-ink-muted">
-            Ortaklık linki · Güncel bonus şartları için {broker.name}{" "}
-            resmi sitesini kontrol edin · Bazı bölgelerde/hesap tiplerinde
-            bonus kampanyaları sunulmayabilir · T&amp;Cs Apply
+            Affiliate link · Check {broker.name}&apos;s official site for
+            current bonus terms · Bonus campaigns may not be available in
+            some regions/account types · T&amp;Cs Apply
           </p>
         </div>
       </div>
