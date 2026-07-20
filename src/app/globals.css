@@ -39,6 +39,7 @@
   --font-display: var(--font-geist);
   --font-sans: var(--font-geist);
   --font-mono: var(--font-jetbrains-mono);
+  --font-poppins: var(--font-poppins);
 }
 
 body {
@@ -190,5 +191,69 @@ button {
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
+  }
+}
+
+/* --- Featured broker card: 3D tilt --- */
+@keyframes featured-ring-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--gold) 35%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 10px color-mix(in srgb, var(--gold) 0%, transparent);
+  }
+}
+
+.featured-card-perspective {
+  perspective: 1400px;
+}
+
+.featured-card-tilt {
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s ease;
+  will-change: transform;
+}
+
+.featured-card-tilt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    480px circle at var(--tilt-x, 50%) var(--tilt-y, 50%),
+    color-mix(in srgb, var(--gold) 16%, transparent),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.featured-card-tilt:hover::before {
+  opacity: 1;
+}
+
+.featured-card-ring {
+  animation: featured-ring-pulse 3.2s ease-in-out infinite;
+}
+
+.featured-card-depth {
+  transform: translateZ(48px);
+}
+
+.featured-card-depth-sm {
+  transform: translateZ(24px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-card-tilt {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .featured-card-ring {
+    animation: none;
   }
 }

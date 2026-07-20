@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { brokerCategories, type Broker } from "@/data/brokers";
-import BrokerCard from "./BrokerCard";
+import RankedBrokerCard from "./RankedBrokerCard";
 
 export default function BrokerList({ brokers }: { brokers: Broker[] }) {
   const [active, setActive] = useState<string | null>(null);
@@ -21,8 +21,8 @@ export default function BrokerList({ brokers }: { brokers: Broker[] }) {
           onClick={() => setActive(null)}
           className={`rounded-full border px-4 py-1.5 font-mono text-xs uppercase tracking-[0.1em] transition-colors ${
             active === null
-              ? "border-text-dark bg-text-dark text-paper-high"
-              : "border-hairline-light text-text-muted hover:border-text-dark hover:text-text-dark"
+              ? "border-text-on-ink bg-text-on-ink text-ink"
+              : "border-hairline text-text-on-ink-muted hover:border-text-on-ink hover:text-text-on-ink"
           }`}
         >
           All
@@ -34,8 +34,8 @@ export default function BrokerList({ brokers }: { brokers: Broker[] }) {
             onClick={() => setActive(category)}
             className={`rounded-full border px-4 py-1.5 font-mono text-xs uppercase tracking-[0.1em] transition-colors ${
               active === category
-                ? "border-text-dark bg-text-dark text-paper-high"
-                : "border-hairline-light text-text-muted hover:border-text-dark hover:text-text-dark"
+                ? "border-text-on-ink bg-text-on-ink text-ink"
+                : "border-hairline text-text-on-ink-muted hover:border-text-on-ink hover:text-text-on-ink"
             }`}
           >
             {category}
@@ -43,13 +43,19 @@ export default function BrokerList({ brokers }: { brokers: Broker[] }) {
         ))}
       </div>
 
-      <div className="mt-8">
+      <div className="mt-8 flex flex-col gap-5">
         {filtered.length === 0 ? (
-          <p className="py-10 text-sm text-text-muted">
+          <p className="py-10 text-sm text-text-on-ink-muted">
             No brokers in this category yet.
           </p>
         ) : (
-          filtered.map((broker) => <BrokerCard key={broker.slug} broker={broker} />)
+          filtered.map((broker, i) => (
+            <RankedBrokerCard
+              key={broker.slug}
+              broker={broker}
+              featured={active === null && i === 0}
+            />
+          ))
         )}
       </div>
     </div>

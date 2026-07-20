@@ -158,16 +158,20 @@ export default function Home() {
         </section>
 
         {/* Ranked broker list */}
-        <section id="brokers" className="bg-paper-high">
+        <section id="brokers" className="relative overflow-hidden bg-ink">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-hairline to-transparent"
+          />
           <div className="mx-auto max-w-6xl px-6 py-20">
             <Reveal className="max-w-2xl">
-              <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
                 Rankings
               </span>
-              <h2 className="mt-3 font-display text-3xl font-semibold text-text-dark md:text-4xl">
+              <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-on-ink md:text-4xl">
                 The {brokers.length} most-chosen forex brokers of 2026
               </h2>
-              <p className="mt-4 text-text-muted">
+              <p className="mt-4 text-text-on-ink-muted">
                 Each broker was assessed on regulatory strength, cost
                 structure, platform support, and fit for different investor
                 profiles.
