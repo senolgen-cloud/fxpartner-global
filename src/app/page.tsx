@@ -8,7 +8,10 @@ import Reveal from "@/components/Reveal";
 import AnimatedStat from "@/components/AnimatedStat";
 import HeroVideo from "@/components/HeroVideo";
 import TradingVideo from "@/components/TradingVideo";
-import { brokers } from "@/data/brokers";
+import DashboardPreview from "@/components/DashboardPreview";
+import { brokers, brokerCategories } from "@/data/brokers";
+
+const regulatorCount = new Set(brokers.flatMap((b) => b.regulators)).size;
 
 const steps = [
   {
@@ -76,7 +79,8 @@ export default function Home() {
           />
           <HeroVideo />
 
-          <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-28">
+          <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-20 md:py-28 lg:grid-cols-[1fr_420px] lg:items-center lg:gap-16">
+          <div>
             <Reveal>
               <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-signal">
                 <span
@@ -133,7 +137,7 @@ export default function Home() {
                     Regulatory Authorities
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold">
-                    <AnimatedStat value={12} suffix="+" />
+                    <AnimatedStat value={regulatorCount} suffix="+" />
                   </dd>
                 </div>
                 <div>
@@ -154,6 +158,15 @@ export default function Home() {
                 </div>
               </dl>
             </Reveal>
+          </div>
+
+          <Reveal delay={200} className="hidden lg:block">
+            <DashboardPreview
+              brokers={brokers}
+              categoryCount={brokerCategories.length}
+              regulatorCount={regulatorCount}
+            />
+          </Reveal>
           </div>
         </section>
 

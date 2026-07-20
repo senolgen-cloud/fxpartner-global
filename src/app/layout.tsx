@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, JetBrains_Mono, Poppins } from "next/font/google";
 import BonusPopup from "@/components/BonusPopup";
+import { organizationSchema, websiteSchema } from "@/lib/schema";
 import "./globals.css";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 const geist = Geist({
   variable: "--font-geist",
@@ -20,9 +23,30 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "FXPARTNER | Forex Broker Comparison and Reviews",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "FXPARTNER | Forex Broker Comparison and Reviews",
+    template: "%s | FXPARTNER",
+  },
   description:
     "XM, AvaTrade, Tickmill, Lite Finance, EXNESS, and more — forex broker reviews compared by trustworthiness, spread, leverage, and platform support. Part of the FXPARTNER ecosystem.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "FXPARTNER | Forex Broker Comparison and Reviews",
+    description:
+      "Forex broker reviews compared by trustworthiness, spread, leverage, and platform support.",
+    url: SITE_URL,
+    siteName: "FXPARTNER",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FXPARTNER | Forex Broker Comparison and Reviews",
+    description:
+      "Forex broker reviews compared by trustworthiness, spread, leverage, and platform support.",
+  },
 };
 
 export default function RootLayout({
@@ -36,6 +60,14 @@ export default function RootLayout({
       className={`${geist.variable} ${jetbrainsMono.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-text-dark">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
+        />
         {children}
         <BonusPopup />
       </body>

@@ -21,8 +21,9 @@ export async function generateMetadata({
   const category = getCategoryBySlug(slug);
   if (!category) return {};
   return {
-    title: `${category.name} Brokers | FXPARTNER`,
+    title: `${category.name} Brokers`,
     description: category.description,
+    alternates: { canonical: `/categories/${category.slug}` },
   };
 }
 

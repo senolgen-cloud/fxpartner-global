@@ -5,9 +5,10 @@ import Footer from "@/components/Footer";
 import { brokerCategories, categoryInfo, brokers } from "@/data/brokers";
 
 export const metadata: Metadata = {
-  title: "Broker Categories | FXPARTNER",
+  title: "Broker Categories",
   description:
     "Beginners, low spread, high leverage, and more — explore forex brokers by category, based on what you need.",
+  alternates: { canonical: "/categories" },
 };
 
 export default function CategoriesPage() {

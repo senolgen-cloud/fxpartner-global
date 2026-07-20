@@ -5,9 +5,10 @@ import ComplaintForm from "@/components/ComplaintForm";
 import { brokers } from "@/data/brokers";
 
 export const metadata: Metadata = {
-  title: "File a Complaint | FXPARTNER",
+  title: "File a Complaint",
   description:
     "Had a problem with a forex broker? Tell us what happened and we'll try to get it resolved.",
+  alternates: { canonical: "/complaint" },
 };
 
 export default function ComplaintPage() {

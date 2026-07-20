@@ -12,6 +12,9 @@ import { db } from "@/db";
 import { comments as commentsTable, users as usersTable } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 import { flagEmoji } from "@/lib/country";
+import { brokerReviewSchema, aggregateRatingSchema, breadcrumbSchema } from "@/lib/schema";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export function generateStaticParams() {
   return brokers.map((b) => ({ slug: b.slug }));
@@ -26,8 +29,15 @@ export async function generateMetadata({
   const broker = getBrokerBySlug(slug);
   if (!broker) return {};
   return {
-    title: `${broker.name} Review | FXPARTNER`,
+    title: `${broker.name} Review`,
     description: broker.summary,
+    alternates: { canonical: `/brokers/${broker.slug}` },
+    openGraph: {
+      title: `${broker.name} Review | FXPARTNER`,
+      description: broker.summary,
+      url: `${SITE_URL}/brokers/${broker.slug}`,
+      type: "article",
+    },
   };
 }
 
@@ -57,8 +67,46 @@ export default async function BrokerDetailPage({
     .where(eq(commentsTable.brokerSlug, broker.slug))
     .orderBy(desc(commentsTable.createdAt));
 
+  const ratedComments = brokerComments.filter((c) => c.rating != null);
+  const aggregate =
+    ratedComments.length > 0
+      ? aggregateRatingSchema({
+          brokerName: broker.name,
+          brokerSlug: broker.slug,
+          ratingValue:
+            Math.round(
+              (ratedComments.reduce((sum, c) => sum + (c.rating ?? 0), 0) /
+                ratedComments.length) *
+                10
+            ) / 10,
+          ratingCount: ratedComments.length,
+        })
+      : null;
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(brokerReviewSchema(broker)) }}
+      />
+      {aggregate && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregate) }}
+        />
+      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Home", url: SITE_URL },
+              { name: "Brokers", url: `${SITE_URL}/#brokers` },
+              { name: broker.name, url: `${SITE_URL}/brokers/${broker.slug}` },
+            ])
+          ),
+        }}
+      />
       <Header />
       <main className="flex-1">
         <section className="bg-ink text-text-on-ink">

@@ -5,9 +5,10 @@ import Footer from "@/components/Footer";
 import { brokers } from "@/data/brokers";
 
 export const metadata: Metadata = {
-  title: "Broker Risk Warnings | FXPARTNER",
+  title: "Broker Risk Warnings",
   description:
     "Brokers flagged for low independent trust scores or recurring complaint patterns in published reviews.",
+  alternates: { canonical: "/blacklist" },
 };
 
 // Curated, not automatic: only brokers whose `cons` already cite a specific,
