@@ -31,14 +31,14 @@ function CardBody({ broker, featured }: { broker: Broker; featured: boolean }) {
           {String(broker.rank).padStart(2, "0")}
         </span>
         <div className={featured ? "featured-card-depth-sm" : ""}>
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-hairline bg-ink shadow-[0_8px_24px_-8px_rgba(0,0,0,0.6)]">
+          <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl border border-hairline bg-ink p-2 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.6)]">
             {broker.logo ? (
               <Image
                 src={broker.logo}
                 alt={broker.name}
-                width={34}
-                height={34}
-                className="h-8.5 w-8.5 object-contain"
+                fill
+                sizes="48px"
+                className="object-contain"
               />
             ) : (
               <span className="font-poppins text-sm font-semibold text-text-on-ink" aria-hidden="true">

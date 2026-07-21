@@ -32,14 +32,14 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
             {String(broker.rank).padStart(2, "0")}
           </span>
           <div>
-            <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-ink">
+            <div className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-lg bg-ink p-2">
               {broker.logo ? (
                 <Image
                   src={broker.logo}
                   alt={broker.name}
-                  width={32}
-                  height={32}
-                  className="h-8 w-8 object-contain"
+                  fill
+                  sizes="44px"
+                  className="object-contain"
                 />
               ) : (
                 <span

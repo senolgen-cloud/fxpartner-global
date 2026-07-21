@@ -83,13 +83,13 @@ export default function BonusPopup() {
         <div className="p-7">
           <div className="flex items-center gap-3">
             {broker.logo && (
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white p-1.5">
+              <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl bg-white p-2">
                 <Image
                   src={broker.logo}
                   alt={broker.name}
-                  width={32}
-                  height={32}
-                  className="h-full w-full object-contain"
+                  fill
+                  sizes="44px"
+                  className="object-contain"
                 />
               </div>
             )}
