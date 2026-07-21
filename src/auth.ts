@@ -25,9 +25,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async session({ session, user }) {
+      const u = user as typeof user & {
+        country?: string | null;
+        phone?: string | null;
+        preferredBroker?: string | null;
+        isVip?: boolean;
+      };
       session.user.id = user.id;
-      session.user.country = (user as typeof user & { country?: string | null }).country ?? null;
-      session.user.isVip = (user as typeof user & { isVip?: boolean }).isVip ?? false;
+      session.user.country = u.country ?? null;
+      session.user.phone = u.phone ?? null;
+      session.user.preferredBroker = u.preferredBroker ?? null;
+      session.user.isVip = u.isVip ?? false;
       return session;
     },
   },

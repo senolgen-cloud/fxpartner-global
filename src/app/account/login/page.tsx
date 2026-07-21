@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { signIn } from "@/auth";
+import SignInForm from "@/components/SignInForm";
+import { brokers } from "@/data/brokers";
 
 export default function LoginPage() {
   return (
@@ -15,34 +16,11 @@ export default function LoginPage() {
             Sign in to FXPARTNER
           </h1>
           <p className="mt-3 text-text-muted">
-            Enter your email and we&apos;ll send you a one-time sign-in link.
-            No password needed.
+            Tell us a bit about yourself and we&apos;ll send you a one-time
+            sign-in link. No password needed.
           </p>
 
-          <form
-            action={async (formData) => {
-              "use server";
-              await signIn("resend", {
-                email: formData.get("email"),
-                redirectTo: "/account",
-              });
-            }}
-            className="mt-8 flex flex-col gap-3"
-          >
-            <input
-              type="email"
-              name="email"
-              required
-              placeholder="you@example.com"
-              className="rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
-            />
-            <button
-              type="submit"
-              className="rounded-full bg-signal px-5 py-3 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong"
-            >
-              Send sign-in link
-            </button>
-          </form>
+          <SignInForm brokers={brokers.map((b) => ({ slug: b.slug, name: b.name }))} />
 
           <p className="mt-6 text-xs leading-relaxed text-text-muted">
             By signing in you get access to broker reviews, complaint

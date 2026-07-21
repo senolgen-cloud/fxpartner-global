@@ -5,6 +5,8 @@ declare module "next-auth" {
     user: {
       id: string;
       country?: string | null;
+      phone?: string | null;
+      preferredBroker?: string | null;
       isVip?: boolean;
     } & DefaultSession["user"];
   }

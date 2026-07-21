@@ -6,6 +6,8 @@ const NOTIFY_EMAIL = process.env.COMPLAINT_NOTIFY_EMAIL || "senolgen@gmail.com";
 export async function sendRegistrationNotification(user: {
   name?: string | null;
   email?: string | null;
+  phone?: string | null;
+  preferredBroker?: string | null;
 }) {
   await sendEmail({
     to: NOTIFY_EMAIL,
@@ -14,6 +16,8 @@ export async function sendRegistrationNotification(user: {
       <h2>New account registered</h2>
       <p><strong>Name:</strong> ${user.name ?? "-"}</p>
       <p><strong>Email:</strong> ${user.email ?? "-"}</p>
+      <p><strong>Phone:</strong> ${user.phone ?? "-"}</p>
+      <p><strong>Preferred broker:</strong> ${user.preferredBroker ?? "-"}</p>
     `,
   });
 }

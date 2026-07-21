@@ -18,6 +18,7 @@ export const users = pgTable("user", {
   image: text("image"),
   country: text("country"),
   phone: text("phone"),
+  preferredBroker: text("preferred_broker"),
   isVip: boolean("is_vip").notNull().default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
