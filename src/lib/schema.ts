@@ -69,6 +69,32 @@ export function brokerReviewSchema(broker: {
   };
 }
 
+export function blogPostingSchema(post: {
+  slug: string;
+  title: string;
+  excerpt: string;
+  publishedAt: string;
+  updatedAt?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt || post.publishedAt,
+    url: `${SITE_URL}/blog/${post.slug}`,
+    author: {
+      "@type": "Organization",
+      name: "FXPARTNER",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "FXPARTNER",
+    },
+  };
+}
+
 // Only valid schema when count >= 1 — Google requires a real rating count.
 export function aggregateRatingSchema(params: {
   brokerName: string;
