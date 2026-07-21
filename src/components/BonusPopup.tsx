@@ -1,20 +1,44 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { getBrokerBySlug } from "@/data/brokers";
 
-const DISMISS_KEY = "fxpartner-xm-bonus-popup-dismissed";
+const DISMISS_KEY = "fxpartner-bonus-popup-dismissed";
+
+const PROMOS = [
+  {
+    slug: "xm",
+    headline: "100% Bonus for New Accounts",
+    body: "New investors who open an XM account with the FXPARTNER partner code get a 100% deposit bonus. The bonus rate varies by account type and country.",
+  },
+  {
+    slug: "avatrade",
+    headline: "FXPARTNER-Exclusive 15% Bonus",
+    body: "New investors who open an AvaTrade account with the FXPARTNER partner code get an exclusive 15% deposit bonus. The bonus rate varies by account type and country.",
+  },
+  {
+    slug: "lite-finance",
+    headline: "FXPARTNER-Exclusive 20% Bonus",
+    body: "New investors who open a Lite Finance account with the FXPARTNER partner code get an exclusive 20% deposit bonus. The bonus rate varies by account type and country.",
+  },
+  {
+    slug: "tickmill",
+    headline: "$30 Welcome Bonus",
+    body: "New investors who open a Tickmill account with the FXPARTNER partner code can claim a $30 welcome bonus. Bonus availability varies by account type and country.",
+  },
+] as const;
 
 export default function BonusPopup() {
   const [open, setOpen] = useState(false);
-  const broker = getBrokerBySlug("xm");
+  const [promoIndex, setPromoIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    if (!broker) return;
     if (sessionStorage.getItem(DISMISS_KEY)) return;
+    setPromoIndex(Math.floor(Math.random() * PROMOS.length));
     const timer = setTimeout(() => setOpen(true), 1500);
     return () => clearTimeout(timer);
-  }, [broker]);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -30,7 +54,10 @@ export default function BonusPopup() {
     sessionStorage.setItem(DISMISS_KEY, "1");
   }
 
-  if (!open || !broker) return null;
+  const promo = promoIndex !== null ? PROMOS[promoIndex] : null;
+  const broker = promo ? getBrokerBySlug(promo.slug) : undefined;
+
+  if (!open || !promo || !broker) return null;
 
   return (
     <div
@@ -54,20 +81,29 @@ export default function BonusPopup() {
         </button>
 
         <div className="p-7">
-          <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-            {broker.name} Promotion
-          </span>
+          <div className="flex items-center gap-3">
+            {broker.logo && (
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white p-1.5">
+                <Image
+                  src={broker.logo}
+                  alt={broker.name}
+                  width={32}
+                  height={32}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+            )}
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
+              {broker.name} Promotion
+            </span>
+          </div>
           <h2
             id="bonus-popup-title"
-            className="mt-3 font-display text-3xl font-semibold leading-tight text-text-on-ink"
+            className="mt-4 font-display text-3xl font-semibold leading-tight text-text-on-ink"
           >
-            100% bonus for new accounts
+            {promo.headline}
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-text-on-ink-muted">
-            New investors who open a {broker.name}{" "}
-            account with the FXPARTNER partner code get a 100% deposit
-            bonus. The bonus rate varies by account type and country.
-          </p>
+          <p className="mt-3 text-sm leading-relaxed text-text-on-ink-muted">{promo.body}</p>
 
           <div className="mt-6 flex flex-col gap-3">
             <a
