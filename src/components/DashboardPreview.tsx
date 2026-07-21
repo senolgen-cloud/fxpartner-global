@@ -1,9 +1,5 @@
-import { scoreAxes, getBrokerScores, type Broker } from "@/data/brokers";
-
-function averageAxis(brokers: Broker[], key: (typeof scoreAxes)[number]["key"]) {
-  const sum = brokers.reduce((acc, b) => acc + getBrokerScores(b)[key], 0);
-  return Math.round((sum / brokers.length) * 10) / 10;
-}
+import Link from "next/link";
+import { getBrokerScores, type Broker } from "@/data/brokers";
 
 export default function DashboardPreview({
   brokers,
@@ -14,10 +10,11 @@ export default function DashboardPreview({
   categoryCount: number;
   regulatorCount: number;
 }) {
-  const topBroker = [...brokers].sort(
+  const ranked = [...brokers].sort(
     (a, b) => getBrokerScores(b).composite - getBrokerScores(a).composite
-  )[0];
-  const topScore = getBrokerScores(topBroker).composite;
+  );
+  const top10 = ranked.slice(0, 10);
+  const topScore = getBrokerScores(top10[0]).composite;
   const avgRating =
     Math.round((brokers.reduce((sum, b) => sum + b.rating, 0) / brokers.length) * 10) / 10;
 
@@ -41,27 +38,41 @@ export default function DashboardPreview({
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-3">
-          {scoreAxes.map((axis) => (
-            <div key={axis.key} className="rounded-xl border border-hairline bg-ink/60 p-3">
-              <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                {axis.label}
-              </p>
-              <div className="mt-2 flex items-end gap-[3px]" aria-hidden="true">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <span
-                    key={i}
-                    className={`w-2 rounded-[1px] ${
-                      i < Math.round(averageAxis(brokers, axis.key))
-                        ? "bg-signal"
-                        : "bg-hairline"
-                    }`}
-                    style={{ height: 8 + i * 4 }}
-                  />
-                ))}
-              </div>
+        <div className="mt-6">
+          <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+            Top 10 Brokers
+          </p>
+          <div className="relative mt-2 h-[220px] overflow-hidden rounded-xl border border-hairline bg-ink/60">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 top-0 z-10 h-8 bg-gradient-to-b from-ink-soft to-transparent"
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-8 bg-gradient-to-t from-ink-soft to-transparent"
+            />
+            <div className="ticker-track-vertical">
+              {[...top10, ...top10].map((broker, i) => (
+                <Link
+                  key={`${broker.slug}-${i}`}
+                  href={`/brokers/${broker.slug}`}
+                  className="flex items-center justify-between gap-3 border-b border-hairline/60 px-3 py-2.5 transition-colors hover:bg-ink"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <span className="font-mono text-[10px] text-text-on-ink-muted">
+                      {String(broker.rank).padStart(2, "0")}
+                    </span>
+                    <span className="font-poppins text-[13px] font-medium text-text-on-ink">
+                      {broker.name}
+                    </span>
+                  </div>
+                  <span className="tabular-stat font-mono text-[12px] font-semibold text-gold">
+                    {getBrokerScores(broker).composite.toFixed(1)}
+                  </span>
+                </Link>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
 
         <div className="mt-6 grid grid-cols-3 gap-3 border-t border-hairline pt-5">

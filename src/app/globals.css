@@ -81,6 +81,19 @@ button {
   animation: ticker-scroll 32s linear infinite;
 }
 
+@keyframes ticker-scroll-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+.ticker-track-vertical {
+  animation: ticker-scroll-vertical 14s linear infinite;
+}
+
 /* --- Scroll-reveal --- */
 .reveal {
   opacity: 0;
@@ -157,6 +170,7 @@ button {
 
 @media (prefers-reduced-motion: reduce) {
   .ticker-track,
+  .ticker-track-vertical,
   .hero-glow-signal,
   .hero-glow-gold,
   .signal-dot {
