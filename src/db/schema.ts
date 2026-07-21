@@ -77,6 +77,43 @@ export const comments = pgTable("comment", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+export const cashbackAccountStatusValues = ["pending", "verified", "rejected"] as const;
+export type CashbackAccountStatus = (typeof cashbackAccountStatusValues)[number];
+
+export const cashbackAccounts = pgTable("cashback_account", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  // Nullable: the per-broker setup form is public and doesn't require an
+  // account. If the visitor happens to be signed in, we still link it.
+  userId: text("user_id").references(() => users.id, { onDelete: "set null" }),
+  brokerSlug: text("broker_slug").notNull(),
+  fullName: text("full_name").notNull(),
+  email: text("email").notNull(),
+  accountNumber: text("account_number").notNull(),
+  // Separate from account processing — only true if the visitor explicitly
+  // opted in to marketing/campaign emails, never assumed.
+  marketingOptIn: boolean("marketing_opt_in").notNull().default(false),
+  status: text("status").$type<CashbackAccountStatus>().notNull().default("pending"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+// One entry per period (e.g. a calendar month) that the site owner enters
+// manually after checking the real IB/partner dashboard for that account —
+// there is no live broker API, so this is never auto-computed or guessed.
+export const cashbackRecords = pgTable("cashback_record", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  accountId: text("account_id")
+    .notNull()
+    .references(() => cashbackAccounts.id, { onDelete: "cascade" }),
+  period: text("period").notNull(), // e.g. "2026-07"
+  amountUsd: text("amount_usd").notNull(), // stored as text to keep exact decimal input
+  note: text("note"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 export const complaintStatusValues = ["new", "in_progress", "resolved", "closed"] as const;
 export type ComplaintStatus = (typeof complaintStatusValues)[number];
 

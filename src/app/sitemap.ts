@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { brokers, brokerCategories, categoryInfo } from "@/data/brokers";
 import { blogPosts } from "@/data/blog";
+import { cashbackPrograms } from "@/data/cashback";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -9,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: SITE_URL, changeFrequency: "daily", priority: 1 },
     { url: `${SITE_URL}/categories`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${SITE_URL}/cashback`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/blacklist`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${SITE_URL}/complaint`, changeFrequency: "monthly", priority: 0.5 },
   ];
@@ -31,5 +33,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...brokerRoutes, ...categoryRoutes, ...blogRoutes];
+  const cashbackSetupRoutes: MetadataRoute.Sitemap = cashbackPrograms.map((p) => ({
+    url: `${SITE_URL}/cashback/${p.brokerSlug}/setup`,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [
+    ...staticRoutes,
+    ...brokerRoutes,
+    ...categoryRoutes,
+    ...blogRoutes,
+    ...cashbackSetupRoutes,
+  ];
 }

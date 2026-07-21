@@ -47,6 +47,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/cashback" className="transition-colors hover:text-text-on-ink">
+                  Cashback
+                </Link>
+              </li>
+              <li>
                 <Link href="/blog" className="transition-colors hover:text-text-on-ink">
                   Blog
                 </Link>

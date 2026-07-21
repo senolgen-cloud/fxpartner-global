@@ -4,10 +4,10 @@ import { auth } from "@/auth";
 const navLinks = [
   { href: "/#brokers", label: "Broker Rankings" },
   { href: "/categories", label: "Categories" },
+  { href: "/cashback", label: "Cashback" },
   { href: "/blog", label: "Blog" },
   { href: "/blacklist", label: "Risk Warnings" },
   { href: "/complaint", label: "Complaint" },
-  { href: "/#faq", label: "FAQ" },
 ];
 
 export default async function Header() {
