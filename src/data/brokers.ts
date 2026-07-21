@@ -331,7 +331,7 @@ export const brokers: Broker[] = [
     scoreOverride: 8.2,
   },
   {
-    rank: 10,
+    rank: 11,
     slug: "markets-com",
     name: "markets.com",
     logo: "/brokers/markets-com.png",
@@ -364,7 +364,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
   },
   {
-    rank: 8,
+    rank: 9,
     slug: "fxpro",
     name: "FxPro",
     logo: "/brokers/fxpro.png",
@@ -397,7 +397,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
   },
   {
-    rank: 11,
+    rank: 12,
     slug: "versus-trade",
     name: "Versus Trade",
     logo: "/brokers/versus-trade.jpg",
@@ -432,7 +432,7 @@ export const brokers: Broker[] = [
     scoreOverride: 5.2,
   },
   {
-    rank: 7,
+    rank: 8,
     slug: "thinkmarkets",
     name: "ThinkMarkets",
     logo: "/brokers/thinkmarkets.jpg",
@@ -465,7 +465,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
   },
   {
-    rank: 9,
+    rank: 10,
     slug: "easymarkets",
     name: "easyMarkets",
     logo: "/brokers/easymarkets.png",
@@ -529,7 +529,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 4,
   },
   {
-    rank: 12,
+    rank: 13,
     slug: "lhfx",
     name: "LHFX",
     logo: "/brokers/lhfx.png",
@@ -561,7 +561,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 2,
   },
   {
-    rank: 13,
+    rank: 14,
     slug: "exclusive-markets",
     name: "Exclusive Markets",
     logo: "/brokers/exclusive-markets.svg",
@@ -593,7 +593,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 1,
   },
   {
-    rank: 14,
+    rank: 15,
     slug: "tradingpro",
     name: "TradingPRO",
     logo: "/brokers/tradingpro.png",
@@ -627,6 +627,40 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 1,
     scoreRegulationOverride: 1,
     scoreOverride: 3.8,
+  },
+  {
+    rank: 7,
+    slug: "fxt",
+    name: "FXT",
+    logo: "/brokers/fxt.svg",
+    tagline: "ASIC-regulated multi-platform trading via MT4, MT5, and the FXT App",
+    rating: 4.3,
+    founded: 2014,
+    minDeposit: "$50",
+    maxLeverage: "1:2000*",
+    regulators: ["ASIC", "VFSC (Vanuatu)"],
+    platforms: ["MT4", "MT5", "WebTrader", "FXT App"],
+    headquarters: "Australia",
+    referralUrl: "https://my.fxtrading.com/new_api/prom/a/Qu3nwT2Y",
+    partnerCode: "FXPARTNER",
+    summary:
+      "FXT (FXTrading.com) is a broker operating since 2014 under a Market Making license from Australia's ASIC alongside an offshore VFSC (Vanuatu) license. It offers five account types, from Standard to Raw Spread, with leverage up to 1:2000 depending on jurisdiction. Accounts can be opened with the FXPARTNER partner code.",
+    pros: [
+      "Tier-1 ASIC (Australia) regulation alongside an offshore VFSC license",
+      "Operating since 2014, with a stronger independent trust score than most offshore-only brokers",
+      "Five account types, including Zero and Raw Spread options",
+      "MT4, MT5, WebTrader, and a proprietary FXT app",
+    ],
+    cons: [
+      "Leverage is capped lower for ASIC-regulated (Australian) clients than for the offshore entity",
+      "Not available to residents of the US, Canada (Ontario), New Zealand, and a few other jurisdictions",
+      "Independent reviewers note clone/impersonator sites using the FXT name — verify you're on the official domain before depositing",
+    ],
+    bestFor: "Traders who want real Tier-1 oversight without giving up high-leverage offshore options",
+    accentNote: "Strongest regulatory track record",
+    categories: ["Institutional Trust", "Multi-Platform"],
+    scoreCost: 4,
+    scoreWithdrawal: 4,
   },
 ].sort((a, b) => a.rank - b.rank);
 
