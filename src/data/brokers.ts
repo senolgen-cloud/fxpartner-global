@@ -592,6 +592,42 @@ export const brokers: Broker[] = [
     scoreCost: 3,
     scoreWithdrawal: 1,
   },
+  {
+    rank: 14,
+    slug: "tradingpro",
+    name: "TradingPRO",
+    logo: "/brokers/tradingpro.png",
+    tagline: "Multi-asset CFD trading via MT4, MT5, and cTrader",
+    rating: 1.8,
+    founded: 2017,
+    minDeposit: "$1",
+    maxLeverage: "1:2000*",
+    regulators: ["FSCA", "FSC (Mauritius)"],
+    platforms: ["MT4", "MT5", "cTrader"],
+    headquarters: "Saint Vincent and the Grenadines / Mauritius",
+    referralUrl: "https://secure.trading-pro.app/links/go/22409",
+    partnerCode: "FXPARTNER",
+    summary:
+      "TradingPRO is a CFD broker offering forex, indices, commodities, and crypto trading with leverage up to 1:2000 and a $1 minimum deposit. It holds offshore licenses (FSCA South Africa, FSC Mauritius) but no Tier-1 regulation, and was listed as an unauthorized firm on the UK FCA's warning list in mid-2025.",
+    pros: [
+      "Very low minimum deposit of $1",
+      "High leverage up to 1:2000",
+      "MT4, MT5, and cTrader platform support",
+      "Wide instrument range including forex, indices, commodities, and crypto CFDs",
+    ],
+    cons: [
+      "Only offshore (FSCA + FSC Mauritius) licenses, no Tier-1 regulation",
+      "Listed as an unauthorized firm on the UK FCA warning list (June 2025)",
+      "Independent review sites report a very low trust score (WikiFX 2.35/10, explicit 'stay away' warning) with multiple documented withdrawal delay/rejection complaints",
+    ],
+    bestFor: "Experienced, risk-aware traders who fully accept the risk and want a very low entry threshold",
+    accentNote: "Lowest minimum deposit",
+    categories: ["High Leverage"],
+    scoreCost: 3,
+    scoreWithdrawal: 1,
+    scoreRegulationOverride: 1,
+    scoreOverride: 3.8,
+  },
 ].sort((a, b) => a.rank - b.rank);
 
 export function getBrokerBySlug(slug: string): Broker | undefined {

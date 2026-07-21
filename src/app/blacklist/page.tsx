@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 // Curated, not automatic: only brokers whose `cons` already cite a specific,
 // sourced complaint pattern or independent trust-score reference. Adding a
 // broker here requires real, checkable evidence — never an unverified claim.
-const WATCHLIST_SLUGS = ["exclusive-markets", "lhfx", "versus-trade"];
+const WATCHLIST_SLUGS = ["exclusive-markets", "lhfx", "versus-trade", "tradingpro"];
 
 export default function BlacklistPage() {
   const flagged = WATCHLIST_SLUGS.map((slug) => brokers.find((b) => b.slug === slug)).filter(

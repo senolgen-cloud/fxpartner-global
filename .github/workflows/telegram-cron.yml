@@ -4,8 +4,9 @@ on:
   schedule:
     # Market snapshot chart — every 2 hours
     - cron: "0 */2 * * *"
-    # News scan — every 30 minutes
-    - cron: "*/30 * * * *"
+    # News scan is paused (workflow_dispatch only) until DEEPL_API_KEY and
+    # UPSTASH_REDIS_REST_URL/TOKEN are configured — without them
+    # /api/cron/news-update 500s on every call.
   workflow_dispatch:
 
 jobs:
@@ -19,7 +20,7 @@ jobs:
             https://fxpartner.global/api/cron/market-update
 
   news-update:
-    if: github.event.schedule == '*/30 * * * *' || github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger news-update

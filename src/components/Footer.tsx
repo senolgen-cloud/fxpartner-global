@@ -109,7 +109,15 @@ export default function Footer() {
             relevant card and does not affect our ranking or scoring
             criteria.
           </p>
-          <p className="mt-3">© {new Date().getFullYear()} FXPARTNER. All rights reserved.</p>
+          <p className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1">
+            <span>© {new Date().getFullYear()} FXPARTNER. All rights reserved.</span>
+            <Link href="/privacy" className="transition-colors hover:text-text-on-ink">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="transition-colors hover:text-text-on-ink">
+              Terms of Service
+            </Link>
+          </p>
         </div>
       </div>
     </footer>
