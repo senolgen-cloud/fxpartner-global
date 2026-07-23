@@ -31,6 +31,17 @@ export interface Broker {
   // default. This field only exists for a reasoned editorial exception
   // that overrides the formula.
   scoreOverride?: number;
+  // An optional time-limited campaign (e.g. refer-a-friend), rendered as
+  // a highlighted banner on the broker's review page. Distinct from the
+  // standing referralUrl/partnerCode, which is always active.
+  promotion?: {
+    tag: string;
+    title: string;
+    intro: string;
+    steps: string[];
+    note: string;
+    contactEmail?: string;
+  };
 }
 
 export const brokerCategories = [
@@ -295,6 +306,20 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
     scoreRegulationOverride: 3,
     scoreOverride: 9.1,
+    promotion: {
+      tag: "Active Campaign",
+      title: "Refer a Friend, Earn $50",
+      intro:
+        "Lite Finance's refer-a-friend campaign is live for FXPARTNER clients: invite a friend, and you both get rewarded.",
+      steps: [
+        "Verify your own account and deposit at least $100.",
+        "Generate your personal referral link and share it with a friend.",
+        "Your friend signs up through your link and, within 7 days, deposits $250+ and applies the promo code to claim a 100% deposit bonus.",
+        "Once your friend completes at least 1 lot of trading, $50 is credited to your account.",
+      ],
+      note: "Campaign terms apply and are subject to change; Lite Finance reserves the right to cancel rewards for terms violations. Confirm current conditions on Lite Finance's official site before participating.",
+      contactEmail: "turkiye@litefinance.com",
+    },
   },
   {
     rank: 6,
