@@ -10,6 +10,7 @@ import HeroVideo from "@/components/HeroVideo";
 import TradingVideo from "@/components/TradingVideo";
 import DashboardPreview from "@/components/DashboardPreview";
 import ShowcaseGallery from "@/components/ShowcaseGallery";
+import BrokerHeroSlider from "@/components/BrokerHeroSlider";
 import StickyCTA from "@/components/StickyCTA";
 import { brokers, brokerCategories } from "@/data/brokers";
 
@@ -170,6 +171,15 @@ export default function Home() {
             />
           </Reveal>
           </div>
+
+          <Reveal delay={330} className="relative mx-auto mt-14 max-w-6xl px-6 lg:mt-16">
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-text-on-ink-muted">
+              Ranked brokers, at a glance
+            </span>
+            <div className="mt-4">
+              <BrokerHeroSlider brokers={brokers} />
+            </div>
+          </Reveal>
         </section>
 
         {/* Ranked broker list */}

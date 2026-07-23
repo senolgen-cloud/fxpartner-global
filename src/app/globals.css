@@ -168,9 +168,19 @@ button {
   transform: translateY(-3px);
 }
 
+/* --- Hero broker slider --- */
+.broker-slider-track {
+  animation: ticker-scroll 40s linear infinite;
+}
+
+.broker-slider-track:hover {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ticker-track,
   .ticker-track-vertical,
+  .broker-slider-track,
   .hero-glow-signal,
   .hero-glow-gold,
   .signal-dot {
