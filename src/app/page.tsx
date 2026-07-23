@@ -9,6 +9,8 @@ import AnimatedStat from "@/components/AnimatedStat";
 import HeroVideo from "@/components/HeroVideo";
 import TradingVideo from "@/components/TradingVideo";
 import DashboardPreview from "@/components/DashboardPreview";
+import ShowcaseGallery from "@/components/ShowcaseGallery";
+import StickyCTA from "@/components/StickyCTA";
 import { brokers, brokerCategories } from "@/data/brokers";
 
 const regulatorCount = new Set(brokers.flatMap((b) => b.regulators)).size;
@@ -197,6 +199,8 @@ export default function Home() {
           </div>
         </section>
 
+        <ShowcaseGallery />
+
         {/* Comparison table */}
         <section id="comparison" className="bg-ink">
           <div className="mx-auto max-w-6xl px-6 py-20">
@@ -291,6 +295,7 @@ export default function Home() {
       </main>
 
       <Footer />
+      <StickyCTA brokerCount={brokers.length} />
     </>
   );
 }
