@@ -5,11 +5,29 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { brokers } from "@/data/brokers";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
+const OG_IMAGE = `${SITE_URL}/campaigns/lite-finance-refer-a-friend.jpg`;
+
 export const metadata: Metadata = {
   title: "Current Broker Campaigns",
   description:
     "Active referral and deposit campaigns from FXPARTNER partner brokers, in one place.",
   alternates: { canonical: "/campaigns" },
+  openGraph: {
+    title: "Current Broker Campaigns | FXPARTNER",
+    description:
+      "Active referral and deposit campaigns from FXPARTNER partner brokers, in one place.",
+    url: `${SITE_URL}/campaigns`,
+    type: "website",
+    images: [{ url: OG_IMAGE, width: 1136, height: 757 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Current Broker Campaigns | FXPARTNER",
+    description:
+      "Active referral and deposit campaigns from FXPARTNER partner brokers, in one place.",
+    images: [OG_IMAGE],
+  },
 };
 
 export default function CampaignsPage() {
