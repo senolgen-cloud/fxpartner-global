@@ -62,6 +62,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/piyasa-analizi" className="transition-colors hover:text-text-on-ink">
+                  Market Analysis
+                </Link>
+              </li>
+              <li>
                 <Link href="/blacklist" className="transition-colors hover:text-text-on-ink">
                   Risk Warnings
                 </Link>

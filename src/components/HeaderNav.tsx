@@ -7,6 +7,7 @@ const primaryLinks = [
   { href: "/#brokers", label: "Broker Rankings" },
   { href: "/categories", label: "Categories" },
   { href: "/blog", label: "Blog" },
+  { href: "/piyasa-analizi", label: "Market Analysis" },
 ];
 
 const resourceLinks = [
