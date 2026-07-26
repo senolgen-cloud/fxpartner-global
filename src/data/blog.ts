@@ -91,6 +91,76 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "xm-review",
+    title: "XM Review 2026: Accounts, Costs, Regulation, and Who It's Best For",
+    excerpt:
+      "A full breakdown of XM's five account types, deposit/withdrawal speed, regulatory licenses, and education tools — the same research behind XM's #1 spot in the FXPARTNER Index.",
+    publishedAt: "2026-07-27",
+    readingMinutes: 9,
+    sections: [
+      {
+        paragraphs: [
+          "XM (XM Global) is the most-chosen broker in the FXPARTNER community, and the #1-ranked broker in the FXPARTNER Index. Founded in 2009 and headquartered across Cyprus and Australia, it has built that position on a genuinely low barrier to entry — a $5 minimum deposit — combined with regulatory coverage and an education program that's unusually extensive for a broker at that price point.",
+          "This review walks through exactly what you get at each account tier, how deposits and withdrawals actually work, and who XM fits best — using the same criteria (regulation, cost, platform, withdrawals) as our broader broker-evaluation framework, so you can check our ranking against the details yourself.",
+        ],
+      },
+      {
+        heading: "Regulation and fund safety",
+        paragraphs: [
+          "XM holds four regulatory licenses: ASIC (Australia), CySEC (Cyprus), and DFSA (Dubai) are Tier-1 authorities, requiring client-fund segregation and minimum capital reserves; FSC (Belize) is its offshore license. Three Tier-1 licenses alongside an offshore one is a stronger safety net than most brokers in this price range offer.",
+          "Accounts also come with negative balance protection, meaning you can't lose more than you've deposited even during a volatile move that gaps through your stop-loss — a standard feature at regulated brokers, but worth confirming before you fund any account.",
+        ],
+      },
+      {
+        heading: "Account types and trading costs",
+        paragraphs: [
+          "XM offers five account types, and the right one depends mostly on how much you trade and how sensitive you are to spread versus commission:",
+        ],
+        list: [
+          "Micro — spreads from 1.0 pips, no commission, $5 minimum deposit. Trades in micro lots (1,000 units), which makes position sizing easier while you're still learning.",
+          "Standard — the same 1.0-pip-from spread and no-commission structure as Micro, but in full-size lots (100,000 units). Also a $5 minimum deposit.",
+          "XM Ultra Low — built for more active trading, with spreads from 0.6 pips and no added commission. $100 minimum deposit.",
+          "Zero — spreads from 0.0 pips on major pairs, offset by a $3.50-per-lot-per-side commission. This is the account that suits scalpers and high-frequency strategies where the tightest possible spread matters more than a flat no-commission structure. $100 minimum deposit.",
+          "Shares — direct share trading with a per-share commission and no leverage, separate from the CFD-style accounts above.",
+        ],
+      },
+      {
+        heading: "Platforms",
+        paragraphs: [
+          "XM runs on MetaTrader 4 and MetaTrader 5 — both broker-agnostic, so your indicators, expert advisors, and chart setups carry over if you ever open an account elsewhere — plus its own XM App for trading and account management from a phone. There's no proprietary desktop platform beyond MetaTrader, which is a deliberate tradeoff: MT4/MT5 have the largest available library of third-party tools and EAs of any retail platform, at the cost of the more modern interface some brokers build on top of them.",
+        ],
+      },
+      {
+        heading: "Deposits and withdrawals",
+        paragraphs: [
+          "Deposits by card or e-wallet (Skrill, Neteller, WebMoney) are typically credited instantly; bank wire transfers take 1-3 business days. XM doesn't charge a deposit fee on any method.",
+          "Withdrawal requests are generally processed within 24 hours on XM's side: e-wallet payouts often land the same day, while card and bank withdrawals take roughly 2-5 business days depending on the provider — the delay at that point is usually the bank's processing time, not XM's. There's no withdrawal fee from XM, though your card issuer or e-wallet provider may apply its own. Withdrawal speed and transparency are exactly the kind of signal we weight most heavily in the FXPARTNER Index's Withdrawals axis, precisely because it's the point where a broker's real behavior — not its marketing page — shows up.",
+        ],
+      },
+      {
+        heading: "Education and research",
+        paragraphs: [
+          "This is where XM separates itself from most brokers at a $5 minimum deposit. It runs live webinars daily, delivered in multiple languages, covering everything from basic candlestick patterns to more advanced technical strategies, plus a recorded video library through a Tradepedia partnership that's available on-demand. An in-house analyst team also publishes daily technical outlooks and a live economic calendar.",
+          "XM also runs a loyalty program, the XM Traders Club, with five membership tiers (Bronze through Elite) that earn XM Coins on closed positions — a structure that rewards trading volume over time rather than a one-off signup bonus.",
+        ],
+      },
+      {
+        heading: "Who XM is best for",
+        paragraphs: [
+          "XM's combination of a $5 entry point, no-commission Micro/Standard accounts, and daily education makes it a natural fit for beginners who want to learn while trading small size. Its Zero account also gives more active traders a genuine low-spread option once they're ready to scale up, without having to switch brokers.",
+          "If your priority is the absolute tightest raw spread regardless of account minimums, it's worth comparing XM's Zero account against dedicated low-spread brokers in our rankings — XM's strength is the combination of accessibility and education, not necessarily having the single lowest cost on the market.",
+        ],
+      },
+      {
+        heading: "The bottom line",
+        paragraphs: [
+          "XM earns its #1 FXPARTNER Index ranking on the combination of two Tier-1 regulators, a five-tier account structure that scales from a $5 beginner account to a genuine low-spread Zero account, consistently fast withdrawal processing, and an education program most competitors don't match at this price point.",
+          "As with any broker, confirm current spreads, leverage limits for your country, and account terms on XM's official site before funding a live account — this review is a research aid, not investment advice.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {

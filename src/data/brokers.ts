@@ -42,6 +42,16 @@ export interface Broker {
     note: string;
     contactEmail?: string;
   };
+  // Optional, researched deep-dive detail beyond the standard fields above.
+  // Only populated for brokers we've written a full account-type/deposit/
+  // withdrawal breakdown for — the page simply omits this section when absent.
+  deepDive?: {
+    accountTypes: { name: string; spread: string; commission: string; minDeposit: string }[];
+    deposits: string;
+    withdrawals: string;
+    support: string;
+    education: string;
+  };
 }
 
 export const brokerCategories = [
@@ -136,7 +146,7 @@ export const scoreAxes = [
 
 export type ScoreAxisKey = (typeof scoreAxes)[number]["key"];
 
-const TIER1_REGULATORS = new Set([
+export const TIER1_REGULATORS = new Set([
   "FCA",
   "ASIC",
   "CySEC",
@@ -207,6 +217,23 @@ export const brokers: Broker[] = [
     categories: ["Beginners"],
     scoreCost: 5,
     scoreWithdrawal: 5,
+    deepDive: {
+      accountTypes: [
+        { name: "Micro", spread: "From 1.0 pips", commission: "None", minDeposit: "$5" },
+        { name: "Standard", spread: "From 1.0 pips", commission: "None", minDeposit: "$5" },
+        { name: "XM Ultra Low", spread: "From 0.6 pips", commission: "None", minDeposit: "$100" },
+        { name: "Zero", spread: "From 0.0 pips", commission: "$3.50 per lot, per side", minDeposit: "$100" },
+        { name: "Shares", spread: "Per-share commission, no leverage", commission: "Varies by share", minDeposit: "$5" },
+      ],
+      deposits:
+        "Cards and e-wallets (Skrill, Neteller, WebMoney) are usually credited instantly; bank wire transfers take 1-3 business days. XM charges no deposit fee.",
+      withdrawals:
+        "Most withdrawal requests are processed within 24 hours — e-wallet payouts typically land the same day, while card and bank withdrawals take roughly 2-5 business days depending on the provider. XM charges no withdrawal fee, though your payment provider may apply its own.",
+      support:
+        "24/7 live chat, phone, and email support in 28+ languages, plus a self-serve help center.",
+      education:
+        "Daily live webinars in 23 languages, a Tradepedia video library, an interactive economic calendar, and the XM Traders Club loyalty program (Bronze through Elite tiers, earning XM Coins on closed positions).",
+    },
   },
   {
     rank: 2,

@@ -12,7 +12,9 @@ import { db } from "@/db";
 import { comments as commentsTable, users as usersTable } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 import { flagEmoji } from "@/lib/country";
-import { brokerReviewSchema, aggregateRatingSchema, breadcrumbSchema } from "@/lib/schema";
+import { brokerReviewSchema, aggregateRatingSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { regulationParagraph, platformParagraph, verdictParagraph, brokerFaqs } from "@/lib/brokerContent";
+import { getBlogPostBySlug } from "@/data/blog";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -51,6 +53,8 @@ export default async function BrokerDetailPage({
   if (!broker) notFound();
 
   const otherBrokers = brokers.filter((b) => b.slug !== broker.slug).slice(0, 3);
+  const faqs = brokerFaqs(broker);
+  const reviewPost = getBlogPostBySlug(`${broker.slug}-review`);
 
   const session = await auth();
   const brokerComments = await db
@@ -106,6 +110,10 @@ export default async function BrokerDetailPage({
             ])
           ),
         }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
       />
       <Header />
       <main className="flex-1">
@@ -247,6 +255,25 @@ export default async function BrokerDetailPage({
               </div>
             )}
 
+            <div className="mt-12 grid gap-10 sm:grid-cols-2">
+              <div>
+                <h2 className="font-display text-xl font-semibold text-text-dark">
+                  Regulation &amp; Fund Safety
+                </h2>
+                <p className="mt-4 text-[15px] leading-relaxed text-text-dark/90">
+                  {regulationParagraph(broker)}
+                </p>
+              </div>
+              <div>
+                <h2 className="font-display text-xl font-semibold text-text-dark">
+                  Trading Platforms
+                </h2>
+                <p className="mt-4 text-[15px] leading-relaxed text-text-dark/90">
+                  {platformParagraph(broker)}
+                </p>
+              </div>
+            </div>
+
             <div className="mt-12 grid gap-8 sm:grid-cols-2">
               <div>
                 <h2 className="font-display text-xl font-semibold text-signal">
@@ -273,6 +300,102 @@ export default async function BrokerDetailPage({
                     </li>
                   ))}
                 </ul>
+              </div>
+            </div>
+
+            {broker.deepDive && (
+              <div className="mt-14 border-t border-hairline-light pt-10">
+                <h2 className="font-display text-2xl font-semibold text-text-dark">
+                  Account Types
+                </h2>
+                <div className="mt-5 overflow-x-auto">
+                  <table className="w-full min-w-[480px] border-collapse text-left text-sm">
+                    <thead>
+                      <tr className="border-b border-hairline-light font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">
+                        <th className="py-2 pr-4 font-medium">Account</th>
+                        <th className="py-2 pr-4 font-medium">Spread</th>
+                        <th className="py-2 pr-4 font-medium">Commission</th>
+                        <th className="py-2 font-medium">Min. Deposit</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-hairline-light">
+                      {broker.deepDive.accountTypes.map((acc) => (
+                        <tr key={acc.name}>
+                          <td className="py-3 pr-4 font-medium text-text-dark">{acc.name}</td>
+                          <td className="py-3 pr-4 text-text-dark/90">{acc.spread}</td>
+                          <td className="py-3 pr-4 text-text-dark/90">{acc.commission}</td>
+                          <td className="py-3 text-text-dark/90">{acc.minDeposit}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                <div className="mt-10 grid gap-8 sm:grid-cols-2">
+                  <div>
+                    <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
+                      Deposits
+                    </h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
+                      {broker.deepDive.deposits}
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
+                      Withdrawals
+                    </h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
+                      {broker.deepDive.withdrawals}
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
+                      Customer Support
+                    </h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
+                      {broker.deepDive.support}
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
+                      Education &amp; Tools
+                    </h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
+                      {broker.deepDive.education}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="mt-14 border-t border-hairline-light pt-10">
+              <h2 className="font-display text-2xl font-semibold text-text-dark">
+                The Verdict
+              </h2>
+              <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-text-dark/90">
+                {verdictParagraph(broker)}
+              </p>
+              {reviewPost && (
+                <Link
+                  href={`/blog/${reviewPost.slug}`}
+                  className="mt-4 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal"
+                >
+                  Read the full {broker.name} review →
+                </Link>
+              )}
+            </div>
+
+            <div className="mt-14 border-t border-hairline-light pt-10">
+              <h2 className="font-display text-2xl font-semibold text-text-dark">
+                Frequently Asked Questions
+              </h2>
+              <div className="mt-6 divide-y divide-hairline-light">
+                {faqs.map((faq) => (
+                  <div key={faq.q} className="py-5">
+                    <h3 className="font-medium text-text-dark">{faq.q}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-text-muted">{faq.a}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
