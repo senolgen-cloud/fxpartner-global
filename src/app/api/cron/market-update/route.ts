@@ -3,6 +3,9 @@ import { sendTelegramPhoto } from "@/lib/telegram";
 import { getCandles, SYMBOLS } from "@/lib/market-data";
 import { sma, rsi } from "@/lib/technicals";
 
+// Owned by Piyasa Analizi Departmanı (Kaan Ediz) — see src/lib/departments.ts
+// and docs/ORGANIZATION.md. Paused by default: only fires via
+// workflow_dispatch in .github/workflows/telegram-cron.yml.
 function isAuthorized(req: NextRequest): boolean {
   const secret = process.env.CRON_SECRET;
   if (!secret) return false;

@@ -26,3 +26,14 @@ jobs:
         run: |
           curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
             https://fxpartner.global/api/cron/news-update
+
+  # Owned by Reklam & Kampanya Departmanı — see docs/ORGANIZATION.md.
+  # Manual-only until Compliance & Brand signs off on a schedule.
+  campaign-digest:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger campaign-digest
+        run: |
+          curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            https://fxpartner.global/api/cron/campaign-digest

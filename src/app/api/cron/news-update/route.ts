@@ -5,6 +5,9 @@ import { translateToTurkish } from "@/lib/translate";
 import { isAlreadyPosted, markAsPosted } from "@/lib/posted-store";
 import { sendTelegramMessage } from "@/lib/telegram";
 
+// Owned by Haber & Editöryal Departmanı (Elif Sarman) — see
+// src/lib/departments.ts and docs/ORGANIZATION.md. Paused by default:
+// only fires via workflow_dispatch in .github/workflows/telegram-cron.yml.
 function isAuthorized(req: NextRequest): boolean {
   const secret = process.env.CRON_SECRET;
   if (!secret) return false;
