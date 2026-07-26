@@ -115,6 +115,19 @@ export const cashbackRecords = pgTable("cashback_record", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+// Dedup log for department cron jobs that post to Telegram but don't
+// need Upstash (no translation/news-feed involved) — e.g. announcing a
+// new /piyasa-analizi post once. `key` is a namespaced string per job
+// (e.g. "market-analysis:piyasa-ozeti-2026-07-24") so multiple crons
+// can share this one table without colliding.
+export const telegramPosts = pgTable("telegram_post", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  key: text("key").notNull().unique(),
+  postedAt: timestamp("posted_at").notNull().defaultNow(),
+});
+
 export const complaintStatusValues = ["new", "in_progress", "resolved", "closed"] as const;
 export type ComplaintStatus = (typeof complaintStatusValues)[number];
 

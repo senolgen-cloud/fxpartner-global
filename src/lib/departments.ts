@@ -34,11 +34,13 @@ export const departments: Department[] = [
     },
     owns: [
       "src/app/api/cron/market-update/route.ts",
+      "src/app/api/cron/market-analysis-share/route.ts",
       "src/app/piyasa-analizi",
       "src/lib/market-data.ts",
       "src/lib/technicals.ts",
+      "src/lib/telegram-posted-store.ts",
     ],
-    automation: "paused",
+    automation: "active",
   },
   {
     id: "news-editorial",
@@ -58,6 +60,9 @@ export const departments: Department[] = [
       "src/lib/relevance-filter.ts",
       "src/lib/translate.ts",
     ],
+    // Blocked, not just deferred: needs DEEPL_API_KEY and
+    // UPSTASH_REDIS_REST_URL/TOKEN in Vercel production before this can
+    // move to "active" — see docs/ORGANIZATION.md.
     automation: "paused",
   },
   {
@@ -100,7 +105,7 @@ export const departments: Department[] = [
       voice: "Net, kar vaadi yok, her zaman 'şartlar değişebilir' notu var",
     },
     owns: ["src/app/campaigns", "src/app/api/cron/campaign-digest/route.ts"],
-    automation: "paused",
+    automation: "active",
   },
   {
     id: "social-community",

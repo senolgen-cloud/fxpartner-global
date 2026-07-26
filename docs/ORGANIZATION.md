@@ -16,16 +16,34 @@ sahibidir.
 
 | Departman | Uzman | Sorumluluk | Otomasyon |
 |---|---|---|---|
-| Piyasa Analizi | Kaan Ediz — Baş Piyasa Analisti | Teknik analiz, `/piyasa-analizi`, market-update cron | Paused |
-| Haber & Editöryal | Elif Sarman — Editöryal Direktör | Haber filtreleme/çeviri, `/blog`, news-update cron | Paused |
+| Piyasa Analizi | Kaan Ediz — Baş Piyasa Analisti | Teknik analiz (market-update, BTC/USD, 2x/gün), günlük piyasa özeti duyurusu (market-analysis-share) | **Active** |
+| Haber & Editöryal | Elif Sarman — Editöryal Direktör | Haber filtreleme/çeviri, `/blog`, news-update cron | Paused — bkz. aşağıdaki blok |
 | Broker İstihbaratı & İnceleme | Deniz Akar — Baş Broker Analisti | Broker skorlama, `/brokers`, `/categories` | Manual |
 | Ortaklık & Cashback | Mert Kıvanç — Ortaklıklar Direktörü | Rev-share anlaşmaları, `/cashback` | Manual |
-| Reklam & Kampanya | Sena Yıldırım — Büyüme ve Reklam Direktörü | `/campaigns`, campaign-digest cron | Paused |
+| Reklam & Kampanya | Sena Yıldırım — Büyüme ve Reklam Direktörü | Haftalık kampanya özeti (campaign-digest) | **Active** |
 | Sosyal Medya & Topluluk | Barış Ongun — Topluluk Yöneticisi | Telegram altyapısı, marka sesi tutarlılığı | Active |
 | Uyumluluk & Marka | Aylin Demirtaş — Uyumluluk ve Marka Direktörü | Yasal metinler, son onay mercii | Manual |
 
 Her departmanın tam görev tanımı, sahip olduğu dosyalar ve "expert" persona
 detayı `src/lib/departments.ts` içindeki `Department` kayıtlarındadır.
+
+### Telegram içerik çeşitliliği (2026-07-26 güncellemesi)
+
+Telegram kanalı artık sadece BTC/USD grafiğiyle sınırlı değil — üç farklı
+departman, üç farklı içerik türünü kendi ritminde paylaşıyor:
+
+1. **market-update** (Piyasa Analizi) — BTC/USD teknik özeti, günde 2 kez (08:00 ve 18:00 UTC).
+2. **market-analysis-share** (Piyasa Analizi) — güncel `/piyasa-analizi` günlük özetini duyurur; her 2 saatte bir kontrol eder ama aynı günü tekrar paylaşmaz (dedup: Postgres'teki `telegram_post` tablosu, Upstash'e ihtiyaç yok).
+3. **campaign-digest** (Reklam & Kampanya) — aktif broker kampanyalarını ve cashback oranlarını haftalık özetler (Pazartesi 09:00 UTC).
+
+**news-update hâlâ paused:** Vercel production'da `DEEPL_API_KEY` ve
+`UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` tanımlı değil (bkz.
+`vercel env ls production`). Bu iki değişken eklenmeden schedule
+açılırsa, route her çalıştığında 500 döner — daha önce tam olarak bu
+yüzden kapatılmıştı (commit `d207f0`). Bu iki anahtar Vercel'e
+eklendiğinde, `.github/workflows/telegram-cron.yml`'a bir `schedule`
+girişi eklemek ve `departments.ts`'te bu departmanın `automation`
+alanını `"active"` yapmak yeterli.
 
 ## Otomasyon durumları ne anlama gelir
 
