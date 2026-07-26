@@ -1,17 +1,16 @@
 name: Telegram content cron
 
 on:
-  schedule:
-    # Market snapshot chart — every 2 hours
-    - cron: "0 */2 * * *"
-    # News scan is paused (workflow_dispatch only) until DEEPL_API_KEY and
-    # UPSTASH_REDIS_REST_URL/TOKEN are configured — without them
-    # /api/cron/news-update 500s on every call.
+  # Market snapshot chart (BTC/USD) is paused (workflow_dispatch only) —
+  # requested to stop the recurring BTCUSD posts to Telegram.
+  # News scan is paused (workflow_dispatch only) until DEEPL_API_KEY and
+  # UPSTASH_REDIS_REST_URL/TOKEN are configured — without them
+  # /api/cron/news-update 500s on every call.
   workflow_dispatch:
 
 jobs:
   market-update:
-    if: github.event.schedule == '0 */2 * * *' || github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger market-update
