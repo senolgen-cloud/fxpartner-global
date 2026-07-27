@@ -54,7 +54,7 @@ export default async function BrokerDetailPage({
 
   const otherBrokers = brokers.filter((b) => b.slug !== broker.slug).slice(0, 3);
   const faqs = brokerFaqs(broker);
-  const reviewPost = getBlogPostBySlug(`${broker.slug}-review`);
+  const reviewPost = await getBlogPostBySlug(`${broker.slug}-review`);
 
   const session = await auth();
   const brokerComments = await db

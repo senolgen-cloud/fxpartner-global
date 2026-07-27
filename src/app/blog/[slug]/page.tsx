@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { blogPosts, getBlogPostBySlug } from "@/data/blog";
+import { getBlogPostBySlug } from "@/data/blog";
 import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
-
-export function generateStaticParams() {
-  return blogPosts.map((p) => ({ slug: p.slug }));
-}
 
 export async function generateMetadata({
   params,
@@ -18,7 +15,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug);
   if (!post) return {};
   return {
     title: post.title,
@@ -40,7 +37,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug);
   if (!post) notFound();
 
   return (
@@ -87,6 +84,20 @@ export default async function BlogPostPage({
             </p>
           </div>
         </section>
+
+        {post.coverImage && (
+          <div className="mx-auto -mt-8 w-full max-w-3xl px-6">
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl">
+              <Image
+                src={post.coverImage}
+                alt={post.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 768px"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        )}
 
         <section>
           <article className="mx-auto max-w-3xl px-6 py-16">

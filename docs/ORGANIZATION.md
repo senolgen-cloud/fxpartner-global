@@ -23,6 +23,7 @@ sahibidir.
 | Reklam & Kampanya | Sena Yıldırım — Büyüme ve Reklam Direktörü | Haftalık kampanya özeti (campaign-digest) | **Active** |
 | Sosyal Medya & Topluluk | Barış Ongun — Topluluk Yöneticisi | Telegram altyapısı, marka sesi tutarlılığı | Active |
 | Uyumluluk & Marka | Aylin Demirtaş — Uyumluluk ve Marka Direktörü | Yasal metinler, son onay mercii | Manual |
+| AI Danışman | Ada Yalman — AI Danışmanlık Direktörü | Ziyaretçi sohbet asistanı (`/api/chat`), editöryal metin ve kapak görseli üretimi — hem admin panelinden (`/admin/content-generator`) hem haftalık otomatik cron'dan (`blog-auto-generate`) — ikisi de doğrudan yayınlar, inceleme yok | **Active** — bkz. aşağıdaki blok |
 
 Her departmanın tam görev tanımı, sahip olduğu dosyalar ve "expert" persona
 detayı `src/lib/departments.ts` içindeki `Department` kayıtlarındadır.
@@ -45,11 +46,31 @@ eklendiğinde, `.github/workflows/telegram-cron.yml`'a bir `schedule`
 girişi eklemek ve `departments.ts`'te bu departmanın `automation`
 alanını `"active"` yapmak yeterli.
 
+### Blog otomasyonu ve bilinçli istisna (2026-07-26 güncellemesi)
+
+`blog-auto-generate` cron'u (AI Danışman) her Çarşamba 10:00 UTC'de
+OpenAI ile bir blog yazısı + kapak görseli üretip **doğrudan yayınlar**
+(`src/data/blog.ts` artık statik dizi değil, Postgres'teki `blog_post`
+tablosu — bkz. `src/db/schema.ts`). Aynı gün ikinci bir çalıştırma
+(ör. elle `workflow_dispatch` retry) o günün postunu tekrar üretmez,
+no-op döner.
+
+Bu, repodaki **tek istisna**: her yeni otomasyon önce `workflow_dispatch`
+ile "paused" eklenip ancak Uyumluluk & Marka onayından sonra
+`schedule`'a alınırken, `blog-auto-generate` site sahibinin doğrudan ve
+bilgilendirilmiş talebiyle — bu riskin ("yayınlanmadan önce hiç kimse
+okumuyor") kendisine açıkça gösterilip onaylanmasının ardından — baştan
+`schedule` ile ve inceleme adımı olmadan eklendi. Teknik önlemler var
+(broker gerçeklerini `aiAssistant.ts`'teki broker dizinine sabitleme,
+aynı gün ikinci yayını engelleme) ama bunlar bir editöryal inceleme
+kapısı değil.
+
 ## Otomasyon durumları ne anlama gelir
 
 - **Active** — kod bir schedule'a bağlıdır ve insan müdahalesi olmadan
-  çalışır (şu an yalnızca Telegram gönderim altyapısının kendisi bu
-  durumda; içerik üreten cron'ların hiçbiri değil).
+  çalışır. Bugün itibariyle bu durumda olanlar: Telegram gönderim
+  altyapısının kendisi, market-update/market-analysis-share/campaign-digest,
+  ve — yukarıdaki istisna ile — `blog-auto-generate`.
 - **Paused** — route gerçek ve çalışır durumda, `.github/workflows/telegram-cron.yml`
   içinde tanımlıdır, ama tetikleyicisi yalnızca `workflow_dispatch`'tir
   (elle tetikleme). Bir cron'u "active"e almak, o workflow'a bir `schedule:`

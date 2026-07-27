@@ -135,6 +135,32 @@ export const departments: Department[] = [
     owns: ["src/app/terms", "src/app/privacy", "src/app/blacklist", "src/app/complaint"],
     automation: "manual",
   },
+  {
+    id: "ai-advisor",
+    name: "AI Danışman Departmanı",
+    mission:
+      "Ziyaretçilere broker seçiminde ve içerik ekibine taslak yazılarda OpenAI destekli, sadece gerçek site verisine dayanan yardım sağlamak.",
+    expert: {
+      name: "Ada Yalman",
+      title: "AI Danışmanlık Direktörü",
+      focus: "Ziyaretçi sohbet asistanı, editöryal metin ve görsel üretimi (manuel + otomatik)",
+      voice: "Yardımsever, temkinli, asla 'garanti kazanç' iması yok",
+    },
+    owns: [
+      "src/lib/aiAssistant.ts",
+      "src/app/api/chat/route.ts",
+      "src/components/ChatWidget.tsx",
+      "src/app/admin/content-generator",
+      "src/app/api/cron/blog-auto-generate/route.ts",
+      "src/app/blog/cover/[slug]/route.ts",
+    ],
+    // Active, not paused: blog-auto-generate runs on a real schedule and
+    // publishes without human review, at the site owner's explicit,
+    // informed request — the one exception in this repo to the
+    // paused-until-compliance-sign-off pattern every other department's
+    // automation follows. See docs/ORGANIZATION.md.
+    automation: "active",
+  },
 ];
 
 export function getDepartment(id: string): Department | undefined {

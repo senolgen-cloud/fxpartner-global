@@ -105,29 +105,31 @@ export default async function MarketAnalysisPostPage({
               ))}
             </div>
 
-            <div className="mt-14 rounded-2xl border border-hairline-light bg-paper p-6">
-              <h2 className="flex items-center gap-2 font-poppins text-xl font-semibold text-text-dark">
-                <span aria-hidden="true">📅</span>
-                Ekonomik Takvim | {post.calendarLabel}
-              </h2>
-              <div className="mt-5 space-y-5">
-                {post.calendarEvents.map((event, i) => (
-                  <div key={i}>
-                    <p className="font-mono text-xs uppercase tracking-[0.1em] text-signal">
-                      {event.icon} {event.time}
-                    </p>
-                    <p className="mt-1 font-poppins text-lg font-semibold text-text-dark">
-                      {event.title}
-                    </p>
-                    {event.note && (
-                      <p className="mt-2 text-[15px] leading-relaxed text-text-muted">
-                        <FormattedText text={event.note} />
+            {post.calendarEvents.length > 0 && (
+              <div className="mt-14 rounded-2xl border border-hairline-light bg-paper p-6">
+                <h2 className="flex items-center gap-2 font-poppins text-xl font-semibold text-text-dark">
+                  <span aria-hidden="true">📅</span>
+                  Ekonomik Takvim | {post.calendarLabel}
+                </h2>
+                <div className="mt-5 space-y-5">
+                  {post.calendarEvents.map((event, i) => (
+                    <div key={i}>
+                      <p className="font-mono text-xs uppercase tracking-[0.1em] text-signal">
+                        {event.icon} {event.time}
                       </p>
-                    )}
-                  </div>
-                ))}
+                      <p className="mt-1 font-poppins text-lg font-semibold text-text-dark">
+                        {event.title}
+                      </p>
+                      {event.note && (
+                        <p className="mt-2 text-[15px] leading-relaxed text-text-muted">
+                          <FormattedText text={event.note} />
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             <p className="mt-10 text-[16px] leading-relaxed text-text-dark/90">
               <FormattedText text={post.closing} />

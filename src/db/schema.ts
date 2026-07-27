@@ -4,9 +4,16 @@ import {
   timestamp,
   boolean,
   integer,
+  jsonb,
   primaryKey,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
+
+export interface BlogSection {
+  heading?: string;
+  paragraphs: string[];
+  list?: string[];
+}
 
 export const users = pgTable("user", {
   id: text("id")
@@ -126,6 +133,30 @@ export const telegramPosts = pgTable("telegram_post", {
     .$defaultFn(() => crypto.randomUUID()),
   key: text("key").notNull().unique(),
   postedAt: timestamp("posted_at").notNull().defaultNow(),
+});
+
+// blogSource: "manual" = admin-triggered via /admin/content-generator,
+// "ai-auto" = unattended blog-auto-generate cron. Auditability only — both
+// paths publish immediately, neither is held for review (AI Danışman
+// Departmanı, by explicit user request — see docs/ORGANIZATION.md).
+export const blogSourceValues = ["manual", "ai-auto"] as const;
+export type BlogSource = (typeof blogSourceValues)[number];
+
+export const blogPosts = pgTable("blog_post", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  slug: text("slug").notNull().unique(),
+  title: text("title").notNull(),
+  excerpt: text("excerpt").notNull(),
+  readingMinutes: integer("reading_minutes").notNull(),
+  sections: jsonb("sections").notNull().$type<BlogSection[]>(),
+  // Base64-encoded image bytes, an internal storage detail — never exposed
+  // directly; served via src/app/blog/cover/[slug]/route.ts instead.
+  coverImageData: text("cover_image_data"),
+  publishedAt: timestamp("published_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at"),
+  source: text("source").$type<BlogSource>().notNull().default("manual"),
 });
 
 export const complaintStatusValues = ["new", "in_progress", "resolved", "closed"] as const;

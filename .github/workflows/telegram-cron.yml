@@ -14,6 +14,9 @@ on:
     # campaign-digest (Reklam & Kampanya): weekly roundup of active
     # broker campaigns + cashback rates, Monday mornings.
     - cron: "0 9 * * 1"
+    # blog-auto-generate (AI Danışman): weekly AI-written blog post +
+    # cover image, published with no human review — see ORGANIZATION.md.
+    - cron: "0 10 * * 3"
 
 jobs:
   # Owned by Piyasa Analizi Departmanı — see docs/ORGANIZATION.md.
@@ -58,3 +61,16 @@ jobs:
         run: |
           curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
             https://fxpartner.global/api/cron/campaign-digest
+
+  # Owned by AI Danışman Departmanı — see docs/ORGANIZATION.md. Publishes
+  # an AI-written post with no human review, at the site owner's explicit
+  # request — the only automation in this repo scheduled without first
+  # going through the workflow_dispatch-only "paused" stage.
+  blog-auto-generate:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 10 * * 3'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger blog-auto-generate
+        run: |
+          curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            https://fxpartner.global/api/cron/blog-auto-generate

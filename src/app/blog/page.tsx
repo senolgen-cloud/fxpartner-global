@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { blogPosts } from "@/data/blog";
+import { getAllBlogPosts } from "@/data/blog";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -11,7 +11,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
 };
 
-export default function BlogIndexPage() {
+export default async function BlogIndexPage() {
+  const blogPosts = await getAllBlogPosts();
   return (
     <>
       <Header />

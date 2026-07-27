@@ -1,12 +1,13 @@
 import type { MetadataRoute } from "next";
 import { brokers, brokerCategories, categoryInfo } from "@/data/brokers";
-import { blogPosts } from "@/data/blog";
+import { getAllBlogPosts } from "@/data/blog";
 import { cashbackPrograms } from "@/data/cashback";
 import { marketAnalysisPosts } from "@/data/marketAnalysis";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const blogPosts = await getAllBlogPosts();
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: SITE_URL, changeFrequency: "daily", priority: 1 },
     { url: `${SITE_URL}/categories`, changeFrequency: "weekly", priority: 0.8 },

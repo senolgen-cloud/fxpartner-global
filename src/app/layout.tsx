@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, JetBrains_Mono, Poppins } from "next/font/google";
 import BonusPopup from "@/components/BonusPopup";
+import ChatWidget from "@/components/ChatWidget";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import "./globals.css";
 
@@ -70,6 +71,7 @@ export default function RootLayout({
         />
         {children}
         <BonusPopup />
+        <ChatWidget />
       </body>
     </html>
   );

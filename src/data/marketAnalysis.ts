@@ -68,6 +68,45 @@ export const marketAnalysisPosts: MarketAnalysisPost[] = [
     closing:
       "**FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın.",
   },
+  {
+    slug: "piyasa-ozeti-2026-07-27",
+    title: "FXPARTNER Günlük Forex Bülteni | 27.07.2026",
+    excerpt:
+      "EUR/USD, Gold, Silver, Brent ve WTI ham petrol ile US100 için günün fiyat hareketleri — enerjide sert düşüş, değerli metaller ve ABD teknoloji endeksinde yükseliş.",
+    publishedAt: "2026-07-27",
+    readingMinutes: 3,
+    intro:
+      "27 Temmuz 2026 sabahı (08:32 itibarıyla) MT5 platformundan alınan anlık verilere göre, enerji emtialarında sert satış baskısı görülürken, değerli metaller ve ABD teknoloji ağırlıklı endekste yükseliş öne çıkıyor.",
+    news: [
+      {
+        icon: "🛢️",
+        heading: "Ham Petrolde Sert Satış Baskısı",
+        body: "BRENTCash **%5,85** değer kaybederek 92,67 seviyesine gerilerken, OILCash (WTI) **%6,15** düşüşle 85,48 seviyesinde işlem görüyor. Her iki kontrat da günün geniş bir bandını test etti (BRENTCash: 90,79–93,40; OILCash: 83,90–86,93) — enerji tarafında güçlü bir satış baskısına işaret ediyor.",
+      },
+      {
+        icon: "🥇",
+        heading: "Değerli Metallerde Alım İlgisi Sürüyor",
+        body: "GOLD **%0,91** yükselişle 4.089,43–4.090,01 bandında, SILVER ise **%1,79** artışla 59,23–59,30 bandında işlem görüyor. Petroldeki zayıflığın aksine metallerde süregelen alım ilgisi dikkat çekiyor.",
+      },
+      {
+        icon: "💶",
+        heading: "EUR/USD Sınırlı Pozitif Seyirde",
+        body: "EUR/USD paritesi **%0,32** artışla 1,1406–1,1408 bandında hareket ediyor; günün aralığı 1,1385–1,1413 ile dar kaldı — parite şu an belirgin bir yön arayışında görünmüyor.",
+      },
+      {
+        icon: "📈",
+        heading: "ABD Teknoloji Endeksinde Güçlü Alım",
+        body: "US100Cash (Nasdaq 100), **%1,40** yükselişle günün en güçlü performans gösteren enstrümanlarından biri oldu; endeks yaklaşık 28.525 seviyesinde işlem görüyor.",
+      },
+    ],
+    calendarLabel: "27 Temmuz 2026",
+    // Bugün için doğrulanmış bir ekonomik takvim kaynağı paylaşılmadı —
+    // uydurma veri koymamak için bu bölüm boş bırakıldı (bkz. sayfadaki
+    // koşullu render). Kaynak sağlanırsa buraya gerçek maddeler eklenir.
+    calendarEvents: [],
+    closing:
+      "Bu bülten, MT5 platformundan alınan anlık fiyat verilerine dayanmaktadır ve yatırım tavsiyesi niteliği taşımaz. Güncel spread ve fiyatları işlem yapmadan önce brokerinizin platformundan teyit edin.",
+  },
 ];
 
 export function getMarketAnalysisPostBySlug(slug: string): MarketAnalysisPost | undefined {
