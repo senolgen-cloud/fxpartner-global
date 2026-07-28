@@ -187,6 +187,20 @@ button {
     animation: none;
   }
 
+  /* With the animation stopped, these tracks would otherwise sit frozen
+     inside an overflow-hidden viewport, permanently hiding everything
+     past the first screenful. Let the viewport scroll by hand instead,
+     and drop the duplicated copy that only existed for the loop. */
+  .ticker-viewport,
+  .broker-slider-viewport {
+    overflow-x: auto;
+  }
+
+  .ticker-track-duplicate,
+  .broker-slider-duplicate {
+    display: none;
+  }
+
   .reveal {
     opacity: 1;
     transform: none;

@@ -59,7 +59,7 @@ function Row({ brokers, hidden }: { brokers: Broker[]; hidden?: boolean }) {
   return (
     <div
       aria-hidden={hidden || undefined}
-      className="flex shrink-0 items-center gap-4 pr-4"
+      className={`flex shrink-0 items-center gap-4 pr-4 ${hidden ? "broker-slider-duplicate" : ""}`}
     >
       {brokers.map((b, i) => (
         <Card key={`${hidden ? "dup" : "src"}-${b.slug}-${i}`} broker={b} />
@@ -72,7 +72,7 @@ export default function BrokerHeroSlider({ brokers }: { brokers: Broker[] }) {
   const sorted = [...brokers].sort((a, b) => a.rank - b.rank);
 
   return (
-    <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+    <div className="broker-slider-viewport relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
       <div className="broker-slider-track flex w-max">
         <Row brokers={sorted} />
         <Row brokers={sorted} hidden />

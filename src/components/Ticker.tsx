@@ -31,10 +31,10 @@ export default async function Ticker() {
   if (pairs.length === 0) return null;
 
   return (
-    <div className="overflow-hidden border-y border-hairline bg-ink-soft py-2.5">
+    <div className="ticker-viewport overflow-hidden border-y border-hairline bg-ink-soft py-2.5">
       <div className="ticker-track flex w-max">
         <TickerRow pairs={pairs} />
-        <div aria-hidden="true" className="flex shrink-0">
+        <div aria-hidden="true" className="ticker-track-duplicate flex shrink-0">
           <TickerRow pairs={pairs} />
         </div>
       </div>
