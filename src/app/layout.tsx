@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, JetBrains_Mono, Poppins } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import BonusPopup from "@/components/BonusPopup";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import "./globals.css";
@@ -70,6 +71,7 @@ export default function RootLayout({
         />
         {children}
         <BonusPopup />
+        <Analytics />
       </body>
     </html>
   );
