@@ -128,6 +128,31 @@ export const telegramPosts = pgTable("telegram_post", {
   postedAt: timestamp("posted_at").notNull().defaultNow(),
 });
 
+export const partnerApplicationStatusValues = ["new", "contacted", "approved", "rejected"] as const;
+export type PartnerApplicationStatus = (typeof partnerApplicationStatusValues)[number];
+
+// Sub-IB partner applications: visitors who want to refer their own
+// clients to a broker under FXPARTNER's master IB agreement, distinct
+// from cashbackAccounts (which is for a trader linking their own
+// account to get a rebate, not for building a referral business).
+export const partnerApplications = pgTable("partner_application", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  userId: text("user_id").references(() => users.id, { onDelete: "set null" }),
+  fullName: text("full_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  country: text("country").notNull(),
+  // How they plan to bring clients — free-form-ish but constrained to a
+  // fixed set of options in the form so replies stay easy to scan.
+  audienceType: text("audience_type").notNull(),
+  brokerSlug: text("broker_slug"),
+  message: text("message").notNull(),
+  status: text("status").$type<PartnerApplicationStatus>().notNull().default("new"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 export const complaintStatusValues = ["new", "in_progress", "resolved", "closed"] as const;
 export type ComplaintStatus = (typeof complaintStatusValues)[number];
 

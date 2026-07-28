@@ -12,6 +12,11 @@ const primaryLinks = [
 
 const resourceLinks = [
   {
+    href: "/partners",
+    label: "Become a Partner",
+    description: "Open a Sub-IB account and earn on clients you refer",
+  },
+  {
     href: "/cashback",
     label: "Cashback",
     description: "Rebate programs from partner brokers",

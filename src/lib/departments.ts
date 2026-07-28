@@ -90,7 +90,12 @@ export const departments: Department[] = [
       focus: "Rev-share anlaşmaları, cashback onboarding akışı",
       voice: "Sözleşmeye sadık, oranları asla teyitsiz kesinleştirmez",
     },
-    owns: ["src/data/cashback.ts", "src/app/cashback", "src/app/admin/cashback"],
+    owns: [
+      "src/data/cashback.ts",
+      "src/app/cashback",
+      "src/app/admin/cashback",
+      "src/app/partners",
+    ],
     automation: "manual",
   },
   {

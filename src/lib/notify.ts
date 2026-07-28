@@ -44,6 +44,32 @@ export async function sendComplaintNotification(complaint: {
   });
 }
 
+export async function sendPartnerApplicationNotification(application: {
+  fullName: string;
+  email: string;
+  phone: string;
+  country: string;
+  audienceType: string;
+  brokerName?: string | null;
+  message: string;
+}) {
+  await sendEmail({
+    to: NOTIFY_EMAIL,
+    subject: `New Sub-IB partner application: ${application.fullName}`,
+    html: `
+      <h2>New Sub-IB partner application</h2>
+      <p><strong>Full name:</strong> ${application.fullName}</p>
+      <p><strong>Email:</strong> ${application.email}</p>
+      <p><strong>Phone:</strong> ${application.phone}</p>
+      <p><strong>Country:</strong> ${application.country}</p>
+      <p><strong>Audience type:</strong> ${application.audienceType}</p>
+      <p><strong>Preferred broker:</strong> ${application.brokerName ?? "No preference"}</p>
+      <p><strong>Message:</strong></p>
+      <p>${application.message.replace(/\n/g, "<br/>")}</p>
+    `,
+  });
+}
+
 export async function sendComplaintStatusUpdate(params: {
   to: string;
   brokerName: string;
