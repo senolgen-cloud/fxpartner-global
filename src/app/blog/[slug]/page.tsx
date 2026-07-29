@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
@@ -30,7 +31,11 @@ export async function generateMetadata({
       url: `${SITE_URL}/blog/${post.slug}`,
       type: "article",
       publishedTime: post.publishedAt,
+      images: post.coverImage ? [{ url: `${SITE_URL}${post.coverImage}` }] : undefined,
     },
+    twitter: post.coverImage
+      ? { card: "summary_large_image", images: [`${SITE_URL}${post.coverImage}`] }
+      : undefined,
   };
 }
 
@@ -90,6 +95,18 @@ export default async function BlogPostPage({
 
         <section>
           <article className="mx-auto max-w-3xl px-6 py-16">
+            {post.coverImage && (
+              <div className="relative mb-12 aspect-square w-full overflow-hidden rounded-2xl border border-hairline-light">
+                <Image
+                  src={post.coverImage}
+                  alt={post.title}
+                  fill
+                  sizes="(min-width: 768px) 768px, 100vw"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            )}
             {post.sections.map((section, i) => (
               <div key={i} className={i > 0 ? "mt-10" : ""}>
                 {section.heading && (

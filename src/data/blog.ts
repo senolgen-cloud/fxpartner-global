@@ -11,6 +11,7 @@ export interface BlogPost {
   publishedAt: string; // ISO date
   updatedAt?: string;
   readingMinutes: number;
+  coverImage?: string;
   sections: BlogSection[];
 }
 
@@ -157,6 +158,106 @@ export const blogPosts: BlogPost[] = [
         paragraphs: [
           "XM earns its #1 FXPARTNER Index ranking on the combination of two Tier-1 regulators, a five-tier account structure that scales from a $5 beginner account to a genuine low-spread Zero account, consistently fast withdrawal processing, and an education program most competitors don't match at this price point.",
           "As with any broker, confirm current spreads, leverage limits for your country, and account terms on XM's official site before funding a live account — this review is a research aid, not investment advice.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "fomc-faiz-karari-fed-baskani-konusmasi",
+    title: "FOMC Faiz Kararı ve FED Başkanı'nın Konuşması: Bugün Piyasaları Neler Bekliyor?",
+    excerpt:
+      "FOMC faiz kararı ve FED Başkanı'nın basın toplantısı bugün altın, döviz, hisse senedi ve kripto para piyasalarının odağında. Beklentiler, olası senaryolar ve yatırımcıların dikkat etmesi gerekenler.",
+    publishedAt: "2026-07-29",
+    readingMinutes: 6,
+    coverImage: "/blog/fomc-faiz-karari-cover.webp",
+    sections: [
+      {
+        heading: "Küresel Piyasaların Gözü FED'de",
+        paragraphs: [
+          "Bugün finansal piyasaların odak noktasında ABD Merkez Bankası'nın (FOMC) açıklayacağı faiz kararı ve ardından gerçekleşecek FED Başkanı'nın basın toplantısı bulunuyor.",
+          "Bu iki gelişme yalnızca ABD ekonomisi için değil, aynı zamanda altın, döviz, hisse senetleri ve kripto para piyasaları açısından da büyük önem taşıyor. Karar sonrasında piyasalarda sert fiyat hareketleri yaşanabileceği için yatırımcıların risk yönetimine ekstra dikkat etmeleri gerekiyor.",
+        ],
+      },
+      {
+        heading: "FOMC Faiz Kararı Saat Kaçta Açıklanacak?",
+        paragraphs: [
+          "Faiz oranının yanı sıra karar metninde kullanılacak ifadeler ve FED Başkanı'nın vereceği mesajlar, piyasaların yönü üzerinde belirleyici olacaktır.",
+        ],
+        list: ["FOMC Faiz Kararı: 21:00 (TSİ)", "FED Başkanı Basın Toplantısı: 21:30 (TSİ)"],
+      },
+      {
+        heading: "Piyasaların Beklentisi Nedir?",
+        paragraphs: [
+          "Ekonomistlerin büyük çoğunluğu, FED'in politika faizini mevcut seviyesinde sabit bırakmasını bekliyor.",
+          "Ancak yatırımcılar için asıl önemli konu faiz kararından çok, FED'in önümüzdeki toplantılar için vereceği sinyaller olacak. Özellikle şu soruların cevapları yakından takip edilecek:",
+        ],
+        list: [
+          "Yılın geri kalanında faiz indirimi ihtimali var mı?",
+          "Enflasyon konusunda FED nasıl bir değerlendirme yapacak?",
+          "İş gücü piyasası hakkında yeni mesajlar verilecek mi?",
+          "Ekonomik büyüme beklentileri değişti mi?",
+        ],
+      },
+      {
+        heading: "Altın (XAU/USD) Nasıl Etkilenebilir?",
+        paragraphs: [
+          "Bu soruların cevapları, doların yönünü ve küresel risk iştahını doğrudan etkileyebilir.",
+          "Güvercin (Dovish) Mesajlar Gelirse — FED'in gelecekte faiz indirimine açık kapı bırakması durumunda:",
+        ],
+        list: [
+          "Altında yükseliş görülebilir.",
+          "ABD Doları değer kaybedebilir.",
+          "Tahvil faizleri geri çekilebilir.",
+          "Riskli varlıklara talep artabilir.",
+        ],
+      },
+      {
+        paragraphs: [
+          "Şahin (Hawkish) Mesajlar Gelirse — FED enflasyonla mücadelede kararlı olduğunu vurgular ve faizlerin uzun süre yüksek kalabileceğini belirtirse:",
+        ],
+        list: [
+          "Altında satış baskısı oluşabilir.",
+          "ABD Doları güç kazanabilir.",
+          "Tahvil faizleri yükselebilir.",
+          "Hisse senedi piyasalarında baskı görülebilir.",
+        ],
+      },
+      {
+        heading: "Forex Piyasasında Hangi Pariteler Hareketlenebilir?",
+        paragraphs: [
+          "FOMC kararının ardından özellikle şu ürünlerde yüksek volatilite beklenebilir:",
+        ],
+        list: ["EUR/USD", "GBP/USD", "USD/JPY", "XAU/USD (Altın)", "Gümüş (XAG/USD)"],
+      },
+      {
+        paragraphs: [
+          "Kısa süre içerisinde geniş spreadler ve ani fiyat hareketleri oluşabileceğinden, yüksek kaldıraç kullanan yatırımcıların dikkatli olması önemlidir.",
+        ],
+      },
+      {
+        heading: "Kripto Para Piyasası Etkilenir mi?",
+        paragraphs: [
+          "Evet. Bitcoin ve diğer büyük kripto varlıklar son yıllarda FED kararlarına karşı oldukça hassas hale geldi.",
+          "Faizlerin uzun süre yüksek kalacağı yönündeki mesajlar riskli varlıklar üzerinde baskı oluşturabilir. Buna karşılık daha yumuşak (güvercin) açıklamalar kripto piyasasında olumlu fiyatlamalara neden olabilir.",
+        ],
+      },
+      {
+        heading: "Yatırımcılar Nelere Dikkat Etmeli?",
+        paragraphs: ["FOMC günlerinde işlem yaparken şu noktalara dikkat edilmesi önerilir:"],
+        list: [
+          "İşlem hacmini normalden düşük tutun.",
+          "Stop-loss kullanmayı ihmal etmeyin.",
+          "İlk birkaç dakikadaki sert hareketlere karşı temkinli olun.",
+          "Basın toplantısını da mutlaka takip edin; asıl yön çoğu zaman burada oluşur.",
+          "Tek bir açıklamaya göre işlem yapmak yerine piyasanın ilk tepkisinin oturmasını beklemek daha sağlıklı olabilir.",
+        ],
+      },
+      {
+        heading: "Sonuç",
+        paragraphs: [
+          "Bugünkü FOMC faiz kararı ve FED Başkanı'nın açıklamaları, haftanın hatta ayın en önemli ekonomik gelişmeleri arasında yer alıyor.",
+          "Faiz oranının değişip değişmemesinden çok, FED'in geleceğe yönelik mesajları küresel piyasalarda fiyatlamaların yönünü belirleyecek. Özellikle altın, dolar, forex pariteleri, hisse senetleri ve kripto para piyasalarında işlem yapan yatırımcıların açıklama saatlerinde yüksek volatiliteye karşı hazırlıklı olmaları gerekiyor.",
+          "FXPARTNER olarak gelişmeleri yakından takip ediyor ve önemli ekonomik olayların piyasalara etkilerini düzenli olarak sizlerle paylaşmaya devam edeceğiz.",
         ],
       },
     ],

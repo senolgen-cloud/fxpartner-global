@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -37,25 +38,38 @@ export default function BlogIndexPage() {
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="group block py-8"
+                  className="group flex gap-6 py-8"
                 >
-                  <span className="font-mono text-xs text-text-muted">
-                    {new Date(post.publishedAt).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}{" "}
-                    · {post.readingMinutes} min read
-                  </span>
-                  <h2 className="mt-2 font-poppins text-2xl font-semibold text-text-dark transition-colors group-hover:text-signal">
-                    {post.title}
-                  </h2>
-                  <p className="mt-2 text-[15px] leading-relaxed text-text-muted">
-                    {post.excerpt}
-                  </p>
-                  <span className="mt-3 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal">
-                    Read the guide →
-                  </span>
+                  {post.coverImage && (
+                    <div className="relative hidden h-28 w-28 shrink-0 overflow-hidden rounded-xl border border-hairline-light sm:block">
+                      <Image
+                        src={post.coverImage}
+                        alt={post.title}
+                        fill
+                        sizes="112px"
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                  <div className="min-w-0">
+                    <span className="font-mono text-xs text-text-muted">
+                      {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}{" "}
+                      · {post.readingMinutes} min read
+                    </span>
+                    <h2 className="mt-2 font-poppins text-2xl font-semibold text-text-dark transition-colors group-hover:text-signal">
+                      {post.title}
+                    </h2>
+                    <p className="mt-2 text-[15px] leading-relaxed text-text-muted">
+                      {post.excerpt}
+                    </p>
+                    <span className="mt-3 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal">
+                      Read the guide →
+                    </span>
+                  </div>
                 </Link>
               ))}
             </div>
