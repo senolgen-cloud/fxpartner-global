@@ -311,6 +311,7 @@ export const brokers: Broker[] = [
     slug: "lite-finance",
     name: "Lite Finance",
     logo: "/brokers/lite-finance.png",
+    ogImage: "/brokers/lite-finance-cover.png",
     tagline: "Selectable leverage up to 1:1000",
     rating: 4.5,
     founded: 2005,
