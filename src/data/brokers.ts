@@ -42,6 +42,9 @@ export interface Broker {
     note: string;
     contactEmail?: string;
   };
+  // Optional designed social-share preview image for this broker's review
+  // page, overriding the auto-generated opengraph-image for that route.
+  ogImage?: string;
   // Optional, researched deep-dive detail beyond the standard fields above.
   // Only populated for brokers we've written a full account-type/deposit/
   // withdrawal breakdown for — the page simply omits this section when absent.
@@ -189,6 +192,7 @@ export const brokers: Broker[] = [
     slug: "xm",
     name: "XM Global",
     logo: "/brokers/xm.png",
+    ogImage: "/brokers/xm-cover.jpg",
     tagline: "Trade via MT4, MT5, and the XM App",
     rating: 4.8,
     founded: 2009,
@@ -240,6 +244,7 @@ export const brokers: Broker[] = [
     slug: "avatrade",
     name: "AvaTrade",
     logo: "/brokers/avatrade.jpg",
+    ogImage: "/brokers/avatrade-cover.png",
     tagline: "Institutional trust, wide regulatory footprint",
     rating: 4.5,
     founded: 2006,

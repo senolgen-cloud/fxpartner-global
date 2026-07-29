@@ -39,7 +39,11 @@ export async function generateMetadata({
       description: broker.summary,
       url: `${SITE_URL}/brokers/${broker.slug}`,
       type: "article",
+      ...(broker.ogImage ? { images: [{ url: `${SITE_URL}${broker.ogImage}` }] } : {}),
     },
+    ...(broker.ogImage
+      ? { twitter: { card: "summary_large_image" as const, images: [`${SITE_URL}${broker.ogImage}`] } }
+      : {}),
   };
 }
 
