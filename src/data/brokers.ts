@@ -561,6 +561,7 @@ export const brokers: Broker[] = [
     slug: "ic-markets",
     name: "IC Markets",
     logo: "/brokers/ic-markets.png",
+    ogImage: "/brokers/ic-markets-cover.png",
     tagline: "Raw ECN spreads and TradingView integration",
     rating: 4.7,
     founded: 2007,
