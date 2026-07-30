@@ -6,6 +6,18 @@
       "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
       "runtimeArgs": ["node_modules/next/dist/bin/next", "dev"],
       "port": 3000
+    },
+    {
+      "name": "partner-hub-site (Next.js)",
+      "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "runtimeArgs": [
+        "C:\\Users\\senol\\OneDrive\\Masaüstü\\site - partner-hub\\node_modules\\next\\dist\\bin\\next",
+        "dev",
+        "C:\\Users\\senol\\OneDrive\\Masaüstü\\site - partner-hub",
+        "--port",
+        "3001"
+      ],
+      "port": 3001
     }
   ]
 }

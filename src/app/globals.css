@@ -295,3 +295,51 @@ button {
     animation: none;
   }
 }
+
+/* --- Partner program: global network map --- */
+@keyframes network-arc-flow {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
+.network-arc {
+  animation: network-arc-flow 6s linear infinite;
+}
+
+@keyframes network-node-pulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+
+.network-node-pulse {
+  animation: network-node-pulse 2.8s ease-out infinite;
+}
+
+/* --- Partner program: final CTA glass panel shimmer --- */
+@keyframes glass-shimmer {
+  0% {
+    transform: translateX(-60%);
+  }
+  100% {
+    transform: translateX(160%);
+  }
+}
+
+.glass-shimmer {
+  animation: glass-shimmer 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .network-arc,
+  .network-node-pulse,
+  .glass-shimmer {
+    animation: none;
+  }
+}
