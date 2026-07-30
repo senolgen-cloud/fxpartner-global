@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 import {
   contentStudioPrompt,
   contentStudioSamples,
 } from "@/data/partnerProgram";
 
 export default function ContentStudioPreview() {
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = usePrefersReducedMotion();
   const [started, setStarted] = useState(false);
   const [typed, setTyped] = useState("");
   const [showResults, setShowResults] = useState(false);

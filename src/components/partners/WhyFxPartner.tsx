@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 import { whyFxPartnerCards, type WhyCard } from "@/data/partnerProgram";
 
 const iconProps = {
@@ -50,7 +51,7 @@ const icons: Record<WhyCard["key"], ReactNode> = {
 };
 
 export default function WhyFxPartner() {
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = usePrefersReducedMotion();
 
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
