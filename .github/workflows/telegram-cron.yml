@@ -3,10 +3,6 @@ name: Telegram content cron
 on:
   workflow_dispatch:
   schedule:
-    # market-update (Piyasa Analizi): BTC/USD chart, 2x/day — kept
-    # deliberately low-frequency so it's one voice among several, not
-    # the dominant Telegram content.
-    - cron: "0 8,18 * * *"
     # market-analysis-share (Piyasa Analizi): checks every 2h whether
     # today's /piyasa-analizi post is live; only actually sends once
     # per day thanks to the DB-backed dedup in telegram-posted-store.ts.
@@ -17,8 +13,13 @@ on:
 
 jobs:
   # Owned by Piyasa Analizi Departmanı — see docs/ORGANIZATION.md.
+  # Paused again: only posts a BTC/USD chart (the one symbol with a
+  # real free intraday data source, see src/lib/market-data.ts), which
+  # made Telegram content look BTC-only. General coverage of EUR/USD,
+  # XAU/USD, US100, oil etc. now goes through market-analysis-share
+  # (real researched write-ups in src/data/marketAnalysis.ts) instead.
   market-update:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 8,18 * * *'
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger market-update

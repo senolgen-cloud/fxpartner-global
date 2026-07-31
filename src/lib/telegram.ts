@@ -1,5 +1,12 @@
 const API_BASE = "https://api.telegram.org";
 
+// Appended to every outbound Telegram message so each post nudges
+// readers back to the site, not just the disclaimer + bare domain.
+export function telegramSiteCta(): string {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
+  return `👉 Daha fazla piyasa analizi ve broker karşılaştırması için sitemizi ziyaret edin: ${siteUrl}`;
+}
+
 function getConfig() {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;

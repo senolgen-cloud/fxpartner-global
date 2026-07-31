@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramPhoto } from "@/lib/telegram";
+import { sendTelegramPhoto, telegramSiteCta } from "@/lib/telegram";
 import { getCandles, SYMBOLS } from "@/lib/market-data";
 import { sma, rsi } from "@/lib/technicals";
 
@@ -42,8 +42,8 @@ export async function GET(req: NextRequest) {
     `<b>${config.label}</b> su an $${currentPrice.toLocaleString("en-US")} seviyesinde.\n` +
     `Fiyat MA10'un ${aboveMA10 ? "uzerinde" : "altinda"}, MA20'nin ${aboveMA20 ? "uzerinde" : "altinda"}. ` +
     `RSI(14) ${rsiValue !== null ? rsiValue.toFixed(1) : "-"} ile ${rsiZone}.\n\n` +
-    `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n` +
-    `fxpartner.global`;
+    `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n\n` +
+    telegramSiteCta();
 
   const result = await sendTelegramPhoto(imageUrl, caption);
   return NextResponse.json({ ok: true, symbol: symbolId, result });

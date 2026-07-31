@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramMessage } from "@/lib/telegram";
+import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
 import { marketAnalysisPosts } from "@/data/marketAnalysis";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
 
@@ -34,8 +34,8 @@ export async function GET(req: NextRequest) {
   const text =
     `<b>${latest.title}</b>\n\n${latest.excerpt}\n\n` +
     `Devamini oku: ${siteUrl}/piyasa-analizi/${latest.slug}\n\n` +
-    `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n` +
-    `fxpartner.global`;
+    `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n\n` +
+    telegramSiteCta();
 
   const result = await sendTelegramMessage(text);
   await markPostedToTelegram(key);

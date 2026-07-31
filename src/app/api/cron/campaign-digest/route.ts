@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramMessage } from "@/lib/telegram";
+import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
 import { brokers } from "@/data/brokers";
 import { getCashbackProgram } from "@/data/cashback";
 
@@ -36,8 +36,8 @@ export async function GET(req: NextRequest) {
     lines.join("\n\n") +
     `\n\nTum detaylar ve guncel sartlar: ${siteUrl}/campaigns\n\n` +
     `Sartlar brokere gore degisebilir ve onceden haber verilmeden guncellenebilir. ` +
-    `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n` +
-    `fxpartner.global`;
+    `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n\n` +
+    telegramSiteCta();
 
   const result = await sendTelegramMessage(text, { disablePreview: true });
   return NextResponse.json({ ok: true, posted: true, count: campaigns.length, result });

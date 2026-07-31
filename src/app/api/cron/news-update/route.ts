@@ -3,7 +3,7 @@ import { fetchAllNews, type NewsItem } from "@/lib/news";
 import { filterRelevantNews } from "@/lib/relevance-filter";
 import { translateToTurkish } from "@/lib/translate";
 import { isAlreadyPosted, markAsPosted } from "@/lib/posted-store";
-import { sendTelegramMessage } from "@/lib/telegram";
+import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
 
 // Owned by Haber & Editöryal Departmanı (Elif Sarman) — see
 // src/lib/departments.ts and docs/ORGANIZATION.md. Paused by default:
@@ -41,7 +41,8 @@ export async function GET(req: NextRequest) {
       `<b>${titleTr}</b>\n\n${descTr}\n\n` +
       `Kaynak: ${item.source}\n` +
       `<a href="${item.link}">Orijinal haberi oku</a>\n\n` +
-      `fxpartner.global | Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.`;
+      `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n\n` +
+      telegramSiteCta();
 
     await sendTelegramMessage(text);
     await markAsPosted(item.guid);
