@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Broker } from "@/data/brokers";
@@ -57,10 +60,7 @@ function Card({ broker }: { broker: Broker }) {
 
 function Row({ brokers, hidden }: { brokers: Broker[]; hidden?: boolean }) {
   return (
-    <div
-      aria-hidden={hidden || undefined}
-      className={`flex shrink-0 items-center gap-4 pr-4 ${hidden ? "broker-slider-duplicate" : ""}`}
-    >
+    <div aria-hidden={hidden || undefined} className="flex shrink-0 items-center gap-4 pr-4">
       {brokers.map((b, i) => (
         <Card key={`${hidden ? "dup" : "src"}-${b.slug}-${i}`} broker={b} />
       ))}
@@ -68,13 +68,67 @@ function Row({ brokers, hidden }: { brokers: Broker[]; hidden?: boolean }) {
   );
 }
 
+// Driven by rAF/transform instead of a CSS animation so it keeps moving
+// regardless of the OS-level "reduce motion" setting (Windows' "Animation
+// effects" toggle, macOS "Reduce motion", etc. all flip
+// prefers-reduced-motion, which previously froze this and fell back to a
+// manually-draggable scrollbar). Speed is only reduced, never stopped,
+// under that preference — a compromise between full a11y compliance and
+// the always-visible marketing carousel this is meant to be.
 export default function BrokerHeroSlider({ brokers }: { brokers: Broker[] }) {
   const sorted = [...brokers].sort((a, b) => a.rank - b.rank);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const rowRef = useRef<HTMLDivElement>(null);
+  const pausedRef = useRef(false);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    const row = rowRef.current;
+    if (!track || !row) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const speed = reduceMotion ? 14 : 36; // px/sec
+
+    let rowWidth = row.getBoundingClientRect().width;
+    const onResize = () => {
+      rowWidth = row.getBoundingClientRect().width;
+    };
+    window.addEventListener("resize", onResize);
+
+    let offset = 0;
+    let last = performance.now();
+    let frame = requestAnimationFrame(tick);
+
+    function tick(now: number) {
+      const dt = (now - last) / 1000;
+      last = now;
+      if (!pausedRef.current && rowWidth > 0) {
+        offset = (offset + speed * dt) % rowWidth;
+        if (track) track.style.transform = `translateX(-${offset}px)`;
+      }
+      frame = requestAnimationFrame(tick);
+    }
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
 
   return (
-    <div className="broker-slider-viewport relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
-      <div className="broker-slider-track flex w-max">
-        <Row brokers={sorted} />
+    <div
+      className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
+      onMouseEnter={() => {
+        pausedRef.current = true;
+      }}
+      onMouseLeave={() => {
+        pausedRef.current = false;
+      }}
+    >
+      <div ref={trackRef} className="flex w-max">
+        <div ref={rowRef}>
+          <Row brokers={sorted} />
+        </div>
         <Row brokers={sorted} hidden />
       </div>
     </div>

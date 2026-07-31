@@ -168,36 +168,27 @@ button {
   transform: translateY(-3px);
 }
 
-/* --- Hero broker slider --- */
-.broker-slider-track {
-  animation: ticker-scroll 40s linear infinite;
-}
-
-.broker-slider-track:hover {
-  animation-play-state: paused;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .ticker-track,
   .ticker-track-vertical,
-  .broker-slider-track,
   .hero-glow-signal,
   .hero-glow-gold,
   .signal-dot {
     animation: none;
   }
 
-  /* With the animation stopped, these tracks would otherwise sit frozen
+  /* With the animation stopped, this track would otherwise sit frozen
      inside an overflow-hidden viewport, permanently hiding everything
      past the first screenful. Let the viewport scroll by hand instead,
-     and drop the duplicated copy that only existed for the loop. */
-  .ticker-viewport,
-  .broker-slider-viewport {
+     and drop the duplicated copy that only existed for the loop.
+     BrokerHeroSlider isn't listed here — it drives its own motion via
+     rAF/transform in JS and only slows down (never stops) under this
+     preference, so it doesn't need the same manual-scroll fallback. */
+  .ticker-viewport {
     overflow-x: auto;
   }
 
-  .ticker-track-duplicate,
-  .broker-slider-duplicate {
+  .ticker-track-duplicate {
     display: none;
   }
 
