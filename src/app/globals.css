@@ -59,7 +59,11 @@ body {
 .goog-te-gadget-icon,
 #goog-gt-tt,
 .goog-tooltip,
-.goog-tooltip:hover {
+.goog-tooltip:hover,
+/* Google's banner iframe class names are auto-generated and change
+   without notice (e.g. "VIpgJd-ZVi9od-ORHb-OEVmcd") — targeting every
+   iframe.skiptranslate is the only reliable way to catch it. */
+iframe.skiptranslate {
   display: none !important;
 }
 .goog-text-highlight {
