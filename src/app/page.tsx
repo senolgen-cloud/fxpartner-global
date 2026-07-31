@@ -66,6 +66,7 @@ export default function Home() {
     <>
       <Header />
       <Ticker />
+      <BrokerHeroSlider brokers={brokers} />
 
       <main className="flex-1">
         {/* Hero */}
@@ -169,15 +170,6 @@ export default function Home() {
             />
           </Reveal>
           </div>
-
-          <Reveal delay={330} className="relative mx-auto mt-14 max-w-6xl px-6 lg:mt-16">
-            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-text-on-ink-muted">
-              Ranked brokers, at a glance
-            </span>
-            <div className="mt-4">
-              <BrokerHeroSlider brokers={brokers} />
-            </div>
-          </Reveal>
         </section>
 
         {/* Ranked broker list */}
