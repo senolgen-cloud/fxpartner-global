@@ -116,14 +116,9 @@ export default function BrokerHeroSlider({ brokers }: { brokers: Broker[] }) {
   }, []);
 
   return (
-    <div className="sticky top-[90px] z-20 border-b border-hairline bg-ink py-3 md:top-[117px]">
-      <div className="mx-auto max-w-6xl px-6">
-        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-text-on-ink-muted">
-          Ranked brokers, at a glance
-        </span>
-      </div>
+    <div className="sticky top-[90px] z-20 border-b border-hairline bg-ink py-2 md:top-[117px]">
       <div
-        className="relative mt-2 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
+        className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
         onMouseEnter={() => {
           pausedRef.current = true;
         }}
