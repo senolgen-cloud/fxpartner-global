@@ -14,7 +14,7 @@
 //                 signal to research further, not a legal finding of fraud.
 //
 // Every entry here is grounded in real research (regulator warning lists,
-// WikiFX, and broker-review sources) gathered 2026-07-31 — never fabricated.
+// and independent broker-review sources) gathered 2026-07-31 — never fabricated.
 // Regulator warning lists change weekly; source/date is noted so this can
 // be refreshed later rather than treated as permanently authoritative.
 
@@ -411,25 +411,25 @@ export const lookupBrokers: LookupBroker[] = [
     name: "ORCA MARKETS",
     verdict: "high-risk",
     note: "Saint Lucia-based; independent reviews report app malfunctions preventing trades and complaints about fund losses and failed deposits.",
-    source: "WikiFX complaint review, 2026",
+    source: "Independent complaint-review sources, 2026",
   },
   {
     name: "LOYAL PRIMUS",
     verdict: "high-risk",
     note: "Users report account deactivation after withdrawal attempts and cancelled withdrawal requests citing 'suspicious activity'.",
-    source: "WikiFX complaint review, 2026",
+    source: "Independent complaint-review sources, 2026",
   },
   {
     name: "WAYONE CAPITAL",
     verdict: "high-risk",
     note: "Saint Lucia-based; allegations of non-compliant fund-withdrawal practices and delayed releases with recurring excuses.",
-    source: "WikiFX complaint review, 2026",
+    source: "Independent complaint-review sources, 2026",
   },
   {
     name: "TNFL FX Global Limited",
     verdict: "high-risk",
     note: "UK-headquartered but lacks the FCA authorization required to legally offer forex services there.",
-    source: "WikiFX complaint review, 2026",
+    source: "Independent complaint-review sources, 2026",
   },
   {
     name: "Fusion Trade",
@@ -440,8 +440,8 @@ export const lookupBrokers: LookupBroker[] = [
   {
     name: "Primarkets",
     verdict: "high-risk",
-    note: "Independent trust score of 1.34/10 on WikiFX, among the lowest of any broker reviewed.",
-    source: "WikiFX trust score, 2026",
+    note: "Independent trust-score aggregators rate this firm at 1.34/10, among the lowest of any broker reviewed.",
+    source: "Independent trust-score aggregator, 2026",
   },
 
   // --- Common "guaranteed return" scam pattern, some impersonating real brokers ---
@@ -481,43 +481,43 @@ export const lookupBrokers: LookupBroker[] = [
     name: "LQDFX",
     verdict: "caution",
     note: "Not regulated by any recognized authority found during review.",
-    source: "WikiFX unregulated-brokers review, 2026",
+    source: "Independent broker-review sources, 2026",
   },
   {
     name: "FxGlory",
     verdict: "caution",
     note: "Not regulated; also offers binary options, a product category with a high scam rate industry-wide.",
-    source: "WikiFX unregulated-brokers review, 2026",
+    source: "Independent broker-review sources, 2026",
   },
   {
     name: "Coinexx",
     verdict: "caution",
     note: "Not regulated by any recognized authority found during review.",
-    source: "WikiFX unregulated-brokers review, 2026",
+    source: "Independent broker-review sources, 2026",
   },
   {
     name: "LMFX",
     verdict: "caution",
     note: "Not regulated by any recognized authority found during review.",
-    source: "WikiFX unregulated-brokers review, 2026",
+    source: "Independent broker-review sources, 2026",
   },
   {
     name: "NordFX",
     verdict: "caution",
     note: "Operates under offshore-only registration rather than a recognized Tier-1/Tier-2 regulator.",
-    source: "WikiFX unregulated-brokers review, 2026",
+    source: "Independent broker-review sources, 2026",
   },
   {
     name: "FreshForex",
     verdict: "caution",
     note: "Not regulated by any recognized authority found during review.",
-    source: "WikiFX unregulated-brokers review, 2026",
+    source: "Independent broker-review sources, 2026",
   },
   {
     name: "EagleFX",
     verdict: "caution",
     note: "Not regulated by any recognized authority found during review; also offers crypto trading alongside forex.",
-    source: "WikiFX unregulated-brokers review, 2026",
+    source: "Independent broker-review sources, 2026",
   },
 ];
 

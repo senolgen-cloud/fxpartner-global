@@ -82,8 +82,8 @@ export default function BrokerLookupSearch() {
             <li className="flex gap-3 text-[15px] text-text-dark/90">
               <span className="mt-1 text-signal">–</span>
               Search the broker&apos;s name together with &ldquo;scam&rdquo;
-              or &ldquo;withdrawal&rdquo; on independent review sites like
-              WikiFX or ForexPeaceArmy.
+              or &ldquo;withdrawal&rdquo; on independent review sites to
+              check for recurring complaint patterns.
             </li>
             <li className="flex gap-3 text-[15px] text-text-dark/90">
               <span className="mt-1 text-signal">–</span>

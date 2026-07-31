@@ -9,13 +9,13 @@ export type NewsItem = {
   source: string;
 };
 
-// FXStreet and Investing.com's own /brokers/ section make them direct
-// competitors — excluded on purpose. These three run general financial
-// news with no broker-comparison business of their own.
+// FXStreet and Investing.com both run their own /brokers/ section, making
+// them direct competitors — excluded on purpose so we never cite/credit a
+// competing broker-comparison site as a source. Only general financial news
+// publishers with no broker-comparison business of their own are used here.
 const FEEDS: { source: string; url: string }[] = [
   { source: "MarketWatch", url: "https://feeds.content.dowjones.io/public/rss/mw_topstories" },
   { source: "CNBC", url: "https://www.cnbc.com/id/15839069/device/rss/rss.html" },
-  { source: "Investing.com", url: "https://www.investing.com/rss/news.rss" },
 ];
 
 const parser = new XMLParser({ ignoreAttributes: true, trimValues: true });

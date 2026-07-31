@@ -577,7 +577,7 @@ export const brokers: Broker[] = [
       "Operating since 2007, an industry leader in raw ECN spreads",
       "Strong multi-regulatory licensing including ASIC, CySEC, and FSA",
       "Broad platform support across MT4/MT5/cTrader/TradingView",
-      "4.8/5 rating from 55,000+ reviews on Trustpilot",
+      "4.8/5 rating from 55,000+ independent customer reviews",
     ],
     cons: [
       "The $200 minimum deposit is high compared to low-barrier brokers",
@@ -644,8 +644,8 @@ export const brokers: Broker[] = [
     ],
     cons: [
       "Only offshore (FSA Seychelles + FSCA) licenses, no Tier-1 regulation",
-      "WikiFX's on-site investigation could not verify a physical presence at the listed Cyprus/Seychelles addresses",
-      "Independent review sites report a low trust score (WikiFX 2.38/10; ForexBrokerz 1.50/5) and recurring withdrawal/frozen-balance complaints",
+      "An independent on-site investigation could not verify a physical presence at the listed Cyprus/Seychelles addresses",
+      "Independent review sites report a very low trust score and recurring withdrawal/frozen-balance complaints",
     ],
     bestFor: "Experienced investors who fully accept the risk and seek high leverage",
     accentNote: "High leverage option",
@@ -679,7 +679,7 @@ export const brokers: Broker[] = [
     cons: [
       "Only offshore (FSCA + FSC Mauritius) licenses, no Tier-1 regulation",
       "Listed as an unauthorized firm on the UK FCA warning list (June 2025)",
-      "Independent review sites report a very low trust score (WikiFX 2.35/10, explicit 'stay away' warning) with multiple documented withdrawal delay/rejection complaints",
+      "Independent review sites report a very low trust score with an explicit 'stay away' warning, plus multiple documented withdrawal delay/rejection complaints",
     ],
     bestFor: "Experienced, risk-aware traders who fully accept the risk and want a very low entry threshold",
     accentNote: "Lowest minimum deposit",

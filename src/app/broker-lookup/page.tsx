@@ -43,7 +43,7 @@ export default function BrokerLookupPage() {
                 <strong className="text-text-dark">How to read this:</strong>{" "}
                 Verdicts are built from official regulator warning lists
                 (FCA, CySEC, BaFin, CONSOB, FINMA), independent trust-score
-                sources (WikiFX), and our own editorial reviews. A
+                sources, and our own editorial reviews. A
                 &ldquo;High Risk&rdquo; label reflects a specific,
                 documented finding — a regulator warning, a confirmed unlicensed
                 status, or a recurring complaint pattern — not an accusation

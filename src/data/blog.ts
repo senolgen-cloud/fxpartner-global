@@ -62,7 +62,7 @@ export const blogPosts: BlogPost[] = [
         heading: "4. Withdrawal speed is the most honest signal a broker gives you",
         paragraphs: [
           "Deposits are always fast — every broker wants your money to arrive quickly. Withdrawals are where the real test happens, because a broker with cash-flow problems or a deliberate strategy to discourage withdrawals will slow-walk them, add unexpected verification hurdles, or bury the process in fine print.",
-          "You don't have to guess. Independent review sites (WikiFX, ForexPeaceArmy, and Trustpilot are the most commonly cited) collect real user reports, and recurring withdrawal complaints are one of the clearest red flags a broker can have — much clearer than a marketing page can tell you. If you're evaluating a broker we haven't reviewed, search its name alongside \"withdrawal\" on one of those sites before funding a live account.",
+          "You don't have to guess. Independent review sites collect real user reports, and recurring withdrawal complaints are one of the clearest red flags a broker can have — much clearer than a marketing page can tell you. If you're evaluating a broker we haven't reviewed, search our own Broker Lookup tool first, then check its name alongside \"withdrawal\" on an independent review site before funding a live account.",
           "This is exactly why we maintain a dedicated risk-warnings page for brokers whose independent trust scores or complaint patterns stand out — it's built from the same review data, not a separate opinion.",
         ],
       },

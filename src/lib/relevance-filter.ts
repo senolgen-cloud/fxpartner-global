@@ -1,7 +1,7 @@
 import type { NewsItem } from "./news";
 
-// Keyword-based relevance filter. MarketWatch/CNBC/Investing.com cover
-// general business news; we only want the subset that actually matters
+// Keyword-based relevance filter. Our RSS sources cover general business
+// news; we only want the subset that actually matters
 // to a forex/CFD trading audience (rates, central banks, currencies,
 // commodities, macro data). No LLM judgment call here on purpose — a
 // fixed keyword list is deterministic and auditable.
