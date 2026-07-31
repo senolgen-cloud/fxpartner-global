@@ -30,7 +30,7 @@ export default function Footer() {
                     href={`/brokers/${b.slug}`}
                     className="transition-colors hover:text-text-on-ink"
                   >
-                    <span className="notranslate">{b.name}</span> Review
+                    <span className="notranslate">{b.name} </span>Review
                   </Link>
                 </li>
               ))}

@@ -94,7 +94,7 @@ export default function BonusPopup() {
               </div>
             )}
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-              <span className="notranslate">{broker.name}</span> Promotion
+              <span className="notranslate">{broker.name} </span>Promotion
             </span>
           </div>
           <h2
