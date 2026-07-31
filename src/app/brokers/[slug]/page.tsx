@@ -199,9 +199,11 @@ export default async function BrokerDetailPage({
                   >
                     Open Account
                   </a>
-                  <span className="font-mono text-[10px] text-text-on-ink-muted">
-                    Affiliate link{broker.partnerCode ? ` · Code: ${broker.partnerCode}` : ""}
-                  </span>
+                  {broker.partnerCode && (
+                    <span className="font-mono text-[10px] text-text-on-ink-muted">
+                      Code: {broker.partnerCode}
+                    </span>
+                  )}
                 </div>
               </div>
 

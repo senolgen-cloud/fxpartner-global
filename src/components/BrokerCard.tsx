@@ -153,7 +153,7 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
             </span>
           </div>
           <p className="mt-3 font-mono text-[10px] text-text-muted">
-            Affiliate link{broker.partnerCode ? ` · Partner Code: ${broker.partnerCode}` : ""} · T&Cs Apply
+            {broker.partnerCode ? `Partner Code: ${broker.partnerCode} · ` : ""}T&amp;Cs Apply
           </p>
         </div>
       </div>

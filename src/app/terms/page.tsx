@@ -56,9 +56,8 @@ export default function TermsPage() {
               FXPARTNER has a partnership/referral relationship with some
               of the brokers listed on this site and may earn a commission
               when you open an account through our links, at no extra cost
-              to you. This is disclosed on every broker card and does not
-              influence our scoring criteria — including for brokers we
-              partner with.
+              to you. This does not influence our scoring criteria —
+              including for brokers we partner with.
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">

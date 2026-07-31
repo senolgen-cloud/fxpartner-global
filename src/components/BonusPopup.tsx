@@ -125,9 +125,9 @@ export default function BonusPopup() {
           </div>
 
           <p className="mt-5 font-mono text-[10px] leading-relaxed text-text-on-ink-muted">
-            Affiliate link · Check {broker.name}&apos;s official site for
-            current bonus terms · Bonus campaigns may not be available in
-            some regions/account types · T&amp;Cs Apply
+            Check {broker.name}&apos;s official site for current bonus
+            terms · Bonus campaigns may not be available in some
+            regions/account types · T&amp;Cs Apply
           </p>
         </div>
       </div>
