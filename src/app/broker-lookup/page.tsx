@@ -11,7 +11,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/broker-lookup" },
 };
 
-export default function BrokerLookupPage() {
+export default async function BrokerLookupPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  const { q } = await searchParams;
   const highRiskCount = lookupBrokers.filter((b) => b.verdict === "high-risk").length;
 
   return (
@@ -36,7 +41,7 @@ export default function BrokerLookupPage() {
 
         <section>
           <div className="mx-auto max-w-3xl px-6 py-16">
-            <BrokerLookupSearch />
+            <BrokerLookupSearch initialQuery={q || ""} />
 
             <div className="mt-14 rounded-2xl border border-hairline-light bg-paper p-6">
               <p className="text-sm leading-relaxed text-text-muted">

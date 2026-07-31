@@ -10,6 +10,7 @@ import TradingVideo from "@/components/TradingVideo";
 import DashboardPreview from "@/components/DashboardPreview";
 import ShowcaseGallery from "@/components/ShowcaseGallery";
 import BrokerHeroSlider from "@/components/BrokerHeroSlider";
+import HeroBrokerSearch from "@/components/HeroBrokerSearch";
 import StickyCTA from "@/components/StickyCTA";
 import { brokers, brokerCategories } from "@/data/brokers";
 
@@ -107,8 +108,14 @@ export default function Home() {
               </p>
             </Reveal>
 
+            <Reveal delay={220}>
+              <div className="mt-7">
+                <HeroBrokerSearch />
+              </div>
+            </Reveal>
+
             <Reveal delay={270}>
-              <div className="mt-9 flex flex-wrap items-center gap-4">
+              <div className="mt-6 flex flex-wrap items-center gap-4">
                 <a
                   href="#brokers"
                   className="lift-on-hover rounded-full bg-signal px-6 py-3 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"

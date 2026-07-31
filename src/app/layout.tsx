@@ -26,6 +26,12 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  // Prevents Chrome's own native "translate this page?" prompt/banner
+  // from firing on top of our own LanguageSwitcher-driven translation —
+  // without this, visitors could see two separate translate UIs stacked.
+  other: {
+    google: "notranslate",
+  },
   title: {
     default: "FXPARTNER | Forex Broker Comparison and Reviews",
     template: "%s | FXPARTNER",

@@ -25,8 +25,8 @@ const VERDICT_META: Record<
   },
 };
 
-export default function BrokerLookupSearch() {
-  const [query, setQuery] = useState("");
+export default function BrokerLookupSearch({ initialQuery = "" }: { initialQuery?: string }) {
+  const [query, setQuery] = useState(initialQuery);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
