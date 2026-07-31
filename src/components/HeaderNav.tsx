@@ -27,6 +27,11 @@ const resourceLinks = [
     description: "Active referral and deposit promotions",
   },
   {
+    href: "/broker-lookup",
+    label: "Broker Lookup",
+    description: "Search any broker for a sourced trust verdict",
+  },
+  {
     href: "/blacklist",
     label: "Risk Warnings",
     description: "Brokers that need extra due diligence",

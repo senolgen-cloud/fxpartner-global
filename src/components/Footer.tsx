@@ -72,6 +72,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/broker-lookup" className="transition-colors hover:text-text-on-ink">
+                  Broker Lookup
+                </Link>
+              </li>
+              <li>
                 <Link href="/blacklist" className="transition-colors hover:text-text-on-ink">
                   Risk Warnings
                 </Link>

@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/partners`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/cashback`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/campaigns`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${SITE_URL}/broker-lookup`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/blacklist`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${SITE_URL}/complaint`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/privacy`, changeFrequency: "yearly", priority: 0.3 },

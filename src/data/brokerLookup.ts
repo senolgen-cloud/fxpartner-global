@@ -1,0 +1,528 @@
+// A broad, searchable broker directory — distinct from src/data/brokers.ts
+// (our deeply-reviewed, ranked partner list). This file exists so a user
+// can type almost any broker name and get an honest, sourced verdict, even
+// for brokers we don't have a full review or partnership with.
+//
+// verdict meanings:
+//   "verified"  — holds real Tier-1 and/or multi-jurisdiction regulation,
+//                 no major regulator warnings found at time of research.
+//   "caution"   — legitimate/operating, but with a real reason to dig
+//                 deeper: offshore-only licensing, a regulator red flag,
+//                 relinquished licenses, or notable complaint patterns.
+//   "high-risk" — named on an official regulator warning/unauthorized-firm
+//                 list, or a documented scam/clone pattern. This is a
+//                 signal to research further, not a legal finding of fraud.
+//
+// Every entry here is grounded in real research (regulator warning lists,
+// WikiFX, and broker-review sources) gathered 2026-07-31 — never fabricated.
+// Regulator warning lists change weekly; source/date is noted so this can
+// be refreshed later rather than treated as permanently authoritative.
+
+export type LookupVerdict = "verified" | "caution" | "high-risk";
+
+export interface LookupBroker {
+  name: string;
+  verdict: LookupVerdict;
+  regulators?: string[];
+  note: string;
+  source: string;
+  // Slug in src/data/brokers.ts, if this broker also has a full FXPARTNER review.
+  relatedSlug?: string;
+}
+
+export const lookupBrokers: LookupBroker[] = [
+  // --- Already fully reviewed on FXPARTNER (see /brokers/[slug]) ---
+  {
+    name: "XM Global",
+    verdict: "verified",
+    regulators: ["ASIC", "CySEC", "DFSA", "FSC (Belize)"],
+    note: "FXPARTNER's most-chosen partner broker; full review available.",
+    source: "FXPARTNER editorial review",
+    relatedSlug: "xm",
+  },
+  {
+    name: "AvaTrade",
+    verdict: "verified",
+    regulators: ["Central Bank of Ireland", "ASIC", "FSCA", "ADGM"],
+    note: "Institutional-scale broker with a wide regulatory footprint; full review available.",
+    source: "FXPARTNER editorial review",
+    relatedSlug: "avatrade",
+  },
+  {
+    name: "Lite Finance",
+    verdict: "verified",
+    regulators: ["Offshore license"],
+    note: "Popular low-barrier-to-entry broker; full review available.",
+    source: "FXPARTNER editorial review",
+    relatedSlug: "lite-finance",
+  },
+  {
+    name: "IC Markets",
+    verdict: "verified",
+    regulators: ["ASIC", "CySEC", "FSA (Seychelles)"],
+    note: "Raw ECN spreads, strong multi-regulatory licensing; full review available.",
+    source: "FXPARTNER editorial review",
+    relatedSlug: "ic-markets",
+  },
+  {
+    name: "Tickmill",
+    verdict: "verified",
+    regulators: ["FCA", "CySEC", "FSA (Seychelles)", "Labuan FSA"],
+    note: "Tier-1 FCA backing with cost-conscious Pro accounts; full review available.",
+    source: "FXPARTNER editorial review",
+    relatedSlug: "tickmill",
+  },
+  {
+    name: "EXNESS",
+    verdict: "verified",
+    regulators: ["FCA", "CySEC", "FSCA", "FSC (Mauritius)"],
+    note: "Known for near-zero spreads and fast withdrawals; full review available.",
+    source: "FXPARTNER editorial review",
+    relatedSlug: "exness",
+  },
+  {
+    name: "FXT (FXTrading.com)",
+    verdict: "verified",
+    regulators: ["ASIC", "VFSC (Vanuatu)"],
+    note: "Tier-1 ASIC regulation alongside an offshore VFSC license; full review available.",
+    source: "FXPARTNER editorial review",
+    relatedSlug: "fxt",
+  },
+  {
+    name: "ThinkMarkets",
+    verdict: "verified",
+    regulators: ["FCA", "ASIC", "CySEC", "FSCA"],
+    note: "Wide instrument range with strong multi-regulatory licensing; full review available.",
+    source: "FXPARTNER editorial review",
+    relatedSlug: "thinkmarkets",
+  },
+  {
+    name: "FxPro",
+    verdict: "verified",
+    regulators: ["FCA", "CySEC", "FSCA", "SCB (Bahamas)"],
+    note: "Top-tier FCA license with broad platform support; full review available.",
+    source: "FXPARTNER editorial review",
+    relatedSlug: "fxpro",
+  },
+  {
+    name: "easyMarkets",
+    verdict: "verified",
+    regulators: ["CySEC", "ASIC", "FSA (Seychelles)", "FSC (BVI)", "FSCA"],
+    note: "5 regulatory licenses plus guaranteed stop-loss tools; full review available.",
+    source: "FXPARTNER editorial review",
+    relatedSlug: "easymarkets",
+  },
+  {
+    name: "markets.com",
+    verdict: "verified",
+    regulators: ["CySEC", "FSC (BVI)"],
+    note: "Combines its own platform with MetaTrader options; full review available.",
+    source: "FXPARTNER editorial review",
+    relatedSlug: "markets-com",
+  },
+  {
+    name: "Versus Trade",
+    verdict: "caution",
+    regulators: ["FSC (Mauritius)"],
+    note: "Founded 2024, offshore-only licensing so far; young track record. Full review available.",
+    source: "FXPARTNER editorial review",
+    relatedSlug: "versus-trade",
+  },
+  {
+    name: "LHFX (formerly LonghornFX)",
+    verdict: "caution",
+    regulators: ["FSC (Mauritius)", "FSCA"],
+    note: "Offshore-only licensing; independent reviews report slippage/withdrawal-delay complaints. Full review available.",
+    source: "FXPARTNER editorial review",
+    relatedSlug: "lhfx",
+  },
+  {
+    name: "Exclusive Markets",
+    verdict: "caution",
+    regulators: ["FSA (Seychelles)", "FSCA"],
+    note: "Offshore-only licensing; low independent trust score and recurring withdrawal complaints. Full review available.",
+    source: "FXPARTNER editorial review",
+    relatedSlug: "exclusive-markets",
+  },
+  {
+    name: "TradingPRO",
+    verdict: "caution",
+    regulators: ["FSCA", "FSC (Mauritius)"],
+    note: "No Tier-1 regulation; was listed on the UK FCA's unauthorized-firm warning list in mid-2025. Full review available.",
+    source: "FXPARTNER editorial review",
+    relatedSlug: "tradingpro",
+  },
+
+  // --- Additional well-known global brokers (not FXPARTNER partners) ---
+  {
+    name: "IG",
+    verdict: "verified",
+    regulators: ["FCA", "ASIC", "MAS", "BaFin"],
+    note: "One of the longest-established CFD/forex brokers, listed on the London Stock Exchange.",
+    source: "Independent regulator/broker-review research, 2026-07-31",
+  },
+  {
+    name: "OANDA",
+    verdict: "verified",
+    regulators: ["CFTC/NFA", "FCA", "ASIC", "MAS"],
+    note: "Long-running multi-jurisdiction broker, widely cited among top regulated brokers for 2026.",
+    source: "Independent regulator/broker-review research, 2026-07-31",
+  },
+  {
+    name: "Interactive Brokers",
+    verdict: "verified",
+    regulators: ["SEC/FINRA", "FCA", "ASIC", "MAS"],
+    note: "Large publicly traded global brokerage with broad market access.",
+    source: "Independent regulator/broker-review research, 2026-07-31",
+  },
+  {
+    name: "Pepperstone",
+    verdict: "verified",
+    regulators: ["FCA", "ASIC", "CySEC", "DFSA"],
+    note: "Global ECN broker known for low-latency execution.",
+    source: "Independent regulator/broker-review research, 2026-07-31",
+  },
+  {
+    name: "FOREX.com",
+    verdict: "verified",
+    regulators: ["CFTC/NFA", "FCA", "ASIC"],
+    note: "StoneX-owned broker, one of the most established US-regulated forex brands.",
+    source: "Independent regulator/broker-review research, 2026-07-31",
+  },
+  {
+    name: "FP Markets",
+    verdict: "verified",
+    regulators: ["ASIC", "CySEC", "FSCA", "FSA (Seychelles)", "CMA (Kenya)"],
+    note: "Multi-jurisdiction ECN broker with a wide regulatory spread.",
+    source: "Independent regulator/broker-review research, 2026-07-31",
+  },
+  {
+    name: "Plus500",
+    verdict: "verified",
+    regulators: ["FCA", "CySEC", "ASIC", "MAS"],
+    note: "Publicly listed CFD provider holding 7 Tier-1 and 4 Tier-2 licenses — one of the broadest regulatory footprints in the industry.",
+    source: "Independent regulator/broker-review research, 2026-07-31",
+  },
+  {
+    name: "eToro",
+    verdict: "verified",
+    regulators: ["FCA", "CySEC", "ASIC"],
+    note: "Social/copy-trading platform holding 4 Tier-1 and 1 Tier-2 license.",
+    source: "Independent regulator/broker-review research, 2026-07-31",
+  },
+  {
+    name: "Swissquote",
+    verdict: "verified",
+    regulators: ["FINMA", "FCA", "CSSF (Luxembourg)", "DFSA"],
+    note: "Swiss banking-license holder — bank-grade regulatory standing, one of the strongest profiles reviewed.",
+    source: "Independent regulator/broker-review research, 2026-07-31",
+  },
+  {
+    name: "Vantage Markets",
+    verdict: "verified",
+    regulators: ["ASIC", "FCA", "FSCA", "VFSC (Vanuatu)"],
+    note: "Dual-Tier-1 regulated (ASIC + FCA) via separate legal entities, operating since 2009.",
+    source: "Independent regulator/broker-review research, 2026-07-31",
+  },
+  {
+    name: "HFM (HF Markets / HotForex)",
+    verdict: "caution",
+    regulators: ["FCA", "FSCA"],
+    note: "Holds real FCA and FSCA licenses, but has been red-flagged by Malaysia's Securities Commission, Bank Negara Malaysia, and Ukraine's NSSMC — check which entity your account falls under.",
+    source: "Independent regulator/broker-review research, 2026-07-31",
+  },
+  {
+    name: "Admirals (Admiral Markets)",
+    verdict: "caution",
+    regulators: ["FCA", "CySEC"],
+    note: "Historically well-regulated, but reported to be restructuring and relinquishing its Estonian investment-firm license — worth checking current entity/license before funding.",
+    source: "Independent regulator/broker-review research, 2026-07-31",
+  },
+  {
+    name: "FBS",
+    verdict: "caution",
+    regulators: ["FSC (Belize)", "CySEC (EU clients only)"],
+    note: "EU clients get real CySEC protection, but most international clients sit under the offshore FSC Belize entity, a license type known for lighter enforcement.",
+    source: "Independent regulator/broker-review research, 2026-07-31",
+  },
+  {
+    name: "Octa (OctaFX)",
+    verdict: "caution",
+    regulators: ["CySEC", "FSCA", "MISA (Comoros)"],
+    note: "Holds a real CySEC market-making license, but only clients onboarded under that specific Cyprus entity get EU protection; independent reviews note a mid-range trust score and withdrawal-related complaints.",
+    source: "Independent regulator/broker-review research, 2026-07-31",
+  },
+  {
+    name: "Deriv",
+    verdict: "caution",
+    regulators: ["MFSA (Malta, EU clients only)"],
+    note: "EU/Malaysian clients get a real Tier-1 MFSA license, but most retail clients elsewhere are onboarded under Deriv (SVG) LLC in St. Vincent & the Grenadines, which has no financial regulator at all.",
+    source: "Independent regulator/broker-review research, 2026-07-31",
+  },
+
+  // --- Named on official regulator unauthorized-firm warning lists ---
+  {
+    name: "TridentFX",
+    verdict: "high-risk",
+    note: "Named on the UK FCA's warning list as not authorised to provide financial services in the UK.",
+    source: "UK FCA warning list, July 2026",
+  },
+  {
+    name: "Axis Advisory Trade",
+    verdict: "high-risk",
+    note: "Named on the UK FCA's warning list as not authorised to provide financial services in the UK.",
+    source: "UK FCA warning list, July 2026",
+  },
+  {
+    name: "BlockassetsBridge",
+    verdict: "high-risk",
+    note: "Named on the UK FCA's warning list as not authorised to provide financial services in the UK.",
+    source: "UK FCA warning list, July 2026",
+  },
+  {
+    name: "Cryptex Markets",
+    verdict: "high-risk",
+    note: "Named on the UK FCA's warning list as not authorised to provide financial services in the UK.",
+    source: "UK FCA warning list, July 2026",
+  },
+  {
+    name: "Mercer Advisor Management",
+    verdict: "high-risk",
+    note: "Named on the UK FCA's warning list as not authorised to provide financial services in the UK.",
+    source: "UK FCA warning list, July 2026",
+  },
+  {
+    name: "CoinFinity",
+    verdict: "high-risk",
+    note: "Named on the UK FCA's warning list as not authorised to provide financial services in the UK.",
+    source: "UK FCA warning list, July 2026",
+  },
+  {
+    name: "Staple Markets",
+    verdict: "high-risk",
+    note: "Named on the UK FCA's warning list as not authorised to provide financial services in the UK.",
+    source: "UK FCA warning list, July 2026",
+  },
+  {
+    name: "Bornemx Market",
+    verdict: "high-risk",
+    note: "Named on the UK FCA's warning list as not authorised to provide financial services in the UK.",
+    source: "UK FCA warning list, July 2026",
+  },
+  {
+    name: "Konvexium",
+    verdict: "high-risk",
+    note: "Flagged by Germany's BaFin for operating without the required license.",
+    source: "German BaFin warning, July 2026",
+  },
+  {
+    name: "Nordvet",
+    verdict: "high-risk",
+    note: "Flagged by Germany's BaFin for operating without the required license.",
+    source: "German BaFin warning, July 2026",
+  },
+  {
+    name: "Tcinos Group",
+    verdict: "high-risk",
+    note: "Flagged by Germany's BaFin for operating without the required license.",
+    source: "German BaFin warning, July 2026",
+  },
+  {
+    name: "Primepocket Trades",
+    verdict: "high-risk",
+    note: "Flagged by Germany's BaFin for operating without the required license.",
+    source: "German BaFin warning, July 2026",
+  },
+  {
+    name: "Trilessyum",
+    verdict: "high-risk",
+    note: "Flagged by Italy's CONSOB for offering trading services without proper authorisation.",
+    source: "Italian CONSOB warning, July 2026",
+  },
+  {
+    name: "Gold Grain Capital",
+    verdict: "high-risk",
+    note: "Flagged by Italy's CONSOB for offering trading services without proper authorisation.",
+    source: "Italian CONSOB warning, July 2026",
+  },
+  {
+    name: "Future Investment",
+    verdict: "high-risk",
+    note: "Flagged by Italy's CONSOB for offering trading services without proper authorisation.",
+    source: "Italian CONSOB warning, July 2026",
+  },
+  {
+    name: "Vault Capital Growth",
+    verdict: "high-risk",
+    note: "Flagged by Switzerland's FINMA for operating without a license.",
+    source: "Swiss FINMA warning, July 2026",
+  },
+  {
+    name: "Quantara Markets",
+    verdict: "high-risk",
+    note: "Not listed under any regulatory authority found during review.",
+    source: "Regulator blacklist roundup, July 2026",
+  },
+  {
+    name: "Global Apex Markets",
+    verdict: "high-risk",
+    note: "Not listed under any regulatory authority found during review.",
+    source: "Regulator blacklist roundup, July 2026",
+  },
+  {
+    name: "Golden Bar Trading",
+    verdict: "high-risk",
+    note: "Not listed under any regulatory authority found during review.",
+    source: "Regulator blacklist roundup, July 2026",
+  },
+  {
+    name: "titanledger.io",
+    verdict: "high-risk",
+    note: "CySEC confirmed this site is not authorized to provide investment services in Cyprus/EU.",
+    source: "CySEC warning, April 2026",
+  },
+  {
+    name: "connectfinancials.com",
+    verdict: "high-risk",
+    note: "CySEC confirmed this site is not authorized to provide investment services in Cyprus/EU.",
+    source: "CySEC warning, April 2026",
+  },
+  {
+    name: "meridian-experts.com",
+    verdict: "high-risk",
+    note: "Operates as a lead-generation/onboarding funnel collecting personal details; named in CySEC's non-approved list.",
+    source: "CySEC warning, April 2026",
+  },
+  {
+    name: "Finxara",
+    verdict: "high-risk",
+    note: "Claims FCA/ASIC/CySEC regulation, but CySEC directly confirmed finxara.com is not licensed under its framework — a clear false-regulation red flag.",
+    source: "CySEC warning, April 2026",
+  },
+  {
+    name: "getleveraged.com",
+    verdict: "high-risk",
+    note: "CySEC confirmed this site is not authorized to provide investment services in Cyprus/EU.",
+    source: "CySEC warning, April 2026",
+  },
+
+  // --- Flagged by independent trust-score/complaint sources ---
+  {
+    name: "ORCA MARKETS",
+    verdict: "high-risk",
+    note: "Saint Lucia-based; independent reviews report app malfunctions preventing trades and complaints about fund losses and failed deposits.",
+    source: "WikiFX complaint review, 2026",
+  },
+  {
+    name: "LOYAL PRIMUS",
+    verdict: "high-risk",
+    note: "Users report account deactivation after withdrawal attempts and cancelled withdrawal requests citing 'suspicious activity'.",
+    source: "WikiFX complaint review, 2026",
+  },
+  {
+    name: "WAYONE CAPITAL",
+    verdict: "high-risk",
+    note: "Saint Lucia-based; allegations of non-compliant fund-withdrawal practices and delayed releases with recurring excuses.",
+    source: "WikiFX complaint review, 2026",
+  },
+  {
+    name: "TNFL FX Global Limited",
+    verdict: "high-risk",
+    note: "UK-headquartered but lacks the FCA authorization required to legally offer forex services there.",
+    source: "WikiFX complaint review, 2026",
+  },
+  {
+    name: "Fusion Trade",
+    verdict: "high-risk",
+    note: "The UK FCA issued a public warning that this firm is unregulated and operating without a proper license.",
+    source: "UK FCA warning, 2023 (still unresolved as of 2026)",
+  },
+  {
+    name: "Primarkets",
+    verdict: "high-risk",
+    note: "Independent trust score of 1.34/10 on WikiFX, among the lowest of any broker reviewed.",
+    source: "WikiFX trust score, 2026",
+  },
+
+  // --- Common "guaranteed return" scam pattern, some impersonating real brokers ---
+  {
+    name: "AffluenceFX",
+    verdict: "high-risk",
+    note: "Advertises unrealistic guaranteed daily win rates; unregulated and on the FCA warning list.",
+    source: "UK FCA warning list, 2026",
+  },
+  {
+    name: "CoingateForexPro",
+    verdict: "high-risk",
+    note: "Claims to 'guarantee profit' with unrealistic weekly returns; unregulated and on the US CFTC watchlist.",
+    source: "US CFTC watchlist, 2026",
+  },
+  {
+    name: "Forex Capital Gain",
+    verdict: "high-risk",
+    note: "Falsely claims CFTC regulation while actually appearing on the CFTC's RED (Registration Deficient) list — a false-regulation red flag.",
+    source: "US CFTC RED list, 2026",
+  },
+  {
+    name: "Octa Stocks FX",
+    verdict: "high-risk",
+    note: "Promises guaranteed daily returns and appears to be a clone/impersonator of the real, CySEC-regulated Octa — verify you're on the official octa.com domain.",
+    source: "UK FCA warning list, 2026",
+  },
+  {
+    name: "Trade360",
+    verdict: "high-risk",
+    note: "The original entity renounced its regulatory licenses and ceased operating in 2023; the domain is now defunct, but cloned versions are used in phishing campaigns — do not trust any site using this name.",
+    source: "Regulator history + phishing-clone reports, 2026",
+  },
+
+  // --- Unregulated but not confirmed fraudulent — extra caution advised ---
+  {
+    name: "LQDFX",
+    verdict: "caution",
+    note: "Not regulated by any recognized authority found during review.",
+    source: "WikiFX unregulated-brokers review, 2026",
+  },
+  {
+    name: "FxGlory",
+    verdict: "caution",
+    note: "Not regulated; also offers binary options, a product category with a high scam rate industry-wide.",
+    source: "WikiFX unregulated-brokers review, 2026",
+  },
+  {
+    name: "Coinexx",
+    verdict: "caution",
+    note: "Not regulated by any recognized authority found during review.",
+    source: "WikiFX unregulated-brokers review, 2026",
+  },
+  {
+    name: "LMFX",
+    verdict: "caution",
+    note: "Not regulated by any recognized authority found during review.",
+    source: "WikiFX unregulated-brokers review, 2026",
+  },
+  {
+    name: "NordFX",
+    verdict: "caution",
+    note: "Operates under offshore-only registration rather than a recognized Tier-1/Tier-2 regulator.",
+    source: "WikiFX unregulated-brokers review, 2026",
+  },
+  {
+    name: "FreshForex",
+    verdict: "caution",
+    note: "Not regulated by any recognized authority found during review.",
+    source: "WikiFX unregulated-brokers review, 2026",
+  },
+  {
+    name: "EagleFX",
+    verdict: "caution",
+    note: "Not regulated by any recognized authority found during review; also offers crypto trading alongside forex.",
+    source: "WikiFX unregulated-brokers review, 2026",
+  },
+];
+
+export function searchLookupBrokers(query: string): LookupBroker[] {
+  const q = query.trim().toLowerCase();
+  if (!q) return [];
+  return lookupBrokers.filter((b) => b.name.toLowerCase().includes(q));
+}
