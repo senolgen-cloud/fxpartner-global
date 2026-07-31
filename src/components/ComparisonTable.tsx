@@ -44,7 +44,7 @@ export default function ComparisonTable() {
                   <span className="font-mono text-xs text-signal">
                     {String(b.rank).padStart(2, "0")}
                   </span>
-                  <span className="font-display text-base font-medium text-text-on-ink">
+                  <span className="notranslate font-display text-base font-medium text-text-on-ink">
                     {b.name}
                   </span>
                 </div>

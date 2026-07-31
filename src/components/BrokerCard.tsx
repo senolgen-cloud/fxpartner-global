@@ -51,7 +51,7 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
               )}
             </div>
             <h3 className="mt-2 font-display text-2xl font-semibold text-text-dark">
-              {broker.name}
+              <span className="notranslate">{broker.name}</span>
             </h3>
             <p className="mt-1 text-sm text-text-muted">{broker.tagline}</p>
             <div className="mt-3">

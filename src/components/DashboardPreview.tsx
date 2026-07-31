@@ -62,7 +62,7 @@ export default function DashboardPreview({
                     <span className="font-mono text-[10px] text-text-on-ink-muted">
                       {String(broker.rank).padStart(2, "0")}
                     </span>
-                    <span className="font-poppins text-[13px] font-medium text-text-on-ink">
+                    <span className="notranslate font-poppins text-[13px] font-medium text-text-on-ink">
                       {broker.name}
                     </span>
                   </div>

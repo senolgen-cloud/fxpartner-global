@@ -181,7 +181,7 @@ export default async function BrokerDetailPage({
                 <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
                   Ranked #{String(broker.rank).padStart(2, "0")}
                 </span>
-                <h1 className="mt-3 font-display text-4xl font-semibold md:text-5xl">
+                <h1 className="notranslate mt-3 font-display text-4xl font-semibold md:text-5xl">
                   {broker.name}
                 </h1>
                 <p className="mt-3 max-w-lg text-lg text-text-on-ink-muted">

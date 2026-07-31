@@ -51,7 +51,7 @@ function CardBody({ broker, featured }: { broker: Broker; featured: boolean }) {
               featured ? "text-3xl" : "text-xl"
             }`}
           >
-            {broker.name}
+            <span className="notranslate">{broker.name}</span>
           </h3>
           <p className="mt-1 text-sm text-text-on-ink-muted">{broker.tagline}</p>
           <div className="mt-3">

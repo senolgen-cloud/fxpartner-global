@@ -80,7 +80,7 @@ export default function CampaignsPage() {
                         <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-gold">
                           {broker.promotion!.tag}
                         </span>
-                        <h2 className="font-display text-2xl font-semibold text-text-dark">
+                        <h2 className="notranslate font-display text-2xl font-semibold text-text-dark">
                           {broker.name}
                         </h2>
                       </div>

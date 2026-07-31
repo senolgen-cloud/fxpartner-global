@@ -43,7 +43,7 @@ function Card({ broker }: { broker: Broker }) {
       </div>
       <div className="min-w-0">
         <div className="flex items-center gap-2">
-          <span className="truncate font-display text-sm font-semibold text-text-on-ink">
+          <span className="notranslate truncate font-display text-sm font-semibold text-text-on-ink">
             {broker.name}
           </span>
           <span className="shrink-0 font-mono text-[10px] text-gold">

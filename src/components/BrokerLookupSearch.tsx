@@ -101,7 +101,7 @@ export default function BrokerLookupSearch() {
             return (
               <div key={b.name} className="py-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <h3 className="font-display text-xl font-semibold text-text-dark">
+                  <h3 className="notranslate font-display text-xl font-semibold text-text-dark">
                     {b.name}
                   </h3>
                   <span

@@ -49,7 +49,7 @@ export default function BlacklistPage() {
               {flagged.map((broker) => (
                 <div key={broker.slug} className="py-8">
                   <div className="flex flex-wrap items-baseline justify-between gap-3">
-                    <h2 className="font-display text-2xl font-semibold text-text-dark">
+                    <h2 className="notranslate font-display text-2xl font-semibold text-text-dark">
                       {broker.name}
                     </h2>
                     <span className="font-mono text-xs uppercase tracking-[0.15em] text-alert">
