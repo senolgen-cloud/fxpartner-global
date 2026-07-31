@@ -53,6 +53,28 @@ body {
   color: var(--paper-high);
 }
 
+/* --- Google Translate widget: keep it invisible, we drive it via our
+   own LanguageSwitcher instead of Google's default banner/dropdown. --- */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget-icon,
+#goog-gt-tt,
+.goog-tooltip,
+.goog-tooltip:hover {
+  display: none !important;
+}
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+}
+body {
+  top: 0 !important;
+}
+.goog-te-gadget {
+  height: 0;
+  overflow: hidden;
+  font-size: 0;
+}
+
 a,
 button {
   -webkit-tap-highlight-color: transparent;

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const primaryLinks = [
   { href: "/#brokers", label: "Broker Rankings" },
@@ -123,6 +124,7 @@ export default function HeaderNav({
       </nav>
 
       <div className="hidden items-center gap-3 border-l border-hairline pl-3 md:flex">
+        <LanguageSwitcher />
         <Link
           href={accountHref}
           className="text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
@@ -167,6 +169,9 @@ export default function HeaderNav({
 
       {mobileOpen && (
         <div className="absolute inset-x-0 top-full border-b border-hairline bg-ink px-6 py-6 md:hidden">
+          <div className="mb-4">
+            <LanguageSwitcher />
+          </div>
           <div className="flex flex-col gap-1">
             {[...primaryLinks, ...resourceLinks].map((link) => (
               <a
