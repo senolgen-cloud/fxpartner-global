@@ -9,7 +9,7 @@ export default async function Header({ standalone = true }: { standalone?: boole
 
   return (
     <header
-      className={`border-b border-hairline bg-ink/95 backdrop-blur ${
+      className={`relative z-20 border-b border-hairline bg-ink/95 backdrop-blur ${
         standalone ? "sticky top-0 z-40" : ""
       }`}
     >
