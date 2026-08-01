@@ -94,19 +94,6 @@ button {
   font-feature-settings: "tnum" 1;
 }
 
-@keyframes ticker-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.ticker-track {
-  animation: ticker-scroll 32s linear infinite;
-}
-
 @keyframes ticker-scroll-vertical {
   from {
     transform: translateY(0);
@@ -195,27 +182,11 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ticker-track,
   .ticker-track-vertical,
   .hero-glow-signal,
   .hero-glow-gold,
   .signal-dot {
     animation: none;
-  }
-
-  /* With the animation stopped, this track would otherwise sit frozen
-     inside an overflow-hidden viewport, permanently hiding everything
-     past the first screenful. Let the viewport scroll by hand instead,
-     and drop the duplicated copy that only existed for the loop.
-     BrokerHeroSlider isn't listed here — it drives its own motion via
-     rAF/transform in JS and only slows down (never stops) under this
-     preference, so it doesn't need the same manual-scroll fallback. */
-  .ticker-viewport {
-    overflow-x: auto;
-  }
-
-  .ticker-track-duplicate {
-    display: none;
   }
 
   .reveal {

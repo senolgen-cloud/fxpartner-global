@@ -87,7 +87,7 @@ export default function BrokerHeroSlider({ brokers }: { brokers: Broker[] }) {
     if (!track || !row) return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const speed = reduceMotion ? 14 : 36; // px/sec
+    const speed = reduceMotion ? 40 : 65; // px/sec
 
     let rowWidth = row.getBoundingClientRect().width;
     const onResize = () => {
