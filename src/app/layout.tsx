@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, JetBrains_Mono, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import BonusPopup from "@/components/BonusPopup";
+import TelegramPopup from "@/components/TelegramPopup";
 import GoogleTranslateWidget from "@/components/GoogleTranslateWidget";
 import Header from "@/components/Header";
 import Ticker from "@/components/Ticker";
@@ -86,6 +87,7 @@ export default function RootLayout({
           <BrokerHeroSlider brokers={brokers} />
         </div>
         {children}
+        <TelegramPopup />
         <BonusPopup />
         <GoogleTranslateWidget />
         <Analytics />

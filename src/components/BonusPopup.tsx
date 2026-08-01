@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { getBrokerBySlug } from "@/data/brokers";
+import { TELEGRAM_CLOSED_EVENT, TELEGRAM_DISMISS_KEY } from "@/components/TelegramPopup";
 
 const DISMISS_KEY = "fxpartner-bonus-popup-dismissed";
 
@@ -33,11 +34,22 @@ export default function BonusPopup() {
   const [open, setOpen] = useState(false);
   const [promoIndex, setPromoIndex] = useState<number | null>(null);
 
+  // Waits for the Telegram popup to be dismissed first (it's shown as the
+  // very first popup), so the two never stack on top of each other.
   useEffect(() => {
     if (sessionStorage.getItem(DISMISS_KEY)) return;
-    setPromoIndex(Math.floor(Math.random() * PROMOS.length));
-    const timer = setTimeout(() => setOpen(true), 1500);
-    return () => clearTimeout(timer);
+
+    function startTimer() {
+      setPromoIndex(Math.floor(Math.random() * PROMOS.length));
+      setTimeout(() => setOpen(true), 1500);
+    }
+
+    if (sessionStorage.getItem(TELEGRAM_DISMISS_KEY)) {
+      startTimer();
+      return;
+    }
+    window.addEventListener(TELEGRAM_CLOSED_EVENT, startTimer, { once: true });
+    return () => window.removeEventListener(TELEGRAM_CLOSED_EVENT, startTimer);
   }, []);
 
   useEffect(() => {

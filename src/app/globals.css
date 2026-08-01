@@ -118,7 +118,12 @@ button {
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  /* "none" (not translateY(0)) so the settled element doesn't keep creating
+     its own stacking context — translateY(0) is a real transform matrix and
+     was trapping z-indexed dropdowns/popovers nested inside .reveal blocks
+     behind later, sibling .reveal blocks. Transitions still interpolate
+     correctly from translateY(18px) to none. */
+  transform: none;
 }
 
 /* --- Hero ambient glow --- */
