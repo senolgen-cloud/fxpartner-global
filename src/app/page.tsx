@@ -65,9 +65,11 @@ const faqs = [
 export default function Home() {
   return (
     <>
-      <Header />
-      <Ticker />
-      <BrokerHeroSlider brokers={brokers} />
+      <div className="sticky top-0 z-40">
+        <Header standalone={false} />
+        <Ticker />
+        <BrokerHeroSlider brokers={brokers} />
+      </div>
 
       <main className="flex-1">
         {/* Hero */}

@@ -72,7 +72,7 @@ export default function TickerClient({ pairs }: { pairs: TickerPair[] }) {
 
   return (
     <div
-      className="sticky top-14 z-30 overflow-hidden border-y border-hairline bg-ink-soft py-2 md:top-16 md:py-2.5"
+      className="overflow-hidden border-y border-hairline bg-ink-soft py-2 md:py-2.5"
       onMouseEnter={() => {
         pausedRef.current = true;
       }}

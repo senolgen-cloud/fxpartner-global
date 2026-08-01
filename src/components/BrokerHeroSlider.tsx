@@ -116,7 +116,7 @@ export default function BrokerHeroSlider({ brokers }: { brokers: Broker[] }) {
   }, []);
 
   return (
-    <div className="sticky top-[90px] z-20 border-b border-hairline bg-ink py-2 md:top-[117px]">
+    <div className="border-b border-hairline bg-ink py-2">
       <div
         className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
         onMouseEnter={() => {

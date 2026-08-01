@@ -2,13 +2,17 @@ import Link from "next/link";
 import { auth } from "@/auth";
 import HeaderNav from "@/components/HeaderNav";
 
-export default async function Header() {
+export default async function Header({ standalone = true }: { standalone?: boolean } = {}) {
   const session = await auth();
   const signedIn = Boolean(session?.user);
   const accountHref = signedIn ? "/account" : "/account/login";
 
   return (
-    <header className="sticky top-0 z-40 border-b border-hairline bg-ink/95 backdrop-blur">
+    <header
+      className={`border-b border-hairline bg-ink/95 backdrop-blur ${
+        standalone ? "sticky top-0 z-40" : ""
+      }`}
+    >
       <div className="relative mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6 md:h-16">
         <Link href="/" className="flex items-baseline gap-2">
           <span className="font-display text-lg font-semibold tracking-tight text-text-on-ink md:text-xl">
