@@ -45,8 +45,9 @@ export default async function BrokerLookupPage({
               <p className="text-sm leading-relaxed text-text-muted">
                 <strong className="text-text-dark">How to read this:</strong>{" "}
                 Verdicts are built from official regulator warning lists
-                (FCA, CySEC, BaFin, CONSOB, FINMA), independent trust-score
-                sources, and our own editorial reviews. A
+                (FCA, CySEC, BaFin, CONSOB, FINMA, Turkey&apos;s SPK),
+                independent trust-score sources, and our own editorial
+                reviews. A
                 &ldquo;High Risk&rdquo; label reflects a specific,
                 documented finding — a regulator warning, a confirmed unlicensed
                 status, or a recurring complaint pattern — not an accusation

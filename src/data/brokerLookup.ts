@@ -519,6 +519,148 @@ export const lookupBrokers: LookupBroker[] = [
     note: "Not regulated by any recognized authority found during review; also offers crypto trading alongside forex.",
     source: "Independent broker-review sources, 2026",
   },
+
+  // --- Turkey's Capital Markets Board (SPK) official access-blocking actions ---
+  // SPK is Turkey's government financial regulator. Under Capital Markets Law
+  // Art. 99/4, it orders Turkey's telecom authority (BTK) to block in-country
+  // access to sites confirmed to be offering unlicensed leveraged trading to
+  // Turkish residents. These are official enforcement decisions, not a
+  // third party's opinion — the strongest sourcing tier in this file.
+  // Gathered 2026-08-01 from SPK bulletins as reported by independent Turkish
+  // financial outlets (Borsa Gündem, EkoTürk, Doviz.com), cross-checked
+  // across multiple sources.
+  {
+    name: "tr-fxpro-group.org",
+    verdict: "high-risk",
+    note: "A clone site using a lookalike domain and FxPro's branding to target Turkish investors. Not affiliated with the real, CySEC/FCA-regulated FxPro in any way. Access-blocked by Turkey's SPK.",
+    source: "Turkish SPK access-blocking bulletin 2024-57",
+  },
+  {
+    name: "batr-tickmill.com",
+    verdict: "high-risk",
+    note: "A clone site using a lookalike domain and Tickmill's branding to target Turkish investors. Not affiliated with the real, FCA-regulated Tickmill in any way. Access-blocked by Turkey's SPK.",
+    source: "Turkish SPK access-blocking bulletin 2024-57",
+  },
+  {
+    name: "xmtrmarket.info",
+    verdict: "high-risk",
+    note: "A clone site using a lookalike domain and XM's branding to target Turkish investors. Not affiliated with the real XM Global in any way. Access-blocked by Turkey's SPK.",
+    source: "Turkish SPK access-blocking bulletin 2024-57",
+  },
+  {
+    name: "fxpro-trgroup.global",
+    verdict: "high-risk",
+    note: "A second clone site impersonating FxPro with a lookalike domain, targeting Turkish investors. Not affiliated with the real FxPro. Access-blocked by Turkey's SPK.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "Borsa Klas Forex (borsaklasforex.com)",
+    verdict: "high-risk",
+    note: "Unlicensed platform offering leveraged trading to Turkish residents without SPK authorization.",
+    source: "Turkish SPK access-blocking bulletin 2024-57",
+  },
+  {
+    name: "KlasFX (klasfx275.com)",
+    verdict: "high-risk",
+    note: "Unlicensed leveraged-trading platform targeting Turkish residents; access-blocked by SPK for operating without authorization.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "Winex Global (winexglobal7.com / winexglobal8.com)",
+    verdict: "high-risk",
+    note: "Unlicensed leveraged-trading platform targeting Turkish residents; access-blocked by SPK for operating without authorization.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "Phase Global (phaseglobal7.com / phaseglobal8.com)",
+    verdict: "high-risk",
+    note: "Unlicensed leveraged-trading platform targeting Turkish residents; access-blocked by SPK for operating without authorization.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "Felix Markets (felixmarketglobal.com / trfelixmarkets.com)",
+    verdict: "high-risk",
+    note: "Unlicensed leveraged-trading platform targeting Turkish residents; access-blocked by SPK for operating without authorization.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "Fortex Capital Markets (fortexcapitalmarkets.com)",
+    verdict: "high-risk",
+    note: "Unlicensed leveraged-trading platform targeting Turkish residents; access-blocked by SPK for operating without authorization.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "Volume Investment (volumeinvestment.net)",
+    verdict: "high-risk",
+    note: "Unlicensed leveraged-trading platform targeting Turkish residents; access-blocked by SPK for operating without authorization.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "Algo Yatırım (algoyatirim.com)",
+    verdict: "high-risk",
+    note: "Unlicensed leveraged-trading platform targeting Turkish residents; access-blocked by SPK for operating without authorization.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "Ventaro Ocean (ventarocean.com)",
+    verdict: "high-risk",
+    note: "Unlicensed leveraged-trading platform targeting Turkish residents; access-blocked by SPK for operating without authorization.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "Ocean8FX (ocean8fx1.com)",
+    verdict: "high-risk",
+    note: "Unlicensed leveraged-trading platform targeting Turkish residents; access-blocked by SPK for operating without authorization.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "BGC-FX (bgc-fx.com)",
+    verdict: "high-risk",
+    note: "Unlicensed leveraged-trading platform targeting Turkish residents; access-blocked by SPK for operating without authorization.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "Finlaba (finlaba.com)",
+    verdict: "high-risk",
+    note: "Unlicensed leveraged-trading platform targeting Turkish residents; access-blocked by SPK for operating without authorization.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "CryonFX (cryonfx5.com)",
+    verdict: "high-risk",
+    note: "Unlicensed leveraged-trading platform targeting Turkish residents; access-blocked by SPK for operating without authorization.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "Dinamik Menkul Değerler",
+    verdict: "high-risk",
+    note: "Unlicensed capital-markets operator targeting Turkish residents (dinamikmenkuldegerler.com, dymenkul.com); a social-media account impersonating this firm was separately flagged too. Access-blocked by SPK.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "Ata Menkul Trade (atamenkultrade.com)",
+    verdict: "high-risk",
+    note: "Unlicensed capital-markets operator targeting Turkish residents; access-blocked by SPK.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "Galata Menkul (galatamenkul.org)",
+    verdict: "high-risk",
+    note: "Unlicensed capital-markets operator targeting Turkish residents; access-blocked by SPK.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "Scuzdan (scuzdan.com)",
+    verdict: "high-risk",
+    note: "Unlicensed capital-markets operator targeting Turkish residents; access-blocked by SPK.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "Model Grup (modelmenkulportfoy.com)",
+    verdict: "high-risk",
+    note: "Unlicensed capital-markets operator targeting Turkish residents; access-blocked by SPK.",
+    source: "Turkish SPK access-blocking bulletin, 2026",
+  },
 ];
 
 export function searchLookupBrokers(query: string): LookupBroker[] {
