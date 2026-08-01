@@ -1,6 +1,4 @@
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Ticker from "@/components/Ticker";
 import BrokerList from "@/components/BrokerList";
 import ComparisonTable from "@/components/ComparisonTable";
 import Reveal from "@/components/Reveal";
@@ -9,7 +7,6 @@ import HeroVideo from "@/components/HeroVideo";
 import TradingVideo from "@/components/TradingVideo";
 import DashboardPreview from "@/components/DashboardPreview";
 import ShowcaseGallery from "@/components/ShowcaseGallery";
-import BrokerHeroSlider from "@/components/BrokerHeroSlider";
 import HeroBrokerSearch from "@/components/HeroBrokerSearch";
 import StickyCTA from "@/components/StickyCTA";
 import { brokers, brokerCategories } from "@/data/brokers";
@@ -65,12 +62,6 @@ const faqs = [
 export default function Home() {
   return (
     <>
-      <div className="sticky top-0 z-40">
-        <Header standalone={false} />
-        <Ticker />
-        <BrokerHeroSlider brokers={brokers} />
-      </div>
-
       <main className="flex-1">
         {/* Hero */}
         <section className="relative overflow-hidden bg-ink text-text-on-ink">

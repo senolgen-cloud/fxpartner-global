@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import TiltWrapper from "@/components/TiltWrapper";
@@ -35,7 +34,6 @@ export default function PartnersPage() {
 
   return (
     <PartnerSmoothScroll>
-      <Header />
       <main className="flex-1 bg-paper-high">
         <PartnerHero brokerCount={brokers.length} regulatorCount={regulatorCount} />
 

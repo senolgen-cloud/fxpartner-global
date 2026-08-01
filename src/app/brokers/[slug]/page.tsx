@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import RatingStars from "@/components/RatingStars";
 import TrustGauge from "@/components/TrustGauge";
@@ -161,7 +160,6 @@ export default async function BrokerDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
       />
-      <Header />
       <main className="flex-1">
         {/* Hero + trust gauge */}
         <section className="relative overflow-hidden bg-ink text-text-on-ink">

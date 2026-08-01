@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FormattedText from "@/components/FormattedText";
 import { marketAnalysisPosts, getMarketAnalysisPostBySlug } from "@/data/marketAnalysis";
@@ -62,7 +61,6 @@ export default async function MarketAnalysisPostPage({
           ),
         }}
       />
-      <Header />
       <main className="flex-1 bg-paper-high">
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-3xl px-6 py-16">

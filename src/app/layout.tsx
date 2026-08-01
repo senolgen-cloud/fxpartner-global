@@ -3,6 +3,10 @@ import { Geist, JetBrains_Mono, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import BonusPopup from "@/components/BonusPopup";
 import GoogleTranslateWidget from "@/components/GoogleTranslateWidget";
+import Header from "@/components/Header";
+import Ticker from "@/components/Ticker";
+import BrokerHeroSlider from "@/components/BrokerHeroSlider";
+import { brokers } from "@/data/brokers";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import "./globals.css";
 
@@ -76,6 +80,11 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
         />
+        <div className="sticky top-0 z-40">
+          <Header standalone={false} />
+          <Ticker />
+          <BrokerHeroSlider brokers={brokers} />
+        </div>
         {children}
         <BonusPopup />
         <GoogleTranslateWidget />

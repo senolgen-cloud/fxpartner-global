@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BrokerCard from "@/components/BrokerCard";
 import { brokers, brokerCategories, categoryInfo, getCategoryBySlug } from "@/data/brokers";
@@ -40,7 +39,6 @@ export default async function CategoryPage({
 
   return (
     <>
-      <Header />
       <main className="flex-1">
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">

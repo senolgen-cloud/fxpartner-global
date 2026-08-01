@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { auth, signOut } from "@/auth";
 import { db } from "@/db";
@@ -84,7 +83,6 @@ export default async function AccountPage() {
 
   return (
     <>
-      <Header />
       <main className="flex-1 bg-paper-high">
         <div className="mx-auto max-w-3xl px-6 py-16">
           <div className="flex flex-wrap items-start justify-between gap-4">

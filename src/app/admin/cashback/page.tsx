@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { db } from "@/db";
 import { cashbackAccounts, cashbackRecords, users } from "@/db/schema";
@@ -32,7 +31,6 @@ export default async function AdminCashbackPage() {
 
   return (
     <>
-      <Header />
       <main className="flex-1 bg-paper-high">
         <div className="mx-auto max-w-4xl px-6 py-16">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">

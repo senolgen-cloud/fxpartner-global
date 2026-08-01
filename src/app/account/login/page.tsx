@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SignInForm from "@/components/SignInForm";
 import { brokers } from "@/data/brokers";
@@ -6,7 +5,6 @@ import { brokers } from "@/data/brokers";
 export default function LoginPage() {
   return (
     <>
-      <Header />
       <main className="flex-1 bg-paper-high">
         <div className="mx-auto max-w-md px-6 py-20">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">

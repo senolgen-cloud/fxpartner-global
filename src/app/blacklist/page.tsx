@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { brokers } from "@/data/brokers";
 
@@ -23,7 +22,6 @@ export default function BlacklistPage() {
 
   return (
     <>
-      <Header />
       <main className="flex-1 bg-paper-high">
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-4xl px-6 py-16 md:py-20">
