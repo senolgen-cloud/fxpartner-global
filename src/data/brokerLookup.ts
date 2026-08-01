@@ -520,6 +520,58 @@ export const lookupBrokers: LookupBroker[] = [
     source: "Independent broker-review sources, 2026",
   },
 
+  // --- Turkey's domestically SPK-licensed retail forex brokerages ---
+  // These hold Turkey's "Geniş Yetkili Aracı Kurum" (Broad-Authority
+  // Brokerage) license from the SPK, specifically covering kaldıraçlı
+  // (leveraged) FX/CFD trading for Turkish residents — the domestic
+  // counterpart to the offshore-regulated brokers above. Cross-checked
+  // against each firm's own regulatory disclosures and independent press
+  // coverage, 2026-08-01. Note: Turkish law caps retail leverage at 1:10
+  // and requires a 50,000 TL minimum margin, both well below what
+  // internationally-regulated brokers can typically offer.
+  {
+    name: "GCM Yatırım (GCM Forex)",
+    verdict: "verified",
+    regulators: ["SPK (Turkey)"],
+    note: "SPK-licensed Broad-Authority Brokerage (license G-039) operating since 2012, offering domestic leveraged FX/CFD trading under Turkish law's 1:10 leverage cap.",
+    source: "Company regulatory disclosures + independent press, 2026",
+  },
+  {
+    name: "İntegral Yatırım Menkul Değerler (İntegral Forex)",
+    verdict: "verified",
+    regulators: ["SPK (Turkey)"],
+    note: "SPK-licensed for leveraged FX trading; was Turkey's largest forex broker by volume in 2012-2013. Operates under Ulukartal Holding.",
+    source: "Company regulatory disclosures + independent press, 2026",
+  },
+  {
+    name: "ALB Menkul Değerler (ALB Forex)",
+    verdict: "verified",
+    regulators: ["SPK (Turkey)"],
+    note: "SPK Broad-Authority Brokerage license (obtained 2015), part of the Albayrak Group, offering domestic leveraged FX trading.",
+    source: "Company regulatory disclosures + independent press, 2026",
+  },
+  {
+    name: "Ahlatcı Yatırım Menkul Değerler",
+    verdict: "verified",
+    regulators: ["SPK (Turkey)"],
+    note: "SPK Broad-Authority Brokerage license (since October 2016), part of Ahlatcı Holding, offering domestic leveraged FX trading.",
+    source: "Company regulatory disclosures, 2026",
+  },
+  {
+    name: "İnfo Yatırım Menkul Değerler",
+    verdict: "verified",
+    regulators: ["SPK (Turkey)"],
+    note: "SPK-licensed brokerage offering domestic leveraged FX trading under Turkish law's 1:10 leverage cap.",
+    source: "Company regulatory disclosures, 2026",
+  },
+  {
+    name: "Trive Yatırım (Trive FX)",
+    verdict: "verified",
+    regulators: ["SPK (Turkey)"],
+    note: "SPK Broad-Authority Brokerage offering domestic leveraged FX/CFD trading alongside local stock and derivatives markets.",
+    source: "Company regulatory disclosures, 2026",
+  },
+
   // --- Turkey's Capital Markets Board (SPK) official access-blocking actions ---
   // SPK is Turkey's government financial regulator. Under Capital Markets Law
   // Art. 99/4, it orders Turkey's telecom authority (BTK) to block in-country
@@ -552,6 +604,12 @@ export const lookupBrokers: LookupBroker[] = [
     verdict: "high-risk",
     note: "A second clone site impersonating FxPro with a lookalike domain, targeting Turkish investors. Not affiliated with the real FxPro. Access-blocked by Turkey's SPK.",
     source: "Turkish SPK access-blocking bulletin, 2026",
+  },
+  {
+    name: "qnbfinvesttr.com",
+    verdict: "high-risk",
+    note: "Uses QNB Finansinvest's name and branding, but independent review sources report no verifiable SPK license found for this domain. Not confirmed to be affiliated with the real, SPK-regulated QNB Yatırım Menkul Değerler. Verify directly on SPK's official brokerage database before trusting this site.",
+    source: "Independent broker-review sources, 2026",
   },
   {
     name: "Borsa Klas Forex (borsaklasforex.com)",
