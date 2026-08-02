@@ -10,8 +10,14 @@ import ShowcaseGallery from "@/components/ShowcaseGallery";
 import HeroBrokerSearch from "@/components/HeroBrokerSearch";
 import StickyCTA from "@/components/StickyCTA";
 import { brokers, brokerCategories } from "@/data/brokers";
+import { lookupBrokers } from "@/data/brokerLookup";
 
 const regulatorCount = new Set(brokers.flatMap((b) => b.regulators)).size;
+const trackedBrokerCount = lookupBrokers.length;
+const trackedRegulatorCount = new Set([
+  ...brokers.flatMap((b) => b.regulators),
+  ...lookupBrokers.flatMap((b) => b.regulators ?? []),
+]).size;
 
 const steps = [
   {
@@ -128,10 +134,10 @@ export default function Home() {
               <dl className="mt-16 grid grid-cols-2 gap-6 border-t border-hairline pt-8 sm:grid-cols-4">
                 <div>
                   <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    Brokers Reviewed
+                    Brokers Tracked
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold">
-                    <AnimatedStat value={brokers.length} />
+                    <AnimatedStat value={trackedBrokerCount} />
                   </dd>
                 </div>
                 <div>
@@ -139,7 +145,7 @@ export default function Home() {
                     Regulatory Authorities
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold">
-                    <AnimatedStat value={regulatorCount} suffix="+" />
+                    <AnimatedStat value={trackedRegulatorCount} suffix="+" />
                   </dd>
                 </div>
                 <div>
