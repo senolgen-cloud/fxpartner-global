@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
+import ShareButtons from "@/components/ShareButtons";
 import { blogPosts, getBlogPostBySlug } from "@/data/blog";
 import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
 
@@ -149,6 +150,10 @@ export default async function BlogPostPage({
               >
                 View Broker Rankings
               </Link>
+            </div>
+
+            <div className="mt-10">
+              <ShareButtons title={post.title} text={post.excerpt} locale="en" />
             </div>
           </article>
         </section>

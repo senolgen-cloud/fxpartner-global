@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
+import ShareButtons from "@/components/ShareButtons";
 import RatingStars from "@/components/RatingStars";
 import TrustGauge from "@/components/TrustGauge";
 import {
@@ -575,6 +576,12 @@ export default async function BrokerDetailPage({
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section>
+          <div className="mx-auto max-w-5xl px-6 pb-16">
+            <ShareButtons title={`${broker.name} Review`} text={broker.summary} locale="en" />
           </div>
         </section>
       </main>

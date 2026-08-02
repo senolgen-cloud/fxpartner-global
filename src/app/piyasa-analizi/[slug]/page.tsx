@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import FormattedText from "@/components/FormattedText";
+import ShareButtons from "@/components/ShareButtons";
 import { marketAnalysisPosts, getMarketAnalysisPostBySlug } from "@/data/marketAnalysis";
 import { newsArticleSchema, breadcrumbSchema } from "@/lib/schema";
 
@@ -153,6 +154,10 @@ export default async function MarketAnalysisPostPage({
               niteliği taşımaz. Yatırım kararlarınızı vermeden önce kendi
               araştırmanızı yapmanız ve gerekirse bir uzmana danışmanız önerilir.
             </p>
+
+            <div className="mt-10">
+              <ShareButtons title={post.title} text={post.excerpt} locale="tr" />
+            </div>
           </article>
         </section>
       </main>
