@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getBrokerScores, type Broker } from "@/data/brokers";
+import type { Broker } from "@/data/brokers";
 import TiltWrapper from "./TiltWrapper";
+import MiniScoreRings from "./MiniScoreRings";
 
 function getMonogram(name: string): string {
   const words = name.trim().split(/\s+/);
@@ -16,8 +17,6 @@ function getMonogram(name: string): string {
 }
 
 function CardBody({ broker, featured }: { broker: Broker; featured: boolean }) {
-  const { composite } = getBrokerScores(broker);
-
   return (
     <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
       <div className="flex min-w-0 items-center gap-4">
@@ -55,28 +54,16 @@ function CardBody({ broker, featured }: { broker: Broker; featured: boolean }) {
             >
               <span className="notranslate">{broker.name}</span>
             </h3>
-            {broker.accentNote && (
-              <span className="mt-1 inline-block rounded-full border border-gold/30 bg-gold/10 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-gold">
-                {broker.accentNote}
-              </span>
-            )}
           </div>
         </div>
       </div>
 
       <div
-        className={`flex shrink-0 flex-wrap items-center gap-3 ${
+        className={`flex shrink-0 flex-wrap items-center gap-4 ${
           featured ? "featured-card-depth-sm" : ""
         }`}
       >
-        <div className="flex shrink-0 items-center gap-2 rounded-xl border border-gold/30 bg-gold/10 px-3 py-2">
-          <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-gold">
-            Index
-          </span>
-          <span className="font-poppins text-lg font-bold leading-none text-gold">
-            {composite.toFixed(1)}
-          </span>
-        </div>
+        <MiniScoreRings broker={broker} tone="dark" />
         <a
           href={broker.referralUrl}
           target="_blank"

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getBrokerScores, type Broker } from "@/data/brokers";
+import type { Broker } from "@/data/brokers";
+import MiniScoreRings from "./MiniScoreRings";
 
 function getMonogram(name: string): string {
   const camelSplit = name
@@ -18,8 +19,6 @@ function getMonogram(name: string): string {
 }
 
 export default function BrokerCard({ broker }: { broker: Broker }) {
-  const { composite } = getBrokerScores(broker);
-
   return (
     <article className="lift-on-hover group relative border-b border-hairline-light py-6 first:pt-0 last:border-b-0 sm:py-7">
       <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
@@ -53,24 +52,12 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
               <h3 className="truncate font-display text-lg font-semibold text-text-dark md:text-xl">
                 <span className="notranslate">{broker.name}</span>
               </h3>
-              {broker.accentNote && (
-                <span className="mt-1 inline-block rounded-full border border-gold/30 bg-gold/10 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-gold">
-                  {broker.accentNote}
-                </span>
-              )}
             </div>
           </div>
         </div>
 
-        <div className="flex shrink-0 flex-wrap items-center gap-3">
-          <div className="flex shrink-0 items-center gap-2 rounded-xl border border-gold/30 bg-gold/10 px-3 py-2">
-            <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-gold">
-              Index
-            </span>
-            <span className="font-display text-lg font-bold leading-none text-gold">
-              {composite.toFixed(1)}
-            </span>
-          </div>
+        <div className="flex shrink-0 flex-wrap items-center gap-4">
+          <MiniScoreRings broker={broker} tone="light" />
           <a
             href={broker.referralUrl}
             target="_blank"
