@@ -117,6 +117,73 @@ export const marketAnalysisPosts: MarketAnalysisPost[] = [
     closing:
       "**FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın.",
   },
+  {
+    slug: "haftalik-gorunum-2026-08-03",
+    title: "FXPARTNER Haftalık Piyasa Görünümü | 3-9 Ağustos 2026",
+    excerpt:
+      "Haftanın gündeminde Cuma günü açıklanacak ABD tarım dışı istihdam (NFP) verisi var; EUR/USD kritik 1,15 desteğini test ederken, altın sıkışan üçgen formasyonunda kırılım bekliyor, USD/TRY ise TCMB'nin güçlü rezerv pozisyonuyla kontrollü seyrini sürdürüyor.",
+    publishedAt: "2026-08-02",
+    readingMinutes: 5,
+    intro:
+      "3-9 Ağustos haftasında piyasaların odağı, Cuma günü açıklanacak ABD tarım dışı istihdam (NFP) raporunda. Haftanın geri kalanında Çin ve ABD PMI verileri, Yeni Zelanda istihdam verisi ve Euro Bölgesi perakende satışları da takip edilecek. EUR/USD, XAU/USD ve USD/TRY üzerinden haftanın öne çıkan başlıklarını derledik.",
+    news: [
+      {
+        icon: "💶",
+        heading: "EUR/USD: NFP Öncesi 1,15 Desteği Kritik",
+        body: "EUR/USD, hafta başında **1,1500 psikolojik seviyesinin** çevresinde işlem görüyor; bu seviyenin altında **1,1400** ve **1,1370-1,1420 bölgesi** bir sonraki destek noktaları olarak izleniyor. Yukarı yönde ise **100 günlük ortalamanın bulunduğu 1,1568** ilk direnç, **200 günlük ortalamanın geçtiği 1,1631** ise bir sonraki hedef konumunda. Piyasa beklentisi, Cuma günkü NFP verisinde **91 bin yeni istihdam** ve **%4,3 işsizlik oranı** yönünde; beklentinin altında kalacak bir veri doların değer kaybetmesine ve paritenin direnç bölgesine yönelmesine yol açabilir.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın (XAU/USD): Sıkışan Üçgen Kırılım Bekliyor",
+        body: "XAU/USD, son altı haftadır **4.020-4.070 dolar bandında** simetrik bir üçgen formasyonu içinde sıkışmış durumda; fiyat şu an **4.040-4.080 dolar** aralığında işlem görüyor. **RSI göstergesinin 44 seviyesinde nötr** seyretmesi, yakın vadede sert bir kırılımın sinyalini veriyor. Yukarı yönlü bir kırılımda **4.120** ve **4.172 dolar** hedef seviyeler olarak öne çıkarken, **4.020 doların altına** sarkma durumunda **3.964** ve **3.914 dolar** bir sonraki destekler. 2026'nın ikinci çeyreğinde merkez bankalarının **289 ton altın alımı** yapması, fiyatı yapısal olarak desteklemeye devam ediyor.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "USD/TRY: TCMB Rezervleriyle Kontrollü Seyir",
+        body: "USD/TRY, hafta başında **47,60-47,70 TL bandında** dengeli bir seyir izliyor. Türkiye Cumhuriyet Merkez Bankası'nın brüt rezervlerini **205,2 milyar dolara**, net rezervlerini (swaplar hariç) **78,8 milyar dolara** yükseltmiş olması, kurdaki volatiliteyi sınırlayan temel unsurlardan biri. Buna karşın yıl sonu projeksiyonları, kurun **49,70-50,00 TL bandına** doğru kademeli bir yükseliş izleyebileceğine işaret ediyor; TCMB'nin faiz politikası bu sürecin hızını belirleyecek ana değişken.",
+      },
+      {
+        icon: "🇺🇸",
+        heading: "Haftanın Ana Gündemi: Cuma Günü Açıklanacak NFP",
+        body: "Hafta boyunca açıklanacak PMI ve istihdam verileri arasında en kritik başlık, **Cuma günü açıklanacak ABD tarım dışı istihdam raporu.** Veri öncesinde Çarşamba günkü **ADP özel sektör istihdam raporu** ve **ISM Hizmet Sektörü PMI'ı** piyasalara ön sinyal verebilir. Zayıf gelecek bir istihdam verisi, Fed'in faiz indirim beklentilerini güçlendirerek doları baskılayabilir ve altın/EUR başta olmak üzere risk varlıklarına destek verebilir; güçlü bir veri ise tam tersi bir etki yaratabilir.",
+      },
+    ],
+    calendarLabel: "3-9 Ağustos 2026",
+    calendarEvents: [
+      {
+        time: "3 Ağustos Pazartesi",
+        icon: "🇺🇸",
+        title: "ABD ISM İmalat PMI",
+        note: "50 üzeri okuma doları destekler, altındaki bir okuma ise doları baskılar.",
+      },
+      {
+        time: "5 Ağustos Çarşamba",
+        icon: "🇺🇸",
+        title: "ADP Özel Sektör İstihdam Raporu ve ISM Hizmet PMI",
+        note: "Cuma'daki NFP öncesi işgücü piyasasına dair ilk sinyalleri verecek.",
+      },
+      {
+        time: "6 Ağustos Perşembe",
+        icon: "🇪🇺",
+        title: "Euro Bölgesi Perakende Satışları",
+        note: "Güçlü veri euroyu destekleyebilir, zayıf veri EUR/USD üzerinde baskı yaratabilir.",
+      },
+      {
+        time: "7 Ağustos Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP), Ortalama Saatlik Kazançlar ve İşsizlik Oranı",
+        note: "Haftanın en kritik verisi; piyasa beklentisi 91 bin yeni istihdam ve %4,3 işsizlik oranı yönünde. Sürpriz bir sapma EUR/USD, XAU/USD ve dolar endeksinde sert hareketlere yol açabilir.",
+      },
+      {
+        time: "7 Ağustos Cuma",
+        icon: "🇨🇦",
+        title: "Kanada İşsizlik Oranı",
+        note: "USD/CAD paritesinde volatiliteyi artırabilir.",
+      },
+    ],
+    closing:
+      "**FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın.",
+  },
 ];
 
 export function getMarketAnalysisPostBySlug(slug: string): MarketAnalysisPost | undefined {
