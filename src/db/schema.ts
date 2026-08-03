@@ -115,6 +115,24 @@ export const cashbackRecords = pgTable("cashback_record", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+export const cashbackLeadStatusValues = ["new", "contacted", "converted"] as const;
+export type CashbackLeadStatus = (typeof cashbackLeadStatusValues)[number];
+
+// Top-of-funnel interest capture from the homepage hero form — just
+// contact details, no broker/account number yet. Distinct from
+// cashbackAccounts, which is filled in later via /cashback/[slug]/setup
+// once the visitor has picked a broker and opened an account.
+export const cashbackLeads = pgTable("cashback_lead", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  fullName: text("full_name").notNull(),
+  phone: text("phone").notNull(),
+  email: text("email").notNull(),
+  status: text("status").$type<CashbackLeadStatus>().notNull().default("new"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 // Dedup log for department cron jobs that post to Telegram but don't
 // need Upstash (no translation/news-feed involved) — e.g. announcing a
 // new /piyasa-analizi post once. `key` is a namespaced string per job

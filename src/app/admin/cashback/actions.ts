@@ -1,7 +1,13 @@
 "use server";
 
 import { db } from "@/db";
-import { cashbackAccounts, cashbackRecords, type CashbackAccountStatus } from "@/db/schema";
+import {
+  cashbackAccounts,
+  cashbackRecords,
+  cashbackLeads,
+  type CashbackAccountStatus,
+  type CashbackLeadStatus,
+} from "@/db/schema";
 import { auth } from "@/auth";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
@@ -16,6 +22,12 @@ async function requireAdmin() {
 export async function setAccountStatus(accountId: string, status: CashbackAccountStatus) {
   await requireAdmin();
   await db.update(cashbackAccounts).set({ status }).where(eq(cashbackAccounts.id, accountId));
+  revalidatePath("/admin/cashback");
+}
+
+export async function setLeadStatus(leadId: string, status: CashbackLeadStatus) {
+  await requireAdmin();
+  await db.update(cashbackLeads).set({ status }).where(eq(cashbackLeads.id, leadId));
   revalidatePath("/admin/cashback");
 }
 

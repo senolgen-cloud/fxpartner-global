@@ -1,13 +1,15 @@
 import Footer from "@/components/Footer";
 import { db } from "@/db";
-import { cashbackAccounts, cashbackRecords, users } from "@/db/schema";
+import { cashbackAccounts, cashbackRecords, cashbackLeads, users } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 import { brokers } from "@/data/brokers";
-import { setAccountStatus, addCashbackRecord } from "./actions";
+import { setAccountStatus, setLeadStatus, addCashbackRecord } from "./actions";
 
 const brokerNames = Object.fromEntries(brokers.map((b) => [b.slug, b.name]));
 
 export default async function AdminCashbackPage() {
+  const leads = await db.select().from(cashbackLeads).orderBy(desc(cashbackLeads.createdAt));
+
   const accounts = await db
     .select({
       id: cashbackAccounts.id,
@@ -44,7 +46,55 @@ export default async function AdminCashbackPage() {
             record per period. Nothing here is calculated automatically.
           </p>
 
-          <div className="mt-8 divide-y divide-hairline-light border-t border-hairline-light">
+          <h2 className="mt-12 font-display text-xl font-semibold text-text-dark">
+            New Leads ({leads.filter((l) => l.status === "new").length})
+          </h2>
+          <p className="mt-1 text-sm text-text-muted">
+            From the homepage cashback form — no broker/account picked yet.
+            Follow up to help them choose one and set up tracking.
+          </p>
+          <div className="mt-4 divide-y divide-hairline-light border-t border-hairline-light">
+            {leads.length === 0 && (
+              <p className="py-6 text-sm text-text-muted">No leads yet.</p>
+            )}
+            {leads.map((lead) => (
+              <div key={lead.id} className="flex flex-wrap items-center justify-between gap-3 py-4">
+                <div>
+                  <p className="font-medium text-text-dark">{lead.fullName}</p>
+                  <p className="mt-1 text-xs text-text-muted">
+                    {lead.phone} · {lead.email} ·{" "}
+                    {lead.createdAt.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  {(["new", "contacted", "converted"] as const).map((s) => (
+                    <form key={s} action={setLeadStatus.bind(null, lead.id, s)}>
+                      <button
+                        type="submit"
+                        className={`rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors ${
+                          lead.status === s
+                            ? "border-text-dark bg-text-dark text-paper-high"
+                            : "border-hairline-light text-text-muted hover:border-text-dark"
+                        }`}
+                      >
+                        {s}
+                      </button>
+                    </form>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <h2 className="mt-14 font-display text-xl font-semibold text-text-dark">
+            Linked Accounts
+          </h2>
+
+          <div className="mt-4 divide-y divide-hairline-light border-t border-hairline-light">
             {accounts.length === 0 && (
               <p className="py-8 text-sm text-text-muted">No accounts linked yet.</p>
             )}

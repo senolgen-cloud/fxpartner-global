@@ -6,14 +6,13 @@ import AnimatedStat from "@/components/AnimatedStat";
 import HeroVideo from "@/components/HeroVideo";
 import HeroSpotlight from "@/components/HeroSpotlight";
 import TradingVideo from "@/components/TradingVideo";
-import DashboardPreview from "@/components/DashboardPreview";
+import HeroCashbackForm from "@/components/HeroCashbackForm";
 import ShowcaseGallery from "@/components/ShowcaseGallery";
 import HeroBrokerSearch from "@/components/HeroBrokerSearch";
 import StickyCTA from "@/components/StickyCTA";
-import { brokers, brokerCategories } from "@/data/brokers";
+import { brokers } from "@/data/brokers";
 import { lookupBrokers } from "@/data/brokerLookup";
 
-const regulatorCount = new Set(brokers.flatMap((b) => b.regulators)).size;
 const trackedBrokerCount = lookupBrokers.length;
 const trackedRegulatorCount = new Set([
   ...brokers.flatMap((b) => b.regulators),
@@ -170,12 +169,8 @@ export default function Home() {
             </Reveal>
           </div>
 
-          <Reveal delay={200} className="hidden lg:block">
-            <DashboardPreview
-              brokers={brokers}
-              categoryCount={brokerCategories.length}
-              regulatorCount={regulatorCount}
-            />
+          <Reveal delay={200}>
+            <HeroCashbackForm />
           </Reveal>
           </div>
         </section>
