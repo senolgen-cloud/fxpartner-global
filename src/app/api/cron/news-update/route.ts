@@ -2,12 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { fetchAllNews, type NewsItem } from "@/lib/news";
 import { filterRelevantNews } from "@/lib/relevance-filter";
 import { translateToTurkish } from "@/lib/translate";
-import { isAlreadyPosted, markAsPosted } from "@/lib/posted-store";
+import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
 import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
 
 // Owned by Haber & Editöryal Departmanı (Elif Sarman) — see
-// src/lib/departments.ts and docs/ORGANIZATION.md. Paused by default:
-// only fires via workflow_dispatch in .github/workflows/telegram-cron.yml.
+// src/lib/departments.ts and docs/ORGANIZATION.md. Dedup now uses the
+// same Postgres-backed store as market-analysis-share (no more Upstash
+// dependency). Still only fires via workflow_dispatch until DEEPL_API_KEY
+// is set in production — see translate.ts.
 function isAuthorized(req: NextRequest): boolean {
   const secret = process.env.CRON_SECRET;
   if (!secret) return false;
@@ -30,7 +32,7 @@ export async function GET(req: NextRequest) {
   const fresh: NewsItem[] = [];
   for (const item of relevant) {
     if (fresh.length >= MAX_POSTS_PER_RUN) break;
-    if (!(await isAlreadyPosted(item.guid))) fresh.push(item);
+    if (!(await isAlreadyPostedToTelegram(`news:${item.guid}`))) fresh.push(item);
   }
 
   const posted: string[] = [];
@@ -45,7 +47,7 @@ export async function GET(req: NextRequest) {
       telegramSiteCta();
 
     await sendTelegramMessage(text);
-    await markAsPosted(item.guid);
+    await markPostedToTelegram(`news:${item.guid}`);
     posted.push(item.title);
   }
 
