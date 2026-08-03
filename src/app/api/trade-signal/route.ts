@@ -54,10 +54,12 @@ export async function GET(req: NextRequest) {
   // never take down the Telegram send, which is the primary channel.
   let xResult: { tweetId: string } | { error: string } | null = null;
   try {
+    // No URL in the tweet body on purpose — a post containing a link costs
+    // $0.20/request on X's pay-per-use pricing vs $0.015 without one, and
+    // the card image already carries a QR code + FXPARTNER branding.
     const tweetText =
       `${pair.toUpperCase()}${direction ? ` ${direction.toUpperCase()}` : ""} — Entry ${entry}\n\n` +
-      `FXPARTNER trade signal. General information only, not investment advice.\n` +
-      `https://fxpartner.global\n\n` +
+      `FXPARTNER trade signal. General information only, not investment advice.\n\n` +
       `#fxpartner #forex #fxsignals`;
     xResult = await postTradeSignalToX(imageUrl, tweetText);
   } catch (err) {
