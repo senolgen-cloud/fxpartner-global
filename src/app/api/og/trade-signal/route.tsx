@@ -63,12 +63,12 @@ function Badge({ code, offset }: { code: string; offset: number }) {
         position: "absolute",
         left: offset,
         top: 0,
-        width: 56,
-        height: 56,
+        width: 60,
+        height: 60,
         borderRadius: 999,
         background: b.bg,
         color: b.fg,
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: 700,
         border: `3px solid ${INK}`,
       }}
@@ -128,15 +128,15 @@ function Stat({
 }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
         {dir && (
-          <span style={{ display: "flex", fontSize: 13, color }}>
+          <span style={{ display: "flex", fontSize: 17, color }}>
             {dir === "up" ? "▲" : "▼"}
           </span>
         )}
         <span
           style={{
-            fontSize: 15,
+            fontSize: 19,
             letterSpacing: 2,
             textTransform: "uppercase",
             color: TEXT_ON_INK_MUTED,
@@ -145,7 +145,7 @@ function Stat({
           {label}
         </span>
       </div>
-      <span style={{ fontSize: 40, fontWeight: 700, color, marginTop: 6 }}>{value}</span>
+      <span style={{ fontSize: 54, fontWeight: 700, color, marginTop: 8 }}>{value}</span>
     </div>
   );
 }
@@ -233,13 +233,13 @@ export async function GET(request: Request) {
           }}
         >
           <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
-            <span style={{ fontSize: 30, fontWeight: 700, color: TEXT_ON_INK }}>
+            <span style={{ fontSize: 32, fontWeight: 700, color: TEXT_ON_INK }}>
               FXPARTNER
               <span style={{ color: SIGNAL }}>.</span>
             </span>
             <span
               style={{
-                fontSize: 15,
+                fontSize: 17,
                 letterSpacing: 3,
                 textTransform: "uppercase",
                 color: TEXT_ON_INK_MUTED,
@@ -254,13 +254,13 @@ export async function GET(request: Request) {
                 display: "flex",
                 alignItems: "center",
                 gap: 8,
-                fontSize: 18,
+                fontSize: 21,
                 fontWeight: 700,
                 letterSpacing: 2,
                 color: TEXT_ON_INK,
                 background: directionColor,
                 borderRadius: 999,
-                padding: "9px 22px 9px 16px",
+                padding: "10px 24px 10px 18px",
                 boxShadow: `0 0 28px 6px ${directionGlow}`,
               }}
             >
@@ -284,11 +284,11 @@ export async function GET(request: Request) {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-            <div style={{ display: "flex", position: "relative", width: 88, height: 56 }}>
+            <div style={{ display: "flex", position: "relative", width: 94, height: 60 }}>
               <Badge code={base} offset={0} />
-              <Badge code={quote} offset={32} />
+              <Badge code={quote} offset={34} />
             </div>
-            <span style={{ fontSize: 50, fontWeight: 700, color: TEXT_ON_INK }}>
+            <span style={{ fontSize: 56, fontWeight: 700, color: TEXT_ON_INK }}>
               {base}
               {quote}
             </span>
@@ -296,7 +296,7 @@ export async function GET(request: Request) {
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
             <span
               style={{
-                fontSize: 15,
+                fontSize: 19,
                 letterSpacing: 2,
                 textTransform: "uppercase",
                 color: TEXT_ON_INK_MUTED,
@@ -304,7 +304,7 @@ export async function GET(request: Request) {
             >
               Entry
             </span>
-            <span style={{ fontSize: 58, fontWeight: 700, color: GOLD, marginTop: 2 }}>
+            <span style={{ fontSize: 68, fontWeight: 700, color: GOLD, marginTop: 4 }}>
               {entry}
             </span>
           </div>
@@ -340,17 +340,17 @@ export async function GET(request: Request) {
           }}
         >
           <div style={{ display: "flex", flexDirection: "column", maxWidth: 760 }}>
-            <span style={{ fontSize: 17, color: TEXT_ON_INK, fontWeight: 700 }}>
+            <span style={{ fontSize: 19, color: TEXT_ON_INK, fontWeight: 700 }}>
               FXPARTNER<span style={{ color: SIGNAL }}>.</span>global
             </span>
-            <span style={{ fontSize: 13, color: TEXT_ON_INK_MUTED, marginTop: 4 }}>
+            <span style={{ fontSize: 15, color: TEXT_ON_INK_MUTED, marginTop: 4 }}>
               General information only, not investment advice. Trade at your own risk.
             </span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
             <span
               style={{
-                fontSize: 12,
+                fontSize: 13,
                 letterSpacing: 1,
                 textTransform: "uppercase",
                 color: TEXT_ON_INK_MUTED,
