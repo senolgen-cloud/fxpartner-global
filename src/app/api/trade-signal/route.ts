@@ -57,10 +57,24 @@ export async function GET(req: NextRequest) {
     // No URL in the tweet body on purpose — a post containing a link costs
     // $0.20/request on X's pay-per-use pricing vs $0.015 without one, and
     // the card image already carries a QR code + FXPARTNER branding.
+    // Longer, educational copy is fine since the account is on X Premium
+    // (25,000-character post limit instead of the free-tier 280).
+    const dirWord = direction?.toUpperCase() === "SELL" ? "SELL" : direction?.toUpperCase() === "BUY" ? "BUY" : "";
+    const levelLines = [
+      target1 ? `🎯 Target: ${target1}` : null,
+      `🛑 Stop Loss: ${stop}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
     const tweetText =
-      `${pair.toUpperCase()}${direction ? ` ${direction.toUpperCase()}` : ""} — Entry ${entry}\n\n` +
-      `FXPARTNER trade signal. General information only, not investment advice.\n\n` +
-      `#fxpartner #forex #fxsignals`;
+      `${pair.toUpperCase()}${dirWord ? ` ${dirWord}` : ""} — Entry ${entry}\n` +
+      `${levelLines}\n\n` +
+      `📊 FXPARTNER Trade Signal\n\n` +
+      `This signal reflects a real trade taken on our tracked account and is shared for informational purposes only — it is not investment advice. Markets move fast; always size positions and set stops according to your own risk tolerance, never based on a single signal alone.\n\n` +
+      `FXPARTNER compares regulated forex brokers on the things that actually matter before you deposit a dollar: licensing, real trading costs, platform reliability, and how fast withdrawals actually clear. The right broker won't make you profitable, but the wrong one can quietly cost you more than any single trade ever will.\n\n` +
+      `Trade responsibly — never risk more than you can afford to lose.\n\n` +
+      `#fxpartner #forex #fxsignals #forextrading #trading`;
     xResult = await postTradeSignalToX(imageUrl, tweetText);
   } catch (err) {
     console.error("X post failed:", err);
