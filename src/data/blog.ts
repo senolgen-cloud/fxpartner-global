@@ -93,8 +93,14 @@ export const blogPosts: BlogPost[] = [
     ],
   },
   {
+    // Title deliberately avoids leading with "XM Review" — /brokers/xm
+    // already owns that primary keyword in its own <title>/<h1> (it's the
+    // higher-authority, more-linked pillar page for XM), and this post is
+    // the deep-dive companion piece it links out to. Duplicating "XM
+    // Review 2026" as the head phrase on both pages would have both
+    // competing for the same query instead of each owning a distinct one.
     slug: "xm-review",
-    title: "XM Review 2026: Accounts, Costs, Regulation, and Who It's Best For",
+    title: "XM Accounts, Fees & Regulation Explained (2026 Breakdown)",
     excerpt:
       "A full breakdown of XM's five account types, deposit/withdrawal speed, regulatory licenses, and education tools — the same research behind XM's #1 spot in the FXPARTNER Index.",
     publishedAt: "2026-07-27",

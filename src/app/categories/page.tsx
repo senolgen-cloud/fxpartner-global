@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import { brokerCategories, categoryInfo, brokers } from "@/data/brokers";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export const metadata: Metadata = {
-  title: "Broker Categories",
+  title: "Forex Broker Categories",
   description:
     "Beginners, low spread, high leverage, and more — explore forex brokers by category, based on what you need.",
   alternates: { canonical: "/categories" },
@@ -13,6 +16,17 @@ export const metadata: Metadata = {
 export default function CategoriesPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Home", url: SITE_URL },
+              { name: "Categories", url: `${SITE_URL}/categories` },
+            ])
+          ),
+        }}
+      />
       <main className="flex-1">
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">

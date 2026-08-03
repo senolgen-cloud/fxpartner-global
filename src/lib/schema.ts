@@ -158,3 +158,47 @@ export function aggregateRatingSchema(params: {
     },
   };
 }
+
+// Combines the editorial Review and — only when real user-submitted
+// comments with a rating exist — the AggregateRating into a single
+// FinancialService entity, instead of emitting two disconnected
+// FinancialService declarations for the same URL on one page. Every field
+// is backed by real data already in src/data/brokers.ts or the comments
+// table; aggregateRating is omitted entirely when ratingCount is 0.
+export function brokerFinancialServiceSchema(params: {
+  broker: { name: string; slug: string; rating: number; summary: string };
+  aggregate?: { ratingValue: number; ratingCount: number } | null;
+}) {
+  const { broker, aggregate } = params;
+  return {
+    "@context": "https://schema.org",
+    "@type": "FinancialService",
+    name: broker.name,
+    url: `${SITE_URL}/brokers/${broker.slug}`,
+    review: {
+      "@type": "Review",
+      author: {
+        "@type": "Organization",
+        name: "FXPARTNER",
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: broker.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      reviewBody: broker.summary,
+    },
+    ...(aggregate && aggregate.ratingCount >= 1
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: aggregate.ratingValue,
+            ratingCount: aggregate.ratingCount,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        }
+      : {}),
+  };
+}

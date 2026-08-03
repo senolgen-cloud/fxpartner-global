@@ -13,7 +13,11 @@ export const metadata: Metadata = {
 export default function MarketAnalysisIndexPage() {
   return (
     <>
-      <main className="flex-1 bg-paper-high">
+      {/* This section's content is deliberately Turkish (unlike the rest of
+          the English-language site) — lang="tr" here is a genuine language
+          signal for crawlers/screen readers/translate tooling, not a
+          translation of English copy. */}
+      <main lang="tr" className="flex-1 bg-paper-high">
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-4xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">

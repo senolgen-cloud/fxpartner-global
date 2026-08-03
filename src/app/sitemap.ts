@@ -34,8 +34,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  // lastModified is set from each post's own real publishedAt/updatedAt
+  // field only — never a fabricated or build-time date. Routes without a
+  // genuine per-item date (brokers, categories, static pages) intentionally
+  // omit lastModified rather than guessing one.
   const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((p) => ({
     url: `${SITE_URL}/blog/${p.slug}`,
+    lastModified: new Date(p.updatedAt || p.publishedAt),
     changeFrequency: "monthly",
     priority: 0.6,
   }));
@@ -48,6 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const marketAnalysisRoutes: MetadataRoute.Sitemap = marketAnalysisPosts.map((p) => ({
     url: `${SITE_URL}/piyasa-analizi/${p.slug}`,
+    lastModified: new Date(p.publishedAt),
     changeFrequency: "monthly",
     priority: 0.6,
   }));

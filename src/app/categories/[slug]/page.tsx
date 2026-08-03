@@ -3,7 +3,29 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import BrokerCard from "@/components/BrokerCard";
-import { brokers, brokerCategories, categoryInfo, getCategoryBySlug } from "@/data/brokers";
+import {
+  brokers,
+  brokerCategories,
+  categoryInfo,
+  getCategoryBySlug,
+  getBrokerScores,
+  type BrokerCategory,
+} from "@/data/brokers";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
+
+// "Beginners" reads awkwardly as "Beginners Brokers" in a <title> — every
+// other category name concatenates cleanly with "Forex Brokers", so only
+// that one needs an override. The on-page H1 keeps the raw category name
+// unchanged to stay consistent with the filter-button label elsewhere.
+const CATEGORY_TITLE_OVERRIDES: Partial<Record<BrokerCategory, string>> = {
+  Beginners: "Best Forex Brokers for Beginners",
+};
+
+function categoryTitle(name: BrokerCategory): string {
+  return CATEGORY_TITLE_OVERRIDES[name] ?? `${name} Forex Brokers`;
+}
 
 export function generateStaticParams() {
   return brokerCategories.map((category) => ({
@@ -20,7 +42,7 @@ export async function generateMetadata({
   const category = getCategoryBySlug(slug);
   if (!category) return {};
   return {
-    title: `${category.name} Brokers`,
+    title: categoryTitle(category.name),
     description: category.description,
     alternates: { canonical: `/categories/${category.slug}` },
   };
@@ -36,9 +58,27 @@ export default async function CategoryPage({
   if (!category) notFound();
 
   const matches = brokers.filter((b) => b.categories.includes(category.name));
+  const topPick =
+    matches.length > 0
+      ? matches.reduce((best, b) =>
+          getBrokerScores(b).composite > getBrokerScores(best).composite ? b : best
+        )
+      : null;
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Home", url: SITE_URL },
+              { name: "Categories", url: `${SITE_URL}/categories` },
+              { name: category.name, url: `${SITE_URL}/categories/${category.slug}` },
+            ])
+          ),
+        }}
+      />
       <main className="flex-1">
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
@@ -57,6 +97,19 @@ export default async function CategoryPage({
             <p className="tabular-stat mt-6 font-mono text-xs uppercase tracking-[0.15em] text-signal">
               {matches.length} brokers in this category
             </p>
+            {topPick && (
+              <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-text-on-ink-muted">
+                Based on the FXPARTNER Index, the top-rated {category.name.toLowerCase()}{" "}
+                broker is{" "}
+                <Link
+                  href={`/brokers/${topPick.slug}`}
+                  className="notranslate font-medium text-text-on-ink underline decoration-hairline underline-offset-4 hover:decoration-signal"
+                >
+                  {topPick.name}
+                </Link>
+                , scoring {getBrokerScores(topPick).composite.toFixed(1)}/10.
+              </p>
+            )}
           </div>
         </section>
 

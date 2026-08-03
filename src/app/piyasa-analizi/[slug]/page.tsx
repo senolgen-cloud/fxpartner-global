@@ -62,7 +62,9 @@ export default async function MarketAnalysisPostPage({
           ),
         }}
       />
-      <main className="flex-1 bg-paper-high">
+      {/* Deliberately Turkish content (unlike the rest of the site) —
+          lang="tr" is a genuine language signal, not a translation. */}
+      <main lang="tr" className="flex-1 bg-paper-high">
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-3xl px-6 py-16">
             <Link

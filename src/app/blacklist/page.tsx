@@ -54,6 +54,9 @@ export default function BlacklistPage() {
                       Rating {broker.rating.toFixed(1)}/5
                     </span>
                   </div>
+                  <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-text-dark/90">
+                    {broker.summary}
+                  </p>
                   <ul className="mt-4 space-y-2">
                     {broker.cons.map((con) => (
                       <li key={con} className="flex gap-3 text-[15px] text-text-dark/90">

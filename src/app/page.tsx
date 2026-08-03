@@ -12,6 +12,7 @@ import HeroBrokerSearch from "@/components/HeroBrokerSearch";
 import StickyCTA from "@/components/StickyCTA";
 import { brokers } from "@/data/brokers";
 import { lookupBrokers } from "@/data/brokerLookup";
+import { faqSchema } from "@/lib/schema";
 
 const trackedBrokerCount = lookupBrokers.length;
 const trackedRegulatorCount = new Set([
@@ -68,6 +69,10 @@ const faqs = [
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
+      />
       <main className="flex-1">
         {/* Hero */}
         <section className="relative overflow-hidden bg-ink text-text-on-ink">

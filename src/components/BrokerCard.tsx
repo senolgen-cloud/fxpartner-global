@@ -52,6 +52,9 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
               <h3 className="truncate font-display text-lg font-semibold text-text-dark md:text-xl">
                 <span className="notranslate">{broker.name}</span>
               </h3>
+              <p className="mt-1 truncate text-sm text-text-muted">
+                Best for {broker.bestFor.charAt(0).toLowerCase() + broker.bestFor.slice(1)}
+              </p>
             </div>
           </div>
         </div>

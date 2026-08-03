@@ -20,7 +20,7 @@ import { db } from "@/db";
 import { comments as commentsTable, users as usersTable } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 import { flagEmoji } from "@/lib/country";
-import { brokerReviewSchema, aggregateRatingSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { brokerFinancialServiceSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { regulationParagraph, platformParagraph, verdictParagraph, brokerFaqs } from "@/lib/brokerContent";
 import { getBlogPostBySlug } from "@/data/blog";
 
@@ -120,9 +120,7 @@ export default async function BrokerDetailPage({
   const ratedComments = brokerComments.filter((c) => c.rating != null);
   const aggregate =
     ratedComments.length > 0
-      ? aggregateRatingSchema({
-          brokerName: broker.name,
-          brokerSlug: broker.slug,
+      ? {
           ratingValue:
             Math.round(
               (ratedComments.reduce((sum, c) => sum + (c.rating ?? 0), 0) /
@@ -130,21 +128,20 @@ export default async function BrokerDetailPage({
                 10
             ) / 10,
           ratingCount: ratedComments.length,
-        })
+        }
       : null;
 
   return (
     <>
+      {/* Single FinancialService entity carrying both the editorial Review
+          and (when real rated comments exist) the AggregateRating, so
+          Google sees one coherent record for this broker on this page. */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(brokerReviewSchema(broker)) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(brokerFinancialServiceSchema({ broker, aggregate })),
+        }}
       />
-      {aggregate && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregate) }}
-        />
-      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
