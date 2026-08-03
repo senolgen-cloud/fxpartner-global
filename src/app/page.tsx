@@ -4,6 +4,7 @@ import ComparisonTable from "@/components/ComparisonTable";
 import Reveal from "@/components/Reveal";
 import AnimatedStat from "@/components/AnimatedStat";
 import HeroVideo from "@/components/HeroVideo";
+import HeroSpotlight from "@/components/HeroSpotlight";
 import TradingVideo from "@/components/TradingVideo";
 import DashboardPreview from "@/components/DashboardPreview";
 import ShowcaseGallery from "@/components/ShowcaseGallery";
@@ -80,6 +81,7 @@ export default function Home() {
             className="hero-glow-gold pointer-events-none absolute -right-16 top-10 h-[360px] w-[360px] rounded-full bg-gold/20 blur-[110px]"
           />
           <HeroVideo />
+          <HeroSpotlight />
 
           <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-20 md:py-28 lg:grid-cols-[1fr_420px] lg:items-center lg:gap-16">
           <div>
@@ -117,7 +119,7 @@ export default function Home() {
               <div className="mt-6 flex flex-wrap items-center gap-4">
                 <a
                   href="#brokers"
-                  className="lift-on-hover rounded-full bg-signal px-6 py-3 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
+                  className="lift-on-hover rounded-full bg-gradient-to-b from-signal to-signal-strong px-6 py-3 text-sm font-medium text-paper-high shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25)] transition-shadow hover:shadow-lg hover:shadow-signal/30"
                 >
                   See the Rankings
                 </a>

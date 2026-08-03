@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { getBrokerScores, type Broker } from "@/data/brokers";
+import TiltWrapper from "./TiltWrapper";
+import AnimatedStat from "./AnimatedStat";
 
 export default function DashboardPreview({
   brokers,
@@ -19,18 +21,24 @@ export default function DashboardPreview({
     Math.round((brokers.reduce((sum, b) => sum + b.rating, 0) / brokers.length) * 10) / 10;
 
   return (
-    <div className="featured-card-perspective">
-      <div className="relative rounded-3xl border border-gold/25 bg-gradient-to-b from-ink-soft to-ink p-6 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.85)] md:p-8">
+    <TiltWrapper>
+      <div className="dashboard-glass relative overflow-hidden rounded-3xl border border-gold/25 bg-gradient-to-b from-ink-soft to-ink p-6 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.85),inset_0_1px_0_0_rgba(255,255,255,0.08)] md:p-8">
         <div className="flex items-center justify-between">
           <div>
-            <span className="font-poppins text-lg font-bold tracking-tight text-text-on-ink">
+            <div className="flex items-center gap-1.5">
+              <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
+              <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-signal">
+                Live
+              </span>
+            </div>
+            <span className="mt-1 block font-poppins text-lg font-bold tracking-tight text-text-on-ink">
               FXPARTNER
             </span>
             <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
               Broker Comparison Panel
             </p>
           </div>
-          <div className="rounded-xl border border-gold/30 bg-gold/10 px-3 py-2 text-right">
+          <div className="index-glow rounded-xl border border-gold/30 bg-gold/10 px-3 py-2 text-right">
             <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-gold">
               Top Index
             </p>
@@ -77,19 +85,25 @@ export default function DashboardPreview({
 
         <div className="mt-6 grid grid-cols-3 gap-3 border-t border-hairline pt-5">
           <div>
-            <p className="font-poppins text-2xl font-bold text-text-on-ink">{brokers.length}</p>
+            <p className="font-poppins text-2xl font-bold text-text-on-ink">
+              <AnimatedStat value={brokers.length} />
+            </p>
             <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-text-on-ink-muted">
               Brokers
             </p>
           </div>
           <div>
-            <p className="font-poppins text-2xl font-bold text-text-on-ink">{avgRating}</p>
+            <p className="font-poppins text-2xl font-bold text-text-on-ink">
+              <AnimatedStat value={avgRating} decimals={1} />
+            </p>
             <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-text-on-ink-muted">
               Avg. Rating
             </p>
           </div>
           <div>
-            <p className="font-poppins text-2xl font-bold text-text-on-ink">{regulatorCount}+</p>
+            <p className="font-poppins text-2xl font-bold text-text-on-ink">
+              <AnimatedStat value={regulatorCount} suffix="+" />
+            </p>
             <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-text-on-ink-muted">
               Regulators
             </p>
@@ -100,6 +114,6 @@ export default function DashboardPreview({
           {categoryCount} categories · Updated live from editorial reviews
         </p>
       </div>
-    </div>
+    </TiltWrapper>
   );
 }

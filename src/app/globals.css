@@ -111,19 +111,22 @@ button {
 .reveal {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: blur(6px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
 .reveal.is-visible {
   opacity: 1;
-  /* "none" (not translateY(0)) so the settled element doesn't keep creating
-     its own stacking context — translateY(0) is a real transform matrix and
-     was trapping z-indexed dropdowns/popovers nested inside .reveal blocks
-     behind later, sibling .reveal blocks. Transitions still interpolate
-     correctly from translateY(18px) to none. */
+  /* "none" (not translateY(0) / blur(0)) so the settled element doesn't keep
+     creating its own stacking context — a real transform/filter function
+     (even a zero one) was trapping z-indexed dropdowns/popovers nested
+     inside .reveal blocks behind later, sibling .reveal blocks. Transitions
+     still interpolate correctly from the starting values to none. */
   transform: none;
+  filter: none;
 }
 
 /* --- Hero ambient glow --- */
@@ -157,6 +160,49 @@ button {
 
 .hero-glow-gold {
   animation: glow-drift-b 20s ease-in-out infinite;
+}
+
+/* Cursor-reactive spotlight — a soft light that follows the pointer across
+   the hero, on top of the ambient drifting blobs. Pure CSS custom
+   properties updated on mousemove, so it's effectively free to run. */
+.hero-spotlight {
+  background: radial-gradient(
+    620px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    color-mix(in srgb, var(--signal) 16%, transparent),
+    transparent 60%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-spotlight {
+    display: none;
+  }
+}
+
+/* --- Dashboard preview: glass panel + live index glow --- */
+.dashboard-glass {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+@keyframes index-glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--gold) 30%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 18px 2px color-mix(in srgb, var(--gold) 22%, transparent);
+  }
+}
+
+.index-glow {
+  animation: index-glow-pulse 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .index-glow {
+    animation: none;
+  }
 }
 
 /* --- Signal pulse dot --- */
@@ -197,6 +243,7 @@ button {
   .reveal {
     opacity: 1;
     transform: none;
+    filter: none;
     transition: none;
   }
 

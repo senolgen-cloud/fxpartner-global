@@ -7,16 +7,18 @@ export default function AnimatedStat({
   prefix = "",
   suffix = "",
   duration = 1100,
+  decimals = 0,
   className = "",
 }: {
   value: number;
   prefix?: string;
   suffix?: string;
   duration?: number;
+  decimals?: number;
   className?: string;
 }) {
   const ref = useRef<HTMLSpanElement | null>(null);
-  const [display, setDisplay] = useState(0);
+  const [display, setDisplay] = useState("0");
 
   useEffect(() => {
     const el = ref.current;
@@ -27,7 +29,7 @@ export default function AnimatedStat({
     ).matches;
 
     if (prefersReduced) {
-      setDisplay(value);
+      setDisplay(value.toFixed(decimals));
       return;
     }
 
@@ -43,7 +45,7 @@ export default function AnimatedStat({
             const tick = (now: number) => {
               const progress = Math.min((now - start) / duration, 1);
               const eased = 1 - Math.pow(1 - progress, 3);
-              setDisplay(Math.round(eased * value));
+              setDisplay((eased * value).toFixed(decimals));
               if (progress < 1) requestAnimationFrame(tick);
             };
 
@@ -57,7 +59,7 @@ export default function AnimatedStat({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [value, duration]);
+  }, [value, duration, decimals]);
 
   return (
     <span ref={ref} className={`tabular-stat ${className}`}>

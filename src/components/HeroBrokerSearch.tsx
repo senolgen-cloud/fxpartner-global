@@ -50,7 +50,7 @@ export default function HeroBrokerSearch() {
 
   return (
     <div ref={containerRef} className="relative w-full max-w-md">
-      <div className="flex items-center gap-2 rounded-full border border-hairline bg-ink-soft/70 px-4 py-2.5 focus-within:border-signal">
+      <div className="flex items-center gap-2 rounded-full border border-hairline/80 bg-ink-soft/50 px-4 py-2.5 backdrop-blur-md transition-shadow duration-300 focus-within:border-signal focus-within:shadow-[0_0_0_4px_rgba(47,111,240,0.18)]">
         <svg
           width="16"
           height="16"
