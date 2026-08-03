@@ -82,7 +82,7 @@ export default function Home() {
           <HeroVideo />
           <HeroSpotlight />
 
-          <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-20 md:py-28 lg:grid-cols-[1fr_420px] lg:items-center lg:gap-16">
+          <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-20 md:py-28 lg:grid-cols-[1fr_420px] lg:items-start lg:gap-16">
           <div>
             <Reveal>
               <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-signal">
