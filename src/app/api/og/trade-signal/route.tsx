@@ -14,12 +14,14 @@ const SIGNAL = "#2f6ff0";
 const GOLD = "#c9a227";
 const TICK_UP = "#22c55e";
 const TICK_DOWN = "#e5484d";
+const TICK_UP_GLOW = "rgba(34,197,94,0.30)";
+const TICK_DOWN_GLOW = "rgba(229,72,77,0.30)";
 
 // Static QR code for https://fxpartner.global, pre-rendered at build time
 // (the `qrcode` package needs Node APIs the edge runtime doesn't have) —
 // safe to hardcode since the target URL never changes between signals.
 const SITE_QR_DATA_URI =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAADwCAYAAAA+VemSAAAAAklEQVR4AewaftIAAAX8SURBVO3B0W1jSxIFwVSBVlT7b1qff0kGaB1YsAePdy5Yo4z4+Pz6/kHSSIWksQpJYxWSxiokjVVIGquQNFYhaaxC0lgP/kD34rdKNpN0L66QbN5F9+K3SjbPFJLGKiSNVUgaq5A0ViFprELSWIWksQpJYz24SLKZpntxh+7FFZLNSbI56V6cdC+ukGzukGym6V68qpA0ViFprELSWIWksQpJYxWSxiokjVVIGuvBjboXd0k2d+henCSbk+7FFboXJ8nmN+pe3CXZ3KGQNFYhaaxC0liFpLEKSWMVksYqJI1VSBrrgf4pyeake/Euko3+u0LSWIWksQpJYxWSxiokjVVIGquQNFYhaawH+uu6FyfJ5qR7cZJsTpLNXboX+nsKSWMVksYqJI1VSBqrkDRWIWmsQtJYhaSxHtwo2fxGyeake3GX7sVvlGz+NYWksQpJYxWSxiokjVVIGquQNFYhaaxC0lgPLtK90N+VbE66FyfJ5qR7cZJsTroXd+he/EaFpLEKSWMVksYqJI1VSBqrkDRWIWmsQtJYD/5AstF/1724S7K5S/fiDslG/18haaxC0liFpLEKSWMVksYqJI1VSBrrwR/oXpwkm5PuxTTJ5plk8066F+8k2byqezFNsrlDIWmsQtJYhaSxCkljFZLGKiSNVUgaq5A01sfn1/cPb6R7cZdk86ruxUmyOeleXCHZnHQvTpLNFboXr0o2J92Lk2Rzl+7FSbJ5VSFprELSWIWksQpJYxWSxiokjVVIGquQNNaDi3Qv3kmyOelenCSbd5FsrpBsTroXV0g2d0g2J92LKySbK3QvTpLNM4WksQpJYxWSxiokjVVIGquQNFYhaaxC0lgfn1/fPxx0L+6SbE66F1dINifdi2eSzUn34iTZXKF7cZJs7tK9eCbZnHQvrpBs3kn34iTZPFNIGquQNFYhaaxC0liFpLEKSWMVksYqJI318fn1/cNNuhd3STYn3Yt3kWzu0r24QrJ5VffiCsnmpHtxkmxOuhdXSDZX6F68KtmcdC9Oks1J9+Ik2Zx0L06SzasKSWMVksYqJI1VSBqrkDRWIWmsQtJYhaSxHlwk2byT7sUkyeYKyeake3HSvbhCsnlV9+IK3Yt30r04STbPFJLGKiSNVUgaq5A0ViFprELSWIWksQpJYz14M92Lk2Rzl+7FM8nmpHtxhWRz0r04STYn3YsrdC+eSTbvJNlcIdmcdC9eVUgaq5A0ViFprELSWIWksQpJYxWSxiokjfXgRt2Lk2Rz0r24S7K5Q7K5S/fiXXQvpulenCSbk2TzqkLSWIWksQpJYxWSxiokjVVIGquQNNbH59f3D/rPuhcnyea36l48k2zu0r24QrJ5F4WksQpJYxWSxiokjVVIGquQNFYhaaxC0lgP/kD34rdKNs8km5PuxUmyOele3CXZvIvuxUmyuUKyOele3CXZPFNIGquQNFYhaaxC0liFpLEKSWMVksYqJI314CLJZpruxau6F1foXlwh2fxrks1duhcnyeYK3YtXFZLGKiSNVUgaq5A0ViFprELSWIWksQpJYz24UffiLsnmXSSbK3QvTroXk3Qv3kmyOelenCSbk2TzqkLSWIWksQpJYxWSxiokjVVIGquQNFYhaawH+uu6F1dINifdi5Nkc4XuxbtINifdi5PuxRW6F1dINs8UksYqJI1VSBqrkDRWIWmsQtJYhaSxCkljPdBbSDb/omTzLpLNSffiCsnmpHvxqkLSWIWksQpJYxWSxiokjVVIGquQNFYhaawHN0o2/5pkc9K9OOlenCSbk2Rzhe7FSbI56V48k2xOuhfvJNm8i0LSWIWksQpJYxWSxiokjVVIGquQNFYhaawHF+le/Ebdiyskm5PuxTTJ5pnuxTTdi3dRSBqrkDRWIWmsQtJYhaSxCkljFZLGKiSN9fH59f2DpJEKSWMVksYqJI1VSBqrkDRWIWmsQtJY/wPm2IYl8N8e+QAAAABJRU5ErkJggg==";
+  "data:image/png;base64,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";
 
 // Two-letter currency badges instead of real flag graphics — Satori's emoji
 // support is inconsistent across renders, while a colored initial badge
@@ -76,27 +78,73 @@ function Badge({ code, offset }: { code: string; offset: number }) {
   );
 }
 
+// A small hand-drawn rocket, angled as if launching — used on the BUY pill.
+// Custom shapes instead of an emoji glyph: Satori's color-emoji support is
+// inconsistent across renders, plain SVG paths always render identically.
+function RocketIcon({ color }: { color: string }) {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      style={{ transform: "rotate(-45deg)" }}
+    >
+      <path d="M12 2c3 3 4.2 7.4 3.4 11.8H8.6C7.8 9.4 9 5 12 2Z" fill={color} />
+      <circle cx="12" cy="8.6" r="1.5" fill={INK} />
+      <path d="M8.6 12.6 5.4 16.4l3.6-1.5Z" fill={color} />
+      <path d="M15.4 12.6 18.6 16.4l-3.6-1.5Z" fill={color} />
+      <path d="M10.3 13.8 12 19.8l1.7-6Z" fill={color} />
+    </svg>
+  );
+}
+
+// A descending trend line with an arrowhead — the SELL counterpart to the
+// rocket, drawn from the same "price chart" visual language.
+function TrendDownIcon({ color }: { color: string }) {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24">
+      <path
+        d="M4 7 10 13 14 9 20 15 M20 15 20 9.5 M20 15 14.5 15"
+        stroke={color}
+        strokeWidth="2.4"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function Stat({
   label,
   value,
   color,
+  dir,
 }: {
   label: string;
   value: string;
   color: string;
+  dir?: "up" | "down";
 }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-      <span
-        style={{
-          fontSize: 15,
-          letterSpacing: 2,
-          textTransform: "uppercase",
-          color: TEXT_ON_INK_MUTED,
-        }}
-      >
-        {label}
-      </span>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        {dir && (
+          <span style={{ display: "flex", fontSize: 13, color }}>
+            {dir === "up" ? "▲" : "▼"}
+          </span>
+        )}
+        <span
+          style={{
+            fontSize: 15,
+            letterSpacing: 2,
+            textTransform: "uppercase",
+            color: TEXT_ON_INK_MUTED,
+          }}
+        >
+          {label}
+        </span>
+      </div>
       <span style={{ fontSize: 40, fontWeight: 700, color, marginTop: 6 }}>{value}</span>
     </div>
   );
@@ -118,7 +166,16 @@ export async function GET(request: Request) {
 
   const [base, quote] = splitPair(pair);
   const directionColor = direction === "SELL" ? TICK_DOWN : TICK_UP;
+  const directionGlow = direction === "SELL" ? TICK_DOWN_GLOW : TICK_UP_GLOW;
   const directionLabel = direction === "SELL" ? "SELL" : direction === "BUY" ? "BUY" : "";
+
+  // Only render stats the EA actually sent — no placeholder dashes for
+  // fields it doesn't provide (e.g. this EA has a single TP, no confidence score).
+  const stats: { label: string; value: string; color: string; dir?: "up" | "down" }[] = [];
+  if (target1) stats.push({ label: "Target 1", value: target1, color: TICK_UP, dir: "up" });
+  if (target2) stats.push({ label: "Target 2", value: target2, color: TICK_UP, dir: "up" });
+  stats.push({ label: "Stop Loss", value: stop, color: TICK_DOWN, dir: "down" });
+  if (confidence) stats.push({ label: "Confidence", value: `${confidence}%`, color: SIGNAL });
 
   return new ImageResponse(
     (
@@ -128,10 +185,43 @@ export async function GET(request: Request) {
           height: H,
           display: "flex",
           flexDirection: "column",
+          position: "relative",
           background: INK,
           fontFamily: "sans-serif",
         }}
       >
+        {/* Ignition glow — direction-colored light behind the pair/entry zone */}
+        <div
+          style={{
+            display: "flex",
+            position: "absolute",
+            width: 680,
+            height: 680,
+            top: -200,
+            right: -100,
+            borderRadius: 999,
+            background: `radial-gradient(circle, ${directionGlow} 0%, rgba(0,0,0,0) 70%)`,
+          }}
+        />
+
+        {/* Ghost watermark of the pair, for depth */}
+        <div
+          style={{
+            display: "flex",
+            position: "absolute",
+            top: 44,
+            right: -20,
+            fontSize: 260,
+            fontWeight: 800,
+            letterSpacing: -8,
+            color: TEXT_ON_INK,
+            opacity: 0.035,
+          }}
+        >
+          {base}
+          {quote}
+        </div>
+
         {/* Header */}
         <div
           style={{
@@ -162,15 +252,23 @@ export async function GET(request: Request) {
             <div
               style={{
                 display: "flex",
+                alignItems: "center",
+                gap: 8,
                 fontSize: 18,
                 fontWeight: 700,
                 letterSpacing: 2,
-                color: directionColor,
-                border: `2px solid ${directionColor}`,
+                color: TEXT_ON_INK,
+                background: directionColor,
                 borderRadius: 999,
-                padding: "8px 24px",
+                padding: "9px 22px 9px 16px",
+                boxShadow: `0 0 28px 6px ${directionGlow}`,
               }}
             >
+              {direction === "SELL" ? (
+                <TrendDownIcon color={TEXT_ON_INK} />
+              ) : (
+                <RocketIcon color={TEXT_ON_INK} />
+              )}
               {directionLabel}
             </div>
           )}
@@ -190,7 +288,7 @@ export async function GET(request: Request) {
               <Badge code={base} offset={0} />
               <Badge code={quote} offset={32} />
             </div>
-            <span style={{ fontSize: 46, fontWeight: 700, color: TEXT_ON_INK }}>
+            <span style={{ fontSize: 50, fontWeight: 700, color: TEXT_ON_INK }}>
               {base}
               {quote}
             </span>
@@ -206,27 +304,27 @@ export async function GET(request: Request) {
             >
               Entry
             </span>
-            <span style={{ fontSize: 52, fontWeight: 700, color: GOLD, marginTop: 2 }}>
+            <span style={{ fontSize: 58, fontWeight: 700, color: GOLD, marginTop: 2 }}>
               {entry}
             </span>
           </div>
         </div>
 
-        {/* Divider */}
-        <div style={{ display: "flex", margin: "36px 48px 0", height: 2, background: GOLD }} />
+        {/* Divider — a fading energy beam instead of a flat bar */}
+        <div
+          style={{
+            display: "flex",
+            margin: "36px 48px 0",
+            height: 2,
+            background: `linear-gradient(90deg, rgba(201,162,39,0) 0%, ${GOLD} 18%, ${GOLD} 82%, rgba(201,162,39,0) 100%)`,
+          }}
+        />
 
-        {/* Stats grid */}
+        {/* Stats — only fields the EA actually sent */}
         <div style={{ display: "flex", padding: "36px 48px 0", gap: 24 }}>
-          <Stat label="Target 1" value={target1 ?? "—"} color={TICK_UP} />
-          <Stat label="Target 2" value={target2 ?? "—"} color={TICK_UP} />
-        </div>
-        <div style={{ display: "flex", padding: "28px 48px 0", gap: 24 }}>
-          <Stat label="Stop Loss" value={stop} color={TICK_DOWN} />
-          <Stat
-            label="Confidence"
-            value={confidence ? `${confidence}%` : "—"}
-            color={SIGNAL}
-          />
+          {stats.map((s) => (
+            <Stat key={s.label} label={s.label} value={s.value} color={s.color} dir={s.dir} />
+          ))}
         </div>
 
         {/* Footer */}
