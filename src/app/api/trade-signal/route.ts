@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramPhoto } from "@/lib/telegram";
+import { postTradeSignalToX } from "@/lib/x";
 
 // Called by the MT5 EA directly (not a scheduled cron) whenever it opens a
 // new trade. The EA already computes entry/TP/SL/confidence — this route
@@ -48,5 +49,21 @@ export async function GET(req: NextRequest) {
     `This is general information only, not investment advice. Trade at your own risk.`;
 
   const result = await sendTelegramPhoto(imageUrl, caption);
-  return NextResponse.json({ ok: true, pair, result });
+
+  // Best-effort: X posting failing (rate limit, expired token, etc.) should
+  // never take down the Telegram send, which is the primary channel.
+  let xResult: { tweetId: string } | { error: string } | null = null;
+  try {
+    const tweetText =
+      `${pair.toUpperCase()}${direction ? ` ${direction.toUpperCase()}` : ""} — Entry ${entry}\n\n` +
+      `FXPARTNER trade signal. General information only, not investment advice.\n` +
+      `https://fxpartner.global\n\n` +
+      `#fxpartner #forex #fxsignals`;
+    xResult = await postTradeSignalToX(imageUrl, tweetText);
+  } catch (err) {
+    console.error("X post failed:", err);
+    xResult = { error: err instanceof Error ? err.message : "unknown error" };
+  }
+
+  return NextResponse.json({ ok: true, pair, result, x: xResult });
 }
