@@ -27,6 +27,7 @@ export async function GET(req: NextRequest) {
   const target1 = searchParams.get("target1");
   const target2 = searchParams.get("target2");
   const confidence = searchParams.get("confidence");
+  const volume = searchParams.get("volume");
   const direction = searchParams.get("direction"); // BUY | SELL, optional
 
   if (!pair || !entry || !stop) {
@@ -41,6 +42,7 @@ export async function GET(req: NextRequest) {
   if (target1) cardParams.set("target1", target1);
   if (target2) cardParams.set("target2", target2);
   if (confidence) cardParams.set("confidence", confidence);
+  if (volume) cardParams.set("volume", volume);
   if (direction) cardParams.set("direction", direction);
   const imageUrl = `${siteUrl}/api/og/trade-signal?${cardParams.toString()}`;
 
