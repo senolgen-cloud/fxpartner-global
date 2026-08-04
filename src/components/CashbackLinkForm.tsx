@@ -58,7 +58,7 @@ export default function CashbackLinkForm({
       <button
         type="submit"
         disabled={pending}
-        className="rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong disabled:opacity-60"
+        className="rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
       >
         {pending ? "Linking…" : "Link Account"}
       </button>

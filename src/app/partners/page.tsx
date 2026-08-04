@@ -256,7 +256,7 @@ export default function PartnersPage() {
                 </p>
                 <a
                   href="#apply"
-                  className="lift-on-hover mt-9 inline-block rounded-full bg-signal px-8 py-3.5 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
+                  className="lift-on-hover mt-9 inline-block rounded-full bg-signal px-8 py-3.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
                 >
                   Become a Partner
                 </a>

@@ -133,7 +133,7 @@ export default function HeaderNav({
         </Link>
         <a
           href="#brokers"
-          className="rounded-full bg-signal px-4 py-2 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong"
+          className="rounded-full bg-signal px-4 py-2 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
         >
           Compare Brokers
         </a>
@@ -195,7 +195,7 @@ export default function HeaderNav({
             <a
               href="#brokers"
               onClick={() => setMobileOpen(false)}
-              className="rounded-full bg-signal px-4 py-2.5 text-center text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong"
+              className="rounded-full bg-signal px-4 py-2.5 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
             >
               Compare Brokers
             </a>

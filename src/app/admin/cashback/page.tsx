@@ -77,7 +77,7 @@ export default async function AdminCashbackPage() {
                         type="submit"
                         className={`rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors ${
                           lead.status === s
-                            ? "border-text-dark bg-text-dark text-paper-high"
+                            ? "border-text-dark bg-text-dark text-ink"
                             : "border-hairline-light text-text-muted hover:border-text-dark"
                         }`}
                       >
@@ -120,7 +120,7 @@ export default async function AdminCashbackPage() {
                             type="submit"
                             className={`rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors ${
                               acc.status === s
-                                ? "border-text-dark bg-text-dark text-paper-high"
+                                ? "border-text-dark bg-text-dark text-ink"
                                 : "border-hairline-light text-text-muted hover:border-text-dark"
                             }`}
                           >

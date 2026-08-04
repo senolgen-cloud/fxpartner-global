@@ -72,7 +72,7 @@ function CardBody({ broker, featured }: { broker: Broker; featured: boolean }) {
             href={broker.referralUrl}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="lift-on-hover rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
+            className="lift-on-hover rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
           >
             Open Account
           </a>

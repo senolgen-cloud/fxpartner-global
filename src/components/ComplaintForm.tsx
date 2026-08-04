@@ -112,7 +112,7 @@ export default function ComplaintForm({
       <button
         type="submit"
         disabled={pending}
-        className="rounded-full bg-signal px-6 py-3 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong disabled:opacity-60"
+        className="rounded-full bg-signal px-6 py-3 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
       >
         {pending ? "Submitting…" : "Submit Complaint"}
       </button>

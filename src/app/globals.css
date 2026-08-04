@@ -1,22 +1,35 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #0b0c0e;
-  --ink-soft: #17191c;
-  --paper: #f1f2f3;
-  --paper-high: #ffffff;
-  --text-dark: #101214;
-  --text-muted: #5b6169;
+  --ink: #06090b;
+  --ink-soft: #0e1417;
+  /* Site-wide dark conversion: "paper" used to mean the light content-page
+     background (#f1f2f3) with "paper-high" as an elevated white card on
+     top of it. Both now map to dark surfaces instead, with paper-high kept
+     LIGHTER than paper so elevated cards still read as "raised" rather
+     than sinking into the page — same relationship as before, inverted. */
+  --paper: #0c1114;
+  --paper-high: #141c20;
+  --text-dark: #eef2f3;
+  --text-muted: #93a1a6;
   --text-on-ink: #f1f2f3;
-  --text-on-ink-muted: #9a9fa6;
-  --signal: #2f6ff0;
-  --signal-strong: #1f4fc4;
+  --text-on-ink-muted: #9aa8ac;
+  /* A fixed white, independent of --paper-high, for button label text that
+     sits on top of --signal-colored buttons — decoupled so darkening
+     paper-high above didn't turn every primary CTA's text illegible. */
+  --on-signal: #f4fbfc;
+  /* Dark turquoise glow accent — richer and less pale than a light cyan,
+     replaces the old brand blue everywhere this token is used (buttons,
+     links, focus rings, ambient glows, live indicators) via the shared
+     theme. */
+  --signal: #0891b2;
+  --signal-strong: #0e7490;
   --gold: #c9a227;
   --tick-up: #22c55e;
   --tick-down: #e5484d;
   --alert: #c1443b;
-  --hairline: #232629;
-  --hairline-light: #d7dadd;
+  --hairline: #172226;
+  --hairline-light: #232c30;
 }
 
 @theme inline {
@@ -28,6 +41,7 @@
   --color-text-muted: var(--text-muted);
   --color-text-on-ink: var(--text-on-ink);
   --color-text-on-ink-muted: var(--text-on-ink-muted);
+  --color-on-signal: var(--on-signal);
   --color-signal: var(--signal);
   --color-signal-strong: var(--signal-strong);
   --color-gold: var(--gold);
@@ -50,7 +64,7 @@ body {
 
 ::selection {
   background: var(--signal);
-  color: var(--paper-high);
+  color: var(--on-signal);
 }
 
 /* --- Google Translate widget: keep it invisible, we drive it via our

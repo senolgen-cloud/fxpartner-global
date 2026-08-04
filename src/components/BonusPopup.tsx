@@ -123,7 +123,7 @@ export default function BonusPopup() {
               target="_blank"
               rel="noopener noreferrer sponsored"
               onClick={close}
-              className="rounded-full bg-signal px-5 py-3 text-center text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong"
+              className="rounded-full bg-signal px-5 py-3 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
             >
               Open Account and Claim Bonus
             </a>

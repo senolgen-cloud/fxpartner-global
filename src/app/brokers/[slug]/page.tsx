@@ -191,7 +191,7 @@ export default async function BrokerDetailPage({
                     href={broker.referralUrl}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="rounded-full bg-signal px-6 py-3 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong"
+                    className="rounded-full bg-signal px-6 py-3 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
                   >
                     Open Account
                   </a>

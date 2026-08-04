@@ -29,7 +29,7 @@ export default function VipInviteClientTrigger({
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-4 inline-block rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong"
+        className="mt-4 inline-block rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
       >
         Join FXPARTNER VIP →
       </a>
@@ -42,7 +42,7 @@ export default function VipInviteClientTrigger({
         type="button"
         onClick={handleClick}
         disabled={pending}
-        className="rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong disabled:opacity-60"
+        className="rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
       >
         {pending ? "Generating…" : "Get my invite link"}
       </button>

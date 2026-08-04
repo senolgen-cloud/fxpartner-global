@@ -89,7 +89,7 @@ export default function TelegramPopup() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={close}
-              className="rounded-full bg-signal px-5 py-3 text-center text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong"
+              className="rounded-full bg-signal px-5 py-3 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
             >
               Join the Telegram Channel
             </a>

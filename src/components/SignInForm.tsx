@@ -12,50 +12,36 @@ export default function SignInForm({
 }) {
   const [state, formAction, pending] = useActionState(submitSignIn, initialState);
 
+  const fieldClass =
+    "mt-2 w-full rounded-xl border border-text-on-ink-muted/25 bg-ink px-4 py-3 text-sm text-text-on-ink outline-none transition-colors placeholder:text-text-on-ink-muted/50 focus:border-signal focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--signal)_25%,transparent)]";
+  const labelClass = "font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted";
+
   return (
     <form action={formAction} className="mt-8 flex flex-col gap-3">
       <div>
-        <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Full Name
-        </label>
-        <input
-          name="fullName"
-          required
-          className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
-        />
+        <label className={labelClass}>Full Name</label>
+        <input name="fullName" required className={fieldClass} />
       </div>
       <div>
-        <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Phone
-        </label>
-        <input
-          name="phone"
-          type="tel"
-          required
-          className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
-        />
+        <label className={labelClass}>Phone</label>
+        <input name="phone" type="tel" required className={fieldClass} />
       </div>
       <div>
-        <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Email
-        </label>
+        <label className={labelClass}>Email</label>
         <input
           name="email"
           type="email"
           required
           placeholder="you@example.com"
-          className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
+          className={fieldClass}
         />
       </div>
       <div>
-        <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Which broker do you trade with? <span className="normal-case text-text-muted/70">(optional)</span>
+        <label className={labelClass}>
+          Which broker do you trade with?{" "}
+          <span className="normal-case text-text-on-ink-muted/70">(optional)</span>
         </label>
-        <select
-          name="preferredBroker"
-          defaultValue=""
-          className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
-        >
+        <select name="preferredBroker" defaultValue="" className={fieldClass}>
           <option value="">Prefer not to say</option>
           {brokers.map((b) => (
             <option key={b.slug} value={b.slug}>
@@ -70,7 +56,7 @@ export default function SignInForm({
       <button
         type="submit"
         disabled={pending}
-        className="mt-2 rounded-full bg-signal px-5 py-3 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong disabled:opacity-60"
+        className="mt-2 rounded-full bg-signal px-5 py-3 text-sm font-semibold text-ink shadow-[0_0_24px_-4px_var(--signal)] transition-colors hover:bg-signal-strong disabled:opacity-60"
       >
         {pending ? "Sending…" : "Send sign-in link"}
       </button>

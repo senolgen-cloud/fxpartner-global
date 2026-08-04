@@ -52,7 +52,7 @@ export default function PartnerHero({
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <a
                 href="#apply"
-                className="lift-on-hover rounded-full bg-signal px-6 py-3 text-sm font-medium text-paper-high transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
+                className="lift-on-hover rounded-full bg-signal px-6 py-3 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
               >
                 Become a Partner
               </a>
