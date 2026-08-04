@@ -193,6 +193,13 @@ export async function GET(request: Request) {
   const directionLabel = direction === "SELL" ? "SELL" : direction === "BUY" ? "BUY" : "";
   const iconColor = SIGNAL;
 
+  // A price of 0 means the EA hadn't detected a real SL/TP yet when it read
+  // the position (it only retries for ~3s after open) — never display that
+  // as if it were an actual level.
+  const isRealLevel = (v: string | null): v is string => v !== null && parseFloat(v) > 0;
+  const hasTarget1 = isRealLevel(target1);
+  const hasStop = isRealLevel(stop);
+
   return new ImageResponse(
     (
       <div
@@ -302,23 +309,28 @@ export async function GET(request: Request) {
             <div style={{ display: "flex", margin: "26px 0 0", height: 1, background: HAIRLINE }} />
 
             <div style={{ display: "flex", gap: 40, marginTop: 26 }}>
-              {target1 && (
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <span
-                    style={{
-                      fontSize: 15,
-                      letterSpacing: 1.5,
-                      textTransform: "uppercase",
-                      color: TEXT_ON_INK_MUTED,
-                    }}
-                  >
-                    Take Profit
-                  </span>
-                  <span style={{ fontSize: 32, fontWeight: 700, color: TICK_UP, marginTop: 6 }}>
-                    {target1}
-                  </span>
-                </div>
-              )}
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <span
+                  style={{
+                    fontSize: 15,
+                    letterSpacing: 1.5,
+                    textTransform: "uppercase",
+                    color: TEXT_ON_INK_MUTED,
+                  }}
+                >
+                  Take Profit
+                </span>
+                <span
+                  style={{
+                    fontSize: 32,
+                    fontWeight: 700,
+                    color: hasTarget1 ? TICK_UP : TEXT_ON_INK_MUTED,
+                    marginTop: 6,
+                  }}
+                >
+                  {hasTarget1 ? target1 : "—"}
+                </span>
+              </div>
               <div style={{ display: "flex", width: 1, background: HAIRLINE }} />
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <span
@@ -331,8 +343,15 @@ export async function GET(request: Request) {
                 >
                   Stop Loss
                 </span>
-                <span style={{ fontSize: 32, fontWeight: 700, color: TICK_DOWN, marginTop: 6 }}>
-                  {stop}
+                <span
+                  style={{
+                    fontSize: 32,
+                    fontWeight: 700,
+                    color: hasStop ? TICK_DOWN : TEXT_ON_INK_MUTED,
+                    marginTop: 6,
+                  }}
+                >
+                  {hasStop ? stop : "—"}
                 </span>
               </div>
             </div>

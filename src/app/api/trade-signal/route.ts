@@ -37,6 +37,13 @@ export async function GET(req: NextRequest) {
     );
   }
 
+  // A price of 0 means the EA hadn't detected a real SL/TP yet when it read
+  // the position (it only retries for ~3s after open) — never present that
+  // as if it were an actual level in the post text either.
+  const isRealLevel = (v: string | null): v is string => v !== null && parseFloat(v) > 0;
+  const hasStop = isRealLevel(stop);
+  const hasTarget1 = isRealLevel(target1);
+
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
   const cardParams = new URLSearchParams({ pair, entry, stop });
   if (target1) cardParams.set("target1", target1);
@@ -52,8 +59,8 @@ export async function GET(req: NextRequest) {
   const dirWord = direction?.toUpperCase() === "SELL" ? "SELL" : direction?.toUpperCase() === "BUY" ? "BUY" : "";
   const captionLevelLines = [
     `📈 Entry: <b>${entry}</b>`,
-    target1 ? `🎯 Take Profit: <b>${target1}</b>` : null,
-    `🛑 Stop Loss: <b>${stop}</b>`,
+    hasTarget1 ? `🎯 Take Profit: <b>${target1}</b>` : null,
+    hasStop ? `🛑 Stop Loss: <b>${stop}</b>` : null,
   ]
     .filter(Boolean)
     .join("\n");
@@ -76,10 +83,9 @@ export async function GET(req: NextRequest) {
     // the card image already carries a QR code + FXPARTNER branding.
     // Longer, educational copy is fine since the account is on X Premium
     // (25,000-character post limit instead of the free-tier 280).
-    const dirWord = direction?.toUpperCase() === "SELL" ? "SELL" : direction?.toUpperCase() === "BUY" ? "BUY" : "";
     const levelLines = [
-      target1 ? `🎯 Target: ${target1}` : null,
-      `🛑 Stop Loss: ${stop}`,
+      hasTarget1 ? `🎯 Target: ${target1}` : null,
+      hasStop ? `🛑 Stop Loss: ${stop}` : null,
     ]
       .filter(Boolean)
       .join("\n");
