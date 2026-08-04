@@ -46,9 +46,24 @@ export async function GET(req: NextRequest) {
   if (direction) cardParams.set("direction", direction);
   const imageUrl = `${siteUrl}/api/og/trade-signal?${cardParams.toString()}`;
 
+  // Telegram photo captions are capped at 1024 characters, so this stays
+  // shorter than the X copy — real trade levels, a short honest pitch for
+  // the site, and a link (unlike X, Telegram doesn't charge per link).
+  const dirWord = direction?.toUpperCase() === "SELL" ? "SELL" : direction?.toUpperCase() === "BUY" ? "BUY" : "";
+  const captionLevelLines = [
+    `📈 Entry: <b>${entry}</b>`,
+    target1 ? `🎯 Take Profit: <b>${target1}</b>` : null,
+    `🛑 Stop Loss: <b>${stop}</b>`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
   const caption =
-    `<b>${pair.toUpperCase()}</b>${direction ? ` — ${direction.toUpperCase()}` : ""}\n\n` +
-    `This is general information only, not investment advice. Trade at your own risk.`;
+    `<b>${pair.toUpperCase()}</b>${dirWord ? ` — ${dirWord}` : ""}\n\n` +
+    `${captionLevelLines}\n\n` +
+    `This signal reflects a real trade on our tracked MT5 account, shared for informational purposes only — not investment advice. Always manage risk according to your own trading plan.\n\n` +
+    `<b>FXPARTNER</b> compares regulated forex brokers by regulation, real trading costs, platform quality, and withdrawal reliability, so you can pick a broker you actually trust.\n\n` +
+    `👉 <a href="${siteUrl}">fxpartner.global</a>`;
 
   const result = await sendTelegramPhoto(imageUrl, caption);
 
