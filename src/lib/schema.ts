@@ -6,8 +6,18 @@ export function organizationSchema() {
     "@type": "Organization",
     name: "FXPARTNER",
     url: SITE_URL,
+    logo: `${SITE_URL}/fxpartner-logo.png`,
     description:
       "Forex broker comparison and review platform, ranking brokers by regulation, cost, platform support, and withdrawal reliability.",
+    founder: {
+      "@type": "Person",
+      name: "Erdem Torun",
+    },
+    // Only confirmed, real profile URLs — never a guessed or placeholder
+    // handle. Add more here as the user confirms them (X, Instagram,
+    // YouTube, Facebook); an unverified sameAs is worse than none, since
+    // it would misattribute FXPARTNER's identity to the wrong account.
+    sameAs: ["https://t.me/fxpartnerglobal"],
   };
 }
 
