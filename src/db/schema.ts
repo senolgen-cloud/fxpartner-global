@@ -171,6 +171,55 @@ export const partnerApplications = pgTable("partner_application", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+export const vipSubscriptionStatusValues = ["active", "past_due", "canceled", "incomplete"] as const;
+export type VipSubscriptionStatus = (typeof vipSubscriptionStatusValues)[number];
+
+// One row per user (Stripe itself is the history/audit trail, not this
+// table) — the source of truth for paid VIP access. `users.isVip` is only
+// a cached convenience flag derived from `status === "active"`; anything
+// that gates paid functionality (discount eligibility, push targeting,
+// /account/vip rendering) must query this table, never the cached flag.
+export const vipSubscriptions = pgTable("vip_subscription", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  userId: text("user_id")
+    .notNull()
+    .unique()
+    .references(() => users.id, { onDelete: "cascade" }),
+  stripeCustomerId: text("stripe_customer_id").notNull(),
+  stripeSubscriptionId: text("stripe_subscription_id").notNull().unique(),
+  stripePriceId: text("stripe_price_id").notNull(),
+  status: text("status").$type<VipSubscriptionStatus>().notNull().default("incomplete"),
+  // The verified cashbackAccounts row that justified the 50% discount at
+  // checkout time, if any — null for full-price subscribers. Kept even if
+  // the linked account is later un-verified, as a record of what applied.
+  discountAccountId: text("discount_account_id").references(() => cashbackAccounts.id, {
+    onDelete: "set null",
+  }),
+  currentPeriodEnd: timestamp("current_period_end", { mode: "date" }),
+  cancelAtPeriodEnd: boolean("cancel_at_period_end").notNull().default(false),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+// One row per browser/device push subscription. `endpoint` is the natural
+// dedup key — the same browser re-subscribing (e.g. after clearing data)
+// gets a new endpoint, an existing one is just refreshed in place.
+export const pushSubscriptions = pgTable("push_subscription", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  endpoint: text("endpoint").notNull().unique(),
+  p256dh: text("p256dh").notNull(),
+  auth: text("auth").notNull(),
+  userAgent: text("user_agent"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 export const complaintStatusValues = ["new", "in_progress", "resolved", "closed"] as const;
 export type ComplaintStatus = (typeof complaintStatusValues)[number];
 
