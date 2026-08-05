@@ -160,7 +160,6 @@ export async function GET(request: Request) {
                 display: "flex",
                 flexDirection: "column",
                 position: "relative",
-                overflow: "hidden",
                 borderRadius: 24,
                 border: `1px solid ${HAIRLINE}`,
                 background: INK_SOFT,
