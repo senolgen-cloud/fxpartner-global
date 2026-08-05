@@ -12,7 +12,6 @@ import {
   SITE_QR_DATA_URI,
   LOGO_DATA_URI,
 } from "@/lib/ogAssets";
-
 import { splitPair, ShieldIcon, SearchIcon, ChartIcon, UsersIcon, CandlesIcon, CopyTradeIcon, CapIcon, HeadsetIcon, Feature, FooterItem } from "@/lib/ogIcons";
 
 export const runtime = "edge";
@@ -20,30 +19,48 @@ export const runtime = "edge";
 const W = 1200;
 const H = 630;
 
+type Outcome = "WIN" | "LOSS" | "BE";
+
+// Same 0-means-not-real convention as /api/og/trade-signal.
+const isRealLevel = (v: string | null): v is string => v !== null && parseFloat(v) > 0;
+
+function resolveOutcome(
+  outcomeParam: string | null,
+  pips: string | null,
+  profit: string | null
+): Outcome | null {
+  const fromParam = outcomeParam?.toUpperCase();
+  if (fromParam === "WIN" || fromParam === "LOSS" || fromParam === "BE") return fromParam;
+  const n = pips !== null ? parseFloat(pips) : profit !== null ? parseFloat(profit) : NaN;
+  if (Number.isNaN(n)) return null;
+  if (n > 0) return "WIN";
+  if (n < 0) return "LOSS";
+  return "BE";
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const pair = (searchParams.get("pair") ?? "").toUpperCase();
   const entry = searchParams.get("entry");
-  const target1 = searchParams.get("target1");
-  const stop = searchParams.get("stop");
-  const volume = searchParams.get("volume");
+  const close = searchParams.get("close");
+  const pips = searchParams.get("pips");
+  const profit = searchParams.get("profit");
   const direction = (searchParams.get("direction") ?? "").toUpperCase(); // BUY | SELL
 
-  if (!pair || !entry || !stop) {
-    return new Response("Missing required params: pair, entry, stop", { status: 400 });
+  if (!pair || !entry || !close) {
+    return new Response("Missing required params: pair, entry, close", { status: 400 });
   }
 
   const [base, quote] = splitPair(pair);
-  const directionColor = direction === "SELL" ? TICK_DOWN : TICK_UP;
   const directionLabel = direction === "SELL" ? "SELL" : direction === "BUY" ? "BUY" : "";
   const iconColor = SIGNAL;
 
-  // A price of 0 means the EA hadn't detected a real SL/TP yet when it read
-  // the position (it only retries for ~3s after open) — never display that
-  // as if it were an actual level.
-  const isRealLevel = (v: string | null): v is string => v !== null && parseFloat(v) > 0;
-  const hasTarget1 = isRealLevel(target1);
-  const hasStop = isRealLevel(stop);
+  const outcome = resolveOutcome(searchParams.get("outcome"), pips, profit);
+  const outcomeColor = outcome === "LOSS" ? TICK_DOWN : outcome === "WIN" ? TICK_UP : TEXT_ON_INK_MUTED;
+  const outcomeLabel = outcome === "WIN" ? "✅ WIN" : outcome === "LOSS" ? "❌ LOSS" : outcome === "BE" ? "➖ BREAKEVEN" : "TRADE CLOSED";
+
+  const hasPips = isRealLevel(pips) || (pips !== null && parseFloat(pips) < 0);
+  const hasProfit = isRealLevel(profit) || (profit !== null && parseFloat(profit) < 0);
 
   return new ImageResponse(
     (
@@ -59,7 +76,7 @@ export async function GET(request: Request) {
         }}
       >
         <div style={{ display: "flex", flex: 1, position: "relative" }}>
-          {/* Ignition glow behind the entry price */}
+          {/* Result glow behind the outcome banner */}
           <div
             style={{
               display: "flex",
@@ -69,11 +86,11 @@ export async function GET(request: Request) {
               top: -40,
               left: -220,
               borderRadius: 999,
-              background: `radial-gradient(circle, ${direction === "SELL" ? "rgba(229,72,77,0.22)" : "rgba(34,197,94,0.22)"} 0%, rgba(0,0,0,0) 70%)`,
+              background: `radial-gradient(circle, ${outcome === "LOSS" ? "rgba(229,72,77,0.22)" : "rgba(34,197,94,0.22)"} 0%, rgba(0,0,0,0) 70%)`,
             }}
           />
 
-          {/* Left: trade data */}
+          {/* Left: trade result data */}
           <div
             style={{
               display: "flex",
@@ -93,7 +110,7 @@ export async function GET(request: Request) {
                   color: TEXT_ON_INK_MUTED,
                 }}
               >
-                Trade Signal
+                Trade Result
               </span>
             </div>
 
@@ -109,8 +126,8 @@ export async function GET(request: Request) {
                     fontSize: 18,
                     fontWeight: 700,
                     letterSpacing: 1,
-                    color: directionColor,
-                    border: `2px solid ${directionColor}`,
+                    color: TEXT_ON_INK_MUTED,
+                    border: `2px solid ${HAIRLINE}`,
                     borderRadius: 999,
                     padding: "6px 20px",
                   }}
@@ -119,35 +136,34 @@ export async function GET(request: Request) {
                 </div>
               )}
             </div>
-            {volume && (
-              <span style={{ display: "flex", fontSize: 17, color: TEXT_ON_INK_MUTED, marginTop: 8 }}>
-                Volume: {volume} lot
-              </span>
-            )}
 
-            <div style={{ display: "flex", flexDirection: "column", marginTop: 34 }}>
+            <div
+              style={{
+                display: "flex",
+                fontSize: 40,
+                fontWeight: 800,
+                color: outcomeColor,
+                marginTop: 30,
+                letterSpacing: -0.5,
+              }}
+            >
+              {outcomeLabel}
+            </div>
+
+            {(hasPips || hasProfit) && (
               <span
                 style={{
-                  fontSize: 16,
-                  letterSpacing: 1.5,
-                  textTransform: "uppercase",
-                  color: TEXT_ON_INK_MUTED,
-                }}
-              >
-                Entry Price
-              </span>
-              <span
-                style={{
-                  fontSize: 72,
+                  display: "flex",
+                  fontSize: 64,
                   fontWeight: 800,
-                  color: SIGNAL,
-                  marginTop: 2,
+                  color: outcomeColor,
+                  marginTop: 8,
                   letterSpacing: -1.5,
                 }}
               >
-                {entry}
+                {hasPips ? `${parseFloat(pips!) > 0 ? "+" : ""}${pips} pips` : `${parseFloat(profit!) > 0 ? "+" : ""}${profit} USD`}
               </span>
-            </div>
+            )}
 
             <div style={{ display: "flex", margin: "26px 0 0", height: 1, background: HAIRLINE }} />
 
@@ -161,17 +177,10 @@ export async function GET(request: Request) {
                     color: TEXT_ON_INK_MUTED,
                   }}
                 >
-                  Take Profit
+                  Entry
                 </span>
-                <span
-                  style={{
-                    fontSize: 32,
-                    fontWeight: 700,
-                    color: hasTarget1 ? TICK_UP : TEXT_ON_INK_MUTED,
-                    marginTop: 6,
-                  }}
-                >
-                  {hasTarget1 ? target1 : "—"}
+                <span style={{ fontSize: 32, fontWeight: 700, color: TEXT_ON_INK, marginTop: 6 }}>
+                  {entry}
                 </span>
               </div>
               <div style={{ display: "flex", width: 1, background: HAIRLINE }} />
@@ -184,17 +193,10 @@ export async function GET(request: Request) {
                     color: TEXT_ON_INK_MUTED,
                   }}
                 >
-                  Stop Loss
+                  Close
                 </span>
-                <span
-                  style={{
-                    fontSize: 32,
-                    fontWeight: 700,
-                    color: hasStop ? TICK_DOWN : TEXT_ON_INK_MUTED,
-                    marginTop: 6,
-                  }}
-                >
-                  {hasStop ? stop : "—"}
+                <span style={{ fontSize: 32, fontWeight: 700, color: outcomeColor, marginTop: 6 }}>
+                  {close}
                 </span>
               </div>
             </div>

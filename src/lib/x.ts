@@ -97,7 +97,8 @@ function arrayBufferToBase64(buf: ArrayBuffer): string {
 
 export async function postTradeSignalToX(
   imageUrl: string,
-  text: string
+  text: string,
+  options: { replyToTweetId?: string } = {}
 ): Promise<{ tweetId: string }> {
   const creds = getCredentials();
 
@@ -129,7 +130,11 @@ export async function postTradeSignalToX(
       Authorization: tweetAuth,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ text, media: { media_ids: [uploadData.media_id_string] } }),
+    body: JSON.stringify({
+      text,
+      media: { media_ids: [uploadData.media_id_string] },
+      ...(options.replyToTweetId ? { reply: { in_reply_to_tweet_id: options.replyToTweetId } } : {}),
+    }),
   });
   const tweetData = await tweetRes.json();
   if (!tweetRes.ok) {

@@ -222,6 +222,23 @@ export const pushSubscriptions = pgTable("push_subscription", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+// One row per MT5 trade the EA reports via /api/trade-signal, keyed by the
+// broker-assigned position ticket. Lets /api/trade-result look up the
+// original Telegram/X post so the closing result can reply to (quote) it
+// instead of appearing as an unrelated standalone card.
+export const tradeSignals = pgTable("trade_signal", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  ticket: text("ticket").notNull().unique(),
+  pair: text("pair").notNull(),
+  direction: text("direction"),
+  entry: text("entry").notNull(),
+  telegramMessageId: text("telegram_message_id"),
+  xTweetId: text("x_tweet_id"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 export const complaintStatusValues = ["new", "in_progress", "resolved", "closed"] as const;
 export type ComplaintStatus = (typeof complaintStatusValues)[number];
 

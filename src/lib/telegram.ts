@@ -43,14 +43,22 @@ export async function sendTelegramMessage(
 }
 
 // photoUrl must be a publicly reachable URL — Telegram fetches it itself,
-// no need to upload bytes from our side.
-export async function sendTelegramPhoto(photoUrl: string, caption: string) {
+// no need to upload bytes from our side. Passing replyToMessageId makes the
+// photo appear as a reply/quote under that earlier message (e.g. a trade
+// result replying to its original entry-signal post) instead of a bare new
+// post in the channel.
+export async function sendTelegramPhoto(
+  photoUrl: string,
+  caption: string,
+  options: { replyToMessageId?: string } = {}
+) {
   const { chatId } = getConfig();
   return callTelegram("sendPhoto", {
     chat_id: chatId,
     photo: photoUrl,
     caption,
     parse_mode: "HTML",
+    ...(options.replyToMessageId ? { reply_parameters: { message_id: options.replyToMessageId } } : {}),
   });
 }
 

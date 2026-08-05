@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramPhoto } from "@/lib/telegram";
 import { postTradeSignalToX } from "@/lib/x";
+import { db } from "@/db";
+import { tradeSignals } from "@/db/schema";
 
 // Called by the MT5 EA directly (not a scheduled cron) whenever it opens a
 // new trade. The EA already computes entry/TP/SL/confidence — this route
@@ -29,6 +31,10 @@ export async function GET(req: NextRequest) {
   const confidence = searchParams.get("confidence");
   const volume = searchParams.get("volume");
   const direction = searchParams.get("direction"); // BUY | SELL, optional
+  // The MT5 position ticket, if the EA sends one. Optional — old EA builds
+  // that don't pass it still work exactly as before, they just won't be
+  // linkable to a later /api/trade-result reply.
+  const ticket = searchParams.get("ticket");
 
   if (!pair || !entry || !stop) {
     return NextResponse.json(
@@ -102,6 +108,26 @@ export async function GET(req: NextRequest) {
   } catch (err) {
     console.error("X post failed:", err);
     xResult = { error: err instanceof Error ? err.message : "unknown error" };
+  }
+
+  // Best-effort: only lets a later /api/trade-result reply to this post
+  // instead of standing alone. Never block/fail the signal itself over it.
+  if (ticket) {
+    try {
+      await db
+        .insert(tradeSignals)
+        .values({
+          ticket,
+          pair: pair.toUpperCase(),
+          direction: dirWord || null,
+          entry,
+          telegramMessageId: result?.message_id != null ? String(result.message_id) : null,
+          xTweetId: "tweetId" in (xResult ?? {}) ? (xResult as { tweetId: string }).tweetId : null,
+        })
+        .onConflictDoNothing();
+    } catch (err) {
+      console.error("Failed to store trade signal for later result linking:", err);
+    }
   }
 
   return NextResponse.json({ ok: true, pair, result, x: xResult });
