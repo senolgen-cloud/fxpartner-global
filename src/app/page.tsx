@@ -144,43 +144,6 @@ export default function Home() {
                 <HeroFeatureRow />
               </div>
             </Reveal>
-
-            <Reveal delay={360}>
-              <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-hairline pt-8 sm:grid-cols-4">
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    Brokers Tracked
-                  </dt>
-                  <dd className="mt-1 font-display text-3xl font-semibold">
-                    <AnimatedStat value={trackedBrokerCount} />
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    Regulatory Authorities
-                  </dt>
-                  <dd className="mt-1 font-display text-3xl font-semibold">
-                    <AnimatedStat value={trackedRegulatorCount} suffix="+" />
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    Lowest Entry
-                  </dt>
-                  <dd className="mt-1 font-display text-3xl font-semibold">
-                    <AnimatedStat value={5} prefix="$" />
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    Comparison Criteria
-                  </dt>
-                  <dd className="mt-1 font-display text-3xl font-semibold">
-                    <AnimatedStat value={6} />
-                  </dd>
-                </div>
-              </dl>
-            </Reveal>
           </div>
 
           <Reveal delay={200}>
@@ -226,6 +189,48 @@ export default function Home() {
         </section>
 
         <RegulatorBadges />
+
+        {/* At-a-glance stats */}
+        <section className="bg-ink">
+          <div className="mx-auto max-w-6xl px-6 py-16">
+            <Reveal>
+              <dl className="mx-auto grid max-w-3xl grid-cols-2 gap-8 text-center sm:grid-cols-4">
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                    Brokers Tracked
+                  </dt>
+                  <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
+                    <AnimatedStat value={trackedBrokerCount} />
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                    Regulatory Authorities
+                  </dt>
+                  <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
+                    <AnimatedStat value={trackedRegulatorCount} suffix="+" />
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                    Lowest Entry
+                  </dt>
+                  <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
+                    <AnimatedStat value={5} prefix="$" />
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                    Comparison Criteria
+                  </dt>
+                  <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
+                    <AnimatedStat value={6} />
+                  </dd>
+                </div>
+              </dl>
+            </Reveal>
+          </div>
+        </section>
 
         <ShowcaseGallery />
 
