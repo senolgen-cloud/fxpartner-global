@@ -215,7 +215,7 @@ export async function GET(request: Request) {
                 />
               </div>
 
-              <div style={{ display: "flex", margin: "18px 0 0", height: 1, background: HAIRLINE }} />
+              <div style={{ display: "flex", width: "100%", margin: "18px 0 0", height: 1, background: HAIRLINE }} />
 
               <div style={{ display: "flex", gap: 32, marginTop: 20 }}>
                 <div style={{ display: "flex", flexDirection: "column" }}>
@@ -260,9 +260,9 @@ export async function GET(request: Request) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`${siteUrl}/trade-card-bg.jpg`}
-              width={684}
-              height={636}
-              style={{ position: "absolute", top: 0, left: 0, objectFit: "cover" }}
+              width={1080}
+              height={1080}
+              style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, width: "100%", height: "100%", objectFit: "cover" }}
               alt=""
             />
             <div
