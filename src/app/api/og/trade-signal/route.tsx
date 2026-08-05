@@ -12,13 +12,34 @@ import {
   SITE_QR_DATA_URI,
   LOGO_DATA_URI,
 } from "@/lib/ogAssets";
-
-import { splitPair, ShieldIcon, SearchIcon, ChartIcon, UsersIcon, CandlesIcon, CopyTradeIcon, CapIcon, HeadsetIcon, Feature, FooterItem } from "@/lib/ogIcons";
+import {
+  splitPair,
+  ShieldIcon,
+  SearchIcon,
+  ChartIcon,
+  UsersIcon,
+  CandlesIcon,
+  CopyTradeIcon,
+  CapIcon,
+  HeadsetIcon,
+  FooterFeature,
+  FeatureCard,
+  ClockIcon,
+  TelegramIcon,
+  YoutubeIcon,
+  InstagramIcon,
+  XIcon,
+  FacebookIcon,
+  SocialIcon,
+  Sparkline,
+  InfoPill,
+} from "@/lib/ogIcons";
 
 export const runtime = "edge";
 
-const W = 1200;
-const H = 630;
+// Square, not the classic 1200x630 OG ratio — this card is built to also be
+// posted as an Instagram feed/story image, which wants 1:1.
+const SIZE = 1080;
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -33,6 +54,7 @@ export async function GET(request: Request) {
     return new Response("Missing required params: pair, entry, stop", { status: 400 });
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
   const [base, quote] = splitPair(pair);
   const directionColor = direction === "SELL" ? TICK_DOWN : TICK_UP;
   const directionLabel = direction === "SELL" ? "SELL" : direction === "BUY" ? "BUY" : "";
@@ -49,281 +71,306 @@ export async function GET(request: Request) {
     (
       <div
         style={{
-          width: W,
-          height: H,
+          width: SIZE,
+          height: SIZE,
           display: "flex",
           flexDirection: "column",
-          position: "relative",
           background: INK,
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", flex: 1, position: "relative" }}>
-          {/* Ignition glow behind the entry price */}
-          <div
-            style={{
-              display: "flex",
-              position: "absolute",
-              width: 560,
-              height: 560,
-              top: -40,
-              left: -220,
-              borderRadius: 999,
-              background: `radial-gradient(circle, ${direction === "SELL" ? "rgba(229,72,77,0.22)" : "rgba(34,197,94,0.22)"} 0%, rgba(0,0,0,0) 70%)`,
-            }}
-          />
-
-          {/* Left: trade data */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: 700,
-              padding: "40px 44px 28px",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={LOGO_DATA_URI} width={116} height={30} alt="" />
+        {/* Header */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+            padding: "40px 44px 0",
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={LOGO_DATA_URI} width={150} height={39} alt="" />
+            <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: 14 }}>
+              <div style={{ display: "flex", width: 26, height: 1, background: HAIRLINE }} />
               <span
                 style={{
-                  fontSize: 12,
-                  letterSpacing: 3,
+                  fontSize: 14,
+                  letterSpacing: 4,
                   textTransform: "uppercase",
+                  fontWeight: 700,
                   color: TEXT_ON_INK_MUTED,
                 }}
               >
                 Trade Signal
               </span>
-            </div>
-
-            <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 30 }}>
-              <span style={{ fontSize: 46, fontWeight: 700, color: TEXT_ON_INK }}>
-                {base}
-                {quote}
-              </span>
-              {directionLabel && (
-                <div
-                  style={{
-                    display: "flex",
-                    fontSize: 18,
-                    fontWeight: 700,
-                    letterSpacing: 1,
-                    color: directionColor,
-                    border: `2px solid ${directionColor}`,
-                    borderRadius: 999,
-                    padding: "6px 20px",
-                  }}
-                >
-                  {directionLabel}
-                </div>
-              )}
-            </div>
-            {volume && (
-              <span style={{ display: "flex", fontSize: 17, color: TEXT_ON_INK_MUTED, marginTop: 8 }}>
-                Volume: {volume} lot
-              </span>
-            )}
-
-            <div style={{ display: "flex", flexDirection: "column", marginTop: 34 }}>
-              <span
-                style={{
-                  fontSize: 16,
-                  letterSpacing: 1.5,
-                  textTransform: "uppercase",
-                  color: TEXT_ON_INK_MUTED,
-                }}
-              >
-                Entry Price
-              </span>
-              <span
-                style={{
-                  fontSize: 72,
-                  fontWeight: 800,
-                  color: SIGNAL,
-                  marginTop: 2,
-                  letterSpacing: -1.5,
-                }}
-              >
-                {entry}
-              </span>
-            </div>
-
-            <div style={{ display: "flex", margin: "26px 0 0", height: 1, background: HAIRLINE }} />
-
-            <div style={{ display: "flex", gap: 40, marginTop: 26 }}>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <span
-                  style={{
-                    fontSize: 15,
-                    letterSpacing: 1.5,
-                    textTransform: "uppercase",
-                    color: TEXT_ON_INK_MUTED,
-                  }}
-                >
-                  Take Profit
-                </span>
-                <span
-                  style={{
-                    fontSize: 32,
-                    fontWeight: 700,
-                    color: hasTarget1 ? TICK_UP : TEXT_ON_INK_MUTED,
-                    marginTop: 6,
-                  }}
-                >
-                  {hasTarget1 ? target1 : "—"}
-                </span>
-              </div>
-              <div style={{ display: "flex", width: 1, background: HAIRLINE }} />
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <span
-                  style={{
-                    fontSize: 15,
-                    letterSpacing: 1.5,
-                    textTransform: "uppercase",
-                    color: TEXT_ON_INK_MUTED,
-                  }}
-                >
-                  Stop Loss
-                </span>
-                <span
-                  style={{
-                    fontSize: 32,
-                    fontWeight: 700,
-                    color: hasStop ? TICK_DOWN : TEXT_ON_INK_MUTED,
-                    marginTop: 6,
-                  }}
-                >
-                  {hasStop ? stop : "—"}
-                </span>
-              </div>
-            </div>
-
-            <div style={{ display: "flex", margin: "26px 0 0", height: 1, background: HAIRLINE }} />
-
-            <div style={{ display: "flex", flexDirection: "column", marginTop: 18 }}>
-              <span style={{ display: "flex", fontSize: 15, color: TEXT_ON_INK_MUTED }}>
-                fxpartner.global
-              </span>
-              <span style={{ display: "flex", fontSize: 12, color: TEXT_ON_INK_MUTED, marginTop: 4 }}>
-                Trading involves risk. This is not investment advice.
-              </span>
+              <div style={{ display: "flex", width: 26, height: 1, background: HAIRLINE }} />
             </div>
           </div>
-
-          {/* Diagonal glow seam */}
-          <div
-            style={{
-              display: "flex",
-              position: "absolute",
-              top: -20,
-              left: 686,
-              width: 3,
-              height: 670,
-              background: SIGNAL,
-              boxShadow: `0 0 24px 4px ${SIGNAL_GLOW}`,
-              transform: "rotate(7deg)",
-            }}
-          />
-
-          {/* Right: brand + features */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              flex: 1,
-              padding: "36px 48px 24px",
-              background: INK_SOFT,
-            }}
-          >
-            <span style={{ fontSize: 26, fontWeight: 700, color: TEXT_ON_INK }}>
-              FXPARTNER<span style={{ color: SIGNAL }}>.</span>
-            </span>
-            <span
-              style={{
-                fontSize: 12,
-                letterSpacing: 2,
-                textTransform: "uppercase",
-                color: TEXT_ON_INK_MUTED,
-                marginTop: 4,
-              }}
-            >
-              Your Partner in Financial Success
-            </span>
-
-            <div style={{ display: "flex", flexDirection: "column", marginTop: 22 }}>
-              <span style={{ fontSize: 30, fontWeight: 700, color: TEXT_ON_INK, lineHeight: 1.15 }}>
-                Trade Smarter.
-              </span>
-              <span style={{ fontSize: 30, fontWeight: 700, color: SIGNAL, lineHeight: 1.15 }}>
-                Grow Stronger.
-              </span>
-            </div>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 16, marginTop: 26 }}>
-              <Feature icon={<ShieldIcon color={iconColor} />} title="Verified Brokers" />
-              <Feature icon={<SearchIcon color={iconColor} />} title="Broker Verification" />
-              <Feature icon={<ChartIcon color={iconColor} />} title="Profitable Signals" />
-              <Feature icon={<UsersIcon color={iconColor} />} title="Global Community" />
-            </div>
-
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 16,
-                marginTop: "auto",
-                padding: "14px 18px",
-                borderRadius: 16,
-                border: `1px solid ${SIGNAL}55`,
-                boxShadow: `0 0 20px 2px ${SIGNAL_GLOW}`,
+                justifyContent: "center",
+                width: 40,
+                height: 40,
+                borderRadius: 999,
+                background: "rgba(34,211,238,0.12)",
               }}
             >
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <span
-                  style={{
-                    fontSize: 12,
-                    letterSpacing: 1.5,
-                    textTransform: "uppercase",
-                    color: SIGNAL,
-                  }}
-                >
-                  Scan to join
-                </span>
-                <span style={{ fontSize: 18, fontWeight: 700, color: TEXT_ON_INK, marginTop: 2 }}>
-                  FXPARTNER
-                </span>
-              </div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={SITE_QR_DATA_URI}
-                width={64}
-                height={64}
-                style={{ borderRadius: 8, marginLeft: "auto" }}
-                alt=""
-              />
+              <ShieldIcon color={iconColor} />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+              <span style={{ fontSize: 13, letterSpacing: 2, textTransform: "uppercase", color: TEXT_ON_INK_MUTED }}>
+                Your Partner In
+              </span>
+              <span style={{ fontSize: 13, letterSpacing: 2, textTransform: "uppercase", fontWeight: 700, color: TEXT_ON_INK }}>
+                Financial Success
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Bottom footer strip */}
+        {/* Main content: left info card + right hero panel */}
+        <div style={{ display: "flex", flexDirection: "row", flex: 1, padding: "28px 44px 0" }}>
+          <div style={{ display: "flex", flexDirection: "column", width: 372 }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                position: "relative",
+                overflow: "hidden",
+                borderRadius: 24,
+                border: `1px solid ${HAIRLINE}`,
+                background: INK_SOFT,
+                padding: "28px 26px",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  position: "absolute",
+                  width: 320,
+                  height: 320,
+                  top: -80,
+                  left: -100,
+                  borderRadius: 999,
+                  background: `radial-gradient(circle, ${direction === "SELL" ? "rgba(229,72,77,0.20)" : "rgba(34,197,94,0.20)"} 0%, rgba(0,0,0,0) 70%)`,
+                }}
+              />
+
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <span style={{ fontSize: 36, fontWeight: 800, color: TEXT_ON_INK }}>
+                  {base}
+                  {quote}
+                </span>
+                {directionLabel && (
+                  <div
+                    style={{
+                      display: "flex",
+                      fontSize: 16,
+                      fontWeight: 700,
+                      letterSpacing: 1,
+                      color: directionColor,
+                      border: `2px solid ${directionColor}`,
+                      borderRadius: 999,
+                      padding: "5px 16px",
+                    }}
+                  >
+                    {directionLabel}
+                  </div>
+                )}
+              </div>
+              {volume && (
+                <span style={{ display: "flex", fontSize: 15, color: TEXT_ON_INK_MUTED, marginTop: 6 }}>
+                  Volume: {volume} lot
+                </span>
+              )}
+
+              <span
+                style={{
+                  display: "flex",
+                  fontSize: 14,
+                  letterSpacing: 1.5,
+                  textTransform: "uppercase",
+                  color: TEXT_ON_INK_MUTED,
+                  marginTop: 22,
+                }}
+              >
+                Entry Price
+              </span>
+              <span style={{ display: "flex", fontSize: 54, fontWeight: 800, color: SIGNAL, marginTop: 2, letterSpacing: -1 }}>
+                {entry}
+              </span>
+
+              <div style={{ display: "flex", marginTop: 14 }}>
+                <Sparkline
+                  seed={`${pair}-${entry}-${direction}`}
+                  color={directionColor}
+                  trendUp={direction !== "SELL"}
+                  width={318}
+                  height={64}
+                />
+              </div>
+
+              <div style={{ display: "flex", margin: "18px 0 0", height: 1, background: HAIRLINE }} />
+
+              <div style={{ display: "flex", gap: 32, marginTop: 20 }}>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <span style={{ fontSize: 13, letterSpacing: 1.5, textTransform: "uppercase", color: TEXT_ON_INK_MUTED }}>
+                    Take Profit
+                  </span>
+                  <span style={{ fontSize: 27, fontWeight: 700, color: hasTarget1 ? TICK_UP : TEXT_ON_INK_MUTED, marginTop: 4 }}>
+                    {hasTarget1 ? target1 : "—"}
+                  </span>
+                </div>
+                <div style={{ display: "flex", width: 1, background: HAIRLINE }} />
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <span style={{ fontSize: 13, letterSpacing: 1.5, textTransform: "uppercase", color: TEXT_ON_INK_MUTED }}>
+                    Stop Loss
+                  </span>
+                  <span style={{ fontSize: 27, fontWeight: 700, color: hasStop ? TICK_DOWN : TEXT_ON_INK_MUTED, marginTop: 4 }}>
+                    {hasStop ? stop : "—"}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <InfoPill
+              icon={<ClockIcon color={SIGNAL} />}
+              mutedText="Real-time signals."
+              accentText="Real results."
+              accentColor={SIGNAL}
+            />
+          </div>
+
+          {/* Hero panel: photo + headline + feature list + QR, all on top */}
+          <div
+            style={{
+              display: "flex",
+              flex: 1,
+              position: "relative",
+              marginLeft: 24,
+              borderRadius: 24,
+              overflow: "hidden",
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${siteUrl}/trade-card-bg.jpg`}
+              width={684}
+              height={636}
+              style={{ position: "absolute", top: 0, left: 0, objectFit: "cover" }}
+              alt=""
+            />
+            <div
+              style={{
+                display: "flex",
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(100deg, rgba(7,9,11,0.88) 18%, rgba(7,9,11,0.45) 55%, rgba(7,9,11,0.7) 100%)",
+              }}
+            />
+
+            <div style={{ display: "flex", flexDirection: "row", flex: 1, position: "relative", padding: 24 }}>
+              <div style={{ display: "flex", flexDirection: "column", flex: 1, justifyContent: "center", paddingRight: 12 }}>
+                <span style={{ fontSize: 30, fontWeight: 700, color: TEXT_ON_INK, lineHeight: 1.15 }}>Trade Smarter.</span>
+                <span style={{ fontSize: 30, fontWeight: 700, color: SIGNAL, lineHeight: 1.15 }}>Grow Stronger.</span>
+                <span style={{ display: "flex", fontSize: 15, color: "#dbe1e3", marginTop: 16, lineHeight: 1.5 }}>
+                  FXPARTNER delivers real-time signals, trusted tools, and a global community to help you succeed in every
+                  market condition.
+                </span>
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", width: 250, gap: 10 }}>
+                <FeatureCard icon={<ShieldIcon color={iconColor} />} title="Verified Brokers" subtitle="Trusted & regulated only." />
+                <FeatureCard icon={<SearchIcon color={iconColor} />} title="Broker Verification" subtitle="Compare and choose right." />
+                <FeatureCard icon={<ChartIcon color={iconColor} />} title="Profitable Signals" subtitle="Built for consistency." />
+                <FeatureCard icon={<UsersIcon color={iconColor} />} title="Global Community" subtitle="Thousands of traders." />
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 14,
+                    marginTop: "auto",
+                    padding: "12px 16px",
+                    borderRadius: 16,
+                    background: "rgba(7,9,11,0.72)",
+                    border: `1px solid ${SIGNAL}55`,
+                    boxShadow: `0 0 20px 2px ${SIGNAL_GLOW}`,
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={SITE_QR_DATA_URI} width={54} height={54} style={{ borderRadius: 8 }} alt="" />
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <span style={{ fontSize: 11, letterSpacing: 1.5, textTransform: "uppercase", color: SIGNAL }}>
+                      Scan to join
+                    </span>
+                    <span style={{ fontSize: 15, fontWeight: 700, color: TEXT_ON_INK }}>FXPARTNER</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer strip: 5 features */}
         <div
           style={{
             display: "flex",
+            flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "18px 48px",
+            padding: "22px 44px",
+            marginTop: 24,
             borderTop: `1px solid ${HAIRLINE}`,
           }}
         >
-          <FooterItem icon={<CandlesIcon color={iconColor} />} label="MT5 Signals" />
-          <FooterItem icon={<CopyTradeIcon color={iconColor} />} label="CopyTrade" />
-          <FooterItem icon={<ShieldIcon color={iconColor} />} label="Risk Management" />
-          <FooterItem icon={<CapIcon color={iconColor} />} label="Trading Education" />
-          <FooterItem icon={<HeadsetIcon color={iconColor} />} label="24/7 Support" />
+          <FooterFeature icon={<CandlesIcon color={iconColor} />} title="MT5 Signals" subtitle="Real-time alerts" />
+          <FooterFeature icon={<CopyTradeIcon color={iconColor} />} title="CopyTrade" subtitle="Follow professionals" />
+          <FooterFeature icon={<ShieldIcon color={iconColor} />} title="Risk Management" subtitle="Protect your capital" />
+          <FooterFeature icon={<CapIcon color={iconColor} />} title="Trading Education" subtitle="Learn & improve" />
+          <FooterFeature icon={<HeadsetIcon color={iconColor} />} title="24/7 Support" subtitle="Always available" />
+        </div>
+
+        {/* Bottom bar */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0 44px 32px",
+          }}
+        >
+          <span style={{ fontSize: 15, color: TEXT_ON_INK_MUTED }}>fxpartner.global</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <ShieldIcon color={TEXT_ON_INK_MUTED} />
+            <span style={{ fontSize: 12, color: TEXT_ON_INK_MUTED }}>Trading involves risk. This is not investment advice.</span>
+          </div>
+          <div style={{ display: "flex", gap: 8 }}>
+            <SocialIcon>
+              <TelegramIcon color={TEXT_ON_INK_MUTED} />
+            </SocialIcon>
+            <SocialIcon>
+              <YoutubeIcon color={TEXT_ON_INK_MUTED} />
+            </SocialIcon>
+            <SocialIcon>
+              <InstagramIcon color={TEXT_ON_INK_MUTED} />
+            </SocialIcon>
+            <SocialIcon>
+              <XIcon color={TEXT_ON_INK_MUTED} />
+            </SocialIcon>
+            <SocialIcon>
+              <FacebookIcon color={TEXT_ON_INK_MUTED} />
+            </SocialIcon>
+          </div>
         </div>
       </div>
     ),
-    { width: W, height: H }
+    { width: SIZE, height: SIZE }
   );
 }
