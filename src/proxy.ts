@@ -28,6 +28,20 @@ function applyAutoLanguage(request: NextRequest, response: NextResponse) {
   }
 }
 
+// Stable, anonymous per-browser ID — set once on a visitor's first request
+// and never rotated after. Pure infrastructure for now (no feature reads it
+// yet): future personalization/attribution/push-prompt-dedup work can key
+// off it via src/lib/visitor.ts instead of each reinventing its own cookie.
+const VISITOR_COOKIE = "fxp_vid";
+
+function applyVisitorId(request: NextRequest, response: NextResponse) {
+  if (request.cookies.has(VISITOR_COOKIE)) return;
+  response.cookies.set(VISITOR_COOKIE, crypto.randomUUID(), {
+    path: "/",
+    maxAge: 60 * 60 * 24 * 365 * 2,
+  });
+}
+
 export default async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
@@ -38,6 +52,7 @@ export default async function proxy(request: NextRequest) {
     }
     const response = NextResponse.next();
     applyAutoLanguage(request, response);
+    applyVisitorId(request, response);
     return response;
   }
 
@@ -46,12 +61,14 @@ export default async function proxy(request: NextRequest) {
     if (!session?.user) {
       const response = NextResponse.redirect(new URL("/account/login", request.url));
       applyAutoLanguage(request, response);
+      applyVisitorId(request, response);
       return response;
     }
   }
 
   const response = NextResponse.next();
   applyAutoLanguage(request, response);
+  applyVisitorId(request, response);
   return response;
 }
 
