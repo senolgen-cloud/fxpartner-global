@@ -198,8 +198,6 @@ export default function Home() {
           </div>
         </section>
 
-        <RegulatorBadges />
-
         {/* Ranked broker list */}
         <section id="brokers" className="relative overflow-hidden bg-ink">
           <div
@@ -226,6 +224,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <RegulatorBadges />
 
         <ShowcaseGallery />
 
