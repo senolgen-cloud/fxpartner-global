@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { brokers } from "@/data/brokers";
 
@@ -7,9 +8,13 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-14">
         <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
-            <span className="font-display text-lg font-semibold text-text-on-ink">
-              FXPARTNER
-            </span>
+            <Image
+              src="/fxpartner-logo.png"
+              alt="FXPARTNER"
+              width={900}
+              height={232}
+              className="h-9 w-auto"
+            />
             <p className="mt-3 max-w-sm text-sm leading-relaxed">
               A review resource comparing forex brokers by regulation, cost,
               and platform support. Not investment advice.
