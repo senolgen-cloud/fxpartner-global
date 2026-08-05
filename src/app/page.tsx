@@ -8,6 +8,7 @@ import HeroSpotlight from "@/components/HeroSpotlight";
 import TradingVideo from "@/components/TradingVideo";
 import HeroCashbackForm from "@/components/HeroCashbackForm";
 import ShowcaseGallery from "@/components/ShowcaseGallery";
+import RegulatorBadges from "@/components/RegulatorBadges";
 import HeroBrokerSearch from "@/components/HeroBrokerSearch";
 import StickyCTA from "@/components/StickyCTA";
 import { brokers } from "@/data/brokers";
@@ -179,6 +180,8 @@ export default function Home() {
           </Reveal>
           </div>
         </section>
+
+        <RegulatorBadges />
 
         {/* Ranked broker list */}
         <section id="brokers" className="relative overflow-hidden bg-ink">
