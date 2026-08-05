@@ -3,6 +3,7 @@ import { Geist, JetBrains_Mono, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import BonusPopup from "@/components/BonusPopup";
 import TelegramPopup from "@/components/TelegramPopup";
+import NotificationOptIn from "@/components/NotificationOptIn";
 import GoogleTranslateWidget from "@/components/GoogleTranslateWidget";
 import Header from "@/components/Header";
 import Ticker from "@/components/Ticker";
@@ -89,6 +90,7 @@ export default function RootLayout({
         {children}
         <TelegramPopup />
         <BonusPopup />
+        <NotificationOptIn />
         <GoogleTranslateWidget />
         <Analytics />
       </body>

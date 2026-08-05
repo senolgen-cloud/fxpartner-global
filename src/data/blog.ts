@@ -268,6 +268,359 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "forex-risk-yonetimi-pozisyon-buyuklugu-stop-loss",
+    title: "Forex'te Risk Yönetimi: Pozisyon Büyüklüğü ve Stop-Loss Stratejileri",
+    excerpt:
+      "Kazançlı bir stratejinin bile hesabı sıfırlayabilmesinin tek nedeni kötü pozisyon büyüklüğüdür. Sermayenizi korumak için pratik risk yönetimi çerçevesi.",
+    publishedAt: "2026-08-05",
+    readingMinutes: 8,
+    sections: [
+      {
+        paragraphs: [
+          "Forex'te yeni başlayanların çoğu zaman analizine değil, risk yönetimine yenilir. Doğru yönü tahmin etmiş olsanız bile, pozisyonunuz hesabınıza göre çok büyükse tek bir ters hareket sizi piyasadan tamamen çıkarabilir. Bu yazı, deneyimli yatırımcıların neredeyse otomatik olarak uyguladığı, ama yeni başlayanların çoğunlukla atladığı temel risk yönetimi kurallarını ele alıyor.",
+          "Bu bir kazanma garantisi değil — hiçbir risk yönetimi tekniği kayıpları ortadan kaldırmaz. Amaç, tek bir kötü işlemin veya art arda gelen birkaç kaybın hesabınızı kalıcı olarak zedelememesini sağlamak.",
+        ],
+      },
+      {
+        heading: "1. İşlem başına riski, hesap büyüklüğünün yüzdesi olarak düşünün",
+        paragraphs: [
+          "Deneyimli yatırımcıların çoğu, tek bir işlemde hesap bakiyesinin %1-2'sinden fazlasını riske atmaz. Bu, lot büyüklüğü değil, stop-loss'a kadar olan mesafenin dolar/TL cinsinden karşılığıdır. 10.000$'lık bir hesapta %1 risk kuralı, herhangi bir işlemde en fazla 100$ kaybetmeyi kabul etmek demektir — stop-loss ister 20 pip ister 80 pip uzaklıkta olsun, pozisyon büyüklüğü buna göre ayarlanır.",
+          "Bu yaklaşımın gücü matematikte gizli: %1 kuralıyla art arda 10 kayıp yaşasanız bile hesabınızın yaklaşık %10'unu kaybedersiniz — geri dönülebilir bir seviye. Pozisyon büyüklüğünü sabit tutup stop-loss'a göre ayarlamazsanız, birkaç geniş-stoplu işlem hesabı çok daha hızlı eritebilir.",
+        ],
+      },
+      {
+        heading: "2. Stop-loss'u piyasaya göre yerleştirin, keyfi bir sayıya göre değil",
+        paragraphs: [
+          "Yaygın bir hata, stop-loss'u \"50 pip\" gibi sabit bir sayıya göre koymaktır — oysa doğru mesafe, işlem yapılan enstrümanın volatilitesine ve son destek/direnç seviyelerine göre değişir. Sakin bir majör paritede 15 pip'lik stop mantıklıyken, aynı mesafe altın veya yüksek volatiliteli bir kripto paritesinde piyasanın normal gürültüsü içinde anında tetiklenebilir.",
+          "Pratik bir yöntem: son swing high/low'un veya belirgin bir destek/direnç bölgesinin biraz ötesine stop koymak — yani fiyatın normal seyrinde \"nefes almasına\" izin verip, gerçekten senaryonun geçersiz olduğu noktada çıkmak. Stop mesafesi belirlendikten sonra pozisyon büyüklüğü, adım 1'deki risk yüzdesine uyacak şekilde hesaplanır — sıra bu şekilde işler, tam tersi değil.",
+        ],
+      },
+      {
+        heading: "3. Kaldıraç, risk değil — sadece bir çarpandır",
+        paragraphs: [
+          "Yüksek kaldıraç kendi başına tehlikeli değildir; tehlikeli olan, kaldıracın izin verdiği maksimum pozisyon büyüklüğünü kullanmaktır. 1:500 kaldıraçlı bir hesap, sizi büyük pozisyon açmaya zorlamaz — sadece küçük bir teminatla büyük pozisyon açmanıza izin verir. Risk yönetimi disiplini olmadan bu, kayıpları hızlandırmanın bir yoludur.",
+          "Kaldıraç konusunu daha ayrıntılı ele aldığımız yazımızda bu farkı ve broker/ülkeye göre değişen kaldıraç limitlerini daha detaylı işliyoruz.",
+        ],
+      },
+      {
+        heading: "4. Korelasyona dikkat edin",
+        paragraphs: [
+          "Aynı anda EUR/USD, GBP/USD ve EUR/GBP'de long pozisyon açmak, üç ayrı bağımsız işlem gibi hissettirebilir — ama bu pariteler yüksek oranda korele hareket eder. Piyasa aleyhinize döndüğünde, üçü de aynı anda zarar etmeye başlar; gerçek riskiniz, tek işlem başına hesapladığınızdan çok daha yüksektir. Açık pozisyonlarınızın toplam yönlü maruziyetini (net exposure) değerlendirmek, tek tek işlemleri değerlendirmek kadar önemlidir.",
+        ],
+      },
+      {
+        heading: "Pratik bir kontrol listesi",
+        paragraphs: [],
+        list: [
+          "İşlem açmadan önce riske atacağınız dolar/TL tutarını (hesabın %1-2'si) belirleyin.",
+          "Stop-loss'u piyasa yapısına göre yerleştirin, ardından pozisyon büyüklüğünü buna göre hesaplayın.",
+          "Yüksek korelasyonlu paritelerde aynı anda birden fazla pozisyon açmadan önce toplam maruziyeti göz önünde bulundurun.",
+          "Bir günde veya haftada ulaşınca işlem yapmayı bırakacağınız bir maksimum kayıp seviyesi belirleyin.",
+          "Hiçbir kural, kayıpları garanti altına almaz — bu bir sermaye koruma çerçevesidir, kâr garantisi değildir.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "teknik-analiz-vs-temel-analiz",
+    title: "Teknik Analiz mi, Temel Analiz mi? İkisini Bir Arada Kullanmak",
+    excerpt:
+      "İki yöntem de tek başına eksik. Teknik analiz size 'ne zaman', temel analiz 'neden' sorusuna cevap verir — birlikte nasıl kullanılır?",
+    publishedAt: "2026-08-05",
+    readingMinutes: 7,
+    sections: [
+      {
+        paragraphs: [
+          "Forex forumlarında sık karşılaşılan bir tartışma: \"Teknik analiz mi işe yarar, temel analiz mi?\" Aslında bu, yanlış kurulmuş bir soru. İki yöntem farklı sorulara cevap verir ve birçok deneyimli yatırımcı ikisini birlikte kullanır — biri fiyatın nereye gidebileceğini, diğeri neden gidebileceğini açıklamaya çalışır.",
+        ],
+      },
+      {
+        heading: "Teknik analiz: fiyatın kendisi neyi anlatıyor?",
+        paragraphs: [
+          "Teknik analiz, geçmiş fiyat hareketlerinin ve işlem hacminin gelecekteki fiyat davranışı hakkında ipucu verdiği varsayımına dayanır. Destek/direnç seviyeleri, trend çizgileri, hareketli ortalamalar (SMA/EMA) ve RSI gibi göstergeler bu yaklaşımın temel araçlarıdır.",
+          "Teknik analizin güçlü yanı, giriş/çıkış zamanlamasında ve risk yönetiminde (stop-loss'u nereye koyacağınızı belirlemede) somut, ölçülebilir seviyeler sunmasıdır. Zayıf yanı ise, beklenmedik bir haber akışının (örneğin bir merkez bankası kararı) teknik seviyeleri bir anda geçersiz kılabilmesidir.",
+        ],
+      },
+      {
+        heading: "Temel analiz: fiyatı ne hareket ettiriyor?",
+        paragraphs: [
+          "Temel analiz, bir para biriminin değerini faiz oranları, enflasyon, istihdam verileri, büyüme rakamları ve merkez bankası politikaları üzerinden değerlendirir. Örneğin bir merkez bankasının faiz artırması, genellikle o para birimine olan talebi artırır — çünkü o para biriminde tutulan varlıklar daha yüksek getiri sunar.",
+          "Temel analizin gücü, büyük ve sürdürülebilir trendlerin arkasındaki mantığı anlamanızı sağlamasıdır. Zayıf yanı ise, \"faiz kararı piyasayı nasıl etkiler\" sorusuna cevap verse de, \"bugün, saat kaçta, hangi seviyeden\" sorusuna aynı netlikte cevap vermemesidir.",
+        ],
+      },
+      {
+        heading: "İkisini birlikte kullanmanın pratik yolu",
+        paragraphs: [
+          "Yaygın bir yaklaşım şudur: temel analizle genel yönü (bias) belirlemek, teknik analizle bu yönde giriş/çıkış zamanlaması yapmak. Örneğin merkez bankası politikaları bir para birimi için genel olarak güçlenme sinyali veriyorsa, teknik olarak geri çekilme (pullback) noktalarını giriş fırsatı olarak değerlendirmek, sadece göstergeye bakıp yön tahmini yapmaktan daha tutarlı bir çerçeve sunar.",
+          "Ekonomik takvimi (faiz kararları, enflasyon verileri, istihdam raporları gibi) takip etmek bu sürecin ayrılmaz bir parçasıdır — bu konuyu ayrı bir yazıda daha detaylı ele alıyoruz.",
+        ],
+      },
+      {
+        heading: "Hangi yöntem kime uygun?",
+        paragraphs: [
+          "Kısa vadeli (gün içi veya scalping) işlem yapanlar genellikle teknik analize ağırlık verir, çünkü karar süreleri saatler hatta dakikalar içinde gerçekleşir. Pozisyon büyüklüğünü haftalar/aylar boyunca taşıyan yatırımcılar için temel analiz genellikle daha belirleyicidir. Çoğu yatırımcı için ideal olan, tamamen birini seçmek değil, kendi zaman ufkuna göre ikisine de belirli bir ağırlık vermektir.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "kaldirac-leverage-nedir-riskleri",
+    title: "Kaldıraç (Leverage) Nedir? Fırsatlar ve Riskler",
+    excerpt:
+      "Kaldıraç kazançları büyütebildiği kadar kayıpları da büyütür. Kaldıracın gerçekte nasıl çalıştığını ve neden dikkatli kullanılması gerektiğini anlatıyoruz.",
+    publishedAt: "2026-08-05",
+    readingMinutes: 6,
+    sections: [
+      {
+        paragraphs: [
+          "Kaldıraç, forex brokerlarının pazarlama materyallerinde en çok öne çıkarılan özelliklerden biri — \"1:500 kaldıraç\" gibi ifadeler cazip görünür. Ama kaldıracın gerçekte ne anlama geldiğini ve neden dikkatli kullanılması gerektiğini anlamadan bir hesap açmak, sermayenizi olması gerekenden çok daha hızlı kaybetmenin en yaygın yollarından biridir.",
+        ],
+      },
+      {
+        heading: "Kaldıraç nasıl çalışır?",
+        paragraphs: [
+          "Kaldıraç, brokerin sağladığı bir \"borç\" değil, teminat (margin) karşılığında piyasada tuttuğunuz pozisyon büyüklüğünü çarpan bir mekanizmadır. 1:100 kaldıraçla 1.000$'lık teminatla 100.000$ değerinde pozisyon açabilirsiniz. Bu, kâr da zarar da 100.000$'lık pozisyon üzerinden hesaplanır demektir — teminatınız sadece pozisyonu açmak için gereken minimum tutardır.",
+          "Bu nokta kritik: kaldıraç kâr/zararınızın büyüklüğünü değiştirmez, sadece aynı büyüklükteki pozisyonu açmak için gereken teminatı azaltır. Yani asıl belirleyici olan pozisyon büyüklüğüdür, kaldıraç oranının kendisi değil.",
+        ],
+      },
+      {
+        heading: "Yüksek kaldıraç neden risklidir?",
+        paragraphs: [
+          "Yüksek kaldıraç, düşük teminatla büyük pozisyon açmayı mümkün kıldığı için, disiplinsiz kullanıldığında hesabı çok hızlı eritebilir. Örneğin 1:500 kaldıraçla hesabınızın tamamına yakınını tek bir pozisyona teminat olarak koyarsanız, fiyatın küçük bir yüzde hareketi bile marjinizi tüketip pozisyonunuzun otomatik kapanmasına (margin call/stop-out) yol açabilir.",
+          "Bu, kaldıracın \"kötü\" olduğu anlamına gelmez — profesyonel yatırımcılar da yüksek kaldıraçlı hesaplar kullanır. Fark, kaldıracın izin verdiği maksimum pozisyonu değil, önceki yazımızda ele aldığımız risk yönetimi kurallarına (işlem başına %1-2 risk gibi) göre belirlenen pozisyonu açmalarıdır.",
+        ],
+      },
+      {
+        heading: "Ülkeye ve brokera göre kaldıraç limitleri",
+        paragraphs: [
+          "Tier-1 regülatörler (İngiltere FCA, Avrupa ESMA/CySEC gibi) perakende yatırımcılar için kaldıraç üst sınırlarını yasal olarak sınırlar — genellikle majör paritelerde 1:30 civarında. Offshore lisanslı brokerlar ise çok daha yüksek kaldıraç (1:500, hatta 1:1000) sunabilir. Yüksek kaldıraç imkânı başlı başına bir kırmızı bayrak değildir, ama genellikle daha hafif regüle edilmiş bir yapının işaretidir — bu dengeyi broker seçim rehberimizde daha detaylı ele alıyoruz.",
+        ],
+      },
+      {
+        heading: "Pratik yaklaşım",
+        paragraphs: [],
+        list: [
+          "Kaldıracı \"ne kadar büyük pozisyon açabilirim\" olarak değil, \"ne kadar az teminatla işlem açabilirim\" olarak düşünün.",
+          "Pozisyon büyüklüğünüzü kaldıracın izin verdiği maksimuma göre değil, risk yönetimi kurallarınıza göre belirleyin.",
+          "Yeni başlıyorsanız, düşük-orta kaldıraçlı bir hesapla başlamak, marj çağrısı riskini azaltır ve öğrenme sürecini daha az stresli hale getirir.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "trading-psikolojisi-duygusal-kararlar",
+    title: "Trading Psikolojisi: Duygusal Kararlardan Nasıl Kaçınılır?",
+    excerpt:
+      "Çoğu yatırımcı stratejisi yüzünden değil, korku ve açgözlülük anındaki dürtüsel kararları yüzünden kaybeder. Disiplini korumanın pratik yolları.",
+    publishedAt: "2026-08-05",
+    readingMinutes: 7,
+    sections: [
+      {
+        paragraphs: [
+          "Deneyimli yatırımcılar arasında sık tekrarlanan bir söz vardır: \"Trading'in yüzde 80'i psikoloji, yüzde 20'si stratejidir.\" Rakam tartışmaya açık olsa da fikir doğru — iyi bir strateji bile, onu uygulayan kişi panikle, açgözlülükle veya intikam almak ister gibi işlem yaptığında işe yaramaz hale gelir.",
+        ],
+      },
+      {
+        heading: "En yaygın duygusal tuzaklar",
+        paragraphs: [
+          "Kayıptan sonra \"intikam işlemi\" (revenge trading) — bir kaybı hemen telafi etmek için plansız, büyük bir pozisyon açmak — belki de en yıkıcı davranış kalıbıdır. Bunu genellikle FOMO (kaçırma korkusu) izler: fiyat hızla yükselirken \"trene binmek\" için analiz yapmadan pozisyon açmak.",
+          "Bir diğer yaygın hata, kazançtaki bir pozisyonu çok erken kapatmak (korku nedeniyle) ama zarardaki bir pozisyonu \"geri dönür\" umuduyla çok uzun süre açık tutmaktır — psikolojik olarak kayıpları kabul etmek kazançlardan vazgeçmekten daha zordur, ve bu asimetri genellikle kayıp işlemlerin kazanç işlemlerinden daha büyük kalmasına yol açar.",
+        ],
+      },
+      {
+        heading: "Neden bu kadar zor?",
+        paragraphs: [
+          "Gerçek para riske girdiğinde beyin, rasyonel analiz değil, hayatta kalma tepkileriyle çalışmaya başlar. Bu, bir zayıflık değil, insan biyolojisinin bir parçasıdır. Çözüm \"daha güçlü irade\" değil, duygusal anda karar vermeyi gerektirmeyecek bir sistem kurmaktır.",
+        ],
+      },
+      {
+        heading: "Pratik önlemler",
+        paragraphs: [
+          "Aşağıdaki alışkanlıklar, duygusal kararların önüne geçmek için deneyimli yatırımcıların yaygın olarak kullandığı yöntemlerdir:",
+        ],
+        list: [
+          "Her işlem öncesi giriş, stop-loss ve hedef seviyeyi yazılı olarak belirleyin — pozisyon açıkken karar değiştirmek, kararı önceden vermekten çok daha zordur.",
+          "Bir gün/hafta için maksimum kayıp limiti belirleyin ve bu limite ulaştığınızda ekranı kapatın.",
+          "Kayıptan hemen sonra yeni bir işlem açmadan önce belirli bir süre (örneğin bir gün) bekleyin — bu, intikam işlemlerinin büyük kısmını engeller.",
+          "İşlemlerinizi bir günlükte (trading journal) kaydedin: hangi kararların plana göre, hangilerinin duygusal olarak alındığını görmek, zamanla en büyük öğretmeninizdir.",
+          "Demo hesapta strateji test etmekle gerçek hesapta küçük pozisyonlarla işlem yapmak arasında büyük bir psikolojik fark vardır — bu geçişi ayrı bir yazımızda ele alıyoruz.",
+        ],
+      },
+      {
+        heading: "Sonuç",
+        paragraphs: [
+          "Trading psikolojisi, bir kez öğrenilip unutulacak bir konu değil, sürekli çalışılması gereken bir disiplindir. En iyi teknik analiz veya en iyi risk yönetimi kuralları bile, onları duygusal anda terk eden bir yatırımcıyı korumaz.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "ecn-vs-market-maker-broker-farki",
+    title: "ECN ve Market Maker Broker Arasındaki Fark",
+    excerpt:
+      "İki farklı yürütme modeli, iki farklı maliyet yapısı. Broker seçerken bu farkı bilmek, spread rakamlarına bakmaktan daha önemli.",
+    publishedAt: "2026-08-05",
+    readingMinutes: 7,
+    sections: [
+      {
+        paragraphs: [
+          "Bir broker seçerken karşınıza çıkan \"ECN\", \"STP\" ve \"Market Maker\" gibi terimler, çoğu zaman yeterince açıklanmadan geçiştirilir. Ama bu terimler, emirlerinizin gerçekte nasıl işlendiğini ve maliyet yapınızı doğrudan etkiler.",
+        ],
+      },
+      {
+        heading: "Market Maker (Dealing Desk) nasıl çalışır?",
+        paragraphs: [
+          "Market Maker brokerlar, müşteri emirlerini doğrudan piyasaya göndermek yerine kendi iç sistemlerinde eşleştirir veya karşı taraf olarak üstlenir. Bu model, sabit spreadler ve genellikle komisyonsuz işlem sunabilir — küçük hesaplar ve yeni başlayanlar için erişilebilir bir yapı sağlar.",
+          "Bu modelin eleştirilen yönü, teorik olarak brokerin müşteri kaybından kâr edebilecek bir konumda olmasıdır. Regüle edilmiş, saygın brokerlarda bu bir sorun yaratmaz — ama fiyatlandırmanın ham piyasa fiyatı yerine brokerin kendi iç fiyatlandırmasına dayandığını bilmek önemlidir.",
+        ],
+      },
+      {
+        heading: "ECN/STP nasıl çalışır?",
+        paragraphs: [
+          "ECN (Electronic Communication Network) ve STP (Straight Through Processing) brokerlar, emirleri doğrudan bir likidite havuzuna (bankalar, diğer yatırımcılar) yönlendirir. Fiyatlar ham piyasa fiyatlarıdır ve broker genellikle spread yerine (veya spread'e ek olarak) lot başına sabit bir komisyon alır.",
+          "Bu modelin avantajı şeffaflıktır — özellikle piyasa yoğun hareket ederken spread'ler daralıp genişleyebilir (değişken spread), ama fiyat gerçek piyasa arz-talebini yansıtır. Dezavantajı, toplam maliyeti (spread + komisyon) hesaplamanın Market Maker'ın \"tek sabit spread\" fiyatlandırmasına göre biraz daha fazla dikkat gerektirmesidir.",
+        ],
+      },
+      {
+        heading: "Hangi model kime uygun?",
+        paragraphs: [
+          "Küçük hesapla başlayan, basitlik isteyen ve sık işlem yapmayan yatırımcılar için Market Maker'ın sabit spread + komisyonsuz yapısı genellikle daha öngörülebilirdir. Scalping veya yüksek frekanslı stratejiler uygulayan, ham spread'in komisyondan daha değerli olduğu aktif yatırımcılar için ECN/STP hesaplar genellikle daha uygun maliyetlidir.",
+          "Birçok broker artık her iki modeli de farklı hesap tipleri (örneğin \"Standard\" ve \"Zero/Raw\") altında sunuyor — bu da doğru soruyu \"hangi broker daha iyi\" değil, \"hangi hesap tipi benim trading tarzıma uygun\" olarak sormayı gerektiriyor. Bu konuyu, broker seçim çerçevemizde daha geniş ele alıyoruz.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "ekonomik-takvim-nasil-okunur",
+    title: "Ekonomik Takvim Nasıl Okunur? Piyasayı Hareket Ettiren Veriler",
+    excerpt:
+      "Faiz kararları, enflasyon verileri, istihdam raporları — ekonomik takvimdeki hangi veriler önemli, hangileri gürültü? Pratik bir okuma rehberi.",
+    publishedAt: "2026-08-05",
+    readingMinutes: 6,
+    sections: [
+      {
+        paragraphs: [
+          "Ekonomik takvim, forex piyasasında fiyat hareketlerinin büyük kısmının arkasındaki nedeni gösteren en pratik araçlardan biridir. Ama takvimdeki onlarca veri arasında hangisinin gerçekten önemli olduğunu bilmeden bakmak, çoğu zaman kafa karıştırıcı bir gürültü yığınına dönüşür.",
+        ],
+      },
+      {
+        heading: "Etki seviyelerini anlamak",
+        paragraphs: [
+          "Çoğu ekonomik takvim, verileri düşük/orta/yüksek etki olarak sınıflandırır (genellikle sarı/turuncu/kırmızı renk kodlarıyla). Yüksek etkili veriler arasında merkez bankası faiz kararları, enflasyon raporları (CPI) ve ABD tarım dışı istihdam verisi (NFP) yer alır — bunlar genellikle yayınlandıkları anda ani ve keskin fiyat hareketlerine neden olur.",
+        ],
+      },
+      {
+        heading: "En çok takip edilen veriler",
+        paragraphs: [
+          "Aşağıdaki veriler, çoğu para birimi çifti için en belirleyici olanlardır:",
+        ],
+        list: [
+          "Faiz kararları — merkez bankalarının politika faizini artırıp artırmadığı, para biriminin cazibesini doğrudan etkiler.",
+          "Enflasyon verileri (CPI/PCE) — merkez bankasının gelecekteki faiz kararlarına dair en güçlü sinyallerden biridir.",
+          "İstihdam raporları — özellikle ABD'de NFP, ekonominin genel sağlığına dair güçlü bir gösterge olarak kabul edilir.",
+          "GSYH büyüme rakamları — ekonominin genel yönünü gösterir, genellikle daha yavaş ama sürdürülebilir trendlerin arkasındaki nedendir.",
+          "Merkez bankası başkanlarının konuşmaları — rakamın kendisi kadar, gelecekteki politikaya dair verilen sinyaller de piyasayı hareket ettirir.",
+        ],
+      },
+      {
+        heading: "Beklenti ile gerçekleşen arasındaki fark önemli",
+        paragraphs: [
+          "Piyasa, verinin kendisinden çok, beklentiden ne kadar saptığına tepki verir. Enflasyon beklenenden yüksek gelirse (piyasa daha düşük bekliyorsa), bu genellikle o para biriminde güçlenmeye yol açabilir — çünkü merkez bankasının faizleri daha uzun süre yüksek tutması ihtimali artar. Beklenen ile gerçekleşen arasındaki fark, sayının mutlak değerinden daha belirleyicidir.",
+        ],
+      },
+      {
+        heading: "Yüksek etkili veriler etrafında dikkat edilmesi gerekenler",
+        paragraphs: [],
+        list: [
+          "Veri açıklamasından hemen önce ve sonra spreadler genişleyebilir — bu dönemde işlem açmak ekstra maliyetli olabilir.",
+          "İlk birkaç dakikadaki keskin hareket, genellikle gerçek yönü değil, piyasanın ilk tepkisini yansıtır; oturmasını beklemek daha sağlıklı olabilir.",
+          "Yüksek etkili bir veri öncesinde pozisyon büyüklüğünü küçültmek veya stop-loss'u gözden geçirmek, beklenmedik volatiliteye karşı makul bir önlemdir.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "demo-hesaptan-gercek-hesaba-gecis",
+    title: "Demo Hesaptan Gerçek Hesaba Geçiş: Ne Zaman ve Nasıl?",
+    excerpt:
+      "Demo hesapta kârlı olmak, gerçek hesapta başarılı olacağınız anlamına gelmez. Geçişi doğru zamanlamanın ve psikolojik farkı yönetmenin yolları.",
+    publishedAt: "2026-08-05",
+    readingMinutes: 6,
+    sections: [
+      {
+        paragraphs: [
+          "Demo hesap, bir platformu ve stratejiyi risksiz test etmenin en iyi yoludur — ama demo hesapta aylarca kârlı olan birçok yatırımcı, gerçek hesaba geçtiğinde beklenmedik bir performans düşüşü yaşar. Bunun nedeni genellikle strateji değil, gerçek para riskinin getirdiği psikolojik farktır.",
+        ],
+      },
+      {
+        heading: "Demo ile gerçek hesap arasındaki asıl fark: para değil, duygu",
+        paragraphs: [
+          "Demo hesapta bir kayıp sadece bir sayıdır. Gerçek hesapta aynı kayıp, kaygı, pişmanlık ve dürtüsel tepki verme isteği yaratır — trading psikolojisi yazımızda ele aldığımız tam olarak bu dinamik. Bu fark, sanılandan çok daha büyük bir performans etkisi yaratabilir; strateji aynı kalsa bile, onu uygulayan kişinin davranışı değişir.",
+        ],
+      },
+      {
+        heading: "Geçiş için hazır olduğunuzu gösteren işaretler",
+        paragraphs: [],
+        list: [
+          "Stratejinizi demo hesapta yeterince uzun süre (birkaç hafta-ay, sadece birkaç gün değil) ve farklı piyasa koşullarında test ettiniz.",
+          "Risk yönetimi kurallarınızı (pozisyon büyüklüğü, stop-loss yerleşimi) düşünmeden, otomatik olarak uygulayabiliyorsunuz.",
+          "İşlem günlüğünüzde tutarlı bir düzen görüyorsunuz — rastgele kazanç/kayıplar değil, tekrarlanabilir bir süreç.",
+        ],
+      },
+      {
+        heading: "Geçişi yumuşatmanın pratik yolu",
+        paragraphs: [
+          "Doğrudan normal boyutta işlem yapmak yerine, gerçek hesaba çok küçük bir pozisyon büyüklüğüyle başlamak (örneğin planladığınızın onda biri) makul bir ara adımdır. Bu, gerçek para riskinin psikolojik etkisini yaşarken, potansiyel kaybı sınırlı tutar. Zamanla, sonuçlar demo performansınızla tutarlı kaldıkça, pozisyon büyüklüğü kademeli olarak artırılabilir.",
+          "Bir broker seçerken, düşük minimum yatırım tutarı sunan hesap tiplerinin bu kademeli geçiş için özellikle uygun olduğunu unutmayın — bu kriterleri broker karşılaştırma sayfamızda daha detaylı inceleyebilirsiniz.",
+        ],
+      },
+      {
+        heading: "Gerçekçi beklenti kurmak",
+        paragraphs: [
+          "Demo hesapta elde edilen sonuçlar, gerçek hesapta bire bir tekrarlanacağının garantisi değildir — ne yönde olursa olsun. Amaç, mükemmel bir tahmin değil, gerçek para riskiyle karşılaştığınızda kendi davranışınızı gözlemlemek ve gerektiğinde ayarlamaktır.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "swap-gecelik-faiz-nedir",
+    title: "Swap (Gecelik Faiz) Nedir? Maliyetlerinizi Nasıl Azaltırsınız?",
+    excerpt:
+      "Pozisyonunuzu gece boyunca açık tutmanın gizli bir maliyeti var: swap. Nasıl hesaplandığını ve stratejinize göre nasıl yönetileceğini anlatıyoruz.",
+    publishedAt: "2026-08-05",
+    readingMinutes: 5,
+    sections: [
+      {
+        paragraphs: [
+          "Spread ve komisyon, forex maliyetleri konuşulduğunda akla ilk gelenlerdir — ama pozisyonunuzu bir günden fazla açık tutan yatırımcılar için swap (gecelik faiz) da hesaba katılması gereken, sık gözden kaçan bir maliyet kalemidir.",
+        ],
+      },
+      {
+        heading: "Swap nedir, neden var?",
+        paragraphs: [
+          "Forex'te her işlem, aslında bir para birimini alıp diğerini satmaktır. İki para biriminin faiz oranları arasındaki farktan dolayı, pozisyonunuzu gece yarısını (broker'ın belirlediği kesim saatini) geçirecek şekilde açık tutarsanız, bu faiz farkı hesabınıza yansıtılır — pozitif (kazanç) veya negatif (maliyet) olarak.",
+          "Örneğin faiz oranı düşük bir para birimini alıp faiz oranı yüksek bir para birimini satıyorsanız, genellikle negatif swap ödersiniz; tam tersi durumda pozitif swap kazanabilirsiniz. Bu, parite ve pozisyon yönüne (long/short) göre değişir.",
+        ],
+      },
+      {
+        heading: "Swap kimin için önemli, kimin için değil?",
+        paragraphs: [
+          "Gün içi (intraday) işlem yapıp pozisyonları kesim saatinden önce kapatan yatırımcılar için swap neredeyse hiç önemli değildir. Ama pozisyonları günler, haftalar hatta aylar boyunca taşıyan (swing veya pozisyon trading) yatırımcılar için swap, toplam maliyetin/kazancın önemli bir parçası haline gelebilir — özellikle yüksek faiz farkı olan paritelerde.",
+        ],
+      },
+      {
+        heading: "Swap'ı nasıl kontrol edebilirsiniz?",
+        paragraphs: [],
+        list: [
+          "Pozisyon açmadan önce brokerinizin swap tablosuna bakın — swap oranları paritenin yönüne göre farklıdır ve broker'dan brokera değişir.",
+          "Uzun vadeli bir pozisyon planlıyorsanız, swap'ın toplam maliyete etkisini önceden hesaba katın; küçük görünen günlük bir oran, haftalar boyunca birikebilir.",
+          "İslami/faizsiz hesap seçeneği sunan brokerlar, swap yerine sabit bir idari ücret uygulayabilir — dini gerekçelerle faiz içeren işlemlerden kaçınmak isteyen yatırımcılar için bu seçeneği kontrol etmek faydalıdır.",
+          "Çarşamba günleri swap genellikle 3 katına çıkar (hafta sonu tatilinin telafisi olarak) — bu günü pozisyon taşıma maliyetinizi hesaplarken unutmayın.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {

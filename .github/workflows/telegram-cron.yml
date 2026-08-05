@@ -10,6 +10,10 @@ on:
     # campaign-digest (Reklam & Kampanya): weekly roundup of active
     # broker campaigns + cashback rates, Monday mornings.
     - cron: "0 9 * * 1"
+    # blog-share (Haber & Editöryal): checks every 2h for the oldest
+    # not-yet-announced /blog post and posts one per run — offset by 30
+    # minutes from market-analysis-share so the two don't fire together.
+    - cron: "30 */2 * * *"
 
 jobs:
   # Owned by Piyasa Analizi Departmanı — see docs/ORGANIZATION.md.
@@ -59,3 +63,16 @@ jobs:
         run: |
           curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
             https://fxpartner.global/api/cron/campaign-digest
+
+  # Owned by Haber & Editöryal Departmanı — see docs/ORGANIZATION.md.
+  # Announces /blog posts (Telegram + web push) as they're published,
+  # one oldest-unposted entry per run so a same-day batch trickles out
+  # across the day instead of flooding the channel at once.
+  blog-share:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '30 */2 * * *'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger blog-share
+        run: |
+          curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            https://fxpartner.global/api/cron/blog-share

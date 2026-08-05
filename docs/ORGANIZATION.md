@@ -17,11 +17,11 @@ sahibidir.
 | Departman | Uzman | Sorumluluk | Otomasyon |
 |---|---|---|---|
 | Piyasa Analizi | Kaan Ediz — Baş Piyasa Analisti | Teknik analiz (market-update, BTC/USD, 2x/gün), günlük piyasa özeti duyurusu (market-analysis-share) | **Active** |
-| Haber & Editöryal | Elif Sarman — Editöryal Direktör | Haber filtreleme/çeviri, `/blog`, news-update cron | Paused — bkz. aşağıdaki blok |
+| Haber & Editöryal | Elif Sarman — Editöryal Direktör | Haber filtreleme/çeviri, `/blog`, blog-share duyurusu | **Active** — news-update hâlâ paused, bkz. aşağıdaki blok |
 | Broker İstihbaratı & İnceleme | Deniz Akar — Baş Broker Analisti | Broker skorlama, `/brokers`, `/categories` | Manual |
 | Ortaklık & Cashback | Mert Kıvanç — Ortaklıklar Direktörü | Rev-share anlaşmaları, `/cashback`, Sub-IB partner başvuruları (`/partners`) | Manual |
 | Reklam & Kampanya | Sena Yıldırım — Büyüme ve Reklam Direktörü | Haftalık kampanya özeti (campaign-digest) | **Active** |
-| Sosyal Medya & Topluluk | Barış Ongun — Topluluk Yöneticisi | Telegram altyapısı, marka sesi tutarlılığı | Active |
+| Sosyal Medya & Topluluk | Barış Ongun — Topluluk Yöneticisi | Telegram altyapısı, web push bildirimleri, marka sesi tutarlılığı | Active |
 | Uyumluluk & Marka | Aylin Demirtaş — Uyumluluk ve Marka Direktörü | Yasal metinler, son onay mercii | Manual |
 
 Her departmanın tam görev tanımı, sahip olduğu dosyalar ve "expert" persona
@@ -29,12 +29,13 @@ detayı `src/lib/departments.ts` içindeki `Department` kayıtlarındadır.
 
 ### Telegram içerik çeşitliliği (2026-07-26 güncellemesi)
 
-Telegram kanalı artık sadece BTC/USD grafiğiyle sınırlı değil — üç farklı
-departman, üç farklı içerik türünü kendi ritminde paylaşıyor:
+Telegram kanalı artık sadece BTC/USD grafiğiyle sınırlı değil — dört farklı
+departman, dört farklı içerik türünü kendi ritminde paylaşıyor:
 
 1. **market-update** (Piyasa Analizi) — BTC/USD teknik özeti, günde 2 kez (08:00 ve 18:00 UTC).
 2. **market-analysis-share** (Piyasa Analizi) — güncel `/piyasa-analizi` günlük özetini duyurur; her 2 saatte bir kontrol eder ama aynı günü tekrar paylaşmaz (dedup: Postgres'teki `telegram_post` tablosu, Upstash'e ihtiyaç yok).
 3. **campaign-digest** (Reklam & Kampanya) — aktif broker kampanyalarını ve cashback oranlarını haftalık özetler (Pazartesi 09:00 UTC).
+4. **blog-share** (Haber & Editöryal) — `/blog`'a eklenen en eski duyurulmamış yazıyı duyurur; her 2 saatte bir kontrol eder (market-analysis-share'den 30 dk kaydırılmış), aynı anda birden fazla yazı eklenmişse hepsini tek seferde değil, çalıştırma başına bir tanesini paylaşarak gün içine yayar.
 
 **news-update hâlâ paused:** Vercel production'da `DEEPL_API_KEY` ve
 `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` tanımlı değil (bkz.
@@ -43,7 +44,33 @@ açılırsa, route her çalıştığında 500 döner — daha önce tam olarak b
 yüzden kapatılmıştı (commit `d207f0`). Bu iki anahtar Vercel'e
 eklendiğinde, `.github/workflows/telegram-cron.yml`'a bir `schedule`
 girişi eklemek ve `departments.ts`'te bu departmanın `automation`
-alanını `"active"` yapmak yeterli.
+alanını `"active"` yapmak yeterli. (`blog-share` bu bloktan bağımsız,
+zaten aktif — o route DeepL/Upstash'e değil, elle yazılan
+`src/data/blog.ts` girdilerine dayanıyor.)
+
+### Web push bildirimleri (2026-08-05 eklendi)
+
+FXStreet tarzı tarayıcı push bildirimleri, Sosyal Medya & Topluluk
+Departmanı'nın (Barış Ongun) sorumluluğunda: `src/lib/push.ts`
+(`web-push` + VAPID anahtarları ile gönderim), `public/sw.js` (service
+worker), `src/app/api/push/subscribe` ve `/unsubscribe` (abonelik
+CRUD'u), `src/components/NotificationOptIn.tsx` (siteye eklenen,
+TelegramPopup/BonusPopup'tan farklı olarak köşede beliren, ısrarcı
+olmayan izin isteme kartı). Abonelikler `push_subscription` tablosunda
+tutulur; `userId` nullable'dır — bildirim izni bir hesap gerektirmez,
+tıpkı FXStreet'te olduğu gibi anonim ziyaretçi de abone olabilir.
+
+market-analysis-share, campaign-digest ve blog-share — üçü de Telegram
+gönderiminin hemen ardından `sendPushToAll(...)` çağırır (best-effort;
+push başarısız olursa Telegram gönderimini etkilemez). Yani "haber,
+analiz, reklam" içeriğinin hepsi hem Telegram'a hem push'a aynı anda
+gider — ayrı bir push-only cron yok.
+
+**Prod'da çalışması için gereken tek eksik:** Vercel production'da
+`NEXT_PUBLIC_VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT`
+tanımlı değil (yerelde `.env.local`'da mevcut, `npx web-push
+generate-vapid-keys` ile üretildi). Bu üç değişken Vercel'e eklenip
+yeniden deploy edilmeden web push hiçbir yerde çalışmaz.
 
 ## Otomasyon durumları ne anlama gelir
 

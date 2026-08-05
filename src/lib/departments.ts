@@ -55,15 +55,21 @@ export const departments: Department[] = [
     },
     owns: [
       "src/app/api/cron/news-update/route.ts",
+      "src/app/api/cron/blog-share/route.ts",
       "src/app/blog",
+      "src/data/blog.ts",
       "src/lib/news.ts",
       "src/lib/relevance-filter.ts",
       "src/lib/translate.ts",
     ],
-    // Blocked, not just deferred: needs DEEPL_API_KEY and
-    // UPSTASH_REDIS_REST_URL/TOKEN in Vercel production before this can
-    // move to "active" — see docs/ORGANIZATION.md.
-    automation: "paused",
+    // "active" as of 2026-08-05: blog-share (announces manually-written
+    // /blog posts) is scheduled, per the user's explicit request in that
+    // session to automate posting. news-update itself (external news
+    // translation) stays workflow_dispatch-only — it still needs
+    // DEEPL_API_KEY and UPSTASH_REDIS_REST_URL/TOKEN in Vercel production,
+    // see docs/ORGANIZATION.md — same "department active, one owned cron
+    // still manual" shape as market-intelligence above.
+    automation: "active",
   },
   {
     id: "broker-intelligence",
@@ -116,14 +122,22 @@ export const departments: Department[] = [
     id: "social-community",
     name: "Sosyal Medya & Topluluk Departmanı",
     mission:
-      "Telegram kanalını ve VIP topluluğu yönetmek; diğer departmanların içeriğini tek bir marka sesiyle yayınlamak.",
+      "Telegram kanalını, web push bildirimlerini ve VIP topluluğu yönetmek; diğer departmanların içeriğini tek bir marka sesiyle yayınlamak.",
     expert: {
       name: "Barış Ongun",
       title: "Topluluk ve Sosyal Medya Yöneticisi",
-      focus: "Telegram gönderim altyapısı, VIP davet akışı, ton tutarlılığı",
+      focus: "Telegram gönderim altyapısı, web push bildirimleri, VIP davet akışı, ton tutarlılığı",
       voice: "Premium ama samimi, asla spam sıklığında değil",
     },
-    owns: ["src/lib/telegram.ts", ".github/workflows/telegram-cron.yml"],
+    owns: [
+      "src/lib/telegram.ts",
+      "src/lib/push.ts",
+      "src/app/api/push/subscribe/route.ts",
+      "src/app/api/push/unsubscribe/route.ts",
+      "src/components/NotificationOptIn.tsx",
+      "public/sw.js",
+      ".github/workflows/telegram-cron.yml",
+    ],
     automation: "active",
   },
   {

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
+import { sendPushToAll } from "@/lib/push";
 import { marketAnalysisPosts } from "@/data/marketAnalysis";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
 
@@ -40,5 +41,12 @@ export async function GET(req: NextRequest) {
   const result = await sendTelegramMessage(text);
   await markPostedToTelegram(key);
 
-  return NextResponse.json({ ok: true, posted: true, slug: latest.slug, result });
+  let push: { sent: number; removed: number } | { error: string } = { sent: 0, removed: 0 };
+  try {
+    push = await sendPushToAll({ title: latest.title, body: latest.excerpt, url: `/piyasa-analizi/${latest.slug}` });
+  } catch (err) {
+    push = { error: (err as Error).message };
+  }
+
+  return NextResponse.json({ ok: true, posted: true, slug: latest.slug, result, push });
 }

@@ -206,13 +206,15 @@ export const vipSubscriptions = pgTable("vip_subscription", {
 // One row per browser/device push subscription. `endpoint` is the natural
 // dedup key — the same browser re-subscribing (e.g. after clearing data)
 // gets a new endpoint, an existing one is just refreshed in place.
+// `userId` is nullable (like cashbackAccounts.userId) — notification opt-in
+// is a public, anonymous-by-default prompt like FXStreet's, not gated
+// behind an account; it's only linked when the visitor happens to be
+// signed in.
 export const pushSubscriptions = pgTable("push_subscription", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-  userId: text("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
+  userId: text("user_id").references(() => users.id, { onDelete: "cascade" }),
   endpoint: text("endpoint").notNull().unique(),
   p256dh: text("p256dh").notNull(),
   auth: text("auth").notNull(),

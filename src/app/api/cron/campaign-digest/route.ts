@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
+import { sendPushToAll } from "@/lib/push";
 import { brokers } from "@/data/brokers";
 import { getCashbackProgram } from "@/data/cashback";
 
@@ -40,5 +41,17 @@ export async function GET(req: NextRequest) {
     telegramSiteCta();
 
   const result = await sendTelegramMessage(text, { disablePreview: true });
-  return NextResponse.json({ ok: true, posted: true, count: campaigns.length, result });
+
+  let push: { sent: number; removed: number } | { error: string } = { sent: 0, removed: 0 };
+  try {
+    push = await sendPushToAll({
+      title: "Bu haftanın aktif broker kampanyaları",
+      body: campaigns.map((b) => b.name).join(", "),
+      url: "/campaigns",
+    });
+  } catch (err) {
+    push = { error: (err as Error).message };
+  }
+
+  return NextResponse.json({ ok: true, posted: true, count: campaigns.length, result, push });
 }
