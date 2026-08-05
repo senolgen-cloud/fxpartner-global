@@ -7,10 +7,11 @@ import HeroVideo from "@/components/HeroVideo";
 import HeroSpotlight from "@/components/HeroSpotlight";
 import TradingVideo from "@/components/TradingVideo";
 import HeroCashbackForm from "@/components/HeroCashbackForm";
+import HeroFeatureRow from "@/components/HeroFeatureRow";
+import HeroEcosystemMockups from "@/components/HeroEcosystemMockups";
 import ShowcaseGallery from "@/components/ShowcaseGallery";
 import RegulatorBadges from "@/components/RegulatorBadges";
 import HeroBrokerSearch from "@/components/HeroBrokerSearch";
-import StickyCTA from "@/components/StickyCTA";
 import { brokers } from "@/data/brokers";
 import { lookupBrokers } from "@/data/brokerLookup";
 import { faqSchema } from "@/lib/schema";
@@ -96,21 +97,22 @@ export default function Home() {
                   aria-hidden="true"
                   className="signal-dot h-1.5 w-1.5 rounded-full bg-signal"
                 />
-                2026 Broker Guide
+                Learn · Trade · Grow
               </span>
             </Reveal>
 
             <Reveal delay={90}>
               <h1 className="mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
-                Learn the difference between forex brokers before you pick one.
+                Everything you need.{" "}
+                <span className="text-signal">One trading ecosystem.</span>
               </h1>
             </Reveal>
 
             <Reveal delay={180}>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-                We compared XM, AvaTrade, Lite Finance, and other leading
-                brokers worldwide in one place, by regulation, cost,
-                platform, and withdrawal speed.
+                FXPARTNER is your all-in-one platform for smarter trading.
+                Signals, AI insights, economic calendar, trusted brokers and
+                a global community.
               </p>
             </Reveal>
 
@@ -126,7 +128,7 @@ export default function Home() {
                   href="#brokers"
                   className="lift-on-hover rounded-full bg-gradient-to-b from-signal to-signal-strong px-6 py-3 text-sm font-medium text-on-signal shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25)] transition-shadow hover:shadow-lg hover:shadow-signal/30"
                 >
-                  See the Rankings
+                  Explore the Ecosystem
                 </a>
                 <a
                   href="#comparison"
@@ -137,8 +139,14 @@ export default function Home() {
               </div>
             </Reveal>
 
+            <Reveal delay={320}>
+              <div className="mt-12 border-t border-hairline pt-10">
+                <HeroFeatureRow />
+              </div>
+            </Reveal>
+
             <Reveal delay={360}>
-              <dl className="mt-16 grid grid-cols-2 gap-6 border-t border-hairline pt-8 sm:grid-cols-4">
+              <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-hairline pt-8 sm:grid-cols-4">
                 <div>
                   <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
                     Brokers Tracked
@@ -176,8 +184,17 @@ export default function Home() {
           </div>
 
           <Reveal delay={200}>
-            <HeroCashbackForm />
+            <HeroEcosystemMockups brokers={brokers} />
           </Reveal>
+          </div>
+        </section>
+
+        {/* Cashback lead capture */}
+        <section className="bg-ink-soft">
+          <div className="mx-auto max-w-6xl px-6 py-16">
+            <div className="mx-auto max-w-lg">
+              <HeroCashbackForm />
+            </div>
           </div>
         </section>
 
@@ -306,7 +323,6 @@ export default function Home() {
       </main>
 
       <Footer />
-      <StickyCTA brokerCount={brokers.length} />
     </>
   );
 }

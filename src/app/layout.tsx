@@ -84,10 +84,10 @@ export default function RootLayout({
         />
         <div className="sticky top-0 z-40">
           <Header standalone={false} />
-          <Ticker />
           <BrokerHeroSlider brokers={brokers} />
         </div>
         {children}
+        <Ticker />
         <TelegramPopup />
         <BonusPopup />
         <NotificationOptIn />
