@@ -73,7 +73,7 @@ export default function RootLayout({
       lang="en"
       className={`${geist.variable} ${jetbrainsMono.variable} ${poppins.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-paper text-text-dark">
+      <body className="min-h-full flex flex-col bg-paper text-text-dark pb-12">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
@@ -87,7 +87,9 @@ export default function RootLayout({
           <BrokerHeroSlider brokers={brokers} />
         </div>
         {children}
-        <Ticker />
+        <div className="fixed inset-x-0 bottom-0 z-40">
+          <Ticker />
+        </div>
         <TelegramPopup />
         <BonusPopup />
         <NotificationOptIn />
