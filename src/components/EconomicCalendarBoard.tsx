@@ -34,14 +34,27 @@ function toEvent(e: EventJson): EconomicEvent {
   return { ...e, date: new Date(e.date) };
 }
 
+// Fixed to Türkiye time (UTC+3, no DST since 2016) rather than the
+// visitor's local timezone — keeps server and client render identical
+// (avoids a hydration mismatch) while showing the times traders here
+// actually expect, e.g. a 12:30 UTC release reads as 15:30.
+const DISPLAY_TZ = "Europe/Istanbul";
+
 function dayLabel(date: Date) {
-  return date.toLocaleDateString("tr-TR", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
+  return date.toLocaleDateString("tr-TR", { weekday: "long", day: "numeric", month: "long", timeZone: DISPLAY_TZ });
+}
+
+// yyyy-mm-dd in DISPLAY_TZ, via en-CA which formats dates in that order —
+// used purely to group rows, so it just needs to be deterministic and
+// timezone-consistent with what's shown, not human-facing.
+function istanbulDateKey(date: Date) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: DISPLAY_TZ }).format(date);
 }
 
 function groupByDay(events: EconomicEvent[]) {
   const groups = new Map<string, EconomicEvent[]>();
   for (const e of events) {
-    const key = e.date.toISOString().slice(0, 10);
+    const key = istanbulDateKey(e.date);
     if (!groups.has(key)) groups.set(key, []);
     groups.get(key)!.push(e);
   }
@@ -55,7 +68,7 @@ function EventRow({ event }: { event: EconomicEvent }) {
   return (
     <div className="grid grid-cols-[64px_1fr_auto] items-center gap-3 border-b border-hairline px-4 py-3 last:border-0 sm:grid-cols-[64px_28px_1fr_100px_80px_80px_80px]">
       <span className="font-mono text-xs text-text-on-ink-muted">
-        {event.date.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit", timeZone: "UTC" })}
+        {event.date.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit", timeZone: DISPLAY_TZ })}
       </span>
       <span className="hidden text-base sm:inline" aria-hidden="true">
         {FLAGS[event.country] ?? "🏳️"}
@@ -113,7 +126,7 @@ export default function EconomicCalendarBoard({ initialEvents }: { initialEvents
     <div className="overflow-hidden rounded-2xl border border-hairline bg-ink-soft">
       <div className="flex items-center justify-between border-b border-hairline px-6 py-4">
         <div className="grid grid-cols-[64px_28px_1fr_100px_80px_80px_80px] gap-3 text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted max-sm:hidden">
-          <span>Saat</span>
+          <span>Saat (TRT)</span>
           <span />
           <span>Veri</span>
           <span>Önem</span>

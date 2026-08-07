@@ -4,7 +4,7 @@ import EconomicCalendarBoard from "@/components/EconomicCalendarBoard";
 import { getWeekCalendar } from "@/lib/economicCalendar";
 
 export const metadata: Metadata = {
-  title: "Ekonomik Takvim | FXPARTNER",
+  title: "Economic Calendar | FXPARTNER",
   description:
     "Canlı ekonomik takvim — CPI, NFP, faiz kararları ve diğer önemli makroekonomik veriler, açıklandığı anda gerçek rakamlarla.",
   alternates: { canonical: "/ekonomik-takvim" },
@@ -28,7 +28,7 @@ export default async function EconomicCalendarPage() {
       <main className="flex-1 bg-ink text-text-on-ink">
         <section className="border-b border-hairline">
           <div className="mx-auto max-w-6xl px-6 py-16">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">Ekonomik Takvim</span>
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">Economic Calendar</span>
             <h1 className="mt-3 font-display text-3xl font-semibold md:text-4xl">
               Bu Haftanın Piyasa Verileri
             </h1>
