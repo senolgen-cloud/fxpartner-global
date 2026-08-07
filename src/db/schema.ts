@@ -292,3 +292,16 @@ export const complaints = pgTable("complaint", {
   status: text("status").$type<ComplaintStatus>().notNull().default("new"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
+
+// One row per /api/ai-assistant call — the visitor's latest message and
+// Gemini's reply, for the /admin/ai-sorulari log. Not a full transcript
+// (the client resends prior turns each request, so logging every request
+// would duplicate earlier turns); just the new question/answer pair.
+export const aiAssistantLogs = pgTable("ai_assistant_log", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  question: text("question").notNull(),
+  reply: text("reply").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});

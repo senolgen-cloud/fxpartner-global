@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getTickerPairs } from "@/lib/rates";
 import { brokers } from "@/data/brokers";
+import { db } from "@/db";
+import { aiAssistantLogs } from "@/db/schema";
 
 export const runtime = "nodejs";
 
@@ -108,6 +110,17 @@ export async function POST(req: NextRequest) {
   const reply: string =
     data?.candidates?.[0]?.content?.parts?.map((p: { text?: string }) => p.text ?? "").join("") ??
     "Üzgünüm, şu anda bir yanıt oluşturamadım.";
+
+  // Best-effort — a logging failure should never break the actual reply.
+  const lastUserMessage = messages[messages.length - 1];
+  try {
+    await db.insert(aiAssistantLogs).values({
+      question: String(lastUserMessage.content).slice(0, 2000),
+      reply,
+    });
+  } catch (err) {
+    console.error("Failed to log AI assistant Q&A:", err);
+  }
 
   return NextResponse.json({ reply });
 }
