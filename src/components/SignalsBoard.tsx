@@ -89,6 +89,7 @@ function SignalTable({ title, signals, closedView }: { title: string; signals: S
                         day: "numeric",
                         hour: "2-digit",
                         minute: "2-digit",
+                        timeZone: "UTC",
                       })}
                     </td>
                     <td className="whitespace-nowrap px-4 py-3.5 font-display font-semibold text-text-on-ink">
@@ -204,6 +205,7 @@ function SignalCard({ signal }: { signal: Signal }) {
           day: "numeric",
           hour: "2-digit",
           minute: "2-digit",
+          timeZone: "UTC",
         })}
       </p>
     </div>
