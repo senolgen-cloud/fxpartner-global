@@ -15,6 +15,9 @@ import HeroBrokerSearch from "@/components/HeroBrokerSearch";
 import { brokers } from "@/data/brokers";
 import { lookupBrokers } from "@/data/brokerLookup";
 import { faqSchema } from "@/lib/schema";
+import { db } from "@/db";
+import { tradeSignals } from "@/db/schema";
+import { desc, eq } from "drizzle-orm";
 
 const trackedBrokerCount = lookupBrokers.length;
 const trackedRegulatorCount = new Set([
@@ -68,7 +71,21 @@ const faqs = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  // Prefer the latest still-open trade so the hero card reflects a real
+  // signal a visitor could still act on; fall back to the latest closed
+  // one so the card isn't empty between open trades.
+  const latestSignal =
+    (await db.query.tradeSignals.findFirst({
+      where: eq(tradeSignals.status, "active"),
+      orderBy: desc(tradeSignals.createdAt),
+    })) ??
+    (await db.query.tradeSignals.findFirst({
+      where: eq(tradeSignals.status, "closed"),
+      orderBy: desc(tradeSignals.closedAt),
+    })) ??
+    null;
+
   return (
     <>
       <script
@@ -147,7 +164,7 @@ export default function Home() {
           </div>
 
           <Reveal delay={200}>
-            <HeroEcosystemMockups brokers={brokers} />
+            <HeroEcosystemMockups brokers={brokers} latestSignal={latestSignal} />
           </Reveal>
           </div>
         </section>

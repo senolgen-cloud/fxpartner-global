@@ -150,20 +150,29 @@ function SignalCard({ signal }: { signal: Signal }) {
   const isClosed = signal.status === "closed";
 
   const resultLine = signal.pips
-    ? `${parseFloat(signal.pips) > 0 ? "+" : ""}${signal.pips} pips`
+    ? `${parseFloat(signal.pips) > 0 ? "+" : ""}${signal.pips}`
     : signal.profit
-      ? `${parseFloat(signal.profit) > 0 ? "+" : ""}${signal.profit} USD`
+      ? `${parseFloat(signal.profit) > 0 ? "+" : ""}$${signal.profit}`
       : null;
+  const resultUnit = signal.pips ? "pips" : null;
+  const resultColor = outcomeColor(signal.outcome);
+
+  // Purely decorative — same as the homepage hero card's sparkline, never
+  // meant to represent a real intraday price series (we don't have one
+  // for most instruments), just a visual accent matching direction.
+  const sparklinePath = isSell
+    ? "M0 8 L20 10 L40 6 L60 18 L80 14 L100 26 L120 22 L140 32 L160 28 L180 36 L200 34"
+    : "M0 32 L20 30 L40 34 L60 22 L80 26 L100 14 L120 18 L140 8 L160 12 L180 4 L200 6";
 
   return (
-    <div className="rounded-2xl border border-hairline bg-ink-soft p-5">
+    <div className="overflow-hidden rounded-2xl border border-hairline bg-gradient-to-b from-ink-soft to-ink p-5 shadow-[0_20px_50px_-25px_rgba(0,0,0,0.7)]">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <span className="font-display text-lg font-semibold text-text-on-ink">{signal.pair}</span>
+          <span className="notranslate font-display text-lg font-semibold text-text-on-ink">{signal.pair}</span>
           {(isBuy || isSell) && (
             <span
-              className="rounded-full border px-2.5 py-0.5 text-xs font-semibold"
-              style={{ borderColor: directionColor, color: directionColor }}
+              className="rounded-full px-2.5 py-0.5 text-xs font-semibold"
+              style={{ background: `${directionColor}26`, color: directionColor }}
             >
               {signal.direction}
             </span>
@@ -184,22 +193,36 @@ function SignalCard({ signal }: { signal: Signal }) {
         )}
       </div>
 
-      {resultLine && (
-        <p className="mt-2 font-mono text-sm font-semibold" style={{ color: outcomeColor(signal.outcome) }}>
-          {resultLine}
+      {isClosed && resultLine ? (
+        <p className="mt-2 font-display text-2xl font-bold tabular-stat" style={{ color: resultColor }}>
+          {resultLine} {resultUnit && <span className="text-sm font-medium text-text-on-ink-muted">{resultUnit}</span>}
+        </p>
+      ) : (
+        <p className="mt-2 font-display text-2xl font-bold tabular-stat text-text-on-ink">
+          {signal.entry}
+          <span className="ml-2 text-sm font-medium text-text-on-ink-muted">entry</span>
         </p>
       )}
 
-      <div className="mt-4 space-y-1.5 border-t border-hairline pt-4">
-        <Level label="Entry" value={signal.entry} color="var(--text-on-ink)" />
-        <Level label="Take Profit" value={signal.target1} color={TICK_UP} />
+      <svg viewBox="0 0 200 40" className="mt-3 h-9 w-full" style={{ color: directionColor }} fill="none">
+        <path d={sparklinePath} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+
+      <div className="mt-3 flex items-center justify-between border-t border-hairline pt-3 font-mono text-[11px]">
+        <span className="text-text-on-ink-muted">
+          {isClosed ? "Close" : "Entry"}{" "}
+          <span className="text-text-on-ink">{isClosed ? signal.closePrice : signal.entry}</span>
+        </span>
+        {signal.target1 && <span style={{ color: TICK_UP }}>TP {signal.target1}</span>}
+        {signal.stop && <span style={{ color: TICK_DOWN }}>SL {signal.stop}</span>}
+      </div>
+
+      <div className="mt-3 space-y-1.5 border-t border-hairline pt-3">
         {signal.target2 && <Level label="Take Profit 2" value={signal.target2} color={TICK_UP} />}
-        <Level label="Stop Loss" value={signal.stop} color={TICK_DOWN} />
-        {isClosed && <Level label="Close" value={signal.closePrice} color="var(--text-on-ink)" />}
         {signal.volume && <Level label="Volume" value={`${signal.volume} lot`} color="var(--text-on-ink-muted)" />}
       </div>
 
-      <p className="mt-4 font-mono text-[11px] text-text-on-ink-muted">
+      <p className="mt-3 font-mono text-[11px] text-text-on-ink-muted">
         {(isClosed ? signal.closedAt : signal.createdAt)?.toLocaleString("en-US", {
           month: "short",
           day: "numeric",
