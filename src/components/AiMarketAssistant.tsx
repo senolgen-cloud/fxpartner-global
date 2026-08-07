@@ -7,29 +7,51 @@ type ChatMessage = { role: "user" | "assistant"; content: string };
 // Minimal markdown → JSX: turns [text](url) links and **bold** into real
 // elements while leaving everything else as plain text. Good enough for
 // Gemini's replies without pulling in a full markdown renderer.
+//
+// Matched with matchAll (not split+regex) because Gemini often wraps
+// links in bold — **[text](url)** — and a split-based single-capture
+// approach can't tell that apart from plain **bold**, so it swallowed
+// the link markup as literal, non-clickable text. This tries the
+// bold-wrapped-link form first, then a plain link, then plain bold.
+const TOKEN_RE = /\*\*\[([^\]]+)\]\(([^)]+)\)\*\*|\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*/g;
+
 function renderContent(text: string, linkClassName: string) {
-  const parts = text.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*)/g);
-  return parts.map((part, i) => {
-    const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-    if (linkMatch) {
-      return (
-        <a
-          key={i}
-          href={linkMatch[2]}
-          target="_blank"
-          rel="noopener noreferrer nofollow sponsored"
-          className={linkClassName}
-        >
-          {linkMatch[1]}
+  const nodes: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let key = 0;
+  let match: RegExpExecArray | null;
+
+  TOKEN_RE.lastIndex = 0;
+  while ((match = TOKEN_RE.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      nodes.push(<Fragment key={key++}>{text.slice(lastIndex, match.index)}</Fragment>);
+    }
+
+    const [, boldLinkText, boldLinkUrl, linkText, linkUrl, boldText] = match;
+    if (boldLinkText !== undefined) {
+      nodes.push(
+        <strong key={key++}>
+          <a href={boldLinkUrl} target="_blank" rel="noopener noreferrer nofollow sponsored" className={linkClassName}>
+            {boldLinkText}
+          </a>
+        </strong>
+      );
+    } else if (linkText !== undefined) {
+      nodes.push(
+        <a key={key++} href={linkUrl} target="_blank" rel="noopener noreferrer nofollow sponsored" className={linkClassName}>
+          {linkText}
         </a>
       );
+    } else if (boldText !== undefined) {
+      nodes.push(<strong key={key++}>{boldText}</strong>);
     }
-    const boldMatch = part.match(/^\*\*([^*]+)\*\*$/);
-    if (boldMatch) {
-      return <strong key={i}>{boldMatch[1]}</strong>;
-    }
-    return <Fragment key={i}>{part}</Fragment>;
-  });
+
+    lastIndex = TOKEN_RE.lastIndex;
+  }
+  if (lastIndex < text.length) {
+    nodes.push(<Fragment key={key++}>{text.slice(lastIndex)}</Fragment>);
+  }
+  return nodes;
 }
 
 const SUGGESTED_QUESTIONS = [
