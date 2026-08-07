@@ -15,9 +15,23 @@ type ChatMessage = { role: "user" | "assistant"; content: string };
 // click through that link earns FXPARTNER a commission.
 function brokerLinkLines() {
   return brokers
-    .map((b) => `- ${b.name}: referans linki ${b.referralUrl} | site incelemesi ${SITE_URL}/brokers/${b.slug}`)
+    .map((b) => {
+      const base = `- ${b.name}: referans linki ${b.referralUrl} | site incelemesi ${SITE_URL}/brokers/${b.slug}`;
+      const promo = BROKER_PROMO_NOTES[b.slug];
+      return promo ? `${base} | özel avantaj: ${promo}` : base;
+    })
     .join("\n");
 }
+
+// Broker-specific promotional notes surfaced only in AI assistant replies
+// (distinct from the structured, page-rendered `promotion` field in
+// src/data/brokers.ts, which is reserved for the broker's own verified
+// campaigns) — the model is instructed to weave these in naturally when
+// that broker comes up, not recite them verbatim.
+const BROKER_PROMO_NOTES: Record<string, string> = {
+  "lite-finance":
+    "FXPARTNER'e özel %20 Marjin Destek Bonusu — hesap açılışında Ortak Kodu alanına 667827970 girilerek etkinleştirilir ve LiteFinance'daki birçok ek avantajın kilidini açar.",
+};
 
 // Keeps the request small and on-topic — this assistant only talks about
 // forex/market analysis, not general chit-chat, coding help, etc.
@@ -36,6 +50,7 @@ Kurallar:
 - ASLA doğrudan yatırım tavsiyesi verme ("şunu al", "şimdi sat" gibi kesin talimatlar verme). Senaryo ve olasılık dilinde konuş ("X olursa, genellikle Y beklenir" gibi).
 - Uydurma fiyat, veri veya haber verme. Emin olmadığın konularda bunu belirt.
 - Kullanıcı yukarıdaki listede bulunan bir brokeri sorarsa (örn. "XM güvenilir mi?", "IC Markets nasıl?"), cevabında MUTLAKA o brokerin markdown formatındaki referans linkini ve/veya site incelemesi linkini ver. Listede olmayan bir broker sorulursa, onun hakkında sitede bilgi bulunmadığını belirt ve link uydurma.
+- Bir brokerin yanında "özel avantaj" notu varsa, bunu cevabına kurumsal ve akıcı bir dille, doğal bir cümle içinde dahil et (madde madde kopyalama, düz metin olarak anlat). Bu notu sadece o broker sorulduğunda kullan, başka brokerlere uygulama veya uydurma.
 - Türkçe yanıt ver, kullanıcı başka dilde yazarsa o dilde yanıtla.`;
 }
 
