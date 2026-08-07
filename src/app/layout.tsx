@@ -50,6 +50,10 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     title: "FXPARTNER",
   },
+  icons: {
+    icon: "/fxpartner-icon.png",
+    apple: "/fxpartner-icon.png",
+  },
   title: {
     default: "FXPARTNER | Forex Broker Comparison and Reviews",
     template: "%s | FXPARTNER",
