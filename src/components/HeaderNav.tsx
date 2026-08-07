@@ -8,6 +8,7 @@ const primaryLinks = [
   { href: "/#brokers", label: "Broker Rankings" },
   { href: "/signals", label: "Signals" },
   { href: "/ai-asistan", label: "AI Assistant" },
+  { href: "/ekonomik-takvim", label: "Ekonomik Takvim" },
   { href: "/categories", label: "Categories" },
   { href: "/blog", label: "Blog" },
   { href: "/piyasa-analizi", label: "Market Analysis" },

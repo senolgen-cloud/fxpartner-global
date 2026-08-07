@@ -257,6 +257,14 @@ export const tradeSignals = pgTable("trade_signal", {
   closedAt: timestamp("closed_at"),
 });
 
+// Dedup store for /api/cron/economic-calendar-alert — id is a stable hash
+// of (title, country, date) from the calendar feed, so a released event
+// only ever triggers one push even across multiple cron runs.
+export const economicCalendarAlerts = pgTable("economic_calendar_alert", {
+  id: text("id").primaryKey(),
+  notifiedAt: timestamp("notified_at").notNull().defaultNow(),
+});
+
 export const complaintStatusValues = ["new", "in_progress", "resolved", "closed"] as const;
 export type ComplaintStatus = (typeof complaintStatusValues)[number];
 

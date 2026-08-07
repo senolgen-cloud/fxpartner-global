@@ -76,3 +76,20 @@ jobs:
         run: |
           curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
             https://fxpartner.global/api/cron/blog-share
+
+  # Owned by Piyasa Analizi Departmanı — see docs/ORGANIZATION.md.
+  # New automation: web-pushes real released figures (actual vs
+  # forecast/previous) for medium/high-impact economic calendar events.
+  # Paused: no schedule trigger yet — needs Compliance sign-off before
+  # moving to "active" per the department's automation governance note
+  # in src/lib/departments.ts. Run manually via workflow_dispatch until
+  # then; to activate, add a `schedule:` entry above (every 5 min) and
+  # a matching `github.event.schedule ==` condition here.
+  economic-calendar-alert:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger economic-calendar-alert
+        run: |
+          curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            https://fxpartner.global/api/cron/economic-calendar-alert
