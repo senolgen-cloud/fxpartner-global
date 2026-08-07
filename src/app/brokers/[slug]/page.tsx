@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
+import BonusPopup from "@/components/BonusPopup";
 import ShareButtons from "@/components/ShareButtons";
 import RatingStars from "@/components/RatingStars";
 import TrustGauge from "@/components/TrustGauge";
@@ -158,6 +159,8 @@ export default async function BrokerDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
       />
+      <BonusPopup slug={broker.slug} />
+
       {/* Floating "Open Account" sticker — pinned to the vertical center of
           the right edge on every breakpoint, so a visitor can jump straight
           to the broker's signup at any scroll depth without hunting for the

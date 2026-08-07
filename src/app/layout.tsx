@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, JetBrains_Mono, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import BonusPopup from "@/components/BonusPopup";
-import TelegramPopup from "@/components/TelegramPopup";
 import NotificationOptIn from "@/components/NotificationOptIn";
 import GoogleTranslateWidget from "@/components/GoogleTranslateWidget";
 import Header from "@/components/Header";
@@ -106,8 +104,6 @@ export default function RootLayout({
         <div className="fixed inset-x-0 bottom-0 z-40">
           <Ticker />
         </div>
-        <TelegramPopup />
-        <BonusPopup />
         <NotificationOptIn />
         <GoogleTranslateWidget />
         <Analytics />

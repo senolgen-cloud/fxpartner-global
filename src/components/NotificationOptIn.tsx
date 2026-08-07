@@ -13,9 +13,9 @@ function urlBase64ToUint8Array(base64Url: string): Uint8Array {
   return Uint8Array.from([...raw].map((c) => c.charCodeAt(0)));
 }
 
-// A small, dismissible corner prompt — deliberately not another full-screen
-// modal like TelegramPopup/BonusPopup, since those two already fire on
-// every fresh session and a third stacked modal would be too much.
+// A small, dismissible corner prompt (not a full-screen modal like
+// BonusPopup) — sitewide, since this is the site's general encouragement
+// to enable notifications outside the broker-specific bonus popup.
 // Some browsers (observed on Edge/Windows) can leave
 // Notification.requestPermission() or pushManager.subscribe() pending
 // indefinitely — no resolve, no reject — if the OS-level notification

@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { getBrokerBySlug } from "@/data/brokers";
-import { TELEGRAM_CLOSED_EVENT, TELEGRAM_DISMISS_KEY } from "@/components/TelegramPopup";
 
 const DISMISS_KEY = "fxpartner-bonus-popup-dismissed";
 
@@ -30,27 +29,22 @@ const PROMOS = [
   },
 ] as const;
 
-export default function BonusPopup() {
+// Shown only on the review page of a broker that actually has a promo
+// below (see /brokers/[slug]/page.tsx) — no more sitewide random-broker
+// popup stacked behind the Telegram one, which is what made every fresh
+// visit feel like a wall of back-to-back popups.
+export default function BonusPopup({ slug }: { slug: string }) {
   const [open, setOpen] = useState(false);
-  const [promoIndex, setPromoIndex] = useState<number | null>(null);
 
-  // Waits for the Telegram popup to be dismissed first (it's shown as the
-  // very first popup), so the two never stack on top of each other.
+  const promo = PROMOS.find((p) => p.slug === slug);
+  const broker = promo ? getBrokerBySlug(promo.slug) : undefined;
+
   useEffect(() => {
+    if (!promo) return;
     if (sessionStorage.getItem(DISMISS_KEY)) return;
-
-    function startTimer() {
-      setPromoIndex(Math.floor(Math.random() * PROMOS.length));
-      setTimeout(() => setOpen(true), 1500);
-    }
-
-    if (sessionStorage.getItem(TELEGRAM_DISMISS_KEY)) {
-      startTimer();
-      return;
-    }
-    window.addEventListener(TELEGRAM_CLOSED_EVENT, startTimer, { once: true });
-    return () => window.removeEventListener(TELEGRAM_CLOSED_EVENT, startTimer);
-  }, []);
+    const timer = setTimeout(() => setOpen(true), 1500);
+    return () => clearTimeout(timer);
+  }, [promo]);
 
   useEffect(() => {
     if (!open) return;
@@ -65,9 +59,6 @@ export default function BonusPopup() {
     setOpen(false);
     sessionStorage.setItem(DISMISS_KEY, "1");
   }
-
-  const promo = promoIndex !== null ? PROMOS[promoIndex] : null;
-  const broker = promo ? getBrokerBySlug(promo.slug) : undefined;
 
   if (!open || !promo || !broker) return null;
 
