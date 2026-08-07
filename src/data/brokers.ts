@@ -240,7 +240,7 @@ export const brokers: Broker[] = [
     },
   },
   {
-    rank: 2,
+    rank: 4,
     slug: "avatrade",
     name: "AvaTrade",
     logo: "/brokers/avatrade.jpg",
@@ -271,10 +271,10 @@ export const brokers: Broker[] = [
     categories: ["Institutional Trust", "Multi-Platform"],
     scoreCost: 3,
     scoreWithdrawal: 3,
-    scoreOverride: 9.2,
+    scoreOverride: 9.0,
   },
   {
-    rank: 5,
+    rank: 6,
     slug: "tickmill",
     name: "Tickmill",
     logo: "/brokers/tickmill.webp",
@@ -356,7 +356,7 @@ export const brokers: Broker[] = [
     },
   },
   {
-    rank: 6,
+    rank: 7,
     slug: "exness",
     name: "EXNESS",
     logo: "/brokers/exness.png",
@@ -424,7 +424,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
   },
   {
-    rank: 9,
+    rank: 2,
     slug: "fxpro",
     name: "FxPro",
     logo: "/brokers/fxpro.png",
@@ -447,14 +447,14 @@ export const brokers: Broker[] = [
       "Over 20 years of industry experience",
     ],
     cons: [
-      "Scores lower than other FXPARTNER partners",
       "Commission structure can be complex on some account types",
     ],
     bestFor: "Experienced investors seeking high leverage and multiple platforms",
-    accentNote: "Highest leverage option",
+    accentNote: "Top-tier regulated, high leverage",
     categories: ["High Leverage", "Institutional Trust"],
     scoreCost: 3,
     scoreWithdrawal: 3,
+    scoreOverride: 9.3,
   },
   {
     rank: 12,
@@ -492,7 +492,7 @@ export const brokers: Broker[] = [
     scoreOverride: 5.2,
   },
   {
-    rank: 8,
+    rank: 9,
     slug: "thinkmarkets",
     name: "ThinkMarkets",
     logo: "/brokers/thinkmarkets.jpg",
@@ -557,7 +557,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
   },
   {
-    rank: 4,
+    rank: 5,
     slug: "ic-markets",
     name: "IC Markets",
     logo: "/brokers/ic-markets.png",
@@ -690,7 +690,7 @@ export const brokers: Broker[] = [
     scoreOverride: 3.8,
   },
   {
-    rank: 7,
+    rank: 8,
     slug: "fxt",
     name: "FXT",
     logo: "/brokers/fxt.svg",
