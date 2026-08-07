@@ -16,9 +16,25 @@ function urlBase64ToUint8Array(base64Url: string): Uint8Array {
 // A small, dismissible corner prompt — deliberately not another full-screen
 // modal like TelegramPopup/BonusPopup, since those two already fire on
 // every fresh session and a third stacked modal would be too much.
+// Some browsers (observed on Edge/Windows) can leave
+// Notification.requestPermission() or pushManager.subscribe() pending
+// indefinitely — no resolve, no reject — if the OS-level notification
+// permission dialog gets stuck or never surfaces. Racing every attempt
+// against this timeout means the button always recovers instead of
+// staying on "Açılıyor..." forever.
+const ENABLE_TIMEOUT_MS = 15000;
+
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) => setTimeout(() => reject(new Error("timeout")), ms)),
+  ]);
+}
+
 export default function NotificationOptIn() {
   const [visible, setVisible] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (sessionStorage.getItem(DISMISS_KEY)) return;
@@ -43,28 +59,38 @@ export default function NotificationOptIn() {
     }
 
     setBusy(true);
+    setError(false);
     try {
-      const permission = await Notification.requestPermission();
+      const permission = await withTimeout(Notification.requestPermission(), ENABLE_TIMEOUT_MS);
       if (permission !== "granted") {
         dismiss();
         return;
       }
 
-      const registration = await navigator.serviceWorker.register("/sw.js");
-      const subscription = await registration.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(publicKey) as BufferSource,
-      });
+      const registration = await withTimeout(navigator.serviceWorker.register("/sw.js"), ENABLE_TIMEOUT_MS);
+      const subscription = await withTimeout(
+        registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(publicKey) as BufferSource,
+        }),
+        ENABLE_TIMEOUT_MS
+      );
 
-      await fetch("/api/push/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(subscription.toJSON()),
-      });
+      await withTimeout(
+        fetch("/api/push/subscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(subscription.toJSON()),
+        }),
+        ENABLE_TIMEOUT_MS
+      );
 
       dismiss();
     } catch {
-      dismiss();
+      // Timed out or genuinely failed — surface it and let the visitor
+      // retry, rather than silently dismissing (they'd have no idea it
+      // didn't work) or leaving the button stuck on "Açılıyor...".
+      setError(true);
     } finally {
       setBusy(false);
     }
@@ -99,6 +125,12 @@ export default function NotificationOptIn() {
           Yeni piyasa analizi, haber ve broker kampanyaları yayınlandığında
           anında tarayıcı bildirimi al.
         </p>
+        {error && (
+          <p className="mt-2 text-xs text-alert">
+            Bildirim izni alınamadı. Tarayıcınızın site ayarlarından bildirim izninin engellenmediğini
+            kontrol edip tekrar deneyin.
+          </p>
+        )}
         <div className="mt-4 flex gap-2">
           <button
             type="button"
@@ -106,7 +138,7 @@ export default function NotificationOptIn() {
             disabled={busy}
             className="flex-1 rounded-full bg-signal px-4 py-2 text-center text-xs font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
           >
-            {busy ? "Açılıyor..." : "Bildirimleri Aç"}
+            {busy ? "Açılıyor..." : error ? "Tekrar Dene" : "Bildirimleri Aç"}
           </button>
           <button
             type="button"
