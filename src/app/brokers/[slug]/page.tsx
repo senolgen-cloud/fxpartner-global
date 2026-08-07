@@ -158,6 +158,26 @@ export default async function BrokerDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
       />
+      {/* Floating "Open Account" sticker — pinned to the vertical center of
+          the right edge on every breakpoint, so a visitor can jump straight
+          to the broker's signup at any scroll depth without hunting for the
+          hero CTA again. Compact circular badge on narrow screens (stays
+          out of the way of content), a fuller pill once there's room. */}
+      <a
+        href={broker.referralUrl}
+        target="_blank"
+        rel="noopener noreferrer sponsored"
+        aria-label={`Open a ${broker.name} account`}
+        className="group fixed right-3 top-1/2 z-40 flex -translate-y-1/2 items-center gap-2 rounded-full bg-signal py-3 pl-3 pr-3 text-on-signal shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur transition-all duration-200 hover:bg-signal-strong hover:pr-5 active:scale-95 sm:right-5"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+          <path d="M13 5l7 7-7 7M5 12h14" />
+        </svg>
+        <span className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-medium opacity-0 transition-all duration-200 group-hover:max-w-[10rem] group-hover:opacity-100">
+          Open Account
+        </span>
+      </a>
+
       <main className="flex-1">
         {/* Hero + trust gauge */}
         <section className="relative overflow-hidden bg-ink text-text-on-ink">
@@ -165,22 +185,22 @@ export default async function BrokerDetailPage({
             aria-hidden="true"
             className="pointer-events-none absolute -right-24 -top-24 h-[380px] w-[380px] rounded-full bg-gold/10 blur-[110px]"
           />
-          <div className="relative mx-auto max-w-5xl px-6 py-14 md:py-20">
+          <div className="relative mx-auto max-w-5xl px-5 py-12 sm:px-6 md:py-20">
             <Link
               href="/#brokers"
               className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
               ← All brokers
             </Link>
-            <div className="mt-6 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
+            <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
               <div>
                 <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
                   Ranked #{String(broker.rank).padStart(2, "0")}
                 </span>
-                <h1 className="notranslate mt-3 font-display text-4xl font-semibold md:text-5xl">
+                <h1 className="notranslate mt-3 font-display text-[2.5rem] font-semibold leading-[1.1] tracking-tight md:text-5xl">
                   {broker.name}
                 </h1>
-                <p className="mt-3 max-w-lg text-lg text-text-on-ink-muted">
+                <p className="mt-3 max-w-lg text-base text-text-on-ink-muted sm:text-lg">
                   {broker.tagline}
                 </p>
                 <div className="mt-4">
@@ -191,7 +211,7 @@ export default async function BrokerDetailPage({
                     href={broker.referralUrl}
                     target="_blank"
                     rel="noopener noreferrer sponsored"
-                    className="rounded-full bg-signal px-6 py-3 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
+                    className="rounded-full bg-signal px-6 py-3.5 text-sm font-medium text-on-signal shadow-lg shadow-signal/20 transition-all hover:bg-signal-strong hover:shadow-signal/30 active:scale-[0.98]"
                   >
                     Open Account
                   </a>
@@ -203,18 +223,18 @@ export default async function BrokerDetailPage({
                 </div>
               </div>
 
-              <div className="flex justify-center rounded-3xl border border-hairline bg-ink-soft/60 p-8 lg:justify-self-end">
+              <div className="flex justify-center rounded-[28px] border border-hairline bg-ink-soft/60 p-8 shadow-2xl shadow-black/20 backdrop-blur-sm lg:justify-self-end">
                 <TrustGauge score={scores.composite} />
               </div>
             </div>
 
             {/* Quick section nav */}
-            <nav className="mt-12 flex flex-wrap gap-2 border-t border-hairline pt-6">
+            <nav className="mt-10 flex gap-2 overflow-x-auto border-t border-hairline pt-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:flex-wrap md:overflow-visible">
               {navSections.map((s) => (
                 <a
                   key={s.id}
                   href={`#${s.id}`}
-                  className="rounded-full border border-hairline px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted transition-colors hover:border-text-on-ink hover:text-text-on-ink"
+                  className="shrink-0 rounded-full border border-hairline px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted transition-colors hover:border-text-on-ink hover:text-text-on-ink"
                 >
                   {s.label}
                 </a>
@@ -223,10 +243,12 @@ export default async function BrokerDetailPage({
           </div>
         </section>
 
-        {/* Snapshot strip */}
+        {/* Snapshot strip — horizontal snap-scroll row of cards on mobile
+            (reads like an iOS widget stack), settles into the original
+            grid once there's room for it at sm+. */}
         <section className="border-b border-hairline-light bg-paper">
-          <div className="mx-auto max-w-5xl px-6 py-8">
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-5">
+          <div className="mx-auto max-w-5xl py-6 sm:px-6 sm:py-8">
+            <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:grid sm:grid-cols-5 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 [&::-webkit-scrollbar]:hidden">
               {[
                 { icon: "deposit" as const, label: "Min. Deposit", value: broker.minDeposit },
                 { icon: "leverage" as const, label: "Max. Leverage", value: broker.maxLeverage },
@@ -236,7 +258,7 @@ export default async function BrokerDetailPage({
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl border border-hairline-light bg-paper-high p-4"
+                  className="w-[42vw] shrink-0 snap-start rounded-2xl border border-hairline-light bg-paper-high p-4 shadow-sm sm:w-auto sm:shrink sm:shadow-none"
                 >
                   <SnapshotIcon name={stat.icon} />
                   <dt className="mt-2 font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted">
@@ -252,7 +274,7 @@ export default async function BrokerDetailPage({
         </section>
 
         <section className="bg-paper-high">
-          <div className="mx-auto max-w-5xl px-6 py-14">
+          <div className="mx-auto max-w-5xl px-5 py-12 sm:px-6 sm:py-14">
             <p className="max-w-2xl text-lg leading-relaxed text-text-dark/90">
               {broker.summary}
             </p>
@@ -351,7 +373,7 @@ export default async function BrokerDetailPage({
 
             {/* Pros & cons */}
             <div id="pros-cons" className="mt-14 scroll-mt-8 grid gap-8 border-t border-hairline-light pt-10 sm:grid-cols-2">
-              <div className="rounded-2xl border border-tick-up/20 bg-tick-up/5 p-6">
+              <div className="rounded-3xl border border-tick-up/20 bg-tick-up/5 p-6 shadow-sm">
                 <h2 className="font-display text-xl font-semibold text-tick-up">
                   Pros
                 </h2>
@@ -364,7 +386,7 @@ export default async function BrokerDetailPage({
                   ))}
                 </ul>
               </div>
-              <div className="rounded-2xl border border-alert/20 bg-alert/5 p-6">
+              <div className="rounded-3xl border border-alert/20 bg-alert/5 p-6 shadow-sm">
                 <h2 className="font-display text-xl font-semibold text-alert">
                   Cons
                 </h2>
