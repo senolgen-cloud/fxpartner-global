@@ -436,7 +436,7 @@ export const brokers: Broker[] = [
     regulators: ["FCA", "CySEC", "FSCA", "SCB (Bahamas)"],
     platforms: ["MT4", "MT5", "cTrader", "FxPro App"],
     headquarters: "United Kingdom / Cyprus",
-    referralUrl: "https://bit.ly/fxpro-turkiye",
+    referralUrl: "https://redirect-fxpro.com/tr/partner/2qhvb5Zx2",
     partnerCode: "2qhvb5Zx2",
     summary:
       "FxPro is a well-established broker with top-tier regulatory licenses including the FCA, broad platform support (MT4, MT5, cTrader, FxPro App), and leverage up to 1:2000 on some account types.",
