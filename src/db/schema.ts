@@ -265,6 +265,16 @@ export const economicCalendarAlerts = pgTable("economic_calendar_alert", {
   notifiedAt: timestamp("notified_at").notNull().defaultNow(),
 });
 
+// Single-row shared cache of the raw ForexFactory feed response — the
+// free feed rate-limits hard, so every caller (page loads, /api polling,
+// the cron) shares this instead of each hitting the feed independently.
+// See src/lib/economicCalendar.ts.
+export const economicCalendarCache = pgTable("economic_calendar_cache", {
+  id: text("id").primaryKey(),
+  payload: text("payload").notNull(),
+  fetchedAt: timestamp("fetched_at").notNull().defaultNow(),
+});
+
 export const complaintStatusValues = ["new", "in_progress", "resolved", "closed"] as const;
 export type ComplaintStatus = (typeof complaintStatusValues)[number];
 
