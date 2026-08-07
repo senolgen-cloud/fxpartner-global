@@ -6,7 +6,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 const OG_IMAGE = `${SITE_URL}/ai-asistan-preview.jpg`;
 const TITLE = "AI Market Assistant | FXPARTNER";
 const DESCRIPTION =
-  "Gemini destekli yapay zeka piyasa asistanı — forex, altın, CPI/NFP gibi makro veriler ve teknik/temel analiz stratejileri hakkında sorularınızı yanıtlar.";
+  "Yatırımcıların tercih ettiği FXPARTNER Piyasa Asistanı — forex, altın, CPI/NFP gibi makro veriler ve teknik/temel analiz stratejileri hakkında sorularınızı yanıtlar.";
 
 export const metadata: Metadata = {
   title: TITLE,
