@@ -73,6 +73,20 @@ function timeLabel() {
   return new Date().toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
 }
 
+// Site-wide language selection lives in the same `googtrans` cookie the
+// Google Translate widget itself reads (see GoogleTranslateWidget.tsx /
+// LanguageSwitcher.tsx) — format "/en/<lang>", absent or "en" means
+// English. Reusing it here means the assistant answers in whatever
+// language the visitor already picked for the rest of the site, without
+// a second language picker.
+function currentSiteLang(): string {
+  if (typeof document === "undefined") return "en";
+  const match = document.cookie.match(/(?:^|;\s*)googtrans=([^;]*)/);
+  if (!match) return "en";
+  const parts = decodeURIComponent(match[1]).split("/");
+  return parts[2] || "en";
+}
+
 export default function AiMarketAssistant() {
   const [messages, setMessages] = useState<ChatMessage[]>([WELCOME]);
   const [input, setInput] = useState("");
@@ -98,7 +112,7 @@ export default function AiMarketAssistant() {
       const res = await fetch("/api/ai-assistant", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: next }),
+        body: JSON.stringify({ messages: next, lang: currentSiteLang() }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Bilinmeyen hata");

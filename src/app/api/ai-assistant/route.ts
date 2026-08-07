@@ -35,9 +35,43 @@ const BROKER_PROMO_NOTES: Record<string, string> = {
     "FXPARTNER'e özel %20 Marjin Destek Bonusu — hesap açılışında Ortak Kodu alanına 667827970 girilerek etkinleştirilir ve LiteFinance'daki birçok ek avantajın kilidini açar.",
 };
 
+// Google Translate language codes (matching src/lib/countryLanguages.ts,
+// the site's own LanguageSwitcher) -> a plain English name Gemini can act
+// on reliably. Falls back to Intl.DisplayNames for anything not listed
+// here rather than needing every possible code hardcoded.
+function languageName(code: string): string {
+  const KNOWN: Record<string, string> = {
+    en: "English",
+    tr: "Turkish",
+    de: "German",
+    fr: "French",
+    es: "Spanish",
+    it: "Italian",
+    nl: "Dutch",
+    pt: "Portuguese",
+    ru: "Russian",
+    pl: "Polish",
+    el: "Greek",
+    ar: "Arabic",
+    id: "Indonesian",
+    ms: "Malay",
+    vi: "Vietnamese",
+    th: "Thai",
+    ja: "Japanese",
+    ko: "Korean",
+    "zh-CN": "Simplified Chinese",
+  };
+  if (KNOWN[code]) return KNOWN[code];
+  try {
+    return new Intl.DisplayNames(["en"], { type: "language" }).of(code) ?? "English";
+  } catch {
+    return "English";
+  }
+}
+
 // Keeps the request small and on-topic — this assistant only talks about
 // forex/market analysis, not general chit-chat, coding help, etc.
-function buildSystemPrompt(tickerLine: string) {
+function buildSystemPrompt(tickerLine: string, targetLanguage: string) {
   return `Sen FXPARTNER sitesinin Yapay Zeka Piyasa Asistanısın. Forex pariteleri, altın/petrol, makroekonomik veriler (CPI, NFP, faiz kararları) ve teknik/temel analiz stratejileri hakkında sorulara yanıt veriyorsun.
 
 Güncel piyasa verileri (referans amaçlı, gecikmeli olabilir):
@@ -53,7 +87,7 @@ Kurallar:
 - Uydurma fiyat, veri veya haber verme. Emin olmadığın konularda bunu belirt.
 - Kullanıcı yukarıdaki listede bulunan bir brokeri sorarsa (örn. "XM güvenilir mi?", "IC Markets nasıl?"), cevabında MUTLAKA o brokerin markdown formatındaki referans linkini ve/veya site incelemesi linkini ver. Listede olmayan bir broker sorulursa, onun hakkında sitede bilgi bulunmadığını belirt ve link uydurma.
 - Bir brokerin yanında "özel avantaj" notu varsa, bunu cevabına kurumsal ve akıcı bir dille, doğal bir cümle içinde dahil et (madde madde kopyalama, düz metin olarak anlat). Bu notu sadece o broker sorulduğunda kullan, başka brokerlere uygulama veya uydurma.
-- Türkçe yanıt ver, kullanıcı başka dilde yazarsa o dilde yanıtla.`;
+- MUTLAKA yalnızca ${targetLanguage} dilinde yanıt ver — ziyaretçi sitede bu dili seçmiş durumda. Kullanıcı farklı bir dilde yazsa bile ${targetLanguage} dilinde yanıtlamaya devam et; dil değiştirme.`;
 }
 
 async function formatTickerLine(): Promise<string> {
@@ -71,7 +105,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "AI assistant is not configured." }, { status: 503 });
   }
 
-  let body: { messages?: ChatMessage[] };
+  let body: { messages?: ChatMessage[]; lang?: string };
   try {
     body = await req.json();
   } catch {
@@ -83,6 +117,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "No messages provided" }, { status: 400 });
   }
 
+  const targetLanguage = languageName(typeof body.lang === "string" ? body.lang : "en");
   const tickerLine = await formatTickerLine();
 
   const contents = messages.map((m) => ({
@@ -95,7 +130,7 @@ export async function POST(req: NextRequest) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       contents,
-      systemInstruction: { parts: [{ text: buildSystemPrompt(tickerLine) }] },
+      systemInstruction: { parts: [{ text: buildSystemPrompt(tickerLine, targetLanguage) }] },
       generationConfig: { temperature: 0.6, maxOutputTokens: 1024 },
     }),
   });
