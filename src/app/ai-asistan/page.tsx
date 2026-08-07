@@ -2,11 +2,29 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import AiMarketAssistant from "@/components/AiMarketAssistant";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
+const OG_IMAGE = `${SITE_URL}/ai-asistan-preview.jpg`;
+const TITLE = "AI Market Assistant | FXPARTNER";
+const DESCRIPTION =
+  "Gemini destekli yapay zeka piyasa asistanı — forex, altın, CPI/NFP gibi makro veriler ve teknik/temel analiz stratejileri hakkında sorularınızı yanıtlar.";
+
 export const metadata: Metadata = {
-  title: "AI Market Assistant | FXPARTNER",
-  description:
-    "Gemini destekli yapay zeka piyasa asistanı — forex, altın, CPI/NFP gibi makro veriler ve teknik/temel analiz stratejileri hakkında sorularınızı yanıtlar.",
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: "/ai-asistan" },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: `${SITE_URL}/ai-asistan`,
+    type: "website",
+    images: [{ url: OG_IMAGE, width: 1448, height: 1086 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
+  },
 };
 
 export default function AiAssistantPage() {
