@@ -1,8 +1,36 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
+
+// Minimal markdown → JSX: turns [text](url) links and **bold** into real
+// elements while leaving everything else as plain text. Good enough for
+// Gemini's replies without pulling in a full markdown renderer.
+function renderContent(text: string, linkClassName: string) {
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) => {
+    const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (linkMatch) {
+      return (
+        <a
+          key={i}
+          href={linkMatch[2]}
+          target="_blank"
+          rel="noopener noreferrer nofollow sponsored"
+          className={linkClassName}
+        >
+          {linkMatch[1]}
+        </a>
+      );
+    }
+    const boldMatch = part.match(/^\*\*([^*]+)\*\*$/);
+    if (boldMatch) {
+      return <strong key={i}>{boldMatch[1]}</strong>;
+    }
+    return <Fragment key={i}>{part}</Fragment>;
+  });
+}
 
 const SUGGESTED_QUESTIONS = [
   "TÜFE (CPI) verisi beklenenden düşük gelirse EUR/USD ne olur?",
@@ -95,7 +123,12 @@ export default function AiMarketAssistant() {
                     : "bg-signal text-on-signal"
                 }`}
               >
-                {m.content}
+                {renderContent(
+                  m.content,
+                  m.role === "assistant"
+                    ? "text-signal underline underline-offset-2 hover:text-signal-strong"
+                    : "text-on-signal underline underline-offset-2"
+                )}
                 <div
                   className={`mt-1 text-[10px] ${
                     m.role === "assistant" ? "text-text-on-ink-muted" : "text-on-signal/70"

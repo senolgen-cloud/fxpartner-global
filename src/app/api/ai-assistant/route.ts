@@ -1,12 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getTickerPairs } from "@/lib/rates";
+import { brokers } from "@/data/brokers";
 
 export const runtime = "nodejs";
 
 const GEMINI_MODEL = "gemini-3.6-flash";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
+
+// One line per broker so the assistant links to our own referral URL
+// instead of inventing or linking to a broker's raw homepage — every
+// click through that link earns FXPARTNER a commission.
+function brokerLinkLines() {
+  return brokers
+    .map((b) => `- ${b.name}: referans linki ${b.referralUrl} | site incelemesi ${SITE_URL}/brokers/${b.slug}`)
+    .join("\n");
+}
 
 // Keeps the request small and on-topic — this assistant only talks about
 // forex/market analysis, not general chit-chat, coding help, etc.
@@ -16,11 +27,15 @@ function buildSystemPrompt(tickerLine: string) {
 Güncel piyasa verileri (referans amaçlı, gecikmeli olabilir):
 ${tickerLine}
 
+Sitede incelenen brokerlar ve linkleri:
+${brokerLinkLines()}
+
 Kurallar:
 - Sadece finans/forex/piyasa konularında yanıt ver. Konu dışı sorularda kibarca konuyu piyasa analizine yönlendir.
 - Kısa, net ve eğitici cevaplar ver. Gerektiğinde madde işaretleri kullan.
 - ASLA doğrudan yatırım tavsiyesi verme ("şunu al", "şimdi sat" gibi kesin talimatlar verme). Senaryo ve olasılık dilinde konuş ("X olursa, genellikle Y beklenir" gibi).
 - Uydurma fiyat, veri veya haber verme. Emin olmadığın konularda bunu belirt.
+- Kullanıcı yukarıdaki listede bulunan bir brokeri sorarsa (örn. "XM güvenilir mi?", "IC Markets nasıl?"), cevabında MUTLAKA o brokerin markdown formatındaki referans linkini ve/veya site incelemesi linkini ver. Listede olmayan bir broker sorulursa, onun hakkında sitede bilgi bulunmadığını belirt ve link uydurma.
 - Türkçe yanıt ver, kullanıcı başka dilde yazarsa o dilde yanıtla.`;
 }
 
