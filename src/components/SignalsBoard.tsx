@@ -311,10 +311,15 @@ export default function SignalsBoard({
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16">
-        <h2 className="font-display text-2xl font-semibold md:hidden">Active Signals</h2>
-        <SignalTable title="Active Signals" signals={active} />
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="font-display text-2xl font-semibold">Active Signals</h2>
+          <span className="hidden items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-signal md:flex">
+            <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
+            Live
+          </span>
+        </div>
         {active.length === 0 ? (
-          <p className="mt-4 text-text-on-ink-muted md:hidden">
+          <p className="text-text-on-ink-muted">
             No open signals right now — check our{" "}
             <a href="https://t.me/fxpartnerglobal" className="text-signal hover:text-signal-strong">
               Telegram channel
@@ -322,7 +327,7 @@ export default function SignalsBoard({
             to get the next one the moment it's posted.
           </p>
         ) : (
-          <div className="mt-6 grid gap-5 sm:grid-cols-2 md:hidden lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {active.map((s) => (
               <SignalCard key={s.id} signal={s} />
             ))}
