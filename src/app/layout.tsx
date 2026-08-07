@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, JetBrains_Mono, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import NotificationOptIn from "@/components/NotificationOptIn";
+import CommunityWidget from "@/components/CommunityWidget";
 import GoogleTranslateWidget from "@/components/GoogleTranslateWidget";
 import Header from "@/components/Header";
 import Ticker from "@/components/Ticker";
@@ -11,6 +12,7 @@ import { organizationSchema, websiteSchema } from "@/lib/schema";
 import "./globals.css";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
+const topBrokers = [...brokers].sort((a, b) => a.rank - b.rank).slice(0, 3);
 
 const geist = Geist({
   variable: "--font-geist",
@@ -105,6 +107,7 @@ export default function RootLayout({
           <Ticker />
         </div>
         <NotificationOptIn />
+        <CommunityWidget topBrokers={topBrokers} />
         <GoogleTranslateWidget />
         <Analytics />
       </body>
