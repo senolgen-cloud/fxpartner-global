@@ -99,6 +99,42 @@ async function formatTickerLine(): Promise<string> {
   }
 }
 
+// Occasionally the model leaks its own internal self-check instead of an
+// actual answer — e.g. "German language? Yes. * Financial/Forex focus?
+// Yes. * Concise...? Yes." That reads as a checklist of yes/no questions
+// about the reply, not a reply itself, so it's a distinctive enough shape
+// to catch and retry rather than show to a visitor.
+function looksLikeLeakedSelfCheck(reply: string): boolean {
+  const yesNoPattern = /\b(yes|no)\.?\s*(\*|\n|$)/gi;
+  const matches = reply.slice(0, 300).match(yesNoPattern);
+  return (matches?.length ?? 0) >= 2 && /\?\s*(yes|no)/i.test(reply.slice(0, 300));
+}
+
+type GeminiResult = { ok: true; reply: string } | { ok: false; status: number; errText: string };
+
+async function callGemini(apiKey: string, contents: unknown, systemPrompt: string): Promise<GeminiResult> {
+  const res = await fetch(`${GEMINI_URL}?key=${apiKey}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      contents,
+      systemInstruction: { parts: [{ text: systemPrompt }] },
+      generationConfig: { temperature: 0.6, maxOutputTokens: 1024 },
+    }),
+  });
+
+  if (!res.ok) {
+    const errText = await res.text().catch(() => "");
+    return { ok: false, status: res.status, errText };
+  }
+
+  const data = await res.json();
+  const reply: string =
+    data?.candidates?.[0]?.content?.parts?.map((p: { text?: string }) => p.text ?? "").join("") ??
+    "Üzgünüm, şu anda bir yanıt oluşturamadım.";
+  return { ok: true, reply };
+}
+
 export async function POST(req: NextRequest) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
@@ -125,26 +161,23 @@ export async function POST(req: NextRequest) {
     parts: [{ text: String(m.content).slice(0, 2000) }],
   }));
 
-  const res = await fetch(`${GEMINI_URL}?key=${apiKey}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      contents,
-      systemInstruction: { parts: [{ text: buildSystemPrompt(tickerLine, targetLanguage) }] },
-      generationConfig: { temperature: 0.6, maxOutputTokens: 1024 },
-    }),
-  });
+  const systemPrompt = buildSystemPrompt(tickerLine, targetLanguage);
 
-  if (!res.ok) {
-    const errText = await res.text().catch(() => "");
-    console.error("Gemini API error:", res.status, errText);
+  // Up to 2 attempts total: a malformed reply (leaked self-check instead
+  // of an actual answer, or an empty string) is rare but worth one silent
+  // retry before giving up, rather than showing it to a visitor.
+  let result = await callGemini(apiKey, contents, systemPrompt);
+  if (result.ok && (looksLikeLeakedSelfCheck(result.reply) || result.reply.trim() === "")) {
+    console.warn("AI assistant reply looked malformed, retrying once:", result.reply.slice(0, 200));
+    result = await callGemini(apiKey, contents, systemPrompt);
+  }
+
+  if (!result.ok) {
+    console.error("Gemini API error:", result.status, result.errText);
     return NextResponse.json({ error: "AI assistant is temporarily unavailable." }, { status: 502 });
   }
 
-  const data = await res.json();
-  const reply: string =
-    data?.candidates?.[0]?.content?.parts?.map((p: { text?: string }) => p.text ?? "").join("") ??
-    "Üzgünüm, şu anda bir yanıt oluşturamadım.";
+  const reply = result.reply;
 
   // Best-effort — a logging failure should never break the actual reply.
   const lastUserMessage = messages[messages.length - 1];
