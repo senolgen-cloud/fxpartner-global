@@ -429,7 +429,7 @@ export const brokers: Broker[] = [
     name: "FxPro",
     logo: "/brokers/fxpro.png",
     tagline: "Trade via MT4, MT5, and the FxPro App",
-    rating: 3.5,
+    rating: 4.6,
     founded: 2006,
     minDeposit: "$100",
     maxLeverage: "1:2000*",
