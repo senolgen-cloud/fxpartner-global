@@ -31,13 +31,38 @@ function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
   ]);
 }
 
+// iOS Safari only exposes the Notification/Push APIs at all once the site
+// has been added to the Home Screen (iOS 16.4+) — in a normal Safari tab
+// `window.Notification` doesn't exist, so the old guard below silently
+// hid the whole prompt for every iPhone visitor with no explanation. This
+// detects that specific case so we can show "Add to Home Screen first"
+// guidance instead of just never appearing.
+function isIos(): boolean {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !("MSStream" in window);
+}
+
+function isStandalone(): boolean {
+  return (
+    window.matchMedia("(display-mode: standalone)").matches ||
+    (navigator as Navigator & { standalone?: boolean }).standalone === true
+  );
+}
+
 export default function NotificationOptIn() {
   const [visible, setVisible] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
+  const [needsIosInstall, setNeedsIosInstall] = useState(false);
 
   useEffect(() => {
     if (sessionStorage.getItem(DISMISS_KEY)) return;
+
+    if (isIos() && !isStandalone()) {
+      setNeedsIosInstall(true);
+      const timer = setTimeout(() => setVisible(true), 7000);
+      return () => clearTimeout(timer);
+    }
+
     if (typeof Notification === "undefined") return;
     if (!("serviceWorker" in navigator) || !("PushManager" in window)) return;
     if (Notification.permission !== "default") return;
@@ -118,36 +143,62 @@ export default function NotificationOptIn() {
             ×
           </button>
         </div>
-        <p
-          id="notification-optin-title"
-          className="mt-2 text-sm leading-relaxed text-text-on-ink-muted"
-        >
-          Yeni piyasa analizi, haber ve broker kampanyaları yayınlandığında
-          anında tarayıcı bildirimi al.
-        </p>
-        {error && (
-          <p className="mt-2 text-xs text-alert">
-            Bildirim izni alınamadı. Tarayıcınızın site ayarlarından bildirim izninin engellenmediğini
-            kontrol edip tekrar deneyin.
-          </p>
+        {needsIosInstall ? (
+          <>
+            <p
+              id="notification-optin-title"
+              className="mt-2 text-sm leading-relaxed text-text-on-ink-muted"
+            >
+              iPhone'da bildirim alabilmek için önce FXPARTNER'ı ana ekranına eklemen gerekiyor:{" "}
+              <span className="text-text-on-ink">Paylaş</span> (
+              <span aria-hidden="true">⬆️</span>) →{" "}
+              <span className="text-text-on-ink">&quot;Ana Ekrana Ekle&quot;</span>. Ekledikten
+              sonra uygulamayı ana ekrandan aç, bildirimler orada açılabilir.
+            </p>
+            <div className="mt-4">
+              <button
+                type="button"
+                onClick={dismiss}
+                className="w-full rounded-full border border-hairline px-4 py-2 text-center text-xs font-medium text-text-on-ink-muted transition-colors hover:text-text-on-ink"
+              >
+                Anladım
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <p
+              id="notification-optin-title"
+              className="mt-2 text-sm leading-relaxed text-text-on-ink-muted"
+            >
+              Yeni piyasa analizi, haber ve broker kampanyaları yayınlandığında
+              anında tarayıcı bildirimi al.
+            </p>
+            {error && (
+              <p className="mt-2 text-xs text-alert">
+                Bildirim izni alınamadı. Tarayıcınızın site ayarlarından bildirim izninin engellenmediğini
+                kontrol edip tekrar deneyin.
+              </p>
+            )}
+            <div className="mt-4 flex gap-2">
+              <button
+                type="button"
+                onClick={enable}
+                disabled={busy}
+                className="flex-1 rounded-full bg-signal px-4 py-2 text-center text-xs font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
+              >
+                {busy ? "Açılıyor..." : error ? "Tekrar Dene" : "Bildirimleri Aç"}
+              </button>
+              <button
+                type="button"
+                onClick={dismiss}
+                className="rounded-full px-3 py-2 text-center font-mono text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
+              >
+                Şimdi değil
+              </button>
+            </div>
+          </>
         )}
-        <div className="mt-4 flex gap-2">
-          <button
-            type="button"
-            onClick={enable}
-            disabled={busy}
-            className="flex-1 rounded-full bg-signal px-4 py-2 text-center text-xs font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
-          >
-            {busy ? "Açılıyor..." : error ? "Tekrar Dene" : "Bildirimleri Aç"}
-          </button>
-          <button
-            type="button"
-            onClick={dismiss}
-            className="rounded-full px-3 py-2 text-center font-mono text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
-          >
-            Şimdi değil
-          </button>
-        </div>
       </div>
     </div>
   );

@@ -1,0 +1,12 @@
+{
+  "name": "FXPARTNER",
+  "short_name": "FXPARTNER",
+  "description": "Forex broker comparison, live trade signals, economic calendar, and market updates.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#06090b",
+  "theme_color": "#06090b",
+  "icons": [
+    { "src": "/fxpartner-logo.png", "sizes": "900x231", "type": "image/png", "purpose": "any" }
+  ]
+}

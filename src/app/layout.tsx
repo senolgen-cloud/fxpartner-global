@@ -38,6 +38,18 @@ export const metadata: Metadata = {
   other: {
     google: "notranslate",
   },
+  // Required for web push on iOS Safari (16.4+): it only works once the
+  // site is added to the Home Screen as an installed web app — a bare
+  // Safari tab can't receive push at all there. manifest.json +
+  // appleWebApp below make that install path available; NotificationOptIn
+  // detects the "not installed yet on iOS" case and prompts to add to
+  // Home Screen instead of trying (and silently failing) to subscribe.
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "FXPARTNER",
+  },
   title: {
     default: "FXPARTNER | Forex Broker Comparison and Reviews",
     template: "%s | FXPARTNER",
