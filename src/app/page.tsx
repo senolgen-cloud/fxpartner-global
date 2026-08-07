@@ -152,15 +152,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Cashback lead capture */}
-        <section className="bg-ink-soft">
-          <div className="mx-auto max-w-6xl px-6 py-16">
-            <div className="mx-auto max-w-lg">
-              <HeroCashbackForm />
-            </div>
-          </div>
-        </section>
-
         {/* Ranked broker list */}
         <section id="brokers" className="relative overflow-hidden bg-ink">
           <div
@@ -184,6 +175,15 @@ export default function Home() {
 
             <div className="mt-12">
               <BrokerList brokers={brokers} />
+            </div>
+          </div>
+        </section>
+
+        {/* Cashback lead capture */}
+        <section className="bg-ink-soft">
+          <div className="mx-auto max-w-6xl px-6 py-16">
+            <div className="mx-auto max-w-lg">
+              <HeroCashbackForm />
             </div>
           </div>
         </section>
