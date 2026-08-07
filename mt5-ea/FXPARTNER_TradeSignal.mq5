@@ -95,6 +95,19 @@ double PipSize(string symbol)
    return (digits == 3 || digits == 5) ? point * 10.0 : point;
   }
 
+// "Pips" is a currency-pair convention (the digits==3/5 rule in PipSize
+// above only means something for those). Applying it to gold, oil, or
+// index CFDs produces a meaningless huge number instead of a real pip
+// count - e.g. a $27.38 gold move became "-2738.0 pips" because gold's
+// 2-digit quote made PipSize() return 0.01 as if it were a pip. Only
+// report pips for actual forex symbols; everything else falls back to
+// the $ profit figure the site already displays when pips is absent.
+bool IsForexSymbol(string symbol)
+  {
+   ENUM_SYMBOL_CALC_MODE mode = (ENUM_SYMBOL_CALC_MODE)SymbolInfoInteger(symbol, SYMBOL_TRADE_CALC_MODE);
+   return mode == SYMBOL_CALC_MODE_FOREX || mode == SYMBOL_CALC_MODE_FOREX_NO_LEVERAGE;
+  }
+
 //--- GET request, returns HTTP status (or -1 on failure - check the log for GetLastError())
 int HttpGet(string url)
   {
@@ -284,7 +297,7 @@ void ReportClose(ulong positionTicket, ulong closingDeal)
 
    double totalProfit = PositionTotalProfit(positionTicket);
    double pips = 0;
-   bool havePips = (entry > 0);
+   bool havePips = (entry > 0) && IsForexSymbol(symbol);
    if(havePips)
      {
       double diff = (closePrice - entry) / PipSize(symbol);
