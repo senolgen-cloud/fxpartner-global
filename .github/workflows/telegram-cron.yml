@@ -14,6 +14,10 @@ on:
     # not-yet-announced /blog post and posts one per run — offset by 30
     # minutes from market-analysis-share so the two don't fire together.
     - cron: "30 */2 * * *"
+    # economic-calendar-alert (Piyasa Analizi): checks every 5 min for
+    # freshly-released medium/high-impact figures. Activated per owner
+    # approval on 2026-08-07 — see src/lib/departments.ts.
+    - cron: "*/5 * * * *"
 
 jobs:
   # Owned by Piyasa Analizi Departmanı — see docs/ORGANIZATION.md.
@@ -78,15 +82,12 @@ jobs:
             https://fxpartner.global/api/cron/blog-share
 
   # Owned by Piyasa Analizi Departmanı — see docs/ORGANIZATION.md.
-  # New automation: web-pushes real released figures (actual vs
-  # forecast/previous) for medium/high-impact economic calendar events.
-  # Paused: no schedule trigger yet — needs Compliance sign-off before
-  # moving to "active" per the department's automation governance note
-  # in src/lib/departments.ts. Run manually via workflow_dispatch until
-  # then; to activate, add a `schedule:` entry above (every 5 min) and
-  # a matching `github.event.schedule ==` condition here.
+  # Web-pushes real released figures (actual vs forecast/previous) for
+  # medium/high-impact economic calendar events. Active as of 2026-08-07
+  # per owner approval — see the automation governance note in
+  # src/lib/departments.ts.
   economic-calendar-alert:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '*/5 * * * *'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger economic-calendar-alert

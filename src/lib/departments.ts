@@ -35,11 +35,17 @@ export const departments: Department[] = [
     owns: [
       "src/app/api/cron/market-update/route.ts",
       "src/app/api/cron/market-analysis-share/route.ts",
+      "src/app/api/cron/economic-calendar-alert/route.ts",
       "src/app/piyasa-analizi",
+      "src/app/ekonomik-takvim",
       "src/lib/market-data.ts",
       "src/lib/technicals.ts",
       "src/lib/telegram-posted-store.ts",
+      "src/lib/economicCalendar.ts",
     ],
+    // economic-calendar-alert scheduled (every 5 min) as of 2026-08-07 per
+    // owner approval — same "department active, one owned cron still
+    // paused" shape as market-update above.
     automation: "active",
   },
   {
