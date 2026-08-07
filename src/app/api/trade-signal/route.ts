@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramPhoto } from "@/lib/telegram";
 import { postTradeSignalToX } from "@/lib/x";
+import { sendPushToAll } from "@/lib/push";
 import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
 
@@ -133,6 +134,18 @@ export async function GET(req: NextRequest) {
     } catch (err) {
       console.error("Failed to store trade signal for later result linking:", err);
     }
+  }
+
+  // Best-effort, same as the X post above — a push failure never blocks the
+  // signal itself, which has already gone out on Telegram/X by this point.
+  try {
+    await sendPushToAll({
+      title: `${dirWord || "New"} ${pair.toUpperCase()}`,
+      body: `Entry ${entry}${hasTarget1 ? ` · TP ${target1}` : ""}${hasStop ? ` · SL ${stop}` : ""}`,
+      url: "/signals",
+    });
+  } catch (err) {
+    console.error("Push notification failed:", err);
   }
 
   return NextResponse.json({ ok: true, pair, result, x: xResult });

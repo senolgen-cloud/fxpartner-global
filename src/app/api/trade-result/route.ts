@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramPhoto } from "@/lib/telegram";
 import { postTradeSignalToX } from "@/lib/x";
+import { sendPushToAll } from "@/lib/push";
 import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -131,6 +132,18 @@ export async function GET(req: NextRequest) {
   } catch (err) {
     console.error("X post failed:", err);
     xResult = { error: err instanceof Error ? err.message : "unknown error" };
+  }
+
+  // Best-effort, same reasoning as /api/trade-signal — never blocks the
+  // result post itself.
+  try {
+    await sendPushToAll({
+      title: `${pair.toUpperCase()} ${outcomeEmoji} ${outcomeWord}`,
+      body: resultLine ? `Entry ${entry} → Close ${close} · ${resultLine}` : `Entry ${entry} → Close ${close}`,
+      url: "/signals",
+    });
+  } catch (err) {
+    console.error("Push notification failed:", err);
   }
 
   return NextResponse.json({ ok: true, pair, outcome, result, x: xResult });
