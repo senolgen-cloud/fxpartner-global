@@ -217,10 +217,14 @@ function SignalCard({ signal }: { signal: Signal }) {
         {signal.stop && <span style={{ color: TICK_DOWN }}>SL {signal.stop}</span>}
       </div>
 
-      <div className="mt-3 space-y-1.5 border-t border-hairline pt-3">
-        {signal.target2 && <Level label="Take Profit 2" value={signal.target2} color={TICK_UP} />}
-        {signal.volume && <Level label="Volume" value={`${signal.volume} lot`} color="var(--text-on-ink-muted)" />}
-      </div>
+      {(signal.target2 || (isClosed && signal.volume)) && (
+        <div className="mt-3 space-y-1.5 border-t border-hairline pt-3">
+          {signal.target2 && <Level label="Take Profit 2" value={signal.target2} color={TICK_UP} />}
+          {isClosed && signal.volume && (
+            <Level label="Volume" value={`${signal.volume} lot`} color="var(--text-on-ink-muted)" />
+          )}
+        </div>
+      )}
 
       <p className="mt-3 font-mono text-[11px] text-text-on-ink-muted">
         {(isClosed ? signal.closedAt : signal.createdAt)?.toLocaleString("en-US", {
