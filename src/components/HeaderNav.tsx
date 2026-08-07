@@ -6,6 +6,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const primaryLinks = [
   { href: "/#brokers", label: "Broker Rankings" },
+  { href: "/signals", label: "Signals" },
   { href: "/categories", label: "Categories" },
   { href: "/blog", label: "Blog" },
   { href: "/piyasa-analizi", label: "Market Analysis" },

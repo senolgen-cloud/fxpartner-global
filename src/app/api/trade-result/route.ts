@@ -90,6 +90,26 @@ export async function GET(req: NextRequest) {
     `\n\nResult of the real trade shared earlier on our tracked MT5 account — shared for informational purposes only, not investment advice.\n\n` +
     `👉 <a href="${siteUrl}">fxpartner.global</a>`;
 
+  // Best-effort: record the real close data against the original row so
+  // /signals can show it — never blocks the actual result post.
+  if (original) {
+    try {
+      await db
+        .update(tradeSignals)
+        .set({
+          status: "closed",
+          outcome: outcome === "WIN" || outcome === "LOSS" || outcome === "BE" ? outcome : null,
+          closePrice: close,
+          pips: pips ?? null,
+          profit: profit ?? null,
+          closedAt: new Date(),
+        })
+        .where(eq(tradeSignals.ticket, ticket));
+    } catch (err) {
+      console.error("Failed to record trade-signal close:", err);
+    }
+  }
+
   const result = await sendTelegramPhoto(imageUrl, caption, {
     replyToMessageId: original?.telegramMessageId ?? undefined,
   });

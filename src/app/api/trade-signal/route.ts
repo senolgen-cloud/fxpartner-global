@@ -121,6 +121,11 @@ export async function GET(req: NextRequest) {
           pair: pair.toUpperCase(),
           direction: dirWord || null,
           entry,
+          target1: hasTarget1 ? target1 : null,
+          target2: target2 && isRealLevel(target2) ? target2 : null,
+          stop: hasStop ? stop : null,
+          volume: volume || null,
+          status: "active",
           telegramMessageId: result?.message_id != null ? String(result.message_id) : null,
           xTweetId: "tweetId" in (xResult ?? {}) ? (xResult as { tweetId: string }).tweetId : null,
         })

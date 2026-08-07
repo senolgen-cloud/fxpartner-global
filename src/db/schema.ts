@@ -222,10 +222,18 @@ export const pushSubscriptions = pgTable("push_subscription", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+export const tradeSignalStatusValues = ["active", "closed"] as const;
+export type TradeSignalStatus = (typeof tradeSignalStatusValues)[number];
+
+export const tradeSignalOutcomeValues = ["WIN", "LOSS", "BE"] as const;
+export type TradeSignalOutcome = (typeof tradeSignalOutcomeValues)[number];
+
 // One row per MT5 trade the EA reports via /api/trade-signal, keyed by the
 // broker-assigned position ticket. Lets /api/trade-result look up the
 // original Telegram/X post so the closing result can reply to (quote) it
-// instead of appearing as an unrelated standalone card.
+// instead of appearing as an unrelated standalone card. Also the backing
+// data for the public /signals page — status/outcome/close fields are only
+// ever filled in from real EA-reported close data, never estimated.
 export const tradeSignals = pgTable("trade_signal", {
   id: text("id")
     .primaryKey()
@@ -234,9 +242,19 @@ export const tradeSignals = pgTable("trade_signal", {
   pair: text("pair").notNull(),
   direction: text("direction"),
   entry: text("entry").notNull(),
+  target1: text("target1"),
+  target2: text("target2"),
+  stop: text("stop"),
+  volume: text("volume"),
+  status: text("status").$type<TradeSignalStatus>().notNull().default("active"),
+  outcome: text("outcome").$type<TradeSignalOutcome>(),
+  closePrice: text("close_price"),
+  pips: text("pips"),
+  profit: text("profit"),
   telegramMessageId: text("telegram_message_id"),
   xTweetId: text("x_tweet_id"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
+  closedAt: timestamp("closed_at"),
 });
 
 export const complaintStatusValues = ["new", "in_progress", "resolved", "closed"] as const;
