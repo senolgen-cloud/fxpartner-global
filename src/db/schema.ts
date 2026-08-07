@@ -305,3 +305,21 @@ export const aiAssistantLogs = pgTable("ai_assistant_log", {
   reply: text("reply").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
+
+export const sentimentVoteValues = ["bullish", "bearish"] as const;
+export type SentimentVote = (typeof sentimentVoteValues)[number];
+
+// One real vote per (pair, visitor) — keyed by the anonymous fxp_vid
+// cookie (src/lib/visitor.ts) so a visitor can change their vote but not
+// stuff the poll. Aggregated live on /topluluk; starts at 0/0, never
+// seeded with fake numbers.
+export const sentimentVotes = pgTable(
+  "sentiment_vote",
+  {
+    pair: text("pair").notNull(),
+    visitorId: text("visitor_id").notNull(),
+    vote: text("vote").$type<SentimentVote>().notNull(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (table) => [primaryKey({ columns: [table.pair, table.visitorId] })]
+);

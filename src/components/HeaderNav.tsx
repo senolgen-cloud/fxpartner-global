@@ -9,6 +9,7 @@ const primaryLinks = [
   { href: "/signals", label: "Signals" },
   { href: "/ai-asistan", label: "AI Assistant" },
   { href: "/ekonomik-takvim", label: "Economic Calendar" },
+  { href: "/topluluk", label: "Community" },
   { href: "/categories", label: "Categories" },
   { href: "/blog", label: "Blog" },
   { href: "/piyasa-analizi", label: "Market Analysis" },
