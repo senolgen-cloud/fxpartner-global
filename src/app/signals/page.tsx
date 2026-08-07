@@ -5,11 +5,29 @@ import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
+const OG_IMAGE = `${SITE_URL}/signals-preview.png`;
+const TITLE = "Live Trading Signals | FXPARTNER";
+const DESCRIPTION =
+  "Real trade signals from our tracked MT5 account — entry, take profit, and stop loss for open trades, plus verified win/loss results once each trade closes.";
+
 export const metadata: Metadata = {
-  title: "Live Trading Signals | FXPARTNER",
-  description:
-    "Real trade signals from our tracked MT5 account — entry, take profit, and stop loss for open trades, plus verified win/loss results once each trade closes.",
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: "/signals" },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: `${SITE_URL}/signals`,
+    type: "website",
+    images: [{ url: OG_IMAGE, width: 1448, height: 1086 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
+  },
 };
 
 // Client-side polling (SignalsBoard) keeps the page fresh after load, but
