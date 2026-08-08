@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
@@ -29,6 +30,14 @@ import { regulationParagraph, platformParagraph, verdictParagraph, brokerFaqs } 
 import { getBlogPostBySlug } from "@/data/blog";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
+
+function getMonogram(name: string): string {
+  const words = name.trim().split(/\s+/);
+  if (words.length > 1) {
+    return words.map((w) => w[0]).join("").slice(0, 2).toUpperCase();
+  }
+  return name.slice(0, 2).toUpperCase();
+}
 
 export function generateStaticParams() {
   return brokers.map((b) => ({ slug: b.slug }));
@@ -206,7 +215,14 @@ export default async function BrokerDetailPage({
             </Link>
             <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
               <div>
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
+                <span className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-hairline bg-ink-soft text-lg font-semibold text-text-on-ink">
+                  {broker.logo ? (
+                    <Image src={broker.logo} alt={`${broker.name} logo`} fill sizes="64px" className="object-contain p-2.5" />
+                  ) : (
+                    getMonogram(broker.name)
+                  )}
+                </span>
+                <span className="mt-4 block font-mono text-xs uppercase tracking-[0.2em] text-signal">
                   Ranked #{String(broker.rank).padStart(2, "0")}
                 </span>
                 <h1 className="notranslate mt-3 font-display text-[2.5rem] font-semibold leading-[1.1] tracking-tight md:text-5xl">
