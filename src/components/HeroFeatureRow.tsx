@@ -72,17 +72,26 @@ const features: { key: string; icon: ReactNode; title: string; body: string }[] 
 
 export default function HeroFeatureRow() {
   return (
-    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
+    // This row lives in the hero's 1fr column next to a fixed 420px mockup
+    // panel, so it never actually gets much wider than ~670px regardless of
+    // viewport — a 5-across row (previously lg:grid-cols-5) squeezed each
+    // item into ~110px and forced titles like "FX Signals" to break after
+    // the first word. Capped at 3 columns and switched to stacked cards,
+    // which read fine at that width instead of wrapping awkwardly.
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
       {features.map((f) => (
-        <div key={f.key} className="flex items-start gap-3">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-hairline bg-ink-soft text-signal">
+        <div
+          key={f.key}
+          className="flex flex-col items-start gap-3 rounded-2xl border border-hairline/70 bg-ink-soft/40 p-4 transition-colors hover:border-signal/40 hover:bg-ink-soft"
+        >
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-hairline bg-ink text-signal">
             {f.icon}
           </span>
           <div className="min-w-0">
             <p className="font-display text-sm font-semibold text-text-on-ink">
               {f.title}
             </p>
-            <p className="mt-0.5 text-xs leading-relaxed text-text-on-ink-muted">
+            <p className="mt-1 text-xs leading-relaxed text-text-on-ink-muted">
               {f.body}
             </p>
           </div>
