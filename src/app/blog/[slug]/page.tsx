@@ -4,7 +4,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
+import BrokerAdBanner from "@/components/BrokerAdBanner";
 import { blogPosts, getBlogPostBySlug } from "@/data/blog";
+import { getSponsoredBroker } from "@/data/brokers";
 import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
@@ -47,6 +49,7 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const post = getBlogPostBySlug(slug);
   if (!post) notFound();
+  const featuredBroker = getSponsoredBroker(post.slug);
 
   return (
     <>
@@ -106,6 +109,9 @@ export default async function BlogPostPage({
                 />
               </div>
             )}
+            <div className="mb-12">
+              <BrokerAdBanner broker={featuredBroker} />
+            </div>
             {post.sections.map((section, i) => (
               <div key={i} className={i > 0 ? "mt-10" : ""}>
                 {section.heading && (

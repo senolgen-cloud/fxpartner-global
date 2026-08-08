@@ -6,10 +6,12 @@ import BonusPopup from "@/components/BonusPopup";
 import ShareButtons from "@/components/ShareButtons";
 import RatingStars from "@/components/RatingStars";
 import TrustGauge from "@/components/TrustGauge";
+import BrokerAdBanner from "@/components/BrokerAdBanner";
 import {
   brokers,
   getBrokerBySlug,
   getBrokerScores,
+  getSponsoredBroker,
   categoryInfo,
   TIER1_REGULATORS,
   type BrokerCategory,
@@ -86,6 +88,8 @@ export default async function BrokerDetailPage({
   if (!broker) notFound();
 
   const otherBrokers = brokers.filter((b) => b.slug !== broker.slug).slice(0, 3);
+  // Cross-sell slot: never advertise the broker whose own page this is.
+  const featuredBroker = getSponsoredBroker(broker.slug, broker.slug);
   const faqs = brokerFaqs(broker);
   const reviewPost = getBlogPostBySlug(`${broker.slug}-review`);
   const scores = getBrokerScores(broker);
@@ -468,6 +472,10 @@ export default async function BrokerDetailPage({
                 </div>
               </div>
             )}
+
+            <div className="mt-14 border-t border-hairline-light pt-10">
+              <BrokerAdBanner broker={featuredBroker} />
+            </div>
 
             {/* Verdict */}
             <div id="verdict" className="mt-14 scroll-mt-8 border-t border-hairline-light pt-10">

@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import SignalsBoard from "@/components/SignalsBoard";
+import BrokerAdBanner from "@/components/BrokerAdBanner";
 import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
+import { getSponsoredBroker } from "@/data/brokers";
 import { desc, eq } from "drizzle-orm";
+
+const featuredBroker = getSponsoredBroker("signals");
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 const OG_IMAGE = `${SITE_URL}/signals-preview.png`;
@@ -53,6 +57,12 @@ export default async function SignalsPage() {
     <>
       <main className="flex-1 bg-ink text-text-on-ink">
         <SignalsBoard initialActive={active} initialClosed={closed} />
+
+        <section className="border-t border-hairline">
+          <div className="mx-auto max-w-3xl px-6 py-10">
+            <BrokerAdBanner broker={featuredBroker} />
+          </div>
+        </section>
 
         <section className="border-t border-hairline">
           <div className="mx-auto max-w-3xl px-6 py-14">

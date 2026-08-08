@@ -45,6 +45,10 @@ export interface Broker {
   // Optional designed social-share preview image for this broker's review
   // page, overriding the auto-generated opengraph-image for that route.
   ogImage?: string;
+  // Optional designed creative for BrokerAdBanner. When set, the ad banner
+  // renders this image (linked to referralUrl) instead of the default
+  // logo/tagline/CTA card layout.
+  adImage?: string;
   // Optional, researched deep-dive detail beyond the standard fields above.
   // Only populated for brokers we've written a full account-type/deposit/
   // withdrawal breakdown for — the page simply omits this section when absent.
@@ -193,6 +197,7 @@ export const brokers: Broker[] = [
     name: "XM Global",
     logo: "/brokers/xm.png",
     ogImage: "/brokers/xm-cover.jpg",
+    adImage: "/ads/xm-banner.png",
     tagline: "Trade via MT4, MT5, and the XM App",
     rating: 4.8,
     founded: 2009,
@@ -313,6 +318,7 @@ export const brokers: Broker[] = [
     name: "Lite Finance",
     logo: "/brokers/lite-finance.png",
     ogImage: "/brokers/lite-finance-cover.png",
+    adImage: "/ads/lite-finance-banner.png",
     tagline: "Selectable leverage up to 1:1000",
     rating: 4.5,
     founded: 2005,
@@ -428,6 +434,7 @@ export const brokers: Broker[] = [
     slug: "fxpro",
     name: "FxPro",
     logo: "/brokers/fxpro.png",
+    adImage: "/ads/fxpro-banner.png",
     tagline: "Trade via MT4, MT5, and the FxPro App",
     rating: 4.6,
     founded: 2006,
@@ -727,4 +734,24 @@ export const brokers: Broker[] = [
 
 export function getBrokerBySlug(slug: string): Broker | undefined {
   return brokers.find((b) => b.slug === slug);
+}
+
+// Brokers currently running paid ad placements (BrokerAdBanner). Kept as an
+// explicit slug list rather than a `sponsored` field on Broker so turning a
+// campaign on/off doesn't require touching the broker's editorial data.
+export const SPONSORED_BROKER_SLUGS = ["xm", "fxpro", "lite-finance"];
+
+// Deterministically picks one of the sponsored brokers for a given page,
+// varying by `seed` (e.g. the page's own slug) so different pages don't all
+// show the same ad, while a given page still renders the same ad on every
+// request/reload. `excludeSlug` keeps a broker's own review page from
+// advertising itself.
+export function getSponsoredBroker(seed: string, excludeSlug?: string): Broker {
+  const pool = brokers.filter(
+    (b) => SPONSORED_BROKER_SLUGS.includes(b.slug) && b.slug !== excludeSlug
+  );
+  const candidates = pool.length > 0 ? pool : brokers.filter((b) => SPONSORED_BROKER_SLUGS.includes(b.slug));
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
+  return candidates[hash % candidates.length];
 }
