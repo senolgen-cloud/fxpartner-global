@@ -225,7 +225,7 @@ export default async function BrokerDetailPage({
                   <div className="mt-4 flex items-center gap-4">
                     <span className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-hairline bg-ink-soft text-lg font-semibold text-text-on-ink">
                       {broker.logo ? (
-                        <Image src={broker.logo} alt={`${broker.name} logo`} fill sizes="64px" className="object-contain p-2.5" />
+                        <Image src={broker.logo} alt={`${broker.name} logo`} fill sizes="64px" className="object-cover" />
                       ) : (
                         getMonogram(broker.name)
                       )}
