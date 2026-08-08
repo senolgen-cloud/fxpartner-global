@@ -9,13 +9,20 @@ export type NewsItem = {
   source: string;
 };
 
-// FXStreet and Investing.com both run their own /brokers/ section, making
-// them direct competitors — excluded on purpose so we never cite/credit a
-// competing broker-comparison site as a source. Only general financial news
-// publishers with no broker-comparison business of their own are used here.
+// FXStreet, Investing.com, and ForexLive/InvestingLive all run their own
+// /brokers/ section, making them direct competitors — excluded on purpose
+// so we never cite/credit a competing broker-comparison site as a source.
+// Only general financial news publishers with no broker-comparison
+// business of their own are used here. Multiple feeds per publisher (e.g.
+// two CNBC ones) are fine — the goal is volume of genuinely relevant
+// items, and filterRelevantNews() still gates every one of them.
 const FEEDS: { source: string; url: string }[] = [
   { source: "MarketWatch", url: "https://feeds.content.dowjones.io/public/rss/mw_topstories" },
+  { source: "MarketWatch", url: "https://feeds.content.dowjones.io/public/rss/mw_marketpulse" },
   { source: "CNBC", url: "https://www.cnbc.com/id/15839069/device/rss/rss.html" },
+  { source: "CNBC", url: "https://www.cnbc.com/id/10000664/device/rss/rss.html" },
+  { source: "Yahoo Finance", url: "https://finance.yahoo.com/news/rssindex" },
+  { source: "Financial Times", url: "https://www.ft.com/rss/home" },
 ];
 
 const parser = new XMLParser({ ignoreAttributes: true, trimValues: true });

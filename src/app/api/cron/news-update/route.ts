@@ -6,10 +6,10 @@ import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-
 import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
 
 // Owned by Haber & Editöryal Departmanı (Elif Sarman) — see
-// src/lib/departments.ts and docs/ORGANIZATION.md. Dedup now uses the
-// same Postgres-backed store as market-analysis-share (no more Upstash
-// dependency). Still only fires via workflow_dispatch until DEEPL_API_KEY
-// is set in production — see translate.ts.
+// src/lib/departments.ts and docs/ORGANIZATION.md. Dedup uses the same
+// Postgres-backed store as market-analysis-share (no Upstash dependency).
+// Scheduled every 3h as of 2026-08-08 (targets ~5-6+ posts/day); still
+// throws until DEEPL_API_KEY is set in production — see translate.ts.
 function isAuthorized(req: NextRequest): boolean {
   const secret = process.env.CRON_SECRET;
   if (!secret) return false;

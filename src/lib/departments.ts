@@ -70,11 +70,12 @@ export const departments: Department[] = [
     ],
     // "active" as of 2026-08-05: blog-share (announces manually-written
     // /blog posts) is scheduled, per the user's explicit request in that
-    // session to automate posting. news-update itself (external news
-    // translation) stays workflow_dispatch-only — it still needs
-    // DEEPL_API_KEY and UPSTASH_REDIS_REST_URL/TOKEN in Vercel production,
-    // see docs/ORGANIZATION.md — same "department active, one owned cron
-    // still manual" shape as market-intelligence above.
+    // session to automate posting. news-update (external news
+    // translation) was also scheduled (every 3h) on 2026-08-08 per an
+    // explicit "I want 5-6+ news posts/day" request — it still silently
+    // no-ops/fails until DEEPL_API_KEY is set in Vercel production, see
+    // docs/ORGANIZATION.md, but no further code change is needed once
+    // that key is added.
     automation: "active",
   },
   {
