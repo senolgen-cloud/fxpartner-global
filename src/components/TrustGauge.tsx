@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 const SIZE = 176;
 const STROKE = 12;
 const RADIUS = (SIZE - STROKE) / 2;
@@ -10,8 +14,17 @@ function toneForScore(score: number): { stroke: string; text: string; label: str
 }
 
 export default function TrustGauge({ score }: { score: number }) {
+  // Starts unfilled on both server and client render (mounted=false) so the
+  // ring visibly sweeps in on mount instead of just appearing pre-filled —
+  // same "animate from 0 after mount" trick as MiniScoreRings.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   const pct = Math.max(0, Math.min(10, score)) / 10;
-  const offset = CIRCUMFERENCE * (1 - pct);
+  const offset = CIRCUMFERENCE * (1 - (mounted ? pct : 0));
   const tone = toneForScore(score);
 
   return (
@@ -36,7 +49,7 @@ export default function TrustGauge({ score }: { score: number }) {
             strokeLinecap="round"
             strokeDasharray={CIRCUMFERENCE}
             strokeDashoffset={offset}
-            style={{ transition: "stroke-dashoffset 0.6s ease" }}
+            style={{ transition: "stroke-dashoffset 1s cubic-bezier(0.16,1,0.3,1)" }}
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
@@ -48,7 +61,11 @@ export default function TrustGauge({ score }: { score: number }) {
           </span>
         </div>
       </div>
-      <span className={`mt-3 font-mono text-[11px] uppercase tracking-[0.2em] ${tone.text}`}>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={`mt-3 ${tone.text}`}>
+        <path d="M12 3l7 3v5c0 4.6-3 8.4-7 9.9-4-1.5-7-5.3-7-9.9V6l7-3z" />
+        <path d="M9 12l2 2 4-4" />
+      </svg>
+      <span className={`mt-1.5 font-mono text-[11px] uppercase tracking-[0.2em] ${tone.text}`}>
         {tone.label} Trust Signal
       </span>
     </div>

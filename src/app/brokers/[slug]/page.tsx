@@ -213,46 +213,56 @@ export default async function BrokerDetailPage({
             >
               ← All brokers
             </Link>
-            <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
-              <div>
-                <span className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-hairline bg-ink-soft text-lg font-semibold text-text-on-ink">
-                  {broker.logo ? (
-                    <Image src={broker.logo} alt={`${broker.name} logo`} fill sizes="64px" className="object-contain p-2.5" />
-                  ) : (
-                    getMonogram(broker.name)
-                  )}
-                </span>
-                <span className="mt-4 block font-mono text-xs uppercase tracking-[0.2em] text-signal">
-                  Ranked #{String(broker.rank).padStart(2, "0")}
-                </span>
-                <h1 className="notranslate mt-3 font-display text-[2.5rem] font-semibold leading-[1.1] tracking-tight md:text-5xl">
-                  {broker.name}
-                </h1>
-                <p className="mt-3 max-w-lg text-base text-text-on-ink-muted sm:text-lg">
-                  {broker.tagline}
-                </p>
-                <div className="mt-4">
-                  <RatingStars rating={broker.rating} />
-                </div>
-                <div className="mt-8 flex flex-wrap items-center gap-4">
-                  <a
-                    href={broker.referralUrl}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="rounded-full bg-signal px-6 py-3.5 text-sm font-medium text-on-signal shadow-lg shadow-signal/20 transition-all hover:bg-signal-strong hover:shadow-signal/30 active:scale-[0.98]"
-                  >
-                    Open Account
-                  </a>
-                  {broker.partnerCode && (
-                    <span className="font-mono text-[10px] text-text-on-ink-muted">
-                      Code: {broker.partnerCode}
+            <div className="mt-6 rounded-[32px] border border-hairline bg-gradient-to-br from-ink-soft/70 to-ink p-6 shadow-2xl shadow-black/40 sm:p-8 md:p-12">
+              <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-hairline px-3 py-1.5 font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-signal">
+                      <path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7L2 9.2l7.1-.6L12 2z" />
+                    </svg>
+                    Ranked #{String(broker.rank).padStart(2, "0")}
+                  </span>
+                  <div className="mt-4 flex items-center gap-4">
+                    <span className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-hairline bg-ink-soft text-lg font-semibold text-text-on-ink">
+                      {broker.logo ? (
+                        <Image src={broker.logo} alt={`${broker.name} logo`} fill sizes="64px" className="object-contain p-2.5" />
+                      ) : (
+                        getMonogram(broker.name)
+                      )}
                     </span>
-                  )}
+                    <h1 className="notranslate font-display text-[2.5rem] font-semibold leading-[1.1] tracking-tight md:text-5xl">
+                      {broker.name}
+                    </h1>
+                  </div>
+                  <p className="mt-4 max-w-lg text-base text-text-on-ink-muted sm:text-lg">
+                    {broker.tagline}
+                  </p>
+                  <div className="mt-5 border-t border-hairline pt-5">
+                    <RatingStars rating={broker.rating} />
+                  </div>
+                  <div className="mt-8 flex flex-wrap items-center gap-4">
+                    <a
+                      href={broker.referralUrl}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      className="group inline-flex items-center gap-2 rounded-full bg-signal px-6 py-3.5 text-sm font-medium text-on-signal shadow-lg shadow-signal/20 transition-all hover:bg-signal-strong hover:shadow-signal/30 active:scale-[0.98]"
+                    >
+                      Open Account
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-0.5">
+                        <path d="M5 12h14M13 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                    {broker.partnerCode && (
+                      <span className="font-mono text-[10px] text-text-on-ink-muted">
+                        Code: {broker.partnerCode}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex justify-center rounded-[28px] border border-hairline bg-ink-soft/60 p-8 shadow-2xl shadow-black/20 backdrop-blur-sm lg:justify-self-end">
-                <TrustGauge score={scores.composite} />
+                <div className="flex justify-center rounded-[28px] border border-hairline bg-ink-soft/60 p-8 shadow-2xl shadow-black/30 backdrop-blur-sm lg:justify-self-end">
+                  <TrustGauge score={scores.composite} />
+                </div>
               </div>
             </div>
 
