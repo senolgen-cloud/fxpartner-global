@@ -468,6 +468,18 @@ export const brokers: Broker[] = [
     scoreCost: 3,
     scoreWithdrawal: 3,
     scoreOverride: 9.3,
+    promotion: {
+      tag: "New Account Offer",
+      title: "100% Welcome Bonus",
+      intro:
+        "FxPro is running a 100% welcome bonus for new accounts opened through the FXPARTNER referral link — a strong head start for first-time deposits.",
+      steps: [
+        "Open a new FxPro account through the FXPARTNER referral link.",
+        "Make a qualifying first deposit.",
+        "Confirm the bonus is applied to your account — exact rate and eligibility vary by account type and region.",
+      ],
+      note: "Bonus terms and conditions apply and may change without notice; confirm current eligibility on FxPro's official site before funding a live account. Trading involves risk of loss.",
+    },
   },
   {
     rank: 12,
