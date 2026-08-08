@@ -1,9 +1,10 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { submitComplaint, type ComplaintFormState } from "@/app/complaint/actions";
 
 const initialState: ComplaintFormState = { ok: false };
+const OTHER_VALUE = "other";
 
 export default function ComplaintForm({
   brokers,
@@ -11,6 +12,7 @@ export default function ComplaintForm({
   brokers: { slug: string; name: string }[];
 }) {
   const [state, formAction, pending] = useActionState(submitComplaint, initialState);
+  const [brokerSlug, setBrokerSlug] = useState("");
 
   if (state.ok) {
     return (
@@ -74,7 +76,8 @@ export default function ComplaintForm({
         <select
           name="brokerSlug"
           required
-          defaultValue=""
+          value={brokerSlug}
+          onChange={(e) => setBrokerSlug(e.target.value)}
           className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
         >
           <option value="" disabled>
@@ -85,7 +88,16 @@ export default function ComplaintForm({
               {b.name}
             </option>
           ))}
+          <option value={OTHER_VALUE}>Other (not listed)</option>
         </select>
+        {brokerSlug === OTHER_VALUE && (
+          <input
+            name="otherBrokerName"
+            required
+            placeholder="Broker name"
+            className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
+          />
+        )}
       </div>
       <div>
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">

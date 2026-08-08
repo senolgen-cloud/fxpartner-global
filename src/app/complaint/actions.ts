@@ -19,17 +19,24 @@ export async function submitComplaint(
   const phone = String(formData.get("phone") || "").trim();
   const email = String(formData.get("email") || "").trim();
   const brokerSlug = String(formData.get("brokerSlug") || "").trim();
+  const otherBrokerName = String(formData.get("otherBrokerName") || "").trim();
   const description = String(formData.get("description") || "").trim();
 
   if (!fullName || !phone || !email || !brokerSlug || !description) {
     return { ok: false, error: "Please fill in every field." };
+  }
+  if (brokerSlug === "other" && !otherBrokerName) {
+    return { ok: false, error: "Please enter the broker's name." };
   }
   if (description.length < 20) {
     return { ok: false, error: "Please describe the issue in a bit more detail." };
   }
 
   const broker = getBrokerBySlug(brokerSlug);
-  const brokerName = broker?.name || brokers.find((b) => b.slug === brokerSlug)?.name || brokerSlug;
+  const brokerName =
+    brokerSlug === "other"
+      ? otherBrokerName
+      : broker?.name || brokers.find((b) => b.slug === brokerSlug)?.name || brokerSlug;
 
   const session = await auth();
 
