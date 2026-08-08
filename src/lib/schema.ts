@@ -8,7 +8,7 @@ export function organizationSchema() {
     url: SITE_URL,
     logo: `${SITE_URL}/fxpartner-logo.png`,
     description:
-      "Forex broker comparison and review platform, ranking brokers by regulation, cost, platform support, and withdrawal reliability.",
+      "FXPARTNER, forex ve finans piyasalarını takip eden yatırımcılar için gerçek zamanlı forex sinyalleri, yapay zeka destekli piyasa analizi, teknik ve temel analiz, ekonomik takvim ve güvenilir broker karşılaştırmaları sunan bir finans platformudur.",
     founder: {
       "@type": "Person",
       name: "Erdem Torun",

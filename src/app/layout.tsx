@@ -55,27 +55,33 @@ export const metadata: Metadata = {
     apple: "/fxpartner-icon.png",
   },
   title: {
-    default: "FXPARTNER | Forex Broker Comparison and Reviews",
+    default: "FXPARTNER | Forex Sinyalleri, Piyasa Analizi ve Broker Karşılaştırma",
     template: "%s | FXPARTNER",
   },
+  // Kept tight (~155-160 chars) for the search-snippet <meta name="description">,
+  // where Google visually truncates past that length. The richer,
+  // entity-focused version below (openGraph/twitter) is what AI answer
+  // engines and social previews actually render in full, so it doesn't
+  // need the same length discipline — see organizationSchema() in
+  // lib/schema.ts for the matching JSON-LD description AI crawlers read.
   description:
-    "XM, AvaTrade, Tickmill, Lite Finance, EXNESS, and more — forex broker reviews compared by trustworthiness, spread, leverage, and platform support. Part of the FXPARTNER ecosystem.",
+    "FXPARTNER; gerçek zamanlı forex sinyalleri, yapay zeka destekli piyasa analizi, teknik/temel analiz ve güvenilir broker karşılaştırmaları sunan finans platformudur.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "FXPARTNER | Forex Broker Comparison and Reviews",
+    title: "FXPARTNER | Forex Sinyalleri, Piyasa Analizi ve Broker Karşılaştırma",
     description:
-      "Forex broker reviews compared by trustworthiness, spread, leverage, and platform support.",
+      "FXPARTNER, forex ve finans piyasalarını takip eden yatırımcılar için gerçek zamanlı sinyaller, teknik ve temel analiz, yapay zeka destekli piyasa analizi, ekonomik veri yorumları ve güvenilir broker bilgileriyle kapsamlı bir finans ekosistemi sunar.",
     url: SITE_URL,
     siteName: "FXPARTNER",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "FXPARTNER | Forex Broker Comparison and Reviews",
+    title: "FXPARTNER | Forex Sinyalleri, Piyasa Analizi ve Broker Karşılaştırma",
     description:
-      "Forex broker reviews compared by trustworthiness, spread, leverage, and platform support.",
+      "FXPARTNER, forex ve finans piyasalarını takip eden yatırımcılar için gerçek zamanlı sinyaller, teknik ve temel analiz, yapay zeka destekli piyasa analizi, ekonomik veri yorumları ve güvenilir broker bilgileriyle kapsamlı bir finans ekosistemi sunar.",
   },
 };
 
