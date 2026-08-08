@@ -12,6 +12,7 @@ import {
   getBrokerBySlug,
   getBrokerScores,
   getSponsoredBroker,
+  SPONSORED_BROKER_SLUGS,
   categoryInfo,
   TIER1_REGULATORS,
   type BrokerCategory,
@@ -88,8 +89,12 @@ export default async function BrokerDetailPage({
   if (!broker) notFound();
 
   const otherBrokers = brokers.filter((b) => b.slug !== broker.slug).slice(0, 3);
-  // Cross-sell slot: never advertise the broker whose own page this is.
-  const featuredBroker = getSponsoredBroker(broker.slug, broker.slug);
+  // Ad slot: a sponsored broker gets to run its own banner on its own review
+  // page too (that's the point of paying for the placement) — cross-sell to
+  // another sponsored broker only when this one isn't a paying advertiser.
+  const featuredBroker = SPONSORED_BROKER_SLUGS.includes(broker.slug)
+    ? broker
+    : getSponsoredBroker(broker.slug, broker.slug);
   const faqs = brokerFaqs(broker);
   const reviewPost = getBlogPostBySlug(`${broker.slug}-review`);
   const scores = getBrokerScores(broker);

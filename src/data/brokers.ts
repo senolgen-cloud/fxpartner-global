@@ -47,8 +47,12 @@ export interface Broker {
   ogImage?: string;
   // Optional designed creative for BrokerAdBanner. When set, the ad banner
   // renders this image (linked to referralUrl) instead of the default
-  // logo/tagline/CTA card layout.
+  // logo/tagline/CTA card layout. Width/height are the creative's real
+  // pixel dimensions (needed so Next/Image computes the right aspect
+  // ratio) — default to the 16:9 in-house template's size when omitted.
   adImage?: string;
+  adImageWidth?: number;
+  adImageHeight?: number;
   // Optional, researched deep-dive detail beyond the standard fields above.
   // Only populated for brokers we've written a full account-type/deposit/
   // withdrawal breakdown for — the page simply omits this section when absent.
@@ -435,6 +439,8 @@ export const brokers: Broker[] = [
     name: "FxPro",
     logo: "/brokers/fxpro.png",
     adImage: "/ads/fxpro-banner.png",
+    adImageWidth: 1536,
+    adImageHeight: 1024,
     tagline: "Trade via MT4, MT5, and the FxPro App",
     rating: 4.6,
     founded: 2006,

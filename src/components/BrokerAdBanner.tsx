@@ -28,8 +28,8 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
         <Image
           src={broker.adImage}
           alt={`${broker.name} reklamı`}
-          width={1376}
-          height={768}
+          width={broker.adImageWidth ?? 1376}
+          height={broker.adImageHeight ?? 768}
           sizes="(min-width: 768px) 768px, 100vw"
           className="h-auto w-full"
         />
