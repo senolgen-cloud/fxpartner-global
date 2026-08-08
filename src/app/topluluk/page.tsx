@@ -141,6 +141,30 @@ export default async function CommunityPage() {
               <div className="rounded-2xl border border-hairline bg-ink-soft p-6">
                 <div className="flex items-center gap-3">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-ink text-text-on-ink">
+                    🤖
+                  </span>
+                  <div>
+                    <h3 className="font-semibold text-text-on-ink">Sohbet Botu</h3>
+                    <p className="text-xs text-text-on-ink-muted">@fxpartner_chat_bot</p>
+                  </div>
+                </div>
+                <p className="mt-3 text-xs leading-relaxed text-text-on-ink-muted">
+                  Sinyalleri, broker karşılaştırmalarını ve aktif kampanyaları Telegram&apos;da
+                  sohbet üzerinden anında sorup öğrenin.
+                </p>
+                <a
+                  href="https://t.me/fxpartner_chat_bot?start=site"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 block rounded-full border border-hairline px-4 py-2.5 text-center text-sm font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
+                >
+                  Botu Başlat
+                </a>
+              </div>
+
+              <div className="rounded-2xl border border-hairline bg-ink-soft p-6">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-ink text-text-on-ink">
                     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
                       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                     </svg>

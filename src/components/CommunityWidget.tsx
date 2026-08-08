@@ -109,6 +109,25 @@ export default function CommunityWidget({ topBrokers }: { topBrokers: Broker[] }
             </div>
             <div className="mt-3 flex items-center gap-3">
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-ink-soft text-text-on-ink">
+                🤖
+              </span>
+              <div className="min-w-0">
+                <h3 className="text-sm font-semibold text-text-on-ink">Sohbet Botu</h3>
+                <p className="truncate text-[11px] text-text-on-ink-muted">Sinyaller, broker &amp; kampanyalar</p>
+              </div>
+              {/* ?start=site lets the bot flow tell this traffic apart from
+                  people who found it inside the Telegram channel itself. */}
+              <a
+                href="https://t.me/fxpartner_chat_bot?start=site"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-auto shrink-0 rounded-full border border-hairline px-3 py-1.5 text-[11px] font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
+              >
+                Başlat
+              </a>
+            </div>
+            <div className="mt-3 flex items-center gap-3">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-ink-soft text-text-on-ink">
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
