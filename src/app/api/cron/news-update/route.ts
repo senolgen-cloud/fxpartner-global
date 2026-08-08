@@ -4,6 +4,7 @@ import { filterRelevantNews } from "@/lib/relevance-filter";
 import { translateToTurkish } from "@/lib/translate";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
 import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
+import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
 // Owned by Haber & Editöryal Departmanı (Elif Sarman) — see
 // src/lib/departments.ts and docs/ORGANIZATION.md. Dedup uses the same
@@ -21,7 +22,7 @@ function isAuthorized(req: NextRequest): boolean {
 // posts nothing, and that's the correct behavior.
 const MAX_POSTS_PER_RUN = 3;
 
-export async function GET(req: NextRequest) {
+export const GET = withCronErrorAlert("news-update", async (req: NextRequest) => {
   if (!isAuthorized(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -52,4 +53,4 @@ export async function GET(req: NextRequest) {
   }
 
   return NextResponse.json({ ok: true, posted, checkedRelevant: relevant.length });
-}
+});

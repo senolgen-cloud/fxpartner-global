@@ -323,3 +323,19 @@ export const sentimentVotes = pgTable(
   },
   (table) => [primaryKey({ columns: [table.pair, table.visitorId] })]
 );
+
+// An owned distribution channel independent of Telegram (which the site
+// has zero control over if the account/channel is ever suspended). Kept
+// intentionally simple for now: single-opt-in email capture only, no
+// double opt-in flow or bulk-send integration yet — that's a follow-up
+// once there's an actual list worth mailing.
+export const newsletterSubscribers = pgTable("newsletter_subscriber", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  email: text("email").notNull().unique(),
+  // Where on the site the signup happened (e.g. "footer", "signals-page"),
+  // so we can tell which placements actually convert.
+  source: text("source"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});

@@ -3,6 +3,7 @@ import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
 import { sendPushToAll } from "@/lib/push";
 import { blogPosts } from "@/data/blog";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
+import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
 // Owned by Haber & Editöryal Departmanı — see src/lib/departments.ts and
 // docs/ORGANIZATION.md. Announces /blog posts to Telegram + web push once
@@ -17,7 +18,7 @@ function isAuthorized(req: NextRequest): boolean {
   return req.headers.get("authorization") === `Bearer ${secret}`;
 }
 
-export async function GET(req: NextRequest) {
+export const GET = withCronErrorAlert("blog-share", async (req: NextRequest) => {
   if (!isAuthorized(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -54,4 +55,4 @@ export async function GET(req: NextRequest) {
   }
 
   return NextResponse.json({ ok: true, posted: true, slug: target.slug, result, push });
-}
+});

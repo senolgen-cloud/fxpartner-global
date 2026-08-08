@@ -4,6 +4,7 @@ import { sendPushToAll } from "@/lib/push";
 import { db } from "@/db";
 import { economicCalendarAlerts } from "@/db/schema";
 import { inArray } from "drizzle-orm";
+import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
 // Owned by Piyasa Analizi Departmanı — see src/lib/departments.ts.
 // Paused by default: only fires via workflow_dispatch in
@@ -20,7 +21,7 @@ function isAuthorized(req: NextRequest): boolean {
 // notifying on old events if a run was skipped/delayed.
 const FRESHNESS_WINDOW_MS = 20 * 60 * 1000;
 
-export async function GET(req: NextRequest) {
+export const GET = withCronErrorAlert("economic-calendar-alert", async (req: NextRequest) => {
   if (!isAuthorized(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -70,4 +71,4 @@ export async function GET(req: NextRequest) {
   }
 
   return NextResponse.json({ ok: true, notified: sent, candidates: candidates.length });
-}
+});

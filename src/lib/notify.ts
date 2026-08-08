@@ -3,6 +3,29 @@ import type { ComplaintStatus } from "@/db/schema";
 
 const NOTIFY_EMAIL = process.env.COMPLAINT_NOTIFY_EMAIL || "senolgen@gmail.com";
 
+// A failing cron job (missing env var, broken feed, expired API key — see
+// the news-update/DEEPL_API_KEY incident on 2026-08-08) previously just
+// 500'd silently; nobody found out until someone happened to check GitHub
+// Actions logs. This makes that failure show up in an inbox immediately.
+// Never let a failed alert throw and mask the original cron error.
+export async function notifyCronFailure(jobName: string, error: unknown) {
+  const message = error instanceof Error ? error.message : String(error);
+  try {
+    await sendEmail({
+      to: NOTIFY_EMAIL,
+      subject: `⚠️ FXPARTNER cron failed: ${jobName}`,
+      html: `
+        <h2>Cron job failed: ${jobName}</h2>
+        <p><strong>Time:</strong> ${new Date().toISOString()}</p>
+        <p><strong>Error:</strong></p>
+        <pre style="white-space:pre-wrap;background:#f4f4f4;padding:12px;border-radius:6px;">${message}</pre>
+      `,
+    });
+  } catch (notifyErr) {
+    console.error(`Failed to send cron-failure alert for ${jobName}`, notifyErr);
+  }
+}
+
 export async function sendRegistrationNotification(user: {
   name?: string | null;
   email?: string | null;

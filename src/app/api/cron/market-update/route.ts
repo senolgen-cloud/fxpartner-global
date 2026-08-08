@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramPhoto, telegramSiteCta } from "@/lib/telegram";
 import { getCandles, SYMBOLS } from "@/lib/market-data";
 import { sma, rsi } from "@/lib/technicals";
+import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
 // Owned by Piyasa Analizi Departmanı (Kaan Ediz) — see src/lib/departments.ts
 // and docs/ORGANIZATION.md. Paused by default: only fires via
@@ -12,7 +13,7 @@ function isAuthorized(req: NextRequest): boolean {
   return req.headers.get("authorization") === `Bearer ${secret}`;
 }
 
-export async function GET(req: NextRequest) {
+export const GET = withCronErrorAlert("market-update", async (req: NextRequest) => {
   if (!isAuthorized(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -47,4 +48,4 @@ export async function GET(req: NextRequest) {
 
   const result = await sendTelegramPhoto(imageUrl, caption);
   return NextResponse.json({ ok: true, symbol: symbolId, result });
-}
+});

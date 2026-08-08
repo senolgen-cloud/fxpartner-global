@@ -3,6 +3,7 @@ import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
 import { sendPushToAll } from "@/lib/push";
 import { brokers } from "@/data/brokers";
 import { getCashbackProgram } from "@/data/cashback";
+import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
 // Owned by Reklam & Kampanya Departmanı (Sena Yıldırım) — see
 // src/lib/departments.ts and docs/ORGANIZATION.md. Paused by default:
@@ -15,7 +16,7 @@ function isAuthorized(req: NextRequest): boolean {
   return req.headers.get("authorization") === `Bearer ${secret}`;
 }
 
-export async function GET(req: NextRequest) {
+export const GET = withCronErrorAlert("campaign-digest", async (req: NextRequest) => {
   if (!isAuthorized(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -54,4 +55,4 @@ export async function GET(req: NextRequest) {
   }
 
   return NextResponse.json({ ok: true, posted: true, count: campaigns.length, result, push });
-}
+});

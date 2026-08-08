@@ -3,6 +3,7 @@ import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
 import { sendPushToAll } from "@/lib/push";
 import { marketAnalysisPosts } from "@/data/marketAnalysis";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
+import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
 // Owned by Piyasa Analizi Departmanı — see src/lib/departments.ts and
 // docs/ORGANIZATION.md. Announces the latest /piyasa-analizi entry to
@@ -16,7 +17,7 @@ function isAuthorized(req: NextRequest): boolean {
   return req.headers.get("authorization") === `Bearer ${secret}`;
 }
 
-export async function GET(req: NextRequest) {
+export const GET = withCronErrorAlert("market-analysis-share", async (req: NextRequest) => {
   if (!isAuthorized(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -49,4 +50,4 @@ export async function GET(req: NextRequest) {
   }
 
   return NextResponse.json({ ok: true, posted: true, slug: latest.slug, result, push });
-}
+});

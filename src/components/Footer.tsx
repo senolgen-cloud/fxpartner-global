@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { brokers } from "@/data/brokers";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 export default function Footer() {
   return (
@@ -23,6 +24,17 @@ export default function Footer() {
               Part of the FXPARTNER education and CopyTrade ecosystem,
               founded by Erdem Torun.
             </p>
+            <div className="mt-6 max-w-sm">
+              <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink">
+                Get updates by email
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed">
+                New signals, market analysis, and broker campaigns — no spam.
+              </p>
+              <div className="mt-3">
+                <NewsletterSignup source="footer" />
+              </div>
+            </div>
           </div>
           <div>
             <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink">
