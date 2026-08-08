@@ -15,7 +15,7 @@ export default async function Header({ standalone = true }: { standalone?: boole
       }`}
     >
       <div className="relative mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6 md:h-16">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex shrink-0 items-center gap-2">
           <Image
             src="/fxpartner-logo.png"
             alt="FXPARTNER"
@@ -24,8 +24,8 @@ export default async function Header({ standalone = true }: { standalone?: boole
             priority
             className="h-8 w-auto md:h-10"
           />
-          <span className="hidden font-mono text-[11px] uppercase tracking-[0.2em] text-text-on-ink-muted sm:inline">
-            Broker Guide
+          <span className="hidden rounded-md border border-hairline px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted lg:inline">
+            Global
           </span>
         </Link>
         <HeaderNav signedIn={signedIn} accountHref={accountHref} />

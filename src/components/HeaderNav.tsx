@@ -2,20 +2,37 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
+// Kept short on purpose — this is the row that has to fit next to the logo
+// and the sign-in/CTA cluster without wrapping or shrinking below content
+// size (that's what caused the overlapping-text bug). Lower-traffic links
+// live in the Resources dropdown instead of competing for row space here.
 const primaryLinks = [
   { href: "/#brokers", label: "Broker Rankings" },
   { href: "/signals", label: "Signals" },
   { href: "/ai-asistan", label: "AI Assistant" },
-  { href: "/ekonomik-takvim", label: "Economic Calendar" },
   { href: "/topluluk", label: "Community" },
-  { href: "/categories", label: "Categories" },
   { href: "/blog", label: "Blog" },
-  { href: "/piyasa-analizi", label: "Market Analysis" },
 ];
 
 const resourceLinks = [
+  {
+    href: "/ekonomik-takvim",
+    label: "Economic Calendar",
+    description: "Live macro events and their expected market impact",
+  },
+  {
+    href: "/categories",
+    label: "Categories",
+    description: "Brokers grouped by what they're best suited for",
+  },
+  {
+    href: "/piyasa-analizi",
+    label: "Market Analysis",
+    description: "Daily market commentary and technical outlook",
+  },
   {
     href: "/partners",
     label: "Become a Partner",
@@ -48,6 +65,11 @@ const resourceLinks = [
   },
 ];
 
+function isActive(pathname: string, href: string) {
+  if (href.startsWith("/#")) return false;
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export default function HeaderNav({
   signedIn,
   accountHref,
@@ -55,6 +77,7 @@ export default function HeaderNav({
   signedIn: boolean;
   accountHref: string;
 }) {
+  const pathname = usePathname();
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const resourcesRef = useRef<HTMLDivElement>(null);
@@ -70,23 +93,31 @@ export default function HeaderNav({
   }, []);
 
   return (
-    <div className="flex items-center gap-3">
-      <nav className="hidden items-center gap-7 md:flex">
-        {primaryLinks.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className="text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
-          >
-            {link.label}
-          </a>
-        ))}
+    <div className="flex shrink-0 items-center gap-3">
+      <nav className="hidden shrink-0 items-center gap-1 rounded-full border border-hairline bg-ink-soft/60 p-1 xl:flex">
+        {primaryLinks.map((link) => {
+          const active = isActive(pathname, link.href);
+          return (
+            <a
+              key={link.href}
+              href={link.href}
+              aria-current={active ? "page" : undefined}
+              className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors ${
+                active
+                  ? "bg-signal text-on-signal"
+                  : "text-text-on-ink-muted hover:text-text-on-ink"
+              }`}
+            >
+              {link.label}
+            </a>
+          );
+        })}
         <div className="relative" ref={resourcesRef}>
           <button
             type="button"
             onClick={() => setResourcesOpen((v) => !v)}
             aria-expanded={resourcesOpen}
-            className="flex items-center gap-1.5 text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
+            className="flex items-center gap-1 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[13px] font-medium text-text-on-ink-muted transition-colors hover:text-text-on-ink"
           >
             Resources
             <svg
@@ -127,17 +158,17 @@ export default function HeaderNav({
         </div>
       </nav>
 
-      <div className="hidden items-center gap-3 border-l border-hairline pl-3 md:flex">
+      <div className="hidden items-center gap-3 border-l border-hairline pl-3 xl:flex">
         <LanguageSwitcher />
         <Link
           href={accountHref}
-          className="text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
+          className="whitespace-nowrap text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
         >
           {signedIn ? "My Account" : "Sign In"}
         </Link>
         <a
           href="#brokers"
-          className="rounded-full bg-signal px-4 py-2 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
+          className="whitespace-nowrap rounded-full bg-signal px-4 py-2 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
         >
           Compare Brokers
         </a>
@@ -148,7 +179,7 @@ export default function HeaderNav({
         onClick={() => setMobileOpen((v) => !v)}
         aria-label={mobileOpen ? "Close menu" : "Open menu"}
         aria-expanded={mobileOpen}
-        className="flex h-9 w-9 items-center justify-center text-text-on-ink md:hidden"
+        className="flex h-9 w-9 items-center justify-center text-text-on-ink xl:hidden"
       >
         {mobileOpen ? (
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -172,7 +203,7 @@ export default function HeaderNav({
       </button>
 
       {mobileOpen && (
-        <div className="absolute inset-x-0 top-full border-b border-hairline bg-ink px-6 py-6 md:hidden">
+        <div className="absolute inset-x-0 top-full max-h-[calc(100vh-3.5rem)] overflow-y-auto border-b border-hairline bg-ink px-6 py-6 xl:hidden">
           <div className="mb-4">
             <LanguageSwitcher />
           </div>
