@@ -23,6 +23,11 @@ export const cashbackPrograms: CashbackProgram[] = [
     rateLabel: "Up to $4 per lot (estimated)",
     rateNote: "Final rate pending confirmation with Exness.",
   },
+  {
+    brokerSlug: "lite-finance",
+    rateLabel: "Up to 50% cash back",
+    rateNote: "Rate varies by account type and trading volume; confirm current terms with Lite Finance.",
+  },
 ];
 
 export function getCashbackProgram(brokerSlug: string) {
