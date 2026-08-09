@@ -70,9 +70,12 @@ export const comments = pgTable("comment", {
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
   brokerSlug: text("broker_slug").notNull(),
-  userId: text("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
+  // Nullable as of 2026-08-09: commenting no longer requires an account
+  // (WordPress-style guest comments), so a comment either has a userId
+  // (signed-in) or a guestName (anonymous) — never neither, enforced in
+  // the submitComment action, not at the DB level.
+  userId: text("user_id").references(() => users.id, { onDelete: "cascade" }),
+  guestName: text("guest_name"),
   rating: integer("rating"),
   body: text("body").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),

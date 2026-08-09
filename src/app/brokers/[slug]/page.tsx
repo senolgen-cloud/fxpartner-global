@@ -123,7 +123,10 @@ export default async function BrokerDetailPage({
   ];
 
   const session = await auth();
-  const brokerComments = await db
+  // Left join, not inner: commenting no longer requires an account, so a
+  // row's author is either a real user (userName) or a guest (guestName) —
+  // an inner join here would silently drop every guest comment.
+  const brokerCommentsRaw = await db
     .select({
       id: commentsTable.id,
       body: commentsTable.body,
@@ -131,11 +134,17 @@ export default async function BrokerDetailPage({
       createdAt: commentsTable.createdAt,
       userName: usersTable.name,
       userCountry: usersTable.country,
+      guestName: commentsTable.guestName,
     })
     .from(commentsTable)
-    .innerJoin(usersTable, eq(commentsTable.userId, usersTable.id))
+    .leftJoin(usersTable, eq(commentsTable.userId, usersTable.id))
     .where(eq(commentsTable.brokerSlug, broker.slug))
     .orderBy(desc(commentsTable.createdAt));
+
+  const brokerComments = brokerCommentsRaw.map((c) => ({
+    ...c,
+    userName: c.userName || c.guestName,
+  }));
 
   const ratedComments = brokerComments.filter((c) => c.rating != null);
   const aggregate =
