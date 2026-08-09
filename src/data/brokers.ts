@@ -320,7 +320,7 @@ export const brokers: Broker[] = [
     rank: 3,
     slug: "lite-finance",
     name: "Lite Finance",
-    logo: "/brokers/lite-finance.png",
+    logo: "/brokers/litefinance-icon.png",
     ogImage: "/brokers/lite-finance-cover.png",
     adImage: "/ads/lite-finance-banner.png",
     tagline: "Selectable leverage up to 1:1000",
