@@ -7,6 +7,7 @@ import BonusPopup from "@/components/BonusPopup";
 import ShareButtons from "@/components/ShareButtons";
 import RatingStars from "@/components/RatingStars";
 import TrustGauge from "@/components/TrustGauge";
+import ReviewBadge from "@/components/ReviewBadge";
 import BrokerAdBanner from "@/components/BrokerAdBanner";
 import {
   brokers,
@@ -582,6 +583,12 @@ export default async function BrokerDetailPage({
             <h2 className="font-display text-2xl font-semibold text-text-dark">
               Comments ({brokerComments.length})
             </h2>
+
+            {aggregate && (
+              <div className="mt-6">
+                <ReviewBadge rating={aggregate.ratingValue} count={aggregate.ratingCount} />
+              </div>
+            )}
 
             <div className="mt-6">
               <CommentForm brokerSlug={broker.slug} signedIn={Boolean(session?.user)} />
