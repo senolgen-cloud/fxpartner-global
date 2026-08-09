@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import BonusPopup from "@/components/BonusPopup";
 import ShareButtons from "@/components/ShareButtons";
-import RatingStars from "@/components/RatingStars";
 import TrustGauge from "@/components/TrustGauge";
 import ReviewBadge from "@/components/ReviewBadge";
 import BrokerAdBanner from "@/components/BrokerAdBanner";
@@ -38,6 +37,34 @@ function getMonogram(name: string): string {
     return words.map((w) => w[0]).join("").slice(0, 2).toUpperCase();
   }
   return name.slice(0, 2).toUpperCase();
+}
+
+function ratingWord(rating: number): string {
+  if (rating >= 4.5) return "Excellent";
+  if (rating >= 3.5) return "Great";
+  if (rating >= 2.5) return "Average";
+  return "Poor";
+}
+
+// score is on the same 1-5 scale as getBrokerScores' individual axes.
+// 3.75 matches the "good" tone threshold already used by MiniScoreRings,
+// so this reads consistently with the rest of the site's score coloring.
+function ScoreCheck({ label, score }: { label: string; score: number }) {
+  const good = score >= 3.75;
+  return (
+    <div className="flex items-center gap-2 rounded-xl border border-hairline bg-ink-soft/50 px-3 py-2.5">
+      {good ? (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-tick-up">
+          <path d="M20 6L9 17l-5-5" />
+        </svg>
+      ) : (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="shrink-0 text-text-on-ink-muted">
+          <path d="M5 12h14" />
+        </svg>
+      )}
+      <span className="text-[11px] leading-tight text-text-on-ink-muted">{label}</span>
+    </div>
+  );
 }
 
 export function generateStaticParams() {
@@ -248,8 +275,53 @@ export default async function BrokerDetailPage({
                     {broker.tagline}
                   </p>
                   <div className="mt-5 border-t border-hairline pt-5">
-                    <RatingStars rating={broker.rating} />
+                    <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                      FXPARTNER is rated
+                    </p>
+                    <p className="mt-1 bg-gradient-to-r from-signal to-purple-400 bg-clip-text font-display text-3xl font-semibold text-transparent">
+                      {ratingWord(broker.rating)}
+                    </p>
+                    <div className="mt-2 flex flex-wrap items-center gap-3">
+                      <div className="flex gap-1" aria-hidden="true">
+                        {Array.from({ length: 5 }).map((_, i) => {
+                          const filled = i < Math.round(broker.rating);
+                          return (
+                            <span
+                              key={i}
+                              className={`flex h-7 w-7 items-center justify-center rounded-md border text-sm ${
+                                filled
+                                  ? "border-signal bg-gradient-to-br from-signal/20 to-purple-400/20 text-signal"
+                                  : "border-hairline text-text-on-ink-muted"
+                              }`}
+                            >
+                              ★
+                            </span>
+                          );
+                        })}
+                      </div>
+                      <span className="tabular-stat font-mono text-sm font-semibold text-text-on-ink">
+                        {broker.rating.toFixed(1)}
+                      </span>
+                      <span className="text-xs text-text-on-ink-muted">{ratingWord(broker.rating)}</span>
+                      <span className="inline-flex items-center gap-1 rounded-full border border-hairline px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.1em] text-text-on-ink-muted">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-signal">
+                          <path d="M20 6L9 17l-5-5" />
+                        </svg>
+                        FXPARTNER Verified
+                      </span>
+                    </div>
                   </div>
+
+                  {/* Real editorial score axes (getBrokerScores), not a
+                      decorative checklist — a low-scoring axis shows a
+                      neutral dash instead of a green check, same "no
+                      unearned checkmarks" rule as ReviewBadge. */}
+                  <div className="mt-5 grid grid-cols-3 gap-3">
+                    <ScoreCheck label="Regulation & Trust" score={scores.regulation} />
+                    <ScoreCheck label="Withdrawal Reliability" score={scores.withdrawal} />
+                    <ScoreCheck label="Platform & Tools" score={scores.platform} />
+                  </div>
+
                   <div className="mt-8 flex flex-wrap items-center gap-4">
                     <a
                       href={broker.referralUrl}
@@ -267,6 +339,9 @@ export default async function BrokerDetailPage({
                         Code: {broker.partnerCode}
                       </span>
                     )}
+                    <span className="font-mono text-[10px] text-text-on-ink-muted">
+                      Verified on FXPARTNER
+                    </span>
                   </div>
                 </div>
 
