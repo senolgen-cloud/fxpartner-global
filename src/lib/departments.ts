@@ -71,11 +71,14 @@ export const departments: Department[] = [
     // "active" as of 2026-08-05: blog-share (announces manually-written
     // /blog posts) is scheduled, per the user's explicit request in that
     // session to automate posting. news-update (external news
-    // translation) was also scheduled (every 3h) on 2026-08-08 per an
-    // explicit "I want 5-6+ news posts/day" request — it still silently
-    // no-ops/fails until DEEPL_API_KEY is set in Vercel production, see
-    // docs/ORGANIZATION.md, but no further code change is needed once
-    // that key is added.
+    // translation) was also scheduled on 2026-08-08 per an explicit
+    // "I want 5-6+ news posts/day" request (every 3h, one message per
+    // item); scaled back to a twice-daily single-digest format on
+    // 2026-08-10 after the owner flagged that cadence risked crowding
+    // out signals/campaigns content and causing notification fatigue.
+    // Still silently no-ops/fails until DEEPL_API_KEY is set in Vercel
+    // production, see docs/ORGANIZATION.md, but no further code change
+    // is needed once that key is added.
     automation: "active",
   },
   {

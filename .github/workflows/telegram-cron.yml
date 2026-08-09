@@ -18,12 +18,14 @@ on:
     # freshly-released medium/high-impact figures. Activated per owner
     # approval on 2026-08-07 — see src/lib/departments.ts.
     - cron: "*/5 * * * *"
-    # news-update (Haber & Editöryal): checks every 3h for fresh relevant
-    # headlines (up to 3 per run, deduped) — targets ~5-6+ posts/day per
-    # owner request on 2026-08-08. Offset 20 min so it doesn't cluster
-    # with the other :00/:30 jobs. Still gated behind DEEPL_API_KEY being
-    # set in Vercel production — see the news-update job below.
-    - cron: "20 */3 * * *"
+    # news-update (Haber & Editöryal): twice a day (09:15 / 18:15 Turkey
+    # time = 06:15 / 15:15 UTC), one digest message bundling every fresh
+    # relevant item since the last run. Was every 3h/up to 3 separate
+    # messages per run (up to ~24/day) until 2026-08-10 — that flooded
+    # the channel and risked subscribers muting or leaving. Still gated
+    # behind DEEPL_API_KEY being set in Vercel production — see the
+    # news-update job below.
+    - cron: "15 6,15 * * *"
 
 jobs:
   # Owned by Piyasa Analizi Departmanı — see docs/ORGANIZATION.md.
@@ -52,14 +54,16 @@ jobs:
             https://fxpartner.global/api/cron/market-analysis-share
 
   # Owned by Haber & Editöryal Departmanı — see docs/ORGANIZATION.md.
-  # Scheduled every 3h as of 2026-08-08 per owner request (~5-6+
-  # posts/day). Still fails until DEEPL_API_KEY is set in Vercel
-  # production (translateToTurkish throws without it) — that failure is
-  # silent (just a red run in Actions), nothing posts and nothing breaks
-  # until the key is added, at which point this starts working with no
+  # Twice-daily digest as of 2026-08-10 (was every 3h/multi-message,
+  # scaled back after the owner noticed it risked crowding out
+  # signals/campaigns content and causing notification fatigue). Still
+  # fails until DEEPL_API_KEY is set in Vercel production
+  # (translateToTurkish throws without it) — that failure is silent
+  # (just a red run in Actions), nothing posts and nothing breaks until
+  # the key is added, at which point this starts working with no
   # further code changes needed.
   news-update:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '20 */3 * * *'
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '15 6,15 * * *'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger news-update
