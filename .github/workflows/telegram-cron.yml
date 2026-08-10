@@ -26,6 +26,10 @@ on:
     # behind DEEPL_API_KEY being set in Vercel production — see the
     # news-update job below.
     - cron: "15 6,15 * * *"
+    # broker-review-share (Broker İstihbaratı & İnceleme): posts one
+    # broker's /brokers/<slug> review page per run, rotating through the
+    # full list hourly. Activated per explicit owner request on 2026-08-10.
+    - cron: "0 * * * *"
 
 jobs:
   # Owned by Piyasa Analizi Departmanı — see docs/ORGANIZATION.md.
@@ -107,3 +111,13 @@ jobs:
         run: |
           curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
             https://fxpartner.global/api/cron/economic-calendar-alert
+
+  # Owned by Broker İstihbaratı & İnceleme Departmanı — see docs/ORGANIZATION.md.
+  broker-review-share:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 * * * *'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger broker-review-share
+        run: |
+          curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            https://fxpartner.global/api/cron/broker-review-share

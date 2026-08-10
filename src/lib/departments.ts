@@ -92,8 +92,17 @@ export const departments: Department[] = [
       focus: "Broker skorlama, regülasyon takibi, karşılaştırma",
       voice: "Titiz, kanıta dayalı, asla abartılı övgü yok",
     },
-    owns: ["src/data/brokers.ts", "src/app/brokers", "src/app/categories", "src/lib/brokerContent.ts"],
-    automation: "manual",
+    owns: [
+      "src/data/brokers.ts",
+      "src/app/brokers",
+      "src/app/categories",
+      "src/lib/brokerContent.ts",
+      "src/app/api/cron/broker-review-share",
+    ],
+    // broker-review-share cron posts one broker review page per hour to
+    // Telegram, rotating through src/data/brokers.ts — activated per
+    // explicit owner request on 2026-08-10, see telegram-cron.yml.
+    automation: "active",
   },
   {
     id: "partnerships-cashback",
