@@ -553,7 +553,7 @@ export const brokers: Broker[] = [
     rank: 10,
     slug: "easymarkets",
     name: "easyMarkets",
-    logo: "/brokers/easymarkets.png",
+    logo: "/brokers/easymarkets-logo.jpg",
     tagline: "Fixed spreads and guaranteed risk-management tools",
     rating: 4.2,
     founded: 2001,
