@@ -20,5 +20,5 @@ jobs:
     steps:
       - name: Trigger broker-review-share for one broker
         run: |
-          curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+          curl -sf -w "\nHTTP %{http_code}\n" -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
             "https://fxpartner.global/api/cron/broker-review-share?slug=${{ inputs.slug }}"
