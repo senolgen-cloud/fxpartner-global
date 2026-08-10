@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
+import { sendTelegramPhoto, telegramSiteCta } from "@/lib/telegram";
 import { brokers } from "@/data/brokers";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
@@ -28,18 +28,19 @@ export const GET = withCronErrorAlert("broker-review-share", async (req: NextReq
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
   const url = `${siteUrl}/brokers/${target.slug}`;
+  const imageUrl = `${siteUrl}/api/og/instagram-broker/${target.slug}`;
   const stars = "⭐".repeat(Math.round(target.rating));
-  const text =
+  // Score card image already shows rating/min-deposit/leverage/regulation
+  // checks, so the caption stays short — Telegram photo captions cap at
+  // 1024 chars and the full detail text used to exceed that once summary
+  // was included.
+  const caption =
     `<b>${target.name}</b> ${stars} (${target.rating}/5)\n\n` +
-    `${target.summary}\n\n` +
-    `💰 Min. yatırım: ${target.minDeposit}\n` +
-    `📈 Maks. kaldıraç: ${target.maxLeverage}\n` +
-    `🛡️ Regülasyon: ${target.regulators.join(", ")}\n\n` +
     `İncelemenin tamamı: ${url}\n\n` +
     `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n\n` +
     telegramSiteCta();
 
-  const result = await sendTelegramMessage(text);
+  const result = await sendTelegramPhoto(imageUrl, caption);
 
   return NextResponse.json({ ok: true, posted: true, slug: target.slug, result });
 });
