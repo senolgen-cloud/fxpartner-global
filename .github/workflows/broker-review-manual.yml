@@ -1,0 +1,24 @@
+name: Broker review manual post
+
+# Isolated from telegram-cron.yml on purpose: that workflow's
+# workflow_dispatch fires every job in the file (market-analysis-share,
+# news-update, blog-share, campaign-digest, economic-calendar-alert too),
+# which is fine for a single ad-hoc trigger but way too much noise for
+# backfilling many brokers one at a time. This workflow only ever posts
+# one broker-review-share message per run.
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Broker slug (src/data/brokers.ts) to post now"
+        required: true
+        type: string
+
+jobs:
+  post-broker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger broker-review-share for one broker
+        run: |
+          curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://fxpartner.global/api/cron/broker-review-share?slug=${{ inputs.slug }}"

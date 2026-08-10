@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramPhoto, telegramSiteCta } from "@/lib/telegram";
-import { brokers } from "@/data/brokers";
+import { brokers, getBrokerBySlug } from "@/data/brokers";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
 // Owned by Broker İstihbaratı & İnceleme Departmanı — see
@@ -23,8 +23,16 @@ export const GET = withCronErrorAlert("broker-review-share", async (req: NextReq
     return NextResponse.json({ ok: true, posted: false, reason: "no brokers" });
   }
 
+  // Optional manual override (used by the broker-review-manual workflow to
+  // backfill/post a specific broker on demand) — falls back to the normal
+  // hour-rotation pick when absent, so the hourly schedule is unaffected.
+  const slugOverride = req.nextUrl.searchParams.get("slug");
   const hoursSinceEpoch = Math.floor(Date.now() / 3_600_000);
-  const target = brokers[hoursSinceEpoch % brokers.length];
+  const target = slugOverride ? getBrokerBySlug(slugOverride) : brokers[hoursSinceEpoch % brokers.length];
+
+  if (!target) {
+    return NextResponse.json({ error: "Unknown broker slug" }, { status: 400 });
+  }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
   const url = `${siteUrl}/brokers/${target.slug}`;
