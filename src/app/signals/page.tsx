@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import SignalsBoard from "@/components/SignalsBoard";
 import BrokerAdBanner from "@/components/BrokerAdBanner";
+import VipCtaBanner from "@/components/VipCtaBanner";
 import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
 import { getSponsoredBroker } from "@/data/brokers";
@@ -60,24 +61,7 @@ export default async function SignalsPage() {
 
         <section className="border-t border-hairline">
           <div className="mx-auto max-w-3xl px-6 py-14">
-            <div className="rounded-2xl border border-gold/30 bg-gradient-to-br from-ink-soft to-ink p-8 text-center sm:p-10">
-              <span className="font-mono text-xs uppercase tracking-[0.2em] text-gold">FXPARTNER VIP</span>
-              <h2 className="mt-3 font-display text-2xl font-semibold sm:text-3xl">
-                Tüm sinyalleri anlık gör, AI piyasa asistanına sor
-              </h2>
-              <p className="mx-auto mt-3 max-w-xl text-sm text-text-on-ink-muted sm:text-base">
-                Buradaki liste sadece bir örnek. VIP üyelik ile her sinyal açılır açılmaz bildirim al, geçmiş
-                performansın tamamına eriş ve piyasa sorularını 7/24 AI asistana sor.
-              </p>
-              <a
-                href="https://fxpartner-vip.vercel.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center justify-center rounded-full bg-gold px-8 py-3 font-semibold text-ink transition hover:brightness-110"
-              >
-                VIP&apos;e Katıl
-              </a>
-            </div>
+            <VipCtaBanner variant="dark" />
           </div>
         </section>
 

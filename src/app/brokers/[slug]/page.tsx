@@ -8,6 +8,7 @@ import ShareButtons from "@/components/ShareButtons";
 import TrustGauge from "@/components/TrustGauge";
 import ReviewBadge from "@/components/ReviewBadge";
 import BrokerAdBanner from "@/components/BrokerAdBanner";
+import VipCtaBanner from "@/components/VipCtaBanner";
 import {
   brokers,
   getBrokerBySlug,
@@ -591,6 +592,10 @@ export default async function BrokerDetailPage({
 
             <div className="mt-14 border-t border-hairline-light pt-10">
               <BrokerAdBanner broker={featuredBroker} />
+            </div>
+
+            <div className="mt-14 border-t border-hairline-light pt-10">
+              <VipCtaBanner variant="light" />
             </div>
 
             {/* Verdict */}
