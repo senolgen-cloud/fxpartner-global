@@ -3,7 +3,7 @@ import { fetchAllNews, type NewsItem } from "@/lib/news";
 import { filterRelevantNews } from "@/lib/relevance-filter";
 import { translateToTurkish } from "@/lib/translate";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
-import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
+import { sendTelegramMessage, telegramSiteCta, mainServicesKeyboard } from "@/lib/telegram";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
 // Owned by Haber & Editöryal Departmanı (Elif Sarman) — see
@@ -69,7 +69,7 @@ export const GET = withCronErrorAlert("news-update", async (req: NextRequest) =>
     `\n\nBu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n\n` +
     telegramSiteCta();
 
-  await sendTelegramMessage(text);
+  await sendTelegramMessage(text, { inlineKeyboard: mainServicesKeyboard() });
   for (const item of fresh) {
     await markPostedToTelegram(`news:${item.guid}`);
   }

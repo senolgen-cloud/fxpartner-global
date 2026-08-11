@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramPhoto, telegramSiteCta } from "@/lib/telegram";
+import { sendTelegramPhoto, telegramSiteCta, mainServicesKeyboard } from "@/lib/telegram";
 import { getCandles, SYMBOLS } from "@/lib/market-data";
 import { sma, rsi } from "@/lib/technicals";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
@@ -46,6 +46,6 @@ export const GET = withCronErrorAlert("market-update", async (req: NextRequest) 
     `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n\n` +
     telegramSiteCta();
 
-  const result = await sendTelegramPhoto(imageUrl, caption);
+  const result = await sendTelegramPhoto(imageUrl, caption, { inlineKeyboard: mainServicesKeyboard() });
   return NextResponse.json({ ok: true, symbol: symbolId, result });
 });

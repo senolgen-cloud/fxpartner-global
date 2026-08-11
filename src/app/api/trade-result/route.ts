@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramPhoto } from "@/lib/telegram";
+import { sendTelegramPhoto, mainServicesKeyboard } from "@/lib/telegram";
 import { postTradeSignalToX } from "@/lib/x";
 import { sendPushToAll } from "@/lib/push";
 import { db } from "@/db";
@@ -113,6 +113,7 @@ export async function GET(req: NextRequest) {
 
   const result = await sendTelegramPhoto(imageUrl, caption, {
     replyToMessageId: original?.telegramMessageId ?? undefined,
+    inlineKeyboard: mainServicesKeyboard(),
   });
 
   // Best-effort, same as /api/trade-signal — an X failure never blocks the

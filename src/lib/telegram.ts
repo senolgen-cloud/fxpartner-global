@@ -7,6 +7,23 @@ export function telegramSiteCta(): string {
   return `👉 Daha fazla piyasa analizi ve broker karşılaştırması için sitemizi ziyaret edin: ${siteUrl}`;
 }
 
+// One shared row of buttons pointing at FXPARTNER's three core services —
+// attached under every content post (analysis, news, campaigns, blog,
+// trade signals) so readers always have one tap back into the actual
+// product, not just the bare site link in the caption text. The broker
+// digest (broker-review-share) builds its own per-broker button rows
+// instead of this one.
+export function mainServicesKeyboard(): InlineKeyboardButton[][] {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
+  return [
+    [
+      { text: "📈 Sinyaller", url: `${siteUrl}/signals` },
+      { text: "🤖 AI Asistan", url: `${siteUrl}/ai-asistan` },
+    ],
+    [{ text: "📊 Broker Karşılaştırmaları", url: siteUrl }],
+  ];
+}
+
 function getConfig() {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -60,7 +77,7 @@ export async function sendTelegramMessage(
 export async function sendTelegramPhoto(
   photoUrl: string,
   caption: string,
-  options: { replyToMessageId?: string } = {}
+  options: { replyToMessageId?: string; inlineKeyboard?: InlineKeyboardButton[][] } = {}
 ) {
   const { chatId } = getConfig();
   return callTelegram("sendPhoto", {
@@ -69,6 +86,9 @@ export async function sendTelegramPhoto(
     caption,
     parse_mode: "HTML",
     ...(options.replyToMessageId ? { reply_parameters: { message_id: options.replyToMessageId } } : {}),
+    ...(options.inlineKeyboard
+      ? { reply_markup: { inline_keyboard: options.inlineKeyboard } }
+      : {}),
   });
 }
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
+import { sendTelegramMessage, telegramSiteCta, mainServicesKeyboard } from "@/lib/telegram";
 import { sendPushToAll } from "@/lib/push";
 import { blogPosts } from "@/data/blog";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
@@ -44,7 +44,7 @@ export const GET = withCronErrorAlert("blog-share", async (req: NextRequest) => 
     `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n\n` +
     telegramSiteCta();
 
-  const result = await sendTelegramMessage(text);
+  const result = await sendTelegramMessage(text, { inlineKeyboard: mainServicesKeyboard() });
   await markPostedToTelegram(`blog:${target.slug}`);
 
   let push: { sent: number; removed: number } | { error: string } = { sent: 0, removed: 0 };

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
+import { sendTelegramMessage, telegramSiteCta, mainServicesKeyboard } from "@/lib/telegram";
 import { sendPushToAll } from "@/lib/push";
 import { brokers } from "@/data/brokers";
 import { getCashbackProgram } from "@/data/cashback";
@@ -41,7 +41,10 @@ export const GET = withCronErrorAlert("campaign-digest", async (req: NextRequest
     `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n\n` +
     telegramSiteCta();
 
-  const result = await sendTelegramMessage(text, { disablePreview: true });
+  const result = await sendTelegramMessage(text, {
+    disablePreview: true,
+    inlineKeyboard: mainServicesKeyboard(),
+  });
 
   let push: { sent: number; removed: number } | { error: string } = { sent: 0, removed: 0 };
   try {

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramPhoto } from "@/lib/telegram";
+import { sendTelegramPhoto, mainServicesKeyboard } from "@/lib/telegram";
 import { postTradeSignalToX } from "@/lib/x";
 import { sendPushToAll } from "@/lib/push";
 import { db } from "@/db";
@@ -79,7 +79,7 @@ export async function GET(req: NextRequest) {
     `<b>FXPARTNER</b> compares regulated forex brokers by regulation, real trading costs, platform quality, and withdrawal reliability, so you can pick a broker you actually trust.\n\n` +
     `👉 <a href="${siteUrl}">fxpartner.global</a>`;
 
-  const result = await sendTelegramPhoto(imageUrl, caption);
+  const result = await sendTelegramPhoto(imageUrl, caption, { inlineKeyboard: mainServicesKeyboard() });
 
   // Best-effort: X posting failing (rate limit, expired token, etc.) should
   // never take down the Telegram send, which is the primary channel.
