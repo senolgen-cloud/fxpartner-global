@@ -35,7 +35,7 @@ export default async function CommunityPage() {
 
   return (
     <>
-      <main className="flex-1 bg-ink text-text-on-ink">
+      <main lang="tr" className="flex-1 bg-ink text-text-on-ink">
         <section className="border-b border-hairline">
           <div className="mx-auto max-w-6xl px-6 py-16 text-center">
             <span className="mx-auto inline-flex items-center gap-2 rounded-full border border-hairline bg-ink-soft px-4 py-1.5 text-xs font-medium uppercase tracking-wide text-signal">
