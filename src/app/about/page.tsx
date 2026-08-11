@@ -239,10 +239,10 @@ export default function AboutPage() {
               </Link>{" "}
               for details. Questions? Email{" "}
               <a
-                href="mailto:senolgen@gmail.com"
+                href="mailto:info@fxpartner.global"
                 className="text-signal hover:text-signal-strong"
               >
-                senolgen@gmail.com
+                info@fxpartner.global
               </a>
               .
             </p>
