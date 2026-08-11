@@ -13,11 +13,21 @@ export default function HeroVideo() {
   const [shouldLoad, setShouldLoad] = useState(false);
 
   useEffect(() => {
-    const id = requestIdleCallback?.(() => setShouldLoad(true)) ?? setTimeout(() => setShouldLoad(true), 200);
-    return () => {
-      if (typeof id === "number") clearTimeout(id);
-      else cancelIdleCallback?.(id);
-    };
+    // Safari (desktop and iOS — every browser on iOS, since they're all
+    // WebKit under the hood) has never implemented requestIdleCallback.
+    // Referencing it as a bare identifier there throws a ReferenceError
+    // (unlike a `window.foo` property access, which safely returns
+    // undefined for a missing property) — that crashed this component's
+    // render on every browser on iPhone, taking the whole homepage down
+    // with it. Reading it off `window` first avoids ever touching the
+    // undeclared identifier.
+    const ric = typeof window !== "undefined" ? window.requestIdleCallback : undefined;
+    if (ric) {
+      const id = ric(() => setShouldLoad(true));
+      return () => window.cancelIdleCallback?.(id);
+    }
+    const timeoutId = setTimeout(() => setShouldLoad(true), 200);
+    return () => clearTimeout(timeoutId);
   }, []);
 
   useEffect(() => {
