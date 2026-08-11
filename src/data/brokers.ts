@@ -344,6 +344,16 @@ export const brokers: Broker[] = [
     categories: ["Low Spread", "Institutional Trust"],
     scoreCost: 5,
     scoreWithdrawal: 4,
+    extraFaqs: [
+      {
+        q: "Tickmill güvenilir mi?",
+        a: "Tickmill, İngiltere'nin FCA'sı ve CySEC dahil düzenleyici lisanslara sahiptir; bu ikisi tier-1 otoritedir. 2014'ten beri faaliyette olan Tickmill, düşük maliyetli Pro hesapları ve hoş geldin/margin bonuslarıyla bilinir. Güncel lisans durumunu ve bölgenizdeki erişilebilirliği Tickmill'in resmi sitesinden teyit edin.",
+      },
+      {
+        q: "Tickmill'den nasıl para çekilir?",
+        a: "Tickmill, hızlı ve şeffaf bir yatırma/çekme süreci sunduğunu belirtir; FCA ve CySEC gibi düzenleyiciler altında faaliyet gösterdiği için çekim taleplerini gereksiz gecikme olmadan işleme alma yükümlülüğü altındadır. Kesin süreler hesap türüne göre değişebileceğinden güncel bilgiyi resmi siteden teyit edin.",
+      },
+    ],
   },
   {
     rank: 3,
@@ -438,6 +448,16 @@ export const brokers: Broker[] = [
     scoreCost: 5,
     scoreWithdrawal: 5,
     scoreOverride: 8.2,
+    extraFaqs: [
+      {
+        q: "Exness güvenilir mi?",
+        a: "Exness, İngiltere'nin FCA'sı ve CySEC dahil 4 düzenleyici lisansına sahiptir; FCA ve CySEC tier-1 otoritedir. 2008'den beri faaliyette olan Exness, aktif traderlar arasında anlık çekim süreleri ve düşük spread seçenekleriyle tanınır. Yüksek/sınırsız kaldıraç seçenekleri deneyimsiz yatırımcılar için risklidir — güncel lisans durumunu resmi siteden teyit edin.",
+      },
+      {
+        q: "Exness'ten nasıl para çekilir?",
+        a: "Exness, çekim işlemlerini anlık/otomatik olarak işlediğini belirtir — bu, brokerin öne çıkan özelliklerinden biridir. Hesap türü çeşitliliği ilk bakışta kafa karıştırıcı olabileceğinden, çekim yöntemi ve süresiyle ilgili güncel detayları hesap açmadan önce Exness'in resmi sitesinden teyit etmenizi öneririz.",
+      },
+    ],
   },
   {
     rank: 11,
@@ -471,6 +491,16 @@ export const brokers: Broker[] = [
     categories: ["Multi-Platform"],
     scoreCost: 3,
     scoreWithdrawal: 3,
+    extraFaqs: [
+      {
+        q: "markets.com güvenilir mi?",
+        a: "markets.com, CySEC (tier-1) ve FSC (BVI, offshore) altında lisanslıdır — diğer incelediğimiz brokerlere kıyasla daha dar bir tier-1 düzenleyici kapsamına sahiptir ve hizmet bazı bölgelerde kısıtlı olabilir. 2008'den beri faaliyette olan marka, kendi Marketsx platformunu MT4/MT5 ile birleştirir. Bölgenizdeki erişilebilirliği ve güncel lisans durumunu resmi siteden teyit edin.",
+      },
+      {
+        q: "markets.com'dan nasıl para çekilir?",
+        a: "markets.com, Marketsx web platformu, mobil uygulama ve MT4/MT5 üzerinden hesap yönetimine izin verir. Çekim yöntemi ve süresi hesap türü ve bölgeye göre değişebileceğinden, güncel bilgiyi markets.com'un resmi sitesinden teyit etmenizi öneririz.",
+      },
+    ],
   },
   {
     rank: 2,
@@ -564,6 +594,16 @@ export const brokers: Broker[] = [
     scoreCost: 3,
     scoreWithdrawal: 2,
     scoreOverride: 5.2,
+    extraFaqs: [
+      {
+        q: "Versus Trade güvenilir mi?",
+        a: "Versus Trade, 2024'te kurulan, kısa bir faaliyet geçmişine sahip ve yalnızca offshore bir lisansa (Mauritius FSC) dayanan bir brokerdır — FCA, ASIC veya CySEC gibi tier-1 bir düzenleyici altında değildir. Bazı kullanıcı yorumları çekim ve kâr iptali ile ilgili şikayetler bildirmektedir. Yüksek kaldıraç (1:2000'e kadar) ve kısa kurumsal geçmiş, dikkatli değerlendirilmesi gereken risk faktörleridir.",
+      },
+      {
+        q: "Versus Trade'den nasıl para çekilir?",
+        a: "Versus Trade yalnızca MT5 üzerinden işlem sunar. Bazı kullanıcı yorumlarında çekim taleplerinin reddedilmesi veya kâr iptaliyle ilgili şikayetler bildirilmiştir — hesap açmadan önce bu geri bildirimleri bağımsız inceleme kaynaklarında araştırmanızı ve küçük bir tutarla test etmenizi öneririz.",
+      },
+    ],
   },
   {
     rank: 9,
@@ -597,6 +637,16 @@ export const brokers: Broker[] = [
     categories: ["Institutional Trust", "Multi-Platform"],
     scoreCost: 4,
     scoreWithdrawal: 3,
+    extraFaqs: [
+      {
+        q: "ThinkMarkets güvenilir mi?",
+        a: "ThinkMarkets, FCA, ASIC ve CySEC dahil güçlü çoklu düzenleyici lisansa sahiptir — üçü de tier-1 otoritedir. 2010'dan beri faaliyette olan ThinkMarkets, Standard hesapta 0 dolar minimum yatırım ve kendi ThinkTrader platformuyla öne çıkar. Güncel lisans durumunu ve bölgenizdeki erişilebilirliği resmi siteden teyit edin.",
+      },
+      {
+        q: "ThinkMarkets'ten nasıl para çekilir?",
+        a: "ThinkMarkets, FCA/ASIC/CySEC gibi düzenleyiciler altında faaliyet gösterdiği için çekim taleplerini gereksiz gecikme olmadan işleme alma yükümlülüğü altındadır. Cent/mikro hesap seçeneği yoktur ve aylık 20 dolarlık bir hareketsizlik ücreti uygulanabilir — çekim öncesi güncel şart ve süreleri resmi siteden teyit edin.",
+      },
+    ],
   },
   {
     rank: 10,
@@ -629,6 +679,16 @@ export const brokers: Broker[] = [
     categories: ["Beginners", "Institutional Trust"],
     scoreCost: 3,
     scoreWithdrawal: 3,
+    extraFaqs: [
+      {
+        q: "easyMarkets güvenilir mi?",
+        a: "easyMarkets, CySEC ve ASIC dahil 5 düzenleyici lisansına sahiptir; ikisi de tier-1 otoritedir. 2001'den beri faaliyette olması, sektördeki en uzun geçmişe sahip brokerlerden biri yapar. Garanti stop-loss ve garanti negatif bakiye koruması gibi sektörde nadir görülen risk yönetimi araçları sunar. Güncel lisans durumunu resmi siteden teyit edin.",
+      },
+      {
+        q: "easyMarkets'ten nasıl para çekilir?",
+        a: "easyMarkets, düzenlenmiş bir broker olarak çekim taleplerini gereksiz gecikme olmadan işleme alma yükümlülüğü altındadır. En düşük spread'lere erişim için Premium/VIP hesaplarda 2.000-10.000 dolar minimum yatırım gerektiğini unutmayın — çekim süre ve yöntemlerini hesap türünüze göre resmi siteden teyit edin.",
+      },
+    ],
   },
   {
     rank: 5,
@@ -704,6 +764,16 @@ export const brokers: Broker[] = [
     categories: [],
     scoreCost: 3,
     scoreWithdrawal: 2,
+    extraFaqs: [
+      {
+        q: "LHFX güvenilir mi?",
+        a: "LHFX (2025'te LonghornFX'ten yeniden markalandı), yalnızca offshore lisanslara (FSC Mauritius ve FSCA) sahiptir — FCA, ASIC veya CySEC gibi bir tier-1 otorite altında değildir. Bağımsız incelemeler yatırma/çekme kolaylığını olumlu bulsa da, slippage ve çekim gecikmeleriyle ilgili şikayetler de bildirilmektedir. Hesap açmadan önce bu riskleri dikkatle değerlendirmenizi öneririz.",
+      },
+      {
+        q: "LHFX'ten nasıl para çekilir?",
+        a: "LHFX, yatırma/çekme işlemlerinde ekstra ücret almadığını belirtir. Ancak bağımsız inceleme kaynakları çekim gecikmeleri ve bonus reklamcılığıyla ilgili şikayetler bildirmektedir — offshore-only lisans yapısı göz önüne alındığında, çekim öncesi güncel kullanıcı deneyimlerini bağımsız kaynaklardan araştırmanızı öneririz.",
+      },
+    ],
   },
   {
     rank: 14,
@@ -736,6 +806,16 @@ export const brokers: Broker[] = [
     categories: ["High Leverage"],
     scoreCost: 3,
     scoreWithdrawal: 1,
+    extraFaqs: [
+      {
+        q: "Exclusive Markets güvenilir mi?",
+        a: "Hayır, dikkatli olunması gereken bir brokerdır: Exclusive Markets yalnızca offshore lisanslara (FSA Seyşeller ve FSCA) sahiptir, tier-1 bir düzenleyici altında değildir. Bağımsız inceleme kaynakları çok düşük bir güven skoru ve tekrar eden çekim/donmuş bakiye şikayetleri bildirmektedir; ayrıca bağımsız bir saha araştırması, ilan edilen Kıbrıs/Seyşeller adreslerinde fiziksel bir varlık doğrulayamamıştır. Bu riskleri hesap açmadan önce dikkatle değerlendirmenizi öneririz.",
+      },
+      {
+        q: "Exclusive Markets'ten nasıl para çekilir?",
+        a: "Bağımsız inceleme sitelerinde Exclusive Markets için tekrar eden çekim ve donmuş bakiye şikayetleri bildirilmektedir — bu, brokerin çekim güvenilirliği açısından en düşük puan aldığımız kategorilerden biridir. Hesap açmayı düşünüyorsanız, küçük bir tutarla başlamanızı ve bir çekim talebinin gerçekten sorunsuz işlendiğini kendiniz test etmenizi öneririz.",
+      },
+    ],
   },
   {
     rank: 15,
@@ -772,6 +852,16 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 1,
     scoreRegulationOverride: 1,
     scoreOverride: 3.8,
+    extraFaqs: [
+      {
+        q: "TradingPRO güvenilir mi?",
+        a: "Hayır — TradingPRO, incelediğimiz brokerler arasında en düşük güven puanına sahip olanlardan biridir. Yalnızca offshore lisanslara (FSCA ve FSC Mauritius) sahiptir ve Haziran 2025'te İngiltere'nin FCA'sı tarafından yetkisiz firma uyarı listesine alınmıştır. Bağımsız inceleme siteleri açıkça \"uzak durun\" uyarısıyla birlikte çok düşük bir güven skoru ve belgelenmiş çekim gecikmesi/reddi şikayetleri bildirmektedir. Hesap açmadan önce bu uyarıları ciddiye almanızı öneririz.",
+      },
+      {
+        q: "TradingPRO'dan nasıl para çekilir?",
+        a: "Bağımsız inceleme kaynakları TradingPRO için birden fazla belgelenmiş çekim gecikmesi/reddi şikayeti bildirmektedir, üstelik firma İngiltere FCA'sının yetkisiz firma uyarı listesinde yer almaktadır. Bu sinyaller göz önüne alındığında, TradingPRO'ya para yatırmadan önce güncel düzenleyici durumunu ve bağımsız kullanıcı deneyimlerini dikkatle araştırmanızı öneririz.",
+      },
+    ],
   },
   {
     rank: 8,
@@ -806,6 +896,16 @@ export const brokers: Broker[] = [
     categories: ["Institutional Trust", "Multi-Platform"],
     scoreCost: 4,
     scoreWithdrawal: 4,
+    extraFaqs: [
+      {
+        q: "FXT güvenilir mi?",
+        a: "FXT (FXTrading.com), Avustralya'nın ASIC'i altında bir Market Making lisansına ve offshore bir VFSC (Vanuatu) lisansına sahiptir; ASIC tier-1 bir otoritedir. 2014'ten beri faaliyette olan FXT, offshore-only brokerlere kıyasla daha güçlü bir bağımsız güven skoruna sahiptir. Önemli bir uyarı: bağımsız incelemeciler FXT adını kullanan sahte/taklit siteler tespit etmiştir — para yatırmadan önce resmi domain üzerinde olduğunuzu mutlaka doğrulayın.",
+      },
+      {
+        q: "FXT'den nasıl para çekilir?",
+        a: "FXT, MT4, MT5, WebTrader ve kendi FXT uygulaması üzerinden hesap yönetimine izin verir. ASIC düzenlemesi altındaki müşteriler için kaldıraç, offshore kuruluşa kıyasla daha düşük bir tavana sahiptir. Çekim süre ve yöntemlerini hesap türünüze göre resmi FXT sitesinden (taklit sitelere dikkat ederek) teyit edin.",
+      },
+    ],
   },
 ].sort((a, b) => a.rank - b.rank);
 
