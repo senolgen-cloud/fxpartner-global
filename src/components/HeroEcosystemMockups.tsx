@@ -179,6 +179,7 @@ export default function HeroEcosystemMockups({
             <li key={broker.slug}>
               <Link
                 href={`/brokers/${broker.slug}`}
+                title={`${broker.name} broker review`}
                 className="group flex items-center gap-2.5 rounded-lg transition-colors hover:bg-ink-soft"
               >
                 <span className="relative flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-ink text-[10px] font-semibold text-text-on-ink">

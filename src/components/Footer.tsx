@@ -45,6 +45,7 @@ export default function Footer() {
                 <li key={b.slug}>
                   <Link
                     href={`/brokers/${b.slug}`}
+                    title={`${b.name} review`}
                     className="transition-colors hover:text-text-on-ink"
                   >
                     <span className="notranslate">{b.name} </span>Review

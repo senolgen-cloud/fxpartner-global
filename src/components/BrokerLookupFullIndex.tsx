@@ -80,6 +80,7 @@ export default function BrokerLookupFullIndex() {
                       {b.relatedSlug && (
                         <Link
                           href={`/brokers/${b.relatedSlug}`}
+                          title={`${b.name} full review`}
                           className="font-mono uppercase tracking-[0.1em] text-signal transition-colors hover:text-signal-strong"
                         >
                           Full review →

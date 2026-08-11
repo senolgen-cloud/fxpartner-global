@@ -125,6 +125,7 @@ export default function ComparisonTable() {
                     <td className="px-5 py-4 text-right">
                       <Link
                         href={`/brokers/${b.slug}`}
+                        title={`${b.name} full review`}
                         className="font-mono text-xs text-signal transition-colors hover:text-text-on-ink"
                       >
                         View →

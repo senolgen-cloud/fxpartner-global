@@ -72,6 +72,7 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
             </a>
             <Link
               href={`/brokers/${broker.slug}`}
+              title={`${broker.name} full review`}
               className="rounded-full border border-hairline-light px-5 py-2.5 text-sm font-medium text-text-dark transition-colors hover:border-text-dark"
             >
               Full Review →

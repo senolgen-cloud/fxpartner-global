@@ -78,6 +78,7 @@ function CardBody({ broker, featured }: { broker: Broker; featured: boolean }) {
           </a>
           <Link
             href={`/brokers/${broker.slug}`}
+            title={`${broker.name} full review`}
             className="rounded-full border border-hairline px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:border-text-on-ink"
           >
             Full Review →

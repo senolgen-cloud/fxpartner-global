@@ -63,6 +63,7 @@ export default function CommunityWidget({ topBrokers }: { topBrokers: Broker[] }
                 <li key={broker.slug}>
                   <Link
                     href={`/brokers/${broker.slug}`}
+                    title={`${broker.name} broker review`}
                     className="group flex items-center gap-2.5 rounded-lg p-1.5 transition-colors hover:bg-ink-soft"
                   >
                     <span className="relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-ink-soft text-[10px] font-semibold text-text-on-ink">
