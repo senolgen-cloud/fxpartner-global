@@ -6,6 +6,7 @@ import CommunityWidget from "@/components/CommunityWidget";
 import GoogleTranslateWidget from "@/components/GoogleTranslateWidget";
 import Header from "@/components/Header";
 import Ticker from "@/components/Ticker";
+import MobileBottomNav from "@/components/MobileBottomNav";
 import BrokerHeroSlider from "@/components/BrokerHeroSlider";
 import { brokers } from "@/data/brokers";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
@@ -95,7 +96,7 @@ export default function RootLayout({
       lang="en"
       className={`${geist.variable} ${jetbrainsMono.variable} ${poppins.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-paper text-text-dark pb-12">
+      <body className="min-h-full flex flex-col bg-paper text-text-dark pb-24 sm:pb-12">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
@@ -110,6 +111,7 @@ export default function RootLayout({
         </div>
         {children}
         <div className="fixed inset-x-0 bottom-0 z-40">
+          <MobileBottomNav />
           <Ticker />
         </div>
         <NotificationOptIn />
