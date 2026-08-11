@@ -184,6 +184,67 @@ export const marketAnalysisPosts: MarketAnalysisPost[] = [
     closing:
       "**FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın.",
   },
+  {
+    slug: "haftalik-gorunum-2026-08-10",
+    title: "FXPARTNER Haftalık Piyasa Görünümü | 10-16 Ağustos 2026",
+    excerpt:
+      "Haftanın ana gündemi Perşembe günü açıklanacak ABD TÜFE (CPI) verisi; jeopolitik gerginlik Nasdaq'ı baskılarken altın 4.375 dolar civarında, EUR/USD 1,154 seviyesinde ve USD/TRY 47,70 TL bandında dengeli seyrini sürdürüyor.",
+    publishedAt: "2026-08-12",
+    readingMinutes: 5,
+    intro:
+      "10-16 Ağustos haftasında piyasaların odağı, Perşembe günü açıklanacak ABD tüketici fiyat endeksi (TÜFE/CPI) verisinde — bu veri, Fed'in faiz patikasına dair beklentileri yeniden şekillendirebilir. Hafta boyunca ayrıca RBA faiz kararı, Almanya ve İngiltere'den makro veriler ile ABD'de art arda açıklanacak istihdam ve sanayi üretimi rakamları izlenecek. EUR/USD, XAU/USD, USD/TRY ve ABD hisse senedi piyasaları üzerinden haftanın öne çıkan başlıklarını derledik.",
+    news: [
+      {
+        icon: "💶",
+        heading: "EUR/USD: 1,154 Seviyesinde Yatay Seyir",
+        body: "EUR/USD, hafta başında **1,1540-1,1542 bandında** işlem görüyor. Son bir ayda parite **%1,4 değer kazanırken**, son 12 aylık dönemde **%1,2 değer kaybetmiş** durumda — kısa vadeli toparlanma ile yıllık trend arasındaki bu ayrışma, yatırımcıların Perşembe günkü ABD TÜFE verisini bekleyerek pozisyon almaktan kaçındığına işaret ediyor. Veri, doların ve dolayısıyla paritenin yönünü haftanın geri kalanında belirleyecek ana katalizör olarak öne çıkıyor.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın (XAU/USD): 4.375 Dolar Civarında, Güçlü Yıllık Performans",
+        body: "XAU/USD, güncel olarak **4.375 dolar** seviyesinde işlem görüyor; günlük bant **4.357-4.435 dolar** arasında şekilleniyor. Ons altın, son 12 ayda **%31,4 değer kazanarak** güçlü bir yükseliş trendini sürdürüyor ve 52 haftalık aralığı **3.311-5.595 dolar** olarak kayıtlara geçti. Analistler Ağustos ayı için **3.581-4.646 dolar** aralığında bir seyir öngörüyor; merkez bankalarının sürdürdüğü net altın alımları fiyatı yapısal olarak destekleyen ana unsur olmaya devam ediyor.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "USD/TRY: 47,70 TL Bandında Kontrollü Seyir",
+        body: "USD/TRY, hafta başında **47,67-47,75 TL bandında**, açılışını **47,70 TL** seviyesinden yaparak dengeli bir görünüm sergiliyor. Son 7 günlük veriye göre kur **47,54-47,80 TL** aralığında hareket etti ve ortalama **47,67 TL** seviyesinde seyretti — bu da TCMB'nin güçlü rezerv pozisyonuyla desteklenen kontrollü kur rejiminin sürdüğünü gösteriyor.",
+      },
+      {
+        icon: "📉",
+        heading: "ABD Hisse Senetleri: Jeopolitik Gerginlik ve Big Tech Zayıflığı Baskı Yaratıyor",
+        body: "Nasdaq 100 endeksi, ABD-İran gerginliğine dair artan endişeler ve büyük teknoloji hisselerindeki (özellikle Alphabet) geri çekilmenin etkisiyle **29.503 puana** geriledi (**%0,40 düşüş**); günlük işlem bandı **29.428-29.706 puan** arasında şekillendi. S&P 500 **%0,3**, Nasdaq Composite ise **%0,6** değer kaybetti. Brent petrol ise jeopolitik risk primiyle **varil başına 87-88 dolar** bandında tutunmayı sürdürdü.",
+      },
+    ],
+    calendarLabel: "10-16 Ağustos 2026",
+    calendarEvents: [
+      {
+        time: "11 Ağustos Salı",
+        icon: "🇦🇺",
+        title: "RBA Faiz Kararı",
+        note: "Avustralya Merkez Bankası'nın kararı, AUD paritelerinde volatiliteyi artırabilir.",
+      },
+      {
+        time: "13 Ağustos Perşembe",
+        icon: "🇺🇸",
+        title: "ABD Tüketici Fiyat Endeksi (TÜFE/CPI)",
+        note: "Haftanın en kritik verisi; Fed'in faiz indirim beklentilerini ve dolayısıyla EUR/USD, XAU/USD ile dolar endeksi üzerindeki fiyatlamayı doğrudan etkileyebilir.",
+      },
+      {
+        time: "15 Ağustos Cumartesi",
+        icon: "🇺🇸",
+        title: "Haftalık İşsizlik Başvuruları, Perakende Satışlar, Philly Fed Endeksi ve Sanayi Üretimi",
+        note: "Aynı gün açıklanacak yoğun bir ABD veri paketi; işgücü piyasası ve tüketici harcamalarına dair güncel resmi verecek.",
+      },
+      {
+        time: "16 Ağustos Pazar",
+        icon: "🇺🇸",
+        title: "Konut Başlangıçları, İnşaat İzinleri ve Michigan Tüketici Güveni (Öncü)",
+        note: "Haftayı kapatan konut sektörü ve tüketici güveni verileri, dolar ve ABD hisse senedi piyasaları için ek bir yön sinyali oluşturabilir.",
+      },
+    ],
+    closing:
+      "**FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
 ];
 
 export function getMarketAnalysisPostBySlug(slug: string): MarketAnalysisPost | undefined {

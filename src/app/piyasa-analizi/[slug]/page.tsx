@@ -21,8 +21,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getMarketAnalysisPostBySlug(slug);
   if (!post) return {};
+  // post.title already leads with "FXPARTNER " (e.g. "FXPARTNER Haftalık
+  // Piyasa Görünümü | ...") for on-page/OG display, but the root layout's
+  // title template also appends "| FXPARTNER" — stripping the prefix here
+  // only affects the <title> tag, not the visible H1 or OG/social title.
+  const tabTitle = post.title.replace(/^FXPARTNER\s+/, "");
   return {
-    title: post.title,
+    title: tabTitle,
     description: post.excerpt,
     alternates: { canonical: `/piyasa-analizi/${post.slug}` },
     openGraph: {
