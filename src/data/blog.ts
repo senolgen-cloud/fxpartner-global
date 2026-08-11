@@ -628,6 +628,7 @@ export const blogPosts: BlogPost[] = [
       "Bloomberg terminali yıllık binlerce dolar tutar. Ücretsiz araçları ve bir yapay zeka asistanını doğru şekilde birleştirerek kendi izleme, haber filtreleme ve risk disiplini sisteminizi nasıl kurabileceğinizi anlatıyoruz.",
     publishedAt: "2026-08-11",
     readingMinutes: 7,
+    coverImage: "/blog/kendi-ai-piyasa-takip-sisteminizi-kurun-cover.png",
     sections: [
       {
         paragraphs: [
