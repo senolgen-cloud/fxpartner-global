@@ -29,7 +29,7 @@ function CardBody({ broker, featured }: { broker: Broker; featured: boolean }) {
           {String(broker.rank).padStart(2, "0")}
         </span>
         <div
-          className={`flex items-center gap-3.5 ${featured ? "featured-card-depth-sm" : ""}`}
+          className={`flex min-w-0 items-center gap-3.5 ${featured ? "featured-card-depth-sm" : ""}`}
         >
           <div className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-hairline bg-ink p-2 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.6)]">
             {broker.logo ? (
