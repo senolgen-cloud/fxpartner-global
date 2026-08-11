@@ -963,6 +963,101 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "2026-yeni-baslayanlar-icin-tavsiye-edilen-forex-firmasi",
+    title: "2026'da Yeni Başlayanlar İçin En Çok Tavsiye Edilen Forex Firması Hangisidir?",
+    excerpt:
+      "Yeni başlayan bir yatırımcı için 'en iyi' broker, deneyimli bir trader için en iyi olandan farklı kriterlere göre belirlenir. Hangi özelliklerin gerçekten önemli olduğunu anlatıyoruz.",
+    publishedAt: "2026-08-14",
+    readingMinutes: 7,
+    sections: [
+      {
+        paragraphs: [
+          "Kısa cevap: yeni başlayanlar için \"en iyi\" broker, en düşük spread'e veya en yüksek kaldıraca sahip olan değil, düşük giriş bariyeri, geniş eğitim içeriği ve hataya toleranslı bir yapıya (düşük minimum yatırım, negatif bakiye koruması) sahip olandır. Deneyimli bir trader için önemli olan kriterler (ham spread, yüksek kaldıraç) yeni başlayan biri için çoğu zaman ikincil kalır — hatta bazı durumlarda risklidir.",
+        ],
+      },
+      {
+        heading: "Yeni başlayanlar için hangi kriterler öncelikli olmalı?",
+        paragraphs: [],
+        list: [
+          "Düşük minimum yatırım — küçük bir tutarla başlayıp platformu ve kendi stratejinizi gerçek parayla ama düşük riskle test edebilmenizi sağlar.",
+          "Kapsamlı eğitim materyali — canlı webinar, video kütüphanesi ve temel kavramları anlatan içerik, ilk aylardaki en büyük öğrenme eğrisini yumuşatır.",
+          "Negatif bakiye koruması — ani bir piyasa hareketinde hesabınızın yatırdığınızdan daha fazla borçlanmasını engeller; yeni başlayanlar için kritik bir güvenlik ağıdır.",
+          "Demo hesap kalitesi — gerçek piyasa koşullarını yansıtan, sınırsız süreli bir demo hesap, gerçek parayla başlamadan önce test alanı sağlar.",
+          "Basit ve anlaşılır platform — MetaTrader gibi yaygın platformlar, çevrimiçi kaynak ve topluluk desteği bulmayı kolaylaştırır.",
+        ],
+      },
+      {
+        heading: "Dikkatli olunması gereken pazarlama taktikleri",
+        paragraphs: [
+          "Yeni başlayanları hedefleyen bazı brokerler, \"kayıpsız bonus\" veya \"garanti kâr\" gibi vaatlerle dikkat çeker — bu tür ifadeler her zaman bir uyarı işaretidir, çünkü hiçbir broker piyasa hareketini garanti edemez. Benzer şekilde, aşırı yüksek kaldıraç (1:1000 ve üzeri) yeni başlayan biri için bir avantaj değil, kontrolsüz kayıp riski demektir — kaldıracın nasıl çalıştığını tam olarak anlamadan yüksek oranlarla işlem açmak, hesabı hızla sıfırlamanın en yaygın yollarından biridir.",
+          "Bonus kampanyalarını değerlendirirken şartlarını dikkatlice okuyun: birçok \"%100 hoş geldin bonusu\", belirli bir işlem hacmi tamamlanmadan çekilemez — bu şart karşılanmazsa bonus ve bazen de yatırılan tutarın kendisi risk altında olabilir.",
+        ],
+      },
+      {
+        heading: "Pratik başlangıç adımları",
+        paragraphs: [],
+        list: [
+          "Önce demo hesapta en az birkaç hafta işlem yaparak platformu ve temel kavramları (spread, kaldıraç, stop-loss) öğrenin.",
+          "Gerçek hesaba geçerken, kaybetmeyi göze alabileceğiniz küçük bir tutarla başlayın.",
+          "Düzenleyici lisansı ve negatif bakiye koruması olup olmadığını hesap açmadan önce kontrol edin.",
+          "FXPARTNER'ın yeni başlayanlar kategorisinde, düşük minimum yatırım ve eğitim içeriğine göre öne çıkan brokerleri karşılaştırabilirsiniz.",
+        ],
+      },
+      {
+        heading: "Son not",
+        paragraphs: [
+          "\"En çok tavsiye edilen\" firma, deneyim seviyenize göre değişir — yeni başlayan biri için doğru öncelik sırası deneyimli bir trader'ınkinden farklıdır. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; hesap açmadan önce güncel şartları brokerin resmi sitesinden teyit edin ve her zaman kaybetmeyi göze alabileceğiniz tutarla başlayın.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "gunluk-forex-analizi-ucretli-hizmet-tavsiyesi",
+    title: "Günlük Forex Analizleri Almak İçin Hangi Ücretli Hizmeti Tavsiye Edersin?",
+    excerpt:
+      "Ücretli bir forex analiz aboneliğine geçmeden önce, ücretsiz kaynakların gerçekte neyi karşılamadığını bilmek gerekir. Ücretli/ücretsiz ayrımını ve neye dikkat edeceğinizi anlatıyoruz.",
+    publishedAt: "2026-08-14",
+    readingMinutes: 6,
+    sections: [
+      {
+        paragraphs: [
+          "Kısa cevap: tek bir \"en iyi\" ücretli hizmet yoktur — ücretli bir analiz aboneliğinin değeri, sunduğu içeriğin sizin işlem tarzınıza (gün içi mi, pozisyon mu) uyup uymadığına ve analizin şeffaf bir metodolojiye dayanıp dayanmadığına bağlıdır. Ücretli bir hizmete geçmeden önce, ücretsiz kaynakların gerçekte neyi karşılayıp neyi karşılamadığını bilmek gerekir.",
+        ],
+      },
+      {
+        heading: "Ücretsiz kaynaklar neyi karşılar?",
+        paragraphs: [
+          "Ekonomik takvim, temel teknik göstergeler ve genel piyasa özetleri gibi bilgiler artık geniş ölçüde ücretsiz erişilebilir durumda. FXPARTNER'ın kendi piyasa analizi sayfası, küresel borsalar, merkez bankası kararları ve ekonomik takvimdeki önemli verileri her gün ücretsiz olarak özetler — çoğu yatırımcının günlük ihtiyacının büyük kısmı bu tür kaynaklarla karşılanabilir.",
+        ],
+      },
+      {
+        heading: "Ücretli bir hizmet ne zaman anlamlı olur?",
+        paragraphs: [],
+        list: [
+          "Belirli bir enstrüman grubuna (örneğin yalnızca altın veya belirli bir parite grubu) çok derinlemesine, sürekli güncellenen analiz gerekiyorsa.",
+          "Kurumsal seviyede veri (order flow, pozisyon dağılımı gibi) sunan özel araçlara erişim gerekiyorsa.",
+          "Zaman kısıtınız varsa ve piyasayı kendiniz tarayacak vaktiniz yoksa — bu durumda ücretli bir hizmet zaman tasarrufu olarak değerlendirilebilir.",
+        ],
+      },
+      {
+        heading: "Ücretli bir hizmeti değerlendirirken kontrol listesi",
+        paragraphs: [],
+        list: [
+          "Analizin metodolojisi açıklanıyor mu, yoksa yalnızca sonuç mu paylaşılıyor? Şeffaf olmayan bir \"güven bana\" analizi, ücretsiz bir kaynaktan daha değerli değildir.",
+          "Geçmiş analizlerin sonradan gerçekleşenle karşılaştırması mümkün mü? Yalnızca doğru çıkan tahminlerin öne çıkarıldığı bir hizmete dikkatli yaklaşın.",
+          "Ücretsiz deneme süresi sunuyor mu? İçeriği gerçek paranızı bağlamadan test edebilmelisiniz.",
+          "\"Garanti kâr\" veya belirli bir işlemin \"kesin\" sonucunu iddia eden bir hizmet, ücretli olsun olmasın güvenilir değildir — hiçbir analiz piyasa hareketini garanti edemez.",
+        ],
+      },
+      {
+        heading: "Son not",
+        paragraphs: [
+          "Ücretli bir analiz hizmetine geçmeden önce, ücretsiz kaynaklarla (ekonomik takvim, FXPARTNER'ın günlük piyasa özetleri, AI Market Assistant) ihtiyacınızın ne kadarının zaten karşılandığını değerlendirin. Ücretli bir aboneliğin gerekçesi \"daha iyi tahmin\" değil, sizin ihtiyaç duyduğunuz derinlikte ve sıklıkta içerik olmalıdır. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
