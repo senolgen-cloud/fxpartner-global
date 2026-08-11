@@ -29,9 +29,16 @@ async function callTelegram(method: string, body: Record<string, unknown>) {
   return data.result;
 }
 
+export type InlineKeyboardButton = { text: string; url: string };
+
 export async function sendTelegramMessage(
   text: string,
-  options: { disablePreview?: boolean } = {}
+  options: {
+    disablePreview?: boolean;
+    // Each inner array is one row of buttons, rendered left-to-right —
+    // e.g. [[{text: "Hesap Aç", url: "..."}, {text: "İncele", url: "..."}]].
+    inlineKeyboard?: InlineKeyboardButton[][];
+  } = {}
 ) {
   const { chatId } = getConfig();
   return callTelegram("sendMessage", {
@@ -39,6 +46,9 @@ export async function sendTelegramMessage(
     text,
     parse_mode: "HTML",
     disable_web_page_preview: options.disablePreview ?? false,
+    ...(options.inlineKeyboard
+      ? { reply_markup: { inline_keyboard: options.inlineKeyboard } }
+      : {}),
   });
 }
 
