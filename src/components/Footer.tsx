@@ -60,6 +60,11 @@ export default function Footer() {
             </h3>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
+                <Link href="/about" className="transition-colors hover:text-text-on-ink">
+                  About Us
+                </Link>
+              </li>
+              <li>
                 <Link href="/categories" className="transition-colors hover:text-text-on-ink">
                   Broker Categories
                 </Link>

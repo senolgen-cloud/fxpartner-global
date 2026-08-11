@@ -19,6 +19,11 @@ const primaryLinks = [
 
 const resourceLinks = [
   {
+    href: "/about",
+    label: "About Us",
+    description: "Who we are, our principles, and how partnerships work",
+  },
+  {
     href: "/ekonomik-takvim",
     label: "Economic Calendar",
     description: "Live macro events and their expected market impact",
