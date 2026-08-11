@@ -48,6 +48,20 @@ const steps = [
   },
 ];
 
+const accountSteps = [
+  "Pick a broker from the ranking above whose regulation and cost profile matches your risk tolerance.",
+  "Complete the broker's KYC form with your ID and proof of address — most Tier-1 regulated brokers require this before your first deposit.",
+  "Fund the account with the minimum deposit first, not your full trading capital, so you can evaluate execution quality risk-free.",
+  "Open the platform (MT4, MT5, or the broker's own app) in demo mode and confirm spreads and order execution match what's advertised.",
+];
+
+const withdrawalSteps = [
+  "Request a small withdrawal first — the amount matters less than observing the broker's actual processing time.",
+  "Use the same payment method you deposited with; most regulated brokers require this for anti-money-laundering compliance.",
+  "Track the time from request to funds received: same-day to 3 business days is typical for reputable brokers, longer delays are a warning sign.",
+  "Keep the confirmation email or transaction ID — it's your reference if you need to dispute a delay with the broker or your regulator.",
+];
+
 const faqs = [
   {
     q: "What is the FXPARTNER Index and how is it calculated?",
@@ -68,6 +82,14 @@ const faqs = [
   {
     q: "Does this site give investment advice?",
     a: "No. The content is for general informational purposes only and is not personal investment advice. You should do your own research and consult a professional if needed before making a decision.",
+  },
+  {
+    q: "How are the trade signals generated, and how accurate are they?",
+    a: "Signals combine automated technical screening (trend, momentum, and volatility indicators across major pairs) with a manual review pass before publication. Every signal carries an entry, stop-loss, and take-profit level so its outcome is objectively checkable — closed signals stay visible on the signals page with their result, win or loss. Past performance does not guarantee future results, and signals are educational in nature, not personalized advice.",
+  },
+  {
+    q: "What are the risks of forex trading?",
+    a: "Forex trading uses leverage, which magnifies both gains and losses — you can lose more than your initial deposit depending on the account type and jurisdiction. Spreads and swaps widen during high-volatility events, and offshore-regulated accounts carry weaker investor-protection guarantees than Tier-1 regulated ones. Only trade with capital you can afford to lose, and use a demo account before committing real funds.",
   },
 ];
 
@@ -309,6 +331,76 @@ export default async function Home() {
                 </Reveal>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Account opening & withdrawal walkthrough */}
+        <section id="guides" className="bg-ink">
+          <div className="mx-auto max-w-6xl px-6 py-20">
+            <Reveal className="max-w-2xl">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
+                Walkthrough
+              </span>
+              <h2 className="mt-3 font-display text-3xl font-semibold text-text-on-ink md:text-4xl">
+                Opening an account and your first withdrawal
+              </h2>
+              <p className="mt-4 text-text-on-ink-muted">
+                The same two moments decide most trust issues with a new
+                broker. Here&apos;s what to check at each one.
+              </p>
+            </Reveal>
+
+            <div className="mt-12 grid gap-10 md:grid-cols-2">
+              <div>
+                <h3 className="font-display text-lg font-semibold text-text-on-ink">
+                  Opening an account
+                </h3>
+                <ol className="mt-4 space-y-4">
+                  {accountSteps.map((step, i) => (
+                    <li key={step} className="flex gap-4">
+                      <span className="font-mono text-xs text-signal">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="text-[14px] leading-relaxed text-text-on-ink-muted">
+                        {step}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+              <div>
+                <h3 className="font-display text-lg font-semibold text-text-on-ink">
+                  Your first withdrawal
+                </h3>
+                <ol className="mt-4 space-y-4">
+                  {withdrawalSteps.map((step, i) => (
+                    <li key={step} className="flex gap-4">
+                      <span className="font-mono text-xs text-signal">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="text-[14px] leading-relaxed text-text-on-ink-muted">
+                        {step}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+
+            <Reveal delay={120} className="mt-12">
+              <div className="rounded-2xl border border-gold/30 bg-gold/5 p-6">
+                <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-gold">
+                  Risk warning
+                </p>
+                <p className="mt-2 max-w-3xl text-[14px] leading-relaxed text-text-on-ink-muted">
+                  Forex trading is leveraged and carries a high risk of
+                  losing your capital quickly. Never deposit more than you
+                  can afford to lose, and treat every step above — KYC,
+                  first deposit, first withdrawal — as a test before
+                  committing further funds.
+                </p>
+              </div>
+            </Reveal>
           </div>
         </section>
 

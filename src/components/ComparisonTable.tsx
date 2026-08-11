@@ -1,85 +1,178 @@
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import { brokers, getBrokerScores } from "@/data/brokers";
+import {
+  brokers,
+  brokerCategories,
+  getBrokerScores,
+  type BrokerCategory,
+} from "@/data/brokers";
 
 export default function ComparisonTable() {
+  const [activeCategory, setActiveCategory] = useState<BrokerCategory | "All">(
+    "All"
+  );
+  const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
+
+  const filtered =
+    activeCategory === "All"
+      ? brokers
+      : brokers.filter((b) => b.categories.includes(activeCategory));
+
   return (
-    <div className="overflow-x-auto rounded-2xl border border-hairline">
-      <table className="w-full min-w-[840px] border-collapse text-left">
-        <thead>
-          <tr className="border-b border-hairline bg-ink-soft">
-            <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
-              Broker
-            </th>
-            <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-gold">
-              Index
-            </th>
-            <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
-              Rating
-            </th>
-            <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
-              Min. Deposit
-            </th>
-            <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
-              Max. Leverage
-            </th>
-            <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
-              Regulation
-            </th>
-            <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
-              Platform
-            </th>
-            <th className="px-5 py-4" />
-          </tr>
-        </thead>
-        <tbody>
-          {brokers.map((b, i) => (
-            <tr
-              key={b.slug}
-              className={`border-b border-hairline last:border-b-0 ${
-                i % 2 === 0 ? "bg-ink" : "bg-ink-soft"
-              }`}
-            >
-              <td className="px-5 py-4">
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs text-signal">
-                    {String(b.rank).padStart(2, "0")}
-                  </span>
-                  <span className="notranslate font-display text-base font-medium text-text-on-ink">
-                    {b.name}
-                  </span>
-                </div>
-              </td>
-              <td className="tabular-stat px-5 py-4 font-mono text-sm font-semibold text-gold">
-                {getBrokerScores(b).composite.toFixed(1)}
-              </td>
-              <td className="tabular-stat px-5 py-4 font-mono text-sm text-text-on-ink">
-                {b.rating.toFixed(1)}
-              </td>
-              <td className="tabular-stat px-5 py-4 font-mono text-sm text-text-on-ink">
-                {b.minDeposit}
-              </td>
-              <td className="tabular-stat px-5 py-4 font-mono text-sm text-text-on-ink">
-                {b.maxLeverage}
-              </td>
-              <td className="px-5 py-4 font-mono text-xs text-text-on-ink-muted">
-                {b.regulators[0]}
-                {b.regulators.length > 1 ? ` +${b.regulators.length - 1}` : ""}
-              </td>
-              <td className="px-5 py-4 font-mono text-xs text-text-on-ink-muted">
-                {b.platforms.join(" / ")}
-              </td>
-              <td className="px-5 py-4 text-right">
-                <Link
-                  href={`/brokers/${b.slug}`}
-                  className="font-mono text-xs text-signal transition-colors hover:text-text-on-ink"
-                >
-                  View →
-                </Link>
-              </td>
+    <div>
+      <div className="mb-5 flex flex-wrap gap-2">
+        {(["All", ...brokerCategories] as const).map((cat) => (
+          <button
+            key={cat}
+            type="button"
+            onClick={() => setActiveCategory(cat)}
+            className={`rounded-full border px-4 py-1.5 font-mono text-xs uppercase tracking-[0.1em] transition-colors ${
+              activeCategory === cat
+                ? "border-signal bg-signal/15 text-signal"
+                : "border-hairline text-text-on-ink-muted hover:border-text-on-ink hover:text-text-on-ink"
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <div className="overflow-x-auto rounded-2xl border border-hairline">
+        <table className="w-full min-w-[840px] border-collapse text-left">
+          <thead>
+            <tr className="border-b border-hairline bg-ink-soft">
+              <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
+                Broker
+              </th>
+              <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-gold">
+                Index
+              </th>
+              <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
+                Rating
+              </th>
+              <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
+                Min. Deposit
+              </th>
+              <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
+                Max. Leverage
+              </th>
+              <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
+                Regulation
+              </th>
+              <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
+                Platform
+              </th>
+              <th className="px-5 py-4" />
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filtered.map((b, i) => {
+              const isExpanded = expandedSlug === b.slug;
+              return (
+                <React.Fragment key={b.slug}>
+                  <tr
+                    className={`border-b border-hairline last:border-b-0 ${
+                      i % 2 === 0 ? "bg-ink" : "bg-ink-soft"
+                    }`}
+                  >
+                    <td className="px-5 py-4">
+                      <div className="flex items-center gap-3">
+                        <span className="font-mono text-xs text-signal">
+                          {String(b.rank).padStart(2, "0")}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setExpandedSlug(isExpanded ? null : b.slug)
+                          }
+                          className="notranslate flex items-center gap-1.5 font-display text-base font-medium text-text-on-ink"
+                        >
+                          {b.name}
+                          <span
+                            aria-hidden="true"
+                            className={`font-mono text-[10px] text-text-on-ink-muted transition-transform ${
+                              isExpanded ? "rotate-180" : ""
+                            }`}
+                          >
+                            ▾
+                          </span>
+                        </button>
+                      </div>
+                    </td>
+                    <td className="tabular-stat px-5 py-4 font-mono text-sm font-semibold text-gold">
+                      {getBrokerScores(b).composite.toFixed(1)}
+                    </td>
+                    <td className="tabular-stat px-5 py-4 font-mono text-sm text-text-on-ink">
+                      {b.rating.toFixed(1)}
+                    </td>
+                    <td className="tabular-stat px-5 py-4 font-mono text-sm text-text-on-ink">
+                      {b.minDeposit}
+                    </td>
+                    <td className="tabular-stat px-5 py-4 font-mono text-sm text-text-on-ink">
+                      {b.maxLeverage}
+                    </td>
+                    <td className="px-5 py-4 font-mono text-xs text-text-on-ink-muted">
+                      {b.regulators[0]}
+                      {b.regulators.length > 1
+                        ? ` +${b.regulators.length - 1}`
+                        : ""}
+                    </td>
+                    <td className="px-5 py-4 font-mono text-xs text-text-on-ink-muted">
+                      {b.platforms.join(" / ")}
+                    </td>
+                    <td className="px-5 py-4 text-right">
+                      <Link
+                        href={`/brokers/${b.slug}`}
+                        className="font-mono text-xs text-signal transition-colors hover:text-text-on-ink"
+                      >
+                        View →
+                      </Link>
+                    </td>
+                  </tr>
+                  {isExpanded ? (
+                    <tr
+                      key={`${b.slug}-detail`}
+                      className={`border-b border-hairline last:border-b-0 ${
+                        i % 2 === 0 ? "bg-ink" : "bg-ink-soft"
+                      }`}
+                    >
+                      <td colSpan={8} className="px-5 pb-6 pt-1">
+                        <div className="grid gap-4 rounded-xl border border-hairline bg-ink-soft/60 p-5 sm:grid-cols-2">
+                          <div>
+                            <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-signal">
+                              Strengths
+                            </p>
+                            <ul className="mt-2 space-y-1.5 text-[13px] leading-relaxed text-text-on-ink-muted">
+                              {b.pros.map((pro) => (
+                                <li key={pro}>+ {pro}</li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div>
+                            <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                              Trade-offs
+                            </p>
+                            <ul className="mt-2 space-y-1.5 text-[13px] leading-relaxed text-text-on-ink-muted">
+                              {b.cons.map((con) => (
+                                <li key={con}>− {con}</li>
+                              ))}
+                            </ul>
+                          </div>
+                          <p className="sm:col-span-2 font-mono text-xs text-text-on-ink-muted">
+                            Best for: {b.bestFor}
+                          </p>
+                        </div>
+                      </td>
+                    </tr>
+                  ) : null}
+                </React.Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
