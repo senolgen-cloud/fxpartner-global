@@ -300,6 +300,16 @@ export const brokers: Broker[] = [
     scoreCost: 3,
     scoreWithdrawal: 3,
     scoreOverride: 9.0,
+    extraFaqs: [
+      {
+        q: "AvaTrade güvenilir mi?",
+        a: "AvaTrade, İrlanda Merkez Bankası ve ASIC dahil 9'dan fazla düzenleyici otorite altında faaliyet gösteren, kurumsal ölçekte bir brokerdır — incelediğimiz brokerler arasında en geniş düzenleyici kapsamına sahip olanlardan biridir. 2006'dan beri faaliyette olması ve sabit spread hesap seçenekleri sunması, kurumsal güven arayan yatırımcılar için tercih edilme nedenidir. Yine de güncel lisans durumunu ve bölgenizdeki erişilebilirliği AvaTrade'in resmi sitesinden teyit edin.",
+      },
+      {
+        q: "AvaTrade'den nasıl para çekilir?",
+        a: "AvaTrade, MT4, MT5, kendi AvaTradeGO uygulaması ve WebTrader üzerinden işlem sunar; çekim talepleri, düzenlenmiş bir broker olarak tabi olduğu yükümlülükler çerçevesinde işleme alınır. Bazı hesap türlerinde işlem başına komisyon uygulanabildiğinden, çekim öncesi net maliyeti ve süreyi hesap türünüze göre AvaTrade'in resmi sitesinden teyit etmenizi öneririz.",
+      },
+    ],
   },
   {
     rank: 6,
@@ -369,6 +379,16 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
     scoreRegulationOverride: 3,
     scoreOverride: 9.1,
+    extraFaqs: [
+      {
+        q: "Lite Finance güvenilir mi?",
+        a: "Lite Finance, 2005'ten beri faaliyette olan ve düşük başlangıç bariyeriyle (10 dolar gibi düşük bir minimum yatırımla) bilinen bir brokerdir. Düzenleme durumu offshore bir lisansa dayanır — FCA, ASIC veya CySEC gibi tier-1 bir otorite altında değildir; bu, düşük başlangıç maliyeti sunarken düzenleyici koruma açısından daha zayıf bir güvenlik ağı anlamına gelir. Lite Finance'in Türkiye'ye özel bir destek hattı (turkiye@litefinance.com) bulunur. Hesap açmadan önce güncel lisans durumunu brokerin resmi sitesinden teyit etmenizi öneririz.",
+      },
+      {
+        q: "Lite Finance'ten nasıl para çekilir?",
+        a: "Lite Finance, MT4, MT5 ve kendi WebTerminal platformu üzerinden işlem yapılmasına imkan tanır; çekim talepleri genellikle hesap doğrulaması tamamlandıktan sonra, yatırılan yönteme işlenir. Offshore bir lisansa dayandığı için, çekim süreleri ve olası ücretler konusunda tier-1 düzenlenmiş brokerlere kıyasla daha az standart bir çerçeve söz konusu olabilir — güncel çekim süre ve koşullarını hesap açmadan önce Lite Finance'in resmi sitesinden veya Türkçe destek hattından teyit edin.",
+      },
+    ],
     promotion: {
       tag: "Active Campaign",
       title: "Refer a Friend, Earn $50",
@@ -487,6 +507,16 @@ export const brokers: Broker[] = [
     scoreCost: 3,
     scoreWithdrawal: 3,
     scoreOverride: 9.3,
+    extraFaqs: [
+      {
+        q: "FxPro güvenilir mi?",
+        a: "FxPro, İngiltere'nin FCA'sı dahil 4 farklı düzenleyici lisansına (FCA, CySEC, FSCA, SCB Bahamas) sahiptir; FCA, en sıkı denetim ve müşteri fonu ayrıştırma şartlarını arayan tier-1 otoritelerden biridir. 2006'dan beri faaliyette olan FxPro, 20 yılı aşkın sektör geçmişine sahiptir. Yine de her broker gibi, güncel lisans durumunu ve Türkiye'den erişilebilirliğini FxPro'nun resmi sitesinden teyit etmenizi öneririz.",
+      },
+      {
+        q: "FxPro'dan nasıl para çekilir?",
+        a: "FxPro, FCA ve CySEC gibi düzenleyiciler altında faaliyet gösterdiği için, müşteri talep ettiğinde çekim işlemlerini gereksiz gecikme olmadan işleme alma yükümlülüğü altındadır. Kesin çekim süreleri ve yöntemleri (e-cüzdan, kart, banka havalesi) hesap türüne ve bölgeye göre değişebileceğinden, güncel bilgiyi FxPro'nun resmi sitesinden veya müşteri destek ekibinden teyit etmenizi öneririz.",
+      },
+    ],
     promotion: {
       tag: "New Account Offer",
       title: "100% Welcome Bonus",
@@ -632,6 +662,16 @@ export const brokers: Broker[] = [
     categories: ["Low Spread", "Institutional Trust"],
     scoreCost: 5,
     scoreWithdrawal: 4,
+    extraFaqs: [
+      {
+        q: "IC Markets güvenilir mi?",
+        a: "IC Markets, 2007'den beri faaliyette olan ve ASIC, CySEC ile FSA (Seyşeller) altında lisanslı bir brokerdır — ASIC ve CySEC tier-1 otoritelerdir. Şeffaflık adına belirtmek gerekir: IC Markets, 2024'te CySEC tarafından kaldıraç limiti ve maliyet şeffaflığı ihlalleri nedeniyle toplam 250.000 Euro para cezasına çarptırılmıştır — bu, düzenleyicinin aktif denetim yaptığının bir göstergesi olsa da, hesap açmadan önce bilinmesi gereken bir husustur. Güncel lisans ve uyum durumunu IC Markets'in resmi sitesinden teyit edin.",
+      },
+      {
+        q: "IC Markets'ten nasıl para çekilir?",
+        a: "IC Markets, MT4, MT5, cTrader ve TradingView entegrasyonu üzerinden işlem sunar; 55.000'den fazla bağımsız müşteri yorumunda 4.8/5 puana sahiptir, bu da genel kullanıcı memnuniyetine dair bir sinyaldir. Çekim süreleri ve yöntemleri hesap türüne göre değişebileceğinden, güncel bilgiyi IC Markets'in resmi sitesinden teyit etmenizi öneririz.",
+      },
+    ],
   },
   {
     rank: 13,
