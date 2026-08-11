@@ -114,8 +114,8 @@ export default function TermsPage() {
             </h2>
             <p className="mt-4">
               Questions about these terms? Email{" "}
-              <a href="mailto:senolgen@gmail.com" className="text-signal hover:text-signal-strong">
-                senolgen@gmail.com
+              <a href="mailto:info@fxpartner.global" className="text-signal hover:text-signal-strong">
+                info@fxpartner.global
               </a>
               .
             </p>

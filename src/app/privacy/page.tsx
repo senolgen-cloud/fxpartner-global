@@ -129,8 +129,8 @@ export default function PrivacyPage() {
               You can ask us to access, correct, or delete your personal
               information, or to withdraw marketing consent, at any time by
               emailing{" "}
-              <a href="mailto:senolgen@gmail.com" className="text-signal hover:text-signal-strong">
-                senolgen@gmail.com
+              <a href="mailto:info@fxpartner.global" className="text-signal hover:text-signal-strong">
+                info@fxpartner.global
               </a>
               . We&apos;ll respond within a reasonable time.
             </p>
