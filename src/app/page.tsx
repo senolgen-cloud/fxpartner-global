@@ -142,7 +142,7 @@ export default async function Home() {
 
             <Reveal delay={90}>
               <h1 className="mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
-                Everything you need.{" "}
+                Forex signals, market analysis, and broker comparison.{" "}
                 <span className="text-signal">One trading ecosystem.</span>
               </h1>
             </Reveal>
