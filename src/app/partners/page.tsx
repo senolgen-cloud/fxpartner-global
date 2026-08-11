@@ -17,6 +17,9 @@ import GlobalNetworkMap from "@/components/partners/GlobalNetworkMap";
 import PartnerFAQ from "@/components/partners/PartnerFAQ";
 import { cashbackPrograms } from "@/data/cashback";
 import { getBrokerBySlug, brokers } from "@/data/brokers";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export const metadata: Metadata = {
   title: "Become a Partner",
@@ -34,6 +37,17 @@ export default function PartnersPage() {
 
   return (
     <PartnerSmoothScroll>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Home", url: SITE_URL },
+              { name: "Become a Partner", url: `${SITE_URL}/partners` },
+            ])
+          ),
+        }}
+      />
       <main className="flex-1 bg-paper-high">
         <PartnerHero brokerCount={brokers.length} regulatorCount={regulatorCount} />
 

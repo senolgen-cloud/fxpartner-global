@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import { marketAnalysisPosts } from "@/data/marketAnalysis";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export const metadata: Metadata = {
   title: "Piyasa Analizleri",
@@ -13,6 +16,17 @@ export const metadata: Metadata = {
 export default function MarketAnalysisIndexPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Home", url: SITE_URL },
+              { name: "Piyasa Analizleri", url: `${SITE_URL}/piyasa-analizi` },
+            ])
+          ),
+        }}
+      />
       {/* This section's content is deliberately Turkish (unlike the rest of
           the English-language site) — lang="tr" here is a genuine language
           signal for crawlers/screen readers/translate tooling, not a

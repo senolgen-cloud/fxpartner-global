@@ -7,6 +7,9 @@ import { comments as commentsTable, users as usersTable } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
 import { getBrokerBySlug } from "@/data/brokers";
 import { flagEmoji } from "@/lib/country";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export const metadata: Metadata = {
   title: "Community",
@@ -35,6 +38,17 @@ export default async function CommunityPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Home", url: SITE_URL },
+              { name: "Community", url: `${SITE_URL}/topluluk` },
+            ])
+          ),
+        }}
+      />
       <main lang="tr" className="flex-1 bg-ink text-text-on-ink">
         <section className="border-b border-hairline">
           <div className="mx-auto max-w-6xl px-6 py-16 text-center">

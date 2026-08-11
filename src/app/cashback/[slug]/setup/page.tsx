@@ -5,6 +5,9 @@ import Footer from "@/components/Footer";
 import CashbackSetupForm from "@/components/CashbackSetupForm";
 import { getCashbackProgram, cashbackPrograms } from "@/data/cashback";
 import { getBrokerBySlug } from "@/data/brokers";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export function generateStaticParams() {
   return cashbackPrograms.map((p) => ({ slug: p.brokerSlug }));
@@ -37,6 +40,18 @@ export default async function CashbackSetupPage({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Home", url: SITE_URL },
+              { name: "Cashback", url: `${SITE_URL}/cashback` },
+              { name: `Set Up ${broker.name} Cashback`, url: `${SITE_URL}/cashback/${slug}/setup` },
+            ])
+          ),
+        }}
+      />
       <main className="flex-1 bg-paper-high">
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-2xl px-6 py-16">

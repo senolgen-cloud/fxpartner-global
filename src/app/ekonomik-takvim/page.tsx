@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import EconomicCalendarBoard from "@/components/EconomicCalendarBoard";
 import { getWeekCalendar } from "@/lib/economicCalendar";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export const metadata: Metadata = {
   title: "Economic Calendar",
@@ -25,6 +28,17 @@ export default async function EconomicCalendarPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Home", url: SITE_URL },
+              { name: "Economic Calendar", url: `${SITE_URL}/ekonomik-takvim` },
+            ])
+          ),
+        }}
+      />
       <main lang="tr" className="flex-1 bg-ink text-text-on-ink">
         <section className="border-b border-hairline">
           <div className="mx-auto max-w-6xl px-6 py-16">

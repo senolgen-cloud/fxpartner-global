@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import AiMarketAssistant from "@/components/AiMarketAssistant";
+import { breadcrumbSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 const OG_IMAGE = `${SITE_URL}/ai-asistan-preview.jpg`;
@@ -30,6 +31,17 @@ export const metadata: Metadata = {
 export default function AiAssistantPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Home", url: SITE_URL },
+              { name: "AI Market Assistant", url: `${SITE_URL}/ai-asistan` },
+            ])
+          ),
+        }}
+      />
       <main lang="tr" className="mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-20">
         <div className="mb-10 text-center">
           <a

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -10,6 +13,17 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Home", url: SITE_URL },
+              { name: "Privacy Policy", url: `${SITE_URL}/privacy` },
+            ])
+          ),
+        }}
+      />
       <main className="flex-1 bg-paper-high">
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-3xl px-6 py-16">
