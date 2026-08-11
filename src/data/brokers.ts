@@ -53,6 +53,15 @@ export interface Broker {
   adImage?: string;
   adImageWidth?: number;
   adImageHeight?: number;
+  // Optional hand-written FAQ entries appended after the auto-generated
+  // ones from brokerFaqs() (src/lib/brokerContent.ts). Unlike the rest of
+  // this file, these render in whatever language they're written in — the
+  // site's Turkish is otherwise served through the client-side Google
+  // Translate widget, which AI/search crawlers reading static HTML never
+  // see. Use this field to answer specific, real-world phrased questions
+  // (e.g. Turkish queries about this broker) directly in their own
+  // language so crawlers can actually find and cite the answer.
+  extraFaqs?: { q: string; a: string }[];
   // Optional, researched deep-dive detail beyond the standard fields above.
   // Only populated for brokers we've written a full account-type/deposit/
   // withdrawal breakdown for — the page simply omits this section when absent.
@@ -230,6 +239,16 @@ export const brokers: Broker[] = [
     categories: ["Beginners"],
     scoreCost: 5,
     scoreWithdrawal: 5,
+    extraFaqs: [
+      {
+        q: "XM Global güvenilir mi?",
+        a: "XM Global, ASIC (Avustralya), CySEC (Kıbrıs) ve DFSA (Dubai) gibi tier-1 düzenleyiciler dahil 4 farklı lisansa sahiptir; bu düzenleyiciler müşteri fonlarının şirket fonlarından ayrı tutulmasını ve asgari sermaye şartlarını zorunlu kılar. 2009'dan beri faaliyette olan XM, negatif bakiye koruması sunar ve FXPARTNER topluluğunda en çok tercih edilen broker konumundadır. Yine de her broker gibi, yatırım yapmadan önce güncel lisans durumunu ve kendi ülkenizdeki erişilebilirliği XM'in resmi sitesinden teyit etmenizi öneririz.",
+      },
+      {
+        q: "XM Global'den nasıl para çekilir?",
+        a: "XM Global'de para çekme talepleri genellikle 24 saat içinde işleme alınır — e-cüzdan (Skrill, Neteller, WebMoney) çekimleri çoğunlukla aynı gün hesabınıza geçer, kart ve banka havalesi çekimleri ise sağlayıcıya bağlı olarak yaklaşık 2-5 iş günü sürebilir. XM, çekim işlemlerinden herhangi bir ücret almaz; olası gecikmeler genellikle ödeme sağlayıcısının kendi işlem sürelerinden kaynaklanır. Çekim, yalnızca hesap doğrulaması (KYC) tamamlanmış hesaplarda ve genellikle paranın yatırıldığı yönteme yapılabilir.",
+      },
+    ],
     deepDive: {
       accountTypes: [
         { name: "Micro", spread: "From 1.0 pips", commission: "None", minDeposit: "$5" },

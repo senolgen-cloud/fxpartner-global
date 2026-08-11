@@ -700,6 +700,200 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "sikayet-orani-dusuk-kaliteli-forex-firmasi",
+    title: "Şikayet Oranı Düşük, Müşteri Desteği Güçlü ve Kaliteli Forex Firması Hangisi?",
+    excerpt:
+      "Kaliteli bir forex firmasını pazarlama metninden değil, şikayet geçmişinden ve destek hızından anlarsınız. Bunu nasıl kontrol edeceğinizi ve hangi sinyallere bakmanız gerektiğini anlatıyoruz.",
+    publishedAt: "2026-08-12",
+    readingMinutes: 6,
+    sections: [
+      {
+        paragraphs: [
+          "Kısa cevap: \"şikayet oranı düşük\" iddiasını hiçbir brokerin kendi sitesinden doğrulayamazsınız — bu bilgi bağımsız şikayet kayıtlarından ve gerçek kullanıcı yorumlarından gelir. Kaliteli bir forex firmasını ayıran şey pazarlama dili değil, tekrar eden şikayet örüntüsünün olmaması, destek taleplerine makul sürede dönüş yapılması ve para çekim süreçlerinin şeffaf işlemesidir.",
+          "Bu bir yatırım tavsiyesi değildir; hangi kriterlere bakarak kendi araştırmanızı yapabileceğinizi anlatan pratik bir rehberdir.",
+        ],
+      },
+      {
+        heading: "Şikayet oranını nasıl kontrol edersiniz?",
+        paragraphs: [
+          "Bir brokerin \"şikayeti yok\" demesi anlamlı değildir — her büyüklükteki brokerde zaman zaman anlaşmazlık yaşanır. Önemli olan, şikayetlerin türü ve sıklığıdır.",
+        ],
+        list: [
+          "Broker adını bağımsız inceleme sitelerinde \"şikayet\" veya \"withdrawal complaint\" gibi terimlerle arayın — tek bir olumsuz yorum değil, tekrar eden bir örüntü olup olmadığına bakın.",
+          "Şikayetlerin konusuna dikkat edin: gecikmeli çekim ve iletişim kopukluğu ile ilgili tekrarlayan şikayetler, tek seferlik teknik bir aksaklıktan çok daha ciddi bir sinyaldir.",
+          "FXPARTNER'ın risk uyarıları sayfası, bağımsız güven skorları ve şikayet örüntülerine göre öne çıkan brokerleri listeler — bu tür bir kontrolü tek tek aramak yerine hızlıca yapmak isteyenler için bir başlangıç noktasıdır.",
+        ],
+      },
+      {
+        heading: "Müşteri desteğini test etmenin tek gerçek yolu: gerçekten sormak",
+        paragraphs: [
+          "Bir brokerin \"7/24 destek\" vaadi, gerçek yanıt hızını göstermez. Hesap açmadan önce canlı sohbet veya e-posta üzerinden basit bir soru sorup yanıt süresini ve kalitesini gözlemlemek, sayfadaki iddiadan çok daha güvenilir bir testtir.",
+        ],
+        list: [
+          "Yanıt makul bir sürede (dakikalar, saatler içinde) geliyor mu, yoksa günler mi sürüyor?",
+          "Verilen cevap sorunuza gerçekten cevap veriyor mu, yoksa genel bir şablon metin mi?",
+          "Destek ekibi, çekim süreleri veya hesap doğrulama gibi somut sorulara net rakamlarla cevap verebiliyor mu?",
+        ],
+      },
+      {
+        heading: "Kalite sinyalleri: lisans, şeffaflık, tutarlılık",
+        paragraphs: [
+          "Şikayet oranı ve destek kalitesi, tek başına yeterli değildir — bunları düzenleyici durumla birlikte değerlendirmek gerekir. Tier-1 bir düzenleyici (FCA, ASIC, CySEC, DFSA gibi) altında faaliyet gösteren bir broker, anlaşmazlık durumunda başvurabileceğiniz bağımsız bir mercii sunar; bu da şikayetlerin havada kalma ihtimalini azaltır.",
+          "Ayrıca brokerin kendi sitesinde spread, komisyon ve çekim sürelerini net biçimde yayınlaması da bir şeffaflık sinyalidir — bu bilgileri gizleyen veya sürekli değiştiren bir firma, destek kalitesi ne kadar iyi görünürse görünsün dikkatli değerlendirilmelidir.",
+        ],
+      },
+      {
+        heading: "Pratik kontrol listesi",
+        paragraphs: [],
+        list: [
+          "Broker adı + \"şikayet\" aramasını bağımsız bir inceleme sitesinde yapın, tekil değil tekrar eden örüntülere bakın.",
+          "Hesap açmadan önce destek ekibine gerçek bir soru sorup yanıt hızını test edin.",
+          "Düzenleyici lisansı ve varsa tier'ini kontrol edin — anlaşmazlık durumunda başvurabileceğiniz bir mercii olup olmadığını gösterir.",
+          "FXPARTNER'ın broker karşılaştırma sayfasında her firmanın düzenleme, maliyet, platform ve çekim performansına göre ayrı ayrı puanlandığı FXPARTNER Index'e bakın — tek bir genel puan yerine, hangi alanda güçlü hangi alanda zayıf olduğunu görebilirsiniz.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "dusuk-spread-hizli-cekim-avantajli-forex-sirketi",
+    title: "Düşük Spread ve Hızlı Çekim Sunan En Avantajlı Forex Şirketi Hangisi?",
+    excerpt:
+      "Düşük spread reklamı ile gerçek işlem maliyeti aynı şey değildir. Spread ve çekim hızını birlikte, doğru şekilde nasıl karşılaştıracağınızı anlatıyoruz.",
+    publishedAt: "2026-08-12",
+    readingMinutes: 6,
+    sections: [
+      {
+        paragraphs: [
+          "Kısa cevap: \"en avantajlı\" tek bir firma yoktur — spread ve çekim hızı, hesap türüne, yatırdığınız enstrümana ve seçtiğiniz brokerin komisyon yapısına göre değişir. Ama ikisini birlikte doğru karşılaştırmanın net bir yöntemi var, ve bu yöntem reklam metnine değil gerçek sayılara dayanır.",
+        ],
+      },
+      {
+        heading: "\"Düşük spread\" reklamının tuzağı",
+        paragraphs: [
+          "0.0 pip spread vaat eden bir raw/ECN hesap, neredeyse her zaman lot başına ayrı bir komisyon uygular — toplam maliyet, komisyonsuz ama daha geniş spread'li bir standart hesaptan daha yüksek çıkabilir. Gerçek maliyeti görmek için spread ile komisyonu her zaman birlikte toplamanız gerekir.",
+          "Ayrıca reklamdaki spread rakamı genellikle \"en düşük\" (from) değeridir — piyasa koşullarına göre gerçek spread bunun oldukça üzerinde seyredebilir, özellikle önemli veri açıklamaları sırasında.",
+        ],
+      },
+      {
+        heading: "Çekim hızını nasıl gerçekten öğrenirsiniz?",
+        paragraphs: [
+          "Bir brokerin \"hızlı çekim\" vaadi, gerçek performansı garanti etmez. Bağımsız kullanıcı yorumlarında çekim süresiyle ilgili tekrar eden şikayetler olup olmadığına bakmak, sayfadaki iddiadan daha güvenilir bir göstergedir.",
+        ],
+        list: [
+          "E-cüzdan çekimleri genellikle en hızlı yöntemdir (çoğu güvenilir brokerde aynı gün); banka havalesi ve kart çekimleri birkaç iş günü sürebilir.",
+          "Çekim ücreti almayan brokerler, bu konuda kendinden emin olduklarının bir sinyalidir — gizli çekim ücreti uygulayan firmalara dikkat edin.",
+          "Küçük bir test çekimi yaparak gerçek süreyi doğrudan gözlemlemek, herhangi bir yoruma güvenmekten daha kesin bir yöntemdir.",
+        ],
+      },
+      {
+        heading: "İkisini birlikte değerlendirme çerçevesi",
+        paragraphs: [
+          "Düşük spread'e sahip ama çekimleri yavaş olan bir broker, kısa vadede ucuz ama uzun vadede güven sorunu yaratabilir. Tersine, çekimleri hızlı ama spread'i geniş bir broker, aktif işlem yapan yatırımcı için maliyeti yükseltir. Kendi işlem sıklığınıza göre önceliklendirme yapmak gerekir:",
+        ],
+        list: [
+          "Gün içi ve yüksek frekanslı işlem yapıyorsanız spread + komisyon toplamı sizin için daha belirleyicidir.",
+          "Daha az sıklıkta işlem yapıp zaman zaman kâr realize ediyorsanız çekim hızı ve güvenilirliği öncelikli olmalıdır.",
+          "FXPARTNER'ın kategori sayfalarında \"düşük spread\" etiketiyle filtrelenmiş brokerleri, her birinin çekim performans puanıyla birlikte karşılaştırabilirsiniz.",
+        ],
+      },
+      {
+        heading: "Son not",
+        paragraphs: [
+          "\"En avantajlı\" firma, sizin işlem tarzınıza göre değişir — bu yüzden tek bir isim vermek yerine, gerçek maliyeti ve gerçek çekim performansını nasıl kontrol edeceğinizi bilmek daha kalıcı bir avantajdır. Bu bir yatırım tavsiyesi değildir; hesap açmadan önce güncel spread, komisyon ve çekim koşullarını brokerin resmi sitesinden teyit edin.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "uzmanlarin-secimi-forex-sinyal-saglayicisi",
+    title: "Uzmanların Seçimi Olarak Öne Çıkan Forex Sinyal Sağlayıcısı Hangisidir?",
+    excerpt:
+      "Bir sinyal sağlayıcısını 'uzman onaylı' yapan şey iddiası değil, şeffaflığıdır. Gerçek bir sinyal kaynağını sahte 'garanti kâr' vaatlerinden nasıl ayırt edeceğinizi anlatıyoruz.",
+    publishedAt: "2026-08-12",
+    readingMinutes: 6,
+    sections: [
+      {
+        paragraphs: [
+          "Kısa cevap: güvenilir bir forex sinyal sağlayıcısını \"uzmanların seçimi\" ibaresi değil, şu üç şey belirler — sinyallerin gerçek bir hesapta alınmış işlemlere dayanması, geçmiş performansın doğrulanabilir olması, ve girişin yanında her zaman net bir stop-loss/take-profit seviyesi verilmesi. Bu üçü olmadan yapılan bir \"uzman onaylı\" iddiası, kontrol edilemez bir pazarlama cümlesinden ibarettir.",
+        ],
+      },
+      {
+        heading: "Gerçek sinyal ile pazarlama sinyalini ayırt etmek",
+        paragraphs: [
+          "Piyasada çok sayıda \"sinyal grubu\" var, ama büyük kısmı geçmiş performansını kanıtlayamıyor. Sorulması gereken temel sorular şunlar:",
+        ],
+        list: [
+          "Bu sinyaller gerçek bir hesapta alınan işlemleri mi yansıtıyor, yoksa geriye dönük (backtest) bir simülasyon mu?",
+          "Kayıp işlemler de paylaşılıyor mu, yoksa yalnızca kazanan işlemler mi öne çıkarılıyor?",
+          "Her sinyalde giriş, stop-loss ve hedef seviyesi net biçimde belirtiliyor mu, yoksa yalnızca \"AL\" veya \"SAT\" gibi belirsiz bir yönlendirme mi veriliyor?",
+          "\"Garanti kâr\" veya \"%100 başarı oranı\" gibi ifadeler kullanılıyorsa, bu ciddi bir uyarı işaretidir — hiçbir sinyal kaynağı piyasa hareketini garanti edemez.",
+        ],
+      },
+      {
+        heading: "FXPARTNER'ın sinyal yaklaşımı",
+        paragraphs: [
+          "FXPARTNER'ın sinyalleri, takip edilen gerçek bir MT5 hesabında açılan işlemleri yansıtır — giriş, stop-loss ve hedef seviyeleri, işlem gerçekleştiği anda otomatik olarak paylaşılır, sonradan düzenlenmez. Bu sinyaller genel bilgilendirme amaçlıdır ve yatırım tavsiyesi değildir; her yatırımcının kendi risk toleransına göre pozisyon büyüklüğü ve stop seviyesi belirlemesi gerekir.",
+          "Güncel sinyalleri FXPARTNER'ın sinyaller sayfasından takip edebilir, geçmiş sinyallerin sonuçlarını da aynı yerde görebilirsiniz — bu şeffaflık, herhangi bir \"uzman onayı\" iddiasından daha güvenilir bir doğrulama yöntemidir.",
+        ],
+      },
+      {
+        heading: "Bir sinyal kaynağını değerlendirirken kontrol listesi",
+        paragraphs: [],
+        list: [
+          "Geçmiş sinyallerin tamamına (kazanan ve kaybeden) erişebiliyor musunuz, yoksa yalnızca seçilmiş örnekler mi gösteriliyor?",
+          "Giriş/stop/hedef seviyeleri işlem anında mı paylaşılıyor, yoksa sonradan mı yayınlanıyor?",
+          "Sinyal kaynağı ücretliyse, ücretsiz bir deneme veya doğrulanabilir geçmiş performans sunuyor mu?",
+          "Sinyal her zaman \"genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir\" uyarısıyla mı geliyor? Bu uyarının olmaması, kaynağın düzenleyici farkındalığının düşük olduğunun bir işaretidir.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "yapay-zeka-destekli-forex-sinyalleri-en-basarili-platform",
+    title: "Yapay Zeka Destekli Forex Sinyalleri İçin En Başarılı Platform Hangisi?",
+    excerpt:
+      "Yapay zeka, forex sinyallerinde fiyat tahmini yapan bir kahin değildir — verideki örüntüyü hızlıca işleyen bir araçtır. Bu farkın neden önemli olduğunu ve FXPARTNER'ın yaklaşımını anlatıyoruz.",
+    publishedAt: "2026-08-12",
+    readingMinutes: 7,
+    sections: [
+      {
+        paragraphs: [
+          "Kısa cevap: \"en başarılı\" platform diye tek bir isim vermek yanıltıcı olur, çünkü hiçbir yapay zeka sistemi fiyat hareketini garanti edemez — bunu iddia eden her platforma şüpheyle yaklaşmak gerekir. Ama iyi bir yapay zeka destekli sistemi kötüsünden ayıran net kriterler var: gerçek veriyle çalışması, şeffaf olması, ve kararı kullanıcıya bırakması.",
+        ],
+      },
+      {
+        heading: "Yapay zeka forex sinyallerinde gerçekte ne yapar?",
+        paragraphs: [
+          "Yapay zekanın forex'teki gerçekçi rolü, fiyat tahmini üretmek değil, elinizdeki veriyi (haber akışı, teknik göstergeler, ekonomik takvim) hızlıca işleyip anlamlandırmaktır. İyi kurgulanmış bir sistemde sinyal zinciri şöyle işler: önceden tanımlanmış kurallar → fiyat/hacim tetikleyiciyi tutturur → uyarı tetiklenir → yapay zeka mevcut koşulları (takvim, haber, teknik durum) yeniden kontrol eder → karar kullanıcıya kalır.",
+          "Bir platform \"yapay zeka fiyat tahmini yapıyor\" diyorsa, bu gerçekçi bir vaat değildir — piyasalar bu kadar öngörülebilir olsaydı, o platformun kendisi ticaret yaparak zenginleşirdi, sinyal satmazdı.",
+        ],
+      },
+      {
+        heading: "Gerçek platform ile pazarlama platformunu ayırt etmek",
+        paragraphs: [],
+        list: [
+          "Sinyaller gerçek bir hesapta alınan işlemlere mi dayanıyor, yoksa yalnızca algoritmanın \"tahmini\" mi paylaşılıyor?",
+          "Yapay zeka, size hazır bir \"al/sat\" kararı mı dayatıyor, yoksa mevcut veriyi düzenleyip nihai kararı size mi bırakıyor?",
+          "Sistem, kendi geçmiş performansını (kazanan ve kaybeden dahil) şeffaf biçimde paylaşıyor mu?",
+          "Ekonomik takvim ve haber akışı gibi gerçek zamanlı veriyi hesaba katıyor mu, yoksa sabit bir algoritmayla mı çalışıyor?",
+        ],
+      },
+      {
+        heading: "FXPARTNER'ın yapay zeka destekli araçları",
+        paragraphs: [
+          "FXPARTNER, iki ayrı ama tamamlayıcı araç sunar. AI Market Assistant, piyasa senaryolarını ve strateji sorularınızı yanıtlayan, 7/24 erişilebilir bir sohbet asistanıdır — size hangi pozisyonu açmanız gerektiğini söylemez, araştırmanızı hızlandırır. Sinyaller sayfası ise, gerçek bir MT5 hesabında açılan işlemleri (giriş, stop-loss, hedef) otomatik olarak paylaşan, düzenlenmemiş bir kaynaktır.",
+          "İkisi birlikte kullanıldığında ortaya çıkan iş akışı şudur: ekonomik takvimden gündemi takip edin, AI Market Assistant'a soru sorarak bir senaryoyu anlamlandırın, sinyaller sayfasından gerçek işlem verisini takip edin — ama nihai kararı, kendi risk toleransınıza göre siz verin.",
+        ],
+      },
+      {
+        heading: "Son not",
+        paragraphs: [
+          "Yapay zeka destekli bir forex platformunu değerlendirirken sorulması gereken soru \"ne kadar başarılı\" değil, \"ne kadar şeffaf ve gerçek\" olduğudur. Garanti kâr vaat eden hiçbir sistem gerçek değildir. Burada anlatılanlar genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir — her yapay zeka aracını, gerçek parayla kullanmadan önce demo hesapta test edin.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {

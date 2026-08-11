@@ -105,5 +105,8 @@ export function brokerFaqs(broker: Broker): { q: string; a: string }[] {
       a: `Yes — see the ${broker.promotion.title} campaign below, or check our Campaigns page for current offers across all partner brokers.`,
     });
   }
+  if (broker.extraFaqs) {
+    faqs.push(...broker.extraFaqs);
+  }
   return faqs;
 }
