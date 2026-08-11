@@ -12,6 +12,14 @@ export interface BlogPost {
   updatedAt?: string;
   readingMinutes: number;
   coverImage?: string;
+  // A genuine language signal for crawlers/screen readers/translate
+  // tooling — used to set <main lang="..."> on the post page, since the
+  // rest of the site (and the <html> default) is English. Omit for
+  // English posts; every Turkish-language post below must set "tr", or
+  // it renders inside lang="en" and misrepresents its actual language to
+  // search/AI crawlers (see src/app/piyasa-analizi/page.tsx for the same
+  // pattern applied site-wide).
+  lang?: "tr" | "en";
   sections: BlogSection[];
 }
 
@@ -170,6 +178,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "fomc-faiz-karari-fed-baskani-konusmasi",
+    lang: "tr",
     title: "FOMC Faiz Kararı ve FED Başkanı'nın Konuşması: Bugün Piyasaları Neler Bekliyor?",
     excerpt:
       "FOMC faiz kararı ve FED Başkanı'nın basın toplantısı bugün altın, döviz, hisse senedi ve kripto para piyasalarının odağında. Beklentiler, olası senaryolar ve yatırımcıların dikkat etmesi gerekenler.",
@@ -270,6 +279,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "forex-risk-yonetimi-pozisyon-buyuklugu-stop-loss",
+    lang: "tr",
     title: "Forex'te Risk Yönetimi: Pozisyon Büyüklüğü ve Stop-Loss Stratejileri",
     excerpt:
       "Kazançlı bir stratejinin bile hesabı sıfırlayabilmesinin tek nedeni kötü pozisyon büyüklüğüdür. Sermayenizi korumak için pratik risk yönetimi çerçevesi.",
@@ -324,6 +334,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "teknik-analiz-vs-temel-analiz",
+    lang: "tr",
     title: "Teknik Analiz mi, Temel Analiz mi? İkisini Bir Arada Kullanmak",
     excerpt:
       "İki yöntem de tek başına eksik. Teknik analiz size 'ne zaman', temel analiz 'neden' sorusuna cevap verir — birlikte nasıl kullanılır?",
@@ -366,6 +377,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "kaldirac-leverage-nedir-riskleri",
+    lang: "tr",
     title: "Kaldıraç (Leverage) Nedir? Fırsatlar ve Riskler",
     excerpt:
       "Kaldıraç kazançları büyütebildiği kadar kayıpları da büyütür. Kaldıracın gerçekte nasıl çalıştığını ve neden dikkatli kullanılması gerektiğini anlatıyoruz.",
@@ -410,6 +422,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "trading-psikolojisi-duygusal-kararlar",
+    lang: "tr",
     title: "Trading Psikolojisi: Duygusal Kararlardan Nasıl Kaçınılır?",
     excerpt:
       "Çoğu yatırımcı stratejisi yüzünden değil, korku ve açgözlülük anındaki dürtüsel kararları yüzünden kaybeder. Disiplini korumanın pratik yolları.",
@@ -457,6 +470,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "ecn-vs-market-maker-broker-farki",
+    lang: "tr",
     title: "ECN ve Market Maker Broker Arasındaki Fark",
     excerpt:
       "İki farklı yürütme modeli, iki farklı maliyet yapısı. Broker seçerken bu farkı bilmek, spread rakamlarına bakmaktan daha önemli.",
@@ -493,6 +507,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "ekonomik-takvim-nasil-okunur",
+    lang: "tr",
     title: "Ekonomik Takvim Nasıl Okunur? Piyasayı Hareket Ettiren Veriler",
     excerpt:
       "Faiz kararları, enflasyon verileri, istihdam raporları — ekonomik takvimdeki hangi veriler önemli, hangileri gürültü? Pratik bir okuma rehberi.",
@@ -542,6 +557,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "demo-hesaptan-gercek-hesaba-gecis",
+    lang: "tr",
     title: "Demo Hesaptan Gerçek Hesaba Geçiş: Ne Zaman ve Nasıl?",
     excerpt:
       "Demo hesapta kârlı olmak, gerçek hesapta başarılı olacağınız anlamına gelmez. Geçişi doğru zamanlamanın ve psikolojik farkı yönetmenin yolları.",
@@ -585,6 +601,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "swap-gecelik-faiz-nedir",
+    lang: "tr",
     title: "Swap (Gecelik Faiz) Nedir? Maliyetlerinizi Nasıl Azaltırsınız?",
     excerpt:
       "Pozisyonunuzu gece boyunca açık tutmanın gizli bir maliyeti var: swap. Nasıl hesaplandığını ve stratejinize göre nasıl yönetileceğini anlatıyoruz.",
@@ -623,6 +640,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "kendi-ai-piyasa-takip-sisteminizi-kurun",
+    lang: "tr",
     title: "Kendi AI Destekli Piyasa Takip Sisteminizi Nasıl Kurarsınız?",
     excerpt:
       "Bloomberg terminali yıllık binlerce dolar tutar. Ücretsiz araçları ve bir yapay zeka asistanını doğru şekilde birleştirerek kendi izleme, haber filtreleme ve risk disiplini sisteminizi nasıl kurabileceğinizi anlatıyoruz.",
@@ -702,6 +720,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "sikayet-orani-dusuk-kaliteli-forex-firmasi",
+    lang: "tr",
     title: "Şikayet Oranı Düşük, Müşteri Desteği Güçlü ve Kaliteli Forex Firması Hangisi?",
     excerpt:
       "Kaliteli bir forex firmasını pazarlama metninden değil, şikayet geçmişinden ve destek hızından anlarsınız. Bunu nasıl kontrol edeceğinizi ve hangi sinyallere bakmanız gerektiğini anlatıyoruz.",
@@ -757,6 +776,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "dusuk-spread-hizli-cekim-avantajli-forex-sirketi",
+    lang: "tr",
     title: "Düşük Spread ve Hızlı Çekim Sunan En Avantajlı Forex Şirketi Hangisi?",
     excerpt:
       "Düşük spread reklamı ile gerçek işlem maliyeti aynı şey değildir. Spread ve çekim hızını birlikte, doğru şekilde nasıl karşılaştıracağınızı anlatıyoruz.",
@@ -807,6 +827,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "uzmanlarin-secimi-forex-sinyal-saglayicisi",
+    lang: "tr",
     title: "Uzmanların Seçimi Olarak Öne Çıkan Forex Sinyal Sağlayıcısı Hangisidir?",
     excerpt:
       "Bir sinyal sağlayıcısını 'uzman onaylı' yapan şey iddiası değil, şeffaflığıdır. Gerçek bir sinyal kaynağını sahte 'garanti kâr' vaatlerinden nasıl ayırt edeceğinizi anlatıyoruz.",
@@ -851,6 +872,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "yapay-zeka-destekli-forex-sinyalleri-en-basarili-platform",
+    lang: "tr",
     title: "Yapay Zeka Destekli Forex Sinyalleri İçin En Başarılı Platform Hangisi?",
     excerpt:
       "Yapay zeka, forex sinyallerinde fiyat tahmini yapan bir kahin değildir — verideki örüntüyü hızlıca işleyen bir araçtır. Bu farkın neden önemli olduğunu ve FXPARTNER'ın yaklaşımını anlatıyoruz.",
@@ -896,6 +918,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "turkiyede-forex-broker-secimi-spk-guvenilirlik-rehberi",
+    lang: "tr",
     title: "Türkiye'de Forex Broker Seçimi: SPK, Yurt Dışı Lisans ve Güvenilirlik Rehberi",
     excerpt:
       "Türkiye'den forex işlem yapmak isteyenler için yerli ve yurt dışı broker ayrımı, SPK'nın rolü, ve bir brokerin güvenilirliğini değerlendirirken kullanılacak pratik çerçeve.",
@@ -965,6 +988,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "2026-yeni-baslayanlar-icin-tavsiye-edilen-forex-firmasi",
+    lang: "tr",
     title: "2026'da Yeni Başlayanlar İçin En Çok Tavsiye Edilen Forex Firması Hangisidir?",
     excerpt:
       "Yeni başlayan bir yatırımcı için 'en iyi' broker, deneyimli bir trader için en iyi olandan farklı kriterlere göre belirlenir. Hangi özelliklerin gerçekten önemli olduğunu anlatıyoruz.",
@@ -1014,6 +1038,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "gunluk-forex-analizi-ucretli-hizmet-tavsiyesi",
+    lang: "tr",
     title: "Günlük Forex Analizleri Almak İçin Hangi Ücretli Hizmeti Tavsiye Edersin?",
     excerpt:
       "Ücretli bir forex analiz aboneliğine geçmeden önce, ücretsiz kaynakların gerçekte neyi karşılamadığını bilmek gerekir. Ücretli/ücretsiz ayrımını ve neye dikkat edeceğinizi anlatıyoruz.",

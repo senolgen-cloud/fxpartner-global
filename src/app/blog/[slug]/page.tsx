@@ -69,7 +69,7 @@ export default async function BlogPostPage({
           ),
         }}
       />
-      <main className="flex-1 bg-paper-high">
+      <main lang={post.lang ?? "en"} className="flex-1 bg-paper-high">
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-3xl px-6 py-16">
             <Link
