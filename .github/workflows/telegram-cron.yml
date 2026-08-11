@@ -26,12 +26,12 @@ on:
     # behind DEEPL_API_KEY being set in Vercel production — see the
     # news-update job below.
     - cron: "15 6,15 * * *"
-    # broker-review-share (Broker İstihbaratı & İnceleme): single weekly
-    # digest of the top 5 ranked brokers, Wednesday mornings (offset from
-    # campaign-digest's Monday slot). Was hourly (24 posts/day) until
-    # 2026-08-14 — scaled back to a single post to stop flooding the
-    # channel.
-    - cron: "0 9 * * 3"
+    # broker-review-share (Broker İstihbaratı & İnceleme): top-5-brokers
+    # digest, 4x/day at 09:00 / 13:00 / 17:00 / 23:00 Turkey time
+    # (= 06:00 / 10:00 / 14:00 / 20:00 UTC). Was hourly (24 posts/day)
+    # until 2026-08-14, briefly cut to weekly, then set to this owner-
+    # requested 4x/day cadence.
+    - cron: "0 6,10,14,20 * * *"
 
 jobs:
   # Owned by Piyasa Analizi Departmanı — see docs/ORGANIZATION.md.
@@ -116,7 +116,7 @@ jobs:
 
   # Owned by Broker İstihbaratı & İnceleme Departmanı — see docs/ORGANIZATION.md.
   broker-review-share:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 9 * * 3'
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 6,10,14,20 * * *'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger broker-review-share

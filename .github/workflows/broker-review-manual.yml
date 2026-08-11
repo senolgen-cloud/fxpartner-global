@@ -1,0 +1,18 @@
+name: Broker digest manual post
+
+# Isolated from telegram-cron.yml on purpose: that workflow's
+# workflow_dispatch fires every job in the file (market-analysis-share,
+# news-update, blog-share, campaign-digest, economic-calendar-alert too),
+# which is way too much noise for testing/backfilling just the top-5
+# broker digest. This workflow only ever triggers broker-review-share.
+on:
+  workflow_dispatch:
+
+jobs:
+  post-broker-digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger broker-review-share
+        run: |
+          curl -sf -w "\nHTTP %{http_code}\n" -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://fxpartner.global/api/cron/broker-review-share"
