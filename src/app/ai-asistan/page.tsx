@@ -9,7 +9,7 @@ const DESCRIPTION =
   "Yatırımcıların tercih ettiği FXPARTNER Piyasa Asistanı — forex, altın, CPI/NFP gibi makro veriler ve teknik/temel analiz stratejileri hakkında sorularınızı yanıtlar.";
 
 export const metadata: Metadata = {
-  title: TITLE,
+  title: "AI Market Assistant",
   description: DESCRIPTION,
   alternates: { canonical: "/ai-asistan" },
   openGraph: {
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 export default function AiAssistantPage() {
   return (
     <>
-      <main className="mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-20">
+      <main lang="tr" className="mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-20">
         <div className="mb-10 text-center">
           <a
             href="https://t.me/fxpartnerglobal"

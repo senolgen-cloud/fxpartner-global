@@ -17,7 +17,7 @@ const DESCRIPTION =
   "Real trade signals from our tracked MT5 account — entry, take profit, and stop loss for open trades, plus verified win/loss results once each trade closes.";
 
 export const metadata: Metadata = {
-  title: TITLE,
+  title: "Live Trading Signals",
   description: DESCRIPTION,
   alternates: { canonical: "/signals" },
   openGraph: {
