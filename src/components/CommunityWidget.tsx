@@ -68,7 +68,7 @@ export default function CommunityWidget({ topBrokers }: { topBrokers: Broker[] }
                   >
                     <span className="relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-ink-soft text-[10px] font-semibold text-text-on-ink">
                       {broker.logo ? (
-                        <Image src={broker.logo} alt="" fill sizes="32px" className="object-contain p-1" />
+                        <Image src={broker.logo} alt={`${broker.name} logo`} fill sizes="32px" className="object-contain p-1" />
                       ) : (
                         getMonogram(broker.name)
                       )}

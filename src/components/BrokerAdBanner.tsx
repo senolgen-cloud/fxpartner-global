@@ -42,7 +42,7 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
       <div className="flex items-center gap-4">
         <span className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-ink-soft text-xs font-semibold text-text-on-ink">
           {broker.logo ? (
-            <Image src={broker.logo} alt="" fill sizes="48px" className="object-contain p-1.5" />
+            <Image src={broker.logo} alt={`${broker.name} logo`} fill sizes="48px" className="object-contain p-1.5" />
           ) : (
             getMonogram(broker.name)
           )}

@@ -184,7 +184,7 @@ export default function HeroEcosystemMockups({
               >
                 <span className="relative flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-ink text-[10px] font-semibold text-text-on-ink">
                   {broker.logo ? (
-                    <Image src={broker.logo} alt="" fill sizes="28px" className="object-contain p-1" />
+                    <Image src={broker.logo} alt={`${broker.name} logo`} fill sizes="28px" className="object-contain p-1" />
                   ) : (
                     getMonogram(broker.name)
                   )}
