@@ -621,6 +621,84 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "kendi-ai-piyasa-takip-sisteminizi-kurun",
+    title: "Kendi AI Destekli Piyasa Takip Sisteminizi Nasıl Kurarsınız?",
+    excerpt:
+      "Bloomberg terminali yıllık binlerce dolar tutar. Ücretsiz araçları ve bir yapay zeka asistanını doğru şekilde birleştirerek kendi izleme, haber filtreleme ve risk disiplini sisteminizi nasıl kurabileceğinizi anlatıyoruz.",
+    publishedAt: "2026-08-11",
+    readingMinutes: 7,
+    sections: [
+      {
+        paragraphs: [
+          "Profesyonel bir Bloomberg terminali yılda on binlerce dolara mal olabilir. Ama çoğu bireysel yatırımcının ihtiyacı olan şey aslında o kadar karmaşık değil: güvenilir bir izleme listesi, gelen haberi anlamlandıracak bir filtre, ve kendi kurallarına sadık kalmasını sağlayacak bir disiplin. Bunların üçü de — doğru kurgulandığında — ücretsiz araçlar ve bir yapay zeka asistanıyla kurulabilir.",
+          "Burada anlatılanlar bir yatırım tavsiyesi değil; kendi karar verme sürecinizi daha düzenli hale getirecek bir sistem kurma yöntemidir. Yapay zeka size ne alıp satacağınızı söylemez — siz kararı verirsiniz, o yalnızca elinizdeki veriyi düzenler ve kendi kurallarınızı size hatırlatır.",
+        ],
+      },
+      {
+        heading: "1. İzleme panonuzu kurun",
+        paragraphs: [
+          "İlk katman, piyasanın genel nabzını görebileceğiniz basit bir kurulumdur. Bunun için karmaşık bir yazılıma gerek yok:",
+        ],
+        list: [
+          "Grafik ve endeksler için ücretsiz bir grafik platformu — ana endeksleri ve kendi izleme listenizi buradan takip edebilirsiniz.",
+          "Sektör ve hisse hareketleri için bir tarayıcı/heatmap aracı — günün kazanan ve kaybedenlerini hızlıca görmenizi sağlar.",
+          "Haber akışı için broker'ınızın haber sekmesi veya güvendiğiniz birkaç kaynağın RSS akışı — sadece kendi takip ettiğiniz enstrümanlarla ilgili başlıklar.",
+          "Ekonomik takvim — merkez bankası kararları, enflasyon ve istihdam verileri gibi piyasayı gerçekten hareket ettiren tarihleri önceden görmek için. FXPARTNER'ın kendi ekonomik takvim sayfası bu amaçla kullanılabilir.",
+        ],
+      },
+      {
+        heading: "2. Haberi analiz etmeden işlem yapmayın",
+        paragraphs: [
+          "Bir haberi ilk gören siz olmayacaksınız — algoritmalar milisaniyeler içinde tepki veriyor. Sizin avantajınız hızda değil, haberi daha iyi anlamakta olabilir. Yeni bir başlıkla karşılaştığınızda kendinize dört soru sormak, tepkisel işlemlerin çoğunu önler:",
+        ],
+        list: [
+          "Bu gerçekten yeni bir bilgi mi, yoksa daha önce bilinen bir haberin tekrarı mı?",
+          "Haberin fiyatı etkileme mekanizması nedir — geliri mi, maliyeti mi, yoksa genel risk iştahını mı etkiliyor?",
+          "Fiyat hareketinin büyüklüğü, haberin önemiyle orantılı mı, yoksa aşırı bir tepki mi?",
+          "Bu haberden ikincil olarak kim etkilenir? (İlk tepki genellikle ilgili enstrümanda anında gerçekleşir; tedarikçiler, rakipler ve müşteriler biraz daha yavaş fiyatlanır.)",
+        ],
+      },
+      {
+        heading: "3. İzleme listenizi disiplinli tutun",
+        paragraphs: [
+          "40 enstrümanlık bir izleme listesi, pratikte 0 enstrümanlık bir izleme listesiyle aynı işi görür — hiçbirine gerçekten odaklanamazsınız. Listenizi üç kademeye ayırmak işe yarar:",
+        ],
+        list: [
+          "Aktif (3-5 enstrüman): Şu anda net bir tetikleyici seviyesi yazılı olan, gerçekten takip ettiğiniz kurulumlar.",
+          "Gelişmekte olan (yaklaşık 10): İlginç ama henüz bir koşulu tetiklememiş isimler (\"X seviyesini tutarsa değerlendiririm\" gibi).",
+          "Evren (yaklaşık 25): Anladığınız ve doğru fiyattan işlem yapabileceğiniz, ama şu an aktif olarak izlemediğiniz isimler.",
+        ],
+      },
+      {
+        heading: "4. Yapay zeka asistanını doğru rolde kullanın",
+        paragraphs: [
+          "Burada en kritik nokta, yapay zekanın rolünü doğru tanımlamaktır: analist, sizsiniz karar verici. Bir yapay zeka asistanına yaptırabileceğiniz işler somuttur — kendi verdiğiniz veriyi düzenlemek, kendi yazdığınız kuralları size hatırlatmak, kendi geçmiş işlemlerinizdeki örüntüleri bulmak. Yapamayacağı (ve yapmaması gereken) şey ise fiyat tahmini yapmak veya \"al/sat\" demektir.",
+          "Pratikte işe yarayan birkaç kullanım alanı: günün başında elinizdeki verileri (endeks vadelileri, izleme listenizdeki hareketler, günün takvimi) özetleyip size kısa bir durum raporu çıkarmasını istemek; bir haberi yukarıdaki dört soru filtresinden geçirmesini istemek; kapanan işlemlerinizin dökümünü verip hangi kurulumların gerçekten işe yaradığını, hangilerinde sürekli aynı hatayı tekrarladığınızı sormak.",
+          "FXPARTNER'ın kendi AI Market Assistant'ı da benzer bir mantıkla çalışır — piyasa senaryolarını ve strateji sorularınızı yanıtlar, ama size hangi brokerde hangi pozisyonu açmanız gerektiğini söylemez. Onu kendi araştırmanızı hızlandıran bir araç olarak görün, kararı veren bir otorite olarak değil.",
+        ],
+      },
+      {
+        heading: "5. Risk kurallarınızı yazılı hale getirin",
+        paragraphs: [
+          "Sistemin en çok göz ardı edilen parçası budur, ama en önemlisidir. Yazılı olmayan bir risk kuralı, piyasa geriliminde neredeyse her zaman esnetilir. Kağıda (veya bir not dosyasına) dökülmesi gereken birkaç temel kural:",
+        ],
+        list: [
+          "İşlem başına maksimum risk yüzdesi — pozisyon büyüklüğünü her zaman stop mesafesinden hesaplayın.",
+          "Aynı anda açık pozisyon sayısı için bir üst sınır, özellikle yeni öğreniyorsanız.",
+          "Günlük kayıp limiti (\"circuit breaker\") — bu limite ulaştığınızda gün için işlemi bırakma kuralı.",
+          "Her pozisyon için işlemi açmadan önce yazılan bir geçersizlik koşulu: \"Şu seviyeyi kaybedersem yanılmışım demektir.\"",
+          "Yeni bir strateji için gerçek parayla başlamadan önce demo hesapta yeterli sayıda işlem test etme kuralı.",
+        ],
+      },
+      {
+        heading: "Son not",
+        paragraphs: [
+          "Böyle bir sistem kurmak sizi kârlı bir yatırımcı yapmaz — hiçbir sistem bunu garanti edemez. Yaptığı şey, kararlarınızı daha az dürtüsel ve daha izlenebilir hale getirmektir: hangi kuralın hangi sinyali ürettiğini, o sinyale göre ne yaptığınızı ve sonucun ne olduğunu geriye dönüp görebilmenizdir. Yeni kurduğunuz her kuralı gerçek parayla değil, önce demo hesapta test edin; hiçbir sistem kâr garantisi vermez ve burada anlatılanlar yatırım tavsiyesi değildir.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
