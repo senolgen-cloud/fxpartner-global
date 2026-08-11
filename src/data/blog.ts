@@ -894,6 +894,75 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "turkiyede-forex-broker-secimi-spk-guvenilirlik-rehberi",
+    title: "Türkiye'de Forex Broker Seçimi: SPK, Yurt Dışı Lisans ve Güvenilirlik Rehberi",
+    excerpt:
+      "Türkiye'den forex işlem yapmak isteyenler için yerli ve yurt dışı broker ayrımı, SPK'nın rolü, ve bir brokerin güvenilirliğini değerlendirirken kullanılacak pratik çerçeve.",
+    publishedAt: "2026-08-13",
+    readingMinutes: 10,
+    sections: [
+      {
+        paragraphs: [
+          "Türkiye'den forex/CFD işlem yapmak isteyen bir yatırımcı için ilk ve en temel ayrım şudur: Türkiye'de yerleşik, Sermaye Piyasası Kurulu (SPK) lisanslı bir aracı kurum üzerinden mi işlem yapılıyor, yoksa yurt dışında kurulu, yabancı bir düzenleyici altında faaliyet gösteren bir broker üzerinden mi? Bu iki seçenek hem yasal çerçeve hem de yatırımcı koruması açısından birbirinden tamamen farklıdır — ve çoğu kafa karışıklığı, bu ayrımın net anlaşılmamasından kaynaklanır.",
+          "Bu rehber genel bilgilendirme amaçlıdır, yatırım veya hukuki tavsiye değildir. Düzenlemeler ve SPK'nın güncel duyuruları zaman içinde değişebilir; bu sayfada anlatılanları her zaman SPK'nın (spk.gov.tr) ve Türkiye Sermaye Piyasaları Birliği'nin (TSPB, tspb.org.tr) resmi kaynaklarıyla teyit etmenizi öneririz.",
+        ],
+      },
+      {
+        heading: "SPK ne yapar, kimi düzenler?",
+        paragraphs: [
+          "Sermaye Piyasası Kurulu (SPK), Türkiye'de sermaye piyasalarını ve yatırım kuruluşlarını düzenleyen resmi otoritedir. Türkiye'de yerleşik olarak kaldıraçlı alım satım (forex/CFD) hizmeti sunabilmek için bir kurumun SPK'dan yetki belgesi alması gerekir. SPK lisanslı bir aracı kurum, müşteri fonlarının ayrı tutulması, asgari sermaye şartları ve düzenli denetim gibi yükümlülüklere tabidir — bu da bir anlaşmazlık durumunda başvurabileceğiniz somut bir yasal mercii olduğu anlamına gelir.",
+          "Türkiye Sermaye Piyasaları Birliği (TSPB), SPK lisanslı aracı kurumların üye olduğu özdenetim kuruluşudur ve üye kurumların güncel listesini kendi sitesinde yayınlar. Bir kurumun gerçekten SPK lisanslı olup olmadığını kontrol etmenin en güvenilir yolu, iddiaya değil bu iki resmi kaynağa bakmaktır.",
+        ],
+      },
+      {
+        heading: "Yurt dışı brokerler: neden farklı bir kategori?",
+        paragraphs: [
+          "Piyasada işlem gören forex brokerlerinin büyük çoğunluğu SPK lisanslı değildir — FCA (İngiltere), ASIC (Avustralya), CySEC (Kıbrıs) gibi yabancı düzenleyiciler altında, Türkiye dışında kurulu şirketlerdir. Bu brokerler kendi düzenleyicileri nezdinde tamamen meşru ve denetime tabi olabilir, ama Türkiye'deki bir yatırımcı için durum farklıdır: bu kurumlar SPK'nın doğrudan denetim ve yaptırım yetkisi altında değildir, ve bir anlaşmazlık çıktığında Türkiye'de başvurabileceğiniz bir SPK süreci bulunmaz.",
+          "SPK, zaman zaman Türkiye'de yerleşik yatırımcılara yönelik pazarlama yapan, SPK yetkisi olmayan yurt dışı platformlara ilişkin kamuya duyurular yapmış ve bazı platformlara erişimi kısıtlayan kararlar almıştır. Bu, söz konusu her yurt dışı brokerin güvenilmez olduğu anlamına gelmez — birçoğu kendi ülkesinde onlarca yıldır faaliyet gösteren, tier-1 düzenleyiciler altında çalışan kurumlardır — ama Türkiye'deki bir yatırımcı için ek bir hukuki belirsizlik katmanı olduğu anlamına gelir.",
+          "Bu yüzden yurt dışı bir broker seçmeden önce, o brokerin kendi düzenleyicisi nezdindeki durumunu (SPK'nın Türkiye'deki değil, kendi ülkesindeki lisans tier'ini) ve Türkiye'den erişim/işlem yapma konusundaki güncel durumunu ayrı ayrı araştırmak gerekir.",
+        ],
+      },
+      {
+        heading: "Kaldıraç, para transferi ve vergi: pratik farklar",
+        paragraphs: [],
+        list: [
+          "Kaldıraç limitleri: SPK lisanslı yerli aracı kurumlarda uygulanan azami kaldıraç oranları, düzenleyici tarafından belirlenir ve genellikle yurt dışı offshore brokerlerin sunduğu oranlardan daha düşüktür — güncel oranı SPK lisanslı kurumun kendisinden teyit edin.",
+          "Para transferi: Yurt dışı bir brokere yapılan yatırım/çekim işlemleri, banka veya kart sağlayıcınızın kendi kurallarına ve döviz mevzuatına tabidir; bazı işlemler ek belge veya açıklama gerektirebilir.",
+          "Vergi: Elde edilen kazançların Türkiye'deki vergi mevzuatı karşısındaki durumu, brokerin nerede kurulu olduğundan bağımsız olarak yatırımcının kendi sorumluluğundadır — bu konuda güncel ve kişiye özel bilgi için bir mali müşavire danışmak gerekir.",
+          "Şikayet/uyuşmazlık yolu: Yerli SPK lisanslı bir kurumla yaşanan uyuşmazlıkta SPK'ya ve TSPB'ye başvuru imkânınız vardır; yurt dışı bir brokerle yaşanan uyuşmazlıkta ise o brokerin kendi düzenleyicisinin şikayet mekanizması geçerlidir.",
+        ],
+      },
+      {
+        heading: "Bir brokerin güvenilirliğini değerlendirme çerçevesi",
+        paragraphs: [
+          "Yerli veya yurt dışı fark etmeksizin, bir brokeri değerlendirirken bakılması gereken dört eksen aynıdır — bu, FXPARTNER'ın kendi broker karşılaştırma sisteminde kullandığı çerçevedir:",
+        ],
+        list: [
+          "Düzenleme — kaç lisansı var, hangi ülkelerde, hangi tier'de? Yerli işlem yapıyorsanız SPK/TSPB kaydını, yurt dışı işlem yapıyorsanız o ülkenin düzenleyici tier'ini kontrol edin.",
+          "Maliyet — spread, komisyon, gecelik faiz (swap) ve gizli ücretler toplamda ne kadar tutuyor?",
+          "Platform — MT4/MT5 gibi yaygın platformları destekliyor mu, demo hesapla test edilebiliyor mu?",
+          "Çekim güvenilirliği — bağımsız kullanıcı yorumlarında tekrar eden çekim şikayeti var mı, çekim süreleri şeffaf mı?",
+        ],
+      },
+      {
+        heading: "Pratik kontrol listesi",
+        paragraphs: [],
+        list: [
+          "Yerli bir kurumla çalışacaksanız, SPK'nın veya TSPB'nin güncel üye listesinden kurumun adını doğrulayın.",
+          "Yurt dışı bir brokerle çalışacaksanız, o brokerin kendi ülkesindeki düzenleyici lisansını (FCA, ASIC, CySEC gibi) ve tier'ini kontrol edin; \"lisanslı\" iddiasını brokerin kendi sitesinden değil, ilgili düzenleyicinin resmi sitesinden teyit edin.",
+          "Her iki durumda da, broker adını bağımsız inceleme kaynaklarında \"şikayet\" ve \"çekim\" terimleriyle arayarak tekrar eden bir örüntü olup olmadığına bakın.",
+          "FXPARTNER'ın broker karşılaştırma sayfası, listelediği her brokeri düzenleme, maliyet, platform ve çekim performansına göre ayrı ayrı puanlar — hangi brokerin hangi eksende güçlü olduğunu görmek için kullanılabilir.",
+        ],
+      },
+      {
+        heading: "Son not",
+        paragraphs: [
+          "\"Türkiye'de en güvenilir forex broker hangisi\" sorusunun tek bir cevabı yoktur, çünkü \"güvenilir\" olmak yerli/yurt dışı ayrımına, sizin risk toleransınıza ve hangi düzenleyici korumasını öncelendirdiğinize göre değişir. Bu sayfa size bir isim vermek yerine, doğru soruları hangi sırayla sormanız gerektiğini gösterir. Yatırım kararı vermeden önce güncel düzenleyici durumu SPK, TSPB veya ilgili yabancı düzenleyicinin resmi sitesinden teyit edin; bu içerik yatırım veya hukuki tavsiye niteliği taşımaz.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
