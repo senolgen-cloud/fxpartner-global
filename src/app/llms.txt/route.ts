@@ -45,6 +45,9 @@ export async function GET() {
     `- [Piyasa Analizi](${SITE_URL}/piyasa-analizi): Turkish-language daily/weekly market analysis (FX, rates, macro data) — this section is intentionally Turkish, unlike the rest of the site.`
   );
   lines.push(`- [File a Complaint](${SITE_URL}/complaint): Submit a documented complaint about a broker.`);
+  lines.push(
+    `- [Regulation Report](${SITE_URL}/raporlar/forex-broker-duzenleme-raporu): Turkish-language, auto-computed report on Tier-1/offshore license distribution and category breakdown across all ${reviewedCount} reviewed brokers — recomputed from the same data on every request, not a hand-maintained statistic.`
+  );
   lines.push("");
 
   lines.push("## Broker Reviews");

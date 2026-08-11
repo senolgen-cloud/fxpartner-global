@@ -70,6 +70,14 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link
+                  href="/raporlar/forex-broker-duzenleme-raporu"
+                  className="transition-colors hover:text-text-on-ink"
+                >
+                  Regulation Report
+                </Link>
+              </li>
+              <li>
                 <Link href="/partners" className="transition-colors hover:text-text-on-ink">
                   Become a Partner
                 </Link>
