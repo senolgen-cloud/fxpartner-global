@@ -26,6 +26,7 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     slug: "how-to-choose-a-forex-broker",
+    coverImage: "/blog/how-to-choose-a-forex-broker-cover.png",
     title: "How to Choose a Forex Broker in 2026: A Complete Guide",
     excerpt:
       "Regulation, cost structure, platform quality, and withdrawal reliability — a practical, step-by-step framework for evaluating any forex broker before you deposit a dollar.",
@@ -108,6 +109,7 @@ export const blogPosts: BlogPost[] = [
     // Review 2026" as the head phrase on both pages would have both
     // competing for the same query instead of each owning a distinct one.
     slug: "xm-review",
+    coverImage: "/blog/xm-review-cover.png",
     title: "XM Accounts, Fees & Regulation Explained (2026 Breakdown)",
     excerpt:
       "A full breakdown of XM's five account types, deposit/withdrawal speed, regulatory licenses, and education tools — the same research behind XM's #1 spot in the FXPARTNER Index.",
@@ -279,6 +281,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "forex-risk-yonetimi-pozisyon-buyuklugu-stop-loss",
+    coverImage: "/blog/forex-risk-yonetimi-cover.png",
     lang: "tr",
     title: "Forex'te Risk Yönetimi: Pozisyon Büyüklüğü ve Stop-Loss Stratejileri",
     excerpt:
@@ -334,6 +337,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "teknik-analiz-vs-temel-analiz",
+    coverImage: "/blog/teknik-analiz-vs-temel-analiz-cover.png",
     lang: "tr",
     title: "Teknik Analiz mi, Temel Analiz mi? İkisini Bir Arada Kullanmak",
     excerpt:
@@ -377,6 +381,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "kaldirac-leverage-nedir-riskleri",
+    coverImage: "/blog/kaldirac-leverage-nedir-riskleri-cover.png",
     lang: "tr",
     title: "Kaldıraç (Leverage) Nedir? Fırsatlar ve Riskler",
     excerpt:
@@ -422,6 +427,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "trading-psikolojisi-duygusal-kararlar",
+    coverImage: "/blog/trading-psikolojisi-duygusal-kararlar-cover.png",
     lang: "tr",
     title: "Trading Psikolojisi: Duygusal Kararlardan Nasıl Kaçınılır?",
     excerpt:
@@ -470,6 +476,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "ecn-vs-market-maker-broker-farki",
+    coverImage: "/blog/ecn-vs-market-maker-broker-farki-cover.png",
     lang: "tr",
     title: "ECN ve Market Maker Broker Arasındaki Fark",
     excerpt:
@@ -507,6 +514,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "ekonomik-takvim-nasil-okunur",
+    coverImage: "/blog/ekonomik-takvim-nasil-okunur-cover.png",
     lang: "tr",
     title: "Ekonomik Takvim Nasıl Okunur? Piyasayı Hareket Ettiren Veriler",
     excerpt:
@@ -557,6 +565,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "demo-hesaptan-gercek-hesaba-gecis",
+    coverImage: "/blog/demo-hesaptan-gercek-hesaba-gecis-cover.png",
     lang: "tr",
     title: "Demo Hesaptan Gerçek Hesaba Geçiş: Ne Zaman ve Nasıl?",
     excerpt:
@@ -601,6 +610,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "swap-gecelik-faiz-nedir",
+    coverImage: "/blog/swap-gecelik-faiz-nedir-cover.png",
     lang: "tr",
     title: "Swap (Gecelik Faiz) Nedir? Maliyetlerinizi Nasıl Azaltırsınız?",
     excerpt:
@@ -720,6 +730,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "sikayet-orani-dusuk-kaliteli-forex-firmasi",
+    coverImage: "/blog/sikayet-orani-dusuk-kaliteli-forex-firmasi-cover.png",
     lang: "tr",
     title: "Şikayet Oranı Düşük, Müşteri Desteği Güçlü ve Kaliteli Forex Firması Hangisi?",
     excerpt:
@@ -776,6 +787,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "dusuk-spread-hizli-cekim-avantajli-forex-sirketi",
+    coverImage: "/blog/dusuk-spread-hizli-cekim-avantajli-forex-sirketi-cover.png",
     lang: "tr",
     title: "Düşük Spread ve Hızlı Çekim Sunan En Avantajlı Forex Şirketi Hangisi?",
     excerpt:
@@ -827,6 +839,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "uzmanlarin-secimi-forex-sinyal-saglayicisi",
+    coverImage: "/blog/uzmanlarin-secimi-forex-sinyal-saglayicisi-cover.png",
     lang: "tr",
     title: "Uzmanların Seçimi Olarak Öne Çıkan Forex Sinyal Sağlayıcısı Hangisidir?",
     excerpt:
@@ -872,6 +885,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "yapay-zeka-destekli-forex-sinyalleri-en-basarili-platform",
+    coverImage: "/blog/yapay-zeka-destekli-forex-sinyalleri-en-basarili-platform-cover.png",
     lang: "tr",
     title: "Yapay Zeka Destekli Forex Sinyalleri İçin En Başarılı Platform Hangisi?",
     excerpt:
@@ -988,6 +1002,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "2026-yeni-baslayanlar-icin-tavsiye-edilen-forex-firmasi",
+    coverImage: "/blog/2026-yeni-baslayanlar-icin-tavsiye-edilen-forex-firmasi-cover.png",
     lang: "tr",
     title: "2026'da Yeni Başlayanlar İçin En Çok Tavsiye Edilen Forex Firması Hangisidir?",
     excerpt:
@@ -1038,6 +1053,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "gunluk-forex-analizi-ucretli-hizmet-tavsiyesi",
+    coverImage: "/blog/gunluk-forex-analizi-ucretli-hizmet-tavsiyesi-cover.png",
     lang: "tr",
     title: "Günlük Forex Analizleri Almak İçin Hangi Ücretli Hizmeti Tavsiye Edersin?",
     excerpt:

@@ -17,11 +17,26 @@ export interface MarketAnalysisPost {
   excerpt: string;
   publishedAt: string; // ISO date
   readingMinutes: number;
+  // Defaults to the daily-summary template cover when omitted (see
+  // getMarketAnalysisCoverImage below) — every post always has a preview
+  // image without each new entry needing to generate/set its own.
+  coverImage?: string;
   intro: string;
   news: MarketNewsItem[];
   calendarLabel: string;
   calendarEvents: EconomicCalendarEvent[];
   closing: string;
+}
+
+const DAILY_COVER = "/piyasa-analizi/gunluk-ozet-cover.png";
+const WEEKLY_COVER = "/piyasa-analizi/haftalik-gorunum-cover.png";
+
+// Weekly posts (slug prefixed "haftalik-") get the weekly template cover;
+// everything else (daily summaries) gets the daily one — a per-post
+// coverImage always overrides this.
+export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
+  if (post.coverImage) return post.coverImage;
+  return post.slug.startsWith("haftalik-") ? WEEKLY_COVER : DAILY_COVER;
 }
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [

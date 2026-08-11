@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-import { marketAnalysisPosts } from "@/data/marketAnalysis";
+import { marketAnalysisPosts, getMarketAnalysisCoverImage } from "@/data/marketAnalysis";
 import { breadcrumbSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
@@ -57,25 +58,36 @@ export default function MarketAnalysisIndexPage() {
                   <Link
                     key={post.slug}
                     href={`/piyasa-analizi/${post.slug}`}
-                    className="group block py-8"
+                    className="group flex gap-6 py-8"
                   >
-                    <span className="font-mono text-xs text-text-muted">
-                      {new Date(post.publishedAt).toLocaleDateString("tr-TR", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}{" "}
-                      · {post.readingMinutes} dk okuma
-                    </span>
-                    <h2 className="mt-2 font-poppins text-2xl font-semibold text-text-dark transition-colors group-hover:text-signal">
-                      {post.title}
-                    </h2>
-                    <p className="mt-2 text-[15px] leading-relaxed text-text-muted">
-                      {post.excerpt}
-                    </p>
-                    <span className="mt-3 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal">
-                      Analizi oku →
-                    </span>
+                    <div className="relative hidden h-28 w-28 shrink-0 overflow-hidden rounded-xl border border-hairline-light sm:block">
+                      <Image
+                        src={getMarketAnalysisCoverImage(post)}
+                        alt={post.title}
+                        fill
+                        sizes="112px"
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="font-mono text-xs text-text-muted">
+                        {new Date(post.publishedAt).toLocaleDateString("tr-TR", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}{" "}
+                        · {post.readingMinutes} dk okuma
+                      </span>
+                      <h2 className="mt-2 font-poppins text-2xl font-semibold text-text-dark transition-colors group-hover:text-signal">
+                        {post.title}
+                      </h2>
+                      <p className="mt-2 text-[15px] leading-relaxed text-text-muted">
+                        {post.excerpt}
+                      </p>
+                      <span className="mt-3 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal">
+                        Analizi oku →
+                      </span>
+                    </div>
                   </Link>
                 ))}
             </div>

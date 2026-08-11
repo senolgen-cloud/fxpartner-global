@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import FormattedText from "@/components/FormattedText";
 import ShareButtons from "@/components/ShareButtons";
-import { marketAnalysisPosts, getMarketAnalysisPostBySlug } from "@/data/marketAnalysis";
+import {
+  marketAnalysisPosts,
+  getMarketAnalysisPostBySlug,
+  getMarketAnalysisCoverImage,
+} from "@/data/marketAnalysis";
 import { newsArticleSchema, breadcrumbSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
@@ -36,6 +41,7 @@ export async function generateMetadata({
       url: `${SITE_URL}/piyasa-analizi/${post.slug}`,
       type: "article",
       publishedTime: post.publishedAt,
+      images: [{ url: `${SITE_URL}${getMarketAnalysisCoverImage(post)}` }],
     },
   };
 }
@@ -97,6 +103,16 @@ export default async function MarketAnalysisPostPage({
 
         <section>
           <article className="mx-auto max-w-3xl px-6 py-16">
+            <div className="relative mb-12 aspect-square w-full overflow-hidden rounded-2xl border border-hairline-light">
+              <Image
+                src={getMarketAnalysisCoverImage(post)}
+                alt={post.title}
+                fill
+                sizes="(min-width: 768px) 768px, 100vw"
+                className="object-cover"
+                priority
+              />
+            </div>
             <div className="space-y-10">
               {post.news.map((item, i) => (
                 <div key={i}>
