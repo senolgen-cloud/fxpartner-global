@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@/auth";
 import HeaderNav from "@/components/HeaderNav";
+import MoreMenuOverlay from "@/components/MoreMenuOverlay";
 
 export default async function Header({ standalone = true }: { standalone?: boolean } = {}) {
   const session = await auth();
@@ -30,6 +31,7 @@ export default async function Header({ standalone = true }: { standalone?: boole
         </Link>
         <HeaderNav signedIn={signedIn} accountHref={accountHref} />
       </div>
+      <MoreMenuOverlay signedIn={signedIn} accountHref={accountHref} />
     </header>
   );
 }

@@ -4,71 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-
-// Kept short on purpose — this is the row that has to fit next to the logo
-// and the sign-in/CTA cluster without wrapping or shrinking below content
-// size (that's what caused the overlapping-text bug). Lower-traffic links
-// live in the Resources dropdown instead of competing for row space here.
-const primaryLinks = [
-  { href: "/#brokers", label: "Broker Rankings" },
-  { href: "/signals", label: "Signals" },
-  { href: "/ai-asistan", label: "AI Assistant" },
-  { href: "/topluluk", label: "Community" },
-  { href: "/blog", label: "Blog" },
-];
-
-const resourceLinks = [
-  {
-    href: "/about",
-    label: "About Us",
-    description: "Who we are, our principles, and how partnerships work",
-  },
-  {
-    href: "/ekonomik-takvim",
-    label: "Economic Calendar",
-    description: "Live macro events and their expected market impact",
-  },
-  {
-    href: "/categories",
-    label: "Categories",
-    description: "Brokers grouped by what they're best suited for",
-  },
-  {
-    href: "/piyasa-analizi",
-    label: "Market Analysis",
-    description: "Daily market commentary and technical outlook",
-  },
-  {
-    href: "/partners",
-    label: "Become a Partner",
-    description: "Open a Sub-IB account and earn on clients you refer",
-  },
-  {
-    href: "/cashback",
-    label: "Cashback",
-    description: "Rebate programs from partner brokers",
-  },
-  {
-    href: "/campaigns",
-    label: "Campaigns",
-    description: "Active referral and deposit promotions",
-  },
-  {
-    href: "/broker-lookup",
-    label: "Broker Lookup",
-    description: "Search any broker for a sourced trust verdict",
-  },
-  {
-    href: "/blacklist",
-    label: "Risk Warnings",
-    description: "Brokers that need extra due diligence",
-  },
-  {
-    href: "/complaint",
-    label: "Complaint",
-    description: "Report an issue with a broker",
-  },
-];
+import { useMoreMenu } from "@/components/MoreMenuContext";
+import { primaryLinks, resourceLinks } from "@/lib/navLinks";
 
 function isActive(pathname: string, href: string) {
   if (href.startsWith("/#")) return false;
@@ -84,7 +21,7 @@ export default function HeaderNav({
 }) {
   const pathname = usePathname();
   const [resourcesOpen, setResourcesOpen] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const { open: mobileOpen, setOpen: setMobileOpen } = useMoreMenu();
   const resourcesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -179,69 +116,25 @@ export default function HeaderNav({
         </a>
       </div>
 
+      {/* Hidden below sm — the phone-width MobileBottomNav's "Daha Fazla"
+          tab opens this same menu there instead. Visible sm-xl (tablet),
+          where neither the full desktop bar nor the bottom nav apply. */}
       <button
         type="button"
-        onClick={() => setMobileOpen((v) => !v)}
+        onClick={() => setMobileOpen(!mobileOpen)}
         aria-label={mobileOpen ? "Close menu" : "Open menu"}
         aria-expanded={mobileOpen}
-        className="flex h-9 w-9 items-center justify-center text-text-on-ink xl:hidden"
+        className="hidden h-9 w-9 items-center justify-center text-text-on-ink sm:flex xl:hidden"
       >
-        {mobileOpen ? (
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path
-              d="M1 1l16 16M17 1L1 17"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-            />
-          </svg>
-        ) : (
-          <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
-            <path
-              d="M0 1h20M0 7h20M0 13h20"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-            />
-          </svg>
-        )}
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
+          <path
+            d="M0 1h20M0 7h20M0 13h20"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+          />
+        </svg>
       </button>
-
-      {mobileOpen && (
-        <div className="absolute inset-x-0 top-full max-h-[calc(100vh-3.5rem)] overflow-y-auto border-b border-hairline bg-ink px-6 py-6 xl:hidden">
-          <div className="mb-4">
-            <LanguageSwitcher />
-          </div>
-          <div className="flex flex-col gap-1">
-            {[...primaryLinks, ...resourceLinks].map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm text-text-on-ink-muted transition-colors hover:bg-ink-soft hover:text-text-on-ink"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-          <div className="mt-4 flex flex-col gap-3 border-t border-hairline pt-4">
-            <Link
-              href={accountHref}
-              onClick={() => setMobileOpen(false)}
-              className="text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
-            >
-              {signedIn ? "My Account" : "Sign In"}
-            </Link>
-            <a
-              href="#brokers"
-              onClick={() => setMobileOpen(false)}
-              className="rounded-full bg-signal px-4 py-2.5 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
-            >
-              Compare Brokers
-            </a>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

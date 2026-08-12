@@ -54,3 +54,6 @@ skills-lock.json
 
 .vercel
 .env*
+
+# Compiled MQL5 binaries — source (.mq5) is tracked, build output is not
+*.ex5

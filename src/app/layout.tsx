@@ -10,6 +10,7 @@ import Header from "@/components/Header";
 import Ticker from "@/components/Ticker";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import DesktopQuickNavFab from "@/components/DesktopQuickNavFab";
+import { MoreMenuProvider } from "@/components/MoreMenuContext";
 import BrokerHeroSlider from "@/components/BrokerHeroSlider";
 import { brokers } from "@/data/brokers";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
@@ -108,15 +109,17 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
         />
-        <div className="sticky top-0 z-40">
-          <Header standalone={false} />
-          <BrokerHeroSlider brokers={brokers} />
-        </div>
-        {children}
-        <div className="fixed inset-x-0 bottom-0 z-40">
-          <MobileBottomNav />
-          <Ticker />
-        </div>
+        <MoreMenuProvider>
+          <div className="sticky top-0 z-40">
+            <Header standalone={false} />
+            <BrokerHeroSlider brokers={brokers} />
+          </div>
+          {children}
+          <div className="fixed inset-x-0 bottom-0 z-40">
+            <MobileBottomNav />
+            <Ticker />
+          </div>
+        </MoreMenuProvider>
         <NotificationOptIn />
         <AddToHomeScreen />
         <DesktopQuickNavFab />

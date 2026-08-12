@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useMoreMenu } from "@/components/MoreMenuContext";
 
 const ICONS = {
   home: (
@@ -14,6 +15,13 @@ const ICONS = {
     <>
       <circle cx="12" cy="8" r="3.5" />
       <path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6" />
+    </>
+  ),
+  more: (
+    <>
+      <circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none" />
+      <circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none" />
     </>
   ),
 } as const;
@@ -33,6 +41,7 @@ function isActive(pathname: string, href: string) {
 
 export default function MobileBottomNavClient({ accountHref }: { accountHref: string }) {
   const pathname = usePathname();
+  const { open: moreOpen, setOpen: setMoreOpen } = useMoreMenu();
 
   const tabs: { href: string; label: string; icon: keyof typeof ICONS }[] = [
     { href: "/", label: "Anasayfa", icon: "home" },
@@ -45,7 +54,7 @@ export default function MobileBottomNavClient({ accountHref }: { accountHref: st
   return (
     <nav
       aria-label="Mobil gezinme"
-      className="grid grid-cols-5 border-t border-hairline bg-ink pb-[env(safe-area-inset-bottom)] sm:hidden"
+      className="grid grid-cols-6 border-t border-hairline bg-ink pb-[env(safe-area-inset-bottom)] sm:hidden"
     >
       {tabs.map((tab) => {
         const active = isActive(pathname, tab.href);
@@ -63,6 +72,17 @@ export default function MobileBottomNavClient({ accountHref }: { accountHref: st
           </Link>
         );
       })}
+      <button
+        type="button"
+        onClick={() => setMoreOpen(!moreOpen)}
+        aria-expanded={moreOpen}
+        className={`flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium transition-colors ${
+          moreOpen ? "text-signal" : "text-text-on-ink-muted"
+        }`}
+      >
+        <TabIcon name="more" />
+        Daha Fazla
+      </button>
     </nav>
   );
 }
