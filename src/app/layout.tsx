@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, JetBrains_Mono, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import NotificationOptIn from "@/components/NotificationOptIn";
+import NewsletterPopup from "@/components/NewsletterPopup";
 import CommunityWidget from "@/components/CommunityWidget";
 import GoogleTranslateWidget from "@/components/GoogleTranslateWidget";
 import Header from "@/components/Header";
@@ -115,6 +116,7 @@ export default function RootLayout({
           <Ticker />
         </div>
         <NotificationOptIn />
+        <NewsletterPopup />
         <CommunityWidget topBrokers={topBrokers} />
         <GoogleTranslateWidget />
         <Analytics />
