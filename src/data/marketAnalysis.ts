@@ -203,16 +203,16 @@ export const marketAnalysisPosts: MarketAnalysisPost[] = [
     slug: "haftalik-gorunum-2026-08-10",
     title: "FXPARTNER Haftalık Piyasa Görünümü | 10-16 Ağustos 2026",
     excerpt:
-      "Haftanın ana gündemi Perşembe günü açıklanacak ABD TÜFE (CPI) verisi; jeopolitik gerginlik Nasdaq'ı baskılarken altın 4.375 dolar civarında, EUR/USD 1,154 seviyesinde ve USD/TRY 47,70 TL bandında dengeli seyrini sürdürüyor.",
+      "Haftanın ana gündemi Çarşamba günü açıklanacak ABD TÜFE (CPI) verisi; jeopolitik gerginlik Nasdaq'ı baskılarken altın 4.375 dolar civarında, EUR/USD 1,154 seviyesinde ve USD/TRY 47,70 TL bandında dengeli seyrini sürdürüyor.",
     publishedAt: "2026-08-12",
     readingMinutes: 5,
     intro:
-      "10-16 Ağustos haftasında piyasaların odağı, Perşembe günü açıklanacak ABD tüketici fiyat endeksi (TÜFE/CPI) verisinde — bu veri, Fed'in faiz patikasına dair beklentileri yeniden şekillendirebilir. Hafta boyunca ayrıca RBA faiz kararı, Almanya ve İngiltere'den makro veriler ile ABD'de art arda açıklanacak istihdam ve sanayi üretimi rakamları izlenecek. EUR/USD, XAU/USD, USD/TRY ve ABD hisse senedi piyasaları üzerinden haftanın öne çıkan başlıklarını derledik.",
+      "10-16 Ağustos haftasında piyasaların odağı, Çarşamba günü açıklanacak ABD tüketici fiyat endeksi (TÜFE/CPI) verisinde — bu veri, Fed'in faiz patikasına dair beklentileri yeniden şekillendirebilir. Hafta boyunca ayrıca RBA faiz kararı, Almanya ve İngiltere'den makro veriler ile ABD'de art arda açıklanacak istihdam ve sanayi üretimi rakamları izlenecek. EUR/USD, XAU/USD, USD/TRY ve ABD hisse senedi piyasaları üzerinden haftanın öne çıkan başlıklarını derledik.",
     news: [
       {
         icon: "💶",
         heading: "EUR/USD: 1,154 Seviyesinde Yatay Seyir",
-        body: "EUR/USD, hafta başında **1,1540-1,1542 bandında** işlem görüyor. Son bir ayda parite **%1,4 değer kazanırken**, son 12 aylık dönemde **%1,2 değer kaybetmiş** durumda — kısa vadeli toparlanma ile yıllık trend arasındaki bu ayrışma, yatırımcıların Perşembe günkü ABD TÜFE verisini bekleyerek pozisyon almaktan kaçındığına işaret ediyor. Veri, doların ve dolayısıyla paritenin yönünü haftanın geri kalanında belirleyecek ana katalizör olarak öne çıkıyor.",
+        body: "EUR/USD, hafta başında **1,1540-1,1542 bandında** işlem görüyor. Son bir ayda parite **%1,4 değer kazanırken**, son 12 aylık dönemde **%1,2 değer kaybetmiş** durumda — kısa vadeli toparlanma ile yıllık trend arasındaki bu ayrışma, yatırımcıların Çarşamba günkü ABD TÜFE verisini bekleyerek pozisyon almaktan kaçındığına işaret ediyor. Veri, doların ve dolayısıyla paritenin yönünü haftanın geri kalanında belirleyecek ana katalizör olarak öne çıkıyor.",
       },
       {
         icon: "🥇",
@@ -239,7 +239,7 @@ export const marketAnalysisPosts: MarketAnalysisPost[] = [
         note: "Avustralya Merkez Bankası'nın kararı, AUD paritelerinde volatiliteyi artırabilir.",
       },
       {
-        time: "13 Ağustos Perşembe",
+        time: "12 Ağustos Çarşamba",
         icon: "🇺🇸",
         title: "ABD Tüketici Fiyat Endeksi (TÜFE/CPI)",
         note: "Haftanın en kritik verisi; Fed'in faiz indirim beklentilerini ve dolayısıyla EUR/USD, XAU/USD ile dolar endeksi üzerindeki fiyatlamayı doğrudan etkileyebilir.",
