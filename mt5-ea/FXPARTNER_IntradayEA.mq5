@@ -34,8 +34,21 @@
 //|  Attach to ONE chart per symbol you want to trade (e.g. one      |
 //|  EURUSD chart, one XAUUSD chart, etc.) - this EA only manages    |
 //|  the symbol of the chart it's attached to. Recommended working   |
-//|  timeframe: M15 (set Period() by opening the EA on an M15        |
-//|  chart), which the "intraday, short-interval" style implies.     |
+//|  timeframe: M5 (set Period() by opening the EA on an M5 chart).  |
+//|                                                                    |
+//|  TRADE-FREQUENCY TUNING (2026-08-12, per owner request - higher  |
+//|  turnover is acceptable on this account): the trend filter was   |
+//|  shortened from EMA200 to EMA50 (flips direction more often, so  |
+//|  more pullback setups qualify), the RSI pullback zone was moved  |
+//|  from 35/65 to 40/60 (triggers on shallower pullbacks), and the  |
+//|  ATR stop/target multiples were tightened (1.5/2.25 -> 1.0/1.4)  |
+//|  so each trade resolves faster, freeing the one-trade-per-symbol |
+//|  slot for a re-entry sooner. Combined with an M5 chart instead   |
+//|  of M15, this should meaningfully raise trade count. It also     |
+//|  raises noise exposure - a shorter EMA and tighter RSI band      |
+//|  react to smaller wiggles, and tighter stops get clipped by      |
+//|  ordinary volatility more often. Watch win rate/expectancy in    |
+//|  the Strategy Tester after this change, not just trade count.    |
 //+------------------------------------------------------------------+
 #property copyright "FXPARTNER"
 #property version   "1.00"
@@ -51,15 +64,15 @@ input int    InpMaxSpreadPoints     = 30;      // Skip entries if current spread
 input int    InpMagicOnly           = 1;       // 1 = only manage positions with InpMagic on this symbol; 0 = also count any position on this symbol toward the one-at-a-time rule
 
 //--- inputs: trend / entry
-input int    InpTrendEmaPeriod      = 200;     // EMA period defining the intraday trend direction
+input int    InpTrendEmaPeriod      = 50;      // EMA period defining the intraday trend direction (shorter = trend flips more often = more setups)
 input int    InpRsiPeriod           = 14;      // RSI period
-input double InpRsiOversold         = 35;      // RSI pullback zone (uptrend BUY trigger below this)
-input double InpRsiOverbought       = 65;      // RSI pullback zone (downtrend SELL trigger above this)
+input double InpRsiOversold         = 40;      // RSI pullback zone (uptrend BUY trigger below this)
+input double InpRsiOverbought       = 60;      // RSI pullback zone (downtrend SELL trigger above this)
 
 //--- inputs: stops / targets (ATR-based, so they scale per symbol)
 input int    InpAtrPeriod           = 14;      // ATR period
-input double InpAtrSlMultiple       = 1.5;     // Stop loss = InpAtrSlMultiple * ATR from entry
-input double InpAtrTpMultiple       = 2.25;    // Take profit = InpAtrTpMultiple * ATR from entry (default gives a 1:1.5 reward:risk)
+input double InpAtrSlMultiple       = 1.0;     // Stop loss = InpAtrSlMultiple * ATR from entry
+input double InpAtrTpMultiple       = 1.4;     // Take profit = InpAtrTpMultiple * ATR from entry (tighter than before -> trades resolve faster, freeing the one-at-a-time slot sooner)
 
 //--- inputs: fundamental filter (MQL5's built-in Economic Calendar)
 input bool   InpNewsFilterEnabled   = true;    // Skip new entries near high-impact news for this symbol's currencies
