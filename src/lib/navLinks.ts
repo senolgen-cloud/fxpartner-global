@@ -37,6 +37,11 @@ export const resourceLinks = [
     description: "Open a Sub-IB account and earn on clients you refer",
   },
   {
+    href: "/copytrade",
+    label: "Copytrade",
+    description: "Auto-copy FXPARTNER's tracked trades onto your own MT5 account",
+  },
+  {
     href: "/cashback",
     label: "Cashback",
     description: "Rebate programs from partner brokers",

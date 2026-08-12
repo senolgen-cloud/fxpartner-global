@@ -83,6 +83,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/copytrade" className="transition-colors hover:text-text-on-ink">
+                  Copytrade
+                </Link>
+              </li>
+              <li>
                 <Link href="/cashback" className="transition-colors hover:text-text-on-ink">
                   Cashback
                 </Link>

@@ -93,6 +93,30 @@ export async function sendPartnerApplicationNotification(application: {
   });
 }
 
+export async function sendCopytradeInquiryNotification(inquiry: {
+  fullName: string;
+  email: string;
+  phone: string;
+  country: string;
+  platform: string;
+  message: string;
+}) {
+  await sendEmail({
+    to: NOTIFY_EMAIL,
+    subject: `New copytrade setup inquiry: ${inquiry.fullName}`,
+    html: `
+      <h2>New FXPARTNER Copytrade inquiry</h2>
+      <p><strong>Full name:</strong> ${inquiry.fullName}</p>
+      <p><strong>Email:</strong> ${inquiry.email}</p>
+      <p><strong>Phone:</strong> ${inquiry.phone}</p>
+      <p><strong>Country:</strong> ${inquiry.country}</p>
+      <p><strong>Broker / platform:</strong> ${inquiry.platform}</p>
+      <p><strong>Message:</strong></p>
+      <p>${inquiry.message.replace(/\n/g, "<br/>")}</p>
+    `,
+  });
+}
+
 export async function sendComplaintStatusUpdate(params: {
   to: string;
   brokerName: string;

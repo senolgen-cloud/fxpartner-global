@@ -48,6 +48,9 @@ export async function GET() {
   lines.push(
     `- [Regulation Report](${SITE_URL}/raporlar/forex-broker-duzenleme-raporu): Turkish-language, auto-computed report on Tier-1/offshore license distribution and category breakdown across all ${reviewedCount} reviewed brokers — recomputed from the same data on every request, not a hand-maintained statistic.`
   );
+  lines.push(
+    `- [Copytrade](${SITE_URL}/copytrade): A self-hosted MT5 "Copier EA" that mirrors trades from FXPARTNER's real tracked account onto a visitor's own MT5 account — the visitor's account/funds stay fully in their own control at all times; not a discretionary account-management service.`
+  );
   lines.push("");
 
   lines.push("## Broker Reviews");
