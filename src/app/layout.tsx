@@ -9,6 +9,7 @@ import GoogleTranslateWidget from "@/components/GoogleTranslateWidget";
 import Header from "@/components/Header";
 import Ticker from "@/components/Ticker";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import DesktopQuickNavFab from "@/components/DesktopQuickNavFab";
 import BrokerHeroSlider from "@/components/BrokerHeroSlider";
 import { brokers } from "@/data/brokers";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
@@ -118,6 +119,7 @@ export default function RootLayout({
         </div>
         <NotificationOptIn />
         <AddToHomeScreen />
+        <DesktopQuickNavFab />
         <NewsletterPopup />
         <CommunityWidget topBrokers={topBrokers} />
         <GoogleTranslateWidget />
