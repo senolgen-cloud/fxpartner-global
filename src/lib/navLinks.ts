@@ -32,6 +32,11 @@ export const resourceLinks = [
     description: "Daily market commentary and technical outlook",
   },
   {
+    href: "/teknik-analiz",
+    label: "Technical Analysis",
+    description: "Pivot levels, support/resistance and RSI/MACD outlook",
+  },
+  {
     href: "/partners",
     label: "Become a Partner",
     description: "Open a Sub-IB account and earn on clients you refer",
