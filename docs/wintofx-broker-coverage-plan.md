@@ -1,5 +1,7 @@
 # WintoFX "İşletmeler" Listesi — FXPARTNER Broker Lookup Kapsam Planı
 
+**Güncelleme (2026-08-13, aynı gün):** A grubundaki 24 broker gerçek regülatör araştırmasıyla `brokerLookup.ts`'ye eklendi ve production'a push edildi (commit `5f5f455`). Ayrıca kendi 9 partner broker'ımıza (`brokers.ts`) gerçek lisans numaraları eklendi ve broker inceleme sayfalarına Low/Medium/High risk rozeti eklendi. Aşağıdaki "A grubu" listesi artık **tamamlandı** — kalan iş sadece B grubu (küçük Türkiye'ye özel markalar).
+
 Tarih: 2026-08-13. wintofx.com/tr/businesses üzerindeki 6 sayfa (~180 firma) taranarak isim + slug + lisans etiketi çıkarıldı ([raw liste aşağıda](#ham-liste-wintofxten-çekilen)).
 
 ## Neden yeni sayfa açmıyoruz, mevcut sistemi büyütüyoruz
