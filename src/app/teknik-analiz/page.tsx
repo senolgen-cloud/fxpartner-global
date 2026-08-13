@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Footer from "@/components/Footer";
-import { technicalAnalysisPosts } from "@/data/technicalAnalysis";
+import { technicalAnalysisPosts, getBulletinTitle, type TechnicalAnalysisPost } from "@/data/technicalAnalysis";
 import { breadcrumbSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
@@ -9,25 +9,40 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 export const metadata: Metadata = {
   title: "Teknik Analiz",
   description:
-    "FXPARTNER'ın gün içi teknik analizleri — pivot seviyeleri, destek/direnç bantları ve RSI/MACD yorumlarıyla.",
+    "FXPARTNER'ın gün içi teknik analiz bültenleri — gerçek grafikler, pivot seviyeleri, destek/direnç bantları ve RSI/MACD yorumlarıyla.",
   alternates: { canonical: "/teknik-analiz" },
 };
 
-function cardImageUrl(post: (typeof technicalAnalysisPosts)[number]) {
+// Falls back to the coded pivot-ladder card when an instrument has no real
+// chart screenshot attached (e.g. Apple below) — every entry always has
+// some image, it just isn't always the real Trading Central chart.
+function codedCardImageUrl(post: TechnicalAnalysisPost) {
   const params = new URLSearchParams({
     instrument: post.instrument,
     timeframe: post.timeframe,
     pivot: post.pivot,
-    last: post.lastPrice,
     bias: post.bias,
     headline: post.headline,
     resistances: post.resistances.map((r) => `${r.price}:${r.strength}`).join(","),
     supports: post.supports.map((s) => `${s.price}:${s.strength}`).join(","),
   });
+  if (post.lastPrice) params.set("last", post.lastPrice);
   return `${SITE_URL}/api/og/technical-analysis?${params.toString()}`;
 }
 
+function groupByDate(posts: TechnicalAnalysisPost[]) {
+  const groups = new Map<string, TechnicalAnalysisPost[]>();
+  for (const post of posts) {
+    const list = groups.get(post.publishedAt) ?? [];
+    list.push(post);
+    groups.set(post.publishedAt, list);
+  }
+  return Array.from(groups.entries()).sort((a, b) => (a[0] < b[0] ? 1 : -1));
+}
+
 export default function TechnicalAnalysisIndexPage() {
+  const dateGroups = groupByDate(technicalAnalysisPosts);
+
   return (
     <>
       <script
@@ -44,41 +59,47 @@ export default function TechnicalAnalysisIndexPage() {
       <main lang="tr" className="flex-1 bg-paper-high">
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-4xl px-6 py-16 md:py-20">
-            <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">Teknik Analiz</span>
+            <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">Teknik Analiz Bülteni</span>
             <h1 className="mt-4 max-w-2xl font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
               Gün içi pivot ve seviye analizleri
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              Pivot seviyeleri, destek/direnç bantları ve RSI/MACD yorumlarıyla —
-              her sinyal yalnızca bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.
+              Gerçek grafikler, pivot seviyeleri, destek/direnç bantları ve RSI/MACD
+              yorumlarıyla — her analiz yalnızca bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.
             </p>
           </div>
         </section>
 
-        <section>
-          <div className="mx-auto max-w-3xl px-6 py-16">
-            <div className="space-y-10">
-              {technicalAnalysisPosts
-                .slice()
-                .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1))
-                .map((post) => (
+        {dateGroups.map(([date, posts]) => (
+          <section key={date} className="border-t border-hairline-light first:border-t-0">
+            <div className="mx-auto max-w-3xl px-6 py-16">
+              <div className="mb-10">
+                <span className="font-mono text-xs text-text-muted">
+                  {new Date(date).toLocaleDateString("tr-TR", { year: "numeric", month: "long", day: "numeric" })}
+                </span>
+                <h2 className="mt-2 font-poppins text-3xl font-semibold text-text-dark">{getBulletinTitle(date)}</h2>
+              </div>
+
+              <div className="space-y-10">
+                {posts.map((post) => (
                   <article
                     key={post.slug}
                     className="overflow-hidden rounded-2xl border border-hairline-light bg-white shadow-sm"
                   >
-                    <div className="relative aspect-square w-full max-w-md mx-auto sm:max-w-none sm:aspect-[4/3]">
-                      <Image src={cardImageUrl(post)} alt={post.headline} fill unoptimized className="object-cover" />
+                    <div className="relative aspect-square w-full max-w-md mx-auto sm:max-w-none sm:aspect-[4/3] bg-ink">
+                      <Image
+                        src={post.chartImage ?? codedCardImageUrl(post)}
+                        alt={post.headline}
+                        fill
+                        unoptimized
+                        className={post.chartImage ? "object-contain" : "object-cover"}
+                      />
                     </div>
                     <div className="p-6">
                       <span className="font-mono text-xs text-text-muted">
-                        {new Date(post.publishedAt).toLocaleDateString("tr-TR", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}{" "}
-                        · {post.instrument} · {post.timeframe} · {post.source}
+                        {post.instrument} · {post.timeframe} · {post.source}
                       </span>
-                      <h2 className="mt-2 font-poppins text-2xl font-semibold text-text-dark">{post.headline}</h2>
+                      <h3 className="mt-2 font-poppins text-2xl font-semibold text-text-dark">{post.headline}</h3>
                       <p className="mt-3 text-[15px] leading-relaxed text-text-muted">
                         <strong className="text-text-dark">Ana senaryo:</strong> {post.preference}
                       </p>
@@ -94,9 +115,10 @@ export default function TechnicalAnalysisIndexPage() {
                     </div>
                   </article>
                 ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        ))}
       </main>
       <Footer />
     </>

@@ -38,8 +38,8 @@ export async function GET(request: Request) {
       return { price, strength: Number(strength ?? 0) };
     });
 
-  if (!instrument || !pivot || !lastPrice) {
-    return new Response("Missing required params: instrument, pivot, last", { status: 400 });
+  if (!instrument || !pivot) {
+    return new Response("Missing required params: instrument, pivot", { status: 400 });
   }
 
   const isBearish = bias === "BEARISH";
@@ -151,21 +151,23 @@ export async function GET(request: Request) {
           ))}
         </div>
 
-        {/* Last price strip */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginTop: 24,
-            padding: "16px 28px",
-            borderRadius: 14,
-            background: "rgba(255,255,255,0.04)",
-          }}
-        >
-          <span style={{ fontSize: 20, fontWeight: 700, color: TEXT_ON_INK_MUTED, letterSpacing: 1 }}>GÜNCEL FİYAT</span>
-          <span style={{ fontSize: 30, fontWeight: 800, color: TEXT_ON_INK }}>{lastPrice}</span>
-        </div>
+        {/* Last price strip — only shown when the source write-up gave one */}
+        {lastPrice && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginTop: 24,
+              padding: "16px 28px",
+              borderRadius: 14,
+              background: "rgba(255,255,255,0.04)",
+            }}
+          >
+            <span style={{ fontSize: 20, fontWeight: 700, color: TEXT_ON_INK_MUTED, letterSpacing: 1 }}>GÜNCEL FİYAT</span>
+            <span style={{ fontSize: 30, fontWeight: 800, color: TEXT_ON_INK }}>{lastPrice}</span>
+          </div>
+        )}
 
         {/* Footer */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 32 }}>

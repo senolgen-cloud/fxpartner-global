@@ -92,6 +92,24 @@ export async function sendTelegramPhoto(
   });
 }
 
+// Sends up to 10 photos as one Telegram album (sendMediaGroup) — only the
+// first item's caption is shown by Telegram clients, the rest render
+// caption-less thumbnails in the same album. Used for bulletin-style posts
+// bundling several instruments' real charts into a single message instead
+// of one photo post per instrument (which would flood the channel).
+export async function sendTelegramMediaGroup(
+  photoUrls: string[],
+  firstCaption: string
+): Promise<{ message_id: number }[]> {
+  const { chatId } = getConfig();
+  const media = photoUrls.map((url, i) => ({
+    type: "photo",
+    media: url,
+    ...(i === 0 ? { caption: firstCaption, parse_mode: "HTML" } : {}),
+  }));
+  return callTelegram("sendMediaGroup", { chat_id: chatId, media });
+}
+
 // One-time, expiring invite link to the VIP group — generated per user on
 // request rather than sharing one static link, so it can't be leaked/reused
 // by non-members.

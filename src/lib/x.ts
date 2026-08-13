@@ -95,19 +95,40 @@ function arrayBufferToBase64(buf: ArrayBuffer): string {
   return btoa(binary);
 }
 
-export async function postTradeSignalToX(
-  imageUrl: string,
+// Text-only tweet, no media upload step — for digest-style posts bundling
+// several instruments where attaching one representative image would be
+// misleading (the tweet isn't about just that one chart).
+export async function postTextToX(
   text: string,
   options: { replyToTweetId?: string } = {}
 ): Promise<{ tweetId: string }> {
   const creds = getCredentials();
+  const tweetAuth = await oauth1Header("POST", TWEET_URL, {}, creds);
+  const tweetRes = await fetch(TWEET_URL, {
+    method: "POST",
+    headers: {
+      Authorization: tweetAuth,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      text,
+      ...(options.replyToTweetId ? { reply: { in_reply_to_tweet_id: options.replyToTweetId } } : {}),
+    }),
+  });
+  const tweetData = await tweetRes.json();
+  if (!tweetRes.ok) {
+    throw new Error(`X tweet failed: ${JSON.stringify(tweetData)}`);
+  }
+  return { tweetId: tweetData.data.id };
+}
 
+async function uploadImageToX(imageUrl: string, creds: OAuth1Credentials): Promise<string> {
   const imgRes = await fetch(imageUrl);
   if (!imgRes.ok) throw new Error(`Failed to fetch card image: ${imgRes.status}`);
   const base64 = arrayBufferToBase64(await imgRes.arrayBuffer());
 
-  // Simple (non-chunked) media upload — fine for a single PNG well under
-  // the 5MB image limit. media_data is a signed form param per X's spec.
+  // Simple (non-chunked) media upload — fine for images well under the 5MB
+  // limit. media_data is a signed form param per X's spec.
   const mediaParams = { media_data: base64 };
   const uploadAuth = await oauth1Header("POST", UPLOAD_URL, mediaParams, creds);
   const uploadRes = await fetch(UPLOAD_URL, {
@@ -122,6 +143,16 @@ export async function postTradeSignalToX(
   if (!uploadRes.ok || !uploadData.media_id_string) {
     throw new Error(`X media upload failed: ${JSON.stringify(uploadData)}`);
   }
+  return uploadData.media_id_string as string;
+}
+
+export async function postTradeSignalToX(
+  imageUrl: string,
+  text: string,
+  options: { replyToTweetId?: string } = {}
+): Promise<{ tweetId: string }> {
+  const creds = getCredentials();
+  const mediaId = await uploadImageToX(imageUrl, creds);
 
   const tweetAuth = await oauth1Header("POST", TWEET_URL, {}, creds);
   const tweetRes = await fetch(TWEET_URL, {
@@ -132,7 +163,42 @@ export async function postTradeSignalToX(
     },
     body: JSON.stringify({
       text,
-      media: { media_ids: [uploadData.media_id_string] },
+      media: { media_ids: [mediaId] },
+      ...(options.replyToTweetId ? { reply: { in_reply_to_tweet_id: options.replyToTweetId } } : {}),
+    }),
+  });
+  const tweetData = await tweetRes.json();
+  if (!tweetRes.ok) {
+    throw new Error(`X tweet failed: ${JSON.stringify(tweetData)}`);
+  }
+  return { tweetId: tweetData.data.id };
+}
+
+// X allows up to 4 images per tweet — used for bulletin posts bundling
+// several instruments' charts. imageUrls beyond the 4th are silently
+// dropped by the caller, not here, so callers stay in control of which
+// charts make the cut.
+export async function postImagesToX(
+  imageUrls: string[],
+  text: string,
+  options: { replyToTweetId?: string } = {}
+): Promise<{ tweetId: string }> {
+  if (imageUrls.length === 0 || imageUrls.length > 4) {
+    throw new Error("postImagesToX requires 1-4 image URLs");
+  }
+  const creds = getCredentials();
+  const mediaIds = await Promise.all(imageUrls.map((url) => uploadImageToX(url, creds)));
+
+  const tweetAuth = await oauth1Header("POST", TWEET_URL, {}, creds);
+  const tweetRes = await fetch(TWEET_URL, {
+    method: "POST",
+    headers: {
+      Authorization: tweetAuth,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      text,
+      media: { media_ids: mediaIds },
       ...(options.replyToTweetId ? { reply: { in_reply_to_tweet_id: options.replyToTweetId } } : {}),
     }),
   });
