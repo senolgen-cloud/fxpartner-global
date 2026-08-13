@@ -210,17 +210,21 @@ function useCountUp(target: number, durationMs = 1400, decimals = 0) {
 
   useEffect(() => {
     if (!started) return;
-    let raf: number;
+    // setTimeout instead of requestAnimationFrame — rAF is paused by the
+    // browser while the tab is backgrounded/not compositing, which would
+    // leave the counter stuck at 0 indefinitely; setTimeout keeps firing
+    // (just throttled) so the count always reaches its target.
+    let timer: ReturnType<typeof setTimeout>;
     const start = performance.now();
     const from = 0;
-    function tick(now: number) {
-      const t = Math.min(1, (now - start) / durationMs);
+    function tick() {
+      const t = Math.min(1, (performance.now() - start) / durationMs);
       const eased = 1 - Math.pow(1 - t, 3);
       setValue(from + (target - from) * eased);
-      if (t < 1) raf = requestAnimationFrame(tick);
+      if (t < 1) timer = setTimeout(tick, 16);
     }
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    tick();
+    return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [started, target, durationMs]);
 
@@ -629,31 +633,33 @@ export default function SignalsBoard({
     <>
       <section className="border-b border-hairline">
         <div className="mx-auto max-w-6xl px-6 py-16">
-          <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">Live Signals</span>
-          <h1 className="mt-3 font-display text-3xl font-semibold md:text-4xl">Real-Time Trading Signals</h1>
-          <p className="mt-4 max-w-2xl text-text-on-ink-muted">
-            Every signal below comes straight from our tracked MT5 account through an automated EA — the same
-            entries posted to our Telegram channel and X, with a real, verified result once each trade closes.
-            Nothing here is simulated or backfilled.
-          </p>
+          <div className="flex flex-col items-center text-center">
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">Live Signals</span>
+            <h1 className="mt-3 font-display text-3xl font-semibold md:text-4xl">Real-Time Trading Signals</h1>
+            <p className="mt-4 max-w-2xl text-text-on-ink-muted">
+              Every signal below comes straight from our tracked MT5 account through an automated EA — the same
+              entries posted to our Telegram channel and X, with a real, verified result once each trade closes.
+              Nothing here is simulated or backfilled.
+            </p>
 
-          <div className="mt-10 flex flex-wrap gap-10">
-            <div>
-              <div className="font-display text-3xl font-semibold">{active.length}</div>
-              <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                Active Signals
+            <div className="mt-10 flex flex-wrap justify-center gap-10">
+              <div>
+                <div className="font-display text-3xl font-semibold">{active.length}</div>
+                <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                  Active Signals
+                </div>
               </div>
-            </div>
-            <div>
-              <div className="font-display text-3xl font-semibold">{decisive.length}</div>
-              <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                Closed Trades
+              <div>
+                <div className="font-display text-3xl font-semibold">{decisive.length}</div>
+                <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                  Closed Trades
+                </div>
               </div>
-            </div>
-            <div>
-              <div className="font-display text-3xl font-semibold">{winRate !== null ? `${winRate}%` : "—"}</div>
-              <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                Win Rate{decisive.length > 0 && decisive.length < 10 ? " (early data)" : ""}
+              <div>
+                <div className="font-display text-3xl font-semibold">{winRate !== null ? `${winRate}%` : "—"}</div>
+                <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                  Win Rate{decisive.length > 0 && decisive.length < 10 ? " (early data)" : ""}
+                </div>
               </div>
             </div>
           </div>
