@@ -138,7 +138,7 @@ export async function GET(request: Request) {
               <span style={{ fontSize: 13, letterSpacing: 1.5, textTransform: "uppercase", color: TEXT_ON_INK_MUTED }}>
                 Take Profit
               </span>
-              <span style={{ fontSize: 30, fontWeight: 700, color: hasTarget1 ? TICK_UP : TEXT_ON_INK_MUTED, marginTop: 4 }}>
+              <span style={{ fontSize: 30, fontWeight: 800, color: hasTarget1 ? TICK_UP : TEXT_ON_INK_MUTED, marginTop: 4 }}>
                 {hasTarget1 ? target1 : "—"}
               </span>
             </div>
@@ -147,7 +147,7 @@ export async function GET(request: Request) {
               <span style={{ fontSize: 13, letterSpacing: 1.5, textTransform: "uppercase", color: TEXT_ON_INK_MUTED }}>
                 Stop Loss
               </span>
-              <span style={{ fontSize: 30, fontWeight: 700, color: hasStop ? TICK_DOWN : TEXT_ON_INK_MUTED, marginTop: 4 }}>
+              <span style={{ fontSize: 30, fontWeight: 800, color: hasStop ? TICK_DOWN : TEXT_ON_INK_MUTED, marginTop: 4 }}>
                 {hasStop ? stop : "—"}
               </span>
             </div>

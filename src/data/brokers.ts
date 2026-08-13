@@ -41,6 +41,18 @@ export interface Broker {
     steps: string[];
     note: string;
     contactEmail?: string;
+    // Optional designed creative for this campaign (e.g. a stats/announcement
+    // banner), shown above the campaign copy on /campaigns. Falls back to the
+    // broker logo + text layout when omitted, same as adImage does for
+    // BrokerAdBanner.
+    image?: string;
+    imageWidth?: number;
+    imageHeight?: number;
+    // Optional campaign-specific CTA that overrides referralUrl for this
+    // promotion's primary button — e.g. an existing-client panel login link
+    // instead of the standard new-account referral link.
+    ctaUrl?: string;
+    ctaLabel?: string;
   };
   // Optional designed social-share preview image for this broker's review
   // page, overriding the auto-generated opengraph-image for that route.
@@ -265,6 +277,23 @@ export const brokers: Broker[] = [
         "24/7 live chat, phone, and email support in 28+ languages, plus a self-serve help center.",
       education:
         "Daily live webinars in 23 languages, a Tradepedia video library, an interactive economic calendar, and the XM Traders Club loyalty program (Bronze through Elite tiers, earning XM Coins on closed positions).",
+    },
+    promotion: {
+      tag: "Aktif Kampanya",
+      title: "XM Nakit İadesi Kampanyası — Şimdiye Kadar 17.369$ Ödendi",
+      intro:
+        "Aynı işlemler, aynı piyasa — ama neden nakit iadesi olmasın? XM Global'de FXPARTNER ortak kodu ile işlem yapan yatırımcılar bugüne kadar toplam 17.369$ nakit iadesi aldı. XM hesabın zaten varsa, avantajdan yararlanmak için mevcut hesabını kapatmana ya da işlemlerini değiştirmen gerekmiyor.",
+      steps: [
+        "FXPARTNER ortak kodu ile EK HESAP aç.",
+        "İşlemlerine bu hesap üzerinden devam et.",
+        "Hepsi bu — yaptığın işlemlerden nakit iadesi almaya başla.",
+      ],
+      note: "Kampanya koşulları değişebilir; güncel şartları katılmadan önce XM'in resmi sitesinden teyit edin. Yatırım yapmak risk içerir, sermayeniz risk altında olabilir.",
+      image: "/campaigns/XM-nakit-iadesi-fxpartner.png",
+      imageWidth: 1672,
+      imageHeight: 941,
+      ctaUrl: "https://bit.ly/xm-panel",
+      ctaLabel: "XM Üye Paneline Giriş Yap",
     },
   },
   {

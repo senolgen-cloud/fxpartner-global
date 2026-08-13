@@ -5,6 +5,7 @@ import NotificationOptIn from "@/components/NotificationOptIn";
 import AddToHomeScreen from "@/components/AddToHomeScreen";
 import NewsletterPopup from "@/components/NewsletterPopup";
 import CommunityWidget from "@/components/CommunityWidget";
+import LiveSupportWidget from "@/components/LiveSupportWidget";
 import GoogleTranslateWidget from "@/components/GoogleTranslateWidget";
 import Header from "@/components/Header";
 import Ticker from "@/components/Ticker";
@@ -125,6 +126,7 @@ export default function RootLayout({
         <DesktopQuickNavFab />
         <NewsletterPopup />
         <CommunityWidget topBrokers={topBrokers} />
+        <LiveSupportWidget />
         <GoogleTranslateWidget />
         <Analytics />
       </body>

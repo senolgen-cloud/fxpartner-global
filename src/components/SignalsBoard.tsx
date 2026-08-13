@@ -23,6 +23,37 @@ function outcomeColor(outcome: TradeSignalOutcome | null) {
   return "var(--text-on-ink-muted)";
 }
 
+// Raw entry -> close price movement, in the trade's favor. We show this
+// instead of the EA's "pips" field — pip size varies wildly across
+// instruments (BTCUSD, indices, XAU vs. forex majors) and the EA's pip
+// math doesn't account for that, so its numbers are unreliable.
+function priceDiff(entry: string | null, closePrice: string | null, direction: string | null): number | null {
+  if (!entry || !closePrice) return null;
+  const entryNum = parseFloat(entry);
+  const closeNum = parseFloat(closePrice);
+  if (Number.isNaN(entryNum) || Number.isNaN(closeNum)) return null;
+  const diff = closeNum - entryNum;
+  return direction === "SELL" ? -diff : diff;
+}
+
+function decimalsOf(value: string | null): number {
+  if (!value) return 2;
+  const idx = value.indexOf(".");
+  return idx === -1 ? 0 : value.length - idx - 1;
+}
+
+function formatDiff(diff: number, decimals: number): string {
+  return `${diff > 0 ? "+" : ""}${diff.toFixed(decimals)}`;
+}
+
+// Aggregate numbers mix wildly different price scales (BTCUSD moves in
+// hundreds, forex majors in thousandths) — a fixed 2-decimal format would
+// round small forex diffs down to 0.00, so use more precision for small
+// values and less for large ones.
+function aggDecimals(value: number): number {
+  return Math.abs(value) >= 10 ? 2 : Math.abs(value) >= 1 ? 3 : 5;
+}
+
 function Level({ label, value, color }: { label: string; value: string | null; color: string }) {
   if (!value) return null;
   return (
@@ -76,11 +107,13 @@ function SignalTable({ title, signals, closedView }: { title: string; signals: S
               {signals.map((s) => {
                 const isSell = s.direction === "SELL";
                 const directionColor = isSell ? TICK_DOWN : TICK_UP;
-                const resultLine = s.pips
-                  ? `${parseFloat(s.pips) > 0 ? "+" : ""}${s.pips} pips`
-                  : s.profit
-                    ? `${parseFloat(s.profit) > 0 ? "+" : ""}${s.profit} USD`
-                    : null;
+                const diff = priceDiff(s.entry, s.closePrice, s.direction);
+                const resultLine =
+                  diff !== null
+                    ? formatDiff(diff, decimalsOf(s.entry))
+                    : s.profit
+                      ? `${parseFloat(s.profit) > 0 ? "+" : ""}${s.profit} USD`
+                      : null;
                 return (
                   <tr key={s.id} className="border-b border-hairline last:border-0">
                     <td className="whitespace-nowrap px-6 py-3.5 font-mono text-xs text-text-on-ink-muted">
@@ -143,18 +176,331 @@ function SignalTable({ title, signals, closedView }: { title: string; signals: S
   );
 }
 
+function formatDuration(ms: number) {
+  if (!ms || ms <= 0) return "—";
+  const totalMinutes = Math.round(ms / 60000);
+  const days = Math.floor(totalMinutes / 1440);
+  const hours = Math.floor((totalMinutes % 1440) / 60);
+  const minutes = totalMinutes % 60;
+  if (days > 0) return `${days}g ${hours}s`;
+  if (hours > 0) return `${hours}s ${minutes}dk`;
+  return `${minutes}dk`;
+}
+
+function useCountUp(target: number, durationMs = 1400, decimals = 0) {
+  const [value, setValue] = useState(0);
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    let raf: number;
+    const start = performance.now();
+    const from = 0;
+    function tick(now: number) {
+      const t = Math.min(1, (now - start) / durationMs);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setValue(from + (target - from) * eased);
+      if (t < 1) raf = requestAnimationFrame(tick);
+    }
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [started, target, durationMs]);
+
+  const display = decimals > 0 ? value.toFixed(decimals) : Math.round(value).toLocaleString("en-US");
+  return { ref, display };
+}
+
+function PipsStats({ closed }: { closed: Signal[] }) {
+  const decisive = closed
+    .filter((s) => (s.outcome === "WIN" || s.outcome === "LOSS") && priceDiff(s.entry, s.closePrice, s.direction) !== null)
+    .slice()
+    .sort((a, b) => (a.closedAt?.getTime() ?? 0) - (b.closedAt?.getTime() ?? 0));
+
+  const pipsValues = decisive.map((s) => priceDiff(s.entry, s.closePrice, s.direction) as number);
+  const totalPips = pipsValues.reduce((sum, p) => sum + p, 0);
+  const wins = decisive.filter((s) => s.outcome === "WIN");
+  const losses = decisive.filter((s) => s.outcome === "LOSS");
+  const bestTrade = pipsValues.length ? Math.max(...pipsValues) : 0;
+  const worstTrade = pipsValues.length ? Math.min(...pipsValues) : 0;
+
+  const totalCount = useCountUp(totalPips, 1400, aggDecimals(totalPips));
+  const bestCount = useCountUp(bestTrade, 1200, aggDecimals(bestTrade));
+  const worstCount = useCountUp(Math.abs(worstTrade), 1200, aggDecimals(worstTrade));
+
+  // Cumulative pips series for the sparkline.
+  let running = 0;
+  const cumulative = pipsValues.map((p) => (running += p));
+  const points = cumulative.length > 0 ? cumulative : [0];
+  const minY = Math.min(0, ...points);
+  const maxY = Math.max(0, ...points);
+  const rangeY = maxY - minY || 1;
+  const W = 600;
+  const H = 140;
+  const stepX = points.length > 1 ? W / (points.length - 1) : 0;
+  const coords = points.map((p, i) => {
+    const x = points.length > 1 ? i * stepX : W / 2;
+    const y = H - ((p - minY) / rangeY) * H;
+    return [x, y] as const;
+  });
+  const linePath = coords.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
+  const areaPath =
+    coords.length > 0
+      ? `${linePath} L${coords[coords.length - 1][0].toFixed(1)} ${H} L${coords[0][0].toFixed(1)} ${H} Z`
+      : "";
+  const zeroY = H - ((0 - minY) / rangeY) * H;
+  const isPositive = totalPips >= 0;
+  const lineColor = isPositive ? TICK_UP : TICK_DOWN;
+
+  // Average trade duration, entry -> close.
+  const durations = decisive
+    .filter((s) => s.createdAt && s.closedAt)
+    .map((s) => s.closedAt!.getTime() - s.createdAt.getTime());
+  const avgDurationMs = durations.length ? durations.reduce((a, b) => a + b, 0) / durations.length : 0;
+  const avgDurationLabel = formatDuration(avgDurationMs);
+
+  // Monthly pips breakdown.
+  const monthlyMap = new Map<string, number>();
+  for (const s of decisive) {
+    const d = s.closedAt ?? s.createdAt;
+    if (!d) continue;
+    const key = d.toLocaleDateString("en-US", { month: "short", year: "2-digit", timeZone: "UTC" });
+    monthlyMap.set(key, (monthlyMap.get(key) ?? 0) + (priceDiff(s.entry, s.closePrice, s.direction) ?? 0));
+  }
+  const monthly = Array.from(monthlyMap.entries());
+  const monthlyMax = Math.max(1, ...monthly.map(([, v]) => Math.abs(v)));
+
+  // Per-pair breakdown.
+  type PairStat = { pair: string; total: number; count: number; wins: number };
+  const pairMap = new Map<string, PairStat>();
+  for (const s of decisive) {
+    const key = s.pair;
+    const entry = pairMap.get(key) ?? { pair: key, total: 0, count: 0, wins: 0 };
+    entry.total += priceDiff(s.entry, s.closePrice, s.direction) ?? 0;
+    entry.count += 1;
+    if (s.outcome === "WIN") entry.wins += 1;
+    pairMap.set(key, entry);
+  }
+  const pairStats = Array.from(pairMap.values()).sort((a, b) => b.total - a.total);
+  const pairMax = Math.max(1, ...pairStats.map((p) => Math.abs(p.total)));
+
+  if (decisive.length === 0) return null;
+
+  return (
+    <div
+      ref={totalCount.ref}
+      className="mt-10 overflow-hidden rounded-2xl border border-hairline bg-ink-soft p-6 md:p-8"
+    >
+      <div className="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
+            Toplam Fiyat Farkı (Kapanan İşlemler)
+          </span>
+          <div className="mt-2 flex items-baseline gap-2">
+            <span
+              className="font-display text-5xl font-bold tabular-stat md:text-6xl"
+              style={{ color: lineColor }}
+            >
+              {isPositive ? "+" : "-"}
+              {totalCount.display}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-6">
+          <div>
+            <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">En İyi</div>
+            <div ref={bestCount.ref} className="mt-1 font-display text-xl font-semibold" style={{ color: TICK_UP }}>
+              +{bestCount.display}
+            </div>
+          </div>
+          <div>
+            <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">En Kötü</div>
+            <div
+              ref={worstCount.ref}
+              className="mt-1 font-display text-xl font-semibold"
+              style={{ color: TICK_DOWN }}
+            >
+              -{worstCount.display}
+            </div>
+          </div>
+          <div>
+            <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">W / L</div>
+            <div className="mt-1 font-display text-xl font-semibold text-text-on-ink">
+              <span style={{ color: TICK_UP }}>{wins.length}</span>
+              <span className="text-text-on-ink-muted"> / </span>
+              <span style={{ color: TICK_DOWN }}>{losses.length}</span>
+            </div>
+          </div>
+          <div>
+            <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+              Ort. Süre
+            </div>
+            <div className="mt-1 font-display text-xl font-semibold text-text-on-ink">{avgDurationLabel}</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-6">
+        <svg viewBox={`0 0 ${W} ${H}`} className="h-32 w-full md:h-40" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="pipsFade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor={lineColor} stopOpacity="0.35" />
+              <stop offset="100%" stopColor={lineColor} stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <line
+            x1="0"
+            y1={zeroY}
+            x2={W}
+            y2={zeroY}
+            stroke="var(--text-on-ink-muted)"
+            strokeOpacity="0.25"
+            strokeDasharray="4 4"
+          />
+          {areaPath && (
+            <path d={areaPath} fill="url(#pipsFade)" className="pips-area-in" />
+          )}
+          {linePath && (
+            <path
+              d={linePath}
+              fill="none"
+              stroke={lineColor}
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="pips-line-in"
+              pathLength={1}
+            />
+          )}
+          {coords.length > 0 && (
+            <circle cx={coords[coords.length - 1][0]} cy={coords[coords.length - 1][1]} r="4" fill={lineColor} />
+          )}
+        </svg>
+        <div className="mt-2 flex justify-between font-mono text-[10px] text-text-on-ink-muted">
+          <span>{decisive[0]?.closedAt?.toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
+          <span>{decisive.length} işlem</span>
+          <span>
+            {decisive[decisive.length - 1]?.closedAt?.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+          </span>
+        </div>
+      </div>
+
+      {monthly.length > 1 && (
+        <div className="mt-8 border-t border-hairline pt-6">
+          <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
+            Aylık Fiyat Farkı
+          </span>
+          <div className="mt-4 flex items-end gap-3">
+            {monthly.map(([month, value], i) => {
+              const barColor = value >= 0 ? TICK_UP : TICK_DOWN;
+              const heightPct = Math.max(4, (Math.abs(value) / monthlyMax) * 100);
+              return (
+                <div key={month} className="flex flex-1 flex-col items-center gap-2">
+                  <span className="font-mono text-[11px] font-medium" style={{ color: barColor }}>
+                    {value >= 0 ? "+" : ""}
+                    {value.toFixed(aggDecimals(value))}
+                  </span>
+                  <div className="flex h-24 w-full items-end justify-center">
+                    <div
+                      className="w-full max-w-10 rounded-t-md monthly-bar-in"
+                      style={{
+                        height: `${heightPct}%`,
+                        background: barColor,
+                        animationDelay: `${i * 80}ms`,
+                      }}
+                    />
+                  </div>
+                  <span className="font-mono text-[10px] text-text-on-ink-muted">{month}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {pairStats.length > 0 && (
+        <div className="mt-8 border-t border-hairline pt-6">
+          <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
+            Parite Bazında Performans
+          </span>
+          <div className="mt-4 space-y-3">
+            {pairStats.map((p, i) => {
+              const barColor = p.total >= 0 ? TICK_UP : TICK_DOWN;
+              const widthPct = Math.max(3, (Math.abs(p.total) / pairMax) * 100);
+              const pairWinRate = Math.round((p.wins / p.count) * 100);
+              return (
+                <div key={p.pair} className="flex items-center gap-3">
+                  <span className="w-20 shrink-0 font-display text-sm font-semibold text-text-on-ink">
+                    {p.pair}
+                  </span>
+                  <div className="relative h-6 flex-1 overflow-hidden rounded-md bg-ink">
+                    <div
+                      className="pair-bar-in h-full rounded-md"
+                      style={
+                        {
+                          "--final-width": `${widthPct}%`,
+                          background: `${barColor}4d`,
+                          borderRight: `2px solid ${barColor}`,
+                          animationDelay: `${i * 70}ms`,
+                        } as React.CSSProperties
+                      }
+                    />
+                  </div>
+                  <span
+                    className="w-20 shrink-0 text-right font-mono text-xs font-semibold"
+                    style={{ color: barColor }}
+                  >
+                    {p.total >= 0 ? "+" : ""}
+                    {p.total.toFixed(aggDecimals(p.total))}
+                  </span>
+                  <span className="w-20 shrink-0 text-right font-mono text-[11px] text-text-on-ink-muted">
+                    {p.count} işlem
+                  </span>
+                  <span className="w-12 shrink-0 text-right font-mono text-[11px] text-text-on-ink-muted">
+                    %{pairWinRate}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SignalCard({ signal }: { signal: Signal }) {
   const isBuy = signal.direction === "BUY";
   const isSell = signal.direction === "SELL";
   const directionColor = isSell ? TICK_DOWN : TICK_UP;
   const isClosed = signal.status === "closed";
 
-  const resultLine = signal.pips
-    ? `${parseFloat(signal.pips) > 0 ? "+" : ""}${signal.pips}`
-    : signal.profit
-      ? `${parseFloat(signal.profit) > 0 ? "+" : ""}$${signal.profit}`
-      : null;
-  const resultUnit = signal.pips ? "pips" : null;
+  const cardDiff = priceDiff(signal.entry, signal.closePrice, signal.direction);
+  const resultLine =
+    cardDiff !== null
+      ? formatDiff(cardDiff, decimalsOf(signal.entry))
+      : signal.profit
+        ? `${parseFloat(signal.profit) > 0 ? "+" : ""}$${signal.profit}`
+        : null;
+  const resultUnit = null;
   const resultColor = outcomeColor(signal.outcome);
 
   // Purely decorative — same as the homepage hero card's sparkline, never
@@ -311,6 +657,8 @@ export default function SignalsBoard({
               </div>
             </div>
           </div>
+
+          <PipsStats closed={closed} />
         </div>
       </section>
 
@@ -331,9 +679,11 @@ export default function SignalsBoard({
             to get the next one the moment it's posted.
           </p>
         ) : (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="flex flex-wrap justify-center gap-5">
             {active.map((s) => (
-              <SignalCard key={s.id} signal={s} />
+              <div key={s.id} className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[calc(25%-15px)]">
+                <SignalCard signal={s} />
+              </div>
             ))}
           </div>
         )}
@@ -348,9 +698,11 @@ export default function SignalsBoard({
               No closed signals yet — results will appear here as trades close.
             </p>
           ) : (
-            <div className="mt-6 grid gap-5 sm:grid-cols-2 md:hidden lg:grid-cols-3">
+            <div className="mt-6 flex flex-wrap justify-center gap-5 md:hidden">
               {closed.map((s) => (
-                <SignalCard key={s.id} signal={s} />
+                <div key={s.id} className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]">
+                  <SignalCard signal={s} />
+                </div>
               ))}
             </div>
           )}

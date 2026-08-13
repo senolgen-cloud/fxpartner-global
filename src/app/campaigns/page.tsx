@@ -96,6 +96,18 @@ export default function CampaignsPage() {
                       </div>
                     </div>
 
+                    {broker.promotion!.image && (
+                      <div className="relative mt-6 aspect-[1672/941] w-full max-w-2xl overflow-hidden rounded-2xl border border-hairline-light">
+                        <Image
+                          src={broker.promotion!.image}
+                          alt={broker.promotion!.title}
+                          fill
+                          sizes="(min-width: 768px) 672px, 100vw"
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+
                     <h3 className="mt-5 font-display text-xl font-semibold text-text-dark">
                       {broker.promotion!.title}
                     </h3>
@@ -116,12 +128,12 @@ export default function CampaignsPage() {
 
                     <div className="mt-6 flex flex-wrap gap-3">
                       <a
-                        href={broker.referralUrl}
+                        href={broker.promotion!.ctaUrl ?? broker.referralUrl}
                         target="_blank"
                         rel="noopener noreferrer sponsored"
                         className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
                       >
-                        Open a {broker.name} Account
+                        {broker.promotion!.ctaLabel ?? `Open a ${broker.name} Account`}
                       </a>
                       {broker.promotion!.contactEmail && (
                         <a

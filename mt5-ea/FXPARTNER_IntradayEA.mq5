@@ -36,19 +36,25 @@
 //|  the symbol of the chart it's attached to. Recommended working   |
 //|  timeframe: M5 (set Period() by opening the EA on an M5 chart).  |
 //|                                                                    |
-//|  TRADE-FREQUENCY TUNING (2026-08-12, per owner request - higher  |
-//|  turnover is acceptable on this account): the trend filter was   |
-//|  shortened from EMA200 to EMA50 (flips direction more often, so  |
-//|  more pullback setups qualify), the RSI pullback zone was moved  |
-//|  from 35/65 to 40/60 (triggers on shallower pullbacks), and the  |
-//|  ATR stop/target multiples were tightened (1.5/2.25 -> 1.0/1.4)  |
-//|  so each trade resolves faster, freeing the one-trade-per-symbol |
-//|  slot for a re-entry sooner. Combined with an M5 chart instead   |
-//|  of M15, this should meaningfully raise trade count. It also     |
-//|  raises noise exposure - a shorter EMA and tighter RSI band      |
-//|  react to smaller wiggles, and tighter stops get clipped by      |
-//|  ordinary volatility more often. Watch win rate/expectancy in    |
-//|  the Strategy Tester after this change, not just trade count.    |
+//|  TRADE-FREQUENCY TUNING (2026-08-13, per owner request - target  |
+//|  ~7-8 signals/day PER SYMBOL): pushed further than the 08-12     |
+//|  pass. Trend filter shortened EMA50 -> EMA20 (flips direction    |
+//|  even more often). RSI pullback zone narrowed 40/60 -> 45/55     |
+//|  (triggers on very shallow pullbacks - much closer to "any RSI   |
+//|  wiggle back toward 50"). ATR stop/target tightened 1.0/1.4 ->   |
+//|  0.7/1.0 so each trade resolves faster, freeing the one-at-a-    |
+//|  time slot for a re-entry sooner. Session widened 08-20 -> 07-22 |
+//|  and the news-filter blackout window shrunk (30/15 -> 15/10 min) |
+//|  so fewer setups get skipped. This is now a HIGH-noise, high-    |
+//|  turnover configuration: a shorter EMA and near-50 RSI band      |
+//|  react to routine price noise, not just real pullbacks, and      |
+//|  tight ATR stops will get clipped by ordinary volatility often.  |
+//|  Expect win rate/expectancy per trade to be materially worse     |
+//|  than the 08-12 tuning - trade count went up because the edge    |
+//|  requirement went down. Actual signals/day depend on the         |
+//|  symbol's real M5 volatility; demo-test each symbol and check    |
+//|  the Journal ("FXPARTNER EA trend pullback" trade comments) to   |
+//|  confirm it is actually hitting ~7-8/day before trusting it.     |
 //+------------------------------------------------------------------+
 #property copyright "FXPARTNER"
 #property version   "1.00"
@@ -64,25 +70,25 @@ input int    InpMaxSpreadPoints     = 30;      // Skip entries if current spread
 input int    InpMagicOnly           = 1;       // 1 = only manage positions with InpMagic on this symbol; 0 = also count any position on this symbol toward the one-at-a-time rule
 
 //--- inputs: trend / entry
-input int    InpTrendEmaPeriod      = 50;      // EMA period defining the intraday trend direction (shorter = trend flips more often = more setups)
+input int    InpTrendEmaPeriod      = 20;      // EMA period defining the intraday trend direction (shorter = trend flips more often = more setups)
 input int    InpRsiPeriod           = 14;      // RSI period
-input double InpRsiOversold         = 40;      // RSI pullback zone (uptrend BUY trigger below this)
-input double InpRsiOverbought       = 60;      // RSI pullback zone (downtrend SELL trigger above this)
+input double InpRsiOversold         = 45;      // RSI pullback zone (uptrend BUY trigger below this)
+input double InpRsiOverbought       = 55;      // RSI pullback zone (downtrend SELL trigger above this)
 
 //--- inputs: stops / targets (ATR-based, so they scale per symbol)
 input int    InpAtrPeriod           = 14;      // ATR period
-input double InpAtrSlMultiple       = 1.0;     // Stop loss = InpAtrSlMultiple * ATR from entry
-input double InpAtrTpMultiple       = 1.4;     // Take profit = InpAtrTpMultiple * ATR from entry (tighter than before -> trades resolve faster, freeing the one-at-a-time slot sooner)
+input double InpAtrSlMultiple       = 0.7;     // Stop loss = InpAtrSlMultiple * ATR from entry
+input double InpAtrTpMultiple       = 1.0;     // Take profit = InpAtrTpMultiple * ATR from entry (tight -> trades resolve fast, freeing the one-at-a-time slot sooner for more trades/day)
 
 //--- inputs: fundamental filter (MQL5's built-in Economic Calendar)
 input bool   InpNewsFilterEnabled   = true;    // Skip new entries near high-impact news for this symbol's currencies
-input int    InpNewsMinutesBefore   = 30;      // Don't open a new trade if a high-impact event is due within this many minutes
-input int    InpNewsMinutesAfter    = 15;      // ...or happened this many minutes ago (let the initial volatility spike pass)
+input int    InpNewsMinutesBefore   = 15;      // Don't open a new trade if a high-impact event is due within this many minutes
+input int    InpNewsMinutesAfter    = 10;      // ...or happened this many minutes ago (let the initial volatility spike pass)
 
 //--- inputs: session filter (broker/server time, 0-23)
 input bool   InpSessionFilterEnabled = true;   // Restrict entries to a trading session window
-input int    InpSessionStartHour     = 8;      // Server-time hour entries are allowed from (inclusive)
-input int    InpSessionEndHour       = 20;     // Server-time hour entries are allowed until (exclusive)
+input int    InpSessionStartHour     = 7;      // Server-time hour entries are allowed from (inclusive)
+input int    InpSessionEndHour       = 22;     // Server-time hour entries are allowed until (exclusive)
 
 CTrade trade;
 
@@ -331,23 +337,51 @@ void OnTick()
    double bid   = SymbolInfoDouble(_Symbol, SYMBOL_BID);
    int    digits = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
 
+   // Broker's minimum distance between price and SL/TP (points -> price).
+   // ATR-based stops can end up tighter than this on some symbols/brokers,
+   // in which case the order would be silently rejected without this check.
+   long   stopsLevelPoints = SymbolInfoInteger(_Symbol, SYMBOL_TRADE_STOPS_LEVEL);
+   double minStopDistance  = stopsLevelPoints * point;
+
    if(uptrend && rsiTurningUp)
      {
       double sl = NormalizeDouble(ask - InpAtrSlMultiple * atrValue, digits);
       double tp = NormalizeDouble(ask + InpAtrTpMultiple * atrValue, digits);
       double slDistance = ask - sl;
+      if(minStopDistance > 0 && slDistance < minStopDistance)
+        {
+         PrintFormat("%s: BUY sinyali bulundu ama ATR stop (%.5f) broker'in min stop mesafesinden (%.5f) daha dar, emir gönderilmedi.",
+                     _Symbol, slDistance, minStopDistance);
+         return;
+        }
       double lots = CalcLotFromRisk(slDistance);
-      if(lots > 0)
-         trade.Buy(lots, _Symbol, ask, sl, tp, "FXPARTNER EA trend pullback");
+      if(lots <= 0)
+        {
+         PrintFormat("%s: BUY sinyali bulundu ama hesaplanan lot 0, emir gönderilmedi (bakiye/tick value kontrol edin).", _Symbol);
+         return;
+        }
+      if(!trade.Buy(lots, _Symbol, ask, sl, tp, "FXPARTNER EA trend pullback"))
+         PrintFormat("%s: BUY emri reddedildi. Retcode=%d (%s)", _Symbol, trade.ResultRetcode(), trade.ResultRetcodeDescription());
      }
    else if(downtrend && rsiTurningDown)
      {
       double sl = NormalizeDouble(bid + InpAtrSlMultiple * atrValue, digits);
       double tp = NormalizeDouble(bid - InpAtrTpMultiple * atrValue, digits);
       double slDistance = sl - bid;
+      if(minStopDistance > 0 && slDistance < minStopDistance)
+        {
+         PrintFormat("%s: SELL sinyali bulundu ama ATR stop (%.5f) broker'in min stop mesafesinden (%.5f) daha dar, emir gönderilmedi.",
+                     _Symbol, slDistance, minStopDistance);
+         return;
+        }
       double lots = CalcLotFromRisk(slDistance);
-      if(lots > 0)
-         trade.Sell(lots, _Symbol, bid, sl, tp, "FXPARTNER EA trend pullback");
+      if(lots <= 0)
+        {
+         PrintFormat("%s: SELL sinyali bulundu ama hesaplanan lot 0, emir gönderilmedi (bakiye/tick value kontrol edin).", _Symbol);
+         return;
+        }
+      if(!trade.Sell(lots, _Symbol, bid, sl, tp, "FXPARTNER EA trend pullback"))
+         PrintFormat("%s: SELL emri reddedildi. Retcode=%d (%s)", _Symbol, trade.ResultRetcode(), trade.ResultRetcodeDescription());
      }
   }
 //+------------------------------------------------------------------+
