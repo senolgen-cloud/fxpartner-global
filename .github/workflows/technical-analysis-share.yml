@@ -1,0 +1,19 @@
+name: Technical analysis share
+
+on:
+  workflow_dispatch:
+
+# Kept in its own workflow (not a job in telegram-cron.yml) on purpose:
+# telegram-cron.yml's jobs all fire together on workflow_dispatch (no
+# per-job input), so adding this there would also re-trigger every other
+# content type. workflow_dispatch-only for now, per the paused-by-default
+# automation pattern in src/lib/departments.ts — flip to a schedule: only
+# after explicit confirmation for this specific cron.
+jobs:
+  technical-analysis-share:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger technical-analysis-share
+        run: |
+          curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            https://fxpartner.global/api/technical-analysis-share
