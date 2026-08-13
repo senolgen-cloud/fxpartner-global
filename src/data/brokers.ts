@@ -31,6 +31,11 @@ export interface Broker {
   // default. This field only exists for a reasoned editorial exception
   // that overrides the formula.
   scoreOverride?: number;
+  // Optional real license number per regulator (only the ones we've
+  // independently verified — a regulator can appear in `regulators`
+  // without a matching entry here if its number hasn't been confirmed).
+  // Rendered as a trust badge on the review page.
+  licenseNumbers?: Partial<Record<string, string>>;
   // An optional time-limited campaign (e.g. refer-a-friend), rendered as
   // a highlighted banner on the broker's review page. Distinct from the
   // standing referralUrl/partnerCode, which is always active.
@@ -215,6 +220,23 @@ export function getBrokerScores(broker: Broker) {
   return { regulation, cost, platform, withdrawal, composite };
 }
 
+export type RiskLevel = "low" | "medium" | "high";
+
+// Derived, not editorial — a simple read of the same composite Index score
+// already shown elsewhere on the page, just labeled for quick scanning.
+export function getRiskLevel(broker: Broker): RiskLevel {
+  const { composite } = getBrokerScores(broker);
+  if (composite >= 8) return "low";
+  if (composite >= 6) return "medium";
+  return "high";
+}
+
+export const RISK_LEVEL_LABEL: Record<RiskLevel, string> = {
+  low: "Low Risk",
+  medium: "Medium Risk",
+  high: "High Risk",
+};
+
 export const brokers: Broker[] = [
   {
     rank: 1,
@@ -229,6 +251,7 @@ export const brokers: Broker[] = [
     minDeposit: "$5",
     maxLeverage: "1:1000*",
     regulators: ["ASIC", "CySEC", "DFSA", "FSC (Belize)"],
+    licenseNumbers: { ASIC: "443670", CySEC: "120/10", DFSA: "F003484" },
     platforms: ["MT4", "MT5", "XM App"],
     headquarters: "Cyprus / Australia",
     referralUrl: "https://affs.click/gvaLg",
@@ -308,6 +331,7 @@ export const brokers: Broker[] = [
     minDeposit: "$100",
     maxLeverage: "1:400*",
     regulators: ["Central Bank of Ireland", "ASIC", "FSCA", "ADGM"],
+    licenseNumbers: { ASIC: "406684", ADGM: "190018", FSCA: "45984" },
     platforms: ["MT4", "MT5", "AvaTradeGO", "WebTrader"],
     headquarters: "Ireland",
     referralUrl: "https://tracking.avapartner.com/yRwAAA",
@@ -352,6 +376,7 @@ export const brokers: Broker[] = [
     minDeposit: "$100",
     maxLeverage: "1:500*",
     regulators: ["FCA", "CySEC", "FSA (Seychelles)", "Labuan FSA"],
+    licenseNumbers: { FCA: "717270", CySEC: "278/15", "Labuan FSA": "MB/18/0028" },
     platforms: ["MT4", "MT5"],
     headquarters: "United Kingdom",
     referralUrl: "https://tickmill.link/4vvHCRK",
@@ -455,6 +480,7 @@ export const brokers: Broker[] = [
     minDeposit: "$10",
     maxLeverage: "Unlimited*",
     regulators: ["FCA", "CySEC", "FSCA", "FSC (Mauritius)"],
+    licenseNumbers: { FCA: "730729", CySEC: "178/12", FSCA: "51024" },
     platforms: ["MT4", "MT5", "Exness Terminal"],
     headquarters: "Cyprus",
     referralUrl: "https://one.exnessonelink.com/a/nt8xpejsow",
@@ -499,6 +525,7 @@ export const brokers: Broker[] = [
     minDeposit: "$100",
     maxLeverage: "1:300*",
     regulators: ["CySEC", "FSC (BVI)"],
+    licenseNumbers: { CySEC: "092/08", "FSC (BVI)": "SIBA/L/14/1067" },
     platforms: ["Marketsx (Web)", "Mobile", "MT4", "MT5"],
     headquarters: "Cyprus / BVI",
     referralUrl: "https://refer.markets.com/2R72MI",
@@ -545,6 +572,7 @@ export const brokers: Broker[] = [
     minDeposit: "$100",
     maxLeverage: "1:2000*",
     regulators: ["FCA", "CySEC", "FSCA", "SCB (Bahamas)"],
+    licenseNumbers: { FCA: "509956", CySEC: "078/07", FSCA: "45052", "SCB (Bahamas)": "SIA-F184" },
     platforms: ["MT4", "MT5", "cTrader", "FxPro App"],
     headquarters: "United Kingdom / Cyprus",
     referralUrl: "https://redirect-fxpro.com/tr/partner/ipw6XC8L",
@@ -645,6 +673,7 @@ export const brokers: Broker[] = [
     minDeposit: "$0",
     maxLeverage: "1:500*",
     regulators: ["FCA", "ASIC", "CySEC", "FSCA"],
+    licenseNumbers: { ASIC: "424700", FCA: "629628", CySEC: "215/13", FSCA: "49835" },
     platforms: ["MT4", "MT5", "ThinkTrader"],
     headquarters: "London / Melbourne",
     referralUrl:
@@ -731,6 +760,7 @@ export const brokers: Broker[] = [
     minDeposit: "$200",
     maxLeverage: "1:500*",
     regulators: ["ASIC", "CySEC", "FSA (Seychelles)"],
+    licenseNumbers: { ASIC: "335692", CySEC: "362/18", "FSA (Seychelles)": "SD018" },
     platforms: ["MT4", "MT5", "cTrader", "TradingView"],
     headquarters: "Sydney, Australia",
     referralUrl: "https://ic.com/?camp=69888",

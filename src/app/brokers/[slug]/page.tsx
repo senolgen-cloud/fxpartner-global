@@ -17,6 +17,8 @@ import {
   SPONSORED_BROKER_SLUGS,
   categoryInfo,
   TIER1_REGULATORS,
+  getRiskLevel,
+  RISK_LEVEL_LABEL,
   type BrokerCategory,
 } from "@/data/brokers";
 import TrustIndex from "@/components/TrustIndex";
@@ -136,6 +138,7 @@ export default async function BrokerDetailPage({
   const faqs = brokerFaqs(broker);
   const reviewPost = getBlogPostBySlug(`${broker.slug}-review`);
   const scores = getBrokerScores(broker);
+  const riskLevel = getRiskLevel(broker);
 
   const tier1Regulators = broker.regulators.filter((r) => TIER1_REGULATORS.has(r));
   const offshoreRegulators = broker.regulators.filter((r) => !TIER1_REGULATORS.has(r));
@@ -254,12 +257,25 @@ export default async function BrokerDetailPage({
             <div className="mt-6 rounded-[32px] border border-hairline bg-gradient-to-br from-ink-soft/70 to-ink p-6 shadow-2xl shadow-black/40 sm:p-8 md:p-12">
               <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
                 <div>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-hairline px-3 py-1.5 font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-signal">
-                      <path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7L2 9.2l7.1-.6L12 2z" />
-                    </svg>
-                    Ranked #{String(broker.rank).padStart(2, "0")}
-                  </span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-hairline px-3 py-1.5 font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-signal">
+                        <path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7L2 9.2l7.1-.6L12 2z" />
+                      </svg>
+                      Ranked #{String(broker.rank).padStart(2, "0")}
+                    </span>
+                    <span
+                      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-mono text-xs uppercase tracking-[0.15em] ${
+                        riskLevel === "low"
+                          ? "border-tick-up/30 bg-tick-up/10 text-tick-up"
+                          : riskLevel === "medium"
+                            ? "border-gold/30 bg-gold/10 text-gold"
+                            : "border-tick-down/30 bg-tick-down/10 text-tick-down"
+                      }`}
+                    >
+                      {RISK_LEVEL_LABEL[riskLevel]}
+                    </span>
+                  </div>
                   <div className="mt-4 flex items-center gap-4">
                     <span className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-hairline bg-ink-soft text-lg font-semibold text-text-on-ink">
                       {broker.logo ? (
@@ -426,6 +442,9 @@ export default async function BrokerDetailPage({
                             className="rounded-full border border-tick-up/30 bg-tick-up/10 px-3 py-1.5 font-mono text-xs text-tick-up"
                           >
                             ✓ {r}
+                            {broker.licenseNumbers?.[r] && (
+                              <span className="text-tick-up/70"> · {broker.licenseNumbers[r]}</span>
+                            )}
                           </span>
                         ))}
                       </div>
@@ -443,6 +462,9 @@ export default async function BrokerDetailPage({
                             className="rounded-full border border-hairline-light px-3 py-1.5 font-mono text-xs text-text-muted"
                           >
                             {r}
+                            {broker.licenseNumbers?.[r] && (
+                              <span className="text-text-muted/70"> · {broker.licenseNumbers[r]}</span>
+                            )}
                           </span>
                         ))}
                       </div>
