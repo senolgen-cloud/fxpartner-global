@@ -15,7 +15,7 @@ export default function BrokerList({ brokers }: { brokers: Broker[] }) {
 
   return (
     <div>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap justify-center gap-2">
         <button
           type="button"
           onClick={() => setActive(null)}

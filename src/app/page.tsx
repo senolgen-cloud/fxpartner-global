@@ -203,7 +203,7 @@ export default async function Home() {
             className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-hairline to-transparent"
           />
           <div className="mx-auto max-w-6xl px-6 py-20">
-            <Reveal className="max-w-2xl">
+            <Reveal className="mx-auto max-w-2xl text-center">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
                 Rankings
               </span>
@@ -281,7 +281,7 @@ export default async function Home() {
         {/* Comparison table */}
         <section id="comparison" className="bg-ink">
           <div className="mx-auto max-w-6xl px-6 py-20">
-            <Reveal className="max-w-2xl">
+            <Reveal className="mx-auto max-w-2xl text-center">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
                 Side by Side
               </span>
@@ -306,7 +306,7 @@ export default async function Home() {
         {/* How to choose */}
         <section id="how-to-choose" className="bg-paper-high">
           <div className="mx-auto max-w-6xl px-6 py-20">
-            <Reveal className="max-w-2xl">
+            <Reveal className="mx-auto max-w-2xl text-center">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
                 Guide
               </span>
@@ -342,7 +342,7 @@ export default async function Home() {
         {/* Account opening & withdrawal walkthrough */}
         <section id="guides" className="bg-ink">
           <div className="mx-auto max-w-6xl px-6 py-20">
-            <Reveal className="max-w-2xl">
+            <Reveal className="mx-auto max-w-2xl text-center">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
                 Walkthrough
               </span>
@@ -414,7 +414,7 @@ export default async function Home() {
         {/* FAQ */}
         <section id="faq" className="bg-paper">
           <div className="mx-auto max-w-3xl px-6 py-20">
-            <Reveal>
+            <Reveal className="text-center">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
                 FAQ
               </span>
