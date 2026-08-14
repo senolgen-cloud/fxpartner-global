@@ -57,6 +57,11 @@ export const resourceLinks = [
     description: "Active referral and deposit promotions",
   },
   {
+    href: "/paketler",
+    label: "Paketler",
+    description: "Starter, Pro, and VIP membership packages",
+  },
+  {
     href: "/broker-lookup",
     label: "Broker Lookup",
     description: "Search any broker for a sourced trust verdict",
