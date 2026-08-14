@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -103,6 +104,98 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Legal registration */}
+        <section id="legal-registration" className="bg-paper-high">
+          <div className="mx-auto max-w-5xl px-6 py-20 md:py-24">
+            <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
+              Legal Registration
+            </span>
+            <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
+              A licensed, registered company
+            </h2>
+            <p className="mt-5 max-w-2xl text-text-muted">
+              FXPARTNER GLOBAL LTD. is a legally registered company,
+              incorporated under the laws of Dubai, United Arab Emirates —
+              not an anonymous website. Our full Certificate of Incorporation
+              is public below.
+            </p>
+
+            <div className="mt-10 grid gap-10 md:grid-cols-[1fr_1fr] md:items-center">
+              <a
+                href="/legal/fxpartner-certificate-of-incorporation.jpg"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="View the full FXPARTNER GLOBAL LTD. Certificate of Incorporation"
+                className="block overflow-hidden rounded-2xl border border-hairline-light shadow-sm transition-opacity hover:opacity-90"
+              >
+                <Image
+                  src="/legal/fxpartner-certificate-of-incorporation.jpg"
+                  alt="FXPARTNER GLOBAL LTD. Certificate of Incorporation"
+                  width={1536}
+                  height={1024}
+                  className="h-auto w-full"
+                />
+              </a>
+
+              <dl className="grid grid-cols-2 gap-6 text-sm">
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
+                    Company Name
+                  </dt>
+                  <dd className="mt-1 font-medium text-text-dark">FXPARTNER GLOBAL LTD.</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
+                    Company Number
+                  </dt>
+                  <dd className="mt-1 font-medium text-text-dark">1497521</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
+                    Incorporation Date
+                  </dt>
+                  <dd className="mt-1 font-medium text-text-dark">24 May 2024</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
+                    Jurisdiction
+                  </dt>
+                  <dd className="mt-1 font-medium text-text-dark">Dubai, United Arab Emirates</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
+                    Business Type
+                  </dt>
+                  <dd className="mt-1 font-medium text-text-dark">Limited Liability Company (LLC)</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
+                    Director &amp; CEO
+                  </dt>
+                  <dd className="mt-1 font-medium text-text-dark">Erdem Torun</dd>
+                </div>
+                <div className="col-span-2">
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
+                    Registered Address
+                  </dt>
+                  <dd className="mt-1 font-medium text-text-dark">
+                    Office 3507, Burlington Tower, Business Bay, Dubai, United Arab Emirates
+                  </dd>
+                </div>
+              </dl>
+            </div>
+
+            <a
+              href="/legal/fxpartner-certificate-of-incorporation.jpg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
+            >
+              View full certificate →
+            </a>
           </div>
         </section>
 

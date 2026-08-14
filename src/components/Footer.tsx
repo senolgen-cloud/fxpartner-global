@@ -24,6 +24,16 @@ export default function Footer() {
               Part of the FXPARTNER education and CopyTrade ecosystem,
               founded by Erdem Torun.
             </p>
+            <Link
+              href="/about#legal-registration"
+              title="View FXPARTNER GLOBAL LTD.'s Certificate of Incorporation"
+              className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-hairline px-3 py-1.5 text-xs font-medium text-text-on-ink-muted transition-colors hover:border-signal hover:text-signal"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Registered Company — UAE
+            </Link>
             <div className="mt-6 max-w-sm">
               <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink">
                 Get updates by email
