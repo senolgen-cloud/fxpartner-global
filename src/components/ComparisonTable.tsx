@@ -8,6 +8,7 @@ import {
   getBrokerScores,
   type BrokerCategory,
 } from "@/data/brokers";
+import { COMPARISON_CRITERIA } from "@/lib/comparisonCriteria";
 
 export default function ComparisonTable() {
   const [activeCategory, setActiveCategory] = useState<BrokerCategory | "All">(
@@ -46,24 +47,16 @@ export default function ComparisonTable() {
               <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
                 Broker
               </th>
-              <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-gold">
-                Index
-              </th>
-              <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
-                Rating
-              </th>
-              <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
-                Min. Deposit
-              </th>
-              <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
-                Max. Leverage
-              </th>
-              <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
-                Regulation
-              </th>
-              <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
-                Platform
-              </th>
+              {COMPARISON_CRITERIA.map((label) => (
+                <th
+                  key={label}
+                  className={`px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] ${
+                    label === "Index" ? "text-gold" : "text-text-on-ink-muted"
+                  }`}
+                >
+                  {label}
+                </th>
+              ))}
               <th className="px-5 py-4" />
             </tr>
           </thead>

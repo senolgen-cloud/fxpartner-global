@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 import BrokerList from "@/components/BrokerList";
 import ComparisonTable from "@/components/ComparisonTable";
+import { COMPARISON_CRITERIA } from "@/lib/comparisonCriteria";
 import Reveal from "@/components/Reveal";
 import AnimatedStat from "@/components/AnimatedStat";
 import HeroVideo from "@/components/HeroVideo";
@@ -25,6 +26,15 @@ const trackedRegulatorCount = new Set([
   ...brokers.flatMap((b) => b.regulators),
   ...lookupBrokers.flatMap((b) => b.regulators ?? []),
 ]).size;
+// Read from each broker's real minDeposit string (e.g. "$5", "From $10*")
+// rather than a hand-typed number, so this can't go stale if a broker with
+// a lower minimum gets added later.
+const lowestMinDeposit = Math.min(
+  ...brokers.map((b) => {
+    const n = parseFloat(b.minDeposit.replace(/[^0-9.]/g, ""));
+    return Number.isNaN(n) ? Infinity : n;
+  })
+);
 
 const steps = [
   {
@@ -260,7 +270,7 @@ export default async function Home() {
                     Lowest Entry
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
-                    <AnimatedStat value={5} prefix="$" />
+                    <AnimatedStat value={lowestMinDeposit} prefix="$" />
                   </dd>
                 </div>
                 <div>
@@ -268,7 +278,7 @@ export default async function Home() {
                     Comparison Criteria
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
-                    <AnimatedStat value={6} />
+                    <AnimatedStat value={COMPARISON_CRITERIA.length} />
                   </dd>
                 </div>
               </dl>
