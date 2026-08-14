@@ -98,7 +98,7 @@ const tiers: {
 
 const partnerLogos = [
   { slug: "xm", name: "XM Global", src: "/brokers/xm.png" },
-  { slug: "exness", name: "EXNESS", src: "/brokers/exness.png" },
+  { slug: "lite-finance", name: "Lite Finance", src: "/brokers/lite-finance.png" },
   { slug: "avatrade", name: "AvaTrade", src: "/brokers/avatrade.jpg" },
   { slug: "fxpro", name: "FxPro", src: "/brokers/fxpro.png" },
 ];
