@@ -8,6 +8,7 @@ import HeroSpotlight from "@/components/HeroSpotlight";
 import TradingVideo from "@/components/TradingVideo";
 import HeroCashbackForm from "@/components/HeroCashbackForm";
 import HeroFeatureRow from "@/components/HeroFeatureRow";
+import InstallAppButtons from "@/components/InstallAppButtons";
 import HeroEcosystemMockups from "@/components/HeroEcosystemMockups";
 import ShowcaseGallery from "@/components/ShowcaseGallery";
 import RegulatorBadges from "@/components/RegulatorBadges";
@@ -176,6 +177,10 @@ export default async function Home() {
                   Comparison Table
                 </a>
               </div>
+            </Reveal>
+
+            <Reveal delay={290}>
+              <InstallAppButtons />
             </Reveal>
 
             <Reveal delay={320}>
