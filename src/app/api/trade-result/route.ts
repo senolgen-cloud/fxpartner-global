@@ -88,7 +88,8 @@ export async function GET(req: NextRequest) {
     `📈 Entry: <b>${entry}</b>\n` +
     `🏁 Close: <b>${close}</b>` +
     (resultLine ? `\n📊 Result: <b>${resultLine}</b>` : "") +
-    `\n\nResult of the real trade shared earlier on our tracked MT5 account — shared for informational purposes only, not investment advice.\n\n` +
+    `\n\n${outcome === "WIN" ? "🔥 Another real result from our tracked account — called live, closed live, no cherry-picking." : "📌 The real result of the trade we called live on our tracked account — wins and losses alike, we post them all."}\n\n` +
+    `⚠️ Past results don't guarantee future ones. Shared for informational purposes only, not investment advice.\n\n` +
     `👉 <a href="${siteUrl}">fxpartner.global</a>`;
 
   // Best-effort: record the real close data against the original row so
@@ -123,9 +124,9 @@ export async function GET(req: NextRequest) {
     const tweetText =
       `${pair.toUpperCase()} ${outcomeEmoji} ${outcomeWord}${resultLine ? ` — ${resultLine}` : ""}\n` +
       `Entry ${entry} → Close ${close}\n\n` +
-      `📊 FXPARTNER Trade Result\n\n` +
-      `Result of a real trade taken on our tracked account, shared for informational purposes only — not investment advice. Past results don't guarantee future ones; always size positions and set stops according to your own risk tolerance.\n\n` +
-      `FXPARTNER compares regulated forex brokers on licensing, real trading costs, platform reliability, and withdrawal speed — pick a broker you actually trust.\n\n` +
+      `${outcome === "WIN" ? "🔥 Another real result from our tracked account — called live, closed live, no cherry-picking." : "📌 We post every result from our tracked account — wins and losses alike, exactly as they happened."}\n\n` +
+      `Every signal we share links back to real brokers you can actually vet: real licensing, real trading costs, real withdrawal speed — no paid placements dressed up as advice.\n\n` +
+      `⚠️ Past results don't guarantee future ones. Not investment advice — always size positions and set stops to your own risk tolerance.\n\n` +
       `#fxpartner #forex #fxsignals #forextrading #trading`;
     xResult = await postTradeSignalToX(imageUrl, tweetText, {
       replyToTweetId: original?.xTweetId ?? undefined,

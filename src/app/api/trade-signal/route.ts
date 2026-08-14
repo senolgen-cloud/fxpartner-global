@@ -73,10 +73,11 @@ export async function GET(req: NextRequest) {
     .join("\n");
 
   const caption =
-    `<b>${pair.toUpperCase()}</b>${dirWord ? ` — ${dirWord}` : ""}\n\n` +
+    `<b>${pair.toUpperCase()}</b>${dirWord ? ` — ${dirWord} ${dirWord === "SELL" ? "🔴" : "🟢"}` : ""}\n\n` +
     `${captionLevelLines}\n\n` +
-    `This signal reflects a real trade on our tracked MT5 account, shared for informational purposes only — not investment advice. Always manage risk according to your own trading plan.\n\n` +
-    `<b>FXPARTNER</b> compares regulated forex brokers by regulation, real trading costs, platform quality, and withdrawal reliability, so you can pick a broker you actually trust.\n\n` +
+    `⚡ Real trade, real account — sent live the moment it opened on our tracked MT5, never backtested or simulated.\n\n` +
+    `🌍 <b>FXPARTNER</b> is your all-in-one trading ecosystem: free live signals, AI-powered market insights, and broker comparisons built on real regulation data — so you always know who you're trusting with your money.\n\n` +
+    `⚠️ For informational purposes only, not investment advice. Always manage risk according to your own trading plan.\n\n` +
     `👉 <a href="${siteUrl}">fxpartner.global</a>`;
 
   const result = await sendTelegramPhoto(imageUrl, caption, { inlineKeyboard: mainServicesKeyboard() });
@@ -98,12 +99,15 @@ export async function GET(req: NextRequest) {
       .join("\n");
 
     const tweetText =
-      `${pair.toUpperCase()}${dirWord ? ` ${dirWord}` : ""} — Entry ${entry}\n` +
+      `${pair.toUpperCase()}${dirWord ? ` ${dirWord} ${dirWord === "SELL" ? "🔴" : "🟢"}` : ""} — Entry ${entry}\n` +
       `${levelLines}\n\n` +
-      `📊 FXPARTNER Trade Signal\n\n` +
-      `This signal reflects a real trade taken on our tracked account and is shared for informational purposes only — it is not investment advice. Markets move fast; always size positions and set stops according to your own risk tolerance, never based on a single signal alone.\n\n` +
-      `FXPARTNER compares regulated forex brokers on the things that actually matter before you deposit a dollar: licensing, real trading costs, platform reliability, and how fast withdrawals actually clear. The right broker won't make you profitable, but the wrong one can quietly cost you more than any single trade ever will.\n\n` +
-      `Trade responsibly — never risk more than you can afford to lose.\n\n` +
+      `⚡ Real trade signal, straight from our live tracked account — sent the moment it opened, not after the fact.\n\n` +
+      `Why traders follow FXPARTNER:\n` +
+      `📊 Free real-time signals — no paywall, ever\n` +
+      `🤖 AI-powered market insights\n` +
+      `🛡️ Broker comparisons built on real regulation, cost, and withdrawal data — not paid placements\n\n` +
+      `The right broker won't make you profitable — but the wrong one can quietly cost you more than any single trade ever will. Compare the ones you can actually trust — link in bio.\n\n` +
+      `⚠️ Not investment advice. Trade responsibly and never risk more than you can afford to lose.\n\n` +
       `#fxpartner #forex #fxsignals #forextrading #trading`;
     xResult = await postTradeSignalToX(imageUrl, tweetText);
   } catch (err) {
