@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import SignalsBoard from "@/components/SignalsBoard";
+import LiveMarketsGrid from "@/components/LiveMarketsGrid";
 import BrokerAdBanner from "@/components/BrokerAdBanner";
 import VipCtaBanner from "@/components/VipCtaBanner";
 import { db } from "@/db";
@@ -88,7 +89,11 @@ export default async function SignalsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
       />
       <main className="flex-1 bg-ink text-text-on-ink">
-        <SignalsBoard initialActive={active} initialClosed={closed} />
+        <SignalsBoard
+          initialActive={active}
+          initialClosed={closed}
+          liveMarkets={<LiveMarketsGrid />}
+        />
 
         <section className="border-t border-hairline">
           <div className="mx-auto max-w-3xl px-6 py-14">

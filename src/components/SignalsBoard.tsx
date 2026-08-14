@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { tradeSignals, TradeSignalOutcome } from "@/db/schema";
 
 type Signal = typeof tradeSignals.$inferSelect;
@@ -592,9 +592,11 @@ function SignalCard({ signal }: { signal: Signal }) {
 export default function SignalsBoard({
   initialActive,
   initialClosed,
+  liveMarkets,
 }: {
   initialActive: Signal[];
   initialClosed: Signal[];
+  liveMarkets?: ReactNode;
 }) {
   const [active, setActive] = useState(initialActive);
   const [closed, setClosed] = useState(initialClosed);
@@ -667,6 +669,8 @@ export default function SignalsBoard({
           <PipsStats closed={closed} />
         </div>
       </section>
+
+      {liveMarkets}
 
       <section className="mx-auto max-w-6xl px-6 py-16">
         <div className="mb-6 flex items-center justify-between">
