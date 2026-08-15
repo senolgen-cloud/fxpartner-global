@@ -103,7 +103,7 @@ export default async function RootLayout({
 
   return (
     <html
-      lang="en"
+      lang="tr"
       className={`${geist.variable} ${jetbrainsMono.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-text-dark pb-24 sm:pb-12">

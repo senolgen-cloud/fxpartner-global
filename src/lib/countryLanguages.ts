@@ -66,9 +66,11 @@ export const COUNTRY_OPTIONS: CountryOption[] = [
 // Countries whose visitors get auto-switched on first visit. Keyed by
 // ISO country code (from Vercel's x-vercel-ip-country header), value is
 // the Google Translate language code. Countries not listed here (or
-// mapped to "en") are left on the original English content.
+// mapped to "tr") are left on the original Turkish content — the site's
+// content is authored in Turkish, so "tr" is the source language, not a
+// translation target.
 export const COUNTRY_TO_LANG: Record<string, string> = Object.fromEntries(
-  COUNTRY_OPTIONS.filter((c) => c.lang !== "en").map((c) => [c.code, c.lang])
+  COUNTRY_OPTIONS.filter((c) => c.lang !== "tr").map((c) => [c.code, c.lang])
 );
 
 export function getCountryOption(lang: string): CountryOption | undefined {

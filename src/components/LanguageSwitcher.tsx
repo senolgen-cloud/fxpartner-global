@@ -3,14 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { COUNTRY_OPTIONS, getCountryOption, type CountryOption } from "@/lib/countryLanguages";
 
-const ENGLISH: CountryOption = { code: "US", name: "English", flag: "🌐", lang: "en" };
+const TURKISH: CountryOption = { code: "TR", name: "Türkçe", flag: "🌐", lang: "tr" };
 
 function readGoogTransCookie(): string {
   const match = document.cookie.match(/(?:^|;\s*)googtrans=([^;]*)/);
-  if (!match) return "en";
-  // Google's cookie format is "/en/<lang>"
+  if (!match) return "tr";
+  // Google's cookie format is "/tr/<lang>" — "tr" is the site's source language
   const parts = decodeURIComponent(match[1]).split("/");
-  return parts[2] || "en";
+  return parts[2] || "tr";
 }
 
 function setCookie(name: string, value: string) {
@@ -24,12 +24,12 @@ function deleteCookie(name: string) {
 export default function LanguageSwitcher() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [current, setCurrent] = useState<CountryOption>(ENGLISH);
+  const [current, setCurrent] = useState<CountryOption>(TURKISH);
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const lang = readGoogTransCookie();
-    setCurrent(lang === "en" ? ENGLISH : getCountryOption(lang) || ENGLISH);
+    setCurrent(lang === "tr" ? TURKISH : getCountryOption(lang) || TURKISH);
   }, []);
 
   useEffect(() => {
@@ -44,10 +44,10 @@ export default function LanguageSwitcher() {
 
   function selectLanguage(option: CountryOption) {
     setCookie("fxp_lang", option.lang);
-    if (option.lang === "en") {
+    if (option.lang === "tr") {
       deleteCookie("googtrans");
     } else {
-      setCookie("googtrans", `/en/${option.lang}`);
+      setCookie("googtrans", `/tr/${option.lang}`);
     }
     setOpen(false);
     window.location.reload();
@@ -82,13 +82,13 @@ export default function LanguageSwitcher() {
           <div className="mt-2 max-h-72 overflow-y-auto">
             <button
               type="button"
-              onClick={() => selectLanguage(ENGLISH)}
+              onClick={() => selectLanguage(TURKISH)}
               className={`flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition-colors hover:bg-ink ${
-                current.lang === "en" ? "text-signal" : "text-text-on-ink"
+                current.lang === "tr" ? "text-signal" : "text-text-on-ink"
               }`}
             >
-              <span aria-hidden="true">🌐</span>
-              Original (English)
+              <span aria-hidden="true">🇹🇷</span>
+              Orijinal (Türkçe)
             </button>
             {filtered.map((c) => (
               <button
@@ -112,8 +112,8 @@ export default function LanguageSwitcher() {
             )}
           </div>
           <p className="mt-2 border-t border-hairline px-2.5 pt-2 text-[10px] leading-relaxed text-text-on-ink-muted">
-            Machine-translated by Google Translate. Original content is in
-            English.
+            Google Translate ile makine çevirisi yapılmıştır. Orijinal
+            içerik Türkçedir.
           </p>
         </div>
       )}

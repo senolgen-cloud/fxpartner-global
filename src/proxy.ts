@@ -9,19 +9,21 @@ const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "senolgen@gmail.com";
 // on their country (from Vercel's x-vercel-ip-country header). Sets the
 // googtrans cookie the Google Translate widget itself reads on load, plus
 // fxp_lang so we never override a choice again — including a user
-// switching back to English, which is also stored here.
+// switching back to Turkish, which is also stored here. The site's own
+// content is authored in Turkish, so "tr" (not "en") is the default/source
+// language and the fallback for unmatched or missing country headers.
 function applyAutoLanguage(request: NextRequest, response: NextResponse) {
   if (request.cookies.has("fxp_lang")) return;
 
   const country = request.headers.get("x-vercel-ip-country");
   const lang = country ? COUNTRY_TO_LANG[country] : undefined;
 
-  response.cookies.set("fxp_lang", lang || "en", {
+  response.cookies.set("fxp_lang", lang || "tr", {
     path: "/",
     maxAge: 60 * 60 * 24 * 365,
   });
   if (lang) {
-    response.cookies.set("googtrans", `/en/${lang}`, {
+    response.cookies.set("googtrans", `/tr/${lang}`, {
       path: "/",
       maxAge: 60 * 60 * 24 * 365,
     });

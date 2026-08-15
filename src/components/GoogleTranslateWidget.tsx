@@ -60,7 +60,7 @@ export default function GoogleTranslateWidget() {
     window.googleTranslateElementInit = () => {
       if (!window.google) return;
       new window.google.translate.TranslateElement(
-        { pageLanguage: "en", autoDisplay: false },
+        { pageLanguage: "tr", autoDisplay: false },
         "google_translate_element"
       );
       if (lang) triggerTranslation(lang);
