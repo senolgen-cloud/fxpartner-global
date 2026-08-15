@@ -3,7 +3,16 @@
 import { useState } from "react";
 import Link from "next/link";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import BrokerAdBanner from "@/components/BrokerAdBanner";
 import { useMoreMenu } from "@/components/MoreMenuContext";
+import { brokers } from "@/data/brokers";
+
+// The 4 highest-ranked partner brokers, shown as a horizontal ad slider at
+// the top of the menu — same BrokerAdBanner used elsewhere (blog posts,
+// broker pages), so it already carries the "Sponsorlu" disclosure and
+// falls back to a logo/tagline/CTA card for any of the four that doesn't
+// have a designed adImage yet.
+const topAdvertisers = [...brokers].sort((a, b) => a.rank - b.rank).slice(0, 4);
 
 type IconName =
   | "signal"
@@ -222,6 +231,16 @@ export default function MoreMenuOverlay({
       </div>
 
       <div className="flex-1 overflow-y-auto">
+        {/* Partner ad slider — horizontal, snap-scroll, each card peeking
+            the next so it reads as swipeable. */}
+        <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pt-5 pb-1 md:px-6">
+          {topAdvertisers.map((broker) => (
+            <div key={broker.slug} className="w-[85%] shrink-0 snap-start sm:w-[360px]">
+              <BrokerAdBanner broker={broker} />
+            </div>
+          ))}
+        </div>
+
         <div className="px-4 pt-5 md:px-6">
           <LanguageSwitcher />
         </div>
