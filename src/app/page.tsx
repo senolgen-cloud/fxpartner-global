@@ -20,6 +20,7 @@ import { faqSchema } from "@/lib/schema";
 import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
+import { getBrokerReviewStats } from "@/lib/brokerReviews";
 
 const trackedBrokerCount = lookupBrokers.length;
 const trackedRegulatorCount = new Set([
@@ -118,6 +119,8 @@ export default async function Home() {
       orderBy: desc(tradeSignals.closedAt),
     })) ??
     null;
+
+  const brokerReviewStats = await getBrokerReviewStats();
 
   return (
     <>
@@ -228,7 +231,7 @@ export default async function Home() {
             </Reveal>
 
             <div className="mt-12">
-              <BrokerList brokers={brokers} />
+              <BrokerList brokers={brokers} reviewStats={brokerReviewStats} />
             </div>
           </div>
         </section>

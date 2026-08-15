@@ -3,8 +3,15 @@
 import { useMemo, useState } from "react";
 import { brokerCategories, categoryInfo, type Broker } from "@/data/brokers";
 import RankedBrokerCard from "./RankedBrokerCard";
+import type { BrokerReviewStats } from "@/lib/brokerReviews";
 
-export default function BrokerList({ brokers }: { brokers: Broker[] }) {
+export default function BrokerList({
+  brokers,
+  reviewStats,
+}: {
+  brokers: Broker[];
+  reviewStats?: Record<string, BrokerReviewStats>;
+}) {
   const [active, setActive] = useState<string | null>(null);
 
   const filtered = useMemo(
@@ -54,6 +61,7 @@ export default function BrokerList({ brokers }: { brokers: Broker[] }) {
               key={broker.slug}
               broker={broker}
               featured={active === null && i === 0}
+              reviewStats={reviewStats?.[broker.slug]}
             />
           ))
         )}

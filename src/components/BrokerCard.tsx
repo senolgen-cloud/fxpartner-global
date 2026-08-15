@@ -3,6 +3,13 @@ import Link from "next/link";
 import type { Broker } from "@/data/brokers";
 import MiniScoreRings from "./MiniScoreRings";
 
+function ratingWord(rating: number): string {
+  if (rating >= 4.5) return "Mükemmel";
+  if (rating >= 3.5) return "Çok İyi";
+  if (rating >= 2.5) return "Ortalama";
+  return "Zayıf";
+}
+
 function getMonogram(name: string): string {
   const camelSplit = name
     .trim()
@@ -55,6 +62,19 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
               <p className="mt-1 truncate text-sm text-text-muted">
                 En iyi {broker.bestFor.charAt(0).toLowerCase() + broker.bestFor.slice(1)}
               </p>
+              <div className="mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-1">
+                <div className="flex gap-0.5" aria-hidden="true">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <span key={i} className={i < Math.round(broker.rating) ? "text-gold" : "text-hairline-light"}>
+                      ★
+                    </span>
+                  ))}
+                </div>
+                <span className="tabular-stat text-xs font-semibold text-text-dark">
+                  {broker.rating.toFixed(1)}
+                </span>
+                <span className="text-xs text-text-muted">{ratingWord(broker.rating)}</span>
+              </div>
             </div>
           </div>
         </div>

@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Broker } from "@/data/brokers";
+import { categoryInfo, type Broker, type BrokerCategory } from "@/data/brokers";
 import TiltWrapper from "./TiltWrapper";
 import MiniScoreRings from "./MiniScoreRings";
+import type { BrokerReviewStats } from "@/lib/brokerReviews";
 
 function getMonogram(name: string): string {
   const words = name.trim().split(/\s+/);
@@ -16,75 +17,146 @@ function getMonogram(name: string): string {
   return name.slice(0, 2).toUpperCase();
 }
 
-function CardBody({ broker, featured }: { broker: Broker; featured: boolean }) {
+function ratingWord(rating: number): string {
+  if (rating >= 4.5) return "Mükemmel";
+  if (rating >= 3.5) return "Çok İyi";
+  if (rating >= 2.5) return "Ortalama";
+  return "Zayıf";
+}
+
+// Compact star + word + (optional real review count) row — same rating
+// vocabulary as ReviewBadge/broker detail hero, just condensed for a list
+// card. Never fabricates a review count: omits that clause entirely when
+// there's no rated-comment data for this broker yet.
+function RatingRow({ broker, reviewStats }: { broker: Broker; reviewStats?: BrokerReviewStats }) {
+  const full = Math.round(broker.rating);
   return (
-    <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-      <div className="flex min-w-0 items-center gap-4">
-        <span
-          className={`shrink-0 font-poppins font-extrabold leading-none text-white/[0.06] transition-colors group-hover:text-gold/40 ${
-            featured ? "featured-card-depth text-6xl md:text-7xl" : "text-4xl md:text-5xl"
-          }`}
-          aria-hidden="true"
-        >
-          {String(broker.rank).padStart(2, "0")}
+    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+      <div className="flex gap-0.5" aria-hidden="true">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <span key={i} className={i < full ? "text-gold" : "text-hairline"}>
+            ★
+          </span>
+        ))}
+      </div>
+      <span className="tabular-stat text-sm font-semibold text-text-on-ink">
+        {broker.rating.toFixed(1)}
+      </span>
+      <span className="text-xs text-text-on-ink-muted">{ratingWord(broker.rating)}</span>
+      {reviewStats && reviewStats.ratingCount > 0 && (
+        <span className="text-xs text-text-on-ink-muted">
+          · {reviewStats.ratingCount} yorum
         </span>
-        <div
-          className={`flex min-w-0 items-center gap-3.5 ${featured ? "featured-card-depth-sm" : ""}`}
-        >
-          <div className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-hairline bg-ink p-2 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.6)]">
-            {broker.logo ? (
-              <Image
-                src={broker.logo}
-                alt={broker.name}
-                fill
-                sizes="48px"
-                className="object-contain"
-              />
-            ) : (
-              <span className="font-poppins text-sm font-semibold text-text-on-ink" aria-hidden="true">
-                {getMonogram(broker.name)}
-              </span>
-            )}
-          </div>
-          <div className="min-w-0">
-            <h3
-              className={`truncate font-poppins font-semibold text-text-on-ink ${
-                featured ? "text-2xl md:text-3xl" : "text-lg md:text-xl"
+      )}
+    </div>
+  );
+}
+
+function CardBody({
+  broker,
+  featured,
+  reviewStats,
+}: {
+  broker: Broker;
+  featured: boolean;
+  reviewStats?: BrokerReviewStats;
+}) {
+  return (
+    <div className={featured ? "featured-card-depth-sm" : ""}>
+      {broker.promotion && (
+        <div className="mb-4 flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3.5 py-1.5">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="shrink-0 text-gold" aria-hidden="true">
+            <path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7L2 9.2l7.1-.6L12 2z" />
+          </svg>
+          <span className="truncate font-mono text-[10px] uppercase tracking-[0.15em] text-gold">
+            {broker.promotion.tag}
+          </span>
+        </div>
+      )}
+
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+        <div className="flex min-w-0 items-center gap-4">
+          <span
+            className={`shrink-0 font-poppins font-extrabold leading-none text-white/[0.06] transition-colors group-hover:text-gold/40 ${
+              featured ? "featured-card-depth text-6xl md:text-7xl" : "text-4xl md:text-5xl"
+            }`}
+            aria-hidden="true"
+          >
+            {String(broker.rank).padStart(2, "0")}
+          </span>
+          <div className="flex min-w-0 items-center gap-3.5">
+            <div
+              className={`relative flex shrink-0 items-center justify-center overflow-hidden rounded-xl border border-hairline bg-ink p-2 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.6)] ${
+                featured ? "h-16 w-16" : "h-12 w-12"
               }`}
             >
-              <span className="notranslate">{broker.name}</span>
-            </h3>
-            <p className="mt-1 truncate text-sm text-text-on-ink-muted">
-              En iyi {broker.bestFor.charAt(0).toLowerCase() + broker.bestFor.slice(1)}
-            </p>
+              {broker.logo ? (
+                <Image
+                  src={broker.logo}
+                  alt={broker.name}
+                  fill
+                  sizes={featured ? "64px" : "48px"}
+                  className="object-contain"
+                />
+              ) : (
+                <span className="font-poppins text-sm font-semibold text-text-on-ink" aria-hidden="true">
+                  {getMonogram(broker.name)}
+                </span>
+              )}
+            </div>
+            <div className="min-w-0">
+              <h3
+                className={`truncate font-poppins font-semibold text-text-on-ink ${
+                  featured ? "text-2xl md:text-3xl" : "text-lg md:text-xl"
+                }`}
+              >
+                <span className="notranslate">{broker.name}</span>
+              </h3>
+              <p className="mt-1 truncate text-sm text-text-on-ink-muted">
+                En iyi {broker.bestFor.charAt(0).toLowerCase() + broker.bestFor.slice(1)}
+              </p>
+              <div className="mt-2">
+                <RatingRow broker={broker} reviewStats={reviewStats} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex shrink-0 flex-col items-center gap-3 sm:flex-row sm:gap-4">
+          <MiniScoreRings broker={broker} tone="dark" />
+          <div className="flex items-center gap-3">
+            <a
+              href={broker.referralUrl}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="lift-on-hover rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
+            >
+              Hesap Aç
+            </a>
+            <Link
+              href={`/brokers/${broker.slug}`}
+              title={`${broker.name} tam inceleme`}
+              className="rounded-full border border-hairline px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:border-text-on-ink"
+            >
+              Tam İnceleme →
+            </Link>
           </div>
         </div>
       </div>
 
-      <div
-        className={`flex shrink-0 flex-col items-center gap-3 sm:flex-row sm:gap-4 ${
-          featured ? "featured-card-depth-sm" : ""
-        }`}
-      >
-        <MiniScoreRings broker={broker} tone="dark" />
-        <div className="flex items-center gap-3">
-          <a
-            href={broker.referralUrl}
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="lift-on-hover rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
-          >
-            Hesap Aç
-          </a>
-          <Link
-            href={`/brokers/${broker.slug}`}
-            title={`${broker.name} tam inceleme`}
-            className="rounded-full border border-hairline px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:border-text-on-ink"
-          >
-            Tam İnceleme →
-          </Link>
+      {broker.categories.length > 0 && (
+        <div className="mt-4 flex flex-wrap gap-1.5 border-t border-hairline pt-4">
+          {broker.categories.map((c) => (
+            <Link
+              key={c}
+              href={`/categories/${categoryInfo[c as BrokerCategory].slug}`}
+              className="rounded-full border border-hairline px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-text-on-ink-muted transition-colors hover:border-signal hover:text-signal"
+            >
+              {categoryInfo[c as BrokerCategory].label}
+            </Link>
+          ))}
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -92,9 +164,11 @@ function CardBody({ broker, featured }: { broker: Broker; featured: boolean }) {
 export default function RankedBrokerCard({
   broker,
   featured = false,
+  reviewStats,
 }: {
   broker: Broker;
   featured?: boolean;
+  reviewStats?: BrokerReviewStats;
 }) {
   if (featured) {
     return (
@@ -104,7 +178,7 @@ export default function RankedBrokerCard({
             <span className="absolute right-6 top-6 hidden rounded-full border border-gold/40 bg-gold/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-gold sm:inline-block">
               En Yüksek Puan
             </span>
-            <CardBody broker={broker} featured />
+            <CardBody broker={broker} featured reviewStats={reviewStats} />
           </div>
         </TiltWrapper>
       </article>
@@ -115,7 +189,7 @@ export default function RankedBrokerCard({
     <article className="group relative">
       <TiltWrapper>
         <div className="rounded-2xl border border-hairline bg-ink-soft/60 p-5 transition-colors hover:border-gold/30 sm:p-6">
-          <CardBody broker={broker} featured={false} />
+          <CardBody broker={broker} featured={false} reviewStats={reviewStats} />
         </div>
       </TiltWrapper>
     </article>
