@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import type { tradeSignals, TradeSignalOutcome } from "@/db/schema";
 import { canViewSignal, requiredTierForPair, type PackageTier } from "@/lib/signalAccess";
+import TradingViewChart from "./TradingViewChart";
 
 type Signal = typeof tradeSignals.$inferSelect;
 type SignalJson = Omit<Signal, "createdAt" | "closedAt"> & {
@@ -53,6 +54,50 @@ function playSignalChime() {
 }
 
 const TIER_LABEL: Record<PackageTier, string> = { starter: "Starter", pro: "Pro", vip: "VIP" };
+
+// SVG donut mirroring the poster's "73% Başarı Oranı" ring — plain text
+// couldn't carry that at-a-glance read, and TrustGauge's version is styled
+// for broker trust scores (0-10, different color scale), not a win rate.
+function PerformanceRing({ rate }: { rate: number | null }) {
+  const size = 96;
+  const stroke = 8;
+  const r = (size - stroke) / 2;
+  const circumference = 2 * Math.PI * r;
+  const pct = rate ?? 0;
+  const offset = circumference * (1 - pct / 100);
+  return (
+    <div className="relative flex h-24 w-24 items-center justify-center">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={stroke}
+          className="text-hairline"
+        />
+        {rate !== null && (
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={r}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={stroke}
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+            strokeLinecap="round"
+            className="text-signal transition-[stroke-dashoffset] duration-700 ease-out"
+          />
+        )}
+      </svg>
+      <span className="absolute font-display text-xl font-semibold">
+        {rate !== null ? `${rate}%` : "—"}
+      </span>
+    </div>
+  );
+}
 
 function LockBadge({ pair }: { pair: string }) {
   const tier = TIER_LABEL[requiredTierForPair(pair)];
@@ -687,6 +732,29 @@ export default function SignalsBoard({
   const [closed, setClosed] = useState(initialClosed);
   const knownIds = useRef(new Set([...initialActive, ...initialClosed].map((s) => s.id)));
 
+  const chartPairs = useMemo(() => {
+    const seen = new Set<string>();
+    const pairs: string[] = [];
+    for (const s of active) {
+      const p = s.pair.toUpperCase();
+      if (!seen.has(p)) {
+        seen.add(p);
+        pairs.push(p);
+      }
+    }
+    // Falls back to majors when there's no active signal yet, so the chart
+    // panel still has something meaningful to show instead of going empty.
+    return pairs.length > 0 ? pairs.slice(0, 6) : ["EURUSD", "GBPUSD", "XAUUSD", "USDJPY"];
+  }, [active]);
+  const [chartSymbol, setChartSymbol] = useState(chartPairs[0]);
+
+  // Keeps the chart pointed at a still-active pair — if the selected pair's
+  // signal closes and drops off chartPairs, snap back to the new first pair
+  // rather than silently charting a symbol that's no longer being traded.
+  useEffect(() => {
+    if (!chartPairs.includes(chartSymbol)) setChartSymbol(chartPairs[0]);
+  }, [chartPairs, chartSymbol]);
+
   // Unlocks the chime's AudioContext on the visitor's first interaction
   // anywhere on the page — required by browser autoplay policy, and cheap
   // to attach unconditionally since unlockAudio() no-ops after the first call.
@@ -759,9 +827,9 @@ export default function SignalsBoard({
                   Kapanan İşlemler
                 </div>
               </div>
-              <div>
-                <div className="font-display text-3xl font-semibold">{winRate !== null ? `${winRate}%` : "—"}</div>
-                <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+              <div className="flex flex-col items-center">
+                <PerformanceRing rate={winRate} />
+                <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
                   Kazanma Oranı{decisive.length > 0 && decisive.length < 10 ? " (erken veri)" : ""}
                 </div>
               </div>
@@ -769,6 +837,31 @@ export default function SignalsBoard({
           </div>
 
           <PipsStats closed={closed} />
+        </div>
+      </section>
+
+      <section className="border-b border-hairline bg-ink-soft/30">
+        <div className="mx-auto max-w-6xl px-6 py-10">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <h2 className="font-display text-xl font-semibold">Canlı Grafik</h2>
+            <div className="flex flex-wrap gap-2">
+              {chartPairs.map((pair) => (
+                <button
+                  key={pair}
+                  type="button"
+                  onClick={() => setChartSymbol(pair)}
+                  className={`notranslate rounded-full border px-3.5 py-1.5 font-mono text-xs uppercase tracking-[0.1em] transition-colors ${
+                    chartSymbol === pair
+                      ? "border-signal bg-signal/15 text-signal"
+                      : "border-hairline text-text-on-ink-muted hover:border-text-on-ink hover:text-text-on-ink"
+                  }`}
+                >
+                  {pair}
+                </button>
+              ))}
+            </div>
+          </div>
+          <TradingViewChart symbol={chartSymbol} />
         </div>
       </section>
 
