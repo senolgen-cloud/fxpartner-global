@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramMessage } from "@/lib/telegram";
+import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
 import { brokers, getBrokerScores } from "@/data/brokers";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
@@ -31,13 +31,11 @@ export const GET = withCronErrorAlert("broker-review-share", async (req: NextReq
     .sort((a, b) => b.scores.composite - a.scores.composite)
     .slice(0, 5);
 
-  // Kept deliberately spare — no stars, no repeated CTA/link line. The
+  // Kept deliberately spare — no stars, no per-broker link repetition. The
   // buttons below already carry every action; the message itself is just
-  // a clean, scannable ranking. Previously included a raw fxpartner.global
-  // URL in a CTA line, which made Telegram auto-attach a large link-
-  // preview card under the text — the "iç içe" (nested/cluttered) look
-  // the owner flagged on 2026-08-12. disablePreview + dropping that line
-  // both fix it.
+  // a clean, scannable ranking. Keeps telegramSiteCta()'s link so Telegram
+  // still attaches its normal site preview card (the owner wants that
+  // preview, just not the star-heavy/cluttered text from before).
   const lines = top5.map(
     ({ broker, scores }, i) => `${i + 1}.  <b>${broker.name}</b>  —  ${scores.composite.toFixed(1)}/10`
   );
@@ -45,7 +43,8 @@ export const GET = withCronErrorAlert("broker-review-share", async (req: NextReq
   const text =
     `🏆 <b>FXPARTNER Index — Haftanın En İyi 5 Broker'i</b>\n\n` +
     lines.join("\n") +
-    `\n\n<i>Genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.</i>`;
+    `\n\n<i>Genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.</i>\n\n` +
+    telegramSiteCta();
 
   // One row per broker: "Hesap Aç" (referral link) + "İncele" (the full
   // FXPARTNER review) side by side, in the same 1-5 order as the text list.
@@ -54,7 +53,7 @@ export const GET = withCronErrorAlert("broker-review-share", async (req: NextReq
     { text: "İncele", url: `${siteUrl}/brokers/${broker.slug}` },
   ]);
 
-  const result = await sendTelegramMessage(text, { inlineKeyboard, disablePreview: true });
+  const result = await sendTelegramMessage(text, { inlineKeyboard });
 
   return NextResponse.json({
     ok: true,
