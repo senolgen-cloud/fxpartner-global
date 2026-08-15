@@ -840,6 +840,8 @@ export default function SignalsBoard({
         </div>
       </section>
 
+      {liveMarkets}
+
       <section className="border-b border-hairline bg-ink-soft/30">
         <div className="mx-auto max-w-6xl px-6 py-10">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
@@ -861,11 +863,63 @@ export default function SignalsBoard({
               ))}
             </div>
           </div>
-          <TradingViewChart symbol={chartSymbol} />
+          <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
+            <TradingViewChart symbol={chartSymbol} />
+            <div className="flex flex-col items-center justify-center gap-6 rounded-2xl border border-hairline bg-ink p-6">
+              <span className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted">
+                Performans
+              </span>
+              <PerformanceRing rate={winRate} />
+              <div className="grid w-full grid-cols-3 gap-2 border-t border-hairline pt-5 text-center">
+                <div>
+                  <div className="tabular-stat font-display text-xl font-semibold">
+                    {active.length + closed.length}
+                  </div>
+                  <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.1em] text-text-on-ink-muted">
+                    Toplam Sinyal
+                  </div>
+                </div>
+                <div>
+                  <div className="tabular-stat font-display text-xl font-semibold text-tick-up">
+                    {wins}
+                  </div>
+                  <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.1em] text-text-on-ink-muted">
+                    Kazanılan
+                  </div>
+                </div>
+                <div>
+                  <div className="tabular-stat font-display text-xl font-semibold text-tick-down">
+                    {decisive.length - wins}
+                  </div>
+                  <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.1em] text-text-on-ink-muted">
+                    Kaybedilen
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {liveMarkets}
+      <section className="border-b border-hairline">
+        <div className="mx-auto max-w-6xl px-6 py-16">
+          <h2 className="font-display text-2xl font-semibold md:hidden">Son Sinyaller</h2>
+          <SignalTable title="Son Sinyaller" signals={closed} closedView viewerTier={viewerTier} />
+          {closed.length === 0 ? (
+            <p className="mt-4 text-text-on-ink-muted md:hidden">
+              Henüz kapanan sinyal yok — işlemler kapandıkça sonuçlar burada görünecek.
+            </p>
+          ) : (
+            <div className="mt-6 flex flex-wrap justify-center gap-5 md:hidden">
+              {closed.map((s) => (
+                <div key={s.id} className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]">
+                  <SignalCard signal={s} viewerTier={viewerTier} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16">
         <div className="mb-6 flex items-center justify-between">
@@ -892,26 +946,6 @@ export default function SignalsBoard({
             ))}
           </div>
         )}
-      </section>
-
-      <section className="border-t border-hairline">
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <h2 className="font-display text-2xl font-semibold md:hidden">Son Kapananlar</h2>
-          <SignalTable title="Son Kapananlar" signals={closed} closedView viewerTier={viewerTier} />
-          {closed.length === 0 ? (
-            <p className="mt-4 text-text-on-ink-muted md:hidden">
-              Henüz kapanan sinyal yok — işlemler kapandıkça sonuçlar burada görünecek.
-            </p>
-          ) : (
-            <div className="mt-6 flex flex-wrap justify-center gap-5 md:hidden">
-              {closed.map((s) => (
-                <div key={s.id} className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]">
-                  <SignalCard signal={s} viewerTier={viewerTier} />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
       </section>
     </>
   );
