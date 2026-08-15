@@ -12,7 +12,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export const metadata: Metadata = {
-  title: "Community",
+  title: "Topluluk",
   description:
     "FXPARTNER'ın küresel yatırımcı topluluğu — gerçek broker yorumları, piyasa beklenti anketi ve resmi Telegram/X kanalları.",
   alternates: { canonical: "/topluluk" },
@@ -43,7 +43,7 @@ export default async function CommunityPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
+              { name: "Ana Sayfa", url: SITE_URL },
               { name: "Community", url: `${SITE_URL}/topluluk` },
             ])
           ),

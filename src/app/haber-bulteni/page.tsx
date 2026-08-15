@@ -30,7 +30,7 @@ export default async function NewsBulletinIndexPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
+              { name: "Ana Sayfa", url: SITE_URL },
               { name: "Haber Bülteni", url: `${SITE_URL}/haber-bulteni` },
             ])
           ),

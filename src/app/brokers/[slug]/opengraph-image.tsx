@@ -65,7 +65,7 @@ export default async function Image({
           <span style={{ fontSize: 34, fontWeight: 800, color: GOLD }}>FX</span>
           <span style={{ fontSize: 34, fontWeight: 800, color: TEXT_ON_INK }}>PARTNER</span>
           <span style={{ marginLeft: 16, fontSize: 22, color: TEXT_ON_INK_MUTED }}>
-            Broker Review
+            Broker İncelemesi
           </span>
         </div>
 

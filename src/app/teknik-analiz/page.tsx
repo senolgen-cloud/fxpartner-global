@@ -50,7 +50,7 @@ export default function TechnicalAnalysisIndexPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
+              { name: "Ana Sayfa", url: SITE_URL },
               { name: "Teknik Analiz", url: `${SITE_URL}/teknik-analiz` },
             ])
           ),

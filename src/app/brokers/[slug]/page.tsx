@@ -207,7 +207,7 @@ export default async function BrokerDetailPage({
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
+              { name: "Ana Sayfa", url: SITE_URL },
               { name: "Brokers", url: `${SITE_URL}/#brokers` },
               { name: broker.name, url: `${SITE_URL}/brokers/${broker.slug}` },
             ])

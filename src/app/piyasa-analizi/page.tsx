@@ -22,7 +22,7 @@ export default function MarketAnalysisIndexPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
+              { name: "Ana Sayfa", url: SITE_URL },
               { name: "Piyasa Analizleri", url: `${SITE_URL}/piyasa-analizi` },
             ])
           ),

@@ -72,7 +72,7 @@ export default function RegulationReportPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
+              { name: "Ana Sayfa", url: SITE_URL },
               {
                 name: "Forex Broker Düzenleme Raporu",
                 url: `${SITE_URL}/raporlar/forex-broker-duzenleme-raporu`,

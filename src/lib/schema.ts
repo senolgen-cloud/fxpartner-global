@@ -7,6 +7,10 @@ export function organizationSchema() {
     name: "FXPARTNER",
     url: SITE_URL,
     logo: `${SITE_URL}/fxpartner-logo.png`,
+    // A genuine language signal for search/AI crawlers — the site's content
+    // is authored in Turkish, so this (and the matching field on the other
+    // schema builders below) should always be "tr-TR", never omitted.
+    inLanguage: "tr-TR",
     description:
       "FXPARTNER, forex ve finans piyasalarını takip eden yatırımcılar için gerçek zamanlı forex sinyalleri, yapay zeka destekli piyasa analizi, teknik ve temel analiz, ekonomik takvim ve güvenilir broker karşılaştırmaları sunan bir finans platformudur.",
     founder: {
@@ -27,6 +31,7 @@ export function websiteSchema() {
     "@type": "WebSite",
     name: "FXPARTNER",
     url: SITE_URL,
+    inLanguage: "tr-TR",
     potentialAction: {
       "@type": "SearchAction",
       target: `${SITE_URL}/categories`,
@@ -93,6 +98,7 @@ export function blogPostingSchema(post: {
     description: post.excerpt,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
+    inLanguage: "tr-TR",
     url: `${SITE_URL}/blog/${post.slug}`,
     author: {
       "@type": "Organization",
@@ -134,6 +140,7 @@ export function newsArticleSchema(post: {
     description: post.excerpt,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
+    inLanguage: "tr-TR",
     url: `${SITE_URL}/piyasa-analizi/${post.slug}`,
     author: {
       "@type": "Organization",

@@ -25,7 +25,7 @@ export default async function Header({ standalone = true }: { standalone?: boole
             className="h-8 w-auto md:h-10"
           />
           <span className="hidden rounded-md border border-hairline px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted lg:inline">
-            Küresel
+            Global
           </span>
         </Link>
         <HeaderNav signedIn={signedIn} accountHref={accountHref} />

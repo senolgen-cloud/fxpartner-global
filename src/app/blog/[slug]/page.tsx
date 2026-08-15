@@ -62,7 +62,7 @@ export default async function BlogPostPage({
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
+              { name: "Ana Sayfa", url: SITE_URL },
               { name: "Blog", url: `${SITE_URL}/blog` },
               { name: post.title, url: `${SITE_URL}/blog/${post.slug}` },
             ])

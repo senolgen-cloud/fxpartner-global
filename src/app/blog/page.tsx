@@ -22,7 +22,7 @@ export default function BlogIndexPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
+              { name: "Ana Sayfa", url: SITE_URL },
               { name: "Blog", url: `${SITE_URL}/blog` },
             ])
           ),

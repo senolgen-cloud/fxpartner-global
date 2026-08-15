@@ -40,7 +40,7 @@ export default function CopytradePage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
+              { name: "Ana Sayfa", url: SITE_URL },
               { name: "Copytrade", url: `${SITE_URL}/copytrade` },
             ])
           ),

@@ -3,82 +3,103 @@
 // or the mobile bottom nav's "Daha Fazla" tab) so both always list the
 // same set of pages instead of drifting out of sync.
 export const primaryLinks = [
-  { href: "/#brokers", label: "Broker Rankings" },
-  { href: "/signals", label: "Signals" },
-  { href: "/ai-asistan", label: "AI Assistant" },
-  { href: "/topluluk", label: "Community" },
+  { href: "/#brokers", label: "Broker Sıralaması" },
+  { href: "/signals", label: "Sinyaller" },
+  { href: "/ai-asistan", label: "AI Asistan" },
+  { href: "/topluluk", label: "Topluluk" },
   { href: "/blog", label: "Blog" },
 ];
 
-export const resourceLinks = [
-  {
-    href: "/about",
-    label: "About Us",
-    description: "Who we are, our principles, and how partnerships work",
-  },
-  {
-    href: "/ekonomik-takvim",
-    label: "Economic Calendar",
-    description: "Live macro events and their expected market impact",
-  },
-  {
-    href: "/categories",
-    label: "Categories",
-    description: "Brokers grouped by what they're best suited for",
-  },
+export type ResourceGroup = "İçerik" | "Kazanç Programları" | "Araçlar ve Güven";
+
+export const resourceLinks: {
+  href: string;
+  label: string;
+  description: string;
+  group: ResourceGroup;
+}[] = [
   {
     href: "/piyasa-analizi",
-    label: "Market Analysis",
-    description: "Daily market commentary and technical outlook",
-  },
-  {
-    href: "/haber-bulteni",
-    label: "News Bulletin",
-    description: "Original daily digest of the day's market-moving headlines",
+    label: "Piyasa Analizi",
+    description: "Günlük piyasa yorumu ve teknik görünüm",
+    group: "İçerik",
   },
   {
     href: "/teknik-analiz",
-    label: "Technical Analysis",
-    description: "Pivot levels, support/resistance and RSI/MACD outlook",
+    label: "Teknik Analiz",
+    description: "Pivot seviyeleri, destek/direnç ve RSI/MACD görünümü",
+    group: "İçerik",
   },
   {
-    href: "/partners",
-    label: "Become a Partner",
-    description: "Open a Sub-IB account and earn on clients you refer",
+    href: "/haber-bulteni",
+    label: "Haber Bülteni",
+    description: "Günü hareket ettiren başlıkların özgün günlük özeti",
+    group: "İçerik",
   },
   {
-    href: "/copytrade",
-    label: "Copytrade",
-    description: "Auto-copy FXPARTNER's tracked trades onto your own MT5 account",
-  },
-  {
-    href: "/cashback",
-    label: "Cashback",
-    description: "Rebate programs from partner brokers",
-  },
-  {
-    href: "/campaigns",
-    label: "Campaigns",
-    description: "Active referral and deposit promotions",
+    href: "/ekonomik-takvim",
+    label: "Ekonomik Takvim",
+    description: "Canlı makro olaylar ve beklenen piyasa etkileri",
+    group: "İçerik",
   },
   {
     href: "/paketler",
     label: "Paketler",
-    description: "Starter, Pro, and VIP membership packages",
+    description: "Starter, Pro ve VIP üyelik paketleri",
+    group: "Kazanç Programları",
+  },
+  {
+    href: "/cashback",
+    label: "Cashback",
+    description: "Partner brokerlardan komisyon iade programları",
+    group: "Kazanç Programları",
+  },
+  {
+    href: "/campaigns",
+    label: "Kampanyalar",
+    description: "Aktif referans ve yatırım promosyonları",
+    group: "Kazanç Programları",
+  },
+  {
+    href: "/partners",
+    label: "Ortak Olun",
+    description: "Bir Alt-IB hesabı açın ve yönlendirdiğiniz müşterilerden kazanın",
+    group: "Kazanç Programları",
+  },
+  {
+    href: "/copytrade",
+    label: "Copytrade",
+    description: "FXPARTNER'ın takip edilen işlemlerini kendi MT5 hesabınıza otomatik kopyalayın",
+    group: "Kazanç Programları",
   },
   {
     href: "/broker-lookup",
-    label: "Broker Lookup",
-    description: "Search any broker for a sourced trust verdict",
+    label: "Broker Sorgulama",
+    description: "Herhangi bir brokerı kaynaklı bir güven değerlendirmesi için arayın",
+    group: "Araçlar ve Güven",
+  },
+  {
+    href: "/categories",
+    label: "Kategoriler",
+    description: "Brokerlar en uygun oldukları alana göre gruplandırıldı",
+    group: "Araçlar ve Güven",
   },
   {
     href: "/blacklist",
-    label: "Risk Warnings",
-    description: "Brokers that need extra due diligence",
+    label: "Risk Uyarıları",
+    description: "Ekstra durum tespiti gerektiren brokerlar",
+    group: "Araçlar ve Güven",
   },
   {
     href: "/complaint",
-    label: "Complaint",
-    description: "Report an issue with a broker",
+    label: "Şikayet",
+    description: "Bir brokerla ilgili sorun bildirin",
+    group: "Araçlar ve Güven",
+  },
+  {
+    href: "/about",
+    label: "Hakkımızda",
+    description: "Kim olduğumuz, ilkelerimiz ve ortaklıkların nasıl işlediği",
+    group: "Araçlar ve Güven",
   },
 ];

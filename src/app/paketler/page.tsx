@@ -163,7 +163,7 @@ export default function PaketlerPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
+              { name: "Ana Sayfa", url: SITE_URL },
               { name: "Paketler", url: `${SITE_URL}/paketler` },
             ])
           ),

@@ -45,7 +45,7 @@ export default async function CashbackSetupPage({
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
+              { name: "Ana Sayfa", url: SITE_URL },
               { name: "Cashback", url: `${SITE_URL}/cashback` },
               { name: `Set Up ${broker.name} Cashback`, url: `${SITE_URL}/cashback/${slug}/setup` },
             ])

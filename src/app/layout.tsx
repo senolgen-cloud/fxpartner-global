@@ -83,6 +83,10 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "FXPARTNER",
     type: "website",
+    // Every page's content is Turkish now, so this is the correct default —
+    // Next.js merges it into every child route's openGraph unless a page
+    // explicitly overrides it, so setting it once here covers the whole site.
+    locale: "tr_TR",
   },
   twitter: {
     card: "summary_large_image",

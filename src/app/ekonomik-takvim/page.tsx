@@ -7,7 +7,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export const metadata: Metadata = {
-  title: "Economic Calendar",
+  title: "Ekonomik Takvim",
   description:
     "Canlı ekonomik takvim — CPI, NFP, faiz kararları ve diğer önemli makroekonomik veriler, açıklandığı anda gerçek rakamlarla.",
   alternates: { canonical: "/ekonomik-takvim" },
@@ -33,7 +33,7 @@ export default async function EconomicCalendarPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
+              { name: "Ana Sayfa", url: SITE_URL },
               { name: "Economic Calendar", url: `${SITE_URL}/ekonomik-takvim` },
             ])
           ),

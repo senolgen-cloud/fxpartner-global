@@ -92,7 +92,7 @@ export default async function SignalsPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
+              { name: "Ana Sayfa", url: SITE_URL },
               { name: "Canlı İşlem Sinyalleri", url: `${SITE_URL}/signals` },
             ])
           ),

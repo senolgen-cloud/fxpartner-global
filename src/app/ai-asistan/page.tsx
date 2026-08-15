@@ -6,7 +6,7 @@ import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 const OG_IMAGE = `${SITE_URL}/ai-asistan-preview.jpg`;
-const TITLE = "AI Market Assistant | FXPARTNER";
+const TITLE = "AI Piyasa Asistanı | FXPARTNER";
 const DESCRIPTION =
   "Yatırımcıların tercih ettiği FXPARTNER Piyasa Asistanı — forex, altın, CPI/NFP gibi makro veriler ve teknik/temel analiz stratejileri hakkında sorularınızı yanıtlar.";
 
@@ -62,7 +62,7 @@ const aiAssistantFaqs = [
 ];
 
 export const metadata: Metadata = {
-  title: "AI Market Assistant",
+  title: "AI Piyasa Asistanı",
   description: DESCRIPTION,
   alternates: { canonical: "/ai-asistan" },
   openGraph: {
@@ -88,7 +88,7 @@ export default function AiAssistantPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
+              { name: "Ana Sayfa", url: SITE_URL },
               { name: "AI Market Assistant", url: `${SITE_URL}/ai-asistan` },
             ])
           ),

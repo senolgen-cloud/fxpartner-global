@@ -9,23 +9,23 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 const OG_IMAGE = `${SITE_URL}/campaigns/lite-finance-refer-a-friend.jpg`;
 
 export const metadata: Metadata = {
-  title: "Current Broker Campaigns",
+  title: "Güncel Broker Kampanyaları",
   description:
-    "Active referral and deposit campaigns from FXPARTNER partner brokers, in one place.",
+    "FXPARTNER partner brokerlarının aktif referans ve yatırım kampanyaları, tek bir yerde.",
   alternates: { canonical: "/campaigns" },
   openGraph: {
-    title: "Current Broker Campaigns | FXPARTNER",
+    title: "Güncel Broker Kampanyaları | FXPARTNER",
     description:
-      "Active referral and deposit campaigns from FXPARTNER partner brokers, in one place.",
+      "FXPARTNER partner brokerlarının aktif referans ve yatırım kampanyaları, tek bir yerde.",
     url: `${SITE_URL}/campaigns`,
     type: "website",
     images: [{ url: OG_IMAGE, width: 1136, height: 757 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Current Broker Campaigns | FXPARTNER",
+    title: "Güncel Broker Kampanyaları | FXPARTNER",
     description:
-      "Active referral and deposit campaigns from FXPARTNER partner brokers, in one place.",
+      "FXPARTNER partner brokerlarının aktif referans ve yatırım kampanyaları, tek bir yerde.",
     images: [OG_IMAGE],
   },
 };
@@ -40,8 +40,8 @@ export default function CampaignsPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
-              { name: "Campaigns", url: `${SITE_URL}/campaigns` },
+              { name: "Ana Sayfa", url: SITE_URL },
+              { name: "Kampanyalar", url: `${SITE_URL}/campaigns` },
             ])
           ),
         }}
@@ -50,16 +50,16 @@ export default function CampaignsPage() {
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-4xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-gold">
-              Campaigns
+              Kampanyalar
             </span>
             <h1 className="mt-4 max-w-2xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Current broker campaigns
+              Güncel broker kampanyaları
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-on-ink-muted">
-              Active referral and deposit campaigns from FXPARTNER partner
-              brokers, kept in one place as they change. Terms vary by
-              broker and country — always confirm current conditions before
-              participating.
+              FXPARTNER partner brokerlarının aktif referans ve yatırım
+              kampanyaları, değiştikçe tek bir yerde toplanıyor. Şartlar
+              brokera ve ülkeye göre değişir — katılmadan önce her zaman
+              güncel koşulları doğrulayın.
             </p>
           </div>
         </section>
@@ -68,7 +68,7 @@ export default function CampaignsPage() {
           <div className="mx-auto max-w-4xl px-6 py-16">
             {campaigns.length === 0 ? (
               <p className="text-[15px] text-text-muted">
-                No active campaigns right now — check back soon.
+                Şu anda aktif kampanya yok — yakında tekrar kontrol edin.
               </p>
             ) : (
               <div className="divide-y divide-hairline-light border-t border-hairline-light">
@@ -133,21 +133,21 @@ export default function CampaignsPage() {
                         rel="noopener noreferrer sponsored"
                         className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
                       >
-                        {broker.promotion!.ctaLabel ?? `Open a ${broker.name} Account`}
+                        {broker.promotion!.ctaLabel ?? `${broker.name} Hesabı Aç`}
                       </a>
                       {broker.promotion!.contactEmail && (
                         <a
                           href={`mailto:${broker.promotion!.contactEmail}`}
                           className="rounded-full border border-hairline-light px-5 py-2.5 text-sm font-medium text-text-dark transition-colors hover:border-text-dark"
                         >
-                          Email {broker.name} for Your Referral Link
+                          Referans Linkiniz İçin {broker.name}&apos;a E-posta Gönderin
                         </a>
                       )}
                       <Link
                         href={`/brokers/${broker.slug}`}
                         className="rounded-full border border-hairline-light px-5 py-2.5 text-sm font-medium text-text-dark transition-colors hover:border-text-dark"
                       >
-                        {broker.name} Full Review →
+                        {broker.name} Tam İnceleme →
                       </Link>
                     </div>
 
