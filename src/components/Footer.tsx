@@ -145,6 +145,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/kurulum" className="transition-colors hover:text-text-on-ink">
+                  Kurulum Rehberi
+                </Link>
+              </li>
+              <li>
                 <a href="#comparison" className="transition-colors hover:text-text-on-ink">
                   Karşılaştırma Tablosu
                 </a>
