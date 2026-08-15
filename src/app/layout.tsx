@@ -12,9 +12,11 @@ import Ticker from "@/components/Ticker";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import DesktopQuickNavFab from "@/components/DesktopQuickNavFab";
 import { MoreMenuProvider } from "@/components/MoreMenuContext";
+import MoreMenuOverlay from "@/components/MoreMenuOverlay";
 import BrokerHeroSlider from "@/components/BrokerHeroSlider";
 import { brokers } from "@/data/brokers";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
+import { auth } from "@/auth";
 import "./globals.css";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
@@ -91,11 +93,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+  const signedIn = Boolean(session?.user);
+  const accountHref = signedIn ? "/account" : "/account/login";
+
   return (
     <html
       lang="en"
@@ -120,6 +126,10 @@ export default function RootLayout({
             <MobileBottomNav />
             <Ticker />
           </div>
+          {/* Mounted here (not nested inside the sticky header's z-40
+              stacking context) so its own fixed z-[60] can actually paint
+              above the mobile bottom nav/ticker — see MoreMenuOverlay. */}
+          <MoreMenuOverlay signedIn={signedIn} accountHref={accountHref} />
         </MoreMenuProvider>
         <NotificationOptIn />
         <AddToHomeScreen />
