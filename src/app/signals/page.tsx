@@ -5,10 +5,12 @@ import LiveMarketsGrid from "@/components/LiveMarketsGrid";
 import BrokerAdBanner from "@/components/BrokerAdBanner";
 import VipCtaBanner from "@/components/VipCtaBanner";
 import { db } from "@/db";
-import { tradeSignals } from "@/db/schema";
+import { tradeSignals, vipSubscriptions } from "@/db/schema";
 import { getSponsoredBroker } from "@/data/brokers";
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, and } from "drizzle-orm";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { auth } from "@/auth";
+import { tierFromPriceId } from "@/lib/vip";
 
 const featuredBroker = getSponsoredBroker("signals");
 
@@ -58,7 +60,9 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function SignalsPage() {
-  const [active, closed] = await Promise.all([
+  const session = await auth();
+
+  const [active, closed, subscriptionRow] = await Promise.all([
     db.query.tradeSignals.findMany({
       where: eq(tradeSignals.status, "active"),
       orderBy: desc(tradeSignals.createdAt),
@@ -69,7 +73,17 @@ export default async function SignalsPage() {
       orderBy: desc(tradeSignals.closedAt),
       limit: 30,
     }),
+    session?.user?.id
+      ? db.query.vipSubscriptions.findFirst({
+          where: and(
+            eq(vipSubscriptions.userId, session.user.id),
+            eq(vipSubscriptions.status, "active")
+          ),
+        })
+      : Promise.resolve(null),
   ]);
+
+  const viewerTier = subscriptionRow ? tierFromPriceId(subscriptionRow.stripePriceId) : null;
 
   return (
     <>
@@ -93,6 +107,7 @@ export default async function SignalsPage() {
           initialActive={active}
           initialClosed={closed}
           liveMarkets={<LiveMarketsGrid />}
+          viewerTier={viewerTier}
         />
 
         <section className="border-t border-hairline">

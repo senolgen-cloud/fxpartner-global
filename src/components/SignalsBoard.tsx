@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import Link from "next/link";
 import type { tradeSignals, TradeSignalOutcome } from "@/db/schema";
+import { canViewSignal, requiredTierForPair, type PackageTier } from "@/lib/signalAccess";
 
 type Signal = typeof tradeSignals.$inferSelect;
 type SignalJson = Omit<Signal, "createdAt" | "closedAt"> & {
@@ -15,6 +17,21 @@ const POLL_MS = 15000;
 
 function toSignal(s: SignalJson): Signal {
   return { ...s, createdAt: new Date(s.createdAt), closedAt: s.closedAt ? new Date(s.closedAt) : null };
+}
+
+const TIER_LABEL: Record<PackageTier, string> = { starter: "Starter", pro: "Pro", vip: "VIP" };
+
+function LockBadge({ pair }: { pair: string }) {
+  const tier = TIER_LABEL[requiredTierForPair(pair)];
+  return (
+    <Link
+      href="/paketler"
+      title={`${tier} üyelere özel — yükseltmek için tıklayın`}
+      className="inline-flex items-center gap-1 rounded-full border border-gold/40 bg-gold/10 px-2.5 py-1 text-[11px] font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/20"
+    >
+      🔒 {tier}
+    </Link>
+  );
 }
 
 function outcomeColor(outcome: TradeSignalOutcome | null) {
@@ -77,7 +94,17 @@ function LevelPair({ target1, stop }: { target1: string | null; stop: string | n
   );
 }
 
-function SignalTable({ title, signals, closedView }: { title: string; signals: Signal[]; closedView?: boolean }) {
+function SignalTable({
+  title,
+  signals,
+  closedView,
+  viewerTier,
+}: {
+  title: string;
+  signals: Signal[];
+  closedView?: boolean;
+  viewerTier: PackageTier | null;
+}) {
   return (
     <div className="hidden overflow-hidden rounded-2xl border border-hairline bg-ink-soft md:block">
       <div className="flex items-center justify-between border-b border-hairline px-6 py-4">
@@ -114,6 +141,7 @@ function SignalTable({ title, signals, closedView }: { title: string; signals: S
                     : s.profit
                       ? `${parseFloat(s.profit) > 0 ? "+" : ""}${s.profit} USD`
                       : null;
+                const locked = !canViewSignal(viewerTier, s.pair);
                 return (
                   <tr key={s.id} className="border-b border-hairline last:border-0">
                     <td className="whitespace-nowrap px-6 py-3.5 font-mono text-xs text-text-on-ink-muted">
@@ -140,19 +168,25 @@ function SignalTable({ title, signals, closedView }: { title: string; signals: S
                         <span className="text-text-on-ink-muted">—</span>
                       )}
                     </td>
-                    <td className="whitespace-nowrap px-4 py-3.5 font-mono text-text-on-ink">{s.entry}</td>
+                    <td className="whitespace-nowrap px-4 py-3.5 font-mono text-text-on-ink">
+                      {locked ? "••••••" : s.entry}
+                    </td>
                     <td className="whitespace-nowrap px-4 py-3.5">
-                      {closedView ? (
+                      {locked ? (
+                        <span className="font-mono text-text-on-ink-muted">•••• / ••••</span>
+                      ) : closedView ? (
                         <span className="font-mono text-text-on-ink">{s.closePrice ?? "—"}</span>
                       ) : (
                         <LevelPair target1={s.target1} stop={s.stop} />
                       )}
                     </td>
                     <td className="whitespace-nowrap px-4 py-3.5 font-mono text-text-on-ink-muted">
-                      {s.volume ?? "—"}
+                      {locked ? "—" : s.volume ?? "—"}
                     </td>
                     <td className="whitespace-nowrap px-6 py-3.5 text-right">
-                      {closedView ? (
+                      {locked ? (
+                        <LockBadge pair={s.pair} />
+                      ) : closedView ? (
                         <span
                           className="rounded-full px-2.5 py-1 text-xs font-semibold text-on-signal"
                           style={{ background: outcomeColor(s.outcome) }}
@@ -491,11 +525,12 @@ function PipsStats({ closed }: { closed: Signal[] }) {
   );
 }
 
-function SignalCard({ signal }: { signal: Signal }) {
+function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: PackageTier | null }) {
   const isBuy = signal.direction === "BUY";
   const isSell = signal.direction === "SELL";
   const directionColor = isSell ? TICK_DOWN : TICK_UP;
   const isClosed = signal.status === "closed";
+  const locked = !canViewSignal(viewerTier, signal.pair);
 
   const cardDiff = priceDiff(signal.entry, signal.closePrice, signal.direction);
   const resultLine =
@@ -528,7 +563,9 @@ function SignalCard({ signal }: { signal: Signal }) {
             </span>
           )}
         </div>
-        {isClosed ? (
+        {locked ? (
+          <LockBadge pair={signal.pair} />
+        ) : isClosed ? (
           <span
             className="rounded-full px-2.5 py-1 text-xs font-semibold text-on-signal"
             style={{ background: outcomeColor(signal.outcome) }}
@@ -543,7 +580,9 @@ function SignalCard({ signal }: { signal: Signal }) {
         )}
       </div>
 
-      {isClosed && resultLine ? (
+      {locked ? (
+        <p className="mt-2 font-display text-2xl font-bold tabular-stat text-text-on-ink-muted">••••••</p>
+      ) : isClosed && resultLine ? (
         <p className="mt-2 font-display text-2xl font-bold tabular-stat" style={{ color: resultColor }}>
           {resultLine} {resultUnit && <span className="text-sm font-medium text-text-on-ink-muted">{resultUnit}</span>}
         </p>
@@ -554,26 +593,37 @@ function SignalCard({ signal }: { signal: Signal }) {
         </p>
       )}
 
-      <svg viewBox="0 0 200 40" className="mt-3 h-9 w-full" style={{ color: directionColor }} fill="none">
-        <path d={sparklinePath} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <svg viewBox="0 0 200 40" className="mt-3 h-9 w-full" style={{ color: locked ? "var(--text-on-ink-muted)" : directionColor }} fill="none">
+        <path d={sparklinePath} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity={locked ? 0.35 : 1} />
       </svg>
 
-      <div className="mt-3 flex items-center justify-between border-t border-hairline pt-3 font-mono text-[11px]">
-        <span className="text-text-on-ink-muted">
-          {isClosed ? "Close" : "Entry"}{" "}
-          <span className="text-text-on-ink">{isClosed ? signal.closePrice : signal.entry}</span>
-        </span>
-        {signal.target1 && <span style={{ color: TICK_UP }}>TP {signal.target1}</span>}
-        {signal.stop && <span style={{ color: TICK_DOWN }}>SL {signal.stop}</span>}
-      </div>
+      {locked ? (
+        <Link
+          href="/paketler"
+          className="mt-3 flex items-center justify-center gap-1.5 rounded-lg border border-hairline border-dashed pt-3 pb-2 font-mono text-[11px] text-text-on-ink-muted transition-colors hover:border-gold hover:text-gold"
+        >
+          Bu sinyal {TIER_LABEL[requiredTierForPair(signal.pair)]} üyelere özel — Yükselt →
+        </Link>
+      ) : (
+        <>
+          <div className="mt-3 flex items-center justify-between border-t border-hairline pt-3 font-mono text-[11px]">
+            <span className="text-text-on-ink-muted">
+              {isClosed ? "Close" : "Entry"}{" "}
+              <span className="text-text-on-ink">{isClosed ? signal.closePrice : signal.entry}</span>
+            </span>
+            {signal.target1 && <span style={{ color: TICK_UP }}>TP {signal.target1}</span>}
+            {signal.stop && <span style={{ color: TICK_DOWN }}>SL {signal.stop}</span>}
+          </div>
 
-      {(signal.target2 || (isClosed && signal.volume)) && (
-        <div className="mt-3 space-y-1.5 border-t border-hairline pt-3">
-          {signal.target2 && <Level label="Take Profit 2" value={signal.target2} color={TICK_UP} />}
-          {isClosed && signal.volume && (
-            <Level label="Volume" value={`${signal.volume} lot`} color="var(--text-on-ink-muted)" />
+          {(signal.target2 || (isClosed && signal.volume)) && (
+            <div className="mt-3 space-y-1.5 border-t border-hairline pt-3">
+              {signal.target2 && <Level label="Take Profit 2" value={signal.target2} color={TICK_UP} />}
+              {isClosed && signal.volume && (
+                <Level label="Volume" value={`${signal.volume} lot`} color="var(--text-on-ink-muted)" />
+              )}
+            </div>
           )}
-        </div>
+        </>
       )}
 
       <p className="mt-3 font-mono text-[11px] text-text-on-ink-muted">
@@ -593,10 +643,12 @@ export default function SignalsBoard({
   initialActive,
   initialClosed,
   liveMarkets,
+  viewerTier,
 }: {
   initialActive: Signal[];
   initialClosed: Signal[];
   liveMarkets?: ReactNode;
+  viewerTier: PackageTier | null;
 }) {
   const [active, setActive] = useState(initialActive);
   const [closed, setClosed] = useState(initialClosed);
@@ -692,7 +744,7 @@ export default function SignalsBoard({
           <div className="flex flex-wrap justify-center gap-5">
             {active.map((s) => (
               <div key={s.id} className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[calc(25%-15px)]">
-                <SignalCard signal={s} />
+                <SignalCard signal={s} viewerTier={viewerTier} />
               </div>
             ))}
           </div>
@@ -702,7 +754,7 @@ export default function SignalsBoard({
       <section className="border-t border-hairline">
         <div className="mx-auto max-w-6xl px-6 py-16">
           <h2 className="font-display text-2xl font-semibold md:hidden">Recently Closed</h2>
-          <SignalTable title="Recently Closed" signals={closed} closedView />
+          <SignalTable title="Recently Closed" signals={closed} closedView viewerTier={viewerTier} />
           {closed.length === 0 ? (
             <p className="mt-4 text-text-on-ink-muted md:hidden">
               No closed signals yet — results will appear here as trades close.
@@ -711,7 +763,7 @@ export default function SignalsBoard({
             <div className="mt-6 flex flex-wrap justify-center gap-5 md:hidden">
               {closed.map((s) => (
                 <div key={s.id} className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]">
-                  <SignalCard signal={s} />
+                  <SignalCard signal={s} viewerTier={viewerTier} />
                 </div>
               ))}
             </div>
