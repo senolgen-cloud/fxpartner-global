@@ -45,7 +45,7 @@ GÖVDE: <3-6 paragraf, paragraflar arasında boş satır>`;
     body: JSON.stringify({
       contents: [{ role: "user", parts: [{ text: `Bugünün haber maddeleri:\n\n${factSheet}` }] }],
       systemInstruction: { parts: [{ text: systemPrompt }] },
-      generationConfig: { temperature: 0.4, maxOutputTokens: 2048 },
+      generationConfig: { temperature: 0.4, maxOutputTokens: 4096 },
     }),
   });
 

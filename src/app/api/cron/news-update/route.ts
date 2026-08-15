@@ -44,8 +44,13 @@ function slugify(title: string): string {
     .trim()
     .replace(/\s+/g, "-")
     .slice(0, 80);
-  const datePart = new Date().toISOString().slice(0, 10);
-  return `${datePart}-${base || "piyasa-bulteni"}`;
+  // Includes time-of-day (not just date) so multiple runs on the same
+  // day — e.g. two quiet-news fallback bulletins with the same generic
+  // title — don't collide on the slug's unique constraint.
+  const now = new Date();
+  const datePart = now.toISOString().slice(0, 10);
+  const timePart = now.toISOString().slice(11, 16).replace(":", "");
+  return `${datePart}-${timePart}-${base || "piyasa-bulteni"}`;
 }
 
 export const GET = withCronErrorAlert("news-update", async (req: NextRequest) => {
