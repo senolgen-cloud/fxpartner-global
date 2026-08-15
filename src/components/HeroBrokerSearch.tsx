@@ -13,7 +13,7 @@ const allSuggestions: Suggestion[] = [
   ...brokers.map((b) => ({
     name: b.name,
     href: `/brokers/${b.slug}`,
-    sub: `Ranked #${String(b.rank).padStart(2, "0")} · Full review`,
+    sub: `#${String(b.rank).padStart(2, "0")} sırada · Tam inceleme`,
   })),
   ...lookupBrokers
     .filter((b) => !rankedByName.has(b.name.toLowerCase()))
@@ -22,10 +22,10 @@ const allSuggestions: Suggestion[] = [
       href: `/broker-lookup?q=${encodeURIComponent(b.name)}`,
       sub:
         b.verdict === "high-risk"
-          ? "High risk — trust verdict"
+          ? "Yüksek risk — güven değerlendirmesi"
           : b.verdict === "caution"
-            ? "Caution — trust verdict"
-            : "Verified — trust verdict",
+            ? "Dikkat — güven değerlendirmesi"
+            : "Onaylı — güven değerlendirmesi",
     })),
 ];
 
@@ -77,7 +77,7 @@ export default function HeroBrokerSearch() {
           onKeyDown={(e) => {
             if (e.key === "Enter") goToLookup();
           }}
-          placeholder="Search a broker (e.g. XM, Octa, Trade360...)"
+          placeholder="Bir broker arayın (ör. XM, Octa, Trade360...)"
           className="w-full bg-transparent text-sm text-text-on-ink placeholder:text-text-on-ink-muted focus:outline-none"
           autoComplete="off"
         />
@@ -103,7 +103,7 @@ export default function HeroBrokerSearch() {
       {open && query.trim() !== "" && results.length === 0 && (
         <div className="absolute inset-x-0 top-full z-30 mt-2 rounded-2xl border border-hairline bg-ink-soft p-4 shadow-2xl">
           <p className="text-sm text-text-on-ink-muted">
-            No match yet — press Enter to check &ldquo;{query}&rdquo; on Broker Lookup.
+            Henüz eşleşme yok — &ldquo;{query}&rdquo; için Broker Sorgulama'da kontrol etmek üzere Enter'a basın.
           </p>
         </div>
       )}

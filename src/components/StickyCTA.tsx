@@ -28,10 +28,10 @@ export default function StickyCTA({ brokerCount }: { brokerCount: number }) {
       <div className="mx-auto flex max-w-xl items-center justify-between gap-4 rounded-full border border-hairline bg-ink/90 py-2.5 pl-5 pr-2.5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-md">
         <div className="min-w-0">
           <p className="truncate text-sm font-medium text-text-on-ink">
-            {brokerCount} broker · free comparison
+            {brokerCount} broker · ücretsiz karşılaştırma
           </p>
           <p className="truncate font-mono text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted">
-            No account needed to browse
+            Göz atmak için hesap gerekmez
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
@@ -39,11 +39,11 @@ export default function StickyCTA({ brokerCount }: { brokerCount: number }) {
             href="#brokers"
             className="lift-on-hover rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
           >
-            Compare now
+            Şimdi karşılaştır
           </a>
           <button
             type="button"
-            aria-label="Dismiss"
+            aria-label="Kapat"
             onClick={() => setDismissed(true)}
             className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-full text-text-on-ink-muted transition-colors hover:bg-ink-soft hover:text-text-on-ink sm:flex"
           >

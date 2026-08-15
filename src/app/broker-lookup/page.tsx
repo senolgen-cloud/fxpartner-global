@@ -6,32 +6,32 @@ import { lookupBrokers } from "@/data/brokerLookup";
 import { faqSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Broker Lookup",
+  title: "Aracı Kurum Sorgulama",
   description:
-    "Search any forex broker by name and see whether it's regulated, worth extra caution, or flagged as high-risk by official regulator warning lists.",
+    "Herhangi bir forex aracı kurumunu isimle arayın ve düzenlenmiş mi, ekstra dikkat gerektiriyor mu, yoksa resmi düzenleyici uyarı listelerinde yüksek riskli olarak mı işaretlenmiş görün.",
   alternates: { canonical: "/broker-lookup" },
 };
 
 const lookupFaqs = [
   {
-    q: "What does 'Verified / Regulated' mean on FXPARTNER's broker lookup?",
-    a: "It means the broker holds real Tier-1 and/or multi-jurisdiction regulatory licenses, and no major regulator warnings were found for it at the time of our research.",
+    q: "FXPARTNER'ın aracı kurum sorgulamasında 'Doğrulanmış / Düzenlenmiş' ne anlama gelir?",
+    a: "Aracı kurumun gerçek Tier-1 ve/veya çoklu yargı bölgesi düzenleyici lisanslarına sahip olduğu ve araştırmamız sırasında ona yönelik büyük bir düzenleyici uyarısı bulunmadığı anlamına gelir.",
   },
   {
-    q: "What does 'Caution' mean on FXPARTNER's broker lookup?",
-    a: "The broker appears to be legitimate and operating, but there's a specific reason to dig deeper before funding an account — for example offshore-only licensing, a regulator red flag, a relinquished license, or a notable pattern of complaints.",
+    q: "FXPARTNER'ın aracı kurum sorgulamasında 'Dikkat' ne anlama gelir?",
+    a: "Aracı kurum meşru ve faaliyette görünüyor, ancak hesap açmadan önce daha derinlemesine araştırma yapmak için özel bir sebep var — örneğin yalnızca offshore lisans, bir düzenleyici uyarısı, bırakılmış bir lisans veya dikkate değer bir şikayet örüntüsü.",
   },
   {
-    q: "What does 'High Risk' mean on FXPARTNER's broker lookup?",
-    a: "The broker is named on an official regulator warning or unauthorized-firm list, or matches a documented scam/clone pattern. This is a signal to research further before going anywhere near it — not a legal finding of fraud.",
+    q: "FXPARTNER'ın aracı kurum sorgulamasında 'Yüksek Risk' ne anlama gelir?",
+    a: "Aracı kurum, resmi bir düzenleyici uyarısında veya yetkisiz firma listesinde adı geçiyor ya da belgelenmiş bir dolandırıcılık/klon örüntüsüyle eşleşiyor. Bu, ona yaklaşmadan önce daha fazla araştırma yapmanız gerektiğine dair bir sinyaldir — hukuki bir dolandırıcılık tespiti değildir.",
   },
   {
-    q: "Is a 'Caution' or 'High Risk' label a legal accusation of fraud?",
-    a: "No. Both labels reflect a specific, documented finding — a regulator warning, a confirmed unlicensed status, or a recurring complaint pattern — not an accusation of criminal fraud. Always verify a broker's current status directly on the relevant regulator's official website before trading.",
+    q: "'Dikkat' veya 'Yüksek Risk' etiketi hukuki bir dolandırıcılık suçlaması mı?",
+    a: "Hayır. Her iki etiket de somut, belgelenmiş bir bulguyu yansıtır — bir düzenleyici uyarısı, doğrulanmış lisanssız durum veya tekrarlayan bir şikayet örüntüsü — cezai dolandırıcılık suçlaması değildir. İşlem yapmadan önce her zaman bir aracı kurumun güncel durumunu doğrudan ilgili düzenleyicinin resmi web sitesinden teyit edin.",
   },
   {
-    q: "What if a broker isn't in FXPARTNER's lookup database yet?",
-    a: "That doesn't mean it's trustworthy — it means we haven't researched it yet. Search the broker's name on your own country's regulator (or the FCA, ASIC, CySEC) to confirm it's licensed, and search its name together with \"scam\" or \"withdrawal\" on independent review sites to check for recurring complaint patterns.",
+    q: "Bir aracı kurum FXPARTNER'ın sorgulama veritabanında henüz yoksa ne olur?",
+    a: "Bu, güvenilir olduğu anlamına gelmez — henüz araştırmadığımız anlamına gelir. Lisanslı olduğunu teyit etmek için aracı kurumun adını kendi ülkenizin düzenleyicisinde (veya FCA, ASIC, CySEC'te) arayın ve tekrarlayan şikayet örüntülerini kontrol etmek için adını bağımsız inceleme sitelerinde \"scam\" veya \"withdrawal\" kelimeleriyle birlikte arayın.",
   },
 ];
 
@@ -53,15 +53,16 @@ export default async function BrokerLookupPage({
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-3xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Broker Lookup
+              Aracı Kurum Sorgulama
             </span>
             <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Check any broker before you fund an account
+              Hesap açmadan önce herhangi bir aracı kurumu kontrol edin
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-text-on-ink-muted">
-              Search {lookupBrokers.length} brokers — from major regulated
-              names to firms named on official regulator warning lists — and
-              see an honest, sourced verdict for each.
+              {lookupBrokers.length} aracı kurum arasında arama yapın — büyük
+              düzenlenmiş isimlerden resmi düzenleyici uyarı listelerinde adı
+              geçen firmalara kadar — ve her biri için dürüst, kaynaklı bir
+              değerlendirme görün.
             </p>
           </div>
         </section>
@@ -72,25 +73,26 @@ export default async function BrokerLookupPage({
 
             <div className="mt-14 rounded-2xl border border-hairline-light bg-paper p-6">
               <p className="text-sm leading-relaxed text-text-muted">
-                <strong className="text-text-dark">How to read this:</strong>{" "}
-                Verdicts are built from official regulator warning lists
-                (FCA, CySEC, BaFin, CONSOB, FINMA, Turkey&apos;s SPK),
-                independent trust-score sources, and our own editorial
-                reviews. A
-                &ldquo;High Risk&rdquo; label reflects a specific,
-                documented finding — a regulator warning, a confirmed unlicensed
-                status, or a recurring complaint pattern — not an accusation
-                of criminal fraud. Regulator warning lists change weekly;
-                always double-check a broker&apos;s current status on the
-                relevant regulator&apos;s official website before trading.
-                We currently track {highRiskCount} brokers flagged as high
-                risk.
+                <strong className="text-text-dark">Bunu nasıl okumalı:</strong>{" "}
+                Değerlendirmeler resmi düzenleyici uyarı listelerinden (FCA,
+                CySEC, BaFin, CONSOB, FINMA, Türkiye&apos;nin SPK&apos;sı),
+                bağımsız güven puanı kaynaklarından ve kendi editoryal
+                incelemelerimizden oluşturulur.
+                &ldquo;Yüksek Risk&rdquo; etiketi somut, belgelenmiş bir
+                bulguyu yansıtır — bir düzenleyici uyarısı, doğrulanmış
+                lisanssız durum veya tekrarlayan bir şikayet örüntüsü —
+                cezai dolandırıcılık suçlaması değildir. Düzenleyici uyarı
+                listeleri haftalık olarak değişir; işlem yapmadan önce her
+                zaman bir aracı kurumun güncel durumunu ilgili
+                düzenleyicinin resmi web sitesinden teyit edin. Şu anda
+                yüksek risk olarak işaretlenmiş {highRiskCount} aracı
+                kurumu takip ediyoruz.
               </p>
             </div>
 
             <div className="mt-14">
               <h2 className="font-display text-2xl font-semibold text-text-dark">
-                Frequently Asked Questions
+                Sıkça Sorulan Sorular
               </h2>
               <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
                 {lookupFaqs.map((faq) => (

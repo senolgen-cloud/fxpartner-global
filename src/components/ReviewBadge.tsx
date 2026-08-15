@@ -1,8 +1,8 @@
 function wordForRating(rating: number): string {
-  if (rating >= 4.5) return "Excellent";
-  if (rating >= 3.5) return "Great";
-  if (rating >= 2.5) return "Average";
-  return "Poor";
+  if (rating >= 4.5) return "Mükemmel";
+  if (rating >= 3.5) return "Çok İyi";
+  if (rating >= 2.5) return "Ortalama";
+  return "Zayıf";
 }
 
 // Real-data equivalent of a Trustpilot-style rating badge — driven by the
@@ -54,7 +54,7 @@ export default function ReviewBadge({
           {rating.toFixed(1)}
         </span>
         <span className="text-xs text-text-on-ink-muted">
-          Based on {count} {count === 1 ? "review" : "reviews"}
+          {count} değerlendirmeye dayanmaktadır
         </span>
       </div>
 
@@ -62,7 +62,7 @@ export default function ReviewBadge({
         <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="text-signal">
           <path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7L2 9.2l7.1-.6L12 2z" />
         </svg>
-        FXPARTNER Community Reviews
+        FXPARTNER Topluluk Değerlendirmeleri
       </span>
     </div>
   );

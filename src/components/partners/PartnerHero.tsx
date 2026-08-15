@@ -30,21 +30,22 @@ export default function PartnerHero({
                 aria-hidden="true"
                 className="signal-dot h-1.5 w-1.5 rounded-full bg-signal"
               />
-              Partner Program
+              Partner Programı
             </span>
           </Reveal>
 
           <Reveal delay={90}>
             <h1 className="mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
-              Build your global partner business.
+              Küresel partner işinizi büyütün.
             </h1>
           </Reveal>
 
           <Reveal delay={180}>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              Help traders succeed while building a scalable, recurring
-              income with FXPARTNER — open your own Sub-IB account under our
-              master IB agreement and earn lifetime commissions.
+              Yatırımcıların başarılı olmasına yardımcı olurken FXPARTNER
+              ile ölçeklenebilir, düzenli bir gelir oluşturun — ana IB
+              anlaşmamız kapsamında kendi Sub-IB hesabınızı açın ve ömür
+              boyu komisyon kazanın.
             </p>
           </Reveal>
 
@@ -54,13 +55,13 @@ export default function PartnerHero({
                 href="#apply"
                 className="lift-on-hover rounded-full bg-signal px-6 py-3 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
               >
-                Become a Partner
+                Partner Olun
               </a>
               <a
                 href="#how-it-works"
                 className="lift-on-hover rounded-full border border-hairline px-6 py-3 text-sm font-medium text-text-on-ink transition-colors hover:border-text-on-ink"
               >
-                See How It Works
+                Nasıl Çalışır
               </a>
             </div>
           </Reveal>
@@ -69,7 +70,7 @@ export default function PartnerHero({
             <dl className="mt-16 grid grid-cols-2 gap-6 border-t border-hairline pt-8 sm:grid-cols-4">
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  Partner Brokers
+                  Partner Aracı Kurumlar
                 </dt>
                 <dd className="mt-1 font-display text-3xl font-semibold">
                   <AnimatedStat value={brokerCount} />
@@ -77,7 +78,7 @@ export default function PartnerHero({
               </div>
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  Regulators Covered
+                  Kapsanan Düzenleyici Kurum
                 </dt>
                 <dd className="mt-1 font-display text-3xl font-semibold">
                   <AnimatedStat value={regulatorCount} suffix="+" />
@@ -85,7 +86,7 @@ export default function PartnerHero({
               </div>
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  Cost to Join
+                  Katılım Maliyeti
                 </dt>
                 <dd className="mt-1 font-display text-3xl font-semibold">
                   <AnimatedStat value={0} prefix="$" />
@@ -93,10 +94,10 @@ export default function PartnerHero({
               </div>
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  Commission Term
+                  Komisyon Süresi
                 </dt>
                 <dd className="mt-1 font-display text-2xl font-semibold">
-                  Lifetime
+                  Ömür Boyu
                 </dd>
               </div>
             </dl>

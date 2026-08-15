@@ -16,27 +16,27 @@ const featuredBroker = getSponsoredBroker("signals");
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 const OG_IMAGE = `${SITE_URL}/signals-preview.png`;
-const TITLE = "Live Trading Signals | FXPARTNER";
+const TITLE = "Canlı İşlem Sinyalleri | FXPARTNER";
 const DESCRIPTION =
-  "Real trade signals from our tracked MT5 account — entry, take profit, and stop loss for open trades, plus verified win/loss results once each trade closes.";
+  "Takip edilen MT5 hesabımızdan gerçek işlem sinyalleri — açık işlemler için giriş, kâr al ve zarar durdur seviyeleri, ayrıca her işlem kapandığında doğrulanmış kazanç/kayıp sonuçları.";
 
 const faqs = [
   {
-    q: "Are these real trades?",
-    a: "Yes. Every signal reflects a real position opened on FXPARTNER's own tracked MT5 account — entry, stop loss, and take profit levels are captured automatically the moment the trade is opened, and never edited afterward.",
+    q: "Bunlar gerçek işlemler mi?",
+    a: "Evet. Her sinyal, FXPARTNER'ın kendi takip edilen MT5 hesabında açılan gerçek bir pozisyonu yansıtır — giriş, zarar durdur ve kâr al seviyeleri işlem açıldığı anda otomatik olarak kaydedilir ve sonradan asla değiştirilmez.",
   },
   {
-    q: "Is this investment advice?",
-    a: "No. These signals are shared for informational purposes only. Past results don't guarantee future ones — always size positions and set stops according to your own risk tolerance, not based on a single signal alone.",
+    q: "Bu bir yatırım tavsiyesi mi?",
+    a: "Hayır. Bu sinyaller yalnızca bilgilendirme amacıyla paylaşılmaktadır. Geçmiş sonuçlar gelecekteki sonuçları garanti etmez — pozisyon büyüklüğünü ve zarar durdur seviyelerini her zaman tek bir sinyale değil, kendi risk toleransınıza göre belirleyin.",
   },
   {
-    q: "How do I see the results of closed signals?",
-    a: "Every signal on this page moves to a closed section once the trade exits, showing the verified win/loss outcome — nothing is removed or cherry-picked after the fact.",
+    q: "Kapanan sinyallerin sonuçlarını nereden görebilirim?",
+    a: "Bu sayfadaki her sinyal, işlem kapandığında doğrulanmış kazanç/kayıp sonucunu gösteren kapalı bölümüne taşınır — hiçbir sonuç sonradan kaldırılmaz veya seçilerek gizlenmez.",
   },
 ];
 
 export const metadata: Metadata = {
-  title: "Live Trading Signals",
+  title: "Canlı İşlem Sinyalleri",
   description: DESCRIPTION,
   alternates: { canonical: "/signals" },
   openGraph: {
@@ -93,7 +93,7 @@ export default async function SignalsPage() {
           __html: JSON.stringify(
             breadcrumbSchema([
               { name: "Home", url: SITE_URL },
-              { name: "Live Trading Signals", url: `${SITE_URL}/signals` },
+              { name: "Canlı İşlem Sinyalleri", url: `${SITE_URL}/signals` },
             ])
           ),
         }}
@@ -125,9 +125,10 @@ export default async function SignalsPage() {
         <section className="border-t border-hairline">
           <div className="mx-auto max-w-3xl px-6 py-14">
             <p className="font-mono text-xs leading-relaxed text-text-on-ink-muted">
-              These are real trades taken on FXPARTNER&apos;s own tracked MT5 account, shared for informational
-              purposes only — not investment advice. Past results don&apos;t guarantee future ones; always size
-              positions and set stops according to your own risk tolerance.
+              Bunlar FXPARTNER&apos;ın kendi takip edilen MT5 hesabında açılan gerçek işlemlerdir; yalnızca
+              bilgilendirme amacıyla paylaşılmaktadır — yatırım tavsiyesi değildir. Geçmiş sonuçlar gelecekteki
+              sonuçları garanti etmez; pozisyon büyüklüğünü ve zarar durdur seviyelerini her zaman kendi risk
+              toleransınıza göre belirleyin.
             </p>
           </div>
         </section>
@@ -135,7 +136,7 @@ export default async function SignalsPage() {
         <section className="border-t border-hairline">
           <div className="mx-auto max-w-3xl px-6 py-14">
             <h2 className="font-display text-2xl font-semibold text-text-on-ink">
-              Frequently Asked Questions
+              Sık Sorulan Sorular
             </h2>
             <div className="mt-6 divide-y divide-hairline border-t border-hairline">
               {faqs.map((faq) => (

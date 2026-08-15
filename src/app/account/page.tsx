@@ -19,9 +19,9 @@ import { brokers } from "@/data/brokers";
 const brokerNames = Object.fromEntries(brokers.map((b) => [b.slug, b.name]));
 
 const CASHBACK_STATUS_LABEL: Record<CashbackAccountStatus, string> = {
-  pending: "Pending Verification",
-  verified: "Verified",
-  rejected: "Not Eligible",
+  pending: "Doğrulama Bekliyor",
+  verified: "Doğrulandı",
+  rejected: "Uygun Değil",
 };
 
 const CASHBACK_STATUS_CLASS: Record<CashbackAccountStatus, string> = {
@@ -31,10 +31,10 @@ const CASHBACK_STATUS_CLASS: Record<CashbackAccountStatus, string> = {
 };
 
 const STATUS_LABEL: Record<ComplaintStatus, string> = {
-  new: "Received",
-  in_progress: "In Progress",
-  resolved: "Resolved",
-  closed: "Closed",
+  new: "Alındı",
+  in_progress: "İşleniyor",
+  resolved: "Çözüldü",
+  closed: "Kapatıldı",
 };
 
 const STATUS_CLASS: Record<ComplaintStatus, string> = {
@@ -88,7 +88,7 @@ export default async function AccountPage() {
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
-                Account
+                Hesap
               </span>
               <h1 className="mt-3 font-display text-3xl font-semibold text-text-dark">
                 {user.name || user.email}
@@ -104,17 +104,18 @@ export default async function AccountPage() {
                 type="submit"
                 className="rounded-full border border-hairline-light px-4 py-2 text-sm text-text-dark transition-colors hover:border-text-dark"
               >
-                Sign out
+                Çıkış yap
               </button>
             </form>
           </div>
 
           <section className="mt-10 rounded-2xl border border-hairline-light bg-paper p-6">
             <h2 className="font-display text-xl font-semibold text-text-dark">
-              Profile
+              Profil
             </h2>
             <p className="mt-2 text-sm text-text-muted">
-              Optional — shown next to your comments on broker reviews.
+              İsteğe bağlı — aracı kurum incelemelerindeki yorumlarınızın
+              yanında gösterilir.
             </p>
             <form action={updateCountry} className="mt-4 flex flex-wrap items-center gap-3">
               <select
@@ -122,7 +123,7 @@ export default async function AccountPage() {
                 defaultValue={user.country ?? ""}
                 className="rounded-xl border border-hairline-light bg-paper-high px-3 py-2 text-sm text-text-dark outline-none focus:border-signal"
               >
-                <option value="">No country set</option>
+                <option value="">Ülke belirtilmedi</option>
                 {COUNTRIES.map((c) => (
                   <option key={c.code} value={c.code}>
                     {c.name}
@@ -133,18 +134,19 @@ export default async function AccountPage() {
                 type="submit"
                 className="rounded-full border border-hairline-light px-4 py-2 text-sm text-text-dark transition-colors hover:border-text-dark"
               >
-                Save
+                Kaydet
               </button>
             </form>
           </section>
 
           <section className="mt-10 rounded-2xl border border-hairline-light bg-paper p-6">
             <h2 className="font-display text-xl font-semibold text-text-dark">
-              FXPARTNER VIP Telegram Group
+              FXPARTNER VIP Telegram Grubu
             </h2>
             <p className="mt-2 text-sm text-text-muted">
-              As a registered member, you get access to the VIP Telegram
-              group. The link below is single-use and expires in 24 hours.
+              Kayıtlı bir üye olarak VIP Telegram grubuna erişiminiz var.
+              Aşağıdaki bağlantı tek kullanımlıktır ve 24 saat içinde
+              geçerliliğini yitirir.
             </p>
             <VipInviteClientTrigger action={generateVipLink} />
           </section>
@@ -154,9 +156,9 @@ export default async function AccountPage() {
               Forex Cashback
             </h2>
             <p className="mt-2 text-sm text-text-muted">
-              Link a trading account with a participating broker to start
-              tracking cashback. Amounts are recorded manually from our
-              partner dashboard, not calculated automatically.
+              Kazanç iadesini takip etmeye başlamak için katılımcı bir aracı
+              kurumla bir işlem hesabı bağlayın. Tutarlar partner panelimizden
+              manuel olarak kaydedilir, otomatik hesaplanmaz.
             </p>
             <div className="mt-4">
               <CashbackLinkForm brokerNames={brokerNames} />
@@ -174,7 +176,7 @@ export default async function AccountPage() {
                             {brokerNames[acc.brokerSlug] || acc.brokerSlug}
                           </p>
                           <p className="mt-0.5 font-mono text-xs text-text-muted">
-                            Account {acc.accountNumber}
+                            Hesap {acc.accountNumber}
                           </p>
                         </div>
                         <span
@@ -207,14 +209,13 @@ export default async function AccountPage() {
 
           <section className="mt-10">
             <h2 className="font-display text-xl font-semibold text-text-dark">
-              Your Complaints
+              Şikayetleriniz
             </h2>
             {myComplaints.length === 0 ? (
               <p className="mt-4 text-sm text-text-muted">
-                You haven&apos;t filed a complaint yet. Have an issue with a
-                broker?{" "}
+                Henüz bir şikayet göndermediniz. Bir brokerla ilgili sorun mu yaşıyorsunuz?{" "}
                 <a href="/complaint" className="text-signal hover:text-signal-strong">
-                  Submit a complaint
+                  Şikayet gönderin
                 </a>
                 .
               </p>
@@ -225,7 +226,7 @@ export default async function AccountPage() {
                     <div>
                       <p className="font-medium text-text-dark">{c.brokerName}</p>
                       <p className="mt-1 text-xs text-text-muted">
-                        {new Date(c.createdAt).toLocaleDateString("en-US", {
+                        {new Date(c.createdAt).toLocaleDateString("tr-TR", {
                           year: "numeric",
                           month: "long",
                           day: "numeric",

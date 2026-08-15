@@ -118,10 +118,10 @@ export default function ComparisonTable() {
                     <td className="px-5 py-4 text-right">
                       <Link
                         href={`/brokers/${b.slug}`}
-                        title={`${b.name} full review`}
+                        title={`${b.name} tam inceleme`}
                         className="font-mono text-xs text-signal transition-colors hover:text-text-on-ink"
                       >
-                        View →
+                        Görüntüle →
                       </Link>
                     </td>
                   </tr>
@@ -136,7 +136,7 @@ export default function ComparisonTable() {
                         <div className="grid gap-4 rounded-xl border border-hairline bg-ink-soft/60 p-5 sm:grid-cols-2">
                           <div>
                             <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-signal">
-                              Strengths
+                              Güçlü Yönler
                             </p>
                             <ul className="mt-2 space-y-1.5 text-[13px] leading-relaxed text-text-on-ink-muted">
                               {b.pros.map((pro) => (
@@ -146,7 +146,7 @@ export default function ComparisonTable() {
                           </div>
                           <div>
                             <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                              Trade-offs
+                              Ödünleşimler
                             </p>
                             <ul className="mt-2 space-y-1.5 text-[13px] leading-relaxed text-text-on-ink-muted">
                               {b.cons.map((con) => (
@@ -155,7 +155,7 @@ export default function ComparisonTable() {
                             </ul>
                           </div>
                           <p className="sm:col-span-2 font-mono text-xs text-text-on-ink-muted">
-                            Best for: {b.bestFor}
+                            En iyi: {b.bestFor}
                           </p>
                         </div>
                       </td>

@@ -3,39 +3,32 @@ import { Broker, TIER1_REGULATORS } from "@/data/brokers";
 const PLATFORM_BLURBS: [needle: string, blurb: string][] = [
   [
     "mt4",
-    "MetaTrader 4 — the industry's most widely used retail platform, valued for broker-agnostic expert advisors and indicators",
+    "MetaTrader 4 — broker bağımsız uzman danışmanları ve indikatörleriyle bilinen, sektörün en yaygın kullanılan perakende platformu",
   ],
   [
     "mt5",
-    "MetaTrader 5 — MetaTrader's newer platform, with more timeframes, order types, and a built-in economic calendar",
+    "MetaTrader 5 — MetaTrader'ın daha fazla zaman dilimi, emir türü ve yerleşik ekonomik takvime sahip daha yeni platformu",
   ],
   [
     "ctrader",
-    "cTrader — favored by ECN-focused and algorithmic traders for its Level II pricing and native cAlgo automation",
+    "cTrader — Level II fiyatlandırması ve yerel cAlgo otomasyonu nedeniyle ECN odaklı ve algoritmik yatırımcıların tercih ettiği platform",
   ],
   [
     "tradingview",
-    "TradingView — wiring live execution directly into one of the most widely used independent charting tools",
+    "TradingView — canlı emir gerçekleştirmeyi en yaygın kullanılan bağımsız grafik araçlarından birine doğrudan bağlar",
   ],
   [
     "webtrader",
-    "a browser-based WebTrader that needs no download",
+    "indirme gerektirmeyen, tarayıcı tabanlı bir WebTrader",
   ],
 ];
 
-// Joins ["A"] -> "A", ["A","B"] -> "A and B", ["A","B","C"] -> "A, B, and C".
+// Joins ["A"] -> "A", ["A","B"] -> "A ve B", ["A","B","C"] -> "A, B ve C".
 function joinList(items: string[]): string {
   if (items.length === 0) return "";
   if (items.length === 1) return items[0];
-  if (items.length === 2) return `${items[0]} and ${items[1]}`;
-  return `${items.slice(0, -1).join(", ")}, and ${items[items.length - 1]}`;
-}
-
-// Lowercases the first letter unless the string leads with an acronym run
-// (e.g. "VIP perks..." or "FXPARTNER-exclusive..." should stay as-is,
-// not become "vIP perks..." / "fXPARTNER-exclusive...").
-function lowerFirst(s: string): string {
-  return /^[A-Z]{2,}/.test(s) ? s : s.charAt(0).toLowerCase() + s.slice(1);
+  if (items.length === 2) return `${items[0]} ve ${items[1]}`;
+  return `${items.slice(0, -1).join(", ")} ve ${items[items.length - 1]}`;
 }
 
 function platformBlurb(name: string): string {
@@ -43,15 +36,15 @@ function platformBlurb(name: string): string {
   for (const [needle, blurb] of PLATFORM_BLURBS) {
     if (key.includes(needle)) return blurb;
   }
-  return `a proprietary ${name}`;
+  return `özel bir ${name} platformu`;
 }
 
 export function platformParagraph(broker: Broker): string {
   const blurbs = broker.platforms.map(platformBlurb);
   if (blurbs.length === 1) {
-    return `${broker.name} trades through ${blurbs[0]}.`;
+    return `${broker.name}, ${blurbs[0]} üzerinden işlem yapılmasını sağlar.`;
   }
-  return `${broker.name} supports ${broker.platforms.length} platforms: ${joinList(blurbs)}.`;
+  return `${broker.name}, ${broker.platforms.length} platformu destekler: ${joinList(blurbs)}.`;
 }
 
 export function regulationParagraph(broker: Broker): string {
@@ -60,20 +53,20 @@ export function regulationParagraph(broker: Broker): string {
   const list = joinList(broker.regulators);
 
   if (tier1.length > 0 && other.length > 0) {
-    return `${broker.name} holds ${broker.regulators.length} regulatory license${broker.regulators.length > 1 ? "s" : ""}: ${list}. ${joinList(tier1)} ${tier1.length > 1 ? "are Tier-1 authorities" : "is a Tier-1 authority"} — these require client-fund segregation and minimum capital reserves, and in some jurisdictions back a compensation scheme if the broker fails. The remaining license${other.length > 1 ? "s are" : " is"} offshore, which typically means lighter capital requirements and no investor compensation scheme behind them.`;
+    return `${broker.name}, ${broker.regulators.length} regülasyon lisansı taşıyor: ${list}. ${joinList(tier1)} Tier-1 otorite${tier1.length > 1 ? "leri" : "si"} — bunlar müşteri fonlarının ayrılmasını ve minimum sermaye rezervini şart koşar, bazı ülkelerde broker iflas ederse bir tazminat şemasını da destekler. Kalan lisans${other.length > 1 ? "lar" : ""} offshore'dur; bu genellikle daha hafif sermaye şartları ve arkasında bir yatırımcı tazminat şeması olmaması anlamına gelir.`;
   }
   if (tier1.length > 0) {
-    return `${broker.name} operates under ${broker.regulators.length} Tier-1 license${broker.regulators.length > 1 ? "s" : ""} — ${list} — the strongest regulatory tier, requiring client-fund segregation, minimum capital reserves, and in some jurisdictions a compensation scheme if the broker fails.`;
+    return `${broker.name}, ${broker.regulators.length} Tier-1 lisans altında faaliyet gösteriyor — ${list} — en güçlü regülasyon seviyesi olan bu lisanslar müşteri fonlarının ayrılmasını, minimum sermaye rezervini ve bazı ülkelerde broker iflas ederse bir tazminat şemasını şart koşar.`;
   }
-  return `${broker.name} is licensed by ${list}. None of these are Tier-1 authorities (FCA, ASIC, CySEC, DFSA, or the Central Bank of Ireland) — offshore regulators typically carry lighter capital requirements and no investor compensation scheme, so it's worth weighing this against the strengths below before funding a live account.`;
+  return `${broker.name}, ${list} tarafından lisanslıdır. Bunların hiçbiri Tier-1 otorite değildir (FCA, ASIC, CySEC, DFSA veya İrlanda Merkez Bankası) — offshore regülatörler genellikle daha hafif sermaye şartları taşır ve arkalarında bir yatırımcı tazminat şeması bulunmaz, bu yüzden canlı bir hesaba para yatırmadan önce bunu aşağıdaki güçlü yönlerle birlikte değerlendirmekte fayda var.`;
 }
 
 export function verdictParagraph(broker: Broker): string {
-  const strengths = broker.pros.slice(0, 2).map(lowerFirst);
+  const strengths = broker.pros.slice(0, 2);
   const tradeoff = broker.cons[0]
-    ? ` Its main tradeoff is ${lowerFirst(broker.cons[0])}, worth weighing against the strengths above.`
+    ? ` En önemli ödünü ${broker.cons[0]} — bunu yukarıdaki güçlü yönlerle birlikte değerlendirmekte fayda var.`
     : "";
-  return `For ${lowerFirst(broker.bestFor)}, ${broker.name} is a strong fit: ${joinList(strengths)}.${tradeoff} As with any broker, confirm current spreads, leverage, and regional availability on ${broker.name}'s official site before funding a live account.`;
+  return `${broker.bestFor} için ${broker.name} güçlü bir uyum sağlıyor: ${joinList(strengths)}.${tradeoff} Herhangi bir brokerda olduğu gibi, canlı bir hesaba para yatırmadan önce güncel spreadleri, kaldıracı ve bölgesel kullanılabilirliği ${broker.name}'ın resmi sitesinden doğrulayın.`;
 }
 
 export function brokerFaqs(broker: Broker): { q: string; a: string }[] {
@@ -81,28 +74,28 @@ export function brokerFaqs(broker: Broker): { q: string; a: string }[] {
   const tier1Count = broker.regulators.filter((r) => TIER1_REGULATORS.has(r)).length;
   const tier1Clause =
     tier1Count === 0
-      ? "None of these are Tier-1 authorities"
+      ? "Bunların hiçbiri Tier-1 otorite değil"
       : tier1Count === n
-        ? `All ${n} ${n > 1 ? "are" : "is"} Tier-1`
-        : `${tier1Count} of ${n} ${tier1Count === 1 ? "is a Tier-1 authority" : "are Tier-1 authorities"}`;
+        ? `${n} lisansın tamamı Tier-1`
+        : `${n} lisanstan ${tier1Count} tanesi Tier-1 otorite`;
   const faqs = [
     {
-      q: `Is ${broker.name} regulated?`,
-      a: `${broker.name} holds ${n} license${n > 1 ? "s" : ""} (${broker.regulators.join(", ")}). ${tier1Clause} — the FCA, ASIC, CySEC, DFSA, and the Central Bank of Ireland are the ones we treat as Tier-1.`,
+      q: `${broker.name} regüle mi?`,
+      a: `${broker.name}, ${n} lisans taşıyor (${broker.regulators.join(", ")}). ${tier1Clause} — Tier-1 olarak kabul ettiğimiz otoriteler FCA, ASIC, CySEC, DFSA ve İrlanda Merkez Bankası'dır.`,
     },
     {
-      q: `What is the minimum deposit at ${broker.name}?`,
-      a: `${broker.minDeposit}. Maximum leverage goes up to ${broker.maxLeverage}, though the exact figure depends on your account type and country of residence.`,
+      q: `${broker.name}'da minimum yatırım tutarı nedir?`,
+      a: `${broker.minDeposit}. Maksimum kaldıraç ${broker.maxLeverage}'e kadar çıkıyor, ancak tam rakam hesap türünüze ve ikamet ettiğiniz ülkeye bağlıdır.`,
     },
     {
-      q: `Which platforms does ${broker.name} support?`,
+      q: `${broker.name} hangi platformları destekliyor?`,
       a: `${broker.platforms.join(", ")}.`,
     },
   ];
   if (broker.promotion) {
     faqs.push({
-      q: `Does ${broker.name} have an active promotion?`,
-      a: `Yes — see the ${broker.promotion.title} campaign below, or check our Campaigns page for current offers across all partner brokers.`,
+      q: `${broker.name}'ın aktif bir kampanyası var mı?`,
+      a: `Evet — aşağıdaki ${broker.promotion.title} kampanyasına bakın veya tüm partner brokerlardaki güncel teklifler için Kampanyalar sayfamızı kontrol edin.`,
     });
   }
   if (broker.extraFaqs) {

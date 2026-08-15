@@ -27,76 +27,77 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "how-to-choose-a-forex-broker",
     coverImage: "/blog/how-to-choose-a-forex-broker-cover.png",
-    title: "How to Choose a Forex Broker in 2026: A Complete Guide",
+    title: "2026'da Forex Brokerı Nasıl Seçilir: Eksiksiz Rehber",
     excerpt:
-      "Regulation, cost structure, platform quality, and withdrawal reliability — a practical, step-by-step framework for evaluating any forex broker before you deposit a dollar.",
+      "Regülasyon, maliyet yapısı, platform kalitesi ve para çekme güvenilirliği — bir dolar bile yatırmadan önce herhangi bir forex brokerını değerlendirmek için pratik, adım adım bir çerçeve.",
     publishedAt: "2026-07-21",
     readingMinutes: 11,
+    lang: "tr",
     sections: [
       {
         paragraphs: [
-          "Every forex broker's homepage says roughly the same thing: tight spreads, fast execution, award-winning platforms. That makes brokers hard to compare on marketing copy alone. The good news is that the things that actually determine whether a broker is safe to trust with your money are checkable — regulation, cost structure, platform quality, and how the broker behaves when you try to withdraw funds. This guide walks through each one, in the order we'd actually check them.",
-          "This isn't investment advice, and nothing here tells you which specific broker to pick. It's a framework you can apply to any broker — the four criteria map directly to how we score every broker in our own rankings, so you can use this guide to sanity-check our numbers too, not just take them on faith.",
+          "Her forex brokerının ana sayfası aşağı yukarı aynı şeyi söyler: dar spreadler, hızlı emir gerçekleştirme, ödüllü platformlar. Bu da brokerları sadece pazarlama metniyle karşılaştırmayı zorlaştırır. İyi haber şu ki, bir brokerın paranıza güvenilip güvenilemeyeceğini gerçekten belirleyen şeyler kontrol edilebilir — regülasyon, maliyet yapısı, platform kalitesi ve brokerın para çekme talebinde nasıl davrandığı. Bu rehber, bunların her birini gerçekte kontrol edeceğimiz sırayla ele alıyor.",
+          "Bu bir yatırım tavsiyesi değildir ve burada hiçbir şey size hangi belirli brokerı seçmeniz gerektiğini söylemez. Herhangi bir brokera uygulayabileceğiniz bir çerçevedir — dört kriter, kendi sıralamalarımızda her brokerı nasıl puanladığımızla doğrudan örtüşür, yani bu rehberi sadece bize güvenmek için değil, rakamlarımızı kendiniz kontrol etmek için de kullanabilirsiniz.",
         ],
       },
       {
-        heading: "1. Start with regulation, not spreads",
+        heading: "1. Spreadlerle değil, regülasyonla başlayın",
         paragraphs: [
-          "Regulation is the single most important filter, because it determines what happens if something goes wrong — a platform outage during a volatile move, a dispute over an executed price, or in the worst case, the broker itself running into financial trouble.",
-          "Not all regulators offer the same protection. Tier-1 regulators — the UK's FCA, Australia's ASIC, Cyprus's CySEC (an EU regulator), and a handful of others — require brokers to segregate client funds from company funds, carry minimum capital reserves, and in some jurisdictions participate in a compensation scheme that reimburses clients if the broker fails. Offshore regulators (common jurisdictions include Mauritius, Seychelles, Belize, and the BVI) have real licensing processes too, but the capital requirements and enforcement are typically lighter, and there's usually no investor compensation scheme behind them.",
-          "This doesn't mean an offshore-regulated broker is automatically a scam — plenty operate honestly for years. It means the regulatory safety net under you is thinner, so problems (a slow withdrawal, a disputed trade) are more likely to become your problem to resolve alone rather than something a regulator will step in on.",
+          "Regülasyon en önemli filtredir, çünkü bir şeyler ters gittiğinde ne olacağını belirler — volatil bir hareket sırasında platform kesintisi, gerçekleşen bir fiyatla ilgili anlaşmazlık veya en kötü durumda brokerın kendisinin finansal sıkıntıya girmesi.",
+          "Tüm regülatörler aynı korumayı sunmaz. Tier-1 regülatörler — İngiltere'nin FCA'sı, Avustralya'nın ASIC'i, Kıbrıs'ın CySEC'i (bir AB regülatörü) ve birkaç diğeri — brokerların müşteri fonlarını şirket fonlarından ayrı tutmasını, minimum sermaye rezervi taşımasını ve bazı ülkelerde broker iflas ederse müşterilere geri ödeme yapan bir tazminat şemasına katılmasını şart koşar. Offshore regülatörlerin de (yaygın ülkeler arasında Mauritius, Seyşeller, Belize ve BVI sayılabilir) gerçek lisanslama süreçleri vardır, ancak sermaye şartları ve denetim genellikle daha hafiftir ve arkalarında genelde bir yatırımcı tazminat şeması bulunmaz.",
+          "Bu, offshore regüleli bir brokerın otomatik olarak dolandırıcı olduğu anlamına gelmez — pek çoğu yıllarca dürüstçe faaliyet gösterir. Anlamı, altınızdaki regülasyon güvenlik ağının daha ince olduğu, dolayısıyla sorunların (yavaş bir para çekme, tartışmalı bir işlem) bir regülatörün müdahale edeceği bir şey yerine sizin tek başınıza çözmeniz gereken bir soruna dönüşme ihtimalinin daha yüksek olduğudur.",
         ],
         list: [
-          "Check how many regulators a broker holds licenses under, and in which countries — one Tier-1 license is meaningfully different from zero.",
-          "A broker regulated in your own country's jurisdiction (or a Tier-1 one) gives you a realistic complaint path if something goes wrong.",
-          "Multiple offshore licenses and zero Tier-1 coverage is a pattern worth weighing carefully, not a disqualifier on its own — pair it with the other three checks below.",
+          "Bir brokerın kaç regülatör altında lisans taşıdığını ve hangi ülkelerde olduğunu kontrol edin — bir Tier-1 lisans, sıfır lisanstan anlamlı ölçüde farklıdır.",
+          "Kendi ülkenizin yetki alanında (veya bir Tier-1 ülkede) regüle olan bir broker, bir şeyler ters giderse size gerçekçi bir şikayet yolu sağlar.",
+          "Birden fazla offshore lisans ve sıfır Tier-1 kapsamı, tek başına diskalifiye eden bir durum değil ama dikkatle tartılması gereken bir örüntüdür — aşağıdaki diğer üç kontrolle birlikte değerlendirin.",
         ],
       },
       {
-        heading: "2. Work out the real cost of trading, not just the advertised spread",
+        heading: "2. Sadece reklamdaki spreadi değil, işlemin gerçek maliyetini hesaplayın",
         paragraphs: [
-          "\"Low spreads\" is the most common marketing claim in this industry, and it's also the easiest one to present misleadingly. A broker advertising a 0.0-pip EUR/USD spread on its raw/ECN account almost always charges a separate commission per lot — the all-in cost can end up higher than a \"standard\" account with a wider spread and no commission. You have to add spread and commission together to compare accounts honestly.",
-          "Beyond spread and commission, check: overnight swap/rollover rates if you hold positions past the daily cutoff, inactivity fees if you don't trade for a stretch, and any deposit or withdrawal fees (many reputable brokers don't charge these, which is itself a useful signal).",
-          "Minimum deposit matters less for cost and more for how much room you have to manage risk properly. A $5 minimum deposit sounds appealing, but trading with too little capital relative to position sizing is one of the more common ways new traders get wiped out — it's rarely the broker's fault when that happens, but a broker that only offers products suited to over-leveraged micro accounts isn't doing you any favors either.",
+          "\"Düşük spread\" bu sektördeki en yaygın pazarlama iddiasıdır ve aynı zamanda yanıltıcı şekilde sunulması en kolay olanıdır. Raw/ECN hesabında 0.0 pip EUR/USD spread reklamı yapan bir broker, neredeyse her zaman lot başına ayrı bir komisyon alır — toplam maliyet, daha geniş spreadli ve komisyonsuz bir \"standart\" hesaptan daha yüksek olabilir. Hesapları dürüstçe karşılaştırmak için spread ve komisyonu toplamanız gerekir.",
+          "Spread ve komisyonun ötesinde şunları kontrol edin: pozisyonları günlük kesim saatinden sonra tutarsanız gecelik swap/rollover oranları, bir süre işlem yapmazsanız hareketsizlik ücretleri ve varsa yatırma veya çekme ücretleri (saygın brokerların çoğu bunları almaz, bu da başlı başına faydalı bir sinyaldir).",
+          "Minimum yatırım tutarı maliyet açısından değil, riski düzgün yönetmek için ne kadar alanınız olduğu açısından önemlidir. 5 dolarlık bir minimum yatırım cazip görünür, ancak pozisyon büyüklüğüne göre çok az sermayeyle işlem yapmak, yeni yatırımcıların hesabının sıfırlanmasının en yaygın yollarından biridir — bu genelde brokerın suçu değildir, ama sadece aşırı kaldıraçlı mikro hesaplara uygun ürünler sunan bir broker de size iyilik yapmıyor demektir.",
         ],
       },
       {
-        heading: "3. Test the platform before you fund a live account",
+        heading: "3. Canlı hesaba para yatırmadan önce platformu test edin",
         paragraphs: [
-          "MetaTrader 4 and MetaTrader 5 remain the most widely used retail platforms because they're broker-agnostic — your charting setups, indicators, and expert advisors carry over if you ever switch brokers. cTrader is a common second option favored by some ECN-focused brokers. Many brokers also build a proprietary web or mobile platform on top of one of these, which can be more polished but ties your workflow to that one broker.",
-          "The only way to actually evaluate a platform is to open a demo account and use it: check order execution speed during normal and volatile conditions, whether one-click trading and stop-loss placement feel reliable, and whether the charting and indicator set covers what your strategy needs. A broker's platform is something you'll interact with every trading day — it's worth the twenty minutes it takes to actually try it before committing real funds.",
+          "MetaTrader 4 ve MetaTrader 5, broker bağımsız olmaları nedeniyle en yaygın kullanılan perakende platformlar olmaya devam ediyor — broker değiştirseniz bile grafik ayarlarınız, indikatörleriniz ve uzman danışmanlarınız (EA) sizinle taşınır. cTrader, bazı ECN odaklı brokerların tercih ettiği yaygın bir ikinci seçenektir. Pek çok broker da bunların üzerine kendi web veya mobil platformunu inşa eder; bu daha cilalı olabilir ama iş akışınızı o tek brokera bağlar.",
+          "Bir platformu gerçekten değerlendirmenin tek yolu bir demo hesap açıp kullanmaktır: normal ve volatil koşullarda emir gerçekleştirme hızını, tek tıkla işlem ve zarar durdur yerleştirmenin güvenilir hissedip hissetmediğini, grafik ve indikatör setinin stratejinizin ihtiyacını karşılayıp karşılamadığını kontrol edin. Bir brokerın platformu her işlem gününde etkileşime gireceğiniz bir şeydir — gerçek para yatırmadan önce denemek için harcayacağınız yirmi dakikaya değer.",
         ],
       },
       {
-        heading: "4. Withdrawal speed is the most honest signal a broker gives you",
+        heading: "4. Para çekme hızı, bir brokerın size verdiği en dürüst sinyaldir",
         paragraphs: [
-          "Deposits are always fast — every broker wants your money to arrive quickly. Withdrawals are where the real test happens, because a broker with cash-flow problems or a deliberate strategy to discourage withdrawals will slow-walk them, add unexpected verification hurdles, or bury the process in fine print.",
-          "You don't have to guess. Independent review sites collect real user reports, and recurring withdrawal complaints are one of the clearest red flags a broker can have — much clearer than a marketing page can tell you. If you're evaluating a broker we haven't reviewed, search our own Broker Lookup tool first, then check its name alongside \"withdrawal\" on an independent review site before funding a live account.",
-          "This is exactly why we maintain a dedicated risk-warnings page for brokers whose independent trust scores or complaint patterns stand out — it's built from the same review data, not a separate opinion.",
+          "Yatırımlar her zaman hızlıdır — her broker paranızın hızlıca gelmesini ister. Gerçek sınav para çekmede yaşanır, çünkü nakit akışı sorunu olan veya para çekmeyi caydırmayı amaçlayan bir broker, süreci yavaşlatır, beklenmedik doğrulama engelleri ekler veya süreci küçük yazılarda gizler.",
+          "Tahmin etmenize gerek yok. Bağımsız inceleme siteleri gerçek kullanıcı raporları toplar ve tekrarlayan para çekme şikayetleri, bir brokerın sahip olabileceği en net kırmızı bayraklardan biridir — bir pazarlama sayfasının size söyleyebileceğinden çok daha netdir. İncelemediğimiz bir brokerı değerlendiriyorsanız, önce kendi Broker Sorgulama aracımızda arayın, ardından canlı bir hesaba para yatırmadan önce adını bağımsız bir inceleme sitesinde \"para çekme\" ile birlikte kontrol edin.",
+          "Bağımsız güven puanları veya şikayet örüntüleri öne çıkan brokerlar için özel bir risk uyarıları sayfası tutmamızın tam nedeni de budur — bu sayfa ayrı bir görüşten değil, aynı inceleme verisinden oluşturulur.",
         ],
       },
       {
-        heading: "How this maps to the FXPARTNER Index",
+        heading: "Bu, FXPARTNER Endeksi'yle nasıl örtüşür",
         paragraphs: [
-          "Every broker we review gets a score from 0–10 on exactly these four axes — Regulation, Cost, Platform, and Withdrawals — averaged into a single FXPARTNER Index. The Regulation axis is calculated directly from the number and tier of licenses a broker holds; Cost and Platform are editorial assessments based on the criteria above; Withdrawals is scored from verifiable signals in independent reviews, the same sources mentioned above. A broker with no negative withdrawal signal gets a neutral score on that axis rather than an assumed positive one — we don't guess in a broker's favor.",
-          "You can see the full breakdown, including the reasoning behind each score, on any broker's review page — we show the axis scores, not just the final number, specifically so you can check our work.",
+          "İncelediğimiz her broker, tam olarak bu dört eksende — Regülasyon, Maliyet, Platform ve Para Çekme — 0-10 arası bir puan alır ve bunlar tek bir FXPARTNER Endeksi'nde ortalanır. Regülasyon ekseni doğrudan brokerın taşıdığı lisans sayısı ve seviyesinden hesaplanır; Maliyet ve Platform yukarıdaki kriterlere dayalı editoryal değerlendirmelerdir; Para Çekme, yukarıda bahsedilen aynı kaynaklardan, bağımsız incelemelerdeki doğrulanabilir sinyallerden puanlanır. Olumsuz bir para çekme sinyali olmayan bir broker, o eksende varsayılan bir olumlu puan değil, nötr bir puan alır — bir brokerın lehine tahmin yürütmeyiz.",
+          "Her puanın arkasındaki gerekçe dahil tüm dökümü, herhangi bir brokerın inceleme sayfasında görebilirsiniz — çalışmamızı kontrol edebilmeniz için özellikle sadece nihai sayıyı değil, eksen puanlarını da gösteriyoruz.",
         ],
       },
       {
-        heading: "A practical checklist before you open an account",
+        heading: "Hesap açmadan önce pratik bir kontrol listesi",
         paragraphs: [],
         list: [
-          "Confirm at least one regulator relevant to your own country, ideally Tier-1.",
-          "Add up spread + commission on the account type you'd actually use, not the cheapest one advertised.",
-          "Open a demo account and place a few trades to test execution and platform fit.",
-          "Search the broker's name plus \"withdrawal\" on an independent review site before funding a live account.",
-          "Start with an amount you're fully prepared to lose while you verify the broker's real-world behavior — this applies even to well-regulated brokers.",
+          "Kendi ülkenizle ilgili en az bir regülatörü, tercihen Tier-1 seviyesinde olanı doğrulayın.",
+          "Reklamı yapılan en ucuz hesap türünü değil, gerçekte kullanacağınız hesap türündeki spread + komisyonu toplayın.",
+          "Bir demo hesap açın ve emir gerçekleştirmeyi ve platform uyumunu test etmek için birkaç işlem yapın.",
+          "Canlı bir hesaba para yatırmadan önce brokerın adını \"para çekme\" ile birlikte bağımsız bir inceleme sitesinde arayın.",
+          "Brokerın gerçek dünyadaki davranışını doğrularken, kaybetmeye tamamen hazır olduğunuz bir miktarla başlayın — bu, iyi regüle brokerlar için bile geçerlidir.",
         ],
       },
       {
-        heading: "Where to go from here",
+        heading: "Buradan sonra nereye bakmalı",
         paragraphs: [
-          "If you want the short version of all this pre-applied to real brokers, our broker rankings page runs every listed broker through this exact framework, and our category pages group brokers by what matters most to you specifically — low spreads, high leverage, or brokers with the strongest regulatory coverage. If you're evaluating a broker not listed here, the checklist above works the same way on its own.",
+          "Tüm bunların gerçek brokerlara önceden uygulanmış kısa halini istiyorsanız, broker sıralamalarımız sayfası listelenen her brokerı tam olarak bu çerçeveden geçirir ve kategori sayfalarımız brokerları sizin için en önemli olan şeye göre gruplar — düşük spread, yüksek kaldıraç veya en güçlü regülasyon kapsamına sahip brokerlar. Burada listelenmeyen bir brokerı değerlendiriyorsanız, yukarıdaki kontrol listesi tek başına da aynı şekilde işe yarar.",
         ],
       },
     ],
@@ -110,70 +111,71 @@ export const blogPosts: BlogPost[] = [
     // competing for the same query instead of each owning a distinct one.
     slug: "xm-review",
     coverImage: "/blog/xm-review-cover.png",
-    title: "XM Accounts, Fees & Regulation Explained (2026 Breakdown)",
+    title: "XM Hesapları, Ücretleri ve Regülasyonu Açıklandı (2026 Detaylı İnceleme)",
     excerpt:
-      "A full breakdown of XM's five account types, deposit/withdrawal speed, regulatory licenses, and education tools — the same research behind XM's #1 spot in the FXPARTNER Index.",
+      "XM'in beş hesap türü, yatırma/çekme hızı, regülasyon lisansları ve eğitim araçlarının tam dökümü — XM'in FXPARTNER Endeksi'nde 1. sırada yer almasının arkasındaki aynı araştırma.",
     publishedAt: "2026-07-27",
     readingMinutes: 9,
+    lang: "tr",
     sections: [
       {
         paragraphs: [
-          "XM (XM Global) is the most-chosen broker in the FXPARTNER community, and the #1-ranked broker in the FXPARTNER Index. Founded in 2009 and headquartered across Cyprus and Australia, it has built that position on a genuinely low barrier to entry — a $5 minimum deposit — combined with regulatory coverage and an education program that's unusually extensive for a broker at that price point.",
-          "This review walks through exactly what you get at each account tier, how deposits and withdrawals actually work, and who XM fits best — using the same criteria (regulation, cost, platform, withdrawals) as our broader broker-evaluation framework, so you can check our ranking against the details yourself.",
+          "XM (XM Global), FXPARTNER topluluğunda en çok tercih edilen ve FXPARTNER Endeksi'nde 1. sırada yer alan brokerdir. 2009'da kurulan ve Kıbrıs ile Avustralya'da merkezlere sahip olan şirket, bu konumu gerçekten düşük bir giriş bariyeri — 5 dolarlık minimum yatırım — ile bu fiyat noktasındaki bir broker için alışılmadık derecede kapsamlı bir regülasyon kapsamı ve eğitim programını birleştirerek inşa etti.",
+          "Bu inceleme, her hesap seviyesinde tam olarak ne aldığınızı, yatırma ve çekme işlemlerinin gerçekte nasıl çalıştığını ve XM'in kime en uygun olduğunu — daha geniş broker değerlendirme çerçevemizle aynı kriterleri (regülasyon, maliyet, platform, para çekme) kullanarak — ele alıyor, böylece sıralamamızı detaylarla kendiniz karşılaştırabilirsiniz.",
         ],
       },
       {
-        heading: "Regulation and fund safety",
+        heading: "Regülasyon ve fon güvenliği",
         paragraphs: [
-          "XM holds four regulatory licenses: ASIC (Australia), CySEC (Cyprus), and DFSA (Dubai) are Tier-1 authorities, requiring client-fund segregation and minimum capital reserves; FSC (Belize) is its offshore license. Three Tier-1 licenses alongside an offshore one is a stronger safety net than most brokers in this price range offer.",
-          "Accounts also come with negative balance protection, meaning you can't lose more than you've deposited even during a volatile move that gaps through your stop-loss — a standard feature at regulated brokers, but worth confirming before you fund any account.",
+          "XM dört regülasyon lisansı taşıyor: ASIC (Avustralya), CySEC (Kıbrıs) ve DFSA (Dubai) müşteri fonlarının ayrılmasını ve minimum sermaye rezervini şart koşan Tier-1 otoritelerdir; FSC (Belize) ise offshore lisansıdır. Bir offshore lisansın yanında üç Tier-1 lisans, bu fiyat aralığındaki brokerların çoğunun sunduğundan daha güçlü bir güvenlik ağıdır.",
+          "Hesaplar ayrıca negatif bakiye koruması ile gelir; bu, zarar durdur seviyenizi aşan volatil bir hareket sırasında bile yatırdığınızdan fazlasını kaybedemeyeceğiniz anlamına gelir — regüle brokerlarda standart bir özelliktir, ama herhangi bir hesaba para yatırmadan önce doğrulanmaya değer.",
         ],
       },
       {
-        heading: "Account types and trading costs",
+        heading: "Hesap türleri ve işlem maliyetleri",
         paragraphs: [
-          "XM offers five account types, and the right one depends mostly on how much you trade and how sensitive you are to spread versus commission:",
+          "XM beş hesap türü sunar ve doğru olanı büyük ölçüde ne kadar işlem yaptığınıza ve spread ile komisyona ne kadar duyarlı olduğunuza bağlıdır:",
         ],
         list: [
-          "Micro — spreads from 1.0 pips, no commission, $5 minimum deposit. Trades in micro lots (1,000 units), which makes position sizing easier while you're still learning.",
-          "Standard — the same 1.0-pip-from spread and no-commission structure as Micro, but in full-size lots (100,000 units). Also a $5 minimum deposit.",
-          "XM Ultra Low — built for more active trading, with spreads from 0.6 pips and no added commission. $100 minimum deposit.",
-          "Zero — spreads from 0.0 pips on major pairs, offset by a $3.50-per-lot-per-side commission. This is the account that suits scalpers and high-frequency strategies where the tightest possible spread matters more than a flat no-commission structure. $100 minimum deposit.",
-          "Shares — direct share trading with a per-share commission and no leverage, separate from the CFD-style accounts above.",
+          "Micro — 1.0 pipten başlayan spreadler, komisyon yok, 5 dolar minimum yatırım. Mikro lotlarla (1.000 birim) işlem yapılır, bu da henüz öğrenirken pozisyon büyüklüğü ayarlamayı kolaylaştırır.",
+          "Standard — Micro ile aynı 1.0 pipten başlayan spread ve komisyonsuz yapı, ancak tam boy lotlarla (100.000 birim). Yine 5 dolar minimum yatırım.",
+          "XM Ultra Low — daha aktif işlem için tasarlanmış, 0.6 pipten başlayan spreadler ve ek komisyon yok. 100 dolar minimum yatırım.",
+          "Zero — majör paritelerde 0.0 pipten başlayan spreadler, lot başına ve taraf başına 3,50 dolarlık komisyonla dengelenir. Bu hesap, en dar spreadin sabit komisyonsuz bir yapıdan daha önemli olduğu scalper'lar ve yüksek frekanslı stratejiler için uygundur. 100 dolar minimum yatırım.",
+          "Shares — yukarıdaki CFD tarzı hesaplardan ayrı olarak, hisse başına komisyonlu ve kaldıraçsız doğrudan hisse senedi işlemi.",
         ],
       },
       {
-        heading: "Platforms",
+        heading: "Platformlar",
         paragraphs: [
-          "XM runs on MetaTrader 4 and MetaTrader 5 — both broker-agnostic, so your indicators, expert advisors, and chart setups carry over if you ever open an account elsewhere — plus its own XM App for trading and account management from a phone. There's no proprietary desktop platform beyond MetaTrader, which is a deliberate tradeoff: MT4/MT5 have the largest available library of third-party tools and EAs of any retail platform, at the cost of the more modern interface some brokers build on top of them.",
+          "XM, MetaTrader 4 ve MetaTrader 5 üzerinde çalışır — ikisi de broker bağımsızdır, yani başka bir yerde hesap açsanız bile indikatörleriniz, uzman danışmanlarınız ve grafik ayarlarınız sizinle taşınır — ayrıca telefondan işlem yapmak ve hesap yönetmek için kendi XM App'i vardır. MetaTrader'ın ötesinde özel bir masaüstü platformu yoktur, bu da bilinçli bir tercihtir: MT4/MT5, bazı brokerların üzerlerine inşa ettiği daha modern arayüzden ödün vererek, perakende platformlar arasında en büyük üçüncü taraf araç ve EA kütüphanesine sahiptir.",
         ],
       },
       {
-        heading: "Deposits and withdrawals",
+        heading: "Yatırma ve çekme işlemleri",
         paragraphs: [
-          "Deposits by card or e-wallet (Skrill, Neteller, WebMoney) are typically credited instantly; bank wire transfers take 1-3 business days. XM doesn't charge a deposit fee on any method.",
-          "Withdrawal requests are generally processed within 24 hours on XM's side: e-wallet payouts often land the same day, while card and bank withdrawals take roughly 2-5 business days depending on the provider — the delay at that point is usually the bank's processing time, not XM's. There's no withdrawal fee from XM, though your card issuer or e-wallet provider may apply its own. Withdrawal speed and transparency are exactly the kind of signal we weight most heavily in the FXPARTNER Index's Withdrawals axis, precisely because it's the point where a broker's real behavior — not its marketing page — shows up.",
+          "Kart veya e-cüzdan (Skrill, Neteller, WebMoney) ile yatırımlar genellikle anında hesaba geçer; banka havaleleri 1-3 iş günü sürer. XM hiçbir yöntemde yatırma ücreti almaz.",
+          "Para çekme talepleri genellikle XM tarafında 24 saat içinde işlenir: e-cüzdan ödemeleri çoğu zaman aynı gün ulaşır, kart ve banka çekimleri ise sağlayıcıya bağlı olarak yaklaşık 2-5 iş günü sürer — bu noktadaki gecikme genellikle XM'in değil, bankanın işlem süresidir. XM'den para çekme ücreti alınmaz, ancak kart sağlayıcınız veya e-cüzdan sağlayıcınız kendi ücretini uygulayabilir. Para çekme hızı ve şeffaflığı, tam olarak FXPARTNER Endeksi'nin Para Çekme ekseninde en ağırlıklı değerlendirdiğimiz sinyal türüdür, çünkü bir brokerın pazarlama sayfasının değil gerçek davranışının ortaya çıktığı nokta tam olarak burasıdır.",
         ],
       },
       {
-        heading: "Education and research",
+        heading: "Eğitim ve araştırma",
         paragraphs: [
-          "This is where XM separates itself from most brokers at a $5 minimum deposit. It runs live webinars daily, delivered in multiple languages, covering everything from basic candlestick patterns to more advanced technical strategies, plus a recorded video library through a Tradepedia partnership that's available on-demand. An in-house analyst team also publishes daily technical outlooks and a live economic calendar.",
-          "XM also runs a loyalty program, the XM Traders Club, with five membership tiers (Bronze through Elite) that earn XM Coins on closed positions — a structure that rewards trading volume over time rather than a one-off signup bonus.",
+          "XM'in 5 dolarlık minimum yatırımla brokerların çoğundan ayrıldığı nokta burasıdır. Temel mum formasyonlarından daha ileri teknik stratejilere kadar her şeyi kapsayan, birden fazla dilde sunulan günlük canlı webinarlar düzenler, ayrıca Tradepedia ortaklığı üzerinden talep üzerine erişilebilen kayıtlı bir video kütüphanesi sunar. Bünyesindeki analist ekibi de günlük teknik görünümler ve canlı bir ekonomik takvim yayınlar.",
+          "XM ayrıca kapalı pozisyonlarda XM Coin kazandıran, beş üyelik seviyesine (Bronz'dan Elite'e) sahip bir sadakat programı olan XM Traders Club'ı işletir — bu, tek seferlik bir kayıt bonusu yerine zaman içindeki işlem hacmini ödüllendiren bir yapıdır.",
         ],
       },
       {
-        heading: "Who XM is best for",
+        heading: "XM kimler için en uygun",
         paragraphs: [
-          "XM's combination of a $5 entry point, no-commission Micro/Standard accounts, and daily education makes it a natural fit for beginners who want to learn while trading small size. Its Zero account also gives more active traders a genuine low-spread option once they're ready to scale up, without having to switch brokers.",
-          "If your priority is the absolute tightest raw spread regardless of account minimums, it's worth comparing XM's Zero account against dedicated low-spread brokers in our rankings — XM's strength is the combination of accessibility and education, not necessarily having the single lowest cost on the market.",
+          "XM'in 5 dolarlık giriş noktası, komisyonsuz Micro/Standard hesapları ve günlük eğitiminin birleşimi, küçük hacimlerle işlem yaparken öğrenmek isteyen yeni başlayanlar için doğal bir uyum sağlıyor. Zero hesabı da daha aktif yatırımcılara, broker değiştirmek zorunda kalmadan büyümeye hazır olduklarında gerçek bir düşük spread seçeneği sunuyor.",
+          "Önceliğiniz hesap minimumlarından bağımsız olarak mutlak en dar ham spread ise, XM'in Zero hesabını sıralamalarımızdaki düşük spread odaklı brokerlarla karşılaştırmaya değer — XM'in gücü mutlaka piyasadaki en düşük maliyete sahip olmak değil, erişilebilirlik ve eğitimin birleşimidir.",
         ],
       },
       {
-        heading: "The bottom line",
+        heading: "Sonuç",
         paragraphs: [
-          "XM earns its #1 FXPARTNER Index ranking on the combination of two Tier-1 regulators, a five-tier account structure that scales from a $5 beginner account to a genuine low-spread Zero account, consistently fast withdrawal processing, and an education program most competitors don't match at this price point.",
-          "As with any broker, confirm current spreads, leverage limits for your country, and account terms on XM's official site before funding a live account — this review is a research aid, not investment advice.",
+          "XM, FXPARTNER Endeksi'ndeki 1. sıra konumunu iki Tier-1 regülatörün, 5 dolarlık başlangıç hesabından gerçek bir düşük spread Zero hesabına kadar ölçeklenen beş seviyeli hesap yapısının, sürekli hızlı para çekme işlemesinin ve bu fiyat noktasında rakiplerin çoğunun eşleşemediği bir eğitim programının birleşimiyle kazanıyor.",
+          "Herhangi bir brokerda olduğu gibi, canlı bir hesaba para yatırmadan önce güncel spreadleri, ülkeniz için kaldıraç limitlerini ve hesap şartlarını XM'in resmi sitesinde doğrulayın — bu inceleme bir araştırma yardımcısıdır, yatırım tavsiyesi değildir.",
         ],
       },
     ],

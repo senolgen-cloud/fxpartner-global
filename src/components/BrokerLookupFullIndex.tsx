@@ -19,21 +19,21 @@ import { lookupBrokers, type LookupVerdict } from "@/data/brokerLookup";
 const GROUPS: { verdict: LookupVerdict; heading: string; description: string }[] = [
   {
     verdict: "high-risk",
-    heading: "Flagged High-Risk",
+    heading: "Yüksek Risk Olarak İşaretlendi",
     description:
-      "Named on an official regulator warning/unauthorized-firm list, or a documented scam/clone pattern.",
+      "Resmi bir düzenleyici uyarısı/yetkisiz firma listesinde adı geçiyor veya belgelenmiş bir dolandırıcılık/klon örüntüsü içeriyor.",
   },
   {
     verdict: "caution",
-    heading: "Use Caution",
+    heading: "Dikkatli Olun",
     description:
-      "Legitimate/operating, but with a real reason to dig deeper — offshore-only licensing, a regulator red flag, or a notable complaint pattern.",
+      "Meşru/faaliyette, ancak daha derinlemesine araştırma yapmak için gerçek bir sebep var — yalnızca offshore lisans, bir düzenleyici uyarısı veya dikkate değer bir şikayet örüntüsü.",
   },
   {
     verdict: "verified",
-    heading: "Verified / Regulated",
+    heading: "Doğrulanmış / Düzenlenmiş",
     description:
-      "Holds real Tier-1 and/or multi-jurisdiction regulation, with no major regulator warnings found at time of research.",
+      "Gerçek Tier-1 ve/veya çoklu yargı bölgesi düzenlemesine sahip, araştırma sırasında büyük bir düzenleyici uyarısı bulunamadı.",
   },
 ];
 
@@ -41,11 +41,11 @@ export default function BrokerLookupFullIndex() {
   return (
     <div className="mt-8 space-y-4">
       <h2 className="font-display text-lg font-semibold text-text-dark">
-        Browse the full list
+        Tam listeye göz atın
       </h2>
       <p className="text-sm text-text-muted">
-        Every broker in our lookup database, grouped by verdict — expand a
-        section to browse without searching.
+        Sorgulama veritabanımızdaki her aracı kurum, değerlendirmeye göre
+        gruplandırılmış — aramadan göz atmak için bir bölümü genişletin.
       </p>
       {GROUPS.map((group) => {
         const entries = lookupBrokers.filter((b) => b.verdict === group.verdict);
@@ -74,16 +74,16 @@ export default function BrokerLookupFullIndex() {
                     <dd className="mt-1.5 text-sm leading-relaxed text-text-dark/90">{b.note}</dd>
                     <dd className="mt-2 flex flex-wrap items-center gap-2 text-xs text-text-muted">
                       {b.regulators && b.regulators.length > 0 && (
-                        <span>Regulators: {b.regulators.join(", ")}</span>
+                        <span>Düzenleyiciler: {b.regulators.join(", ")}</span>
                       )}
-                      <span className="font-mono">Source: {b.source}</span>
+                      <span className="font-mono">Kaynak: {b.source}</span>
                       {b.relatedSlug && (
                         <Link
                           href={`/brokers/${b.relatedSlug}`}
-                          title={`${b.name} full review`}
+                          title={`${b.name} tam incelemesi`}
                           className="font-mono uppercase tracking-[0.1em] text-signal transition-colors hover:text-signal-strong"
                         >
-                          Full review →
+                          Tam inceleme →
                         </Link>
                       )}
                     </dd>

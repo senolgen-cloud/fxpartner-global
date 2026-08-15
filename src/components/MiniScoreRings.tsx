@@ -89,21 +89,21 @@ export default function MiniScoreRings({
   return (
     <div className="flex shrink-0 items-start gap-3">
       <Ring
-        label="Reg"
+        label="Reg."
         score={scores.regulation}
         mounted={mounted}
         mutedClass={mutedClass}
         labelClass={labelClass}
       />
       <Ring
-        label="Cost"
+        label="Mly."
         score={scores.cost}
         mounted={mounted}
         mutedClass={mutedClass}
         labelClass={labelClass}
       />
       <Ring
-        label="Wd."
+        label="Çek."
         score={scores.withdrawal}
         mounted={mounted}
         mutedClass={mutedClass}

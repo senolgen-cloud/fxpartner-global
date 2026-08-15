@@ -18,8 +18,8 @@ const features: { key: string; icon: ReactNode; title: string; body: string }[] 
         <path d="M7.5 7.5a6.5 6.5 0 0 0 0 9M16.5 7.5a6.5 6.5 0 0 1 0 9M4.5 4.5a10.5 10.5 0 0 0 0 15M19.5 4.5a10.5 10.5 0 0 1 0 15" />
       </svg>
     ),
-    title: "FX Signals",
-    body: "Real-time trading opportunities.",
+    title: "FX Sinyalleri",
+    body: "Gerçek zamanlı işlem fırsatları.",
   },
   {
     key: "ai",
@@ -29,8 +29,8 @@ const features: { key: string; icon: ReactNode; title: string; body: string }[] 
         <path d="M9 6.2a2.5 2.5 0 0 0-4.4 1.6A2.6 2.6 0 0 0 3 10.3a2.6 2.6 0 0 0 1.5 2.4A2.6 2.6 0 0 0 7 16.3h2" />
       </svg>
     ),
-    title: "AI Analysis",
-    body: "AI-powered market insights.",
+    title: "Yapay Zeka Analizi",
+    body: "Yapay zeka destekli piyasa içgörüleri.",
   },
   {
     key: "calendar",
@@ -41,8 +41,8 @@ const features: { key: string; icon: ReactNode; title: string; body: string }[] 
         <path d="M8 13.5h.01M12 13.5h.01M16 13.5h.01M8 17h.01M12 17h.01" />
       </svg>
     ),
-    title: "Economic Calendar",
-    body: "Stay ahead with real-time economic events.",
+    title: "Ekonomik Takvim",
+    body: "Gerçek zamanlı ekonomik olaylarla önde kalın.",
   },
   {
     key: "brokers",
@@ -52,8 +52,8 @@ const features: { key: string; icon: ReactNode; title: string; body: string }[] 
         <path d="M9 12l2 2 4-4" />
       </svg>
     ),
-    title: "Trusted Brokers",
-    body: "Partnered with leading global brokers.",
+    title: "Güvenilir Brokerlar",
+    body: "Önde gelen küresel brokerlarla ortaklık.",
   },
   {
     key: "community",
@@ -65,8 +65,8 @@ const features: { key: string; icon: ReactNode; title: string; body: string }[] 
         <path d="M14.5 14.5c2.3.2 4 1.8 4.5 4.5" />
       </svg>
     ),
-    title: "Trading Community",
-    body: "Connect. Share. Grow together.",
+    title: "Trading Topluluğu",
+    body: "Bağlan. Paylaş. Birlikte büyü.",
   },
 ];
 

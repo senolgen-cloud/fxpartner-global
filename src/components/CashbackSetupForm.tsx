@@ -13,12 +13,12 @@ export default function CashbackSetupForm({ brokerSlug }: { brokerSlug: string }
     return (
       <div className="rounded-2xl border border-hairline-light bg-paper p-8 text-center">
         <h2 className="font-poppins text-2xl font-semibold text-text-dark">
-          You&apos;re set up
+          Kurulum tamamlandı
         </h2>
         <p className="mt-3 text-text-muted">
-          We&apos;ll verify your account against our partner dashboard and
-          start tracking your cashback. If you have an FXPARTNER account,
-          you can also check its status from your account page.
+          Hesabınızı partner panelimizle doğrulayıp kazanç iadenizi takip
+          etmeye başlayacağız. Bir FXPARTNER hesabınız varsa, durumunu
+          hesap sayfanızdan da kontrol edebilirsiniz.
         </p>
       </div>
     );
@@ -28,7 +28,7 @@ export default function CashbackSetupForm({ brokerSlug }: { brokerSlug: string }
     <form action={formAction} className="flex flex-col gap-5">
       <div>
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Full Name
+          Ad Soyad
         </label>
         <input
           name="fullName"
@@ -38,7 +38,7 @@ export default function CashbackSetupForm({ brokerSlug }: { brokerSlug: string }
       </div>
       <div>
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Email
+          E-posta
         </label>
         <input
           name="email"
@@ -49,25 +49,25 @@ export default function CashbackSetupForm({ brokerSlug }: { brokerSlug: string }
       </div>
       <div>
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Trading Account Number
+          İşlem Hesap Numarası
         </label>
         <input
           name="accountNumber"
           required
-          placeholder="e.g. 12345678"
+          placeholder="örn. 12345678"
           className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
         />
         <p className="mt-1.5 text-xs text-text-muted">
-          Open this account through our link first if you haven&apos;t
-          already — cashback only applies to accounts referred by
-          FXPARTNER.
+          Henüz açmadıysanız bu hesabı önce bizim bağlantımız üzerinden
+          açın — kazanç iadesi yalnızca FXPARTNER tarafından yönlendirilen
+          hesaplar için geçerlidir.
         </p>
       </div>
 
       <label className="flex items-start gap-2 text-xs leading-relaxed text-text-muted">
         <input type="checkbox" name="marketingOptIn" className="mt-0.5" />
-        Yes, email me about relevant promotions and campaigns. (Optional —
-        not required to receive cashback.)
+        Evet, ilgili tanıtım ve kampanyalar hakkında bana e-posta gönderin.
+        (İsteğe bağlı — kazanç iadesi almak için gerekli değildir.)
       </label>
 
       {state.error && <p className="text-sm text-alert">{state.error}</p>}
@@ -77,13 +77,13 @@ export default function CashbackSetupForm({ brokerSlug }: { brokerSlug: string }
         disabled={pending}
         className="rounded-full bg-signal px-6 py-3 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
       >
-        {pending ? "Submitting…" : "Set Up Cashback"}
+        {pending ? "Gönderiliyor…" : "Cashback Kurulumunu Tamamla"}
       </button>
 
       <p className="text-xs leading-relaxed text-text-muted">
-        We use this information to verify your account with the broker and
-        track your cashback. It won&apos;t be used for anything else unless
-        you check the box above.
+        Bu bilgileri hesabınızı aracı kurumla doğrulamak ve kazanç
+        iadenizi takip etmek için kullanıyoruz. Yukarıdaki kutuyu
+        işaretlemediğiniz sürece başka bir amaç için kullanılmaz.
       </p>
     </form>
   );

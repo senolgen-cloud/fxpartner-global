@@ -9,17 +9,17 @@ const VERDICT_META: Record<
   { label: string; badgeClass: string; icon: string }
 > = {
   verified: {
-    label: "Verified / Regulated",
+    label: "Doğrulanmış / Düzenlenmiş",
     badgeClass: "border-tick-up/30 bg-tick-up/10 text-tick-up",
     icon: "✓",
   },
   caution: {
-    label: "Caution",
+    label: "Dikkat",
     badgeClass: "border-gold/30 bg-gold/10 text-gold",
     icon: "!",
   },
   "high-risk": {
-    label: "High Risk — Avoid",
+    label: "Yüksek Risk — Kaçının",
     badgeClass: "border-alert/30 bg-alert/10 text-alert",
     icon: "✕",
   },
@@ -50,7 +50,7 @@ export default function BrokerLookupSearch({ initialQuery = "" }: { initialQuery
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Type a broker name (e.g. XM, Octa, Trade360...)"
+          placeholder="Bir aracı kurum adı yazın (örn. XM, Octa, Trade360...)"
           className="w-full rounded-2xl border border-hairline-light bg-paper-high px-5 py-4 text-base text-text-dark placeholder:text-text-muted focus:border-signal focus:outline-none"
           autoComplete="off"
         />
@@ -58,8 +58,8 @@ export default function BrokerLookupSearch({ initialQuery = "" }: { initialQuery
 
       {query.trim() === "" && (
         <p className="mt-4 text-sm text-text-muted">
-          {lookupBrokers.length} brokers in our searchable database. Start
-          typing a name above to search.
+          Aranabilir veritabanımızda {lookupBrokers.length} aracı kurum var.
+          Aramak için yukarıya bir isim yazmaya başlayın.
         </p>
       )}
 
@@ -67,28 +67,28 @@ export default function BrokerLookupSearch({ initialQuery = "" }: { initialQuery
         <div className="mt-6 rounded-2xl border border-hairline-light bg-paper p-6">
           <p className="text-[15px] leading-relaxed text-text-dark/90">
             <strong className="text-text-dark">
-              &ldquo;{query}&rdquo; isn&apos;t in our database yet.
+              &ldquo;{query}&rdquo; henüz veritabanımızda yok.
             </strong>{" "}
-            That doesn&apos;t mean it&apos;s trustworthy — it means we
-            haven&apos;t researched it. Before funding an account, check:
+            Bu, güvenilir olduğu anlamına gelmez — henüz araştırmadığımız
+            anlamına gelir. Hesap açmadan önce şunları kontrol edin:
           </p>
           <ul className="mt-4 space-y-2">
             <li className="flex gap-3 text-[15px] text-text-dark/90">
               <span className="mt-1 text-signal">–</span>
-              Search the broker&apos;s name on your own country&apos;s
-              regulator website (or FCA, ASIC, CySEC) to confirm it&apos;s
-              actually licensed.
+              Gerçekten lisanslı olduğunu teyit etmek için aracı kurumun
+              adını kendi ülkenizin düzenleyici web sitesinde (veya FCA,
+              ASIC, CySEC&apos;te) arayın.
             </li>
             <li className="flex gap-3 text-[15px] text-text-dark/90">
               <span className="mt-1 text-signal">–</span>
-              Search the broker&apos;s name together with &ldquo;scam&rdquo;
-              or &ldquo;withdrawal&rdquo; on independent review sites to
-              check for recurring complaint patterns.
+              Tekrarlayan şikayet örüntülerini kontrol etmek için aracı
+              kurumun adını &ldquo;scam&rdquo; veya &ldquo;withdrawal&rdquo;
+              kelimeleriyle birlikte bağımsız inceleme sitelerinde arayın.
             </li>
             <li className="flex gap-3 text-[15px] text-text-dark/90">
               <span className="mt-1 text-signal">–</span>
-              Promises like &ldquo;guaranteed returns&rdquo; or
-              &ldquo;risk-free trading&rdquo; are always a red flag.
+              &ldquo;Garantili getiri&rdquo; veya &ldquo;risksiz işlem&rdquo;
+              gibi vaatler her zaman kırmızı bayraktır.
             </li>
           </ul>
         </div>
@@ -127,16 +127,16 @@ export default function BrokerLookupSearch({ initialQuery = "" }: { initialQuery
                     </div>
                   )}
                   <span className="font-mono text-[11px] text-text-muted">
-                    Source: {b.source}
+                    Kaynak: {b.source}
                   </span>
                 </div>
                 {b.relatedSlug && (
                   <Link
                     href={`/brokers/${b.relatedSlug}`}
-                    title={`${b.name} full review`}
+                    title={`${b.name} tam incelemesi`}
                     className="mt-3 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal transition-colors hover:text-signal-strong"
                   >
-                    See full review →
+                    Tam incelemeyi gör →
                   </Link>
                 )}
               </div>

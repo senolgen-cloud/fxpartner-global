@@ -19,30 +19,30 @@ export default function SignInForm({
   return (
     <form action={formAction} className="mt-8 flex flex-col gap-3">
       <div>
-        <label className={labelClass}>Full Name</label>
+        <label className={labelClass}>Ad Soyad</label>
         <input name="fullName" required className={fieldClass} />
       </div>
       <div>
-        <label className={labelClass}>Phone</label>
+        <label className={labelClass}>Telefon</label>
         <input name="phone" type="tel" required className={fieldClass} />
       </div>
       <div>
-        <label className={labelClass}>Email</label>
+        <label className={labelClass}>E-posta</label>
         <input
           name="email"
           type="email"
           required
-          placeholder="you@example.com"
+          placeholder="siz@ornek.com"
           className={fieldClass}
         />
       </div>
       <div>
         <label className={labelClass}>
-          Which broker do you trade with?{" "}
-          <span className="normal-case text-text-on-ink-muted/70">(optional)</span>
+          Hangi aracı kurumla işlem yapıyorsunuz?{" "}
+          <span className="normal-case text-text-on-ink-muted/70">(isteğe bağlı)</span>
         </label>
         <select name="preferredBroker" defaultValue="" className={fieldClass}>
-          <option value="">Prefer not to say</option>
+          <option value="">Belirtmek istemiyorum</option>
           {brokers.map((b) => (
             <option key={b.slug} value={b.slug}>
               {b.name}
@@ -58,7 +58,7 @@ export default function SignInForm({
         disabled={pending}
         className="mt-2 rounded-full bg-signal px-5 py-3 text-sm font-semibold text-ink shadow-[0_0_24px_-4px_var(--signal)] transition-colors hover:bg-signal-strong disabled:opacity-60"
       >
-        {pending ? "Sending…" : "Send sign-in link"}
+        {pending ? "Gönderiliyor…" : "Giriş bağlantısı gönder"}
       </button>
     </form>
   );

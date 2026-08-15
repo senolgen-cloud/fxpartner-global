@@ -5,8 +5,8 @@ import { breadcrumbSchema } from "@/lib/schema";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export const metadata: Metadata = {
-  title: "Terms of Service",
-  description: "The terms that apply to using fxpartner.global.",
+  title: "Kullanım Şartları",
+  description: "fxpartner.global kullanımına ilişkin şartlar.",
   alternates: { canonical: "/terms" },
 };
 
@@ -18,8 +18,8 @@ export default function TermsPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
-              { name: "Terms of Service", url: `${SITE_URL}/terms` },
+              { name: "Ana Sayfa", url: SITE_URL },
+              { name: "Kullanım Şartları", url: `${SITE_URL}/terms` },
             ])
           ),
         }}
@@ -28,13 +28,13 @@ export default function TermsPage() {
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-3xl px-6 py-16">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Legal
+              Yasal
             </span>
             <h1 className="mt-4 font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Terms of Service
+              Kullanım Şartları
             </h1>
             <p className="mt-4 font-mono text-xs text-text-on-ink-muted">
-              Last updated: July 2026
+              Son güncelleme: Temmuz 2026
             </p>
           </div>
         </section>
@@ -42,92 +42,94 @@ export default function TermsPage() {
         <section>
           <article className="mx-auto max-w-3xl px-6 py-16 text-[15px] leading-relaxed text-text-dark/90">
             <p>
-              These terms apply when you use fxpartner.global. By using the
-              site, you agree to them. If you don&apos;t agree, please don&apos;t
-              use the site.
+              Bu şartlar fxpartner.global&apos;i kullandığınızda geçerlidir.
+              Siteyi kullanarak bunları kabul etmiş olursunuz. Kabul
+              etmiyorsanız lütfen siteyi kullanmayın.
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Not investment advice
+              Yatırım tavsiyesi değildir
             </h2>
             <p className="mt-4">
-              FXPARTNER publishes broker reviews, rankings, comparisons, and
-              general educational content about forex and CFD trading. None
-              of it is personal investment, financial, or legal advice.
-              Trading leveraged forex and derivative products carries a
-              high level of risk and can result in the loss of all your
-              invested capital. Do your own research and, if needed,
-              consult a licensed professional before trading with any
-              broker.
+              FXPARTNER; broker incelemeleri, sıralamaları, karşılaştırmaları
+              ve forex ile CFD ticareti hakkında genel eğitim içeriği
+              yayınlar. Bunların hiçbiri kişisel yatırım, finansal veya
+              hukuki tavsiye niteliği taşımaz. Kaldıraçlı forex ve türev
+              ürünlerle işlem yapmak yüksek düzeyde risk taşır ve yatırdığınız
+              sermayenin tamamının kaybına yol açabilir. Herhangi bir
+              brokerla işlem yapmadan önce kendi araştırmanızı yapın ve
+              gerekirse lisanslı bir uzmana danışın.
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Affiliate relationships
+              Ortaklık (affiliate) ilişkileri
             </h2>
             <p className="mt-4">
-              FXPARTNER has a partnership/referral relationship with some
-              of the brokers listed on this site and may earn a commission
-              when you open an account through our links, at no extra cost
-              to you. This does not influence our scoring criteria —
-              including for brokers we partner with.
+              FXPARTNER, bu sitede listelenen bazı brokerlarla ortaklık/yönlendirme
+              ilişkisi içindedir ve bağlantılarımız üzerinden hesap açtığınızda,
+              size ek bir maliyet çıkmadan komisyon kazanabilir. Bu durum
+              puanlama kriterlerimizi etkilemez — ortaklık kurduğumuz
+              brokerlar dahil.
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Accounts
+              Hesaplar
             </h2>
             <p className="mt-4">
-              You&apos;re responsible for the accuracy of the information you
-              submit when creating an account, filing a complaint, or
-              signing up for cashback, and for keeping access to your email
-              inbox secure, since that&apos;s how you sign in.
+              Hesap oluştururken, şikayet bildirirken veya cashback için
+              kaydolurken gönderdiğiniz bilgilerin doğruluğundan ve giriş
+              yapmak için kullandığınız e-posta gelen kutunuzun güvenliğini
+              sağlamaktan siz sorumlusunuz.
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Comments
+              Yorumlar
             </h2>
             <p className="mt-4">
-              When you leave a comment on a broker review, you&apos;re
-              confirming it reflects your genuine experience or opinion. We
-              may remove comments that are false, abusive, spam, or
-              unrelated to the broker being reviewed.
+              Bir broker incelemesine yorum bıraktığınızda, bunun gerçek
+              deneyiminizi veya görüşünüzü yansıttığını onaylamış olursunuz.
+              Yanlış, kötüye kullanım içeren, spam niteliğinde veya
+              incelenen brokerla ilgisi olmayan yorumları kaldırabiliriz.
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Complaints and cashback
+              Şikayetler ve cashback
             </h2>
             <p className="mt-4">
-              Submitting a complaint doesn&apos;t guarantee a resolution or
-              compensation — FXPARTNER isn&apos;t a regulator and can&apos;t force a
-              broker to act. Cashback is paid by the relevant broker
-              directly into your trading account, based on your real
-              trading volume; published rates are estimates and may change.
-              We track cashback manually against our own partner records
-              and aren&apos;t responsible for delays on the broker&apos;s side.
+              Şikayet göndermek bir çözüm veya tazminat garantisi vermez —
+              FXPARTNER bir regülatör değildir ve bir brokerı harekete
+              geçmeye zorlayamaz. Cashback, gerçek işlem hacminize dayalı
+              olarak ilgili broker tarafından doğrudan işlem hesabınıza
+              ödenir; yayınlanan oranlar tahminidir ve değişebilir.
+              Cashback&apos;i kendi ortaklık kayıtlarımıza karşı manuel olarak
+              takip ederiz ve brokerdan kaynaklanan gecikmelerden sorumlu
+              değiliz.
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Risk warnings page
+              Risk uyarıları sayfası
             </h2>
             <p className="mt-4">
-              Our risk-warnings page flags brokers based on independent
-              trust scores and complaint patterns found in published
-              reviews. It&apos;s a signal for further research, not a legal
-              finding of wrongdoing.
+              Risk uyarıları sayfamız, yayınlanan incelemelerde bulunan
+              bağımsız güven puanlarına ve şikayet örüntülerine dayanarak
+              brokerları işaretler. Bu, daha fazla araştırma için bir sinyaldir,
+              yasal bir suistimal tespiti değildir.
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Changes
+              Değişiklikler
             </h2>
             <p className="mt-4">
-              We may update these terms or our broker rankings, scoring, or
-              content at any time as new information becomes available.
+              Yeni bilgiler edindikçe bu şartları veya broker sıralamalarımızı,
+              puanlamamızı ya da içeriğimizi herhangi bir zamanda
+              güncelleyebiliriz.
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Contact
+              İletişim
             </h2>
             <p className="mt-4">
-              Questions about these terms? Email{" "}
+              Bu şartlarla ilgili sorularınız mı var? E-posta gönderin:{" "}
               <a href="mailto:info@fxpartner.global" className="text-signal hover:text-signal-strong">
                 info@fxpartner.global
               </a>
@@ -135,10 +137,10 @@ export default function TermsPage() {
             </p>
 
             <p className="mt-10 rounded-2xl border border-hairline-light bg-paper p-5 text-sm text-text-muted">
-              These terms describe how the site actually operates in plain
-              language. They aren&apos;t a substitute for formal legal review —
-              have a qualified lawyer review them if you need specific
-              regulatory or liability protections for your jurisdiction.
+              Bu şartlar, sitenin fiilen nasıl işlediğini sade bir dille
+              açıklar. Resmi bir hukuki incelemenin yerini tutmaz — bulunduğunuz
+              yargı bölgesi için özel regülasyon veya sorumluluk korumalarına
+              ihtiyacınız varsa, şartları yetkili bir avukata inceletin.
             </p>
           </article>
         </section>

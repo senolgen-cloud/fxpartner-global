@@ -91,21 +91,21 @@ export default function CommissionCalculator() {
     <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
       <div className="space-y-8">
         <SliderField
-          label="Referred traders"
+          label="Referans edilen yatırımcı"
           value={referredTraders}
           min={1}
           max={200}
           onChange={setReferredTraders}
         />
         <SliderField
-          label="Avg. lots per trader / month"
+          label="Ort. lot / yatırımcı / ay"
           value={avgLots}
           min={1}
           max={20}
           onChange={setAvgLots}
         />
         <SliderField
-          label="Commission per lot"
+          label="Lot başına komisyon"
           value={commissionPerLot}
           min={1}
           max={15}
@@ -116,22 +116,22 @@ export default function CommissionCalculator() {
 
       <div className="rounded-3xl border border-hairline-light bg-paper-high p-8">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
-          Estimated monthly revenue
+          Tahmini aylık gelir
         </p>
         <p className="mt-2 font-display text-4xl font-semibold text-text-dark">
           <AnimatedNumber value={monthly} prefix="$" />
         </p>
         <div className="my-6 h-px bg-hairline-light" />
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
-          Estimated yearly revenue
+          Tahmini yıllık gelir
         </p>
         <p className="mt-2 font-display text-3xl font-semibold text-signal">
           <AnimatedNumber value={yearly} prefix="$" />
         </p>
         <p className="mt-6 text-xs leading-relaxed text-text-muted">
-          Illustrative example only. Actual commission rates and payout
-          terms are confirmed per broker agreement once you&apos;re
-          approved as a partner.
+          Yalnızca örnek amaçlıdır. Gerçek komisyon oranları ve ödeme
+          koşulları, partner olarak onaylandıktan sonra aracı kurum
+          anlaşmasına göre belirlenir.
         </p>
       </div>
     </div>

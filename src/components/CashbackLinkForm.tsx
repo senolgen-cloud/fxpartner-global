@@ -16,8 +16,8 @@ export default function CashbackLinkForm({
   if (state.ok) {
     return (
       <p className="rounded-xl border border-hairline-light bg-paper p-4 text-sm text-text-muted">
-        Account submitted. We&apos;ll verify it against our partner dashboard
-        and confirm here once it&apos;s active.
+        Hesap gönderildi. Partner panelimizle doğrulayıp aktif olduğunda
+        burada onaylayacağız.
       </p>
     );
   }
@@ -26,7 +26,7 @@ export default function CashbackLinkForm({
     <form action={formAction} className="flex flex-col gap-3 sm:flex-row sm:items-end">
       <div className="flex-1">
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Broker
+          Aracı Kurum
         </label>
         <select
           name="brokerSlug"
@@ -35,7 +35,7 @@ export default function CashbackLinkForm({
           className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-3 py-2.5 text-sm text-text-dark outline-none focus:border-signal"
         >
           <option value="" disabled>
-            Select a broker
+            Bir aracı kurum seçin
           </option>
           {cashbackPrograms.map((p) => (
             <option key={p.brokerSlug} value={p.brokerSlug}>
@@ -46,12 +46,12 @@ export default function CashbackLinkForm({
       </div>
       <div className="flex-1">
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Trading Account Number
+          İşlem Hesap Numarası
         </label>
         <input
           name="accountNumber"
           required
-          placeholder="e.g. 12345678"
+          placeholder="örn. 12345678"
           className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-3 py-2.5 text-sm text-text-dark outline-none focus:border-signal"
         />
       </div>
@@ -60,7 +60,7 @@ export default function CashbackLinkForm({
         disabled={pending}
         className="rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
       >
-        {pending ? "Linking…" : "Link Account"}
+        {pending ? "Bağlanıyor…" : "Hesabı Bağla"}
       </button>
       {state.error && <p className="text-xs text-alert sm:basis-full">{state.error}</p>}
     </form>

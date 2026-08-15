@@ -3,13 +3,13 @@ import { partnerTiers } from "@/data/partnerProgram";
 // Illustrative preview data only — this is a mock of what a partner's own
 // dashboard looks like, not a live feed of real referral activity.
 const recentActivity = [
-  { client: "Partner Client #041", country: "AE", lots: 6.2, commission: 31 },
-  { client: "Partner Client #037", country: "DE", lots: 3.4, commission: 17 },
-  { client: "Partner Client #052", country: "SG", lots: 9.1, commission: 46 },
-  { client: "Partner Client #029", country: "TR", lots: 4.8, commission: 24 },
-  { client: "Partner Client #063", country: "ZA", lots: 2.1, commission: 11 },
-  { client: "Partner Client #018", country: "BR", lots: 7.6, commission: 38 },
-  { client: "Partner Client #044", country: "GB", lots: 5.0, commission: 25 },
+  { client: "Partner Müşterisi #041", country: "AE", lots: 6.2, commission: 31 },
+  { client: "Partner Müşterisi #037", country: "DE", lots: 3.4, commission: 17 },
+  { client: "Partner Müşterisi #052", country: "SG", lots: 9.1, commission: 46 },
+  { client: "Partner Müşterisi #029", country: "TR", lots: 4.8, commission: 24 },
+  { client: "Partner Müşterisi #063", country: "ZA", lots: 2.1, commission: 11 },
+  { client: "Partner Müşterisi #018", country: "BR", lots: 7.6, commission: 38 },
+  { client: "Partner Müşterisi #044", country: "GB", lots: 5.0, commission: 25 },
 ];
 
 const currentTierIndex = 2; // "Gold" — illustrative example partner
@@ -36,12 +36,12 @@ export default function PartnerDashboardPreview() {
             FXPARTNER
           </span>
           <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-            Partner Dashboard · Illustrative preview
+            Partner Paneli · Örnek önizleme
           </p>
         </div>
         <div className="rounded-xl border border-gold/30 bg-gold/10 px-3 py-2 text-right">
           <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-gold">
-            This Month
+            Bu Ay
           </p>
           <p className="font-poppins text-xl font-bold text-gold">$1,240</p>
         </div>
@@ -49,7 +49,7 @@ export default function PartnerDashboardPreview() {
 
       <div className="mt-6">
         <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-          Recent Referral Activity
+          Son Referans Etkinliği
         </p>
         <div className="relative mt-2 h-[220px] overflow-hidden rounded-xl border border-hairline bg-ink/60">
           <div
@@ -89,7 +89,7 @@ export default function PartnerDashboardPreview() {
             {referredClients}
           </p>
           <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-            Referred Clients
+            Referans Edilen Müşteri
           </p>
         </div>
         <div>
@@ -97,7 +97,7 @@ export default function PartnerDashboardPreview() {
             $340
           </p>
           <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-            Pending Payout
+            Bekleyen Ödeme
           </p>
         </div>
         <div>
@@ -105,7 +105,7 @@ export default function PartnerDashboardPreview() {
             {currentTier.name}
           </p>
           <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-            Current Tier
+            Mevcut Seviye
           </p>
         </div>
       </div>

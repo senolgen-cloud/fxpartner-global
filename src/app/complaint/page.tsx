@@ -7,9 +7,9 @@ import { breadcrumbSchema } from "@/lib/schema";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export const metadata: Metadata = {
-  title: "File a Complaint",
+  title: "Şikayet Bildir",
   description:
-    "Had a problem with a forex broker? Tell us what happened and we'll try to get it resolved.",
+    "Bir forex aracı kurumuyla sorun mu yaşadınız? Bize ne olduğunu anlatın, çözüme kavuşturmaya çalışalım.",
   alternates: { canonical: "/complaint" },
 };
 
@@ -21,8 +21,8 @@ export default function ComplaintPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
-              { name: "File a Complaint", url: `${SITE_URL}/complaint` },
+              { name: "Ana Sayfa", url: SITE_URL },
+              { name: "Şikayet Bildir", url: `${SITE_URL}/complaint` },
             ])
           ),
         }}
@@ -31,15 +31,15 @@ export default function ComplaintPage() {
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-3xl px-6 py-16">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Complaints
+              Şikayetler
             </span>
             <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Had a problem with a broker?
+              Bir aracı kurumla sorun mu yaşadınız?
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              Tell us what happened. We review every complaint, try to reach
-              out to the broker within 48 hours, and follow up with you by
-              email on what we find.
+              Bize ne olduğunu anlatın. Her şikayeti inceliyor, 48 saat
+              içinde aracı kurumla iletişime geçmeye çalışıyor ve
+              bulgularımızı size e-posta ile bildiriyoruz.
             </p>
           </div>
         </section>
@@ -48,10 +48,11 @@ export default function ComplaintPage() {
           <div className="mx-auto max-w-2xl px-6 py-16">
             <ComplaintForm brokers={brokers.map((b) => ({ slug: b.slug, name: b.name }))} />
             <p className="mt-8 text-xs leading-relaxed text-text-muted">
-              FXPARTNER is not a regulator and cannot force a broker to
-              respond or compensate you. We forward verified complaints to
-              the broker and publish patterns we see in our reviews. For
-              formal/legal action, contact your local financial regulator.
+              FXPARTNER bir düzenleyici kurum değildir ve bir aracı kurumu
+              yanıt vermeye veya sizi tazmin etmeye zorlayamaz. Doğrulanmış
+              şikayetleri ilgili aracı kuruma iletir ve incelemelerimizde
+              gördüğümüz eğilimleri yayınlarız. Resmi/hukuki işlem için
+              yerel finansal düzenleyici kurumunuzla iletişime geçin.
             </p>
           </div>
         </section>

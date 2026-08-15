@@ -24,7 +24,7 @@ function Card({ broker }: { broker: Broker }) {
   return (
     <Link
       href={`/brokers/${broker.slug}`}
-      title={`${broker.name} review — ${broker.tagline}`}
+      title={`${broker.name} incelemesi — ${broker.tagline}`}
       className="group flex w-[248px] shrink-0 items-center gap-3.5 rounded-2xl border border-hairline bg-ink-soft/70 p-4 transition-colors hover:border-signal/50 hover:bg-ink-soft"
     >
       <div className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-ink p-2">

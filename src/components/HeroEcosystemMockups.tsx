@@ -76,7 +76,7 @@ function SignalCardBody({ signal }: { signal: TradeSignal }) {
       ) : (
         <p className="mt-2 font-display text-2xl font-bold tabular-stat text-text-on-ink">
           {signal.entry}
-          <span className="ml-2 text-sm font-medium text-text-on-ink-muted">entry</span>
+          <span className="ml-2 text-sm font-medium text-text-on-ink-muted">giriş</span>
         </p>
       )}
       <svg viewBox="0 0 200 40" className={`mt-3 h-9 w-full ${isSell ? "text-tick-down" : "text-tick-up"}`} fill="none">
@@ -90,7 +90,7 @@ function SignalCardBody({ signal }: { signal: TradeSignal }) {
       </svg>
       <div className="mt-3 flex items-center justify-between border-t border-hairline pt-3 font-mono text-[11px]">
         <span className="text-text-on-ink-muted">
-          {isClosed ? "Close" : "Entry"} <span className="text-text-on-ink">{isClosed ? signal.closePrice : signal.entry}</span>
+          {isClosed ? "Kapanış" : "Giriş"} <span className="text-text-on-ink">{isClosed ? signal.closePrice : signal.entry}</span>
         </span>
         {signal.target1 && <span className="text-tick-up">TP {signal.target1}</span>}
         {signal.stop && <span className="text-tick-down">SL {signal.stop}</span>}
@@ -113,7 +113,7 @@ export default function HeroEcosystemMockups({
       {/* Forex Signals */}
       <Link href="/signals" className="block transition-opacity hover:opacity-90">
         <CardShell
-          label="Forex Signals"
+          label="Forex Sinyalleri"
           icon={
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
               <circle cx="12" cy="12" r="2.2" />
@@ -125,7 +125,7 @@ export default function HeroEcosystemMockups({
             <SignalCardBody signal={latestSignal} />
           ) : (
             <p className="py-6 text-center text-xs text-text-on-ink-muted">
-              No signals yet — check back soon.
+              Henüz sinyal yok — yakında tekrar kontrol edin.
             </p>
           )}
         </CardShell>
@@ -134,7 +134,7 @@ export default function HeroEcosystemMockups({
       {/* AI Market Assistant */}
       <Link href="/ai-asistan" className="block transition-opacity hover:opacity-90">
         <CardShell
-          label="AI Market Assistant"
+          label="Yapay Zeka Piyasa Asistanı"
           icon={
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
               <rect x="4" y="5" width="16" height="11" rx="2.5" />
@@ -144,16 +144,16 @@ export default function HeroEcosystemMockups({
         >
           <div className="flex justify-end">
             <p className="max-w-[85%] rounded-xl rounded-tr-sm bg-ink px-3 py-2 text-[11px] leading-relaxed text-text-on-ink">
-              What happens if CPI comes lower?
+              CPI daha düşük gelirse ne olur?
             </p>
           </div>
           <p className="mt-2 max-w-[90%] rounded-xl rounded-tl-sm bg-signal/10 px-3 py-2 text-[11px] leading-relaxed text-text-on-ink-muted">
-            Lower CPI usually weakens the USD and may lead to bullish momentum
-            in EURUSD, Gold and other risk assets.
+            Daha düşük CPI genellikle USD'yi zayıflatır ve EURUSD, Altın ve
+            diğer risk varlıklarında yükseliş momentumuna yol açabilir.
           </p>
           <div className="mt-3 flex items-center gap-2 rounded-full border border-hairline-light px-3 py-2">
             <span className="flex-1 truncate text-[11px] text-text-on-ink-muted">
-              Ask anything about the markets…
+              Piyasalar hakkında ne isterseniz sorun…
             </span>
             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-signal text-on-signal">
               <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
@@ -166,7 +166,7 @@ export default function HeroEcosystemMockups({
 
       {/* Trusted Brokers */}
       <CardShell
-        label="Trusted Brokers"
+        label="Güvenilir Brokerlar"
         icon={
           <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 3l7 3v5c0 4.6-3 8.4-7 9.9-4-1.5-7-5.3-7-9.9V6l7-3z" />
@@ -179,7 +179,7 @@ export default function HeroEcosystemMockups({
             <li key={broker.slug}>
               <Link
                 href={`/brokers/${broker.slug}`}
-                title={`${broker.name} broker review`}
+                title={`${broker.name} broker incelemesi`}
                 className="group flex items-center gap-2.5 rounded-lg transition-colors hover:bg-ink-soft"
               >
                 <span className="relative flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-ink text-[10px] font-semibold text-text-on-ink">
@@ -193,7 +193,7 @@ export default function HeroEcosystemMockups({
                   {broker.name}
                 </span>
                 <span className="flex shrink-0 items-center gap-1 text-[10px] text-text-on-ink-muted">
-                  Verified
+                  Onaylı
                   <svg viewBox="0 0 24 24" className="h-3 w-3 text-signal" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
@@ -206,7 +206,7 @@ export default function HeroEcosystemMockups({
           href="/broker-lookup"
           className="mt-3 flex items-center justify-between border-t border-hairline pt-3 text-[11px] font-medium text-signal transition-colors hover:text-signal-strong"
         >
-          View All Brokers
+          Tüm Brokerları Görüntüle
           <span aria-hidden="true">→</span>
         </Link>
       </CardShell>

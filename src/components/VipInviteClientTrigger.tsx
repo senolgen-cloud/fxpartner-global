@@ -18,7 +18,7 @@ export default function VipInviteClientTrigger({
         const url = await action();
         setLink(url);
       } catch {
-        setError("Could not generate an invite link. Please try again.");
+        setError("Davet bağlantısı oluşturulamadı. Lütfen tekrar deneyin.");
       }
     });
   }
@@ -31,7 +31,7 @@ export default function VipInviteClientTrigger({
         rel="noopener noreferrer"
         className="mt-4 inline-block rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
       >
-        Join FXPARTNER VIP →
+        FXPARTNER VIP'e Katıl →
       </a>
     );
   }
@@ -44,7 +44,7 @@ export default function VipInviteClientTrigger({
         disabled={pending}
         className="rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
       >
-        {pending ? "Generating…" : "Get my invite link"}
+        {pending ? "Oluşturuluyor…" : "Davet bağlantımı al"}
       </button>
       {error && <p className="mt-2 text-xs text-alert">{error}</p>}
     </div>

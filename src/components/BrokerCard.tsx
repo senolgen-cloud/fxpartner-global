@@ -53,7 +53,7 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
                 <span className="notranslate">{broker.name}</span>
               </h3>
               <p className="mt-1 truncate text-sm text-text-muted">
-                Best for {broker.bestFor.charAt(0).toLowerCase() + broker.bestFor.slice(1)}
+                En iyi {broker.bestFor.charAt(0).toLowerCase() + broker.bestFor.slice(1)}
               </p>
             </div>
           </div>
@@ -68,14 +68,14 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
               rel="noopener noreferrer sponsored"
               className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft hover:shadow-lg hover:shadow-ink/20"
             >
-              Open Account
+              Hesap Aç
             </a>
             <Link
               href={`/brokers/${broker.slug}`}
-              title={`${broker.name} full review`}
+              title={`${broker.name} tam inceleme`}
               className="rounded-full border border-hairline-light px-5 py-2.5 text-sm font-medium text-text-dark transition-colors hover:border-text-dark"
             >
-              Full Review →
+              Tam İnceleme →
             </Link>
           </div>
         </div>

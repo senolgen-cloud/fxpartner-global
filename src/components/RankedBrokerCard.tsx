@@ -55,7 +55,7 @@ function CardBody({ broker, featured }: { broker: Broker; featured: boolean }) {
               <span className="notranslate">{broker.name}</span>
             </h3>
             <p className="mt-1 truncate text-sm text-text-on-ink-muted">
-              Best for {broker.bestFor.charAt(0).toLowerCase() + broker.bestFor.slice(1)}
+              En iyi {broker.bestFor.charAt(0).toLowerCase() + broker.bestFor.slice(1)}
             </p>
           </div>
         </div>
@@ -74,14 +74,14 @@ function CardBody({ broker, featured }: { broker: Broker; featured: boolean }) {
             rel="noopener noreferrer sponsored"
             className="lift-on-hover rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
           >
-            Open Account
+            Hesap Aç
           </a>
           <Link
             href={`/brokers/${broker.slug}`}
-            title={`${broker.name} full review`}
+            title={`${broker.name} tam inceleme`}
             className="rounded-full border border-hairline px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:border-text-on-ink"
           >
-            Full Review →
+            Tam İnceleme →
           </Link>
         </div>
       </div>
@@ -102,7 +102,7 @@ export default function RankedBrokerCard({
         <TiltWrapper>
           <div className="featured-card-ring relative overflow-hidden rounded-3xl border border-gold/30 bg-gradient-to-b from-ink-soft to-ink p-5 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)] sm:p-6 md:p-8">
             <span className="absolute right-6 top-6 hidden rounded-full border border-gold/40 bg-gold/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-gold sm:inline-block">
-              Top Rated
+              En Yüksek Puan
             </span>
             <CardBody broker={broker} featured />
           </div>

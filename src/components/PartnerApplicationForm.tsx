@@ -9,11 +9,11 @@ import {
 const initialState: PartnerApplicationFormState = { ok: false };
 
 const audienceOptions = [
-  { value: "social_media", label: "Social media following (Instagram, YouTube, X…)" },
-  { value: "signal_group", label: "Trading signal / community group" },
-  { value: "website", label: "My own website or blog" },
-  { value: "offline_network", label: "Personal / offline network of traders" },
-  { value: "other", label: "Other" },
+  { value: "social_media", label: "Sosyal medya takipçi kitlesi (Instagram, YouTube, X…)" },
+  { value: "signal_group", label: "Sinyal / topluluk grubu" },
+  { value: "website", label: "Kendi web sitem veya blogum" },
+  { value: "offline_network", label: "Kişisel / çevrimdışı yatırımcı ağı" },
+  { value: "other", label: "Diğer" },
 ];
 
 export default function PartnerApplicationForm({
@@ -27,12 +27,12 @@ export default function PartnerApplicationForm({
     return (
       <div className="rounded-2xl border border-hairline-light bg-paper p-8 text-center">
         <h2 className="font-display text-2xl font-semibold text-text-dark">
-          Application received
+          Başvurunuz alındı
         </h2>
         <p className="mt-3 text-text-muted">
-          Thank you. Our partnerships team reviews every application and will
-          reach out by email to walk through the Sub-IB setup for the broker
-          you&apos;re interested in.
+          Teşekkür ederiz. Ortaklıklar ekibimiz her başvuruyu inceler ve
+          ilgilendiğiniz aracı kurum için Sub-IB kurulumunu anlatmak üzere
+          e-posta ile sizinle iletişime geçer.
         </p>
       </div>
     );
@@ -42,7 +42,7 @@ export default function PartnerApplicationForm({
     <form action={formAction} className="flex flex-col gap-5">
       <div>
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Full Name
+          Ad Soyad
         </label>
         <input
           name="fullName"
@@ -53,7 +53,7 @@ export default function PartnerApplicationForm({
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-            Email
+            E-posta
           </label>
           <input
             name="email"
@@ -64,7 +64,7 @@ export default function PartnerApplicationForm({
         </div>
         <div>
           <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-            Phone
+            Telefon
           </label>
           <input
             name="phone"
@@ -77,7 +77,7 @@ export default function PartnerApplicationForm({
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-            Country
+            Ülke
           </label>
           <input
             name="country"
@@ -87,14 +87,14 @@ export default function PartnerApplicationForm({
         </div>
         <div>
           <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-            Preferred Broker
+            Tercih Edilen Aracı Kurum
           </label>
           <select
             name="brokerSlug"
             defaultValue=""
             className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
           >
-            <option value="">No preference / not sure yet</option>
+            <option value="">Tercihim yok / henüz emin değilim</option>
             {brokers.map((b) => (
               <option key={b.slug} value={b.slug}>
                 {b.name}
@@ -105,7 +105,7 @@ export default function PartnerApplicationForm({
       </div>
       <div>
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          How do you reach potential clients?
+          Potansiyel müşterilere nasıl ulaşıyorsunuz?
         </label>
         <select
           name="audienceType"
@@ -114,7 +114,7 @@ export default function PartnerApplicationForm({
           className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
         >
           <option value="" disabled>
-            Select an option
+            Bir seçenek belirleyin
           </option>
           {audienceOptions.map((o) => (
             <option key={o.value} value={o.value}>
@@ -125,22 +125,23 @@ export default function PartnerApplicationForm({
       </div>
       <div>
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Tell us about your audience and plan
+          Kitleniz ve planınız hakkında bize bilgi verin
         </label>
         <textarea
           name="message"
           required
           rows={5}
           minLength={20}
-          placeholder="Roughly how many people you reach, how active they are as traders, and how you'd introduce them to a broker."
+          placeholder="Yaklaşık kaç kişiye ulaştığınız, bu kişilerin yatırımcı olarak ne kadar aktif olduğu ve onları bir aracı kuruma nasıl yönlendireceğiniz."
           className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
         />
       </div>
 
       <label className="flex items-start gap-2 text-xs leading-relaxed text-text-muted">
         <input type="checkbox" required className="mt-0.5" />
-        I understand this is an application, not a guarantee of approval or
-        income, and I consent to FXPARTNER contacting me about it.
+        Bunun bir başvuru olduğunu, onay veya gelir garantisi vermediğini
+        anlıyorum ve FXPARTNER'ın bu konuda benimle iletişime geçmesine
+        onay veriyorum.
       </label>
 
       {state.error && <p className="text-sm text-alert">{state.error}</p>}
@@ -150,7 +151,7 @@ export default function PartnerApplicationForm({
         disabled={pending}
         className="rounded-full bg-signal px-6 py-3 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
       >
-        {pending ? "Submitting…" : "Apply as a Partner"}
+        {pending ? "Gönderiliyor…" : "Partner Olarak Başvur"}
       </button>
     </form>
   );

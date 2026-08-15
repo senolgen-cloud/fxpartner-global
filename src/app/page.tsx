@@ -39,68 +39,68 @@ const lowestMinDeposit = Math.min(
 const steps = [
   {
     n: "01",
-    title: "Check the regulation",
-    body: "Brokers overseen by top-tier (Tier-1) authorities like the FCA, ASIC, or CySEC offer a stronger framework for the safety of your funds.",
+    title: "Regülasyonu kontrol edin",
+    body: "FCA, ASIC veya CySEC gibi üst düzey (Tier-1) otoriteler tarafından denetlenen brokerlar, fonlarınızın güvenliği için daha güçlü bir çerçeve sunar.",
   },
   {
     n: "02",
-    title: "Compare the cost structure",
-    body: "Weigh spread, commission, and overnight swap rates together — a low spread is sometimes offset by a higher commission.",
+    title: "Maliyet yapısını karşılaştırın",
+    body: "Spread, komisyon ve gecelik swap oranlarını birlikte değerlendirin — düşük bir spread bazen daha yüksek bir komisyonla dengelenir.",
   },
   {
     n: "03",
-    title: "Test the platform and tools",
-    body: "Open a demo account to see whether the MT4, MT5, or cTrader interface fits your own strategy.",
+    title: "Platformu ve araçları test edin",
+    body: "MT4, MT5 veya cTrader arayüzünün kendi stratejinize uyup uymadığını görmek için bir demo hesap açın.",
   },
   {
     n: "04",
-    title: "Try the withdrawal process",
-    body: "Starting with a small deposit and watching the speed and transparency of your first withdrawal request is the best way to test long-term trust.",
+    title: "Para çekme sürecini deneyin",
+    body: "Küçük bir depozitle başlayıp ilk para çekme talebinizin hızını ve şeffaflığını izlemek, uzun vadeli güveni test etmenin en iyi yoludur.",
   },
 ];
 
 const accountSteps = [
-  "Pick a broker from the ranking above whose regulation and cost profile matches your risk tolerance.",
-  "Complete the broker's KYC form with your ID and proof of address — most Tier-1 regulated brokers require this before your first deposit.",
-  "Fund the account with the minimum deposit first, not your full trading capital, so you can evaluate execution quality risk-free.",
-  "Open the platform (MT4, MT5, or the broker's own app) in demo mode and confirm spreads and order execution match what's advertised.",
+  "Yukarıdaki sıralamadan, regülasyonu ve maliyet profili risk toleransınıza uyan bir broker seçin.",
+  "Broker'ın KYC formunu kimliğiniz ve adres belgenizle tamamlayın — çoğu Tier-1 regüle broker ilk depozitten önce bunu ister.",
+  "Hesabı önce tüm işlem sermayenizle değil, minimum depozit ile fonlayın; böylece riske girmeden işlem kalitesini değerlendirebilirsiniz.",
+  "Platformu (MT4, MT5 veya broker'ın kendi uygulaması) demo modunda açın ve spread ile emir gerçekleştirmenin reklamı yapılanla eşleştiğini doğrulayın.",
 ];
 
 const withdrawalSteps = [
-  "Request a small withdrawal first — the amount matters less than observing the broker's actual processing time.",
-  "Use the same payment method you deposited with; most regulated brokers require this for anti-money-laundering compliance.",
-  "Track the time from request to funds received: same-day to 3 business days is typical for reputable brokers, longer delays are a warning sign.",
-  "Keep the confirmation email or transaction ID — it's your reference if you need to dispute a delay with the broker or your regulator.",
+  "Önce küçük bir para çekme talebinde bulunun — tutardan çok broker'ın gerçek işlem süresini gözlemlemek önemlidir.",
+  "Depozit yaptığınız aynı ödeme yöntemini kullanın; çoğu regüle broker kara para aklamayı önleme uyumluluğu için bunu şart koşar.",
+  "Talepten paranın ulaşmasına kadar geçen süreyi takip edin: güvenilir brokerlarda aynı gün ile 3 iş günü arası tipiktir, daha uzun gecikmeler uyarı işaretidir.",
+  "Onay e-postasını veya işlem numarasını saklayın — broker'la veya regülatörünüzle bir gecikmeyi tartışmanız gerekirse referansınız olur.",
 ];
 
 const faqs = [
   {
-    q: "What is the FXPARTNER Index and how is it calculated?",
-    a: "The FXPARTNER Index is a composite score from 0-10, calculated from the four criteria in the 01-04 guide below (Regulation, Cost, Platform, Withdrawals). The Platform axis is computed automatically from the broker's platform data. The Regulation axis is derived from license data by default; the editorial team may update this score when it makes a reasoned exception. The Cost and Withdrawals axes are editorial judgments based on verifiable signals found in the review — brokers with no specific signal get a neutral score on that axis. The Index is a separate measure from the star rating; the two can reflect different things.",
+    q: "FXPARTNER Endeksi nedir ve nasıl hesaplanır?",
+    a: "FXPARTNER Endeksi, aşağıdaki 01-04 rehberindeki dört kriterden (Regülasyon, Maliyet, Platform, Para Çekme) hesaplanan 0-10 arası bileşik bir puandır. Platform ekseni, broker'ın platform verilerinden otomatik olarak hesaplanır. Regülasyon ekseni varsayılan olarak lisans verilerinden türetilir; editör ekibi gerekçeli bir istisna yaptığında bu puanı güncelleyebilir. Maliyet ve Para Çekme eksenleri, incelemede bulunan doğrulanabilir sinyallere dayalı editoryal değerlendirmelerdir — belirli bir sinyali olmayan brokerlar o eksende nötr bir puan alır. Endeks, yıldız puanlamasından ayrı bir ölçüdür; ikisi farklı şeyleri yansıtabilir.",
   },
   {
-    q: "How is this ranking determined?",
-    a: "It's an assessment based on general criteria around regulatory quality, cost transparency, platform variety, and fit for the investor's profile. FXPARTNER has a partnership/referral relationship with some of the listed brokers and may earn a commission on account openings; this is noted separately on each broker card.",
+    q: "Bu sıralama nasıl belirleniyor?",
+    a: "Regülasyon kalitesi, maliyet şeffaflığı, platform çeşitliliği ve yatırımcı profiline uygunluk gibi genel kriterlere dayalı bir değerlendirmedir. FXPARTNER, listelenen brokerların bazılarıyla ortaklık/referans ilişkisine sahiptir ve hesap açılışlarından komisyon kazanabilir; bu durum her broker kartında ayrıca belirtilir.",
   },
   {
-    q: "Which broker is best for beginners?",
-    a: "For a low minimum deposit and extensive educational content, XM generally offers an easier start; Lite Finance also stands out for its low barrier to entry.",
+    q: "Yeni başlayanlar için en iyi broker hangisi?",
+    a: "Düşük minimum depozit ve kapsamlı eğitim içeriği için XM genellikle daha kolay bir başlangıç sunar; Lite Finance de düşük giriş bariyeriyle öne çıkar.",
   },
   {
-    q: "Why do leverage ratios vary by country?",
-    a: "In regions like the EU and UK, ESMA/FCA regulations cap leverage for retail investors, while offshore-licensed accounts can offer much higher ratios. The figures on this page may vary by region.",
+    q: "Kaldıraç oranları ülkeye göre neden değişir?",
+    a: "AB ve İngiltere gibi bölgelerde ESMA/FCA regülasyonları perakende yatırımcılar için kaldıracı sınırlarken, offshore lisanslı hesaplar çok daha yüksek oranlar sunabilir. Bu sayfadaki rakamlar bölgeye göre değişebilir.",
   },
   {
-    q: "Does this site give investment advice?",
-    a: "No. The content is for general informational purposes only and is not personal investment advice. You should do your own research and consult a professional if needed before making a decision.",
+    q: "Bu site yatırım tavsiyesi veriyor mu?",
+    a: "Hayır. İçerik yalnızca genel bilgilendirme amaçlıdır ve kişisel yatırım tavsiyesi değildir. Karar vermeden önce kendi araştırmanızı yapmalı ve gerekirse bir uzmana danışmalısınız.",
   },
   {
-    q: "How are the trade signals generated, and how accurate are they?",
-    a: "Signals combine automated technical screening (trend, momentum, and volatility indicators across major pairs) with a manual review pass before publication. Every signal carries an entry, stop-loss, and take-profit level so its outcome is objectively checkable — closed signals stay visible on the signals page with their result, win or loss. Past performance does not guarantee future results, and signals are educational in nature, not personalized advice.",
+    q: "İşlem sinyalleri nasıl oluşturuluyor ve ne kadar doğru?",
+    a: "Sinyaller, önde gelen paritelerde trend, momentum ve volatilite göstergelerini içeren otomatik teknik taramayı, yayından önce yapılan manuel bir incelemeyle birleştirir. Her sinyalde giriş, zarar durdur ve kâr al seviyesi bulunur; böylece sonucu nesnel olarak kontrol edilebilir — kapanan sinyaller, kazanç veya kayıp sonucuyla birlikte sinyaller sayfasında görünür kalır. Geçmiş performans gelecekteki sonuçları garanti etmez ve sinyaller kişiselleştirilmiş tavsiye değil, eğitim amaçlıdır.",
   },
   {
-    q: "What are the risks of forex trading?",
-    a: "Forex trading uses leverage, which magnifies both gains and losses — you can lose more than your initial deposit depending on the account type and jurisdiction. Spreads and swaps widen during high-volatility events, and offshore-regulated accounts carry weaker investor-protection guarantees than Tier-1 regulated ones. Only trade with capital you can afford to lose, and use a demo account before committing real funds.",
+    q: "Forex ticaretinin riskleri nelerdir?",
+    a: "Forex ticareti kaldıraç kullanır; bu hem kazançları hem de kayıpları büyütür — hesap türüne ve yargı alanına bağlı olarak ilk depozitinizden daha fazlasını kaybedebilirsiniz. Yüksek volatilite dönemlerinde spread ve swap'lar genişler, offshore regüleli hesaplar Tier-1 regüleli hesaplara göre daha zayıf yatırımcı koruma garantileri taşır. Yalnızca kaybetmeyi göze alabileceğiniz sermayeyle işlem yapın ve gerçek fon yatırmadan önce bir demo hesap kullanın.",
   },
 ];
 
@@ -147,22 +147,22 @@ export default async function Home() {
                   aria-hidden="true"
                   className="signal-dot h-1.5 w-1.5 rounded-full bg-signal"
                 />
-                Learn · Trade · Grow
+                Öğren · İşlem Yap · Büyü
               </span>
             </Reveal>
 
             <Reveal delay={90}>
               <h1 className="mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
-                Forex signals, market analysis, and broker comparison.{" "}
-                <span className="text-signal">One trading ecosystem.</span>
+                Forex sinyalleri, piyasa analizi ve broker karşılaştırması.{" "}
+                <span className="text-signal">Tek bir trading ekosistemi.</span>
               </h1>
             </Reveal>
 
             <Reveal delay={180}>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-                FXPARTNER is your all-in-one platform for smarter trading.
-                Signals, AI insights, economic calendar, trusted brokers and
-                a global community.
+                FXPARTNER, daha akıllı işlem yapmanız için hepsi bir arada
+                platformdur. Sinyaller, yapay zeka içgörüleri, ekonomik
+                takvim, güvenilir brokerlar ve küresel bir topluluk.
               </p>
             </Reveal>
 
@@ -178,13 +178,13 @@ export default async function Home() {
                   href="#brokers"
                   className="lift-on-hover rounded-full bg-gradient-to-b from-signal to-signal-strong px-6 py-3 text-sm font-medium text-on-signal shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25)] transition-shadow hover:shadow-lg hover:shadow-signal/30"
                 >
-                  Explore the Ecosystem
+                  Ekosistemi Keşfet
                 </a>
                 <a
                   href="#comparison"
                   className="lift-on-hover rounded-full border border-hairline px-6 py-3 text-sm font-medium text-text-on-ink transition-colors hover:border-text-on-ink"
                 >
-                  Comparison Table
+                  Karşılaştırma Tablosu
                 </a>
               </div>
             </Reveal>
@@ -215,15 +215,15 @@ export default async function Home() {
           <div className="mx-auto max-w-6xl px-6 py-20">
             <Reveal className="mx-auto max-w-2xl text-center">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-                Rankings
+                Sıralamalar
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-on-ink md:text-4xl">
-                The {brokers.length} most-chosen forex brokers of 2026
+                2026'nın en çok tercih edilen {brokers.length} forex brokeri
               </h2>
               <p className="mt-4 text-text-on-ink-muted">
-                Each broker was assessed on regulatory strength, cost
-                structure, platform support, and fit for different investor
-                profiles.
+                Her broker; regülasyon gücü, maliyet yapısı, platform desteği
+                ve farklı yatırımcı profillerine uygunluk açısından
+                değerlendirildi.
               </p>
             </Reveal>
 
@@ -251,7 +251,7 @@ export default async function Home() {
               <dl className="mx-auto grid max-w-3xl grid-cols-2 gap-8 text-center sm:grid-cols-4">
                 <div>
                   <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    Brokers Tracked
+                    Takip Edilen Broker
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
                     <AnimatedStat value={trackedBrokerCount} />
@@ -259,7 +259,7 @@ export default async function Home() {
                 </div>
                 <div>
                   <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    Regulatory Authorities
+                    Regülasyon Otoritesi
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
                     <AnimatedStat value={trackedRegulatorCount} suffix="+" />
@@ -267,7 +267,7 @@ export default async function Home() {
                 </div>
                 <div>
                   <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    Lowest Entry
+                    En Düşük Giriş
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
                     <AnimatedStat value={lowestMinDeposit} prefix="$" />
@@ -275,7 +275,7 @@ export default async function Home() {
                 </div>
                 <div>
                   <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    Comparison Criteria
+                    Karşılaştırma Kriteri
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
                     <AnimatedStat value={COMPARISON_CRITERIA.length} />
@@ -293,22 +293,22 @@ export default async function Home() {
           <div className="mx-auto max-w-6xl px-6 py-20">
             <Reveal className="mx-auto max-w-2xl text-center">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-                Side by Side
+                Yan Yana
               </span>
               <h2 className="mt-3 font-display text-3xl font-semibold text-text-on-ink md:text-4xl">
-                Comparison table
+                Karşılaştırma tablosu
               </h2>
               <p className="mt-4 text-text-on-ink-muted">
-                See the key numbers at a glance before you decide.
+                Karar vermeden önce önemli rakamları tek bakışta görün.
               </p>
             </Reveal>
             <Reveal delay={120} className="mt-10">
               <ComparisonTable />
             </Reveal>
             <p className="mt-6 max-w-2xl font-mono text-xs leading-relaxed text-text-on-ink-muted">
-              * Leverage and minimum deposit figures may vary by account type
-              and the investor&apos;s country. Verify current terms on the
-              broker&apos;s official website before trading.
+              * Kaldıraç ve minimum depozit rakamları hesap türüne ve
+              yatırımcının ülkesine göre değişebilir. İşlem yapmadan önce
+              güncel koşulları broker&apos;ın resmi web sitesinden doğrulayın.
             </p>
           </div>
         </section>
@@ -318,15 +318,15 @@ export default async function Home() {
           <div className="mx-auto max-w-6xl px-6 py-20">
             <Reveal className="mx-auto max-w-2xl text-center">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
-                Guide
+                Rehber
               </span>
               <h2 className="mt-3 font-display text-3xl font-semibold text-text-dark md:text-4xl">
-                How to choose a broker?
+                Broker nasıl seçilir?
               </h2>
               <p className="mt-4 text-text-muted">
-                These four criteria are scored from 0-10 on every broker
-                profile as the{" "}
-                <strong className="font-medium text-text-dark">FXPARTNER Index</strong>.
+                Bu dört kriter, her broker profilinde{" "}
+                <strong className="font-medium text-text-dark">FXPARTNER Endeksi</strong>{" "}
+                olarak 0-10 arası puanlanır.
               </p>
             </Reveal>
             <div className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2">
@@ -354,21 +354,21 @@ export default async function Home() {
           <div className="mx-auto max-w-6xl px-6 py-20">
             <Reveal className="mx-auto max-w-2xl text-center">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-                Walkthrough
+                Adım Adım
               </span>
               <h2 className="mt-3 font-display text-3xl font-semibold text-text-on-ink md:text-4xl">
-                Opening an account and your first withdrawal
+                Hesap açma ve ilk para çekme işleminiz
               </h2>
               <p className="mt-4 text-text-on-ink-muted">
-                The same two moments decide most trust issues with a new
-                broker. Here&apos;s what to check at each one.
+                Yeni bir brokerla ilgili güven sorunlarının çoğu aynı iki anda
+                belirlenir. İşte her birinde nelere dikkat etmeniz gerektiği.
               </p>
             </Reveal>
 
             <div className="mt-12 grid gap-10 md:grid-cols-2">
               <div>
                 <h3 className="font-display text-lg font-semibold text-text-on-ink">
-                  Opening an account
+                  Hesap açma
                 </h3>
                 <ol className="mt-4 space-y-4">
                   {accountSteps.map((step, i) => (
@@ -385,7 +385,7 @@ export default async function Home() {
               </div>
               <div>
                 <h3 className="font-display text-lg font-semibold text-text-on-ink">
-                  Your first withdrawal
+                  İlk para çekme işleminiz
                 </h3>
                 <ol className="mt-4 space-y-4">
                   {withdrawalSteps.map((step, i) => (
@@ -405,14 +405,14 @@ export default async function Home() {
             <Reveal delay={120} className="mt-12">
               <div className="rounded-2xl border border-gold/30 bg-gold/5 p-6">
                 <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-gold">
-                  Risk warning
+                  Risk uyarısı
                 </p>
                 <p className="mt-2 max-w-3xl text-[14px] leading-relaxed text-text-on-ink-muted">
-                  Forex trading is leveraged and carries a high risk of
-                  losing your capital quickly. Never deposit more than you
-                  can afford to lose, and treat every step above — KYC,
-                  first deposit, first withdrawal — as a test before
-                  committing further funds.
+                  Forex ticareti kaldıraçlıdır ve sermayenizi hızla kaybetme
+                  riski taşır. Kaybetmeyi göze alamayacağınızdan fazlasını
+                  asla yatırmayın ve yukarıdaki her adımı — KYC, ilk depozit,
+                  ilk para çekme — daha fazla fon yatırmadan önce bir test
+                  olarak değerlendirin.
                 </p>
               </div>
             </Reveal>
@@ -426,10 +426,10 @@ export default async function Home() {
           <div className="mx-auto max-w-3xl px-6 py-20">
             <Reveal className="text-center">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
-                FAQ
+                SSS
               </span>
               <h2 className="mt-3 font-display text-3xl font-semibold text-text-dark md:text-4xl">
-                Frequently asked questions
+                Sıkça sorulan sorular
               </h2>
             </Reveal>
             <div className="mt-10 divide-y divide-hairline-light border-t border-hairline-light">

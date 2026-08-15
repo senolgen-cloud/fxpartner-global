@@ -23,21 +23,21 @@ export default function LoginPage() {
             {/* Form side */}
             <div className="p-8 md:p-12">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
-                Account
+                Hesap
               </span>
               <h1 className="mt-3 font-display text-3xl font-semibold text-text-on-ink">
-                Sign in to FXPARTNER
+                FXPARTNER&apos;a giriş yapın
               </h1>
               <p className="mt-3 text-text-on-ink-muted">
-                Tell us a bit about yourself and we&apos;ll send you a
-                one-time sign-in link. No password needed.
+                Bize kendinizden biraz bahsedin, size tek kullanımlık bir
+                giriş bağlantısı gönderelim. Şifreye gerek yok.
               </p>
 
               <SignInForm brokers={brokers.map((b) => ({ slug: b.slug, name: b.name }))} />
 
               <p className="mt-6 text-xs leading-relaxed text-text-on-ink-muted">
-                By signing in you get access to broker reviews, complaint
-                tracking, and an invite to the FXPARTNER VIP Telegram group.
+                Giriş yaparak broker incelemelerine, şikayet takibine ve
+                FXPARTNER VIP Telegram grubuna davete erişim kazanırsınız.
               </p>
             </div>
 
@@ -52,13 +52,13 @@ export default function LoginPage() {
             >
               <div className="flex h-full flex-col items-center justify-center px-8 text-center">
                 <span className="text-4xl font-bold uppercase tracking-tight text-text-on-ink">
-                  Welcome
+                  Tekrar
                   <br />
-                  Back
+                  Hoş Geldiniz
                 </span>
                 <p className="mt-4 text-sm text-text-on-ink/80">
-                  Broker reviews, cashback tracking, and VIP Telegram access —
-                  all in one place.
+                  Broker incelemeleri, cashback takibi ve VIP Telegram
+                  erişimi — hepsi tek bir yerde.
                 </p>
               </div>
             </div>

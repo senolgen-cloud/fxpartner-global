@@ -11,7 +11,7 @@ export default function GlobalNetworkMap() {
         viewBox="0 0 100 60"
         className="h-auto w-full"
         role="img"
-        aria-label="Stylized diagram of FXPARTNER's partner network spanning Europe, MENA, Asia-Pacific, Africa, and the Americas"
+        aria-label="FXPARTNER'ın Avrupa, MENA, Asya-Pasifik, Afrika ve Amerika kıtalarına yayılan partner ağının stilize diyagramı"
       >
         {networkArcs.map(([fromKey, toKey], i) => {
           const from = getRegion(fromKey);

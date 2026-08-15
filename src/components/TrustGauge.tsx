@@ -8,9 +8,9 @@ const RADIUS = (SIZE - STROKE) / 2;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
 function toneForScore(score: number): { stroke: string; text: string; label: string } {
-  if (score >= 7.5) return { stroke: "var(--tick-up)", text: "text-tick-up", label: "Strong" };
-  if (score >= 5) return { stroke: "var(--gold)", text: "text-gold", label: "Fair" };
-  return { stroke: "var(--alert)", text: "text-alert", label: "Weak" };
+  if (score >= 7.5) return { stroke: "var(--tick-up)", text: "text-tick-up", label: "Güçlü" };
+  if (score >= 5) return { stroke: "var(--gold)", text: "text-gold", label: "Orta" };
+  return { stroke: "var(--alert)", text: "text-alert", label: "Zayıf" };
 }
 
 export default function TrustGauge({ score }: { score: number }) {
@@ -57,7 +57,7 @@ export default function TrustGauge({ score }: { score: number }) {
             {score.toFixed(1)}
           </span>
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-            / 10 Index
+            / 10 Endeks
           </span>
         </div>
       </div>
@@ -66,7 +66,7 @@ export default function TrustGauge({ score }: { score: number }) {
         <path d="M9 12l2 2 4-4" />
       </svg>
       <span className={`mt-1.5 font-mono text-[11px] uppercase tracking-[0.2em] ${tone.text}`}>
-        {tone.label} Trust Signal
+        {tone.label} Güven Sinyali
       </span>
     </div>
   );

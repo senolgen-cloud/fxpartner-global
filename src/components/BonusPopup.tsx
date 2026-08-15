@@ -9,23 +9,23 @@ const DISMISS_KEY = "fxpartner-bonus-popup-dismissed";
 const PROMOS = [
   {
     slug: "xm",
-    headline: "100% Bonus for New Accounts",
-    body: "New investors who open an XM account with the FXPARTNER partner code get a 100% deposit bonus. The bonus rate varies by account type and country.",
+    headline: "Yeni Hesaplara %100 Bonus",
+    body: "FXPARTNER partner koduyla XM hesabı açan yeni yatırımcılar %100 yatırım bonusu kazanır. Bonus oranı hesap türüne ve ülkeye göre değişir.",
   },
   {
     slug: "avatrade",
-    headline: "FXPARTNER-Exclusive 15% Bonus",
-    body: "New investors who open an AvaTrade account with the FXPARTNER partner code get an exclusive 15% deposit bonus. The bonus rate varies by account type and country.",
+    headline: "FXPARTNER'a Özel %15 Bonus",
+    body: "FXPARTNER partner koduyla AvaTrade hesabı açan yeni yatırımcılar özel %15 yatırım bonusu kazanır. Bonus oranı hesap türüne ve ülkeye göre değişir.",
   },
   {
     slug: "lite-finance",
-    headline: "FXPARTNER-Exclusive 20% Bonus",
-    body: "New investors who open a Lite Finance account with the FXPARTNER partner code get an exclusive 20% deposit bonus. The bonus rate varies by account type and country.",
+    headline: "FXPARTNER'a Özel %20 Bonus",
+    body: "FXPARTNER partner koduyla Lite Finance hesabı açan yeni yatırımcılar özel %20 yatırım bonusu kazanır. Bonus oranı hesap türüne ve ülkeye göre değişir.",
   },
   {
     slug: "tickmill",
-    headline: "$30 Welcome Bonus",
-    body: "New investors who open a Tickmill account with the FXPARTNER partner code can claim a $30 welcome bonus. Bonus availability varies by account type and country.",
+    headline: "30$ Hoş Geldin Bonusu",
+    body: "FXPARTNER partner koduyla Tickmill hesabı açan yeni yatırımcılar 30$ hoş geldin bonusu talep edebilir. Bonus uygunluğu hesap türüne ve ülkeye göre değişir.",
   },
 ] as const;
 
@@ -77,7 +77,7 @@ export default function BonusPopup({ slug }: { slug: string }) {
         <button
           type="button"
           onClick={close}
-          aria-label="Close"
+          aria-label="Kapat"
           className="absolute right-4 top-4 font-mono text-lg text-text-on-ink-muted transition-colors hover:text-text-on-ink"
         >
           ×
@@ -97,7 +97,7 @@ export default function BonusPopup({ slug }: { slug: string }) {
               </div>
             )}
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-              <span className="notranslate">{broker.name} </span>Promotion
+              <span className="notranslate">{broker.name} </span>Kampanyası
             </span>
           </div>
           <h2
@@ -116,21 +116,21 @@ export default function BonusPopup({ slug }: { slug: string }) {
               onClick={close}
               className="rounded-full bg-signal px-5 py-3 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
             >
-              Open Account and Claim Bonus
+              Hesap Aç ve Bonusu Al
             </a>
             <button
               type="button"
               onClick={close}
               className="text-center font-mono text-xs uppercase tracking-[0.1em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              Not now
+              Şimdi değil
             </button>
           </div>
 
           <p className="mt-5 font-mono text-[10px] leading-relaxed text-text-on-ink-muted">
-            Check {broker.name}&apos;s official site for current bonus
-            terms · Bonus campaigns may not be available in some
-            regions/account types · T&amp;Cs Apply
+            Güncel bonus koşulları için {broker.name}&apos;in resmi
+            sitesini kontrol edin · Bonus kampanyaları bazı bölgelerde/hesap
+            türlerinde geçerli olmayabilir · Şartlar ve koşullar geçerlidir
           </p>
         </div>
       </div>

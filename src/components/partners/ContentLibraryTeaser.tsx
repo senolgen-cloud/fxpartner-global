@@ -13,14 +13,14 @@ export default function ContentLibraryTeaser() {
               {cat.title}
             </h3>
             <span className="whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.15em] text-text-muted">
-              {cat.itemCount} items
+              {cat.itemCount} öğe
             </span>
           </div>
           <p className="mt-3 max-h-0 overflow-hidden text-sm leading-relaxed text-text-muted opacity-0 transition-all duration-300 group-hover:max-h-24 group-hover:opacity-100">
             {cat.description}
           </p>
           <span className="mt-4 inline-block font-mono text-[10px] uppercase tracking-[0.15em] text-signal">
-            Included with your partner account
+            Partner hesabınıza dahildir
           </span>
         </div>
       ))}

@@ -5,13 +5,13 @@ const regulators = [
     flag: "🇬🇧",
     abbr: "FCA",
     name: "Financial Conduct Authority",
-    country: "United Kingdom",
+    country: "Birleşik Krallık",
   },
   {
     flag: "🇦🇺",
     abbr: "ASIC",
     name: "Australian Securities & Investments Commission",
-    country: "Australia",
+    country: "Avustralya",
   },
   {
     flag: "🇭🇰",
@@ -23,31 +23,31 @@ const regulators = [
     flag: "🇨🇾",
     abbr: "CySEC",
     name: "Cyprus Securities and Exchange Commission",
-    country: "Cyprus",
+    country: "Kıbrıs",
   },
   {
     flag: "🇦🇪",
     abbr: "CMA",
     name: "Capital Market Authority",
-    country: "United Arab Emirates",
+    country: "Birleşik Arap Emirlikleri",
   },
   {
     flag: "🇨🇴",
     abbr: "SFC",
     name: "Financial Superintendence of Colombia",
-    country: "Colombia",
+    country: "Kolombiya",
   },
   {
     flag: "🇿🇦",
     abbr: "FSCA",
     name: "Financial Sector Conduct Authority",
-    country: "South Africa",
+    country: "Güney Afrika",
   },
   {
     flag: "🇰🇭",
     abbr: "SERC",
     name: "Securities and Exchange Regulator of Cambodia",
-    country: "Cambodia",
+    country: "Kamboçya",
   },
   {
     flag: "🇲🇺",
@@ -73,15 +73,15 @@ export default function RegulatorBadges() {
       <div className="mx-auto max-w-6xl px-6 py-20">
         <Reveal className="max-w-2xl">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-            Oversight
+            Denetim
           </span>
           <h2 className="mt-3 font-display text-3xl font-semibold text-text-on-ink md:text-4xl">
-            Regulators we cross-check
+            Çapraz kontrol ettiğimiz regülatörler
           </h2>
           <p className="mt-4 text-text-on-ink-muted">
-            Every license we list is verified against the public register of
-            one of these authorities before a broker earns a place in the
-            rankings.
+            Listelediğimiz her lisans, bir broker sıralamalarda yer almadan
+            önce bu otoritelerden birinin kamuya açık siciline karşı
+            doğrulanır.
           </p>
         </Reveal>
 

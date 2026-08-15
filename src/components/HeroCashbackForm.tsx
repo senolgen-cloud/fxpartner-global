@@ -30,39 +30,39 @@ export default function HeroCashbackForm() {
             </svg>
           </div>
           <h3 className="mt-4 font-poppins text-xl font-semibold text-text-on-ink">
-            You&apos;re on the list
+            Listeye eklendiniz
           </h3>
           <p className="mt-2 max-w-xs text-sm leading-relaxed text-text-on-ink-muted">
-            We&apos;ll reach out shortly to help you pick a broker and set up
-            your cashback tracking.
+            Kısa süre içinde sizinle iletişime geçerek bir broker seçmenize ve
+            cashback takibinizi kurmanıza yardımcı olacağız.
           </p>
         </div>
       ) : (
         <>
           <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-gold">
-            Cashback Program
+            Cashback Programı
           </span>
           <h3 className="mt-2 font-poppins text-2xl font-bold leading-tight text-text-on-ink">
-            Get cash back on every trade
+            Her işlemde nakit iade kazanın
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-text-on-ink-muted">
-            Leave your details and we&apos;ll set up cashback tracking on
-            your broker account — no extra cost, no catch.
+            Bilgilerinizi bırakın, broker hesabınızda cashback takibini
+            sizin için kuralım — ek ücret yok, gizli şart yok.
           </p>
 
           <form action={formAction} className="mt-6 flex flex-col gap-3.5">
-            <input name="fullName" placeholder="Full name" required className={fieldClass} />
+            <input name="fullName" placeholder="Ad Soyad" required className={fieldClass} />
             <input
               name="phone"
               type="tel"
-              placeholder="Phone number"
+              placeholder="Telefon numarası"
               required
               className={fieldClass}
             />
             <input
               name="email"
               type="email"
-              placeholder="Email address"
+              placeholder="E-posta adresi"
               required
               className={fieldClass}
             />
@@ -74,12 +74,12 @@ export default function HeroCashbackForm() {
               disabled={pending}
               className="lift-on-hover mt-1 rounded-full bg-gradient-to-b from-signal to-signal-strong px-6 py-3 text-sm font-medium text-on-signal shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25)] transition-shadow hover:shadow-lg hover:shadow-signal/30 disabled:opacity-60"
             >
-              {pending ? "Sending…" : "Get My Cashback"}
+              {pending ? "Gönderiliyor…" : "Cashback'imi Al"}
             </button>
           </form>
 
           <p className="mt-4 text-center text-[11px] leading-relaxed text-text-on-ink-muted">
-            We&apos;ll only use this to set up and confirm your cashback — no spam.
+            Bu bilgileri yalnızca cashback'inizi kurmak ve onaylamak için kullanacağız — spam yok.
           </p>
         </>
       )}

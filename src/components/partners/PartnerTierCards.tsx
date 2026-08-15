@@ -38,7 +38,7 @@ export default function PartnerTierCards() {
                         isPremium ? "text-gold" : "text-signal"
                       }`}
                     >
-                      {tier.minReferred}+ clients
+                      {tier.minReferred}+ müşteri
                     </span>
                   </div>
                   <p className="mt-2 text-sm font-medium text-text-muted">
@@ -67,9 +67,9 @@ export default function PartnerTierCards() {
         })}
       </div>
       <p className="mt-8 text-xs leading-relaxed text-text-muted">
-        Illustrative tier structure — final referral thresholds and
-        rev-share percentages are confirmed per broker agreement once
-        you&apos;re approved as a partner.
+        Örnek seviye yapısı — nihai referans eşikleri ve gelir paylaşım
+        oranları, partner olarak onaylandıktan sonra aracı kurum
+        anlaşmasına göre belirlenir.
       </p>
     </div>
   );

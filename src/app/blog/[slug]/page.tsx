@@ -159,7 +159,7 @@ export default async function BlogPostPage({
             </div>
 
             <div className="mt-10">
-              <ShareButtons title={post.title} text={post.excerpt} locale="en" />
+              <ShareButtons title={post.title} text={post.excerpt} locale="tr" />
             </div>
           </article>
         </section>

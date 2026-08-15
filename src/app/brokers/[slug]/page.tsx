@@ -43,10 +43,10 @@ function getMonogram(name: string): string {
 }
 
 function ratingWord(rating: number): string {
-  if (rating >= 4.5) return "Excellent";
-  if (rating >= 3.5) return "Great";
-  if (rating >= 2.5) return "Average";
-  return "Poor";
+  if (rating >= 4.5) return "Mükemmel";
+  if (rating >= 3.5) return "Çok İyi";
+  if (rating >= 2.5) return "Ortalama";
+  return "Zayıf";
 }
 
 // score is on the same 1-5 scale as getBrokerScores' individual axes.
@@ -83,11 +83,11 @@ export async function generateMetadata({
   const broker = getBrokerBySlug(slug);
   if (!broker) return {};
   return {
-    title: `${broker.name} Review`,
+    title: `${broker.name} İncelemesi`,
     description: broker.summary,
     alternates: { canonical: `/brokers/${broker.slug}` },
     openGraph: {
-      title: `${broker.name} Review | FXPARTNER`,
+      title: `${broker.name} İncelemesi | FXPARTNER`,
       description: broker.summary,
       url: `${SITE_URL}/brokers/${broker.slug}`,
       type: "article",
@@ -144,13 +144,13 @@ export default async function BrokerDetailPage({
   const offshoreRegulators = broker.regulators.filter((r) => !TIER1_REGULATORS.has(r));
 
   const navSections = [
-    { id: "regulation", label: "Regulation" },
-    { id: "platforms", label: "Platforms" },
-    { id: "pros-cons", label: "Pros & Cons" },
-    ...(broker.deepDive ? [{ id: "accounts", label: "Accounts" }] : []),
-    { id: "verdict", label: "Verdict" },
-    { id: "faq", label: "FAQ" },
-    { id: "reviews", label: "Reviews" },
+    { id: "regulation", label: "Regülasyon" },
+    { id: "platforms", label: "Platformlar" },
+    { id: "pros-cons", label: "Artılar ve Eksiler" },
+    ...(broker.deepDive ? [{ id: "accounts", label: "Hesaplar" }] : []),
+    { id: "verdict", label: "Değerlendirme" },
+    { id: "faq", label: "SSS" },
+    { id: "reviews", label: "Yorumlar" },
   ];
 
   const session = await auth();
@@ -236,7 +236,7 @@ export default async function BrokerDetailPage({
           <path d="M13 5l7 7-7 7M5 12h14" />
         </svg>
         <span className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-medium opacity-0 transition-all duration-200 group-hover:max-w-[10rem] group-hover:opacity-100">
-          Open Account
+          Hesap Aç
         </span>
       </a>
 
@@ -252,7 +252,7 @@ export default async function BrokerDetailPage({
               href="/#brokers"
               className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              ← All brokers
+              ← Tüm brokerlar
             </Link>
             <div className="mt-6 rounded-[32px] border border-hairline bg-gradient-to-br from-ink-soft/70 to-ink p-6 shadow-2xl shadow-black/40 sm:p-8 md:p-12">
               <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
@@ -262,7 +262,7 @@ export default async function BrokerDetailPage({
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-signal">
                         <path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7L2 9.2l7.1-.6L12 2z" />
                       </svg>
-                      Ranked #{String(broker.rank).padStart(2, "0")}
+                      Sıralama #{String(broker.rank).padStart(2, "0")}
                     </span>
                     <span
                       className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-mono text-xs uppercase tracking-[0.15em] ${
@@ -293,7 +293,7 @@ export default async function BrokerDetailPage({
                   </p>
                   <div className="mt-5 border-t border-hairline pt-5">
                     <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                      FXPARTNER is rated
+                      FXPARTNER puanı
                     </p>
                     <p className="mt-1 bg-gradient-to-r from-signal to-purple-400 bg-clip-text font-display text-3xl font-semibold text-transparent">
                       {ratingWord(broker.rating)}
@@ -324,7 +324,7 @@ export default async function BrokerDetailPage({
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-signal">
                           <path d="M20 6L9 17l-5-5" />
                         </svg>
-                        FXPARTNER Verified
+                        FXPARTNER Onaylı
                       </span>
                     </div>
                   </div>
@@ -334,9 +334,9 @@ export default async function BrokerDetailPage({
                       neutral dash instead of a green check, same "no
                       unearned checkmarks" rule as ReviewBadge. */}
                   <div className="mt-5 grid grid-cols-3 gap-3">
-                    <ScoreCheck label="Regulation & Trust" score={scores.regulation} />
-                    <ScoreCheck label="Withdrawal Reliability" score={scores.withdrawal} />
-                    <ScoreCheck label="Platform & Tools" score={scores.platform} />
+                    <ScoreCheck label="Regülasyon ve Güven" score={scores.regulation} />
+                    <ScoreCheck label="Para Çekme Güvenilirliği" score={scores.withdrawal} />
+                    <ScoreCheck label="Platform ve Araçlar" score={scores.platform} />
                   </div>
 
                   <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -346,18 +346,18 @@ export default async function BrokerDetailPage({
                       rel="noopener noreferrer sponsored"
                       className="group inline-flex items-center gap-2 rounded-full bg-signal px-6 py-3.5 text-sm font-medium text-on-signal shadow-lg shadow-signal/20 transition-all hover:bg-signal-strong hover:shadow-signal/30 active:scale-[0.98]"
                     >
-                      Open Account
+                      Hesap Aç
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-0.5">
                         <path d="M5 12h14M13 5l7 7-7 7" />
                       </svg>
                     </a>
                     {broker.partnerCode && (
                       <span className="font-mono text-[10px] text-text-on-ink-muted">
-                        Code: {broker.partnerCode}
+                        Kod: {broker.partnerCode}
                       </span>
                     )}
                     <span className="font-mono text-[10px] text-text-on-ink-muted">
-                      Verified on FXPARTNER
+                      FXPARTNER'da Onaylı
                     </span>
                   </div>
                 </div>
@@ -390,11 +390,11 @@ export default async function BrokerDetailPage({
           <div className="mx-auto max-w-5xl py-6 sm:px-6 sm:py-8">
             <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:grid sm:grid-cols-5 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 [&::-webkit-scrollbar]:hidden">
               {[
-                { icon: "deposit" as const, label: "Min. Deposit", value: broker.minDeposit },
-                { icon: "leverage" as const, label: "Max. Leverage", value: broker.maxLeverage },
-                { icon: "founded" as const, label: "Founded", value: String(broker.founded) },
-                { icon: "hq" as const, label: "Headquarters", value: broker.headquarters },
-                { icon: "platforms" as const, label: "Platforms", value: String(broker.platforms.length) },
+                { icon: "deposit" as const, label: "Min. Yatırım", value: broker.minDeposit },
+                { icon: "leverage" as const, label: "Maks. Kaldıraç", value: broker.maxLeverage },
+                { icon: "founded" as const, label: "Kuruluş", value: String(broker.founded) },
+                { icon: "hq" as const, label: "Merkez", value: broker.headquarters },
+                { icon: "platforms" as const, label: "Platformlar", value: String(broker.platforms.length) },
               ].map((stat) => (
                 <div
                   key={stat.label}
@@ -424,7 +424,7 @@ export default async function BrokerDetailPage({
               <div className="grid gap-10 lg:grid-cols-[1fr_1fr]">
                 <div>
                   <h2 className="font-display text-xl font-semibold text-text-dark">
-                    Regulation &amp; Fund Safety
+                    Regülasyon ve Fon Güvenliği
                   </h2>
                   <p className="mt-4 text-[15px] leading-relaxed text-text-dark/90">
                     {regulationParagraph(broker)}
@@ -433,7 +433,7 @@ export default async function BrokerDetailPage({
                   {tier1Regulators.length > 0 && (
                     <div className="mt-6">
                       <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-tick-up">
-                        Tier-1 Licenses
+                        Tier-1 Lisanslar
                       </h3>
                       <div className="mt-3 flex flex-wrap gap-2">
                         {tier1Regulators.map((r) => (
@@ -453,7 +453,7 @@ export default async function BrokerDetailPage({
                   {offshoreRegulators.length > 0 && (
                     <div className="mt-4">
                       <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                        Offshore / Other Licenses
+                        Offshore / Diğer Lisanslar
                       </h3>
                       <div className="mt-3 flex flex-wrap gap-2">
                         {offshoreRegulators.map((r) => (
@@ -481,7 +481,7 @@ export default async function BrokerDetailPage({
             {/* Platforms + categories */}
             <div id="platforms" className="mt-14 scroll-mt-8 border-t border-hairline-light pt-10">
               <h2 className="font-display text-xl font-semibold text-text-dark">
-                Trading Platforms
+                İşlem Platformları
               </h2>
               <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-text-dark/90">
                 {platformParagraph(broker)}
@@ -500,7 +500,7 @@ export default async function BrokerDetailPage({
               {broker.categories.length > 0 && (
                 <div className="mt-6">
                   <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                    Categories
+                    Kategoriler
                   </h3>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {broker.categories.map((c) => (
@@ -509,7 +509,7 @@ export default async function BrokerDetailPage({
                         href={`/categories/${categoryInfo[c as BrokerCategory].slug}`}
                         className="rounded-full border border-hairline-light px-3 py-1.5 font-mono text-xs text-text-muted transition-colors hover:border-text-dark hover:text-text-dark"
                       >
-                        {c}
+                        {categoryInfo[c as BrokerCategory].label}
                       </Link>
                     ))}
                   </div>
@@ -521,7 +521,7 @@ export default async function BrokerDetailPage({
             <div id="pros-cons" className="mt-14 scroll-mt-8 grid gap-8 border-t border-hairline-light pt-10 sm:grid-cols-2">
               <div className="rounded-3xl border border-tick-up/20 bg-tick-up/5 p-6 shadow-sm">
                 <h2 className="font-display text-xl font-semibold text-tick-up">
-                  Pros
+                  Artılar
                 </h2>
                 <ul className="mt-4 space-y-3">
                   {broker.pros.map((pro) => (
@@ -534,7 +534,7 @@ export default async function BrokerDetailPage({
               </div>
               <div className="rounded-3xl border border-alert/20 bg-alert/5 p-6 shadow-sm">
                 <h2 className="font-display text-xl font-semibold text-alert">
-                  Cons
+                  Eksiler
                 </h2>
                 <ul className="mt-4 space-y-3">
                   {broker.cons.map((con) => (
@@ -550,16 +550,16 @@ export default async function BrokerDetailPage({
             {broker.deepDive && (
               <div id="accounts" className="mt-14 scroll-mt-8 border-t border-hairline-light pt-10">
                 <h2 className="font-display text-2xl font-semibold text-text-dark">
-                  Account Types
+                  Hesap Türleri
                 </h2>
                 <div className="mt-5 overflow-x-auto rounded-2xl border border-hairline-light">
                   <table className="w-full min-w-[480px] border-collapse text-left text-sm">
                     <thead>
                       <tr className="border-b border-hairline-light bg-paper font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">
-                        <th className="py-3 pl-5 pr-4 font-medium">Account</th>
+                        <th className="py-3 pl-5 pr-4 font-medium">Hesap</th>
                         <th className="py-3 pr-4 font-medium">Spread</th>
-                        <th className="py-3 pr-4 font-medium">Commission</th>
-                        <th className="py-3 pr-5 font-medium">Min. Deposit</th>
+                        <th className="py-3 pr-4 font-medium">Komisyon</th>
+                        <th className="py-3 pr-5 font-medium">Min. Yatırım</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-hairline-light">
@@ -578,7 +578,7 @@ export default async function BrokerDetailPage({
                 <div className="mt-10 grid gap-6 sm:grid-cols-2">
                   <div className="rounded-2xl border border-hairline-light p-5">
                     <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                      Deposits
+                      Yatırma
                     </h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
                       {broker.deepDive.deposits}
@@ -586,7 +586,7 @@ export default async function BrokerDetailPage({
                   </div>
                   <div className="rounded-2xl border border-hairline-light p-5">
                     <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                      Withdrawals
+                      Para Çekme
                     </h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
                       {broker.deepDive.withdrawals}
@@ -594,7 +594,7 @@ export default async function BrokerDetailPage({
                   </div>
                   <div className="rounded-2xl border border-hairline-light p-5">
                     <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                      Customer Support
+                      Müşteri Desteği
                     </h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
                       {broker.deepDive.support}
@@ -602,7 +602,7 @@ export default async function BrokerDetailPage({
                   </div>
                   <div className="rounded-2xl border border-hairline-light p-5">
                     <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                      Education &amp; Tools
+                      Eğitim ve Araçlar
                     </h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
                       {broker.deepDive.education}
@@ -624,7 +624,7 @@ export default async function BrokerDetailPage({
             <div id="verdict" className="mt-14 scroll-mt-8 border-t border-hairline-light pt-10">
               <div className="rounded-2xl border border-gold/25 bg-gold/5 p-7">
                 <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-gold">
-                  FXPARTNER Verdict
+                  FXPARTNER Değerlendirmesi
                 </span>
                 <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-text-dark/90">
                   {verdictParagraph(broker)}
@@ -634,7 +634,7 @@ export default async function BrokerDetailPage({
                     href={`/blog/${reviewPost.slug}`}
                     className="mt-4 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal"
                   >
-                    Read the full {broker.name} review →
+                    {broker.name} incelemesinin tamamını okuyun →
                   </Link>
                 )}
               </div>
@@ -643,7 +643,7 @@ export default async function BrokerDetailPage({
             {/* FAQ */}
             <div id="faq" className="mt-14 scroll-mt-8 border-t border-hairline-light pt-10">
               <h2 className="font-display text-2xl font-semibold text-text-dark">
-                Frequently Asked Questions
+                Sıkça Sorulan Sorular
               </h2>
               <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
                 {faqs.map((faq) => (
@@ -669,7 +669,7 @@ export default async function BrokerDetailPage({
                   🎁 {broker.promotion.title}
                 </span>
                 <span className="shrink-0 font-mono text-xs uppercase tracking-[0.15em] text-gold">
-                  Click for {broker.name} Campaigns →
+                  {broker.name} Kampanyaları için tıklayın →
                 </span>
               </Link>
             )}
@@ -678,11 +678,11 @@ export default async function BrokerDetailPage({
               className={`${broker.promotion ? "mt-6" : "mt-14"} rounded-2xl border border-hairline-light bg-paper p-6`}
             >
               <p className="text-sm leading-relaxed text-text-muted">
-                <strong className="text-text-dark">Note:</strong> The
-                information above is for general informational purposes;
-                terms may vary by account type and your country. We
-                recommend verifying current conditions on {broker.name}&apos;s
-                official website before trading.
+                <strong className="text-text-dark">Not:</strong> Yukarıdaki
+                bilgiler genel bilgilendirme amaçlıdır; şartlar hesap türüne
+                ve ülkenize göre değişebilir. İşlem yapmadan önce güncel
+                koşulları {broker.name}&apos;ın resmi sitesinden doğrulamanızı
+                öneririz.
               </p>
             </div>
           </div>
@@ -692,7 +692,7 @@ export default async function BrokerDetailPage({
         <section id="reviews" className="scroll-mt-8 bg-paper-high">
           <div className="mx-auto max-w-5xl px-6 py-16">
             <h2 className="font-display text-2xl font-semibold text-text-dark">
-              Comments ({brokerComments.length})
+              Yorumlar ({brokerComments.length})
             </h2>
 
             {aggregate && (
@@ -711,14 +711,14 @@ export default async function BrokerDetailPage({
                   <div key={c.id} className="py-5">
                     <div className="flex items-center gap-2">
                       <span className="font-medium text-text-dark">
-                        {c.userName || "FXPARTNER user"}
+                        {c.userName || "FXPARTNER kullanıcısı"}
                       </span>
                       {c.userCountry && <span aria-hidden="true">{flagEmoji(c.userCountry)}</span>}
                       {c.rating && (
                         <span className="font-mono text-xs text-gold">{c.rating}/5</span>
                       )}
                       <span className="font-mono text-xs text-text-muted">
-                        {new Date(c.createdAt).toLocaleDateString("en-US", {
+                        {new Date(c.createdAt).toLocaleDateString("tr-TR", {
                           year: "numeric",
                           month: "short",
                           day: "numeric",
@@ -736,7 +736,7 @@ export default async function BrokerDetailPage({
         <section className="bg-paper">
           <div className="mx-auto max-w-5xl px-6 py-16">
             <h2 className="font-display text-2xl font-semibold text-text-dark">
-              Explore other brokers
+              Diğer brokerları keşfedin
             </h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-3">
               {otherBrokers.map((b) => (
@@ -760,7 +760,7 @@ export default async function BrokerDetailPage({
 
         <section>
           <div className="mx-auto max-w-5xl px-6 pb-16">
-            <ShareButtons title={`${broker.name} Review`} text={broker.summary} locale="en" />
+            <ShareButtons title={`${broker.name} İncelemesi`} text={broker.summary} locale="tr" />
           </div>
         </section>
       </main>

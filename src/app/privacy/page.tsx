@@ -5,8 +5,8 @@ import { breadcrumbSchema } from "@/lib/schema";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: "How FXPARTNER collects, uses, and protects your personal information.",
+  title: "Gizlilik Politikası",
+  description: "FXPARTNER kişisel verilerinizi nasıl toplar, kullanır ve korur.",
   alternates: { canonical: "/privacy" },
 };
 
@@ -18,8 +18,8 @@ export default function PrivacyPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
-              { name: "Privacy Policy", url: `${SITE_URL}/privacy` },
+              { name: "Ana Sayfa", url: SITE_URL },
+              { name: "Gizlilik Politikası", url: `${SITE_URL}/privacy` },
             ])
           ),
         }}
@@ -28,13 +28,13 @@ export default function PrivacyPage() {
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-3xl px-6 py-16">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Legal
+              Yasal
             </span>
             <h1 className="mt-4 font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Privacy Policy
+              Gizlilik Politikası
             </h1>
             <p className="mt-4 font-mono text-xs text-text-on-ink-muted">
-              Last updated: July 2026
+              Son güncelleme: Temmuz 2026
             </p>
           </div>
         </section>
@@ -42,128 +42,132 @@ export default function PrivacyPage() {
         <section>
           <article className="mx-auto max-w-3xl px-6 py-16 text-[15px] leading-relaxed text-text-dark/90">
             <p>
-              This policy explains what personal information FXPARTNER
-              (&quot;we&quot;, &quot;us&quot;) collects through fxpartner.global, why we
-              collect it, and how you can control it. It applies to every
-              form on this site: account sign-in, broker comments, the
-              complaint form, and the cashback program.
+              Bu politika, FXPARTNER&apos;ın (&quot;biz&quot;) fxpartner.global
+              üzerinden hangi kişisel verileri topladığını, bunları neden
+              topladığını ve bunları nasıl kontrol edebileceğinizi açıklar.
+              Bu site üzerindeki her form için geçerlidir: hesap girişi,
+              aracı kurum yorumları, şikayet formu ve kazanç iade (cashback)
+              programı.
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              What we collect
+              Ne topluyoruz
             </h2>
             <ul className="mt-4 space-y-2">
               <li>
-                <strong>Account sign-in:</strong> full name, phone number,
-                email address, and — optionally — which broker you trade
-                with.
+                <strong>Hesap girişi:</strong> ad soyad, telefon numarası,
+                e-posta adresi ve — isteğe bağlı olarak — hangi aracı
+                kurumla işlem yaptığınız.
               </li>
               <li>
-                <strong>Broker comments:</strong> your comment text, an
-                optional 1–5 rating, and — if you set it — your country
-                (shown publicly next to your comment).
+                <strong>Aracı kurum yorumları:</strong> yorum metniniz,
+                isteğe bağlı 1-5 puanlama ve — belirtirseniz — ülkeniz
+                (yorumunuzun yanında herkese açık şekilde gösterilir).
               </li>
               <li>
-                <strong>Complaint form:</strong> full name, phone, email,
-                the broker involved, and your description of the issue.
+                <strong>Şikayet formu:</strong> ad soyad, telefon, e-posta,
+                ilgili aracı kurum ve sorununuzun açıklaması.
               </li>
               <li>
-                <strong>Cashback program:</strong> full name, email, trading
-                account number, and whether you opted in to promotional
-                emails.
+                <strong>Kazanç iade programı:</strong> ad soyad, e-posta,
+                işlem hesap numarası ve tanıtım e-postalarına izin verip
+                vermediğiniz.
               </li>
               <li>
-                <strong>Automatically:</strong> a session cookie that keeps
-                you signed in. We don&apos;t use third-party advertising or
-                tracking cookies.
+                <strong>Otomatik olarak:</strong> oturumunuzu açık tutan bir
+                oturum çerezi. Üçüncü taraf reklam veya izleme çerezi
+                kullanmıyoruz.
               </li>
             </ul>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Why we collect it
+              Neden topluyoruz
             </h2>
             <ul className="mt-4 space-y-2">
-              <li>To create and maintain your account, and keep you signed in.</li>
-              <li>To review and follow up on complaints you submit about a broker.</li>
-              <li>To verify and track cashback against your linked trading account.</li>
-              <li>To send you an invite to the FXPARTNER VIP Telegram group.</li>
+              <li>Hesabınızı oluşturmak, sürdürmek ve oturumunuzu açık tutmak için.</li>
+              <li>Bir aracı kurum hakkında gönderdiğiniz şikayetleri incelemek ve takip etmek için.</li>
+              <li>Bağlı işlem hesabınıza göre kazanç iadesini doğrulamak ve takip etmek için.</li>
+              <li>Size FXPARTNER VIP Telegram grubuna davet göndermek için.</li>
               <li>
-                To send you promotional or campaign emails — <strong>only</strong>{" "}
-                if you explicitly opted in on the cashback form. We never
-                add you to a marketing list without that checkbox being
-                checked.
+                Size tanıtım veya kampanya e-postaları göndermek için —{" "}
+                <strong>yalnızca</strong> kazanç iade formunda açıkça izin
+                verdiyseniz. O onay kutusu işaretlenmeden sizi asla bir
+                pazarlama listesine eklemeyiz.
               </li>
             </ul>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Who we share it with
+              Kimlerle paylaşıyoruz
             </h2>
             <p className="mt-4">
-              We don&apos;t sell your data. A small number of service
-              providers process it on our behalf so the site can function:
+              Verilerinizi satmıyoruz. Sitenin çalışabilmesi için az sayıda
+              hizmet sağlayıcı bizim adımıza bu verileri işler:
             </p>
             <ul className="mt-4 space-y-2">
               <li>
-                <strong>Neon (Postgres)</strong> — stores your account and
-                submission data.
+                <strong>Neon (Postgres)</strong> — hesap ve gönderim
+                verilerinizi saklar.
               </li>
               <li>
-                <strong>Resend</strong> — delivers sign-in links and
-                notification emails.
+                <strong>Resend</strong> — giriş bağlantılarını ve bildirim
+                e-postalarını iletir.
               </li>
               <li>
-                <strong>Vercel</strong> — hosts the website and application.
+                <strong>Vercel</strong> — web sitesini ve uygulamayı barındırır.
               </li>
               <li>
-                <strong>Telegram</strong> — if you request a VIP group
-                invite, we call Telegram&apos;s API to generate it.
+                <strong>Telegram</strong> — VIP grup daveti talep ederseniz,
+                bunu oluşturmak için Telegram&apos;ın API&apos;sini
+                çağırırız.
               </li>
               <li>
-                <strong>The relevant broker</strong> — if you submit a
-                complaint or cashback signup, we share the details you
-                provided with that broker so they can investigate or
-                process it.
+                <strong>İlgili aracı kurum</strong> — bir şikayet veya
+                kazanç iade kaydı gönderirseniz, sağladığınız bilgileri
+                inceleyip işleme alabilmesi için ilgili aracı kurumla
+                paylaşırız.
               </li>
             </ul>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              How long we keep it
+              Ne kadar süre saklıyoruz
             </h2>
             <p className="mt-4">
-              We keep account, complaint, and cashback records for as long
-              as your account is active or as needed to resolve an open
-              complaint or cashback claim. You can request deletion at any
-              time — see &quot;Your rights&quot; below.
+              Hesap, şikayet ve kazanç iade kayıtlarını hesabınız aktif
+              olduğu sürece veya açık bir şikayet ya da kazanç iade talebini
+              sonuçlandırmak için gerektiği kadar saklarız. İstediğiniz
+              zaman silme talebinde bulunabilirsiniz — aşağıdaki
+              &quot;Haklarınız&quot; bölümüne bakın.
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Your rights
+              Haklarınız
             </h2>
             <p className="mt-4">
-              You can ask us to access, correct, or delete your personal
-              information, or to withdraw marketing consent, at any time by
-              emailing{" "}
+              Kişisel bilgilerinize erişmemizi, bunları düzeltmemizi ya da
+              silmemizi isteyebilir, veya pazarlama iznini istediğiniz zaman{" "}
               <a href="mailto:info@fxpartner.global" className="text-signal hover:text-signal-strong">
                 info@fxpartner.global
-              </a>
-              . We&apos;ll respond within a reasonable time.
+              </a>{" "}
+              adresine e-posta göndererek geri çekebilirsiniz. Makul bir
+              süre içinde yanıt vereceğiz.
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Not investment advice
+              Yatırım tavsiyesi değildir
             </h2>
             <p className="mt-4">
-              Nothing on this site, including how we process your data, is
-              investment advice. Broker rankings, cashback rates, and
-              editorial content are for general information only.
+              Verilerinizi nasıl işlediğimiz dahil, bu sitedeki hiçbir şey
+              yatırım tavsiyesi değildir. Aracı kurum sıralamaları, kazanç
+              iade oranları ve editoryal içerik yalnızca genel bilgi
+              amaçlıdır.
             </p>
 
             <p className="mt-10 rounded-2xl border border-hairline-light bg-paper p-5 text-sm text-text-muted">
-              This policy describes our actual data practices in plain
-              language. It isn&apos;t a substitute for formal legal review —
-              if you need this policy to meet a specific regulatory
-              framework (e.g. KVKK or GDPR) for your jurisdiction, have a
-              qualified lawyer review it.
+              Bu politika, gerçek veri uygulamalarımızı sade bir dille
+              anlatır. Resmi bir hukuki incelemenin yerini tutmaz — bu
+              politikanın bulunduğunuz bölge için belirli bir düzenleyici
+              çerçeveyi (örn. KVKK veya GDPR) karşılaması gerekiyorsa, yetkin
+              bir avukata inceletin.
             </p>
           </article>
         </section>

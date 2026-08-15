@@ -15,16 +15,15 @@ import { breadcrumbSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
-// "Beginners" reads awkwardly as "Beginners Brokers" in a <title> — every
-// other category name concatenates cleanly with "Forex Brokers", so only
-// that one needs an override. The on-page H1 keeps the raw category name
-// unchanged to stay consistent with the filter-button label elsewhere.
+// "Yeni Başlayanlar" doesn't concatenate cleanly with "Forex Brokerları" in
+// a <title> the way the other category labels do, so only that one needs
+// an override.
 const CATEGORY_TITLE_OVERRIDES: Partial<Record<BrokerCategory, string>> = {
-  Beginners: "Best Forex Brokers for Beginners",
+  Beginners: "Yeni Başlayanlar İçin En İyi Forex Brokerları",
 };
 
 function categoryTitle(name: BrokerCategory): string {
-  return CATEGORY_TITLE_OVERRIDES[name] ?? `${name} Forex Brokers`;
+  return CATEGORY_TITLE_OVERRIDES[name] ?? `${categoryInfo[name].label} Forex Brokerları`;
 }
 
 export function generateStaticParams() {
@@ -72,9 +71,9 @@ export default async function CategoryPage({
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
-              { name: "Categories", url: `${SITE_URL}/categories` },
-              { name: category.name, url: `${SITE_URL}/categories/${category.slug}` },
+              { name: "Ana Sayfa", url: SITE_URL },
+              { name: "Kategoriler", url: `${SITE_URL}/categories` },
+              { name: categoryInfo[category.name].label, url: `${SITE_URL}/categories/${category.slug}` },
             ])
           ),
         }}
@@ -86,28 +85,28 @@ export default async function CategoryPage({
               href="/categories"
               className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              ← All categories
+              ← Tüm kategoriler
             </Link>
             <h1 className="mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              {category.name}
+              {categoryInfo[category.name].label}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
               {category.description}
             </p>
             <p className="tabular-stat mt-6 font-mono text-xs uppercase tracking-[0.15em] text-signal">
-              {matches.length} brokers in this category
+              Bu kategoride {matches.length} broker var
             </p>
             {topPick && (
               <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-text-on-ink-muted">
-                Based on the FXPARTNER Index, the top-rated {category.name.toLowerCase()}{" "}
-                broker is{" "}
+                FXPARTNER Endeksi&apos;ne göre en yüksek puanlı {categoryInfo[category.name].label.toLowerCase()}{" "}
+                brokerı{" "}
                 <Link
                   href={`/brokers/${topPick.slug}`}
                   className="notranslate font-medium text-text-on-ink underline decoration-hairline underline-offset-4 hover:decoration-signal"
                 >
                   {topPick.name}
                 </Link>
-                , scoring {getBrokerScores(topPick).composite.toFixed(1)}/10.
+                , {getBrokerScores(topPick).composite.toFixed(1)}/10 puanla.
               </p>
             )}
           </div>
@@ -117,7 +116,7 @@ export default async function CategoryPage({
           <div className="mx-auto max-w-6xl px-6 py-16">
             {matches.length === 0 ? (
               <p className="text-sm text-text-muted">
-                No brokers in this category yet.
+                Bu kategoride henüz broker yok.
               </p>
             ) : (
               matches.map((broker) => (

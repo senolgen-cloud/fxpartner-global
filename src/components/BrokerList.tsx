@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { brokerCategories, type Broker } from "@/data/brokers";
+import { brokerCategories, categoryInfo, type Broker } from "@/data/brokers";
 import RankedBrokerCard from "./RankedBrokerCard";
 
 export default function BrokerList({ brokers }: { brokers: Broker[] }) {
@@ -25,7 +25,7 @@ export default function BrokerList({ brokers }: { brokers: Broker[] }) {
               : "border-hairline text-text-on-ink-muted hover:border-text-on-ink hover:text-text-on-ink"
           }`}
         >
-          All
+          Tümü
         </button>
         {brokerCategories.map((category) => (
           <button
@@ -38,7 +38,7 @@ export default function BrokerList({ brokers }: { brokers: Broker[] }) {
                 : "border-hairline text-text-on-ink-muted hover:border-text-on-ink hover:text-text-on-ink"
             }`}
           >
-            {category}
+            {categoryInfo[category].label}
           </button>
         ))}
       </div>
@@ -46,7 +46,7 @@ export default function BrokerList({ brokers }: { brokers: Broker[] }) {
       <div className="mt-8 flex flex-col gap-5">
         {filtered.length === 0 ? (
           <p className="py-10 text-sm text-text-on-ink-muted">
-            No brokers in this category yet.
+            Bu kategoride henüz broker yok.
           </p>
         ) : (
           filtered.map((broker, i) => (

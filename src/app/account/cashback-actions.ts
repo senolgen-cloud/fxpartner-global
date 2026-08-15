@@ -18,24 +18,24 @@ export async function linkCashbackAccount(
 ): Promise<LinkAccountState> {
   const session = await auth();
   if (!session?.user?.id) {
-    return { ok: false, error: "Please sign in first." };
+    return { ok: false, error: "Lütfen önce giriş yapın." };
   }
 
   const brokerSlug = String(formData.get("brokerSlug") || "").trim();
   const accountNumber = String(formData.get("accountNumber") || "").trim();
 
   if (!cashbackPrograms.some((p) => p.brokerSlug === brokerSlug)) {
-    return { ok: false, error: "Please select a valid broker." };
+    return { ok: false, error: "Lütfen geçerli bir aracı kurum seçin." };
   }
   if (!accountNumber || accountNumber.length < 3) {
-    return { ok: false, error: "Please enter a valid account number." };
+    return { ok: false, error: "Lütfen geçerli bir hesap numarası girin." };
   }
 
   await db.insert(cashbackAccounts).values({
     userId: session.user.id,
     brokerSlug,
     accountNumber,
-    fullName: session.user.name || session.user.email || "FXPARTNER member",
+    fullName: session.user.name || session.user.email || "FXPARTNER üyesi",
     email: session.user.email || "",
   });
 

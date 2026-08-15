@@ -1,34 +1,34 @@
 const slides = [
   {
-    eyebrow: "01 · Regulation",
-    title: "Every license,\nverified.",
-    body: "FCA, ASIC, CySEC, and offshore registrations cross-checked against public registries before a broker earns a place on the list.",
+    eyebrow: "01 · Regülasyon",
+    title: "Her lisans,\ndoğrulandı.",
+    body: "FCA, ASIC, CySEC ve offshore kayıtlar, bir broker listeye girmeden önce kamuya açık sicillerle çapraz kontrol edilir.",
     stat: "9",
-    statLabel: "Regulators Tracked",
+    statLabel: "Takip Edilen Regülatör",
     tone: "signal" as const,
   },
   {
-    eyebrow: "02 · Cost",
-    title: "Spread and swap,\nside by side.",
-    body: "Commission, spread, and overnight swap read together — not in isolation — so the real cost of holding a position is visible.",
+    eyebrow: "02 · Maliyet",
+    title: "Spread ve swap,\nyan yana.",
+    body: "Komisyon, spread ve gecelik swap birlikte — tek başına değil — değerlendirilir; böylece bir pozisyonu tutmanın gerçek maliyeti görünür.",
     stat: "0.0",
-    statLabel: "Pip From (Raw)",
+    statLabel: "Pip'ten İtibaren (Ham)",
     tone: "gold" as const,
   },
   {
     eyebrow: "03 · Platform",
-    title: "MT4, MT5,\ncTrader tested.",
-    body: "Execution speed, order types, and mobile parity checked on a live demo before any platform is scored.",
+    title: "MT4, MT5,\ncTrader test edildi.",
+    body: "Herhangi bir platform puanlanmadan önce, canlı bir demoda işlem hızı, emir türleri ve mobil eşdeğerlik kontrol edilir.",
     stat: "3",
-    statLabel: "Platforms Compared",
+    statLabel: "Karşılaştırılan Platform",
     tone: "signal" as const,
   },
   {
-    eyebrow: "04 · Withdrawal",
-    title: "The first payout\nis the real test.",
-    body: "A small deposit, a real withdrawal request, and a stopwatch — trust is measured, not assumed.",
-    stat: "24h",
-    statLabel: "Fastest Payout Seen",
+    eyebrow: "04 · Para Çekme",
+    title: "İlk ödeme,\ngerçek testtir.",
+    body: "Küçük bir depozit, gerçek bir para çekme talebi ve bir kronometre — güven varsayılmaz, ölçülür.",
+    stat: "24 sa",
+    statLabel: "Görülen En Hızlı Ödeme",
     tone: "gold" as const,
   },
 ];
@@ -39,11 +39,10 @@ export default function ShowcaseGallery() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex max-w-2xl flex-col gap-3">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-            Inside the Index
+            Endeksin İçinde
           </span>
           <h2 className="font-display text-3xl font-semibold text-text-on-ink md:text-4xl">
-            See <em className="font-poppins italic text-text-on-ink-muted">how</em> each score
-            is earned.
+            Her puanın <em className="font-poppins italic text-text-on-ink-muted">nasıl</em> kazanıldığını görün.
           </h2>
         </div>
       </div>

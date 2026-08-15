@@ -11,8 +11,8 @@ export default function NewsletterSignup({ source }: { source: string }) {
   if (state.ok) {
     return (
       <p className="text-sm text-text-on-ink">
-        Thanks — you&apos;re on the list. We&apos;ll only email you real updates,
-        no spam.
+        Teşekkürler — listeye eklendiniz. Size yalnızca gerçek güncellemeler
+        gönderiyoruz, spam yok.
       </p>
     );
   }
@@ -24,7 +24,7 @@ export default function NewsletterSignup({ source }: { source: string }) {
         name="email"
         type="email"
         required
-        placeholder="you@email.com"
+        placeholder="siz@email.com"
         className="w-full min-w-0 rounded-full border border-hairline bg-ink-soft px-4 py-2.5 text-sm text-text-on-ink outline-none focus:border-signal sm:flex-1"
       />
       <button
@@ -32,7 +32,7 @@ export default function NewsletterSignup({ source }: { source: string }) {
         disabled={pending}
         className="shrink-0 rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
       >
-        {pending ? "…" : "Subscribe"}
+        {pending ? "…" : "Abone Ol"}
       </button>
       {state.error && <p className="text-xs text-alert sm:basis-full">{state.error}</p>}
     </form>

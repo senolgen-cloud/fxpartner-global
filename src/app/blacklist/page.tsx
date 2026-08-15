@@ -7,9 +7,9 @@ import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export const metadata: Metadata = {
-  title: "Broker Risk Warnings",
+  title: "Aracı Kurum Risk Uyarıları",
   description:
-    "Brokers flagged for low independent trust scores or recurring complaint patterns in published reviews.",
+    "Düşük bağımsız güven puanları veya yayınlanan incelemelerde tekrarlayan şikayet örüntüleri nedeniyle işaretlenmiş aracı kurumlar.",
   alternates: { canonical: "/blacklist" },
 };
 
@@ -20,16 +20,16 @@ const WATCHLIST_SLUGS = ["exclusive-markets", "lhfx", "versus-trade", "tradingpr
 
 const faqs = [
   {
-    q: "Does being on this list mean a broker is a scam?",
-    a: "No. It's not a legal finding of fraud — it means the broker scores low on independent trust indices or has a recurring, sourced complaint pattern (most often around withdrawals) that's worth extra due diligence before you fund an account. The specific evidence is cited on each broker's full review.",
+    q: "Bu listede olmak, bir aracı kurumun dolandırıcı olduğu anlamına mı gelir?",
+    a: "Hayır. Bu, hukuki bir dolandırıcılık tespiti değildir — aracı kurumun bağımsız güven endekslerinde düşük puan aldığı veya (çoğunlukla para çekme ile ilgili) tekrarlayan, kaynaklı bir şikayet örüntüsüne sahip olduğu, bir hesap açmadan önce ek durum tespiti (due diligence) yapmaya değer olduğu anlamına gelir. Somut kanıtlar her aracı kurumun tam incelemesinde belirtilir.",
   },
   {
-    q: "How does a broker get added to this list?",
-    a: "Only brokers whose review already cites a specific, sourced complaint pattern or independent trust-score reference are added — never an unverified claim. The same evidence appears in that broker's own review page.",
+    q: "Bir aracı kurum bu listeye nasıl eklenir?",
+    a: "Yalnızca incelemesinde zaten somut, kaynaklı bir şikayet örüntüsü veya bağımsız güven puanı referansı bulunan aracı kurumlar eklenir — doğrulanmamış bir iddia asla eklenmez. Aynı kanıt, o aracı kurumun kendi inceleme sayfasında da yer alır.",
   },
   {
-    q: "What should I do if I already have an account with a flagged broker?",
-    a: "Read the specific concerns cited on that broker's review page, and consider testing a small withdrawal to confirm the process works as expected. If you've had a documented issue yourself, you can file a complaint with FXPARTNER.",
+    q: "İşaretlenmiş bir aracı kurumda zaten hesabım varsa ne yapmalıyım?",
+    a: "O aracı kurumun inceleme sayfasında belirtilen özel endişeleri okuyun ve sürecin beklendiği gibi çalıştığını doğrulamak için küçük bir para çekme işlemini test etmeyi düşünün. Kendiniz belgelenmiş bir sorun yaşadıysanız, FXPARTNER'a şikayet bildirebilirsiniz.",
   },
 ];
 
@@ -45,8 +45,8 @@ export default function BlacklistPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbSchema([
-              { name: "Home", url: SITE_URL },
-              { name: "Risk Warnings", url: `${SITE_URL}/blacklist` },
+              { name: "Ana Sayfa", url: SITE_URL },
+              { name: "Risk Uyarıları", url: `${SITE_URL}/blacklist` },
             ])
           ),
         }}
@@ -59,17 +59,18 @@ export default function BlacklistPage() {
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-4xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-alert">
-              Risk Warnings
+              Risk Uyarıları
             </span>
             <h1 className="mt-4 max-w-2xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Brokers to research carefully before signing up
+              Kaydolmadan önce dikkatlice araştırılması gereken aracı kurumlar
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-on-ink-muted">
-              These brokers score low on independent trust indices or have
-              recurring complaint patterns noted in published reviews. This
-              is not a legal finding of fraud — it&apos;s a signal to do
-              extra due diligence. Sources are cited on each broker&apos;s
-              full review.
+              Bu aracı kurumlar bağımsız güven endekslerinde düşük puan
+              alıyor veya yayınlanan incelemelerde tekrarlayan şikayet
+              örüntülerine sahip. Bu hukuki bir dolandırıcılık tespiti
+              değildir — ek durum tespiti yapılması gerektiğine dair bir
+              sinyaldir. Kaynaklar her aracı kurumun tam incelemesinde
+              belirtilir.
             </p>
           </div>
         </section>
@@ -84,7 +85,7 @@ export default function BlacklistPage() {
                       {broker.name}
                     </h2>
                     <span className="font-mono text-xs uppercase tracking-[0.15em] text-alert">
-                      Rating {broker.rating.toFixed(1)}/5
+                      Puan {broker.rating.toFixed(1)}/5
                     </span>
                   </div>
                   <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-text-dark/90">
@@ -102,7 +103,7 @@ export default function BlacklistPage() {
                     href={`/brokers/${broker.slug}`}
                     className="mt-4 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal transition-colors hover:text-signal-strong"
                   >
-                    Full review →
+                    Tam inceleme →
                   </Link>
                 </div>
               ))}
@@ -110,23 +111,23 @@ export default function BlacklistPage() {
 
             <div className="mt-14 rounded-2xl border border-hairline-light bg-paper p-6">
               <h3 className="font-display text-lg font-semibold text-text-dark">
-                Had a bad experience with a broker?
+                Bir aracı kurumla kötü bir deneyim mi yaşadınız?
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                File a complaint and we&apos;ll factor verified, recurring
-                patterns into this page and our scoring.
+                Şikayet bildirin, doğrulanmış ve tekrarlayan örüntüleri bu
+                sayfaya ve puanlamamıza yansıtalım.
               </p>
               <Link
                 href="/complaint"
                 className="mt-4 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
               >
-                Submit a Complaint
+                Şikayet Gönder
               </Link>
             </div>
 
             <div className="mt-14">
               <h2 className="font-display text-2xl font-semibold text-text-dark">
-                Frequently Asked Questions
+                Sıkça Sorulan Sorular
               </h2>
               <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
                 {faqs.map((faq) => (

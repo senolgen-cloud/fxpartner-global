@@ -43,7 +43,7 @@ export default function TrustIndex({
     <div>
       <div className="flex items-baseline gap-1.5">
         <span className={`font-mono text-[10px] uppercase tracking-[0.15em] ${mutedClass}`}>
-          FXPARTNER Index
+          FXPARTNER Endeksi
         </span>
         <span
           className={`tabular-stat font-display text-xl font-semibold leading-none ${labelClass}`}

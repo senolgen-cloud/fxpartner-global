@@ -39,7 +39,7 @@ export default function ContentStudioPreview() {
       className="rounded-3xl border border-hairline-light bg-ink p-6 text-text-on-ink md:p-8"
     >
       <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-signal">
-        Partner Content Studio · Preview
+        Partner İçerik Stüdyosu · Önizleme
       </p>
       <div className="mt-4 rounded-xl border border-hairline bg-ink-soft px-4 py-3 font-mono text-sm text-text-on-ink">
         <span className="text-text-on-ink-muted">{"> "}</span>
@@ -55,7 +55,7 @@ export default function ContentStudioPreview() {
             aria-hidden="true"
             className="signal-dot h-1.5 w-1.5 rounded-full bg-signal"
           />
-          Generating...
+          Oluşturuluyor...
         </div>
       )}
 
@@ -81,8 +81,8 @@ export default function ContentStudioPreview() {
       )}
 
       <p className="mt-6 text-xs leading-relaxed text-text-on-ink-muted">
-        Preview only — illustrates a capability available inside the partner
-        content library, not a live generator.
+        Sadece önizleme — partner içerik kütüphanesinde sunulan bir
+        özelliği gösterir, canlı bir üretici değildir.
       </p>
     </motion.div>
   );
