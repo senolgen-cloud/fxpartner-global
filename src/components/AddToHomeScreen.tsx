@@ -72,7 +72,11 @@ export default function AddToHomeScreen() {
     <div
       role="dialog"
       aria-labelledby="a2hs-title"
-      className="fixed bottom-16 left-4 z-40 w-[calc(100%-2rem)] max-w-xs rounded-2xl border border-hairline bg-ink text-text-on-ink shadow-2xl motion-safe:animate-[popIn_0.25s_ease-out] sm:bottom-20 sm:left-6"
+      // bottom-40 (not the old bottom-16) clears LiveSupportWidget, which
+      // sits at bottom-24 left-3 on every breakpoint (not desktop-only like
+      // the old CommunityWidget/DesktopQuickNavFab pair was), so this needs
+      // the extra clearance on mobile too, not just sm:.
+      className="fixed bottom-40 left-4 z-40 w-[calc(100%-2rem)] max-w-xs rounded-2xl border border-hairline bg-ink text-text-on-ink shadow-2xl motion-safe:animate-[popIn_0.25s_ease-out] sm:bottom-44 sm:left-6"
     >
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">

@@ -4,13 +4,12 @@ import { Analytics } from "@vercel/analytics/next";
 import NotificationOptIn from "@/components/NotificationOptIn";
 import AddToHomeScreen from "@/components/AddToHomeScreen";
 import NewsletterPopup from "@/components/NewsletterPopup";
-import CommunityWidget from "@/components/CommunityWidget";
+import QuickAccessHub from "@/components/QuickAccessHub";
 import LiveSupportWidget from "@/components/LiveSupportWidget";
 import GoogleTranslateWidget from "@/components/GoogleTranslateWidget";
 import Header from "@/components/Header";
 import Ticker from "@/components/Ticker";
 import MobileBottomNav from "@/components/MobileBottomNav";
-import DesktopQuickNavFab from "@/components/DesktopQuickNavFab";
 import { MoreMenuProvider } from "@/components/MoreMenuContext";
 import MoreMenuOverlay from "@/components/MoreMenuOverlay";
 import BrokerHeroSlider from "@/components/BrokerHeroSlider";
@@ -133,9 +132,8 @@ export default async function RootLayout({
         </MoreMenuProvider>
         <NotificationOptIn />
         <AddToHomeScreen />
-        <DesktopQuickNavFab />
         <NewsletterPopup />
-        <CommunityWidget topBrokers={topBrokers} />
+        <QuickAccessHub topBrokers={topBrokers} />
         <LiveSupportWidget />
         <GoogleTranslateWidget />
         <Analytics />

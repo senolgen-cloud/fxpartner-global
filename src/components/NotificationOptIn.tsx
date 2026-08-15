@@ -127,7 +127,10 @@ export default function NotificationOptIn() {
     <div
       role="dialog"
       aria-labelledby="notification-optin-title"
-      className="fixed bottom-16 right-4 z-40 w-[calc(100%-2rem)] max-w-xs rounded-2xl border border-hairline bg-ink text-text-on-ink shadow-2xl motion-safe:animate-[popIn_0.25s_ease-out] sm:bottom-20 sm:right-6"
+      // sm:bottom-40 clears QuickAccessHub's FAB (bottom-24, h-14) sitting
+      // in the same corner on desktop — on mobile there's no competing
+      // widget at bottom-16, so that offset stays as-is.
+      className="fixed bottom-16 right-4 z-40 w-[calc(100%-2rem)] max-w-xs rounded-2xl border border-hairline bg-ink text-text-on-ink shadow-2xl motion-safe:animate-[popIn_0.25s_ease-out] sm:bottom-40 sm:right-6"
     >
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">

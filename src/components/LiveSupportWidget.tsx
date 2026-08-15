@@ -23,9 +23,9 @@ function TelegramIcon() {
 }
 
 // Sitewide floating "Canlı Destek" button — left side, deliberately opposite
-// the right-edge cluster (CommunityWidget + DesktopQuickNavFab) so it never
-// stacks with them. Same bottom-24 rail as those widgets so it sits above
-// the mobile bottom nav / ticker on every breakpoint.
+// the right-edge QuickAccessHub FAB so it never stacks with it. Same
+// bottom-24 rail as that widget so it sits above the mobile bottom nav /
+// ticker on every breakpoint.
 export default function LiveSupportWidget() {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
