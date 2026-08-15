@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
+import { sendTelegramMessage } from "@/lib/telegram";
 import { brokers, getBrokerScores } from "@/data/brokers";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
@@ -31,16 +31,21 @@ export const GET = withCronErrorAlert("broker-review-share", async (req: NextReq
     .sort((a, b) => b.scores.composite - a.scores.composite)
     .slice(0, 5);
 
-  const lines = top5.map(({ broker, scores }, i) => {
-    const stars = "⭐".repeat(Math.round(broker.rating));
-    return `${i + 1}. <b>${broker.name}</b> ${stars} (${broker.rating}/5) — FXPARTNER Index ${scores.composite.toFixed(1)}/10`;
-  });
+  // Kept deliberately spare — no stars, no repeated CTA/link line. The
+  // buttons below already carry every action; the message itself is just
+  // a clean, scannable ranking. Previously included a raw fxpartner.global
+  // URL in a CTA line, which made Telegram auto-attach a large link-
+  // preview card under the text — the "iç içe" (nested/cluttered) look
+  // the owner flagged on 2026-08-12. disablePreview + dropping that line
+  // both fix it.
+  const lines = top5.map(
+    ({ broker, scores }, i) => `${i + 1}.  <b>${broker.name}</b>  —  ${scores.composite.toFixed(1)}/10`
+  );
 
   const text =
-    `<b>FXPARTNER Index'e göre en yüksek puanlı 5 broker</b>\n\n` +
+    `🏆 <b>FXPARTNER Index — Haftanın En İyi 5 Broker'i</b>\n\n` +
     lines.join("\n") +
-    `\n\nBu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n\n` +
-    telegramSiteCta();
+    `\n\n<i>Genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.</i>`;
 
   // One row per broker: "Hesap Aç" (referral link) + "İncele" (the full
   // FXPARTNER review) side by side, in the same 1-5 order as the text list.
@@ -49,7 +54,7 @@ export const GET = withCronErrorAlert("broker-review-share", async (req: NextReq
     { text: "İncele", url: `${siteUrl}/brokers/${broker.slug}` },
   ]);
 
-  const result = await sendTelegramMessage(text, { inlineKeyboard });
+  const result = await sendTelegramMessage(text, { inlineKeyboard, disablePreview: true });
 
   return NextResponse.json({
     ok: true,
