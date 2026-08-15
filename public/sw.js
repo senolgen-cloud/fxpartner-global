@@ -16,6 +16,13 @@ self.addEventListener("push", (event) => {
       icon: "/fxpartner-logo.png",
       badge: "/fxpartner-logo.png",
       data: { url: data.url },
+      // Explicit, not just relying on the platform default: silent:false is
+      // what actually makes the OS play its notification sound, and the
+      // vibrate pattern is the mobile equivalent for phones on silent/DND
+      // where sound alone wouldn't be felt. Both matter here specifically
+      // because these are trading signals — a missed one is a missed entry.
+      silent: false,
+      vibrate: [200, 100, 200],
     })
   );
 });

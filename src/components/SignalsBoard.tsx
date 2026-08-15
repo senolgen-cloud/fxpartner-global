@@ -19,6 +19,39 @@ function toSignal(s: SignalJson): Signal {
   return { ...s, createdAt: new Date(s.createdAt), closedAt: s.closedAt ? new Date(s.closedAt) : null };
 }
 
+// Two-tone chime via Web Audio — no audio file to ship/host, and it sounds
+// identical everywhere. Browsers block audio until the page has seen a user
+// gesture, so the AudioContext is created lazily on first click/keydown
+// rather than on mount; until that first gesture fires, a signal arriving
+// won't audibly chime (the push notification below still covers that case).
+let sharedAudioCtx: AudioContext | null = null;
+
+function unlockAudio() {
+  if (sharedAudioCtx) return;
+  const Ctx = window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (Ctx) sharedAudioCtx = new Ctx();
+}
+
+function playSignalChime() {
+  if (!sharedAudioCtx) return;
+  const ctx = sharedAudioCtx;
+  if (ctx.state === "suspended") ctx.resume();
+  const now = ctx.currentTime;
+  [880, 1320].forEach((freq, i) => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.value = freq;
+    const start = now + i * 0.14;
+    gain.gain.setValueAtTime(0, start);
+    gain.gain.linearRampToValueAtTime(0.2, start + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, start + 0.28);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(start);
+    osc.stop(start + 0.3);
+  });
+}
+
 const TIER_LABEL: Record<PackageTier, string> = { starter: "Starter", pro: "Pro", vip: "VIP" };
 
 function LockBadge({ pair }: { pair: string }) {
@@ -654,6 +687,18 @@ export default function SignalsBoard({
   const [closed, setClosed] = useState(initialClosed);
   const knownIds = useRef(new Set([...initialActive, ...initialClosed].map((s) => s.id)));
 
+  // Unlocks the chime's AudioContext on the visitor's first interaction
+  // anywhere on the page — required by browser autoplay policy, and cheap
+  // to attach unconditionally since unlockAudio() no-ops after the first call.
+  useEffect(() => {
+    document.addEventListener("pointerdown", unlockAudio, { once: true });
+    document.addEventListener("keydown", unlockAudio, { once: true });
+    return () => {
+      document.removeEventListener("pointerdown", unlockAudio);
+      document.removeEventListener("keydown", unlockAudio);
+    };
+  }, []);
+
   useEffect(() => {
     let cancelled = false;
 
@@ -663,6 +708,11 @@ export default function SignalsBoard({
         if (!res.ok || cancelled) return;
         const data: { active: SignalJson[]; closed: SignalJson[] } = await res.json();
         if (cancelled) return;
+        // Chime only for brand-new active signals — a new closed-trade
+        // result isn't something a member needs to react to immediately,
+        // and it would fire on every result the moment the board loads.
+        const hasNewActiveSignal = data.active.some((s) => !knownIds.current.has(s.id));
+        if (hasNewActiveSignal) playSignalChime();
         setActive(data.active.map(toSignal));
         setClosed(data.closed.map(toSignal));
         for (const s of [...data.active, ...data.closed]) knownIds.current.add(s.id);
