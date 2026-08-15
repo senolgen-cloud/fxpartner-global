@@ -415,7 +415,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 3,
+    rank: 2,
     slug: "lite-finance",
     name: "Lite Finance",
     logo: "/brokers/litefinance-icon.png",
@@ -566,7 +566,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 2,
+    rank: 3,
     slug: "fxpro",
     name: "FxPro",
     logo: "/brokers/fxpro.png",
@@ -982,7 +982,7 @@ export function getBrokerBySlug(slug: string): Broker | undefined {
 // Brokers currently running paid ad placements (BrokerAdBanner). Kept as an
 // explicit slug list rather than a `sponsored` field on Broker so turning a
 // campaign on/off doesn't require touching the broker's editorial data.
-export const SPONSORED_BROKER_SLUGS = ["xm", "fxpro", "lite-finance"];
+export const SPONSORED_BROKER_SLUGS = ["xm", "fxpro", "lite-finance", "avatrade"];
 
 // Deterministically picks one of the sponsored brokers for a given page,
 // varying by `seed` (e.g. the page's own slug) so different pages don't all
