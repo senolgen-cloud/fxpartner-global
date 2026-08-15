@@ -32,6 +32,11 @@ export const resourceLinks = [
     description: "Daily market commentary and technical outlook",
   },
   {
+    href: "/haber-bulteni",
+    label: "News Bulletin",
+    description: "Original daily digest of the day's market-moving headlines",
+  },
+  {
     href: "/teknik-analiz",
     label: "Technical Analysis",
     description: "Pivot levels, support/resistance and RSI/MACD outlook",

@@ -123,6 +123,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/haber-bulteni" className="transition-colors hover:text-text-on-ink">
+                  News Bulletin
+                </Link>
+              </li>
+              <li>
                 <Link href="/broker-lookup" className="transition-colors hover:text-text-on-ink">
                   Broker Lookup
                 </Link>

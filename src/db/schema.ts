@@ -342,3 +342,23 @@ export const newsletterSubscribers = pgTable("newsletter_subscriber", {
   source: text("source"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
+
+// Published on /haber-bulteni/[slug] first, then announced to Telegram
+// linking back to that page — replaces the old news-update behavior of
+// linking straight to each external publisher's own article. The `body`
+// is an LLM-synthesized rewrite grounded ONLY in the fetched title/
+// description of each source item (see lib/bulletin.ts) — never new
+// facts/numbers/predictions the sources didn't already state — and
+// `sources` credits every publisher actually used, satisfying attribution
+// without reproducing/linking to their copyrighted text directly.
+export const newsBulletins = pgTable("news_bulletin", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  slug: text("slug").notNull().unique(),
+  title: text("title").notNull(),
+  excerpt: text("excerpt").notNull(),
+  body: text("body").notNull(),
+  sources: text("sources").notNull(), // JSON-encoded string[] of publisher names
+  publishedAt: timestamp("published_at").notNull().defaultNow(),
+});

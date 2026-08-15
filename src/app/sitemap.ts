@@ -3,15 +3,18 @@ import { brokers, brokerCategories, categoryInfo } from "@/data/brokers";
 import { blogPosts } from "@/data/blog";
 import { cashbackPrograms } from "@/data/cashback";
 import { marketAnalysisPosts } from "@/data/marketAnalysis";
+import { db } from "@/db";
+import { newsBulletins } from "@/db/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: SITE_URL, changeFrequency: "daily", priority: 1 },
     { url: `${SITE_URL}/categories`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/piyasa-analizi`, changeFrequency: "daily", priority: 0.7 },
+    { url: `${SITE_URL}/haber-bulteni`, changeFrequency: "daily", priority: 0.7 },
     { url: `${SITE_URL}/teknik-analiz`, changeFrequency: "daily", priority: 0.7 },
     { url: `${SITE_URL}/raporlar/forex-broker-duzenleme-raporu`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${SITE_URL}/partners`, changeFrequency: "weekly", priority: 0.7 },
@@ -62,6 +65,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  const bulletins = await db.query.newsBulletins.findMany();
+  const bulletinRoutes: MetadataRoute.Sitemap = bulletins.map((b) => ({
+    url: `${SITE_URL}/haber-bulteni/${b.slug}`,
+    lastModified: new Date(b.publishedAt),
+    changeFrequency: "monthly",
+    priority: 0.5,
+  }));
+
   return [
     ...staticRoutes,
     ...brokerRoutes,
@@ -69,5 +80,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...blogRoutes,
     ...cashbackSetupRoutes,
     ...marketAnalysisRoutes,
+    ...bulletinRoutes,
   ];
 }

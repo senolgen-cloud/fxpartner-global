@@ -145,6 +145,7 @@ const GROUPS: Group[] = [
       { href: "/ekonomik-takvim", label: "Ekonomik Takvim", icon: "calendar" },
       { href: "/teknik-analiz", label: "Teknik Analiz", icon: "chart" },
       { href: "/piyasa-analizi", label: "Piyasa Analizi", icon: "chart" },
+      { href: "/haber-bulteni", label: "Haber Bülteni", icon: "blog" },
       { href: "/broker-lookup", label: "Broker Sorgula", icon: "search" },
       { href: "/categories", label: "Kategoriler", icon: "category" },
     ],
