@@ -330,6 +330,7 @@ export const brokers: Broker[] = [
     rank: 4,
     slug: "bybit",
     name: "Bybit",
+    logo: "/brokers/bybit logo.png",
     tagline: "MT5 üzerinden forex, kripto ve CFD işlemleri",
     rating: 4.5,
     founded: 2018,
