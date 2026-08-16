@@ -4,6 +4,7 @@ import { filterRelevantNews } from "@/lib/relevance-filter";
 import { synthesizeBulletin, buildFallbackBulletin } from "@/lib/bulletin";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
 import { sendTelegramMessage, telegramSiteCta, mainServicesKeyboard } from "@/lib/telegram";
+import { postTextToX } from "@/lib/x";
 import { db } from "@/db";
 import { newsBulletins } from "@/db/schema";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
@@ -95,11 +96,30 @@ export const GET = withCronErrorAlert("news-update", async (req: NextRequest) =>
     await markPostedToTelegram(`news:${item.guid}`);
   }
 
+  // No raw URL in the tweet body on purpose — X's algorithm suppresses
+  // reach on link-containing posts, so every other X post in this codebase
+  // (trade-signal, trade-result, technical-analysis-share) points readers
+  // to the profile link instead. Best-effort: an X failure shouldn't fail
+  // the whole cron run, since the site + Telegram post already succeeded.
+  let xResult: { tweetId: string } | { error: string } | null = null;
+  try {
+    const cta = "📰 Daha fazlası için Web Sitemizi ziyaret edin. Link Bio'da!";
+    const disclaimer = "Yatırım tavsiyesi değildir.";
+    const budget = 280 - cta.length - disclaimer.length - 4; // 4 = two \n\n separators
+    const title = bulletin.title.length > budget ? bulletin.title.slice(0, budget - 1) + "…" : bulletin.title;
+    const tweetText = `${title}\n\n${disclaimer}\n\n${cta}`;
+    xResult = await postTextToX(tweetText);
+  } catch (err) {
+    console.error("X post failed:", err);
+    xResult = { error: err instanceof Error ? err.message : "unknown error" };
+  }
+
   return NextResponse.json({
     ok: true,
     posted: true,
     slug,
     itemCount: fresh.length,
     checkedRelevant: relevant.length,
+    xResult,
   });
 });
