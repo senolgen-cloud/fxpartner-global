@@ -260,7 +260,7 @@ export const marketAnalysisPosts: MarketAnalysisPost[] = [
     closing:
       "**FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
   },
-];  {
+;  {
     slug: "haftalik-gorunum-2026-08-17",
     title: "FXPARTNER Haftalık Piyasa Görünümü | 17-23 Ağustos 2026",
     excerpt:
@@ -335,5 +335,6 @@ export const marketAnalysisPosts: MarketAnalysisPost[] = [
 
 export function getMarketAnalysisPostBySlug(slug: string): MarketAnalysisPost | undefined {
   return marketAnalysisPosts.find((p) => p.slug === slug);
-}
+} 
+]
 
