@@ -60,6 +60,16 @@ export function getTierPriceId(tier: PackageTier): string {
   return priceId;
 }
 
+// USD price per tier — matches the amounts shown on /paketler. NOWPayments
+// checkout needs a plain number (it has no concept of a pre-created Price
+// object like Stripe), so this is the one place both the display page and
+// the NOWPayments checkout action read from.
+export const TIER_PRICE_USD: Record<PackageTier, number> = {
+  starter: 29,
+  pro: 59,
+  vip: 99,
+};
+
 // Reverse lookup (Stripe price ID -> which tier it belongs to) for display
 // purposes, e.g. showing "Pro" on the account page for an active subscriber.
 export function tierFromPriceId(priceId: string): PackageTier | null {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-import { createPackageCheckoutSession } from "./checkout-actions";
+import { createPackageCheckoutSession, createNowPaymentsCheckout } from "./checkout-actions";
 import { lookupBrokers } from "@/data/brokerLookup";
 import { breadcrumbSchema } from "@/lib/schema";
 import type { PackageTier } from "@/lib/vip";
@@ -253,6 +253,14 @@ export default function PaketlerPage() {
                     }`}
                   >
                     {t.ctaLabel} →
+                  </button>
+                </form>
+                <form action={createNowPaymentsCheckout.bind(null, t.tier)} className="mt-3">
+                  <button
+                    type="submit"
+                    className="w-full rounded-full border border-hairline px-6 py-3 text-sm font-medium text-text-on-ink-muted transition-colors hover:border-gold hover:text-gold"
+                  >
+                    ₿ Kripto ile Öde
                   </button>
                 </form>
               </div>

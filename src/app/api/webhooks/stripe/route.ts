@@ -4,6 +4,7 @@ import { getStripe } from "@/lib/stripe";
 import { db } from "@/db";
 import { users, vipSubscriptions, type VipSubscriptionStatus } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { tierFromPriceId } from "@/lib/vip";
 
 // Stripe's source of truth for subscription state — Checkout only tells us
 // a session completed, the subscription object itself carries price/status/
@@ -15,6 +16,7 @@ async function upsertSubscription(
   subscription: Stripe.Subscription
 ) {
   const priceId = subscription.items.data[0]?.price.id ?? "";
+  const tier = tierFromPriceId(priceId);
   const status = mapStatus(subscription.status);
   const discountAccountId = subscription.metadata?.discountAccountId || null;
   const periodEndSeconds = subscription.items.data[0]?.current_period_end;
@@ -24,6 +26,8 @@ async function upsertSubscription(
     .insert(vipSubscriptions)
     .values({
       userId,
+      provider: "stripe",
+      tier,
       stripeCustomerId: customerId,
       stripeSubscriptionId: subscription.id,
       stripePriceId: priceId,
@@ -35,6 +39,8 @@ async function upsertSubscription(
     .onConflictDoUpdate({
       target: vipSubscriptions.userId,
       set: {
+        provider: "stripe",
+        tier,
         stripeCustomerId: customerId,
         stripeSubscriptionId: subscription.id,
         stripePriceId: priceId,

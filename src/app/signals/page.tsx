@@ -10,7 +10,7 @@ import { getSponsoredBroker } from "@/data/brokers";
 import { desc, eq, and } from "drizzle-orm";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { auth } from "@/auth";
-import { tierFromPriceId } from "@/lib/vip";
+import { tierFromPriceId, type PackageTier } from "@/lib/vip";
 
 const featuredBroker = getSponsoredBroker("signals");
 
@@ -83,7 +83,10 @@ export default async function SignalsPage() {
       : Promise.resolve(null),
   ]);
 
-  const viewerTier = subscriptionRow ? tierFromPriceId(subscriptionRow.stripePriceId) : null;
+  const viewerTier = subscriptionRow
+    ? ((subscriptionRow.tier as PackageTier | null) ??
+      (subscriptionRow.stripePriceId ? tierFromPriceId(subscriptionRow.stripePriceId) : null))
+    : null;
 
   return (
     <>
