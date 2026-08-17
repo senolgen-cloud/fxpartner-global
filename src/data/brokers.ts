@@ -1036,3 +1036,18 @@ export function getSponsoredBroker(seed: string, excludeSlug?: string): Broker {
   for (let i = 0; i < seed.length; i++) hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
   return candidates[hash % candidates.length];
 }
+
+// Same pool as getSponsoredBroker, but the whole list (order varied by
+// `seed` via a rotation offset) instead of one fixed pick — for ad slots
+// that cycle through sponsors client-side (see RotatingBrokerAd) rather
+// than showing the same one broker on every visit.
+export function getSponsoredBrokerPool(seed: string, excludeSlug?: string): Broker[] {
+  const pool = brokers.filter(
+    (b) => SPONSORED_BROKER_SLUGS.includes(b.slug) && b.slug !== excludeSlug
+  );
+  const candidates = pool.length > 0 ? pool : brokers.filter((b) => SPONSORED_BROKER_SLUGS.includes(b.slug));
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
+  const offset = hash % candidates.length;
+  return [...candidates.slice(offset), ...candidates.slice(0, offset)];
+}

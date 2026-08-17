@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import SignalsBoard from "@/components/SignalsBoard";
 import LiveMarketsGrid from "@/components/LiveMarketsGrid";
-import BrokerAdBanner from "@/components/BrokerAdBanner";
+import RotatingBrokerAd from "@/components/RotatingBrokerAd";
 import VipCtaBanner from "@/components/VipCtaBanner";
 import { db } from "@/db";
 import { tradeSignals, vipSubscriptions } from "@/db/schema";
-import { getSponsoredBroker } from "@/data/brokers";
+import { getSponsoredBrokerPool } from "@/data/brokers";
 import { desc, eq, and } from "drizzle-orm";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { auth } from "@/auth";
 import { tierFromPriceId, type PackageTier } from "@/lib/vip";
 
-const featuredBroker = getSponsoredBroker("signals");
+const sponsoredBrokers = getSponsoredBrokerPool("signals");
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 const OG_IMAGE = `${SITE_URL}/signals-preview.png`;
@@ -121,7 +121,7 @@ export default async function SignalsPage() {
 
         <section className="border-t border-hairline">
           <div className="mx-auto max-w-3xl px-6 py-10">
-            <BrokerAdBanner broker={featuredBroker} />
+            <RotatingBrokerAd brokers={sponsoredBrokers} />
           </div>
         </section>
 
