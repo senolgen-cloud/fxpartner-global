@@ -177,7 +177,10 @@ export const partnerApplications = pgTable("partner_application", {
 export const vipSubscriptionStatusValues = ["active", "past_due", "canceled", "incomplete"] as const;
 export type VipSubscriptionStatus = (typeof vipSubscriptionStatusValues)[number];
 
-export const vipProviderValues = ["stripe", "nowpayments"] as const;
+// "manual" is for comp/test access granted directly by an admin (no real
+// payment) — kept honest in the record rather than misattributed to
+// whichever paid provider happened to be closest.
+export const vipProviderValues = ["stripe", "nowpayments", "manual"] as const;
 export type VipProvider = (typeof vipProviderValues)[number];
 
 // One row per user (Stripe/NOWPayments themselves are the history/audit
