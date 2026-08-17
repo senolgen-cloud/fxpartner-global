@@ -4,11 +4,13 @@
 // Sinyalleri", VIP is positioned as the most comprehensive tier — so
 // anything outside plain FX/metals/indices (crypto, energy) defaults to VIP.
 //
-// Anonymous/signed-out visitors are treated as Starter-level for web
-// visibility — Starter's real differentiators are the Telegram VIP channel,
-// trade notifications, and guided support, not exclusive website content,
-// so the site keeps showing forex-pair signals publicly (same as before
-// this tiering existed) while Pro/VIP unlock the rest on-site.
+// A viewer with no active package (viewerTier === null) has zero rank —
+// every active signal is locked regardless of pair, full stop. Closed/
+// historical signals are a separate concern entirely and are never gated
+// by this module; see SignalsBoard's closedView/isClosed branches, which
+// skip canViewSignal altogether so past performance stays public
+// (real-results social proof) while only *live, actionable* signals are
+// the paid product.
 //
 // Type-only import — lib/vip.ts pulls in db/drizzle at runtime, but this
 // file is also used from the client-side SignalsBoard component, so only
@@ -56,9 +58,31 @@ export function requiredTierForPair(rawPair: string): PackageTier {
 }
 
 export function viewerRank(viewerTier: PackageTier | null): number {
-  return TIER_RANK[viewerTier ?? "starter"];
+  return viewerTier ? TIER_RANK[viewerTier] : -1;
 }
 
 export function canViewSignal(viewerTier: PackageTier | null, pair: string): boolean {
   return viewerRank(viewerTier) >= TIER_RANK[requiredTierForPair(pair)];
+}
+
+// Strips actual entry/SL/TP/volume from an active signal the viewer isn't
+// entitled to — the UI's "••••••" masking (SignalsBoard) is cosmetic on
+// its own; a client-side lock never stopped anyone from reading the real
+// numbers straight out of the network response. Closed/historical signals
+// are never masked (past performance is public). Server-only in practice
+// (called from signals/page.tsx and /api/signals), but kept in this
+// client-safe module since it's pure policy, not a DB call.
+export function maskLockedActiveSignal<
+  T extends {
+    pair: string;
+    status: string;
+    entry: string;
+    target1: string | null;
+    target2: string | null;
+    stop: string | null;
+    volume: string | null;
+  },
+>(signal: T, viewerTier: PackageTier | null): T {
+  if (signal.status !== "active" || canViewSignal(viewerTier, signal.pair)) return signal;
+  return { ...signal, entry: "", target1: null, target2: null, stop: null, volume: null };
 }

@@ -11,6 +11,7 @@ import { desc, eq, and } from "drizzle-orm";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { auth } from "@/auth";
 import { tierFromPriceId, type PackageTier } from "@/lib/vip";
+import { maskLockedActiveSignal } from "@/lib/signalAccess";
 
 const sponsoredBrokers = getSponsoredBrokerPool("signals");
 
@@ -88,6 +89,10 @@ export default async function SignalsPage() {
       (subscriptionRow.stripePriceId ? tierFromPriceId(subscriptionRow.stripePriceId) : null))
     : null;
 
+  // Real masking, not just a UI overlay — a locked signal's actual entry/
+  // SL/TP/volume never leaves the server in the first place.
+  const maskedActive = active.map((s) => maskLockedActiveSignal(s, viewerTier));
+
   return (
     <>
       <script
@@ -107,7 +112,7 @@ export default async function SignalsPage() {
       />
       <main className="flex-1 bg-ink text-text-on-ink">
         <SignalsBoard
-          initialActive={active}
+          initialActive={maskedActive}
           initialClosed={closed}
           liveMarkets={<LiveMarketsGrid />}
           viewerTier={viewerTier}

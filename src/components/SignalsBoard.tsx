@@ -219,7 +219,9 @@ function SignalTable({
                     : s.profit
                       ? `${parseFloat(s.profit) > 0 ? "+" : ""}${s.profit} USD`
                       : null;
-                const locked = !canViewSignal(viewerTier, s.pair);
+                // Past performance is public regardless of package — only
+                // closedView's live/active counterpart is the gated product.
+                const locked = closedView ? false : !canViewSignal(viewerTier, s.pair);
                 return (
                   <tr key={s.id} className="border-b border-hairline last:border-0">
                     <td className="whitespace-nowrap px-6 py-3.5 font-mono text-xs text-text-on-ink-muted">
@@ -608,7 +610,9 @@ function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: Packag
   const isSell = signal.direction === "SELL";
   const directionColor = isSell ? TICK_DOWN : TICK_UP;
   const isClosed = signal.status === "closed";
-  const locked = !canViewSignal(viewerTier, signal.pair);
+  // Past performance is public regardless of package — only open/active
+  // signals are gated.
+  const locked = isClosed ? false : !canViewSignal(viewerTier, signal.pair);
 
   const cardDiff = priceDiff(signal.entry, signal.closePrice, signal.direction);
   const resultLine =
