@@ -260,6 +260,78 @@ export const marketAnalysisPosts: MarketAnalysisPost[] = [
     closing:
       "**FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
   },
+  {
+    slug: "haftalik-gorunum-2026-08-17",
+    title: "FXPARTNER Haftalık Piyasa Görünümü | 17-23 Ağustos 2026",
+    excerpt:
+      "S&P 500 rekor tazeledi, Reddit S&P 500'e katılıyor ve temmuz perakende satışları beklenmedik şekilde geriledi; haftanın gündeminde FOMC tutanakları ve öncü PMI verileri var. Ortadoğu'daki gerginlik altın ve petrolü desteklerken EUR/USD iki aylık zirveye yakın seyrediyor.",
+    publishedAt: "2026-08-16",
+    readingMinutes: 5,
+    intro:
+      "17-23 Ağustos haftasında piyasaların odağı, Çarşamba günü açıklanacak FOMC tutanaklarında — 28-29 Temmuz toplantısında üç üyenin faiz artırımı yönünde muhalif oy kullanması, tutanakların ayrıntılarını özellikle önemli kılıyor. Geçtiğimiz hafta S&P 500 tarihi rekorunu tazelerken, temmuz ayı perakende satışlarındaki beklenmedik düşüş tüketici harcamalarına dair soru işaretleri yarattı. Ortadoğu'da süregelen jeopolitik gerginlik altın ve petrol fiyatlarını desteklemeye devam ediyor. EUR/USD, XAU/USD, USD/TRY ve ABD hisse senedi piyasaları üzerinden haftanın öne çıkan başlıklarını derledik.",
+    news: [
+      {
+        icon: "💶",
+        heading: "EUR/USD: İki Aylık Zirveye Yakın Seyir",
+        body: "EUR/USD, hafta başında **1,1570** seviyesinde işlem görüyor; euro, Ortadoğu'daki gelişmelerin seyri ve ABD-İran arasında olası bir anlaşmaya dair karışık sinyallerin gölgesinde **son iki ayın en yüksek seviyelerine** yakın seyrediyor. Günlük bant **1,1526-1,1586** aralığında şekillenirken, yükselen petrol fiyatlarının enflasyon üzerindeki olası etkisi de yatırımcıların yakından izlediği bir diğer başlık. Çarşamba günkü FOMC tutanakları, paritenin haftanın geri kalanındaki yönü için kritik bir katalizör olabilir.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın (XAU/USD): 4.377 Dolar Civarında, Jeopolitik Risk Primi Sürüyor",
+        body: "XAU/USD, hafta sonu öncesi son kapanışta **4.376,82 dolar** seviyesinde bulunuyor. Ortadoğu'da İran, İsrail ve ABD arasındaki gerginliğin sürmesi, Hürmüz Boğazı'ndaki gemi trafiğinin hafta sonuna doğru belirgin şekilde zayıflaması ve Husilerin Suudi Arabistan'a yönelik saldırılarını yeniden başlatması, altını güvenli liman talebiyle desteklemeye devam ediyor. Jeopolitik risklerin sürmesi halinde ons altında yukarı yönlü baskının korunabileceği değerlendiriliyor.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "USD/TRY: 47,80 TL Bandında Yatay Seyir",
+        body: "USD/TRY, hafta başında **47,7480-47,9025 TL bandında**, açılışını **47,8065 TL** seviyesinden yaparak dengeli görünümünü koruyor. Kur, son haftalarda gözlenen dar bantlı ve kontrollü seyrini sürdürüyor; TCMB'nin güçlü rezerv pozisyonu, kurdaki volatiliteyi sınırlayan temel unsur olmaya devam ediyor.",
+      },
+      {
+        icon: "📈",
+        heading: "ABD Hisse Senetleri: S&P 500 Rekor Tazeledi, Reddit Endekse Katılıyor",
+        body: "S&P 500, geçtiğimiz Perşembe günü **7.798,99 puanla** yılın **27'nci rekorunu** tazeledi; Nasdaq Composite ise Meta Platforms, Micron Technology ve Netflix hisselerindeki yükselişin desteğiyle **%0,81 artışla 26.803,03 puana** çıktı. Cuma günü kâr satışlarıyla S&P 500 **%0,2 geriledi**, ancak endeks üst üste **üçüncü haftalık kazancını** tamamladı. Ayrı bir gelişmede **Reddit hisseleri**, S&P Dow Jones Indices'in endekse dahil edilme kararının ardından Cuma günü **%11'in üzerinde** sıçradı; şirket, AvalonBay Communities'in endeksten ayrılmasıyla açılan yere **18 Ağustos Salı** işlem açılışından önce resmen katılacak. Bu tür off-cycle endeks değişiklikleri, pasif fonların zorunlu alımları nedeniyle kısa vadede hisse üzerinde ek talep yaratabiliyor.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Zayıf Perakende Satışlar ve Ortadoğu Kaynaklı Petrol Riski",
+        body: "ABD Ticaret Bakanlığı'nın 14 Ağustos'ta açıkladığı verilere göre temmuz ayı perakende satışları, **%0,1'lik artış beklentisinin aksine %0,6 geriledi** — dokuz aydır ilk aylık düşüş. Gerilemenin bir kısmı, Amazon'un yıllık indirim kampanyasının bu yıl haziran ayına kaymasıyla açıklanıyor; buna karşın motorlu taşıt satışlarındaki **%1,8'lik** ve mağazasız perakendecilerdeki **%2,2'lik** düşüş tüketici harcamalarına dair soru işaretlerini büyütüyor. Bu arada Brent petrol, Ortadoğu'daki arz riskleri ve Hürmüz Boğazı'ndaki gerginliğin etkisiyle **varil başına 87-89 dolar** bandında güçlü seyrini koruyor; zayıflayan tüketici verisi ile yükselen enerji fiyatlarının bileşimi, Fed'in Eylül toplantısı öncesi manevra alanını daraltabilir.",
+      },
+    ],
+    calendarLabel: "17-23 Ağustos 2026",
+    calendarEvents: [
+      {
+        time: "17 Ağustos Pazartesi",
+        icon: "🇺🇸",
+        title: "ABD Empire State İmalat Endeksi ve NAHB Konut Piyasası Endeksi",
+        note: "Haftanın nispeten sakin başlangıcında imalat ve konut sektörüne dair ilk sinyaller.",
+      },
+      {
+        time: "18 Ağustos Salı",
+        icon: "📈",
+        title: "Reddit'in S&P 500'e Resmi Girişi",
+        note: "Endekse dahil olma kararı sonrası pasif fon akışlarının hisse üzerinde yarattığı etki izlenecek; ayrıca ABD ihracat fiyatları ve konut başlangıçları da açıklanacak.",
+      },
+      {
+        time: "19 Ağustos Çarşamba",
+        icon: "🇺🇸",
+        title: "FOMC Tutanakları (28-29 Temmuz Toplantısı)",
+        note: "Üç üyenin faiz artırımı yönünde muhalif oy kullandığı toplantının ayrıntıları, Fed içindeki görüş ayrılığının derinliğini gösterecek ve Eylül toplantısı beklentilerini şekillendirebilir.",
+      },
+      {
+        time: "20 Ağustos Perşembe",
+        icon: "🇺🇸",
+        title: "Haftalık İşsizlik Başvuruları",
+        note: "İşgücü piyasasının güncel seyrine dair yeni bir gösterge sunacak.",
+      },
+      {
+        time: "21 Ağustos Cuma",
+        icon: "🌍",
+        title: "ABD ve Avrupa Öncü PMI Verileri",
+        note: "27-29 Ağustos'taki Jackson Hole Sempozyumu öncesi büyüme görünümüne dair son işaretler; sempozyumda yeni Fed Başkanı Kevin Warsh'ın ilk konuşması yakından izlenecek.",
+      },
+    ],
+    closing:
+      "**FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
 ];
 
 export function getMarketAnalysisPostBySlug(slug: string): MarketAnalysisPost | undefined {

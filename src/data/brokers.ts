@@ -328,6 +328,39 @@ export const brokers: Broker[] = [
   },
   {
     rank: 4,
+    slug: "bybit",
+    name: "Bybit",
+    logo: "/brokers/bybit logo.png",
+    tagline: "MT5 üzerinden forex, kripto ve CFD işlemleri",
+    rating: 4.5,
+    founded: 2018,
+    minDeposit: "$0",
+    maxLeverage: "1:500",
+    regulators: ["AFSA (Kazakistan)", "VARA (Dubai, ön lisans)", "MiCAR / FMA (Avusturya)"],
+    platforms: ["MT5", "TradingView"],
+    headquarters: "Dubai, BAE",
+    referralUrl: "https://www.bybit.com/invite?ref=BVOJ8VL",
+    summary:
+      "Bybit, kripto borsası kökenli global bir platform olarak MetaTrader 5 üzerinden forex, kripto ve CFD işlemlerine erişim sunuyor. 400'den fazla enstrüman, 1:500'e varan kaldıraç ve EUR/USD'de ortalama 0,1 pip gibi düşük spread seçenekleriyle öne çıkıyor. FXPARTNER bağlantısıyla hesap açan kullanıcılar referral avantajlarından yararlanır.",
+    pros: [
+      "400'den fazla enstrümanla geniş forex/kripto/CFD yelpazesi",
+      "EUR/USD'de ortalama 0,1 pip gibi düşük spread",
+      "MT5 hesap açılışında minimum yatırım şartı yok",
+      "1:500'e varan kaldıraç",
+    ],
+    cons: [
+      "XM/AvaTrade gibi FCA, ASIC veya CySEC lisansı yok — regülasyonu AFSA (Kazakistan), VARA (Dubai, ön lisans) ve MiCAR (Avusturya) ile sınırlı",
+      "CFD/MT5 ürünü 2024'te eklendi — forex tarafında XM kadar uzun bir geçmişi yok",
+      "MT5 hesabına yalnızca USDT ile yatırım yapılabiliyor",
+    ],
+    bestFor: "Kripto ve forex'i tek platformda işlem yapmak isteyen yatırımcılar",
+    accentNote: "Kripto + forex tek platformda",
+    categories: ["Low Spread", "High Leverage"],
+    scoreCost: 4,
+    scoreWithdrawal: 3,
+  },
+  {
+    rank: 5,
     slug: "avatrade",
     name: "AvaTrade",
     logo: "/brokers/avatrade.jpg",
@@ -375,7 +408,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 6,
+    rank: 7,
     slug: "tickmill",
     name: "Tickmill",
     logo: "/brokers/tickmill.webp",
@@ -481,7 +514,7 @@ export const brokers: Broker[] = [
     },
   },
   {
-    rank: 7,
+    rank: 8,
     slug: "exness",
     name: "EXNESS",
     logo: "/brokers/exness.png",
@@ -527,7 +560,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 11,
+    rank: 12,
     slug: "markets-com",
     name: "markets.com",
     logo: "/brokers/markets-com.png",
@@ -630,7 +663,7 @@ export const brokers: Broker[] = [
     },
   },
   {
-    rank: 12,
+    rank: 13,
     slug: "versus-trade",
     name: "Versus Trade",
     logo: "/brokers/versus-trade.jpg",
@@ -675,7 +708,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 9,
+    rank: 10,
     slug: "thinkmarkets",
     name: "ThinkMarkets",
     logo: "/brokers/thinkmarkets.jpg",
@@ -719,7 +752,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 10,
+    rank: 11,
     slug: "easymarkets",
     name: "easyMarkets",
     logo: "/brokers/easymarkets-logo.jpg",
@@ -761,7 +794,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 5,
+    rank: 6,
     slug: "ic-markets",
     name: "IC Markets",
     logo: "/brokers/ic-markets.png",
@@ -805,7 +838,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 13,
+    rank: 14,
     slug: "lhfx",
     name: "LHFX",
     logo: "/brokers/lhfx.png",
@@ -847,7 +880,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 14,
+    rank: 15,
     slug: "exclusive-markets",
     name: "Exclusive Markets",
     logo: "/brokers/exclusive-markets.svg",
@@ -889,7 +922,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 15,
+    rank: 16,
     slug: "tradingpro",
     name: "TradingPRO",
     logo: "/brokers/tradingpro.png",
@@ -935,7 +968,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 8,
+    rank: 9,
     slug: "fxt",
     name: "FXT",
     logo: "/brokers/fxt.svg",
@@ -987,7 +1020,7 @@ export function getBrokerBySlug(slug: string): Broker | undefined {
 // Brokers currently running paid ad placements (BrokerAdBanner). Kept as an
 // explicit slug list rather than a `sponsored` field on Broker so turning a
 // campaign on/off doesn't require touching the broker's editorial data.
-export const SPONSORED_BROKER_SLUGS = ["xm", "fxpro", "lite-finance", "avatrade"];
+export const SPONSORED_BROKER_SLUGS = ["xm", "fxpro", "lite-finance", "avatrade", "bybit"];
 
 // Deterministically picks one of the sponsored brokers for a given page,
 // varying by `seed` (e.g. the page's own slug) so different pages don't all
