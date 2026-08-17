@@ -52,33 +52,21 @@ export async function GET(req: NextRequest) {
   const hasTarget1 = isRealLevel(target1);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
-  const cardParams = new URLSearchParams({ pair, entry, stop });
-  if (target1) cardParams.set("target1", target1);
-  if (target2) cardParams.set("target2", target2);
-  if (confidence) cardParams.set("confidence", confidence);
-  if (volume) cardParams.set("volume", volume);
-  if (direction) cardParams.set("direction", direction);
+  const dirWord = direction?.toUpperCase() === "SELL" ? "SELL" : direction?.toUpperCase() === "BUY" ? "BUY" : "";
+
+  // Public Telegram/X announcements name only the instrument now — no
+  // direction, no entry/TP/SL. Those require an active /paketler package
+  // on-site (see signalAccess.ts); the OG card renders a matching "🔒
+  // Üyelere Özel" teaser when entry/stop are omitted like this.
+  const cardParams = new URLSearchParams({ pair });
   const imageUrl = `${siteUrl}/api/og/trade-signal?${cardParams.toString()}`;
 
-  // Telegram photo captions are capped at 1024 characters, so this stays
-  // shorter than the X copy — real trade levels, a short honest pitch for
-  // the site, and a link (unlike X, Telegram doesn't charge per link).
-  const dirWord = direction?.toUpperCase() === "SELL" ? "SELL" : direction?.toUpperCase() === "BUY" ? "BUY" : "";
-  const captionLevelLines = [
-    `📈 Entry: <b>${entry}</b>`,
-    hasTarget1 ? `🎯 Take Profit: <b>${target1}</b>` : null,
-    hasStop ? `🛑 Stop Loss: <b>${stop}</b>` : null,
-  ]
-    .filter(Boolean)
-    .join("\n");
-
   const caption =
-    `<b>${pair.toUpperCase()}</b>${dirWord ? ` — ${dirWord} ${dirWord === "SELL" ? "🔴" : "🟢"}` : ""}\n\n` +
-    `${captionLevelLines}\n\n` +
-    `⚡ Real trade, real account — sent live the moment it opened on our tracked MT5, never backtested or simulated.\n\n` +
-    `🌍 <b>FXPARTNER</b> is your all-in-one trading ecosystem: free live signals, AI-powered market insights, and broker comparisons built on real regulation data — so you always know who you're trusting with your money.\n\n` +
-    `⚠️ For informational purposes only, not investment advice. Always manage risk according to your own trading plan.\n\n` +
-    `👉 <a href="${siteUrl}">fxpartner.global</a>`;
+    `<b>${pair.toUpperCase()}</b> üzerinde yeni bir işlem açıldı\n\n` +
+    `🔒 Yön, giriş ve TP/SL seviyeleri Pro/VIP üyelere özel.\n\n` +
+    `⚡ Gerçek hesap, gerçek işlem — takip edilen MT5 hesabımızda açıldığı an bildiriliyor.\n\n` +
+    `⚠️ Bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.\n\n` +
+    `👉 Detayları görmek için <a href="${siteUrl}/paketler">paketlerimize göz atın</a>`;
 
   const result = await sendTelegramPhoto(imageUrl, caption, { inlineKeyboard: mainServicesKeyboard() });
 
@@ -89,24 +77,16 @@ export async function GET(req: NextRequest) {
     // No URL in the tweet body on purpose — a post containing a link costs
     // $0.20/request on X's pay-per-use pricing vs $0.015 without one, and
     // the card image already carries a QR code + FXPARTNER branding.
-    // Longer, educational copy is fine since the account is on X Premium
-    // (25,000-character post limit instead of the free-tier 280).
-    const levelLines = [
-      hasTarget1 ? `🎯 Target: ${target1}` : null,
-      hasStop ? `🛑 Stop Loss: ${stop}` : null,
-    ]
-      .filter(Boolean)
-      .join("\n");
-
+    // Direction/entry/TP/SL are gated the same as Telegram — instrument
+    // name only, full details require a package.
     const tweetText =
-      `${pair.toUpperCase()}${dirWord ? ` ${dirWord} ${dirWord === "SELL" ? "🔴" : "🟢"}` : ""} — Entry ${entry}\n` +
-      `${levelLines}\n\n` +
-      `⚡ Real trade signal, straight from our live tracked account — sent the moment it opened, not after the fact.\n\n` +
+      `${pair.toUpperCase()} — new trade just opened on our live tracked account\n\n` +
+      `🔒 Direction, entry, and TP/SL are Pro/VIP-only.\n\n` +
       `Why traders follow FXPARTNER:\n` +
-      `📊 Free real-time signals — no paywall, ever\n` +
+      `📊 Real trades from a real tracked account — no backtests\n` +
       `🤖 AI-powered market insights\n` +
       `🛡️ Broker comparisons built on real regulation, cost, and withdrawal data — not paid placements\n\n` +
-      `The right broker won't make you profitable — but the wrong one can quietly cost you more than any single trade ever will. Compare the ones you can actually trust — link in bio.\n\n` +
+      `Compare the brokers you can actually trust and unlock full signal details — link in bio.\n\n` +
       `⚠️ Not investment advice. Trade responsibly and never risk more than you can afford to lose.\n\n` +
       `#fxpartner #forex #fxsignals #forextrading #trading`;
     xResult = await postTradeSignalToX(imageUrl, tweetText);
@@ -144,8 +124,8 @@ export async function GET(req: NextRequest) {
   // signal itself, which has already gone out on Telegram/X by this point.
   try {
     await sendPushToAll({
-      title: `${dirWord || "New"} ${pair.toUpperCase()}`,
-      body: `Entry ${entry}${hasTarget1 ? ` · TP ${target1}` : ""}${hasStop ? ` · SL ${stop}` : ""}`,
+      title: `Yeni işlem: ${pair.toUpperCase()}`,
+      body: "Yön, giriş ve TP/SL için siteye giriş yapın.",
       url: "/signals",
     });
   } catch (err) {

@@ -30,22 +30,27 @@ export async function GET(request: Request) {
   const target1 = searchParams.get("target1");
   const stop = searchParams.get("stop");
   const direction = (searchParams.get("direction") ?? "").toUpperCase(); // BUY | SELL
+  // Public Telegram/X announcements only name the instrument now — no
+  // direction or price levels, which require an active package on-site
+  // (see /api/trade-signal). This route renders that teaser card when
+  // entry/stop are omitted, instead of requiring them.
+  const locked = !entry || !stop;
 
-  if (!pair || !entry || !stop) {
-    return new Response("Missing required params: pair, entry, stop", { status: 400 });
+  if (!pair) {
+    return new Response("Missing required param: pair", { status: 400 });
   }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
   const [base, quote] = splitPair(pair);
   const directionColor = direction === "SELL" ? TICK_DOWN : TICK_UP;
-  const directionLabel = direction === "SELL" ? "SELL" : direction === "BUY" ? "BUY" : "";
+  const directionLabel = locked ? "" : direction === "SELL" ? "SELL" : direction === "BUY" ? "BUY" : "";
 
   // A price of 0 means the EA hadn't detected a real SL/TP yet when it read
   // the position (it only retries for ~3s after open) — never display that
   // as if it were an actual level.
   const isRealLevel = (v: string | null): v is string => v !== null && parseFloat(v) > 0;
-  const hasTarget1 = isRealLevel(target1);
-  const hasStop = isRealLevel(stop);
+  const hasTarget1 = !locked && isRealLevel(target1);
+  const hasStop = !locked && isRealLevel(stop);
 
   return new ImageResponse(
     (
@@ -96,7 +101,13 @@ export async function GET(request: Request) {
         {/* Entry price value — sits directly under the "ENTRY PRICE" label
             already baked into the design file, just below the box top. */}
         <div style={{ display: "flex", position: "absolute", left: BOX_LEFT, top: 312, width: BOX_WIDTH }}>
-          <span style={{ fontSize: 60, fontWeight: 800, color: SIGNAL, letterSpacing: -1 }}>{entry}</span>
+          {locked ? (
+            <span style={{ fontSize: 26, fontWeight: 800, color: TEXT_ON_INK_MUTED, letterSpacing: -0.5 }}>
+              🔒 Üyelere Özel
+            </span>
+          ) : (
+            <span style={{ fontSize: 60, fontWeight: 800, color: SIGNAL, letterSpacing: -1 }}>{entry}</span>
+          )}
         </div>
 
         {/* Mask over the design file's placeholder sample chart, so the
@@ -123,13 +134,35 @@ export async function GET(request: Request) {
             width: BOX_WIDTH,
           }}
         >
-          <Sparkline
-            seed={`${pair}-${entry}-${direction}`}
-            color={directionColor}
-            trendUp={direction !== "SELL"}
-            width={BOX_WIDTH}
-            height={220}
-          />
+          {locked ? (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                width: BOX_WIDTH,
+                height: 220,
+                textAlign: "center",
+              }}
+            >
+              <span style={{ fontSize: 48 }}>🔒</span>
+              <span style={{ fontSize: 20, fontWeight: 700, color: TEXT_ON_INK, marginTop: 12 }}>
+                Yön ve TP/SL
+              </span>
+              <span style={{ fontSize: 16, color: TEXT_ON_INK_MUTED, marginTop: 4 }}>
+                Pro/VIP üyelere özel
+              </span>
+            </div>
+          ) : (
+            <Sparkline
+              seed={`${pair}-${entry}-${direction}`}
+              color={directionColor}
+              trendUp={direction !== "SELL"}
+              width={BOX_WIDTH}
+              height={220}
+            />
+          )}
 
           <div style={{ display: "flex", width: BOX_WIDTH, marginTop: 20, height: 1, background: HAIRLINE }} />
 
@@ -139,7 +172,7 @@ export async function GET(request: Request) {
                 Take Profit
               </span>
               <span style={{ fontSize: 30, fontWeight: 800, color: hasTarget1 ? TICK_UP : TEXT_ON_INK_MUTED, marginTop: 4 }}>
-                {hasTarget1 ? target1 : "—"}
+                {locked ? "🔒" : hasTarget1 ? target1 : "—"}
               </span>
             </div>
             <div style={{ display: "flex", width: 1, background: HAIRLINE }} />
@@ -148,7 +181,7 @@ export async function GET(request: Request) {
                 Stop Loss
               </span>
               <span style={{ fontSize: 30, fontWeight: 800, color: hasStop ? TICK_DOWN : TEXT_ON_INK_MUTED, marginTop: 4 }}>
-                {hasStop ? stop : "—"}
+                {locked ? "🔒" : hasStop ? stop : "—"}
               </span>
             </div>
           </div>
