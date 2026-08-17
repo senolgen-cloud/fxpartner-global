@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Footer from "@/components/Footer";
 import { auth, signOut } from "@/auth";
 import { db } from "@/db";
@@ -5,8 +6,11 @@ import {
   complaints as complaintsTable,
   cashbackAccounts,
   cashbackRecords,
+  vipSubscriptions,
+  tradeSignals,
   type ComplaintStatus,
   type CashbackAccountStatus,
+  type VipSubscriptionStatus,
 } from "@/db/schema";
 import { eq, desc, inArray } from "drizzle-orm";
 import { createVipInviteLink } from "@/lib/telegram";
@@ -15,6 +19,7 @@ import CashbackLinkForm from "@/components/CashbackLinkForm";
 import { updateCountry } from "./profile-actions";
 import { COUNTRIES } from "@/lib/country";
 import { brokers } from "@/data/brokers";
+import { tierFromPriceId, type PackageTier } from "@/lib/vip";
 
 const brokerNames = Object.fromEntries(brokers.map((b) => [b.slug, b.name]));
 
@@ -26,7 +31,7 @@ const CASHBACK_STATUS_LABEL: Record<CashbackAccountStatus, string> = {
 
 const CASHBACK_STATUS_CLASS: Record<CashbackAccountStatus, string> = {
   pending: "text-gold",
-  verified: "text-emerald-600",
+  verified: "text-tick-up",
   rejected: "text-alert",
 };
 
@@ -40,25 +45,53 @@ const STATUS_LABEL: Record<ComplaintStatus, string> = {
 const STATUS_CLASS: Record<ComplaintStatus, string> = {
   new: "text-signal",
   in_progress: "text-gold",
-  resolved: "text-emerald-600",
-  closed: "text-text-muted",
+  resolved: "text-tick-up",
+  closed: "text-text-on-ink-muted",
+};
+
+const VIP_STATUS_LABEL: Record<VipSubscriptionStatus, string> = {
+  active: "Aktif",
+  past_due: "Ödeme Gecikti",
+  canceled: "İptal Edildi",
+  incomplete: "Tamamlanmadı",
+};
+
+const VIP_STATUS_CLASS: Record<VipSubscriptionStatus, string> = {
+  active: "text-tick-up",
+  past_due: "text-gold",
+  canceled: "text-alert",
+  incomplete: "text-text-on-ink-muted",
+};
+
+const TIER_LABEL: Record<PackageTier, string> = {
+  starter: "Starter",
+  pro: "Pro",
+  vip: "VIP",
 };
 
 export default async function AccountPage() {
   const session = await auth();
   const user = session!.user!;
 
-  const myComplaints = await db
-    .select()
-    .from(complaintsTable)
-    .where(eq(complaintsTable.userId, user.id!))
-    .orderBy(desc(complaintsTable.createdAt));
-
-  const myCashbackAccounts = await db
-    .select()
-    .from(cashbackAccounts)
-    .where(eq(cashbackAccounts.userId, user.id!))
-    .orderBy(desc(cashbackAccounts.createdAt));
+  const [myComplaints, myCashbackAccounts, subscription, latestSignal] = await Promise.all([
+    db
+      .select()
+      .from(complaintsTable)
+      .where(eq(complaintsTable.userId, user.id!))
+      .orderBy(desc(complaintsTable.createdAt)),
+    db
+      .select()
+      .from(cashbackAccounts)
+      .where(eq(cashbackAccounts.userId, user.id!))
+      .orderBy(desc(cashbackAccounts.createdAt)),
+    db.query.vipSubscriptions.findFirst({
+      where: eq(vipSubscriptions.userId, user.id!),
+    }),
+    db.query.tradeSignals.findFirst({
+      where: eq(tradeSignals.status, "active"),
+      orderBy: desc(tradeSignals.createdAt),
+    }),
+  ]);
 
   const myCashbackRecords = myCashbackAccounts.length
     ? await db
@@ -73,6 +106,17 @@ export default async function AccountPage() {
         .orderBy(desc(cashbackRecords.createdAt))
     : [];
 
+  const activeSignalsCount = await db
+    .select({ id: tradeSignals.id })
+    .from(tradeSignals)
+    .where(eq(tradeSignals.status, "active"));
+
+  const subscriptionTier: PackageTier | null = subscription
+    ? ((subscription.tier as PackageTier | null) ??
+      (subscription.stripePriceId ? tierFromPriceId(subscription.stripePriceId) : null))
+    : null;
+  const isActiveVip = subscription?.status === "active";
+
   async function generateVipLink() {
     "use server";
     const s = await auth();
@@ -83,14 +127,14 @@ export default async function AccountPage() {
 
   return (
     <>
-      <main className="flex-1 bg-paper-high">
+      <main className="flex-1 bg-ink text-text-on-ink">
         <div className="mx-auto max-w-3xl px-6 py-16">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
-                Hesap
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
+                Üye Paneli
               </span>
-              <h1 className="mt-3 font-display text-3xl font-semibold text-text-dark">
+              <h1 className="mt-3 font-display text-3xl font-semibold text-text-on-ink">
                 {user.name || user.email}
               </h1>
             </div>
@@ -102,18 +146,106 @@ export default async function AccountPage() {
             >
               <button
                 type="submit"
-                className="rounded-full border border-hairline-light px-4 py-2 text-sm text-text-dark transition-colors hover:border-text-dark"
+                className="rounded-full border border-hairline px-4 py-2 text-sm text-text-on-ink transition-colors hover:border-text-on-ink"
               >
                 Çıkış yap
               </button>
             </form>
           </div>
 
-          <section className="mt-10 rounded-2xl border border-hairline-light bg-paper p-6">
-            <h2 className="font-display text-xl font-semibold text-text-dark">
+          {/* VIP membership status */}
+          <section className="mt-8 rounded-2xl border border-hairline bg-ink-soft p-6">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h2 className="font-display text-lg font-semibold text-text-on-ink">
+                  Üyelik Durumu
+                </h2>
+                {subscription ? (
+                  <p className="mt-1 text-sm text-text-on-ink-muted">
+                    {subscriptionTier ? TIER_LABEL[subscriptionTier] : "Paket"} paketi ·{" "}
+                    <span className={VIP_STATUS_CLASS[subscription.status]}>
+                      {VIP_STATUS_LABEL[subscription.status]}
+                    </span>
+                    {subscription.currentPeriodEnd &&
+                      ` · ${subscription.currentPeriodEnd.toLocaleDateString("tr-TR", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })} tarihine kadar`}
+                  </p>
+                ) : (
+                  <p className="mt-1 text-sm text-text-on-ink-muted">
+                    Henüz bir üyelik paketiniz yok.
+                  </p>
+                )}
+              </div>
+              {!isActiveVip && (
+                <Link
+                  href="/paketler"
+                  className="shrink-0 rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
+                >
+                  Paketleri İncele →
+                </Link>
+              )}
+            </div>
+          </section>
+
+          {/* Quick access: Signals + AI Assistant */}
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            <Link
+              href="/signals"
+              className="group rounded-2xl border border-hairline bg-ink-soft p-6 transition-colors hover:border-signal"
+            >
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.15em] text-signal">
+                  <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
+                  Canlı
+                </span>
+                <span className="font-mono text-xs text-text-on-ink-muted">
+                  {activeSignalsCount.length} aktif
+                </span>
+              </div>
+              <h3 className="mt-3 font-display text-xl font-semibold text-text-on-ink">
+                Sinyaller
+              </h3>
+              {latestSignal ? (
+                <p className="mt-1 text-sm text-text-on-ink-muted">
+                  Son sinyal:{" "}
+                  <span className="notranslate text-text-on-ink">{latestSignal.pair}</span>{" "}
+                  {latestSignal.direction}
+                </p>
+              ) : (
+                <p className="mt-1 text-sm text-text-on-ink-muted">Gerçek MT5 hesabından anlık sinyaller.</p>
+              )}
+              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-signal transition-colors group-hover:text-signal-strong">
+                Sinyalleri Gör →
+              </span>
+            </Link>
+
+            <Link
+              href="/ai-asistan"
+              className="group rounded-2xl border border-hairline bg-ink-soft p-6 transition-colors hover:border-signal"
+            >
+              <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-signal">
+                🤖 Yapay Zeka
+              </span>
+              <h3 className="mt-3 font-display text-xl font-semibold text-text-on-ink">
+                AI Asistan
+              </h3>
+              <p className="mt-1 text-sm text-text-on-ink-muted">
+                Piyasalar, CPI, brokerlar ve stratejiler hakkında anında yanıt alın.
+              </p>
+              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-signal transition-colors group-hover:text-signal-strong">
+                Soru Sor →
+              </span>
+            </Link>
+          </div>
+
+          <section className="mt-10 rounded-2xl border border-hairline bg-ink-soft p-6">
+            <h2 className="font-display text-xl font-semibold text-text-on-ink">
               Profil
             </h2>
-            <p className="mt-2 text-sm text-text-muted">
+            <p className="mt-2 text-sm text-text-on-ink-muted">
               İsteğe bağlı — aracı kurum incelemelerindeki yorumlarınızın
               yanında gösterilir.
             </p>
@@ -121,7 +253,7 @@ export default async function AccountPage() {
               <select
                 name="country"
                 defaultValue={user.country ?? ""}
-                className="rounded-xl border border-hairline-light bg-paper-high px-3 py-2 text-sm text-text-dark outline-none focus:border-signal"
+                className="rounded-xl border border-hairline bg-ink px-3 py-2 text-sm text-text-on-ink outline-none focus:border-signal"
               >
                 <option value="">Ülke belirtilmedi</option>
                 {COUNTRIES.map((c) => (
@@ -132,18 +264,18 @@ export default async function AccountPage() {
               </select>
               <button
                 type="submit"
-                className="rounded-full border border-hairline-light px-4 py-2 text-sm text-text-dark transition-colors hover:border-text-dark"
+                className="rounded-full border border-hairline px-4 py-2 text-sm text-text-on-ink transition-colors hover:border-text-on-ink"
               >
                 Kaydet
               </button>
             </form>
           </section>
 
-          <section className="mt-10 rounded-2xl border border-hairline-light bg-paper p-6">
-            <h2 className="font-display text-xl font-semibold text-text-dark">
+          <section className="mt-10 rounded-2xl border border-hairline bg-ink-soft p-6">
+            <h2 className="font-display text-xl font-semibold text-text-on-ink">
               FXPARTNER VIP Telegram Grubu
             </h2>
-            <p className="mt-2 text-sm text-text-muted">
+            <p className="mt-2 text-sm text-text-on-ink-muted">
               Kayıtlı bir üye olarak VIP Telegram grubuna erişiminiz var.
               Aşağıdaki bağlantı tek kullanımlıktır ve 24 saat içinde
               geçerliliğini yitirir.
@@ -151,11 +283,11 @@ export default async function AccountPage() {
             <VipInviteClientTrigger action={generateVipLink} />
           </section>
 
-          <section className="mt-10 rounded-2xl border border-hairline-light bg-paper p-6">
-            <h2 className="font-display text-xl font-semibold text-text-dark">
+          <section className="mt-10 rounded-2xl border border-hairline bg-ink-soft p-6">
+            <h2 className="font-display text-xl font-semibold text-text-on-ink">
               Forex Cashback
             </h2>
-            <p className="mt-2 text-sm text-text-muted">
+            <p className="mt-2 text-sm text-text-on-ink-muted">
               Kazanç iadesini takip etmeye başlamak için katılımcı bir aracı
               kurumla bir işlem hesabı bağlayın. Tutarlar partner panelimizden
               manuel olarak kaydedilir, otomatik hesaplanmaz.
@@ -165,17 +297,17 @@ export default async function AccountPage() {
             </div>
 
             {myCashbackAccounts.length > 0 && (
-              <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
+              <div className="mt-6 divide-y divide-hairline border-t border-hairline">
                 {myCashbackAccounts.map((acc) => {
                   const records = myCashbackRecords.filter((r) => r.accountId === acc.id);
                   return (
                     <div key={acc.id} className="py-4">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <div>
-                          <p className="font-medium text-text-dark">
+                          <p className="font-medium text-text-on-ink">
                             {brokerNames[acc.brokerSlug] || acc.brokerSlug}
                           </p>
-                          <p className="mt-0.5 font-mono text-xs text-text-muted">
+                          <p className="mt-0.5 font-mono text-xs text-text-on-ink-muted">
                             Hesap {acc.accountNumber}
                           </p>
                         </div>
@@ -190,10 +322,10 @@ export default async function AccountPage() {
                           {records.map((r) => (
                             <div
                               key={r.id}
-                              className="flex items-center justify-between text-xs text-text-muted"
+                              className="flex items-center justify-between text-xs text-text-on-ink-muted"
                             >
                               <span>{r.period}{r.note ? ` · ${r.note}` : ""}</span>
-                              <span className="tabular-stat font-mono font-medium text-text-dark">
+                              <span className="tabular-stat font-mono font-medium text-text-on-ink">
                                 ${r.amountUsd}
                               </span>
                             </div>
@@ -208,11 +340,11 @@ export default async function AccountPage() {
           </section>
 
           <section className="mt-10">
-            <h2 className="font-display text-xl font-semibold text-text-dark">
+            <h2 className="font-display text-xl font-semibold text-text-on-ink">
               Şikayetleriniz
             </h2>
             {myComplaints.length === 0 ? (
-              <p className="mt-4 text-sm text-text-muted">
+              <p className="mt-4 text-sm text-text-on-ink-muted">
                 Henüz bir şikayet göndermediniz. Bir brokerla ilgili sorun mu yaşıyorsunuz?{" "}
                 <a href="/complaint" className="text-signal hover:text-signal-strong">
                   Şikayet gönderin
@@ -220,12 +352,12 @@ export default async function AccountPage() {
                 .
               </p>
             ) : (
-              <div className="mt-4 divide-y divide-hairline-light border-t border-hairline-light">
+              <div className="mt-4 divide-y divide-hairline border-t border-hairline">
                 {myComplaints.map((c) => (
                   <div key={c.id} className="flex items-center justify-between gap-4 py-4">
                     <div>
-                      <p className="font-medium text-text-dark">{c.brokerName}</p>
-                      <p className="mt-1 text-xs text-text-muted">
+                      <p className="font-medium text-text-on-ink">{c.brokerName}</p>
+                      <p className="mt-1 text-xs text-text-on-ink-muted">
                         {new Date(c.createdAt).toLocaleDateString("tr-TR", {
                           year: "numeric",
                           month: "long",
