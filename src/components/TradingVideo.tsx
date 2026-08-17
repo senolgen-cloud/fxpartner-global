@@ -14,7 +14,7 @@ export default function TradingVideo() {
             Eğitim
           </span>
           <h2 className="mt-3 font-display text-3xl font-semibold text-text-dark md:text-4xl">
-            Forex'e başlangıç: temel bilgiler
+            Forex&apos;e başlangıç: temel bilgiler
           </h2>
           <p className="mt-4 max-w-2xl text-text-muted">
             Brokerları karşılaştırmaya dalmadan önce, piyasanın nasıl
@@ -47,7 +47,7 @@ export default function TradingVideo() {
           rel="noopener noreferrer"
           className="mt-1 inline-block font-mono text-xs text-signal transition-colors hover:text-signal-strong"
         >
-          Orijinal videoyu YouTube'da izleyin →
+          Orijinal videoyu YouTube&apos;da izleyin →
         </a>
       </div>
     </section>

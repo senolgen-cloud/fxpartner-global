@@ -337,7 +337,7 @@ function useCountUp(target: number, durationMs = 1400, decimals = 0) {
     }
     tick();
     return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [started, target, durationMs]);
 
   const display = decimals > 0 ? value.toFixed(decimals) : Math.round(value).toLocaleString("en-US");
@@ -810,7 +810,7 @@ export default function SignalsBoard({
             <h1 className="mt-3 font-display text-3xl font-semibold md:text-4xl">Gerçek Zamanlı İşlem Sinyalleri</h1>
             <p className="mt-4 max-w-2xl text-text-on-ink-muted">
               Aşağıdaki her sinyal, otomatik bir EA aracılığıyla doğrudan takip edilen MT5 hesabımızdan gelir —
-              Telegram kanalımızda ve X'te paylaşılanlarla aynı girişler, her işlem kapandığında gerçek ve
+              Telegram kanalımızda ve X&apos;te paylaşılanlarla aynı girişler, her işlem kapandığında gerçek ve
               doğrulanmış bir sonuçla birlikte. Burada hiçbir şey simüle edilmemiş veya sonradan eklenmemiştir.
             </p>
 

@@ -221,7 +221,7 @@ export default async function Home() {
                 Sıralamalar
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-on-ink md:text-4xl">
-                2026'nın en çok tercih edilen {brokers.length} forex brokeri
+                2026&apos;nın en çok tercih edilen {brokers.length} forex brokeri
               </h2>
               <p className="mt-4 text-text-on-ink-muted">
                 Her broker; regülasyon gücü, maliyet yapısı, platform desteği

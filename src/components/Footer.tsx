@@ -25,16 +25,11 @@ export default function Footer() {
               Erdem Torun tarafından kurulan FXPARTNER eğitim ve CopyTrade
               ekosisteminin bir parçasıdır.
             </p>
-            <Link
-              href="/about#legal-registration"
-              title="FXPARTNER GLOBAL LTD.'in Kuruluş Sertifikasını Görüntüle"
-              className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-hairline px-3 py-1.5 text-xs font-medium text-text-on-ink-muted transition-colors hover:border-signal hover:text-signal"
-            >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              Kayıtlı Şirket — BAE
-            </Link>
+            {/* Certificate-of-incorporation link disabled 2026-08-17: the
+                actual scan (public/legal/fxpartner-certificate-of-
+                incorporation.jpg) was never uploaded, so this pointed at a
+                dead link/section. Re-enable once the real file exists —
+                see /about's "Legal registration" section, also disabled. */}
             <div className="mt-6 max-w-sm">
               <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink">
                 E-posta ile güncellemeler alın
@@ -150,22 +145,22 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#comparison" className="transition-colors hover:text-text-on-ink">
+                <a href="/#comparison" className="transition-colors hover:text-text-on-ink">
                   Karşılaştırma Tablosu
                 </a>
               </li>
               <li>
-                <a href="#how-to-choose" className="transition-colors hover:text-text-on-ink">
+                <a href="/#how-to-choose" className="transition-colors hover:text-text-on-ink">
                   Broker Nasıl Seçilir
                 </a>
               </li>
               <li>
-                <a href="#video" className="transition-colors hover:text-text-on-ink">
+                <a href="/#video" className="transition-colors hover:text-text-on-ink">
                   Eğitim Videosu
                 </a>
               </li>
               <li>
-                <a href="#faq" className="transition-colors hover:text-text-on-ink">
+                <a href="/#faq" className="transition-colors hover:text-text-on-ink">
                   Sıkça Sorulan Sorular
                 </a>
               </li>

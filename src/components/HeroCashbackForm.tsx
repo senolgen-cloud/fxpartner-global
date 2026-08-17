@@ -79,7 +79,7 @@ export default function HeroCashbackForm() {
           </form>
 
           <p className="mt-4 text-center text-[11px] leading-relaxed text-text-on-ink-muted">
-            Bu bilgileri yalnızca cashback'inizi kurmak ve onaylamak için kullanacağız — spam yok.
+            Bu bilgileri yalnızca cashback&apos;inizi kurmak ve onaylamak için kullanacağız — spam yok.
           </p>
         </>
       )}

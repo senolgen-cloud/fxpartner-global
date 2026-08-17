@@ -118,7 +118,7 @@ export default function HeaderNav({
           {signedIn ? "Hesabım" : "Giriş Yap"}
         </Link>
         <a
-          href="#brokers"
+          href="/#brokers"
           className="whitespace-nowrap rounded-full bg-signal px-4 py-2 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
         >
           Brokerları Karşılaştır

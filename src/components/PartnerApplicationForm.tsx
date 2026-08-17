@@ -140,7 +140,7 @@ export default function PartnerApplicationForm({
       <label className="flex items-start gap-2 text-xs leading-relaxed text-text-muted">
         <input type="checkbox" required className="mt-0.5" />
         Bunun bir başvuru olduğunu, onay veya gelir garantisi vermediğini
-        anlıyorum ve FXPARTNER'ın bu konuda benimle iletişime geçmesine
+        anlıyorum ve FXPARTNER&apos;ın bu konuda benimle iletişime geçmesine
         onay veriyorum.
       </label>
 

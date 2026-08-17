@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -110,97 +109,14 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Legal registration */}
-        <section id="legal-registration" className="bg-paper-high">
-          <div className="mx-auto max-w-5xl px-6 py-20 md:py-24">
-            <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Yasal Kayıt
-            </span>
-            <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
-              Lisanslı, tescilli bir şirket
-            </h2>
-            <p className="mt-5 max-w-2xl text-text-muted">
-              FXPARTNER GLOBAL LTD., Dubai, Birleşik Arap Emirlikleri
-              kanunlarına göre kurulmuş, yasal olarak tescilli bir şirkettir —
-              anonim bir web sitesi değildir. Tam Kuruluş Sertifikamız
-              aşağıda kamuya açıktır.
-            </p>
-
-            <div className="mt-10 grid gap-10 md:grid-cols-[1fr_1fr] md:items-center">
-              <a
-                href="/legal/fxpartner-certificate-of-incorporation.jpg"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="FXPARTNER GLOBAL LTD. Kuruluş Sertifikasının tamamını görüntüleyin"
-                className="block overflow-hidden rounded-2xl border border-hairline-light shadow-sm transition-opacity hover:opacity-90"
-              >
-                <Image
-                  src="/legal/fxpartner-certificate-of-incorporation.jpg"
-                  alt="FXPARTNER GLOBAL LTD. Kuruluş Sertifikası"
-                  width={1536}
-                  height={1024}
-                  className="h-auto w-full"
-                />
-              </a>
-
-              <dl className="grid grid-cols-2 gap-6 text-sm">
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                    Şirket Adı
-                  </dt>
-                  <dd className="mt-1 font-medium text-text-dark">FXPARTNER GLOBAL LTD.</dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                    Şirket Numarası
-                  </dt>
-                  <dd className="mt-1 font-medium text-text-dark">1497521</dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                    Kuruluş Tarihi
-                  </dt>
-                  <dd className="mt-1 font-medium text-text-dark">24 Mayıs 2024</dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                    Yargı Bölgesi
-                  </dt>
-                  <dd className="mt-1 font-medium text-text-dark">Dubai, Birleşik Arap Emirlikleri</dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                    Şirket Türü
-                  </dt>
-                  <dd className="mt-1 font-medium text-text-dark">Limited Şirket (LLC)</dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                    Direktör ve CEO
-                  </dt>
-                  <dd className="mt-1 font-medium text-text-dark">Erdem Torun</dd>
-                </div>
-                <div className="col-span-2">
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                    Kayıtlı Adres
-                  </dt>
-                  <dd className="mt-1 font-medium text-text-dark">
-                    Office 3507, Burlington Tower, Business Bay, Dubai, Birleşik Arap Emirlikleri
-                  </dd>
-                </div>
-              </dl>
-            </div>
-
-            <a
-              href="/legal/fxpartner-certificate-of-incorporation.jpg"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
-            >
-              Sertifikanın tamamını görüntüle →
-            </a>
-          </div>
-        </section>
+        {/* Legal registration — disabled 2026-08-17: this section links to
+            and displays /legal/fxpartner-certificate-of-incorporation.jpg,
+            which was never actually uploaded to public/legal/ (that
+            directory doesn't exist). Re-enable once the real scan is
+            provided — until then this claimed a document was "publicly
+            available below" that in fact 404s, which is worse than not
+            showing the section at all. See Footer.tsx for the matching
+            link, also disabled. */}
 
         {/* For investors */}
         <section>
@@ -260,7 +176,7 @@ export default function AboutPage() {
             </div>
             <div className="mt-8">
               <Link
-                href="/brokers"
+                href="/#brokers"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
                 Brokerları karşılaştır →

@@ -30,7 +30,7 @@ function formatDelta(change: number) {
   return `${change >= 0 ? "+" : ""}${change.toFixed(2)}%`;
 }
 
-async function fetchJson(url: string): Promise<any> {
+async function fetchJson<T>(url: string): Promise<T> {
   const res = await fetch(url, { next: { revalidate: 300 } });
   if (!res.ok) throw new Error(`Fetch failed: ${url} (${res.status})`);
   return res.json();
@@ -41,7 +41,7 @@ async function getFxPairs(): Promise<TickerPair[]> {
   const end = new Date();
   const start = new Date(end.getTime() - 6 * 24 * 60 * 60 * 1000);
   const url = `https://api.frankfurter.dev/v1/${isoDate(start)}..${isoDate(end)}?base=USD&symbols=${FX_SYMBOLS.join(",")}`;
-  const data = await fetchJson(url);
+  const data = await fetchJson<{ rates: Record<string, Record<string, number>> }>(url);
 
   const dates = Object.keys(data.rates).sort();
   const latestDate = dates[dates.length - 1];
@@ -77,7 +77,7 @@ async function getFxPairs(): Promise<TickerPair[]> {
 // Real-time spot gold price (gold-api.com, no API key required). No
 // historical endpoint is available on the free tier, so no delta.
 async function getGold(): Promise<TickerPair> {
-  const data = await fetchJson("https://api.gold-api.com/price/XAU");
+  const data = await fetchJson<{ price: number }>("https://api.gold-api.com/price/XAU");
   return {
     symbol: "XAU/USD",
     value: Number(data.price).toFixed(1),
@@ -88,10 +88,10 @@ async function getGold(): Promise<TickerPair> {
 
 // Real-time BTC/USD with real 24h change (CoinGecko public API, no API key required).
 async function getBtc(): Promise<TickerPair> {
-  const data = await fetchJson(
+  const data = await fetchJson<{ bitcoin: { usd: number; usd_24h_change: number } }>(
     "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true"
   );
-  const change = data.bitcoin.usd_24h_change as number;
+  const change = data.bitcoin.usd_24h_change;
   return {
     symbol: "BTC/USD",
     value: Number(data.bitcoin.usd).toLocaleString("en-US", { maximumFractionDigits: 0 }),

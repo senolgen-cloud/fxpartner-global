@@ -179,7 +179,7 @@ export default function PartnersPage() {
               Aktif partner anlaşması olan brokerlar
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-text-muted">
-              Sub-IB ortaklıkları şu anda, FXPARTNER'ın zaten onaylı bir ana
+              Sub-IB ortaklıkları şu anda, FXPARTNER&apos;ın zaten onaylı bir ana
               IB anlaşmasına sahip olduğu aşağıdaki brokerlar için mümkündür.
               Başvuruda tercihinizi belirtin — uygunluğu ve kesin şartları
               doğrudan brokerla teyit edeceğiz.

@@ -94,7 +94,7 @@ export default function NewsletterPopup() {
                 id="newsletter-popup-title"
                 className="mt-4 font-display text-2xl font-semibold leading-tight text-text-on-ink"
               >
-                FXPARTNER'ı ziyaret ettiğin için teşekkür ederim.
+                FXPARTNER&apos;ı ziyaret ettiğin için teşekkür ederim.
               </h2>
               <div className="mt-3 space-y-3 text-sm leading-relaxed text-text-on-ink-muted">
                 <p>

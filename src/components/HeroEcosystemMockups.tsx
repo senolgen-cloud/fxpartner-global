@@ -148,7 +148,7 @@ export default function HeroEcosystemMockups({
             </p>
           </div>
           <p className="mt-2 max-w-[90%] rounded-xl rounded-tl-sm bg-signal/10 px-3 py-2 text-[11px] leading-relaxed text-text-on-ink-muted">
-            Daha düşük CPI genellikle USD'yi zayıflatır ve EURUSD, Altın ve
+            Daha düşük CPI genellikle USD&apos;yi zayıflatır ve EURUSD, Altın ve
             diğer risk varlıklarında yükseliş momentumuna yol açabilir.
           </p>
           <div className="mt-3 flex items-center gap-2 rounded-full border border-hairline-light px-3 py-2">

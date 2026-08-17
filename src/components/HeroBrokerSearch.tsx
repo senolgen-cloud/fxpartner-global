@@ -103,7 +103,7 @@ export default function HeroBrokerSearch() {
       {open && query.trim() !== "" && results.length === 0 && (
         <div className="absolute inset-x-0 top-full z-30 mt-2 rounded-2xl border border-hairline bg-ink-soft p-4 shadow-2xl">
           <p className="text-sm text-text-on-ink-muted">
-            Henüz eşleşme yok — &ldquo;{query}&rdquo; için Broker Sorgulama'da kontrol etmek üzere Enter'a basın.
+            Henüz eşleşme yok — &ldquo;{query}&rdquo; için Broker Sorgulama&apos;da kontrol etmek üzere Enter&apos;a basın.
           </p>
         </div>
       )}

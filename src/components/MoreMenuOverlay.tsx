@@ -292,7 +292,7 @@ export default function MoreMenuOverlay({
             {signedIn ? "Hesabım" : "Giriş Yap"}
           </Link>
           <a
-            href="#brokers"
+            href="/#brokers"
             onClick={close}
             className="rounded-full bg-signal px-4 py-3 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
           >

@@ -31,7 +31,7 @@ export default function VipInviteClientTrigger({
         rel="noopener noreferrer"
         className="mt-4 inline-block rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
       >
-        FXPARTNER VIP'e Katıl →
+        FXPARTNER VIP&apos;e Katıl →
       </a>
     );
   }

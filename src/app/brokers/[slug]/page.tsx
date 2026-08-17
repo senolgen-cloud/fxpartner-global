@@ -357,7 +357,7 @@ export default async function BrokerDetailPage({
                       </span>
                     )}
                     <span className="font-mono text-[10px] text-text-on-ink-muted">
-                      FXPARTNER'da Onaylı
+                      FXPARTNER&apos;da Onaylı
                     </span>
                   </div>
                 </div>
