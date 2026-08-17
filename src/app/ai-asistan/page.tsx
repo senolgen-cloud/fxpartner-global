@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 import AiMarketAssistant from "@/components/AiMarketAssistant";
+import UpgradeGate from "@/components/UpgradeGate";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { getViewerAccess, hasTierAccess } from "@/lib/tierAccess";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 const OG_IMAGE = `${SITE_URL}/ai-asistan-preview.jpg`;
@@ -41,11 +43,11 @@ const features = [
 const aiAssistantFaqs = [
   {
     q: "FXPARTNER AI Asistanı nedir?",
-    a: "FXPARTNER AI Asistanı, forex, altın, kripto ve endeks piyasalarını analiz eden, sorularınızı yanıtlayan ve yatırım kararlarınızı daha bilinçli almanıza yardımcı olan yeni nesil bir yapay zeka deneyimidir. 7/24 erişilebilir ve tamamen ücretsizdir.",
+    a: "FXPARTNER AI Asistanı, forex, altın, kripto ve endeks piyasalarını analiz eden, sorularınızı yanıtlayan ve yatırım kararlarınızı daha bilinçli almanıza yardımcı olan yeni nesil bir yapay zeka deneyimidir. 7/24 erişilebilir, Pro ve VIP paket üyelerine özeldir.",
   },
   {
     q: "FXPARTNER AI Asistanı ücretsiz mi?",
-    a: "Evet. FXPARTNER AI Asistanı, FXPARTNER ekosisteminin bir parçası olarak tüm kullanıcılara ücretsiz sunulur — herhangi bir üyelik veya ödeme gerekmez.",
+    a: "Hayır. FXPARTNER AI Asistanı, Pro ve VIP paketlerinin bir parçasıdır — erişmek için bu paketlerden birine üye olmanız gerekir. Starter paketinde AI Asistan yer almaz.",
   },
   {
     q: "FXPARTNER AI Asistanı hangi konularda yardımcı olur?",
@@ -57,7 +59,7 @@ const aiAssistantFaqs = [
   },
   {
     q: "FXPARTNER AI Asistanı'na nasıl ulaşabilirim?",
-    a: "fxpartner.global/ai-asistan adresinden, herhangi bir kayıt gerekmeden doğrudan sohbete başlayabilirsiniz. Asistan Türkçe ve İngilizce dahil birden fazla dilde hizmet verir.",
+    a: "fxpartner.global/ai-asistan adresinden, Pro veya VIP paketinizle giriş yaparak sohbete başlayabilirsiniz. Asistan Türkçe ve İngilizce dahil birden fazla dilde hizmet verir.",
   },
 ];
 
@@ -80,7 +82,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AiAssistantPage() {
+export default async function AiAssistantPage() {
+  const { signedIn, tier } = await getViewerAccess();
+  const canUse = hasTierAccess(tier, "pro");
+
   return (
     <>
       <script
@@ -129,7 +134,16 @@ export default function AiAssistantPage() {
           />
         </div>
 
-        <AiMarketAssistant />
+        {canUse ? (
+          <AiMarketAssistant />
+        ) : (
+          <UpgradeGate
+            eyebrow="Pro & VIP Üyelere Özel"
+            title="AI Piyasa Asistanı'na erişmek için Pro veya VIP paketine katılın"
+            description="Sınırsız soru, anlık piyasa analizi ve strateji desteği — Pro paketinden itibaren açılır."
+            signedIn={signedIn}
+          />
+        )}
 
         {/* Rich SEO/AEO content — real crawlable text answering "what is
             FXPARTNER AI", not just the banner image above. */}

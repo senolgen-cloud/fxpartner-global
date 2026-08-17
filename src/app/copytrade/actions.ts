@@ -1,6 +1,7 @@
 "use server";
 
 import { sendCopytradeInquiryNotification } from "@/lib/notify";
+import { getViewerAccess, hasTierAccess } from "@/lib/tierAccess";
 
 export type CopytradeInquiryFormState = {
   ok: boolean;
@@ -11,6 +12,13 @@ export async function submitCopytradeInquiry(
   _prevState: CopytradeInquiryFormState,
   formData: FormData
 ): Promise<CopytradeInquiryFormState> {
+  // The page hides the form from non-VIP visitors, but that's cosmetic on
+  // its own — a direct form POST must be rejected too.
+  const { tier } = await getViewerAccess();
+  if (!hasTierAccess(tier, "vip")) {
+    return { ok: false, error: "Copytrade requires a VIP package." };
+  }
+
   const fullName = String(formData.get("fullName") || "").trim();
   const email = String(formData.get("email") || "").trim();
   const phone = String(formData.get("phone") || "").trim();

@@ -3,6 +3,7 @@ import { getTickerPairs } from "@/lib/rates";
 import { brokers } from "@/data/brokers";
 import { db } from "@/db";
 import { aiAssistantLogs } from "@/db/schema";
+import { getViewerAccess, hasTierAccess } from "@/lib/tierAccess";
 
 export const runtime = "nodejs";
 
@@ -136,6 +137,14 @@ async function callGemini(apiKey: string, contents: unknown, systemPrompt: strin
 }
 
 export async function POST(req: NextRequest) {
+  // Page-level gating (ai-asistan/page.tsx) hides the widget from
+  // non-Pro/VIP visitors, but that's cosmetic on its own — enforce the
+  // same rule here so the endpoint can't be called directly.
+  const { tier } = await getViewerAccess();
+  if (!hasTierAccess(tier, "pro")) {
+    return NextResponse.json({ error: "AI Assistant requires a Pro or VIP package." }, { status: 403 });
+  }
+
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return NextResponse.json({ error: "AI assistant is not configured." }, { status: 503 });

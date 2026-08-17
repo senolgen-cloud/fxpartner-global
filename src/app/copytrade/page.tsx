@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import CopytradeInquiryForm from "@/components/CopytradeInquiryForm";
+import UpgradeGate from "@/components/UpgradeGate";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { getViewerAccess, hasTierAccess } from "@/lib/tierAccess";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -32,7 +34,10 @@ const faqs = [
   },
 ];
 
-export default function CopytradePage() {
+export default async function CopytradePage() {
+  const { signedIn, tier } = await getViewerAccess();
+  const canApply = hasTierAccess(tier, "vip");
+
   return (
     <>
       <script
@@ -193,7 +198,17 @@ export default function CopytradePage() {
               rehberini size e-posta ile iletsin.
             </p>
             <div className="mt-8">
-              <CopytradeInquiryForm />
+              {canApply ? (
+                <CopytradeInquiryForm />
+              ) : (
+                <UpgradeGate
+                  eyebrow="VIP Üyelere Özel"
+                  title="Copytrade kurulumu için VIP paketine katılın"
+                  description="FXPARTNER CopyTrade erişimi VIP paketinin bir parçasıdır — kurulum talebi göndermek için önce VIP'e katılın."
+                  signedIn={signedIn}
+                  dark={false}
+                />
+              )}
             </div>
             <p className="mt-8 rounded-2xl border border-hairline-light bg-paper-high p-5 text-xs leading-relaxed text-text-muted">
               Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi

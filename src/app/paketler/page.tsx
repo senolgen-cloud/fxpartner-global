@@ -6,6 +6,7 @@ import { createNowPaymentsCheckout } from "./checkout-actions";
 import { lookupBrokers } from "@/data/brokerLookup";
 import { breadcrumbSchema } from "@/lib/schema";
 import type { PackageTier } from "@/lib/vip";
+import { PACKAGE_TIER_INFO, PACKAGE_TIER_ORDER } from "@/data/packageTiers";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 const trackedBrokerCount = lookupBrokers.length;
@@ -25,76 +26,24 @@ const topFeatures = [
   { icon: "telegram", title: "Telegram VIP", sub: "Anlık Bildirimler" },
 ] as const;
 
-const tiers: {
-  tier: PackageTier;
-  name: string;
-  ctaLabel: string;
-  price: number;
-  accent: string;
-  featured?: boolean;
-  blurb: string;
-  features: string[];
-}[] = [
-  {
-    tier: "starter",
-    name: "Starter",
-    ctaLabel: "Starter'a Katıl",
-    price: 29,
-    accent: "text-tick-up",
-    blurb: "Forex'e güçlü bir başlangıç yapmak isteyenler için.",
-    features: [
-      "Forex Sinyalleri",
-      "Entry / Stop Loss / Take Profit",
-      "İşlem Açılış & Kapanış Bildirimleri",
-      "İşlem Güncellemeleri",
-      "Telegram VIP Kanal Erişimi",
-      "Temel Risk Yönetimi",
-    ],
-  },
-  {
-    tier: "pro",
-    name: "Pro",
-    ctaLabel: "Pro'ya Katıl",
-    price: 59,
-    accent: "text-signal",
-    featured: true,
-    blurb: "Daha fazla piyasa, daha fazla analiz ve daha profesyonel yaklaşım.",
-    features: [
-      "Starter paketindeki tüm özellikler",
-      "GOLD / XAUUSD Sinyalleri",
-      "Endeks Sinyalleri",
-      "Günlük Teknik Analiz",
-      "Haftalık Piyasa Görünümü",
-      "Ekonomik Takvim Değerlendirmeleri",
-      "AI Destekli Piyasa Analizleri",
-      "Gelişmiş Risk Yönetimi",
-      "İşlem Yönetimi Rehberliği",
-      "MT5 & Broker Kurulum Desteği",
-      "Öncelikli Destek",
-    ],
-  },
-  {
-    tier: "vip",
-    name: "VIP",
-    ctaLabel: "VIP'e Katıl",
-    price: 99,
-    accent: "text-gold",
-    blurb: "FXPARTNER'ın en kapsamlı profesyonel deneyimi.",
-    features: [
-      "Pro paketindeki tüm özellikler",
-      "FXPARTNER CopyTrade Erişimi",
-      "Premium İşlem Stratejileri",
-      "Özel VIP Analizler",
-      "Profesyonel Risk Yönetimi",
-      "Özel İşlem Yönetimi Desteği",
-      "VIP Piyasa Değerlendirmeleri",
-      "Öncelikli VIP Destek",
-      "VIP Eğitim İçerikleri",
-      "Yeni Sistemlere Erken Erişim",
-      "Birebir MT5 & Teknik Destek",
-    ],
-  },
-];
+const TIER_ACCENT: Record<PackageTier, string> = {
+  starter: "text-tick-up",
+  pro: "text-signal",
+  vip: "text-gold",
+};
+const TIER_CTA_LABEL: Record<PackageTier, string> = {
+  starter: "Starter'a Katıl",
+  pro: "Pro'ya Katıl",
+  vip: "VIP'e Katıl",
+};
+
+const tiers = PACKAGE_TIER_ORDER.map((tier) => ({
+  tier,
+  ...PACKAGE_TIER_INFO[tier],
+  accent: TIER_ACCENT[tier],
+  ctaLabel: TIER_CTA_LABEL[tier],
+  featured: tier === "pro",
+}));
 
 const partnerLogos = [
   { slug: "xm", name: "XM Global", src: "/brokers/xm.png" },

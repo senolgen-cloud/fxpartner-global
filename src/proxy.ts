@@ -58,7 +58,12 @@ export default async function proxy(request: NextRequest) {
     return response;
   }
 
-  if (path.startsWith("/account") && !path.startsWith("/account/login") && !path.startsWith("/account/verify")) {
+  if (
+    path.startsWith("/account") &&
+    !path.startsWith("/account/login") &&
+    !path.startsWith("/account/register") &&
+    !path.startsWith("/account/verify")
+  ) {
     const session = await auth();
     if (!session?.user) {
       const response = NextResponse.redirect(new URL("/account/login", request.url));

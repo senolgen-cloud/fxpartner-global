@@ -145,24 +145,24 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="/#comparison" className="transition-colors hover:text-text-on-ink">
+                <Link href="/#comparison" className="transition-colors hover:text-text-on-ink">
                   Karşılaştırma Tablosu
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/#how-to-choose" className="transition-colors hover:text-text-on-ink">
+                <Link href="/#how-to-choose" className="transition-colors hover:text-text-on-ink">
                   Broker Nasıl Seçilir
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/#video" className="transition-colors hover:text-text-on-ink">
+                <Link href="/#video" className="transition-colors hover:text-text-on-ink">
                   Eğitim Videosu
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/#faq" className="transition-colors hover:text-text-on-ink">
+                <Link href="/#faq" className="transition-colors hover:text-text-on-ink">
                   Sıkça Sorulan Sorular
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

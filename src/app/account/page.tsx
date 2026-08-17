@@ -20,6 +20,8 @@ import { updateCountry } from "./profile-actions";
 import { COUNTRIES } from "@/lib/country";
 import { brokers } from "@/data/brokers";
 import { tierFromPriceId, type PackageTier } from "@/lib/vip";
+import { PACKAGE_TIER_INFO, PACKAGE_TIER_ORDER } from "@/data/packageTiers";
+import { createNowPaymentsCheckout } from "@/app/paketler/checkout-actions";
 
 const brokerNames = Object.fromEntries(brokers.map((b) => [b.slug, b.name]));
 
@@ -188,6 +190,50 @@ export default async function AccountPage() {
                 </Link>
               )}
             </div>
+
+            {/* What the current package includes, plus a renew/upgrade
+                path — a subscriber shouldn't have to go re-read /paketler
+                to know what they're actually paying for. */}
+            {isActiveVip && subscriptionTier && (
+              <div className="mt-6 border-t border-hairline pt-6">
+                <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                  {PACKAGE_TIER_INFO[subscriptionTier].name} Paketinize Dahil
+                </h3>
+                <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {PACKAGE_TIER_INFO[subscriptionTier].features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-text-on-ink-muted">
+                      <span className="mt-0.5 text-tick-up">✓</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <form action={createNowPaymentsCheckout.bind(null, subscriptionTier)}>
+                    <button
+                      type="submit"
+                      className="rounded-full border border-hairline px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
+                    >
+                      ₿ Paketi Yenile
+                    </button>
+                  </form>
+                  {subscriptionTier !== "vip" && (
+                    <Link
+                      href="/paketler"
+                      className="rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
+                    >
+                      {PACKAGE_TIER_INFO[PACKAGE_TIER_ORDER[PACKAGE_TIER_ORDER.indexOf(subscriptionTier) + 1]].name}
+                      &apos;e Yükselt →
+                    </Link>
+                  )}
+                </div>
+                <p className="mt-3 text-xs leading-relaxed text-text-on-ink-muted">
+                  Kripto ödemede otomatik yenileme yoktur — süreniz dolmadan
+                  önce &quot;Paketi Yenile&quot;ye tıklayarak erişiminizi
+                  kesintisiz sürdürebilirsiniz.
+                </p>
+              </div>
+            )}
           </section>
 
           {/* Quick access: Signals + AI Assistant */}
@@ -226,9 +272,16 @@ export default async function AccountPage() {
               href="/ai-asistan"
               className="group rounded-2xl border border-hairline bg-ink-soft p-6 transition-colors hover:border-signal"
             >
-              <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-signal">
-                🤖 Yapay Zeka
-              </span>
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-signal">
+                  🤖 Yapay Zeka
+                </span>
+                {!(subscriptionTier === "pro" || subscriptionTier === "vip") && (
+                  <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-text-on-ink-muted">
+                    🔒 Pro+
+                  </span>
+                )}
+              </div>
               <h3 className="mt-3 font-display text-xl font-semibold text-text-on-ink">
                 AI Asistan
               </h3>
@@ -236,7 +289,7 @@ export default async function AccountPage() {
                 Piyasalar, CPI, brokerlar ve stratejiler hakkında anında yanıt alın.
               </p>
               <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-signal transition-colors group-hover:text-signal-strong">
-                Soru Sor →
+                {subscriptionTier === "pro" || subscriptionTier === "vip" ? "Soru Sor →" : "Yükselt →"}
               </span>
             </Link>
           </div>

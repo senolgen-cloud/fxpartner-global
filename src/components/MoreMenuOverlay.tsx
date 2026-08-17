@@ -284,20 +284,39 @@ export default function MoreMenuOverlay({
         </div>
 
         <div className="mt-2 flex flex-col gap-3 border-t border-hairline px-4 py-6 md:px-6">
+          {signedIn ? (
+            <Link
+              href={accountHref}
+              onClick={close}
+              className="text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
+            >
+              Hesabım
+            </Link>
+          ) : (
+            <div className="flex items-center gap-4">
+              <Link
+                href="/account/login"
+                onClick={close}
+                className="text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
+              >
+                Giriş Yap
+              </Link>
+              <Link
+                href="/account/register"
+                onClick={close}
+                className="text-sm font-medium text-signal transition-colors hover:text-signal-strong"
+              >
+                Kayıt Ol
+              </Link>
+            </div>
+          )}
           <Link
-            href={accountHref}
-            onClick={close}
-            className="text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
-          >
-            {signedIn ? "Hesabım" : "Giriş Yap"}
-          </Link>
-          <a
             href="/#brokers"
             onClick={close}
             className="rounded-full bg-signal px-4 py-3 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
           >
             Broker Karşılaştır
-          </a>
+          </Link>
         </div>
       </div>
     </div>

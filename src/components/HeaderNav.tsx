@@ -111,18 +111,35 @@ export default function HeaderNav({
 
       <div className="hidden items-center gap-3 border-l border-hairline pl-3 xl:flex">
         <LanguageSwitcher />
+        {signedIn ? (
+          <Link
+            href={accountHref}
+            className="whitespace-nowrap text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
+          >
+            Hesabım
+          </Link>
+        ) : (
+          <>
+            <Link
+              href="/account/login"
+              className="whitespace-nowrap text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
+            >
+              Giriş Yap
+            </Link>
+            <Link
+              href="/account/register"
+              className="whitespace-nowrap rounded-full border border-hairline px-3.5 py-1.5 text-sm font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
+            >
+              Kayıt Ol
+            </Link>
+          </>
+        )}
         <Link
-          href={accountHref}
-          className="whitespace-nowrap text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
-        >
-          {signedIn ? "Hesabım" : "Giriş Yap"}
-        </Link>
-        <a
           href="/#brokers"
           className="whitespace-nowrap rounded-full bg-signal px-4 py-2 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
         >
           Brokerları Karşılaştır
-        </a>
+        </Link>
       </div>
 
       {/* Hidden below sm — the phone-width MobileBottomNav's "Daha Fazla"

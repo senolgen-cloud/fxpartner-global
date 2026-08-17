@@ -1,12 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-import SimpleSignInForm from "@/components/SimpleSignInForm";
+import SignInForm from "@/components/SignInForm";
+import { brokers } from "@/data/brokers";
 
-export default function LoginPage() {
+export const metadata: Metadata = {
+  title: "Ücretsiz Kayıt Ol",
+  description: "FXPARTNER'a ücretsiz üye olun — broker incelemeleri, cashback takibi ve VIP Telegram erişimi.",
+  alternates: { canonical: "/account/register" },
+};
+
+export default function RegisterPage() {
   return (
     <>
       <main className="relative flex-1 overflow-hidden bg-ink">
-        {/* Ambient glow, same drifting-blob language as the homepage hero */}
         <div
           className="hero-glow-signal pointer-events-none absolute -top-32 -left-24 h-[520px] w-[520px] rounded-full blur-3xl"
           style={{ background: "color-mix(in srgb, var(--signal) 30%, transparent)" }}
@@ -26,19 +33,19 @@ export default function LoginPage() {
                 Hesap
               </span>
               <h1 className="mt-3 font-display text-3xl font-semibold text-text-on-ink">
-                Tekrar hoş geldiniz
+                Ücretsiz hesap oluşturun
               </h1>
               <p className="mt-3 text-text-on-ink-muted">
-                E-postanızı girin, size tek kullanımlık bir giriş bağlantısı
-                gönderelim. Şifreye gerek yok.
+                Bize kendinizden biraz bahsedin, size tek kullanımlık bir
+                giriş bağlantısı gönderelim. Şifreye gerek yok.
               </p>
 
-              <SimpleSignInForm />
+              <SignInForm brokers={brokers.map((b) => ({ slug: b.slug, name: b.name }))} />
 
               <p className="mt-6 text-xs leading-relaxed text-text-on-ink-muted">
-                Henüz üye değil misiniz?{" "}
-                <Link href="/account/register" className="text-signal hover:text-signal-strong">
-                  Ücretsiz kayıt olun
+                Zaten üye misiniz?{" "}
+                <Link href="/account/login" className="text-signal hover:text-signal-strong">
+                  Giriş yapın
                 </Link>
                 .
               </p>
@@ -55,9 +62,9 @@ export default function LoginPage() {
             >
               <div className="flex h-full flex-col items-center justify-center px-8 text-center">
                 <span className="text-4xl font-bold uppercase tracking-tight text-text-on-ink">
-                  Tekrar
+                  Hoş
                   <br />
-                  Hoş Geldiniz
+                  Geldiniz
                 </span>
                 <p className="mt-4 text-sm text-text-on-ink/80">
                   Broker incelemeleri, cashback takibi ve VIP Telegram
