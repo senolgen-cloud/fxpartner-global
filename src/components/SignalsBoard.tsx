@@ -844,6 +844,33 @@ export default function SignalsBoard({
         </div>
       </section>
 
+      <section className="mx-auto max-w-6xl px-6 py-16">
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="font-display text-2xl font-semibold">Aktif Sinyaller</h2>
+          <span className="hidden items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-signal md:flex">
+            <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
+            Canlı
+          </span>
+        </div>
+        {active.length === 0 ? (
+          <p className="text-text-on-ink-muted">
+            Şu anda açık sinyal yok — bir sonrakini paylaşıldığı anda almak için{" "}
+            <a href="https://t.me/fxpartnerglobal" className="text-signal hover:text-signal-strong">
+              Telegram kanalımızı
+            </a>{" "}
+            takip edin.
+          </p>
+        ) : (
+          <div className="flex flex-wrap justify-center gap-5">
+            {active.map((s) => (
+              <div key={s.id} className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[calc(25%-15px)]">
+                <SignalCard signal={s} viewerTier={viewerTier} />
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
       {liveMarkets}
 
       <section className="border-b border-hairline bg-ink-soft/30">
@@ -923,33 +950,6 @@ export default function SignalsBoard({
             </div>
           )}
         </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 py-16">
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="font-display text-2xl font-semibold">Aktif Sinyaller</h2>
-          <span className="hidden items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-signal md:flex">
-            <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
-            Canlı
-          </span>
-        </div>
-        {active.length === 0 ? (
-          <p className="text-text-on-ink-muted">
-            Şu anda açık sinyal yok — bir sonrakini paylaşıldığı anda almak için{" "}
-            <a href="https://t.me/fxpartnerglobal" className="text-signal hover:text-signal-strong">
-              Telegram kanalımızı
-            </a>{" "}
-            takip edin.
-          </p>
-        ) : (
-          <div className="flex flex-wrap justify-center gap-5">
-            {active.map((s) => (
-              <div key={s.id} className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[calc(25%-15px)]">
-                <SignalCard signal={s} viewerTier={viewerTier} />
-              </div>
-            ))}
-          </div>
-        )}
       </section>
     </>
   );
