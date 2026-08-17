@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-import { createPackageCheckoutSession, createNowPaymentsCheckout } from "./checkout-actions";
+import { createNowPaymentsCheckout } from "./checkout-actions";
 import { lookupBrokers } from "@/data/brokerLookup";
 import { breadcrumbSchema } from "@/lib/schema";
 import type { PackageTier } from "@/lib/vip";
@@ -243,7 +243,11 @@ export default function PaketlerPage() {
                   ))}
                 </ul>
 
-                <form action={createPackageCheckoutSession.bind(null, t.tier)} className="mt-8">
+                {/* Stripe checkout is temporarily off — not configured (no
+                    Turkish business entity to register with Stripe yet).
+                    NOWPayments is the only live checkout path for now; swap
+                    this back to offering both once Stripe is set up. */}
+                <form action={createNowPaymentsCheckout.bind(null, t.tier)} className="mt-8">
                   <button
                     type="submit"
                     className={`w-full rounded-full px-6 py-3 text-sm font-semibold transition-colors ${
@@ -252,15 +256,7 @@ export default function PaketlerPage() {
                         : "border border-hairline text-text-on-ink hover:border-text-on-ink"
                     }`}
                   >
-                    {t.ctaLabel} →
-                  </button>
-                </form>
-                <form action={createNowPaymentsCheckout.bind(null, t.tier)} className="mt-3">
-                  <button
-                    type="submit"
-                    className="w-full rounded-full border border-hairline px-6 py-3 text-sm font-medium text-text-on-ink-muted transition-colors hover:border-gold hover:text-gold"
-                  >
-                    ₿ Kripto ile Öde
+                    ₿ {t.ctaLabel} →
                   </button>
                 </form>
               </div>
@@ -290,7 +286,7 @@ export default function PaketlerPage() {
               </div>
             </div>
             <div>
-              <div className="font-display text-2xl font-semibold">Stripe</div>
+              <div className="font-display text-2xl font-semibold">₿ Kripto</div>
               <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
                 Güvenli Ödeme
               </div>
