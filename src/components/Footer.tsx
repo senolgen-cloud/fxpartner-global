@@ -130,6 +130,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/pozisyon-hesaplayici" className="transition-colors hover:text-text-on-ink">
+                  Pozisyon Hesaplayıcı
+                </Link>
+              </li>
+              <li>
                 <Link href="/blacklist" className="transition-colors hover:text-text-on-ink">
                   Risk Uyarıları
                 </Link>

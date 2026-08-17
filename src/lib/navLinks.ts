@@ -79,6 +79,12 @@ export const resourceLinks: {
     group: "Araçlar ve Güven",
   },
   {
+    href: "/pozisyon-hesaplayici",
+    label: "Pozisyon Hesaplayıcı",
+    description: "Risk seviyenize göre doğru lot büyüklüğünü hesaplayın",
+    group: "Araçlar ve Güven",
+  },
+  {
     href: "/categories",
     label: "Kategoriler",
     description: "Brokerlar en uygun oldukları alana göre gruplandırıldı",
