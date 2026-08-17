@@ -1,0 +1,23 @@
+name: News bulletin cron
+
+# Split out from telegram-cron.yml on 2026-08-17: that file also runs a
+# */5-minute schedule (economic-calendar-alert), and GitHub Actions is
+# documented to silently drop less-frequent schedule ticks in a workflow
+# that also has a very-frequent one under load. Confirmed via `gh run
+# list` that the news-update job had a 0/300 fire rate there, always
+# "skipped" — this file gives the twice-daily bulletin its own
+# uncontested schedule so it actually fires.
+on:
+  workflow_dispatch:
+  schedule:
+    # 09:15 / 18:15 Turkey time = 06:15 / 15:15 UTC.
+    - cron: "15 6,15 * * *"
+
+jobs:
+  news-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger news-update
+        run: |
+          curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            https://fxpartner.global/api/cron/news-update

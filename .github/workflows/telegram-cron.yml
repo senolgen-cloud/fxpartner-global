@@ -18,14 +18,10 @@ on:
     # freshly-released medium/high-impact figures. Activated per owner
     # approval on 2026-08-07 — see src/lib/departments.ts.
     - cron: "*/5 * * * *"
-    # news-update (Haber & Editöryal): twice a day (09:15 / 18:15 Turkey
-    # time = 06:15 / 15:15 UTC), one digest message bundling every fresh
-    # relevant item since the last run. Was every 3h/up to 3 separate
-    # messages per run (up to ~24/day) until 2026-08-10 — that flooded
-    # the channel and risked subscribers muting or leaving. Still gated
-    # behind DEEPL_API_KEY being set in Vercel production — see the
-    # news-update job below.
-    - cron: "15 6,15 * * *"
+    # news-update (Haber & Editöryal): moved to its own workflow file,
+    # news-update-cron.yml, on 2026-08-17 — this file's */5-minute
+    # schedule was silently starving news-update's twice-daily tick (see
+    # that file's header comment for the full story).
     # broker-review-share (Broker İstihbaratı & İnceleme): top-5-brokers
     # digest, 4x/day at 09:00 / 13:00 / 17:00 / 23:00 Turkey time
     # (= 06:00 / 10:00 / 14:00 / 20:00 UTC). Was hourly (24 posts/day)
@@ -58,24 +54,6 @@ jobs:
         run: |
           curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
             https://fxpartner.global/api/cron/market-analysis-share
-
-  # Owned by Haber & Editöryal Departmanı — see docs/ORGANIZATION.md.
-  # Twice-daily digest as of 2026-08-10 (was every 3h/multi-message,
-  # scaled back after the owner noticed it risked crowding out
-  # signals/campaigns content and causing notification fatigue). Still
-  # fails until DEEPL_API_KEY is set in Vercel production
-  # (translateToTurkish throws without it) — that failure is silent
-  # (just a red run in Actions), nothing posts and nothing breaks until
-  # the key is added, at which point this starts working with no
-  # further code changes needed.
-  news-update:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '15 6,15 * * *'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger news-update
-        run: |
-          curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            https://fxpartner.global/api/cron/news-update
 
   # Owned by Reklam & Kampanya Departmanı — see docs/ORGANIZATION.md.
   campaign-digest:
