@@ -48,6 +48,22 @@ export function getBulletinTitle(publishedAt: string): string {
   return bulletinTitles[publishedAt] ?? `${publishedAt} - Teknik Analiz Bülteni`;
 }
 
+// The per-day bulletin route (/teknik-analiz/[date]) uses DD-MM-YYYY in the
+// URL rather than the ISO format posts are keyed by internally, since
+// that's the date format the site's own bulletins are announced with
+// (e.g. Telegram posts, "18.08.2026 - ..." titles above).
+export function isoToBulletinSlug(iso: string): string {
+  const [y, m, d] = iso.split("-");
+  return `${d}-${m}-${y}`;
+}
+
+export function bulletinSlugToIso(slug: string): string | null {
+  const match = /^(\d{2})-(\d{2})-(\d{4})$/.exec(slug);
+  if (!match) return null;
+  const [, d, m, y] = match;
+  return `${y}-${m}-${d}`;
+}
+
 export const technicalAnalysisPosts: TechnicalAnalysisPost[] = [
   {
     slug: "eur-usd-gun-ici-2026-08-13",
@@ -282,6 +298,59 @@ export const technicalAnalysisPosts: TechnicalAnalysisPost[] = [
       "Altın 4.428 üzerinde kalıcılaşırsa, yükselişin 4.464 ve 4.485 seviyelerine doğru devam etmesi mümkün.",
     comment:
       "RSI 50 seviyesinin altında, MACD negatif bölgede ve sinyal çizgisinin altında. Fiyatın 20 ve 50 periyotluk hareketli ortalamaların altında bulunması da kısa vadede satıcılı görünümü destekliyor.",
+    source: "Trading Central",
+  },
+  {
+    slug: "silver-gun-ici-2026-08-18",
+    instrument: "Silver",
+    timeframe: "Gün İçi",
+    publishedAt: "2026-08-18",
+    pivot: "66,08",
+    lastPrice: "65,02",
+    bias: "BEARISH",
+    headline: "Silver Gün İçi: Hedef 63,55",
+    chartImage: "/Grafik/18082026-silver.png",
+    resistances: [
+      { price: "67,72", strength: 1 },
+      { price: "67,11", strength: 1 },
+    ],
+    supports: [
+      { price: "62,94", strength: 1 },
+      { price: "63,55", strength: 1 },
+    ],
+    preference:
+      "66,08 seviyesi direnç olarak kaldığı sürece aşağı yönlü hareketin devam etmesi bekleniyor. Bu senaryoda 63,55 ve ardından 62,94 seviyeleri hedeflenebilir.",
+    alternative:
+      "Silver 66,08 üzerinde kalıcılaşırsa, yükselişin 67,11 ve 67,72 seviyelerine doğru devam etmesi mümkün.",
+    comment:
+      "RSI 50'nin altında ve MACD negatif bölgede, sinyal çizgisinin altında bulunuyor. Ayrıca fiyatın 20 ve 50 periyotluk hareketli ortalamaların altında olması kısa vadeli satış baskısını destekliyor.",
+    source: "Trading Central",
+  },
+  {
+    slug: "wti-gun-ici-2026-08-18",
+    instrument: "Ham Petrol (WTI)",
+    timeframe: "Gün İçi",
+    publishedAt: "2026-08-18",
+    pivot: "82,90",
+    lastPrice: "84,24",
+    bias: "BULLISH",
+    headline: "Ham Petrol (WTI) Gün İçi: Hedef 85,85",
+    chartImage: "/Grafik/18082026-Oil-Wti.png",
+    resistances: [
+      { price: "88,05", strength: 1 },
+      { price: "87,00", strength: 1 },
+      { price: "85,85", strength: 1 },
+    ],
+    supports: [
+      { price: "81,30", strength: 1 },
+      { price: "82,25", strength: 1 },
+    ],
+    preference:
+      "82,90 seviyesi üzerinde kaldığı sürece yukarı yönlü görünüm korunuyor. Bu durumda ilk hedef 85,85, ardından 87,00 seviyesi öne çıkıyor.",
+    alternative:
+      "82,90 seviyesinin altında kalınması halinde satış baskısı artabilir. Bu durumda 82,25 ve 81,30 seviyeleri destek olarak takip edilebilir.",
+    comment:
+      "82,90 seviyesindeki direncin yukarı kırılması, yükseliş hareketini hızlandırarak fiyatı 85,85 bölgesine taşıdı. Mevcut yapı, 82,90 üzerinde kaldığı sürece pozitif görünümü destekliyor.",
     source: "Trading Central",
   },
 ];
