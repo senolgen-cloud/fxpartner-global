@@ -267,7 +267,7 @@ export const technicalAnalysisPosts: TechnicalAnalysisPost[] = [
     lastPrice: "4.393",
     bias: "BEARISH",
     headline: "Altın Gün İçi: Hedef 4.346",
-    chartImage: "/Grafik/18082026 - GOLD.png",
+    chartImage: "/Grafik/18082026-gold.png",
     resistances: [
       { price: "4.485", strength: 1 },
       { price: "4.464", strength: 1 },

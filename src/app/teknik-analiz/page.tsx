@@ -84,7 +84,7 @@ export default function TechnicalAnalysisIndexPage() {
                 {posts.map((post) => (
                   <article
                     key={post.slug}
-                    className="overflow-hidden rounded-2xl border border-hairline-light bg-white shadow-sm"
+                    className="overflow-hidden rounded-2xl border border-hairline bg-ink-soft/60 shadow-sm"
                   >
                     <div className="relative aspect-square w-full max-w-md mx-auto sm:max-w-none sm:aspect-[4/3] bg-ink">
                       <Image
@@ -96,20 +96,20 @@ export default function TechnicalAnalysisIndexPage() {
                       />
                     </div>
                     <div className="p-6">
-                      <span className="font-mono text-xs text-text-muted">
+                      <span className="font-mono text-xs text-text-on-ink-muted">
                         {post.instrument} · {post.timeframe} · {post.source}
                       </span>
-                      <h3 className="mt-2 font-poppins text-2xl font-semibold text-text-dark">{post.headline}</h3>
-                      <p className="mt-3 text-[15px] leading-relaxed text-text-muted">
-                        <strong className="text-text-dark">Ana senaryo:</strong> {post.preference}
+                      <h3 className="mt-2 font-poppins text-2xl font-semibold text-text-on-ink">{post.headline}</h3>
+                      <p className="mt-3 text-[15px] leading-relaxed text-text-on-ink-muted">
+                        <strong className="text-text-on-ink">Ana senaryo:</strong> {post.preference}
                       </p>
-                      <p className="mt-2 text-[15px] leading-relaxed text-text-muted">
-                        <strong className="text-text-dark">Alternatif senaryo:</strong> {post.alternative}
+                      <p className="mt-2 text-[15px] leading-relaxed text-text-on-ink-muted">
+                        <strong className="text-text-on-ink">Alternatif senaryo:</strong> {post.alternative}
                       </p>
-                      <p className="mt-2 text-[15px] leading-relaxed text-text-muted">
-                        <strong className="text-text-dark">Yorum:</strong> {post.comment}
+                      <p className="mt-2 text-[15px] leading-relaxed text-text-on-ink-muted">
+                        <strong className="text-text-on-ink">Yorum:</strong> {post.comment}
                       </p>
-                      <p className="mt-4 text-xs text-text-muted">
+                      <p className="mt-4 text-xs text-text-on-ink-muted">
                         Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.
                       </p>
                     </div>
