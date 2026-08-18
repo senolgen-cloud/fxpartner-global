@@ -1015,6 +1015,7 @@ export const brokers: Broker[] = [
     rank: 17,
     slug: "4xc",
     name: "4XC",
+    logo: "/brokers/4xc.png",
     tagline: "MT4/MT5 üzerinden rekabetçi spreadler ve kopya ticaret araçları",
     rating: 3.2,
     founded: 2018,
