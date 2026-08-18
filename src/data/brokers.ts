@@ -1011,6 +1011,49 @@ export const brokers: Broker[] = [
       },
     ],
   },
+  {
+    rank: 17,
+    slug: "4xc",
+    name: "4XC",
+    tagline: "MT4/MT5 üzerinden rekabetçi spreadler ve kopya ticaret araçları",
+    rating: 3.2,
+    founded: 2018,
+    minDeposit: "$50",
+    maxLeverage: "1:500*",
+    regulators: ["FSC (Cook Islands)"],
+    platforms: ["MT4", "MT5", "WebTrader"],
+    headquarters: "Rarotonga, Cook Adaları",
+    referralUrl: "http://live.4xc.com/signup/hMuEQRm2",
+    summary:
+      "4XC (4xCube), 2018'den beri Cook Adaları Finansal Denetim Komisyonu (FSC) lisansı altında faaliyet gösteren bir offshore brokerdır. MT4/MT5 üzerinden rekabetçi spreadler ve HokoCloud kopya ticaret araçları sunar, ancak FCA/CySEC/ASIC gibi tier-1 bir denetime sahip değildir ve bağımsız incelemelerde karışık çekim deneyimleri bildirilmektedir.",
+    pros: [
+      "Standard hesapta rekabetçi spreadler (EUR/USD için ~0.7 pip bildirilmiştir)",
+      "MT4 ve MT5 üzerinden geniş enstrüman ve platform desteği",
+      "HokoCloud kopya ticaret altyapısı",
+      "Yeni başlayanlar için eğitim içerikleri",
+    ],
+    cons: [
+      "Yalnızca offshore Cook Adaları (FSC) lisansına sahip — FCA, CySEC veya ASIC gibi tier-1 bir denetim yok",
+      "Bağımsız incelemelerde bazı kullanıcılar çekimlerde gecikme veya ek belge talebi bildirmiştir",
+      "Kredi kartı yatırımlarında %3, Perfect Money'de %6 gibi yüksek işlem ücretleri",
+      "VIP hesap için minimum yatırım $10.000 gibi yüksek bir eşiğe sahiptir",
+    ],
+    bestFor: "Kopya ticaret araçlarına ilgi duyan, offshore lisans riskini kabul eden deneyimli yatırımcılar",
+    accentNote: "Kopya ticaret odaklı offshore broker",
+    categories: ["High Leverage"],
+    scoreCost: 3,
+    scoreWithdrawal: 2,
+    extraFaqs: [
+      {
+        q: "4XC güvenilir mi?",
+        a: "4XC, yalnızca Cook Adaları Finansal Denetim Komisyonu'nun (FSC) offshore lisansına sahiptir — FCA, CySEC veya ASIC gibi tier-1 bir düzenleyici otoritenin gözetimi altında değildir. Bu lisans türü, yatırımcı tazminat fonu gibi güçlü koruma mekanizmaları içermez. Bağımsız inceleme siteleri 4XC için düşük-orta düzeyde bir güven skoru bildirmektedir; hesap açmadan önce güncel düzenleyici durumu kendiniz de araştırmanızı öneririz.",
+      },
+      {
+        q: "4XC'den para çekmek ne kadar sürer?",
+        a: "Bağımsız incelemelere göre 4XC'de standart yöntemlerle çekimler anında ile 24 saat arasında işlenebilirken, kredi kartı çekimleri 7-10 iş gününü bulabilir. Bazı kullanıcılar gecikme veya ek belge talebi yaşandığını bildirmiştir. Yöntem bazlı ücretler ve güncel işlem süreleri için resmi 4XC sitesini kontrol edin.",
+      },
+    ],
+  },
 ].sort((a, b) => a.rank - b.rank);
 
 export function getBrokerBySlug(slug: string): Broker | undefined {
