@@ -41,6 +41,7 @@ export interface TechnicalAnalysisPost {
 // when a date has no explicit entry.
 export const bulletinTitles: Record<string, string> = {
   "2026-08-13": "13.08.2026 - Gün Ortası Teknik Analiz Bülteni",
+  "2026-08-18": "18.08.2026 - Gün İçi Teknik Analiz Bülteni",
 };
 
 export function getBulletinTitle(publishedAt: string): string {
@@ -255,6 +256,32 @@ export const technicalAnalysisPosts: TechnicalAnalysisPost[] = [
     alternative: "298,34 seviyesinin altında bir hareket 294,95 ve 292,93 seviyelerini getirir.",
     comment:
       "RSI (bağıl güç endeksi) 50'nin altında. MACD (trend sapma göstergesi) sinyal çizgisinin üzerinde, fakat negatif. Yapılandırma çeşitli. Dahası, cari fiyat 20 ve 50 hareketli ortalamalarının altında (sırasıyla 303,02 ve 306,58 seviyelerinde).",
+    source: "Trading Central",
+  },
+  {
+    slug: "altin-gun-ici-2026-08-18",
+    instrument: "Gold",
+    timeframe: "Gün İçi",
+    publishedAt: "2026-08-18",
+    pivot: "4.428",
+    lastPrice: "4.393",
+    bias: "BEARISH",
+    headline: "Altın Gün İçi: Hedef 4.346",
+    chartImage: "/Grafik/18082026 - GOLD.png",
+    resistances: [
+      { price: "4.485", strength: 1 },
+      { price: "4.464", strength: 1 },
+    ],
+    supports: [
+      { price: "4.324", strength: 1 },
+      { price: "4.346", strength: 1 },
+    ],
+    preference:
+      "4.428 seviyesi direnç olarak korunduğu sürece aşağı yönlü hareketin devam etmesi bekleniyor. Bu durumda 4.346 ve ardından 4.324 seviyeleri hedeflenebilir.",
+    alternative:
+      "Altın 4.428 üzerinde kalıcılaşırsa, yükselişin 4.464 ve 4.485 seviyelerine doğru devam etmesi mümkün.",
+    comment:
+      "RSI 50 seviyesinin altında, MACD negatif bölgede ve sinyal çizgisinin altında. Fiyatın 20 ve 50 periyotluk hareketli ortalamaların altında bulunması da kısa vadede satıcılı görünümü destekliyor.",
     source: "Trading Central",
   },
 ];
