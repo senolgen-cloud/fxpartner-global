@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getFeaturedPartner, getPropFirmScores } from "@/data/propFirms";
+import { getFeaturedPartner, getPropFirmScores, hasActiveLink } from "@/data/propFirms";
 
 /**
  * Öne çıkarılan prop ortağı kartı.
@@ -16,9 +16,12 @@ export default function PropFirmFeaturedCard() {
   if (!firm) return null;
 
   const { composite } = getPropFirmScores(firm);
-  // Ödeme kanıtı doğrulanmadan dışa link verilmez — isPromotable() kuralının
-  // görsel karşılığı. Doğrulanana kadar kart bilgi verir, yönlendirmez.
-  const promotable = firm.payoutProof.status === "verified";
+  // Link ticari karara bağlı; rozet ise editoryal duruma. İkisi ayrı —
+  // bkz. propFirms.ts → hasActiveLink() / isPromotable().
+  const linkOn = hasActiveLink(firm);
+  const verified = firm.payoutProof.status === "verified";
+  const d = firm.discount;
+  const discountLive = d?.status === "live";
 
   return (
     <div className="rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/[0.07] to-transparent p-6 md:p-8">
@@ -105,19 +108,36 @@ export default function PropFirmFeaturedCard() {
         >
           İncelemeyi gör
         </Link>
-        {promotable && firm.referralUrl && (
+        {linkOn && (
           <a
             href={firm.referralUrl}
             target="_blank"
             rel="nofollow sponsored noopener noreferrer"
             className="font-mono text-xs uppercase tracking-[0.1em] text-signal hover:text-signal-strong"
           >
-            Firmaya git →
+            {firm.name}&apos;a git →
           </a>
         )}
-        {!promotable && (
-          <span className="font-mono text-[11px] text-text-on-ink-muted">
-            Ödeme kanıtı doğrulaması tamamlanana kadar yönlendirme linki kapalı.
+
+        {discountLive && d.code && (
+          <span className="font-mono text-xs text-text-on-ink-muted">
+            İndirim kodu:{" "}
+            <span className="rounded border border-dashed border-signal/50 bg-signal/10 px-2 py-0.5 uppercase text-signal">
+              {d.code}
+            </span>
+            {typeof d.percent === "number" && (
+              <span className="ml-2 font-semibold text-gold">%{d.percent}</span>
+            )}
+          </span>
+        )}
+
+        {/* Link açık olsa bile doğrulama durumu olduğu gibi söylenir. Ticari
+            karar, editoryal iddianın yerine geçmez. */}
+        {!verified && (
+          <span className="w-full font-mono text-[11px] leading-relaxed text-text-on-ink-muted">
+            Bağımsız ödeme kanıtı doğrulamamız henüz tamamlanmadı — bu firma
+            &ldquo;{firm.payoutProof.status === "monitored" ? "İzleniyor" : "Doğrulanmadı"}&rdquo;
+            statüsünde. Hesap açmadan önce kendi araştırmanızı yapın.
           </span>
         )}
       </div>

@@ -120,6 +120,23 @@ export interface PropFirm {
   backingNote?: string;
 
   referralUrl?: string;
+  /**
+   * Yönlendirme linki aktif mi?
+   *
+   * ⚠️ Bu, `payoutProof.status`'ten KASITLI olarak ayrıdır. İkisi farklı şeyler:
+   *
+   *   • `linkActive`  → TİCARİ karar. Site sahibinin, o firmaya trafik göndermeyi
+   *                     seçmesi. Firmayla kurulan ilişkiye ve sahibinin kendi
+   *                     bilgisine dayanır.
+   *   • `payoutProof` → EDİTORYAL İDDİA. "Biz bu firmanın ödeme yaptığını kendi
+   *                     kaynaklarımızla doğruladık" demek.
+   *
+   * Başta ikisini birbirine bağlamıştım; yanlıştı. Bir linki aktif etmek için
+   * doğrulama iddiasında bulunmak gerekmiyor — gereken tek şey, doğrulamadığımız
+   * bir şeyi doğrulamış gibi GÖSTERMEMEK. Bu yüzden link açıkken bile rozet
+   * hâlâ "İzleniyor" der ve kartta ne eksik olduğu yazar.
+   */
+  linkActive?: boolean;
   /** FXPARTNER'ın bu firmayla ticari ilişkisi var mı? Kartta açıkça etiketlenir. */
   isPartner: boolean;
   discount?: PropDiscount;
@@ -501,21 +518,26 @@ export const propFirms: PropFirm[] = [
     // ama yukarıdaki dosya notunda açıklandığı gibi sıralamayı değiştirmez.
     isPartner: true,
     referralUrl: "https://bit.ly/funded-ic",
+    // Site sahibinin ticari kararı (19.08.2026): link aktif. Bu, ödeme
+    // doğrulaması yerine GEÇMEZ — payoutProof aşağıda hâlâ "monitored" ve
+    // kart/tablo bunu olduğu gibi gösteriyor.
+    linkActive: true,
     discount: {
       label: "%30 indirim",
-      // Kayıtlı ama YAYIMLANMIYOR: status "pending" olduğu sürece tablo bu
-      // sayıyı göstermez, "Teyit bekliyor" der. Ortak teyit edince tek yapılacak
-      // şey status'ü "live" yapmak (ve fiyatları girmek).
       percent: 30,
-      // Link checkout.icfunded.com/products?aff=urdtef adresine yönleniyor.
-      // Sayfa client-side render edildiği için indirimin linkle otomatik mi
-      // uygulandığı yoksa kod mu gerektiği dışarıdan doğrulanamadı.
-      // Ortakla teyit edilmeden sitede sayı olarak yayımlanmaz.
-      applies: "unknown",
-      status: "pending",
+      // Ortaktan teyit alındı (19.08.2026): indirim linke gömülü değil,
+      // checkout'ta elle giriliyor.
+      applies: "manual-code",
+      code: "EIEGEB",
+      status: "live",
+      // priceFrom / priceFromDiscounted BİLEREK boş: yüzdeden fiyat
+      // hesaplamıyoruz (bkz. PropDiscount tanımı). $74 × %30 aritmetiği
+      // checkout'takiyle birebir tutmayabilir — hesap boyutuna göre indirim
+      // farklı uygulanıyor olabilir. Gerçek indirimli fiyat checkout'tan
+      // teyit edilince girilecek, o zaman tabloda üstü çizili fiyat çıkar.
       note:
-        "Oran ortaktan alındı; indirimin linkle otomatik uygulanıp uygulanmadığı " +
-        "checkout üzerinde teyit edilecek. Teyit sonrası status 'live' yapılır.",
+        "Oran ve kod ortaktan alındı. Kod checkout'ta elle giriliyor. " +
+        "İndirimli fiyatlar checkout üzerinden teyit edilip eklenecek.",
     },
     models: ["1-step", "2-step"],
     accountSizes: ["$10.000", "$25.000", "$50.000", "$100.000", "$200.000"],
@@ -759,6 +781,18 @@ export function propFirmsByScore() {
  */
 export function isPromotable(firm: PropFirm) {
   return firm.payoutProof.status === "verified";
+}
+
+/**
+ * Yönlendirme linki gösterilebilir mi?
+ *
+ * `isPromotable()`'dan ayrı: link aktif etmek ticari bir karar, "ödeme
+ * doğrulandı" demek ise editoryal bir iddia. Link açık olabilir ve rozet
+ * aynı anda dürüstçe "İzleniyor" diyebilir — yeter ki doğrulanmamış bir şey
+ * doğrulanmış gibi gösterilmesin.
+ */
+export function hasActiveLink(firm: PropFirm) {
+  return Boolean(firm.linkActive && firm.referralUrl);
 }
 
 /**
