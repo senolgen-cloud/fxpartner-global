@@ -28,6 +28,7 @@ import { db } from "@/db";
 import { comments as commentsTable, users as usersTable } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 import { flagEmoji } from "@/lib/country";
+import { getLiveCashbackProgram } from "@/data/cashback";
 import { brokerFinancialServiceSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { regulationParagraph, platformParagraph, verdictParagraph, brokerFaqs } from "@/lib/brokerContent";
 import { getBlogPostBySlug } from "@/data/blog";
@@ -139,6 +140,9 @@ export default async function BrokerDetailPage({
   const reviewPost = getBlogPostBySlug(`${broker.slug}-review`);
   const scores = getBrokerScores(broker);
   const riskLevel = getRiskLevel(broker);
+  // Only confirmed programs are promoted off /cashback — an estimate never
+  // appears as a promise on a review page.
+  const cashback = getLiveCashbackProgram(broker.slug);
 
   const tier1Regulators = broker.regulators.filter((r) => TIER1_REGULATORS.has(r));
   const offshoreRegulators = broker.regulators.filter((r) => !TIER1_REGULATORS.has(r));
@@ -674,8 +678,25 @@ export default async function BrokerDetailPage({
               </Link>
             )}
 
+            {cashback && (
+              <Link
+                href={`/cashback/${broker.slug}/setup`}
+                className={`${broker.promotion ? "mt-6" : "mt-10"} flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-tick-up/30 bg-tick-up/10 px-6 py-4 transition-colors hover:border-tick-up/50`}
+              >
+                <span className="text-sm text-text-dark">
+                  <strong className="font-semibold">
+                    {cashback.rateLabel} —{" "}
+                  </strong>
+                  {cashback.pitch}
+                </span>
+                <span className="shrink-0 font-mono text-xs uppercase tracking-[0.15em] text-tick-up">
+                  Nakit iadeyi başlat →
+                </span>
+              </Link>
+            )}
+
             <div
-              className={`${broker.promotion ? "mt-6" : "mt-14"} rounded-2xl border border-hairline-light bg-paper p-6`}
+              className={`${broker.promotion || cashback ? "mt-6" : "mt-14"} rounded-2xl border border-hairline-light bg-paper p-6`}
             >
               <p className="text-sm leading-relaxed text-text-muted">
                 <strong className="text-text-dark">Not:</strong> Yukarıdaki

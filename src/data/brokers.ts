@@ -36,6 +36,12 @@ export interface Broker {
   // without a matching entry here if its number hasn't been confirmed).
   // Rendered as a trust badge on the review page.
   licenseNumbers?: Partial<Record<string, string>>;
+  // Optional editorial sentence appended to the auto-generated regulation
+  // paragraph. Exists for brokers whose licence list is technically true but
+  // misleading on its own — e.g. a group that holds a tier-1 licence under an
+  // EU entity while onboarding Turkish clients to an offshore one. The
+  // formula can't see that distinction; this field spells it out.
+  regulationNote?: string;
   // An optional time-limited campaign (e.g. refer-a-friend), rendered as
   // a highlighted banner on the broker's review page. Distinct from the
   // standing referralUrl/partnerCode, which is always active.
@@ -461,43 +467,112 @@ export const brokers: Broker[] = [
     adImage: "/campaigns/litefinance-reklam-1.png",
     adImageWidth: 1672,
     adImageHeight: 941,
-    tagline: "1:1000'e kadar seçilebilir kaldıraç",
+    tagline: "10 dolardan başlayan cent hesap, 0.0 pipten ECN",
     rating: 4.5,
     founded: 2005,
     minDeposit: "$10",
     maxLeverage: "1:1000*",
-    regulators: ["Offshore license"],
-    platforms: ["MT4", "MT5", "LiteFinance WebTerminal"],
-    headquarters: "Kıbrıs",
+    // Grupta üç ayrı tüzel kişilik var, ama bu liste bilinçli olarak yalnızca
+    // Türkiye'den açılan bir hesaba fiilen uygulanan lisansları içeriyor.
+    // CySEC'li Liteforex (Europe) Ltd yalnızca AEA müşterilerine hizmet
+    // verdiği için buraya yazılmadı — yazılsaydı sayfa okura ait olmayan bir
+    // Tier-1 rozeti gösterirdi. Bağlamı regulationNote ve SSS anlatıyor.
+    regulators: ["FSC (Mauritius)", "SVG FSA (yalnızca şirket kaydı)"],
+    licenseNumbers: {
+      "FSC (Mauritius)": "GB20025921",
+      "SVG FSA (yalnızca şirket kaydı)": "931 LLC 2021",
+    },
+    regulationNote:
+      "Grubun ayrıca CySEC lisanslı bir Avrupa şirketi var — Liteforex (Europe) Ltd, lisans no 093/08 — ancak bu şirket yalnızca Avrupa Ekonomik Alanı müşterilerine hizmet veriyor. Türkiye'den açılan hesaplar bu şirkete değil, offshore tarafa (LiteFinance Global LLC, Saint Vincent, kayıt no 931 LLC 2021 veya LiteFinance Investment Limited, Mauritius FSC) bağlanır; dolayısıyla CySEC'in yatırımcı tazmin fonu Türkiye'deki bir hesap için geçerli değildir. Hesap açarken sözleşmenin hangi şirketle imzalandığını mutlaka kontrol edin.",
+    platforms: ["MT4", "MT5", "cTrader", "LiteFinance WebTerminal"],
+    headquarters: "Kıbrıs (AB) / Saint Vincent (global)",
     referralUrl: "https://litefinance-tr.org/?uid=667827970",
     summary:
-      "Lite Finance, cent hesaplar, yüksek kaldıraç seçenekleri ve düşük minimum yatırım tutarı sayesinde küçük bir sermayeyle başlamak isteyen yatırımcılar arasında popülerdir. FXPARTNER'a özel bonus ve promosyonlara erişilebilir.",
+      "Lite Finance, 10 dolarlık cent hesabı ve 0.0 pipten başlayan ECN hesabını aynı çatı altında sunan az sayıdaki brokerdan biri: aynı yerde hem düşük riskli pratik yapabilir, hem de ham spreade geçebilirsiniz. Doğrulanmış hesaplarda anlık para çekme (günde 5.000 dolara kadar otomatik işlenir) ve kendi sosyal işlem (copytrade) platformu öne çıkan taraflar. Buna karşılık Türkiye'den açılan hesaplar CySEC'li AB şirketine değil offshore şirkete bağlanır — bu incelemenin regülasyon puanını sınırlayan asıl sebep budur.",
     pros: [
-      "10 dolar gibi düşük bir tutarla hesap açma",
-      "FXPARTNER'a özel bonus ve promosyonlar",
-      "Düşük riskli pratik için cent hesap seçeneği",
-      "Basit ve hızlı hesap açma süreci",
+      "Cent hesapta 10 dolarla, ECN hesapta 50 dolarla başlama imkanı",
+      "ECN hesabında 0.0 pipten spread, lot başına 0,25 dolardan komisyon",
+      "Doğrulanmış hesaplarda anlık para çekme — günde 5.000 dolara kadar otomatik",
+      "FXPARTNER üzerinden %50'ye kadar nakit iade",
+      "MT4, MT5, cTrader ve tarayıcıdan çalışan WebTerminal",
+      "Kendi copytrade platformu — hem kopyalayan hem sinyal veren tarafta",
+      "Türkçe destek hattı (turkiye@litefinance.com)",
     ],
     cons: [
+      "Türkiye'den açılan hesaplar CySEC'li AB şirketine değil offshore şirkete bağlanır",
+      "Çekim yalnızca paranın yatırıldığı aynı yönteme ve aynı para birimine yapılabilir",
+      "Bazı çekim yöntemlerinde %0-2 arası masraf çıkabilir",
       "Kurumsal yatırımcı içeriği XM/AvaTrade kadar kapsamlı değil",
     ],
-    bestFor: "Küçük sermayeyle başlayan bireysel yatırımcılar",
+    bestFor: "Küçük sermayeyle başlayıp ECN'e geçmeyi planlayan bireysel yatırımcılar",
     accentNote: "En düşük giriş bariyeri",
-    categories: ["Beginners"],
-    scoreCost: 4,
-    scoreWithdrawal: 3,
+    categories: ["Beginners", "Low Spread", "Multi-Platform"],
+    // 0.0 pipten ECN + lot başına 0,25 dolar komisyon, listedeki en ucuz
+    // maliyet yapılarından biri; yatırma ücreti yok.
+    scoreCost: 5,
+    // Doğrulanmış hesapta otomatik çekim açıkken talepler anlık işleniyor
+    // (günde 5.000 dolara kadar); manuel taleplerin çoğu 24 saat içinde.
+    // Listedeki en hızlı çekim profillerinden biri.
+    scoreWithdrawal: 5,
+    // Formül üç lisansı "tier-1 yok" diye 2 puanla değerlendiriyor; Mauritius
+    // FSC'nin tam yetkili Investment Dealer lisansı bunu bir puan yukarı
+    // taşıyacak kadar gerçek bir denetim — ama Türkiye'den açılan hesabın
+    // offshore şirkete bağlanması nedeniyle daha yukarı çıkmıyor.
     scoreRegulationOverride: 3,
     scoreOverride: 9.1,
     extraFaqs: [
       {
         q: "Lite Finance güvenilir mi?",
-        a: "Lite Finance, 2005'ten beri faaliyette olan ve düşük başlangıç bariyeriyle (10 dolar gibi düşük bir minimum yatırımla) bilinen bir brokerdir. Düzenleme durumu offshore bir lisansa dayanır — FCA, ASIC veya CySEC gibi tier-1 bir otorite altında değildir; bu, düşük başlangıç maliyeti sunarken düzenleyici koruma açısından daha zayıf bir güvenlik ağı anlamına gelir. Lite Finance'in Türkiye'ye özel bir destek hattı (turkiye@litefinance.com) bulunur. Hesap açmadan önce güncel lisans durumunu brokerin resmi sitesinden teyit etmenizi öneririz.",
+        a: "Lite Finance 2005'ten beri faaliyette ve üç ayrı tüzel kişilik üzerinden çalışıyor: Liteforex (Europe) Ltd (CySEC lisans no 093/08, yalnızca Avrupa Ekonomik Alanı müşterileri), LiteFinance Investment Limited (Mauritius FSC, Investment Dealer lisansı GB20025921) ve LiteFinance Global LLC (Saint Vincent ve Grenadinler, 931 LLC 2021 — bu bir şirket kaydıdır, denetleyici bir lisans değildir). Buradaki kritik ayrım şu: Türkiye'den açtığınız hesap CySEC'li Avrupa şirketine değil, offshore şirkete bağlanır — yani CySEC'in yatırımcı tazmin fonu ve negatif bakiye koruması gibi güvenceleri sizin hesabınız için geçerli olmaz. Mauritius FSC lisansı gerçek bir denetim katmanıdır ama tier-1 (FCA, ASIC, CySEC) seviyesinde değildir. Lite Finance'in Türkçe destek hattı (turkiye@litefinance.com) bulunur. Hesap açarken sözleşmenin hangi şirketle imzalandığını mutlaka kontrol edin.",
       },
       {
         q: "Lite Finance'ten nasıl para çekilir?",
-        a: "Lite Finance, MT4, MT5 ve kendi WebTerminal platformu üzerinden işlem yapılmasına imkan tanır; çekim talepleri genellikle hesap doğrulaması tamamlandıktan sonra, yatırılan yönteme işlenir. Offshore bir lisansa dayandığı için, çekim süreleri ve olası ücretler konusunda tier-1 düzenlenmiş brokerlere kıyasla daha az standart bir çerçeve söz konusu olabilir — güncel çekim süre ve koşullarını hesap açmadan önce Lite Finance'in resmi sitesinden veya Türkçe destek hattından teyit edin.",
+        a: "Çekim talepleri kişisel kabinden oluşturulur ve doğrulanmış (KYC tamamlanmış) bir hesapta otomatik çekim açıkken anlık işlenir: desteklenen yöntemlerde günde 5.000 dolara kadar, gün içinde birden fazla kez, kimsenin onayını beklemeden. Bu limitin üzerindeki ve otomatik akış dışında kalan taleplerin çoğu 24 saat içinde, banka havaleleri ise 1-3 iş gününde tamamlanır. Anlık çekimden yararlanmak için üç şey gerekir: hesap doğrulaması tamamlanmış olmalı, kabinde otomatik çekim etkin olmalı ve çekim yöntemi bu akışı desteklemeli (kart ve e-cüzdanlar destekler, banka havalesi doğası gereği desteklemez). İki de kural var: para yalnızca yatırdığınız yönteme ve aynı para birimine çekilebilir (Skrill ile yatırdıysanız yalnızca aynı Skrill cüzdanına çekersiniz), ve yönteme göre %0-2 arası masraf çıkabilir. Yatırma işlemlerinde Lite Finance ücret almaz.",
+      },
+      {
+        q: "Lite Finance cent hesap nedir, kimin için uygundur?",
+        a: "Cent hesapta bakiyeniz ve kâr/zararınız dolar yerine cent cinsinden gösterilir; sözleşme büyüklüğü 100.000 dolar yerine 1.000 dolardır. Pratikte bu, 10 dolarlık bir bakiyeyle gerçek piyasa koşullarında, gerçek fiyatlarla, ama 100 kat küçük risk ölçeğinde işlem yapmak demek. Demo hesabın aksine burada gerçek para ve gerçek psikoloji devrededir — bu yüzden strateji test etmek ve ilk canlı işlem alışkanlığını kurmak için en mantıklı adımdır. Cent hesapta stop out seviyesi %50, kaldıraç 1:1000'e kadar seçilebilir ve komisyon yoktur (spread 3 pipten başlar).",
+      },
+      {
+        q: "Lite Finance ECN hesap komisyonu ne kadar?",
+        a: "ECN hesabında spread 0.0 pipten başlar ve maliyet komisyon olarak alınır: lot başına 0,25 dolardan itibaren. Minimum yatırım 50 dolar, kaldıraç 1:1000'e kadar, stop out %20. ECN hesabı MT4 ve MT5'in yanı sıra cTrader'ı da destekleyen tek hesap türüdür. Scalping ve yüksek frekanslı işlem yapanlar için spread + komisyon toplamı, komisyonsuz Classic hesabın 1.8 piplik spreadinden genellikle daha düşük bir toplam maliyet üretir.",
+      },
+      {
+        q: "Lite Finance kaldıraç ne kadar, 1:1000 herkes için geçerli mi?",
+        a: "Classic ve ECN hesaplarda kaldıraç 1:1 ile 1:1000 arasında seçilebilir; cent hesapta da 1:1000'e kadar çıkılabilir. Ancak kaldıraç enstrümana, pozisyon büyüklüğüne ve hesap bakiyesine göre otomatik olarak kademelendirilir — yani her enstrümanda ve her lot büyüklüğünde 1:1000 uygulanmaz. Yüksek kaldıraç kâr potansiyelini değil, pozisyon büyüklüğünü artırır; aynı oranda zarar riskini de büyütür. Kaç lot açmanız gerektiğini FXPARTNER'ın pozisyon büyüklüğü hesaplayıcısıyla hesaplayın.",
+      },
+      {
+        q: "Lite Finance copytrade (sosyal işlem) nasıl çalışır?",
+        a: "Lite Finance'in kendi sosyal işlem platformunda iki taraf vardır. Kopyalayan taraf: bir sosyal işlem hesabı açar, sıralamadan bir yatırımcı seçer ve kopyalama tipini ayarlar; işlemler otomatik olarak kendi hesabınıza yansır. Fonlarınız başka birinin hesabına aktarılmaz — kendi hesabınızda kalır ve kopyalamayı istediğiniz an durdurabilirsiniz. Kopyalama için tavsiye edilen başlangıç tutarı 50 dolardır. Sinyal veren taraf: kendi işlemlerini kopyalanmaya açar ve kârdan yüzde alır; komisyon oranını kendisi belirler ve sıralamada gösterilir. Komisyon yalnızca kopyalayan taraf kâr ettiğinde tahakkuk eder, şirket ayrıca ücret almaz. Kopyalanmaya açılan hesap için tavsiye edilen tutar 500 dolardır.",
+      },
+      {
+        q: "Lite Finance swap-free (İslami) hesap veriyor mu?",
+        a: "Evet. Cent, Classic ve ECN hesap türlerinin üçünde de İslami (swap-free) hesap seçeneği mevcuttur; bu hesaplarda gecelik pozisyon taşıma faizi (swap) işletilmez. Swap-free statüsü talep üzerine tanımlanır ve enstrüman bazında istisnalar olabilir — hangi sembollerde geçerli olduğunu hesap açtıktan sonra destek hattından teyit edin.",
+      },
+      {
+        q: "Lite Finance yatırım bonusu var mı, bonus çekilebilir mi?",
+        a: "Lite Finance dönemsel olarak promosyon kodlu yatırım bonusları yayınlar; yaygın olanları 50 dolar üzeri yatırımlarda %30 ve 100 dolar üzeri yatırımlarda promosyon koduyla %100 bonustur. Bonusun iki temel kuralını bilmek gerekir: bonus tutarı ek marjin olarak kullanılır, doğrudan çekilemez; bonusun ve ondan doğan kârın çekilebilmesi için belirli bir işlem hacmi (lot) şartının tamamlanması gerekir ve bonusun geçerlilik süresi (genellikle 6 ay) vardır. Bonus, marjin çağrısı ihtimalini azaltırken pozisyonu büyütme dürtüsü de yaratır — hacim şartını kovalayarak gereksiz işlem açmak, bonusun en sık yapılan hatasıdır. Katılmadan önce güncel koşulları Lite Finance'in resmi sitesinden teyit edin.",
+      },
+      {
+        q: "Lite Finance Türkiye'de yasal mı, SPK lisansı var mı?",
+        a: "Hayır — Lite Finance'in Sermaye Piyasası Kurulu (SPK) lisansı yoktur ve Türkiye'de yerleşik bir yatırım kuruluşu değildir. Türkiye'de kaldıraçlı işlem yalnızca SPK yetkilendirmesi olan aracı kurumlar tarafından sunulabilir; yurt dışı brokerlarla hesap açan Türkiye'deki yatırımcılar SPK'nın yatırımcı tazmin mekanizmasının dışında kalır ve bir anlaşmazlıkta Türk hukuku yerine brokerin bağlı olduğu offshore yargı yetkisine tabi olur. Bu, Lite Finance'e özel bir durum değildir — Türkiye'ye hizmet veren tüm uluslararası brokerler için geçerlidir. Karar vermeden önce FXPARTNER'ın broker düzenleme raporunu okuyun.",
       },
     ],
+    deepDive: {
+      accountTypes: [
+        { name: "Cent", spread: "3 pipten itibaren", commission: "Yok", minDeposit: "$10" },
+        { name: "Classic", spread: "1.8 pipten itibaren", commission: "Yok", minDeposit: "$50" },
+        { name: "ECN", spread: "0.0 pipten itibaren", commission: "Lot başına $0.25'ten itibaren", minDeposit: "$50" },
+      ],
+      deposits:
+        "Banka kartı, banka havalesi, e-cüzdan (Skrill, Neteller ve bölgesel sağlayıcılar) ve kripto para transferi kabul edilir. Lite Finance yatırma işlemlerinden ücret almaz; kart ve e-cüzdan yatırımları genellikle anında, banka havaleleri 1-3 iş gününde hesaba geçer. Cent hesapta minimum 10, Classic ve ECN hesapta 50 dolar.",
+      withdrawals:
+        "Doğrulanmış hesapta otomatik çekim açıkken talepler anlık işlenir — desteklenen yöntemlerde günde 5.000 dolara kadar, gün içinde tekrar tekrar, manuel onay beklemeden. Bu limitin üzerindeki ve otomatik akış dışındaki talepler çoğunlukla 24 saat içinde, banka havaleleri 1-3 iş gününde tamamlanır. İki kısıt var: para yalnızca yatırıldığı yönteme ve aynı para birimine çekilebilir, ve yönteme göre %0-2 arası masraf uygulanabilir.",
+      support:
+        "7/24 canlı destek ve e-posta desteğinin yanı sıra Türkiye'ye özel bir destek hattı (turkiye@litefinance.com) ve Türkçe kişisel kabin arayüzü. Hesap doğrulama (KYC) süreci kimlik ve adres belgesiyle kabinden yürütülür.",
+      education:
+        "Yeni başlayanlar için adım adım rehberler, teknik ve temel analiz blogu, günlük piyasa yorumları, ekonomik takvim ve sınırsız süreli demo hesap. Kendi sosyal işlem platformu üzerinden başkalarının işlemlerini kopyalayarak veya kendi işlemlerini kopyalanmaya açarak öğrenme/gelir modeli sunar.",
+    },
     promotion: {
       tag: "Aktif Kampanya",
       title: "Arkadaşını Davet Et, 50$ Kazan",

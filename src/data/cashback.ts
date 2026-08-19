@@ -2,34 +2,60 @@ export interface CashbackProgram {
   brokerSlug: string;
   rateLabel: string;
   rateNote: string;
+  // "live"    — terms confirmed with the broker; the rate is a commitment we
+  //             advertise and the program is promoted across the site.
+  // "pending" — the agreement exists but the final rate hasn't been signed
+  //             off, so the number is shown as an estimate and never pushed
+  //             from a broker page or a campaign.
+  // Anything promoted anywhere outside /cashback must be "live".
+  status: "live" | "pending";
+  // Live programs only: the one-line promise used on the broker review page
+  // and in campaign copy. Kept next to the rate so the number and the claim
+  // can never drift apart.
+  pitch?: string;
 }
 
 // Only brokers with a real, confirmed volume-based rev-share/IB agreement
-// belong here — never add a broker just because it's on the site. Rates
-// are estimates pending final terms; keep them easy to update in one place.
+// belong here — never add a broker just because it's on the site. Keep the
+// rates easy to update in one place, and flip `status` to "live" only once
+// the final terms are confirmed with that broker.
 export const cashbackPrograms: CashbackProgram[] = [
   {
     brokerSlug: "xm",
-    rateLabel: "Up to $5 per lot (estimated)",
-    rateNote: "Final rate pending confirmation with XM.",
+    rateLabel: "Lot başına 5 dolara kadar (tahmini)",
+    rateNote: "Nihai oran XM ile teyit edilmeyi bekliyor.",
+    status: "pending",
   },
   {
     brokerSlug: "avatrade",
-    rateLabel: "Up to 20% of spread (estimated)",
-    rateNote: "Final rate pending confirmation with AvaTrade.",
+    rateLabel: "Spreadin %20'sine kadar (tahmini)",
+    rateNote: "Nihai oran AvaTrade ile teyit edilmeyi bekliyor.",
+    status: "pending",
   },
   {
     brokerSlug: "exness",
-    rateLabel: "Up to $4 per lot (estimated)",
-    rateNote: "Final rate pending confirmation with Exness.",
+    rateLabel: "Lot başına 4 dolara kadar (tahmini)",
+    rateNote: "Nihai oran Exness ile teyit edilmeyi bekliyor.",
+    status: "pending",
   },
   {
     brokerSlug: "lite-finance",
-    rateLabel: "Up to 50% cash back",
-    rateNote: "Rate varies by account type and trading volume; confirm current terms with Lite Finance.",
+    rateLabel: "%50'ye kadar nakit iade",
+    rateNote:
+      "Oran hesap türüne ve aylık işlem hacmine göre değişir; ECN hesaplarda komisyon üzerinden, Classic ve Cent hesaplarda spread üzerinden hesaplanır. İade, Lite Finance tarafından doğrudan işlem hesabınıza yatırılır.",
+    status: "live",
+    pitch:
+      "Mevcut hesabınızı kapatmanıza gerek yok; iade, işlem hacminize göre Lite Finance tarafından doğrudan işlem hesabınıza yatırılır.",
   },
 ];
 
 export function getCashbackProgram(brokerSlug: string) {
   return cashbackPrograms.find((p) => p.brokerSlug === brokerSlug);
+}
+
+// The subset that's safe to promote off the /cashback page — broker reviews,
+// campaigns, the partner page, digests.
+export function getLiveCashbackProgram(brokerSlug: string) {
+  const program = getCashbackProgram(brokerSlug);
+  return program?.status === "live" ? program : undefined;
 }

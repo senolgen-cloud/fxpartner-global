@@ -48,6 +48,11 @@ export function platformParagraph(broker: Broker): string {
 }
 
 export function regulationParagraph(broker: Broker): string {
+  const note = broker.regulationNote ? ` ${broker.regulationNote}` : "";
+  return `${baseRegulationParagraph(broker)}${note}`;
+}
+
+function baseRegulationParagraph(broker: Broker): string {
   const tier1 = broker.regulators.filter((r) => TIER1_REGULATORS.has(r));
   const other = broker.regulators.filter((r) => !TIER1_REGULATORS.has(r));
   const list = joinList(broker.regulators);
