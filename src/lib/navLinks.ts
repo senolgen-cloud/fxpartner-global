@@ -4,6 +4,7 @@
 // same set of pages instead of drifting out of sync.
 export const primaryLinks = [
   { href: "/#brokers", label: "Broker Sıralaması" },
+  { href: "/prop-firmalar", label: "Prop Firmalar" },
   { href: "/signals", label: "Sinyaller" },
   { href: "/ai-asistan", label: "AI Asistan" },
   { href: "/topluluk", label: "Topluluk" },
@@ -45,7 +46,7 @@ export const resourceLinks: {
   {
     href: "/paketler",
     label: "Paketler",
-    description: "Starter, Pro ve VIP üyelik paketleri",
+    description: "Ücretsiz, Pro ve VIP üyelik paketleri",
     group: "Kazanç Programları",
   },
   {

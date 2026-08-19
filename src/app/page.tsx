@@ -14,7 +14,9 @@ import HeroEcosystemMockups from "@/components/HeroEcosystemMockups";
 import ShowcaseGallery from "@/components/ShowcaseGallery";
 import RegulatorBadges from "@/components/RegulatorBadges";
 import HeroBrokerSearch from "@/components/HeroBrokerSearch";
+import PropFirmFeaturedCard from "@/components/PropFirmFeaturedCard";
 import { brokers } from "@/data/brokers";
+import { propFirms, propFirmsByScore, getPropFirmScores } from "@/data/propFirms";
 import { lookupBrokers } from "@/data/brokerLookup";
 import { faqSchema } from "@/lib/schema";
 import { db } from "@/db";
@@ -214,6 +216,88 @@ export default async function Home() {
             <div className="mt-12">
               <BrokerList brokers={brokers} reviewStats={brokerReviewStats} />
             </div>
+          </div>
+        </section>
+
+        {/* Prop firmalar — brokerlar ve sinyaller gibi ana dikeylerden biri.
+            Öne çıkan ortak kartı + rubrik sıralamasının ilk üçü. İkisi görsel
+            olarak ayrı tutuluyor: kart ticari yerleşim, liste editoryal
+            sıralama. */}
+        <section id="prop-firmalar" className="relative overflow-hidden bg-ink">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-hairline to-transparent"
+          />
+          <div className="mx-auto max-w-6xl px-6 py-20">
+            <Reveal className="mx-auto max-w-2xl text-center">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-gold">
+                Prop Firmalar
+              </span>
+              <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-on-ink md:text-4xl">
+                Kendi sermayenizi riske atmadan işlem yapın
+              </h2>
+              <p className="mt-4 text-text-on-ink-muted">
+                Funded account veren {propFirms.length} firma; kural seti, challenge
+                ücreti, drawdown limitleri ve ödeme sicili üzerinden bağımsız olarak
+                puanlandı. Ticari ilişkimiz olan firmalar açıkça etiketlenir.
+              </p>
+            </Reveal>
+
+            <Reveal className="mt-12">
+              <PropFirmFeaturedCard />
+            </Reveal>
+
+            <Reveal className="mt-10">
+              <div className="grid gap-4 sm:grid-cols-3">
+                {propFirmsByScore()
+                  .slice(0, 3)
+                  .map((firm, i) => (
+                    <div
+                      key={firm.slug}
+                      className="rounded-2xl border border-hairline bg-ink-soft/60 p-5"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-text-on-ink-muted">
+                          #{i + 1}
+                        </span>
+                        <span className="font-mono text-sm font-semibold text-gold">
+                          {getPropFirmScores(firm).composite.toFixed(1)}
+                        </span>
+                      </div>
+                      <h3 className="mt-3 flex items-center gap-2 font-poppins text-lg font-semibold text-text-on-ink">
+                        {firm.name}
+                        {firm.isPartner && (
+                          <span className="rounded-full border border-gold/40 bg-gold/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-gold">
+                            Ortak
+                          </span>
+                        )}
+                      </h3>
+                      <p className="mt-2 text-xs leading-relaxed text-text-on-ink-muted">
+                        {firm.tagline}
+                      </p>
+                      <dl className="mt-4 space-y-1.5 border-t border-hairline pt-4 text-xs">
+                        <div className="flex justify-between">
+                          <dt className="text-text-on-ink-muted">Kâr payı</dt>
+                          <dd className="text-text-on-ink">{firm.profitSplit}</dd>
+                        </div>
+                        <div className="flex justify-between">
+                          <dt className="text-text-on-ink-muted">Giriş</dt>
+                          <dd className="text-text-on-ink">{firm.challengeFeeFrom}</dd>
+                        </div>
+                      </dl>
+                    </div>
+                  ))}
+              </div>
+            </Reveal>
+
+            <Reveal className="mt-10 text-center">
+              <a
+                href="/prop-firmalar"
+                className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
+              >
+                {propFirms.length} firmanın tamamını karşılaştır →
+              </a>
+            </Reveal>
           </div>
         </section>
 

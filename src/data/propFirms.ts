@@ -1,0 +1,778 @@
+// Prop firm (funded account) verisi. Kasıtlı olarak brokers.ts'ten AYRI bir
+// dosya ve AYRI bir puanlama ekseni kullanır: bir prop firma broker değildir.
+// Broker'da "min. yatırım / kaldıraç / regülasyon" ölçeriz; prop firmada
+// ölçtüğümüz şey "kural seti ne kadar geçilebilir, ödeme gerçekten yapılıyor
+// mu, şeffaf mı". İkisini aynı Index'e sokmak her ikisini de yanlış ölçer.
+//
+// Strateji ve editoryal kurallar: docs/prop-firm-strategy.md
+//
+// ⚠️ SIRALAMA HAKKINDA — bu dosyanın en önemli notu:
+// IC Funded bizim ilk ortağımızdır. Buna rağmen listede birinci DEĞİLDİR,
+// çünkü rubrikte birinci çıkmıyor. /about sayfasındaki taahhüdümüz bu:
+// "Bir ortaklık, bir firmanın nasıl incelendiğini veya puanlandığını asla
+// değiştirmez." Ortağın tepeye konduğu bir karşılaştırma listesi, listenin
+// kendisini değersiz kılar — ve bu dikeyde satmaya çalıştığımız tek şey
+// listenin güvenilirliğidir. Ortaklık ilişkisi her firma kartında açıkça
+// etiketlenir; gizlenmez, ama sıralamayı da satın almaz.
+
+/**
+ * Bir prop firmanın ödeme (payout) güvenilirliği hakkında bildiklerimiz.
+ *
+ * Bu dosyadaki EN ÖNEMLİ alan budur. 2020-2026 arasında 80'den fazla prop
+ * firma kapandı; TrueForexFunds ~1.2M dolar ödenmemiş payout bırakarak
+ * battı, MyFundedFX Şubat 2026'da kapandı. Ödeme kanıtı doğrulanmamış bir
+ * firmayı önermek, sitenin üzerine kurulu olduğu güven iddiasını riske atar.
+ *
+ * cashback.ts'teki live/pending disiplininin aynısı geçerlidir:
+ * `/prop-firmalar` hub'ı dışında hiçbir yerde (firma inceleme CTA'sı,
+ * kampanya, Telegram, Instagram) `verified` olmayan bir firma promote
+ * edilemez — bkz. isPromotable() aşağıda.
+ */
+export interface PayoutProof {
+  // "verified"  — son 30 gün içinde, kaynağı kayıtlı, kendi kontrol ettiğimiz
+  //               bir ödeme kanıtı var.
+  // "monitored" — kanıt var ama 30 günden eski, VEYA firma yeni/izleniyor.
+  //               Yayımlanabilir, promote edilemez.
+  // "warning"   — somut ve kaynaklı gecikme/ret örüntüsü tespit edildi.
+  // "none"      — hiç doğrulanmadı. Hiçbir yerde görünmez.
+  status: "verified" | "monitored" | "warning" | "none";
+  /** ISO tarih — son kontrol ne zaman yapıldı. */
+  lastCheckedAt: string;
+  /** Kanıtın nereden geldiği. Boş bırakılamaz; "duyduk" kaynak değildir. */
+  sources: string[];
+  /** `verified` dışındaki her statüde: neyin eksik olduğu net yazılır. */
+  note: string;
+}
+
+export const PAYOUT_STATUS_LABEL: Record<PayoutProof["status"], string> = {
+  verified: "Ödeme Doğrulandı",
+  monitored: "İzleniyor",
+  warning: "Uyarı",
+  none: "Doğrulanmadı",
+};
+
+/**
+ * İndirim/kampanya bilgisi. Yine live/pending mantığı: teyit edilmemiş bir
+ * indirim oranı sitede sayı olarak yayımlanmaz — uygulanmayan bir "%30
+ * indirim" vaadi, güven açısından indirim vermemekten daha kötüdür.
+ */
+export interface PropDiscount {
+  label: string;
+  /**
+   * İndirim yüzdesi. SADECE `status: "live"` iken tabloda sayı olarak
+   * gösterilir — teyit edilmemiş bir oranı sayıyla yayımlamak, uygulanmadığında
+   * doğrudan güven kaybı demek. `pending` durumda tablo "Teyit bekliyor" der.
+   */
+  percent?: number;
+  /** Link'e gömülü mü, yoksa checkout'ta kod mu girilmesi gerekiyor? */
+  applies: "auto-via-link" | "manual-code" | "unknown";
+  code?: string;
+  /**
+   * Liste ve indirimli fiyat. Yüzdeden HESAPLANMAZ, elle teyit edilip yazılır:
+   * firmalar indirimi hesap boyutuna göre farklı uyguluyor ve para birimleri
+   * karışık ($/€). Hesaplanmış bir fiyat, checkout'takinden sapabilir.
+   */
+  priceFrom?: string;
+  priceFromDiscounted?: string;
+  status: "live" | "pending";
+  note: string;
+}
+
+/** Bir firmanın tek bir challenge modelinin kuralları. */
+export interface PropRuleSet {
+  name: string;
+  model: "1-step" | "2-step" | "instant";
+  /** Yüzde olarak, sırayla her faz için. 1-step'te tek eleman. */
+  profitTargets: number[];
+  dailyDrawdown: number;
+  maxDrawdown: number;
+  drawdownType: "static" | "trailing" | "unknown";
+  minTradingDays: number | null;
+  feeFrom: string;
+}
+
+export interface PropFirm {
+  rank: number;
+  slug: string;
+  name: string;
+  logo?: string;
+  tagline: string;
+  founded: number;
+  headquarters: string;
+  /** Firmanın arkasında duran broker (varsa). Çöküş riskini ciddi ölçüde düşürür. */
+  backedBy?: string;
+  /**
+   * Destekleyen brokerın sitedeki slug'ı (brokers.ts). SADECE çapraz link için.
+   *
+   * ⚠️ Bu bir SKOR BAĞLANTISI DEĞİLDİR. Brokerın Index puanı bu prop firmanın
+   * puanına hiçbir şekilde karışmaz; iki rubrik ayrı çalışır. Alan yalnızca
+   * "bu firmanın arkasındaki brokerın incelemesi de sitede" diyebilmek için var.
+   */
+  backedByBrokerSlug?: string;
+  /**
+   * `backedBy` iddiasının yanında HER ZAMAN gösterilen açıklama.
+   *
+   * Aynı nesnede duruyor ki uyarı iddiadan ayrı düşemesin: "IC Markets destekli"
+   * ifadesi, dikkatsiz okunduğunda "IC Funded da regüle" gibi anlaşılıyor —
+   * anlaşılmamalı. Broker desteği karşı taraf riskini düşürür, prop firmayı
+   * regüle bir kuruluş haline getirmez.
+   */
+  backingNote?: string;
+
+  referralUrl?: string;
+  /** FXPARTNER'ın bu firmayla ticari ilişkisi var mı? Kartta açıkça etiketlenir. */
+  isPartner: boolean;
+  discount?: PropDiscount;
+
+  // --- Challenge yapısı ---
+  models: ("1-step" | "2-step" | "instant")[];
+  accountSizes: string[];
+  challengeFeeFrom: string;
+  /** $100k hesap için referans fiyat — maliyet karşılaştırmasının tek ortak paydası. */
+  fee100k?: string;
+  profitSplit: string;
+  maxAllocation: string;
+  payoutCycle: string;
+  platforms: string[];
+
+  rules: PropRuleSet[];
+
+  // --- ÜRÜN UYUMU ---
+  // Bkz. docs/prop-firm-strategy.md Bölüm 2.3. Prop firmaların çoğu copy
+  // trading'i ve/veya üçüncü parti sinyal servisi kullanımını yasaklar.
+  // Bu alanlar doğrulanmadan ilgili çapraz satış AÇILMAZ — aksi halde
+  // kullanıcının hesabı kural ihlalinden iptal edilir ve suçlanan biz oluruz.
+  // "restricted" = koşullu izin (ör. yalnızca kişinin KENDİ hesapları arasında).
+  // Ürün pazarlaması açısından "banned" ile aynı sonucu doğurur: FXPARTNER'ın
+  // merkezi CopyTrade hesabından kopyalamak bu koşulu sağlamaz.
+  copyTradingAllowed: "allowed" | "restricted" | "banned" | "unknown";
+  /** Sinyalleri MANUEL uygulamak. Copy trading'den farklıdır; ayrı doğrulanır. */
+  signalServiceAllowed: "allowed" | "banned" | "unknown";
+  eaAllowed: "allowed" | "restricted" | "banned" | "unknown";
+
+  payoutProof: PayoutProof;
+
+  // --- Puanlama eksenleri (0-5) ---
+  /** Kural seti ne kadar geçilebilir/adil (hedef, drawdown tipi, min. gün). */
+  scoreRules: number;
+  /** Challenge maliyeti ve iade politikası. */
+  scoreCost: number;
+  /** Ödeme geçmişi, hızı, kâr paylaşımı. */
+  scorePayout: number;
+  /** Kural netliği, kurumsal kimlik, geçmişin uzunluğu. */
+  scoreTransparency: number;
+
+  summary: string;
+  pros: string[];
+  cons: string[];
+  bestFor: string;
+  extraFaqs?: { q: string; a: string }[];
+}
+
+// Not: `rank` alanı elle değil, composite skora göre atanır. Yeni firma
+// eklerken skorları yaz, sonra sıralamayı ona göre düzelt.
+export const propFirms: PropFirm[] = [
+  {
+    rank: 1,
+    slug: "ftmo",
+    name: "FTMO",
+    tagline: "Sektörün en uzun ödeme geçmişine sahip referans firması",
+    founded: 2014,
+    headquarters: "Prag, Çekya",
+    isPartner: false,
+    models: ["2-step"],
+    accountSizes: ["$10.000", "$25.000", "$50.000", "$100.000", "$200.000"],
+    challengeFeeFrom: "$155",
+    fee100k: "~$540",
+    profitSplit: "%80 → Scaling Plan ile %90",
+    maxAllocation: "$200.000 (scaling ile daha yüksek)",
+    payoutCycle: "1-3 gün",
+    platforms: ["MT4", "MT5", "cTrader", "DXtrade"],
+    rules: [
+      {
+        name: "FTMO Challenge",
+        model: "2-step",
+        profitTargets: [10, 5],
+        dailyDrawdown: 5,
+        maxDrawdown: 10,
+        drawdownType: "static",
+        minTradingDays: 4,
+        feeFrom: "$155",
+      },
+    ],
+    copyTradingAllowed: "unknown",
+    signalServiceAllowed: "unknown",
+    eaAllowed: "restricted",
+    payoutProof: {
+      status: "monitored",
+      lastCheckedAt: "2026-08-19",
+      sources: [
+        "200.000+ funded trader, 2014'ten bu yana kesintisiz faaliyet",
+        "Bağımsız inceleme derlemelerinde %99,8 zamanında ödeme oranı (2025-2026 dönemi)",
+        "2025-2026 şikayet analizlerinde ödeme başarısızlığı kategorisi görülmüyor",
+      ],
+      note:
+        "Sektörün en güçlü ödeme sicili, ancak FXPARTNER olarak kendi " +
+        "kontrolümüzü yapmadık. 'verified' için son 30 günden kaynağı kayıtlı " +
+        "3 bağımsız kanıt + Türk kullanıcı için çalışan çekim yöntemi teyidi gerekiyor.",
+    },
+    scoreRules: 4,
+    scoreCost: 3,
+    scorePayout: 5,
+    scoreTransparency: 5,
+    summary:
+      "FTMO, 2014'ten bu yana faaliyet gösteren ve sektörün fiili referans noktası " +
+      "sayılan firmadır. Kural seti agresif değil, ödeme sicili sektörde eşi yok. " +
+      "Karşılığında en pahalı seçeneklerden biri ve kâr paylaşımı %80'de başlıyor.",
+    pros: [
+      "2014'ten beri kesintisiz faaliyet — sektörde en uzun geçmiş",
+      "200.000+ funded trader; ödeme sicili bağımsız derlemelerde %99,8",
+      "Statik drawdown — trailing'e göre çok daha yönetilebilir",
+      "Geniş platform desteği (MT4, MT5, cTrader, DXtrade)",
+    ],
+    cons: [
+      "$100k için ~$540 — listedeki en pahalı seçeneklerden",
+      "Kâr paylaşımı %80'de başlıyor; rakiplerde %85-95 var",
+      "%10 kâr hedefi, %8'lik rakiplere göre daha zor",
+    ],
+    bestFor:
+      "Fiyattan çok güvenliğe öncelik veren, firmanın kapanma riskini sıfıra yakın " +
+      "tutmak isteyen trader.",
+  },
+  {
+    rank: 2,
+    slug: "fundednext",
+    name: "FundedNext",
+    tagline: "Yüksek kâr paylaşımı ve hızlı ödeme",
+    founded: 2022,
+    headquarters: "Dubai, BAE",
+    // FXPARTNER'ın ikinci prop ortağı.
+    //
+    // SÜREÇ NOTU — bu dosyanın sıralama bütünlüğü iddiasının kanıtı:
+    // FundedNext bu tabloda 8.8 ile birinci sırada. Bu skor, ortaklık
+    // ilişkisi KURULMADAN ÖNCE, tamamen rubrik üzerinden verildi ve
+    // ortaklık haberinden sonra tek bir eksende bile değiştirilmedi.
+    // Yani ortağımız birinci olduğu için değil, birinci olduğu için
+    // ortağımız oldu. Bu sıra bozulursa (ör. rakip bir firma daha yüksek
+    // skor alırsa) liste ona göre değişir.
+    isPartner: true,
+    // FirstPromoter takip linki (fpr=). Saf takip — bir indirim taşımıyor,
+    // bu yüzden `discount` alanı bilinçli olarak boş bırakıldı. Var olmayan
+    // bir indirimi ima etmemek için "indirimli link" olarak sunulmayacak.
+    referralUrl: "https://fundednext.com/?fpr=FXPARTNER",
+    models: ["1-step", "2-step", "instant"],
+    accountSizes: ["$5.000", "$10.000", "$25.000", "$50.000", "$100.000", "$200.000"],
+    challengeFeeFrom: "$59",
+    fee100k: "~$499",
+    profitSplit: "%85 → CFD'de %95'e kadar",
+    maxAllocation: "$200.000+",
+    payoutCycle: "24 saat",
+    platforms: ["MT5", "cTrader", "Match-Trader"],
+    rules: [
+      {
+        name: "Evaluation (2-Step)",
+        model: "2-step",
+        profitTargets: [8, 5],
+        dailyDrawdown: 5,
+        maxDrawdown: 10,
+        drawdownType: "static",
+        minTradingDays: 5,
+        feeFrom: "$59",
+      },
+    ],
+    // Yalnızca kişinin KENDİ hesapları arasında (FundedNext hesapları arası
+    // veya başka bir prop firmadaki kendi hesabıyla) kopyalamaya izin var,
+    // hesapların aynı kişiye ait ve doğrulanmış olması şartıyla. FXPARTNER'ın
+    // merkezi CopyTrade hesabından kopyalamak bu şartı SAĞLAMAZ ve
+    // "üçüncü taraf istismarı" kuralını tetikler.
+    copyTradingAllowed: "restricted",
+    // ⚠️ AÇIKÇA YASAK: FundedNext, trader'ın herhangi bir sinyal servisine
+    // abone olmasını veya dış sinyallerle işlem yönlendirmesini yasaklıyor.
+    // "Challenge Modu" bu firma için AÇILAMAZ — bkz. docs/prop-firm-strategy.md
+    // Bölüm 2.3 ve 4.2'deki revizyon.
+    signalServiceAllowed: "banned",
+    // EA'lara izin var (MT4/MT5), ancak yalnızca gerçek piyasa mantığıyla
+    // çalışanlara; latency/quote-stuffing istismarı yasak.
+    eaAllowed: "restricted",
+    payoutProof: {
+      status: "monitored",
+      lastCheckedAt: "2026-08-19",
+      sources: [
+        "Firma beyanı: 93.000+ funded trader'a 261M+ dolar ödeme (2026 Ç1 sonu)",
+        "24 saatlik ödeme döngüsü, iki haftalık payout takvimi",
+        "Firma beyanı: ödeme 24 saatte yapılmazsa $1.000 ek tazminat",
+      ],
+      note:
+        "Ödeme hacmi büyük ve iletişimi şeffaf, ancak rakamlar büyük ölçüde firma " +
+        "beyanına dayanıyor. Bağımsız doğrulama yapılacak.",
+    },
+    scoreRules: 4.5,
+    scoreCost: 4,
+    scorePayout: 4.5,
+    scoreTransparency: 4.5,
+    summary:
+      "2022'de kurulmasına rağmen funded trader hacmiyle sektörün en büyükleri arasına " +
+      "girdi. Faz 1 kâr hedefi %8 ile FTMO'nun %10'undan düşük, kâr paylaşımı daha " +
+      "yüksek ve ödemeler 24 saatte işleniyor. Geçmişi FTMO kadar uzun değil.",
+    pros: [
+      "Faz 1 hedefi %8 — FTMO'nun %10'una göre belirgin şekilde kolay",
+      "Kâr paylaşımı %85'ten başlıyor, CFD'de %95'e çıkıyor",
+      "24 saatlik ödeme döngüsü, iki haftada bir payout",
+      "$59'dan başlayan giriş ücreti",
+    ],
+    cons: [
+      "Sinyal servisi kullanımı açıkça yasak — dış sinyallerle işlem yapılamaz",
+      "Copy trading yalnızca kişinin kendi hesapları arasında; üçüncü taraf kopyalama yasak",
+      "2022 kuruluşlu — FTMO'nun on yıllık sicili yok",
+      "Ödeme rakamlarının büyük kısmı bağımsız değil, firma beyanı",
+      "Model çeşitliliği (1-step/2-step/instant) yeni başlayan için kafa karıştırıcı",
+    ],
+    bestFor:
+      "Daha ulaşılabilir kâr hedefi ve yüksek kâr paylaşımı isteyen, firmanın görece " +
+      "yeni olmasını kabul eden trader.",
+  },
+  {
+    rank: 3,
+    slug: "fundingpips",
+    name: "FundingPips",
+    tagline: "En düşük maliyet ve en yüksek ölçekleme tavanı",
+    founded: 2022,
+    headquarters: "Dubai, BAE",
+    isPartner: false,
+    models: ["1-step", "2-step"],
+    accountSizes: ["$5.000", "$10.000", "$25.000", "$50.000", "$100.000"],
+    challengeFeeFrom: "$32",
+    fee100k: "~$444",
+    profitSplit: "%80 → Hot Seat ile %100",
+    maxAllocation: "$2.000.000 (Hot Seat)",
+    payoutCycle: "24 saat",
+    platforms: ["MT5", "cTrader", "Match-Trader", "TradeLocker"],
+    rules: [
+      {
+        name: "2-Step Standard",
+        model: "2-step",
+        profitTargets: [10, 5],
+        dailyDrawdown: 5,
+        maxDrawdown: 10,
+        drawdownType: "static",
+        minTradingDays: null,
+        feeFrom: "$32",
+      },
+      {
+        name: "2-Step Pro / Zero",
+        model: "2-step",
+        profitTargets: [6, 6],
+        dailyDrawdown: 3,
+        maxDrawdown: 6,
+        drawdownType: "static",
+        minTradingDays: null,
+        feeFrom: "$32",
+      },
+    ],
+    copyTradingAllowed: "unknown",
+    signalServiceAllowed: "unknown",
+    eaAllowed: "restricted",
+    payoutProof: {
+      status: "monitored",
+      lastCheckedAt: "2026-08-19",
+      sources: [
+        "24 saatlik ödeme süresi, bağımsız karşılaştırmalarda tutarlı şekilde raporlanıyor",
+        "Hot Seat ölçekleme programı 2M dolara kadar tahsis sunuyor",
+      ],
+      note: "Bağımsız ödeme kanıtı toplama süreci başlatılacak.",
+    },
+    scoreRules: 4,
+    scoreCost: 4.5,
+    scorePayout: 4.5,
+    scoreTransparency: 4,
+    summary:
+      "Listedeki en ucuz giriş noktası ve en yüksek ölçekleme tavanı. Ancak Pro/Zero " +
+      "planlarındaki %3 günlük ve %6 maksimum drawdown, sektör standardı olan %5/%10'a " +
+      "göre belirgin şekilde daha sıkı — ucuzluk, kural sıkılığıyla dengeleniyor.",
+    pros: [
+      "$100k için ~$444 — listedeki en düşük maliyet",
+      "Hot Seat ile 2M dolara kadar ölçekleme, tepede %100 kâr paylaşımı",
+      "24 saatlik ödeme",
+      "Minimum işlem günü şartı yok — challenge hızlı bitirilebilir",
+    ],
+    cons: [
+      "Pro/Zero planlarında %3 günlük / %6 maks. drawdown — sektör standardından sıkı",
+      "2022 kuruluşlu, sicili henüz kısa",
+      "Plan çeşitliliği kural karışıklığına yol açabiliyor",
+    ],
+    bestFor:
+      "Maliyeti minimize etmek isteyen ve sıkı drawdown kurallarıyla çalışabilecek " +
+      "disiplinli trader.",
+  },
+  {
+    rank: 4,
+    slug: "the5ers",
+    name: "The5ers",
+    tagline: "Minimum işlem günü olmayan, uzun soluklu firma",
+    founded: 2016,
+    headquarters: "Tel Aviv, İsrail",
+    isPartner: false,
+    models: ["1-step", "2-step", "instant"],
+    accountSizes: ["$5.000", "$10.000", "$20.000", "$60.000", "$100.000"],
+    challengeFeeFrom: "$19",
+    profitSplit: "%75 → ölçekleme ile %100'e kadar",
+    maxAllocation: "$4.000.000 (ölçekleme programı)",
+    payoutCycle: "İki haftada bir",
+    platforms: ["MT5"],
+    rules: [
+      {
+        name: "Hyper Growth",
+        model: "2-step",
+        profitTargets: [8, 5],
+        dailyDrawdown: 5,
+        maxDrawdown: 10,
+        drawdownType: "static",
+        minTradingDays: null,
+        feeFrom: "$19",
+      },
+      {
+        name: "Bootcamp",
+        model: "2-step",
+        profitTargets: [6, 6],
+        dailyDrawdown: 3,
+        maxDrawdown: 5,
+        drawdownType: "static",
+        minTradingDays: null,
+        feeFrom: "$205",
+      },
+    ],
+    copyTradingAllowed: "unknown",
+    signalServiceAllowed: "unknown",
+    eaAllowed: "restricted",
+    payoutProof: {
+      status: "monitored",
+      lastCheckedAt: "2026-08-19",
+      sources: [
+        "2016'dan bu yana faaliyet — sektörde FTMO'dan sonra en uzun geçmişlerden",
+        "İki haftalık düzenli payout takvimi; ilk ödeme funded hesaptan 14 gün sonra",
+      ],
+      note: "Bağımsız ödeme kanıtı toplama süreci başlatılacak.",
+    },
+    scoreRules: 4,
+    scoreCost: 3.5,
+    scorePayout: 4,
+    scoreTransparency: 3.5,
+    summary:
+      "2016'dan beri faaliyette; sektörde FTMO'dan sonraki en uzun geçmişe sahip " +
+      "firmalardan. Minimum işlem günü şartının olmaması güçlü bir avantaj. Ancak " +
+      "Bootcamp programının $205-350 aktivasyon ücreti iade edilmiyor ve kâr paylaşımı " +
+      "%50'den başlıyor — bu, listedeki en kafa karıştırıcı yapı.",
+    pros: [
+      "2016'dan beri faaliyet — uzun ve kesintisiz sicil",
+      "Minimum işlem günü şartı yok",
+      "$19'dan başlayan çok düşük giriş ücreti",
+      "Ölçekleme programı 4M dolara kadar çıkıyor",
+    ],
+    cons: [
+      "Bootcamp aktivasyon ücreti ($205-350) iade EDİLMİYOR",
+      "Bootcamp'te kâr paylaşımı %50'den başlıyor — listedeki en düşük",
+      "Program yapısı karmaşık; hangi planın hangi kurala tabi olduğu net değil",
+      "Sadece MT5 desteği",
+    ],
+    bestFor:
+      "Kendi hızında çalışmak isteyen, minimum işlem günü baskısı istemeyen ve program " +
+      "yapısını okumaya vakit ayıracak trader.",
+  },
+  {
+    rank: 5,
+    slug: "ic-funded",
+    name: "IC Funded",
+    tagline: "IC Markets destekli, broker altyapılı prop firma",
+    founded: 2023,
+    headquarters: "Doğrulanacak",
+    // Bu dikeydeki en kritik güven sinyali: IC Funded bağımsız bir startup
+    // değil, IC Markets'ın (sitede rank 6 broker — bkz. brokers.ts, slug
+    // "ic-markets") fiyatlama ve emir gerçekleştirme altyapısını kullanan
+    // broker destekli bir yapı. Sektörün 1 numaralı riski olan "firma bir
+    // gecede kapanır" senaryosunu belirgin şekilde düşürür.
+    backedBy: "IC Markets",
+    backedByBrokerSlug: "ic-markets",
+    backingNote:
+      "IC Markets'ın desteği, karşı taraf riskini bağımsız bir prop firmaya kıyasla " +
+      "düşürür — ancak IC Funded'ı regüle bir kuruluş yapmaz. Prop firmalar broker " +
+      "gibi lisanslanmaz; IC Markets'ın kendi lisansları IC Funded'daki fonlanmış " +
+      "hesabınızı kapsamaz.",
+    // FXPARTNER'ın ilk prop ortağı. Bu etiket kartta AÇIKÇA gösterilir —
+    // ama yukarıdaki dosya notunda açıklandığı gibi sıralamayı değiştirmez.
+    isPartner: true,
+    referralUrl: "https://bit.ly/funded-ic",
+    discount: {
+      label: "%30 indirim",
+      // Kayıtlı ama YAYIMLANMIYOR: status "pending" olduğu sürece tablo bu
+      // sayıyı göstermez, "Teyit bekliyor" der. Ortak teyit edince tek yapılacak
+      // şey status'ü "live" yapmak (ve fiyatları girmek).
+      percent: 30,
+      // Link checkout.icfunded.com/products?aff=urdtef adresine yönleniyor.
+      // Sayfa client-side render edildiği için indirimin linkle otomatik mi
+      // uygulandığı yoksa kod mu gerektiği dışarıdan doğrulanamadı.
+      // Ortakla teyit edilmeden sitede sayı olarak yayımlanmaz.
+      applies: "unknown",
+      status: "pending",
+      note:
+        "Oran ortaktan alındı; indirimin linkle otomatik uygulanıp uygulanmadığı " +
+        "checkout üzerinde teyit edilecek. Teyit sonrası status 'live' yapılır.",
+    },
+    models: ["1-step", "2-step"],
+    accountSizes: ["$10.000", "$25.000", "$50.000", "$100.000", "$200.000"],
+    challengeFeeFrom: "$74",
+    profitSplit: "%75 → 30 gün sonra %80",
+    maxAllocation: "$200.000",
+    payoutCycle: "48 saat (garanti)",
+    // cTrader teyitli (ctrader.com prop firm dizininde listeleniyor).
+    // Diğer platformlar ortakla teyit edilecek.
+    platforms: ["cTrader"],
+    rules: [
+      {
+        name: "2-Step Evaluation",
+        model: "2-step",
+        profitTargets: [10, 5],
+        dailyDrawdown: 5,
+        maxDrawdown: 10,
+        drawdownType: "unknown",
+        // ⚠️ Kaynaklar çelişiyor: bazıları faz başına 3 gün, bazıları toplam
+        // 5 gün diyor. Hesaplayıcıya girmeden önce ortaktan teyit alınacak.
+        minTradingDays: 3,
+        feeFrom: "$74",
+      },
+      {
+        name: "1-Step Accelerated",
+        model: "1-step",
+        profitTargets: [10],
+        dailyDrawdown: 3,
+        maxDrawdown: 6,
+        drawdownType: "unknown",
+        minTradingDays: 3,
+        feeFrom: "$154",
+      },
+    ],
+    // ⚠️ EN ÖNEMLİ SATIR: IC Funded copy trading'i AÇIKÇA YASAKLIYOR.
+    // Bu, FXPARTNER CopyTrade ürününün IC Funded kullanıcılarına
+    // pazarlanamayacağı anlamına gelir. İstisna yok.
+    copyTradingAllowed: "banned",
+    // Sinyalleri manuel uygulamak copy trading değildir, ama bazı firmalar
+    // ikisini aynı maddede toplar. Ortakla YAZILI teyit alınmadan
+    // "Challenge Modu" sinyal katmanı bu firma için açılmaz.
+    signalServiceAllowed: "unknown",
+    eaAllowed: "restricted",
+    payoutProof: {
+      // Broker desteği ve 48 saatlik ödeme garantisi güçlü sinyaller, ancak
+      // KENDİ doğruladığımız bir ödeme kanıtı henüz yok. Tanımımız gereği
+      // (son 30 gün, kaynağı kayıtlı, kontrol edilmiş) bu "verified" değil.
+      status: "monitored",
+      lastCheckedAt: "2026-08-19",
+      sources: [
+        "IC Funded topluluk kanallarında ekip tarafından paylaşılan payout kanıtları",
+        "IC Markets: 38.000+ Trustpilot değerlendirmesi, 4.8/5 (broker tarafı)",
+        "Firma beyanı: çekim 48 saat içinde işlenmezse $500 tazminat garantisi",
+      ],
+      note:
+        "'verified' için gereken: (1) son 30 gün içinden, kaynağı kayıtlı en az " +
+        "3 bağımsız ödeme kanıtı, (2) 48 saat garantisinin sözleşme metninde " +
+        "teyidi, (3) Türk kullanıcı için çalışan bir çekim yönteminin " +
+        "doğrulanması. Ortak ilişkisi mevcut olduğu için bu birkaç günlük iştir.",
+    },
+    // YENİDEN PUANLAMA (19.08.2026) — 7.5 → 8.0
+    //
+    // İlk puanlamada broker desteği yeterince ağırlıklandırılmamıştı. Ödeme
+    // ekseninin tanımı zaten "kapanma riskinin de ölçüldüğü yer" (bkz.
+    // /prop-firmalar puanlama açıklaması); IC Markets'ın arkasında olması bu
+    // riski bağımsız bir 2023 kuruluşuna kıyasla yapısal olarak düşürüyor.
+    // Bunu 3.5'te bırakmak, kendi rubriğimizi kendi tanımına aykırı
+    // uygulamaktı. Düzeltildi.
+    scoreRules: 3.5, // Değişmedi: %10 hedef ve 3 gün min. ortalama; yeni kanıt yok.
+    scoreCost: 4, // Değişmedi: $74 giriş iyi, ama iade 3. ödemede — bu bir eksi.
+    // 3.5 → 4: IC Markets karşı taraf yapısı + 48 saat / $500 ödeme garantisi.
+    // 4.5'e çıkmıyor çünkü kâr paylaşımı %75 ile listenin en düşüğü.
+    scorePayout: 4,
+    // 4 → 4.5: Tanımlanabilir, düzenlenmiş bir broker operasyonuna bağlı
+    // kurumsal yapı; ekip topluluk kanallarında düzenli ödeme kanıtı yayımlıyor.
+    scoreTransparency: 4.5,
+    summary:
+      "IC Funded, IC Markets'ın fiyatlama ve emir gerçekleştirme altyapısını kullanan " +
+      "broker destekli bir prop firmadır. Bu, sektörün en büyük riski olan ani kapanma " +
+      "ihtimalini bağımsız prop firmalara kıyasla belirgin şekilde düşürür. Kural seti " +
+      "sektör ortalamasına yakın; asıl zayıf noktası kâr paylaşımının %75'ten başlaması " +
+      "ve challenge ücretinin ancak üçüncü ödemede iade edilmesidir.",
+    pros: [
+      "IC Markets destekli — bağımsız prop firmalara göre çok daha düşük kapanma riski",
+      "Broker altyapısı sayesinde gerçek fiyatlama ve emir gerçekleştirme",
+      "Çekim 48 saat içinde işlenmezse $500 tazminat garantisi (sözleşmede teyit edilecek)",
+      "Giriş ücreti düşük: 2-Step $74'ten başlıyor",
+      "Ekip, topluluk kanallarında düzenli ödeme kanıtı paylaşıyor",
+    ],
+    cons: [
+      "Kâr paylaşımı %75'ten başlıyor — sektörde %80-95 yaygın",
+      "Challenge ücreti ancak ÜÇÜNCÜ ödemede iade ediliyor; rakiplerin çoğu ilk ödemede iade ediyor",
+      "Copy trading kesinlikle yasak — FXPARTNER CopyTrade bu hesaplarda kullanılamaz",
+      "EA kullanımı 'hyperactivity' kısıtına tabi; sınır net tanımlanmamış",
+      "2023 kuruluşlu; uzun vadeli ödeme geçmişi henüz oluşmadı",
+    ],
+    bestFor:
+      "Bağımsız bir prop firmanın kapanma riskini almak istemeyen, broker altyapısına " +
+      "güvenen ve düşük ücretle başlamak isteyen trader.",
+  },
+  {
+    rank: 6,
+    slug: "alpha-capital-group",
+    name: "Alpha Capital Group",
+    tagline: "İngiltere merkezli, geniş platform desteği",
+    founded: 2021,
+    headquarters: "Londra, İngiltere",
+    isPartner: false,
+    models: ["1-step", "2-step"],
+    accountSizes: ["$10.000", "$25.000", "$50.000", "$100.000", "$200.000", "$400.000"],
+    challengeFeeFrom: "$69",
+    profitSplit: "%80",
+    maxAllocation: "$400.000",
+    payoutCycle: "İki haftada bir",
+    platforms: ["MT5", "cTrader", "DXtrade", "TradeLocker"],
+    rules: [
+      {
+        name: "Alpha Pro",
+        model: "2-step",
+        profitTargets: [8, 5],
+        dailyDrawdown: 5,
+        maxDrawdown: 10,
+        // Plana göre statik veya trailing değişiyor — bu, hesaplayıcıya
+        // girmeden önce plan bazında ayrıştırılması gereken bir alan.
+        drawdownType: "unknown",
+        minTradingDays: null,
+        feeFrom: "$69",
+      },
+    ],
+    copyTradingAllowed: "unknown",
+    signalServiceAllowed: "unknown",
+    eaAllowed: "restricted",
+    payoutProof: {
+      status: "monitored",
+      lastCheckedAt: "2026-08-19",
+      sources: [
+        "2021'den bu yana faaliyet; İngiltere merkezli kurumsal yapı",
+        "Bağımsız inceleme sitelerinde ödeme kanıtı raporlanıyor",
+      ],
+      note: "Bağımsız ödeme kanıtı toplama süreci başlatılacak.",
+    },
+    scoreRules: 3.5,
+    scoreCost: 3.5,
+    scorePayout: 4,
+    scoreTransparency: 4,
+    summary:
+      "İngiltere merkezli, 2021'den beri faaliyette. En geniş platform desteğine sahip " +
+      "firmalardan ve $400.000'a kadar tahsis sunuyor. Zayıf noktası, plana göre " +
+      "değişen drawdown tipi (statik veya trailing) ve '%40 en iyi gün' kuralı gibi " +
+      "ek kısıtların kural setini karmaşıklaştırması.",
+    pros: [
+      "En geniş platform desteği: MT5, cTrader, DXtrade, TradeLocker",
+      "$400.000'a kadar tahsis",
+      "İngiltere merkezli kurumsal yapı",
+      "Minimum işlem günü şartı yok",
+    ],
+    cons: [
+      "Drawdown tipi plana göre statik veya trailing — trailing çok daha zor",
+      "'%40 en iyi gün' kuralı gibi ek kısıtlar kural setini karmaşıklaştırıyor",
+      "Kâr paylaşımı %80'de sabit; ölçekleme ile artış rakipler kadar agresif değil",
+    ],
+    bestFor:
+      "Belirli bir platformda (DXtrade, TradeLocker) çalışmak zorunda olan ve kural " +
+      "detaylarını okumaya vakit ayıracak trader.",
+  },
+];
+
+/**
+ * Composite skor — brokers.ts'teki getBrokerScores ile aynı mantık:
+ * dört eksenin ortalaması, 10 üzerinden.
+ */
+export function getPropFirmScores(firm: PropFirm) {
+  const composite =
+    Math.round(
+      ((firm.scoreRules + firm.scoreCost + firm.scorePayout + firm.scoreTransparency) /
+        4) *
+        2 *
+        10
+    ) / 10;
+  return {
+    rules: firm.scoreRules,
+    cost: firm.scoreCost,
+    payout: firm.scorePayout,
+    transparency: firm.scoreTransparency,
+    composite,
+  };
+}
+
+/** Slug ile firma getir. */
+export function getPropFirm(slug: string) {
+  return propFirms.find((f) => f.slug === slug);
+}
+
+/**
+ * Sayfa üstünde öne çıkarılan ortak.
+ *
+ * ⚠️ BU BİR SIRALAMA DEĞİLDİR. Ticari ilişkiye dayalı, kartın üzerinde
+ * açıkça "Ortaklık yerleşimi" diye etiketlenen bir yerleşimdir. Sıralama
+ * tabloda, rubriğe göre durmaya devam eder.
+ *
+ * Bu ayrım, bir ortağa görünürlük vermenin puanlamayı bozmayan tek dürüst
+ * yoludur: okuyucu neyin editoryal değerlendirme, neyin ticari yerleşim
+ * olduğunu tek bakışta ayırt edebilir. Rakiplerin (bkz.
+ * docs/competitor-best2traders-analysis.md Bölüm 3.1) yaptığı hata,
+ * ikisini birbirine karıştırmak.
+ */
+/**
+ * Bu brokerın desteklediği prop firma (varsa) — broker inceleme sayfasından
+ * çapraz link vermek için.
+ *
+ * Bağımlılık yönü kasıtlı: `brokers.ts` bu dosyaya HİÇ referans vermez, broker
+ * sayfası sunum katmanında buradan okur. Böylece broker verisi prop dikeyinden
+ * tamamen bağımsız kalır.
+ */
+export function getPropFirmByBackingBroker(brokerSlug: string) {
+  return propFirms.find((f) => f.backedByBrokerSlug === brokerSlug);
+}
+
+export const FEATURED_PARTNER_SLUG = "ic-funded";
+
+export function getFeaturedPartner() {
+  const firm = getPropFirm(FEATURED_PARTNER_SLUG);
+  // Öne çıkarma yalnızca gerçekten ortak olan bir firma için geçerli.
+  return firm?.isPartner ? firm : undefined;
+}
+
+/** Composite skora göre sıralı liste. */
+export function propFirmsByScore() {
+  return [...propFirms].sort(
+    (a, b) => getPropFirmScores(b).composite - getPropFirmScores(a).composite
+  );
+}
+
+/**
+ * Bir firmanın `/prop-firmalar` hub'ı DIŞINDA promote edilip edilemeyeceği.
+ *
+ * Hub sayfası her firmayı (statüsüyle birlikte) listeler — bilgi vermek
+ * amacındır. Ama inceleme sayfasındaki CTA, kampanya sayfası, Telegram
+ * postu, Instagram — bunların hepsi bir tavsiyedir ve yalnızca ödeme
+ * kanıtı doğrulanmış firmalar için açılır.
+ */
+export function isPromotable(firm: PropFirm) {
+  return firm.payoutProof.status === "verified";
+}
+
+/**
+ * FXPARTNER CopyTrade'in bu firmada kullanılıp kullanılamayacağı.
+ * "unknown" da "hayır" demektir — doğrulanmamış izin, izin değildir.
+ */
+export function canUseCopyTrade(firm: PropFirm) {
+  return firm.copyTradingAllowed === "allowed";
+}
+
+/**
+ * "Challenge Modu" sinyal katmanının bu firma için açılıp açılamayacağı.
+ * Aynı mantık: yazılı teyit yoksa kapalıdır.
+ */
+export function canUseSignals(firm: PropFirm) {
+  return firm.signalServiceAllowed === "allowed";
+}
