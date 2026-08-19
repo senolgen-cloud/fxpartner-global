@@ -156,8 +156,9 @@ export default async function Home() {
 
             <Reveal delay={90}>
               <h1 className="mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
-                Forex sinyalleri, piyasa analizi ve broker karşılaştırması.{" "}
-                <span className="text-signal">Tek bir trading ekosistemi.</span>
+                Trading.
+                <br />
+                <span className="text-signal">Ama daha akıllı...</span>
               </h1>
             </Reveal>
 
@@ -167,29 +168,6 @@ export default async function Home() {
                 platformdur. Sinyaller, yapay zeka içgörüleri, ekonomik
                 takvim, güvenilir brokerlar ve küresel bir topluluk.
               </p>
-            </Reveal>
-
-            <Reveal delay={220}>
-              <div className="mt-7">
-                <HeroBrokerSearch />
-              </div>
-            </Reveal>
-
-            <Reveal delay={270}>
-              <div className="mt-6 flex flex-wrap items-center gap-4">
-                <a
-                  href="#brokers"
-                  className="lift-on-hover rounded-full bg-gradient-to-b from-signal to-signal-strong px-6 py-3 text-sm font-medium text-on-signal shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25)] transition-shadow hover:shadow-lg hover:shadow-signal/30"
-                >
-                  Ekosistemi Keşfet
-                </a>
-                <a
-                  href="#comparison"
-                  className="lift-on-hover rounded-full border border-hairline px-6 py-3 text-sm font-medium text-text-on-ink transition-colors hover:border-text-on-ink"
-                >
-                  Karşılaştırma Tablosu
-                </a>
-              </div>
             </Reveal>
 
             <Reveal delay={290}>
@@ -228,6 +206,9 @@ export default async function Home() {
                 ve farklı yatırımcı profillerine uygunluk açısından
                 değerlendirildi.
               </p>
+              <div className="mt-6">
+                <HeroBrokerSearch />
+              </div>
             </Reveal>
 
             <div className="mt-12">

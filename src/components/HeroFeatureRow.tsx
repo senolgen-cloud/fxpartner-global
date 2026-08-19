@@ -68,6 +68,18 @@ const features: { key: string; icon: ReactNode; title: string; body: string }[] 
     title: "Trading Topluluğu",
     body: "Bağlan. Paylaş. Birlikte büyü.",
   },
+  {
+    key: "copytrade",
+    icon: (
+      <svg {...iconProps} className="h-5 w-5">
+        <path d="M4 17V7M4 7l-2.5 2.5M4 7l2.5 2.5" />
+        <path d="M20 7v10M20 17l2.5-2.5M20 17l-2.5-2.5" />
+        <path d="M9 12h6" />
+      </svg>
+    ),
+    title: "CopyTrade",
+    body: "Başarılı traderları otomatik kopyala.",
+  },
 ];
 
 export default function HeroFeatureRow() {
