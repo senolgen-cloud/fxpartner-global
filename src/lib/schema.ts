@@ -21,7 +21,11 @@ export function organizationSchema() {
     // handle. Add more here as the user confirms them (X, Instagram,
     // YouTube, Facebook); an unverified sameAs is worse than none, since
     // it would misattribute FXPARTNER's identity to the wrong account.
-    sameAs: ["https://t.me/fxpartnerglobal", "https://x.com/fxpartner_TR"],
+    sameAs: [
+      "https://t.me/fxpartnerglobal",
+      "https://x.com/fxpartner_TR",
+      "https://www.instagram.com/fxpartner_global/",
+    ],
   };
 }
 
