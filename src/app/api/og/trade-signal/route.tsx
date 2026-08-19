@@ -30,10 +30,22 @@ export async function GET(request: Request) {
   const target1 = searchParams.get("target1");
   const stop = searchParams.get("stop");
   const direction = (searchParams.get("direction") ?? "").toUpperCase(); // BUY | SELL
-  // Public Telegram/X announcements only name the instrument now — no
-  // direction or price levels, which require an active package on-site
-  // (see /api/trade-signal). This route renders that teaser card when
-  // entry/stop are omitted, instead of requiring them.
+  const confidence = searchParams.get("confidence");
+  // Rolling track record, passed in by the caller rather than queried here —
+  // this route is edge/`ImageResponse` and gets re-fetched by Telegram and X
+  // on every post, so it stays a pure renderer with no DB round-trip.
+  // Source of the numbers: lib/signalStats.ts (count-based only).
+  const statTrades = searchParams.get("statTrades");
+  const statWinRate = searchParams.get("statWinRate");
+  const statDays = searchParams.get("statDays") ?? "30";
+  const hasStats = Boolean(statTrades && statWinRate);
+
+  // Public Telegram/X announcements carry the instrument, direction and
+  // confidence; the price levels (entry/TP/SL) are the paid product and
+  // require an active package on-site (see /api/trade-signal). This route
+  // renders that teaser card when entry/stop are omitted — direction and
+  // confidence still show, so the card says something real instead of
+  // being a blank lock screen.
   const locked = !entry || !stop;
 
   if (!pair) {
@@ -43,7 +55,9 @@ export async function GET(request: Request) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
   const [base, quote] = splitPair(pair);
   const directionColor = direction === "SELL" ? TICK_DOWN : TICK_UP;
-  const directionLabel = locked ? "" : direction === "SELL" ? "SELL" : direction === "BUY" ? "BUY" : "";
+  // Shown on locked cards too — direction alone isn't tradeable, and it's
+  // what makes the later result card verifiable after the fact.
+  const directionLabel = direction === "SELL" ? "SELL" : direction === "BUY" ? "BUY" : "";
 
   // A price of 0 means the EA hadn't detected a real SL/TP yet when it read
   // the position (it only retries for ~3s after open) — never display that
@@ -135,6 +149,9 @@ export async function GET(request: Request) {
           }}
         >
           {locked ? (
+            // Locked cards lead with what we *can* show — the confidence the
+            // EA assigned this setup, and the rolling track record — instead
+            // of a bare padlock that gives a scroller no reason to stop.
             <div
               style={{
                 display: "flex",
@@ -146,13 +163,37 @@ export async function GET(request: Request) {
                 textAlign: "center",
               }}
             >
-              <span style={{ fontSize: 48 }}>🔒</span>
-              <span style={{ fontSize: 20, fontWeight: 700, color: TEXT_ON_INK, marginTop: 12 }}>
-                Yön ve TP/SL
-              </span>
-              <span style={{ fontSize: 16, color: TEXT_ON_INK_MUTED, marginTop: 4 }}>
-                Pro/VIP üyelere özel
-              </span>
+              {confidence ? (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                  {/* Written pre-uppercased rather than via textTransform:
+                      CSS uppercasing runs under a non-Turkish locale here and
+                      turns "Sinyal Güveni" into "SINYAL GÜVENI", dropping the
+                      dotted İ. */}
+                  <span style={{ fontSize: 13, letterSpacing: 1.5, color: TEXT_ON_INK_MUTED }}>
+                    SİNYAL GÜVENİ
+                  </span>
+                  <span style={{ fontSize: 68, fontWeight: 800, color: SIGNAL, letterSpacing: -2, marginTop: 2 }}>
+                    %{confidence}
+                  </span>
+                </div>
+              ) : (
+                <span style={{ fontSize: 48 }}>🔒</span>
+              )}
+
+              {hasStats ? (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: 14 }}>
+                  <span style={{ fontSize: 26, fontWeight: 800, color: TICK_UP }}>
+                    %{statWinRate} isabet
+                  </span>
+                  <span style={{ fontSize: 15, color: TEXT_ON_INK_MUTED, marginTop: 2 }}>
+                    son {statDays} günde {statTrades} işlem
+                  </span>
+                </div>
+              ) : (
+                <span style={{ fontSize: 16, color: TEXT_ON_INK_MUTED, marginTop: 10 }}>
+                  Seviyeler üyelere özel
+                </span>
+              )}
             </div>
           ) : (
             <Sparkline

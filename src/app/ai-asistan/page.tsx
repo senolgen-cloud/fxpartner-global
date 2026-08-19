@@ -47,7 +47,7 @@ const aiAssistantFaqs = [
   },
   {
     q: "FXPARTNER AI Asistanı ücretsiz mi?",
-    a: "Hayır. FXPARTNER AI Asistanı, Pro ve VIP paketlerinin bir parçasıdır — erişmek için bu paketlerden birine üye olmanız gerekir. Starter paketinde AI Asistan yer almaz.",
+    a: "Hayır. FXPARTNER AI Asistanı, Pro ve VIP paketlerinin bir parçasıdır — erişmek için bu paketlerden birine üye olmanız gerekir. Ücretsiz üyelikte AI Asistan yer almaz.",
   },
   {
     q: "FXPARTNER AI Asistanı hangi konularda yardımcı olur?",

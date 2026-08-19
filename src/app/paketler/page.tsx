@@ -6,7 +6,7 @@ import { createNowPaymentsCheckout } from "./checkout-actions";
 import { lookupBrokers } from "@/data/brokerLookup";
 import { breadcrumbSchema } from "@/lib/schema";
 import type { PackageTier } from "@/lib/vip";
-import { PACKAGE_TIER_INFO, PACKAGE_TIER_ORDER } from "@/data/packageTiers";
+import { PACKAGE_TIER_INFO, PACKAGE_TIER_ORDER, FREE_TIER_INFO } from "@/data/packageTiers";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 const trackedBrokerCount = lookupBrokers.length;
@@ -14,7 +14,7 @@ const trackedBrokerCount = lookupBrokers.length;
 export const metadata: Metadata = {
   title: "Paketler",
   description:
-    "FXPARTNER Starter, Pro ve VIP paketleri — gerçek MT5 hesabından anlık al/sat sinyalleri, uzman analizler ve profesyonel risk yönetimi.",
+    "FXPARTNER paketleri — forex sinyalleri ücretsiz üyelikle, GOLD ve endeksler Pro'da, kripto ve enerji VIP'te. Gerçek MT5 hesabından anlık al/sat sinyalleri.",
   alternates: { canonical: "/paketler" },
 };
 
@@ -27,12 +27,10 @@ const topFeatures = [
 ] as const;
 
 const TIER_ACCENT: Record<PackageTier, string> = {
-  starter: "text-tick-up",
   pro: "text-signal",
   vip: "text-gold",
 };
 const TIER_CTA_LABEL: Record<PackageTier, string> = {
-  starter: "Starter'a Katıl",
   pro: "Pro'ya Katıl",
   vip: "VIP'e Katıl",
 };
@@ -160,6 +158,37 @@ export default function PaketlerPage() {
         {/* Pricing cards */}
         <section id="paketler" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
           <div className="grid gap-6 lg:grid-cols-3 lg:items-start">
+            {/* Free tier — an account, not a purchase, so it gets a register
+                link instead of a checkout form. Rendered inline rather than
+                folded into `tiers` because it has no price and no tier id to
+                hand to createNowPaymentsCheckout. */}
+            <div className="relative flex flex-col rounded-2xl border border-hairline bg-ink-soft/60 p-8">
+              <h2 className="font-display text-2xl font-bold text-tick-up">{FREE_TIER_INFO.name}</h2>
+              <p className="mt-2 text-sm text-text-on-ink-muted">{FREE_TIER_INFO.blurb}</p>
+              <p className="mt-6 flex items-baseline gap-1">
+                <span className="font-display text-4xl font-bold text-text-on-ink">$0</span>
+                <span className="text-sm text-text-on-ink-muted">/ süresiz</span>
+              </p>
+
+              <ul className="mt-6 flex-1 space-y-2.5">
+                {FREE_TIER_INFO.features.map((f) => (
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-text-on-ink-muted">
+                    <span className="text-tick-up">
+                      <CheckIcon />
+                    </span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                href="/account/register"
+                className="mt-8 w-full rounded-full border border-hairline px-6 py-3 text-center text-sm font-semibold text-text-on-ink transition-colors hover:border-tick-up hover:text-tick-up"
+              >
+                Ücretsiz Hesap Aç →
+              </Link>
+            </div>
+
             {tiers.map((t) => (
               <div
                 key={t.tier}
@@ -192,10 +221,9 @@ export default function PaketlerPage() {
                   ))}
                 </ul>
 
-                {/* Stripe checkout is temporarily off — not configured (no
-                    Turkish business entity to register with Stripe yet).
-                    NOWPayments is the only live checkout path for now; swap
-                    this back to offering both once Stripe is set up. */}
+                {/* NOWPayments (crypto) is the only checkout rail — Stripe
+                    doesn't operate in Turkey, so there is no card path to
+                    offer alongside it. */}
                 <form action={createNowPaymentsCheckout.bind(null, t.tier)} className="mt-8">
                   <button
                     type="submit"

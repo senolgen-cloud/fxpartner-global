@@ -1101,6 +1101,412 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "litefinance-cent-hesap-rehberi",
+    lang: "tr",
+    title: "10 Dolarla Gerçek İşlem: LiteFinance Cent Hesap Rehberi",
+    excerpt:
+      "Cent hesap, demo ile gerçek hesap arasındaki boşluğu dolduran ara basamaktır: gerçek para, gerçek fiyat, gerçek psikoloji — ama 100 kat küçük risk ölçeğinde. Nasıl çalıştığını, kime uygun olduğunu ve ne zaman terk edilmesi gerektiğini anlatıyoruz.",
+    publishedAt: "2026-08-19",
+    readingMinutes: 8,
+    sections: [
+      {
+        paragraphs: [
+          "Demo hesapta üç ay boyunca istikrarlı kâr eden yatırımcıların büyük kısmı, gerçek hesaba geçtiği ilk ay para kaybeder. Sebep strateji değil, psikolojidir: demo hesapta zarar eden pozisyonu taşımak bedavadır, gerçek hesapta değildir. Bu farkı hiçbir demo hesap öğretemez, çünkü öğretebilmesi için gerçek para gerekir.",
+          "Cent hesap tam olarak bu boşluğu doldurmak için var. Gerçek bir hesaptır — gerçek fiyatlarla, gerçek emir gerçekleştirmeyle ve gerçek parayla çalışır — ama hesap birimi dolar yerine cent olduğu için risk ölçeği yüz kat küçüktür. 10 dolar yatırırsınız, terminalde bakiyeniz 1.000 görünür ve 0,01 lotluk bir pozisyonda pip başına kaybınız 10 sent yerine 10 cent olur.",
+          "Bu yazı LiteFinance'in cent hesabını örnek alıyor çünkü Türkiye'den erişilebilen brokerlar arasında cent hesabı ile 0.0 pipten ECN hesabını aynı çatı altında sunanlardan biri. Ama anlatılan mantık her cent hesap için geçerlidir. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+        ],
+      },
+      {
+        heading: "Cent hesap teknik olarak nedir?",
+        paragraphs: [
+          "Standart bir forex hesabında 1 lot, 100.000 birimlik bir sözleşmedir. Cent hesapta 1 lot, 1.000 birimliktir — yani standart hesabın mikro lotunun onda biri ölçeğinde bir sözleşme. Bakiyeniz de aynı mantıkla gösterilir: yatırdığınız 10 dolar, terminalde 1.000 cent olarak görünür.",
+          "Buradaki tek değişiklik ölçektir. Spread aynı piyasadan gelir, kayma (slippage) aynı şekilde yaşanır, gecelik swap aynı şekilde işler ve marjin çağrısı aynı kurallarla tetiklenir. Öğrenmek istediğiniz her mekanik burada gerçek haliyle çalışır — sadece hata yapmanın faturası küçüktür.",
+          "LiteFinance'in cent hesabında minimum yatırım 10 dolar, spread 3 pipten başlıyor, komisyon alınmıyor ve stop out seviyesi %50. Kaldıraç 1:1000'e kadar seçilebiliyor. Bu rakamlar hesap açmadan önce brokerin resmi sitesinden teyit edilmelidir; broker koşulları zaman içinde değişir.",
+        ],
+      },
+      {
+        heading: "Demo hesap neden yetmiyor",
+        paragraphs: [
+          "Demo hesabın öğrettiği şeyler gerçektir: platformu kullanmak, emir tiplerini tanımak, grafik okumak, bir stratejiyi mekanik olarak uygulamak. Öğretemediği tek şey, kendi paranız risk altındayken nasıl karar verdiğinizdir — ve piyasada kaybedilen paranın büyük kısmı stratejiden değil, tam olarak bu karar anlarından çıkar.",
+        ],
+        list: [
+          "Demo hesapta 200 dolarlık kayan zararı taşımak duygusal olarak bedavadır; aynı zarar gerçek parada uykunuzu kaçırır ve pozisyonu erken kapatmanıza yol açar.",
+          "Demo hesapta kâr hedefine ulaşan pozisyonu bırakmak kolaydır; gerçek parada kârı erken realize etme dürtüsü çok daha güçlüdür.",
+          "Demo hesapta zarar durdur seviyesini geri çekmenin sonucu yoktur; gerçek hesapta bu, tek işlemle hesabı bitiren en yaygın davranıştır.",
+          "Demo hesapta gerçekleşen emirlerin çoğu ideal fiyattan olur; gerçek hesapta haber anlarında kayma ve genişleyen spreadle tanışırsınız.",
+        ],
+      },
+      {
+        heading: "İlk hafta planı: cent hesapta ne yapmalı",
+        paragraphs: [
+          "Cent hesabın amacı para kazanmak değil, gerçek koşullarda veri toplamaktır. Kazanç hedefiyle başlarsanız hesabın bütün faydasını kaybedersiniz — 10 dolarlık bir hesapta anlamlı bir kazanç ancak akıl dışı bir kaldıraçla mümkündür ve bu da öğrenmek istediğiniz her şeyi bozar.",
+        ],
+        list: [
+          "Gün 1-2: Hesabı açın, doğrulamayı (KYC) tamamlayın, 10-20 dolar yatırın ve tek bir paritede (tercihen EUR/USD) en küçük lotla 3-5 işlem yapın. Amaç: emir gerçekleştirme ve platform akışını gerçek parayla görmek.",
+          "Gün 3-5: Her işlemde zarar durdur ve kâr al seviyelerini önceden yazın ve işlem açıldıktan sonra hiçbirini değiştirmeyin. Amaç: planı bozma dürtüsünü ölçmek.",
+          "Gün 6-7: Bir işlem günlüğü tutun — giriş sebebi, çıkış sebebi, işlem sırasında ne hissettiğiniz. Bu üç sütun, cent hesabın asıl çıktısıdır.",
+          "Tüm hafta boyunca: Pozisyon büyüklüğünü tahminle değil hesapla belirleyin. FXPARTNER'ın pozisyon büyüklüğü hesaplayıcısı, hesap bakiyesi ve zarar durdur mesafesinden kaç lot açmanız gerektiğini verir.",
+          "Yapmayın: Kaldıracı 1:1000'e çekip hesabı iki katına çıkarmayı denemek. Cent hesapta bunu yaparsanız öğrendiğiniz tek şey hesabın ne kadar hızlı sıfırlandığı olur.",
+        ],
+      },
+      {
+        heading: "Cent hesaptan ne zaman çıkılır?",
+        paragraphs: [
+          "Cent hesap bir basamaktır, varış noktası değil. Çıkış için doğru sinyal kâr değil, tutarlılıktır: en az 30-40 işlemlik bir seride, planınıza sadık kaldığınızı ve sonuçların rastlantısal olmadığını kendi günlüğünüzden görebiliyorsanız bir sonraki basamağa geçebilirsiniz.",
+          "LiteFinance'te bir sonraki basamak Classic hesap (50 dolar minimum, 1.8 pipten spread, komisyonsuz) veya doğrudan ECN hesabıdır (50 dolar minimum, 0.0 pipten spread, lot başına 0,25 dolardan komisyon). Aynı broker içinde kaldığınız için platform, kabin ve para çekme akışı değişmez — yalnızca ölçek ve maliyet yapısı değişir. Hangi hacimde ECN'in Classic'ten ucuz hale geldiğini ayrı bir yazıda hesapladık.",
+          "Erken geçmenin bedeli, cent hesabın önlemek için var olduğu hatanın tam olarak gerçek ölçekte yaşanmasıdır. Geç geçmenin bedeli ise yalnızca zamandır. İkisi arasında seçim yapmanız gerekiyorsa, geç kalın.",
+        ],
+      },
+      {
+        heading: "Cent hesabın sınırları",
+        paragraphs: [],
+        list: [
+          "Cent hesap spreadi daha geniştir (LiteFinance'te 3 pipten başlar). Bu bir dezavantaj değil, ödediğiniz eğitim ücretidir — ama scalping gibi maliyete duyarlı stratejileri cent hesapta test etmenin sonuçları yanıltıcı olur.",
+          "Küçük bakiye, risk yönetimi alanını daraltır. 10 dolarlık bir hesapta işlem başına %1 risk 10 senttir; bu, bazı enstrümanlarda en küçük lot büyüklüğünün bile altında kalabilir.",
+          "Cent hesabın psikolojisi tam ölçekli değildir. 10 dolar kaybetmek 1.000 dolar kaybetmekle aynı hissettirmez — cent hesap duygusal baskının tamamını değil, başlangıcını öğretir.",
+          "Kaldıraç burada da gerçek bir risktir. 1:1000 kaldıraçla açılan bir cent pozisyonu, hesabın tamamını dakikalar içinde götürebilir.",
+        ],
+      },
+      {
+        heading: "Hesap açmadan önce kontrol listesi",
+        paragraphs: [],
+        list: [
+          "Hesabın hangi tüzel kişilikle açıldığını kontrol edin. LiteFinance'te Türkiye'den açılan hesaplar CySEC lisanslı Avrupa şirketine değil, offshore şirkete bağlanır — bu, düzenleyici güvencenin daha ince olduğu anlamına gelir.",
+          "Para yatırmadan önce çekim yöntemini seçin. Çekim yalnızca yatırdığınız yönteme ve aynı para birimine yapılabilir; yanlış yöntemle yatırmak sonradan düzeltilmesi zahmetli bir hatadır.",
+          "Doğrulamayı (KYC) ilk gün tamamlayın. Anlık para çekme özelliği yalnızca doğrulanmış hesaplarda çalışır.",
+          "Bonus tekliflerini ilk hesapta kabul etmeyin. Bonus ek marjindir, çekilebilir bakiye değildir ve hacim şartı sizi gereksiz işlem açmaya iter — cent hesabın amacına doğrudan zıttır.",
+          "Kaybetmeyi göze alabileceğiniz tutarla başlayın. Bu, cent hesap dahil her hesap türü için geçerlidir.",
+        ],
+      },
+      {
+        heading: "Özet",
+        paragraphs: [
+          "Cent hesap, gerçek para ile öğrenmenin en ucuz yoludur. Demo hesabın öğretemediği tek şeyi — kendi kararlarınızı baskı altında nasıl verdiğinizi — 10 dolarlık bir faturayla öğretir. Doğru kullanıldığında bir sonraki basamağa geçtiğinizde ödeyeceğiniz öğrenme maliyetini büyük ölçüde düşürür; kazanç hesabı gibi kullanıldığında ise yalnızca hesabın hızla sıfırlanmasını sağlar.",
+          "LiteFinance'in hesap türleri, para çekme koşulları ve düzenleyici durumuyla ilgili tam dökümü broker inceleme sayfamızda bulabilirsiniz. Bu içerik yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "litefinance-anlik-para-cekme",
+    coverImage: "/blog/litefinance-anlik-para-cekme-cover.png",
+    lang: "tr",
+    title: "LiteFinance'te Anlık Para Çekme: Üç Şart ve Gerçek Süreler",
+    excerpt:
+      "LiteFinance'te çekim talepleri anlık işlenebiliyor — ama otomatik olarak değil. Anlık çekimin üç şartını, hangi yöntemin ne kadar sürdüğünü ve en sık yapılan beş hatayı anlatıyoruz.",
+    publishedAt: "2026-08-19",
+    readingMinutes: 7,
+    sections: [
+      {
+        paragraphs: [
+          "Forex'te bir brokerın size verdiği en dürüst sinyal para çekmedir. Para yatırma her brokerda hızlıdır — parayı almak isterler. Asıl sınav, o parayı geri istediğinizde ne olduğudur.",
+          "LiteFinance bu testte iyi bir profile sahip: doğrulanmış bir hesapta otomatik çekim akışı açıkken talepler anlık işlenir — desteklenen yöntemlerde günde 5.000 dolara kadar, gün içinde birden fazla kez, manuel onay beklemeden. Ama \"anlık\" kelimesi burada koşulsuz değil. Üç şart sağlanmazsa talebiniz normal kuyruğa düşer ve 24 saate kadar bekler.",
+          "Bu yazı o üç şartı, hangi yöntemin gerçekte ne kadar sürdüğünü ve ilk çekimde en sık yapılan hataları anlatıyor. Koşullar değişebileceği için rakamları hesap açmadan önce brokerin resmi sitesinden teyit edin.",
+        ],
+      },
+      {
+        heading: "Anlık çekimin üç şartı",
+        paragraphs: [
+          "Anlık çekim bir ayrıcalık değil, bir yapılandırmadır. Üçünü de sağladığınızda çalışır, birini eksik bıraktığınızda çalışmaz — ve çoğu kullanıcı hangisinin eksik olduğunu para çekmeye çalıştığı gün öğrenir.",
+        ],
+        list: [
+          "1. Hesap doğrulaması (KYC) tamamlanmış olmalı. Kimlik ve adres belgesi kabinden yüklenir. Doğrulanmamış bir hesapta hiçbir çekim otomatik işlenmez. Bunu para yatırdığınız gün halledin, çekmek istediğiniz gün değil.",
+          "2. Kabinde otomatik çekim etkin olmalı. Bu bir ayardır ve varsayılan olarak açık gelmeyebilir. Kişisel kabinden kontrol edin.",
+          "3. Çekim yöntemi bu akışı desteklemeli. Kartlar ve e-cüzdanlar destekler. Banka havalesi doğası gereği desteklemez — para muhabir banka zincirinden geçer ve bu zinciri hiçbir broker hızlandıramaz.",
+        ],
+      },
+      {
+        heading: "Yöntem başına gerçek süreler",
+        paragraphs: [
+          "Aşağıdaki süreler brokerın talebi işleme alma süresini değil, paranın size ulaşma süresini kapsar — ikisi farklıdır ve çoğu şikayet bu farktan doğar. Broker talebi 30 saniyede işleyebilir, ama e-cüzdan sağlayıcınız kendi tarafında 2 saat tutabilir.",
+        ],
+        list: [
+          "E-cüzdan (otomatik akışta): anlık — çoğunlukla dakikalar içinde. Günlük 5.000 dolarlık otomatik limit bu kanalda en anlamlı hale gelir.",
+          "Banka/kredi kartı: broker tarafında anlık işlenir, ancak kart ağının iade sürecine bağlı olarak hesabınıza yansıması 1-5 iş günü sürebilir. Bu gecikme brokerdan değil, kart şemasından kaynaklanır.",
+          "Kripto transferi: ağ onay süresine bağlı, genellikle dakikalar. Ağ ücreti size aittir.",
+          "Banka havalesi: 1-3 iş günü. Otomatik akışın dışındadır.",
+          "5.000 doların üzerindeki talepler ve otomatik akış dışında kalan her şey: çoğunlukla 24 saat içinde, manuel işleme alınarak.",
+        ],
+      },
+      {
+        heading: "Aynı yöntem kuralı — en çok sürpriz yaratan madde",
+        paragraphs: [
+          "LiteFinance'te para yalnızca yatırdığınız yönteme ve aynı para birimine çekilebilir. Skrill ile yatırdıysanız yalnızca aynı Skrill cüzdanına çekersiniz; kartla yatırdıysanız iade önce o karta gider.",
+          "Bu keyfi bir kısıtlama değil, kara para aklamayı önleme mevzuatının standart bir gereğidir ve sektörde yaygındır. Ama pratikte şu anlama gelir: para yatırma yönteminizi seçerken aslında para çekme yönteminizi de seçmiş olursunuz. Kullanmadığınız bir kartla veya erişiminizin belirsiz olduğu bir cüzdanla yatırım yapmak, sonradan düzeltilmesi zahmetli bir karardır.",
+          "Birden fazla yöntemle yatırım yaptıysanız çekim genellikle yatırılan tutarlar oranında dağıtılır. Bu da hesabınızı tek bir yöntem etrafında kurmanın neden daha az sürtünme yarattığını açıklar.",
+        ],
+      },
+      {
+        heading: "Ücretler: %0-2 nereden çıkıyor?",
+        paragraphs: [
+          "LiteFinance yatırma işlemlerinden ücret almaz. Çekimlerde ise yönteme göre %0 ile %2 arasında bir masraf çıkabilir — bu genellikle brokerın kârı değil, ödeme sağlayıcısının işlem ücretidir ve maliyeti kimin üstlendiği yönteme göre değişir.",
+          "Pratik sonuç: ayda bir kez 1.000 dolar çekmek, dört kez 250 dolar çekmekten daha ucuz olabilir. Sık ve küçük çekimler yapıyorsanız yöntem başına ücreti bir kez hesaplayın; yıllık toplamı çoğu kişinin beklediğinden yüksek çıkar.",
+        ],
+      },
+      {
+        heading: "İlk çekimde en sık yapılan beş hata",
+        paragraphs: [],
+        list: [
+          "KYC'yi para çekmek istediği gün yapmaya çalışmak. Belge onayı zaman alır; \"anlık çekim çalışmıyor\" şikayetlerinin çoğu aslında budur.",
+          "Aktif bonusu olan bir hesaptan çekim talebi göndermek. Bonus ek marjindir; çekim talebi genellikle bonusun ve ondan doğan kârın iptaline yol açar. Bonus koşullarını çekmeden önce okuyun.",
+          "Açık pozisyon varken serbest marjinin tamamını çekmeye çalışmak. Çekilebilir tutar bakiyeniz değil, serbest marjinizdir; hesaplamayı açık pozisyonların kullandığı marjini düşerek yapın.",
+          "Yatırdığından farklı bir cüzdana çekmeye çalışmak. Aynı yöntem kuralı nedeniyle talep reddedilir.",
+          "İlk çekimi büyük tutarla denemek. Yeni bir brokerda ilk çekimi küçük bir tutarla yapıp süreci baştan sona görmek, her broker için geçerli bir sağduyu kuralıdır.",
+        ],
+      },
+      {
+        heading: "Çekim hızı bir güven ölçüsüdür — ama tek başına yeterli değil",
+        paragraphs: [
+          "Hızlı çekim önemli bir sinyaldir çünkü nakit akışı sorunu olan bir broker bunu sürdüremez. Ama hızlı çekim, düzenleyici korumanın yerine geçmez.",
+          "LiteFinance'te Türkiye'den açılan hesaplar CySEC lisanslı Avrupa şirketine değil, offshore şirkete bağlanır. Bu, bir anlaşmazlık durumunda arkanızda bir yatırımcı tazmin fonu olmadığı anlamına gelir — çekimler anlık işlense bile. İki konu birbirinden bağımsızdır ve ikisini birlikte değerlendirmek gerekir.",
+          "Brokerın düzenleyici yapısı, hesap türleri ve puanlamasıyla ilgili tam döküm için LiteFinance inceleme sayfamıza bakabilirsiniz. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "litefinance-ecn-maliyet-hesabi",
+    lang: "tr",
+    title: "Lot Başına Gerçekte Ne Ödüyorsunuz? ECN Maliyet Hesabı",
+    excerpt:
+      "\"0.0 pip spread\" reklamı tek başına hiçbir şey ifade etmez. Spread ve komisyonu toplayıp LiteFinance Classic, LiteFinance ECN ve XM Zero hesaplarının 1 lotluk gerçek maliyetini yan yana hesaplıyoruz.",
+    publishedAt: "2026-08-19",
+    readingMinutes: 9,
+    sections: [
+      {
+        paragraphs: [
+          "Forex reklamlarındaki en yaygın yanıltıcı ifade \"0.0 pipten spread\"dir. Yanlış değildir — ama eksiktir. 0.0 pip spread sunan her hesap, maliyeti komisyon olarak alır ve komisyonu görmezden gelen bir karşılaştırma her zaman yanlış hesabı ucuz gösterir.",
+          "Doğru soru şu: aynı işlemi açıp kapattığımda toplam kaç dolar ödüyorum? Bu yazıda o hesabı üç hesap türü üzerinde adım adım yapıyoruz. Kullanılan rakamlar brokerların ilan ettiği başlangıç değerleridir ve değişebilir; kendi hesabınız için işlem yapmadan önce brokerin resmi sitesinden teyit edin.",
+        ],
+      },
+      {
+        heading: "Formül: toplam maliyet = spread + komisyon",
+        paragraphs: [
+          "EUR/USD'de 1 standart lot 100.000 birimdir ve bu büyüklükte 1 pip yaklaşık 10 dolar eder. Yani spreadi dolara çevirmek için pip cinsinden spreadi 10 ile çarpmanız yeterlidir.",
+          "Komisyon tarafında dikkat edilecek tek bir ayrıntı var ve maliyeti ikiye katlayabilir: komisyonun tek yönlü mü (per side) yoksa gidiş-dönüş mü (round turn) olduğu. \"Lot başına 3,50 dolar, taraf başına\" ifadesi, bir pozisyonu açıp kapatmanın 7 dolar tuttuğu anlamına gelir. Bir brokerın komisyon rakamını okurken bu iki kelimeyi aramazsanız yaptığınız her karşılaştırma bozulur.",
+          "Üçüncü bir kalem daha var: pozisyonu gecelik taşıyorsanız swap. Gün içi işlem yapıyorsanız swap sizi ilgilendirmez; birkaç gün pozisyon taşıyorsanız bazı paritelerde swap, spread ve komisyonun toplamından büyük olabilir.",
+        ],
+      },
+      {
+        heading: "Üç hesap, tek işlem: 1 lot EUR/USD aç-kapa",
+        paragraphs: [
+          "Aşağıdaki hesap, spreadin ilan edilen başlangıç değerinde olduğu varsayımıyla yapılmıştır. Gerçekte 0.0 pip bir taban değerdir, ortalama değil — normal seans koşullarında ECN tipi hesaplarda EUR/USD spreadi çoğunlukla 0.1-0.5 pip aralığında hareket eder. Karşılaştırmayı dürüst tutmak için ECN hesaplarında 0.3 pip ortalama varsaydık.",
+        ],
+        list: [
+          "LiteFinance Classic — spread 1.8 pip, komisyon yok. Maliyet: 1,8 × 10 $ = 18 $.",
+          "LiteFinance ECN — spread ~0.3 pip + lot başına 0,25 dolardan komisyon. Maliyet: 3 $ + 0,25-0,50 $ = yaklaşık 3,25-3,50 $.",
+          "XM Zero — spread ~0.3 pip + lot başına taraf başına 3,50 dolar komisyon. Maliyet: 3 $ + 7 $ = yaklaşık 10 $.",
+          "XM Standard — spread 1.0 pip, komisyon yok. Maliyet: 1,0 × 10 $ = 10 $.",
+        ],
+      },
+      {
+        heading: "Bu tablodan çıkan üç sonuç",
+        paragraphs: [
+          "Birincisi: komisyonsuz hesap ucuz hesap demek değildir. LiteFinance Classic bu listedeki tek \"komisyon yok\" seçeneği ve aynı zamanda en pahalısı — çünkü maliyet komisyondan kaldırılıp spreade gömülmüştür. Komisyonsuz hesapların cazibesi maliyette değil, hesabın basitliğindedir.",
+          "İkincisi: iki farklı brokerın \"0.0 pip ECN\" hesabı arasında üç kata varan maliyet farkı olabilir. Buradaki fark spreadden değil, komisyon yapısından geliyor — LiteFinance'in lot başına 0,25 dolardan başlayan komisyonu ile XM Zero'nun taraf başına 3,50 doları arasındaki mesafe, aynı işlemi 3,50 dolara mı yoksa 10 dolara mı yaptığınızı belirliyor.",
+          "Üçüncüsü: fark hacimle büyür. Ayda 50 lot işlem yapan biri için Classic ile ECN arasındaki yaklaşık 14,5 dolarlık lot farkı, ayda 725 dolara denk gelir. Bu, çoğu perakende hesabın yıllık getiri beklentisinden büyük bir kalemdir ve tamamen hesap türü seçimiyle ilgilidir.",
+        ],
+      },
+      {
+        heading: "Nakit iade hesabı nasıl değiştirir?",
+        paragraphs: [
+          "İşlem maliyeti tek yönlü bir kalem değildir: bir kısmı, brokerın iş ortağına ödediği payla geri gelebilir. FXPARTNER üzerinden bağlanan LiteFinance hesaplarında nakit iade oranı %50'ye kadar çıkıyor — ECN hesaplarda komisyon, Classic ve Cent hesaplarda spread üzerinden hesaplanıyor.",
+          "Pratikte bu, yukarıdaki ECN maliyetinin bir bölümünün geri dönmesi anlamına gelir. İadenin büyüklüğü hesap türüne ve aylık hacme bağlı olduğu için tek bir rakam vermek doğru olmaz; ama yön nettir: iade, zaten en ucuz olan hesabı daha da ucuzlatır ve hacim büyüdükçe etkisi artar.",
+          "Önemli ayrıntı: nakit iade için mevcut hesabınızı kapatmanız gerekmez. Hesap numaranızı FXPARTNER'ın nakit iade sayfasından göndermeniz yeterlidir; iade, işlem hacminize göre broker tarafından doğrudan işlem hesabınıza yatırılır.",
+        ],
+      },
+      {
+        heading: "Hangi hesap kime uygun?",
+        paragraphs: [],
+        list: [
+          "Ayda 5 lotun altında işlem yapıyorsanız: maliyet farkı mutlak olarak küçüktür (yaklaşık 70 dolar). Hesabın basitliği sizin için daha değerliyse komisyonsuz bir hesap makul bir tercihtir.",
+          "Ayda 5-50 lot arası: ECN tipi bir hesap net şekilde ucuzdur ve fark aylık bütçenizde görünür hale gelir.",
+          "Scalping veya yüksek frekanslı işlem: ECN dışında bir seçenek pratikte anlamlı değildir. Bu tarzda toplam maliyet, stratejinin kâr eşiğini doğrudan belirler.",
+          "Pozisyon taşıyorsanız (birkaç gün-hafta): önceliğiniz spread veya komisyon değil, swap oranlarıdır. Maliyet karşılaştırmasını swap üzerinden yapın.",
+          "Uzman danışman (EA) kullanıyorsanız: geriye dönük testlerinizi kendi hesabınızın gerçek spread ve komisyonuyla çalıştırın. Varsayılan test ayarlarıyla kârlı görünen pek çok EA, gerçek maliyet girildiğinde zarara döner.",
+        ],
+      },
+      {
+        heading: "Karşılaştırmayı kendiniz yaparken",
+        paragraphs: [],
+        list: [
+          "Komisyonun taraf başına mı gidiş-dönüş mü olduğunu doğrulayın — bu tek soru maliyeti ikiye katlayabilir.",
+          "Spreadin ilan edilen minimumunu değil, işlem yaptığınız saatlerdeki ortalamasını ölçün. Bir demo hesapta bir hafta boyunca spreadi kaydetmek yeterlidir.",
+          "İşlem yaptığınız enstrümanla hesaplayın. Altın, endeksler ve egzotik pariteler için pip değeri ve tipik spread tamamen farklıdır.",
+          "Aylık hacminizle çarpın. Lot başına birkaç dolarlık fark, yıllık toplamda hesap büyüklüğünüzle kıyaslanabilir bir tutara ulaşabilir.",
+          "Varsa nakit iadeyi net maliyetten düşün — ama iadeyi kâr gibi değil, maliyet indirimi gibi değerlendirin.",
+        ],
+      },
+      {
+        heading: "Özet",
+        paragraphs: [
+          "İşlem maliyeti, bir yatırımcının kontrol edebildiği çok az değişkenden biridir. Piyasanın yönünü tahmin edemezsiniz ama lot başına ne ödediğinizi tam olarak bilebilir ve düşürebilirsiniz — ve bu, uzun vadede pek çok strateji iyileştirmesinden daha büyük fark yaratır.",
+          "LiteFinance'in hesap türleri, komisyon yapısı ve düzenleyici durumuyla ilgili tam döküm için broker inceleme sayfamıza bakabilirsiniz. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "forex-bonus-tuzagi-hacim-sarti",
+    lang: "tr",
+    title: "Bonusunuzu Neden Çekemiyorsunuz? Hacim Şartının Matematiği",
+    excerpt:
+      "Yatırım bonusu bedava para değildir; koşullu bir marjin kredisidir. Hacim şartının nasıl hesaplandığını, bonusun gerçek maliyetini ve hangi durumda mantıklı olduğunu adım adım gösteriyoruz.",
+    publishedAt: "2026-08-19",
+    readingMinutes: 8,
+    sections: [
+      {
+        paragraphs: [
+          "\"%100 yatırım bonusu\" bu sektörün en etkili pazarlama cümlesidir ve aynı zamanda en yanlış anlaşılanıdır. Yeni yatırımcıların büyük kısmı bonusu bakiyeye eklenen para sanır. Değildir. Bonus, belirli koşullar yerine getirilene kadar çekilemeyen, koşullu bir marjin kredisidir.",
+          "Bu yazı marka bağımsızdır — anlatılan mekanik, bonus veren hemen her brokerda aynı şekilde çalışır. Örnekleri somutlaştırmak için LiteFinance'in yayınladığı bonus tiplerini kullanıyoruz, ama rakamlar dönemsel olarak değişir; katılmadan önce güncel koşulları brokerin resmi sitesinden okuyun.",
+        ],
+      },
+      {
+        heading: "Bonus tam olarak nedir?",
+        paragraphs: [
+          "Bonus, hesabınızın marjin hesaplamasına dahil edilen ama çekilebilir bakiyenize dahil edilmeyen bir tutardır. 500 dolar yatırıp %100 bonus aldığınızda terminalde 1.000 dolar görürsünüz; bu 1.000 doların 500'ü sizindir, 500'ü brokerın koşullu katkısıdır.",
+          "Bunun size sağladığı tek somut şey daha fazla marjin alanıdır: aynı pozisyon büyüklüğünde marjin çağrısına daha geç yakalanırsınız. Sağlamadığı şey ise kâr potansiyelidir — bonus pozisyonlarınızın kazancını artırmaz, yalnızca daha büyük pozisyon açabilmenize izin verir. Bu ikisi arasındaki fark, bonusun neden bir risk çarpanı olduğunu açıklar.",
+          "LiteFinance'te yaygın olarak görülen tipler: 50 dolar üzeri yatırımlarda %30 bonus ve promosyon koduyla 100 dolar üzeri yatırımlarda %100 bonus. Bonuslar genellikle 6 ay geçerlidir ve azami bir tavan tutar taşır.",
+        ],
+      },
+      {
+        heading: "Hacim şartı nasıl hesaplanır?",
+        paragraphs: [
+          "Bonusun (ve çoğu durumda bonustan doğan kârın) çekilebilir hale gelmesi için belirli bir işlem hacmini tamamlamanız gerekir. Bu hacim lot cinsinden ifade edilir ve genellikle bonus tutarına bağlı bir çarpanla hesaplanır.",
+          "Aşağıdaki örnek gerçek bir kampanya koşulu değil, mekanizmayı göstermek için kurulmuş bir hesaptır. Kendi kampanyanızın çarpanını koşullar sayfasından okuyup aynı hesabı yapın.",
+        ],
+        list: [
+          "Varsayım: 500 dolar yatırdınız, %100 bonusla 500 dolar bonus aldınız. Kampanya, bonusun her 1 doları için 1 lot işlem şartı koyuyor olsun.",
+          "Gereken hacim: 500 lot. EUR/USD'de 500 standart lot, 50 milyon dolarlık nominal işlem hacmi demektir.",
+          "Bu hacmin maliyeti: 1.8 pip spreadli bir hesapta lot başına yaklaşık 18 dolar × 500 lot = 9.000 dolar işlem maliyeti.",
+          "Sonuç: 500 dolarlık bonusu çekilebilir hale getirmek için 9.000 dolar maliyet ödemeniz gerekir. Bu koşulda bonus, matematiksel olarak alınabilir bir şey değildir.",
+          "Aynı hesabı düşük çarpanlı bir kampanyada yapın — örneğin bonusun her 1 doları için 0,1 lot — ve rakam 50 lota, maliyet 900 dolara iner. Karar tamamen çarpanda saklıdır.",
+        ],
+      },
+      {
+        heading: "Bonusun görünmeyen maliyeti: davranış değişikliği",
+        paragraphs: [
+          "Hacim şartının asıl bedeli ödediğiniz spread değil, sizi ittiği davranıştır. Şartı tamamlamaya çalışan bir yatırımcı, stratejisinin sinyal vermediği anlarda da işlem açar — çünkü artık amacı iyi işlem yapmak değil, lot biriktirmektir.",
+          "Bu, forex'te hesap sıfırlamanın en sistematik yollarından biridir ve nedeni bonus değil, bonusun yarattığı teşviktir. Aynı yatırımcı bonus almasaydı ayda 10 işlem yapacaktı; bonusla 60 işlem yapar ve bu 50 fazladan işlemin beklenen değeri negatiftir.",
+          "İkinci görünmeyen maliyet: bonus çoğu brokerda çekim talebinde iptal olur. Yani hesabınızda aktif bonus varken para çekmek isterseniz, bonusu ve çoğu durumda bonustan doğan kârı kaybedersiniz. Bu, acil nakit ihtiyacı olan biri için gerçek bir kayıptır.",
+        ],
+      },
+      {
+        heading: "Bonus ne zaman mantıklıdır?",
+        paragraphs: [
+          "Bonus her zaman kötü değildir — koşulları doğru okunduğunda belirli durumlarda işe yarar.",
+        ],
+        list: [
+          "Zaten yapacağınız hacme yakın bir şart varsa. Ayda 40 lot işlem yapan biri için 50 lotluk bir şart, davranışını değiştirmeden ulaşılabilir bir hedeftir.",
+          "Bonusu çekmeyi değil, yalnızca marjin tamponu olarak kullanmayı planlıyorsanız — ve bu tamponun pozisyon büyütmenize izin vermesine izin vermiyorsanız.",
+          "Bonusun süresi (genellikle 6 ay) sizin normal işlem temponuzla uyumluysa.",
+          "Ve her durumda: bonus, brokerı seçme sebebiniz değilse. Broker seçimi regülasyon, maliyet, platform ve para çekme üzerinden yapılır; bonus bu dördünden hiçbirini telafi etmez.",
+        ],
+      },
+      {
+        heading: "Bonus koşullarında okunacak beş satır",
+        paragraphs: [],
+        list: [
+          "Hacim çarpanı: bonusun her 1 doları için kaç lot? Bu tek rakam bonusun alınabilir olup olmadığını belirler.",
+          "Hangi enstrümanlar hacme sayılıyor? Bazı kampanyalarda yalnızca belirli pariteler veya belirli süreden uzun tutulan pozisyonlar sayılır.",
+          "Bonus tavanı ne kadar? Yüzde büyük görünse de mutlak tavan çoğu zaman düşüktür.",
+          "Geçerlilik süresi ne kadar? Süre dolduğunda bonus ve çoğu durumda ondan doğan kâr silinir.",
+          "Çekim talebi bonusu iptal ediyor mu? Neredeyse her zaman evet — ama koşulun tam ifadesini görmeden varsaymayın.",
+        ],
+      },
+      {
+        heading: "Özet",
+        paragraphs: [
+          "Bonus bedava para değil, koşullu bir marjin kredisidir ve gerçek fiyatı hacim şartında yazılıdır. O şartı lot cinsinden hesaplayıp işlem maliyetine çevirdiğinizde, bonusun size ne kadara mal olduğunu tam olarak görürsünüz — ve çoğu kampanyada bu rakam bonusun kendisinden büyüktür.",
+          "Broker seçerken bonusu değil, dört temel ekseni kullanın: regülasyon, maliyet, platform ve para çekme. FXPARTNER'ın broker sıralamalarında her broker tam olarak bu dört eksende puanlanır. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "litefinance-vs-xm-karsilastirma",
+    coverImage: "/blog/litefinance-vs-xm-karsilastirma-cover.png",
+    lang: "tr",
+    title: "LiteFinance mi XM mi? İki Brokerı Dürüstçe Karşılaştırma",
+    excerpt:
+      "FXPARTNER her ikisinden de gelir elde ediyor — bu yüzden karşılaştırmayı bir kazanan ilan ederek değil, hangi profile hangisinin uyduğunu göstererek yapıyoruz. Regülasyon, maliyet, platform ve para çekme, yan yana.",
+    publishedAt: "2026-08-19",
+    readingMinutes: 9,
+    sections: [
+      {
+        paragraphs: [
+          "Önce şeffaflık: FXPARTNER hem XM'in hem LiteFinance'in iş ortağıdır ve her ikisinden de komisyon geliri elde eder. Yani \"hangisi daha iyi\" sorusuna verdiğimiz cevabın ticari olarak tarafsız olduğunu iddia edemeyiz — bunun yerine yapabileceğimiz şey, kararı sizin verebilmeniz için ikisinin farklarını gizlemeden yan yana koymaktır.",
+          "İyi haber şu ki bu iki broker gerçekten farklı profillerde. Birbirinin yerine geçen iki seçenek olsalardı karşılaştırma anlamsız olurdu; öyle değiller ve fark, hangi ölçüde korunmak istediğinizle hangi ölçüde maliyet düşürmek istediğiniz arasındaki tercihe dayanıyor.",
+        ],
+      },
+      {
+        heading: "Regülasyon: en büyük fark burada",
+        paragraphs: [
+          "XM, ASIC (Avustralya), CySEC (Kıbrıs) ve DFSA (Dubai) dahil dört lisans taşıyor; bunların üçü Tier-1 otorite. Tier-1 lisanslar müşteri fonlarının şirket fonlarından ayrı tutulmasını, asgari sermaye rezervini ve bazı ülkelerde broker iflas ederse devreye giren bir tazminat şemasını şart koşar.",
+          "LiteFinance grubunun da CySEC lisanslı bir Avrupa şirketi var — Liteforex (Europe) Ltd, lisans no 093/08 — ancak bu şirket yalnızca Avrupa Ekonomik Alanı müşterilerine hizmet veriyor. Türkiye'den açılan hesaplar bu şirkete değil, offshore tarafa bağlanıyor: LiteFinance Investment Limited (Mauritius FSC, lisans no GB20025921) veya LiteFinance Global LLC (Saint Vincent, kayıt no 931 LLC 2021 — bu bir şirket kaydıdır, denetleyici lisans değil).",
+          "Pratik sonuç: Türkiye'den hesap açan bir yatırımcı için XM'in düzenleyici koruması belirgin şekilde daha güçlüdür. LiteFinance tarafında Mauritius FSC gerçek bir denetim katmanıdır, ancak Tier-1 seviyesinde değildir ve arkasında bir yatırımcı tazmin fonu yoktur. Her iki broker da SPK lisanslı değildir; Türkiye'ye hizmet veren tüm uluslararası brokerlar için bu geçerlidir.",
+        ],
+      },
+      {
+        heading: "Maliyet: fark hacimle büyüyor",
+        paragraphs: [
+          "Maliyet tarafında yön tersine dönüyor. İki brokerın ham spread hesapları arasındaki komisyon farkı, aynı işlemin fiyatını üç katına kadar değiştirebiliyor.",
+        ],
+        list: [
+          "XM Standard/Micro: spread 1.0 pipten, komisyon yok, minimum yatırım 5 $. 1 lot EUR/USD maliyeti yaklaşık 10 $.",
+          "XM Zero: spread 0.0 pipten, komisyon lot başına taraf başına 3,50 $, minimum yatırım 100 $. 1 lot maliyeti yaklaşık 10 $ (3 $ spread + 7 $ komisyon).",
+          "LiteFinance Classic: spread 1.8 pipten, komisyon yok, minimum yatırım 50 $. 1 lot maliyeti yaklaşık 18 $.",
+          "LiteFinance ECN: spread 0.0 pipten, komisyon lot başına 0,25 $'dan, minimum yatırım 50 $. 1 lot maliyeti yaklaşık 3,25-3,50 $.",
+          "LiteFinance Cent: spread 3 pipten, komisyon yok, minimum yatırım 10 $ — maliyet açısından değil, öğrenme aracı olarak değerlendirilmesi gereken bir hesap.",
+        ],
+      },
+      {
+        heading: "Platform ve ürün",
+        paragraphs: [
+          "XM, MT4, MT5 ve kendi XM App'i üzerinden çalışıyor. Eğitim tarafı sektörde en güçlülerden biri: 23 dilde günlük canlı webinarlar, kapsamlı video kütüphanesi ve bir sadakat programı.",
+          "LiteFinance dört platform sunuyor — MT4, MT5, cTrader ve tarayıcıdan çalışan kendi WebTerminal'i. cTrader desteği ayırt edici bir nokta: Level II fiyatlandırma ve yerel algoritmik işlem altyapısı nedeniyle ECN odaklı ve otomasyon kullanan yatırımcıların tercih ettiği platformdur ve XM'de bulunmaz.",
+          "LiteFinance'in ikinci ayırt edici ürünü kendi sosyal işlem (copytrade) platformu: başka bir yatırımcının işlemlerini kopyalayabilir ya da kendi işlemlerinizi kopyalanmaya açıp kârdan komisyon alabilirsiniz. Fonlar kendi hesabınızda kalır ve kopyalama istediğiniz an durdurulabilir; kopyalama için tavsiye edilen başlangıç tutarı 50 dolardır.",
+        ],
+      },
+      {
+        heading: "Para çekme",
+        paragraphs: [
+          "İki brokerın da para çekme profili güçlü, ama mekanikleri farklı.",
+          "XM'de çekim taleplerinin çoğu 24 saat içinde işleme alınır; e-cüzdan çekimleri genellikle aynı gün, kart ve banka çekimleri 2-5 iş günü sürer. XM çekim ücreti almaz.",
+          "LiteFinance'te doğrulanmış bir hesapta otomatik çekim akışı açıkken talepler anlık işlenir — günde 5.000 dolara kadar, manuel onay beklemeden. Buna karşılık iki kısıt var: para yalnızca yatırıldığı yönteme ve aynı para birimine çekilebilir, ve yönteme göre %0-2 arası masraf çıkabilir.",
+          "Özetle LiteFinance daha hızlı, XM daha az sürtünmeli. Anlık çekim önemli bir sinyaldir ama düzenleyici korumanın yerine geçmez — iki konu birbirinden bağımsızdır.",
+        ],
+      },
+      {
+        heading: "FXPARTNER Endeksi ve puanlar",
+        paragraphs: [
+          "Her broker dört eksende puanlanır: Regülasyon, Maliyet, Platform ve Para Çekme. XM'in bileşik endeksi 9.5, LiteFinance'in 9.1. Aradaki fark neredeyse tamamen regülasyon ekseninden geliyor — XM üç Tier-1 lisansla 5/5 alırken, Türkiye'den açılan hesabın offshore şirkete bağlanması nedeniyle LiteFinance 3/5'te kalıyor.",
+          "Maliyet ve para çekme eksenlerinde ikisi de tam puana yakın; platform ekseninde LiteFinance dört platformuyla önde. Puanların tam dökümünü ve her eksenin gerekçesini iki brokerın inceleme sayfalarında görebilirsiniz.",
+        ],
+      },
+      {
+        heading: "Karar ağacı: hangisi sizin profilinize uyuyor?",
+        paragraphs: [],
+        list: [
+          "Önceliğiniz düzenleyici koruma ve fon güvenliğiyse → XM. Üç Tier-1 lisans, bu karşılaştırmadaki tek gerçek ayrım noktasıdır ve telafi edilemez.",
+          "Ayda 20 lotun üzerinde işlem yapıyorsanız ve maliyet asıl kaleminizse → LiteFinance ECN. Lot başına fark, yıllık toplamda hesap büyüklüğünüzle kıyaslanabilir bir tutara ulaşır.",
+          "cTrader veya algoritmik işlem kullanıyorsanız → LiteFinance. XM cTrader desteklemiyor.",
+          "10-50 dolar arası bir tutarla gerçek parayla öğrenmek istiyorsanız → LiteFinance Cent hesap. XM'in minimum yatırımı daha düşük (5 $) ama cent hesabı yok.",
+          "Eğitim içeriği, webinar ve rehberlik arıyorsanız → XM. Bu alanda sektörün en güçlü kütüphanelerinden birine sahip.",
+          "Başka birinin işlemlerini kopyalamak veya kendi işlemlerinizi kopyalatmak istiyorsanız → LiteFinance sosyal işlem platformu.",
+          "Kararsızsanız → ikisini birden kullanmak yaygın ve makul bir çözümdür: uzun vadeli sermayeyi daha güçlü regüle olan tarafta tutup, maliyete duyarlı aktif işlemi diğer tarafta yapmak. Sermayeyi tek bir brokerda toplama zorunluluğunuz yok.",
+        ],
+      },
+      {
+        heading: "Son not",
+        paragraphs: [
+          "Bu karşılaştırmada bir kazanan ilan etmiyoruz çünkü dürüst cevap profile bağlı. Regülasyonu önceleyen biri için XM açık ara doğru tercih; maliyeti önceleyen aktif bir yatırımcı için LiteFinance ECN'in sunduğu rakamı XM'de bulmak mümkün değil.",
+          "Hangisini seçerseniz seçin, karar vermeden önce iki şeyi kendiniz doğrulayın: hesabın hangi tüzel kişilikle açıldığı ve o hesap türünün güncel spread/komisyon rakamları. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {

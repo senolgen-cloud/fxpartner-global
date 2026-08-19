@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramPhoto, mainServicesKeyboard } from "@/lib/telegram";
 import { postTradeSignalToX } from "@/lib/x";
-import { sendPushToAll } from "@/lib/push";
+import { sendPushToMembers } from "@/lib/push";
+import { getRecentSignalStats, statsLineTr, statsLineEn } from "@/lib/signalStats";
+import { requiredTierForPair } from "@/lib/signalAccess";
 import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -83,14 +85,30 @@ export async function GET(req: NextRequest) {
   const outcomeWord = outcome === "WIN" ? "WIN" : outcome === "LOSS" ? "LOSS" : outcome === "BE" ? "BREAKEVEN" : "CLOSED";
   const resultLine = pips ? `${parseFloat(pips) > 0 ? "+" : ""}${pips} pips` : profit ? `${parseFloat(profit) > 0 ? "+" : ""}${profit} USD` : null;
 
+  // Read after the DB update below would be ideal (so this trade counts
+  // itself), but the update happens further down — close enough, and a
+  // stats failure must never block the result post.
+  let stats = null;
+  try {
+    stats = await getRecentSignalStats(requiredTierForPair(pair));
+  } catch (err) {
+    console.error("Signal stats lookup failed:", err);
+  }
+  const trStats = statsLineTr(stats);
+
   const caption =
-    `<b>${pair.toUpperCase()}</b> — ${outcomeEmoji} <b>${outcomeWord}</b>\n\n` +
-    `📈 Entry: <b>${entry}</b>\n` +
-    `🏁 Close: <b>${close}</b>` +
-    (resultLine ? `\n📊 Result: <b>${resultLine}</b>` : "") +
-    `\n\n${outcome === "WIN" ? "🔥 Another real result from our tracked account — called live, closed live, no cherry-picking." : "📌 The real result of the trade we called live on our tracked account — wins and losses alike, we post them all."}\n\n` +
-    `⚠️ Past results don't guarantee future ones. Shared for informational purposes only, not investment advice.\n\n` +
-    `👉 <a href="${siteUrl}">fxpartner.global</a>`;
+    `<b>${pair.toUpperCase()}</b>${direction ? ` ${direction}` : ""} — ${outcomeEmoji} <b>${outcomeWord}</b>\n\n` +
+    `📈 Giriş: <b>${entry}</b>\n` +
+    `🏁 Kapanış: <b>${close}</b>` +
+    (resultLine ? `\n📊 Sonuç: <b>${resultLine}</b>` : "") +
+    `\n\n${
+      outcome === "WIN"
+        ? "🔥 Bu işlemin yönünü açıldığı anda paylaşmıştık — sonucu da burada. Seçip ayıklamıyoruz."
+        : "📌 Kaybeden işlemi de aynı yerde yayınlıyoruz. Yalnızca kazananları gösteren bir kanal değiliz."
+    }\n\n` +
+    (trStats ? `${trStats}\n\n` : "") +
+    `⚠️ Geçmiş sonuçlar gelecekteki sonuçları garanti etmez. Bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.\n\n` +
+    `👉 <a href="${siteUrl}/signals">Tüm işlem geçmişi: fxpartner.global/signals</a>`;
 
   // Best-effort: record the real close data against the original row so
   // /signals can show it — never blocks the actual result post.
@@ -122,10 +140,14 @@ export async function GET(req: NextRequest) {
   let xResult: { tweetId: string } | { error: string } | null = null;
   try {
     const tweetText =
-      `${pair.toUpperCase()} ${outcomeEmoji} ${outcomeWord}${resultLine ? ` — ${resultLine}` : ""}\n` +
+      `${pair.toUpperCase()}${direction ? ` ${direction}` : ""} ${outcomeEmoji} ${outcomeWord}${resultLine ? ` — ${resultLine}` : ""}\n` +
       `Entry ${entry} → Close ${close}\n\n` +
-      `${outcome === "WIN" ? "🔥 Another real result from our tracked account — called live, closed live, no cherry-picking." : "📌 We post every result from our tracked account — wins and losses alike, exactly as they happened."}\n\n` +
-      `Every signal we share links back to real brokers you can actually vet: real licensing, real trading costs, real withdrawal speed — no paid placements dressed up as advice.\n\n` +
+      `${
+        outcome === "WIN"
+          ? "🔥 We called the direction publicly when this opened — here's how it closed. Nothing cherry-picked."
+          : "📌 We post the losers too, on the same account, in the same place."
+      }\n\n` +
+      (statsLineEn(stats) ? `${statsLineEn(stats)}\n\n` : "") +
       `⚠️ Past results don't guarantee future ones. Not investment advice — always size positions and set stops to your own risk tolerance.\n\n` +
       `#fxpartner #forex #fxsignals #forextrading #trading`;
     xResult = await postTradeSignalToX(imageUrl, tweetText, {
@@ -139,7 +161,7 @@ export async function GET(req: NextRequest) {
   // Best-effort, same reasoning as /api/trade-signal — never blocks the
   // result post itself.
   try {
-    await sendPushToAll({
+    await sendPushToMembers({
       title: `${pair.toUpperCase()} ${outcomeEmoji} ${outcomeWord}`,
       body: resultLine ? `Entry ${entry} → Close ${close} · ${resultLine}` : `Entry ${entry} → Close ${close}`,
       url: "/signals",

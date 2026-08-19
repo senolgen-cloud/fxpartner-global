@@ -10,6 +10,13 @@ const ICONS = {
   ),
   signals: <path d="M3 12h3l2.5-7 4 14 2.5-9L17 12h4" />,
   markets: <path d="M4 20V10M10 20V4M16 20v-7M22 20H2" />,
+  // Prop / funded account: kalkan + yükselen çizgi — "sermaye emanet edildi"
+  prop: (
+    <>
+      <path d="M12 3.5 19 6v5.5c0 4.2-2.9 7.4-7 8.5-4.1-1.1-7-4.3-7-8.5V6l7-2.5Z" />
+      <path d="M9 12.5l2 2 4-4.5" />
+    </>
+  ),
   analysis: <path d="m3 17 5-5 4 4 8-9M14 7h6v6" />,
   profile: (
     <>
@@ -46,7 +53,12 @@ export default function MobileBottomNavClient({ accountHref }: { accountHref: st
   const tabs: { href: string; label: string; icon: keyof typeof ICONS }[] = [
     { href: "/", label: "Anasayfa", icon: "home" },
     { href: "/signals", label: "Sinyaller", icon: "signals" },
-    { href: "/piyasa-analizi", label: "Piyasalar", icon: "markets" },
+    // Prop firmalar ana dikey oldu (19.08.2026). Şerit 6 sütunda kalsın diye
+    // "Piyasalar" (/piyasa-analizi) buradan çıkarıldı — 7. sütun 360px'lik bir
+    // ekranda etiketleri kırıyor. /piyasa-analizi hâlâ üst menüdeki Kaynaklar
+    // grubunda ve "Daha Fazla" menüsünde erişilebilir. Geri almak için bu
+    // satırı /piyasa-analizi + icon "markets" ile değiştirmek yeterli.
+    { href: "/prop-firmalar", label: "Prop", icon: "prop" },
     { href: "/ai-asistan", label: "Analiz", icon: "analysis" },
     { href: accountHref, label: "Profil", icon: "profile" },
   ];

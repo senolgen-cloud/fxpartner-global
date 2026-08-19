@@ -10,7 +10,7 @@ import { getSponsoredBrokerPool } from "@/data/brokers";
 import { desc, eq, and } from "drizzle-orm";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { auth } from "@/auth";
-import { tierFromPriceId, type PackageTier } from "@/lib/vip";
+import { type AccessTier } from "@/lib/vip";
 import { maskLockedActiveSignal } from "@/lib/signalAccess";
 
 const sponsoredBrokers = getSponsoredBrokerPool("signals");
@@ -84,9 +84,11 @@ export default async function SignalsPage() {
       : Promise.resolve(null),
   ]);
 
-  const viewerTier = subscriptionRow
-    ? ((subscriptionRow.tier as PackageTier | null) ??
-      (subscriptionRow.stripePriceId ? tierFromPriceId(subscriptionRow.stripePriceId) : null))
+  // Signed out -> null (everything masked, including the free FX signals —
+  // that mask is the registration prompt). Signed in with no active
+  // subscription -> "free", which unlocks the FX pairs.
+  const viewerTier: AccessTier | null = session?.user?.id
+    ? ((subscriptionRow?.tier as AccessTier | null) ?? "free")
     : null;
 
   // Real masking, not just a UI overlay — a locked signal's actual entry/

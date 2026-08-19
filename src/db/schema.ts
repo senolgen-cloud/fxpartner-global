@@ -180,24 +180,21 @@ export type VipSubscriptionStatus = (typeof vipSubscriptionStatusValues)[number]
 // "manual" is for comp/test access granted directly by an admin (no real
 // payment) — kept honest in the record rather than misattributed to
 // whichever paid provider happened to be closest.
-export const vipProviderValues = ["stripe", "nowpayments", "manual"] as const;
+export const vipProviderValues = ["nowpayments", "manual"] as const;
 export type VipProvider = (typeof vipProviderValues)[number];
 
-// One row per user (Stripe/NOWPayments themselves are the history/audit
-// trail, not this table) — the source of truth for paid VIP access.
-// `users.isVip` is only a cached convenience flag derived from
-// `status === "active"`; anything that gates paid functionality (discount
-// eligibility, push targeting, /account/vip rendering) must query this
-// table, never the cached flag.
+// One row per user (NOWPayments itself is the history/audit trail, not this
+// table) — the source of truth for paid VIP access. `users.isVip` is only a
+// cached convenience flag derived from `status === "active"`; anything that
+// gates paid functionality (discount eligibility, push targeting) must query
+// this table, never the cached flag.
 //
-// `provider` distinguishes the two payment rails. Stripe's fields stay
-// NOT NULL-shaped in spirit but are nullable in the schema since a
-// NOWPayments row never populates them (and vice versa for the
-// nowpayments* fields) — application code should only read the fields
-// matching `provider`. Unlike Stripe's real recurring subscriptions,
-// NOWPayments has no auto-renewal: each period is its own crypto payment,
-// so currentPeriodEnd here is simply "access granted through this date"
-// and a cron (once built) will need to prompt for renewal before it lapses.
+// NOWPayments is the only paid rail — Stripe doesn't support Turkey, so the
+// card path was removed entirely. It has no auto-renewal: each period is its
+// own crypto payment, so currentPeriodEnd here is simply "access granted
+// through this date" and a cron (once built) will need to prompt for renewal
+// before it lapses. `tier` is therefore the only place a subscriber's
+// package is recorded — there is no price-ID indirection to fall back on.
 export const vipSubscriptions = pgTable("vip_subscription", {
   id: text("id")
     .primaryKey()
@@ -206,11 +203,8 @@ export const vipSubscriptions = pgTable("vip_subscription", {
     .notNull()
     .unique()
     .references(() => users.id, { onDelete: "cascade" }),
-  provider: text("provider").$type<VipProvider>().notNull().default("stripe"),
+  provider: text("provider").$type<VipProvider>().notNull().default("nowpayments"),
   tier: text("tier"),
-  stripeCustomerId: text("stripe_customer_id"),
-  stripeSubscriptionId: text("stripe_subscription_id").unique(),
-  stripePriceId: text("stripe_price_id"),
   // NOWPayments' own payment id for the most recent successful payment —
   // the natural idempotency key for the IPN webhook (a resent callback for
   // the same payment_id should not re-extend the period).
@@ -229,8 +223,10 @@ export const vipSubscriptions = pgTable("vip_subscription", {
 });
 
 // Duplicated from src/lib/vip.ts's PackageTier rather than imported, to
-// avoid a circular import (vip.ts already imports from this file).
-type NowPaymentsTier = "starter" | "pro" | "vip";
+// avoid a circular import (vip.ts already imports from this file). Only the
+// purchasable tiers appear here — "free" is granted by having an account and
+// never goes through checkout, so it can never be an order's tier.
+type NowPaymentsTier = "pro" | "vip";
 
 // One row per NOWPayments checkout attempt, created right before redirecting
 // to the invoice page — the IPN webhook has no other way to know which user/

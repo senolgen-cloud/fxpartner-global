@@ -28,6 +28,10 @@ import { db } from "@/db";
 import { comments as commentsTable, users as usersTable } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 import { flagEmoji } from "@/lib/country";
+import { getLiveCashbackProgram } from "@/data/cashback";
+// Tek yönlü bağımlılık: brokers.ts prop dikeyinden habersiz kalır, çapraz link
+// sunum katmanında kurulur. Skor bağlantısı YOK — bkz. propFirms.ts.
+import { getPropFirmByBackingBroker, getPropFirmScores } from "@/data/propFirms";
 import { brokerFinancialServiceSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { regulationParagraph, platformParagraph, verdictParagraph, brokerFaqs } from "@/lib/brokerContent";
 import { getBlogPostBySlug } from "@/data/blog";
@@ -139,6 +143,10 @@ export default async function BrokerDetailPage({
   const reviewPost = getBlogPostBySlug(`${broker.slug}-review`);
   const scores = getBrokerScores(broker);
   const riskLevel = getRiskLevel(broker);
+  // Only confirmed programs are promoted off /cashback — an estimate never
+  // appears as a promise on a review page.
+  const cashback = getLiveCashbackProgram(broker.slug);
+  const backedPropFirm = getPropFirmByBackingBroker(broker.slug);
 
   const tier1Regulators = broker.regulators.filter((r) => TIER1_REGULATORS.has(r));
   const offshoreRegulators = broker.regulators.filter((r) => !TIER1_REGULATORS.has(r));
@@ -640,6 +648,49 @@ export default async function BrokerDetailPage({
               </div>
             </div>
 
+            {/* Prop firma çapraz linki — yalnızca bu brokerın desteklediği bir
+                prop firma varsa. Bilinçli olarak Değerlendirme'den SONRA:
+                brokerın kendi puanı okunduktan sonra gelen ek bir bilgi,
+                değerlendirmenin parçası değil. İki dikeyin puanı ayrıdır. */}
+            {backedPropFirm && (
+              <div className="mt-14 border-t border-hairline-light pt-10">
+                <div className="rounded-2xl border border-hairline-light bg-paper-high p-7">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-signal">
+                    İlgili — Prop Firma
+                  </span>
+                  <h2 className="mt-3 font-display text-xl font-semibold text-text-dark">
+                    {broker.name}, {backedPropFirm.name} funded account programını
+                    destekliyor
+                  </h2>
+                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-text-muted">
+                    {backedPropFirm.name}, {broker.name}&apos;ın fiyatlama ve emir
+                    gerçekleştirme altyapısını kullanan bir prop firmadır. Kendi
+                    sermayenizi yatırmadan, bir değerlendirme sürecini geçerek
+                    fonlanmış hesapla işlem yapmayı sağlar.
+                  </p>
+                  <p className="mt-3 max-w-2xl text-xs leading-relaxed text-text-muted">
+                    <strong className="text-text-dark">Önemli:</strong> Prop firmalar
+                    broker gibi lisanslanmaz. {broker.name}&apos;ın bu sayfada listelenen
+                    lisansları {backedPropFirm.name}&apos;daki fonlanmış hesabınızı
+                    kapsamaz; iki hizmet ayrı değerlendirilir ve sitemizde ayrı
+                    rubriklerle puanlanır.
+                  </p>
+                  <div className="mt-5 flex flex-wrap items-center gap-5">
+                    <Link
+                      href="/prop-firmalar"
+                      className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
+                    >
+                      {backedPropFirm.name} değerlendirmesi (
+                      {getPropFirmScores(backedPropFirm).composite.toFixed(1)}) →
+                    </Link>
+                    <span className="font-mono text-[11px] text-text-muted">
+                      Prop firma puanı, broker puanından bağımsızdır
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* FAQ */}
             <div id="faq" className="mt-14 scroll-mt-8 border-t border-hairline-light pt-10">
               <h2 className="font-display text-2xl font-semibold text-text-dark">
@@ -674,8 +725,25 @@ export default async function BrokerDetailPage({
               </Link>
             )}
 
+            {cashback && (
+              <Link
+                href={`/cashback/${broker.slug}/setup`}
+                className={`${broker.promotion ? "mt-6" : "mt-10"} flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-tick-up/30 bg-tick-up/10 px-6 py-4 transition-colors hover:border-tick-up/50`}
+              >
+                <span className="text-sm text-text-dark">
+                  <strong className="font-semibold">
+                    {cashback.rateLabel} —{" "}
+                  </strong>
+                  {cashback.pitch}
+                </span>
+                <span className="shrink-0 font-mono text-xs uppercase tracking-[0.15em] text-tick-up">
+                  Nakit iadeyi başlat →
+                </span>
+              </Link>
+            )}
+
             <div
-              className={`${broker.promotion ? "mt-6" : "mt-14"} rounded-2xl border border-hairline-light bg-paper p-6`}
+              className={`${broker.promotion || cashback ? "mt-6" : "mt-14"} rounded-2xl border border-hairline-light bg-paper p-6`}
             >
               <p className="text-sm leading-relaxed text-text-muted">
                 <strong className="text-text-dark">Not:</strong> Yukarıdaki

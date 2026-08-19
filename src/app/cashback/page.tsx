@@ -15,6 +15,12 @@ export const metadata: Metadata = {
 };
 
 export default function CashbackPage() {
+  // Confirmed programs first — they're the ones a visitor can act on today;
+  // the estimates sit below them.
+  const orderedPrograms = [...cashbackPrograms].sort(
+    (a, b) => Number(b.status === "live") - Number(a.status === "live")
+  );
+
   return (
     <>
       <script
@@ -47,8 +53,10 @@ export default function CashbackPage() {
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">
               Aşağıdan bir aracı kurum seçin, işlem hesap numaranızı gönderin,
               biz de bunu partner kayıtlarımızla doğrulayalım — hesap
-              gerekmez. Aşağıdaki oranlar güncel tahminlerdir ve her aracı
-              kurumla nihai koşullar teyit edildikçe değişebilir.
+              gerekmez. <strong className="text-text-on-ink">Aktif</strong>{" "}
+              işaretli programların koşulları aracı kurumla teyit edilmiştir;{" "}
+              <strong className="text-text-on-ink">Tahmini</strong> işaretli
+              oranlar nihai koşullar imzalandıkça değişebilir.
             </p>
           </div>
         </section>
@@ -56,19 +64,38 @@ export default function CashbackPage() {
         <section>
           <div className="mx-auto max-w-3xl px-6 py-16">
             <div className="divide-y divide-hairline-light border-t border-hairline-light">
-              {cashbackPrograms.map((program) => {
+              {orderedPrograms.map((program) => {
                 const broker = getBrokerBySlug(program.brokerSlug);
                 if (!broker) return null;
+                const live = program.status === "live";
                 return (
                   <div key={program.brokerSlug} className="py-6">
                     <div className="flex flex-wrap items-baseline justify-between gap-3">
-                      <h2 className="font-poppins text-xl font-semibold text-text-dark">
+                      <h2 className="flex items-center gap-3 font-poppins text-xl font-semibold text-text-dark">
                         {broker.name}
+                        <span
+                          className={`rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.15em] ${
+                            live
+                              ? "bg-tick-up/12 text-tick-up"
+                              : "bg-hairline-light text-text-muted"
+                          }`}
+                        >
+                          {live ? "Aktif" : "Tahmini"}
+                        </span>
                       </h2>
-                      <span className="font-mono text-sm font-semibold text-gold">
+                      <span
+                        className={`font-mono text-sm font-semibold ${
+                          live ? "text-tick-up" : "text-gold"
+                        }`}
+                      >
                         {program.rateLabel}
                       </span>
                     </div>
+                    {program.pitch && (
+                      <p className="mt-2 text-[15px] font-medium text-text-dark">
+                        {program.pitch}
+                      </p>
+                    )}
                     <p className="mt-2 text-sm text-text-muted">{program.rateNote}</p>
                     <div className="mt-3 flex flex-wrap gap-4">
                       <Link
