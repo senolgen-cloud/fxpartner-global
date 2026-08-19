@@ -332,6 +332,49 @@ export const marketAnalysisPosts: MarketAnalysisPost[] = [
     closing:
       "**FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
   },
+  {
+    slug: "gunluk-bulten-2026-08-19",
+    title: "FXPARTNER Günlük Bülten | 19.08.2026",
+    excerpt:
+      "Yarı iletken sektöründeki satış dalgası Asya borsalarına sıçradı, yüksek ABD tahvil getirileri ve $91'in üzerindeki Brent petrol risk iştahını baskılıyor; USD/JPY müdahale bölgesine yakın, EUR/USD 1,1575'te yatay.",
+    publishedAt: "2026-08-19",
+    readingMinutes: 4,
+    intro:
+      "Asya seansı, küresel çip sektöründeki geri çekilmenin bölge borsalarına yayılması, yükselen ABD tahvil getirileri ve sertleşen ham petrol fiyatlarının baskısı altında geçiyor. Teknoloji ağırlıklı endeksler güne sert satışlarla başlarken, enerji ve faiz cephesindeki gerilim risk iştahını sınırlıyor. Gün içinde piyasaların odağı, öğleden sonra açıklanacak Avrupa PMI verilerine ve merkez bankası açıklamalarına kayıyor.",
+    news: [
+      {
+        icon: "📉",
+        heading: "Çip Sektöründeki Satış Dalgası Asya Borsalarını Vurdu",
+        body: "Dün gece Wall Street'te teknoloji hisselerinde görülen zayıflık, bu sabah bölgenin çip devlerine — **Samsung, SK Hynix ve TSMC** — sirayet etti ve endeksleri aşağı çekti. Japonya'da **Topix endeksi %2,6**, Güney Kore'de **Kospi endeksi %4,8**, Çin'de **Şanghay Bileşik endeksi %1,1** ve Hong Kong'da **Hang Seng endeksi %0,5** geriledi. Avustralya'nın **S&P/ASX 200 endeksi** ise madencilik ve enerji hisselerinin desteğiyle sınırlı bir kayıpla, **%0,3** düşüşle görece daha dirençli bir görünüm sergiledi.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Brent $91'in Üzerinde, Ortadoğu Kaynaklı Arz Endişesi Sürüyor",
+        body: "Brent petrol, Ortadoğu'daki jeopolitik gerilimin ve Umman Boğazı üzerinden geçen ticaret rotalarındaki tıkanıklığın etkisiyle **varil başına 91 doların üzerinde** işlem görüyor. Aynı zamanda ABD 10 yıllık Hazine tahvili getirisinin **%4,71** civarında seyretmesi, büyüme odaklı ve riskli hisselere olan iştahı baskılıyor. Bu ikili baskı — yüksek enerji maliyeti ve yüksek reel getiri — risk varlıklarının önünü kesen temel unsur olarak öne çıkıyor.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın $4.340 Civarında Dengede",
+        body: "XAU/USD, güvenli liman talebi ile yüksek küresel tahvil getirilerinin baskısı arasında sıkışarak **$4.340/ons** seviyesinin çevresinde yatay bir seyir izliyor. Getirilerdeki yükseliş altını sınırlarken, teknoloji sektöründeki satış baskısının tetiklediği risk iştahı kaybı, metale bir miktar destek sağlıyor.",
+      },
+      {
+        icon: "💴",
+        heading: "USD/JPY Müdahale Bölgesine Yakın, EUR/USD Yatay",
+        body: "USD/JPY, işlemcilerin **160,00** seviyesinin test edilmesi durumunda olası bir resmi kur müdahalesini yakından izlediği **159,45-159,80 bandına** yakın seyrediyor. EUR/USD ise gün içinde belirgin bir yön arayışına girmeden **1,1575** civarında yatay kalmaya devam ediyor.",
+      },
+    ],
+    calendarLabel: "19 Ağustos 2026",
+    calendarEvents: [
+      {
+        time: "Öğleden Sonra (Avrupa Seansı)",
+        icon: "🇪🇺",
+        title: "Öncü PMI Verileri ve Merkez Bankası Açıklamaları",
+        note: "Günün ağırlık merkezi Avrupa seansına kayıyor; PMI verileri ve planlanan merkez bankası konuşmaları öncesi pozisyonlanma izlenecek. Sürmekte olan teknoloji sektörü oynaklığı nedeniyle risk limitlerinin sıkı tutulması öneriliyor.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
 ];
 
 export function getMarketAnalysisPostBySlug(slug: string): MarketAnalysisPost | undefined {

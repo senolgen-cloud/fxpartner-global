@@ -42,6 +42,7 @@ export interface TechnicalAnalysisPost {
 export const bulletinTitles: Record<string, string> = {
   "2026-08-13": "13.08.2026 - Gün Ortası Teknik Analiz Bülteni",
   "2026-08-18": "18.08.2026 - Gün İçi Teknik Analiz Bülteni",
+  "2026-08-19": "19.08.2026 - Gün İçi Teknik Analiz Bülteni",
 };
 
 export function getBulletinTitle(publishedAt: string): string {
@@ -351,6 +352,110 @@ export const technicalAnalysisPosts: TechnicalAnalysisPost[] = [
       "82,90 seviyesinin altında kalınması halinde satış baskısı artabilir. Bu durumda 82,25 ve 81,30 seviyeleri destek olarak takip edilebilir.",
     comment:
       "82,90 seviyesindeki direncin yukarı kırılması, yükseliş hareketini hızlandırarak fiyatı 85,85 bölgesine taşıdı. Mevcut yapı, 82,90 üzerinde kaldığı sürece pozitif görünümü destekliyor.",
+    source: "Trading Central",
+  },
+  {
+    slug: "altin-gun-ici-2026-08-19",
+    instrument: "Gold",
+    timeframe: "30 Dakika",
+    publishedAt: "2026-08-19",
+    pivot: "4.386",
+    lastPrice: "4.349",
+    bias: "BEARISH",
+    headline: "Altın Gün İçi: Hedef 4.297",
+    chartImage: "/Grafik/19082026-gold.png",
+    resistances: [
+      { price: "4.442", strength: 1 },
+      { price: "4.421", strength: 1 },
+    ],
+    supports: [
+      { price: "4.297", strength: 1 },
+      { price: "4.276", strength: 1 },
+    ],
+    preference:
+      "4.386 pivot direnci korundukça aşağı yönlü baskının sürmesini bekliyoruz; ilk etapta 4.297, kırılırsa 4.276 hedefte.",
+    alternative:
+      "4.386 üzerinde günlük kapanış, baskıyı geçersiz kılar ve fiyatı 4.421-4.442 direnç bandına taşıyabilir.",
+    comment:
+      "Teknik olarak RSI 45,21 ile nötr-zayıf bölgede, MACD -3,73 ile sinyal çizgisinin altında negatif seyrediyor; fiyat 20 ve 50 periyotluk ortalamaların altında kalarak kısa vadeli satıcılı yapıyı doğruluyor. Temelde ise tablo karışık: ABD 10 yıllık tahvil getirisinin %4,71 civarında güçlü kalması ve dolar endeksindeki dirençli seyir haftalardır ons altın üzerinde baskı unsuru, ancak Asya borsalarındaki çip sektörü kaynaklı satış dalgasının tetiklediği risk iştahı kaybı, güvenli liman talebiyle olası bir aşağı yönlü sert hareketi sınırlayabilir. Bir trader gözüyle, 4.386 üzerine kalıcı bir günlük kapanış görülmeden düşüş senaryosunu ana senaryo olarak korumak mantıklı.",
+    source: "Trading Central",
+  },
+  {
+    slug: "usd-jpy-gun-ici-2026-08-19",
+    instrument: "USD/JPY",
+    timeframe: "30 Dakika",
+    publishedAt: "2026-08-19",
+    pivot: "159,82",
+    lastPrice: "159,33",
+    bias: "BEARISH",
+    headline: "USD/JPY Gün İçi: Hedef 159,05",
+    chartImage: "/Grafik/19082026-usdjpy.png",
+    resistances: [
+      { price: "160,35", strength: 1 },
+      { price: "160,15", strength: 1 },
+    ],
+    supports: [
+      { price: "159,05", strength: 1 },
+      { price: "158,85", strength: 1 },
+    ],
+    preference:
+      "159,82 seviyesi direnç olarak kaldığı sürece aşağı yönlü hareketin devam etmesini bekliyoruz; 159,05 ve ardından 158,85 hedefte.",
+    alternative:
+      "159,82 üzerinde kalıcılaşma, toparlanmayı 160,15-160,35 bandına taşıyabilir.",
+    comment:
+      "RSI 31,39 ile aşırı satım bölgesine yaklaşıyor, MACD -0,07 ile hafif negatif; fiyat kısa vadeli ortalamaların altına sarkarak momentumun zayıfladığına işaret ediyor. Temel tarafta ise pariteyi asıl belirleyen unsur, 160,00 seviyesinin test edilmesi durumunda gündeme gelebilecek resmi Japon kur müdahalesi ihtimali — bu, yükselişleri doğal olarak sınırlayan psikolojik bir tavan oluşturuyor. Buna karşın ABD tahvil getirilerinin %4,71 civarında yüksek kalması dolar lehine bir zemin sağlıyor; bu iki gücün çekişmesi pariteyi 159,82 pivotu etrafında dar bir bantta tutabilir. Müdahale riski nedeniyle 160,00 üzerinde agresif long pozisyonlardan kaçınmak, deneyimli bir trader için temkinli yaklaşım olur.",
+    source: "Trading Central",
+  },
+  {
+    slug: "gbp-usd-gun-ici-2026-08-19",
+    instrument: "GBP/USD",
+    timeframe: "30 Dakika",
+    publishedAt: "2026-08-19",
+    pivot: "1,3565",
+    lastPrice: "1,3542",
+    bias: "BEARISH",
+    headline: "GBP/USD Gün İçi: Hedef 1,3497",
+    chartImage: "/Grafik/19082026-gbpusd.png",
+    resistances: [
+      { price: "1,3617", strength: 1 },
+      { price: "1,3597", strength: 1 },
+    ],
+    supports: [
+      { price: "1,3497", strength: 1 },
+      { price: "1,3478", strength: 1 },
+    ],
+    preference:
+      "1,3565 seviyesi direnç olarak kaldığı sürece aşağı yönlü hareketin devam etmesini bekliyoruz; 1,3497 ve ardından 1,3478 hedefte.",
+    alternative:
+      "1,3565 üzerinde günlük kapanış, toparlanmayı 1,3597-1,3617 bandına taşıyabilir.",
+    comment:
+      "RSI 57,87 ile nötr bölgede fakat MACD 0,00 ile sinyal çizgisine yapışık, yani momentum kararsız — teknik olarak net bir yön henüz teyit edilmiş değil. Temel cephede kablo, kendi başına zayıf bir haber akışından değil, genel dolar gücünden baskı görüyor: yüksek ABD tahvil getirileri ve risk iştahının teknoloji sektöründeki satışlarla zayıflaması, USD çaprazlarının genelinde dolara destek veriyor. Gün içinde açıklanacak Avrupa PMI verileri ve merkez bankası açıklamaları, paritenin 1,3565 pivotu etrafındaki kararsızlığı kırabilecek asıl katalizör; veri öncesi temkinli, pivotun altında kalındığı sürece aşağı yönlü senaryoyu öncelemek daha tutarlı.",
+    source: "Trading Central",
+  },
+  {
+    slug: "wti-gun-ici-2026-08-19",
+    instrument: "Ham Petrol (WTI)",
+    timeframe: "30 Dakika",
+    publishedAt: "2026-08-19",
+    pivot: "83,30",
+    lastPrice: "84,67",
+    bias: "BULLISH",
+    headline: "Ham Petrol (WTI) Gün İçi: Hedef 85,85",
+    chartImage: "/Grafik/19082026-wti.png",
+    resistances: [
+      { price: "87,00", strength: 1 },
+      { price: "85,85", strength: 1 },
+    ],
+    supports: [
+      { price: "82,25", strength: 1 },
+      { price: "81,30", strength: 1 },
+    ],
+    preference:
+      "83,30 pivot desteği korundukça yukarı yönlü görünümün devam etmesini bekliyoruz; ilk hedef 85,85, ardından 87,00.",
+    alternative:
+      "83,30 altına sarkma, toparlanmayı geçersiz kılar ve fiyatı 82,25-81,30 destek bandına çekebilir.",
+    comment:
+      "RSI 59,21 ile yükseliş yönünü destekleyen bölgede, MACD 0,42 ile pozitif ve sinyal çizgisinin üzerinde — teknik yapı alım tarafını destekliyor. Temelde ise fiyatı esas taşıyan unsur arz tarafı: Ortadoğu'daki jeopolitik gerginlik ve Umman Boğazı üzerinden geçen ticaret rotalarındaki tıkanıklık, Brent'i 91 doların üzerine taşırken WTI'ı da aynı risk primiyle yukarı çekiyor. Bir trader için kritik nokta, bu yükselişin makro büyüme endişesinden değil jeopolitik arz riskinden beslenmesi — yani gerginlik dinmeden 83,30 pivotunun altına sarkma ihtimali düşük görünüyor, ancak olası bir de-eskalasyon haberi hızlı bir geri çekilmeyi tetikleyebilir.",
     source: "Trading Central",
   },
 ];
