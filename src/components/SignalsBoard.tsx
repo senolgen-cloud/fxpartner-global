@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import type { tradeSignals, TradeSignalOutcome } from "@/db/schema";
-import { canViewSignal, requiredTierForPair, type PackageTier } from "@/lib/signalAccess";
+import { canViewSignal, requiredTierForPair, type AccessTier } from "@/lib/signalAccess";
+import { ACCESS_TIER_LABEL } from "@/data/packageTiers";
 import TradingViewChart from "./TradingViewChart";
 
 type Signal = typeof tradeSignals.$inferSelect;
@@ -53,7 +54,17 @@ function playSignalChime() {
   });
 }
 
-const TIER_LABEL: Record<PackageTier, string> = { starter: "Starter", pro: "Pro", vip: "VIP" };
+// Only Pro/VIP instruments can ever be locked — free-tier FX signals are
+// public to everyone, signed in or not (see lib/signalAccess.ts), so this
+// is only ever reached for a paid tier and the prompt is always "upgrade".
+function lockPrompt(pair: string): { href: string; label: string; badge: string } {
+  const required = requiredTierForPair(pair);
+  return {
+    href: "/paketler",
+    label: `Bu sinyal ${ACCESS_TIER_LABEL[required]} üyelere özel — Yükselt →`,
+    badge: ACCESS_TIER_LABEL[required],
+  };
+}
 
 // SVG donut mirroring the poster's "73% Başarı Oranı" ring — plain text
 // couldn't carry that at-a-glance read, and TrustGauge's version is styled
@@ -100,14 +111,14 @@ function PerformanceRing({ rate }: { rate: number | null }) {
 }
 
 function LockBadge({ pair }: { pair: string }) {
-  const tier = TIER_LABEL[requiredTierForPair(pair)];
+  const { href, label, badge } = lockPrompt(pair);
   return (
     <Link
-      href="/paketler"
-      title={`${tier} üyelere özel — yükseltmek için tıklayın`}
+      href={href}
+      title={label}
       className="inline-flex items-center gap-1 rounded-full border border-gold/40 bg-gold/10 px-2.5 py-1 text-[11px] font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/20"
     >
-      🔒 {tier}
+      🔒 {badge}
     </Link>
   );
 }
@@ -181,7 +192,7 @@ function SignalTable({
   title: string;
   signals: Signal[];
   closedView?: boolean;
-  viewerTier: PackageTier | null;
+  viewerTier: AccessTier | null;
 }) {
   return (
     <div className="hidden overflow-hidden rounded-2xl border border-hairline bg-ink-soft md:block">
@@ -605,7 +616,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
   );
 }
 
-function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: PackageTier | null }) {
+function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: AccessTier | null }) {
   const isBuy = signal.direction === "BUY";
   const isSell = signal.direction === "SELL";
   const directionColor = isSell ? TICK_DOWN : TICK_UP;
@@ -681,10 +692,10 @@ function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: Packag
 
       {locked ? (
         <Link
-          href="/paketler"
+          href={lockPrompt(signal.pair).href}
           className="mt-3 flex items-center justify-center gap-1.5 rounded-lg border border-hairline border-dashed pt-3 pb-2 font-mono text-[11px] text-text-on-ink-muted transition-colors hover:border-gold hover:text-gold"
         >
-          Bu sinyal {TIER_LABEL[requiredTierForPair(signal.pair)]} üyelere özel — Yükselt →
+          {lockPrompt(signal.pair).label}
         </Link>
       ) : (
         <>
@@ -730,7 +741,7 @@ export default function SignalsBoard({
   initialActive: Signal[];
   initialClosed: Signal[];
   liveMarkets?: ReactNode;
-  viewerTier: PackageTier | null;
+  viewerTier: AccessTier | null;
 }) {
   const [active, setActive] = useState(initialActive);
   const [closed, setClosed] = useState(initialClosed);

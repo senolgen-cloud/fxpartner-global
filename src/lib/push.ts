@@ -23,15 +23,41 @@ export interface PushPayload {
   url: string;
 }
 
-// Best-effort broadcast to every stored subscription. A subscription that
-// the browser has revoked (410 Gone) or that no longer exists (404) is
-// deleted so the table doesn't accumulate dead endpoints; any other
-// per-subscription failure is swallowed so one bad row can't fail the
-// whole broadcast.
+// Best-effort broadcast to every stored subscription, including anonymous
+// ones. Use this for open, top-of-funnel content (blog posts, campaign
+// digests, market analysis, economic-calendar alerts) — things whose whole
+// job is reach. For trade signals use sendPushToMembers below instead.
+//
+// A subscription that the browser has revoked (410 Gone) or that no longer
+// exists (404) is deleted so the table doesn't accumulate dead endpoints;
+// any other per-subscription failure is swallowed so one bad row can't fail
+// the whole broadcast.
 export async function sendPushToAll(payload: PushPayload): Promise<{ sent: number; removed: number }> {
+  return broadcast(payload, await db.query.pushSubscriptions.findMany());
+}
+
+// Signal notifications go only to subscriptions tied to a real account.
+// Instant signal alerts are a member benefit — that's the trade: the levels
+// and the alerts are free, the registration isn't optional. An anonymous
+// push subscription (userId null) is silently skipped here rather than
+// rejected at subscribe time, so the same browser opt-in still works for
+// the content pushes above.
+export async function sendPushToMembers(payload: PushPayload): Promise<{ sent: number; removed: number }> {
+  const subs = await db.query.pushSubscriptions.findMany();
+  return broadcast(
+    payload,
+    subs.filter((s) => s.userId !== null)
+  );
+}
+
+type PushSubscriptionRow = Awaited<ReturnType<typeof db.query.pushSubscriptions.findMany>>[number];
+
+async function broadcast(
+  payload: PushPayload,
+  subs: PushSubscriptionRow[]
+): Promise<{ sent: number; removed: number }> {
   ensureConfigured();
 
-  const subs = await db.query.pushSubscriptions.findMany();
   let sent = 0;
   let removed = 0;
 

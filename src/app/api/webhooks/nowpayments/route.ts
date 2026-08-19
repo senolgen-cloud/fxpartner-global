@@ -10,7 +10,7 @@ import { eq } from "drizzle-orm";
 const PERIOD_DAYS = 30;
 
 // users.isVip is a cached read-only-for-UI flag, kept in lockstep with the
-// authoritative vipSubscriptions row — same pattern as the Stripe webhook.
+// authoritative vipSubscriptions row — nothing else should write it.
 async function syncIsVipCache(userId: string) {
   const [row] = await db
     .select({ status: vipSubscriptions.status })

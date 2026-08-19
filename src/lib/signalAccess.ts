@@ -1,24 +1,32 @@
-// Which /paketler tier a given instrument's live signal requires to view in
-// full on the website. Matches the feature lists on /paketler: Starter says
-// "Forex Sinyalleri", Pro adds "GOLD / XAUUSD Sinyalleri" + "Endeks
-// Sinyalleri", VIP is positioned as the most comprehensive tier — so
-// anything outside plain FX/metals/indices (crypto, energy) defaults to VIP.
+// Which access level a given instrument's live signal requires to view in
+// full on the website. Matches the tiers on /paketler:
 //
-// A viewer with no active package (viewerTier === null) has zero rank —
-// every active signal is locked regardless of pair, full stop. Closed/
-// historical signals are a separate concern entirely and are never gated
-// by this module; see SignalsBoard's closedView/isClosed branches, which
-// skip canViewSignal altogether so past performance stays public
+//   free — plain FX majors/crosses. Fully public: no account, no payment.
+//          These same levels go out openly on Telegram and X (see
+//          PUBLISH_FREE_TIER_LEVELS in /api/trade-signal), so hiding them
+//          behind a login here would only mean the site showed less than
+//          the public channel — the one place a visitor arrives ready to
+//          convert. The account now earns its keep on push alerts and
+//          cashback, not on withholding what we already published.
+//   pro  — GOLD / XAUUSD, silver, and index CFDs.
+//   vip  — everything else: crypto, energy, and any other exotic symbol.
+//
+// A signed-OUT visitor (viewer === null) is therefore treated as "free":
+// they see FX levels in full, and Pro/VIP instruments stay masked exactly
+// as they do for a registered free user.
+// Closed/historical signals are a separate concern entirely and are never
+// gated by this module; see SignalsBoard's closedView/isClosed branches,
+// which skip canViewSignal altogether so past performance stays public
 // (real-results social proof) while only *live, actionable* signals are
-// the paid product.
+// gated.
 //
 // Type-only import — lib/vip.ts pulls in db/drizzle at runtime, but this
 // file is also used from the client-side SignalsBoard component, so only
-// the (erased-at-compile-time) type crosses that boundary.
-import type { PackageTier } from "@/lib/vip";
-export type { PackageTier };
+// the (erased-at-compile-time) types cross that boundary.
+import type { AccessTier, PackageTier } from "@/lib/vip";
+export type { AccessTier, PackageTier };
 
-export const TIER_RANK: Record<PackageTier, number> = { starter: 0, pro: 1, vip: 2 };
+export const TIER_RANK: Record<AccessTier, number> = { free: 0, pro: 1, vip: 2 };
 
 const METAL_SYMBOLS = new Set(["GOLD", "XAUUSD", "SILVER", "XAGUSD"]);
 
@@ -39,7 +47,7 @@ const INDEX_PREFIXES = [
 
 const FX_CODES = new Set(["EUR", "USD", "GBP", "JPY", "CHF", "AUD", "CAD", "NZD", "TRY"]);
 
-export function requiredTierForPair(rawPair: string): PackageTier {
+export function requiredTierForPair(rawPair: string): AccessTier {
   const pair = rawPair.toUpperCase().replace(/[^A-Z0-9]/g, "");
 
   if (METAL_SYMBOLS.has(pair)) return "pro";
@@ -49,20 +57,25 @@ export function requiredTierForPair(rawPair: string): PackageTier {
   if (pair.length === 6) {
     const base = pair.slice(0, 3);
     const quote = pair.slice(3, 6);
-    if (FX_CODES.has(base) && FX_CODES.has(quote)) return "starter";
+    if (FX_CODES.has(base) && FX_CODES.has(quote)) return "free";
   }
 
   // Everything else — crypto (BTCUSD, ETHUSD), energy (OILCASH,
-  // BRENTCASH), and any other exotic instrument — is VIP-only.
+  // BRENTCASH), and any other exotic instrument — is VIP-only. Note this
+  // catch-all is also what puts GOLD24-7 in VIP: it is a separate product
+  // from spot GOLD, not a symbol-matching miss, and is meant to stay here.
   return "vip";
 }
 
-export function viewerRank(viewerTier: PackageTier | null): number {
-  return viewerTier ? TIER_RANK[viewerTier] : -1;
+// null (signed out) ranks the same as "free" — a guest and a registered
+// free user see exactly the same signals. Registration changes what you get
+// *pushed*, not what you can read.
+export function viewerRank(viewer: AccessTier | null): number {
+  return TIER_RANK[viewer ?? "free"];
 }
 
-export function canViewSignal(viewerTier: PackageTier | null, pair: string): boolean {
-  return viewerRank(viewerTier) >= TIER_RANK[requiredTierForPair(pair)];
+export function canViewSignal(viewer: AccessTier | null, pair: string): boolean {
+  return viewerRank(viewer) >= TIER_RANK[requiredTierForPair(pair)];
 }
 
 // Strips actual entry/SL/TP/volume from an active signal the viewer isn't
@@ -82,7 +95,7 @@ export function maskLockedActiveSignal<
     stop: string | null;
     volume: string | null;
   },
->(signal: T, viewerTier: PackageTier | null): T {
-  if (signal.status !== "active" || canViewSignal(viewerTier, signal.pair)) return signal;
+>(signal: T, viewer: AccessTier | null): T {
+  if (signal.status !== "active" || canViewSignal(viewer, signal.pair)) return signal;
   return { ...signal, entry: "", target1: null, target2: null, stop: null, volume: null };
 }

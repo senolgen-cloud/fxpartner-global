@@ -4,9 +4,17 @@
 // bottom footer strip of both cards.
 import { TEXT_ON_INK, TEXT_ON_INK_MUTED, HAIRLINE } from "@/lib/ogAssets";
 
+// Splits a 6-letter FX pair into its two currency codes (EURUSD -> EUR,USD)
+// so the OG cards can style the halves separately. Anything that isn't a
+// plain 6-letter alphabetic pair is returned whole: index, metal, crypto and
+// energy symbols carry digits and longer names, and the old version both
+// stripped the digits and then sliced blindly — turning US100CASH into
+// "USCASH" and GOLD24-7 into "GOL"+"D". Only strip separators, never digits.
 export function splitPair(pair: string): [string, string] {
-  const clean = pair.replace(/[^A-Za-z]/g, "").toUpperCase();
-  if (clean.length >= 6) return [clean.slice(0, 3), clean.slice(3, 6)];
+  const clean = pair.replace(/[^A-Za-z0-9]/g, "").toUpperCase();
+  if (clean.length === 6 && /^[A-Z]{6}$/.test(clean)) {
+    return [clean.slice(0, 3), clean.slice(3, 6)];
+  }
   return [clean, ""];
 }
 

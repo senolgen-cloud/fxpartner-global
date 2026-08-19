@@ -19,7 +19,7 @@ import CashbackLinkForm from "@/components/CashbackLinkForm";
 import { updateCountry } from "./profile-actions";
 import { COUNTRIES } from "@/lib/country";
 import { brokers } from "@/data/brokers";
-import { tierFromPriceId, type PackageTier } from "@/lib/vip";
+import { type PackageTier } from "@/lib/vip";
 import { PACKAGE_TIER_INFO, PACKAGE_TIER_ORDER } from "@/data/packageTiers";
 import { createNowPaymentsCheckout } from "@/app/paketler/checkout-actions";
 
@@ -66,7 +66,6 @@ const VIP_STATUS_CLASS: Record<VipSubscriptionStatus, string> = {
 };
 
 const TIER_LABEL: Record<PackageTier, string> = {
-  starter: "Starter",
   pro: "Pro",
   vip: "VIP",
 };
@@ -113,10 +112,7 @@ export default async function AccountPage() {
     .from(tradeSignals)
     .where(eq(tradeSignals.status, "active"));
 
-  const subscriptionTier: PackageTier | null = subscription
-    ? ((subscription.tier as PackageTier | null) ??
-      (subscription.stripePriceId ? tierFromPriceId(subscription.stripePriceId) : null))
-    : null;
+  const subscriptionTier: PackageTier | null = (subscription?.tier as PackageTier | null) ?? null;
   const isActiveVip = subscription?.status === "active";
 
   async function generateVipLink() {
@@ -176,8 +172,12 @@ export default async function AccountPage() {
                       })} tarihine kadar`}
                   </p>
                 ) : (
+                  // Not "you have nothing" — a signed-in account IS the free
+                  // tier, and saying so is what makes the upgrade an upgrade
+                  // rather than a first purchase.
                   <p className="mt-1 text-sm text-text-on-ink-muted">
-                    Henüz bir üyelik paketiniz yok.
+                    <span className="text-tick-up">Ücretsiz üyelik</span> · Anlık
+                    push bildirimleri ve cashback açık.
                   </p>
                 )}
               </div>
