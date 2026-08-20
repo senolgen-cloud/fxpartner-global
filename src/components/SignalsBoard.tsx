@@ -129,35 +129,43 @@ function outcomeColor(outcome: TradeSignalOutcome | null) {
   return "var(--text-on-ink-muted)";
 }
 
-// Raw entry -> close price movement, in the trade's favor. We show this
-// instead of the EA's "pips" field — pip size varies wildly across
-// instruments (BTCUSD, indices, XAU vs. forex majors) and the EA's pip
-// math doesn't account for that, so its numbers are unreliable.
-function priceDiff(entry: string | null, closePrice: string | null, direction: string | null): number | null {
-  if (!entry || !closePrice) return null;
-  const entryNum = parseFloat(entry);
-  const closeNum = parseFloat(closePrice);
-  if (Number.isNaN(entryNum) || Number.isNaN(closeNum)) return null;
-  const diff = closeNum - entryNum;
-  return direction === "SELL" ? -diff : diff;
+// İşlemin 1.00 lot bazına indirgenmiş kâr/zararı, dolar cinsinden.
+//
+// Daha önce burada ham fiyat farkı (entry -> close) gösteriliyordu, ondan da
+// önce EA'nın "pips" alanı. İkisi de yanlıştı ve sebepleri farklıydı:
+//
+//   * EA'nın pips'i enstrümanlar arasında tutarsız — bir GOLD işlemi -$242
+//     için "-1212 pip", bir US100 işlemi +$19 için "+6400 pip" kaydediyordu.
+//   * Ham fiyat farkı ise ölçek olarak karşılaştırılamaz: BTCUSD yüzlerce
+//     birim oynarken EURUSD binde birlerle oynuyor. Bunları toplamak veya
+//     yan yana koymak matematiksel olarak anlamsız.
+//
+// Lot başına P/L her ikisini de çözüyor: dolar cinsinden olduğu için
+// enstrümanlar arasında toplanabilir ve karşılaştırılabilir, lot bazına
+// indirgendiği için de pozisyon büyüklüğünden bağımsız. Hesaptaki gerçek
+// lotlar 0.02 ile 30.00 arasında değişiyor; normalize edilmeden bakılan
+// bir "kâr" rakamı sinyal kalitesini değil sadece lot büyüklüğünü ölçer.
+//
+// NOT: Bu bir getiri (return) iddiası DEĞİLDİR — "şu kadar sermayeyle şu
+// kadar kazandırır" demiyor. Sinyalin kendi özelliğini ölçüyor: 1 lotluk
+// pozisyonda bu hareket ne kadar ediyordu.
+function profitPerLot(profit: string | null, volume: string | null): number | null {
+  if (!profit || !volume) return null;
+  const p = parseFloat(profit);
+  const v = parseFloat(volume);
+  if (Number.isNaN(p) || Number.isNaN(v) || v === 0) return null;
+  return p / v;
 }
 
-function decimalsOf(value: string | null): number {
-  if (!value) return 2;
-  const idx = value.indexOf(".");
-  return idx === -1 ? 0 : value.length - idx - 1;
-}
-
-function formatDiff(diff: number, decimals: number): string {
-  return `${diff > 0 ? "+" : ""}${diff.toFixed(decimals)}`;
-}
-
-// Aggregate numbers mix wildly different price scales (BTCUSD moves in
-// hundreds, forex majors in thousandths) — a fixed 2-decimal format would
-// round small forex diffs down to 0.00, so use more precision for small
-// values and less for large ones.
-function aggDecimals(value: number): number {
-  return Math.abs(value) >= 10 ? 2 : Math.abs(value) >= 1 ? 3 : 5;
+// Dolar tutarı — tüm enstrümanlarda aynı ölçekte olduğu için sabit 2 hane
+// yeterli. (Fiyat farkı gösterilirken enstrümana göre değişken hassasiyet
+// gerekiyordu; lot başına P/L'de böyle bir sorun yok.)
+function formatPerLot(value: number): string {
+  const sign = value > 0 ? "+" : value < 0 ? "−" : "";
+  return `${sign}$${Math.abs(value).toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
 }
 
 function Level({ label, value, color }: { label: string; value: string | null; color: string }) {
@@ -216,20 +224,15 @@ function SignalTable({
                 <th className="px-4 py-3 font-medium">Giriş</th>
                 <th className="px-4 py-3 font-medium">{closedView ? "Kapanış" : "SL / TP"}</th>
                 <th className="px-4 py-3 font-medium">Lot</th>
-                <th className="px-6 py-3 text-right font-medium">{closedView ? "Sonuç" : "Durum"}</th>
+                <th className="px-6 py-3 text-right font-medium">{closedView ? "Sonuç (1 lot)" : "Durum"}</th>
               </tr>
             </thead>
             <tbody>
               {signals.map((s) => {
                 const isSell = s.direction === "SELL";
                 const directionColor = isSell ? TICK_DOWN : TICK_UP;
-                const diff = priceDiff(s.entry, s.closePrice, s.direction);
-                const resultLine =
-                  diff !== null
-                    ? formatDiff(diff, decimalsOf(s.entry))
-                    : s.profit
-                      ? `${parseFloat(s.profit) > 0 ? "+" : ""}${s.profit} USD`
-                      : null;
+                const perLot = profitPerLot(s.profit, s.volume);
+                const resultLine = perLot !== null ? formatPerLot(perLot) : null;
                 // Past performance is public regardless of package — only
                 // closedView's live/active counterpart is the gated product.
                 const locked = closedView ? false : !canViewSignal(viewerTier, s.pair);
@@ -359,24 +362,26 @@ function useCountUp(target: number, durationMs = 1400, decimals = 0) {
 
 function PipsStats({ closed }: { closed: Signal[] }) {
   const decisive = closed
-    .filter((s) => (s.outcome === "WIN" || s.outcome === "LOSS") && priceDiff(s.entry, s.closePrice, s.direction) !== null)
+    .filter((s) => (s.outcome === "WIN" || s.outcome === "LOSS") && profitPerLot(s.profit, s.volume) !== null)
     .slice()
     .sort((a, b) => (a.closedAt?.getTime() ?? 0) - (b.closedAt?.getTime() ?? 0));
 
-  const pipsValues = decisive.map((s) => priceDiff(s.entry, s.closePrice, s.direction) as number);
-  const totalPips = pipsValues.reduce((sum, p) => sum + p, 0);
+  // Artık dolar topluyoruz, fiyat farkı değil — bu toplam matematiksel
+  // olarak anlamlı, öncekiler değildi.
+  const perLotValues = decisive.map((s) => profitPerLot(s.profit, s.volume) as number);
+  const totalPips = perLotValues.reduce((sum, p) => sum + p, 0);
   const wins = decisive.filter((s) => s.outcome === "WIN");
   const losses = decisive.filter((s) => s.outcome === "LOSS");
-  const bestTrade = pipsValues.length ? Math.max(...pipsValues) : 0;
-  const worstTrade = pipsValues.length ? Math.min(...pipsValues) : 0;
+  const bestTrade = perLotValues.length ? Math.max(...perLotValues) : 0;
+  const worstTrade = perLotValues.length ? Math.min(...perLotValues) : 0;
 
-  const totalCount = useCountUp(totalPips, 1400, aggDecimals(totalPips));
-  const bestCount = useCountUp(bestTrade, 1200, aggDecimals(bestTrade));
-  const worstCount = useCountUp(Math.abs(worstTrade), 1200, aggDecimals(worstTrade));
+  const totalCount = useCountUp(totalPips, 1400, 2);
+  const bestCount = useCountUp(bestTrade, 1200, 2);
+  const worstCount = useCountUp(Math.abs(worstTrade), 1200, 2);
 
-  // Cumulative pips series for the sparkline.
+  // Kümülatif 1-lot-başına P/L serisi (sparkline).
   let running = 0;
-  const cumulative = pipsValues.map((p) => (running += p));
+  const cumulative = perLotValues.map((p) => (running += p));
   const points = cumulative.length > 0 ? cumulative : [0];
   const minY = Math.min(0, ...points);
   const maxY = Math.max(0, ...points);
@@ -405,13 +410,13 @@ function PipsStats({ closed }: { closed: Signal[] }) {
   const avgDurationMs = durations.length ? durations.reduce((a, b) => a + b, 0) / durations.length : 0;
   const avgDurationLabel = formatDuration(avgDurationMs);
 
-  // Monthly pips breakdown.
+  // Aylık 1-lot-başına P/L dağılımı.
   const monthlyMap = new Map<string, number>();
   for (const s of decisive) {
     const d = s.closedAt ?? s.createdAt;
     if (!d) continue;
     const key = d.toLocaleDateString("en-US", { month: "short", year: "2-digit", timeZone: "UTC" });
-    monthlyMap.set(key, (monthlyMap.get(key) ?? 0) + (priceDiff(s.entry, s.closePrice, s.direction) ?? 0));
+    monthlyMap.set(key, (monthlyMap.get(key) ?? 0) + (profitPerLot(s.profit, s.volume) ?? 0));
   }
   const monthly = Array.from(monthlyMap.entries());
   const monthlyMax = Math.max(1, ...monthly.map(([, v]) => Math.abs(v)));
@@ -422,7 +427,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
   for (const s of decisive) {
     const key = s.pair;
     const entry = pairMap.get(key) ?? { pair: key, total: 0, count: 0, wins: 0 };
-    entry.total += priceDiff(s.entry, s.closePrice, s.direction) ?? 0;
+    entry.total += profitPerLot(s.profit, s.volume) ?? 0;
     entry.count += 1;
     if (s.outcome === "WIN") entry.wins += 1;
     pairMap.set(key, entry);
@@ -439,25 +444,39 @@ function PipsStats({ closed }: { closed: Signal[] }) {
     >
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div>
+          {/* Etiket, gerçekte kapsanan işlem sayısından türetiliyor.
+              Sayfa yalnızca son N kapanmış işlemi yüklüyor (signals/page.tsx
+              → limit), dolayısıyla buna "Toplam" demek tüm geçmişi ima eder
+              ve yanlış olur. Sayı veriden geldiği için limit değişirse
+              etiket de kendiliğinden doğru kalır. */}
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
-            Toplam Fiyat Farkı (Kapanan İşlemler)
+            Son {decisive.length} İşlem — 1 Lot Başına K/Z
           </span>
           <div className="mt-2 flex items-baseline gap-2">
             <span
+              ref={totalCount.ref}
               className="font-display text-5xl font-bold tabular-stat md:text-6xl"
               style={{ color: lineColor }}
             >
-              {isPositive ? "+" : "-"}
-              {totalCount.display}
+              {isPositive ? "+" : "−"}${totalCount.display}
             </span>
           </div>
+          {/* Rakamın ne olduğu ve ne OLMADIĞI birlikte yazılıyor: normalize
+              edilmiş bir sinyal ölçüsü, hesap getirisi değil. Bu ayrım
+              yazılmazsa sayı doğrudan getiri iddiası gibi okunuyor. */}
+          <p className="mt-3 max-w-md text-xs leading-relaxed text-text-on-ink-muted">
+            Her işlem 1.00 lotluk pozisyona indirgenerek toplanmıştır — böylece
+            farklı enstrümanlar ve farklı lot büyüklükleri karşılaştırılabilir hale
+            gelir. <strong className="text-text-on-ink">Bu bir getiri oranı değildir</strong>;
+            gerçek sonucunuz kendi lot büyüklüğünüze ve giriş anınıza göre değişir.
+          </p>
         </div>
 
         <div className="flex flex-wrap gap-6">
           <div>
             <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">En İyi</div>
             <div ref={bestCount.ref} className="mt-1 font-display text-xl font-semibold" style={{ color: TICK_UP }}>
-              +{bestCount.display}
+              +${bestCount.display}
             </div>
           </div>
           <div>
@@ -467,7 +486,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
               className="mt-1 font-display text-xl font-semibold"
               style={{ color: TICK_DOWN }}
             >
-              -{worstCount.display}
+              −${worstCount.display}
             </div>
           </div>
           <div>
@@ -545,7 +564,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
                 <div key={month} className="flex flex-1 flex-col items-center gap-2">
                   <span className="font-mono text-[11px] font-medium" style={{ color: barColor }}>
                     {value >= 0 ? "+" : ""}
-                    {value.toFixed(aggDecimals(value))}
+                    {formatPerLot(value)}
                   </span>
                   <div className="flex h-24 w-full items-end justify-center">
                     <div
@@ -598,7 +617,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
                     style={{ color: barColor }}
                   >
                     {p.total >= 0 ? "+" : ""}
-                    {p.total.toFixed(aggDecimals(p.total))}
+                    {formatPerLot(p.total)}
                   </span>
                   <span className="w-20 shrink-0 text-right font-mono text-[11px] text-text-on-ink-muted">
                     {p.count} işlem
@@ -625,14 +644,11 @@ function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: Access
   // signals are gated.
   const locked = isClosed ? false : !canViewSignal(viewerTier, signal.pair);
 
-  const cardDiff = priceDiff(signal.entry, signal.closePrice, signal.direction);
-  const resultLine =
-    cardDiff !== null
-      ? formatDiff(cardDiff, decimalsOf(signal.entry))
-      : signal.profit
-        ? `${parseFloat(signal.profit) > 0 ? "+" : ""}$${signal.profit}`
-        : null;
-  const resultUnit = null;
+  const cardPerLot = profitPerLot(signal.profit, signal.volume);
+  const resultLine = cardPerLot !== null ? formatPerLot(cardPerLot) : null;
+  // Rakamın neyi ifade ettiği rakamın yanında durmalı; "1 lot başına"
+  // olmadan bu sayı bir hesap getirisi gibi okunuyor.
+  const resultUnit = cardPerLot !== null ? "1 lot başına" : null;
   const resultColor = outcomeColor(signal.outcome);
 
   // Purely decorative — same as the homepage hero card's sparkline, never
