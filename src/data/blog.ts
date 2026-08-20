@@ -1640,6 +1640,10 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "teminat-bonusu-nedir-trade-bonusu-farki",
+    // Square build of the campaign banner — same treatment as the XM cashback
+    // post: blurred fill behind, wide original letterboxed on top, because the
+    // post page crops covers to a square and would cut the headline off.
+    coverImage: "/blog/teminat-bonusu-nedir-trade-bonusu-farki-cover.png",
     lang: "tr",
     title: "Teminat Bonusu Nedir? Trade Bonusundan Farkı — Rakamlarla",
     excerpt:
