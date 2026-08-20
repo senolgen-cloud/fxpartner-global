@@ -87,7 +87,7 @@ export const GET = withCronErrorAlert("news-update", async (req: NextRequest) =>
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
   const text =
     `<b>${bulletin.title}</b>\n\n${bulletin.excerpt}\n\n` +
-    `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n\n` +
+    `Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.\n\n` +
     `📰 Bültenin tamamı: ${siteUrl}/haber-bulteni/${slug}\n\n` +
     telegramSiteCta();
 

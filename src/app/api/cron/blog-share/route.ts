@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramMessage, telegramSiteCta, mainServicesKeyboard } from "@/lib/telegram";
+import {
+  sendTelegramMessage,
+  sendTelegramPhoto,
+  telegramSiteCta,
+  mainServicesKeyboard,
+} from "@/lib/telegram";
 import { sendPushToAll } from "@/lib/push";
 import { blogPosts } from "@/data/blog";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
@@ -40,11 +45,21 @@ export const GET = withCronErrorAlert("blog-share", async (req: NextRequest) => 
   const url = `${siteUrl}/blog/${target.slug}`;
   const text =
     `<b>${target.title}</b>\n\n${target.excerpt}\n\n` +
-    `Devamini oku: ${url}\n\n` +
-    `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n\n` +
+    `Devamını oku: ${url}\n\n` +
+    `Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.\n\n` +
     telegramSiteCta();
 
-  const result = await sendTelegramMessage(text, { inlineKeyboard: mainServicesKeyboard() });
+  // Posts that ship a cover go out as a photo post rather than a bare link
+  // whose preview Telegram may or may not expand — the cover is already a
+  // purpose-made image and reads far better in the channel feed. sendPhoto
+  // caps the caption at 1024 characters, so anything longer (or any post
+  // without a cover) falls back to the plain text message.
+  const photoUrl = target.coverImage ? `${siteUrl}${target.coverImage}` : undefined;
+  const keyboard = mainServicesKeyboard();
+  const result =
+    photoUrl && text.length <= 1024
+      ? await sendTelegramPhoto(photoUrl, text, { inlineKeyboard: keyboard })
+      : await sendTelegramMessage(text, { inlineKeyboard: keyboard });
   await markPostedToTelegram(`blog:${target.slug}`);
 
   let push: { sent: number; removed: number } | { error: string } = { sent: 0, removed: 0 };

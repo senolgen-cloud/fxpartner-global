@@ -35,8 +35,8 @@ export const GET = withCronErrorAlert("market-analysis-share", async (req: NextR
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
   const text =
     `<b>${latest.title}</b>\n\n${latest.excerpt}\n\n` +
-    `Devamini oku: ${siteUrl}/piyasa-analizi/${latest.slug}\n\n` +
-    `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n\n` +
+    `Devamını oku: ${siteUrl}/piyasa-analizi/${latest.slug}\n\n` +
+    `Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.\n\n` +
     telegramSiteCta();
 
   const result = await sendTelegramMessage(text, { inlineKeyboard: mainServicesKeyboard() });

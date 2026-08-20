@@ -38,7 +38,7 @@ export const GET = withCronErrorAlert("campaign-digest", async (req: NextRequest
     lines.join("\n\n") +
     `\n\nTum detaylar ve guncel sartlar: ${siteUrl}/campaigns\n\n` +
     `Sartlar brokere gore degisebilir ve onceden haber verilmeden guncellenebilir. ` +
-    `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n\n` +
+    `Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.\n\n` +
     telegramSiteCta();
 
   const result = await sendTelegramMessage(text, {

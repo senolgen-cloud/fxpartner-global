@@ -43,7 +43,7 @@ export const GET = withCronErrorAlert("market-update", async (req: NextRequest) 
     `<b>${config.label}</b> su an $${currentPrice.toLocaleString("en-US")} seviyesinde.\n` +
     `Fiyat MA10'un ${aboveMA10 ? "uzerinde" : "altinda"}, MA20'nin ${aboveMA20 ? "uzerinde" : "altinda"}. ` +
     `RSI(14) ${rsiValue !== null ? rsiValue.toFixed(1) : "-"} ile ${rsiZone}.\n\n` +
-    `Bu icerik genel bilgilendirme amaclidir, yatirim tavsiyesi degildir.\n\n` +
+    `Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.\n\n` +
     telegramSiteCta();
 
   const result = await sendTelegramPhoto(imageUrl, caption, { inlineKeyboard: mainServicesKeyboard() });
