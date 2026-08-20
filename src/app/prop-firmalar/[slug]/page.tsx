@@ -267,7 +267,10 @@ export default async function PropFirmDetailPage({
                   </a>
                 )}
                 {discountLive && d.code && (
-                  <span className="font-mono text-xs text-text-on-ink-muted">
+                  <Link
+                    href={`/prop-firmalar/${firm.slug}/indirim-kodu`}
+                    className="font-mono text-xs text-text-on-ink-muted hover:text-text-on-ink"
+                  >
                     İndirim kodu:{" "}
                     <span className="rounded border border-dashed border-signal/50 bg-signal/10 px-2 py-0.5 uppercase text-signal">
                       {d.code}
@@ -275,7 +278,7 @@ export default async function PropFirmDetailPage({
                     {typeof d.percent === "number" && (
                       <span className="ml-2 font-semibold text-gold">%{d.percent}</span>
                     )}
-                  </span>
+                  </Link>
                 )}
               </div>
             )}

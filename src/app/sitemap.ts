@@ -49,6 +49,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
+  // Yalnızca teyitli indirimi olan firmalar için sayfa üretiliyor (bkz.
+  // indirim-kodu/page.tsx), sitemap de aynı filtreyi kullanmak zorunda —
+  // aksi halde var olmayan sayfaları Google'a bildirmiş oluruz.
+  const discountRoutes: MetadataRoute.Sitemap = propFirms
+    .filter((f) => f.discount?.status === "live" && f.discount.code)
+    .map((f) => ({
+      url: `${SITE_URL}/prop-firmalar/${f.slug}/indirim-kodu`,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }));
+
   const categoryRoutes: MetadataRoute.Sitemap = brokerCategories.map((c) => ({
     url: `${SITE_URL}/categories/${categoryInfo[c].slug}`,
     changeFrequency: "weekly",
@@ -91,6 +102,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...staticRoutes,
     ...brokerRoutes,
     ...propFirmRoutes,
+    ...discountRoutes,
     ...categoryRoutes,
     ...blogRoutes,
     ...cashbackSetupRoutes,
