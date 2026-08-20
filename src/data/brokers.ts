@@ -463,8 +463,12 @@ export const brokers: Broker[] = [
     slug: "lite-finance",
     name: "Lite Finance",
     logo: "/brokers/litefinance-icon.png",
-    ogImage: "/brokers/lite-finance-cover.png",
-    adImage: "/campaigns/litefinance-reklam-1.png",
+    // Both the share preview and the ad slot run the current campaign
+    // creative. Filename deliberately has no "%20" in it — the original
+    // upload did, and a literal %20 in a public path decodes back to a
+    // space, so Next/Image would 404 on it.
+    ogImage: "/campaigns/litefinance-teminat-bonusu.png",
+    adImage: "/campaigns/litefinance-teminat-bonusu.png",
     adImageWidth: 1672,
     adImageHeight: 941,
     tagline: "10 dolardan başlayan cent hesap, 0.0 pipten ECN",
@@ -573,18 +577,27 @@ export const brokers: Broker[] = [
       education:
         "Yeni başlayanlar için adım adım rehberler, teknik ve temel analiz blogu, günlük piyasa yorumları, ekonomik takvim ve sınırsız süreli demo hesap. Kendi sosyal işlem platformu üzerinden başkalarının işlemlerini kopyalayarak veya kendi işlemlerini kopyalanmaya açarak öğrenme/gelir modeli sunar.",
     },
+    // The invite-a-friend promo this replaced is still a live Lite Finance
+    // offer, but a broker can only carry one `promotion` and the %20 margin
+    // bonus is the campaign we're actually running creative behind. If both
+    // need to show on /campaigns, the field has to become an array first.
     promotion: {
-      tag: "Aktif Kampanya",
-      title: "Arkadaşını Davet Et, 50$ Kazan",
+      tag: "FXPARTNER'a Özel",
+      title: "%20 Teminat Bonusu — Koşulsuz, Şartsız",
       intro:
-        "Lite Finance'in arkadaşını davet et kampanyası FXPARTNER müşterileri için aktif: bir arkadaşını davet et, ikiniz de ödüllendirilin.",
+        "FXPARTNER üzerinden açılan Lite Finance hesaplarına, yatırdığınız tutarın %20'si teminat bonusu olarak tanımlanır. Bu bir trade bonusu değildir: bakiyenize eklenip hacim şartına bağlanmaz, teminatınıza eklenir ve hesabınızın dalgalanmaya dayanma payını doğrudan büyütür. Kazancınız size aittir, hacim şartı yoktur.",
       steps: [
-        "Kendi hesabını doğrula ve en az 100$ yatır.",
-        "Kişisel referans linkini oluştur ve bir arkadaşınla paylaş.",
-        "Arkadaşın senin linkin üzerinden kaydolsun ve 7 gün içinde 250$+ yatırıp promosyon kodunu uygulayarak %100 yatırım bonusu talep etsin.",
-        "Arkadaşın en az 1 lot işlem tamamladığında, hesabına 50$ yatırılır.",
+        "FXPARTNER bağlantısı üzerinden Lite Finance hesabını aç.",
+        "Hesap doğrulamanı (KYC) tamamla.",
+        "Yatırımını yap — teminat bonusu yatırdığın tutarın %20'si oranında tanımlanır.",
+        "İşlemlerine devam et; bonus teminat tarafında durur, kârın kendi bakiyende birikir.",
       ],
-      note: "Kampanya koşulları geçerlidir ve değişikliğe tabidir; Lite Finance, koşul ihlallerinde ödülleri iptal etme hakkını saklı tutar. Katılmadan önce güncel koşulları Lite Finance'in resmi sitesinden teyit edin.",
+      note: "Teminat bonusu çekilebilir bir bakiye değildir; hesabın teminat tabanını büyütür ve çekim yapıldığında hesaptan düşülebilir. Bonus daha büyük pozisyon açmak için değil, mevcut pozisyonun nefes payını genişletmek için tasarlanmıştır. Kampanya koşulları değişebilir; katılmadan önce güncel şartları FXPARTNER veya Lite Finance'in Türkiye destek hattından teyit edin. Kaldıraçlı işlemler yüksek risk içerir.",
+      image: "/campaigns/litefinance-teminat-bonusu.png",
+      imageWidth: 1672,
+      imageHeight: 941,
+      ctaUrl: "https://bit.ly/litefinance-vip",
+      ctaLabel: "Teminat Bonuslu Hesap Aç",
       contactEmail: "turkiye@litefinance.com",
     },
   },

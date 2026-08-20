@@ -29,6 +29,7 @@ Boşluk orada.
 | **4 platform** (MT4, MT5, cTrader, WebTerminal) | cTrader ECN/algo kitlesi için ayırt edici | XM ve çoğu rakip cTrader vermiyor |
 | Kendi **copytrade** platformu | Pasif gelir arayan segment + sinyal veren tarafta gelir | `/signals` ve `/copytrade` sayfalarımızla doğal eşleşme |
 | **%50'ye kadar nakit iade** (FXPARTNER IB) | En yüksek marjımız burada — XM'de lot başına ~5 $ | `/cashback`'te **tek aktif program**; diğer üçü hâlâ tahmini |
+| **%20 koşulsuz teminat bonusu** (FXPARTNER'a özel) | Piyasadaki bonusların neredeyse tamamı hacim şartlı trade bonusu; koşulsuz teminat bonusu nadir | Rakiplerin bonus mesajıyla yarışmıyoruz — **farklı bir ürünü** anlatıyoruz |
 | **Türkçe destek hattı** (turkiye@litefinance.com) | Offshore brokerlarda nadir | Güven itirazını doğrudan kırar |
 
 ### Gizlenmeyecek zayıf yönler
@@ -225,6 +226,10 @@ Instagram / Shorts / SEO
 
 ## 7. Uyum sınırları — istisnasız
 
+> **%20 teminat bonusu — kapatılması gereken üç boşluk.** Kampanya metni ve blog yazısı, bonusun *teminata eklendiği, hacim şartı taşımadığı ve kârın yatırımcıya ait olduğu* esasına göre yazıldı. Üç koşul hâlâ teyit edilmedi ve reklam hacmi artmadan önce netleşmeli: **(1)** azami bonus tavanı var mı, **(2)** bonusun bir geçerlilik süresi var mı, **(3)** kısmi çekimde bonus hangi oranda düşülüyor. Metinlerde bu üçü "çekim yapıldığında hesaptan düşülebilir" ve "koşulları teyit edin" şeklinde temkinli bırakıldı; kesin rakamlar geldiğinde `promotion.note` ve blog yazısının son bölümü güncellenmeli.
+>
+> **Bir de ifade notu:** banner "koşulsuz, şartsız sadece LiteFinance'da" diyor. Blog yazısında bunu piyasa geneli için mutlak bir olumsuzlama olarak ("hiçbir global firma vermiyor") değil, doğrulanabilir bir ifadeyle yazdık: küresel brokerların standart uygulaması hacim şartlı trade bonusudur, koşulsuz teminat bonusu nadirdir ve genellikle iş ortaklıkları üzerinden sunulur. Mutlak iddia, tek bir karşı örnekle çürütülebilir ve yazının güvenilirliğini bitirir; bu haliyle aynı mesajı verip savunulabilir kalıyor.
+
 | Asla | Yerine |
 |---|---|
 | "Garanti kazanç", "kesin kâr", aylık getiri vaadi | "Maliyet şu kadar", "süre şu kadar" — sadece doğrulanabilir sayı |
@@ -244,7 +249,9 @@ Her creative ve her gönderi risk uyarısı taşır: *"Yatırım tavsiyesi deği
 - [x] `/brokers/lite-finance` derin inceleme, 3 hesap türü, dürüst regülasyon bölümü, 9 SSS
 - [x] 4 creative (ad / kare / story / nakit iade) + yeniden üretim rotası
 - [x] **Nakit iade canlıda:** `/cashback`'te LiteFinance "Aktif" rozetiyle en üstte, `/brokers/lite-finance` sayfasından `/cashback/lite-finance/setup`'a giden banner ile
-- [x] **5 blog yazısının tamamı yayında** — cent hesap rehberi, anlık para çekme, ECN maliyet hesabı, bonus tuzağı, LiteFinance vs XM
+- [x] **6 blog yazısı yayında** — cent hesap rehberi, anlık para çekme, ECN maliyet hesabı, bonus tuzağı, LiteFinance vs XM, teminat bonusu vs trade bonusu
+- [x] **%20 teminat bonusu kampanyası canlıda** — `/campaigns`'te aktif kampanya, reklam slotlarında (`adImage`) ve paylaşım önizlemesinde (`ogImage`) `litefinance-teminat-bonusu.png`
+- [ ] Kampanyanın eksik koşulları netleştirilsin: azami bonus tavanı, süre, çekimde düşülme oranı (bkz. bölüm 7 notu)
 - [ ] Kapak görseli eksik olan 3 yazı (cent hesap, ECN maliyet, bonus tuzağı) — görsel üretim günlük limiti sıfırlandığında tamamlanacak
 - [ ] `/copytrade` sayfasına LiteFinance sosyal işlem bölümü
 - [ ] Diğer üç brokerın nakit iade oranı teyit edilip `status: "live"`a çekilsin

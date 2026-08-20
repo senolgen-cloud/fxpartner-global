@@ -1638,6 +1638,119 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "teminat-bonusu-nedir-trade-bonusu-farki",
+    lang: "tr",
+    title: "Teminat Bonusu Nedir? Trade Bonusundan Farkı — Rakamlarla",
+    excerpt:
+      "Teminat bonusu ile trade bonusu aynı şey değildir: biri hesabınızın dalgalanmaya dayanma payını büyütür, diğeri sizi hacim şartına bağlar. Farkı 1.000 dolarlık bir hesap üzerinden pip pip hesaplıyoruz — ve teminat bonusunu boşa harcamanın tek yolunu gösteriyoruz.",
+    publishedAt: "2026-08-20",
+    readingMinutes: 9,
+    sections: [
+      {
+        paragraphs: [
+          "Forex'te \"bonus\" kelimesi tek bir şeyi anlatmaz. Piyasada birbirinden tamamen farklı iki mekanizma aynı isimle pazarlanıyor ve ikisini karıştırmak, yatırımcının hesabına doğrudan zarar veren bir hataya dönüşüyor.",
+          "Birincisi trade bonusu (yatırım bonusu, kredi bonusu): bakiyenize eklenir, işlem sermayeniz büyümüş gibi görünür, ama çekilebilir hale gelmesi için belirli bir işlem hacmini tamamlamanız gerekir. İkincisi teminat bonusu: bakiyenize değil teminatınıza eklenir, hacim şartı taşımaz ve tek işlevi hesabınızın piyasa dalgalanmasına dayanma payını büyütmektir.",
+          "Bu yazıda ikisinin farkını 1.000 dolarlık bir hesap üzerinden rakamlarla gösteriyoruz. Sonda da teminat bonusunun sağladığı avantajı tamamen sıfırlayan tek hatayı hesaplayacağız — ve bu hatayı yapanların oranı, tahmin edilenden yüksek.",
+        ],
+      },
+      {
+        heading: "Neden bu ayrım bugün özellikle önemli?",
+        paragraphs: [
+          "Çünkü piyasadaki standart uygulama trade bonusudur. Küresel brokerların yayınladığı \"%30\", \"%50\", \"%100 bonus\" kampanyalarının neredeyse tamamı hacim şartına bağlı trade bonuslarıdır: bonusu almak kolaydır, tutmak zordur ve çoğu durumda çekilebilir hale getirmenin maliyeti bonusun kendisinden büyüktür.",
+          "Koşulsuz teminat bonusu ise piyasada nadir görülür. Nedeni basit: brokerın bu bonustan doğrudan bir hacim geliri garantisi yoktur — yatırımcıyı daha çok işlem yapmaya zorlamaz. Bu yüzden genellikle standart kampanya olarak değil, belirli iş ortaklıkları üzerinden sunulur.",
+          "FXPARTNER üzerinden açılan Lite Finance hesaplarına tanımlanan %20 teminat bonusu tam olarak böyle bir düzenlemedir: koşulsuz, şartsız ve hacim taahhüdü içermez. Bu, FXPARTNER'ın Lite Finance ile kurduğu resmi iş ortaklığından doğan, Türk yatırımcılara özel bir imkândır — brokerın herkese açık kampanya sayfasında yayınladığı bir teklif değildir.",
+        ],
+      },
+      {
+        heading: "Kurulum: 1.000 dolarlık hesap, %20 bonus",
+        paragraphs: [
+          "Aşağıdaki bütün hesaplar tek bir senaryo üzerinden yürüyor. Rakamları sadeleştirmek için EUR/USD paritesini 1,00 kabul ettik ve stop out seviyesini %20 aldık — stop out oranı hesap türüne göre değişir (Lite Finance'te ECN hesapta %20, cent hesapta %50), kendi hesabınızınkini kabinden kontrol edin.",
+        ],
+        list: [
+          "Yatırım: 1.000 $. Bonus oranı: %20 → 200 $.",
+          "Açılan pozisyon: 0,5 lot EUR/USD, 1:100 kaldıraç.",
+          "Bu pozisyonun bloke ettiği teminat: yaklaşık 500 $.",
+          "0,5 lotta 1 pip hareket: 5 $.",
+        ],
+      },
+      {
+        heading: "Senaryo A — Bonus yok",
+        paragraphs: [
+          "Öz sermayeniz 1.000 $, pozisyonun bloke ettiği teminat 500 $. Stop out %20 seviyesinde tetiklendiğine göre, hesabınız öz sermaye 100 dolara (500 $ × %20) inince zorla kapatılır.",
+          "Yani taşıyabileceğiniz azami zarar: 1.000 − 100 = 900 $. Pip cinsinden: 900 ÷ 5 = 180 pip. Pozisyonunuz size karşı 180 pip giderse hesap kapanır.",
+        ],
+      },
+      {
+        heading: "Senaryo B — %20 teminat bonusu",
+        paragraphs: [
+          "Bonus bakiyenize değil teminat tabanınıza ekleniyor: teminat hesabında öz sermayeniz 1.200 $ olarak işlem görüyor. Kendi paranız hâlâ 1.000 $ — değişen tek şey, marjin hesaplamasının hangi rakam üzerinden yapıldığı.",
+          "Aynı pozisyon, aynı 500 $ bloke teminat, aynı %20 stop out eşiği: hesap yine 100 dolara inince kapanır. Ama bu kez yukarıdan aşağıya kat edilecek mesafe daha uzun.",
+          "Taşıyabileceğiniz azami zarar: 1.200 − 100 = 1.100 $. Pip cinsinden: 1.100 ÷ 5 = 220 pip.",
+          "Sonuç: teminat bonusu size 40 pip ekstra nefes payı verdi (180 → 220). Bu, bonus tutarının tam karşılığıdır — 200 $ bonus, 0,5 lotluk bir pozisyonda tam olarak 40 pip demektir. Kârınız değişmedi, kaldıracınız değişmedi, riskiniz değişmedi; sadece piyasanın size karşı gidebileceği mesafe uzadı.",
+        ],
+      },
+      {
+        heading: "Senaryo C — Aynı %20, ama trade bonusu olarak",
+        paragraphs: [
+          "Şimdi aynı 200 doları trade bonusu olarak alalım. Bakiyeniz 1.200 $ görünür ve ilk bakışta bu daha cazip gelir — sonuçta \"daha fazla sermaye\".",
+          "Ama bu 200 doları çekebilmek için bir işlem hacmini tamamlamanız gerekir. Çarpan kampanyadan kampanyaya değişir; yaygın bir örnek üzerinden gidelim: bonusun her 1 doları için 1 lot işlem şartı. Bu, 200 lot demektir.",
+          "200 lotun maliyeti nedir? 1,8 pip spreadli bir hesapta 1 standart lotun maliyeti yaklaşık 18 $. 200 × 18 = 3.600 $.",
+          "Yani 200 dolarlık bonusu çekilebilir hale getirmek için 3.600 dolar işlem maliyeti ödemeniz gerekir. Bu koşulda bonus, matematiksel olarak alınabilir bir şey değildir — ve çekim talebi gönderdiğiniz anda çoğu brokerda bonus ve ondan doğan kâr iptal olur.",
+          "Kendi kampanyanızın çarpanını koşullar sayfasından okuyup aynı hesabı yapın. Çarpan düştükçe tablo değişir; ama yön aynı kalır: trade bonusunun fiyatı hacim şartında yazılıdır.",
+        ],
+      },
+      {
+        heading: "İki bonusun yan yana karşılaştırması",
+        paragraphs: [],
+        list: [
+          "Nereye eklenir — Teminat bonusu: teminat tabanına. Trade bonusu: bakiyeye.",
+          "Hacim şartı — Teminat bonusu: yok. Trade bonusu: var, çoğunlukla bonusun katları düzeyinde.",
+          "Ne sağlar — Teminat bonusu: dalgalanmaya dayanma payı (yukarıdaki örnekte 40 pip). Trade bonusu: görünürde sermaye.",
+          "Kâr kime ait — Teminat bonusu: kârınız kendi bakiyenizde birikir ve çekilebilir. Trade bonusu: bonustan doğan kâr, hacim şartı tamamlanana kadar kilitlidir.",
+          "Davranışa etkisi — Teminat bonusu: sizi işlem açmaya zorlamaz. Trade bonusu: hacim şartını kovalatarak stratejiniz sinyal vermediğinde bile işlem açmaya iter.",
+          "Ortak nokta — İkisi de çekilebilir nakit değildir. Teminat bonusu çekim yapıldığında hesaptan düşülebilir; trade bonusu çekim talebinde iptal olur.",
+        ],
+      },
+      {
+        heading: "Teminat bonusunu boşa harcamanın tek yolu",
+        paragraphs: [
+          "Buraya kadar teminat bonusu kusursuz görünüyor. Bir tuzağı var ve tamamen yatırımcının kendi elinde: ekstra teminatı daha büyük pozisyon açmak için kullanmak.",
+          "Hesaplayalım. Teminat tabanınız 1.200 $ olduğuna göre 0,5 lot yerine 0,6 lot açabilirsiniz. Bu pozisyon 600 $ teminat bloke eder, stop out eşiği 600 × %20 = 120 $ olur ve taşıyabileceğiniz azami zarar 1.200 − 120 = 1.080 $ olur. 0,6 lotta 1 pip 6 $ ettiğine göre: 1.080 ÷ 6 = 180 pip.",
+          "180 pip. Yani bonussuz halinizle tamamen aynı. Pozisyonu bonus oranında büyüttüğünüz anda, bonusun size verdiği 40 piplik nefes payı matematiksel olarak sıfırlanır — elinizde sadece daha büyük bir pozisyon ve pip başına daha yüksek bir zarar kalır.",
+          "Teminat bonusunun bütün değeri, pozisyon büyüklüğünü değiştirmemenizde saklı. Aynı lotla devam ederseniz bonus net kazançtır; lotu büyütürseniz bonus hiç var olmamış gibi olur. Bu, kampanyanın küçük yazılarında değil, dördüncü sınıf aritmetiğinde yazılıdır.",
+        ],
+      },
+      {
+        heading: "Teminat bonusu kime yarar?",
+        paragraphs: [],
+        list: [
+          "Zarar durdur mesafesi geniş olan swing yatırımcılarına: ekstra teminat payı, pozisyonun normal dalgalanmada erken kapanma riskini düşürür.",
+          "Küçük sermayeyle çalışanlara: 500-2.000 dolar aralığındaki hesaplarda stop out'a olan mesafe zaten dardır; %20'lik bir teminat eklemesi bu aralıkta oransal olarak en çok fark yaratan yerdir.",
+          "Haber dönemlerinde pozisyon taşıyanlara: ani spread genişlemeleri ve kaymalar, teminat seviyesini bir anda aşağı çeker. Ekstra teminat bu ani hareketlerde tampon görevi görür.",
+          "Yaramayacağı kişi: bonusu \"daha fazla lot açabilirim\" diye okuyan yatırımcı. Yukarıdaki hesap tam olarak bunu gösteriyor.",
+        ],
+      },
+      {
+        heading: "Katılmadan önce sorulacak dört soru",
+        paragraphs: [],
+        list: [
+          "Bonus teminata mı, bakiyeye mi ekleniyor? Bu tek soru, hangi bonusla karşı karşıya olduğunuzu belirler.",
+          "Hacim şartı var mı? Yoksa gerçekten koşulsuz bir teminat bonusudur; varsa adı ne olursa olsun trade bonusudur.",
+          "Bonustan doğan kâr çekilebilir mi, yoksa kilitli mi?",
+          "Çekim yaptığımda bonus ne oluyor? Teminat bonuslarında bonus genellikle çekim tutarıyla orantılı olarak düşülür — bu normaldir, ama önceden bilmek gerekir.",
+        ],
+      },
+      {
+        heading: "FXPARTNER'a özel %20 teminat bonusu",
+        paragraphs: [
+          "FXPARTNER üzerinden açılan Lite Finance hesaplarında bu bonus koşulsuz ve şartsız tanımlanır: yatırdığınız tutarın %20'si teminat tarafına eklenir, hacim taahhüdü istenmez ve kazancınız kendi bakiyenizde birikir. Yukarıdaki B senaryosu tam olarak bu kampanyanın hesabıdır.",
+          "Lite Finance'in hesap türleri, komisyon yapısı, para çekme koşulları ve düzenleyici durumuyla ilgili tam döküm — düzenleyici zayıflıkları dahil — broker inceleme sayfamızda yer alıyor. Bonusun cazip olması brokerı değerlendirme kriterlerinizin yerine geçmemeli: broker seçimi regülasyon, maliyet, platform ve para çekme üzerinden yapılır.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz. Kampanya koşulları değişebilir; katılmadan önce güncel şartları teyit edin.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
