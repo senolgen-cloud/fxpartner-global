@@ -6,6 +6,9 @@ import type { tradeSignals, TradeSignalOutcome } from "@/db/schema";
 import { canViewSignal, requiredTierForPair, type AccessTier } from "@/lib/signalAccess";
 import { ACCESS_TIER_LABEL } from "@/data/packageTiers";
 import TradingViewChart from "./TradingViewChart";
+import LotLadder from "./LotLadder";
+import { favorableMove } from "@/lib/contractSizes";
+import { isTestPeriod, TEST_PERIOD_LABEL, TEST_PERIOD_NOTE } from "@/lib/performancePeriod";
 
 type Signal = typeof tradeSignals.$inferSelect;
 type SignalJson = Omit<Signal, "createdAt" | "closedAt"> & {
@@ -129,37 +132,21 @@ function outcomeColor(outcome: TradeSignalOutcome | null) {
   return "var(--text-on-ink-muted)";
 }
 
-// İşlemin 1.00 lot bazına indirgenmiş kâr/zararı, dolar cinsinden.
+// SONUÇ GÖSTERİMİNİN GEÇMİŞİ — aynı hataya dönülmesin diye:
 //
-// Daha önce burada ham fiyat farkı (entry -> close) gösteriliyordu, ondan da
-// önce EA'nın "pips" alanı. İkisi de yanlıştı ve sebepleri farklıydı:
+//   1. EA'nın "pips" alanı — enstrümanlar arasında tutarsızdı. Bir GOLD
+//      işlemi -$242 için "-1212 pip", bir US100 işlemi +$19 için "+6400 pip"
+//      kaydediyordu.
+//   2. Ham fiyat farkı (giriş -> kapanış) — ölçek olarak karşılaştırılamaz.
+//      BTCUSD yüzlerce birim oynarken EURUSD binde birlerle oynuyor.
+//   3. 1 lota indirgenmiş P/L — küçük lotlarda sonucu şişiriyordu. 0.30
+//      lotluk -$631,50'lik gerçek bir zarar ekranda -$2.105,00 görünüyordu,
+//      çünkü 1 lota çıkarmak onu 3,3 katına çıkarıyor. 0.02 lotta çarpan 50.
 //
-//   * EA'nın pips'i enstrümanlar arasında tutarsız — bir GOLD işlemi -$242
-//     için "-1212 pip", bir US100 işlemi +$19 için "+6400 pip" kaydediyordu.
-//   * Ham fiyat farkı ise ölçek olarak karşılaştırılamaz: BTCUSD yüzlerce
-//     birim oynarken EURUSD binde birlerle oynuyor. Bunları toplamak veya
-//     yan yana koymak matematiksel olarak anlamsız.
-//
-// Lot başına P/L her ikisini de çözüyor: dolar cinsinden olduğu için
-// enstrümanlar arasında toplanabilir ve karşılaştırılabilir, lot bazına
-// indirgendiği için de pozisyon büyüklüğünden bağımsız. Hesaptaki gerçek
-// lotlar 0.02 ile 30.00 arasında değişiyor; normalize edilmeden bakılan
-// bir "kâr" rakamı sinyal kalitesini değil sadece lot büyüklüğünü ölçer.
-//
-// NOT: Bu bir getiri (return) iddiası DEĞİLDİR — "şu kadar sermayeyle şu
-// kadar kazandırır" demiyor. Sinyalin kendi özelliğini ölçüyor: 1 lotluk
-// pozisyonda bu hareket ne kadar ediyordu.
-function profitPerLot(profit: string | null, volume: string | null): number | null {
-  if (!profit || !volume) return null;
-  const p = parseFloat(profit);
-  const v = parseFloat(volume);
-  if (Number.isNaN(p) || Number.isNaN(v) || v === 0) return null;
-  return p / v;
-}
-
-// Dolar tutarı — tüm enstrümanlarda aynı ölçekte olduğu için sabit 2 hane
-// yeterli. (Fiyat farkı gösterilirken enstrümana göre değişken hassasiyet
-// gerekiyordu; lot başına P/L'de böyle bir sorun yok.)
+// ŞİMDİ: satırda GERÇEKLEŞEN tutar gösteriliyor. "Kaç lotta ne eder" sorusu
+// ayrı bir bileşende (LotLadder) cevaplanıyor; orada sözleşme değeri
+// üzerinden hesaplandığı için her lot basamağı doğru çıkıyor.
+// Bkz. lib/contractSizes.ts.
 function formatPerLot(value: number): string {
   const sign = value > 0 ? "+" : value < 0 ? "−" : "";
   return `${sign}$${Math.abs(value).toLocaleString("en-US", {
@@ -224,15 +211,20 @@ function SignalTable({
                 <th className="px-4 py-3 font-medium">Giriş</th>
                 <th className="px-4 py-3 font-medium">{closedView ? "Kapanış" : "SL / TP"}</th>
                 <th className="px-4 py-3 font-medium">Lot</th>
-                <th className="px-6 py-3 text-right font-medium">{closedView ? "Sonuç (1 lot)" : "Durum"}</th>
+                <th className="px-6 py-3 text-right font-medium">{closedView ? "Sonuç" : "Durum"}</th>
               </tr>
             </thead>
             <tbody>
               {signals.map((s) => {
                 const isSell = s.direction === "SELL";
                 const directionColor = isSell ? TICK_DOWN : TICK_UP;
-                const perLot = profitPerLot(s.profit, s.volume);
-                const resultLine = perLot !== null ? formatPerLot(perLot) : null;
+                // GERÇEK hesap sonucu. Bir süre burada 1-lota indirgenmiş
+                // değer gösterildi; küçük lotlarda bu sonucu 10-50 kat
+                // şişiriyordu (0.30 lotluk −$631,50'lik bir işlem ekranda
+                // −$2.105,00 görünüyordu). Ne olduğunu soran birine
+                // verilecek tek dürüst cevap gerçekleşen tutar.
+                const resultLine =
+                  s.profit !== null ? formatPerLot(parseFloat(s.profit)) : null;
                 // Past performance is public regardless of package — only
                 // closedView's live/active counterpart is the gated product.
                 const locked = closedView ? false : !canViewSignal(viewerTier, s.pair);
@@ -281,11 +273,21 @@ function SignalTable({
                       {locked ? (
                         <LockBadge pair={s.pair} />
                       ) : closedView ? (
-                        <span
-                          className="rounded-full px-2.5 py-1 text-xs font-semibold text-on-signal"
-                          style={{ background: outcomeColor(s.outcome) }}
-                        >
-                          {resultLine ?? s.outcome ?? "CLOSED"}
+                        <span className="inline-flex items-center gap-2">
+                          {/* Deneme dönemi işlemi olduğu satırda görünür —
+                              yayınlanan istatistiğe girmediği için okuyucunun
+                              bunu bilmesi gerekiyor. */}
+                          {isTestPeriod(s.closedAt ?? s.createdAt) && (
+                            <span className="rounded-full border border-hairline px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-text-on-ink-muted">
+                              {TEST_PERIOD_LABEL}
+                            </span>
+                          )}
+                          <span
+                            className="rounded-full px-2.5 py-1 text-xs font-semibold text-on-signal"
+                            style={{ background: outcomeColor(s.outcome) }}
+                          >
+                            {resultLine ?? s.outcome ?? "CLOSED"}
+                          </span>
                         </span>
                       ) : (
                         <span className="rounded-full border border-signal px-2.5 py-1 text-xs font-semibold text-signal">
@@ -362,13 +364,25 @@ function useCountUp(target: number, durationMs = 1400, decimals = 0) {
 
 function PipsStats({ closed }: { closed: Signal[] }) {
   const decisive = closed
-    .filter((s) => (s.outcome === "WIN" || s.outcome === "LOSS") && profitPerLot(s.profit, s.volume) !== null)
+    // Deneme dönemi yayınlanan istatistiğe girmez — bkz. lib/performancePeriod.ts
+    .filter(
+      (s) =>
+        (s.outcome === "WIN" || s.outcome === "LOSS") &&
+        s.profit !== null &&
+        !isTestPeriod(s.closedAt ?? s.createdAt)
+    )
     .slice()
     .sort((a, b) => (a.closedAt?.getTime() ?? 0) - (b.closedAt?.getTime() ?? 0));
 
-  // Artık dolar topluyoruz, fiyat farkı değil — bu toplam matematiksel
-  // olarak anlamlı, öncekiler değildi.
-  const perLotValues = decisive.map((s) => profitPerLot(s.profit, s.volume) as number);
+  // GERÇEK hesap kâr/zararı toplanıyor.
+  //
+  // Kısa bir süre burada 1-lota indirgenmiş değerler toplandı ve bu bir
+  // hataydı: 0.02 lotluk bir işlemi 1 lota çıkarmak onu 50 kat
+  // ağırlıklandırıyor. Bu pencerede iki küçük lotlu işlem toplamı $5.518
+  // yukarı çekerken gerçekte sadece $110 kazandırmışlardı. Gerçekleşen
+  // tutarları toplamak tek dürüst yöntem; "kaç lotta ne eder" sorusu ise
+  // artık her sinyalin kendi lot merdiveninde cevaplanıyor (LotLadder).
+  const perLotValues = decisive.map((s) => parseFloat(s.profit as string));
   const totalPips = perLotValues.reduce((sum, p) => sum + p, 0);
   const wins = decisive.filter((s) => s.outcome === "WIN");
   const losses = decisive.filter((s) => s.outcome === "LOSS");
@@ -416,7 +430,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
     const d = s.closedAt ?? s.createdAt;
     if (!d) continue;
     const key = d.toLocaleDateString("en-US", { month: "short", year: "2-digit", timeZone: "UTC" });
-    monthlyMap.set(key, (monthlyMap.get(key) ?? 0) + (profitPerLot(s.profit, s.volume) ?? 0));
+    monthlyMap.set(key, (monthlyMap.get(key) ?? 0) + parseFloat(s.profit ?? "0"));
   }
   const monthly = Array.from(monthlyMap.entries());
   const monthlyMax = Math.max(1, ...monthly.map(([, v]) => Math.abs(v)));
@@ -427,7 +441,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
   for (const s of decisive) {
     const key = s.pair;
     const entry = pairMap.get(key) ?? { pair: key, total: 0, count: 0, wins: 0 };
-    entry.total += profitPerLot(s.profit, s.volume) ?? 0;
+    entry.total += parseFloat(s.profit ?? "0");
     entry.count += 1;
     if (s.outcome === "WIN") entry.wins += 1;
     pairMap.set(key, entry);
@@ -435,7 +449,21 @@ function PipsStats({ closed }: { closed: Signal[] }) {
   const pairStats = Array.from(pairMap.values()).sort((a, b) => b.total - a.total);
   const pairMax = Math.max(1, ...pairStats.map((p) => Math.abs(p.total)));
 
-  if (decisive.length === 0) return null;
+  // Canlı dönemde henüz kapanmış işlem yoksa blok gizlenmez — ne zaman
+  // başlayacağı açıkça söylenir. Sessizce kaybolan bir performans bölümü,
+  // "veri yok" ile "veri gizlendi" arasındaki farkı okuyucuya bırakır.
+  if (decisive.length === 0) {
+    return (
+      <div className="rounded-2xl border border-hairline bg-ink-soft/40 p-6">
+        <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
+          Canlı Performans
+        </span>
+        <p className="mt-3 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">
+          {TEST_PERIOD_NOTE}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -450,7 +478,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
               ve yanlış olur. Sayı veriden geldiği için limit değişirse
               etiket de kendiliğinden doğru kalır. */}
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
-            Son {decisive.length} İşlem — 1 Lot Başına K/Z
+            Son {decisive.length} İşlem — Gerçekleşen K/Z
           </span>
           <div className="mt-2 flex items-baseline gap-2">
             <span
@@ -644,11 +672,17 @@ function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: Access
   // signals are gated.
   const locked = isClosed ? false : !canViewSignal(viewerTier, signal.pair);
 
-  const cardPerLot = profitPerLot(signal.profit, signal.volume);
-  const resultLine = cardPerLot !== null ? formatPerLot(cardPerLot) : null;
+  // Kartta da gerçekleşen tutar gösteriliyor; "kaç lotta ne eder" sorusunu
+  // aşağıdaki LotLadder cevaplıyor.
+  const resultLine =
+    signal.profit !== null ? formatPerLot(parseFloat(signal.profit)) : null;
+  // Kapanmışsa gerçekleşen hareket, açıksa hedefe kadarki potansiyel hareket.
+  const ladderMove = isClosed
+    ? favorableMove(signal.entry, signal.closePrice, signal.direction)
+    : favorableMove(signal.entry, signal.target1, signal.direction);
   // Rakamın neyi ifade ettiği rakamın yanında durmalı; "1 lot başına"
   // olmadan bu sayı bir hesap getirisi gibi okunuyor.
-  const resultUnit = cardPerLot !== null ? "1 lot başına" : null;
+  const resultUnit = null;
   const resultColor = outcomeColor(signal.outcome);
 
   // Purely decorative — same as the homepage hero card's sparkline, never
@@ -705,6 +739,16 @@ function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: Access
       <svg viewBox="0 0 200 40" className="mt-3 h-9 w-full" style={{ color: locked ? "var(--text-on-ink-muted)" : directionColor }} fill="none">
         <path d={sparklinePath} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity={locked ? 0.35 : 1} />
       </svg>
+
+      {/* Lot merdiveni: "bu sinyali kendi lotumla uygulasaydım ne olurdu"
+          sorusunun cevabı. Kapanmış işlemde gerçekleşen hareket, açık
+          işlemde hedefe kadarki potansiyel hareket üzerinden. Kilitli
+          sinyalde gösterilmez — seviyeler zaten gizli. */}
+      {!locked && (
+        <div className="mt-3">
+          <LotLadder pair={signal.pair} priceMove={ladderMove} />
+        </div>
+      )}
 
       {locked ? (
         <Link
@@ -828,7 +872,16 @@ export default function SignalsBoard({
   }, []);
 
   // Only WIN/LOSS count toward the win rate — a breakeven close is neither.
-  const decisive = closed.filter((s) => s.outcome === "WIN" || s.outcome === "LOSS");
+  //
+  // Deneme dönemi de dışarıda: aksi halde sayfa bir yanda "bu dönem
+  // istatistiklere dahil edilmez" derken diğer yanda o dönemin kazanma
+  // oranını büyük puntoyla gösteriyordu. Canlı veri gelene kadar oran
+  // null kalır ve PerformanceRing "—" gösterir.
+  const decisive = closed.filter(
+    (s) =>
+      (s.outcome === "WIN" || s.outcome === "LOSS") &&
+      !isTestPeriod(s.closedAt ?? s.createdAt)
+  );
   const wins = decisive.filter((s) => s.outcome === "WIN").length;
   const winRate = decisive.length > 0 ? Math.round((wins / decisive.length) * 100) : null;
 
