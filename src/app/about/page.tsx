@@ -176,7 +176,7 @@ export default function AboutPage() {
             </div>
             <div className="mt-8">
               <Link
-                href="/#brokers"
+                href="/brokerlar"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
                 Brokerları karşılaştır →

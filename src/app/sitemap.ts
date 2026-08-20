@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { brokers, brokerCategories, categoryInfo } from "@/data/brokers";
+import { propFirms } from "@/data/propFirms";
 import { blogPosts } from "@/data/blog";
 import { cashbackPrograms } from "@/data/cashback";
 import { marketAnalysisPosts } from "@/data/marketAnalysis";
@@ -11,6 +12,10 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: SITE_URL, changeFrequency: "daily", priority: 1 },
+    // Broker hub'ı: nişin en yüksek hacimli ticari kelimelerinin hedef sayfası
+    // ("en iyi forex broker", "forex broker karşılaştırma"). Ana sayfadan sonra
+    // en yüksek öncelik.
+    { url: `${SITE_URL}/brokerlar`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE_URL}/categories`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/piyasa-analizi`, changeFrequency: "daily", priority: 0.7 },
@@ -36,6 +41,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${SITE_URL}/brokers/${b.slug}`,
     changeFrequency: "weekly",
     priority: 0.9,
+  }));
+
+  const propFirmRoutes: MetadataRoute.Sitemap = propFirms.map((f) => ({
+    url: `${SITE_URL}/prop-firmalar/${f.slug}`,
+    changeFrequency: "weekly",
+    priority: 0.8,
   }));
 
   const categoryRoutes: MetadataRoute.Sitemap = brokerCategories.map((c) => ({
@@ -79,6 +90,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...staticRoutes,
     ...brokerRoutes,
+    ...propFirmRoutes,
     ...categoryRoutes,
     ...blogRoutes,
     ...cashbackSetupRoutes,

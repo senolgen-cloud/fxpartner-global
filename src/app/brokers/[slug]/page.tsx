@@ -257,7 +257,7 @@ export default async function BrokerDetailPage({
           />
           <div className="relative mx-auto max-w-5xl px-5 py-12 sm:px-6 md:py-20">
             <Link
-              href="/#brokers"
+              href="/brokerlar"
               className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
               ← Tüm brokerlar

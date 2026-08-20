@@ -215,9 +215,12 @@ export default function PropFirmComparisonTable() {
                   <tr className="border-b border-hairline/60 align-middle">
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-2">
-                        <span className="font-poppins text-sm font-semibold text-text-on-ink">
+                        <Link
+                          href={`/prop-firmalar/${firm.slug}`}
+                          className="font-poppins text-sm font-semibold text-text-on-ink hover:text-signal"
+                        >
                           {firm.name}
-                        </span>
+                        </Link>
                         {/* Ortaklık ilişkisi gizlenmez — ama sıralamayı da
                             değiştirmez. Bkz. propFirms.ts dosya başı notu. */}
                         {firm.isPartner && (
@@ -265,14 +268,22 @@ export default function PropFirmComparisonTable() {
                     </td>
 
                     <td className="px-5 py-4 text-right">
-                      <button
-                        type="button"
-                        onClick={() => setExpandedSlug(open ? null : firm.slug)}
-                        aria-expanded={open}
-                        className="font-mono text-[11px] uppercase tracking-[0.1em] text-signal hover:text-signal-strong"
-                      >
-                        {open ? "Kapat" : "Detay"}
-                      </button>
+                      <div className="flex items-center justify-end gap-4">
+                        <button
+                          type="button"
+                          onClick={() => setExpandedSlug(open ? null : firm.slug)}
+                          aria-expanded={open}
+                          className="font-mono text-[11px] uppercase tracking-[0.1em] text-signal hover:text-signal-strong"
+                        >
+                          {open ? "Kapat" : "Detay"}
+                        </button>
+                        <Link
+                          href={`/prop-firmalar/${firm.slug}`}
+                          className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted hover:text-signal"
+                        >
+                          İnceleme →
+                        </Link>
+                      </div>
                     </td>
                   </tr>
 

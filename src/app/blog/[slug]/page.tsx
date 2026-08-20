@@ -151,7 +151,7 @@ export default async function BlogPostPage({
                 withdrawals using the exact framework above.
               </p>
               <Link
-                href="/#brokers"
+                href="/brokerlar"
                 className="mt-4 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
               >
                 View Broker Rankings

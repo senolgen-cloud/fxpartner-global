@@ -103,7 +103,7 @@ export default function RegulationReportPage() {
           <article className="mx-auto max-w-4xl px-6 py-16">
             <p className="text-[15px] leading-relaxed text-text-dark/90">
               {`Bu rapor, FXPARTNER'ın incelediği ${total} forex broker'ının düzenleyici lisans verilerinden otomatik olarak hesaplanır — hiçbir rakam elle girilmemiştir; tümü `}
-              <Link href="/#brokers" className="text-signal hover:text-signal-strong">
+              <Link href="/brokerlar" className="text-signal hover:text-signal-strong">
                 broker karşılaştırma sayfasıyla
               </Link>
               {` aynı veri kümesinden, sayfa her açıldığında yeniden üretilir. Metodoloji, FXPARTNER Index'in dört ekseninden biri olan "Düzenleme" puanıyla aynıdır: FCA (İngiltere), ASIC (Avustralya), CySEC (Kıbrıs), DFSA (Dubai) ve İrlanda Merkez Bankası tier-1 otorite olarak sayılır.`}

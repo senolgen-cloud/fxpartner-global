@@ -141,7 +141,7 @@ const GROUPS: Group[] = [
     links: [
       { href: "/signals", label: "Sinyaller", icon: "signal" },
       { href: "/ai-asistan", label: "AI Asistan", icon: "ai" },
-      { href: "/#brokers", label: "Broker Sıralaması", icon: "ranking" },
+      { href: "/brokerlar", label: "Broker Sıralaması", icon: "ranking" },
       { href: "/paketler", label: "Paketler", icon: "package" },
       { href: "/copytrade", label: "Copytrade", icon: "copy" },
       { href: "/topluluk", label: "Topluluk", icon: "community" },
@@ -311,7 +311,7 @@ export default function MoreMenuOverlay({
             </div>
           )}
           <Link
-            href="/#brokers"
+            href="/brokerlar"
             onClick={close}
             className="rounded-full bg-signal px-4 py-3 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
           >

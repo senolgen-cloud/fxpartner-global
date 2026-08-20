@@ -8,11 +8,22 @@ import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
+// Yıl başlıkta bilinçli: Türkçe SERP'in tamamı "2026 En İyi …" kalıbıyla dolu.
+// Tek yerden türetiliyor ki her yıl elle güncelleme gerekmesin.
+const YEAR = new Date().getFullYear();
+
 export const metadata: Metadata = {
-  title: "Prop Firma Karşılaştırma",
-  description:
-    "Prop firmaları (funded account) kural seti, challenge ücreti, drawdown limitleri, kâr paylaşımı ve ödeme sicili üzerinden karşılaştırın. Bağımsız puanlama, kaynaklı veri.",
+  // Hedef kelimeler: "en iyi prop firma", "prop firma karşılaştırma",
+  // "funded hesap". Türkçe aramada üç kalıp da kullanılıyor.
+  title: `${YEAR} En İyi Prop Firmaları — Funded Hesap Karşılaştırması`,
+  description: `Prop firmalarını (funded hesap) challenge kuralları, drawdown limitleri, ücretler, kâr paylaşımı ve ödeme sicili üzerinden karşılaştırın. Bağımsız puanlama, kaynaklı veri, indirim kodları. Prop firma nedir, hangisi güvenilir?`,
   alternates: { canonical: "/prop-firmalar" },
+  openGraph: {
+    title: `${YEAR} En İyi Prop Firmaları — FXPARTNER Karşılaştırması`,
+    description:
+      "Funded hesap veren firmalar, ödeme sicili dahil bağımsız kriterlerle puanlandı.",
+    url: `${SITE_URL}/prop-firmalar`,
+  },
 };
 
 // AEO notu: bu cevaplar kasıtlı olarak Türkçe ve statik HTML içinde. Sitenin
@@ -97,7 +108,7 @@ export default function PropFirmalarPage() {
               Prop Firmalar
             </span>
             <h1 className="mt-4 font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Prop firma karşılaştırması
+              {YEAR} en iyi prop firmaları
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
               Funded account veren firmaları kural seti, challenge ücreti, drawdown
@@ -276,7 +287,7 @@ export default function PropFirmalarPage() {
                 Pozisyon hesaplayıcı →
               </Link>
               <Link
-                href="/#brokers"
+                href="/brokerlar"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
                 Broker karşılaştırması →
