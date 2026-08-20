@@ -419,17 +419,65 @@ function PipsStats({ closed }: { closed: Signal[] }) {
   const monthlyMax = Math.max(1, ...monthly.map(([, v]) => Math.abs(v)));
 
   // Per-pair breakdown.
-  type PairStat = { pair: string; total: number; count: number; wins: number };
+  // Parite kırılımında toplamın yanına MEDYAN ve AYKIRI DEĞER işareti de
+  // hesaplanıyor.
+  //
+  // Sebep: toplam tek bir işlem tarafından ele geçirilebiliyor ve o zaman
+  // kazanma oranıyla toplam birbiriyle çelişiyormuş gibi görünüyor. SILVER
+  // bunun canlı örneği — 8 işlem, %63 kazanma, ama net −$7.954, çünkü tek
+  // bir 1.00 lotluk işlem −$10.836 kaybettirmiş ve 5 kazancın toplamından
+  // (+$4.673) büyük. Veri doğru; eksik olan, okuyucunun bunu görebilmesi.
+  //
+  // Medyan tipik işlemi gösterir (SILVER'da +$207,50), aykırı değer işareti
+  // ise "bu toplamı tek işlem belirledi" der. İkisi birlikte, rakamı
+  // değiştirmeden anlaşılır kılıyor.
+  type PairStat = {
+    pair: string;
+    total: number;
+    count: number;
+    wins: number;
+    values: number[];
+  };
   const pairMap = new Map<string, PairStat>();
   for (const s of decisive) {
     const key = s.pair;
-    const entry = pairMap.get(key) ?? { pair: key, total: 0, count: 0, wins: 0 };
-    entry.total += parseFloat(s.profit ?? "0");
+    const entry = pairMap.get(key) ?? {
+      pair: key,
+      total: 0,
+      count: 0,
+      wins: 0,
+      values: [],
+    };
+    const v = parseFloat(s.profit ?? "0");
+    entry.total += v;
     entry.count += 1;
+    entry.values.push(v);
     if (s.outcome === "WIN") entry.wins += 1;
     pairMap.set(key, entry);
   }
-  const pairStats = Array.from(pairMap.values()).sort((a, b) => b.total - a.total);
+
+  const median = (nums: number[]) => {
+    if (nums.length === 0) return 0;
+    const sorted = [...nums].sort((a, b) => a - b);
+    const mid = Math.floor(sorted.length / 2);
+    return sorted.length % 2 === 0
+      ? (sorted[mid - 1] + sorted[mid]) / 2
+      : sorted[mid];
+  };
+
+  const pairStats = Array.from(pairMap.values())
+    .map((p) => {
+      const biggest = Math.max(...p.values.map(Math.abs));
+      // Tek bir işlem, tüm işlemlerin mutlak büyüklük toplamının yarısından
+      // fazlasını oluşturuyorsa toplam o işlem tarafından belirleniyor demektir.
+      const magnitude = p.values.reduce((s, v) => s + Math.abs(v), 0);
+      return {
+        ...p,
+        med: median(p.values),
+        dominated: p.count > 2 && magnitude > 0 && biggest / magnitude > 0.5,
+      };
+    })
+    .sort((a, b) => b.total - a.total);
   const pairMax = Math.max(1, ...pairStats.map((p) => Math.abs(p.total)));
 
   if (decisive.length === 0) return null;
@@ -635,16 +683,46 @@ function PipsStats({ closed }: { closed: Signal[] }) {
                     {p.total >= 0 ? "+" : ""}
                     {formatPerLot(p.total)}
                   </span>
+                  {/* Medyan: toplamın yanındaki "tipik işlem" ölçüsü.
+                      Toplam tek bir uç işlemle ele geçirilebiliyor, medyan
+                      geçirilemiyor. */}
+                  <span
+                    className="w-24 shrink-0 text-right font-mono text-[11px]"
+                    style={{ color: p.med >= 0 ? TICK_UP : TICK_DOWN }}
+                    title="Medyan işlem sonucu"
+                  >
+                    ort. {formatPerLot(p.med)}
+                  </span>
                   <span className="w-20 shrink-0 text-right font-mono text-[11px] text-text-on-ink-muted">
                     {p.count} işlem
                   </span>
                   <span className="w-12 shrink-0 text-right font-mono text-[11px] text-text-on-ink-muted">
                     %{pairWinRate}
                   </span>
+                  {/* Toplamı tek işlem belirlediyse söylenir. Aksi halde
+                      "%63 kazanma ama net eksi" satırı çelişkili görünüyor
+                      ve okuyucu veriye güvenmiyor. */}
+                  <span className="w-5 shrink-0 text-right">
+                    {p.dominated && (
+                      <span
+                        title="Bu toplamın yarısından fazlasını tek bir işlem oluşturuyor — medyana bakın"
+                        className="cursor-help font-mono text-[11px] text-gold"
+                      >
+                        ⚠
+                      </span>
+                    )}
+                  </span>
                 </div>
               );
             })}
           </div>
+          <p className="mt-4 text-xs leading-relaxed text-text-on-ink-muted">
+            <span className="text-gold">⚠</span> işareti, o paritedeki toplamın
+            yarısından fazlasının tek bir işlemden geldiğini gösterir. Böyle
+            durumlarda toplam yerine{" "}
+            <strong className="text-text-on-ink">ort.</strong> (medyan) sütununa
+            bakın — tipik işlemin nasıl sonuçlandığını o söyler.
+          </p>
         </div>
       )}
     </div>
