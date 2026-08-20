@@ -1110,6 +1110,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "litefinance-cent-hesap-rehberi",
+    adBrokerSlug: "lite-finance",
     lang: "tr",
     title: "10 Dolarla Gerçek İşlem: LiteFinance Cent Hesap Rehberi",
     excerpt:
@@ -1197,6 +1198,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "litefinance-anlik-para-cekme",
+    adBrokerSlug: "lite-finance",
     coverImage: "/blog/litefinance-anlik-para-cekme-cover.png",
     lang: "tr",
     title: "LiteFinance'te Anlık Para Çekme: Üç Şart ve Gerçek Süreler",
@@ -1274,6 +1276,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "litefinance-ecn-maliyet-hesabi",
+    adBrokerSlug: "lite-finance",
     lang: "tr",
     title: "Lot Başına Gerçekte Ne Ödüyorsunuz? ECN Maliyet Hesabı",
     excerpt:
