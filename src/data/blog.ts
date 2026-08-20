@@ -20,6 +20,13 @@ export interface BlogPost {
   // search/AI crawlers (see src/app/piyasa-analizi/page.tsx for the same
   // pattern applied site-wide).
   lang?: "tr" | "en";
+  // Pins the ad slot above the article to one broker instead of letting
+  // getSponsoredBroker() hash the slug into the sponsor pool. Rotation is
+  // fine for general guides, but a post written about one broker's campaign
+  // must not open with a competitor's banner — set this on any post that
+  // names a broker in its title or argues for a specific broker's product.
+  // Unknown slugs fall back to the normal rotation.
+  adBrokerSlug?: string;
   sections: BlogSection[];
 }
 
@@ -1644,6 +1651,7 @@ export const blogPosts: BlogPost[] = [
     // post: blurred fill behind, wide original letterboxed on top, because the
     // post page crops covers to a square and would cut the headline off.
     coverImage: "/blog/teminat-bonusu-nedir-trade-bonusu-farki-cover.png",
+    adBrokerSlug: "lite-finance",
     lang: "tr",
     title: "Teminat Bonusu Nedir? Trade Bonusundan Farkı — Rakamlarla",
     excerpt:

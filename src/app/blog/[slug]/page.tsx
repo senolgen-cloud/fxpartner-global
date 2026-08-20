@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 import BrokerAdBanner from "@/components/BrokerAdBanner";
 import { blogPosts, getBlogPostBySlug } from "@/data/blog";
-import { getSponsoredBroker } from "@/data/brokers";
+import { getBrokerBySlug, getSponsoredBroker } from "@/data/brokers";
 import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
@@ -49,7 +49,11 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const post = getBlogPostBySlug(slug);
   if (!post) notFound();
-  const featuredBroker = getSponsoredBroker(post.slug);
+  // A post that argues for one broker pins its own ad slot (adBrokerSlug);
+  // everything else keeps the hashed rotation across the sponsor pool.
+  const featuredBroker =
+    (post.adBrokerSlug ? getBrokerBySlug(post.adBrokerSlug) : undefined) ??
+    getSponsoredBroker(post.slug);
 
   return (
     <>
