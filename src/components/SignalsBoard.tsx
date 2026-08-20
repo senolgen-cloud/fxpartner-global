@@ -8,7 +8,6 @@ import { ACCESS_TIER_LABEL } from "@/data/packageTiers";
 import TradingViewChart from "./TradingViewChart";
 import LotLadder from "./LotLadder";
 import { favorableMove } from "@/lib/contractSizes";
-import { isTestPeriod, TEST_PERIOD_LABEL, TEST_PERIOD_NOTE } from "@/lib/performancePeriod";
 
 type Signal = typeof tradeSignals.$inferSelect;
 type SignalJson = Omit<Signal, "createdAt" | "closedAt"> & {
@@ -273,21 +272,11 @@ function SignalTable({
                       {locked ? (
                         <LockBadge pair={s.pair} />
                       ) : closedView ? (
-                        <span className="inline-flex items-center gap-2">
-                          {/* Deneme dönemi işlemi olduğu satırda görünür —
-                              yayınlanan istatistiğe girmediği için okuyucunun
-                              bunu bilmesi gerekiyor. */}
-                          {isTestPeriod(s.closedAt ?? s.createdAt) && (
-                            <span className="rounded-full border border-hairline px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-text-on-ink-muted">
-                              {TEST_PERIOD_LABEL}
-                            </span>
-                          )}
-                          <span
-                            className="rounded-full px-2.5 py-1 text-xs font-semibold text-on-signal"
-                            style={{ background: outcomeColor(s.outcome) }}
-                          >
-                            {resultLine ?? s.outcome ?? "CLOSED"}
-                          </span>
+                        <span
+                          className="rounded-full px-2.5 py-1 text-xs font-semibold text-on-signal"
+                          style={{ background: outcomeColor(s.outcome) }}
+                        >
+                          {resultLine ?? s.outcome ?? "CLOSED"}
                         </span>
                       ) : (
                         <span className="rounded-full border border-signal px-2.5 py-1 text-xs font-semibold text-signal">
@@ -364,13 +353,7 @@ function useCountUp(target: number, durationMs = 1400, decimals = 0) {
 
 function PipsStats({ closed }: { closed: Signal[] }) {
   const decisive = closed
-    // Deneme dönemi yayınlanan istatistiğe girmez — bkz. lib/performancePeriod.ts
-    .filter(
-      (s) =>
-        (s.outcome === "WIN" || s.outcome === "LOSS") &&
-        s.profit !== null &&
-        !isTestPeriod(s.closedAt ?? s.createdAt)
-    )
+    .filter((s) => (s.outcome === "WIN" || s.outcome === "LOSS") && s.profit !== null)
     .slice()
     .sort((a, b) => (a.closedAt?.getTime() ?? 0) - (b.closedAt?.getTime() ?? 0));
 
@@ -449,21 +432,21 @@ function PipsStats({ closed }: { closed: Signal[] }) {
   const pairStats = Array.from(pairMap.values()).sort((a, b) => b.total - a.total);
   const pairMax = Math.max(1, ...pairStats.map((p) => Math.abs(p.total)));
 
-  // Canlı dönemde henüz kapanmış işlem yoksa blok gizlenmez — ne zaman
-  // başlayacağı açıkça söylenir. Sessizce kaybolan bir performans bölümü,
-  // "veri yok" ile "veri gizlendi" arasındaki farkı okuyucuya bırakır.
-  if (decisive.length === 0) {
-    return (
-      <div className="rounded-2xl border border-hairline bg-ink-soft/40 p-6">
-        <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
-          Canlı Performans
-        </span>
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">
-          {TEST_PERIOD_NOTE}
-        </p>
-      </div>
-    );
-  }
+  if (decisive.length === 0) return null;
+
+  // Kapsanan tarih aralığı veriden türetiliyor. Bir performans rakamının
+  // yanında hangi dönemi ölçtüğü yazmazsa okuyucu kendi varsayımını yapar;
+  // 13 günlük bir kayıt "yıllık performans" gibi okunabilir. Elle yazılan
+  // bir tarih ise veriyle birlikte güncellenmez ve zamanla yalan olur.
+  const firstAt = decisive[0]?.closedAt ?? decisive[0]?.createdAt ?? null;
+  const lastAt =
+    decisive[decisive.length - 1]?.closedAt ??
+    decisive[decisive.length - 1]?.createdAt ??
+    null;
+  const rangeLabel =
+    firstAt && lastAt
+      ? `${firstAt.toLocaleDateString("tr-TR", { day: "numeric", month: "long" })} – ${lastAt.toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" })}`
+      : null;
 
   return (
     <div
@@ -472,14 +455,19 @@ function PipsStats({ closed }: { closed: Signal[] }) {
     >
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div>
-          {/* Etiket, gerçekte kapsanan işlem sayısından türetiliyor.
-              Sayfa yalnızca son N kapanmış işlemi yüklüyor (signals/page.tsx
-              → limit), dolayısıyla buna "Toplam" demek tüm geçmişi ima eder
-              ve yanlış olur. Sayı veriden geldiği için limit değişirse
-              etiket de kendiliğinden doğru kalır. */}
+          {/* Etiket tamamen veriden türetiliyor: işlem sayısı da tarih
+              aralığı da. Sayfa yalnızca son N kapanmış işlemi yüklüyor
+              (signals/page.tsx → limit), dolayısıyla "Toplam" demek tüm
+              geçmişi ima eder ve yanlış olur. Limit veya veri değişirse
+              etiket kendiliğinden doğru kalır. */}
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
-            Son {decisive.length} İşlem — Gerçekleşen K/Z
+            {decisive.length} İşlem — Gerçekleşen K/Z
           </span>
+          {rangeLabel && (
+            <p className="mt-1 font-mono text-[11px] text-text-on-ink-muted">
+              {rangeLabel}
+            </p>
+          )}
           <div className="mt-2 flex items-baseline gap-2">
             <span
               ref={totalCount.ref}
@@ -872,16 +860,7 @@ export default function SignalsBoard({
   }, []);
 
   // Only WIN/LOSS count toward the win rate — a breakeven close is neither.
-  //
-  // Deneme dönemi de dışarıda: aksi halde sayfa bir yanda "bu dönem
-  // istatistiklere dahil edilmez" derken diğer yanda o dönemin kazanma
-  // oranını büyük puntoyla gösteriyordu. Canlı veri gelene kadar oran
-  // null kalır ve PerformanceRing "—" gösterir.
-  const decisive = closed.filter(
-    (s) =>
-      (s.outcome === "WIN" || s.outcome === "LOSS") &&
-      !isTestPeriod(s.closedAt ?? s.createdAt)
-  );
+  const decisive = closed.filter((s) => s.outcome === "WIN" || s.outcome === "LOSS");
   const wins = decisive.filter((s) => s.outcome === "WIN").length;
   const winRate = decisive.length > 0 ? Math.round((wins / decisive.length) * 100) : null;
 

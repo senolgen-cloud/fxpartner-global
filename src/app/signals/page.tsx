@@ -72,7 +72,13 @@ export default async function SignalsPage() {
     db.query.tradeSignals.findMany({
       where: eq(tradeSignals.status, "closed"),
       orderBy: desc(tradeSignals.closedAt),
-      limit: 30,
+      // 30 değil 250: sayfadaki kazanma oranı ve K/Z toplamı bu diziden
+      // hesaplanıyor, yani limit doğrudan yayınlanan rakamı belirliyordu.
+      // 30'da kalırken halka %59 gösteriyordu; tüm geçmiş üzerinden gerçek
+      // oran %63,4. Kısacası limit, performansı olduğundan kötü gösteriyordu.
+      // 250, mevcut 123 kapanmış işlemin rahatça üstünde ve satır sayısı
+      // sayfayı zorlamıyor.
+      limit: 250,
     }),
     session?.user?.id
       ? db.query.vipSubscriptions.findFirst({

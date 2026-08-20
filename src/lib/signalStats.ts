@@ -2,7 +2,6 @@ import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
 import { and, eq, gte } from "drizzle-orm";
 import { requiredTierForPair } from "@/lib/signalAccess";
-import { LIVE_PERFORMANCE_START } from "@/lib/performancePeriod";
 import type { AccessTier } from "@/lib/vip";
 
 // Rolling track record for the tracked MT5 account, published in the public
@@ -68,14 +67,7 @@ export async function getRecentSignalStats(
   scope: StatsScope = "all",
   windowDays = 30
 ): Promise<SignalStats | null> {
-  // Pencere başlangıcı deneme döneminin içine düşerse canlı yayın başlangıcına
-  // çekilir. Bu fonksiyonun çıktısı Telegram ve X gönderilerine basılıyor —
-  // yani sitedeki filtrelemeyi burada tekrarlamazsak, sitede "deneme dönemi
-  // dahil değil" derken aynı dönemin oranını sosyal medyada yayınlamış
-  // oluruz. Bkz. lib/performancePeriod.ts
-  const windowStart = new Date(Date.now() - windowDays * 24 * 60 * 60 * 1000);
-  const since =
-    windowStart < LIVE_PERFORMANCE_START ? LIVE_PERFORMANCE_START : windowStart;
+  const since = new Date(Date.now() - windowDays * 24 * 60 * 60 * 1000);
 
   const rows = await db
     .select({ pair: tradeSignals.pair, outcome: tradeSignals.outcome })
