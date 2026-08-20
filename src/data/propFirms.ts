@@ -312,6 +312,10 @@ export const propFirms: PropFirm[] = [
     // bu yüzden `discount` alanı bilinçli olarak boş bırakıldı. Var olmayan
     // bir indirimi ima etmemek için "indirimli link" olarak sunulmayacak.
     referralUrl: "https://fundednext.com/?fpr=FXPARTNER",
+    // linkActive alanı FundedNext eklendikten SONRA tanımlandığı için burada
+    // eksik kalmıştı — yani ortaklık kayıtlıydı ama link hiçbir yerde
+    // görünmüyordu. Diğer iki ortakla tutarlı hale getirildi.
+    linkActive: true,
     models: ["1-step", "2-step", "instant"],
     accountSizes: ["$5.000", "$10.000", "$25.000", "$50.000", "$100.000", "$200.000"],
     challengeFeeFrom: "$59",
@@ -392,10 +396,22 @@ export const propFirms: PropFirm[] = [
     segment: "cfd",
     founded: 2022,
     headquarters: "Dubai, BAE",
-    isPartner: false,
+    // FXPARTNER'ın üçüncü prop ortağı (20.08.2026).
+    //
+    // SÜREÇ NOTU: FundingPips bu tabloda 8.5 ile 3. sıradaydı ve ortaklık
+    // kurulduktan sonra tek bir ekseni değişmedi. FundedNext'te olduğu gibi,
+    // sıralama ortaklıktan önce ve ondan bağımsız belirlendi.
+    isPartner: true,
+    // Saf referans takip linki — FundedNext'inki gibi bir indirim taşımıyor.
+    // Kayıt sayfası kontrol edildi: kupon alanı yok, indirim ilan edilmiyor.
+    // Bu yüzden `discount` alanı bilinçli olarak boş; tabloda "İndirim yok"
+    // görünecek ve bu doğru.
+    referralUrl: "https://app.fundingpips.com/register?referral_code=C83A1F08",
+    linkActive: true,
     models: ["1-step", "2-step"],
     accountSizes: ["$5.000", "$10.000", "$25.000", "$50.000", "$100.000"],
-    challengeFeeFrom: "$32",
+    // Kayıt sayfasından doğrulandı: "Starts at $29" ($32 yazıyordu).
+    challengeFeeFrom: "$29",
     fee100k: "~$444",
     profitSplit: "%80 → Hot Seat ile %100",
     maxAllocation: "$2.000.000 (Hot Seat)",
@@ -434,8 +450,15 @@ export const propFirms: PropFirm[] = [
       sources: [
         "24 saatlik ödeme süresi, bağımsız karşılaştırmalarda tutarlı şekilde raporlanıyor",
         "Hot Seat ölçekleme programı 2M dolara kadar tahsis sunuyor",
+        "Trustpilot: 61.000+ değerlendirme, 4,8 puan (20.08.2026 itibarıyla)",
+        "Firma beyanı: 282M+ dolar toplam ödül, 400.000 fonlama",
       ],
-      note: "Bağımsız ödeme kanıtı toplama süreci başlatılacak.",
+      note:
+        "Trustpilot hacmi ve puanı listedeki en güçlülerinden. Ancak kayıt " +
+        "sayfasındaki 'canlı ödeme akışı' widget'ı gerçek veri DEĞİL: aynı " +
+        "isimler ve tutarlar sabit bir sırayla döngüye giriyor. Bu bir kural " +
+        "ihlali değil, sektörde yaygın bir pazarlama öğesi — ama ödeme kanıtı " +
+        "olarak sayılamaz ve bizim doğrulamamızın yerine geçmez.",
     },
     scoreRules: 4,
     scoreCost: 4.5,
