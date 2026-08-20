@@ -573,17 +573,23 @@ export const propFirms: PropFirm[] = [
       applies: "manual-code",
       code: "EIEGEB",
       status: "live",
-      // priceFrom / priceFromDiscounted BİLEREK boş: yüzdeden fiyat
-      // hesaplamıyoruz (bkz. PropDiscount tanımı). $74 × %30 aritmetiği
-      // checkout'takiyle birebir tutmayabilir — hesap boyutuna göre indirim
-      // farklı uygulanıyor olabilir. Gerçek indirimli fiyat checkout'tan
-      // teyit edilince girilecek, o zaman tabloda üstü çizili fiyat çıkar.
+      // Checkout ekranından doğrulandı (20.08.2026), EIEGEB uygulanmış hâli:
+      //   5K:  $74,00  -> $51,80
+      //   10K: $125,00 -> $87,50
+      //   25K: $249,00 -> $174,30
+      // Üçünde de indirim tam %30. En düşük hesap boyutu referans alınıyor
+      // çünkü tabloda "…'den başlıyor" olarak gösteriliyor.
+      priceFrom: "$74",
+      priceFromDiscounted: "$51,80",
       note:
-        "Oran ve kod ortaktan alındı. Kod checkout'ta elle giriliyor. " +
-        "İndirimli fiyatlar checkout üzerinden teyit edilip eklenecek.",
+        "Oran ve kod ortaktan alındı; indirimli fiyat checkout üzerinde " +
+        "doğrulandı. Kod ödeme ekranında elle giriliyor. Kodun reset ve " +
+        "tekrar satın almalarda geçerli olup olmadığı henüz teyit edilmedi.",
     },
-    models: ["1-step", "2-step"],
-    accountSizes: ["$10.000", "$25.000", "$50.000", "$100.000", "$200.000"],
+    // Checkout ekranından doğrulandı (20.08.2026): 1 Step / 2 Step / Instant
+    // sekmeleri var ve en küçük hesap 5K'dan başlıyor.
+    models: ["1-step", "2-step", "instant"],
+    accountSizes: ["$5.000", "$10.000", "$25.000", "$50.000", "$100.000", "$200.000"],
     challengeFeeFrom: "$74",
     profitSplit: "%75 → 30 gün sonra %80",
     maxAllocation: "$200.000",
@@ -595,21 +601,34 @@ export const propFirms: PropFirm[] = [
       {
         name: "2-Step Evaluation",
         model: "2-step",
+        // Checkout'tan doğrulandı: 5K hesapta Faz 1 hedefi $500 (%10),
+        // Faz 2 hedefi $250 (%5).
         profitTargets: [10, 5],
         drawdownUnit: "percent",
-        dailyDrawdown: 5,
-        maxDrawdown: 10,
+        // ⚠️ DÜZELTME (20.08.2026): Burada 5/10 yazıyordu — bu yalnızca
+        // FAZ 2'nin limitleri. Faz 1 daha sıkı: %4 günlük / %8 maksimum.
+        // Trader'ı ilk eleyen limit Faz 1 olduğu için bağlayıcı olan o;
+        // tabloya giren değer bu. İki fazın farkı extraRule'da yazılı.
+        // Üçüncü taraf kaynaklar bu ayrımı atlıyordu, checkout ekranı
+        // düzeltti.
+        dailyDrawdown: 4,
+        maxDrawdown: 8,
         drawdownType: "unknown",
         // ⚠️ Kaynaklar çelişiyor: bazıları faz başına 3 gün, bazıları toplam
-        // 5 gün diyor. Hesaplayıcıya girmeden önce ortaktan teyit alınacak.
+        // 5 gün diyor. Checkout ekranında görünmüyor; ortaktan teyit alınacak.
         minTradingDays: 3,
         feeFrom: "$74",
+        extraRule:
+          "Limitler faza göre değişir: Faz 1'de %4 günlük / %8 maksimum, Faz 2'de %5 günlük / %10 maksimum. Tabloda daha sıkı olan Faz 1 gösterilir çünkü eleme önce orada olur. Ayrıca drawdown limitleri ÜCRETLE artırılabiliyor: günlük limit artışı ücretin +%10'u, maksimum limit artışı +%20'si — yani ilan edilen fiyat, gevşetilmiş kurallarla çalışmak isteyen için gerçek maliyet değildir.",
       },
       {
         name: "1-Step Accelerated",
         model: "1-step",
         profitTargets: [10],
         drawdownUnit: "percent",
+        // ⚠️ Bu değerler hâlâ üçüncü taraf kaynaklardan. 2-Step'te aynı
+        // kaynakların yanıldığı ortaya çıktığı için (bkz. yukarısı),
+        // bunlar da checkout'un "1 STEP" sekmesinden doğrulanmalı.
         dailyDrawdown: 3,
         maxDrawdown: 6,
         drawdownType: "unknown",
