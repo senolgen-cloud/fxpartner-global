@@ -84,11 +84,34 @@ export interface PropRuleSet {
   model: "1-step" | "2-step" | "instant";
   /** Yüzde olarak, sırayla her faz için. 1-step'te tek eleman. */
   profitTargets: number[];
-  dailyDrawdown: number;
+  /**
+   * Drawdown biriminin ne olduğu.
+   *
+   * CFD firmaları limitleri YÜZDE ile ifade eder (%5 günlük / %10 toplam).
+   * Futures firmaları ise DOLAR ile ("$50k hesapta $2.500 trailing").
+   * İkisini aynı alanda tutup hepsine "%" eklemek, futures satırlarında
+   * tamamen yanlış sayılar üretirdi — bu yüzden birim veriyle birlikte
+   * taşınıyor ve render tarafı buna göre biçimlendiriyor.
+   */
+  drawdownUnit: "percent" | "usd";
+  dailyDrawdown: number | null;
   maxDrawdown: number;
+  /** `usd` biriminde, sayıların hangi hesap boyutuna ait olduğu. */
+  refAccountSize?: string;
   drawdownType: "static" | "trailing" | "unknown";
   minTradingDays: number | null;
   feeFrom: string;
+  /** Tutarlılık kuralı gibi, elenme sebebi olabilecek ek kısıtlar. */
+  extraRule?: string;
+}
+
+/** Drawdown değerini birimine göre okunabilir metne çevirir. */
+export function formatDrawdown(
+  value: number | null,
+  unit: PropRuleSet["drawdownUnit"]
+) {
+  if (value === null) return "Yok";
+  return unit === "percent" ? `%${value}` : `$${value.toLocaleString("tr-TR")}`;
 }
 
 export interface PropFirm {
@@ -97,6 +120,15 @@ export interface PropFirm {
   name: string;
   logo?: string;
   tagline: string;
+  /**
+   * Hangi enstrüman ailesinde çalışıyor.
+   *
+   * Bu, tabloda en üst seviye ayrım olmalı: CFD ve futures prop firmaları
+   * karşılaştırılabilir ürünler değil. Kural setleri (yüzde vs dolar
+   * drawdown), platformlar (MT5 vs NinjaTrader) ve hatta hedef kitle farklı.
+   * Aynı listede sıralamak, ikisini de yanlış temsil eder.
+   */
+  segment: "cfd" | "futures";
   founded: number;
   headquarters: string;
   /** Firmanın arkasında duran broker (varsa). Çöküş riskini ciddi ölçüde düşürür. */
@@ -194,6 +226,7 @@ export const propFirms: PropFirm[] = [
     slug: "ftmo",
     name: "FTMO",
     tagline: "Sektörün en uzun ödeme geçmişine sahip referans firması",
+    segment: "cfd",
     founded: 2014,
     headquarters: "Prag, Çekya",
     isPartner: false,
@@ -210,6 +243,7 @@ export const propFirms: PropFirm[] = [
         name: "FTMO Challenge",
         model: "2-step",
         profitTargets: [10, 5],
+        drawdownUnit: "percent",
         dailyDrawdown: 5,
         maxDrawdown: 10,
         drawdownType: "static",
@@ -261,6 +295,7 @@ export const propFirms: PropFirm[] = [
     slug: "fundednext",
     name: "FundedNext",
     tagline: "Yüksek kâr paylaşımı ve hızlı ödeme",
+    segment: "cfd",
     founded: 2022,
     headquarters: "Dubai, BAE",
     // FXPARTNER'ın ikinci prop ortağı.
@@ -290,6 +325,7 @@ export const propFirms: PropFirm[] = [
         name: "Evaluation (2-Step)",
         model: "2-step",
         profitTargets: [8, 5],
+        drawdownUnit: "percent",
         dailyDrawdown: 5,
         maxDrawdown: 10,
         drawdownType: "static",
@@ -353,6 +389,7 @@ export const propFirms: PropFirm[] = [
     slug: "fundingpips",
     name: "FundingPips",
     tagline: "En düşük maliyet ve en yüksek ölçekleme tavanı",
+    segment: "cfd",
     founded: 2022,
     headquarters: "Dubai, BAE",
     isPartner: false,
@@ -369,6 +406,7 @@ export const propFirms: PropFirm[] = [
         name: "2-Step Standard",
         model: "2-step",
         profitTargets: [10, 5],
+        drawdownUnit: "percent",
         dailyDrawdown: 5,
         maxDrawdown: 10,
         drawdownType: "static",
@@ -379,6 +417,7 @@ export const propFirms: PropFirm[] = [
         name: "2-Step Pro / Zero",
         model: "2-step",
         profitTargets: [6, 6],
+        drawdownUnit: "percent",
         dailyDrawdown: 3,
         maxDrawdown: 6,
         drawdownType: "static",
@@ -426,6 +465,7 @@ export const propFirms: PropFirm[] = [
     slug: "the5ers",
     name: "The5ers",
     tagline: "Minimum işlem günü olmayan, uzun soluklu firma",
+    segment: "cfd",
     founded: 2016,
     headquarters: "Tel Aviv, İsrail",
     isPartner: false,
@@ -441,6 +481,7 @@ export const propFirms: PropFirm[] = [
         name: "Hyper Growth",
         model: "2-step",
         profitTargets: [8, 5],
+        drawdownUnit: "percent",
         dailyDrawdown: 5,
         maxDrawdown: 10,
         drawdownType: "static",
@@ -451,6 +492,7 @@ export const propFirms: PropFirm[] = [
         name: "Bootcamp",
         model: "2-step",
         profitTargets: [6, 6],
+        drawdownUnit: "percent",
         dailyDrawdown: 3,
         maxDrawdown: 5,
         drawdownType: "static",
@@ -500,6 +542,7 @@ export const propFirms: PropFirm[] = [
     slug: "ic-funded",
     name: "IC Funded",
     tagline: "IC Markets destekli, broker altyapılı prop firma",
+    segment: "cfd",
     founded: 2023,
     headquarters: "Doğrulanacak",
     // Bu dikeydeki en kritik güven sinyali: IC Funded bağımsız bir startup
@@ -553,6 +596,7 @@ export const propFirms: PropFirm[] = [
         name: "2-Step Evaluation",
         model: "2-step",
         profitTargets: [10, 5],
+        drawdownUnit: "percent",
         dailyDrawdown: 5,
         maxDrawdown: 10,
         drawdownType: "unknown",
@@ -565,6 +609,7 @@ export const propFirms: PropFirm[] = [
         name: "1-Step Accelerated",
         model: "1-step",
         profitTargets: [10],
+        drawdownUnit: "percent",
         dailyDrawdown: 3,
         maxDrawdown: 6,
         drawdownType: "unknown",
@@ -643,6 +688,7 @@ export const propFirms: PropFirm[] = [
     slug: "alpha-capital-group",
     name: "Alpha Capital Group",
     tagline: "İngiltere merkezli, geniş platform desteği",
+    segment: "cfd",
     founded: 2021,
     headquarters: "Londra, İngiltere",
     isPartner: false,
@@ -658,6 +704,7 @@ export const propFirms: PropFirm[] = [
         name: "Alpha Pro",
         model: "2-step",
         profitTargets: [8, 5],
+        drawdownUnit: "percent",
         dailyDrawdown: 5,
         maxDrawdown: 10,
         // Plana göre statik veya trailing değişiyor — bu, hesaplayıcıya
@@ -702,6 +749,244 @@ export const propFirms: PropFirm[] = [
     bestFor:
       "Belirli bir platformda (DXtrade, TradeLocker) çalışmak zorunda olan ve kural " +
       "detaylarını okumaya vakit ayıracak trader.",
+  },
+  // ─────────────────────────────────────────────────────────────────────
+  // FUTURES SEGMENTİ
+  //
+  // Bu firmalar CFD tarafındakilerle aynı ürün DEĞİL: limitleri dolar
+  // cinsinden, platformları NinjaTrader/Tradovate, enstrümanları CME
+  // vadeli işlemleri. Tabloda `segment` ile ayrılıyorlar.
+  //
+  // ⚠️ 2026 boyunca bu üç firmanın da şartları esaslı biçimde değişti
+  // (Apex 4.0 Mart 2026'da abonelik modelini tek seferlik ücretle
+  // değiştirdi; Topstep 12 Ocak 2026'da kâr paylaşımını yeniden
+  // yapılandırdı). Buradaki sayılar açık kaynaklardan derlendi ve
+  // hiçbiri henüz FXPARTNER tarafından doğrulanmadı — üçü de
+  // `payoutProof: "monitored"`, yani hiçbiri promote edilmiyor.
+  // ─────────────────────────────────────────────────────────────────────
+  {
+    rank: 7,
+    slug: "topstep",
+    name: "Topstep",
+    tagline: "2012'den beri faaliyette, futures tarafının en uzun geçmişi",
+    segment: "futures",
+    founded: 2012,
+    headquarters: "Chicago, ABD",
+    isPartner: false,
+    models: ["1-step"],
+    accountSizes: ["$50.000", "$100.000", "$150.000"],
+    challengeFeeFrom: "$49/ay",
+    profitSplit: "%90 (12 Ocak 2026'dan itibaren ilk ödemeden geçerli)",
+    maxAllocation: "$150.000",
+    payoutCycle: "Ayda 4 talebe kadar",
+    platforms: ["TopstepX", "NinjaTrader", "Tradovate", "TradingView"],
+    rules: [
+      {
+        name: "Trading Combine $50K",
+        model: "1-step",
+        profitTargets: [6],
+        drawdownUnit: "usd",
+        dailyDrawdown: 1000,
+        maxDrawdown: 2000,
+        refAccountSize: "$50.000",
+        drawdownType: "trailing",
+        minTradingDays: null,
+        feeFrom: "$165/ay",
+        extraRule:
+          "Ödeme talebi için en az $150 kâr getiren 5 kazançlı gün gerekiyor. Express Funded hesaplarda ödeme, bakiyenin %50'si veya $5.000 ile sınırlı.",
+      },
+    ],
+    copyTradingAllowed: "unknown",
+    signalServiceAllowed: "unknown",
+    eaAllowed: "unknown",
+    payoutProof: {
+      status: "monitored",
+      lastCheckedAt: "2026-08-19",
+      sources: [
+        "2012'den bu yana kesintisiz faaliyet — futures prop tarafında en uzun geçmiş",
+        "Apex ile birlikte sektördeki yeni funded-trader kayıtlarının tahmini %55-65'ini oluşturuyor",
+      ],
+      note:
+        "Uzun sicil güçlü bir sinyal, ancak FXPARTNER kendi ödeme doğrulamasını " +
+        "yapmadı. Ayrıca kâr paylaşımı yapısı 12 Ocak 2026'da değişti; mevcut " +
+        "şartların firmadan teyidi gerekiyor.",
+    },
+    scoreRules: 4,
+    scoreCost: 3,
+    scorePayout: 4.5,
+    scoreTransparency: 4.5,
+    summary:
+      "Topstep, futures prop tarafının en köklü firması — 2012'den beri faaliyette. " +
+      "Trailing drawdown kullanıyor ancak günlük zarar limiti de var, yani iki sınır " +
+      "birden takip edilmeli. Asıl zayıf noktası maliyet yapısı: aylık abonelik " +
+      "modeli, tek seferlik ücret ödeyen rakiplere göre uzun süren değerlendirmelerde " +
+      "belirgin şekilde pahalıya geliyor.",
+    pros: [
+      "2012'den beri faaliyet — sektörde en uzun kesintisiz sicil",
+      "12 Ocak 2026'dan itibaren ilk ödemeden geçerli %90 kâr paylaşımı",
+      "Geniş platform desteği: TopstepX, NinjaTrader, Tradovate, TradingView",
+      "Minimum işlem günü şartı yok",
+    ],
+    cons: [
+      "Aylık abonelik modeli — değerlendirme uzarsa maliyet birikiyor",
+      "Trailing drawdown, statik drawdown'a göre belirgin şekilde zor",
+      "Ödeme için en az $150 kâr getiren 5 kazançlı gün şartı",
+      "Express Funded hesaplarda ödeme tavanı (%50 veya $5.000)",
+    ],
+    bestFor:
+      "Futures işlem yapan, uzun kurumsal geçmişe önem veren ve değerlendirmeyi " +
+      "hızlı bitirebileceğini düşünen trader.",
+  },
+  {
+    rank: 8,
+    slug: "apex-trader-funding",
+    name: "Apex Trader Funding",
+    tagline: "Futures tarafının en yüksek hacimli firmalarından",
+    segment: "futures",
+    founded: 2021,
+    headquarters: "Austin, Texas, ABD",
+    isPartner: false,
+    models: ["1-step"],
+    accountSizes: ["$25.000", "$50.000", "$100.000", "$150.000", "$250.000", "$300.000"],
+    challengeFeeFrom: "$131 + $79 aktivasyon",
+    profitSplit: "İlk $25.000 kârın tamamı, sonrasında %90",
+    maxAllocation: "$300.000",
+    payoutCycle: "Firma şartlarına göre",
+    platforms: ["Tradovate", "NinjaTrader"],
+    rules: [
+      {
+        name: "Evaluation $50K (Intraday Trail)",
+        model: "1-step",
+        profitTargets: [6],
+        drawdownUnit: "usd",
+        // Apex çoğu hesap tipinde SERT GÜNLÜK zarar limiti uygulamıyor;
+        // hesabı yöneten şey trailing maksimum drawdown. Buradaki null
+        // "veri eksik" değil, "böyle bir limit yok" demek.
+        dailyDrawdown: null,
+        maxDrawdown: 2500,
+        refAccountSize: "$50.000",
+        drawdownType: "trailing",
+        minTradingDays: null,
+        feeFrom: "$131 + $79",
+        extraRule:
+          "%50 tutarlılık kuralı geçerli. Mart 2026'daki 4.0 güncellemesiyle MAE ve 5:1 risk-getiri kuralları kaldırıldı; gün sonu (EOD) veya gün içi (intraday) trailing drawdown arasında seçim yapılabiliyor.",
+      },
+    ],
+    copyTradingAllowed: "unknown",
+    signalServiceAllowed: "unknown",
+    eaAllowed: "unknown",
+    payoutProof: {
+      status: "monitored",
+      lastCheckedAt: "2026-08-19",
+      sources: [
+        "Topstep ile birlikte sektördeki yeni funded-trader kayıtlarının tahmini %55-65'ini oluşturuyor",
+        "Affiliate programı 180 günlük cookie ve reset'ler dahil ömür boyu tekrarlı komisyon sunuyor",
+      ],
+      note:
+        "Hacim yüksek ancak FXPARTNER kendi ödeme doğrulamasını yapmadı. " +
+        "Model Mart 2026'da (4.0) esaslı biçimde değişti — mevcut ücret ve " +
+        "kural yapısının firmadan teyidi gerekiyor.",
+    },
+    scoreRules: 3.5,
+    scoreCost: 4,
+    scorePayout: 4.5,
+    scoreTransparency: 3.5,
+    summary:
+      "Apex, futures prop tarafında hacim olarak en büyük firmalardan biri. En güçlü " +
+      "yanı kâr paylaşımı: ilk 25.000 doların tamamı trader'da kalıyor, sonrasında %90. " +
+      "Buna karşılık gün içi trailing drawdown, normal piyasa geri çekilmelerinde bile " +
+      "hesabı kapatabiliyor ve %50 tutarlılık kuralı ek bir eleme sebebi — kural seti " +
+      "göründüğünden daha zor.",
+    pros: [
+      "İlk $25.000 kârın tamamı trader'da, sonrasında %90 paylaşım",
+      "Geniş hesap yelpazesi: $25.000 - $300.000",
+      "Mart 2026'dan itibaren tek seferlik ücret (aylık abonelik kaldırıldı)",
+      "Gün sonu veya gün içi trailing drawdown arasında seçim imkânı",
+      "Sık ve agresif indirim kampanyaları",
+    ],
+    cons: [
+      "Gün içi trailing drawdown, normal geri çekilmelerde bile hesabı kapatabiliyor",
+      "%50 tutarlılık kuralı ek eleme riski yaratıyor",
+      "Değerlendirme ücretine ek $79 aktivasyon ücreti",
+      "Kural seti 2026'da esaslı biçimde değişti; eski rehberler yanıltıcı olabilir",
+    ],
+    bestFor:
+      "Yüksek kâr paylaşımı isteyen, trailing drawdown ile çalışmaya alışkın ve " +
+      "tutarlılık kuralını yönetebilecek futures trader'ı.",
+  },
+  {
+    rank: 9,
+    slug: "earn2trade",
+    name: "Earn2Trade",
+    tagline: "Eğitim ve değerlendirmeyi birleştiren futures programı",
+    segment: "futures",
+    founded: 2018,
+    headquarters: "ABD",
+    isPartner: false,
+    models: ["1-step"],
+    accountSizes: ["$50.000", "$100.000", "$150.000", "$200.000"],
+    challengeFeeFrom: "$139 aktivasyon",
+    profitSplit: "%80",
+    maxAllocation: "$200.000",
+    payoutCycle: "Minimum $100 eşiği",
+    platforms: ["NinjaTrader", "Finamark"],
+    rules: [
+      {
+        name: "Gauntlet Mini",
+        model: "1-step",
+        profitTargets: [6],
+        drawdownUnit: "usd",
+        dailyDrawdown: 1100,
+        maxDrawdown: 2000,
+        refAccountSize: "$50.000",
+        // Gün sonu (EOD) drawdown her gün sıfırlanıyor — gün içi trailing'e
+        // göre işleme daha fazla nefes alanı bırakıyor.
+        drawdownType: "trailing",
+        minTradingDays: 10,
+        feeFrom: "$139",
+        extraRule:
+          "%30 tutarlılık kuralı ve onaylı işlem saatleri şartı geçerli. Onaylı saatler, günlük zarar limiti ve drawdown — bu üçünün ihlali hesabı anında sonlandırıyor.",
+      },
+    ],
+    // Earn2Trade copy trading'i açıkça yasaklıyor.
+    copyTradingAllowed: "banned",
+    signalServiceAllowed: "unknown",
+    eaAllowed: "unknown",
+    payoutProof: {
+      status: "monitored",
+      lastCheckedAt: "2026-08-19",
+      sources: [
+        "2018'den bu yana faaliyet; eğitim programı ile değerlendirmeyi birleştiren yapı",
+        "Funded hesaplarda %80/20 kâr paylaşımı, $100 minimum ödeme eşiği",
+      ],
+      note: "Bağımsız ödeme kanıtı toplama süreci başlatılacak.",
+    },
+    scoreRules: 3.5,
+    scoreCost: 3.5,
+    scorePayout: 4,
+    scoreTransparency: 4,
+    summary:
+      "Earn2Trade, değerlendirme programını bir eğitim müfredatıyla birleştiriyor — " +
+      "futures'a yeni başlayanlar için listedeki en anlamlı yapı bu. Gün sonu " +
+      "drawdown'ı her gün sıfırlandığı için gün içi trailing kullanan rakiplere göre " +
+      "işleme daha fazla alan bırakıyor. Buna karşılık %30 tutarlılık kuralı ve " +
+      "onaylı işlem saatleri şartı, kural setini göründüğünden sıkı hale getiriyor.",
+    pros: [
+      "Eğitim müfredatı değerlendirmeyle birlikte geliyor — yeni başlayan için avantaj",
+      "Gün sonu drawdown her gün sıfırlanıyor; gün içi trailing'den daha yönetilebilir",
+      "Aktivasyon ücreti ilk çekimden mahsup ediliyor, peşin ödenmiyor",
+      "$100 gibi düşük bir minimum ödeme eşiği",
+    ],
+    cons: [
+      "%30 tutarlılık kuralı — tek bir büyük kazanç günü değerlendirmeyi geçersiz kılabilir",
+      "Onaylı işlem saatleri dışında işlem hesabı anında sonlandırıyor",
+      "Minimum 10 işlem günü şartı",
+      "Copy trading kesinlikle yasak",
+      "Kâr paylaşımı %80 — futures tarafındaki %90'lık rakiplerin altında",
+    ],
+    bestFor:
+      "Futures'a yeni başlayan, eğitimle birlikte ilerlemek isteyen ve gün sonu " +
+      "drawdown'ın esnekliğine ihtiyaç duyan trader.",
   },
 ];
 

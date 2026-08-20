@@ -9,6 +9,7 @@ import {
   getPropFirmScores,
   hasActiveLink,
   PAYOUT_STATUS_LABEL,
+  formatDrawdown,
   type PropFirm,
 } from "@/data/propFirms";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
@@ -62,7 +63,7 @@ export async function generateMetadata({
 function discountFaqs(firm: PropFirm) {
   const d = firm.discount!;
   const cheapestRule = [...firm.rules].sort(
-    (a, b) => a.dailyDrawdown - b.dailyDrawdown
+    (a, b) => (a.dailyDrawdown ?? Infinity) - (b.dailyDrawdown ?? Infinity)
   )[0];
 
   return [
@@ -86,7 +87,7 @@ function discountFaqs(firm: PropFirm) {
       ? [
           {
             q: `İndirimli challenge satın almadan önce nelere dikkat etmeliyim?`,
-            a: `Ücretten önce kural setine bakın. ${firm.name}'ın en sıkı planında günlük zarar limiti %${cheapestRule.dailyDrawdown}, toplam zarar limiti %${cheapestRule.maxDrawdown}. Elenmelerin çoğu kâr hedefine ulaşamamaktan değil, bu limitlerin aşılmasından kaynaklanır. Ayrıca copy trading ve dış sinyal kullanımına dair kuralları mutlaka okuyun; ihlal durumunda birikmiş kâr ödenmeden hesap kapatılabilir.`,
+            a: `Ücretten önce kural setine bakın. ${firm.name}'ın en sıkı planında günlük zarar limiti ${formatDrawdown(cheapestRule.dailyDrawdown, cheapestRule.drawdownUnit)}, toplam zarar limiti ${formatDrawdown(cheapestRule.maxDrawdown, cheapestRule.drawdownUnit)}. Elenmelerin çoğu kâr hedefine ulaşamamaktan değil, bu limitlerin aşılmasından kaynaklanır. Ayrıca copy trading ve dış sinyal kullanımına dair kuralları mutlaka okuyun; ihlal durumunda birikmiş kâr ödenmeden hesap kapatılabilir.`,
           },
         ]
       : []),

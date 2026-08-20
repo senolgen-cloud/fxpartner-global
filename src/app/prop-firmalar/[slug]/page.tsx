@@ -8,6 +8,7 @@ import {
   getPropFirmScores,
   hasActiveLink,
   PAYOUT_STATUS_LABEL,
+  formatDrawdown,
   type PropFirm,
 } from "@/data/propFirms";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
@@ -68,7 +69,7 @@ const EA_NOTE: Record<PropFirm["eaAllowed"], string> = {
 function firmFaqs(firm: PropFirm) {
   const { composite } = getPropFirmScores(firm);
   const cheapest = [...firm.rules].sort(
-    (a, b) => a.dailyDrawdown - b.dailyDrawdown
+    (a, b) => (a.dailyDrawdown ?? Infinity) - (b.dailyDrawdown ?? Infinity)
   )[0];
 
   const faqs = [
@@ -96,7 +97,7 @@ function firmFaqs(firm: PropFirm) {
         firm.rules
           .map(
             (r) =>
-              `${r.name}: kâr hedefi %${r.profitTargets.join(", ardından %")}, günlük zarar limiti %${r.dailyDrawdown}, toplam zarar limiti %${r.maxDrawdown}` +
+              `${r.name}: kâr hedefi %${r.profitTargets.join(", ardından %")}, günlük zarar limiti ${formatDrawdown(r.dailyDrawdown, r.drawdownUnit)}, toplam zarar limiti ${formatDrawdown(r.maxDrawdown, r.drawdownUnit)}` +
               (r.minTradingDays !== null
                 ? `, minimum ${r.minTradingDays} işlem günü`
                 : ", minimum işlem günü şartı yok")
@@ -120,8 +121,11 @@ function firmFaqs(firm: PropFirm) {
       q: `${firm.name} challenge'ı nasıl geçilir?`,
       a:
         `${firm.name}'da elenmelerin büyük çoğunluğu kâr hedefine ulaşamamaktan değil, ` +
-        `zarar limitinin aşılmasından kaynaklanır. En sıkı planda günlük limit %${cheapest.dailyDrawdown}, ` +
-        `toplam limit %${cheapest.maxDrawdown}. Bu, hesap büyüklüğüne göre işlem başına riskinizi ` +
+        `zarar limitinin aşılmasından kaynaklanır. En sıkı planda ` +
+        (cheapest.dailyDrawdown === null
+          ? `ayrı bir günlük zarar limiti yok; hesabı yöneten tek sınır ${formatDrawdown(cheapest.maxDrawdown, cheapest.drawdownUnit)} toplam limit`
+          : `günlük limit ${formatDrawdown(cheapest.dailyDrawdown, cheapest.drawdownUnit)}, toplam limit ${formatDrawdown(cheapest.maxDrawdown, cheapest.drawdownUnit)}`) +
+        `. Bu, hesap büyüklüğüne göre işlem başına riskinizi ` +
         `önceden hesaplamanız gerektiği anlamına gelir — tek bir aşırı pozisyon her iki limiti de tetikleyebilir. ` +
         `Pozisyon büyüklüğü hesaplamak için pozisyon hesaplayıcımızı kullanabilirsiniz.`,
     });
@@ -349,8 +353,8 @@ export default async function PropFirmDetailPage({
                         <td className="px-4 py-3 text-text-muted">
                           %{r.profitTargets.join(" → %")}
                         </td>
-                        <td className="px-4 py-3 text-text-muted">%{r.dailyDrawdown}</td>
-                        <td className="px-4 py-3 text-text-muted">%{r.maxDrawdown}</td>
+                        <td className="px-4 py-3 text-text-muted">{formatDrawdown(r.dailyDrawdown, r.drawdownUnit)}</td>
+                        <td className="px-4 py-3 text-text-muted">{formatDrawdown(r.maxDrawdown, r.drawdownUnit)}</td>
                         <td className="px-4 py-3 text-text-muted">
                           {r.minTradingDays ?? "Yok"}
                         </td>
@@ -360,6 +364,39 @@ export default async function PropFirmDetailPage({
                   </tbody>
                 </table>
               </div>
+              {/* Dolar bazlı limitlerin hangi hesap boyutuna ait olduğu
+                  yazılmazsa sayılar anlamsız — futures firmalarında limit
+                  hesap büyüklüğüyle ölçekleniyor. */}
+              {firm.rules.some((r) => r.refAccountSize) && (
+                <p className="mt-3 font-mono text-[11px] text-text-muted">
+                  Dolar cinsinden limitler{" "}
+                  {firm.rules.find((r) => r.refAccountSize)?.refAccountSize} hesap
+                  içindir ve hesap büyüklüğüne göre ölçeklenir.
+                </p>
+              )}
+
+              {/* Tutarlılık kuralı gibi ek kısıtlar: tabloya sığmıyor ama
+                  elenme sebebi olarak drawdown kadar önemli. */}
+              {firm.rules.some((r) => r.extraRule) && (
+                <div className="mt-5 space-y-3">
+                  {firm.rules
+                    .filter((r) => r.extraRule)
+                    .map((r) => (
+                      <div
+                        key={r.name}
+                        className="rounded-xl border border-hairline-light bg-paper p-4"
+                      >
+                        <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted">
+                          {r.name} — ek kurallar
+                        </p>
+                        <p className="mt-1.5 text-sm leading-relaxed text-text-dark/90">
+                          {r.extraRule}
+                        </p>
+                      </div>
+                    ))}
+                </div>
+              )}
+
               <p className="mt-3 font-mono text-[11px] text-text-muted">
                 Platformlar: {firm.platforms.join(", ")} · Hesap boyutları:{" "}
                 {firm.accountSizes.join(", ")}

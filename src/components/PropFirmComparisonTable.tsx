@@ -6,6 +6,7 @@ import {
   propFirmsByScore,
   getPropFirmScores,
   PAYOUT_STATUS_LABEL,
+  formatDrawdown,
   type PropFirm,
 } from "@/data/propFirms";
 
@@ -22,6 +23,16 @@ const PROP_CRITERIA = [
   "Min. Gün",
   "Ödeme Kanıtı",
 ] as const;
+
+// Segment, model filtresinin ÜSTÜNDE ve ondan görsel olarak ayrı duruyor:
+// CFD ve futures firmaları karşılaştırılabilir ürünler değil (dolar vs yüzde
+// drawdown, NinjaTrader vs MT5), o yüzden bu bir filtre değil bir sekme gibi
+// davranmalı. Varsayılan CFD — sitenin kitlesi ağırlıklı olarak orada.
+type SegmentFilter = "cfd" | "futures";
+const SEGMENT_LABEL: Record<SegmentFilter, string> = {
+  cfd: "Forex / CFD",
+  futures: "Futures",
+};
 
 type ModelFilter = "Tümü" | "1-step" | "2-step" | "instant";
 const MODEL_FILTERS: ModelFilter[] = ["Tümü", "1-step", "2-step", "instant"];
@@ -156,10 +167,11 @@ function headlineRules(firm: PropFirm) {
 }
 
 export default function PropFirmComparisonTable() {
+  const [activeSegment, setActiveSegment] = useState<SegmentFilter>("cfd");
   const [activeModel, setActiveModel] = useState<ModelFilter>("Tümü");
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
 
-  const ranked = propFirmsByScore();
+  const ranked = propFirmsByScore().filter((f) => f.segment === activeSegment);
   const filtered =
     activeModel === "Tümü"
       ? ranked
@@ -167,6 +179,39 @@ export default function PropFirmComparisonTable() {
 
   return (
     <div>
+      <div
+        role="tablist"
+        aria-label="Enstrüman segmenti"
+        className="mb-4 inline-flex rounded-full border border-hairline p-1"
+      >
+        {(Object.keys(SEGMENT_LABEL) as SegmentFilter[]).map((seg) => {
+          const active = activeSegment === seg;
+          const count = propFirmsByScore().filter((f) => f.segment === seg).length;
+          return (
+            <button
+              key={seg}
+              type="button"
+              role="tab"
+              aria-selected={active}
+              onClick={() => {
+                setActiveSegment(seg);
+                // Segment değişince model filtresi sıfırlanmalı: futures'ta
+                // 2 aşamalı model neredeyse yok, seçili kalırsa boş tablo çıkar.
+                setActiveModel("Tümü");
+                setExpandedSlug(null);
+              }}
+              className={`rounded-full px-5 py-2 font-mono text-xs uppercase tracking-[0.1em] transition-colors ${
+                active
+                  ? "bg-signal text-ink"
+                  : "text-text-on-ink-muted hover:text-text-on-ink"
+              }`}
+            >
+              {SEGMENT_LABEL[seg]} ({count})
+            </button>
+          );
+        })}
+      </div>
+
       <div className="mb-5 flex flex-wrap gap-2">
         {MODEL_FILTERS.map((model) => (
           <button
@@ -247,10 +292,10 @@ export default function PropFirmComparisonTable() {
                       <PriceCell firm={firm} />
                     </td>
                     <td className="px-5 py-4 font-mono text-sm text-text-on-ink">
-                      {rule ? `%${rule.dailyDrawdown}` : "—"}
+                      {rule ? formatDrawdown(rule.dailyDrawdown, rule.drawdownUnit) : "—"}
                     </td>
                     <td className="px-5 py-4 font-mono text-sm text-text-on-ink">
-                      {rule ? `%${rule.maxDrawdown}` : "—"}
+                      {rule ? formatDrawdown(rule.maxDrawdown, rule.drawdownUnit) : "—"}
                     </td>
                     <td className="px-5 py-4 font-mono text-sm text-text-on-ink">
                       {rule?.minTradingDays === null || rule?.minTradingDays === undefined
