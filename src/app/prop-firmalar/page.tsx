@@ -281,6 +281,12 @@ export default function PropFirmalarPage() {
 
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
+                href="/prop-firmalar/indirim-kodlari"
+                className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
+              >
+                İndirim kodları →
+              </Link>
+              <Link
                 href="/pozisyon-hesaplayici"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >

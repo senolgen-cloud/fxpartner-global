@@ -25,6 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/partners`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/copytrade`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/prop-firmalar`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE_URL}/prop-firmalar/indirim-kodlari`, changeFrequency: "weekly", priority: 0.75 },
     { url: `${SITE_URL}/cashback`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/campaigns`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/paketler`, changeFrequency: "weekly", priority: 0.7 },

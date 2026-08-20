@@ -988,6 +988,325 @@ export const propFirms: PropFirm[] = [
       "Futures'a yeni başlayan, eğitimle birlikte ilerlemek isteyen ve gün sonu " +
       "drawdown'ın esnekliğine ihtiyaç duyan trader.",
   },
+  {
+    rank: 10,
+    slug: "blueberry-funded",
+    name: "Blueberry Funded",
+    tagline: "ASIC regüleli Blueberry Markets destekli",
+    segment: "cfd",
+    founded: 2024,
+    headquarters: "Avustralya",
+    // IC Funded gibi broker destekli bir yapı — ama buradaki broker ASIC
+    // regüleli, yani karşı taraf riski açısından listedeki en güçlü
+    // destek yapılarından biri.
+    backedBy: "Blueberry Markets",
+    backingNote:
+      "Blueberry Markets ASIC regüleli bir brokerdır ve bu destek karşı taraf " +
+      "riskini bağımsız prop firmalara kıyasla düşürür — ancak Blueberry Funded'ı " +
+      "regüle bir kuruluş yapmaz. Prop firmalar broker gibi lisanslanmaz; " +
+      "brokerın lisansı fonlanmış hesabınızı kapsamaz.",
+    isPartner: false,
+    models: ["1-step", "2-step", "instant"],
+    accountSizes: ["$1.250", "$5.000", "$10.000", "$25.000", "$50.000", "$100.000", "$200.000"],
+    challengeFeeFrom: "$30",
+    profitSplit: "%80 → ölçekleme ile %90",
+    maxAllocation: "$2.000.000 (ölçekleme programı)",
+    payoutCycle: "İki haftada bir, 24 saat içinde",
+    platforms: ["MT4", "MT5", "cTrader"],
+    rules: [
+      {
+        name: "2-Step Evaluation",
+        model: "2-step",
+        profitTargets: [8, 6],
+        drawdownUnit: "percent",
+        dailyDrawdown: 4,
+        maxDrawdown: 10,
+        drawdownType: "static",
+        minTradingDays: null,
+        feeFrom: "$30",
+        extraRule:
+          "Günlük drawdown, 17:00 EST'teki bakiye veya öz sermayenin yükseğinden hesaplanır ve gün boyunca sabit kalır — gerçekleşmemiş kâr günlük zarar tabanını yükseltebilir. Tutarlılık kuralları 1-step, 2-step ve Instant challenge'larda kaldırıldı. Yüksek etkili haber ticareti, arbitraj ve aşırı hızlı işlem kalıpları kısıtlı.",
+      },
+    ],
+    copyTradingAllowed: "unknown",
+    signalServiceAllowed: "unknown",
+    eaAllowed: "restricted",
+    payoutProof: {
+      status: "monitored",
+      lastCheckedAt: "2026-08-20",
+      sources: [
+        "ASIC regüleli Blueberry Markets tarafından destekleniyor",
+        "İki haftalık ödeme döngüsü, 24 saat içinde işleme alınıyor",
+        "Ölçekleme programı $2.000.000'a kadar çıkıyor",
+      ],
+      note:
+        "Broker desteği güçlü bir sinyal ancak firma 2024'te kuruldu, uzun vadeli " +
+        "ödeme sicili henüz oluşmadı. FXPARTNER kendi doğrulamasını yapmadı.",
+    },
+    scoreRules: 4,
+    scoreCost: 3.5,
+    scorePayout: 4,
+    scoreTransparency: 4.5,
+    summary:
+      "Blueberry Funded, ASIC regüleli Blueberry Markets tarafından desteklenen bir " +
+      "prop firmadır — listedeki en güçlü destek yapılarından biri. Tutarlılık " +
+      "kurallarını tamamen kaldırmış olması trader lehine ciddi bir fark. Zayıf " +
+      "noktası 2024 kuruluşlu olması ve günlük drawdown'ın 17:00 EST'te sabitlenen " +
+      "bir referanstan hesaplanması — bu detay gözden kaçarsa beklenmedik ihlal üretir.",
+    pros: [
+      "ASIC regüleli Blueberry Markets desteği — güçlü karşı taraf yapısı",
+      "Tutarlılık kuralı yok (1-step, 2-step ve Instant'ta kaldırıldı)",
+      "$1.250'den başlayan çok geniş hesap yelpazesi",
+      "Ölçekleme $2.000.000'a kadar, kâr paylaşımı %90'a çıkıyor",
+      "Ödemeler 24 saat içinde işleniyor",
+    ],
+    cons: [
+      "2024 kuruluşlu — uzun vadeli ödeme sicili henüz yok",
+      "Günlük drawdown 17:00 EST referansından sabitleniyor; gerçekleşmemiş kâr tabanı yükseltebiliyor",
+      "Haber ticareti ve otomasyon kısıtlamaları var",
+      "31 farklı hesap seçeneği yeni başlayan için kafa karıştırıcı",
+    ],
+    bestFor:
+      "Regüle bir brokerın arkasında durmasını önemseyen ve tutarlılık kuralıyla " +
+      "uğraşmak istemeyen trader.",
+  },
+  {
+    rank: 11,
+    slug: "e8-markets",
+    name: "E8 Markets",
+    tagline: "Yüksek ödeme hacmi, karmaşık kural seti",
+    segment: "cfd",
+    founded: 2021,
+    headquarters: "ABD",
+    isPartner: false,
+    models: ["1-step", "2-step", "instant"],
+    accountSizes: ["$25.000", "$50.000", "$100.000", "$150.000"],
+    challengeFeeFrom: "$130",
+    fee100k: "$260",
+    profitSplit: "%80 → ücretli yükseltmeyle %90 veya %100",
+    maxAllocation: "$150.000",
+    payoutCycle: "İki haftada bir, 1-2 gün işleme",
+    platforms: ["MT5", "cTrader", "TradeLocker"],
+    rules: [
+      {
+        name: "E8 Signature",
+        model: "2-step",
+        profitTargets: [8, 5],
+        drawdownUnit: "percent",
+        // Gün sonu "dinamik" drawdown: seviye her günün sonunda en yüksek
+        // kapanış bakiyesine göre yukarı çekiliyor.
+        dailyDrawdown: 4,
+        maxDrawdown: 8,
+        drawdownType: "trailing",
+        minTradingDays: null,
+        feeFrom: "$130",
+        extraRule:
+          "Drawdown ürüne göre değişiyor: E8 One / Classic / Track'te gün içi trailing, E8 Signature'da gün sonu dinamik. Fonlanmış hesapta 'en iyi gün' kuralı var — E8 One'da %40, E8 Signature'da %35 tavan. İlk ödeme 8. günde; sonrası her biri %0,3 gerçekleşmiş kâr içeren 5 kârlı güne bağlı.",
+      },
+    ],
+    copyTradingAllowed: "unknown",
+    signalServiceAllowed: "unknown",
+    eaAllowed: "unknown",
+    payoutProof: {
+      status: "monitored",
+      lastCheckedAt: "2026-08-20",
+      sources: [
+        "Firma beyanı: 200.000+ trader'a 68M+ dolar ödeme, 18.907 ödeme işlemi",
+        "Beyan edilen ortalama ödeme tutarı: $3.636",
+        "2021'den bu yana faaliyet; ABD'de E8 Funding LLC olarak kayıtlı, CEO'su kamuya açık",
+      ],
+      note:
+        "Ödeme hacmi ve işlem sayısı listedeki en somut rakamlar arasında, ancak " +
+        "hepsi firma beyanı. Bağımsız doğrulama yapılacak.",
+    },
+    scoreRules: 3.5,
+    scoreCost: 3.5,
+    scorePayout: 4.5,
+    scoreTransparency: 4,
+    summary:
+      "E8 Markets, 68 milyon doları aşan ödeme hacmi ve 18.907 ödeme işlemiyle " +
+      "sektörün en somut rakamlarını açıklayan firmalardan biri. Buna karşılık kural " +
+      "seti listedeki en karmaşığı: drawdown tipi ürüne göre değişiyor ve fonlanmış " +
+      "hesapta 'en iyi gün' tavanı var. Hangi ürünü aldığınızı bilmeden başlamak " +
+      "burada gerçek bir risk.",
+    pros: [
+      "68M+ dolar ödeme, 18.907 ödeme işlemi — sektörde en somut beyan edilen rakamlar",
+      "2021'den beri faaliyet; ABD'de kayıtlı tüzel kişilik, CEO kamuya açık",
+      "Kâr paylaşımı ücretli yükseltmeyle %100'e çıkabiliyor",
+      "İlk ödeme 8. günde alınabiliyor",
+    ],
+    cons: [
+      "Drawdown tipi ürüne göre değişiyor (gün içi trailing vs gün sonu dinamik) — kural seti karmaşık",
+      "Fonlanmış hesapta 'en iyi gün' tavanı (%40 / %35)",
+      "Ödeme için her biri %0,3 kâr içeren 5 kârlı gün şartı",
+      "Maksimum tahsis $150.000 — rakiplerin altında",
+    ],
+    bestFor:
+      "Kural metnini baştan sona okuyacak, hangi ürünü aldığını netleştirip ona göre " +
+      "çalışacak deneyimli trader.",
+  },
+  {
+    rank: 12,
+    slug: "myfundedfutures",
+    name: "MyFundedFutures",
+    tagline: "Aktivasyon ücreti olmayan futures programı",
+    segment: "futures",
+    founded: 2023,
+    headquarters: "ABD",
+    isPartner: false,
+    models: ["1-step"],
+    accountSizes: ["$50.000", "$100.000", "$150.000"],
+    challengeFeeFrom: "$80",
+    profitSplit: "Core/Pro %80 · Rapid %90",
+    maxAllocation: "$150.000",
+    payoutCycle: "Rapid'de 24 saat · Pro'da iki haftada bir",
+    platforms: ["NinjaTrader", "Tradovate", "TradingView"],
+    rules: [
+      {
+        name: "Pro",
+        model: "1-step",
+        profitTargets: [6],
+        drawdownUnit: "percent",
+        // Üç planın hiçbirinde günlük zarar limiti yok — tek taban trailing
+        // drawdown. Bu, sektörde alışılmadık ve trader lehine bir fark.
+        dailyDrawdown: null,
+        maxDrawdown: 3,
+        drawdownType: "trailing",
+        minTradingDays: null,
+        feeFrom: "$80",
+        extraRule:
+          "Pro planında tutarlılık kuralı yok, $1.000 minimum ödeme ve tüm Pro hesaplar genelinde $100.000 kümülatif tavan var. Core planı %40 tutarlılık kuralı ve ödeme döngüsü başına $5.000 tavan uygular; Rapid planında tutarlılık kuralı yoktur ama drawdown gün içi trailing'dir. Aktivasyon ücretleri tüm planlarda kaldırıldı.",
+      },
+    ],
+    copyTradingAllowed: "unknown",
+    signalServiceAllowed: "unknown",
+    eaAllowed: "unknown",
+    payoutProof: {
+      status: "monitored",
+      lastCheckedAt: "2026-08-20",
+      sources: [
+        "Rapid planında ilk sim-funded işlemden sonra her 24 saatte ödeme uygunluğu açılıyor",
+        "Aktivasyon ücretleri tüm planlarda kaldırıldı",
+      ],
+      note: "Bağımsız ödeme kanıtı toplama süreci başlatılacak.",
+    },
+    scoreRules: 4,
+    scoreCost: 4,
+    scorePayout: 4,
+    scoreTransparency: 3.5,
+    summary:
+      "MyFundedFutures'ın öne çıkan yanı, üç planının hiçbirinde günlük zarar limiti " +
+      "olmaması — tek taban trailing drawdown. Bu, gün içi dalgalanmada nefes alanı " +
+      "bırakıyor ve futures tarafında alışılmadık bir esneklik. Zayıf noktası üç planın " +
+      "birbirinden farklı kurallara tabi olması: Core'da tutarlılık kuralı var, Rapid'de " +
+      "yok ama drawdown gün içi, Pro'da ikisi de yok ama kümülatif ödeme tavanı var.",
+    pros: [
+      "Hiçbir planda günlük zarar limiti yok — tek sınır trailing drawdown",
+      "Aktivasyon ücretleri tamamen kaldırıldı",
+      "Rapid planında %90 kâr paylaşımı ve 24 saatte ödeme uygunluğu",
+      "Pro ve Core'da gün sonu drawdown — gün içi trailing'den yönetilebilir",
+    ],
+    cons: [
+      "Üç plan üç farklı kural setine tabi; yanlış plan seçimi pahalıya patlıyor",
+      "Pro planında tüm hesaplar genelinde $100.000 kümülatif ödeme tavanı",
+      "Core planında %40 tutarlılık kuralı ve döngü başına $5.000 tavan",
+      "2023 kuruluşlu — sicil kısa",
+    ],
+    bestFor:
+      "Günlük zarar limiti baskısı olmadan çalışmak isteyen ve üç plan arasındaki " +
+      "farkı okuyup doğru olanı seçecek futures trader'ı.",
+  },
+  {
+    rank: 13,
+    slug: "goat-funded-trader",
+    name: "Goat Funded Trader",
+    tagline: "En ucuz giriş — ama ciddi güven soruları var",
+    segment: "cfd",
+    founded: 2023,
+    headquarters: "Doğrulanacak",
+    isPartner: false,
+    models: ["1-step", "2-step", "instant"],
+    accountSizes: ["$5.000", "$10.000", "$25.000", "$50.000", "$100.000", "$200.000", "$400.000"],
+    challengeFeeFrom: "$5 (Pay Later)",
+    profitSplit: "%75 → 4 ödeme sonrası %95",
+    maxAllocation: "$400.000",
+    payoutCycle: "48-72 saat",
+    platforms: ["MT5", "cTrader", "Match-Trader"],
+    rules: [
+      {
+        name: "2-Step",
+        model: "2-step",
+        profitTargets: [8, 6],
+        drawdownUnit: "percent",
+        dailyDrawdown: 4,
+        maxDrawdown: 10,
+        drawdownType: "static",
+        minTradingDays: 3,
+        feeFrom: "$5 (Pay Later)",
+        extraRule:
+          "İlk iki ödemede %6 çekim limiti uygulanıyor. HFT stratejileri ve altın arbitraj EA'ları yasak. Instant Funding dışındaki tüm hesap tiplerinde minimum 3 işlem günü şartı var.",
+      },
+      {
+        name: "1-Step",
+        model: "1-step",
+        profitTargets: [10],
+        drawdownUnit: "percent",
+        dailyDrawdown: 3,
+        maxDrawdown: 6,
+        drawdownType: "static",
+        minTradingDays: 3,
+        feeFrom: "$5 (Pay Later)",
+      },
+    ],
+    copyTradingAllowed: "unknown",
+    signalServiceAllowed: "unknown",
+    eaAllowed: "restricted",
+    payoutProof: {
+      // ⚠️ Listedeki ilk "warning" — bu statünün var olma sebebi tam olarak bu.
+      // Trustpilot'un sahte yorumları temizledikten sonra puanı geri çekmesi,
+      // bir şeffaflık sorunudur ve ödeme reddi şikayetleriyle birleştiğinde
+      // firmayı promote edilebilir olmaktan çıkarır.
+      status: "warning",
+      lastCheckedAt: "2026-08-20",
+      sources: [
+        "Trustpilot, sahte yorumları kaldırdıktan sonra firmanın puanını geri çekti",
+        "Şikayetler iki başlıkta yoğunlaşıyor: koordineli işlem şüphesiyle ödeme reddi, ve trader'ın limitler içinde olduğunu düşündüğü halde hesabın ihlalli sayılması",
+        "İlk iki ödemede %6 çekim limiti uygulanıyor",
+      ],
+      note:
+        "Bu firma UYARI statüsündedir ve sitede hiçbir yerde önerilmez. Sahte yorum " +
+        "temizliği sonrası puanın geri çekilmesi ile ödeme reddi şikayetlerinin bir " +
+        "arada bulunması, ücretin ne kadar düşük olduğundan bağımsız olarak ciddi bir " +
+        "risk göstergesidir. Listede tutulmasının sebebi, arayan kişinin bu bilgiyi " +
+        "bulabilmesidir.",
+    },
+    scoreRules: 3.5,
+    scoreCost: 4.5,
+    scorePayout: 2,
+    scoreTransparency: 2,
+    summary:
+      "Goat Funded Trader, $5'lık Pay Later girişiyle sektörün en ucuz başlangıcını " +
+      "sunuyor ve kural seti kâğıt üzerinde makul. Ancak Trustpilot'un sahte yorumları " +
+      "temizledikten sonra puanı geri çekmesi ve ödeme reddi şikayetlerinin belirli bir " +
+      "örüntü oluşturması, bu firmayı öneremeyeceğimiz anlamına geliyor. Prop firmada " +
+      "asıl ürün ödemedir; ödeme sorgulanıyorsa ücretin düşüklüğü bir avantaj değildir.",
+    pros: [
+      "Sektörün en düşük giriş maliyeti: Pay Later ile $5 peşin",
+      "Kâr paylaşımı 4 ödeme sonrası %95'e çıkıyor",
+      "$400.000'a kadar tahsis, statik drawdown",
+      "Ödemeler 48-72 saatte işleniyor",
+    ],
+    cons: [
+      "⚠️ Trustpilot, sahte yorumları kaldırdıktan sonra puanı geri çekti",
+      "⚠️ Ödeme reddi şikayetleri belirli bir örüntü oluşturuyor",
+      "Trader'ın limitler içinde olduğunu düşündüğü halde hesabın ihlalli sayıldığı şikayetler var",
+      "İlk iki ödemede %6 çekim limiti",
+      "Kâr paylaşımı %75'ten başlıyor",
+    ],
+    bestFor:
+      "Şu an için önermiyoruz. Ödeme kanıtı durumu netleşene kadar, düşük ücret bu " +
+      "riski karşılamıyor.",
+  },
 ];
 
 /**
