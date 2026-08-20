@@ -97,7 +97,7 @@ function firmFaqs(firm: PropFirm) {
         firm.rules
           .map(
             (r) =>
-              `${r.name}: kâr hedefi %${r.profitTargets.join(", ardından %")}, günlük zarar limiti ${formatDrawdown(r.dailyDrawdown, r.drawdownUnit)}, toplam zarar limiti ${formatDrawdown(r.maxDrawdown, r.drawdownUnit)}` +
+              `${r.name}: ${r.profitTargets.length === 0 ? "kâr hedefi yok (doğrudan fonlanmış hesap)" : `kâr hedefi %${r.profitTargets.join(", ardından %")}`}, günlük zarar limiti ${formatDrawdown(r.dailyDrawdown, r.drawdownUnit)}, toplam zarar limiti ${formatDrawdown(r.maxDrawdown, r.drawdownUnit)}` +
               (r.minTradingDays !== null
                 ? `, minimum ${r.minTradingDays} işlem günü`
                 : ", minimum işlem günü şartı yok")
@@ -351,7 +351,9 @@ export default async function PropFirmDetailPage({
                       <tr key={r.name} className="border-b border-hairline-light/60">
                         <td className="px-4 py-3 font-semibold text-text-dark">{r.name}</td>
                         <td className="px-4 py-3 text-text-muted">
-                          %{r.profitTargets.join(" → %")}
+                          {r.profitTargets.length === 0
+                            ? "Yok"
+                            : `%${r.profitTargets.join(" → %")}`}
                         </td>
                         <td className="px-4 py-3 text-text-muted">{formatDrawdown(r.dailyDrawdown, r.drawdownUnit)}</td>
                         <td className="px-4 py-3 text-text-muted">{formatDrawdown(r.maxDrawdown, r.drawdownUnit)}</td>

@@ -586,14 +586,32 @@ export const propFirms: PropFirm[] = [
         "doğrulandı. Kod ödeme ekranında elle giriliyor. Kodun reset ve " +
         "tekrar satın almalarda geçerli olup olmadığı henüz teyit edilmedi.",
     },
-    // Checkout ekranından doğrulandı (20.08.2026): 1 Step / 2 Step / Instant
-    // sekmeleri var ve en küçük hesap 5K'dan başlıyor.
+    // ↓ Bu bloğun tamamı 20.08.2026'da IC Funded checkout ekranından,
+    //   üç sekme de tek tek açılarak doğrulandı. Üçüncü taraf inceleme
+    //   siteleri bu firmada birden fazla noktada yanılıyordu.
     models: ["1-step", "2-step", "instant"],
-    accountSizes: ["$5.000", "$10.000", "$25.000", "$50.000", "$100.000", "$200.000"],
+    // 2-Step 500K'ya kadar çıkıyor; 1-Step 10K-100K, Instant 5K-100K arası.
+    accountSizes: [
+      "$5.000",
+      "$10.000",
+      "$25.000",
+      "$50.000",
+      "$100.000",
+      "$200.000",
+      "$500.000",
+    ],
     challengeFeeFrom: "$74",
-    profitSplit: "%75 → 30 gün sonra %80",
-    maxAllocation: "$200.000",
-    payoutCycle: "48 saat (garanti)",
+    // ⚠️ DÜZELTME: "%75 → 30 gün sonra %80" yazıyordu. Checkout'ta üç modelde
+    // ve tüm hesap boyutlarında kâr paylaşımı sabit %80 görünüyor. %75 gibi
+    // bir başlangıç oranı hiçbir yerde yok. Paylaşım ücretli "Profit Split
+    // Boost" (+%20 fiyat) ile yükseltilebiliyor.
+    profitSplit: "%80 (ücretli yükseltmeyle daha yüksek)",
+    maxAllocation: "$500.000 (2-Step)",
+    // Checkout'ta ödeme koşulu "Sessions: 5 days of $X" olarak tanımlı —
+    // X hesap bakiyesinin %0,5'i. Yani ödeme, her biri asgari tutarda kâr
+    // getiren 5 seansa bağlı. "48 saat" firmanın işleme süresi taahhüdü,
+    // ödeme uygunluğu koşulu değil; ikisi ayrı şeyler.
+    payoutCycle: "5 nitelikli seans sonrası · işleme 48 saat",
     // cTrader teyitli (ctrader.com prop firm dizininde listeleniyor).
     // Diğer platformlar ortakla teyit edilecek.
     platforms: ["cTrader"],
@@ -614,26 +632,47 @@ export const propFirms: PropFirm[] = [
         dailyDrawdown: 4,
         maxDrawdown: 8,
         drawdownType: "unknown",
-        // ⚠️ Kaynaklar çelişiyor: bazıları faz başına 3 gün, bazıları toplam
-        // 5 gün diyor. Checkout ekranında görünmüyor; ortaktan teyit alınacak.
-        minTradingDays: 3,
+        // Checkout'ta değerlendirme için minimum işlem günü şartı GÖRÜNMÜYOR.
+        // Üçüncü taraf kaynakların "3 gün" / "5 gün" dediği şey büyük
+        // olasılıkla ödeme koşulu olan "5 nitelikli seans" ile karıştırılmış.
+        // Doğrulanmamış bir sayı yazmaktansa null bırakıyoruz.
+        minTradingDays: null,
         feeFrom: "$74",
         extraRule:
-          "Limitler faza göre değişir: Faz 1'de %4 günlük / %8 maksimum, Faz 2'de %5 günlük / %10 maksimum. Tabloda daha sıkı olan Faz 1 gösterilir çünkü eleme önce orada olur. Ayrıca drawdown limitleri ÜCRETLE artırılabiliyor: günlük limit artışı ücretin +%10'u, maksimum limit artışı +%20'si — yani ilan edilen fiyat, gevşetilmiş kurallarla çalışmak isteyen için gerçek maliyet değildir.",
+          "Limitler faza göre değişir: Faz 1'de %4 günlük / %8 maksimum, Faz 2'de %5 günlük / %10 maksimum, fonlanmış hesapta %5 / %10. Tabloda daha sıkı olan Faz 1 gösterilir çünkü eleme önce orada olur. Ödeme koşulu ayrıdır: her biri hesap bakiyesinin %0,5'i kadar kâr getiren 5 seans gerekir. Fonlanmış hesap aktivasyonu ücretsizdir. Drawdown limitleri ÜCRETLE gevşetilebilir — günlük limit +%10, maksimum limit +%20 fiyat; ayrıca hızlandırılmış ödeme +%15 ve kâr paylaşımı artışı +%20 olarak satılıyor. Yani ilan edilen fiyat, bu seçeneklerin herhangi birini isteyen için gerçek maliyet değildir.",
       },
       {
-        name: "1-Step Accelerated",
+        name: "1-Step Evaluation",
         model: "1-step",
+        // Checkout'tan doğrulandı: 10K hesapta hedef $1.000 (%10).
+        // Hesap boyutları 10K-100K arası, 5K yok.
         profitTargets: [10],
         drawdownUnit: "percent",
-        // ⚠️ Bu değerler hâlâ üçüncü taraf kaynaklardan. 2-Step'te aynı
-        // kaynakların yanıldığı ortaya çıktığı için (bkz. yukarısı),
-        // bunlar da checkout'un "1 STEP" sekmesinden doğrulanmalı.
+        // Doğrulandı: %3 günlük / %6 maksimum — hem değerlendirmede hem de
+        // fonlanmış hesapta aynı. 2-Step'in aksine faz farkı yok.
         dailyDrawdown: 3,
         maxDrawdown: 6,
         drawdownType: "unknown",
-        minTradingDays: 3,
+        minTradingDays: null,
         feeFrom: "$154",
+        extraRule:
+          "Değerlendirme ve fonlanmış hesap aynı limitlere tabidir (%3 günlük / %6 maksimum) — 2-Step'teki faz farkı burada yoktur. Hesap boyutları $10.000-$100.000 arasındadır. Ödeme koşulu ve ücretli gevşetme seçenekleri 2-Step ile aynıdır.",
+      },
+      {
+        name: "Instant Funding",
+        model: "instant",
+        // Değerlendirme yok — doğrudan fonlanmış hesap satın alınıyor,
+        // dolayısıyla kâr hedefi de yok.
+        profitTargets: [],
+        drawdownUnit: "percent",
+        // Listedeki en sıkı limitler: %5 maksimum, 1-Step'in %6'sından da dar.
+        dailyDrawdown: 3,
+        maxDrawdown: 5,
+        drawdownType: "unknown",
+        minTradingDays: null,
+        feeFrom: "$109",
+        extraRule:
+          "Değerlendirme aşaması yoktur; hesap doğrudan fonlanmış olarak satın alınır. Karşılığında limitler listedeki en sıkı seviyededir: %3 günlük / %5 maksimum. Hesap boyutları $5.000-$100.000. Kâr paylaşımı yine %80 ve ödeme için 5 nitelikli seans şartı geçerlidir.",
       },
     ],
     // ⚠️ EN ÖNEMLİ SATIR: IC Funded copy trading'i AÇIKÇA YASAKLIYOR.
@@ -670,10 +709,15 @@ export const propFirms: PropFirm[] = [
     // riski bağımsız bir 2023 kuruluşuna kıyasla yapısal olarak düşürüyor.
     // Bunu 3.5'te bırakmak, kendi rubriğimizi kendi tanımına aykırı
     // uygulamaktı. Düzeltildi.
-    scoreRules: 3.5, // Değişmedi: %10 hedef ve 3 gün min. ortalama; yeni kanıt yok.
-    scoreCost: 4, // Değişmedi: $74 giriş iyi, ama iade 3. ödemede — bu bir eksi.
-    // 3.5 → 4: IC Markets karşı taraf yapısı + 48 saat / $500 ödeme garantisi.
-    // 4.5'e çıkmıyor çünkü kâr paylaşımı %75 ile listenin en düşüğü.
+    // Checkout doğrulaması sonrası (20.08.2026) puanlar gözden geçirildi.
+    // Net etki nötr: kâr paylaşımı sandığımızdan iyi çıktı (%75 değil %80),
+    // ama Faz 1 limitleri sandığımızdan sıkı çıktı (%5/%10 değil %4/%8) ve
+    // limitlerin ücretle gevşetilmesi bir maliyet şeffaflığı sorunu.
+    scoreRules: 3.5, // Faz 1 daha sıkı ama min. gün şartı yok — dengeleniyor.
+    scoreCost: 4, // $74 giriş iyi; ücretli gevşetme seçenekleri puanı yukarı çekmiyor.
+    // Kâr paylaşımı %80'de sabit (%75 değilmiş) + IC Markets karşı taraf yapısı
+    // + 48 saat / $500 garantisi. 4.5'e çıkmıyor: ödeme, her biri bakiyenin
+    // %0,5'i kadar kâr getiren 5 seans şartına bağlı.
     scorePayout: 4,
     // 4 → 4.5: Tanımlanabilir, düzenlenmiş bir broker operasyonuna bağlı
     // kurumsal yapı; ekip topluluk kanallarında düzenli ödeme kanıtı yayımlıyor.
@@ -692,8 +736,13 @@ export const propFirms: PropFirm[] = [
       "Ekip, topluluk kanallarında düzenli ödeme kanıtı paylaşıyor",
     ],
     cons: [
-      "Kâr paylaşımı %75'ten başlıyor — sektörde %80-95 yaygın",
-      "Challenge ücreti ancak ÜÇÜNCÜ ödemede iade ediliyor; rakiplerin çoğu ilk ödemede iade ediyor",
+      // ⚠️ Buradan iki madde ÇIKARILDI (20.08.2026): "kâr paylaşımı %75'ten
+      // başlıyor" ve "ücret ancak üçüncü ödemede iade ediliyor". İkisi de
+      // üçüncü taraf kaynaklardandı; checkout paylaşımın sabit %80 olduğunu
+      // gösterdi ve iade politikasına dair hiçbir kanıt bulunamadı.
+      // Doğrulayamadığımız bir olumsuz iddiayı yayımda tutmuyoruz.
+      "Kâr paylaşımı %80'de sabit; yükseltmek ücretli (+%20 fiyat)",
+      "Drawdown limitlerini gevşetmek ücretli — ilan edilen fiyat gerçek maliyet olmayabilir",
       "Copy trading kesinlikle yasak — FXPARTNER CopyTrade bu hesaplarda kullanılamaz",
       "EA kullanımı 'hyperactivity' kısıtına tabi; sınır net tanımlanmamış",
       "2023 kuruluşlu; uzun vadeli ödeme geçmişi henüz oluşmadı",
