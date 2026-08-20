@@ -254,7 +254,8 @@ export const brokers: Broker[] = [
     slug: "xm",
     name: "XM Global",
     logo: "/brokers/xm.png",
-    ogImage: "/brokers/xm-cover.jpg",
+    // Share preview runs the current campaign creative, same as Lite Finance.
+    ogImage: "/campaigns/XM-cashback.png",
     adImage: "/campaigns/xm-100bonus-reklam.png",
     adImageWidth: 1672,
     adImageHeight: 941,
@@ -318,14 +319,14 @@ export const brokers: Broker[] = [
       tag: "Aktif Kampanya",
       title: "XM Nakit İadesi Kampanyası — Şimdiye Kadar 17.369$ Ödendi",
       intro:
-        "Aynı işlemler, aynı piyasa — ama neden nakit iadesi olmasın? XM Global'de FXPARTNER ortak kodu ile işlem yapan yatırımcılar bugüne kadar toplam 17.369$ nakit iadesi aldı. XM hesabın zaten varsa, avantajdan yararlanmak için mevcut hesabını kapatmana ya da işlemlerini değiştirmen gerekmiyor.",
+        "Aynı işlemler, aynı piyasa — ama neden nakit iadesi olmasın? XM Global'de FXPARTNER ortak kodu ile işlem yapan yatırımcılar bugüne kadar toplam 17.369$ nakit iadesi aldı ve iade gün sonunda hesaba geçiyor, ay sonu beklenmiyor. XM hesabın zaten varsa, avantajdan yararlanmak için mevcut hesabını kapatmana ya da işlemlerini değiştirmen gerekmiyor.",
       steps: [
         "FXPARTNER ortak kodu ile EK HESAP aç.",
         "İşlemlerine bu hesap üzerinden devam et.",
         "Hepsi bu — yaptığın işlemlerden nakit iadesi almaya başla.",
       ],
       note: "Kampanya koşulları değişebilir; güncel şartları katılmadan önce XM'in resmi sitesinden teyit edin. Yatırım yapmak risk içerir, sermayeniz risk altında olabilir.",
-      image: "/campaigns/XM-nakit-iadesi-fxpartner.png",
+      image: "/campaigns/XM-cashback.png",
       imageWidth: 1672,
       imageHeight: 941,
       ctaUrl: "https://bit.ly/xm-panel",

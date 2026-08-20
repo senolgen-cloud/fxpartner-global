@@ -1751,6 +1751,138 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "xm-nakit-iadesi-nasil-calisir",
+    // Square build of the 16:9 campaign banner — the post page renders covers
+    // at aspect-square, so the wide original would lose its headline to the
+    // crop. Blurred fill behind, untouched banner letterboxed on top.
+    coverImage: "/blog/xm-nakit-iadesi-nasil-calisir-cover.png",
+    lang: "tr",
+    title: "XM Nakit İadesi: Haklı Çıkmanızı Gerektirmeyen Tek Kalem",
+    excerpt:
+      "İşlem hesabınızdaki her getiri kalemi piyasada haklı çıkmanıza bağlıdır — biri hariç. Nakit iadesinin parası nereden gelir, gün sonunda ödenmesi neyi değiştirir ve maliyet eşiğinizi tam olarak ne kadar düşürür? Rakamlarla.",
+    publishedAt: "2026-08-20",
+    readingMinutes: 10,
+    sections: [
+      {
+        paragraphs: [
+          "İki yatırımcı düşünün. Aynı brokerda, aynı paritede, aynı gün, aynı işlemleri açıp aynı seviyelerden kapatıyorlar. Yıl sonunda birinin hesabında diğerinden daha fazla para var.",
+          "Aradaki fark strateji değil. Analiz değil, zamanlama değil, şans değil. Fark, birinin yaptığı her işlemin maliyetinin bir kısmını geri alıyor olması.",
+          "İşlem hesabınızdaki bütün getiri kalemleri tek bir şeye bağlıdır: piyasada haklı çıkmanıza. Nakit iadesi bu listenin dışındaki tek kalemdir — kazandığınız işlemde de, kaybettiğiniz işlemde de ödenir. Bu yazı onun nasıl çalıştığını, parasının nereden geldiğini ve sizin hesabınızda tam olarak neyi değiştirdiğini anlatıyor.",
+        ],
+      },
+      {
+        heading: "Bu paranın kaynağı ne? Kimse bedava para vermez",
+        paragraphs: [
+          "Doğru soru bu ve cevabını bilmeden katılmamak gerekir.",
+          "Bir brokerın geliri, sizin ödediğiniz spread ve komisyondan oluşur. Broker bu gelirin bir kısmını, kendisine yatırımcı yönlendiren iş ortaklarına pay olarak öder — sektörde standart olan IB (introducing broker) modeli budur. FXPARTNER, XM'in resmi iş ortağıdır ve bu payın bir bölümünü, işlemi fiilen yapan kişiye, yani size geri verir.",
+          "Buradaki kritik nokta şu: nakit iadesi sizin spreadinizin üzerine eklenen bir maliyetten çıkmaz. Ortak kodla açılan hesapta da, kodsuz açılan hesapta da ödediğiniz spread aynıdır. Değişen tek şey, brokerın zaten ödeyeceği ortak payının bir kısmının sizde kalmasıdır. Yani kodsuz hesap açan bir yatırımcı daha ucuza işlem yapmıyor — sadece kendisine ait olabilecek bir payı hiç talep etmemiş oluyor.",
+          "Bu modeli açıkça yazıyoruz çünkü \"bedava para\" gibi sunulan her teklifte ilk sorulması gereken soru paranın kaynağıdır. Kaynağı açıklanamayan bir teklif, açıklanabilen bir tekliften her zaman daha risklidir.",
+        ],
+      },
+      {
+        heading: "Rakamlarla: eşiğiniz ne kadar düşüyor?",
+        paragraphs: [
+          "Nakit iadesinin etkisini anlamanın en net yolu onu kâr olarak değil, eşik düşüşü olarak görmektir.",
+          "XM Standard hesapta EUR/USD spreadi 1,0 pipten başlar. 1 standart lotta 1 pip yaklaşık 10 dolar ettiğine göre, o pozisyondan bir dolar kazanmadan önce piyasadan 10 doları geri kazanmanız gerekir. Bu, her işlemde aştığınız görünmez eşiktir.",
+          "Nakit iadesi bu eşiği doğrudan aşağı çeker. Lot başına iadeniz ne kadarsa, gerçek maliyetiniz o kadar azalır:",
+        ],
+        list: [
+          "Lot başına 2 $ iade → gerçek maliyet 8 $ → eşik 1,0 pip yerine 0,8 pip.",
+          "Lot başına 3 $ iade → gerçek maliyet 7 $ → eşik 0,7 pip. Aşmanız gereken mesafe %30 kısaldı.",
+          "Lot başına 5 $ iade → gerçek maliyet 5 $ → eşik 0,5 pip. Maliyetinizin yarısı geri döndü.",
+        ],
+      },
+      {
+        heading: "Yıllık tabloya çevirince",
+        paragraphs: [
+          "Tek işlemde birkaç dolar kulağa küçük gelir. Nakit iadesini anlamlı kılan şey tekrardır — her lotta, istisnasız.",
+          "Ayda 20 lot işlem yapan bir yatırımcı yılda 240 lot demektir:",
+        ],
+        list: [
+          "Lot başına 2 $ → yılda 480 $.",
+          "Lot başına 3 $ → yılda 720 $.",
+          "Lot başına 5 $ → yılda 1.200 $.",
+          "Ayda 50 lot yapıyorsanız bu rakamları 2,5 ile çarpın: yılda 1.200 $ ile 3.000 $ arası.",
+        ],
+      },
+      {
+        heading: "Önemli uyarı: kendi oranınızı öğrenin",
+        paragraphs: [
+          "Yukarıdaki rakamlar mekanizmayı göstermek için kurulmuş örneklerdir, taahhüt değildir. Lot başına iade oranı hesap türüne, işlem yaptığınız enstrümana ve aylık hacminize göre değişir — Zero hesapta komisyon üzerinden, Standard ve Micro hesapta spread üzerinden hesaplanır ve bu ikisi aynı rakamı vermez.",
+          "Kendi profilinize karşılık gelen güncel oranı FXPARTNER'ın nakit iadesi sayfasından öğrenebilirsiniz. Bir oranı öğrenmeden yıllık planlama yapmayın; \"yaklaşık\" bir rakamla kurulan bütçe, gerçekleşmediğinde en çok kırgınlık yaratan şeydir.",
+        ],
+      },
+      {
+        heading: "\"Gün sonunda\" ne demek — ve neden fark eder?",
+        paragraphs: [
+          "Nakit iadesi programlarının çoğu aylık, bazıları üç aylık ödeme yapar. XM nakit iadesi kampanyasında iade gün sonunda hesabınıza döner. Bu, sadece bir hız farkı değil; üç ayrı sonucu var.",
+        ],
+        list: [
+          "Para aynı gün teminatınıza döner ve ertesi gün sizin için çalışmaya başlar. Aylık ödeme yapan bir programda aynı tutar ortalama iki hafta boyunca sizin dışınızda bekler.",
+          "Maliyetiniz görünür hale gelir. Her gün ne kadar iade aldığınızı görmek, o gün ne kadar maliyet ödediğinizi de görmek demektir. Görünen maliyet, yönetilen maliyettir — pek çok yatırımcı işlem maliyetini ilk kez bu şekilde takip etmeye başlar.",
+          "Doğrulanabilirlik. Günlük ödemede bir aksaklığı ertesi gün fark edersiniz; aylık ödemede aynı aksaklığı otuz gün sonra öğrenirsiniz. Sıklık, güvenin en pratik biçimidir.",
+        ],
+      },
+      {
+        heading: "Değiştirme maliyeti: sıfır",
+        paragraphs: [
+          "Nakit iadesini finansal kararlar arasında sıra dışı yapan şey, sizden hiçbir ödün istememesidir. Brokerınızı değiştirmiyorsunuz — zaten XM'de kalıyorsunuz. Stratejinizi değiştirmiyorsunuz. Platformunuzu, lot büyüklüğünüzü, risk kurallarınızı değiştirmiyorsunuz.",
+          "XM hesabınız zaten varsa mevcut hesabınızı kapatmanız da gerekmiyor: FXPARTNER ortak koduyla bir ek hesap açıp işlemlerinize o hesap üzerinden devam ediyorsunuz.",
+        ],
+        list: [
+          "1. FXPARTNER ortak kodu ile XM'de ek hesap açın.",
+          "2. İşlemlerinize bu hesap üzerinden devam edin — alışkanlıklarınızda hiçbir şey değişmiyor.",
+          "3. Yaptığınız işlemlerin nakit iadesi gün sonunda hesabınıza geçmeye başlar.",
+        ],
+      },
+      {
+        heading: "Kimin için ne kadar fark eder?",
+        paragraphs: [
+          "Dürüst olmak gerekirse nakit iadesi herkes için aynı ölçüde anlamlı değil. Kendi profilinizi aşağıdan bulun:",
+        ],
+        list: [
+          "Ayda 5 lotun altında: yıllık iade birkaç yüz dolar seviyesinde kalır. Zararına değil ama hayatınızı değiştirmez; bu hacimde asıl önceliğiniz maliyet değil, tutarlılık olmalı.",
+          "Ayda 20-50 lot: burada rakam görünür hale gelir. Yıllık iade, çoğu yatırımcının aylık işlem maliyetinin birkaç katına denk gelir.",
+          "Ayda 100 lot ve üzeri: nakit iadesi artık bir ayrıntı değil, gelir tablonuzun kalemidir. Bu hacimde iadeyi almamak, stratejinizde bilerek bir performans kaybını kabul etmekle aynı şeydir.",
+          "Scalper ve EA kullanıcıları: en yüksek etki burada. Bu tarzlarda toplam maliyet, stratejinin kâr eşiğini belirleyen baskın değişkendir; maliyetteki %20-30'luk bir düşüş, bazı sistemleri zarar bölgesinden çıkarabilecek büyüklüktedir.",
+        ],
+      },
+      {
+        heading: "Nakit iadesinin yapmadığı şeyler",
+        paragraphs: [
+          "Bir teklifi dürüstçe anlatmanın yolu, ne olmadığını da söylemekten geçer.",
+          "Nakit iadesi kâr değildir; maliyet geri dönüşüdür. 500 dolar kaybettiğiniz bir ayda 60 dolar iade aldıysanız, o ay 440 dolar kaybettiniz. İade zararı azaltır, işareti değiştirmez.",
+          "Nakit iadesi zarar eden bir stratejiyi kâra geçirmez. Ortalama olarak lot başına 5 dolar kaybettiren bir sistemde lot başına 3 dolarlık iade, sizi lot başına 2 dolar zararda bırakır — ve hacim büyüdükçe bu zarar da büyür.",
+          "Bu yüzden en pahalı hata şudur: iade kazanmak için daha fazla işlem açmak. Stratejiniz sinyal vermediği halde lot biriktirmek, iadeyle geri alacağınızdan çok daha fazlasını piyasaya bırakmanın en hızlı yoludur. Nakit iadesi, yapacağınız işlemlerin maliyetini düşürmek içindir; yapmayacağınız işlemleri yapmak için değil.",
+          "Son olarak: hiçbir broker sadece nakit iadesi verdiği için seçilmez. Broker seçimi dört eksende yapılır — regülasyon, maliyet, platform ve para çekme. XM bu dört eksende zaten güçlü olduğu için nakit iadesi anlamlı bir ek avantaja dönüşüyor; zayıf bir brokerda aynı iade, yalnızca kötü bir kararın üzerine konmuş bir süs olurdu.",
+        ],
+      },
+      {
+        heading: "Neden XM?",
+        paragraphs: [
+          "Nakit iadesi bir çarpandır; neyin üzerine bindiğine bakmak gerekir.",
+          "XM Global, ASIC (Avustralya), CySEC (Kıbrıs) ve DFSA (Dubai) dahil dört lisans taşıyor — bunların üçü tier-1 otorite. Tier-1 düzenleme, müşteri fonlarının şirket fonlarından ayrı tutulmasını ve asgari sermaye rezervini zorunlu kılar. Minimum yatırım 5 dolar, negatif bakiye koruması var, yatırma ve çekme işlemlerinde broker ücreti alınmıyor ve çekim talepleri genellikle 24 saat içinde işleniyor.",
+          "FXPARTNER Endeksi'nde XM'in bileşik puanı 9.5 — sıralamamızdaki en yüksek puan ve bunun büyük bölümü regülasyon ekseninden geliyor. Nakit iadesi, bu temelin üzerine eklenen bir maliyet avantajıdır; onun yerine geçen bir şey değil.",
+        ],
+      },
+      {
+        heading: "Bu kampanya şu ana kadar ne ödedi?",
+        paragraphs: [
+          "FXPARTNER ortak kodu ile XM'de işlem yapan yatırımcılara bugüne kadar toplam 17.369 dolar nakit iadesi ödendi. Bu rakam bir projeksiyon değil, gerçekleşmiş ödemelerin toplamı.",
+          "Kampanyanın tam koşullarını, güncel oranları ve başvuru adımlarını kampanyalar sayfamızda bulabilirsiniz. Nakit iadesi kaydınızı oluşturduktan sonra ödemeleriniz hesabınızda takip edilebilir hale gelir.",
+        ],
+      },
+      {
+        heading: "Özet",
+        paragraphs: [
+          "Piyasada haklı çıkıp çıkmayacağınızı kimse garanti edemez. Ama her işlemde ödediğiniz maliyetin bir kısmının geri döneceğini baştan bilebilirsiniz — ve bu, işlem hesabınızdaki tek belirli kalemdir.",
+          "Değiştirmeniz gereken hiçbir şey yok: aynı broker, aynı strateji, aynı işlemler. Tek fark, hesabın hangi ortak koduyla açıldığı. Ayda 20 lot işlem yapan biri için bu tek satırlık fark, yılda birkaç yüz dolar demek.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz. Nakit iadesi oranları ve kampanya koşulları değişebilir; katılmadan önce güncel şartları teyit edin.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
