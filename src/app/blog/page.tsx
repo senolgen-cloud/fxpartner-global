@@ -7,10 +7,15 @@ import { breadcrumbSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
+// Every post in src/data/blog.ts is Turkish and carries lang: "tr", so the
+// section's own chrome (heading, dates, link labels) is Turkish too and
+// <main> declares it. Leaving English chrome around Turkish articles was
+// both a reading-experience mismatch and a wrong language signal to
+// crawlers — the same reason each post sets lang individually.
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Guides and explainers on choosing a forex broker, understanding regulation, and evaluating trading costs.",
+    "Forex brokerı seçimi, regülasyonun okunması ve işlem maliyetlerinin hesaplanması üzerine rehberler ve açıklayıcı yazılar.",
   alternates: { canonical: "/blog" },
 };
 
@@ -28,17 +33,17 @@ export default function BlogIndexPage() {
           ),
         }}
       />
-      <main className="flex-1 bg-paper-high">
+      <main lang="tr" className="flex-1 bg-paper-high">
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-4xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
               Blog
             </span>
             <h1 className="mt-4 max-w-2xl font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Guides for choosing a broker with confidence
+              Broker seçiminde güvenle ilerlemeniz için rehberler
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              Practical, checkable criteria — not marketing copy.
+              Pazarlama metni değil; pratik, kendiniz doğrulayabileceğiniz kriterler.
             </p>
           </div>
         </section>
@@ -65,12 +70,12 @@ export default function BlogIndexPage() {
                   )}
                   <div className="min-w-0">
                     <span className="font-mono text-xs text-text-muted">
-                      {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                      {new Date(post.publishedAt).toLocaleDateString("tr-TR", {
                         year: "numeric",
                         month: "long",
                         day: "numeric",
                       })}{" "}
-                      · {post.readingMinutes} min read
+                      · {post.readingMinutes} dk okuma
                     </span>
                     <h2 className="mt-2 font-poppins text-2xl font-semibold text-text-dark transition-colors group-hover:text-signal">
                       {post.title}
@@ -79,7 +84,7 @@ export default function BlogIndexPage() {
                       {post.excerpt}
                     </p>
                     <span className="mt-3 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal">
-                      Read the guide →
+                      Rehberi oku →
                     </span>
                   </div>
                 </Link>

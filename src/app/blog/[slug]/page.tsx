@@ -76,15 +76,15 @@ export default async function BlogPostPage({
               href="/blog"
               className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              ← All guides
+              ← Tüm rehberler
             </Link>
             <p className="mt-6 font-mono text-xs text-text-on-ink-muted">
-              {new Date(post.publishedAt).toLocaleDateString("en-US", {
+              {new Date(post.publishedAt).toLocaleDateString("tr-TR", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
               })}{" "}
-              · {post.readingMinutes} min read
+              · {post.readingMinutes} dk okuma
             </p>
             <h1 className="mt-3 font-poppins text-4xl font-semibold leading-[1.15] tracking-tight md:text-5xl">
               {post.title}
@@ -144,17 +144,18 @@ export default async function BlogPostPage({
 
             <div className="mt-14 rounded-2xl border border-hairline-light bg-paper p-6">
               <h3 className="font-poppins text-lg font-semibold text-text-dark">
-                Ready to compare brokers?
+                Brokerları karşılaştırmaya hazır mısınız?
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                See how real brokers score on regulation, cost, platform, and
-                withdrawals using the exact framework above.
+                Gerçek brokerların regülasyon, maliyet, platform ve para çekme
+                eksenlerinde nasıl puan aldığını görün — yukarıdaki çerçevenin
+                aynısıyla.
               </p>
               <Link
                 href="/brokerlar"
                 className="mt-4 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
               >
-                View Broker Rankings
+                Broker Sıralamalarını Gör
               </Link>
             </div>
 
