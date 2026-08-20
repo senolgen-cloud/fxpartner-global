@@ -1507,6 +1507,137 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "trump-clarity-act-cagrisi-kripto-yukselisi",
+    coverImage: "/blog/trump-kripto-yasasi-cover.png",
+    lang: "tr",
+    title:
+      "Trump'ın Kripto Yasası Çağrısı ve Kripto Yükselişi: Rakamlar, Takvim ve Gerçek Nedenler",
+    excerpt:
+      "Trump 19 Ağustos'ta Beyaz Saray'da CLARITY Act'in onaylanması çağrısı yaptı; Bitcoin 2 Haziran'dan bu yana ilk kez 70.000 doları gördü. Yükselişin arkasındaki üç katalizör, yasanın gerçek durumu ve 15 Eylül'deki kritik oylama.",
+    publishedAt: "2026-08-20",
+    readingMinutes: 8,
+    sections: [
+      {
+        paragraphs: [
+          "19 Ağustos 2026'da ABD Başkanı Donald Trump, Beyaz Saray yerleşkesindeki Eisenhower Binası'nda kripto sektörünün önde gelen isimleriyle bir araya geldi ve Senato'ya, CLARITY Act olarak bilinen kripto piyasa yapısı yasasını onaylama çağrısında bulundu. Toplantıda Coinbase, Ripple, Gemini, Robinhood, Polymarket ve Kalshi gibi şirketlerin üst düzey yöneticilerinin yanı sıra SEC ve CFTC yönetimi de yer aldı.",
+          "Piyasa tepkisi sert oldu. Bitcoin 2 Haziran'dan bu yana ilk kez kısa süreliğine 70.000 doların üzerini gördü, Ethereum tek seansta çift haneli yükseldi ve toplam kripto piyasa değeri 2,3 trilyon doların üzerine çıktı.",
+          "Bu yazının amacı manşeti tekrarlamak değil, iki şeyi netleştirmek: yasa henüz onaylanmadı ve yükselişin tek nedeni Trump'ın açıklaması değil. İkisini de sırayla ele alıyoruz.",
+        ],
+      },
+      {
+        heading: "Piyasada ne oldu: 19-20 Ağustos rakamları",
+        paragraphs: [
+          "Hareket kripto piyasasının geneline yayıldı ve altcoinlerde Bitcoin'den daha güçlü seyretti — regülasyon haberlerinde sık görülen bir örüntü, çünkü hukuki belirsizlikten en çok etkilenen varlıklar Bitcoin değil, menkul kıymet sayılıp sayılmayacağı tartışmalı olan tokenlar.",
+        ],
+        list: [
+          "Bitcoin: 68.000-69.700 dolar bandında işlem gördü, gün içi zirvede 70.000 doların üzerine taştı; 24 saatlik değişim kaynağa ve saate göre yaklaşık +%5 ile +%7 arasında.",
+          "Ethereum: 2.000 dolar seviyesini geri aldı ve 2.250 dolar civarına kadar yükseldi; günlük kazanç %17-18 bandında.",
+          "Solana: yaklaşık 85 dolar, günlük +%10,8.",
+          "XRP: yaklaşık 1,10 dolar, günlük +%10,3.",
+          "Toplam kripto piyasa değeri 2,32 trilyon doların üzerine çıktı; Bitcoin dominansı %61 civarında.",
+        ],
+      },
+      {
+        paragraphs: [
+          "Buradaki rakamlar 19-20 Ağustos seanslarına ait ve farklı kaynaklar farklı anlık görüntüler verdiği için birbirinden ayrışıyor — bazı yayınlar zirveyi 71.800 dolar civarında raporlarken, kapanışa yakın ölçümler 68.000-69.000 dolar aralığını gösteriyor. Bu bir çelişki değil, aynı günün farklı saatleri. İşlem yaparken tek referansınız kendi platformunuzdaki canlı fiyat olmalıdır.",
+        ],
+      },
+      {
+        heading: "CLARITY Act tam olarak ne yapıyor?",
+        paragraphs: [
+          "Tam adı Digital Asset Market Clarity Act. Bugün ABD'de bir kripto varlığın menkul kıymet mi (SEC yetkisi) yoksa emtia mı (CFTC yetkisi) sayılacağı büyük ölçüde dava dava, karar karar belirleniyor. Bu belirsizlik hem borsaların hangi kurala uyacağını hem de proje ekiplerinin ABD'de faaliyet gösterip gösteremeyeceğini bulanık bırakıyor.",
+          "Tasarının getirmeyi hedeflediği çerçeve üç ana başlıkta özetlenebilir:",
+        ],
+        list: [
+          "Hangi dijital varlığı hangi kurumun denetleyeceğini federal düzeyde netleştirmek — yani SEC ile CFTC arasındaki yetki sınırını çizmek.",
+          "Kripto borsaları ve aracı kuruluşlar için kayıt, faaliyet ve müşteri varlıklarının korunmasına ilişkin kurallar oluşturmak.",
+          "Kamu görevlilerinin dijital varlık ihraç etmesine ve bunlardan gelir elde etmesine ilişkin etik sınırlar koymak.",
+        ],
+      },
+      {
+        paragraphs: [
+          "Sektörün bu yasayı yıllardır istemesinin nedeni tam olarak birinci madde: net bir kural, kısıtlayıcı bile olsa belirsizliğe tercih edilir, çünkü belirsizlik yatırım ve ürün planlamasını imkânsız kılar.",
+        ],
+      },
+      {
+        heading: "Yasa onaylanmadı — takvim ve gerçek durum",
+        paragraphs: [
+          "Bu ayrımın altını çizmek gerekiyor, çünkü haber sosyal medyada sık sık yasanın kabul edildiği izlenimiyle dolaşıyor. Trump'ın 19 Ağustos'taki açıklaması bir onay değil, bir çağrıydı. Tasarı hâlâ Senato'da bekliyor.",
+          "Senato Çoğunluk Lideri John Thune 8 Ağustos'ta tasarı için cloture (görüşmeyi kapatma) önergesi verdi; bu adım 15 Eylül'de yapılacak bir usul oylamasının önünü açtı. Ancak orada oylanacak olan yasanın kabulü değil, görüşmeye başlanıp başlanmayacağıdır.",
+          "Sayısal tablo şöyle: tasarının ilerlemesi için Senato'da 60 oy gerekiyor ve Cumhuriyetçilerin yaklaşık altı Demokrat oyuna ihtiyacı var. Tasarı Mayıs ayında Senato Bankacılık Komisyonu'ndan yalnızca iki Demokrat desteğiyle geçmişti ve o tarihten bu yana bu açık kapanmış değil.",
+        ],
+      },
+      {
+        paragraphs: ["Tıkanmanın üç ana nedeni var:"],
+        list: [
+          "Etik hükümleri: Kamu görevlilerinin ve eşlerinin dijital varlık ihraç etmesini yasaklamayı öngören düzenleme. Senatörler Ruben Gallego ve Thom Tillis'in hazırladığı uzlaşı metni, Trump'ın kripto şirketlerindeki paylarından çıkmasını da şart koşuyor; Trump bu metni henüz onaylamış değil. Haziranda açıklanan beyana göre başkanın 2025'te kripto işlerinden elde ettiği gelir 1,2 milyar dolara yakındı.",
+          "Yasa dışı finansmanla mücadele ve kolluk yetkilerinin kapsamı konusunda anlaşma sağlanamaması.",
+          "Stablecoin'lerin kullanıcılara getiri veya ödül dağıtıp dağıtamayacağı tartışması — bankacılık sektörünün yoğun lobi yaptığı başlık.",
+        ],
+      },
+      {
+        heading: "Yükselişin arkasındaki üç katalizör",
+        paragraphs: [
+          "Manşet Trump'ın çağrısı oldu, ancak aynı 48 saat içinde üç ayrı gelişme üst üste bindi. Hareketin büyüklüğünü dürüstçe açıklamak için üçünü birden saymak gerekiyor:",
+        ],
+        list: [
+          "Politika sinyali: Trump'ın CLARITY Act çağrısı ve bir gün öncesinde, 18 Ağustos'ta SEC'in ilk kez doğrudan token ihraçlarına yönelik kural taslağı önermesi.",
+          "Makro: ABD Hazinesi uzun vadeli tahvil geri alımlarını işlem başına 2 milyar dolardan 4 milyar dolara çıkardı. 30 yıllık tahvil faizi %5,337'den %5,18'e geriledi ve faizdeki bu gevşeme riskli varlıklara talebi doğrudan artırdı.",
+          "Mekanik: kısa pozisyon tasfiyesi. 24 saat içinde yaklaşık 1,7-1,9 milyar dolarlık pozisyon likide oldu ve bunun ezici çoğunluğu short pozisyonlardı.",
+        ],
+      },
+      {
+        paragraphs: [
+          "Üçüncü madde özellikle önemli. Short squeeze bir talep hikâyesi değil, bir zorunlu alım hikâyesidir: yükselen fiyat, aşağı yönlü bahis yapmış yatırımcıları pozisyonlarını kapatmak için alım yapmaya zorlar, bu alımlar fiyatı daha da yukarı iter ve döngü kendi kendini besler. Bu tür hareketler hızlı gelir; katalizör tükendiğinde ve zorunlu alımlar bittiğinde aynı hızla geri verilebilir.",
+          "Yani 19 Ağustos'taki yükseliş yalnızca bir düzenleme beklentisinin fiyatlanması değil, üzerine kaldıraç tasfiyesi binmiş bir hareketti. Bu ayrım, hareketin kalıcılığı konusunda ne kadar iddialı olabileceğinizi belirler.",
+        ],
+      },
+      {
+        heading: "15 Eylül için üç senaryo",
+        paragraphs: [
+          "Piyasanın şu anda fiyatladığı şey bir sonuç değil, bir olasılık. Oylamanın üç makul çıktısı var ve her birinin farklı bir fiyat davranışı beklenir:",
+        ],
+        list: [
+          "Usul oylaması geçer: Tasarı Senato gündemine girer. Bu, yasanın kabul edildiği anlamına gelmez ama belirsizliği azaltır. Beklenen tepki olumlu; ancak haber kısmen fiyatlandığı için ilk tepkinin ardından kâr satışı görülmesi olağandır.",
+          "Usul oylaması geçmez: 60 oy eşiği aşılamaz ve süreç yeniden belirsizliğe döner. Ağustos yükselişinin bir kısmının geri verilmesi en olası senaryodur; bu durumda düşüşün sertliğini bu kez kaldıraçlı long pozisyonların tasfiyesi belirler.",
+          "Hükümler yumuşatılarak uzlaşı sağlanır: Etik maddeleri ya da stablecoin başlığı esnetilerek ilerleme kaydedilir. Piyasa açısından genelde en olumlu senaryo budur, çünkü hem takvim işler hem de sektörün istediği yetki netliği korunur.",
+        ],
+      },
+      {
+        paragraphs: [
+          "Burada klasik bir örüntüye dikkat etmek gerekiyor: söylentiyi al, haberi sat. Regülasyon süreçlerinde fiyat çoğu zaman beklenti aşamasında yükselir ve haber gerçekleştiğinde, sonuç olumlu olsa bile geri çekilir. Bu bir kural değil, ama sık tekrarlanan bir davranış biçimi.",
+        ],
+      },
+      {
+        heading: "Bu haber üzerinde işlem yapacaksanız",
+        paragraphs: [
+          "Haber odaklı hareketlerde en sık yapılan hata, yönü doğru tahmin edip pozisyon büyüklüğünü yanlış ayarlamaktır. Yön tuttuğu hâlde ara volatilite stop seviyesini süpürdüğü için zarar yazan çok sayıda işlem vardır.",
+        ],
+        list: [
+          "Pozisyon büyüklüğünü normal seansa göre küçültün; oynaklık arttığında aynı lot artık aynı risk demek değildir. Sitemizdeki pozisyon büyüklüğü hesaplayıcısı bu ayarı hesabınıza göre yapmanızı sağlar.",
+          "Kaldıracı düşürün. 19 Ağustos'ta 1,7 milyar doları aşan tasfiyenin nedeni yön hatası değil, kaldıraç seviyesiydi.",
+          "Açıklama saatlerinde spreadlerin genişleyeceğini varsayın ve girişlerinizi bu genişlemeyi tolere edecek şekilde planlayın.",
+          "15 Eylül'ü takviminize alın. Ekonomik takvim sayfamız bu tür planlı olayları önceden görmenizi sağlar; sürpriz olmayan bir volatiliteye hazırlıksız yakalanmak gereksizdir.",
+          "Tek bir manşete göre işlem yapmayın. Yukarıdaki üç katalizör örneğinde olduğu gibi, bir hareketin nedeni çoğu zaman göründüğünden fazladır.",
+        ],
+      },
+      {
+        heading: "Sonuç",
+        paragraphs: [
+          "19 Ağustos'ta olan şey net: Trump kripto sektörüyle Beyaz Saray'da buluştu ve Senato'ya CLARITY Act'i onaylama çağrısı yaptı; piyasa bunu, tahvil geri alımları ve büyük bir short squeeze ile birlikte güçlü bir yükselişle fiyatladı. Olmayan şey de aynı ölçüde net: yasa onaylanmadı, 15 Eylül'deki oylama yalnızca bir usul adımı ve tasarının önündeki üç temel anlaşmazlık hâlâ çözülmüş değil.",
+          "Bu iki cümleyi birbirine karıştırmamak, bu haberde alınabilecek en değerli pozisyondur. FXPARTNER olarak süreci takip etmeye ve 15 Eylül oylaması öncesinde gelişmeleri paylaşmaya devam edeceğiz.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Kripto varlıklar ve kaldıraçlı işlemler yüksek risk içerir; sermayenizin tamamını kaybedebilirsiniz.",
+        ],
+      },
+      {
+        heading: "Kaynaklar",
+        paragraphs: [
+          "Bu yazıdaki olay akışı, yasama takvimi ve fiyat rakamları 19-20 Ağustos 2026 tarihli haberlerden derlenmiştir. Başlıca kaynaklar: CoinDesk, Forbes, The Block, Decrypt, American Banker ve ABD Senatosu Bankacılık Komisyonu'nun kamuya açık açıklamaları. Rakamlar derlendikleri andaki değerleri yansıtır ve okuduğunuz anda değişmiş olabilir.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
