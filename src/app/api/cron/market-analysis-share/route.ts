@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramMessage, telegramSiteCta, mainServicesKeyboard } from "@/lib/telegram";
+import { sendTelegramMessage, telegramSiteCta, telegramContactCta, mainServicesKeyboard } from "@/lib/telegram";
 import { sendPushToAll, type PushResult } from "@/lib/push";
 import { marketAnalysisPosts } from "@/data/marketAnalysis";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
@@ -37,7 +37,8 @@ export const GET = withCronErrorAlert("market-analysis-share", async (req: NextR
     `<b>${latest.title}</b>\n\n${latest.excerpt}\n\n` +
     `Devamını oku: ${siteUrl}/piyasa-analizi/${latest.slug}\n\n` +
     `Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.\n\n` +
-    telegramSiteCta();
+    telegramSiteCta() +
+    `\n\n${telegramContactCta()}`;
 
   const result = await sendTelegramMessage(text, { inlineKeyboard: mainServicesKeyboard() });
   await markPostedToTelegram(key);

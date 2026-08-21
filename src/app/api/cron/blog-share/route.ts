@@ -3,9 +3,10 @@ import {
   sendTelegramMessage,
   sendTelegramPhoto,
   telegramSiteCta,
+  telegramContactCta,
   mainServicesKeyboard,
 } from "@/lib/telegram";
-import { sendPushToAll } from "@/lib/push";
+import { sendPushToAll, type PushResult } from "@/lib/push";
 import { blogPosts } from "@/data/blog";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
@@ -47,7 +48,8 @@ export const GET = withCronErrorAlert("blog-share", async (req: NextRequest) => 
     `<b>${target.title}</b>\n\n${target.excerpt}\n\n` +
     `Devamını oku: ${url}\n\n` +
     `Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.\n\n` +
-    telegramSiteCta();
+    telegramSiteCta() +
+    `\n\n${telegramContactCta()}`;
 
   // Posts that ship a cover go out as a photo post rather than a bare link
   // whose preview Telegram may or may not expand — the cover is already a
@@ -62,7 +64,7 @@ export const GET = withCronErrorAlert("blog-share", async (req: NextRequest) => 
       : await sendTelegramMessage(text, { inlineKeyboard: keyboard });
   await markPostedToTelegram(`blog:${target.slug}`);
 
-  let push: { sent: number; removed: number } | { error: string } = { sent: 0, removed: 0 };
+  let push: PushResult | { error: string } = { sent: 0, removed: 0, failed: 0 };
   try {
     push = await sendPushToAll({ title: target.title, body: target.excerpt, url: `/blog/${target.slug}` });
   } catch (err) {

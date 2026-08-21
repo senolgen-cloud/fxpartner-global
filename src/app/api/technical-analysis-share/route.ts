@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramMessage, sendTelegramMediaGroup, mainServicesKeyboard } from "@/lib/telegram";
+import { sendTelegramMessage, sendTelegramMediaGroup, mainServicesKeyboard, telegramContactCta } from "@/lib/telegram";
 import { postImagesToX, postTextToX } from "@/lib/x";
 import { technicalAnalysisPosts, getBulletinTitle } from "@/data/technicalAnalysis";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
@@ -45,9 +45,12 @@ export async function GET(req: NextRequest) {
   // every instrument's scenario text (album captions are too short for that).
   let telegramResult: unknown = null;
   if (chartPosts.length > 0) {
+    // A media group takes no inline keyboard, so the album's only route to
+    // a person is this line in its caption.
     const albumCaption =
       `<b>${title}</b>\n\n` +
-      posts.map((p) => `${biasEmoji(p.bias)} <b>${p.instrument}</b> — Pivot ${p.pivot}`).join("\n");
+      posts.map((p) => `${biasEmoji(p.bias)} <b>${p.instrument}</b> — Pivot ${p.pivot}`).join("\n") +
+      `\n\n${telegramContactCta()}`;
     telegramResult = await sendTelegramMediaGroup(
       chartPosts.map((p) => `${siteUrl}${p.chartImage}`),
       albumCaption
@@ -66,7 +69,8 @@ export async function GET(req: NextRequest) {
       )
       .join("\n\n") +
     `\n\nBu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Kaynak: ${posts[0].source}.\n\n` +
-    `👉 <a href="${siteUrl}/teknik-analiz">fxpartner.global/teknik-analiz</a>`;
+    `👉 <a href="${siteUrl}/teknik-analiz">fxpartner.global/teknik-analiz</a>\n\n` +
+    telegramContactCta();
   const detailResult = await sendTelegramMessage(detailText, { inlineKeyboard: mainServicesKeyboard() });
 
   // X: up to 4 real chart images (Premium's long-form text limit fits the

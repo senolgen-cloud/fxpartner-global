@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramPhoto, mainServicesKeyboard } from "@/lib/telegram";
+import { sendTelegramPhoto, mainServicesKeyboard, telegramContactCta } from "@/lib/telegram";
 import { postTradeSignalToX } from "@/lib/x";
 import { sendPushToMembers } from "@/lib/push";
 import { getRecentSignalStats, statsLineTr, statsLineEn } from "@/lib/signalStats";
@@ -108,7 +108,8 @@ export async function GET(req: NextRequest) {
     }\n\n` +
     (trStats ? `${trStats}\n\n` : "") +
     `⚠️ Geçmiş sonuçlar gelecekteki sonuçları garanti etmez. Bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.\n\n` +
-    `👉 <a href="${siteUrl}/signals">Tüm işlem geçmişi: fxpartner.global/signals</a>`;
+    `👉 <a href="${siteUrl}/signals">Tüm işlem geçmişi: fxpartner.global/signals</a>\n\n` +
+    telegramContactCta();
 
   // Best-effort: record the real close data against the original row so
   // /signals can show it — never blocks the actual result post.

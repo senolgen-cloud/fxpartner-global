@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramPhoto, mainServicesKeyboard } from "@/lib/telegram";
+import { sendTelegramPhoto, mainServicesKeyboard, telegramContactCta } from "@/lib/telegram";
 import { postTradeSignalToX } from "@/lib/x";
 import { sendPushToMembers, sendPushToNonMembers } from "@/lib/push";
 import { getRecentSignalStats, statsLineTr, statsLineEn } from "@/lib/signalStats";
@@ -138,8 +138,9 @@ export async function GET(req: NextRequest) {
       : `🔒 Giriş, TP ve SL seviyeleri ${ACCESS_TIER_LABEL[requiredTier]} üyelere özel — bu seviyeler olmadan pozisyon yönetilemez.\n\n`) +
     `⚠️ Bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Pozisyon büyüklüğünü ve riskini kendi toleransına göre belirle. Geçmiş sonuçlar gelecekteki sonuçları garanti etmez.\n\n` +
     (openLevels
-      ? `👉 <a href="${siteUrl}/signals">Tüm işlem geçmişi ve anlık bildirimler: fxpartner.global/signals</a>`
-      : `👉 <a href="${siteUrl}/paketler">Seviyeleri anlık görmek için paketlere göz atın</a>`);
+      ? `👉 <a href="${siteUrl}/signals">Tüm işlem geçmişi ve anlık bildirimler: fxpartner.global/signals</a>\n\n`
+      : `👉 <a href="${siteUrl}/paketler">Seviyeleri anlık görmek için paketlere göz atın</a>\n\n`) +
+    telegramContactCta();
 
   const result = await sendTelegramPhoto(imageUrl, caption, { inlineKeyboard: mainServicesKeyboard() });
 

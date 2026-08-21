@@ -3,7 +3,7 @@ import { fetchAllNews, type NewsItem } from "@/lib/news";
 import { filterRelevantNews } from "@/lib/relevance-filter";
 import { synthesizeBulletin, buildFallbackBulletin } from "@/lib/bulletin";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
-import { sendTelegramMessage, telegramSiteCta, mainServicesKeyboard } from "@/lib/telegram";
+import { sendTelegramMessage, telegramSiteCta, telegramContactCta, mainServicesKeyboard } from "@/lib/telegram";
 import { sendPushToAll, type PushResult } from "@/lib/push";
 import { postTextToX } from "@/lib/x";
 import { db } from "@/db";
@@ -90,7 +90,8 @@ export const GET = withCronErrorAlert("news-update", async (req: NextRequest) =>
     `<b>${bulletin.title}</b>\n\n${bulletin.excerpt}\n\n` +
     `Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.\n\n` +
     `📰 Bültenin tamamı: ${siteUrl}/haber-bulteni/${slug}\n\n` +
-    telegramSiteCta();
+    telegramSiteCta() +
+    `\n\n${telegramContactCta()}`;
 
   await sendTelegramMessage(text, { inlineKeyboard: mainServicesKeyboard() });
   for (const item of fresh) {

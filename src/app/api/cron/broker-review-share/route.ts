@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
+import { sendTelegramMessage, telegramSiteCta, telegramContactCta, contactButtonRow } from "@/lib/telegram";
 import { brokers, getBrokerScores } from "@/data/brokers";
 import { sendPushToAll, type PushResult } from "@/lib/push";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
@@ -47,14 +47,21 @@ export const GET = withCronErrorAlert("broker-review-share", async (req: NextReq
     `🏆 <b>FXPARTNER Index — Haftanın En İyi 5 Broker'i</b>\n\n` +
     lines.join("\n") +
     `\n\n<i>Genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.</i>\n\n` +
-    telegramSiteCta();
+    telegramSiteCta() +
+    `\n\n${telegramContactCta()}`;
 
   // One row per broker: "Hesap Aç" (referral link) + "İncele" (the full
   // FXPARTNER review) side by side, in the same 1-5 order as the text list.
-  const inlineKeyboard = top5.map(({ broker }) => [
-    { text: `${broker.name} — Hesap Aç`, url: broker.referralUrl },
-    { text: "İncele", url: `${siteUrl}/brokers/${broker.slug}` },
-  ]);
+  // Contact row appended by hand: this is the one post that builds its own
+  // keyboard instead of mainServicesKeyboard(), which carries that row for
+  // everything else.
+  const inlineKeyboard = [
+    ...top5.map(({ broker }) => [
+      { text: `${broker.name} — Hesap Aç`, url: broker.referralUrl },
+      { text: "İncele", url: `${siteUrl}/brokers/${broker.slug}` },
+    ]),
+    contactButtonRow(),
+  ];
 
   const result = await sendTelegramMessage(text, { inlineKeyboard });
 

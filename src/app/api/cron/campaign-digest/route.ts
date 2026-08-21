@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramMessage, telegramSiteCta, mainServicesKeyboard } from "@/lib/telegram";
+import { sendTelegramMessage, telegramSiteCta, telegramContactCta, mainServicesKeyboard } from "@/lib/telegram";
 import { sendPushToAll, type PushResult } from "@/lib/push";
 import { brokers } from "@/data/brokers";
 import { getCashbackProgram } from "@/data/cashback";
@@ -39,7 +39,8 @@ export const GET = withCronErrorAlert("campaign-digest", async (req: NextRequest
     `\n\nTum detaylar ve guncel sartlar: ${siteUrl}/campaigns\n\n` +
     `Sartlar brokere gore degisebilir ve onceden haber verilmeden guncellenebilir. ` +
     `Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.\n\n` +
-    telegramSiteCta();
+    telegramSiteCta() +
+    `\n\n${telegramContactCta()}`;
 
   const result = await sendTelegramMessage(text, {
     disablePreview: true,

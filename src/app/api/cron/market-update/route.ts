@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramPhoto, telegramSiteCta, mainServicesKeyboard } from "@/lib/telegram";
+import { sendTelegramPhoto, telegramSiteCta, telegramContactCta, mainServicesKeyboard } from "@/lib/telegram";
 import { getCandles, SYMBOLS } from "@/lib/market-data";
 import { sma, rsi } from "@/lib/technicals";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
@@ -44,7 +44,8 @@ export const GET = withCronErrorAlert("market-update", async (req: NextRequest) 
     `Fiyat MA10'un ${aboveMA10 ? "uzerinde" : "altinda"}, MA20'nin ${aboveMA20 ? "uzerinde" : "altinda"}. ` +
     `RSI(14) ${rsiValue !== null ? rsiValue.toFixed(1) : "-"} ile ${rsiZone}.\n\n` +
     `Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.\n\n` +
-    telegramSiteCta();
+    telegramSiteCta() +
+    `\n\n${telegramContactCta()}`;
 
   const result = await sendTelegramPhoto(imageUrl, caption, { inlineKeyboard: mainServicesKeyboard() });
   return NextResponse.json({ ok: true, symbol: symbolId, result });

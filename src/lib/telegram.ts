@@ -7,12 +7,28 @@ export function telegramSiteCta(): string {
   return `👉 Daha fazla piyasa analizi ve broker karşılaştırması için sitemizi ziyaret edin: ${siteUrl}`;
 }
 
-// One shared row of buttons pointing at FXPARTNER's three core services —
-// attached under every content post (analysis, news, campaigns, blog,
-// trade signals) so readers always have one tap back into the actual
-// product, not just the bare site link in the caption text. The broker
-// digest (broker-review-share) builds its own per-broker button rows
-// instead of this one.
+// Personal contact route for readers who want to talk to someone rather
+// than read another page. Goes on every post twice over: as the closing
+// line of the text (Telegram auto-links a bare @handle, so no markup
+// needed) and as a button, since on mobile the button is the one people
+// actually tap.
+const CONTACT_HANDLE = "@erdemtorun";
+const CONTACT_URL = "https://t.me/erdemtorun";
+
+export function telegramContactCta(): string {
+  return `📩 Detaylı Bilgi ve İletişim: ${CONTACT_HANDLE}`;
+}
+
+export function contactButtonRow(): InlineKeyboardButton[] {
+  return [{ text: "📩 Detaylı Bilgi ve İletişim", url: CONTACT_URL }];
+}
+
+// One shared set of buttons pointing at FXPARTNER's three core services,
+// plus the contact row — attached under every content post (analysis,
+// news, campaigns, blog, trade signals) so readers always have one tap
+// back into the actual product, not just the bare site link in the
+// caption text. The broker digest (broker-review-share) builds its own
+// per-broker button rows and appends contactButtonRow() itself.
 export function mainServicesKeyboard(): InlineKeyboardButton[][] {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
   return [
@@ -21,6 +37,7 @@ export function mainServicesKeyboard(): InlineKeyboardButton[][] {
       { text: "🤖 AI Asistan", url: `${siteUrl}/ai-asistan` },
     ],
     [{ text: "📊 Broker Karşılaştırmaları", url: siteUrl }],
+    contactButtonRow(),
   ];
 }
 
