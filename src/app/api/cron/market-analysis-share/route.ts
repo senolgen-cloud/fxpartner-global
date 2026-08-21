@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramMessage, telegramSiteCta, mainServicesKeyboard } from "@/lib/telegram";
-import { sendPushToAll } from "@/lib/push";
+import { sendPushToAll, type PushResult } from "@/lib/push";
 import { marketAnalysisPosts } from "@/data/marketAnalysis";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
@@ -42,7 +42,7 @@ export const GET = withCronErrorAlert("market-analysis-share", async (req: NextR
   const result = await sendTelegramMessage(text, { inlineKeyboard: mainServicesKeyboard() });
   await markPostedToTelegram(key);
 
-  let push: { sent: number; removed: number } | { error: string } = { sent: 0, removed: 0 };
+  let push: PushResult | { error: string } = { sent: 0, removed: 0, failed: 0 };
   try {
     push = await sendPushToAll({ title: latest.title, body: latest.excerpt, url: `/piyasa-analizi/${latest.slug}` });
   } catch (err) {

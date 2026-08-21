@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramMessage, telegramSiteCta, mainServicesKeyboard } from "@/lib/telegram";
-import { sendPushToAll } from "@/lib/push";
+import { sendPushToAll, type PushResult } from "@/lib/push";
 import { brokers } from "@/data/brokers";
 import { getCashbackProgram } from "@/data/cashback";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
@@ -46,7 +46,7 @@ export const GET = withCronErrorAlert("campaign-digest", async (req: NextRequest
     inlineKeyboard: mainServicesKeyboard(),
   });
 
-  let push: { sent: number; removed: number } | { error: string } = { sent: 0, removed: 0 };
+  let push: PushResult | { error: string } = { sent: 0, removed: 0, failed: 0 };
   try {
     push = await sendPushToAll({
       title: "Bu haftanın aktif broker kampanyaları",
