@@ -1,14 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramMessage, telegramSiteCta } from "@/lib/telegram";
 import { brokers, getBrokerScores } from "@/data/brokers";
+import { sendPushToAll, type PushResult } from "@/lib/push";
+import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
 // Owned by Broker İstihbaratı & İnceleme Departmanı — see
 // src/lib/departments.ts and docs/ORGANIZATION.md. Was one broker's review
 // per run, rotating hourly (24 posts/day) until 2026-08-14 — that flooded
-// the channel, so it's now a single weekly digest of the top 5 ranked
-// brokers by FXPARTNER Index, sent as one text message instead of 5
-// separate photo posts.
+// the channel, so it's now a single digest of the top 5 ranked brokers by
+// FXPARTNER Index, sent as one text message instead of 5 separate photo
+// posts, on the 4x/day cadence in telegram-cron.yml (was briefly weekly).
+// Web push goes out once a day, not on every run — see below.
 function isAuthorized(req: NextRequest): boolean {
   const secret = process.env.CRON_SECRET;
   if (!secret) return false;
@@ -55,10 +58,37 @@ export const GET = withCronErrorAlert("broker-review-share", async (req: NextReq
 
   const result = await sendTelegramMessage(text, { inlineKeyboard });
 
+  // Telegram gets this digest four times a day; push subscribers get it
+  // once. A ranking that barely moves between runs is not worth four
+  // notifications, and the daily budget is already shared with the news
+  // bulletin, the blog, the market analysis and the calendar alerts.
+  // Keyed on the Türkiye-time date so "once a day" means the local day.
+  const todayKey = `push:broker-digest:${new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Istanbul",
+  }).format(new Date())}`;
+
+  let push: PushResult | { skipped: string } | { error: string } = { skipped: "already pushed today" };
+  if (!(await isAlreadyPostedToTelegram(todayKey))) {
+    try {
+      push = await sendPushToAll({
+        title: "FXPARTNER Index — Günün En İyi 5 Brokeri",
+        body: top5.map(({ broker, scores }) => `${broker.name} ${scores.composite.toFixed(1)}`).join(" · "),
+        url: "/brokerlar",
+      });
+      await markPostedToTelegram(todayKey);
+    } catch (err) {
+      // Not marked, so the next run today retries — the Telegram post has
+      // already gone out either way and must not fail over this.
+      console.error("Broker digest push failed:", err);
+      push = { error: (err as Error).message };
+    }
+  }
+
   return NextResponse.json({
     ok: true,
     posted: true,
     slugs: top5.map((t) => t.broker.slug),
     result,
+    push,
   });
 });

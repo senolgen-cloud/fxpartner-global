@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramPhoto, mainServicesKeyboard } from "@/lib/telegram";
 import { postTradeSignalToX } from "@/lib/x";
-import { sendPushToMembers } from "@/lib/push";
+import { sendPushToMembers, sendPushToNonMembers } from "@/lib/push";
 import { getRecentSignalStats, statsLineTr, statsLineEn } from "@/lib/signalStats";
 import { requiredTierForPair } from "@/lib/signalAccess";
 import { ACCESS_TIER_LABEL } from "@/data/packageTiers";
@@ -203,8 +203,17 @@ export async function GET(req: NextRequest) {
 
   // Best-effort, same as the X post above — a push failure never blocks the
   // signal itself, which has already gone out on Telegram/X by this point.
-  try {
-    await sendPushToMembers({
+  //
+  // Two audiences, two payloads. Members get the levels. Subscriptions with
+  // no account behind them (the majority of the list) used to get nothing
+  // at all here, which wasted both a granted notification permission and
+  // the one moment they're most likely to register — so they get a teaser
+  // pointing at sign-up instead. The teaser carries only what already went
+  // out publicly on Telegram and X (pair + direction), never the levels:
+  // instant levels-on-your-phone is exactly what the free account buys
+  // (see the header comment in lib/signalAccess.ts).
+  const [memberPush, teaserPush] = await Promise.allSettled([
+    sendPushToMembers({
       title: publicDirection
         ? `${dirEmoji} ${pair.toUpperCase()} ${publicDirection} açıldı`
         : `Yeni işlem: ${pair.toUpperCase()}`,
@@ -214,10 +223,18 @@ export async function GET(req: NextRequest) {
           ? `Sinyal güveni %${confidence} · Giriş, TP ve SL için dokunun.`
           : "Giriş, TP ve SL seviyeleri için dokunun.",
       url: "/signals",
-    });
-  } catch (err) {
-    console.error("Push notification failed:", err);
-  }
+    }),
+    sendPushToNonMembers({
+      title: publicDirection
+        ? `${dirEmoji} ${pair.toUpperCase()} ${publicDirection} açıldı`
+        : `Yeni işlem: ${pair.toUpperCase()}`,
+      body: "Giriş, TP ve SL seviyeleri anında üyelere gidiyor. Ücretsiz hesap aç, sonraki sinyali kaçırma.",
+      url: "/account/login",
+    }),
+  ]);
+
+  if (memberPush.status === "rejected") console.error("Push notification failed (members):", memberPush.reason);
+  if (teaserPush.status === "rejected") console.error("Push notification failed (non-members):", teaserPush.reason);
 
   return NextResponse.json({ ok: true, pair, result, x: xResult });
 }

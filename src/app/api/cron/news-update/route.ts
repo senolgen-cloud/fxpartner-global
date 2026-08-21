@@ -4,6 +4,7 @@ import { filterRelevantNews } from "@/lib/relevance-filter";
 import { synthesizeBulletin, buildFallbackBulletin } from "@/lib/bulletin";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
 import { sendTelegramMessage, telegramSiteCta, mainServicesKeyboard } from "@/lib/telegram";
+import { sendPushToAll, type PushResult } from "@/lib/push";
 import { postTextToX } from "@/lib/x";
 import { db } from "@/db";
 import { newsBulletins } from "@/db/schema";
@@ -96,6 +97,23 @@ export const GET = withCronErrorAlert("news-update", async (req: NextRequest) =>
     await markPostedToTelegram(`news:${item.guid}`);
   }
 
+  // Same reach logic as blog-share: the bulletin is our own page, the push
+  // links back to it. Twice-daily at most (the schedule in
+  // news-update-cron.yml), and nothing at all on a quiet news day, since
+  // the run returns early when there's nothing fresh. Best-effort — the
+  // site page and the Telegram post have already gone out.
+  let push: PushResult | { error: string };
+  try {
+    push = await sendPushToAll({
+      title: bulletin.title,
+      body: bulletin.excerpt,
+      url: `/haber-bulteni/${slug}`,
+    });
+  } catch (err) {
+    console.error("News bulletin push failed:", err);
+    push = { error: err instanceof Error ? err.message : "unknown error" };
+  }
+
   // No raw URL in the tweet body on purpose — X's algorithm suppresses
   // reach on link-containing posts, so every other X post in this codebase
   // (trade-signal, trade-result, technical-analysis-share) points readers
@@ -120,6 +138,7 @@ export const GET = withCronErrorAlert("news-update", async (req: NextRequest) =>
     slug,
     itemCount: fresh.length,
     checkedRelevant: relevant.length,
+    push,
     xResult,
   });
 });
