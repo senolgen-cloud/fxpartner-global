@@ -1649,6 +1649,808 @@ export const blogPosts: BlogPost[] = [
     ],
   },
   {
+    "slug": "xm-hesap-turleri-micro-standard-ultra-low-zero",
+    "coverImage": "/blog/xm-hesap-turleri-micro-standard-ultra-low-zero-cover.png",
+    "title": "XM Micro, Standard, Ultra Low ve Zero: Hangi Hesap Türü Size Uygun?",
+    "excerpt": "XM'in beş hesap türünü spread, komisyon ve minimum yatırım açısından karşılaştırıyoruz. EURUSD standart lot üzerinden lot başına gerçek maliyeti dolar cinsinden hesaplayıp yıllık farkı ortaya koyuyoruz.",
+    "publishedAt": "2026-08-20",
+    "readingMinutes": 8,
+    "lang": "tr",
+    "sections": [
+      {
+        "paragraphs": [
+          "Hesap türü seçimi, çoğu yatırımcının hesap açarken en hızlı geçtiği ama sonradan en çok pişman olduğu adımdır. Ekrandaki tabloda \"0.0 pipten itibaren spread\" yazan satır doğal olarak en cazip görünür; yanındaki komisyon satırı ise küçük puntoyla kalır. Oysa işlem maliyeti tek bir kalemden değil, spread ile komisyonun toplamından oluşur ve bu toplam, aynı stratejiyi uygulayan iki kişinin yıl sonu bakiyesini birbirinden ayırabilecek büyüklüktedir.",
+          "Bu yazıda XM'in beş hesap türünü (Micro, Standard, XM Ultra Low, Zero ve Shares) pazarlama diliyle değil, aritmetikle karşılaştıracağız. Amaç bir hesabı diğerine üstün ilan etmek değil; hangi profilin hangi maliyet yapısıyla daha az sürtünme yaşadığını göstermek. Hesaplamaların tamamı EURUSD üzerinden ve standart lot (100.000 birim) varsayımıyla yapılacak, çünkü karşılaştırmanın anlamlı olması için sabit bir zemin gerekiyor.",
+          "Bir not: XM 2009'dan beri faaliyette, ASIC (443670), CySEC (120/10), DFSA (F003484) ve Belize FSC düzenlemeleri altında çalışıyor. Bu yazı regülasyon veya kurum incelemesi değil; herhangi bir brokerin lisans ve şikâyet geçmişini kendiniz doğrulamak isterseniz Broker Sorgulama aracı ve Broker Sıralamaları bunun için var. Burada odak tek bir teknik soruda: maliyet nerede oluşuyor?"
+        ],
+      },
+      {
+        "heading": "Beş hesap türü aslında üç farklı maliyet modeli",
+        "paragraphs": [
+          "İsimler beş tane olsa da, arkada yatan mantık üç grupta toplanıyor. Micro ve Standard aynı fiyatlama modelini paylaşıyor: 1.0 pipten itibaren spread, komisyon yok, minimum yatırım 5 $. Aralarındaki tek yapısal fark lot büyüklüğü; ikisi de aynı spread havuzundan besleniyor.",
+          "İkinci grup XM Ultra Low. Spread 0.6 pipten itibaren başlıyor, yine komisyon alınmıyor, ancak minimum yatırım 100 $'a çıkıyor. Yani maliyetin tamamı hâlâ spreade gömülü, sadece daha dar.",
+          "Üçüncü grup Zero. Burada spread 0.0 pipten itibaren başlıyor, ama maliyet spreadden komisyona taşınıyor: lot başına taraf başına 3.50 $. Minimum yatırım yine 100 $. Shares ise tamamen ayrı bir kategori: hisse başına komisyon alınıyor ve kaldıraç yok.",
+          "Bu ayrımı kavramak önemli, çünkü \"komisyonsuz\" ifadesi maliyetsiz anlamına gelmiyor. Komisyonsuz hesaplarda maliyet, alış ile satış fiyatı arasındaki farkın içinde saklanıyor. Zero hesapta ise görünür hale geliyor. Hangisinin daha ucuz olduğu, tamamen sayılara bakmakla anlaşılır."
+        ],
+      },
+      {
+        "heading": "EURUSD tek lotta gerçek maliyet: 6 $, 7 $ ve 10 $ — ve \"0.0 spread\" neden her zaman en ucuz değil",
+        "paragraphs": [
+          "EURUSD'de standart lot 100.000 birimdir ve bu büyüklükte 1 pip hareket yaklaşık 10 $ değerindedir. Bu tek bilgi, üç hesabın maliyetini aynı para birimine çevirmemizi sağlar. Spread bir maliyettir çünkü pozisyonu açar açmaz o kadar zararla başlarsınız; komisyon ise doğrudan bakiyeden düşülür. İkisini de dolara çevirip toplarsak karşılaştırma dürüst olur.",
+          "Sonuç sezgiye ters çıkar: en agresif görünen spread rakamına sahip Zero hesap, komisyon eklendiğinde Ultra Low'dan lot başına 1 $ daha pahalıdır. 7 $'a karşı 6 $. Fark küçük görünebilir, ama oransal olarak yaklaşık yüzde 17'lik bir maliyet farkıdır ve işlem sayısıyla doğrusal olarak büyür.",
+          "Burada dikkat edilmesi gereken bir nüans var. Hem 0.0 hem 0.6 rakamları \"itibaren\" ifadesiyle veriliyor; bunlar taban değerler, ortalama değil. Likiditenin daraldığı saatlerde, veri açıklamalarında ve seans açılışlarında her iki hesapta da spread genişler. Ancak Zero hesapta komisyon sabittir, spread ise değişkendir; Ultra Low'da maliyetin tamamı değişkendir. Yani volatil dönemlerde Zero'nun maliyetinin sabit kısmı bir tampon işlevi görebilir, sakin dönemlerde ise dezavantaja dönüşür.",
+          "İkinci nüans: bu karşılaştırma EURUSD'ye özgüdür. Spreadi doğal olarak geniş olan egzotik pariteler veya bazı emtialarda, sabit komisyonlu bir yapı ile değişken spreadli yapı arasındaki denge değişebilir. Bu yüzden kendi işlem yaptığınız enstrümanda aynı hesabı yapmadan genelleme yapmayın. Pozisyon Hesaplayıcı, kendi lot büyüklüğünüz ve enstrümanınız için pip değerini çıkarmanıza yardımcı olur.",
+          "Hesap gidiş-dönüş (round-turn), yani pozisyonu açıp kapatmanın toplam maliyeti üzerinden yapılmalıdır:"
+        ],
+        "list": [
+          "Zero hesap: 0.0 pip spread = 0 $ + komisyon 3.50 $ giriş + 3.50 $ çıkış = toplam 7 $ / lot",
+          "XM Ultra Low: 0.6 pip spread = 6 $ + komisyon yok = toplam 6 $ / lot",
+          "Standard: 1.0 pip spread = 10 $ + komisyon yok = toplam 10 $ / lot",
+          "Micro: Standard ile aynı fiyatlama, 1.0 pip; maliyet lot büyüklüğüyle orantılı olarak küçülür"
+        ],
+      },
+      {
+        "heading": "Aylık 10, 50 ve 100 lotta yıllık fark ne kadar?",
+        "paragraphs": [
+          "Lot başına 1-4 dolarlık farklar tek işlemde önemsiz görünür. Yıllık hacme yayıldığında ise strateji seçiminden bağımsız, kaçınılmaz bir sızıntı kalemine dönüşür. Aşağıda üç farklı hacim senaryosu için yıllık toplam maliyetler yer alıyor. Hesap basittir: lot başına maliyet çarpı aylık lot çarpı 12."
+        ],
+        "list": [
+          "Aylık 10 lot (yıllık 120 lot): Ultra Low 720 $, Zero 840 $, Standard/Micro 1.200 $. Ultra Low ile Zero arası fark 120 $, Standard ile Ultra Low arası fark 480 $.",
+          "Aylık 50 lot (yıllık 600 lot): Ultra Low 3.600 $, Zero 4.200 $, Standard/Micro 6.000 $. Ultra Low ile Zero arası fark 600 $, Standard ile Ultra Low arası fark 2.400 $.",
+          "Aylık 100 lot (yıllık 1.200 lot): Ultra Low 7.200 $, Zero 8.400 $, Standard/Micro 12.000 $. Ultra Low ile Zero arası fark 1.200 $, Standard ile Ultra Low arası fark 4.800 $.",
+          "Standard ile Zero arasındaki yıllık fark aynı senaryolarda sırasıyla 360 $, 1.800 $ ve 3.600 $ olur."
+        ],
+      },
+      {
+        "heading": "Micro hesap bir cent hesabı değildir",
+        "paragraphs": [
+          "Piyasada en sık karşılaşılan yanlış anlamalardan biri Micro hesabın bir \"cent hesabı\" olduğu düşüncesidir. Cent hesaplarda bakiyeniz sent cinsinden gösterilir; 10 $ yatırdığınızda ekranda 1.000 birim görürsünüz ve bu psikolojik bir yanılsama yaratır. XM'in Micro hesabı böyle çalışmaz.",
+          "Micro hesabın yaptığı tek şey, sözleşme büyüklüğünü küçültmek; yani aynı fiyatlama ve aynı spread yapısıyla, çok daha küçük lot adımlarına izin vermektir. Bakiye normal para biriminde tutulur, kâr ve zarar gerçek değerleriyle görünür. Spread yine 1.0 pipten itibaren başlar, komisyon yine yoktur, minimum yatırım yine 5 $'dır.",
+          "Bunun pratik anlamı şudur: Micro hesap, maliyeti ucuzlatan bir hesap değil, riski küçük parçalara bölmeye izin veren bir hesaptır. Küçük sermayeyle gerçek piyasa koşullarında pozisyon boyutlandırmayı öğrenmek isteyen biri için gerçekten faydalıdır, çünkü Standard hesapta yuvarlanamayacak kadar küçük risk birimleriyle çalışabilirsiniz. Ama lot başına oransal işlem maliyetiniz Standard ile aynı kalır."
+        ],
+      },
+      {
+        "heading": "Asıl ayrım noktası spread değil, 5 $ ile 100 $ arasındaki eşik",
+        "paragraphs": [
+          "Beş hesabı yan yana koyduğunuzda en keskin çizgi, 0.4 pipin nerede olduğu değil, minimum yatırımın nerede olduğudur. Micro, Standard ve Shares 5 $'dan başlarken, Ultra Low ve Zero 100 $ eşiğinden başlar. Bu, hesapları fiilen iki dünyaya böler: düşük eşikli hesaplar tanışma ve öğrenme alanı, 100 $ eşikli hesaplar ise maliyet optimizasyonu alanıdır.",
+          "5 $ ile hesap açılabilmesi bir kolaylıktır, ancak 5 $ ile işlem yapmak risk yönetimi açısından ciddi biçimde sorunludur. Nedenini birkaç maddede toplayalım:"
+        ],
+        "list": [
+          "5 $'lık bir bakiyede, işlem başına yüzde 1 risk almak 5 sentlik bir risk demektir; bu tutarda anlamlı bir zarar durdur mesafesi kurmak matematiksel olarak mümkün değildir.",
+          "Zorunlu olarak sermayeye göre çok büyük pozisyonlar açılır, yani kaldıraç fiilen sonuna kadar kullanılır ve tek bir hareket hesabı sıfırlar.",
+          "İşlem maliyeti bakiyeye oranla devasa hale gelir: tek bir mikro pozisyonun spread maliyeti bile bakiyenin kayda değer bir yüzdesini götürebilir.",
+          "Sonuçlar istatistiksel olarak anlamsızlaşır; birkaç işlemde hesabın bitmesi stratejinin iyi ya da kötü olduğu hakkında hiçbir şey söylemez.",
+          "Psikolojik olarak yanlış alışkanlık kazandırır: kaybedilecek tutar önemsiz olduğu için disiplinsiz işlem normalleşir.",
+          "Negatif bakiye koruması sizi borca düşmekten korur, ancak sermayenizi kaybetmekten korumaz; bu iki şey aynı değildir."
+        ],
+      },
+      {
+        "heading": "Shares hesabı neden kaldıraçsız ve kime mantıklı?",
+        "paragraphs": [
+          "Shares hesabı diğer dördünden temelde ayrılır: hisse başına komisyon alınır ve kaldıraç yoktur. Kaldıracın olmaması bir eksiklik değil, ürünün doğasıyla ilgili bir tercihtir. Tek bir şirket hissesi, bir para biriminden çok daha sert ve daha ani hareket edebilir; bilanço açıklamaları, temettü kararları veya şirkete özgü haberler gecede çift haneli boşluklar yaratabilir. Bu tür bir varlıkta kaldıraç, riski yönetilebilir olmaktan çıkarır.",
+          "Kaldıraçsız yapı, pozisyonun büyüklüğünün doğrudan yatırdığınız parayla sınırlı olması demektir. Bu, teminat tamamlama baskısını ortadan kaldırır ve pozisyonu istediğiniz kadar uzun süre taşımanıza izin verir. Buna karşılık aynı getiriyi elde etmek için çok daha fazla sermaye bağlamanız gerekir.",
+          "Bu hesap, kaldıraçlı döviz işlemi yapmak istemeyen, tekil şirketlere orta-uzun vadeli maruziyet arayan ve pozisyonunu haftalarca taşımayı planlayan bir profile mantıklı gelir. Gün içi hızlı alım satım yapan biri için ise komisyon yapısı ve kaldıraç yokluğu birlikte anlamsız bir kombinasyon oluşturur. Şirket bilançolarının yoğunlaştığı dönemleri (örneğin 26 Ağustos akşamı açıklanacak Nvidia bilançosu gibi) takip etmek isteyenler için Ekonomik Takvim bu tarihleri önceden görmeye yarar."
+        ],
+      },
+      {
+        "heading": "Karar ağacı: hangi profil hangi hesaba gitmeli?",
+        "paragraphs": [
+          "Tabloya bakıp \"o zaman herkes Ultra Low açsın\" demek acele bir sonuç olur. Üç şeyi birlikte düşünmek gerekir.",
+          "Birincisi, maliyet farkı ancak sermayenizle orantılı olduğunda anlamlıdır. 1.000 $ sermayeyle ayda 100 lot işlem yapmak zaten sürdürülebilir bir tablo değildir; oradaki asıl sorun 4.800 $'lık maliyet farkı değil, hacmin sermayeye oranıdır. Buna karşılık 50.000 $ sermayeyle ayda 50 lot çeviren bir hesapta 2.400 $'lık yıllık fark, doğrudan getiriden düşen somut bir kalemdir.",
+          "İkincisi, bu hesap yalnızca işlem maliyetini kapsar. Gecelik pozisyon taşıma (swap) maliyetleri, kayma (slippage) ve emir gerçekleşme kalitesi bu tabloya dahil değildir ve bazı stratejilerde spread farkından daha belirleyici olabilir.",
+          "Üçüncüsü, işlem sıklığı düşükse bu farkların pratik etkisi sınırlıdır. Ayda birkaç pozisyon açan, hedefi yüzlerce pip olan bir swing yatırımcısı için 0.4 pipin peşine düşmek, dikkati asıl meseleden (pozisyon boyutu ve zarar durdur disiplininden) uzaklaştırır. Bu farklar, işlem sıklığı arttıkça önem kazanır.",
+          "Bu üç filtreyi kendi durumunuza uyguladıktan sonra aşağıdaki liste, yukarıdaki tüm hesaplamaların özeti olarak iş görür. Kendi profilinizi en yakın satırda bulup oradan başlayabilirsiniz. Hiçbiri kesin bir reçete değil, sadece maliyet ve risk yapısına dayanan bir yön göstergesidir."
+        ],
+        "list": [
+          "Sermayeniz 100 $'ın altında ve amacınız gerçek koşullarda pozisyon boyutlandırma öğrenmekse: Micro. Maliyet avantajı yok, ama riski yeterince küçük parçalara bölebilirsiniz.",
+          "Sermayeniz birkaç yüz dolar seviyesinde ve normal lot adımlarıyla çalışmak istiyorsanız: Standard. Micro ile aynı fiyatlama, daha büyük sözleşme birimi.",
+          "Sermayeniz 100 $ üzerinde ve işlem sıklığınız orta-yüksekse: XM Ultra Low. EURUSD'de lot başına 6 $ ile üç seçenek arasındaki en düşük toplam maliyet burada; komisyon takibi de gerekmez.",
+          "Spreadin sıfıra yakın olmasının stratejiniz için teknik bir gereklilik olduğunu düşünüyorsanız: Zero. Ancak lot başına 7 $ toplam maliyeti kabul ettiğinizi bilerek girin.",
+          "Kaldıraç kullanmak istemiyor, tekil hisselerde orta-uzun vadeli pozisyon taşımayı planlıyorsanız: Shares.",
+          "Ayda birkaç işlem yapan bir swing yatırımcısıysanız: hesap türü tercihiniz sonucunuzu belirleyen değişken değildir; enerjinizi pozisyon boyutu ve zarar durdur disiplinine ayırın.",
+          "Hangi profile girdiğinizden emin değilseniz: önce üç ay boyunca gerçek işlem sıklığınızı ölçün, sonra bu yazıdaki lot başına maliyet rakamlarıyla kendi hesabınızı yapın."
+        ],
+      },
+      {
+        "heading": "Sonuç: karşılaştırmayı doğru kalemler üzerinden yapın",
+        "paragraphs": [
+          "Bu yazının tek teknik iddiası şudur: EURUSD standart lotta Zero hesabın toplam maliyeti 7 $, Ultra Low'un 6 $, Standard ve Micro'nun 10 $'dır. \"0.0 spread\" ifadesi bir pazarlama başlığı değil, doğru bir bilgidir; ancak yanına 7 $'lık gidiş-dönüş komisyonu eklenmeden okunduğunda yanıltıcı bir sonuca götürür. Karşılaştırmayı her zaman spread artı komisyon toplamı üzerinden, kendi enstrümanınız ve kendi lot büyüklüğünüzle yapın.",
+          "XM'in bu tabloyla ilgili dürüstçe anılması gereken sınırları da var: raw-spread hesap seçenekleri sınırlı sayıda, maksimum kaldıraç bölgeye ve hesabın bağlı olduğu tüzel kişiliğe göre değişiyor ve cTrader desteklenmiyor; platform tarafında MT4, MT5 ve XM App ile yetinmeniz gerekiyor. Minimum yatırımın 5 $ olması ise bir imkândır, davet değil. Hesap türü seçimi maliyeti birkaç yüz ile birkaç bin dolar arasında değiştirebilir; ama hiçbir hesap türü zayıf bir risk yönetimini telafi etmez. Sorularınızı somutlaştırmak için AI Asistan üzerinden kendi senaryonuzu da çalıştırabilirsiniz.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz."
+        ],
+      },
+    ],
+  },
+  {
+    "slug": "xm-para-yatirma-cekme-sureler-kyc",
+    "coverImage": "/blog/xm-para-yatirma-cekme-sureler-kyc-cover.png",
+    "title": "XM'de Para Yatırma ve Çekme: Gerçek Süreler, KYC ve Takılma Noktaları",
+    "excerpt": "XM'de yatırma ve çekme yöntemlerinin gerçek süreleri, \"işleme alma\" ile \"hesaba geçme\" arasındaki fark, KYC belgelerinin neden reddedildiği ve çekim geciktiğinde izlenecek adımlar.",
+    "publishedAt": "2026-08-20",
+    "readingMinutes": 9,
+    "lang": "tr",
+    "sections": [
+      {
+        "paragraphs": [
+          "Bir brokerle ilişkinizin ilk günü genellikle sorunsuz geçer. Para yatırma ekranı hızlıdır, kart bilgisi girilir, bakiye birkaç saniye içinde görünür. Bu aşamada hiçbir broker sizi zorlamaz; çünkü içeri para girişi, hemen her kurumun teknik ve ticari olarak en çok yatırım yaptığı süreçtir. Asıl sınav, ilk çekim talebini gönderdiğiniz gün başlar.",
+          "Yatırma ile çekme arasındaki bu asimetri kötü niyetin işareti değil, sistemin yapısal bir sonucudur. Yatırmada broker parayı alan taraftır ve kimlik doğrulama yükünü ödeme sağlayıcısı üstlenir. Çekmede ise broker parayı gönderen taraf olur; bu andan itibaren kara para aklamayla mücadele mevzuatı, kaynak doğrulama kuralları ve ödeme sağlayıcılarının kendi takvimleri devreye girer. Aynı kullanıcı, aynı hesap, tamamen farklı bir prosedür.",
+          "Bu yazıda XM örneği üzerinden yöntem bazlı gerçek süreleri, \"24 saat içinde işleme alınır\" ifadesinin ne anlama geldiğini, çekimlerin neden paranın yatırıldığı yönteme yapıldığını ve KYC belgelerinin hangi nedenlerle reddedildiğini ele alacağız. Amaç bir kurumu övmek değil; süreci önceden bilerek gereksiz bekleme ve hayal kırıklığı yaşamamanızı sağlamak."
+        ],
+      },
+      {
+        "heading": "Yatırma hızı bir kalite göstergesi değil; yöntem bazlı gerçek süreler ne diyor?",
+        "paragraphs": [
+          "Pazarlama materyallerinde en sık öne çıkarılan cümlelerden biri \"anında para yatırma\"dır. Oysa bu, sektörde neredeyse standarttır ve bir kurumu diğerinden ayırt etmez. Kart ve e-cüzdan altyapıları zaten anlık çalışır; broker burada yalnızca bir tahsilat kanalı kullanmaktadır. Değerlendirme yaparken ağırlığı yatırma hızına değil, çekim davranışına vermek gerekir: bir kurumun parayı ne kadar kolay aldığı değil, ne kadar öngörülebilir biçimde geri verdiği ölçüdür.",
+          "Süre beklentisini doğru kurmanın yolu ise yöntemleri tek tek ayırmaktan geçer. \"Ne kadar sürer?\" sorusunun tek bir cevabı yoktur; cevap seçtiğiniz kanala göre değişir. XM'in bildirdiği çerçeve şu şekildedir (minimum yatırım tutarı 5 dolardır; Ultra Low ve Zero hesaplarında bu eşik 100 dolara çıkar):",
+          "Bu sürelerin hiçbiri garanti değildir; hafta sonu, resmî tatiller, bankalar arası mutabakat günleri ve ödeme sağlayıcısının kendi doğrulama süreçleri takvimi uzatabilir. Özellikle Cuma akşamı gönderilen bir talebin pratikte Pazartesi işlem görmesi olağandır."
+        ],
+        "list": [
+          "Kart ve e-cüzdan yatırma (Skrill, Neteller, WebMoney): genellikle anında.",
+          "Banka havalesi ile yatırma: 1-3 iş günü.",
+          "Çekim talebinin işleme alınması: genellikle 24 saat içinde.",
+          "E-cüzdana çekim: çoğunlukla aynı gün.",
+          "Karta ve banka havalesine çekim: 2-5 iş günü.",
+          "XM tarafında yatırma ve çekme işlemleri için ücret alınmaz; ancak aracı banka veya cüzdan sağlayıcısının kendi kesintileri olabilir."
+        ],
+      },
+      {
+        "heading": "\"24 saat içinde işleme alınır\" ile \"hesabınıza geçer\" aynı şey değil",
+        "paragraphs": [
+          "Kullanıcıların yaşadığı hayal kırıklığının büyük kısmı, tek bir cümlenin yanlış okunmasından kaynaklanır. \"Çekim talepleri 24 saat içinde işleme alınır\" ifadesi, paranın 24 saat içinde hesabınızda olacağı anlamına gelmez. Bu cümle yalnızca sürecin brokerın kontrolündeki kısmını tarif eder.",
+          "Süreci iki bağımsız aşamaya ayırmak gerekir. Birinci aşama, brokerın iç onayıdır: talebin alınması, hesabın KYC durumunun ve serbest teminatın kontrol edilmesi, ödeme talimatının hazırlanması ve sağlayıcıya iletilmesi. XM'de bu aşama genellikle 24 saat içinde tamamlanır ve tamamen kurumun sorumluluğundadır.",
+          "İkinci aşama ise brokerın kontrolü dışındadır: ödeme sağlayıcısının, kart şebekesinin veya muhabir bankaların parayı hedefe ulaştırması. E-cüzdanlarda bu ikinci aşama neredeyse anlıktır, bu yüzden e-cüzdan çekimleri çoğunlukla aynı gün sonuçlanır. Kart iadelerinde ise para, ilgili kart şebekesi üzerinden geri akar ve bu akış 2-5 iş günü sürebilir; banka havalesinde muhabir banka zinciri devreye girdiği için süre benzer bir bantta kalır.",
+          "Pratik sonuç şudur: 24. saatte para hesabınızda değilse bu, otomatik olarak bir sorun anlamına gelmez. Sorun sinyali, talebin brokerda hâlâ \"beklemede\" görünmesidir. Talep \"işlendi\" statüsüne geçmişse top artık ödeme sağlayıcısındadır ve doğru muhatap orasıdır."
+        ],
+      },
+      {
+        "heading": "Neden para, yatırdığınız yönteme geri dönmek zorunda?",
+        "paragraphs": [
+          "En sık karşılaşılan itiraz şudur: \"Ben kartla yatırdım ama Skrill'e çekmek istiyorum, neden olmuyor?\" Bunun cevabı brokerın keyfî bir tercihi değil, kara para aklamayla mücadele mevzuatının temel kuralıdır. Bu kural literatürde fon kaynağının izlenebilirliği, yani source of funds ilkesi olarak geçer.",
+          "Mantık basittir. Eğer bir kullanıcı A kanalından para yatırıp B kanalından çekebilseydi, aracı kurum fiilen bir para transfer hizmetine dönüşürdü: fonun kaynağı ile varış noktası arasındaki bağ kopar, işlem zinciri izlenemez hale gelir. Düzenleyiciler tam da bunu engellemek için, çekimlerin öncelikle paranın geldiği kanala yapılmasını şart koşar. XM'in çekim politikasında bu kuralın uygulanması, sektör standardının dışına çıkmak değil, tam tersine standarda uymaktır.",
+          "Uygulamada bu şöyle işler: kartla 500 dolar yatırdıysanız, çekiminiz önce o kart üzerinden yatırdığınız tutara kadar karta iade olarak gerçekleşir. Yatırdığınız tutarı aşan kâr kısmı, kart şebekeleri iade tutarını orijinal işlem tutarıyla sınırladığı için genellikle banka havalesi gibi ikinci bir kanala yönlendirilir. Yani birden fazla yöntemle yatırım yaptıysanız, çekiminiz de birden fazla parçaya bölünebilir ve her parçanın kendi süresi işler.",
+          "Bu nedenle yatırma yöntemi seçimi aslında bir çekim yöntemi seçimidir. Paranızı hangi kanaldan gönderirseniz, büyük olasılıkla o kanaldan geri alacaksınız. Hızlı çekim önceliğiniz varsa, karar anı çekim ekranı değil, ilk yatırma ekranıdır."
+        ],
+      },
+      {
+        "heading": "KYC'yi hesap açar açmaz tamamlamak neden doğru sıra?",
+        "paragraphs": [
+          "Çoğu kullanıcı KYC belgelerini ilk çekim talebini gönderdikten sonra yüklemeye başlar. Bu, sürecin en yorucu biçimde yaşanmasının ana nedenidir. Belge doğrulama zaten birkaç gün sürebilecek bir işlemdir; onu paranıza ihtiyaç duyduğunuz güne bırakmak, bekleme süresini gereksiz yere uzatır ve stres altında hatalı belge yüklemeye yol açar.",
+          "Doğru sıra şudur: hesabı açın, belgeleri aynı gün yükleyin, doğrulamanın tamamlandığını görün, sonra ilk yatırımı yapın. Böylece çekim gününde tek beklemeniz gereken şey ödeme sağlayıcısının takvimi olur. XM'de çekim işlemleri KYC'si tamamlanmış hesaplarda yapılır; bu bir istisna değil, düzenlemeye tabi tüm kurumlarda geçerli bir ön koşuldur.",
+          "Genel olarak istenen belge seti iki başlıkta toplanır. Birincisi kimlik teyidi, ikincisi adres teyidi:"
+        ],
+        "list": [
+          "Kimlik belgesi: pasaport, kimlik kartı veya ehliyet. Fotoğraf, ad-soyad, doğum tarihi, belge numarası ve son geçerlilik tarihi okunabilir olmalı.",
+          "Adres teyidi: son dönemli elektrik, su, doğalgaz veya internet faturası ya da banka hesap ekstresi. Belgede ad-soyad ve tam adres birlikte görünmeli.",
+          "Belgenin dört köşesi de kadraja girmiş olmalı; kesik kenar en sık ret nedenlerinden biridir.",
+          "Kart ile yatırım yapıldıysa kartın ön ve arka yüzü istenebilir; bu durumda kart numarasının ortadaki hanelerinin ve arka yüzdeki güvenlik kodunun kapatılması beklenir.",
+          "Ad-soyad yazımı, hesap açılışında girdiğiniz bilgiyle birebir aynı olmalı."
+        ],
+      },
+      {
+        "heading": "Belgeler en çok hangi nedenlerle reddediliyor?",
+        "paragraphs": [
+          "Belge reddi genellikle kullanıcının kimliğiyle değil, dosyanın teknik kalitesiyle ilgilidir. Doğrulama ekipleri belgeyi makine ve insan gözüyle okunabilir bulmak zorundadır; okunamayan bir belge, doğru bilgi içerse bile kabul edilemez. En yaygın ret nedenleri şunlardır:",
+          "Bu listedeki maddelerin ortak özelliği, hepsinin baştan önlenebilir olmasıdır. Belgeyi düz bir zeminde, gündüz ışığında, gölge düşürmeden ve tam kadrajla çekmek, ret ihtimalini büyük ölçüde ortadan kaldırır. Tarayıcı kullanımı, telefon kamerasına göre daha az sorun çıkarır.",
+          "İsim uyuşmazlığı ayrı bir başlık hak eder. Evlilik sonrası soyadı değişikliği, ikinci ad kullanımı veya Türkçe karakterlerin farklı yazımı gibi durumlar sistemin otomatik eşleştirmesini bozar. Böyle bir durum varsa, belgeyi yüklemeden önce destek hattına açıklama yapmak süreci kısaltır. XM tarafında 28'den fazla dilde 7/24 canlı destek bulunması, bu tür açıklamaların kendi dilinizde yapılabilmesi açısından pratik bir kolaylıktır."
+        ],
+        "list": [
+          "Belgenin kenarları kesik veya bir köşesi kadraj dışında.",
+          "Düşük çözünürlük; yazılar veya belge numarası okunamıyor.",
+          "Flaş yansıması, gölge veya parmakla kapatılmış alanlar.",
+          "Süresi geçmiş kimlik belgesi veya tarihi çok eski adres belgesi.",
+          "Belgedeki ad-soyad ile hesaptaki ad-soyadın uyuşmaması.",
+          "Adres belgesinde ad-soyad veya adresten birinin görünmemesi.",
+          "Ekran fotoğrafı olarak alınmış, üzerinde tarayıcı arayüzü görünen dosyalar."
+        ],
+      },
+      {
+        "heading": "Bonuslu hesapta çekim yaparsanız ne olur?",
+        "paragraphs": [
+          "Bonus kampanyaları sektörde yaygındır ve genel mantıkları birbirine benzer. Bonus, bakiyenizde görünen ama sizin yatırdığınız para olmayan bir tutardır; kurum bu tutarı belirli bir işlem hacmi karşılığında sunar. Bu yüzden çoğu programda para çekimi, çekilen tutarla orantılı biçimde bonusun bir kısmının veya tamamının hesaptan düşülmesine yol açar.",
+          "Hacim şartının arkasındaki mantık da aynı yerden gelir. Bonusun doğrudan nakde çevrilebilmesi durumunda kampanya bir promosyon olmaktan çıkıp doğrudan nakit dağıtımına dönüşür. Bu nedenle bonusla ilişkili tutarın serbest kalması genellikle belirli bir lot hacminin tamamlanmasına bağlanır. Buradaki oranlar kampanyadan kampanyaya ve bölgeden bölgeye değiştiği için, kendi hesabınıza uygulanan koşulları kampanya sayfasından ve destek üzerinden doğrulamanız gerekir; genel bir rakam vermek yanıltıcı olur.",
+          "Pratik öneri şudur: bonuslu bir hesapta kısmi çekim yapmayı planlıyorsanız, çekim öncesi bakiyenizin ne kadarının bonus kaynaklı olduğunu ve çekimin marjinizi nasıl etkileyeceğini hesaplayın. Açık pozisyonu olan bir hesapta çekim, serbest teminatı düşürerek margin call eşiğini yaklaştırabilir. Pozisyon büyüklüğü ile teminat ilişkisini önceden görmek için Pozisyon Hesaplayıcı bu tür senaryolarda işe yarar."
+        ],
+      },
+      {
+        "heading": "Çekim gecikti: adım adım ne yapmalı?",
+        "paragraphs": [
+          "Beklenen süre aşıldığında ilk refleks genellikle destek hattına sitem etmek olur; oysa doğru sıralamayla ilerlemek hem daha hızlı sonuç verir hem de sorunun gerçekten nerede olduğunu gösterir. Aşağıdaki adımları sırasıyla uygulayın:",
+          "Bu adımlar sonunda sorun çözülmüyorsa, elinizde artık somut bir kayıt olur: talep tarihi, statü değişikliği zamanı, işlem referansı ve destek yazışması. Bir brokerle yaşanan uyuşmazlıkta düzenleyiciye veya bağımsız uzlaştırma mekanizmasına başvurmanın ön koşulu, tam olarak bu kayıt setidir. Şikâyet geçmişi ve lisans durumu kontrolü için Broker Sorgulama aracı ile Broker Sıralamaları başlangıç noktası olabilir."
+        ],
+        "list": [
+          "Hesabınızdaki işlem geçmişinden talebin statüsünü kontrol edin: hâlâ beklemede mi, işlendi mi?",
+          "KYC durumunuzun tamamlanmış göründüğünü doğrulayın; eksik belge çekimi sessizce bekletebilir.",
+          "Talebin banka veya cüzdan sağlayıcısının tatil ve mutabakat takvimine denk gelip gelmediğine bakın.",
+          "Statü \"işlendi\" ise brokerdan işlem referans numarasını isteyin ve bu numarayla ödeme sağlayıcısına veya bankanıza başvurun.",
+          "Statü hâlâ \"beklemede\" ise canlı destekten yazılı olarak gerekçe talep edin; sözlü bilgiyle yetinmeyin.",
+          "Tüm yazışmaları, ekran görüntülerini ve tarihleri saklayın.",
+          "Sorun 5 iş gününü aşıyor ve gerekçe verilmiyorsa, kurumun lisans aldığı düzenleyicinin şikâyet kanalını öğrenin."
+        ],
+      },
+      {
+        "heading": "Çekim davranışı, bir brokerı değerlendirmede en dürüst sinyaldir",
+        "paragraphs": [
+          "Bir aracı kurumun reklamı, spread tablosu, platform çeşitliliği ve eğitim içeriği hakkında söylenen her şey pazarlama tarafından şekillendirilebilir. Çekim süreci ise şekillendirilemez; çünkü orada kurumun operasyonel disiplini, likidite yönetimi ve düzenleyici uyumu doğrudan görünür hale gelir. Parayı zamanında ve gerekçesiz sorun çıkarmadan gönderen bir kurum, bunu her ay tekrar tekrar kanıtlamak zorundadır.",
+          "Bu yüzden bir brokerı test etmenin en sağlıklı yolu, büyük bir tutarla başlamak değil, küçük bir yatırım yapıp erken bir çekim denemesidir. Süreç boyunca ne kadar bilgi verildiği, statülerin ne kadar şeffaf göründüğü ve destek ekibinin yazılı gerekçe verip vermediği, tablo ve rakamlardan çok daha fazlasını anlatır. XM örneğinde süreler ve ücretsiz çekim politikası açıkça duyurulmuş durumdadır; sizin işiniz bu duyuruyu kendi hesabınızda doğrulamaktır.",
+          "Özetle: KYC'yi ilk gün bitirin, yatırma yöntemini çekim yöntemi olarak düşünerek seçin, \"işleme alma\" ile \"hesaba geçme\" arasındaki farkı bilerek bekleyin ve gecikme durumunda duygusal değil kayıt temelli ilerleyin. Bu dört alışkanlık, çekim sürecinde yaşanan sorunların büyük bölümünü baştan ortadan kaldırır.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz."
+        ],
+      },
+    ],
+  },
+  {
+    "slug": "mt4-mt5-xm-app-hangi-platform",
+    "coverImage": "/blog/mt4-mt5-xm-app-hangi-platform-cover.png",
+    "title": "MT4, MT5 ve XM App: Hangi Platformda İşlem Yapmalısınız?",
+    "excerpt": "MT4 ile MT5 arasındaki fark bir sürüm yükseltmesinden ibaret değil; MQL4 ve MQL5 birbiriyle uyumlu bile değil. Üç platformu kabiliyet, ekosistem ve broker bağımsızlığı açısından karşılaştırıyoruz.",
+    "publishedAt": "2026-08-20",
+    "readingMinutes": 9,
+    "lang": "tr",
+    "sections": [
+      {
+        "paragraphs": [
+          "Platform seçimi, hesap türü seçimi kadar dikkat çekmeyen ama etkisi daha uzun süren bir karardır. Hesap türünü sonradan değiştirmek çoğu kurumda birkaç dakikalık bir işlemdir; platform değiştirmek ise yıllar içinde biriktirdiğiniz şablonları, indikatör ayarlarını, grafik düzenlerini ve varsa otomatik işlem sistemlerinizi yeniden kurmak anlamına gelir. Bu yüzden platform kararı, günlük konfor sorusundan çok bir taşınma maliyeti sorusudur.",
+          "Piyasada bu konu genellikle yanlış çerçevelenir: \"MT5, MT4'ün yeni sürümüdür, o hâlde daha iyidir\" cümlesi teknik olarak yanıltıcıdır. İkisi aynı şirketin ürünü olsa da farklı ürünlerdir, farklı programlama dilleriyle çalışırlar ve birinde yazdığınız bir sistem diğerinde çalışmaz. Aynı şekilde, bir brokerin kendi mobil uygulaması ile bir masaüstü işlem terminalini yan yana koyup \"hangisi daha iyi\" diye sormak da doğru soru değildir; bunlar farklı işleri yapan araçlardır.",
+          "Bu yazıda XM'in sunduğu üç platformu — MT4, MT5 ve XM App — kabiliyet, ekosistem, hesap modeli ve broker bağımsızlığı başlıkları altında karşılaştıracağız. Sonunda demo hesapta uygulayabileceğiniz somut bir test protokolü ve profil bazlı bir karar listesi bulacaksınız. Amaç bir platformu diğerine üstün ilan etmek değil; hangi kullanım tarzının hangi araçla daha az sürtünme yaşadığını göstermek."
+        ],
+      },
+      {
+        "heading": "MT4 ile MT5 arasındaki ilişki bir sürüm yükseltmesi değil",
+        "paragraphs": [
+          "Numaralandırma yanıltıcıdır. MT5, MT4'ün üzerine inşa edilmiş bir güncelleme değil, sıfırdan yazılmış ayrı bir terminaldir. Aynı arayüz mantığını, benzer menü yapısını ve tanıdık grafik görünümünü paylaşırlar; ama motor farklıdır. Bu yüzden MT4 kullanıcısı MT5'e geçtiğinde kendini evinde hisseder, sonra ilk gerçek işini yapmaya çalıştığında farkların yüzeysel olmadığını görür.",
+          "MT5 daha yeni ve daha kabiliyetli bir platformdur. Daha fazla zaman dilimi sunar, dolayısıyla MT4'te elle oluşturmanız gereken ara periyotlar hazır gelir. Ekonomik takvim terminalin içine gömülüdür; veri açıklamalarını grafikten ayrı bir sekmede takip etmek zorunda kalmazsınız. Emir türleri daha çeşitlidir, strateji test motoru belirgin biçimde daha hızlıdır ve çoklu iş parçacığı kullanabilir. Ayrıca MT5 forex dışında hisse senedi ve vadeli işlem enstrümanlarını da doğal olarak destekleyecek şekilde tasarlanmıştır; MT4 esas olarak forex ve CFD odaklı bir mimariye sahiptir.",
+          "Buradaki fark listesi, MT5'in her kullanıcı için doğru seçim olduğu anlamına gelmez. Sunulan kabiliyetlerin kaçını gerçekten kullanacağınız, kararın asıl belirleyicisidir. Günde iki pozisyon açan ve tek zaman dilimine bakan biri için gelişmiş test motorunun pratik karşılığı yoktur.",
+          "MT5'in MT4'e göre öne çıkan somut farkları şunlardır:"
+        ],
+        "list": [
+          "Daha fazla hazır zaman dilimi; ara periyotları elle üretmeye gerek kalmaz",
+          "Terminal içine gömülü ekonomik takvim ve haber akışı",
+          "Daha geniş bekleyen emir türü seti",
+          "Çok daha hızlı ve çok çekirdekli çalışabilen strateji test motoru",
+          "Hisse senedi ve vadeli işlem gibi borsa enstrümanlarına uygun mimari",
+          "Piyasa derinliği görüntüleme desteği"
+        ],
+      },
+      {
+        "heading": "MT4 neden hâlâ ayakta: ekosistem ve MQL4-MQL5 uyumsuzluğu",
+        "paragraphs": [
+          "Teknik olarak daha yetenekli platformun her zaman kazanmadığı durumlardan biri budur. MT4, uzun yıllar boyunca fiilî standart olduğu için etrafında çok büyük bir üçüncü taraf ekosistemi oluştu: otomatik işlem sistemleri (EA'lar), özel indikatörler, şablonlar, forum arşivleri, kod örnekleri ve bunları anlatan eğitim içerikleri. MT5 için üretilen içerik yıllar içinde arttı, ancak MT4 arşivi hacim olarak hâlâ daha büyüktür.",
+          "Asıl kritik nokta şudur: MQL4 ile MQL5 birbiriyle uyumlu değildir. MT4 için yazılmış bir EA'yı MT5'e kopyalayıp çalıştıramazsınız. Kaynak kodu elinizde olsa bile taşıma işlemi bir dönüştürme değil, çoğu zaman yeniden yazma anlamına gelir; çünkü diller yalnızca sözdizimi düzeyinde değil, emir yönetimi mantığı düzeyinde de ayrışır. Kaynak kodu elinizde değilse — derlenmiş dosya satın aldıysanız — taşıma seçeneği tamamen ortadan kalkar.",
+          "Bu, otomatik sistem kullananlar için platform kararını neredeyse tek başına belirleyen faktördür. Kullandığınız veya satın almayı planladığınız EA hangi platform içinse, platformunuz odur. Tersini yapmaya çalışmak, geliştirici desteği olmayan bir yeniden yazım projesine girişmek demektir.",
+          "Bir uyarı da tersi yönde geçerli: büyük ekosistem, kaliteli ekosistem anlamına gelmez. MT4 için dolaşımda olan EA ve indikatörlerin önemli bir kısmı geriye dönük test sonuçlarına aşırı uyarlanmış, canlı piyasada aynı davranışı göstermeyen sistemlerdir. Arşivin büyüklüğü bir avantajdır; seçim titizliğinin yerini tutmaz."
+        ],
+      },
+      {
+        "heading": "Netting mi hedging mi? Hesap modeli işlem tarzınızı belirler",
+        "paragraphs": [
+          "İki platform arasındaki en az konuşulan ama en somut farklardan biri pozisyon muhasebesi modelidir. MT4 hedging modeliyle çalışır: aynı enstrümanda birden fazla bağımsız pozisyon açabilirsiniz ve bunlar ayrı ayrı yaşar. EURUSD'de bir alış ve bir satış pozisyonunuz aynı anda açık durabilir; her birinin kendi giriş fiyatı, kendi stop-loss seviyesi ve kendi kâr-zarar hesabı vardır.",
+          "MT5 ise hem netting hem hedging modelini destekler; hangisinin geçerli olduğunu hesabınızın tanımı belirler. Netting modelinde aynı enstrümanda tek bir net pozisyon tutulur. Bir lot alışınız varken yarım lot satış yaparsanız yeni bir pozisyon açılmaz, mevcut pozisyon yarım lota iner. Ters yönde daha büyük bir işlem yaparsanız pozisyon kapanır ve yön değiştirir.",
+          "Bu ayrım teorik değildir. Kademeli giriş yapan, aynı enstrümanda farklı zaman dilimlerine göre ayrı ayrı pozisyon taşıyan veya her pozisyona kendi stop seviyesini koyan bir yaklaşım netting hesapta beklediğiniz gibi davranmaz. Buna karşılık netting modeli, tek bir net riske bakmak isteyenler için daha temiz bir tablo sunar ve marj kullanımı açısından daha şeffaftır.",
+          "XM tarafında MT4 ve MT5 hesapları hedging mantığıyla kullanılabilir; yine de hesabı açmadan önce ilgili hesap tanımının hangi modelde çalıştığını doğrulamak yerinde olur. Bu tür yapısal detaylar, kurumun kendi hesap özellikleri sayfasından teyit edilmesi gereken şeylerdir."
+        ],
+      },
+      {
+        "heading": "XM App ne yapar, ne yapmaz?",
+        "paragraphs": [
+          "XM App, XM'in kendi mobil uygulamasıdır ve MT4 ile MT5'in mobil sürümlerinden farklı bir amaca hizmet eder. Onu bir masaüstü terminalinin küçültülmüş hâli olarak değil, hesap yönetimi ve hızlı işlem için tasarlanmış ayrı bir arayüz olarak düşünmek daha doğrudur.",
+          "İyi yaptığı işler nettir: hesap bakiyesi, marj durumu ve açık pozisyonları hızlıca görmek; para yatırma ve çekme taleplerini başlatmak; belge yükleme ve hesap doğrulama gibi idari işleri halletmek; basit bir alış-satış emri iletmek veya açık bir pozisyonu kapatmak. Yolda, masaüstünden uzaktayken pozisyonunuza müdahale etmeniz gerektiğinde bu yeterlidir ve hızlıdır.",
+          "Yapmadığı işler de aynı ölçüde nettir ve bunları baştan bilmek gerekir. XM App otomatik işlem sistemi çalıştıramaz; bir EA'yı mobil uygulamada koşturmanın yolu yoktur. Derin grafik analizi için de uygun değildir: çok sayıda indikatörü üst üste bindirmek, uzun geçmişe dönük çizim yapmak, çoklu grafik düzeni kurmak veya ince ayarlı bir şablon sistemi işletmek küçük ekranda pratik olarak mümkün değildir. Ayrıca strateji testi yapamazsınız.",
+          "Buradan çıkan sonuç bir dışlama değil, bir iş bölümüdür. Analizi ve sistem yönetimini masaüstü terminalinde yapıp, gün içindeki takip ve idari işleri mobil uygulamaya bırakmak çoğu kullanıcı için makul bir düzendir. Sorun, mobil uygulamayı tek platform olarak kullanmaya çalışmakta ortaya çıkar."
+        ],
+      },
+      {
+        "heading": "Platform ayarlarınız kime ait? Bağlanma maliyeti meselesi",
+        "paragraphs": [
+          "Bu, platform tartışmalarında neredeyse hiç gündeme gelmeyen ama uzun vadede en pahalıya mal olan konudur. MT4 ve MT5 bağımsız bir yazılım şirketinin ürünüdür ve çok sayıda kurum tarafından desteklenir. Şablonlarınız, özel indikatörleriniz, grafik düzenleriniz, uyarı ayarlarınız ve EA'larınız yerel dosyalar hâlinde durur. Kurum değiştirdiğinizde bu dosyaları yeni kurulumun ilgili klasörlerine kopyalayıp kaldığınız yerden devam edersiniz.",
+          "Brokerin kendi uygulaması için bu geçerli değildir. Orada biriktirdiğiniz izleme listeleri, arayüz alışkanlıkları ve varsa özel görünümler o kuruma aittir ve sizinle taşınmaz. Bu bir kötü niyet göstergesi değil, tescilli yazılımın doğal sonucudur; ama sonucu değiştirmez: brokerin kendi uygulamasına ne kadar çok yerleşirseniz, kurum değiştirmenin size maliyeti o kadar artar. Buna bağlanma (lock-in) maliyeti denir ve genellikle taşınmaya karar verdiğiniz gün fark edilir.",
+          "Pratik sonuç şudur: uzun vadede kurum değiştirme ihtimalinizi sıfır saymıyorsanız, analiz ve sistem katmanınızı standart bir terminalde tutmak stratejik bir tercihtir. Mobil uygulamayı kullanmayın demek değil bu; asıl kurulumunuzu oraya yaslamayın demek. Karşılaştırma yaparken Broker Sorgulama aracı ve Broker Sıralamaları gibi kaynaklara bakmak, hangi kurumların hangi standart platformları desteklediğini görmek açısından işe yarar."
+        ],
+      },
+      {
+        "heading": "XM cTrader desteklemiyor: bu kimin için sorun?",
+        "paragraphs": [
+          "Açıkça belirtmek gerekir: XM'in platform listesi MT4, MT5 ve XM App ile sınırlıdır. cTrader desteklenmemektedir. Bu, kurumun eksik yönleri arasında dürüstçe sayılması gereken bir maddedir ve pazarlama diliyle geçiştirilmemelidir.",
+          "Kimin için gerçekten sorun olduğu ise daha dar bir sorudur. cTrader, emir defteri görünümü, derinlik tabanlı emir iletimi ve cAlgo tarafındaki geliştirme ortamı nedeniyle belirli bir kullanıcı grubunda tercih edilir. Eğer stratejiniz seviye seviye likidite görmeye, gelişmiş emir defteri etkileşimine dayanıyorsa veya mevcut algoritmalarınız cTrader ekosisteminde yazılmışsa, bu eksiklik sizin için doğrudan bir eleme kriteridir; başka hiçbir avantaj bunu telafi etmez.",
+          "Buna karşılık MT4 veya MT5 üzerinden çalışan, EA'ları MQL tarafında olan veya manuel işlem yapan bir kullanıcı için pratik etkisi sınırlıdır. Yani bu madde herkes için değil, belirli bir teknik profil için belirleyicidir. Kararı verirken kendinize sormanız gereken soru basittir: cTrader'ı bugün fiilen kullanıyor musunuz, yoksa listede görmek mi istiyorsunuz? İkisi farklı şeylerdir.",
+          "Aynı dürüstlükle eklenmesi gereken diğer noktalar: XM'de raw-spread hesap seçenekleri sınırlıdır ve maksimum kaldıraç bölgeye ve tüzel kişiliğe göre değişir. XM Global 2009'dan beri faaliyette; ASIC (443670), CySEC (120/10), DFSA (F003484) ve Belize FSC düzenlemeleri altında çalışıyor, negatif bakiye koruması sunuyor. Bunlar birbirini iptal eden değil, birlikte değerlendirilmesi gereken bilgilerdir."
+        ],
+      },
+      {
+        "heading": "Demo hesapta platform testi: neye, nasıl bakmalı?",
+        "paragraphs": [
+          "Platform kararını ekran görüntülerine veya özellik listelerine bakarak vermek yerine, demo hesapta ölçülebilir bir test yapmak çok daha bilgilendiricidir. Demo hesap gerçek piyasa koşullarını birebir yansıtmaz — özellikle emir gerçekleştirme tarafında canlı hesaptan farklı davranabilir — ama arayüzün sizinle uyumunu ve platformun stres altındaki davranışını görmek için yeterlidir.",
+          "Testi rastgele tıklayarak değil, sabit bir protokolle yapın. Aynı adımları hem MT4'te hem MT5'te, mümkünse aynı saatlerde tekrarlayın; ancak bu şekilde karşılaştırdığınız şey platform olur, piyasa koşulu olmaz. Not tutun; hafızaya güvenmeyin.",
+          "Şu başlıkları sırayla ölçün:"
+        ],
+        "list": [
+          "Emir gerçekleştirme hızı: emri gönderdiğiniz an ile onay ekranının döndüğü an arasındaki gecikmeyi sakin bir saatte birkaç kez ölçün",
+          "Kayma (slippage): girdiğiniz fiyat ile gerçekleşen fiyat arasındaki farkı kaydedin; sakin saatlerle hareketli saatleri ayrı ayrı not edin",
+          "Tek tık işlem: özelliği açın ve yanlışlıkla emir göndermeye ne kadar açık olduğunu, onay adımlarının nerede devreye girdiğini test edin",
+          "Stop-loss yerleştirme: emri açarken, açtıktan sonra ve grafik üzerinden sürükleyerek stop koymayı deneyin; hangisinin kaç adım sürdüğünü ölçün",
+          "Haber anı davranışı: takvimdeki bir veri açıklamasında spreadin nasıl genişlediğini, emirlerin nasıl karşılandığını ve arayüzün donup donmadığını izleyin",
+          "Hafta sonu ve kapanış davranışı: piyasa kapalıyken grafiklerin, bekleyen emirlerin ve bağlantının nasıl davrandığını kontrol edin",
+          "Yeniden bağlanma: internet bağlantısını kısa süre kesip terminalin açık pozisyonlarla nasıl toparlandığını görün"
+        ],
+      },
+      {
+        "heading": "Profilinize göre karar: kısa bir özet",
+        "paragraphs": [
+          "Doğru platform diye genel bir cevap yok; kullanım tarzınıza göre sürtünmesi en az olan platform var. Aşağıdaki liste, yukarıdaki teknik ayrımların pratik karşılığını özetliyor. Kararı verirken ekonomik takvimi ve pozisyon büyüklüğü hesaplarını nasıl takip ettiğinizi de hesaba katın; Ekonomik Takvim ve Pozisyon Hesaplayıcı gibi platform dışı araçlar bazı ihtiyaçları zaten karşılıyor olabilir.",
+        ],
+        "list": [
+          "Elinizde MT4 için yazılmış bir EA varsa: MT4. Karar başka kritere bakmadan verilmiştir, çünkü o kod MT5'te çalışmaz",
+          "Hisse ve vadeli işlem enstrümanlarına da bakıyorsanız veya yoğun strateji testi yapıyorsanız: MT5",
+          "Çok sayıda zaman dilimi arasında geçiş yapıyor ve ekonomik takvimi terminalin içinde istiyorsanız: MT5",
+          "Aynı enstrümanda kademeli ve ters yönlü pozisyonlar taşıyorsanız: hedging modeliyle çalışan bir hesap; netting hesap bu tarzı bozar",
+          "Günde birkaç manuel işlem yapıyorsanız: fark büyük ölçüde teoriktir, alıştığınız arayüzde kalın",
+          "Yalnızca takip, bakiye ve para yatırma-çekme işleri için: XM App yeterlidir, ama tek platformunuz olmamalıdır",
+          "cTrader'ı fiilen kullanıyorsanız: XM bu ihtiyacı karşılamıyor, kurum listesini buna göre daraltın"
+        ],
+      },
+      {
+        "heading": "Son not",
+        "paragraphs": [
+          "Platform, sonuçları belirleyen değişkenlerden yalnızca biridir ve muhtemelen en belirleyicisi değildir. Risk yönetimi, pozisyon büyüklüğü ve işlem maliyeti yapısı, arayüz tercihinden çok daha fazla ağırlık taşır. Platformu bir kez seçip alışkanlık hâline getirmek, sürekli platform değiştirerek her seferinde yeniden öğrenmekten genellikle daha verimlidir.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz."
+        ],
+      },
+    ],
+  },
+  {
+    "slug": "lot-nedir-mikro-mini-standart-lot-hesaplama",
+    "coverImage": "/blog/lot-nedir-mikro-mini-standart-lot-hesaplama-cover.png",
+    "title": "Lot Nedir? Mikro, Mini ve Standart Lot Hesaplaması Adım Adım",
+    "excerpt": "Standart, mini, mikro ve nano lotun kaç birime denk geldiğini, pip değerinin neden pariteye göre değiştiğini ve lot büyüklüğünün risk yüzdesinden nasıl türetildiğini iki tam sayısal örnekle adım adım anlatıyoruz.",
+    "publishedAt": "2026-08-20",
+    "readingMinutes": 8,
+    "lang": "tr",
+    "sections": [
+      {
+        "paragraphs": [
+          "Yeni başlayan bir yatırımcının platformda takıldığı ilk kutu, fiyat grafiği değil, emir ekranındaki lot kutusudur. Yön kararını vermiştir, seviyeyi belirlemiştir, stop noktasını bile işaretlemiştir; ama o kutuya ne yazacağını bilmez. Çoğu kişi burada teknik bir hesap yapmak yerine kendisini rahat hissettiren bir sayı yazar: 0.10, 0.50, bazen 1.00. Oysa bu kutuya yazılan sayı, işlemin sonucunu yön tahmininden daha güçlü biçimde belirler.",
+          "Sebebi basit: yön tahmininiz uzun vadede belli bir isabet oranında kalır, ama lot büyüklüğü her işlemde kaybınızın mutlak boyutunu belirler. İsabet oranı yüzde 55 olan bir sistem bile, tek işlemde hesabın yüzde 20'sini riske atan bir lot seçimiyle birkaç ardışık zararda tükenebilir. Lot, stratejinin süsü değil, hayatta kalma mekanizmasıdır.",
+          "Bu yazıda önce lot birimlerinin ne anlama geldiğini, sonra pip değerinin neden enstrümandan enstrümana değiştiğini, ardından da lot büyüklüğünü riskten türeten formülü ele alacağız. İki tam sayısal örnek çözeceğiz. Sonunda ise en sık yapılan hataları ve kaldıraçla ilgili yaygın kavram karışıklığını netleştireceğiz."
+        ],
+      },
+      {
+        "heading": "Lot bir para birimi değil, bir sözleşme büyüklüğüdür",
+        "paragraphs": [
+          "Lot, forex piyasasında işlem gören standartlaştırılmış miktarın adıdır. Bir lot alıyorum demek, belli bir sayıda baz para birimi alıyorum demektir. Bu miktar sabittir ve piyasa genelinde kabul görmüş dört kademesi vardır.",
+          "Kademeler arasındaki oran her zaman on kattır. Standart lottan mini lota, mini lottan mikro lota, mikro lottan nano lota geçerken büyüklük her seferinde onda birine iner. Bu düzenli yapı, lot hesabını zihinden yapmayı kolaylaştırır: mikro lot cinsinden bir sonuç bulduysanız virgülü iki basamak kaydırarak standart lot cinsine çevirebilirsiniz.",
+          "Platformda gördüğünüz 0.01, 0.10, 1.00 gibi rakamlar standart lot cinsindendir. Yani 0.01 lot, bir mikro lottur; 0.10 lot, bir mini lottur. Bu dönüşümü içselleştirmek, ilerideki hesapların tamamını sadeleştirir.",
+          "Lot büyüklüğünün doğrudan sonucu şudur: pozisyon ne kadar büyükse, fiyatın aynı miktarda hareketi hesabınıza o kadar büyük bir tutar olarak yansır. Fiyat aynıdır, grafik aynıdır; değişen tek şey sizin o harekete maruz kalma derecenizdir."
+        ],
+        "list": [
+          "Standart lot = 100.000 birim (platformda 1.00)",
+          "Mini lot = 10.000 birim (platformda 0.10)",
+          "Mikro lot = 1.000 birim (platformda 0.01)",
+          "Nano lot = 100 birim (platformda 0.001, her broker desteklemez)"
+        ],
+      },
+      {
+        "heading": "EURUSD'de bir pip kaç dolar eder?",
+        "paragraphs": [
+          "Pip, kurdaki en küçük standart hareket birimidir. Beş haneli kotasyonlu çoğu parite için pip, dördüncü ondalık basamaktır; yani 0.0001. EURUSD 1.1597'den 1.1598'e çıktığında fiyat bir pip yükselmiş olur.",
+          "Bu hareketin kaç dolar ettiği ise doğrudan lot büyüklüğüne bağlıdır. EURUSD'de dolar kotasyon para birimi olduğu için hesap temizdir ve hafızaya alınmaya değer bir tablo ortaya çıkar. Bu üç satır, forex risk hesabının omurgasıdır. Aklınızda tuttuğunuz tek şey standart lotta 10 $ olsa bile, geri kalanını onda bir kuralıyla türetebilirsiniz.",
+          "Dikkat edilmesi gereken nokta, bu değerlerin EURUSD gibi kotasyonu dolar olan pariteler için geçerli olmasıdır. GBPUSD, AUDUSD, NZDUSD gibi sonu USD ile biten paritelerde de aynı tablo çalışır. Ama kotasyon para birimi dolar olmadığında hesap değişir."
+        ],
+        "list": [
+          "Standart lot (100.000 birim): 1 pip = 10 $",
+          "Mini lot (10.000 birim): 1 pip = 1 $",
+          "Mikro lot (1.000 birim): 1 pip = 0.10 $",
+          "Nano lot (100 birim): 1 pip = 0.01 $"
+        ],
+      },
+      {
+        "heading": "Pip değeri neden kotasyon para birimine bağlıdır?",
+        "paragraphs": [
+          "Bir pozisyonun kâr veya zararı, doğası gereği kotasyon para birimi cinsinden oluşur. EURUSD alırken euro alıp dolar satarsınız; sonuç dolar olarak birikir. Hesabınız da dolar cinsindense herhangi bir çevrim gerekmez, tablo doğrudan geçerlidir.",
+          "USDJPY gibi Japon yeni kotasyonlu paritelerde iki şey birden değişir. Birincisi, pip tanımı: yen çiftlerinde fiyat iki ondalıkla kote edildiği için bir pip 0.0001 değil, 0.01'dir. İkincisi, oluşan kâr veya zarar yen cinsindendir ve dolar bazlı bir hesapta görünür hale gelmesi için güncel USDJPY kuruyla dolara çevrilmesi gerekir. Bu çevrim kur değiştikçe değiştiği için, yen çiftlerinde pip değeri sabit bir sayı değildir; gün içinde bile hafifçe kayar.",
+          "Altında (XAUUSD) durum bir başka açıdan farklıdır. Burada birim pip değil ons ve dolardır. Standart sözleşme 100 onstur. Dolayısıyla altın fiyatındaki 1 dolarlık hareket, standart lotta 100 $ eder. Altın gibi günlük hareket aralığı onlarca doları bulabilen bir enstrümanda bu çarpanın ne anlama geldiğini görmek için altının bugünlerde 4.367 $ civarında işlem gördüğünü ve haftalık dip ile zirve arasında 4.324 $ ile 4.370 $ bandının oluştuğunu hatırlamak yeterli. Böyle bir bantta standart lotluk bir pozisyon, dar bir gün içinde bile dört haneli tutarlarda dalgalanır.",
+          "Buradan çıkan pratik kural şudur: pip değerini ezberlemeyin, enstrümana göre teyit edin. EURUSD'nin tablosunu USDJPY'ye veya altına taşımak, hesabınızı sistematik olarak yanlış boyutlandırmanın en hızlı yoludur. Sitedeki Pozisyon Hesaplayıcı aracı tam olarak bu adımı otomatikleştirmek için var: enstrümanı, hesap para birimini ve lot büyüklüğünü girdiğinizde pip değerini doğru para biriminde verir."
+        ],
+      },
+      {
+        "heading": "Asıl formül: lot, riskten türetilir",
+        "paragraphs": [
+          "Şimdiye kadar anlatılan her şey tek bir denkleme hizmet ediyor. Lot büyüklüğünü sezgiyle değil, üç bilinen büyüklükten hesaplarsınız: kaybetmeye razı olduğunuz tutar, stopun uzaklığı ve bir birim hareketin parasal değeri.",
+          "Lot = (Hesap büyüklüğü x Risk yüzdesi) / (Stop mesafesi (pip) x Pip değeri)",
+          "Payda duran şey, riske ettiğiniz para miktarıdır. Paydada duran şey ise, stopa kadar gidilirse bir standart lotluk pozisyonun kaybettireceği tutardır. Bölme işlemi size kaç standart lot açabileceğinizi verir.",
+          "Bu formülün en önemli özelliği, işlem sırasını tersine çevirmesidir. Önce lotu seçip sonra stopu ona göre ayarlamazsınız. Önce teknik olarak anlamlı stop seviyesini belirlersiniz, sonra risk yüzdenizi sabitlersiniz, lot bu ikisinin sonucu olarak çıkar. Yani lot bir karar değil, bir çıktıdır.",
+          "Risk yüzdesi tarafında yaygın uygulama işlem başına yüzde 1 ile yüzde 2 aralığıdır. Bu bir kural değil bir tercihtir, ama sabit tutulması önemlidir; çünkü formülün koruyucu etkisi tam olarak bu sabitlikten gelir. Risk yüzdesini işlemden işleme değiştirirseniz, farkında olmadan en yüksek riski en çok güvendiğiniz ama en az doğrulanmış fikre ayırmış olursunuz."
+        ],
+      },
+      {
+        "heading": "İki örnek: EURUSD'de 25 pip stop ve altında 12 dolarlık stop",
+        "paragraphs": [
+          "Formülü somutlaştırmanın tek yolu sayılarla çalışmaktır. İki farklı enstrümanda, aynı risk disiplinini uygulayan iki hesap düşünelim.",
+          "Birinci örnek: 2.000 $ büyüklüğünde bir hesap, işlem başına yüzde 1 risk alıyor. Bu, işlem başına 20 $ demektir. Enstrüman EURUSD ve teknik yapı 25 pip uzaklıkta bir stop gerektiriyor. EURUSD'de standart lotta pip değeri 10 $ olduğuna göre, paydadaki tutar 25 x 10 = 250 $ olur. Bölme işlemi 20 / 250 = 0.08 sonucunu verir. Yani 0.08 lot, mikro lot cinsinden sekiz mikro lot.",
+          "Bu sonucu doğrulamak kolaydır. 0.08 lotta bir pip 0.80 $ eder; 25 pip stop tetiklenirse kayıp 25 x 0.80 = 20 $ olur. Tam olarak hedeflenen risk tutarı. Formül, hesabı kendi içinde tutarlı hale getirir.",
+          "İkinci örnek: 5.000 $ büyüklüğünde bir hesap, yine yüzde 1 risk alıyor; yani 50 $. Enstrüman XAUUSD ve stop mesafesi 12 dolar. Altında standart lotta 1 dolarlık hareket 100 $ ettiğine göre, payda 12 x 100 = 1.200 $ olur. Bölme işlemi 50 / 1.200 = 0.041 sonucunu verir. Platformda genellikle iki ondalık adım kullanıldığı için bu 0.04 lota yuvarlanır.",
+          "Yuvarlamanın yönü de bir karardır. Aşağı yuvarlamak riski hedefin biraz altında bırakır, yukarı yuvarlamak üstüne çıkarır. Risk yönetiminde aşağı yuvarlamak tutarlı olan yaklaşımdır. 0.04 lotta 12 dolarlık stop 48 $ kaybettirir; 0.05 lotta ise 60 $, yani hedeflenen riskin yüzde 20 üzerinde.",
+          "İki örnek arasındaki farkı görmek önemli. Hesap büyüklüğü iki buçuk katına çıkmasına rağmen lot büyüklüğü yarıya inmiştir. Sebep enstrümanın karakteridir: altında birim hareket başına parasal değer çok daha yüksektir ve makul bir stop mesafesi çok daha geniştir. Aynı risk disiplini, farklı enstrümanlarda tamamen farklı lot rakamları üretir. Bir enstrümanda alıştığınız lot büyüklüğünü diğerine taşımak, bu yazının anlattığı her şeyi geçersiz kılar."
+        ],
+      },
+      {
+        "heading": "Kaldıraç lot büyüklüğünü belirlemez, sadece teminatı belirler",
+        "paragraphs": [
+          "Yeni başlayanların en köklü kavram karışıklığı burada. Yaygın sanı, yüksek kaldıracın daha büyük pozisyon açmayı gerektirdiği veya otomatik olarak daha riskli hale getirdiği yönünde. Oysa kaldıraç, açtığınız pozisyonun büyüklüğünü değil, o pozisyonu açık tutmak için hesabınızda bloke edilecek teminat miktarını belirler.",
+          "Şöyle düşünün: 0.08 lotluk bir EURUSD pozisyonunun piyasa riski, kaldıraç 1:30 da olsa 1:1000 de olsa aynıdır. Fiyat 25 pip aleyhinize gittiğinde kaybınız her iki durumda da 20 $'dır. Değişen tek şey, o pozisyonun ne kadar sermayenizi bloke ettiğidir. Yüksek kaldıraç blokeyi azaltır, kaybı azaltmaz.",
+          "O halde yüksek kaldıraç neden riskli sayılıyor? Çünkü dolaylı bir etki yaratıyor. Teminat gereksinimi düştüğünde, hesap bakiyesi teorik olarak çok daha büyük pozisyonlara izin verir hale gelir ve bu izin, disiplini olmayan yatırımcı için bir davete dönüşür. Risk, kaldıraç oranından değil, o oranın açtığı alanı doldurma eğiliminden doğar.",
+          "XM'de maksimum kaldıraç 1:1000'e kadar çıkabiliyor, ancak bu oran bölgeye ve hesabın bağlı olduğu tüzel kişiliğe göre değişiyor; her kullanıcı için geçerli tek bir rakam yok. Uygulamada önemli olan da bu üst sınır değil, sizin formülden çıkan lot büyüklüğünüzün o kaldıraçla açılabilir olup olmadığıdır. Formül önce gelir, kaldıraç sonra teyit edilir."
+        ],
+      },
+      {
+        "heading": "Lot hesabında en sık yapılan dört hata",
+        "paragraphs": [
+          "Bu hataların ortak noktası, hepsinin makul görünmesidir. Hiçbiri açıkça yanlış hissettirmez; sadece hesabı sessizce aşındırır.",
+          "Dördüncü maddeye biraz daha yakından bakmak gerekiyor. Hesabınız dolar dışı bir para biriminde tutuluyorsa, formülün payındaki risk tutarı hesap para biriminde, paydadaki pip değeri ise çoğu zaman dolar cinsindedir. İkisini aynı para birimine çevirmeden bölerseniz sonuç anlamsız çıkar. Bu, tabloyu ezberleyip formülü mekanik uygulayan yatırımcının en kolay atladığı adımdır.",
+          "Bir diğer sessiz hata, stop mesafesini piyasa koşullarından bağımsız düşünmektir. Volatilitenin arttığı dönemlerde aynı teknik yapı daha geniş stop gerektirir ve formül otomatik olarak daha küçük lot üretir. Bu bir kısıtlama değil, sistemin doğru çalıştığının işaretidir. Önemli veri açıklamalarının ve merkez bankası etkinliklerinin ne zaman olduğunu Ekonomik Takvim üzerinden önceden görmek, bu tür dönemlerde pozisyon boyutunu bilinçli ayarlamayı kolaylaştırır."
+        ],
+        "list": [
+          "Lotu hesaplamak yerine içine sinen bir sayı seçmek; rahatlık hissi bir risk ölçüsü değildir",
+          "Stop mesafesini lota göre ayarlamak; sıra tersinedir, önce stop belirlenir, lot ondan türer",
+          "Kaldıracı pozisyon büyüklüğüyle karıştırmak; kaldıraç teminatı belirler, riski değil",
+          "Hesap para birimi ile enstrümanın kotasyon para birimi farkını atlamak",
+          "Aynı lot büyüklüğünü EURUSD, USDJPY ve XAUUSD'de ayrım gözetmeden kullanmak"
+        ],
+      },
+      {
+        "heading": "Küçük hesapta mikro lot neden önemli, 5 dolarlık minimum neden yanıltıcı?",
+        "paragraphs": [
+          "Formülün küçük hesaplarda işe yaraması için brokerin yeterince ince lot adımlarına izin vermesi gerekir. 2.000 $'lık örnekte 0.08 lot çıktı; broker sadece 0.10 adımlarına izin verseydi bu sonucu uygulamak mümkün olmaz, ya riski yüzde 25 aşmak ya da işlemi tamamen pas geçmek gerekirdi. Mikro lot desteği, risk yönetimini teorik olmaktan çıkarıp uygulanabilir kılan şeydir.",
+          "XM'in Micro hesabı bu açıdan küçük bakiyeli hesaplar için işlevsel bir seçenek; küçük lot adımlarıyla çalışabilmek, risk yüzdesini gerçekten sabit tutmayı mümkün kılıyor. Fiyatlama tarafında Micro ve Standard aynı modeli paylaşıyor: 1.0 pipten itibaren spread, komisyon yok. Fark maliyet yapısında değil, işlem yapabildiğiniz büyüklük çözünürlüğünde.",
+          "Buna karşılık, minimum yatırımın 5 $ olması risk yönetimi açısından yanıltıcı bir avantajdır ve bunu açıkça söylemek gerekir. 5 $'lık bir hesapta yüzde 1 risk, işlem başına 5 sentlik bir kayıp bütçesi demektir. Bu bütçeyle EURUSD'de makul bir stop mesafesinde açılabilecek pozisyon, çoğu durumda desteklenen en küçük lot adımının bile altında kalır. Yani hesap teknik olarak açılabilir ama disiplinli boyutlandırma yapılamaz.",
+          "Sonuç olarak düşük minimum yatırım, platformu tanımak ve emir mekaniğini deneyimlemek için anlamlı bir eşik. Risk kurallarını gerçekten uygulayabilmek içinse hesap büyüklüğünün, kullandığınız stop mesafeleri ve enstrümanın pip değeriyle uyumlu olması gerekir. Bu uyumun olup olmadığını görmenin en hızlı yolu, kendi rakamlarınızı Pozisyon Hesaplayıcı'ya girip çıkan lot büyüklüğünün brokerin izin verdiği en küçük adımın üzerinde kalıp kalmadığına bakmaktır. Farklı brokerlerin lot adımlarını ve hesap koşullarını karşılaştırmak isterseniz Broker Sıralamaları ve Broker Sorgulama aracı bu karşılaştırmayı yapmanıza yardımcı olur."
+        ],
+      },
+      {
+        "heading": "Lot kutusuna yazdığınız sayı, stratejinizin özetidir",
+        "paragraphs": [
+          "Lot hesabı zor bir matematik değil; tek bir bölme işlemi. Zor olan, o işlemi her seferinde yapma disiplinidir. Standart lot 100.000 birimdir, mini 10.000, mikro 1.000, nano 100. EURUSD'de standart lotta bir pip 10 $, mini lotta 1 $, mikro lotta 0.10 $ eder. Bu tablo dolar kotasyonlu pariteler için geçerlidir; yen çiftlerinde pip 0.01'dir ve çevrim gerekir, altında sözleşme 100 ons olduğu için 1 dolarlık hareket standart lotta 100 $ eder.",
+          "Geri kalan her şey formülden çıkar. Riske edeceğiniz tutarı belirleyin, stopu teknik gerekçeyle koyun, bölme işlemini yapın, aşağı yuvarlayın. Kaldıracın bu denklemde yeri yok; o sadece pozisyonun ne kadar teminat bloke edeceğini söyler. Lot kutusuna yazdığınız sayı, aslında risk anlayışınızın tek satırlık özetidir.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz."
+        ],
+      },
+    ],
+  },
+  {
+    "slug": "marjin-margin-call-stop-out-nedir",
+    "coverImage": "/blog/marjin-margin-call-stop-out-nedir-cover.png",
+    "title": "Marjin, Margin Call ve Stop Out: Hesabınız Tam Olarak Ne Zaman Kapanır?",
+    "excerpt": "Bakiye, öz sermaye, kullanılan marjin ve marjin seviyesi formüllerini ayırıyor; 1.000 $ hesap ve 1 lot EURUSD üzerinden marjin seviyesinin hangi pip mesafesinde yüzde 100'e indiğini adım adım hesaplıyoruz.",
+    "publishedAt": "2026-08-20",
+    "readingMinutes": 9,
+    "lang": "tr",
+    "sections": [
+      {
+        "paragraphs": [
+          "Kaldıraçlı işlemlerde hesabın kapanması ani bir olay gibi görünür ama değildir. Platform bir anda pozisyonları tasfiye ettiğinde çoğu yatırımcının aklına gelen ilk cümle \"kaldıraç yüzünden patladı\" olur. Oysa tasfiyeye giden yol tamamen aritmetiktir, adım adım izlenebilir ve pozisyon açılmadan önce hesaplanabilir. Sorun genellikle formülün karmaşıklığında değil, terimlerin birbirine karıştırılmasında yatar.",
+          "Bakiye ile öz sermaye aynı şey değildir. Kullanılan marjin ile serbest marjin aynı şey değildir. Margin call ile stop out ise birbirinden bütünüyle farklı iki olaydır: biri bir uyarı, diğeri bir tasfiye işlemidir. Bu dört ayrımı netleştiren bir yatırımcı, pozisyonu açtığı anda hesabının hangi fiyat seviyesinde kapanacağını bilir. Bilmeyen yatırımcı ise bunu ancak olay gerçekleştikten sonra öğrenir.",
+          "Bu yazıda önce terimleri kesin tanımlarla ve formüllerle ayıracağız, sonra tek bir sayısal senaryoyu sonuna kadar çözeceğiz. Senaryonun sonunda çıkan ders, çoğu kişinin beklediğinin tersidir: hesabı bitiren şey kaldıraç oranı değil, pozisyon büyüklüğüdür."
+        ],
+      },
+      {
+        "heading": "Dört terim, dört formül: bakiye, öz sermaye, kullanılan marjin, serbest marjin",
+        "paragraphs": [
+          "Platform ekranındaki alt bardaki rakamlar rastgele dizilmiş değildir; her biri bir öncekinden türer. Sırasıyla okumak, sistemin nasıl çalıştığını görmenin en hızlı yoludur.",
+          "Bakiye (Balance), yalnızca kapatılmış işlemlerin sonucudur. Açık pozisyonlarınız ne durumda olursa olsun bakiye değişmez; bir pozisyonu kapattığınız anda kâr veya zarar bakiyeye yazılır. Bu yüzden bakiye, hesabınızın anlık durumunu değil, geçmişini gösteren bir sayıdır.",
+          "Öz sermaye (Equity), hesabın gerçek anlık değeridir. Formülü basittir: Equity = Bakiye + açık pozisyonların kâr/zararı. Bütün pozisyonlarınızı şu an piyasa fiyatından kapatsaydınız elinizde kalacak tutar budur. Marjin mekanizmasının tamamı bakiyeye değil, bu sayıya bakar.",
+          "Kullanılan marjin (Used Margin), açtığınız pozisyonu taşımak için hesabınızda bloke edilen teminattır. Formülü: Kullanılan Marjin = Pozisyon Büyüklüğü / Kaldıraç. Bu para hesabınızdan çıkmaz, sadece dondurulur; pozisyon kapandığında serbest kalır.",
+          "Serbest marjin (Free Margin), yeni pozisyon açmak veya mevcut pozisyonların zararını emmek için kalan tutardır: Serbest Marjin = Equity - Kullanılan Marjin. Zarar büyüdükçe equity düşer, kullanılan marjin sabit kaldığı için serbest marjin erir. Hesabın dayanıklılığı bu sayıda saklıdır."
+        ],
+        "list": [
+          "Bakiye = kapalı işlemlerin net sonucu (açık pozisyonlardan etkilenmez)",
+          "Öz Sermaye (Equity) = Bakiye + açık pozisyonların kâr/zararı",
+          "Kullanılan Marjin = Pozisyon Büyüklüğü / Kaldıraç",
+          "Serbest Marjin = Equity - Kullanılan Marjin",
+          "Marjin Seviyesi (%) = (Equity / Kullanılan Marjin) x 100"
+        ],
+      },
+      {
+        "heading": "Marjin seviyesi neden tek gerçek gösterge tablosudur?",
+        "paragraphs": [
+          "Yukarıdaki beşinci formül, diğer dördünü tek bir yüzdeye sıkıştırır: Marjin Seviyesi = (Equity / Kullanılan Marjin) x 100. Broker'ın sistemleri hesabınızı bu yüzde üzerinden izler; margin call ve stop out eşikleri de bu yüzdeye göre tanımlanır.",
+          "Sayının okunması sezgiseldir. Marjin seviyesi %1000 ise, öz sermayeniz bloke edilen teminatın on katıdır; pozisyonun zarar taşıma kapasitesi geniştir. %200'e düştüğünde teminatın iki katı kadar öz sermayeniz kalmıştır. %100 ise öz sermayeniz tam olarak bloke edilen teminata eşittir; yani serbest marjin sıfırdır ve yeni pozisyon açma kapasiteniz bitmiştir.",
+          "Burada kritik nokta şudur: yüzde düşerken pay değişir, payda genellikle sabit kalır. Kullanılan marjin, pozisyonu açtığınız andaki büyüklük ve kaldıraca göre belirlenir ve pozisyon açık kaldığı sürece değişmez. Değişen tek şey equity'dir. Dolayısıyla marjin seviyesinin düşüş hızı, doğrudan zararınızın hızıdır ve zararın hızı da pozisyon büyüklüğüne bağlıdır.",
+          "Bu yüzden marjin seviyesi bir \"risk göstergesi\" değil, risk göstergesinin ta kendisidir. Açık pozisyonu olan bir hesapta izlenmesi gereken tek sayı istenirse, kâr/zarar rakamı değil bu yüzde olmalıdır."
+        ],
+      },
+      {
+        "heading": "Margin call bir uyarı, stop out bir tasfiyedir — ve seviyeleri broker belirler",
+        "paragraphs": [
+          "Margin call, marjin seviyesi broker'ın belirlediği ilk eşiğin altına indiğinde tetiklenen uyarıdır. Anlamı şudur: teminatınız pozisyonu taşımaya yetecek güvenli aralığın dışına çıktı, ya teminat ekleyin ya pozisyon küçültün. Bu aşamada henüz kimse sizin adınıza bir şey kapatmaz; karar hâlâ sizdedir. Modern platformlarda bu uyarı çoğu zaman renk değişimi veya bildirim olarak gelir, eski adının çağrıştırdığı gibi bir telefon araması olarak değil.",
+          "Stop out ise uyarı değildir. Marjin seviyesi ikinci ve daha düşük eşiğin altına indiğinde sistem, sizden onay almadan pozisyonları otomatik olarak kapatmaya başlar. Bu bir müdahale hakkı değil, sözleşmeden doğan bir tasfiye mekanizmasıdır.",
+          "Bu iki eşiğin sayısal değeri evrensel değildir; her broker kendi belirler ve aynı broker içinde bile hesap türüne, enstrümana ve tüzel kişiliğe göre farklılaşabilir. Sektörde yaygın olarak margin call eşiğinin %100 ile %50 bandında, stop out eşiğinin ise %50 ile %20 bandında görüldüğü söylenebilir. Ancak bu bir standart değil, bir gözlem aralığıdır.",
+          "Pratik sonuç nettir: kendi hesabınızın margin call ve stop out yüzdesini tahmin etmeyin, hesap sözleşmenizden veya broker'ın işlem koşulları sayfasından doğrulayın. Bu iki sayı, hesabınızın hangi fiyat seviyesinde biteceğini belirleyen parametrelerdir; bilinmeyen bir parametreyle risk yönetimi yapılamaz. Farklı brokerlerin koşullarını karşılaştırmak isterseniz Broker Sorgulama aracı ve Broker Sıralamaları bu tür şart karşılaştırmaları için uygun başlangıç noktalarıdır."
+        ],
+      },
+      {
+        "heading": "Sayısal senaryo: 1.000 $ hesap, 1:500 kaldıraç, 1 lot EURUSD",
+        "paragraphs": [
+          "Şimdi formülleri tek bir örnekte sonuna kadar çalıştıralım. Varsayımlar: hesapta 1.000 $ var, kaldıraç 1:500, EURUSD kuru 1.10 ve 1 standart lot (100.000 birim) alım pozisyonu açılıyor. Spread ve swap gibi kalemleri, aritmetiği bulandırmamak için hesaba katmıyoruz.",
+          "Önce pozisyon değeri: 100.000 birim x 1.10 = 110.000 $. Sonra kullanılan marjin: 110.000 / 500 = 220 $. Serbest marjin ise 1.000 - 220 = 780 $. Açılış anında marjin seviyesi (1.000 / 220) x 100 = yaklaşık %455'tir.",
+          "Standart lotta EURUSD'de 1 pip yaklaşık 10 $ değerindedir. Yani fiyat aleyhinize her 1 pip hareket ettiğinde equity 10 $ azalır. Marjin seviyesinin %100'e inmesi için equity'nin kullanılan marjine, yani 220 $'a eşitlenmesi gerekir. Bunun için gereken zarar: 1.000 - 220 = 780 $. 780 / 10 = 78 pip.",
+          "Sonuç şu: fiyat 78 pip aleyhinize giderse öz sermayeniz 220 $'a düşer ve marjin seviyeniz %100 olur. EURUSD'de 78 pip, yani yaklaşık 0.0078'lik bir hareket, olağandışı bir hareket değildir; birçok gün içinde görülebilecek bir aralıktır. Bu noktada hesabınızın yüzde 78'i tek bir pozisyonda silinmiş olur ve bu, 1:500 gibi yüksek bir kaldıraçta bile böyledir.",
+          "Aynı hesabı kaldıraç değiştirerek tekrarlayın: kaldıraç 1:100 olsaydı kullanılan marjin 1.100 $ olurdu ve 1.000 $'lık hesapla bu pozisyon zaten açılamazdı. Kaldıracın yaptığı tek şey, pozisyonu açmanıza izin verip vermemektir. Pozisyon açıldıktan sonra zararınızın hızını belirleyen şey kaldıraç değil, lot büyüklüğüdür — çünkü pip değeri lot büyüklüğünden türer, kaldıraçtan değil."
+        ],
+        "list": [
+          "Pozisyon değeri: 100.000 x 1.10 = 110.000 $",
+          "Kullanılan marjin: 110.000 / 500 = 220 $",
+          "Serbest marjin: 1.000 - 220 = 780 $",
+          "Pip değeri: 1 standart lot EURUSD'de yaklaşık 10 $",
+          "Marjin seviyesinin %100 olması için gereken zarar: 780 $ = 78 pip",
+          "Bu noktada equity 220 $, kayıp hesabın yüzde 78'i"
+        ],
+      },
+      {
+        "heading": "Asıl ders: hesabı bitiren kaldıraç değil, pozisyon büyüklüğüdür",
+        "paragraphs": [
+          "Yukarıdaki senaryonun en önemli çıktısı, kaldıraç tartışmasının çoğu zaman yanlış yerde yapıldığını göstermesidir. 1:500 kaldıraç, 1.000 $'lık hesaba 1 lotluk pozisyon açma kapısını açar. Kapının açılması ile içeri girmek zorunda olmak aynı şey değildir.",
+          "Aynı hesapta 1 lot yerine 0.10 lot açılsaydı, kullanılan marjin 22 $, pip değeri yaklaşık 1 $ olurdu. Marjin seviyesinin %100'e inmesi için gereken zarar bu kez çok daha büyük bir fiyat hareketi gerektirirdi. Kaldıraç oranı hiç değişmeden, hesabın dayanıklılığı bambaşka bir düzeye çıkar. Yani risk düğmesi kaldıraç ayarında değil, lot kutusundadır.",
+          "Bu, yüksek kaldıracın zararsız olduğu anlamına gelmez. Yüksek kaldıraç, küçük bir hesapla çok büyük bir pozisyon açmayı teknik olarak mümkün kıldığı için davranışsal bir risk taşır; sınırı sistem koymadığında sınırı yatırımcının koyması gerekir. XM'de maksimum kaldıraç 1:1000'e kadar çıkabilmekte, ancak bu oran bölgeye ve tüzel kişiliğe göre değişmektedir; bu tür üst sınırları kendi hesabınız için doğrulamadan planlama yapmayın.",
+          "Pozisyon büyüklüğünü hesabınızın taşıyabileceği zarara göre belirlemek, marjin matematiğinin tamamını lehinize çevirir. Kendi hesap büyüklüğünüz ve enstrümanınız için pip değerini ve gerekli teminatı çıkarmak isterseniz Pozisyon Hesaplayıcı bu aritmetiği kısaltır."
+        ],
+      },
+      {
+        "heading": "Stop out neden bir koruma değil, bir tasfiyedir?",
+        "paragraphs": [
+          "Stop out bazen \"broker sizi koruyor\" diye anlatılır. Daha doğru bir tanım şudur: stop out, öncelikle broker'ın alacağını koruyan bir tasfiye mekanizmasıdır. Sizin zararınızı sabitlemesi, bu sürecin amacı değil sonucudur. Sistem, teminatınızın taşıyabileceği zararın sınırına gelindiğinde pozisyonu piyasa fiyatından kapatır; bu fiyatın sizin için uygun olup olmadığı hesaba katılmaz.",
+          "Birden fazla açık pozisyon varsa hangisinin önce kapatılacağı da genellikle sizin tercihinize bırakılmaz. Yaygın uygulama, en çok zarardaki pozisyonun ilk sırada kapatılmasıdır; çünkü marjin seviyesini en hızlı yukarı çeken işlem odur. Bu, stratejinizin mantığına aykırı bir sonuç doğurabilir: örneğin bir korunma amaçlı taşıdığınız bacak kapanırken diğeri açık kalabilir ve pozisyonunuz istemediğiniz bir yöne açık hale gelir.",
+          "Daha önemli bir kısıt daha var. Stop out seviyesi bir garanti değil, bir tetikleyicidir. Fiyat sürekli aktığında sistem o seviyeye yakın bir yerde kapatabilir; ancak önemli veri açıklamaları, hafta sonu açılışları veya beklenmedik haber anlarında fiyat iki seviye arasında hiç işlem görmeden sıçrayabilir. Buna boşluk (gap) denir. Boşluk anında stop out seviyesi tamamen atlanabilir ve pozisyon, hesaplanandan çok daha kötü bir fiyattan kapanabilir.",
+          "Bu senaryoda öz sermaye sıfırın altına inebilir; yani hesap eksiye düşebilir. Negatif bakiye koruması tam olarak burada devreye girer: hesabın eksi bakiyesi sıfırlanır ve yatırdığınızdan fazlasını borçlanmazsınız. XM negatif bakiye koruması sunmaktadır. Ancak bu korumanın ne yaptığını doğru anlamak gerekir; sermayenizi korumaz, yalnızca kaybınızın hesaptaki tutarla sınırlı kalmasını sağlar.",
+          "Boşluk riskini yönetmenin en pratik yolu, yüksek etkili veri saatlerini önceden bilmek ve o saatlerde taşınan pozisyon büyüklüğünü buna göre ayarlamaktır. Ekonomik Takvim, hangi saatlerde bu tür hareketlerin olasılığının arttığını görmek için kullanılabilir."
+        ],
+      },
+      {
+        "heading": "Marjin seviyesini sağlıklı tutmanın somut yolları",
+        "paragraphs": [
+          "Marjin seviyesi tek bir kesirdir: payda equity, paydada kullanılan marjin vardır. Yüzdeyi yükseltmenin de yalnızca iki yolu vardır — payı büyütmek veya paydayı küçültmek. Aşağıdaki maddelerin hepsi bu iki hareketten birine dayanır.",
+          "Bu listedeki maddeler bir strateji değil, hijyen kurallarıdır. Hiçbiri kâr üretmez; hepsi, kâr üretecek kadar uzun süre piyasada kalmanızı hedefler."
+        ],
+        "list": [
+          "Pozisyon büyüklüğünü hesabın büyüklüğüne göre belirleyin; lot kutusuna girdiğiniz sayı, risk ayarının kendisidir",
+          "Pozisyonu açmadan önce kullanılan marjini ve marjin seviyesinin %100'e ineceği pip mesafesini hesaplayın",
+          "Zararı durdur (stop loss) emrini, stop out seviyesinden çok önce devreye girecek şekilde konumlandırın; tasfiyeyi sisteme bırakmayın",
+          "Aynı yöne bakan birden fazla pozisyonu tek bir büyük pozisyon gibi değerlendirin; korelasyonlu enstrümanlarda toplam risk göründüğünden fazladır",
+          "Serbest marjini sıfıra yaklaştıran bir yükü kalıcı olarak taşımayın; tampon olmadan tek bir haber yeterlidir",
+          "Yüksek etkili veri ve olay saatlerinde taşınan pozisyon büyüklüğünü önceden gözden geçirin",
+          "Hesabınızın margin call ve stop out yüzdelerini sözleşmeden doğrulayın ve bu iki sayıyı planınıza yazın"
+        ],
+      },
+      {
+        "heading": "Hedging ve netting hesaplarda marjin hesabı neden farklılaşabilir?",
+        "paragraphs": [
+          "Son bir teknik ayrım: aynı enstrümanda hem alım hem satım pozisyonu taşıyabildiğiniz hesap yapısına hedging, aynı enstrümandaki pozisyonların tek bir net pozisyona indirgendiği yapıya netting denir. Bu tercih platform ve hesap türüne göre değişir.",
+          "Netting yapıda 1 lot alım ve 0.6 lot satım, 0.4 lotluk tek bir net pozisyona dönüşür ve teminat bu net büyüklük üzerinden hesaplanır. Hedging yapıda ise iki pozisyon ayrı ayrı durur; brokerin uygulamasına göre teminat iki bacak için de tam olarak bloke edilebilir, kısmen indirimli uygulanabilir veya kilitli pozisyon için farklı bir kural işletilebilir.",
+          "Sonuç olarak, kâğıt üzerinde \"yönsüz\" görünen bir pozisyon çifti, hesap yapısına bağlı olarak marjin seviyenizi beklediğinizden daha fazla baskılayabilir. Aynı işlemleri iki farklı hesap türünde açtığınızda farklı kullanılan marjin rakamları görmeniz bu yüzden şaşırtıcı değildir. Kendi hesabınızın hangi modelle çalıştığını ve kilitli pozisyonlarda teminatı nasıl hesapladığını, gerçek para riske etmeden önce demo ortamında test etmek en temiz doğrulama yöntemidir."
+        ],
+      },
+      {
+        "heading": "Toparlarsak",
+        "paragraphs": [
+          "Marjin mekanizması gizemli değil, sadece sıralıdır. Bakiye geçmişi gösterir, equity bugünü gösterir, kullanılan marjin pozisyonun bedelidir, serbest marjin tamponunuzdur ve marjin seviyesi bu dördünü tek bir yüzdeye indirger. Margin call bir uyarı, stop out ise bir tasfiyedir; ikisinin eşikleri brokerden brokere değişir ve tahmin edilmesi değil doğrulanması gereken sayılardır.",
+          "1.000 $ hesap, 1:500 kaldıraç ve 1 lot EURUSD örneğinde gördüğümüz gibi, 78 piplik bir hareket hesabın yüzde 78'ini silmeye yetiyor. Bu sonucu üreten şey kaldıraç oranı değil, hesabın büyüklüğüne göre fazla büyük seçilmiş bir pozisyondu. Kaldıraç kapıyı açar; içeriye ne kadar yük taşıdığınıza siz karar verirsiniz. Boşluk riskinin stop out seviyesini atlayabildiği durumlarda negatif bakiye koruması kaybı hesaptaki tutarla sınırlar — XM bu korumayı sunmaktadır — ama sermayenizi korumaz. Sermayeyi koruyan tek şey, pozisyon açılmadan önce yapılan hesaptır.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz."
+        ],
+      },
+    ],
+  },
+  {
+    "slug": "altin-xauusd-agustos-2026-teknik-gorunum",
+    "coverImage": "/blog/altin-xauusd-agustos-2026-teknik-gorunum-cover.png",
+    "title": "Altın (XAU/USD) 4.370 Doları Test Etti: Jackson Hole Öncesi Teknik ve Temel Görünüm",
+    "excerpt": "Altın 4.367 dolar civarında işlem görürken RSI ve MACD ivme kaybına işaret ediyor. 4.311 dolarlık desteğin iki tarafındaki senaryoları, Fed'in ikili tablosunu ve Jackson Hole takvimini teknik bir çerçevede ele alıyoruz.",
+    "publishedAt": "2026-08-20",
+    "readingMinutes": 10,
+    "lang": "tr",
+    "sections": [
+      {
+        "paragraphs": [
+          "Altın, 20 Ağustos 2026 itibarıyla ons başına 4.367 dolar civarında işlem görüyor. Gün zirvesi 4.370 dolara uzandı; haftanın dibi ise 4.324 dolarda kaldı. Fiyat haftalık bazda yukarı yönlü ve dibinden kırk dolardan fazla uzaklaşmış durumda. İlk bakışta tablo net: alıcılar kontrolde.",
+          "Ancak fiyatın yönü ile o yönün arkasındaki güç her zaman aynı hikâyeyi anlatmaz ve bu hafta altında tam olarak böyle bir ayrışma var. Fiyat yukarı gidiyor, fakat ivme göstergeleri bu yükselişi eskisi kadar hevesli biçimde onaylamıyor: RSI 60'ın altına çekildi, MACD histogramı daralıyor ve Salı günü düşüş yönlü bir yutan mum oluştu. Hiçbiri tek başına dönüş sinyali değil, ama bir arada yükselişin kırılgan bir zeminde ilerlediğini söylüyorlar.",
+          "Bu yazıda amaç bir yön tahmini yapmak değil; önümüzdeki iki haftada altının hangi seviyelerde hangi soruları soracağını ve hangi başlıkların bu soruların cevabını değiştirebileceğini bir çerçeveye oturtmak. 26 Ağustos'taki çekirdek PCE verisinden 27-29 Ağustos'taki Jackson Hole sempozyumuna, oradan 16 Eylül FOMC toplantısına uzanan bir takvim var ve altın bu takvimin tam ortasında duruyor."
+        ],
+      },
+      {
+        "heading": "Teknik tablo: yükseliş sürüyor ama ivme zayıflıyor",
+        "paragraphs": [
+          "Seviyeler \"fiyat nerede karar verecek?\" sorusunu, ivme göstergeleri ise \"o karara giden hareket ne kadar güçlü?\" sorusunu yanıtlar. Altında şu an bu iki cevap örtüşmüyor.",
+          "Aşağı yönde ilk ciddi eşik 4.311 dolar, yani 14 Ağustos'ta görülen dip. Böyle bir seviyenin önemi bir kez test edilip savunulmuş olmasından gelir: piyasa o fiyatta alıcı bulmuştur, dolayısıyla oraya yeniden gelindiğinde aynı tepkinin gelip gelmeyeceği ölçülebilir bir soru haline gelir. Altında bir sonraki referans 4.220 dolar; arada belirgin bir istasyon olmadığı için bu bölge kırılım halinde hareketin hızlanabileceği bir boşluktur.",
+          "Yukarı yönde ilk direnç 4.450 dolar; üzerinde 4.510 dolarda 200 günlük basit hareketli ortalama duruyor. Bu ortalama orta-uzun vadeli trend algısı için yaygın biçimde izlendiğinden, birçok kural tabanlı yaklaşım fiyatın hangi tarafında kapandığına göre konumlanır; bu da seviyenin etrafında işlem yoğunluğunu artırır. Daha yukarıda Mayıs sonu zirvesi olan 4.600 dolar var.",
+          "İvme tarafına gelince: RSI'ın 60'ın altına çekilmesi aşırı satım anlamına gelmez. Yükseliş rejimlerinde 50-80 bandında salınan bir göstergenin alt yarıya kayması, alım baskısının azaldığına işaret eder. MACD histogramının daralması da benzer bir şey söyler: histogram iki hareketli ortalama arasındaki farkın değişimini gösterir, daralması trendin bittiği değil hızlanmayı bıraktığı anlamına gelir.",
+          "Salı günkü düşüş yönlü yutan mum ise daha somut bir bilgi taşır: bir önceki günün gövdesinin tamamının satıcılar tarafından geri alındığını, yani gün içinde yukarı çıkan fiyatın kapanışa doğru satış gördüğünü gösterir. Tek başına zayıf bir sinyaldir, fakat ivme göstergeleriyle aynı yöne işaret ettiğinde dikkate değer hale gelir — şu anki durum bu."
+        ],
+        "list": [
+          "Destekler: 4.311 $ (14 Ağustos dibi) ve altında 4.220 $",
+          "Dirençler: 4.450 $, ardından 4.510 $ (200 günlük SMA) ve 4.600 $ (Mayıs sonu zirvesi)",
+          "Güncel fiyat: 4.367 $ civarı; gün zirvesi 4.370 $, haftalık dip 4.324 $",
+          "İvme: RSI 60'ın altında, MACD histogramı daralıyor, Salı günü düşüş yönlü yutan mum"
+        ],
+      },
+      {
+        "heading": "İki senaryo: 4.311 dolar neden ayrım noktası?",
+        "paragraphs": [
+          "Senaryo kurmak tahmin yapmak değildir; senaryo, \"şu olursa şuraya bakarım\" biçiminde önceden karar verme disiplinidir. Altındaki mevcut yapı 4.311 doları doğal bir ayrım çizgisi haline getiriyor: bu seviyenin üstünde kalındığı sürece yükseliş yapısı teknik olarak bozulmuş sayılmaz, altında günlük kapanış görülürse yapı sorgulanır hale gelir.",
+          "Aşağıdaki çerçeve hangi seviyelerin hangi durumda devreye girdiğini gösteriyor."
+        ],
+        "list": [
+          "Senaryo 1 — 4.311 dolar üzerinde tutunma: Fiyat bu desteği koruduğu sürece haftalık dip olan 4.324 dolar ve mevcut 4.367 dolar bandı ara referans olarak kalır. Yukarıda ilk ciddi test 4.450 dolar; burada satış görülmesi ivme göstergelerinin uyarısını doğrular. 4.450 doların üzerinde tutunma sağlanırsa bir sonraki gündem maddesi doğrudan 4.510 dolardaki 200 günlük SMA olur.",
+          "Senaryo 1'in devamı — 4.510 dolar üstü: 200 günlük ortalamanın üzerinde günlük kapanışlar orta vadeli trend okumasını güçlendirir ve 4.600 dolardaki Mayıs sonu zirvesini gündeme getirir.",
+          "Senaryo 2 — 4.311 doların altında kapanış: 14 Ağustos dibi kırılmış olur ve yukarıdaki yapı geçersizleşir. Ara destek zayıf olduğu için bir sonraki teknik referans 4.220 dolara iner; aradaki mesafenin genişliği hareketin hızlanma ihtimalini artırır.",
+          "Senaryo 2'nin devamı — 4.220 dolar tepkisi: Alıcı tepkisi gelirse fiyat 4.311 dolara dönmeye çalışır ve eski destek direnç olarak sınanır. Tepki gelmezse yapı daha geniş bir düzeltme okumasına döner.",
+          "Ortak nokta: kararı anlık dokunuş değil, kapanışlar verir — haber saatlerinde bu ayrım daha da önemlidir."
+        ],
+      },
+      {
+        "heading": "Temel taraf: dolar zayıflığı, düşen getiriler ve reel faiz bağlantısı",
+        "paragraphs": [
+          "Yükselişin arkasında birkaç temel unsur birlikte çalışıyor. Birincisi doların genel zayıflığı. Altın dolar cinsinden fiyatlandığı için, dolar diğer para birimleri karşısında değer kaybettiğinde altının fiyatı mekanik olarak yukarı yönlü baskı görür; bu bir talep hikâyesi değil, birim hikâyesidir. EUR/USD'nin 1.1597 civarına, yaklaşık iki ayın zirvesine çıkmış olması bu zayıflığın altını çiziyor.",
+          "İkincisi, ABD Hazinesinin geri alım işlemlerinin uzun vadeli getirileri aşağı çekmesi. Getiriler düştüğünde altın için tablo doğrudan değişir; nedenini anlamak için altının en temel özelliğine bakmak gerekir.",
+          "Altın getirisi olmayan bir varlıktır. Kupon ödemez, temettü dağıtmaz. Dolayısıyla altın tutmanın bir fırsat maliyeti vardır: aynı parayı tahvile koysanız faiz kazanacaktınız. Bu maliyeti belirleyen şey nominal faiz değil, reel faizdir — yani nominal faizden enflasyonun düşülmüş hali. Reel faiz yüksekken altın tutmak pahalıdır, çünkü vazgeçilen reel getiri büyüktür. Reel faiz düştüğünde ise elde tutma maliyeti azalır ve varlık göreli olarak daha çekici hale gelir.",
+          "Şu andaki bileşim tam olarak bu yönde çalışıyor: nominal uzun vadeli getiriler geri alımların etkisiyle aşağı gelirken enflasyon %3'lerin ortasında seyrediyor; Haziran çekirdek PCE yıllık %3.3 olarak açıklanmıştı. Nominal getiri düşerken enflasyon yerinde saydığında reel faiz sıkışır. Enflasyon endişelerinin canlı kalması ayrıca altının geleneksel enflasyon koruması kimliğini gündemde tutuyor.",
+          "Dördüncü unsur petrolün toparlanması. Enerji fiyatlarındaki yükseliş manşet enflasyon beklentilerini yukarı çeker ve dolaylı olarak altın talebini destekleyebilir; ancak bu etki beklentiler üzerinden dolaşarak ve gecikmeli gelir. Toplamda temel zemin destekleyici görünüyor, fakat bu zeminin en kritik parçası — para politikasının yönü — net değil."
+        ],
+      },
+      {
+        "heading": "Fed'in ikili tablosu altın için neden belirsizlik üretiyor?",
+        "paragraphs": [
+          "Fed politika faizi hedef aralığı şu anda %3.50-3.75 ve Temmuz FOMC toplantısında faiz sabit tutuldu. Fakat toplantının asıl dikkat çeken tarafı karar değil, itirazın yönüydü: üç bölgesel Fed başkanı — Logan, Hammack ve Kashkari — 25 baz puanlık ARTIRIM yönünde muhalefet şerhi düştü. Zayıflayan bir ekonomi görüntüsünün ortasında muhalefetin indirim değil artırım yönünde olması, kurul içindeki enflasyon endişesinin ne kadar canlı olduğunu gösteriyor.",
+          "Diğer tarafta ekonominin yavaşladığına dair somut veriler var. Temmuz tarım dışı istihdam -23.000 geldi ve önceki aylarda ciddi aşağı yönlü revizyonlar yapıldı; Temmuz perakende satışlar -%0.6 ile Mayıs 2025'ten bu yana en sert aylık düşüşü kaydetti. İkisi birlikte talep tarafında belirgin bir soğuma anlatıyor. Buna karşılık Temmuz TÜFE manşet ve çekirdekte yıllık bazda hafifledi, ÜFE beklentiden yumuşak geldi — ama enflasyon hâlâ %3'lerin ortasında, yani hedefin belirgin biçimde üzerinde.",
+          "Altın için asıl belirsizlik bu ikili tablodan doğuyor, çünkü iki hikâye de savunulabilir ve altını farklı yönlere iter. Zayıflayan istihdam ve tüketim hikâyesi kazanırsa Fed'in gevşemeye yönelmesi beklenir, reel faizler düşer ve altının fırsat maliyeti azalır. Enflasyonun inatçılığı hikâyesi kazanırsa üç bölgesel başkanın işaret ettiği sıkılaşma senaryosu fiyatlanmaya başlar, reel faizler yükselir ve fırsat maliyeti artar.",
+          "Piyasa şu an ikisinin arasında duruyor: 16 Eylül FOMC toplantısı için sabit tutma olasılığı yaklaşık %65 fiyatlanıyor. Bu net bir beklenti değil; kalan dilim, sürpriz bir verinin fiyatlamayı hızla kaydırabileceğini gösteriyor. Altındaki ivme kaybını da bu çerçevede okumak mantıklı: piyasa bir katalizör bekliyor ve o katalizör henüz gelmedi."
+        ],
+      },
+      {
+        "heading": "Takvim riski: 26 Ağustos'tan 16 Eylül'e uzanan üç eşik",
+        "paragraphs": [
+          "Altını hareket ettirebilecek olayların büyük kısmı takvimde belli. Bu sürpriz olmayacağı anlamına gelmiyor; sürprizin ne zaman gelebileceğinin bilindiği anlamına geliyor — ki bu bilgi pozisyon yönetiminde yön tahmininden daha kullanışlıdır.",
+          "İlk eşik 26 Ağustos. O gün 12:30 GMT'de hem ABD 2. çeyrek GSYH verisinin ikinci tahmini (öncü okuma %1.5) hem de çekirdek PCE açıklanacak. Çekirdek PCE Fed'in tercih ettiği enflasyon ölçüsü olduğu için reel faiz denklemini doğrudan etkiler; beklentinin üzerinde bir okuma sıkılaşma tarafını, altında bir okuma gevşeme tarafını güçlendirir.",
+          "İkinci eşik 27-29 Ağustos'taki Jackson Hole Ekonomi Sempozyumu. Wyoming'deki Jackson Lake Lodge'da düzenlenen sempozyumun teması \"Financial Innovation: Implications for Payments and Policy\"; 70'ten fazla ülkeden yaklaşık 120 katılımcı bekleniyor. Jackson Hole tarihsel olarak, resmi toplantılar dışında politika yönüne dair en açık sinyallerin verildiği kürsü olarak izlenir.",
+          "Bu yılın en kritik anı 28 Ağustos, yaklaşık 10:00 ET (14:00 GMT). Kevin Warsh, Fed Başkanı sıfatıyla ilk Jackson Hole açılış konuşmasını yapacak. Bu konuşmanın 16 Eylül kararı için belirleyici görülmesinin üç nedeni var. Birincisi zamanlama: FOMC öncesindeki son geniş çaplı politika beyanı niteliğinde. İkincisi, bir başkanın ilk Jackson Hole konuşması genellikle tek bir toplantının ötesinde kurumun çerçevesine dair ton belirler; piyasa bunu taktiksel değil stratejik sinyal olarak okur. Üçüncüsü, Temmuz'daki muhalefet şerhlerinin ardından kurul içinde görünür bir ayrışma var; başkanın enflasyon ile istihdam arasındaki dengeyi nasıl kurduğunu ilk kez bu kürsüden duyacak olan piyasa, %65'lik sabit tutma fiyatlamasını buna göre yeniden ayarlayabilir.",
+          "Üçüncü eşik 16 Eylül'deki FOMC faiz kararı. O tarihe kadar altının 4.311-4.450 bandındaki davranışı, piyasanın bu soruya verdiği cevabın kademeli olarak fiyata yansıması biçiminde okunabilir. Takibi için Ekonomik Takvim kullanışlıdır; XM'in ekonomik takvimi de veri saatlerini ve önceki okumaları aynı ekranda gösterir."
+        ],
+        "list": [
+          "25 Ağustos 14:00 GMT — ABD Tüketici Güven Endeksi",
+          "26 Ağustos 12:30 GMT — ABD 2. çeyrek GSYH (ikinci tahmin, öncü %1.5) ve çekirdek PCE",
+          "27-29 Ağustos — Jackson Hole Ekonomi Sempozyumu, Wyoming",
+          "28 Ağustos ~14:00 GMT — Kevin Warsh'ın Fed Başkanı olarak ilk açılış konuşması",
+          "16 Eylül — FOMC faiz kararı (sabit tutma olasılığı ~%65 fiyatlanıyor)"
+        ],
+      },
+      {
+        "heading": "XAUUSD'de pozisyon büyüklüğü neden döviz paritelerinden farklı hesaplanır?",
+        "paragraphs": [
+          "Teknik ve temel tabloyu doğru okumak yetmez; enstrümanın sözleşme yapısını bilmek de gerekir, çünkü bu yapı risk hesabını doğrudan değiştirir. XAUUSD'de standart lot 100 onstur. Pratik sonucu şudur: altın fiyatında 1 dolarlık hareket, standart lotta 100 dolar kâr veya zarar demektir. Bu, döviz paritelerine alışkın bir yatırımcı için sezgiye ters bir ölçek farkı yaratır, çünkü altında günlük dalgalanma tek dolarlarla değil onlarca dolarla ölçülür. Bu hafta iyi bir örnek: 4.324-4.370 dolar aralığı standart lotta 4.600 dolarlık dalgalanmaya karşılık gelir.",
+          "Bu ölçek, stop mesafesi ile lot büyüklüğü arasındaki ilişkiyi keskinleştirir. Yukarıdaki çerçevede 4.311 dolar destek, 4.450 dolar direnç ve bandın genişliği 139 dolar. Stop'u teknik olarak anlamlı bir yere, yani desteğin altına koymak isterseniz mevcut 4.367 dolar seviyesinden itibaren stop mesafeniz elli doları rahatlıkla aşar. Standart lotta elli dolarlık mesafe 5.000 dolarlık risk demektir; bu, çoğu hesap için kabul edilebilir tek işlem riskinin çok üzerindedir.",
+          "Sonuç şu: altında lot büyüklüğü hesap büyüklüğüne göre değil, stop mesafesine göre belirlenir. Önce stop seviyesine karar verirsiniz, sonra o mesafede kaybetmeye razı olduğunuz tutarı belirlersiniz, lot büyüklüğü bu iki sayıdan çıkar. Geniş bantta işlem yapmak otomatik olarak daha küçük lot demektir. Pozisyon Hesaplayıcı bu üç değişkeni bağlar; XM tarafında minimum lot adımlarının küçük olması da sonucu uygulanabilir kılan pratik bir detay, çünkü hesap küçük bir lot gerektirdiğinde yukarı yuvarlamak zorunda kalmazsınız.",
+          "Son olarak takvim ile işlem mekaniği arasındaki bağlantı: 26 Ağustos'taki çekirdek PCE ve 28 Ağustos'taki Warsh konuşması gibi anlarda iki ek risk devreye girer — spread genişlemesi ve kayma. Likidite geçici olarak inceldiği için alış-satış farkı normalin belirgin biçimde üzerine çıkabilir; fiyat sıçramaları nedeniyle emirler istenen seviyeden değil, mevcut ilk fiyattan gerçekleşebilir. Bu, stop emirlerinin de belirlenen seviyenin ötesinde çalışabileceği anlamına gelir; yani hesapladığınız risk, gerçekleşen riskin alt sınırıdır, garantisi değil."
+        ],
+        "list": [
+          "XAUUSD standart lot = 100 ons; 1 dolarlık hareket = standart lotta 100 $",
+          "Bu haftanın 4.324-4.370 dolar aralığı standart lotta 4.600 $'lık dalgalanmaya denk gelir",
+          "139 dolar genişliğindeki 4.311-4.450 bandının dışına konan bir stop, standart lotta binlerce dolarlık risk üretir",
+          "Doğru sıra: önce stop seviyesi, sonra kabul edilen risk tutarı, en son lot büyüklüğü",
+          "Veri ve konuşma saatlerinde spread genişlemesi ve kayma riski artar; stop'lar belirlenen seviyenin ötesinde çalışabilir"
+        ],
+      },
+      {
+        "heading": "Kapanış: yön değil, seviyeler ve tarihler",
+        "paragraphs": [
+          "Altındaki mevcut tablo kolay bir hikâyeye izin vermiyor. Fiyat 4.367 dolar civarında ve haftalık dibinden belirgin biçimde yukarıda; temel zemin destekleyici. Buna karşılık ivme göstergeleri yorulmaya işaret ediyor ve Fed tarafındaki ikili tablo, hangi yöne kararlı bir fiyatlama yapılacağını belirsiz bırakıyor.",
+          "Böyle bir ortamda en işlevsel yaklaşım, yön tahmini yerine seviye ve tarih disiplini kurmaktır. Aşağıda 4.311 ve 4.220 dolar, yukarıda 4.450, 4.510 ve 4.600 dolar; takvimde 26 Ağustos, 28 Ağustos ve 16 Eylül. Piyasa bu çerçevenin neresinde karar verirse versin, kararı önceden bilmek yerine karara nasıl tepki vereceğinizi önceden belirlemiş olmak, altın gibi ölçeği büyük bir enstrümanda gerçek avantajdır.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz."
+        ],
+      },
+    ],
+  },
+  {
+    "slug": "jackson-hole-2026-warsh-eylul-fomc",
+    "coverImage": "/blog/jackson-hole-2026-warsh-eylul-fomc-cover.png",
+    "title": "Jackson Hole 2026: Warsh'ın İlk Konuşması ve Eylül FOMC İçin Ne Anlama Geliyor?",
+    "excerpt": "27-29 Ağustos'ta Jackson Hole'da Kevin Warsh, Fed Başkanı olarak ilk açılış konuşmasını yapacak. Zayıflayan istihdam ile inatçı enflasyon arasındaki ikilemin 16 Eylül FOMC fiyatlamasına nasıl yansıdığını inceliyoruz.",
+    "publishedAt": "2026-08-20",
+    "readingMinutes": 10,
+    "lang": "tr",
+    "sections": [
+      {
+        "paragraphs": [
+          "27-29 Ağustos tarihlerinde Wyoming'deki Jackson Lake Lodge'da toplanacak olan ekonomi sempozyumu, bu yıl alışılmışın dışında bir gündemle geliyor. 28 Ağustos'ta yaklaşık 14:00 GMT'de (ABD Doğu saatiyle 10:00 civarı) Kevin Warsh, Fed Başkanı sıfatıyla ilk Jackson Hole açılış konuşmasını yapacak. Bir Fed başkanının bu kürsüdeki ilk konuşması, teknik içeriğinden bağımsız olarak piyasa katılımcıları tarafından bir üslup testi gibi izlenir: yeni başkan hangi kelimeleri seçiyor, hangi verilere ağırlık veriyor, önceliği fiyat istikrarı mı yoksa istihdam mı?",
+          "Bu yılın resmî teması ise doğrudan faiz patikası hakkında değil: \"Financial Innovation: Implications for Payments and Policy\". Yani ödeme sistemleri, finansal yenilik ve bunların para politikası aktarımına etkileri. 70'ten fazla ülkeden yaklaşık 120 katılımcının bir araya geldiği bu akademik çerçeve, konuşmanın büyük bölümünün yapısal konulara ayrılabileceğini gösteriyor. Ancak piyasa, temanın ne olduğuna değil, açılış konuşmasının içine sıkıştırılacak birkaç cümleye bakacak.",
+          "Bu yazının amacı bir yön tahmini yapmak değil. Amaç, önümüzdeki iki haftanın takvimini, Fed'in içinde bulunduğu veri ikilemini ve mevcut piyasa fiyatlamasının hangi noktada kırılgan hale geldiğini olabildiğince sade biçimde ortaya koymak. Yön tahmini yapmak yerine, hangi mekanizmanın hangi sonucu doğurabileceğini anlamak, haber dönemlerinde çok daha kullanışlı bir zihinsel araçtır."
+        ],
+      },
+      {
+        "heading": "Jackson Hole neden bu kadar konuşuluyor — ve her yıl neden konuşulmamalı?",
+        "paragraphs": [
+          "Sempozyum 1982'den beri Kansas City Fed tarafından düzenleniyor. Başlangıçta akademik bir buluşma olarak tasarlanan etkinlik, zaman içinde merkez bankacılarının resmî toplantı takvimi dışında, görece serbest bir ortamda konuşabildiği nadir platformlardan birine dönüştü. Tam da bu serbestlik nedeniyle, geçmişte bazı politika dönüşlerinin ilk sinyalleri buradan verildi. Bir FOMC bildirisi hukuk metni gibi yazılır; Jackson Hole konuşması ise çerçeveyi açıklama imkânı tanır.",
+          "Bu tarihsel arka plan, etkinliğe hak ettiğinden fazla bir kesinlik atfedilmesine de yol açıyor. Dürüst olmak gerekirse: Jackson Hole her yıl piyasa hareketi yaratmaz. Yılların önemli bir bölümünde konuşmalar mevcut duruşu tekrar eder, sürpriz içermez ve ilk dakikalardaki oynaklık gün içinde sönümlenir. Etkinliğin \"her zaman kritik\" olduğu algısı, büyük ölçüde birkaç istisnai yılın hafızada orantısız yer kaplamasından kaynaklanıyor.",
+          "Bu yılı görece daha izlenebilir kılan şey, temanın kendisi değil, üç şeyin aynı anda üst üste binmesi: yeni bir Fed başkanının ilk konuşması, Temmuz toplantısında ortaya çıkmış açık bir kurul içi görüş ayrılığı ve birbiriyle çelişen makro veriler. Bu üçlü olmasaydı, sempozyum muhtemelen sıradan bir akademik hafta olarak geçecekti.",
+          "Dolayısıyla doğru beklenti şudur: konuşma, mevcut belirsizliği azaltabilir ya da hiç dokunmadan geçebilir. İkisi de olağan sonuçlardır ve bir plan, iki ihtimali de kaldırabilecek şekilde kurulmalıdır."
+        ],
+      },
+      {
+        "heading": "Fed'in bugünkü ikilemi: zayıflayan istihdama karşı inatçı enflasyon",
+        "paragraphs": [
+          "Fed'in politika faizi hedef aralığı şu anda %3.50-3.75. Temmuz 2026 toplantısında faiz sabit tutuldu, ancak kararın kendisinden daha dikkat çekici olan, muhalefet şerhlerinin yönüydü. Logan, Hammack ve Kashkari — üç bölgesel Fed başkanı — 25 baz puanlık bir indirim değil, ARTIRIM yönünde muhalefet şerhi düştü. Bu, kurulun bir kanadının enflasyonu hâlâ birincil risk olarak gördüğünü açıkça gösteriyor.",
+          "Bu görüşün veri tarafında dayanağı var. Enflasyon %3'lerin ortasında seyrediyor ve Fed'in tercih ettiği ölçüt olan çekirdek PCE, Haziran'da yıllık %3.3 seviyesindeydi. Hedefin belirgin biçimde üzerinde olan bu seviye, uzun süredir aynı bantta sıkışmış durumda. Enflasyonun düşüş hızının yavaşlaması, bir merkez bankası için indirim tartışmasını başlatmayı zorlaştıran türden bir durumdur.",
+          "Madalyonun diğer yüzü ise reel ekonomiden geliyor ve tablo belirgin biçimde soğuyor. Temmuz tarım dışı istihdam -23.000 geldi; yani net iş kaybı. Bunun tek başına gürültü olduğu söylenebilirdi, ancak önceki aylarda yapılan ciddi aşağı yönlü revizyonlar, işgücü piyasasının bir süredir düşünüldüğünden zayıf olduğunu ima ediyor. Tüketici tarafında da Temmuz perakende satışları -%0.6 ile Mayıs 2025'ten bu yana en sert aylık düşüşünü kaydetti.",
+          "Enflasyon cephesinde ise en son veriler bir miktar rahatlama sundu: Temmuz TÜFE'de hem manşet hem çekirdekte yıllık bazda hafifleme görüldü ve ÜFE beklentiden yumuşak geldi. Ancak tek bir aylık hafifleme, %3'lerin ortasındaki bir enflasyonu hedefe yakınsamış saymak için yeterli değil.",
+          "Fed'in ikilemini böylece iki cümleye indirebiliriz: faizi indirirse, henüz kırılmamış bir enflasyon dinamiğini yeniden canlandırma riski alır. Faizi sabit tutmakta ısrar ederse — ya da bazı üyelerin savunduğu gibi artırırsa — zaten daralan istihdam ve tüketimi daha da sıkıştırma riski alır. Bu tür simetrik olmayan risklerin bulunduğu dönemlerde merkez bankaları genellikle beklemeyi tercih eder ve iletişimi belirsiz tutar."
+        ],
+        "list": [
+          "Sıkı duruşu destekleyen taraf: çekirdek PCE (Haziran) yıllık %3.3, enflasyon %3'lerin ortasında, Temmuz'da üç üyeden artırım yönünde muhalefet şerhi.",
+          "Gevşemeyi destekleyen taraf: Temmuz tarım dışı istihdam -23.000 ve önceki aylarda ciddi aşağı revizyonlar.",
+          "Tüketim tarafı: Temmuz perakende satışlar -%0.6, Mayıs 2025'ten bu yana en sert aylık düşüş.",
+          "Son dönem yumuşama sinyali: Temmuz TÜFE'de manşet ve çekirdekte yıllık hafifleme, ÜFE beklentiden yumuşak.",
+          "Mevcut politika zemini: hedef aralık %3.50-3.75, Temmuz'da faiz sabit tutuldu."
+        ],
+      },
+      {
+        "heading": "Piyasa fiyatlaması neden asimetrik bir risk yaratıyor?",
+        "paragraphs": [
+          "16 Eylül FOMC toplantısı için piyasa fiyatlaması, faizin sabit tutulma olasılığını yaklaşık %65 olarak gösteriyor. Birkaç hafta önce bu oran kabaca 50/50 seviyesindeydi. Yani konsensüs, kısa sürede belirgin biçimde \"sabit tutma\" tarafına kaydı.",
+          "Bu kaymanın ne anlama geldiğini doğru okumak gerekiyor. Fiyatlama bir tahmin değil, bir pozisyon dağılımıdır. %65, katılımcıların ağırlıklı olarak sabit tutma senaryosuna göre konumlandığını gösterir. Bir senaryo fiyatlandığında, o senaryo gerçekleştiğinde piyasanın vereceği tepki sınırlı kalır — çünkü zaten fiyatın içindedir. Buna karşılık, fiyatlanmamış olan sonuç gerçekleşirse tepki orantısız biçimde sert olur, zira çok sayıda pozisyonun aynı anda yeniden düzenlenmesi gerekir.",
+          "Bu nedenle mevcut tablo asimetrik bir risk taşıyor. Warsh'ın konuşması mevcut duruşu teyit ederse, tepki muhtemelen ölçülü kalacaktır. Ancak konuşma, kalan yaklaşık %35'lik ihtimali besleyecek bir ton içerirse — ister bir indirim kapısını aralayan güvercin bir vurgu, ister Temmuz'daki artırım yönlü muhalefeti sahiplenen şahin bir vurgu — hareket, olasılığıyla orantısız biçimde büyük olabilir.",
+          "Buradan çıkan pratik sonuç şudur: konsensüs bir yöne kaydığında, sürpriz genellikle o yönün tersinden gelir. Bu bir kehanet değil, pozisyon matematiğinin doğal sonucudur. Kalabalık tarafta duran işlemler, ters senaryoda çıkış için aynı dar kapıyı kullanmak zorunda kalır."
+        ],
+      },
+      {
+        "heading": "Önümüzdeki iki haftanın takvimi: sadece Jackson Hole değil",
+        "paragraphs": [
+          "Warsh'ın konuşması bu dönemin tek başlığı değil. Sempozyumun etrafında, hem ABD hem de diğer büyük ekonomilerden gelen bir veri yoğunluğu var. Özellikle 26 Ağustos, tek günde birden fazla önemli başlığın toplandığı bir tarih. Aşağıdaki liste, saatleri GMT cinsinden veriyor:"
+        ],
+        "list": [
+          "25 Ağustos 01:30 GMT — RBA toplantı tutanakları (politika faizi %4.35).",
+          "25 Ağustos 14:00 GMT — ABD Tüketici Güven Endeksi.",
+          "26 Ağustos 01:30 GMT — Avustralya TÜFE (önceki yıllık %3.8).",
+          "26 Ağustos 12:30 GMT — ABD 2. çeyrek GSYH ikinci tahmini (öncü okuma %1.5) ve çekirdek PCE verisi.",
+          "26 Ağustos akşamı — Nvidia bilançosu; risk iştahı ve endeks tarafı için ayrı bir başlık.",
+          "27 Ağustos 23:30 GMT — Tokyo TÜFE (önceki yıllık %1.7).",
+          "27-29 Ağustos — Jackson Hole Ekonomi Sempozyumu, Jackson Lake Lodge.",
+          "28 Ağustos 12:30 GMT — Kanada 2. çeyrek GSYH; 14:00 GMT — Warsh'ın açılış konuşması."
+        ],
+      },
+      {
+        "heading": "Bu seviyeler neden önemli: aktarım mekanizması olarak okumak",
+        "paragraphs": [
+          "Aşağıdaki bölüm bir fiyat tahmini değildir. Amaç, bir faiz beklentisi değişikliğinin hangi kanallardan hangi enstrümana ulaştığını ve bugün hangi teknik seviyelerin bu geçişin ölçüldüğü noktalar olduğunu göstermektir. Seviyeler, hareketin nereye gideceğini söylemez; hareketin ciddiye alınıp alınmadığını ölçmeye yarar.",
+          "EUR/USD şu anda 1.1597 civarında, yaklaşık iki ayın zirvesine yakın. Hemen üzerinde 1.1600 direnci var; aşağıda 1.1578 (50 periyot hareketli ortalama) ve 1.1552 (200 periyot hareketli ortalama) destek olarak izleniyor. Aktarım kanalı doğrudan: güvercin bir ton, ABD faiz beklentisini aşağı çeker, dolar getiri avantajını azaltır ve pariteyi yukarı iter — bu durumda 1.1600'ün kalıcı biçimde aşılıp aşılamadığı asıl soru olur. Şahin bir ton ise ters yönde çalışır ve önce 1.1578, ardından 1.1552 test edilebilir.",
+          "Altın 4.367 $ civarında işlem görüyor. Aşağıda 4.311 $ (14 Ağustos dibi), yukarıda 4.450 $ ilk referanslar. Altının faize duyarlılığı reel getiri üzerinden çalışır: faiz beklentisi düştüğünde getirisiz varlık tutmanın fırsat maliyeti azalır ve altın destek bulur; beklenti yukarı kaydığında bunun tersi geçerlidir. Teknik göstergelerde ivmenin bir miktar zayıfladığını da not etmek gerekir — RSI 60'ın altına çekilmiş, MACD histogramı daralıyor.",
+          "Bitcoin ise yıllık dipten %20'den fazla toparlanmış durumda. Yukarıda 70.283/70.531 bölgesi ve 71.402 direnç olarak izleniyor; aşağıda 66.519 ve 65.416 destek konumunda. Kripto tarafında aktarım daha dolaylıdır ve genellikle likidite/risk iştahı kanalıyla çalışır: gevşeme beklentisinin arttığı ortamlarda risk iştahı desteklenir, sıkılaşma beklentisi ise ters yönde baskı yapar. Bu ilişkinin her dönemde aynı güçte çalışmadığını akılda tutmak gerekir.",
+          "Şahin ve güvercin senaryoları böylece somut hale gelir: güvercin bir tonda EUR/USD'de 1.1600 üzeri, altında 4.450 $ yönü ve Bitcoin'de 70.283/70.531 bölgesi test edilebilir; şahin bir tonda ise EUR/USD'de 1.1578-1.1552 bandı, altında 4.311 $ ve Bitcoin'de 66.519 gündeme gelebilir. Bu, ne olacağının değil, olursa nerede ölçüleceğinin haritasıdır."
+        ],
+      },
+      {
+        "heading": "Haber anında işlem yapmanın gerçek maliyeti: spread, kayma ve boşluk",
+        "paragraphs": [
+          "Haber dönemlerinde en çok gözden kaçan şey, riskin sadece yönle ilgili olmadığıdır. Yönü doğru tahmin eden bir işlem bile, işlem altyapısının o anki koşulları nedeniyle zararla kapanabilir. Bunun dört ana kaynağı var.",
+          "Birincisi spread genişlemesi. Veri veya konuşma anında likidite sağlayıcılar kotasyonlarını geri çeker; alış-satış farkı normal seviyesinin katlarına çıkabilir. Sıfır veya düşük spreadli hesap türlerinde bile bu geçerlidir, çünkü \"0.0 pipten itibaren\" gibi ifadeler taban değeri anlatır, ortalamayı değil. Örneğin XM'in Zero hesabında spread 0.0 pipten başlar ama lot başına taraf başına 3.50 $ komisyon sabittir; Ultra Low'da ise maliyetin tamamı değişken spreadin içindedir. Volatil dakikalarda bu iki yapının davranışı birbirinden farklılaşır.",
+          "İkincisi kayma (slippage). Emriniz gördüğünüz fiyattan değil, emrin sıraya girdiği anda piyasada mevcut olan fiyattan gerçekleşir. Hızlı hareketlerde aradaki fark anlamlı boyutlara ulaşabilir.",
+          "Üçüncüsü boşluk (gap) riski. Fiyat bir seviyeden diğerine sıçradığında, aradaki stop emirleri o seviyede değil, boşluğun bittiği ilk fiyattan çalışır. Yani planladığınız zararın üzerinde bir zararla kapanabilirsiniz. Garantili stop imkânının bulunmadığı ortamlarda bu risk tamamen ortadan kaldırılamaz.",
+          "Dördüncüsü likiditenin çekilmesi. Emir defterinin inceldiği anlarda görece küçük hacimler bile fiyatı beklenenden fazla hareket ettirir; bu da ilk üç maddenin hepsini büyütür.",
+          "Bu risklere karşı yapılabilecekler teknik değil, disiplin düzeyindedir:"
+        ],
+        "list": [
+          "Pozisyon büyüklüğünü küçültmek: haber saatlerinde normal lotun bir kısmıyla çalışmak, oynaklığın etkisini doğrudan azaltır.",
+          "Veri veya konuşma öncesi pozisyonu tamamen kapatmak: en basit ve en kesin korunma yöntemi budur; işlem yapmamak da bir karardır.",
+          "Garantili stop bulunmayan ortamlarda stop mesafesini genişletip lotu düşürmek: böylece toplam risk sabit kalırken gürültüyle stop olma ihtimali azalır.",
+          "Hesabın marjin seviyesini önceden kontrol etmek: kullanılabilir teminatın düşük olduğu bir hesapta ani hareket, stop çalışmadan marjin kapatmasına yol açabilir.",
+          "Takvimi önceden çıkarmak: hangi saatte hangi verinin geleceğini bilmek, pozisyonun o saate denk gelmesini tesadüf olmaktan çıkarır — sitedeki Ekonomik Takvim sayfası bu planlamayı yapmak için yeterlidir.",
+          "Pozisyon Hesaplayıcı ile lot başına risk tutarını işlemden önce dolar cinsinden görmek."
+        ],
+      },
+      {
+        "heading": "Sonuç: konuşmayı bir yön kaynağı değil, bir belirsizlik ölçütü olarak izleyin",
+        "paragraphs": [
+          "Özetlemek gerekirse: 28 Ağustos'taki konuşma, Fed'in zayıflayan istihdam ile %3'lerin ortasındaki enflasyon arasında hangisine ağırlık verdiğine dair bir ipucu sunabilir. 16 Eylül FOMC için sabit tutma olasılığının yaklaşık %65'e çıkmış olması, sürprizin daha çok bu fiyatlamanın dışında kalan senaryodan gelebileceği anlamına geliyor. Ancak sempozyumun her yıl piyasa hareketi yaratmadığını ve bu yılın resmî temasının doğrudan faiz patikası olmadığını da hatırda tutmak gerekiyor.",
+          "Bu tür dönemlerde en işlevsel yaklaşım, tahmini keskinleştirmek yerine planı sağlamlaştırmaktır. Seviyeleri hedef olarak değil, tepkinin ciddiyetini ölçen referanslar olarak kullanmak; pozisyon büyüklüğünü oynaklığa göre ayarlamak; ve takvimi işlem planının parçası haline getirmek, sonucu kontrol edemediğiniz bir haftada kontrol edebileceğiniz tek şeydir. Broker tarafında ise hangi hesap yapısının volatil dakikalarda nasıl davrandığını — sabit komisyon mu, değişken spread mi — önceden bilmek, sonradan sürpriz yaşamamayı sağlar.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz."
+        ],
+      },
+    ],
+  },
+  {
     slug: "teminat-bonusu-nedir-trade-bonusu-farki",
     // Square build of the campaign banner — same treatment as the XM cashback
     // post: blurred fill behind, wide original letterboxed on top, because the
