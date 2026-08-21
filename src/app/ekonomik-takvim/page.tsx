@@ -48,8 +48,8 @@ export default async function EconomicCalendarPage() {
             </h1>
             <p className="mt-4 max-w-2xl text-text-on-ink-muted">
               Orta ve yüksek önemdeki makroekonomik veriler — açıklanma saatinde gerçek rakamlarla otomatik
-              güncellenir. Bildirim aboneleri, veri açıklandığı anda gerçekleşen/beklenti/önceki değerleriyle
-              anında bildirim alır.
+              güncellenir. Bildirim aboneleri, yüksek önemli veriler açıklandığı anda gerçekleşen/beklenti/önceki
+              değerleriyle anında bildirim alır.
             </p>
           </div>
         </section>
