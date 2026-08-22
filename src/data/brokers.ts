@@ -76,6 +76,19 @@ export interface Broker {
   adImage?: string;
   adImageWidth?: number;
   adImageHeight?: number;
+  // Optional narrow-screen creative. A leaderboard squeezed into a 375px
+  // phone is unreadable, so a broker whose media kit ships a square or
+  // portrait size can supply it here and the banner swaps at the sm
+  // breakpoint.
+  adImageMobile?: string;
+  adImageMobileWidth?: number;
+  adImageMobileHeight?: number;
+  // Optional click-through for the creatives above, for partners whose
+  // media kit tags every banner size with its own tracking link — using
+  // referralUrl there would report all of it as whichever size the link
+  // was copied from. Falls back to referralUrl when unset.
+  adUrl?: string;
+  adUrlMobile?: string;
   // Optional hand-written FAQ entries appended after the auto-generated
   // ones from brokerFaqs() (src/lib/brokerContent.ts). Unlike the rest of
   // this file, these render in whatever language they're written in — the
@@ -1200,6 +1213,21 @@ export const brokers: Broker[] = [
     ],
     bestFor: "Düzenleyici genişliğe önem veren ve ECN maliyetleri için sermaye ayırabilen yatırımcılar",
     accentNote: "ASIC, BaFin ve CySEC lisanslı",
+    // MultiBank's own IB creatives rather than in-house ones, so these are
+    // standard IAB sizes instead of this file's usual 1672x941: the 728x90
+    // leaderboard on desktop, the 300x250 square on phones where a
+    // leaderboard would shrink to an illegible strip. Each carries the
+    // tracking link its own size was generated with.
+    adImage: "/campaigns/multibank-728x90.jpg",
+    adImageWidth: 728,
+    adImageHeight: 90,
+    adUrl:
+      "https://multibankfx.com/account/live-account?ibNum=9981362&utm_source=ib-media-generator&utm_media=728x90&utm_term=9981362",
+    adImageMobile: "/campaigns/multibank-300x250.jpg",
+    adImageMobileWidth: 300,
+    adImageMobileHeight: 250,
+    adUrlMobile:
+      "https://multibankfx.com/account/live-account?ibNum=9981362&utm_source=ib-media-generator&utm_media=300x250&utm_term=9981362",
     categories: ["Institutional Trust", "Multi-Platform"],
     scoreCost: 3,
     scoreWithdrawal: 4,
@@ -1250,7 +1278,7 @@ export function getBrokerBySlug(slug: string): Broker | undefined {
 // Brokers currently running paid ad placements (BrokerAdBanner). Kept as an
 // explicit slug list rather than a `sponsored` field on Broker so turning a
 // campaign on/off doesn't require touching the broker's editorial data.
-export const SPONSORED_BROKER_SLUGS = ["xm", "fxpro", "lite-finance", "avatrade", "bybit"];
+export const SPONSORED_BROKER_SLUGS = ["xm", "fxpro", "lite-finance", "avatrade", "bybit", "multibank"];
 
 // Deterministically picks one of the sponsored brokers for a given page,
 // varying by `seed` (e.g. the page's own slug) so different pages don't all

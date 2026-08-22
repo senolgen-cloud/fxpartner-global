@@ -16,13 +16,18 @@ function getMonogram(name: string): string {
 // practice.
 export default function BrokerAdBanner({ broker }: { broker: Broker }) {
   if (broker.adImage) {
-    return (
+    // Two anchors rather than two <source>s in one: where a partner's media
+    // kit tags each banner size with its own tracking link, the click has to
+    // carry the link belonging to the creative that was actually on screen.
+    const wide = (
       <a
-        href={broker.referralUrl}
+        href={broker.adUrl ?? broker.referralUrl}
         target="_blank"
         rel="noopener noreferrer sponsored"
         aria-label={`${broker.name} — Sponsorlu, Hesap Aç`}
-        className="block overflow-hidden rounded-2xl border border-hairline transition-opacity hover:opacity-90"
+        className={`overflow-hidden rounded-2xl border border-hairline transition-opacity hover:opacity-90 ${
+          broker.adImageMobile ? "hidden sm:block" : "block"
+        }`}
       >
         <span className="sr-only">Sponsorlu — {broker.name}</span>
         <Image
@@ -34,6 +39,31 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
           className="h-auto w-full"
         />
       </a>
+    );
+
+    if (!broker.adImageMobile) return wide;
+
+    return (
+      <>
+        {wide}
+        <a
+          href={broker.adUrlMobile ?? broker.adUrl ?? broker.referralUrl}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          aria-label={`${broker.name} — Sponsorlu, Hesap Aç`}
+          className="mx-auto block w-fit overflow-hidden rounded-2xl border border-hairline transition-opacity hover:opacity-90 sm:hidden"
+        >
+          <span className="sr-only">Sponsorlu — {broker.name}</span>
+          <Image
+            src={broker.adImageMobile}
+            alt={`${broker.name} reklamı`}
+            width={broker.adImageMobileWidth ?? 300}
+            height={broker.adImageMobileHeight ?? 250}
+            sizes="300px"
+            className="h-auto max-w-full"
+          />
+        </a>
+      </>
     );
   }
 
