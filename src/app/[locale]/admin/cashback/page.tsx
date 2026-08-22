@@ -4,10 +4,19 @@ import { cashbackAccounts, cashbackRecords, cashbackLeads, users } from "@/db/sc
 import { eq, desc } from "drizzle-orm";
 import { brokers } from "@/data/brokers";
 import { setAccountStatus, setLeadStatus, addCashbackRecord } from "./actions";
+import { setServerLocale } from "@/lib/serverLocale";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 
 const brokerNames = Object.fromEntries(brokers.map((b) => [b.slug, b.name]));
 
-export default async function AdminCashbackPage() {
+export default async function AdminCashbackPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const leads = await db.select().from(cashbackLeads).orderBy(desc(cashbackLeads.createdAt));
 
   const accounts = await db
@@ -69,6 +78,17 @@ export default async function AdminCashbackPage() {
                       day: "numeric",
                     })}
                   </p>
+                  {lead.source && (
+                    <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.1em] text-signal">
+                      {lead.source}
+                      {lead.campaign ? ` · ${lead.campaign}` : ""}
+                      {lead.landingPath && (
+                        <span className="ml-2 tracking-normal text-text-muted normal-case">
+                          {lead.landingPath}
+                        </span>
+                      )}
+                    </p>
+                  )}
                 </div>
                 <div className="flex gap-2">
                   {(["new", "contacted", "converted"] as const).map((s) => (

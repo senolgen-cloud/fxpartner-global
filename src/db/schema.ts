@@ -8,6 +8,19 @@ import {
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 
+// First-touch attribution, shared by every table that records someone
+// entering the funnel. Written once at insert time from the fxp_attr
+// cookie (set in src/proxy.ts) and never updated afterwards — a later
+// visit through a different channel must not rewrite where a person
+// originally came from. All three are nullable on purpose: every row
+// created before this existed, and every visitor who arrives with no
+// UTM and no referrer, legitimately has no source.
+const attribution = {
+  source: text("source"),
+  campaign: text("campaign"),
+  landingPath: text("landing_path"),
+};
+
 export const users = pgTable("user", {
   id: text("id")
     .primaryKey()
@@ -20,6 +33,7 @@ export const users = pgTable("user", {
   phone: text("phone"),
   preferredBroker: text("preferred_broker"),
   isVip: boolean("is_vip").notNull().default(false),
+  ...attribution,
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
@@ -99,6 +113,7 @@ export const cashbackAccounts = pgTable("cashback_account", {
   // opted in to marketing/campaign emails, never assumed.
   marketingOptIn: boolean("marketing_opt_in").notNull().default(false),
   status: text("status").$type<CashbackAccountStatus>().notNull().default("pending"),
+  ...attribution,
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
@@ -133,6 +148,7 @@ export const cashbackLeads = pgTable("cashback_lead", {
   phone: text("phone").notNull(),
   email: text("email").notNull(),
   status: text("status").$type<CashbackLeadStatus>().notNull().default("new"),
+  ...attribution,
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
@@ -218,6 +234,7 @@ export const vipSubscriptions = pgTable("vip_subscription", {
   }),
   currentPeriodEnd: timestamp("current_period_end", { mode: "date" }),
   cancelAtPeriodEnd: boolean("cancel_at_period_end").notNull().default(false),
+  ...attribution,
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });

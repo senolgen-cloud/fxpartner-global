@@ -20,7 +20,7 @@ export async function subscribeToNewsletter(
   const source = String(formData.get("source") || "").trim() || null;
 
   if (!email || !EMAIL_RE.test(email)) {
-    return { ok: false, error: "Please enter a valid email address." };
+    return { ok: false, error: "Lütfen geçerli bir e-posta adresi girin." };
   }
 
   await db.insert(newsletterSubscribers).values({ email, source }).onConflictDoNothing();

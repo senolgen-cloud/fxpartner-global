@@ -6,6 +6,7 @@ import { auth } from "@/auth";
 import { cashbackPrograms } from "@/data/cashback";
 import { getBrokerBySlug } from "@/data/brokers";
 import { sendEmail } from "@/lib/email";
+import { getAttribution } from "@/lib/visitor";
 import { revalidatePath } from "next/cache";
 
 const NOTIFY_EMAIL = process.env.COMPLAINT_NOTIFY_EMAIL || "senolgen@gmail.com";
@@ -37,6 +38,7 @@ export async function linkCashbackAccount(
     accountNumber,
     fullName: session.user.name || session.user.email || "FXPARTNER üyesi",
     email: session.user.email || "",
+    ...(await getAttribution()),
   });
 
   const brokerName = getBrokerBySlug(brokerSlug)?.name || brokerSlug;
