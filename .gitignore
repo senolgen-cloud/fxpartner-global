@@ -60,3 +60,6 @@ skills-lock.json
 
 # Scratch output from scripts/translate.mjs — translations live in src/, not here.
 tmp/
+
+# Throwaway worktree used to build exactly what is committed.
+.verify-tree/
