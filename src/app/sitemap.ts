@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { hreflangCode, locales, localePath, defaultLocale } from "@/lib/i18n";
 import { brokers, brokerCategories, categoryInfo } from "@/data/brokers";
 import { propFirms } from "@/data/propFirms";
 import { blogPosts } from "@/data/blog";
@@ -99,7 +100,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.5,
   }));
 
-  return [
+  const turkishRoutes = [
     ...staticRoutes,
     ...brokerRoutes,
     ...propFirmRoutes,
@@ -110,4 +111,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...marketAnalysisRoutes,
     ...bulletinRoutes,
   ];
+
+  // Every URL is listed once per locale, and each entry declares the whole
+  // set through alternates.languages — that is the pairing that tells Google
+  // /ua/brokerlar and /brokerlar are the same page in two languages rather
+  // than two pages competing for the same query.
+  return turkishRoutes.flatMap((route) => {
+    const path = route.url.replace(SITE_URL, "") || "/";
+    const languages = Object.fromEntries(
+      locales.map((l) => [hreflangCode[l], `${SITE_URL}${localePath(l, path)}`])
+    );
+    return locales.map((locale) => ({
+      ...route,
+      url: `${SITE_URL}${localePath(locale, path)}`,
+      alternates: { languages },
+      // A translated tree is newer and thinner than the Turkish original, so
+      // it doesn't claim the same priority.
+      priority: locale === defaultLocale ? route.priority : Math.max(0.1, (route.priority ?? 0.5) - 0.1),
+    }));
+  });
 }

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { localizeBlogPost, localizeBlogPosts, localizeBrokers } from "@/lib/localizeContent";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import BrokerList from "@/components/BrokerList";
@@ -61,9 +63,15 @@ const faqs = [
   },
 ];
 
-export default async function BrokerlarPage() {
+export default async function BrokerlarPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const reviewStats = await getBrokerReviewStats();
-  const ranked = [...brokers].sort((a, b) => a.rank - b.rank);
+  const ranked = localizeBrokers([...brokers], locale).sort((a, b) => a.rank - b.rank);
   const top = ranked[0];
   const trackedRegulators = new Set([
     ...brokers.flatMap((b) => b.regulators),

@@ -28,6 +28,14 @@ export const hreflangCode: Record<Locale, string> = {
   en: "en",
 };
 
+// Open Graph wants language_TERRITORY, which is neither the URL segment nor
+// the bare language code.
+export const ogLocale: Record<Locale, string> = {
+  tr: "tr_TR",
+  ua: "uk_UA",
+  en: "en_US",
+};
+
 export const localeLabel: Record<Locale, string> = {
   tr: "Türkçe",
   ua: "Українська",

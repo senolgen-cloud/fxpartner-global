@@ -15,14 +15,16 @@ import { MoreMenuProvider } from "@/components/MoreMenuContext";
 import MoreMenuOverlay from "@/components/MoreMenuOverlay";
 import BrokerHeroSlider from "@/components/BrokerHeroSlider";
 import { brokers } from "@/data/brokers";
+import { localizeBrokers } from "@/lib/localizeContent";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import { auth } from "@/auth";
 import { LocaleProvider } from "@/components/LocaleProvider";
-import { defaultLocale, htmlLang, isLocale, locales, type Locale } from "@/lib/i18n";
+import { defaultLocale, hreflangCode, htmlLang, isLocale, locales, localePath, ogLocale, type Locale } from "@/lib/i18n";
+import { getDictionary } from "@/lib/dictionary";
 import "../globals.css";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
-const topBrokers = [...brokers].sort((a, b) => a.rank - b.rank).slice(0, 3);
+const rankedBrokers = [...brokers].sort((a, b) => a.rank - b.rank);
 
 const geist = Geist({
   variable: "--font-geist",
@@ -40,7 +42,23 @@ const poppins = Poppins({
   weight: ["500", "600", "700", "800"],
 });
 
-export const metadata: Metadata = {
+// Per-locale, because the title, the description and above all the
+// hreflang set differ by tree. hreflang is what stops Google reading /ua as
+// a duplicate of / and picking one: every page advertises its siblings, and
+// x-default points at Turkish, which is the tree with the bare URL.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale: Locale = isLocale(raw) ? raw : defaultLocale;
+  const t = getDictionary(locale);
+  const languages = Object.fromEntries(
+    locales.map((l) => [hreflangCode[l], localePath(l, "/")])
+  );
+
+  return {
   metadataBase: new URL(SITE_URL),
   // Prevents Chrome's own native "translate this page?" prompt/banner
   // from firing on top of our own LanguageSwitcher-driven translation —
@@ -73,7 +91,7 @@ export const metadata: Metadata = {
     apple: "/fxpartner-icon.png",
   },
   title: {
-    default: "FXPARTNER | Forex Sinyalleri, Piyasa Analizi ve Broker Karşılaştırma",
+    default: t["site.title"],
     template: "%s | FXPARTNER",
   },
   // Kept tight (~155-160 chars) for the search-snippet <meta name="description">,
@@ -83,29 +101,31 @@ export const metadata: Metadata = {
   // need the same length discipline — see organizationSchema() in
   // lib/schema.ts for the matching JSON-LD description AI crawlers read.
   description:
-    "FXPARTNER; gerçek zamanlı forex sinyalleri, yapay zeka destekli piyasa analizi, teknik/temel analiz ve güvenilir broker karşılaştırmaları sunan finans platformudur.",
+    t["site.description"],
   alternates: {
-    canonical: "/",
+    canonical: localePath(locale, "/"),
+    languages: { ...languages, "x-default": "/" },
   },
   openGraph: {
-    title: "FXPARTNER | Forex Sinyalleri, Piyasa Analizi ve Broker Karşılaştırma",
+    title: t["site.title"],
     description:
-      "FXPARTNER, forex ve finans piyasalarını takip eden yatırımcılar için gerçek zamanlı sinyaller, teknik ve temel analiz, yapay zeka destekli piyasa analizi, ekonomik veri yorumları ve güvenilir broker bilgileriyle kapsamlı bir finans ekosistemi sunar.",
+      t["site.longDescription"],
     url: SITE_URL,
     siteName: "FXPARTNER",
     type: "website",
     // Every page's content is Turkish now, so this is the correct default —
     // Next.js merges it into every child route's openGraph unless a page
     // explicitly overrides it, so setting it once here covers the whole site.
-    locale: "tr_TR",
+    locale: ogLocale[locale],
   },
   twitter: {
     card: "summary_large_image",
-    title: "FXPARTNER | Forex Sinyalleri, Piyasa Analizi ve Broker Karşılaştırma",
+    title: t["site.title"],
     description:
-      "FXPARTNER, forex ve finans piyasalarını takip eden yatırımcılar için gerçek zamanlı sinyaller, teknik ve temel analiz, yapay zeka destekli piyasa analizi, ekonomik veri yorumları ve güvenilir broker bilgileriyle kapsamlı bir finans ekosistemi sunar.",
+      t["site.longDescription"],
   },
-};
+  };
+}
 
 // Every locale tree is a build target. Turkish is reachable at both / (via
 // the rewrite in proxy.ts) and nothing else — the prefix only exists in the
@@ -126,6 +146,8 @@ export default async function RootLayout({
   const session = await auth();
   const signedIn = Boolean(session?.user);
   const accountHref = signedIn ? "/account" : "/account/login";
+  const localizedBrokers = localizeBrokers(rankedBrokers, locale);
+  const topBrokers = localizedBrokers.slice(0, 3);
 
   return (
     <html
@@ -145,7 +167,7 @@ export default async function RootLayout({
           <MoreMenuProvider>
           <StickyChrome>
             <Header standalone={false} />
-            <BrokerHeroSlider brokers={brokers} />
+            <BrokerHeroSlider brokers={localizedBrokers} />
           </StickyChrome>
           {children}
           <div className="fixed inset-x-0 bottom-0 z-40">

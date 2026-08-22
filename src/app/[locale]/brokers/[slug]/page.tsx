@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { localizeBroker } from "@/lib/localizeContent";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Image from "next/image";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
@@ -81,10 +83,12 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
-  const broker = getBrokerBySlug(slug);
+  const { slug, locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const source = getBrokerBySlug(slug);
+  const broker = source ? localizeBroker(source, locale) : source;
   if (!broker) return {};
   return {
     title: `${broker.name} İncelemesi`,
@@ -126,10 +130,12 @@ function SnapshotIcon({ name }: { name: keyof typeof SNAPSHOT_ICONS }) {
 export default async function BrokerDetailPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }) {
-  const { slug } = await params;
-  const broker = getBrokerBySlug(slug);
+  const { slug, locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const source = getBrokerBySlug(slug);
+  const broker = source ? localizeBroker(source, locale) : source;
   if (!broker) notFound();
 
   const otherBrokers = brokers.filter((b) => b.slug !== broker.slug).slice(0, 3);

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { localizeBlogPost, localizeBlogPosts, localizeBrokers } from "@/lib/localizeContent";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Image from "next/image";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
@@ -19,7 +21,13 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
 };
 
-export default function BlogIndexPage() {
+export default async function BlogIndexPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   return (
     <>
       <script
@@ -51,7 +59,7 @@ export default function BlogIndexPage() {
         <section>
           <div className="mx-auto max-w-3xl px-6 py-16">
             <div className="divide-y divide-hairline-light border-t border-hairline-light">
-              {blogPosts.map((post) => (
+              {localizeBlogPosts(blogPosts, locale).map((post) => (
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}

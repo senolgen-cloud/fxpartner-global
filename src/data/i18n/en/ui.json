@@ -1,0 +1,19 @@
+{
+  "site.title": "FXPARTNER | Forex Signals, Market Analysis and Broker Comparison",
+  "site.description": "FXPARTNER is a financial platform providing real-time forex signals, AI-powered market analysis, technical/fundamental analysis, and reliable broker comparisons.",
+  "site.longDescription": "FXPARTNER offers a comprehensive financial ecosystem for investors following the forex and financial markets, with real-time signals, technical and fundamental analysis, AI-powered market analysis, economic data commentary, and reliable broker information.",
+  "nav.signals": "Signals",
+  "nav.aiAssistant": "AI Assistant",
+  "nav.brokers": "Broker Comparisons",
+  "nav.blog": "Blog",
+  "nav.calendar": "Economic Calendar",
+  "nav.more": "More",
+  "cta.openAccount": "Open Account",
+  "cta.review": "Review",
+  "cta.compare": "See Broker Rankings",
+  "label.sponsored": "Sponsored",
+  "label.contact": "Detailed Information and Contact",
+  "disclaimer.short": "This content is for general information purposes only and is not investment advice.",
+  "disclaimer.risk": "Past results do not guarantee future performance. Determine your position size and risk according to your own tolerance.",
+  "language.switch": "Language"
+}

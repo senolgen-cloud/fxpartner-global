@@ -1,4 +1,6 @@
 import Link from "@/components/LocaleLink";
+import { localizeBlogPost, localizeBlogPosts, localizeBrokers } from "@/lib/localizeContent";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Footer from "@/components/Footer";
 import BrokerList from "@/components/BrokerList";
 import ComparisonTable from "@/components/ComparisonTable";
@@ -108,7 +110,13 @@ const faqs = [
   },
 ];
 
-export default async function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   // Prefer the latest still-open trade so the hero card reflects a real
   // signal a visitor could still act on; fall back to the latest closed
   // one so the card isn't empty between open trades.

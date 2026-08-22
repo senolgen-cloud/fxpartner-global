@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { localizeBlogPost, localizeBlogPosts, localizeBrokers } from "@/lib/localizeContent";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Image from "next/image";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
@@ -32,10 +34,12 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const { slug, locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const source = getBlogPostBySlug(slug);
+  const post = source ? localizeBlogPost(source, locale) : source;
   if (!post) return {};
   return {
     title: post.title,
@@ -58,11 +62,13 @@ export async function generateMetadata({
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }) {
-  const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
-  if (!post) notFound();
+  const { slug, locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const source = getBlogPostBySlug(slug);
+  if (!source) notFound();
+  const post = localizeBlogPost(source, locale);
   // A post that argues for one broker pins its own ad slot (adBrokerSlug);
   // everything else keeps the hashed rotation across the sponsor pool.
   const featuredBroker =

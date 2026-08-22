@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "@/components/LocaleLink";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
 import BrokerAdBanner from "@/components/BrokerAdBanner";
 import { useMoreMenu } from "@/components/MoreMenuContext";
 import { useLocale } from "@/components/LocaleProvider";
@@ -245,6 +246,7 @@ export default function MoreMenuOverlay({
         </div>
 
         <div className="px-4 pt-5 md:px-6">
+          <LocaleSwitcher className="mb-3 flex-wrap" />
           <LanguageSwitcher />
         </div>
 

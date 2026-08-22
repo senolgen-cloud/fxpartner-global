@@ -5,7 +5,7 @@ import Link from "@/components/LocaleLink";
 import { useLocalePathname } from "@/components/useLocalePathname";
 import { useLocale } from "@/components/LocaleProvider";
 import { localePath } from "@/lib/i18n";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
 import { useMoreMenu } from "@/components/MoreMenuContext";
 import { primaryLinks, resourceLinks, type ResourceGroup } from "@/lib/navLinks";
 
@@ -113,7 +113,7 @@ export default function HeaderNav({
       </nav>
 
       <div className="hidden items-center gap-3 border-l border-hairline pl-3 xl:flex">
-        <LanguageSwitcher />
+        <LocaleSwitcher className="hidden lg:flex" />
         {signedIn ? (
           <Link
             href={accountHref}
