@@ -1172,7 +1172,12 @@ export const brokers: Broker[] = [
     rating: 4.3,
     founded: 2005,
     minDeposit: "$50",
-    maxLeverage: "1:500",
+    // 1:1000 per MultiBank's own live IB campaign, which is also what the
+    // banner in the ad rotation advertises; the third-party reviews the
+    // rest of this entry is built from still say 1:500, so the two are not
+    // describing the same entity or region. The auto-generated FAQ already
+    // qualifies the figure as account- and residence-dependent.
+    maxLeverage: "1:1000",
     regulators: [
       "ASIC",
       "BaFin",
