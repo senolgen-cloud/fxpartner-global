@@ -57,3 +57,6 @@ skills-lock.json
 
 # Compiled MQL5 binaries — source (.mq5) is tracked, build output is not
 *.ex5
+
+# Scratch output from scripts/translate.mjs — translations live in src/, not here.
+tmp/
