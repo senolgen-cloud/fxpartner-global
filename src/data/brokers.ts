@@ -376,7 +376,7 @@ export const brokers: Broker[] = [
     adImageWidth: 1672,
     adImageHeight: 941,
     tagline: "Kurumsal güven, geniş regülasyon kapsamı",
-    rating: 4.5,
+    rating: 4.2,
     founded: 2006,
     minDeposit: "$100",
     maxLeverage: "1:400*",
@@ -402,7 +402,7 @@ export const brokers: Broker[] = [
     categories: ["Institutional Trust", "Multi-Platform"],
     scoreCost: 3,
     scoreWithdrawal: 3,
-    scoreOverride: 9.0,
+    scoreOverride: 8.9,
     extraFaqs: [
       {
         q: "AvaTrade güvenilir mi?",
@@ -524,7 +524,7 @@ export const brokers: Broker[] = [
     // taşıyacak kadar gerçek bir denetim — ama Türkiye'den açılan hesabın
     // offshore şirkete bağlanması nedeniyle daha yukarı çıkmıyor.
     scoreRegulationOverride: 3,
-    scoreOverride: 9.1,
+    scoreOverride: 9.2,
     extraFaqs: [
       {
         q: "Lite Finance güvenilir mi?",
@@ -701,7 +701,7 @@ export const brokers: Broker[] = [
     adImageWidth: 1672,
     adImageHeight: 941,
     tagline: "MT4, MT5 ve FxPro App üzerinden işlem yapın",
-    rating: 4.6,
+    rating: 4.4,
     founded: 2006,
     minDeposit: "$100",
     maxLeverage: "1:2000*",
@@ -727,7 +727,7 @@ export const brokers: Broker[] = [
     categories: ["High Leverage", "Institutional Trust"],
     scoreCost: 3,
     scoreWithdrawal: 3,
-    scoreOverride: 9.3,
+    scoreOverride: 9.1,
     extraFaqs: [
       {
         q: "FxPro güvenilir mi?",
@@ -889,7 +889,7 @@ export const brokers: Broker[] = [
     logo: "/brokers/ic-markets.png",
     ogImage: "/brokers/ic-markets-cover.png",
     tagline: "Ham ECN spreadler ve TradingView entegrasyonu",
-    rating: 4.7,
+    rating: 4.2,
     founded: 2007,
     minDeposit: "$200",
     maxLeverage: "1:500*",
@@ -915,6 +915,9 @@ export const brokers: Broker[] = [
     categories: ["Low Spread", "Institutional Trust"],
     scoreCost: 5,
     scoreWithdrawal: 4,
+    // Editorial composite set by the owner to track the featured order;
+    // the four-axis average would put this at 9.0.
+    scoreOverride: 8.9,
     extraFaqs: [
       {
         q: "IC Markets güvenilir mi?",
@@ -1197,6 +1200,9 @@ export const brokers: Broker[] = [
     categories: ["Institutional Trust", "Multi-Platform"],
     scoreCost: 3,
     scoreWithdrawal: 4,
+    // Editorial composite set by the owner to track the featured order;
+    // the four-axis average would put this at 8.5.
+    scoreOverride: 9.0,
     deepDive: {
       accountTypes: [
         { name: "Standard", spread: "1.5 pipten itibaren", commission: "Yok", minDeposit: "$50" },
