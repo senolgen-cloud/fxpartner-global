@@ -334,7 +334,7 @@ export const brokers: Broker[] = [
     },
   },
   {
-    rank: 6,
+    rank: 11,
     slug: "bybit",
     name: "Bybit",
     logo: "/brokers/bybit logo.png",
@@ -365,6 +365,9 @@ export const brokers: Broker[] = [
     categories: ["Low Spread", "High Leverage"],
     scoreCost: 4,
     scoreWithdrawal: 3,
+    // Editorial composite set by the owner; the four-axis average
+    // would put this at 6.0.
+    scoreOverride: 7.5,
   },
   {
     rank: 5,
@@ -415,7 +418,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 8,
+    rank: 7,
     slug: "tickmill",
     name: "Tickmill",
     logo: "/brokers/tickmill.webp",
@@ -603,7 +606,7 @@ export const brokers: Broker[] = [
     },
   },
   {
-    rank: 9,
+    rank: 8,
     slug: "exness",
     name: "EXNESS",
     logo: "/brokers/exness.png",
@@ -797,7 +800,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 11,
+    rank: 10,
     slug: "thinkmarkets",
     name: "ThinkMarkets",
     logo: "/brokers/thinkmarkets.jpg",
@@ -883,7 +886,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 7,
+    rank: 6,
     slug: "ic-markets",
     name: "IC Markets",
     logo: "/brokers/ic-markets.png",
@@ -1060,7 +1063,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 10,
+    rank: 9,
     slug: "fxt",
     name: "FXT",
     logo: "/brokers/fxt.svg",
