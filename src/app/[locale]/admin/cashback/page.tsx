@@ -69,17 +69,6 @@ export default async function AdminCashbackPage() {
                       day: "numeric",
                     })}
                   </p>
-                  {lead.source && (
-                    <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.1em] text-signal">
-                      {lead.source}
-                      {lead.campaign ? ` · ${lead.campaign}` : ""}
-                      {lead.landingPath && (
-                        <span className="ml-2 tracking-normal text-text-muted normal-case">
-                          {lead.landingPath}
-                        </span>
-                      )}
-                    </p>
-                  )}
                 </div>
                 <div className="flex gap-2">
                   {(["new", "contacted", "converted"] as const).map((s) => (
