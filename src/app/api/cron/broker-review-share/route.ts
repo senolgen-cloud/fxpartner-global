@@ -43,8 +43,11 @@ export const GET = withCronErrorAlert("broker-review-share", async (req: NextReq
     ({ broker, scores }, i) => `${i + 1}.  <b>${broker.name}</b>  —  ${scores.composite.toFixed(1)}/10`
   );
 
+  // "Haftanın" was left over from the week the digest was briefly weekly;
+  // it posts four times a day now, and the push it fires alongside already
+  // says Günün.
   const text =
-    `🏆 <b>FXPARTNER Index — Haftanın En İyi 5 Broker'i</b>\n\n` +
+    `🏆 <b>FXPARTNER Index — Günün En İyi 5 Broker'i</b>\n\n` +
     lines.join("\n") +
     `\n\n<i>Genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.</i>\n\n` +
     telegramSiteCta() +
