@@ -8,6 +8,7 @@ import QuickAccessHub from "@/components/QuickAccessHub";
 import LiveSupportWidget from "@/components/LiveSupportWidget";
 import GoogleTranslateWidget from "@/components/GoogleTranslateWidget";
 import Header from "@/components/Header";
+import StickyChrome from "@/components/StickyChrome";
 import Ticker from "@/components/Ticker";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import { MoreMenuProvider } from "@/components/MoreMenuContext";
@@ -128,10 +129,10 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
         />
         <MoreMenuProvider>
-          <div className="sticky top-0 z-40">
+          <StickyChrome>
             <Header standalone={false} />
             <BrokerHeroSlider brokers={brokers} />
-          </div>
+          </StickyChrome>
           {children}
           <div className="fixed inset-x-0 bottom-0 z-40">
             <MobileBottomNav />
