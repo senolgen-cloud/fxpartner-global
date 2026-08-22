@@ -1144,6 +1144,90 @@ export const brokers: Broker[] = [
       },
     ],
   },
+  {
+    rank: 18,
+    slug: "multibank",
+    name: "MultiBank Group",
+    tagline: "Beş kıtada lisanslı, ECN odaklı çok varlıklı broker",
+    rating: 4.3,
+    founded: 2005,
+    minDeposit: "$50",
+    maxLeverage: "1:500",
+    regulators: [
+      "ASIC",
+      "BaFin",
+      "CySEC",
+      "MAS",
+      "SCA (BAE)",
+      "CIMA",
+      "FMA (Avusturya)",
+      "VARA (Dubai)",
+    ],
+    licenseNumbers: {
+      ASIC: "416279",
+      BaFin: "10119375",
+      CySEC: "430/23",
+      MAS: "CMS101174",
+      "SCA (BAE)": "20200000045",
+    },
+    platforms: ["MT4", "MT5", "MultiBank Plus"],
+    headquarters: "Dubai, Birleşik Arap Emirlikleri",
+    referralUrl:
+      "https://multibankfx.com/account/live-account?ibNum=9981362&utm_source=ib-media-generator&utm_media=300x250&utm_term=9981362",
+    summary:
+      "MultiBank Group 2005'te kuruldu, merkezini 2022'de Hong Kong'dan Dubai'ye taşıdı ve grup şirketleri ASIC (416279), BaFin (10119375), CySEC (430/23), MAS (CMS101174) ve BAE SCA (20200000045) dahil beş kıtadaki düzenleyiciler altında faaliyet gösteriyor. Maliyet tarafı hesap türüne göre keskin biçimde ayrışıyor: standart hesap 50 $ ile açılıyor ama spreadler 1.5 pipten başlıyor, gerçekten dar spread için 5.000 $ minimumlu ECN hesabı gerekiyor. Cent/mikro hesap yok ve 3 ay işlem yapılmayan hesaptan 60 $ hareketsizlik ücreti alınıyor.",
+    pros: [
+      "İki tier-1 düzenleyici (ASIC 416279, CySEC 430/23) ve Almanya BaFin, Singapur MAS, BAE SCA lisansları",
+      "ECN hesapta 0.0 pipten başlayan spread + lot başına 3 $ komisyon (gidiş-dönüş 6 $)",
+      "MT4, MT5 ve grubun kendi MultiBank Plus platformu",
+      "Kart, e-cüzdan ve kripto yatırımları anında; broker tarafında yatırma/çekme ücreti yok",
+    ],
+    cons: [
+      "Standart hesapta spreadler 1.5 pipten başlıyor — dar spread için 5.000 $ minimumlu ECN hesabı şart",
+      "3 ay işlem yapılmayan hesaptan 60 $ hareketsizlik ücreti; sektör normu genelde 12 ay ve daha düşük tutar",
+      "Cent/mikro hesap yok, küçük sermayeyle pozisyon boyutunu ölçeklemek zor",
+      "Scalping kısıtlamaları ve bağımsız incelemelerde mobil uygulama/destek için karışık kullanıcı geri bildirimi",
+    ],
+    bestFor: "Düzenleyici genişliğe önem veren ve ECN maliyetleri için sermaye ayırabilen yatırımcılar",
+    accentNote: "ASIC, BaFin ve CySEC lisanslı",
+    categories: ["Institutional Trust", "Multi-Platform"],
+    scoreCost: 3,
+    scoreWithdrawal: 4,
+    deepDive: {
+      accountTypes: [
+        { name: "Standard", spread: "1.5 pipten itibaren", commission: "Yok", minDeposit: "$50" },
+        { name: "Pro", spread: "0.8 pipten itibaren", commission: "Yok", minDeposit: "$1.000" },
+        {
+          name: "ECN",
+          spread: "0.0 pipten itibaren",
+          commission: "Lot başına, taraf başına $3 (gidiş-dönüş $6)",
+          minDeposit: "$5.000",
+        },
+      ],
+      deposits:
+        "Visa/Mastercard, UnionPay, banka havalesi, SEPA, Al Ansari Exchange ve kripto (BTC, USDT ERC20/TRC20) desteklenir. Kart, e-cüzdan ve kripto yatırımları genellikle anında geçer; banka havaleleri bankaya ve ülkeye bağlı olarak 1-3 iş günü sürer. MultiBank kendi tarafında yatırma ücreti almaz, ödeme sağlayıcınız kendi ücretini uygulayabilir.",
+      withdrawals:
+        "Çekim talepleri finans birimi tarafından genellikle 24 saat içinde işleme alınır; sonrası ödeme yöntemine bağlıdır — kripto ~24 saat, e-cüzdan 1-2 gün, kart 2-5 iş günü, banka havalesi 3-7 iş günü. Broker çekim ücreti almaz. Bağımsız incelemelerde çekim sürecinin evrak tarafının karmaşık bulunduğu geri bildirimler yer alır.",
+      support:
+        "Canlı sohbet, e-posta, WhatsApp, geri arama ve 15'ten fazla yerel telefon hattı; İngilizce, Arapça, İspanyolca, Almanca, Mandarin ve Vietnamca dahil çok dilli. MultiBank kendi sitesinde desteği 7/24 olarak tanıtıyor, bağımsız incelemelerde 24/5 olarak geçiyor.",
+      education:
+        "Başlangıç/orta/ileri seviyelere ayrılmış 20'den fazla yazılı içerik ve kısa video, ayda iki kez konuk analistlerle canlı webinar ve sekiz dilde PDF platform kılavuzları. İçerikler demo kullanıcılarına da açık.",
+    },
+    extraFaqs: [
+      {
+        q: "MultiBank güvenilir mi?",
+        a: "MultiBank Group 2005'ten beri faaliyette ve grup şirketleri Avustralya ASIC (416279), Kıbrıs CySEC (430/23), Almanya BaFin (10119375), Singapur MAS (CMS101174) ve BAE SCA (20200000045) dahil beş kıtadaki düzenleyiciler altında lisanslı — bunlardan ASIC ve CySEC tier-1 kabul edilir. Hangi grup şirketiyle sözleşme yaptığınız hangi düzenleyicinin sizi koruduğunu belirlediği için, hesap açmadan önce sözleşmedeki şirket adını ve lisansı resmi siteden teyit edin.",
+      },
+      {
+        q: "MultiBank'ta hareketsizlik ücreti var mı?",
+        a: "Evet. Bağımsız incelemelere göre 3 ay boyunca işlem yapılmayan hesaplardan 60 $ hareketsizlik ücreti alınıyor. Bu, sektörde yaygın olan 12 aylık süreye kıyasla belirgin biçimde kısa bir eşik; hesabınızı uzun süre boş bırakmayı düşünüyorsanız bakiyenizi çekmeniz veya güncel ücret tarifesini resmi siteden kontrol etmeniz önerilir.",
+      },
+      {
+        q: "MultiBank'ta minimum yatırım ne kadar?",
+        a: "Standart hesap 50 $ ile açılabiliyor. Ancak dar spreadler hesap türüne bağlı: Pro hesap 1.000 $, 0.0 pipten başlayan ECN hesap ise 5.000 $ minimum yatırım istiyor. Cent veya mikro hesap seçeneği bulunmuyor, bu yüzden küçük sermayeyle çok küçük lotlarla çalışmak isteyenler için uygun bir yapı değil.",
+      },
+    ],
+  },
 ].sort((a, b) => a.rank - b.rank);
 
 export function getBrokerBySlug(slug: string): Broker | undefined {

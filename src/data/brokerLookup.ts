@@ -833,6 +833,7 @@ export const lookupBrokers: LookupBroker[] = [
     regulators: ["ASIC", "BaFin", "FMA (Austria)", "CySEC", "FSC (BVI)"],
     note: "Broad multi-continent regulatory footprint including two Tier-1 regulators (ASIC 416279, BaFin).",
     source: "Independent regulator/broker-review research, 2026-08-13",
+    relatedSlug: "multibank",
   },
   {
     name: "Scope Markets",
