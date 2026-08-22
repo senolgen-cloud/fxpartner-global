@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
-export const metadata: Metadata = {
-  title: "Uygulama Kurulum Rehberi (iOS, Android, Windows)",
-  description:
-    "FXPARTNER'ı iPhone, Android telefon veya Windows bilgisayarınıza uygulama gibi kurun. Adım adım kurulum rehberi ve bildirimleri açma talimatları.",
-  alternates: { canonical: "/kurulum" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.kurulum.title"],
+    description: t["page.kurulum.description"],
+    alternates: {
+      canonical: localePath(locale, "/kurulum"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/kurulum")])
+      ),
+    },
+  };
+}
 
 interface Step {
   title: string;

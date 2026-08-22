@@ -5,6 +5,8 @@ import AiMarketAssistant from "@/components/AiMarketAssistant";
 import UpgradeGate from "@/components/UpgradeGate";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { getViewerAccess, hasTierAccess } from "@/lib/tierAccess";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 const OG_IMAGE = `${SITE_URL}/ai-asistan-preview.jpg`;
@@ -63,24 +65,35 @@ const aiAssistantFaqs = [
   },
 ];
 
-export const metadata: Metadata = {
-  title: "AI Piyasa Asistanı",
-  description: DESCRIPTION,
-  alternates: { canonical: "/ai-asistan" },
-  openGraph: {
-    title: TITLE,
-    description: DESCRIPTION,
-    url: `${SITE_URL}/ai-asistan`,
-    type: "website",
-    images: [{ url: OG_IMAGE, width: 1448, height: 1086 }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: TITLE,
-    description: DESCRIPTION,
-    images: [OG_IMAGE],
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.ai-asistan.title"],
+    description: t["page.ai-asistan.description"],
+    alternates: {
+      canonical: localePath(locale, "/ai-asistan"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/ai-asistan")])
+      ),
+    },
+    openGraph: {
+      url: `${SITE_URL}/ai-asistan`,
+      type: "website",
+      images: [{ url: OG_IMAGE, width: 1448, height: 1086 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [OG_IMAGE],
+    },
+  };
+}
 
 export default async function AiAssistantPage() {
   const { signedIn, tier } = await getViewerAccess();

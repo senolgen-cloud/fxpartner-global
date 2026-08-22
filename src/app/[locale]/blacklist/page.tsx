@@ -3,15 +3,31 @@ import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import { brokers } from "@/data/brokers";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
-export const metadata: Metadata = {
-  title: "Aracı Kurum Risk Uyarıları",
-  description:
-    "Düşük bağımsız güven puanları veya yayınlanan incelemelerde tekrarlayan şikayet örüntüleri nedeniyle işaretlenmiş aracı kurumlar.",
-  alternates: { canonical: "/blacklist" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.blacklist.title"],
+    description: t["page.blacklist.description"],
+    alternates: {
+      canonical: localePath(locale, "/blacklist"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/blacklist")])
+      ),
+    },
+  };
+}
 
 // Curated, not automatic: only brokers whose `cons` already cite a specific,
 // sourced complaint pattern or independent trust-score reference. Adding a

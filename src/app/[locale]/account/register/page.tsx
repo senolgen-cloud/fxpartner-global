@@ -1,14 +1,31 @@
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import SignInForm from "@/components/SignInForm";
 import { brokers } from "@/data/brokers";
 
-export const metadata: Metadata = {
-  title: "Ücretsiz Kayıt Ol",
-  description: "FXPARTNER'a ücretsiz üye olun — broker incelemeleri, cashback takibi ve VIP Telegram erişimi.",
-  alternates: { canonical: "/account/register" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.account.register.title"],
+    description: t["page.account.register.description"],
+    alternates: {
+      canonical: localePath(locale, "/account/register"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/account/register")])
+      ),
+    },
+  };
+}
 
 export default function RegisterPage() {
   return (

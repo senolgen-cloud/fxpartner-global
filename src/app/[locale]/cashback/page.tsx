@@ -4,15 +4,31 @@ import Footer from "@/components/Footer";
 import { cashbackPrograms } from "@/data/cashback";
 import { getBrokerBySlug } from "@/data/brokers";
 import { breadcrumbSchema } from "@/lib/schema";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
-export const metadata: Metadata = {
-  title: "Forex Cashback",
-  description:
-    "İşlem komisyonunuzun bir kısmını geri alın. Hesabınızı katılımcı bir aracı kurumla bağlayın ve kazanç iadenizi FXPARTNER hesabınızdan takip edin.",
-  alternates: { canonical: "/cashback" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.cashback.title"],
+    description: t["page.cashback.description"],
+    alternates: {
+      canonical: localePath(locale, "/cashback"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/cashback")])
+      ),
+    },
+  };
+}
 
 export default function CashbackPage() {
   // Confirmed programs first — they're the ones a visitor can act on today;

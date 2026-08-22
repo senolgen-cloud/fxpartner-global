@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import CopytradeInquiryForm from "@/components/CopytradeInquiryForm";
@@ -8,12 +10,26 @@ import { getViewerAccess, hasTierAccess } from "@/lib/tierAccess";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
-export const metadata: Metadata = {
-  title: "Copytrade — FXPARTNER Sinyallerini Otomatik Kopyalayın",
-  description:
-    "FXPARTNER'ın gerçek, takip edilen MT5 hesabındaki işlemleri kendi hesabınıza otomatik kopyalayan Copier EA — hesabınızın kontrolü her zaman sizde kalır.",
-  alternates: { canonical: "/copytrade" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.copytrade.title"],
+    description: t["page.copytrade.description"],
+    alternates: {
+      canonical: localePath(locale, "/copytrade"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/copytrade")])
+      ),
+    },
+  };
+}
 
 const faqs = [
   {

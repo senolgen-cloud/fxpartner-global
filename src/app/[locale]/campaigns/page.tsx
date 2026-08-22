@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Image from "next/image";
 import Footer from "@/components/Footer";
@@ -8,27 +10,35 @@ import { breadcrumbSchema } from "@/lib/schema";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 const OG_IMAGE = `${SITE_URL}/campaigns/lite-finance-refer-a-friend.jpg`;
 
-export const metadata: Metadata = {
-  title: "Güncel Broker Kampanyaları",
-  description:
-    "FXPARTNER partner brokerlarının aktif referans ve yatırım kampanyaları, tek bir yerde.",
-  alternates: { canonical: "/campaigns" },
-  openGraph: {
-    title: "Güncel Broker Kampanyaları | FXPARTNER",
-    description:
-      "FXPARTNER partner brokerlarının aktif referans ve yatırım kampanyaları, tek bir yerde.",
-    url: `${SITE_URL}/campaigns`,
-    type: "website",
-    images: [{ url: OG_IMAGE, width: 1136, height: 757 }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Güncel Broker Kampanyaları | FXPARTNER",
-    description:
-      "FXPARTNER partner brokerlarının aktif referans ve yatırım kampanyaları, tek bir yerde.",
-    images: [OG_IMAGE],
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.campaigns.title"],
+    description: t["page.campaigns.description"],
+    alternates: {
+      canonical: localePath(locale, "/campaigns"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/campaigns")])
+      ),
+    },
+    openGraph: {
+      url: `${SITE_URL}/campaigns`,
+      type: "website",
+      images: [{ url: OG_IMAGE, width: 1136, height: 757 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [OG_IMAGE],
+    },
+  };
+}
 
 export default function CampaignsPage() {
   const campaigns = brokers.filter((b) => b.promotion);

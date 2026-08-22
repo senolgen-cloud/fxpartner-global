@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import { localizeBlogPost, localizeBlogPosts, localizeBrokers } from "@/lib/localizeContent";
-import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Image from "next/image";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
@@ -14,12 +15,26 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 // <main> declares it. Leaving English chrome around Turkish articles was
 // both a reading-experience mismatch and a wrong language signal to
 // crawlers — the same reason each post sets lang individually.
-export const metadata: Metadata = {
-  title: "Blog",
-  description:
-    "Forex brokerı seçimi, regülasyonun okunması ve işlem maliyetlerinin hesaplanması üzerine rehberler ve açıklayıcı yazılar.",
-  alternates: { canonical: "/blog" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.blog.title"],
+    description: t["page.blog.description"],
+    alternates: {
+      canonical: localePath(locale, "/blog"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/blog")])
+      ),
+    },
+  };
+}
 
 export default async function BlogIndexPage({
   params,

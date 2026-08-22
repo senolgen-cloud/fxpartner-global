@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import { brokerCategories, categoryInfo, brokers } from "@/data/brokers";
@@ -6,12 +8,26 @@ import { breadcrumbSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
-export const metadata: Metadata = {
-  title: "Forex Broker Kategorileri",
-  description:
-    "Yeni başlayanlar, düşük spread, yüksek kaldıraç ve daha fazlası — ihtiyacınıza göre forex brokerlarını kategoriye göre keşfedin.",
-  alternates: { canonical: "/categories" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.categories.title"],
+    description: t["page.categories.description"],
+    alternates: {
+      canonical: localePath(locale, "/categories"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/categories")])
+      ),
+    },
+  };
+}
 
 export default function CategoriesPage() {
   return (

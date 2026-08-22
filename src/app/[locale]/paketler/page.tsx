@@ -7,16 +7,32 @@ import { lookupBrokers } from "@/data/brokerLookup";
 import { breadcrumbSchema } from "@/lib/schema";
 import type { PackageTier } from "@/lib/vip";
 import { PACKAGE_TIER_INFO, PACKAGE_TIER_ORDER, FREE_TIER_INFO } from "@/data/packageTiers";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 const trackedBrokerCount = lookupBrokers.length;
 
-export const metadata: Metadata = {
-  title: "Paketler",
-  description:
-    "FXPARTNER paketleri — forex sinyalleri ücretsiz üyelikle, GOLD ve endeksler Pro'da, kripto ve enerji VIP'te. Gerçek MT5 hesabından anlık al/sat sinyalleri.",
-  alternates: { canonical: "/paketler" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.paketler.title"],
+    description: t["page.paketler.description"],
+    alternates: {
+      canonical: localePath(locale, "/paketler"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/paketler")])
+      ),
+    },
+  };
+}
 
 const topFeatures = [
   { icon: "signal", title: "Anlık Sinyaller", sub: "Entry • SL • TP" },

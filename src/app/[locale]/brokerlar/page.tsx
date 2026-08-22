@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import { localizeBlogPost, localizeBlogPosts, localizeBrokers } from "@/lib/localizeContent";
-import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import BrokerList from "@/components/BrokerList";
@@ -19,19 +20,32 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 // birbirinden ayrı düşmesin.
 const YEAR = new Date().getFullYear();
 
-export const metadata: Metadata = {
-  // Hedef kelimeler: "en iyi forex broker", "forex broker karşılaştırma",
-  // "forex aracı kurumları". Türkçe aramada hem "broker" hem "aracı kurum"
-  // kullanılıyor — ikisi de başlıkta/gövdede geçiyor.
-  title: `${YEAR} En İyi Forex Brokerleri — Karşılaştırma ve Bağımsız Puanlama`,
-  description: `${brokers.length} forex brokeri regülasyon, işlem maliyeti, platform ve para çekme deneyimi üzerinden bağımsız olarak puanlandı. Aracı kurum karşılaştırması, gerçek kullanıcı yorumları ve risk uyarıları.`,
-  alternates: { canonical: "/brokerlar" },
-  openGraph: {
-    title: `${YEAR} En İyi Forex Brokerleri — FXPARTNER Karşılaştırması`,
-    description: `${brokers.length} aracı kurum, aynı kriterlerle puanlandı. Ortaklık puanlamayı değiştirmez.`,
-    url: `${SITE_URL}/brokerlar`,
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.brokerlar.title"].replace("{year}", String(YEAR)),
+    description: t["page.brokerlar.description"].replace("{count}", String(brokers.length)),
+    alternates: {
+      canonical: localePath(locale, "/brokerlar"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/brokerlar")])
+      ),
+    },
+    // Hedef kelimeler: "en iyi forex broker", "forex broker karşılaştırma",
+    // "forex aracı kurumları". Türkçe aramada hem "broker" hem "aracı kurum"
+    // kullanılıyor — ikisi de başlıkta/gövdede geçiyor.
+    openGraph: {
+      url: `${SITE_URL}/brokerlar`,
+    },
+  };
+}
 
 // AEO: cevap motorlarının alıntılayabileceği düz metin cevaplar. Sorular
 // gerçek Türkçe arama kalıplarıyla yazıldı ("hangi broker", "güvenilir mi",

@@ -1,14 +1,31 @@
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Footer from "@/components/Footer";
 import { breadcrumbSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
-export const metadata: Metadata = {
-  title: "Gizlilik Politikası",
-  description: "FXPARTNER kişisel verilerinizi nasıl toplar, kullanır ve korur.",
-  alternates: { canonical: "/privacy" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.privacy.title"],
+    description: t["page.privacy.description"],
+    alternates: {
+      canonical: localePath(locale, "/privacy"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/privacy")])
+      ),
+    },
+  };
+}
 
 export default function PrivacyPage() {
   return (

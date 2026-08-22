@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Footer from "@/components/Footer";
 import ComplaintForm from "@/components/ComplaintForm";
 import { brokers } from "@/data/brokers";
@@ -6,12 +8,26 @@ import { breadcrumbSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
-export const metadata: Metadata = {
-  title: "Şikayet Bildir",
-  description:
-    "Bir forex aracı kurumuyla sorun mu yaşadınız? Bize ne olduğunu anlatın, çözüme kavuşturmaya çalışalım.",
-  alternates: { canonical: "/complaint" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.complaint.title"],
+    description: t["page.complaint.description"],
+    alternates: {
+      canonical: localePath(locale, "/complaint"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/complaint")])
+      ),
+    },
+  };
+}
 
 export default function ComplaintPage() {
   return (

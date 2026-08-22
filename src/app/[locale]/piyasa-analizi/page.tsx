@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Image from "next/image";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
@@ -7,12 +9,26 @@ import { breadcrumbSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
-export const metadata: Metadata = {
-  title: "Piyasa Analizleri",
-  description:
-    "FXPARTNER'ın günlük piyasa özetleri — küresel borsalar, merkez bankası kararları ve ekonomik takvimdeki önemli veriler.",
-  alternates: { canonical: "/piyasa-analizi" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.piyasa-analizi.title"],
+    description: t["page.piyasa-analizi.description"],
+    alternates: {
+      canonical: localePath(locale, "/piyasa-analizi"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/piyasa-analizi")])
+      ),
+    },
+  };
+}
 
 export default function MarketAnalysisIndexPage() {
   return (

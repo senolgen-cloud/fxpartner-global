@@ -12,6 +12,8 @@ import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { auth } from "@/auth";
 import { type AccessTier } from "@/lib/vip";
 import { maskLockedActiveSignal } from "@/lib/signalAccess";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 
 const sponsoredBrokers = getSponsoredBrokerPool("signals");
 
@@ -36,24 +38,35 @@ const faqs = [
   },
 ];
 
-export const metadata: Metadata = {
-  title: "Canlı İşlem Sinyalleri",
-  description: DESCRIPTION,
-  alternates: { canonical: "/signals" },
-  openGraph: {
-    title: TITLE,
-    description: DESCRIPTION,
-    url: `${SITE_URL}/signals`,
-    type: "website",
-    images: [{ url: OG_IMAGE, width: 1448, height: 1086 }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: TITLE,
-    description: DESCRIPTION,
-    images: [OG_IMAGE],
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.signals.title"],
+    description: t["page.signals.description"],
+    alternates: {
+      canonical: localePath(locale, "/signals"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/signals")])
+      ),
+    },
+    openGraph: {
+      url: `${SITE_URL}/signals`,
+      type: "website",
+      images: [{ url: OG_IMAGE, width: 1448, height: 1086 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [OG_IMAGE],
+    },
+  };
+}
 
 // Client-side polling (SignalsBoard) keeps the page fresh after load, but
 // the initial server render still needs to be a live DB read every request

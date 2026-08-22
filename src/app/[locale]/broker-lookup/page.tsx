@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Footer from "@/components/Footer";
 import BrokerLookupSearch from "@/components/BrokerLookupSearch";
 import BrokerLookupFullIndex from "@/components/BrokerLookupFullIndex";
 import { lookupBrokers } from "@/data/brokerLookup";
 import { faqSchema } from "@/lib/schema";
 
-export const metadata: Metadata = {
-  title: "Aracı Kurum Sorgulama",
-  description:
-    "Herhangi bir forex aracı kurumunu isimle arayın ve düzenlenmiş mi, ekstra dikkat gerektiriyor mu, yoksa resmi düzenleyici uyarı listelerinde yüksek riskli olarak mı işaretlenmiş görün.",
-  alternates: { canonical: "/broker-lookup" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.broker-lookup.title"],
+    description: t["page.broker-lookup.description"],
+    alternates: {
+      canonical: localePath(locale, "/broker-lookup"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/broker-lookup")])
+      ),
+    },
+  };
+}
 
 const lookupFaqs = [
   {

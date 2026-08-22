@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import SentimentPoll from "@/components/SentimentPoll";
@@ -13,12 +15,26 @@ import { getViewerAccess } from "@/lib/tierAccess";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
-export const metadata: Metadata = {
-  title: "Topluluk",
-  description:
-    "FXPARTNER'ın küresel yatırımcı topluluğu — gerçek broker yorumları, piyasa beklenti anketi ve resmi Telegram/X kanalları.",
-  alternates: { canonical: "/topluluk" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.topluluk.title"],
+    description: t["page.topluluk.description"],
+    alternates: {
+      canonical: localePath(locale, "/topluluk"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/topluluk")])
+      ),
+    },
+  };
+}
 
 export const dynamic = "force-dynamic";
 

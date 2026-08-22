@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import {
@@ -12,12 +14,26 @@ import { breadcrumbSchema } from "@/lib/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
-export const metadata: Metadata = {
-  title: "Forex Broker Düzenleme Raporu 2026",
-  description:
-    "FXPARTNER'ın kendi verilerine dayanan, güncel olarak hesaplanan forex broker düzenleme kapsamı raporu — tier-1 lisans dağılımı, düzenleyici sıklığı ve kategori kırılımı.",
-  alternates: { canonical: "/raporlar/forex-broker-duzenleme-raporu" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.raporlar.forex-broker-duzenleme-raporu.title"],
+    description: t["page.raporlar.forex-broker-duzenleme-raporu.description"],
+    alternates: {
+      canonical: localePath(locale, "/raporlar/forex-broker-duzenleme-raporu"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/raporlar/forex-broker-duzenleme-raporu")])
+      ),
+    },
+  };
+}
 
 // Every number on this page is computed at request time directly from
 // src/data/brokers.ts (the same data that drives /brokers and /categories)

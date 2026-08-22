@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import DiscountCodeCopy from "@/components/DiscountCodeCopy";
@@ -14,17 +16,29 @@ import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 const YEAR = new Date().getFullYear();
 
-export const metadata: Metadata = {
-  title: `Prop Firma İndirim Kodları ${YEAR} — Güncel ve Doğrulanmış`,
-  description: `Prop firma indirim kodları: hangi firmanın güncel kuponu var, oranı ne, nasıl uygulanıyor. Yalnızca koşulları teyit edilmiş kodlar listelenir; indirimi olmayan firmalar açıkça belirtilir.`,
-  alternates: { canonical: "/prop-firmalar/indirim-kodlari" },
-  openGraph: {
-    title: `Prop Firma İndirim Kodları ${YEAR}`,
-    description:
-      "Doğrulanmış prop firma kuponları ve challenge ücretinde geçerli indirim oranları.",
-    url: `${SITE_URL}/prop-firmalar/indirim-kodlari`,
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.prop-firmalar.indirim-kodlari.title"].replace("{year}", String(YEAR)),
+    description: t["page.prop-firmalar.indirim-kodlari.description"],
+    alternates: {
+      canonical: localePath(locale, "/prop-firmalar/indirim-kodlari"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/prop-firmalar/indirim-kodlari")])
+      ),
+    },
+    openGraph: {
+      url: `${SITE_URL}/prop-firmalar/indirim-kodlari`,
+    },
+  };
+}
 
 const faqs = [
   {

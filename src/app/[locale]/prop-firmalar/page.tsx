@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import PropFirmComparisonTable from "@/components/PropFirmComparisonTable";
@@ -12,19 +14,31 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 // Tek yerden türetiliyor ki her yıl elle güncelleme gerekmesin.
 const YEAR = new Date().getFullYear();
 
-export const metadata: Metadata = {
-  // Hedef kelimeler: "en iyi prop firma", "prop firma karşılaştırma",
-  // "funded hesap". Türkçe aramada üç kalıp da kullanılıyor.
-  title: `${YEAR} En İyi Prop Firmaları — Funded Hesap Karşılaştırması`,
-  description: `Prop firmalarını (funded hesap) challenge kuralları, drawdown limitleri, ücretler, kâr paylaşımı ve ödeme sicili üzerinden karşılaştırın. Bağımsız puanlama, kaynaklı veri, indirim kodları. Prop firma nedir, hangisi güvenilir?`,
-  alternates: { canonical: "/prop-firmalar" },
-  openGraph: {
-    title: `${YEAR} En İyi Prop Firmaları — FXPARTNER Karşılaştırması`,
-    description:
-      "Funded hesap veren firmalar, ödeme sicili dahil bağımsız kriterlerle puanlandı.",
-    url: `${SITE_URL}/prop-firmalar`,
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.prop-firmalar.title"].replace("{year}", String(YEAR)),
+    description: t["page.prop-firmalar.description"],
+    alternates: {
+      canonical: localePath(locale, "/prop-firmalar"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/prop-firmalar")])
+      ),
+    },
+    // Hedef kelimeler: "en iyi prop firma", "prop firma karşılaştırma",
+    // "funded hesap". Türkçe aramada üç kalıp da kullanılıyor.
+    openGraph: {
+      url: `${SITE_URL}/prop-firmalar`,
+    },
+  };
+}
 
 // AEO notu: bu cevaplar kasıtlı olarak Türkçe ve statik HTML içinde. Sitenin
 // diğer dilleri client-side Google Translate ile servis ediliyor ve AI/arama

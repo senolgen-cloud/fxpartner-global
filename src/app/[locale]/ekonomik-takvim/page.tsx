@@ -3,15 +3,31 @@ import Footer from "@/components/Footer";
 import EconomicCalendarBoard from "@/components/EconomicCalendarBoard";
 import { getWeekCalendar } from "@/lib/economicCalendar";
 import { breadcrumbSchema } from "@/lib/schema";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
-export const metadata: Metadata = {
-  title: "Ekonomik Takvim",
-  description:
-    "Canlı ekonomik takvim — CPI, NFP, faiz kararları ve diğer önemli makroekonomik veriler, açıklandığı anda gerçek rakamlarla.",
-  alternates: { canonical: "/ekonomik-takvim" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const t = getDictionary(locale);
+
+  return {
+    title: t["page.ekonomik-takvim.title"],
+    description: t["page.ekonomik-takvim.description"],
+    alternates: {
+      canonical: localePath(locale, "/ekonomik-takvim"),
+      languages: Object.fromEntries(
+        locales.map((l) => [hreflangCode[l], localePath(l, "/ekonomik-takvim")])
+      ),
+    },
+  };
+}
 
 // Client-side polling (EconomicCalendarBoard) keeps this fresh after load;
 // the initial render should still be a live fetch, not a build-time cache.
