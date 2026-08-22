@@ -57,8 +57,16 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     title: "FXPARTNER",
   },
+  // Two framings of the same logo, by how much room the slot has. The
+  // browser tab renders at 16-32px, where the FXPARTNER wordmark under the
+  // monogram is an unreadable smudge, so `icon` (and app/favicon.ico) carry
+  // the FX mark alone. The Home Screen / installed-app icon is large enough
+  // for the full lockup, so apple-touch-icon and manifest.json keep it.
   icons: {
-    icon: "/fxpartner-icon.png",
+    icon: [
+      { url: "/fxpartner-mark-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/fxpartner-mark-512.png", sizes: "512x512", type: "image/png" },
+    ],
     apple: "/fxpartner-icon.png",
   },
   title: {
