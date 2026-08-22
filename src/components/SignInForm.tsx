@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useActionState } from "react";
 import { submitSignIn, type SignInState } from "@/app/[locale]/account/login/actions";
@@ -10,6 +11,7 @@ export default function SignInForm({
 }: {
   brokers: { slug: string; name: string }[];
 }) {
+  const tr = useTr();
   const [state, formAction, pending] = useActionState(submitSignIn, initialState);
 
   const fieldClass =
@@ -38,8 +40,8 @@ export default function SignInForm({
       </div>
       <div>
         <label className={labelClass}>
-          Hangi aracı kurumla işlem yapıyorsunuz?{" "}
-          <span className="normal-case text-text-on-ink-muted/70">(isteğe bağlı)</span>
+          {tr("Hangi aracı kurumla işlem yapıyorsunuz?")}{" "}
+          <span className="normal-case text-text-on-ink-muted/70">{tr("(isteğe bağlı)")}</span>
         </label>
         <select name="preferredBroker" defaultValue="" className={fieldClass}>
           <option value="">Belirtmek istemiyorum</option>

@@ -219,7 +219,7 @@ export default function Footer() {
 
         <div className="mt-12 border-t border-hairline pt-6 text-xs leading-relaxed text-text-on-ink-muted/80">
           <p>
-            <strong className="text-text-on-ink-muted">Risk uyarısı:</strong> Kaldıraçlı
+            <strong className="text-text-on-ink-muted">{tr("Risk uyarısı:")}</strong> Kaldıraçlı
             forex ve türev ürünlerle işlem yapmak yüksek düzeyde risk taşır
             ve yatırdığınız sermayenin tamamının kaybedilmesine yol
             açabilir. Bu sayfadaki içerik yalnızca genel bilgilendirme
@@ -229,7 +229,7 @@ export default function Footer() {
             broker&apos;ın resmi web sitesinden doğrulayın.
           </p>
           <p className="mt-3">
-            <strong className="text-text-on-ink-muted">Bağlı kuruluş bilgilendirmesi:</strong> FXPARTNER,
+            <strong className="text-text-on-ink-muted">{tr("Bağlı kuruluş bilgilendirmesi:")}</strong> FXPARTNER,
             bu sayfada listelenen brokerların bazılarıyla ortaklık/referans
             ilişkisine sahiptir ve &ldquo;Hesap Aç&rdquo; bağlantıları
             üzerinden açılan hesaplardan komisyon kazanabilir. Bu durum

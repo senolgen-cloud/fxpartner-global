@@ -104,7 +104,7 @@ export default async function IndirimKodlariPage({
                 Prop Firmalar
               </Link>
               <span className="mx-2">/</span>
-              <span className="text-text-on-ink">İndirim Kodları</span>
+              <span className="text-text-on-ink">{tr("İndirim Kodları")}</span>
             </nav>
 
             <h1 className="mt-6 font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">

@@ -281,7 +281,7 @@ export default async function PropFirmDetailPage({
                     href={`/prop-firmalar/${firm.slug}/indirim-kodu`}
                     className="font-mono text-xs text-text-on-ink-muted hover:text-text-on-ink"
                   >
-                    İndirim kodu:{" "}
+                    {tr("İndirim kodu:")}{" "}
                     <span className="rounded border border-dashed border-signal/50 bg-signal/10 px-2 py-0.5 uppercase text-signal">
                       {d.code}
                     </span>

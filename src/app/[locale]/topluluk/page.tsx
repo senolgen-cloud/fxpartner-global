@@ -176,7 +176,7 @@ export default async function CommunityPage({
                     📣
                   </span>
                   <div>
-                    <h3 className="font-semibold text-text-on-ink">Resmi Telegram Kanalı</h3>
+                    <h3 className="font-semibold text-text-on-ink">{tr("Resmi Telegram Kanalı")}</h3>
                     <p className="text-xs text-text-on-ink-muted">@fxpartnerglobal</p>
                   </div>
                 </div>
@@ -201,7 +201,7 @@ export default async function CommunityPage({
                     </svg>
                   </span>
                   <div>
-                    <h3 className="font-semibold text-text-on-ink">Resmi Instagram Hesabı</h3>
+                    <h3 className="font-semibold text-text-on-ink">{tr("Resmi Instagram Hesabı")}</h3>
                     <p className="text-xs text-text-on-ink-muted">@fxpartner_global</p>
                   </div>
                 </div>
@@ -249,7 +249,7 @@ export default async function CommunityPage({
                     </svg>
                   </span>
                   <div>
-                    <h3 className="font-semibold text-text-on-ink">Resmi X (Twitter) Hesabı</h3>
+                    <h3 className="font-semibold text-text-on-ink">{tr("Resmi X (Twitter) Hesabı")}</h3>
                     <p className="text-xs text-text-on-ink-muted">@fxpartner_TR</p>
                   </div>
                 </div>

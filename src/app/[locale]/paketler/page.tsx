@@ -300,7 +300,7 @@ export default async function PaketlerPage({
           <div className="flex flex-col items-center justify-between gap-8 rounded-2xl border border-hairline bg-ink-soft p-8 text-center md:flex-row md:text-left">
             <div>
               <p className="font-display text-2xl font-semibold">
-                Piyasayı takip etmek yerine,{" "}
+                {tr("Piyasayı takip etmek yerine,")}{" "}
                 <span className="text-signal">sistemli takip edin.</span>
               </p>
               <p className="mt-2 text-sm text-text-on-ink-muted">

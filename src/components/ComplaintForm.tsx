@@ -26,7 +26,7 @@ export default function ComplaintForm({
         <p className="mt-3 text-text-muted">
           Teşekkür ederiz. 48 saat içinde brokerla iletişime geçmeye
           çalışacağız ve e-posta ile geri dönüş yapacağız. Bir FXPARTNER
-          hesabınız varsa, durumu{" "}
+          {tr("hesabınız varsa, durumu")}{" "}
           <Link href="/account" className="text-signal hover:text-signal-strong">
             {tr("hesap sayfanızdan")}
           </Link>{" "}
@@ -91,7 +91,7 @@ export default function ComplaintForm({
               {b.name}
             </option>
           ))}
-          <option value={OTHER_VALUE}>Diğer (listede yok)</option>
+          <option value={OTHER_VALUE}>{tr("Diğer (listede yok)")}</option>
         </select>
         {brokerSlug === OTHER_VALUE && (
           <input

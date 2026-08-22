@@ -401,7 +401,7 @@ export default async function AccountPage({
             </h2>
             {myComplaints.length === 0 ? (
               <p className="mt-4 text-sm text-text-on-ink-muted">
-                Henüz bir şikayet göndermediniz. Bir brokerla ilgili sorun mu yaşıyorsunuz?{" "}
+                {tr("Henüz bir şikayet göndermediniz. Bir brokerla ilgili sorun mu yaşıyorsunuz?")}{" "}
                 <Link href="/complaint" className="text-signal hover:text-signal-strong">
                   {tr("Şikayet gönderin")}
                 </Link>

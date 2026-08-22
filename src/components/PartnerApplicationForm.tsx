@@ -94,7 +94,7 @@ export default function PartnerApplicationForm({
             defaultValue=""
             className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
           >
-            <option value="">Tercihim yok / henüz emin değilim</option>
+            <option value="">{tr("Tercihim yok / henüz emin değilim")}</option>
             {brokers.map((b) => (
               <option key={b.slug} value={b.slug}>
                 {b.name}

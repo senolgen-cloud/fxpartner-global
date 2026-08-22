@@ -154,8 +154,8 @@ export default function NotificationOptIn() {
               id="notification-optin-title"
               className="mt-2 text-sm leading-relaxed text-text-on-ink-muted"
             >
-              iPhone'da bildirim alabilmek için önce FXPARTNER'ı ana ekranına eklemen gerekiyor:{" "}
-              <span className="text-text-on-ink">Paylaş</span> (
+              {tr("iPhone'da bildirim alabilmek için önce FXPARTNER'ı ana ekranına eklemen gerekiyor:")}{" "}
+              <span className="text-text-on-ink">{tr("Paylaş")}</span> (
               <span aria-hidden="true">⬆️</span>) →{" "}
               <span className="text-text-on-ink">&quot;Ana Ekrana Ekle&quot;</span>. Ekledikten
               sonra uygulamayı ana ekrandan aç, bildirimler orada açılabilir.

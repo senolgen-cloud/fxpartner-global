@@ -119,6 +119,35 @@ function wrapFile(path) {
       continue;
     }
 
+    // --- <tag>text</tag> on one line -------------------------------------
+    // Only when the tag has no expression inside it, so the whole child is
+    // the text: <span className="x">Metin</span>.
+    const inline = line.match(/^(\s*<([a-zA-Z][\w.]*)\b[^>]*>)([^<>{}]*[çğıöşüÇĞİÖŞÜ][^<>{}]*)(<\/\2>.*)$/);
+    if (inline) {
+      const [, open, , text, close] = inline;
+      const trimmed = text.trim();
+      if (trimmed) {
+        const decoded = decodeEntities(trimmed);
+        out.push(`${open}{tr(${JSON.stringify(decoded)})}${close}`);
+        collected.push(decoded);
+        changed++;
+        continue;
+      }
+    }
+
+    // --- text followed by a JSX space --------------------------------------
+    // "…gerekiyor:{" "}" — the trailing {" "} is what stops the run detector,
+    // and the text before it is still a plain string.
+    const beforeSpace = line.match(/^(\s*)([^<>{}]*[çğıöşüÇĞİÖŞÜ][^<>{}]*?)(\{" "\})\s*$/);
+    if (beforeSpace) {
+      const [, indent, text, space] = beforeSpace;
+      const decoded = decodeEntities(text.trim());
+      out.push(`${indent}{tr(${JSON.stringify(decoded)})}${space}`);
+      collected.push(decoded);
+      changed++;
+      continue;
+    }
+
     // --- a translatable attribute ----------------------------------------
     let current = line;
     for (const attr of ATTRS) {

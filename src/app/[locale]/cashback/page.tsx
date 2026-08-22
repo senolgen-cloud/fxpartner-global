@@ -75,7 +75,7 @@ export default async function CashbackPage({
               Aşağıdan bir aracı kurum seçin, işlem hesap numaranızı gönderin,
               biz de bunu partner kayıtlarımızla doğrulayalım — hesap
               gerekmez. <strong className="text-text-on-ink">Aktif</strong>{" "}
-              işaretli programların koşulları aracı kurumla teyit edilmiştir;{" "}
+              {tr("işaretli programların koşulları aracı kurumla teyit edilmiştir;")}{" "}
               <strong className="text-text-on-ink">Tahmini</strong> işaretli
               oranlar nihai koşullar imzalandıkça değişebilir.
             </p>

@@ -45,7 +45,7 @@ export default async function LoginPage({
               <SimpleSignInForm />
 
               <p className="mt-6 text-xs leading-relaxed text-text-on-ink-muted">
-                Henüz üye değil misiniz?{" "}
+                {tr("Henüz üye değil misiniz?")}{" "}
                 <Link href="/account/register" className="text-signal hover:text-signal-strong">
                   {tr("Ücretsiz kayıt olun")}
                 </Link>

@@ -13,7 +13,7 @@ export default function CopytradeInquiryForm() {
   if (state.ok) {
     return (
       <div className="rounded-2xl border border-hairline-light bg-paper p-8 text-center">
-        <h2 className="font-display text-2xl font-semibold text-text-dark">Talebiniz alındı</h2>
+        <h2 className="font-display text-2xl font-semibold text-text-dark">{tr("Talebiniz alındı")}</h2>
         <p className="mt-3 text-text-muted">
           {tr("Ekibimiz kısa süre içinde e-posta ile dönüş yaparak Copier EA kurulumunu ve mevcut kısıtlamaları/riskleri sizinle birlikte gözden geçirecek.")}
         </p>

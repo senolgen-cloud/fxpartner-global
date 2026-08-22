@@ -79,7 +79,7 @@ export default async function NewsBulletinIndexPage({
         <section>
           <div className="mx-auto max-w-3xl px-6 py-16">
             {bulletins.length === 0 ? (
-              <p className="text-text-muted">Henüz bülten yayınlanmadı.</p>
+              <p className="text-text-muted">{tr("Henüz bülten yayınlanmadı.")}</p>
             ) : (
               <div className="divide-y divide-hairline-light border-t border-hairline-light">
                 {bulletins.map((b) => (

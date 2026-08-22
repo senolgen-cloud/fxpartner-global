@@ -141,7 +141,7 @@ export default function PositionSizeCalculator({
 
               <div className="mt-4">
                 <div className="flex items-center justify-between text-[11px] text-text-on-ink-muted">
-                  <span>10 üst üste kayıptan sonra bakiye</span>
+                  <span>{tr("10 üst üste kayıptan sonra bakiye")}</span>
                   <span className="font-mono font-semibold text-text-on-ink">
                     %{r.balanceAfter10LossesPercent.toFixed(0)}
                   </span>

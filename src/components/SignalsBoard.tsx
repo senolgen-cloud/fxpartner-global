@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Link from "@/components/LocaleLink";
@@ -188,17 +189,18 @@ function SignalTable({
   closedView?: boolean;
   viewerTier: AccessTier | null;
 }) {
+  const tr = useTr();
   return (
     <div className="hidden overflow-hidden rounded-2xl border border-hairline bg-ink-soft md:block">
       <div className="flex items-center justify-between border-b border-hairline px-6 py-4">
         <h2 className="font-display text-lg font-semibold text-text-on-ink">{title}</h2>
         <span className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-signal">
           <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
-          Canlı
+          {tr("Canlı")}
         </span>
       </div>
       {signals.length === 0 ? (
-        <p className="px-6 py-8 text-sm text-text-on-ink-muted">Henüz gösterilecek bir şey yok.</p>
+        <p className="px-6 py-8 text-sm text-text-on-ink-muted">{tr("Henüz gösterilecek bir şey yok.")}</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full min-w-[720px] border-collapse text-sm">
@@ -206,8 +208,8 @@ function SignalTable({
               <tr className="border-b border-hairline text-left text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted">
                 <th className="px-6 py-3 font-medium">Saat</th>
                 <th className="px-4 py-3 font-medium">Parite</th>
-                <th className="px-4 py-3 font-medium">Yön</th>
-                <th className="px-4 py-3 font-medium">Giriş</th>
+                <th className="px-4 py-3 font-medium">{tr("Yön")}</th>
+                <th className="px-4 py-3 font-medium">{tr("Giriş")}</th>
                 <th className="px-4 py-3 font-medium">{closedView ? "Kapanış" : "SL / TP"}</th>
                 <th className="px-4 py-3 font-medium">Lot</th>
                 <th className="px-6 py-3 text-right font-medium">{closedView ? "Sonuç" : "Durum"}</th>
@@ -352,6 +354,7 @@ function useCountUp(target: number, durationMs = 1400, decimals = 0) {
 }
 
 function PipsStats({ closed }: { closed: Signal[] }) {
+  const tr = useTr();
   const decisive = closed
     .filter((s) => (s.outcome === "WIN" || s.outcome === "LOSS") && s.profit !== null)
     .slice()
@@ -538,13 +541,13 @@ function PipsStats({ closed }: { closed: Signal[] }) {
 
         <div className="flex flex-wrap gap-6">
           <div>
-            <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">En İyi</div>
+            <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">{tr("En İyi")}</div>
             <div ref={bestCount.ref} className="mt-1 font-display text-xl font-semibold" style={{ color: TICK_UP }}>
               +${bestCount.display}
             </div>
           </div>
           <div>
-            <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">En Kötü</div>
+            <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">{tr("En Kötü")}</div>
             <div
               ref={worstCount.ref}
               className="mt-1 font-display text-xl font-semibold"
@@ -563,7 +566,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
           </div>
           <div>
             <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-              Ort. Süre
+              {tr("Ort. Süre")}
             </div>
             <div className="mt-1 font-display text-xl font-semibold text-text-on-ink">{avgDurationLabel}</div>
           </div>
@@ -618,7 +621,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
       {monthly.length > 1 && (
         <div className="mt-8 border-t border-hairline pt-6">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
-            Aylık Fiyat Farkı
+            {tr("Aylık Fiyat Farkı")}
           </span>
           <div className="mt-4 flex items-end gap-3">
             {monthly.map(([month, value], i) => {
@@ -651,7 +654,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
       {pairStats.length > 0 && (
         <div className="mt-8 border-t border-hairline pt-6">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
-            Parite Bazında Performans
+            {tr("Parite Bazında Performans")}
           </span>
           <div className="mt-4 space-y-3">
             {pairStats.map((p, i) => {
@@ -689,7 +692,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
                   <span
                     className="w-24 shrink-0 text-right font-mono text-[11px]"
                     style={{ color: p.med >= 0 ? TICK_UP : TICK_DOWN }}
-                    title="Medyan işlem sonucu"
+                    title={tr("Medyan işlem sonucu")}
                   >
                     ort. {formatPerLot(p.med)}
                   </span>
@@ -705,7 +708,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
                   <span className="w-5 shrink-0 text-right">
                     {p.dominated && (
                       <span
-                        title="Bu toplamın yarısından fazlasını tek bir işlem oluşturuyor — medyana bakın"
+                        title={tr("Bu toplamın yarısından fazlasını tek bir işlem oluşturuyor — medyana bakın")}
                         className="cursor-help font-mono text-[11px] text-gold"
                       >
                         ⚠
@@ -730,6 +733,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
 }
 
 function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: AccessTier | null }) {
+  const tr = useTr();
   const isBuy = signal.direction === "BUY";
   const isSell = signal.direction === "SELL";
   const directionColor = isSell ? TICK_DOWN : TICK_UP;
@@ -784,7 +788,7 @@ function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: Access
         ) : (
           <span className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-signal">
             <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
-            Canlı
+            {tr("Canlı")}
           </span>
         )}
       </div>
@@ -798,7 +802,7 @@ function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: Access
       ) : (
         <p className="mt-2 font-display text-2xl font-bold tabular-stat text-text-on-ink">
           {signal.entry}
-          <span className="ml-2 text-sm font-medium text-text-on-ink-muted">giriş</span>
+          <span className="ml-2 text-sm font-medium text-text-on-ink-muted">{tr("giriş")}</span>
         </p>
       )}
 
@@ -869,6 +873,7 @@ export default function SignalsBoard({
   liveMarkets?: ReactNode;
   viewerTier: AccessTier | null;
 }) {
+  const tr = useTr();
   const [active, setActive] = useState(initialActive);
   const [closed, setClosed] = useState(initialClosed);
   const knownIds = useRef(new Set([...initialActive, ...initialClosed].map((s) => s.id)));
@@ -947,12 +952,10 @@ export default function SignalsBoard({
       <section className="border-b border-hairline">
         <div className="mx-auto max-w-6xl px-6 py-16">
           <div className="flex flex-col items-center text-center">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">Canlı Sinyaller</span>
-            <h1 className="mt-3 font-display text-3xl font-semibold md:text-4xl">Gerçek Zamanlı İşlem Sinyalleri</h1>
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">{tr("Canlı Sinyaller")}</span>
+            <h1 className="mt-3 font-display text-3xl font-semibold md:text-4xl">{tr("Gerçek Zamanlı İşlem Sinyalleri")}</h1>
             <p className="mt-4 max-w-2xl text-text-on-ink-muted">
-              Aşağıdaki her sinyal, otomatik bir EA aracılığıyla doğrudan takip edilen MT5 hesabımızdan gelir —
-              Telegram kanalımızda ve X&apos;te paylaşılanlarla aynı girişler, her işlem kapandığında gerçek ve
-              doğrulanmış bir sonuçla birlikte. Burada hiçbir şey simüle edilmemiş veya sonradan eklenmemiştir.
+              {tr("Aşağıdaki her sinyal, otomatik bir EA aracılığıyla doğrudan takip edilen MT5 hesabımızdan gelir — Telegram kanalımızda ve X'te paylaşılanlarla aynı girişler, her işlem kapandığında gerçek ve doğrulanmış bir sonuçla birlikte. Burada hiçbir şey simüle edilmemiş veya sonradan eklenmemiştir.")}
             </p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-10">
@@ -965,7 +968,7 @@ export default function SignalsBoard({
               <div>
                 <div className="font-display text-3xl font-semibold">{decisive.length}</div>
                 <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  Kapanan İşlemler
+                  {tr("Kapanan İşlemler")}
                 </div>
               </div>
               <div className="flex flex-col items-center">
@@ -986,14 +989,14 @@ export default function SignalsBoard({
           <h2 className="font-display text-2xl font-semibold">Aktif Sinyaller</h2>
           <span className="hidden items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-signal md:flex">
             <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
-            Canlı
+            {tr("Canlı")}
           </span>
         </div>
         {active.length === 0 ? (
           <p className="text-text-on-ink-muted">
-            Şu anda açık sinyal yok — bir sonrakini paylaşıldığı anda almak için{" "}
+            {tr("Şu anda açık sinyal yok — bir sonrakini paylaşıldığı anda almak için")}{" "}
             <a href="https://t.me/fxpartnerglobal" className="text-signal hover:text-signal-strong">
-              Telegram kanalımızı
+              {tr("Telegram kanalımızı")}
             </a>{" "}
             takip edin.
           </p>
@@ -1013,7 +1016,7 @@ export default function SignalsBoard({
       <section className="border-b border-hairline bg-ink-soft/30">
         <div className="mx-auto max-w-6xl px-6 py-10">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-            <h2 className="font-display text-xl font-semibold">Canlı Grafik</h2>
+            <h2 className="font-display text-xl font-semibold">{tr("Canlı Grafik")}</h2>
             <div className="flex flex-wrap gap-2">
               {chartPairs.map((pair) => (
                 <button
@@ -1052,7 +1055,7 @@ export default function SignalsBoard({
                     {wins}
                   </div>
                   <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.1em] text-text-on-ink-muted">
-                    Kazanılan
+                    {tr("Kazanılan")}
                   </div>
                 </div>
                 <div>
@@ -1075,7 +1078,7 @@ export default function SignalsBoard({
           <SignalTable title="Son Sinyaller" signals={closed} closedView viewerTier={viewerTier} />
           {closed.length === 0 ? (
             <p className="mt-4 text-text-on-ink-muted md:hidden">
-              Henüz kapanan sinyal yok — işlemler kapandıkça sonuçlar burada görünecek.
+              {tr("Henüz kapanan sinyal yok — işlemler kapandıkça sonuçlar burada görünecek.")}
             </p>
           ) : (
             <div className="mt-6 flex flex-wrap justify-center gap-5 md:hidden">

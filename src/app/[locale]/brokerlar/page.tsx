@@ -152,7 +152,7 @@ export default async function BrokerlarPage({
               puanlandı. Aynı kriterler herkese uygulanır.
             </p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">
-              <strong className="text-text-on-ink">Ortaklık, puanlamayı değiştirmez.</strong>{" "}
+              <strong className="text-text-on-ink">{tr("Ortaklık, puanlamayı değiştirmez.")}</strong>{" "}
               {tr("Platformu reklam ve komisyon gelirleri finanse eder — bu gelir asla daha iyi bir puan satın almaz. Ticari ilişkimiz olan brokerlar sayfa üzerinde açıkça belirtilir.")}
             </p>
             <div className="mt-8">
@@ -231,7 +231,7 @@ export default async function BrokerlarPage({
             </h2>
             <div className="mt-10 space-y-8">
               <div>
-                <h3 className="font-poppins text-lg font-semibold">1. Regülasyon</h3>
+                <h3 className="font-poppins text-lg font-semibold">{tr("1. Regülasyon")}</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-text-on-ink-muted">
                   Sadece &ldquo;lisanslı mı&rdquo; değil, <strong className="text-text-on-ink">sizin
                   hesabınızın hangi tüzel kişilik altında açıldığı</strong> önemli. Bir
@@ -249,11 +249,11 @@ export default async function BrokerlarPage({
                 </p>
               </div>
               <div>
-                <h3 className="font-poppins text-lg font-semibold">3. Para çekme deneyimi</h3>
+                <h3 className="font-poppins text-lg font-semibold">{tr("3. Para çekme deneyimi")}</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-text-on-ink-muted">
                   Şikayetlerin büyük çoğunluğu buradan çıkar. En pratik yöntem: hesap
                   açtıktan sonra küçük bir tutarla çekim testi yapmak. Tekrarlayan,
-                  kaynaklı çekim şikayeti olan brokerları{" "}
+                  {tr("kaynaklı çekim şikayeti olan brokerları")}{" "}
                   <Link href="/blacklist" className="text-signal hover:text-signal-strong">
                     {tr("risk uyarıları")}
                   </Link>{" "}
@@ -261,7 +261,7 @@ export default async function BrokerlarPage({
                 </p>
               </div>
               <div>
-                <h3 className="font-poppins text-lg font-semibold">4. Platform ve araçlar</h3>
+                <h3 className="font-poppins text-lg font-semibold">{tr("4. Platform ve araçlar")}</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-text-on-ink-muted">
                   {tr("MT4, MT5, cTrader veya brokerın kendi platformu. Kullandığınız EA veya gösterge varsa platform desteği belirleyici olur.")}
                 </p>
@@ -270,7 +270,7 @@ export default async function BrokerlarPage({
 
             <div className="mt-10 rounded-2xl border border-hairline bg-ink-soft/60 p-6">
               <p className="text-sm leading-relaxed text-text-on-ink-muted">
-                <strong className="text-text-on-ink">Şu anki lider:</strong> {top.name} —{" "}
+                <strong className="text-text-on-ink">{tr("Şu anki lider:")}</strong> {top.name} —{" "}
                 {getBrokerScores(top).composite.toFixed(1)} Index puanı. {top.summary}
               </p>
             </div>

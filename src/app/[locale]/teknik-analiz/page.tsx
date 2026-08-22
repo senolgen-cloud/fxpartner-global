@@ -73,7 +73,7 @@ export default async function TechnicalAnalysisIndexPage({
       <main lang="tr" className="flex-1 bg-paper-high">
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-4xl px-6 py-16 md:py-20">
-            <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">Teknik Analiz Bülteni</span>
+            <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">{tr("Teknik Analiz Bülteni")}</span>
             <h1 className="mt-4 max-w-2xl font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
               {tr("Gün içi pivot ve seviye analizleri")}
             </h1>

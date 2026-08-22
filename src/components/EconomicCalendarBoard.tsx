@@ -131,10 +131,10 @@ export default function EconomicCalendarBoard({ initialEvents }: { initialEvents
           <span>Saat (TRT)</span>
           <span />
           <span>Veri</span>
-          <span>Önem</span>
-          <span>Önceki</span>
+          <span>{tr("Önem")}</span>
+          <span>{tr("Önceki")}</span>
           <span>Beklenti</span>
-          <span>Gerçekleşen</span>
+          <span>{tr("Gerçekleşen")}</span>
         </div>
         <span className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-signal">
           <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
@@ -143,7 +143,7 @@ export default function EconomicCalendarBoard({ initialEvents }: { initialEvents
       </div>
 
       {groups.length === 0 ? (
-        <p className="px-6 py-8 text-sm text-text-on-ink-muted">Bu hafta için veri bulunamadı.</p>
+        <p className="px-6 py-8 text-sm text-text-on-ink-muted">{tr("Bu hafta için veri bulunamadı.")}</p>
       ) : (
         groups.map(([day, dayEvents]) => (
           <div key={day}>

@@ -171,8 +171,8 @@ export default async function RegulationReportPage({
               <table className="w-full min-w-[420px] text-left text-sm">
                 <thead className="bg-paper text-xs uppercase tracking-[0.1em] text-text-muted">
                   <tr>
-                    <th className="px-4 py-3 font-medium">Düzenleyici</th>
-                    <th className="px-4 py-3 font-medium">Broker sayısı</th>
+                    <th className="px-4 py-3 font-medium">{tr("Düzenleyici")}</th>
+                    <th className="px-4 py-3 font-medium">{tr("Broker sayısı")}</th>
                     <th className="px-4 py-3 font-medium">Tier</th>
                   </tr>
                 </thead>
@@ -187,7 +187,7 @@ export default async function RegulationReportPage({
                             Tier-1
                           </span>
                         ) : (
-                          <span className="text-xs text-text-muted">Offshore / diğer</span>
+                          <span className="text-xs text-text-muted">{tr("Offshore / diğer")}</span>
                         )}
                       </td>
                     </tr>
@@ -204,7 +204,7 @@ export default async function RegulationReportPage({
                 <thead className="bg-paper text-xs uppercase tracking-[0.1em] text-text-muted">
                   <tr>
                     <th className="px-4 py-3 font-medium">Kategori</th>
-                    <th className="px-4 py-3 font-medium">Broker sayısı</th>
+                    <th className="px-4 py-3 font-medium">{tr("Broker sayısı")}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-hairline-light">

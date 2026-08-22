@@ -77,7 +77,7 @@ function SignalCardBody({ signal }: { signal: TradeSignal }) {
       ) : (
         <p className="mt-2 font-display text-2xl font-bold tabular-stat text-text-on-ink">
           {signal.entry}
-          <span className="ml-2 text-sm font-medium text-text-on-ink-muted">giriş</span>
+          <span className="ml-2 text-sm font-medium text-text-on-ink-muted">{tr("giriş")}</span>
         </p>
       )}
       <svg viewBox="0 0 200 40" className={`mt-3 h-9 w-full ${isSell ? "text-tick-down" : "text-tick-up"}`} fill="none">

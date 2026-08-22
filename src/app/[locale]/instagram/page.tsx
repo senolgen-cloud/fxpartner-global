@@ -154,7 +154,7 @@ export default async function InstagramLandingPage({
             </a>
             <h1 className="mt-5 font-poppins text-3xl font-semibold leading-[1.15] tracking-tight md:text-5xl">
               Instagram&apos;dan geldiniz.{" "}
-              <span className="text-signal">Aradığınız her şey burada.</span>
+              <span className="text-signal">{tr("Aradığınız her şey burada.")}</span>
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-text-on-ink-muted">
               {tr("FXPARTNER, forex aracı kurumlarını regülasyon, maliyet ve şikayet kayıtlarına göre inceleyen bağımsız bir kaynaktır. Aşağıdaki araçların tamamı ücretsizdir; hesap açmanıza gerek yok.")}
@@ -286,11 +286,11 @@ export default async function InstagramLandingPage({
               ))}
             </div>
             <p className="mt-6 text-sm text-text-on-ink-muted">
-              Nasıl çalıştığımızı ve gelir modelimizi{" "}
+              {tr("Nasıl çalıştığımızı ve gelir modelimizi")}{" "}
               <Link href="/about" className="text-signal underline-offset-4 hover:underline">
                 {tr("Hakkımızda")}
               </Link>{" "}
-              sayfasında açıklıyoruz. Bir aracı kurumla sorun yaşadıysanız{" "}
+              {tr("sayfasında açıklıyoruz. Bir aracı kurumla sorun yaşadıysanız")}{" "}
               <Link href="/complaint" className="text-signal underline-offset-4 hover:underline">
                 {tr("şikayet kaydı")}
               </Link>{" "}
@@ -311,7 +311,7 @@ export default async function InstagramLandingPage({
 
             <div className="mt-8 grid gap-4 md:grid-cols-3">
               <div className="rounded-2xl border border-hairline bg-ink p-6 md:col-span-1">
-                <h3 className="font-display text-base font-semibold">📧 E-posta bülteni</h3>
+                <h3 className="font-display text-base font-semibold">{tr("📧 E-posta bülteni")}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-on-ink-muted">
                   {tr("Günlük teknik bülten ve broker güncellemeleri doğrudan e-postanıza. Spam yok, tek tıkla çıkabilirsiniz.")}
                 </p>
@@ -326,7 +326,7 @@ export default async function InstagramLandingPage({
                 rel="noopener noreferrer"
                 className="rounded-2xl border border-hairline bg-ink p-6 transition-colors hover:border-signal"
               >
-                <h3 className="font-display text-base font-semibold">📣 Telegram kanalı</h3>
+                <h3 className="font-display text-base font-semibold">{tr("📣 Telegram kanalı")}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-on-ink-muted">
                   {tr("Bülten yayınlandığında ilk bildirim burada. @fxpartnerglobal")}
                 </p>
@@ -369,7 +369,7 @@ export default async function InstagramLandingPage({
                 {tr("Kaldıraçlı forex ve CFD işlemleri yüksek risk taşır ve her yatırımcı için uygun değildir. Kaldıraç, kâr kadar zararı da büyütür; yatırdığınız sermayenin tamamını kaybetme ihtimaliniz vardır. Bu sitedeki içerikler genel bilgilendirme amaçlıdır, kişiye özel yatırım tavsiyesi veya alım-satım önerisi değildir. İşlem yapmadan önce bilgi ve tecrübenizi değerlendirin, gerekirse bağımsız bir uzmandan destek alın.")}
               </p>
               <p className="mt-3 text-xs leading-relaxed text-text-on-ink-muted">
-                Ayrıntılar için{" "}
+                {tr("Ayrıntılar için")}{" "}
                 <Link href="/terms" className="underline underline-offset-4">
                   {tr("Kullanım Koşulları")}
                 </Link>{" "}

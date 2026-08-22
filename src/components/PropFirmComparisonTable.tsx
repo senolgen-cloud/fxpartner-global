@@ -82,11 +82,12 @@ const SIGNAL_NOTE: Record<PropFirm["signalServiceAllowed"], string> = {
  */
 function DiscountCell({ firm }: { firm: PropFirm }) {
   const [copied, setCopied] = useState(false);
+  const tr = useTr();
   const d = firm.discount;
 
   if (!d) {
     return (
-      <span className="font-mono text-[11px] text-text-on-ink-muted">İndirim yok</span>
+      <span className="font-mono text-[11px] text-text-on-ink-muted">{tr("İndirim yok")}</span>
     );
   }
 
@@ -434,7 +435,7 @@ export default function PropFirmComparisonTable() {
                             )}
 
                             <p className="mt-3 text-[11px] leading-relaxed text-text-on-ink-muted">
-                              <span className="text-text-on-ink">Ödeme kanıtı:</span>{" "}
+                              <span className="text-text-on-ink">{tr("Ödeme kanıtı:")}</span>{" "}
                               {firm.payoutProof.note}
                             </p>
                           </div>
@@ -457,12 +458,12 @@ export default function PropFirmComparisonTable() {
         en geniş kural setini gösterir; sıkı planlar detay satırında listelenmiştir.
       </p>
       <p className="mt-2 text-xs leading-relaxed text-text-on-ink-muted">
-        <strong className="text-text-on-ink">İndirim sütunu:</strong> Yalnızca koşulları
-        teyit edilmiş indirimler oran ve kodla gösterilir.{" "}
+        <strong className="text-text-on-ink">{tr("İndirim sütunu:")}</strong> Yalnızca koşulları
+        {tr("teyit edilmiş indirimler oran ve kodla gösterilir.")}{" "}
         <span className="text-text-on-ink">Teyit bekliyor</span>, anlaşmanın var ama
         oranın veya nasıl uygulandığının henüz doğrulanmadığı anlamına gelir — doğrulanana
-        kadar sayı yayımlamıyoruz.{" "}
-        <span className="text-text-on-ink">İndirim yok</span> ise o firmayla indirim
+        {tr("kadar sayı yayımlamıyoruz.")}{" "}
+        <span className="text-text-on-ink">{tr("İndirim yok")}</span> ise o firmayla indirim
         anlaşmamız olmadığını açıkça belirtir; boş bırakıp aratmıyoruz.
       </p>
     </div>

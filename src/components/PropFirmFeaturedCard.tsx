@@ -122,7 +122,7 @@ export default function PropFirmFeaturedCard() {
 
         {discountLive && d.code && (
           <span className="font-mono text-xs text-text-on-ink-muted">
-            İndirim kodu:{" "}
+            {tr("İndirim kodu:")}{" "}
             <span className="rounded border border-dashed border-signal/50 bg-signal/10 px-2 py-0.5 uppercase text-signal">
               {d.code}
             </span>

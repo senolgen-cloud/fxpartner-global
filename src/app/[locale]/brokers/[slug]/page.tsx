@@ -578,7 +578,7 @@ export default async function BrokerDetailPage({
                         <th className="py-3 pl-5 pr-4 font-medium">Hesap</th>
                         <th className="py-3 pr-4 font-medium">Spread</th>
                         <th className="py-3 pr-4 font-medium">Komisyon</th>
-                        <th className="py-3 pr-5 font-medium">Min. Yatırım</th>
+                        <th className="py-3 pr-5 font-medium">{tr("Min. Yatırım")}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-hairline-light">
@@ -680,7 +680,7 @@ export default async function BrokerDetailPage({
                     fonlanmış hesapla işlem yapmayı sağlar.
                   </p>
                   <p className="mt-3 max-w-2xl text-xs leading-relaxed text-text-muted">
-                    <strong className="text-text-dark">Önemli:</strong> Prop firmalar
+                    <strong className="text-text-dark">{tr("Önemli:")}</strong> Prop firmalar
                     broker gibi lisanslanmaz. {broker.name}&apos;ın bu sayfada listelenen
                     lisansları {backedPropFirm.name}&apos;daki fonlanmış hesabınızı
                     kapsamaz; iki hizmet ayrı değerlendirilir ve sitemizde ayrı

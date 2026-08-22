@@ -91,8 +91,8 @@ export default async function CopytradePage({
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
               Copier EA, gerçek ve takip edilen MT5 hesabımızdaki işlemleri
-              sizin kendi hesabınıza otomatik olarak yansıtır —{" "}
-              <strong className="text-text-on-ink">hesabınızın kontrolü her zaman sizde kalır.</strong>{" "}
+              {tr("sizin kendi hesabınıza otomatik olarak yansıtır —")}{" "}
+              <strong className="text-text-on-ink">{tr("hesabınızın kontrolü her zaman sizde kalır.")}</strong>{" "}
               {tr("FXPARTNER hiçbir zaman paranıza veya hesabınıza erişemez.")}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">

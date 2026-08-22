@@ -90,7 +90,7 @@ export default async function BrokerLookupPage({
 
             <div className="mt-14 rounded-2xl border border-hairline-light bg-paper p-6">
               <p className="text-sm leading-relaxed text-text-muted">
-                <strong className="text-text-dark">Bunu nasıl okumalı:</strong>{" "}
+                <strong className="text-text-dark">{tr("Bunu nasıl okumalı:")}</strong>{" "}
                 Değerlendirmeler resmi düzenleyici uyarı listelerinden (FCA,
                 CySEC, BaFin, CONSOB, FINMA, Türkiye&apos;nin SPK&apos;sı),
                 bağımsız güven puanı kaynaklarından ve kendi editoryal

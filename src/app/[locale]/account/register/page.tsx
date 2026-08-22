@@ -68,7 +68,7 @@ export default async function RegisterPage({
               <SignInForm brokers={brokers.map((b) => ({ slug: b.slug, name: b.name }))} />
 
               <p className="mt-6 text-xs leading-relaxed text-text-on-ink-muted">
-                Zaten üye misiniz?{" "}
+                {tr("Zaten üye misiniz?")}{" "}
                 <Link href="/account/login" className="text-signal hover:text-signal-strong">
                   {tr("Giriş yapın")}
                 </Link>

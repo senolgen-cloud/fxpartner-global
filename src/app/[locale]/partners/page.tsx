@@ -231,10 +231,10 @@ export default async function PartnersPage({
               {tr("Bu kimler için uygun")}
             </h2>
             <ul className="mt-6 space-y-3 text-sm leading-relaxed text-text-muted">
-              <li>— Trading ile ilgilenen bir kitlesi olan sosyal medya hesabı, YouTube kanalı veya blog yönetiyorsunuz.</li>
-              <li>— Bir trading sinyal grubu, topluluk veya Telegram kanalı yönetiyorsunuz.</li>
-              <li>— Zaten gayri resmi olarak trader yönlendiriyorsunuz ve bunun yerine düzgün, izlenebilir bir partner yapısı istiyorsunuz.</li>
-              <li>— Forex broker yönlendirmelerinin doğal bir uyum sağladığı bir işletme veya ağ yönetiyorsunuz.</li>
+              <li>{tr("— Trading ile ilgilenen bir kitlesi olan sosyal medya hesabı, YouTube kanalı veya blog yönetiyorsunuz.")}</li>
+              <li>{tr("— Bir trading sinyal grubu, topluluk veya Telegram kanalı yönetiyorsunuz.")}</li>
+              <li>{tr("— Zaten gayri resmi olarak trader yönlendiriyorsunuz ve bunun yerine düzgün, izlenebilir bir partner yapısı istiyorsunuz.")}</li>
+              <li>{tr("— Forex broker yönlendirmelerinin doğal bir uyum sağladığı bir işletme veya ağ yönetiyorsunuz.")}</li>
             </ul>
             <p className="mt-6 text-xs leading-relaxed text-text-muted">
               {tr("Bu yatırım tavsiyesi değildir ve garantili bir gelir fırsatı sunmaz — gerçek kazançlar tamamen yönlendirdiğiniz müşterilerin işlem hacmine ve her brokerın nihai onay ve şartlarına bağlıdır. FXPARTNER, spam yapmayı, yanıltmayı veya brokerı potansiyel müşterilere yanlış tanıtmayı amaçlayan başvuruları kabul etmez.")}

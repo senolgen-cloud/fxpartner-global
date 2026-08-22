@@ -105,7 +105,7 @@ export default async function CategoryPage({
             {topPick && (
               <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-text-on-ink-muted">
                 FXPARTNER Endeksi&apos;ne göre en yüksek puanlı {categoryInfo[category.name].label.toLowerCase()}{" "}
-                brokerı{" "}
+                {tr("brokerı")}{" "}
                 <Link
                   href={`/brokers/${topPick.slug}`}
                   className="notranslate font-medium text-text-on-ink underline decoration-hairline underline-offset-4 hover:decoration-signal"

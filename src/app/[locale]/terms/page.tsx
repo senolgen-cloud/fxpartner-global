@@ -124,7 +124,7 @@ export default async function TermsPage({
               {tr("İletişim")}
             </h2>
             <p className="mt-4">
-              Bu şartlarla ilgili sorularınız mı var? E-posta gönderin:{" "}
+              {tr("Bu şartlarla ilgili sorularınız mı var? E-posta gönderin:")}{" "}
               <a href="mailto:info@fxpartner.global" className="text-signal hover:text-signal-strong">
                 info@fxpartner.global
               </a>

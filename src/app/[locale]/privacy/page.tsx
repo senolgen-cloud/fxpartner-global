@@ -76,21 +76,21 @@ export default async function PrivacyPage({
             </h2>
             <ul className="mt-4 space-y-2">
               <li>
-                <strong>Hesap girişi:</strong> ad soyad, telefon numarası,
+                <strong>{tr("Hesap girişi:")}</strong> ad soyad, telefon numarası,
                 e-posta adresi ve — isteğe bağlı olarak — hangi aracı
                 kurumla işlem yaptığınız.
               </li>
               <li>
-                <strong>Aracı kurum yorumları:</strong> yorum metniniz,
+                <strong>{tr("Aracı kurum yorumları:")}</strong> yorum metniniz,
                 isteğe bağlı 1-5 puanlama ve — belirtirseniz — ülkeniz
                 (yorumunuzun yanında herkese açık şekilde gösterilir).
               </li>
               <li>
-                <strong>Şikayet formu:</strong> ad soyad, telefon, e-posta,
+                <strong>{tr("Şikayet formu:")}</strong> ad soyad, telefon, e-posta,
                 ilgili aracı kurum ve sorununuzun açıklaması.
               </li>
               <li>
-                <strong>Kazanç iade programı:</strong> ad soyad, e-posta,
+                <strong>{tr("Kazanç iade programı:")}</strong> ad soyad, e-posta,
                 işlem hesap numarası ve tanıtım e-postalarına izin verip
                 vermediğiniz.
               </li>
@@ -105,13 +105,13 @@ export default async function PrivacyPage({
               Neden topluyoruz
             </h2>
             <ul className="mt-4 space-y-2">
-              <li>Hesabınızı oluşturmak, sürdürmek ve oturumunuzu açık tutmak için.</li>
-              <li>Bir aracı kurum hakkında gönderdiğiniz şikayetleri incelemek ve takip etmek için.</li>
-              <li>Bağlı işlem hesabınıza göre kazanç iadesini doğrulamak ve takip etmek için.</li>
-              <li>Size FXPARTNER VIP Telegram grubuna davet göndermek için.</li>
+              <li>{tr("Hesabınızı oluşturmak, sürdürmek ve oturumunuzu açık tutmak için.")}</li>
+              <li>{tr("Bir aracı kurum hakkında gönderdiğiniz şikayetleri incelemek ve takip etmek için.")}</li>
+              <li>{tr("Bağlı işlem hesabınıza göre kazanç iadesini doğrulamak ve takip etmek için.")}</li>
+              <li>{tr("Size FXPARTNER VIP Telegram grubuna davet göndermek için.")}</li>
               <li>
-                Size tanıtım veya kampanya e-postaları göndermek için —{" "}
-                <strong>yalnızca</strong> kazanç iade formunda açıkça izin
+                {tr("Size tanıtım veya kampanya e-postaları göndermek için —")}{" "}
+                <strong>{tr("yalnızca")}</strong> kazanç iade formunda açıkça izin
                 verdiyseniz. O onay kutusu işaretlenmeden sizi asla bir
                 pazarlama listesine eklemeyiz.
               </li>
@@ -141,7 +141,7 @@ export default async function PrivacyPage({
                 çağırırız.
               </li>
               <li>
-                <strong>İlgili aracı kurum</strong> — bir şikayet veya
+                <strong>{tr("İlgili aracı kurum")}</strong> — bir şikayet veya
                 kazanç iade kaydı gönderirseniz, sağladığınız bilgileri
                 inceleyip işleme alabilmesi için ilgili aracı kurumla
                 paylaşırız.
@@ -160,7 +160,7 @@ export default async function PrivacyPage({
             </h2>
             <p className="mt-4">
               Kişisel bilgilerinize erişmemizi, bunları düzeltmemizi ya da
-              silmemizi isteyebilir, veya pazarlama iznini istediğiniz zaman{" "}
+              {tr("silmemizi isteyebilir, veya pazarlama iznini istediğiniz zaman")}{" "}
               <a href="mailto:info@fxpartner.global" className="text-signal hover:text-signal-strong">
                 info@fxpartner.global
               </a>{" "}

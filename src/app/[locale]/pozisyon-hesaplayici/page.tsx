@@ -102,7 +102,7 @@ export default async function PositionSizeCalculatorPage({
 
         <section className="border-t border-hairline">
           <div className="mx-auto max-w-3xl px-6 py-16 md:py-20">
-            <h2 className="text-2xl font-semibold md:text-3xl">Sık sorulan sorular</h2>
+            <h2 className="text-2xl font-semibold md:text-3xl">{tr("Sık sorulan sorular")}</h2>
             <div className="mt-8 divide-y divide-hairline border-t border-hairline">
               {faqs.map((faq) => (
                 <details key={faq.q} className="group py-5">

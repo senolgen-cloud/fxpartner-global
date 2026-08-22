@@ -30,7 +30,7 @@ export default async function AdminAiAssistantLogsPage({
 
           <div className="mt-10 space-y-4">
             {logs.length === 0 ? (
-              <p className="text-sm text-text-muted">Henüz hiç soru sorulmamış.</p>
+              <p className="text-sm text-text-muted">{tr("Henüz hiç soru sorulmamış.")}</p>
             ) : (
               logs.map((log) => (
                 <div key={log.id} className="rounded-2xl border border-hairline-light bg-white p-5">

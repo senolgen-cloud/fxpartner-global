@@ -174,7 +174,7 @@ export default async function Home({
               <h1 className="mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
                 Trading.
                 <br />
-                <span className="text-signal">Ama daha akıllı...</span>
+                <span className="text-signal">{tr("Ama daha akıllı...")}</span>
               </h1>
             </Reveal>
 
@@ -287,11 +287,11 @@ export default async function Home({
                       </p>
                       <dl className="mt-4 space-y-1.5 border-t border-hairline pt-4 text-xs">
                         <div className="flex justify-between">
-                          <dt className="text-text-on-ink-muted">Kâr payı</dt>
+                          <dt className="text-text-on-ink-muted">{tr("Kâr payı")}</dt>
                           <dd className="text-text-on-ink">{firm.profitSplit}</dd>
                         </div>
                         <div className="flex justify-between">
-                          <dt className="text-text-on-ink-muted">Giriş</dt>
+                          <dt className="text-text-on-ink-muted">{tr("Giriş")}</dt>
                           <dd className="text-text-on-ink">{firm.challengeFeeFrom}</dd>
                         </div>
                       </dl>
@@ -402,7 +402,7 @@ export default async function Home({
                 {tr("Broker nasıl seçilir?")}
               </h2>
               <p className="mt-4 text-text-muted">
-                Bu dört kriter, her broker profilinde{" "}
+                {tr("Bu dört kriter, her broker profilinde")}{" "}
                 <strong className="font-medium text-text-dark">FXPARTNER Endeksi</strong>{" "}
                 {tr("olarak 0-10 arası puanlanır.")}
               </p>

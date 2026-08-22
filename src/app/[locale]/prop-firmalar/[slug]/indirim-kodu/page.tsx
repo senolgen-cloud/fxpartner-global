@@ -156,7 +156,7 @@ export default async function IndirimKoduPage({
                 {firm.name}
               </Link>
               <span className="mx-2">/</span>
-              <span className="text-text-on-ink">İndirim Kodu</span>
+              <span className="text-text-on-ink">{tr("İndirim Kodu")}</span>
             </nav>
 
             <h1 className="mt-6 font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
@@ -257,7 +257,7 @@ export default async function IndirimKoduPage({
                 düşündüğünüzden daha az.
               </p>
               <p>
-                Bu yüzden firma seçimini indirim oranına göre yapmayın. Sıralamamızda{" "}
+                {tr("Bu yüzden firma seçimini indirim oranına göre yapmayın. Sıralamamızda")}{" "}
                 {firm.name} <strong className="text-text-on-ink">{scores.composite.toFixed(1)}/10</strong>{" "}
                 puanla{" "}
                 {[...propFirms]
@@ -271,7 +271,7 @@ export default async function IndirimKoduPage({
               {firm.payoutProof.status !== "verified" && (
                 <p className="rounded-xl border border-hairline bg-ink-soft/60 p-4 text-sm">
                   <strong className="text-text-on-ink">Dikkat:</strong> Bu firma için
-                  bağımsız ödeme kanıtı doğrulamamız henüz tamamlanmadı (durum:{" "}
+                  {tr("bağımsız ödeme kanıtı doğrulamamız henüz tamamlanmadı (durum:")}{" "}
                   {PAYOUT_STATUS_LABEL[firm.payoutProof.status]}). İndirim oranı ne
                   olursa olsun, hesap açmadan önce kendi araştırmanızı yapın.
                 </p>

@@ -140,7 +140,7 @@ export default async function PropFirmalarPage({
             </p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">
               Şu an {ranked.length} firma izleniyor. Bir firmanın{" "}
-              <strong className="text-text-on-ink">Ödeme Doğrulandı</strong> etiketi
+              <strong className="text-text-on-ink">{tr("Ödeme Doğrulandı")}</strong> etiketi
               alabilmesi için son 30 gün içinden kaynağı kayıtlı bağımsız ödeme kanıtı
               sunmuş olması gerekir — bu doğrulama tamamlanmadan hiçbir firma site
               genelinde önerilmez.
@@ -212,7 +212,7 @@ export default async function PropFirmalarPage({
 
             <div className="mt-8 rounded-2xl border border-hairline-light bg-paper p-6">
               <p className="text-sm leading-relaxed text-text-muted">
-                <strong className="text-text-dark">Şu anki lider:</strong> {top.name} —{" "}
+                <strong className="text-text-dark">{tr("Şu anki lider:")}</strong> {top.name} —{" "}
                 {getPropFirmScores(top).composite.toFixed(1)} Index puanı.{" "}
                 {top.summary}
               </p>
@@ -238,19 +238,19 @@ export default async function PropFirmalarPage({
                 tutar olarak değerlendirin.
               </p>
               <p>
-                <strong className="text-text-on-ink">Firma kapanma riski gerçektir.</strong>{" "}
+                <strong className="text-text-on-ink">{tr("Firma kapanma riski gerçektir.")}</strong>{" "}
                 {tr("2020-2026 arasında 80'den fazla prop firma kapandı. Arkasında düzenlenmiş bir broker bulunan veya uzun faaliyet geçmişi olan firmalar bu riski düşürür, ancak sıfırlamaz.")}
               </p>
               <p>
-                <strong className="text-text-on-ink">Düzenleyici tablo değişiyor.</strong>{" "}
+                <strong className="text-text-on-ink">{tr("Düzenleyici tablo değişiyor.")}</strong>{" "}
                 {tr("İtalya'da CONSOB, prop challenge'larını manipüle edilebilir zorluk seviyeleri ve ödenmeyen kâr payları gerekçesiyle uyardı; Belçika FSMA ve İspanya CNMV benzer uyarılar yayımladı. AB'de funded-account modelinin MiFID II kapsamına alınması değerlendiriliyor. Türkiye'de ise faaliyet SPK tarafından düzenlenmemiş bir gri alandadır.")}
               </p>
               <p>
-                <strong className="text-text-on-ink">Kural ihlali hesabı sıfırlar.</strong>{" "}
+                <strong className="text-text-on-ink">{tr("Kural ihlali hesabı sıfırlar.")}</strong>{" "}
                 {tr("Copy trading yasağı, EA kısıtları ve haber ticareti sınırlamaları gerçektir; ihlal durumunda birikmiş kâr ödenmeden hesap kapatılabilir. Tablodaki her firma için copy trading durumunu detay satırında gösteriyoruz.")}
               </p>
               <p className="text-sm">
-                Bu sayfadaki hiçbir içerik yatırım tavsiyesi değildir. Ayrıntılar için{" "}
+                {tr("Bu sayfadaki hiçbir içerik yatırım tavsiyesi değildir. Ayrıntılar için")}{" "}
                 <Link href="/terms" className="text-signal hover:text-signal-strong">
                   {tr("Kullanım Şartları")}
                 </Link>{" "}
