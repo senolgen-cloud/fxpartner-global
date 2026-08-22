@@ -7,6 +7,7 @@ import {
   mainServicesKeyboard,
 } from "@/lib/telegram";
 import { sendPushToAll, type PushResult } from "@/lib/push";
+import { postTextToX, postTradeSignalToX } from "@/lib/x";
 import { blogPosts } from "@/data/blog";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
@@ -18,6 +19,31 @@ import { withCronErrorAlert } from "@/lib/cron-wrapper";
 // not-yet-announced entry per run — with the every-2h schedule in
 // telegram-cron.yml, a backlog drains one post per run instead of
 // flooding the channel all at once.
+
+// X counts every link as 23 characters regardless of its real length, and the
+// hard cap is 280. Reserve the link allowance plus the two newlines that
+// separate it from the body, then spend what's left on title + excerpt.
+const X_LIMIT = 280;
+const X_LINK_COST = 23;
+
+function truncate(text: string, max: number): string {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 1);
+  const lastSpace = cut.lastIndexOf(" ");
+  return (lastSpace > max * 0.6 ? cut.slice(0, lastSpace) : cut).trimEnd() + "…";
+}
+
+// Title always survives intact; the excerpt is what gets trimmed, and is
+// dropped entirely rather than shown as a two-word stub when the title alone
+// already eats the budget.
+function buildTweet(title: string, excerpt: string, url: string): string {
+  const budget = X_LIMIT - X_LINK_COST - 2;
+  const head = truncate(title, budget);
+  const remaining = budget - head.length - 2;
+  const body = remaining >= 40 ? `\n\n${truncate(excerpt, remaining)}` : "";
+  return `${head}${body}\n\n${url}`;
+}
+
 function isAuthorized(req: NextRequest): boolean {
   const secret = process.env.CRON_SECRET;
   if (!secret) return false;
@@ -71,5 +97,17 @@ export const GET = withCronErrorAlert("blog-share", async (req: NextRequest) => 
     push = { error: (err as Error).message };
   }
 
-  return NextResponse.json({ ok: true, posted: true, slug: target.slug, result, push });
+  // X is best-effort and runs last: the Telegram post is the canonical
+  // announcement and has already been marked as sent, so a missing X
+  // credential or a rate-limited API must not fail the run and make the
+  // next invocation re-announce the same post to the channel.
+  let x: { tweetId: string } | { error: string } = { error: "not attempted" };
+  try {
+    const tweet = buildTweet(target.title, target.excerpt, url);
+    x = photoUrl ? await postTradeSignalToX(photoUrl, tweet) : await postTextToX(tweet);
+  } catch (err) {
+    x = { error: (err as Error).message };
+  }
+
+  return NextResponse.json({ ok: true, posted: true, slug: target.slug, result, push, x });
 });
