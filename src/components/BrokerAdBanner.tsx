@@ -19,6 +19,14 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
     // Two anchors rather than two <source>s in one: where a partner's media
     // kit tags each banner size with its own tracking link, the click has to
     // carry the link belonging to the creative that was actually on screen.
+    //
+    // Which one shows is a container query, not a viewport one, because the
+    // same component sits in slots of very different widths: the content
+    // slot runs to 768px, while MoreMenuOverlay's swipeable cards are 360px
+    // even on a desktop. Keyed to the viewport, a laptop opening that menu
+    // got the 728px leaderboard crushed into a 360px card — 44px tall and
+    // unreadable. 560px is the switch: above it the leaderboard still reads
+    // at 0.77 scale, below it the square is the honest fit.
     const wide = (
       <a
         href={broker.adUrl ?? broker.referralUrl}
@@ -26,7 +34,7 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
         rel="noopener noreferrer sponsored"
         aria-label={`${broker.name} — Sponsorlu, Hesap Aç`}
         className={`overflow-hidden rounded-2xl border border-hairline transition-opacity hover:opacity-90 ${
-          broker.adImageMobile ? "hidden sm:block" : "block"
+          broker.adImageMobile ? "hidden @[560px]:block" : "block"
         }`}
       >
         <span className="sr-only">Sponsorlu — {broker.name}</span>
@@ -41,17 +49,17 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
       </a>
     );
 
-    if (!broker.adImageMobile) return wide;
+    if (!broker.adImageMobile) return <div className="@container">{wide}</div>;
 
     return (
-      <>
+      <div className="@container">
         {wide}
         <a
           href={broker.adUrlMobile ?? broker.adUrl ?? broker.referralUrl}
           target="_blank"
           rel="noopener noreferrer sponsored"
           aria-label={`${broker.name} — Sponsorlu, Hesap Aç`}
-          className="mx-auto block w-fit overflow-hidden rounded-2xl border border-hairline transition-opacity hover:opacity-90 sm:hidden"
+          className="mx-auto block w-fit overflow-hidden rounded-2xl border border-hairline transition-opacity hover:opacity-90 @[560px]:hidden"
         >
           <span className="sr-only">Sponsorlu — {broker.name}</span>
           <Image
@@ -63,7 +71,7 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
             className="h-auto max-w-full"
           />
         </a>
-      </>
+      </div>
     );
   }
 
