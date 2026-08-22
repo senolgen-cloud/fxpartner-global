@@ -23,13 +23,28 @@ if (!["brokers", "blog"].includes(TARGET)) {
 // modules that pull in the db and half the app, and all this needs is the
 // string literals.
 function quoted(line) {
-  const a = line.indexOf('"');
-  const b = line.lastIndexOf('"');
+  // Two shapes live in these files: bare TS keys (title: "x") and JSON-style
+  // quoted ones ("title": "x"). Taking from the first quote to the last would
+  // swallow the key itself on the second shape — which it did, putting
+  // 'title": "Lot Nedir?' into 71 blog strings — so the key is cut off first.
+  let rest = line.trim();
+  if (rest.startsWith('"')) {
+    const keyEnd = rest.indexOf('"', 1);
+    const colon = rest.indexOf(":", keyEnd);
+    if (colon !== -1) rest = rest.slice(colon + 1);
+  } else {
+    const colon = rest.indexOf(":");
+    // only strip a leading key, never a colon inside the value
+    if (colon !== -1 && colon < rest.indexOf('"')) rest = rest.slice(colon + 1);
+  }
+
+  const a = rest.indexOf('"');
+  const b = rest.lastIndexOf('"');
   if (a < 0 || b <= a) return null;
   try {
-    return JSON.parse(line.slice(a, b + 1));
+    return JSON.parse(rest.slice(a, b + 1));
   } catch {
-    return line.slice(a + 1, b);
+    return rest.slice(a + 1, b);
   }
 }
 
