@@ -334,7 +334,7 @@ export const brokers: Broker[] = [
     },
   },
   {
-    rank: 4,
+    rank: 5,
     slug: "bybit",
     name: "Bybit",
     logo: "/brokers/bybit logo.png",
@@ -367,7 +367,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
   },
   {
-    rank: 5,
+    rank: 6,
     slug: "avatrade",
     name: "AvaTrade",
     logo: "/brokers/avatrade.jpg",
@@ -415,7 +415,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 7,
+    rank: 8,
     slug: "tickmill",
     name: "Tickmill",
     logo: "/brokers/tickmill.webp",
@@ -603,7 +603,7 @@ export const brokers: Broker[] = [
     },
   },
   {
-    rank: 8,
+    rank: 9,
     slug: "exness",
     name: "EXNESS",
     logo: "/brokers/exness.png",
@@ -649,7 +649,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 12,
+    rank: 13,
     slug: "markets-com",
     name: "markets.com",
     logo: "/brokers/markets-com.png",
@@ -752,7 +752,7 @@ export const brokers: Broker[] = [
     },
   },
   {
-    rank: 13,
+    rank: 14,
     slug: "versus-trade",
     name: "Versus Trade",
     logo: "/brokers/versus-trade.jpg",
@@ -797,7 +797,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 10,
+    rank: 11,
     slug: "thinkmarkets",
     name: "ThinkMarkets",
     logo: "/brokers/thinkmarkets.jpg",
@@ -841,7 +841,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 11,
+    rank: 12,
     slug: "easymarkets",
     name: "easyMarkets",
     logo: "/brokers/easymarkets-logo.jpg",
@@ -883,7 +883,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 6,
+    rank: 7,
     slug: "ic-markets",
     name: "IC Markets",
     logo: "/brokers/ic-markets.png",
@@ -927,7 +927,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 14,
+    rank: 15,
     slug: "lhfx",
     name: "LHFX",
     logo: "/brokers/lhfx.png",
@@ -969,7 +969,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 15,
+    rank: 16,
     slug: "exclusive-markets",
     name: "Exclusive Markets",
     logo: "/brokers/exclusive-markets.svg",
@@ -1011,7 +1011,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 16,
+    rank: 17,
     slug: "tradingpro",
     name: "TradingPRO",
     logo: "/brokers/tradingpro.png",
@@ -1057,7 +1057,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 9,
+    rank: 10,
     slug: "fxt",
     name: "FXT",
     logo: "/brokers/fxt.svg",
@@ -1101,7 +1101,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 17,
+    rank: 18,
     slug: "4xc",
     name: "4XC",
     logo: "/brokers/4xc.png",
@@ -1145,9 +1145,10 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 18,
+    rank: 4,
     slug: "multibank",
     name: "MultiBank Group",
+    logo: "/brokers/multibankgroup_logo.jpg",
     tagline: "Beş kıtada lisanslı, ECN odaklı çok varlıklı broker",
     rating: 4.3,
     founded: 2005,
@@ -1170,7 +1171,10 @@ export const brokers: Broker[] = [
       MAS: "CMS101174",
       "SCA (BAE)": "20200000045",
     },
-    platforms: ["MT4", "MT5", "MultiBank Plus"],
+    // WebTrader listed separately, same as the 4XC entry does: MT4 and MT5
+    // both run in the browser here with nothing to install, which is a real
+    // access route rather than a repackaging of the desktop terminals.
+    platforms: ["MT4", "MT5", "MultiBank Plus", "WebTrader"],
     headquarters: "Dubai, Birleşik Arap Emirlikleri",
     referralUrl:
       "https://multibankfx.com/account/live-account?ibNum=9981362&utm_source=ib-media-generator&utm_media=300x250&utm_term=9981362",
@@ -1179,7 +1183,7 @@ export const brokers: Broker[] = [
     pros: [
       "İki tier-1 düzenleyici (ASIC 416279, CySEC 430/23) ve Almanya BaFin, Singapur MAS, BAE SCA lisansları",
       "ECN hesapta 0.0 pipten başlayan spread + lot başına 3 $ komisyon (gidiş-dönüş 6 $)",
-      "MT4, MT5 ve grubun kendi MultiBank Plus platformu",
+      "MT4, MT5, tarayıcıdan çalışan WebTrader ve sosyal/kopya ticaret içeren MultiBank Plus",
       "Kart, e-cüzdan ve kripto yatırımları anında; broker tarafında yatırma/çekme ücreti yok",
     ],
     cons: [
