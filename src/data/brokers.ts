@@ -83,12 +83,19 @@ export interface Broker {
   adImageMobile?: string;
   adImageMobileWidth?: number;
   adImageMobileHeight?: number;
+  // Optional skyscraper for the right rail on wide screens (see
+  // BrokerSkyscraperAd). Only brokers that have one are eligible for that
+  // slot; it renders nothing rather than showing a stretched banner.
+  adImageTall?: string;
+  adImageTallWidth?: number;
+  adImageTallHeight?: number;
   // Optional click-through for the creatives above, for partners whose
   // media kit tags every banner size with its own tracking link — using
   // referralUrl there would report all of it as whichever size the link
   // was copied from. Falls back to referralUrl when unset.
   adUrl?: string;
   adUrlMobile?: string;
+  adUrlTall?: string;
   // Optional hand-written FAQ entries appended after the auto-generated
   // ones from brokerFaqs() (src/lib/brokerContent.ts). Unlike the rest of
   // this file, these render in whatever language they're written in — the
@@ -1233,6 +1240,11 @@ export const brokers: Broker[] = [
     adImageMobileHeight: 250,
     adUrlMobile:
       "https://multibankfx.com/account/live-account?ibNum=9981362&utm_source=ib-media-generator&utm_media=300x250&utm_term=9981362",
+    adImageTall: "/campaigns/multibank-160x600.jpg",
+    adImageTallWidth: 160,
+    adImageTallHeight: 600,
+    adUrlTall:
+      "https://multibankfx.com/account/live-account?ibNum=9981362&utm_source=ib-media-generator&utm_media=160x600&utm_term=9981362",
     categories: ["Institutional Trust", "Multi-Platform"],
     scoreCost: 3,
     scoreWithdrawal: 4,
@@ -1284,6 +1296,20 @@ export function getBrokerBySlug(slug: string): Broker | undefined {
 // explicit slug list rather than a `sponsored` field on Broker so turning a
 // campaign on/off doesn't require touching the broker's editorial data.
 export const SPONSORED_BROKER_SLUGS = ["xm", "fxpro", "lite-finance", "avatrade", "bybit", "multibank"];
+
+// The right rail is only worth rendering for a broker that actually has a
+// skyscraper creative — stretching a leaderboard into a 160px column, or
+// holding an empty 160px gutter open, are both worse than no rail. Returns
+// undefined when no sponsor has one, and the caller drops the column.
+export function getSkyscraperBroker(seed: string, excludeSlug?: string): Broker | undefined {
+  const pool = brokers.filter(
+    (b) => SPONSORED_BROKER_SLUGS.includes(b.slug) && b.adImageTall && b.slug !== excludeSlug
+  );
+  if (pool.length === 0) return undefined;
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
+  return pool[hash % pool.length];
+}
 
 // Deterministically picks one of the sponsored brokers for a given page,
 // varying by `seed` (e.g. the page's own slug) so different pages don't all
