@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { defaultLocale, locales } from "@/lib/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -6,7 +7,17 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 // authenticated/operator-only surfaces with no indexable content, and
 // /api is a data/RPC layer, not a page — none of it is useful for search
 // or AI ingestion, and no business reason exists to expose it deliberately.
-const DISALLOW = ["/account", "/admin", "/api/"];
+// Locale-prefixed too: /ua/account is the same authenticated surface as
+// /account, and a crawler that only knows the Turkish path would happily
+// index the Ukrainian one.
+const PRIVATE_PATHS = ["/account", "/admin"];
+const DISALLOW = [
+  ...PRIVATE_PATHS,
+  ...locales
+    .filter((l) => l !== defaultLocale)
+    .flatMap((l) => PRIVATE_PATHS.map((path) => `/${l}${path}`)),
+  "/api/",
+];
 
 // AI search-augmented crawlers: fetch content live to answer a specific
 // user question and cite the source. Allowing these drives direct
