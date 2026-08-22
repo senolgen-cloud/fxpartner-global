@@ -1,11 +1,21 @@
 import Footer from "@/components/Footer";
+import { tr } from "@/lib/chrome";
 import { db } from "@/db";
 import { aiAssistantLogs } from "@/db/schema";
 import { desc } from "drizzle-orm";
+import { setServerLocale } from "@/lib/serverLocale";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminAiAssistantLogsPage() {
+export default async function AdminAiAssistantLogsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const logs = await db.select().from(aiAssistantLogs).orderBy(desc(aiAssistantLogs.createdAt)).limit(200);
 
   return (
@@ -15,7 +25,7 @@ export default async function AdminAiAssistantLogsPage() {
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">Admin</span>
           <h1 className="mt-3 font-display text-3xl font-semibold text-text-dark">AI Assistant Q&amp;A Log</h1>
           <p className="mt-2 text-sm text-text-muted">
-            Son 200 soru/cevap, en yeniden eskiye. Kimlik bilgisi tutulmuyor — yalnızca soru, cevap ve zaman.
+            {tr("Son 200 soru/cevap, en yeniden eskiye. Kimlik bilgisi tutulmuyor — yalnızca soru, cevap ve zaman.")}
           </p>
 
           <div className="mt-10 space-y-4">

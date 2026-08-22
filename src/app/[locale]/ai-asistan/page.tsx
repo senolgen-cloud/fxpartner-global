@@ -6,7 +6,9 @@ import UpgradeGate from "@/components/UpgradeGate";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { getViewerAccess, hasTierAccess } from "@/lib/tierAccess";
 import { getDictionary } from "@/lib/dictionary";
+import { tr } from "@/lib/chrome";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 const OG_IMAGE = `${SITE_URL}/ai-asistan-preview.jpg`;
@@ -95,7 +97,14 @@ export async function generateMetadata({
   };
 }
 
-export default async function AiAssistantPage() {
+export default async function AiAssistantPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const { signedIn, tier } = await getViewerAccess();
   const canUse = hasTierAccess(tier, "pro");
 
@@ -124,22 +133,20 @@ export default async function AiAssistantPage() {
             rel="noopener noreferrer"
             className="mb-4 inline-flex items-center gap-2 rounded-full border border-hairline bg-ink-soft px-4 py-1.5 text-xs font-medium uppercase tracking-wide text-signal transition-colors hover:border-signal hover:text-text-on-ink"
           >
-            📣 Telegram Kanalımıza Katılın
+            {tr("📣 Telegram Kanalımıza Katılın")}
           </a>
           <h1 className="mb-4 text-3xl font-semibold text-text-on-ink sm:text-4xl md:text-5xl">
             Daha Akıllı Analiz. <span className="text-signal">Daha Güçlü Yatırımlar.</span>
           </h1>
           <p className="mx-auto max-w-2xl text-text-on-ink-muted">
-            Piyasalar her saniye değişiyor. FXPARTNER AI Asistanı, yatırım yolculuğunuzda ihtiyaç
-            duyduğunuz bilgiye saniyeler içinde ulaşmanızı sağlayan, modern ve akıllı bir
-            yardımcınızdır.
+            {tr("Piyasalar her saniye değişiyor. FXPARTNER AI Asistanı, yatırım yolculuğunuzda ihtiyaç duyduğunuz bilgiye saniyeler içinde ulaşmanızı sağlayan, modern ve akıllı bir yardımcınızdır.")}
           </p>
         </div>
 
         <div className="mb-14 overflow-hidden rounded-2xl border border-hairline shadow-sm">
           <Image
             src="/ai-asistan/ai-asistan-banner.png"
-            alt="FXPARTNER AI Asistanı — daha akıllı analiz, daha güçlü yatırımlar"
+            alt={tr("FXPARTNER AI Asistanı — daha akıllı analiz, daha güçlü yatırımlar")}
             width={1672}
             height={941}
             className="h-auto w-full"
@@ -152,7 +159,7 @@ export default async function AiAssistantPage() {
         ) : (
           <UpgradeGate
             eyebrow="Pro & VIP Üyelere Özel"
-            title="AI Piyasa Asistanı'na erişmek için Pro veya VIP paketine katılın"
+            title={tr("AI Piyasa Asistanı'na erişmek için Pro veya VIP paketine katılın")}
             description="Sınırsız soru, anlık piyasa analizi ve strateji desteği — Pro paketinden itibaren açılır."
             signedIn={signedIn}
           />
@@ -163,17 +170,13 @@ export default async function AiAssistantPage() {
         <section className="mt-20">
           <div className="mx-auto max-w-3xl text-center">
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-              FXPARTNER AI Asistanı
+              {tr("FXPARTNER AI Asistanı")}
             </span>
             <h2 className="mt-3 text-2xl font-semibold text-text-on-ink sm:text-3xl">
-              Yatırım yolculuğunuzda akıllı rehberiniz
+              {tr("Yatırım yolculuğunuzda akıllı rehberiniz")}
             </h2>
             <p className="mt-4 leading-relaxed text-text-on-ink-muted">
-              FXPARTNER AI Asistanı sadece bir sohbet aracı değil; piyasayı anlamanıza, bilgiye
-              daha hızlı ulaşmanıza ve yatırım yolculuğunuzda daha güçlü hareket etmenize yardımcı
-              olan yeni nesil bir AI deneyimidir. Forex, altın, kripto ve endeksler dahil geniş bir
-              enstrüman yelpazesinde; CPI, NFP gibi makroekonomik verilerden teknik/temel analiz
-              stratejilerine kadar sorularınızı saniyeler içinde yanıtlar.
+              {tr("FXPARTNER AI Asistanı sadece bir sohbet aracı değil; piyasayı anlamanıza, bilgiye daha hızlı ulaşmanıza ve yatırım yolculuğunuzda daha güçlü hareket etmenize yardımcı olan yeni nesil bir AI deneyimidir. Forex, altın, kripto ve endeksler dahil geniş bir enstrüman yelpazesinde; CPI, NFP gibi makroekonomik verilerden teknik/temel analiz stratejilerine kadar sorularınızı saniyeler içinde yanıtlar.")}
             </p>
           </div>
 
@@ -192,10 +195,10 @@ export default async function AiAssistantPage() {
 
           <div className="mx-auto mt-14 max-w-2xl rounded-2xl border border-hairline bg-ink-soft/40 p-8 text-center">
             <p className="text-lg font-semibold text-text-on-ink">
-              ✨ Sorun. Öğrenin. Analiz Edin. Daha bilinçli hareket edin.
+              {tr("✨ Sorun. Öğrenin. Analiz Edin. Daha bilinçli hareket edin.")}
             </p>
             <p className="mt-2 text-sm text-text-on-ink-muted">
-              FXPARTNER AI Asistanı, 7/24 hızlı, güvenilir ve akıllı yanıtlarla yanınızda.
+              {tr("FXPARTNER AI Asistanı, 7/24 hızlı, güvenilir ve akıllı yanıtlarla yanınızda.")}
             </p>
           </div>
 
@@ -229,7 +232,7 @@ export default async function AiAssistantPage() {
               search snippets. */}
           <div className="mx-auto mt-20 max-w-3xl">
             <h2 className="text-2xl font-semibold text-text-on-ink text-center">
-              Sıkça Sorulan Sorular
+              {tr("Sıkça Sorulan Sorular")}
             </h2>
             <div className="mt-8 divide-y divide-hairline border-t border-hairline">
               {aiAssistantFaqs.map((faq) => (

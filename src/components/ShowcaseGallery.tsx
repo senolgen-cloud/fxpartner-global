@@ -1,3 +1,4 @@
+import { tr } from "@/lib/chrome";
 const slides = [
   {
     eyebrow: "01 · Regülasyon",
@@ -39,7 +40,7 @@ export default function ShowcaseGallery() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex max-w-2xl flex-col gap-3">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-            Endeksin İçinde
+            {tr("Endeksin İçinde")}
           </span>
           <h2 className="font-display text-3xl font-semibold text-text-on-ink md:text-4xl">
             Her puanın <em className="font-poppins italic text-text-on-ink-muted">nasıl</em> kazanıldığını görün.

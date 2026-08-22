@@ -1,4 +1,5 @@
 import Link from "@/components/LocaleLink";
+import { tr } from "@/lib/chrome";
 import { getTickerPairs, type TickerPair } from "@/lib/rates";
 
 const TICK_UP = "#22c55e";
@@ -84,7 +85,7 @@ function MarketCard({ pair }: { pair: TickerPair }) {
           href="/teknik-analiz"
           className="font-mono text-[11px] uppercase tracking-[0.1em] text-signal hover:text-signal-strong"
         >
-          Analizi Gör →
+          {tr("Analizi Gör →")}
         </Link>
       </div>
     </div>
@@ -108,14 +109,13 @@ export default async function LiveMarketsGrid() {
       <div className="mx-auto max-w-6xl px-6 py-16">
         <div className="flex flex-col items-center text-center">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-            Canlı Piyasalar
+            {tr("Canlı Piyasalar")}
           </span>
           <h2 className="mt-3 font-display text-2xl font-semibold md:text-3xl">
-            Sinyallerimizle aynı anda piyasada olanlar
+            {tr("Sinyallerimizle aynı anda piyasada olanlar")}
           </h2>
           <p className="mt-3 max-w-xl text-text-on-ink-muted">
-            Aşağıdaki sinyaller açılırken piyasanın genel görünümü — anlık fiyat ve günlük
-            değişim.
+            {tr("Aşağıdaki sinyaller açılırken piyasanın genel görünümü — anlık fiyat ve günlük değişim.")}
           </p>
         </div>
 

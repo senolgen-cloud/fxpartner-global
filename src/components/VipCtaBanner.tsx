@@ -1,4 +1,5 @@
 import Link from "@/components/LocaleLink";
+import { tr } from "@/lib/chrome";
 
 // Shared VIP upsell CTA — used on /signals (dark theme) and broker review
 // pages (light theme). Points at this site's own /paketler checkout — the
@@ -28,7 +29,7 @@ export default function VipCtaBanner({ variant = "dark" }: { variant?: "dark" | 
             : "mt-3 font-display text-2xl font-semibold text-text-dark sm:text-3xl"
         }
       >
-        Tüm sinyalleri anlık gör, AI piyasa asistanına sor
+        {tr("Tüm sinyalleri anlık gör, AI piyasa asistanına sor")}
       </h2>
       <p
         className={
@@ -37,14 +38,13 @@ export default function VipCtaBanner({ variant = "dark" }: { variant?: "dark" | 
             : "mx-auto mt-3 max-w-xl text-sm text-text-dark/70 sm:text-base"
         }
       >
-        Her sinyal açılır açılmaz bildirim al, geçmiş performansın tamamına eriş ve piyasa sorularını 7/24 AI
-        asistana sor.
+        {tr("Her sinyal açılır açılmaz bildirim al, geçmiş performansın tamamına eriş ve piyasa sorularını 7/24 AI asistana sor.")}
       </p>
       <Link
         href="/paketler"
         className="mt-6 inline-flex items-center justify-center rounded-full bg-gold px-8 py-3 font-semibold text-ink transition hover:brightness-110"
       >
-        VIP&apos;e Katıl
+        {tr("VIP'e Katıl")}
       </Link>
     </div>
   );

@@ -1,4 +1,5 @@
 import Link from "@/components/LocaleLink";
+import { tr } from "@/lib/chrome";
 import { localizeBlogPost, localizeBlogPosts, localizeBrokers } from "@/lib/localizeContent";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Footer from "@/components/Footer";
@@ -26,6 +27,7 @@ import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
 import { getBrokerReviewStats } from "@/lib/brokerReviews";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const trackedBrokerCount = lookupBrokers.length;
 const trackedRegulatorCount = new Set([
@@ -115,6 +117,9 @@ export default async function Home({
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const { locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   // Prefer the latest still-open trade so the hero card reflects a real
@@ -161,7 +166,7 @@ export default async function Home({
                   aria-hidden="true"
                   className="signal-dot h-1.5 w-1.5 rounded-full bg-signal"
                 />
-                Öğren · İşlem Yap · Büyü
+                {tr("Öğren · İşlem Yap · Büyü")}
               </span>
             </Reveal>
 
@@ -175,9 +180,7 @@ export default async function Home({
 
             <Reveal delay={180}>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-                FXPARTNER, daha akıllı işlem yapmanız için hepsi bir arada
-                platformdur. Sinyaller, yapay zeka içgörüleri, ekonomik
-                takvim, güvenilir brokerlar ve küresel bir topluluk.
+                {tr("FXPARTNER, daha akıllı işlem yapmanız için hepsi bir arada platformdur. Sinyaller, yapay zeka içgörüleri, ekonomik takvim, güvenilir brokerlar ve küresel bir topluluk.")}
               </p>
             </Reveal>
 
@@ -207,15 +210,13 @@ export default async function Home({
           <div className="mx-auto max-w-6xl px-6 py-20">
             <Reveal className="mx-auto max-w-2xl text-center">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-                Sıralamalar
+                {tr("Sıralamalar")}
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-on-ink md:text-4xl">
                 2026&apos;nın en çok tercih edilen {brokers.length} forex brokeri
               </h2>
               <p className="mt-4 text-text-on-ink-muted">
-                Her broker; regülasyon gücü, maliyet yapısı, platform desteği
-                ve farklı yatırımcı profillerine uygunluk açısından
-                değerlendirildi.
+                {tr("Her broker; regülasyon gücü, maliyet yapısı, platform desteği ve farklı yatırımcı profillerine uygunluk açısından değerlendirildi.")}
               </p>
               <div className="mt-6">
                 <HeroBrokerSearch />
@@ -243,7 +244,7 @@ export default async function Home({
                 Prop Firmalar
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-on-ink md:text-4xl">
-                Kendi sermayenizi riske atmadan işlem yapın
+                {tr("Kendi sermayenizi riske atmadan işlem yapın")}
               </h2>
               <p className="mt-4 text-text-on-ink-muted">
                 Funded account veren {propFirms.length} firma; kural seti, challenge
@@ -336,7 +337,7 @@ export default async function Home({
                 </div>
                 <div>
                   <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    Regülasyon Otoritesi
+                    {tr("Regülasyon Otoritesi")}
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
                     <AnimatedStat value={trackedRegulatorCount} suffix="+" />
@@ -344,7 +345,7 @@ export default async function Home({
                 </div>
                 <div>
                   <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    En Düşük Giriş
+                    {tr("En Düşük Giriş")}
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
                     <AnimatedStat value={lowestMinDeposit} prefix="$" />
@@ -352,7 +353,7 @@ export default async function Home({
                 </div>
                 <div>
                   <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    Karşılaştırma Kriteri
+                    {tr("Karşılaştırma Kriteri")}
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
                     <AnimatedStat value={COMPARISON_CRITERIA.length} />
@@ -373,10 +374,10 @@ export default async function Home({
                 Yan Yana
               </span>
               <h2 className="mt-3 font-display text-3xl font-semibold text-text-on-ink md:text-4xl">
-                Karşılaştırma tablosu
+                {tr("Karşılaştırma tablosu")}
               </h2>
               <p className="mt-4 text-text-on-ink-muted">
-                Karar vermeden önce önemli rakamları tek bakışta görün.
+                {tr("Karar vermeden önce önemli rakamları tek bakışta görün.")}
               </p>
             </Reveal>
             <Reveal delay={120} className="mt-10">
@@ -398,12 +399,12 @@ export default async function Home({
                 Rehber
               </span>
               <h2 className="mt-3 font-display text-3xl font-semibold text-text-dark md:text-4xl">
-                Broker nasıl seçilir?
+                {tr("Broker nasıl seçilir?")}
               </h2>
               <p className="mt-4 text-text-muted">
                 Bu dört kriter, her broker profilinde{" "}
                 <strong className="font-medium text-text-dark">FXPARTNER Endeksi</strong>{" "}
-                olarak 0-10 arası puanlanır.
+                {tr("olarak 0-10 arası puanlanır.")}
               </p>
             </Reveal>
             <div className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2">
@@ -431,21 +432,20 @@ export default async function Home({
           <div className="mx-auto max-w-6xl px-6 py-20">
             <Reveal className="mx-auto max-w-2xl text-center">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-                Adım Adım
+                {tr("Adım Adım")}
               </span>
               <h2 className="mt-3 font-display text-3xl font-semibold text-text-on-ink md:text-4xl">
-                Hesap açma ve ilk para çekme işleminiz
+                {tr("Hesap açma ve ilk para çekme işleminiz")}
               </h2>
               <p className="mt-4 text-text-on-ink-muted">
-                Yeni bir brokerla ilgili güven sorunlarının çoğu aynı iki anda
-                belirlenir. İşte her birinde nelere dikkat etmeniz gerektiği.
+                {tr("Yeni bir brokerla ilgili güven sorunlarının çoğu aynı iki anda belirlenir. İşte her birinde nelere dikkat etmeniz gerektiği.")}
               </p>
             </Reveal>
 
             <div className="mt-12 grid gap-10 md:grid-cols-2">
               <div>
                 <h3 className="font-display text-lg font-semibold text-text-on-ink">
-                  Hesap açma
+                  {tr("Hesap açma")}
                 </h3>
                 <ol className="mt-4 space-y-4">
                   {accountSteps.map((step, i) => (
@@ -462,7 +462,7 @@ export default async function Home({
               </div>
               <div>
                 <h3 className="font-display text-lg font-semibold text-text-on-ink">
-                  İlk para çekme işleminiz
+                  {tr("İlk para çekme işleminiz")}
                 </h3>
                 <ol className="mt-4 space-y-4">
                   {withdrawalSteps.map((step, i) => (
@@ -482,14 +482,10 @@ export default async function Home({
             <Reveal delay={120} className="mt-12">
               <div className="rounded-2xl border border-gold/30 bg-gold/5 p-6">
                 <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-gold">
-                  Risk uyarısı
+                  {tr("Risk uyarısı")}
                 </p>
                 <p className="mt-2 max-w-3xl text-[14px] leading-relaxed text-text-on-ink-muted">
-                  Forex ticareti kaldıraçlıdır ve sermayenizi hızla kaybetme
-                  riski taşır. Kaybetmeyi göze alamayacağınızdan fazlasını
-                  asla yatırmayın ve yukarıdaki her adımı — KYC, ilk depozit,
-                  ilk para çekme — daha fazla fon yatırmadan önce bir test
-                  olarak değerlendirin.
+                  {tr("Forex ticareti kaldıraçlıdır ve sermayenizi hızla kaybetme riski taşır. Kaybetmeyi göze alamayacağınızdan fazlasını asla yatırmayın ve yukarıdaki her adımı — KYC, ilk depozit, ilk para çekme — daha fazla fon yatırmadan önce bir test olarak değerlendirin.")}
                 </p>
               </div>
             </Reveal>
@@ -506,7 +502,7 @@ export default async function Home({
                 SSS
               </span>
               <h2 className="mt-3 font-display text-3xl font-semibold text-text-dark md:text-4xl">
-                Sıkça sorulan sorular
+                {tr("Sıkça sorulan sorular")}
               </h2>
             </Reveal>
             <div className="mt-10 divide-y divide-hairline-light border-t border-hairline-light">

@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { tr } from "@/lib/chrome";
 import { getBrokerBySlug, getBrokerScores } from "@/data/brokers";
 
 export const runtime = "edge";
@@ -65,7 +66,7 @@ export default async function Image({
           <span style={{ fontSize: 34, fontWeight: 800, color: GOLD }}>FX</span>
           <span style={{ fontSize: 34, fontWeight: 800, color: TEXT_ON_INK }}>PARTNER</span>
           <span style={{ marginLeft: 16, fontSize: 22, color: TEXT_ON_INK_MUTED }}>
-            Broker İncelemesi
+            {tr("Broker İncelemesi")}
           </span>
         </div>
 

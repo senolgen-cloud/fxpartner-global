@@ -1,8 +1,10 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useEffect, useState } from "react";
 
 export default function StickyCTA({ brokerCount }: { brokerCount: number }) {
+  const tr = useTr();
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 
@@ -31,7 +33,7 @@ export default function StickyCTA({ brokerCount }: { brokerCount: number }) {
             {brokerCount} broker · ücretsiz karşılaştırma
           </p>
           <p className="truncate font-mono text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted">
-            Göz atmak için hesap gerekmez
+            {tr("Göz atmak için hesap gerekmez")}
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
@@ -39,7 +41,7 @@ export default function StickyCTA({ brokerCount }: { brokerCount: number }) {
             href="#brokers"
             className="lift-on-hover rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
           >
-            Şimdi karşılaştır
+            {tr("Şimdi karşılaştır")}
           </a>
           <button
             type="button"

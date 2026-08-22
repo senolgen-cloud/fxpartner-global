@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import { brokerCategories, categoryInfo, brokers } from "@/data/brokers";
 import { breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -29,7 +31,14 @@ export async function generateMetadata({
   };
 }
 
-export default function CategoriesPage() {
+export default async function CategoriesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   return (
     <>
       <script
@@ -50,11 +59,10 @@ export default function CategoriesPage() {
               Kategoriler
             </span>
             <h1 className="mt-4 max-w-2xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              İhtiyacınıza uygun bir broker bulun
+              {tr("İhtiyacınıza uygun bir broker bulun")}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              Her kategori, brokerları tek bir öne çıkan özellik etrafında gruplar.
-              Karşılaştırmanıza buradan başlayın.
+              {tr("Her kategori, brokerları tek bir öne çıkan özellik etrafında gruplar. Karşılaştırmanıza buradan başlayın.")}
             </p>
           </div>
         </section>
@@ -85,7 +93,7 @@ export default function CategoriesPage() {
                       {info.description}
                     </p>
                     <span className="mt-5 font-mono text-xs uppercase tracking-[0.15em] text-signal transition-colors group-hover:text-signal-strong">
-                      Görüntüle →
+                      {tr("Görüntüle →")}
                     </span>
                   </Link>
                 );

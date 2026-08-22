@@ -1,4 +1,5 @@
 import Reveal from "@/components/Reveal";
+import { tr } from "@/lib/chrome";
 
 const regulators = [
   {
@@ -76,12 +77,10 @@ export default function RegulatorBadges() {
             Denetim
           </span>
           <h2 className="mt-3 font-display text-3xl font-semibold text-text-on-ink md:text-4xl">
-            Çapraz kontrol ettiğimiz regülatörler
+            {tr("Çapraz kontrol ettiğimiz regülatörler")}
           </h2>
           <p className="mt-4 text-text-on-ink-muted">
-            Listelediğimiz her lisans, bir broker sıralamalarda yer almadan
-            önce bu otoritelerden birinin kamuya açık siciline karşı
-            doğrulanır.
+            {tr("Listelediğimiz her lisans, bir broker sıralamalarda yer almadan önce bu otoritelerden birinin kamuya açık siciline karşı doğrulanır.")}
           </p>
         </Reveal>
 

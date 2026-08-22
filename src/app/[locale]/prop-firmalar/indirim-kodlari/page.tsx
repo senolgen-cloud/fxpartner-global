@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
@@ -12,6 +13,7 @@ import {
   PAYOUT_STATUS_LABEL,
 } from "@/data/propFirms";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 const YEAR = new Date().getFullYear();
@@ -59,7 +61,14 @@ const faqs = [
   },
 ];
 
-export default function IndirimKodlariPage() {
+export default async function IndirimKodlariPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const ranked = propFirmsByScore();
   const withLive = ranked.filter((f) => f.discount?.status === "live" && f.discount.code);
   const pending = ranked.filter((f) => f.discount?.status === "pending");
@@ -99,7 +108,7 @@ export default function IndirimKodlariPage() {
             </nav>
 
             <h1 className="mt-6 font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Prop firma indirim kodları
+              {tr("Prop firma indirim kodları")}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
               İzlediğimiz {propFirms.length} firmanın güncel kupon durumu. Yalnızca
@@ -122,8 +131,7 @@ export default function IndirimKodlariPage() {
 
             {withLive.length === 0 ? (
               <p className="mt-4 rounded-2xl border border-hairline-light bg-paper p-6 text-sm leading-relaxed text-text-muted">
-                Şu anda koşulları teyit edilmiş aktif bir indirim kodumuz bulunmuyor.
-                Teyit edilmemiş oranları burada yayımlamıyoruz.
+                {tr("Şu anda koşulları teyit edilmiş aktif bir indirim kodumuz bulunmuyor. Teyit edilmemiş oranları burada yayımlamıyoruz.")}
               </p>
             ) : (
               <div className="mt-6 space-y-5">
@@ -167,7 +175,7 @@ export default function IndirimKodlariPage() {
                           href={`/prop-firmalar/${firm.slug}/indirim-kodu`}
                           className="font-mono text-xs uppercase tracking-[0.12em] text-signal hover:text-signal-strong"
                         >
-                          Nasıl kullanılır →
+                          {tr("Nasıl kullanılır →")}
                         </Link>
                         {hasActiveLink(firm) && (
                           <a
@@ -192,11 +200,10 @@ export default function IndirimKodlariPage() {
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-3xl px-6 py-16">
             <h2 className="font-poppins text-2xl font-semibold md:text-3xl">
-              Diğer firmaların durumu
+              {tr("Diğer firmaların durumu")}
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">
-              Boş bırakmak yerine açıkça yazıyoruz — indirim aramak için başka yere
-              bakmanız gerekip gerekmediğini bilin.
+              {tr("Boş bırakmak yerine açıkça yazıyoruz — indirim aramak için başka yere bakmanız gerekip gerekmediğini bilin.")}
             </p>
 
             <div className="mt-8 divide-y divide-hairline border-t border-hairline">
@@ -230,7 +237,7 @@ export default function IndirimKodlariPage() {
         <section>
           <div className="mx-auto max-w-3xl px-6 py-16">
             <h2 className="font-poppins text-2xl font-semibold text-text-dark md:text-3xl">
-              Sıkça sorulanlar
+              {tr("Sıkça sorulanlar")}
             </h2>
             <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
               {faqs.map((f) => (
@@ -248,7 +255,7 @@ export default function IndirimKodlariPage() {
                 href="/prop-firmalar"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
-                Tüm prop firmaları karşılaştır →
+                {tr("Tüm prop firmaları karşılaştır →")}
               </Link>
             </div>
           </div>

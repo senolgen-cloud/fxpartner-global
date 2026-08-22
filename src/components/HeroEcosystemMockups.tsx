@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import type { Broker } from "@/data/brokers";
 import type { tradeSignals } from "@/db/schema";
@@ -125,7 +126,7 @@ export default function HeroEcosystemMockups({
             <SignalCardBody signal={latestSignal} />
           ) : (
             <p className="py-6 text-center text-xs text-text-on-ink-muted">
-              Henüz sinyal yok — yakında tekrar kontrol edin.
+              {tr("Henüz sinyal yok — yakında tekrar kontrol edin.")}
             </p>
           )}
         </CardShell>
@@ -144,16 +145,15 @@ export default function HeroEcosystemMockups({
         >
           <div className="flex justify-end">
             <p className="max-w-[85%] rounded-xl rounded-tr-sm bg-ink px-3 py-2 text-[11px] leading-relaxed text-text-on-ink">
-              CPI daha düşük gelirse ne olur?
+              {tr("CPI daha düşük gelirse ne olur?")}
             </p>
           </div>
           <p className="mt-2 max-w-[90%] rounded-xl rounded-tl-sm bg-signal/10 px-3 py-2 text-[11px] leading-relaxed text-text-on-ink-muted">
-            Daha düşük CPI genellikle USD&apos;yi zayıflatır ve EURUSD, Altın ve
-            diğer risk varlıklarında yükseliş momentumuna yol açabilir.
+            {tr("Daha düşük CPI genellikle USD'yi zayıflatır ve EURUSD, Altın ve diğer risk varlıklarında yükseliş momentumuna yol açabilir.")}
           </p>
           <div className="mt-3 flex items-center gap-2 rounded-full border border-hairline-light px-3 py-2">
             <span className="flex-1 truncate text-[11px] text-text-on-ink-muted">
-              Piyasalar hakkında ne isterseniz sorun…
+              {tr("Piyasalar hakkında ne isterseniz sorun…")}
             </span>
             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-signal text-on-signal">
               <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
@@ -193,7 +193,7 @@ export default function HeroEcosystemMockups({
                   {broker.name}
                 </span>
                 <span className="flex shrink-0 items-center gap-1 text-[10px] text-text-on-ink-muted">
-                  Onaylı
+                  {tr("Onaylı")}
                   <svg viewBox="0 0 24 24" className="h-3 w-3 text-signal" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
@@ -206,7 +206,7 @@ export default function HeroEcosystemMockups({
           href="/broker-lookup"
           className="mt-3 flex items-center justify-between border-t border-hairline pt-3 text-[11px] font-medium text-signal transition-colors hover:text-signal-strong"
         >
-          Tüm Brokerları Görüntüle
+          {tr("Tüm Brokerları Görüntüle")}
           <span aria-hidden="true">→</span>
         </Link>
       </CardShell>

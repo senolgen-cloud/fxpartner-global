@@ -1,3 +1,4 @@
+import { tr } from "@/lib/chrome";
 import { partnerTiers } from "@/data/partnerProgram";
 
 // Illustrative preview data only — this is a mock of what a partner's own
@@ -36,7 +37,7 @@ export default function PartnerDashboardPreview() {
             FXPARTNER
           </span>
           <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-            Partner Paneli · Örnek önizleme
+            {tr("Partner Paneli · Örnek önizleme")}
           </p>
         </div>
         <div className="rounded-xl border border-gold/30 bg-gold/10 px-3 py-2 text-right">
@@ -49,7 +50,7 @@ export default function PartnerDashboardPreview() {
 
       <div className="mt-6">
         <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-          Son Referans Etkinliği
+          {tr("Son Referans Etkinliği")}
         </p>
         <div className="relative mt-2 h-[220px] overflow-hidden rounded-xl border border-hairline bg-ink/60">
           <div
@@ -89,7 +90,7 @@ export default function PartnerDashboardPreview() {
             {referredClients}
           </p>
           <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-            Referans Edilen Müşteri
+            {tr("Referans Edilen Müşteri")}
           </p>
         </div>
         <div>
@@ -97,7 +98,7 @@ export default function PartnerDashboardPreview() {
             $340
           </p>
           <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-            Bekleyen Ödeme
+            {tr("Bekleyen Ödeme")}
           </p>
         </div>
         <div>

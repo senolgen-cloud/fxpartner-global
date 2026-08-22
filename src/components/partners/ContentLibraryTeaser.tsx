@@ -1,3 +1,4 @@
+import { tr } from "@/lib/chrome";
 import { contentLibraryCategories } from "@/data/partnerProgram";
 
 export default function ContentLibraryTeaser() {
@@ -20,7 +21,7 @@ export default function ContentLibraryTeaser() {
             {cat.description}
           </p>
           <span className="mt-4 inline-block font-mono text-[10px] uppercase tracking-[0.15em] text-signal">
-            Partner hesabınıza dahildir
+            {tr("Partner hesabınıza dahildir")}
           </span>
         </div>
       ))}

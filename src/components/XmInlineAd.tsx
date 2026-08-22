@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { tr } from "@/lib/chrome";
 import { getInlineAdCopy } from "@/lib/xm";
 import { getBrokerBySlug } from "@/data/brokers";
 
@@ -100,8 +101,7 @@ export default function XmInlineAd({
           {copy.ctaLabel}
         </a>
         <p className="mt-4 text-[11px] leading-relaxed text-text-on-ink-muted/70">
-          Bu bir reklamdır. FXPARTNER, bu bağlantı üzerinden açılan hesaplardan komisyon kazanabilir; bu, sizin
-          ödediğiniz spread veya komisyonu değiştirmez. Kaldıraçlı işlemler yüksek risk içerir.
+          {tr("Bu bir reklamdır. FXPARTNER, bu bağlantı üzerinden açılan hesaplardan komisyon kazanabilir; bu, sizin ödediğiniz spread veya komisyonu değiştirmez. Kaldıraçlı işlemler yüksek risk içerir.")}
         </p>
       </div>
     </aside>

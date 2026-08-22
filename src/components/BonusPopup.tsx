@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -34,6 +35,7 @@ const PROMOS = [
 // popup stacked behind the Telegram one, which is what made every fresh
 // visit feel like a wall of back-to-back popups.
 export default function BonusPopup({ slug }: { slug: string }) {
+  const tr = useTr();
   const [open, setOpen] = useState(false);
 
   const promo = PROMOS.find((p) => p.slug === slug);
@@ -116,14 +118,14 @@ export default function BonusPopup({ slug }: { slug: string }) {
               onClick={close}
               className="rounded-full bg-signal px-5 py-3 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
             >
-              Hesap Aç ve Bonusu Al
+              {tr("Hesap Aç ve Bonusu Al")}
             </a>
             <button
               type="button"
               onClick={close}
               className="text-center font-mono text-xs uppercase tracking-[0.1em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              Şimdi değil
+              {tr("Şimdi değil")}
             </button>
           </div>
 

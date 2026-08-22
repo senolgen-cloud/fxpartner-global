@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { tr } from "@/lib/chrome";
 import type { TechnicalAnalysisPost } from "@/data/technicalAnalysis";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
@@ -51,7 +52,7 @@ export default function TechnicalAnalysisCard({ post }: { post: TechnicalAnalysi
           <strong className="text-text-on-ink">Yorum:</strong> {post.comment}
         </p>
         <p className="mt-4 text-xs text-text-on-ink-muted">
-          Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.
+          {tr("Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.")}
         </p>
       </div>
     </article>

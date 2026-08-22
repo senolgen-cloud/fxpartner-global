@@ -1,3 +1,4 @@
+import { tr } from "@/lib/chrome";
 import {
   LOT_LADDER,
   formatMoney,
@@ -43,7 +44,7 @@ export default function LotLadder({
     <div className={compact ? "" : "rounded-xl border border-hairline bg-ink/40 p-4"}>
       <div className="flex items-baseline justify-between gap-4">
         <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
-          Lot başına sonuç
+          {tr("Lot başına sonuç")}
         </span>
         <span className="font-mono text-[10px] text-text-on-ink-muted">
           {priceMove > 0 ? "+" : "−"}
@@ -69,8 +70,7 @@ export default function LotLadder({
           söylüyoruz, çünkü büyüklük mertebesi yine de doğru. */}
       {!spec.usdQuoted && (
         <p className="mt-2 font-mono text-[10px] leading-relaxed text-text-on-ink-muted">
-          Yaklaşık — bu enstrümanın kotasyonu USD değil, sözleşme değeri kura
-          göre değişir.
+          {tr("Yaklaşık — bu enstrümanın kotasyonu USD değil, sözleşme değeri kura göre değişir.")}
         </p>
       )}
     </div>

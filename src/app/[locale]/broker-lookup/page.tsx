@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Footer from "@/components/Footer";
@@ -69,10 +70,10 @@ export default async function BrokerLookupPage({
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-3xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Aracı Kurum Sorgulama
+              {tr("Aracı Kurum Sorgulama")}
             </span>
             <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Hesap açmadan önce herhangi bir aracı kurumu kontrol edin
+              {tr("Hesap açmadan önce herhangi bir aracı kurumu kontrol edin")}
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-text-on-ink-muted">
               {lookupBrokers.length} aracı kurum arasında arama yapın — büyük
@@ -108,7 +109,7 @@ export default async function BrokerLookupPage({
 
             <div className="mt-14">
               <h2 className="font-display text-2xl font-semibold text-text-dark">
-                Sıkça Sorulan Sorular
+                {tr("Sıkça Sorulan Sorular")}
               </h2>
               <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
                 {lookupFaqs.map((faq) => (

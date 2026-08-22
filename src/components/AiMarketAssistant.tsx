@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { Fragment, useEffect, useRef, useState } from "react";
 
@@ -88,6 +89,7 @@ function currentSiteLang(): string {
 }
 
 export default function AiMarketAssistant() {
+  const tr = useTr();
   const [messages, setMessages] = useState<ChatMessage[]>([WELCOME]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -206,7 +208,7 @@ export default function AiMarketAssistant() {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Piyasalar, CPI, Altın, EURUSD veya stratejiler hakkında soru sorun..."
+            placeholder={tr("Piyasalar, CPI, Altın, EURUSD veya stratejiler hakkında soru sorun...")}
             className="flex-1 rounded-full border border-hairline bg-paper px-4 py-2.5 text-sm text-text-on-ink placeholder:text-text-on-ink-muted focus:border-signal focus:outline-none"
             disabled={loading}
           />
@@ -215,7 +217,7 @@ export default function AiMarketAssistant() {
             disabled={loading || !input.trim()}
             className="flex items-center gap-2 rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-50"
           >
-            Gönder
+            {tr("Gönder")}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -228,7 +230,7 @@ export default function AiMarketAssistant() {
           <circle cx="12" cy="12" r="10" />
           <path d="M12 16v-4M12 8h.01" strokeLinecap="round" />
         </svg>
-        Yapay zeka analizleri eğitim amaçlıdır, doğrudan yatırım tavsiyesi içermez.
+        {tr("Yapay zeka analizleri eğitim amaçlıdır, doğrudan yatırım tavsiyesi içermez.")}
       </p>
     </div>
   );

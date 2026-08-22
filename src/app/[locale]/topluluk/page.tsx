@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
@@ -12,6 +13,7 @@ import { getBrokerBySlug } from "@/data/brokers";
 import { flagEmoji } from "@/lib/country";
 import { breadcrumbSchema } from "@/lib/schema";
 import { getViewerAccess } from "@/lib/tierAccess";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -38,7 +40,14 @@ export async function generateMetadata({
 
 export const dynamic = "force-dynamic";
 
-export default async function CommunityPage() {
+export default async function CommunityPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const { signedIn } = await getViewerAccess();
 
   const recentComments = signedIn
@@ -75,14 +84,13 @@ export default async function CommunityPage() {
         <section className="border-b border-hairline">
           <div className="mx-auto max-w-6xl px-6 py-16 text-center">
             <span className="mx-auto inline-flex items-center gap-2 rounded-full border border-hairline bg-ink-soft px-4 py-1.5 text-xs font-medium uppercase tracking-wide text-signal">
-              👥 Küresel Yatırımcı Topluluğu
+              {tr("👥 Küresel Yatırımcı Topluluğu")}
             </span>
             <h1 className="mt-4 font-display text-3xl font-semibold md:text-5xl">
               Aktif Trader <span className="text-signal">Topluluğu &amp; Analizler</span>
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-text-on-ink-muted">
-              Gerçek broker değerlendirmelerini keşfedin, piyasa beklenti anketine katılın ve resmi
-              sosyal kanallarımıza katılarak anlık bilgilere ulaşın.
+              {tr("Gerçek broker değerlendirmelerini keşfedin, piyasa beklenti anketine katılın ve resmi sosyal kanallarımıza katılarak anlık bilgilere ulaşın.")}
             </p>
           </div>
         </section>
@@ -91,7 +99,7 @@ export default async function CommunityPage() {
           <section className="mx-auto max-w-2xl px-6 py-16">
             <UpgradeGate
               eyebrow="Üyelere Özel"
-              title="Topluluğu görmek için giriş yapın"
+              title={tr("Topluluğu görmek için giriş yapın")}
               description="Broker değerlendirmelerini, piyasa beklenti anketini ve topluluk kanallarımızı görmek için ücretsiz bir hesapla giriş yapmanız yeterli."
               signedIn={false}
             />
@@ -103,12 +111,12 @@ export default async function CommunityPage() {
           <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
             <div>
               <h2 className="flex items-center gap-2 font-display text-xl font-semibold">
-                💬 Son Broker Değerlendirmeleri
+                {tr("💬 Son Broker Değerlendirmeleri")}
               </h2>
               <div className="mt-6 space-y-4">
                 {recentComments.length === 0 ? (
                   <p className="rounded-2xl border border-hairline bg-ink-soft p-6 text-sm text-text-on-ink-muted">
-                    Henüz bir değerlendirme yok — ilk yorumu bırakan siz olun.
+                    {tr("Henüz bir değerlendirme yok — ilk yorumu bırakan siz olun.")}
                   </p>
                 ) : (
                   recentComments.map((c) => {
@@ -152,10 +160,10 @@ export default async function CommunityPage() {
             <div className="space-y-6">
               <div className="rounded-2xl border border-hairline bg-ink-soft p-6">
                 <h2 className="flex items-center gap-2 font-display text-base font-semibold">
-                  📈 Piyasa Duygu Eğilimi (Sentiment)
+                  {tr("📈 Piyasa Duygu Eğilimi (Sentiment)")}
                 </h2>
                 <p className="mt-2 text-xs text-text-on-ink-muted">
-                  EUR/USD ve Altın için gerçek zamanlı topluluk beklenti oylaması.
+                  {tr("EUR/USD ve Altın için gerçek zamanlı topluluk beklenti oylaması.")}
                 </p>
                 <div className="mt-5">
                   <SentimentPoll />
@@ -173,8 +181,7 @@ export default async function CommunityPage() {
                   </div>
                 </div>
                 <p className="mt-3 text-xs leading-relaxed text-text-on-ink-muted">
-                  Anlık sinyal bildirimleri, kırılma uyarıları ve gün içi analizler için Telegram
-                  kanalımıza katılın.
+                  {tr("Anlık sinyal bildirimleri, kırılma uyarıları ve gün içi analizler için Telegram kanalımıza katılın.")}
                 </p>
                 <a
                   href="https://t.me/fxpartnerglobal"
@@ -182,7 +189,7 @@ export default async function CommunityPage() {
                   rel="noopener noreferrer"
                   className="mt-4 block rounded-full bg-signal px-4 py-2.5 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
                 >
-                  Telegram&apos;a Katıl
+                  {tr("Telegram'a Katıl")}
                 </a>
               </div>
 
@@ -199,9 +206,7 @@ export default async function CommunityPage() {
                   </div>
                 </div>
                 <p className="mt-3 text-xs leading-relaxed text-text-on-ink-muted">
-                  Günlük teknik bülten özetleri, broker regülasyon kartları ve dolandırıcılık
-                  uyarıları. Instagram&apos;da işlem sinyali paylaşmıyoruz — içeriklerimiz
-                  bilgilendirme amaçlıdır.
+                  {tr("Günlük teknik bülten özetleri, broker regülasyon kartları ve dolandırıcılık uyarıları. Instagram'da işlem sinyali paylaşmıyoruz — içeriklerimiz bilgilendirme amaçlıdır.")}
                 </p>
                 <a
                   href="https://www.instagram.com/fxpartner_global/"
@@ -224,8 +229,7 @@ export default async function CommunityPage() {
                   </div>
                 </div>
                 <p className="mt-3 text-xs leading-relaxed text-text-on-ink-muted">
-                  Sinyalleri, broker karşılaştırmalarını ve aktif kampanyaları Telegram&apos;da
-                  sohbet üzerinden anında sorup öğrenin.
+                  {tr("Sinyalleri, broker karşılaştırmalarını ve aktif kampanyaları Telegram'da sohbet üzerinden anında sorup öğrenin.")}
                 </p>
                 <a
                   href="https://t.me/fxpartner_chat_bot?start=site"
@@ -233,7 +237,7 @@ export default async function CommunityPage() {
                   rel="noopener noreferrer"
                   className="mt-4 block rounded-full border border-hairline px-4 py-2.5 text-center text-sm font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
                 >
-                  Botu Başlat
+                  {tr("Botu Başlat")}
                 </a>
               </div>
 
@@ -250,8 +254,7 @@ export default async function CommunityPage() {
                   </div>
                 </div>
                 <p className="mt-3 text-xs leading-relaxed text-text-on-ink-muted">
-                  Piyasa haberleri, ekonomik veriler ve en güncel duyurular için X hesabımızı takip
-                  edin.
+                  {tr("Piyasa haberleri, ekonomik veriler ve en güncel duyurular için X hesabımızı takip edin.")}
                 </p>
                 <a
                   href="https://x.com/fxpartner_TR"

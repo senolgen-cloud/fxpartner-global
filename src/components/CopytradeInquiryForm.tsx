@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useActionState } from "react";
 import { submitCopytradeInquiry, type CopytradeInquiryFormState } from "@/app/[locale]/copytrade/actions";
@@ -6,6 +7,7 @@ import { submitCopytradeInquiry, type CopytradeInquiryFormState } from "@/app/[l
 const initialState: CopytradeInquiryFormState = { ok: false };
 
 export default function CopytradeInquiryForm() {
+  const tr = useTr();
   const [state, formAction, pending] = useActionState(submitCopytradeInquiry, initialState);
 
   if (state.ok) {
@@ -13,9 +15,7 @@ export default function CopytradeInquiryForm() {
       <div className="rounded-2xl border border-hairline-light bg-paper p-8 text-center">
         <h2 className="font-display text-2xl font-semibold text-text-dark">Talebiniz alındı</h2>
         <p className="mt-3 text-text-muted">
-          Ekibimiz kısa süre içinde e-posta ile dönüş yaparak Copier EA
-          kurulumunu ve mevcut kısıtlamaları/riskleri sizinle birlikte
-          gözden geçirecek.
+          {tr("Ekibimiz kısa süre içinde e-posta ile dönüş yaparak Copier EA kurulumunu ve mevcut kısıtlamaları/riskleri sizinle birlikte gözden geçirecek.")}
         </p>
       </div>
     );
@@ -60,7 +60,7 @@ export default function CopytradeInquiryForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-            Ülke
+            {tr("Ülke")}
           </label>
           <input
             name="country"
@@ -75,28 +75,26 @@ export default function CopytradeInquiryForm() {
           <input
             name="platform"
             required
-            placeholder="Örn. XM, MT5"
+            placeholder={tr("Örn. XM, MT5")}
             className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
           />
         </div>
       </div>
       <div>
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Eklemek istediğiniz bir şey var mı? (opsiyonel)
+          {tr("Eklemek istediğiniz bir şey var mı? (opsiyonel)")}
         </label>
         <textarea
           name="message"
           rows={4}
-          placeholder="Sorularınız veya risk toleransınız hakkında bilgi"
+          placeholder={tr("Sorularınız veya risk toleransınız hakkında bilgi")}
           className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
         />
       </div>
 
       <label className="flex items-start gap-2 text-xs leading-relaxed text-text-muted">
         <input type="checkbox" required className="mt-0.5" />
-        Bunun bir kâr garantisi olmadığını, kendi hesabımın kontrolünün
-        her zaman bende kaldığını ve kaybedebileceğim sermayeyle işlem
-        yapacağımı anlıyorum.
+        {tr("Bunun bir kâr garantisi olmadığını, kendi hesabımın kontrolünün her zaman bende kaldığını ve kaybedebileceğim sermayeyle işlem yapacağımı anlıyorum.")}
       </label>
 
       {state.error && <p className="text-sm text-alert">{state.error}</p>}

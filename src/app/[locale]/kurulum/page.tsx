@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -205,7 +207,14 @@ function WindowsIcon() {
   );
 }
 
-export default function KurulumPage() {
+export default async function KurulumPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   return (
     <>
       <script
@@ -230,13 +239,10 @@ export default function KurulumPage() {
               Kurulum Rehberi
             </span>
             <h1 className="mt-4 font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              FXPARTNER&apos;ı telefonunuza veya bilgisayarınıza kurun
+              {tr("FXPARTNER'ı telefonunuza veya bilgisayarınıza kurun")}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              App Store veya Play Store gerekmez. FXPARTNER, tarayıcınız
-              üzerinden birkaç dokunuşla telefonunuzun veya bilgisayarınızın
-              ana ekranına eklenir ve gerçek bir uygulama gibi çalışır — yeni
-              sinyaller de doğrudan bildirim olarak gelir.
+              {tr("App Store veya Play Store gerekmez. FXPARTNER, tarayıcınız üzerinden birkaç dokunuşla telefonunuzun veya bilgisayarınızın ana ekranına eklenir ve gerçek bir uygulama gibi çalışır — yeni sinyaller de doğrudan bildirim olarak gelir.")}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
@@ -289,24 +295,22 @@ export default function KurulumPage() {
 
             <div className="mt-14 rounded-2xl border border-hairline-light bg-paper p-6">
               <h3 className="font-poppins text-lg font-semibold text-text-dark">
-                Sinyalleri kaçırmayın
+                {tr("Sinyalleri kaçırmayın")}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                Kurulumdan sonra bildirimlere izin verirseniz, yeni bir işlem
-                sinyali yayınlandığı anda telefonunuza veya bilgisayarınıza
-                sesli bir bildirim düşer.
+                {tr("Kurulumdan sonra bildirimlere izin verirseniz, yeni bir işlem sinyali yayınlandığı anda telefonunuza veya bilgisayarınıza sesli bir bildirim düşer.")}
               </p>
               <Link
                 href="/signals"
                 className="mt-4 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
               >
-                Canlı Sinyallere Git
+                {tr("Canlı Sinyallere Git")}
               </Link>
             </div>
 
             <div id="faq" className="mt-14 scroll-mt-8 border-t border-hairline-light pt-10">
               <h2 className="font-poppins text-2xl font-semibold text-text-dark">
-                Sıkça Sorulan Sorular
+                {tr("Sıkça Sorulan Sorular")}
               </h2>
               <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
                 {faqs.map((faq) => (

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { localizeBroker } from "@/lib/localizeContent";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Image from "next/image";
@@ -37,6 +38,7 @@ import { getPropFirmByBackingBroker, getPropFirmScores } from "@/data/propFirms"
 import { brokerFinancialServiceSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { regulationParagraph, platformParagraph, verdictParagraph, brokerFaqs } from "@/lib/brokerContent";
 import { getBlogPostBySlug } from "@/data/blog";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -132,6 +134,9 @@ export default async function BrokerDetailPage({
 }: {
   params: Promise<{ slug: string; locale: string }>;
 }) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const { slug, locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const source = getBrokerBySlug(slug);
@@ -250,7 +255,7 @@ export default async function BrokerDetailPage({
           <path d="M13 5l7 7-7 7M5 12h14" />
         </svg>
         <span className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-medium opacity-0 transition-all duration-200 group-hover:max-w-[10rem] group-hover:opacity-100">
-          Hesap Aç
+          {tr("Hesap Aç")}
         </span>
       </a>
 
@@ -266,7 +271,7 @@ export default async function BrokerDetailPage({
               href="/brokerlar"
               className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              ← Tüm brokerlar
+              {tr("← Tüm brokerlar")}
             </Link>
             <div className="mt-6 rounded-[32px] border border-hairline bg-gradient-to-br from-ink-soft/70 to-ink p-6 shadow-2xl shadow-black/40 sm:p-8 md:p-12">
               <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
@@ -307,7 +312,7 @@ export default async function BrokerDetailPage({
                   </p>
                   <div className="mt-5 border-t border-hairline pt-5">
                     <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                      FXPARTNER puanı
+                      {tr("FXPARTNER puanı")}
                     </p>
                     <p className="mt-1 bg-gradient-to-r from-signal to-purple-400 bg-clip-text font-display text-3xl font-semibold text-transparent">
                       {ratingWord(broker.rating)}
@@ -338,7 +343,7 @@ export default async function BrokerDetailPage({
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-signal">
                           <path d="M20 6L9 17l-5-5" />
                         </svg>
-                        FXPARTNER Onaylı
+                        {tr("FXPARTNER Onaylı")}
                       </span>
                     </div>
                   </div>
@@ -360,7 +365,7 @@ export default async function BrokerDetailPage({
                       rel="noopener noreferrer sponsored"
                       className="group inline-flex items-center gap-2 rounded-full bg-signal px-6 py-3.5 text-sm font-medium text-on-signal shadow-lg shadow-signal/20 transition-all hover:bg-signal-strong hover:shadow-signal/30 active:scale-[0.98]"
                     >
-                      Hesap Aç
+                      {tr("Hesap Aç")}
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-0.5">
                         <path d="M5 12h14M13 5l7 7-7 7" />
                       </svg>
@@ -371,7 +376,7 @@ export default async function BrokerDetailPage({
                       </span>
                     )}
                     <span className="font-mono text-[10px] text-text-on-ink-muted">
-                      FXPARTNER&apos;da Onaylı
+                      {tr("FXPARTNER'da Onaylı")}
                     </span>
                   </div>
                 </div>
@@ -438,7 +443,7 @@ export default async function BrokerDetailPage({
               <div className="grid gap-10 lg:grid-cols-[1fr_1fr]">
                 <div>
                   <h2 className="font-display text-xl font-semibold text-text-dark">
-                    Regülasyon ve Fon Güvenliği
+                    {tr("Regülasyon ve Fon Güvenliği")}
                   </h2>
                   <p className="mt-4 text-[15px] leading-relaxed text-text-dark/90">
                     {regulationParagraph(broker)}
@@ -467,7 +472,7 @@ export default async function BrokerDetailPage({
                   {offshoreRegulators.length > 0 && (
                     <div className="mt-4">
                       <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                        Offshore / Diğer Lisanslar
+                        {tr("Offshore / Diğer Lisanslar")}
                       </h3>
                       <div className="mt-3 flex flex-wrap gap-2">
                         {offshoreRegulators.map((r) => (
@@ -495,7 +500,7 @@ export default async function BrokerDetailPage({
             {/* Platforms + categories */}
             <div id="platforms" className="mt-14 scroll-mt-8 border-t border-hairline-light pt-10">
               <h2 className="font-display text-xl font-semibold text-text-dark">
-                İşlem Platformları
+                {tr("İşlem Platformları")}
               </h2>
               <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-text-dark/90">
                 {platformParagraph(broker)}
@@ -535,7 +540,7 @@ export default async function BrokerDetailPage({
             <div id="pros-cons" className="mt-14 scroll-mt-8 grid gap-8 border-t border-hairline-light pt-10 sm:grid-cols-2">
               <div className="rounded-3xl border border-tick-up/20 bg-tick-up/5 p-6 shadow-sm">
                 <h2 className="font-display text-xl font-semibold text-tick-up">
-                  Artılar
+                  {tr("Artılar")}
                 </h2>
                 <ul className="mt-4 space-y-3">
                   {broker.pros.map((pro) => (
@@ -564,7 +569,7 @@ export default async function BrokerDetailPage({
             {broker.deepDive && (
               <div id="accounts" className="mt-14 scroll-mt-8 border-t border-hairline-light pt-10">
                 <h2 className="font-display text-2xl font-semibold text-text-dark">
-                  Hesap Türleri
+                  {tr("Hesap Türleri")}
                 </h2>
                 <div className="mt-5 overflow-x-auto rounded-2xl border border-hairline-light">
                   <table className="w-full min-w-[480px] border-collapse text-left text-sm">
@@ -592,7 +597,7 @@ export default async function BrokerDetailPage({
                 <div className="mt-10 grid gap-6 sm:grid-cols-2">
                   <div className="rounded-2xl border border-hairline-light p-5">
                     <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                      Yatırma
+                      {tr("Yatırma")}
                     </h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
                       {broker.deepDive.deposits}
@@ -600,7 +605,7 @@ export default async function BrokerDetailPage({
                   </div>
                   <div className="rounded-2xl border border-hairline-light p-5">
                     <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                      Para Çekme
+                      {tr("Para Çekme")}
                     </h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
                       {broker.deepDive.withdrawals}
@@ -608,7 +613,7 @@ export default async function BrokerDetailPage({
                   </div>
                   <div className="rounded-2xl border border-hairline-light p-5">
                     <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                      Müşteri Desteği
+                      {tr("Müşteri Desteği")}
                     </h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
                       {broker.deepDive.support}
@@ -616,7 +621,7 @@ export default async function BrokerDetailPage({
                   </div>
                   <div className="rounded-2xl border border-hairline-light p-5">
                     <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                      Eğitim ve Araçlar
+                      {tr("Eğitim ve Araçlar")}
                     </h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
                       {broker.deepDive.education}
@@ -638,7 +643,7 @@ export default async function BrokerDetailPage({
             <div id="verdict" className="mt-14 scroll-mt-8 border-t border-hairline-light pt-10">
               <div className="rounded-2xl border border-gold/25 bg-gold/5 p-7">
                 <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-gold">
-                  FXPARTNER Değerlendirmesi
+                  {tr("FXPARTNER Değerlendirmesi")}
                 </span>
                 <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-text-dark/90">
                   {verdictParagraph(broker)}
@@ -662,7 +667,7 @@ export default async function BrokerDetailPage({
               <div className="mt-14 border-t border-hairline-light pt-10">
                 <div className="rounded-2xl border border-hairline-light bg-paper-high p-7">
                   <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-signal">
-                    İlgili — Prop Firma
+                    {tr("İlgili — Prop Firma")}
                   </span>
                   <h2 className="mt-3 font-display text-xl font-semibold text-text-dark">
                     {broker.name}, {backedPropFirm.name} funded account programını
@@ -690,7 +695,7 @@ export default async function BrokerDetailPage({
                       {getPropFirmScores(backedPropFirm).composite.toFixed(1)}) →
                     </Link>
                     <span className="font-mono text-[11px] text-text-muted">
-                      Prop firma puanı, broker puanından bağımsızdır
+                      {tr("Prop firma puanı, broker puanından bağımsızdır")}
                     </span>
                   </div>
                 </div>
@@ -700,7 +705,7 @@ export default async function BrokerDetailPage({
             {/* FAQ */}
             <div id="faq" className="mt-14 scroll-mt-8 border-t border-hairline-light pt-10">
               <h2 className="font-display text-2xl font-semibold text-text-dark">
-                Sıkça Sorulan Sorular
+                {tr("Sıkça Sorulan Sorular")}
               </h2>
               <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
                 {faqs.map((faq) => (
@@ -743,7 +748,7 @@ export default async function BrokerDetailPage({
                   {cashback.pitch}
                 </span>
                 <span className="shrink-0 font-mono text-xs uppercase tracking-[0.15em] text-tick-up">
-                  Nakit iadeyi başlat →
+                  {tr("Nakit iadeyi başlat →")}
                 </span>
               </Link>
             )}
@@ -810,7 +815,7 @@ export default async function BrokerDetailPage({
         <section className="bg-paper">
           <div className="mx-auto max-w-5xl px-6 py-16">
             <h2 className="font-display text-2xl font-semibold text-text-dark">
-              Diğer brokerları keşfedin
+              {tr("Diğer brokerları keşfedin")}
             </h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-3">
               {otherBrokers.map((b) => (

@@ -5,7 +5,9 @@ import { cashbackPrograms } from "@/data/cashback";
 import { getBrokerBySlug } from "@/data/brokers";
 import { breadcrumbSchema } from "@/lib/schema";
 import { getDictionary } from "@/lib/dictionary";
+import { tr } from "@/lib/chrome";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -30,7 +32,14 @@ export async function generateMetadata({
   };
 }
 
-export default function CashbackPage() {
+export default async function CashbackPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   // Confirmed programs first — they're the ones a visitor can act on today;
   // the estimates sit below them.
   const orderedPrograms = [...cashbackPrograms].sort(
@@ -57,14 +66,10 @@ export default function CashbackPage() {
               Cashback
             </span>
             <h1 className="mt-4 font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              İşlem maliyetinizin bir kısmını geri alın
+              {tr("İşlem maliyetinizin bir kısmını geri alın")}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              Partner bağlantımız üzerinden bir aracı kurumda işlem
-              yaptığınızda, aracı kurum işlem hacminizden doğan komisyonun
-              bir kısmını bize öder. Bunun bir kısmını, aracı kurum
-              tarafından doğrudan işlem hesabınıza yatırılmak üzere size
-              geri veririz.
+              {tr("Partner bağlantımız üzerinden bir aracı kurumda işlem yaptığınızda, aracı kurum işlem hacminizden doğan komisyonun bir kısmını bize öder. Bunun bir kısmını, aracı kurum tarafından doğrudan işlem hesabınıza yatırılmak üzere size geri veririz.")}
             </p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">
               Aşağıdan bir aracı kurum seçin, işlem hesap numaranızı gönderin,
@@ -134,26 +139,21 @@ export default function CashbackPage() {
 
             <div className="mt-14 rounded-2xl border border-hairline-light bg-paper p-6">
               <h3 className="font-poppins text-lg font-semibold text-text-dark">
-                Hesabınızı bağlamaya hazır mısınız?
+                {tr("Hesabınızı bağlamaya hazır mısınız?")}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                İşlem hesap numaranızı göndermek ve kazanç iade geçmişinizi
-                takip etmek için FXPARTNER hesabınızda oturum açın.
+                {tr("İşlem hesap numaranızı göndermek ve kazanç iade geçmişinizi takip etmek için FXPARTNER hesabınızda oturum açın.")}
               </p>
               <Link
                 href="/account/login"
                 className="mt-4 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
               >
-                Giriş Yap / Hesap Bağla
+                {tr("Giriş Yap / Hesap Bağla")}
               </Link>
             </div>
 
             <p className="mt-8 text-xs leading-relaxed text-text-muted">
-              Kazanç iadesi, gerçek işlem hacminize göre aracı kurum
-              tarafından doğrudan işlem hesabınıza yatırılır. Hesap
-              sayfanızda gösterilen tutarlar partner panelimizden manuel
-              olarak kaydedilir, otomatik oluşturulmaz ve son işlemleri
-              yansıtması zaman alabilir. Bu yatırım tavsiyesi değildir.
+              {tr("Kazanç iadesi, gerçek işlem hacminize göre aracı kurum tarafından doğrudan işlem hesabınıza yatırılır. Hesap sayfanızda gösterilen tutarlar partner panelimizden manuel olarak kaydedilir, otomatik oluşturulmaz ve son işlemleri yansıtması zaman alabilir. Bu yatırım tavsiyesi değildir.")}
             </p>
           </div>
         </section>

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Footer from "@/components/Footer";
 import PositionSizeCalculator from "@/components/PositionSizeCalculator";
 import { getLiveFxRates } from "@/lib/positionSize";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 
@@ -50,7 +52,14 @@ const faqs = [
   },
 ];
 
-export default async function PositionSizeCalculatorPage() {
+export default async function PositionSizeCalculatorPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const rates = await getLiveFxRates();
 
   return (
@@ -72,14 +81,13 @@ export default async function PositionSizeCalculatorPage() {
         <section className="border-b border-hairline">
           <div className="mx-auto max-w-4xl px-6 py-16 text-center md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Risk Yönetimi Aracı
+              {tr("Risk Yönetimi Aracı")}
             </span>
             <h1 className="mt-4 font-display text-3xl font-semibold md:text-5xl">
-              Pozisyon Büyüklüğü Hesaplayıcı
+              {tr("Pozisyon Büyüklüğü Hesaplayıcı")}
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-text-on-ink-muted">
-              Hesap bakiyenize ve stop loss mesafenize göre, farklı risk seviyelerinde ne kadarlık bir
-              pozisyon açmanız gerektiğini görün — canlı piyasa kurlarıyla hesaplanır.
+              {tr("Hesap bakiyenize ve stop loss mesafenize göre, farklı risk seviyelerinde ne kadarlık bir pozisyon açmanız gerektiğini görün — canlı piyasa kurlarıyla hesaplanır.")}
             </p>
           </div>
         </section>
@@ -88,9 +96,7 @@ export default async function PositionSizeCalculatorPage() {
           <PositionSizeCalculator rates={rates} />
 
           <p className="mt-6 text-center text-xs leading-relaxed text-text-on-ink-muted">
-            Bu araç yalnızca bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Kaldıraçlı ürünlerde
-            işlem yapmak sermayenizin tamamını kaybetmenize yol açabilir — pozisyon büyüklüğünüzü her
-            zaman kendi risk toleransınıza göre belirleyin.
+            {tr("Bu araç yalnızca bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Kaldıraçlı ürünlerde işlem yapmak sermayenizin tamamını kaybetmenize yol açabilir — pozisyon büyüklüğünüzü her zaman kendi risk toleransınıza göre belirleyin.")}
           </p>
         </section>
 

@@ -1,3 +1,4 @@
+import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { getFeaturedPartner, getPropFirmScores, hasActiveLink } from "@/data/propFirms";
 
@@ -27,7 +28,7 @@ export default function PropFirmFeaturedCard() {
     <div className="rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/[0.07] to-transparent p-6 md:p-8">
       <div className="flex flex-wrap items-center gap-3">
         <span className="rounded-full border border-gold/40 bg-gold/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-gold">
-          Ortaklık yerleşimi
+          {tr("Ortaklık yerleşimi")}
         </span>
         <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
           Sıralama değil — tabloda {composite.toFixed(1)} puanla yer alıyor
@@ -48,7 +49,7 @@ export default function PropFirmFeaturedCard() {
         <dl className="grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-4">
           <div>
             <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-text-on-ink-muted">
-              Giriş
+              {tr("Giriş")}
             </dt>
             <dd className="mt-1 font-poppins text-lg font-semibold text-text-on-ink">
               {firm.challengeFeeFrom}
@@ -56,7 +57,7 @@ export default function PropFirmFeaturedCard() {
           </div>
           <div>
             <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-text-on-ink-muted">
-              Kâr Payı
+              {tr("Kâr Payı")}
             </dt>
             <dd className="mt-1 font-poppins text-lg font-semibold text-text-on-ink">
               {firm.profitSplit}
@@ -64,7 +65,7 @@ export default function PropFirmFeaturedCard() {
           </div>
           <div>
             <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-text-on-ink-muted">
-              Ödeme
+              {tr("Ödeme")}
             </dt>
             <dd className="mt-1 font-poppins text-lg font-semibold text-text-on-ink">
               {firm.payoutCycle}
@@ -106,7 +107,7 @@ export default function PropFirmFeaturedCard() {
           href="/prop-firmalar"
           className="rounded-full bg-signal px-5 py-2.5 font-mono text-xs uppercase tracking-[0.1em] text-ink transition-colors hover:bg-signal-strong"
         >
-          İncelemeyi gör
+          {tr("İncelemeyi gör")}
         </Link>
         {linkOn && (
           <a

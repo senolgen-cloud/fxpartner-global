@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
@@ -12,6 +13,8 @@ import {
   type BrokerCategory,
 } from "@/data/brokers";
 import { breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -35,7 +38,7 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
   const category = getCategoryBySlug(slug);
@@ -50,8 +53,11 @@ export async function generateMetadata({
 export default async function CategoryPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string ; locale: string }>;
 }) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const { slug } = await params;
   const category = getCategoryBySlug(slug);
   if (!category) notFound();
@@ -85,7 +91,7 @@ export default async function CategoryPage({
               href="/categories"
               className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              ← Tüm kategoriler
+              {tr("← Tüm kategoriler")}
             </Link>
             <h1 className="mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
               {categoryInfo[category.name].label}
@@ -116,7 +122,7 @@ export default async function CategoryPage({
           <div className="mx-auto max-w-6xl px-6 py-16">
             {matches.length === 0 ? (
               <p className="text-sm text-text-muted">
-                Bu kategoride henüz broker yok.
+                {tr("Bu kategoride henüz broker yok.")}
               </p>
             ) : (
               matches.map((broker) => (

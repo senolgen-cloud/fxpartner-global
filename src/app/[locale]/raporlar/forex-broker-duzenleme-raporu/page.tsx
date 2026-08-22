@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
@@ -11,6 +12,7 @@ import {
   categoryInfo,
 } from "@/data/brokers";
 import { breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -40,7 +42,14 @@ export async function generateMetadata({
 // — nothing here is a hand-typed statistic that can drift out of sync or
 // go stale. That's the point: this is meant to be a citable, always-
 // accurate primary source, not an editorial summary of one.
-export default function RegulationReportPage() {
+export default async function RegulationReportPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const total = brokers.length;
 
   const regulatorCounts = new Map<string, number>();
@@ -104,7 +113,7 @@ export default function RegulationReportPage() {
               FXPARTNER Veri Raporu
             </span>
             <h1 className="mt-4 max-w-2xl font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Forex Broker Düzenleme Kapsamı Raporu
+              {tr("Forex Broker Düzenleme Kapsamı Raporu")}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
               {`FXPARTNER'ın ${total} broker'lık inceleme veri setinden, her sayfa yüklendiğinde yeniden hesaplanan düzenleyici lisans dağılımı ve kategori kırılımı.`}
@@ -120,7 +129,7 @@ export default function RegulationReportPage() {
             <p className="text-[15px] leading-relaxed text-text-dark/90">
               {`Bu rapor, FXPARTNER'ın incelediği ${total} forex broker'ının düzenleyici lisans verilerinden otomatik olarak hesaplanır — hiçbir rakam elle girilmemiştir; tümü `}
               <Link href="/brokerlar" className="text-signal hover:text-signal-strong">
-                broker karşılaştırma sayfasıyla
+                {tr("broker karşılaştırma sayfasıyla")}
               </Link>
               {` aynı veri kümesinden, sayfa her açıldığında yeniden üretilir. Metodoloji, FXPARTNER Index'in dört ekseninden biri olan "Düzenleme" puanıyla aynıdır: FCA (İngiltere), ASIC (Avustralya), CySEC (Kıbrıs), DFSA (Dubai) ve İrlanda Merkez Bankası tier-1 otorite olarak sayılır.`}
             </p>
@@ -147,18 +156,16 @@ export default function RegulationReportPage() {
                   {avgRegulatorsPerBroker}
                 </p>
                 <p className="mt-2 text-sm text-text-muted">
-                  broker başına ortalama lisans sayısı
+                  {tr("broker başına ortalama lisans sayısı")}
                 </p>
               </div>
             </div>
 
             <h2 className="mt-14 font-poppins text-2xl font-semibold text-text-dark">
-              Düzenleyiciye göre dağılım
+              {tr("Düzenleyiciye göre dağılım")}
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-text-muted">
-              Bir broker birden fazla düzenleyici altında lisanslı
-              olabileceği için toplam, incelenen broker sayısından fazla
-              olabilir.
+              {tr("Bir broker birden fazla düzenleyici altında lisanslı olabileceği için toplam, incelenen broker sayısından fazla olabilir.")}
             </p>
             <div className="mt-6 overflow-x-auto rounded-2xl border border-hairline-light">
               <table className="w-full min-w-[420px] text-left text-sm">
@@ -190,7 +197,7 @@ export default function RegulationReportPage() {
             </div>
 
             <h2 className="mt-14 font-poppins text-2xl font-semibold text-text-dark">
-              Kategoriye göre broker sayısı
+              {tr("Kategoriye göre broker sayısı")}
             </h2>
             <div className="mt-6 overflow-x-auto rounded-2xl border border-hairline-light">
               <table className="w-full min-w-[420px] text-left text-sm">
@@ -219,13 +226,10 @@ export default function RegulationReportPage() {
             </div>
 
             <h2 className="mt-14 font-poppins text-2xl font-semibold text-text-dark">
-              FXPARTNER Index&apos;e göre en yüksek puanlı 10 broker
+              {tr("FXPARTNER Index'e göre en yüksek puanlı 10 broker")}
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-text-muted">
-              Düzenleme, maliyet, platform ve çekim güvenilirliği
-              eksenlerinin ortalamasından hesaplanan bileşik puana göre
-              sıralanmıştır. Tam metodoloji için her broker&apos;ın kendi
-              inceleme sayfasındaki eksen kırılımına bakabilirsiniz.
+              {tr("Düzenleme, maliyet, platform ve çekim güvenilirliği eksenlerinin ortalamasından hesaplanan bileşik puana göre sıralanmıştır. Tam metodoloji için her broker'ın kendi inceleme sayfasındaki eksen kırılımına bakabilirsiniz.")}
             </p>
             <div className="mt-6 overflow-x-auto rounded-2xl border border-hairline-light">
               <table className="w-full min-w-[480px] text-left text-sm">
@@ -262,12 +266,7 @@ export default function RegulationReportPage() {
             </div>
 
             <p className="mt-10 rounded-2xl border border-hairline-light bg-paper p-5 text-sm leading-relaxed text-text-muted">
-              Bu rapor FXPARTNER&apos;ın kendi editoryal inceleme verisinden
-              üretilir; bağımsız bir piyasa araştırması veya resmi düzenleyici
-              istatistiği değildir. Herhangi bir broker hakkında karar
-              vermeden önce güncel lisans durumunu ilgili düzenleyicinin
-              resmi sitesinden teyit edin. Bu içerik yatırım tavsiyesi
-              değildir.
+              {tr("Bu rapor FXPARTNER'ın kendi editoryal inceleme verisinden üretilir; bağımsız bir piyasa araştırması veya resmi düzenleyici istatistiği değildir. Herhangi bir broker hakkında karar vermeden önce güncel lisans durumunu ilgili düzenleyicinin resmi sitesinden teyit edin. Bu içerik yatırım tavsiyesi değildir.")}
             </p>
           </article>
         </section>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import { localizeBlogPost, localizeBlogPosts, localizeBrokers } from "@/lib/localizeContent";
@@ -11,6 +12,7 @@ import { brokers, brokerCategories, categoryInfo, getBrokerScores } from "@/data
 import { lookupBrokers } from "@/data/brokerLookup";
 import { getBrokerReviewStats } from "@/lib/brokerReviews";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -82,6 +84,9 @@ export default async function BrokerlarPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const { locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const reviewStats = await getBrokerReviewStats();
@@ -148,9 +153,7 @@ export default async function BrokerlarPage({
             </p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">
               <strong className="text-text-on-ink">Ortaklık, puanlamayı değiştirmez.</strong>{" "}
-              Platformu reklam ve komisyon gelirleri finanse eder — bu gelir asla daha iyi
-              bir puan satın almaz. Ticari ilişkimiz olan brokerlar sayfa üzerinde açıkça
-              belirtilir.
+              {tr("Platformu reklam ve komisyon gelirleri finanse eder — bu gelir asla daha iyi bir puan satın almaz. Ticari ilişkimiz olan brokerlar sayfa üzerinde açıkça belirtilir.")}
             </p>
             <div className="mt-8">
               <HeroBrokerSearch />
@@ -169,11 +172,10 @@ export default async function BrokerlarPage({
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-6xl px-6 pb-20">
             <h2 className="font-poppins text-3xl font-semibold md:text-4xl">
-              Forex broker karşılaştırma tablosu
+              {tr("Forex broker karşılaştırma tablosu")}
             </h2>
             <p className="mt-4 max-w-2xl text-text-on-ink-muted">
-              Minimum yatırım, kaldıraç, regülasyon ve platform desteğini yan yana
-              karşılaştırın. Kategoriye göre filtreleyebilirsiniz.
+              {tr("Minimum yatırım, kaldıraç, regülasyon ve platform desteğini yan yana karşılaştırın. Kategoriye göre filtreleyebilirsiniz.")}
             </p>
             <div className="mt-8">
               <ComparisonTable />
@@ -185,7 +187,7 @@ export default async function BrokerlarPage({
         <section>
           <div className="mx-auto max-w-5xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              İhtiyaca göre
+              {tr("İhtiyaca göre")}
             </span>
             <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
               Profilinize uygun brokeri bulun
@@ -222,10 +224,10 @@ export default async function BrokerlarPage({
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-3xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-gold">
-              Nasıl seçilir
+              {tr("Nasıl seçilir")}
             </span>
             <h2 className="mt-3 font-poppins text-3xl font-semibold md:text-4xl">
-              Forex brokeri seçerken bakılacak dört şey
+              {tr("Forex brokeri seçerken bakılacak dört şey")}
             </h2>
             <div className="mt-10 space-y-8">
               <div>
@@ -240,12 +242,10 @@ export default async function BrokerlarPage({
               </div>
               <div>
                 <h3 className="font-poppins text-lg font-semibold">
-                  2. Gerçek işlem maliyeti
+                  {tr("2. Gerçek işlem maliyeti")}
                 </h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-text-on-ink-muted">
-                  Spread tek başına yanıltıcıdır. Komisyon ve gecelik taşıma maliyeti
-                  (swap) ile birlikte hesaplanmalı. &ldquo;Sıfır komisyon&rdquo; genelde
-                  spreadin geniş olduğu anlamına gelir.
+                  {tr("Spread tek başına yanıltıcıdır. Komisyon ve gecelik taşıma maliyeti (swap) ile birlikte hesaplanmalı. &ldquo;Sıfır komisyon&rdquo; genelde spreadin geniş olduğu anlamına gelir.")}
                 </p>
               </div>
               <div>
@@ -255,16 +255,15 @@ export default async function BrokerlarPage({
                   açtıktan sonra küçük bir tutarla çekim testi yapmak. Tekrarlayan,
                   kaynaklı çekim şikayeti olan brokerları{" "}
                   <Link href="/blacklist" className="text-signal hover:text-signal-strong">
-                    risk uyarıları
+                    {tr("risk uyarıları")}
                   </Link>{" "}
-                  sayfamızda işaretliyoruz.
+                  {tr("sayfamızda işaretliyoruz.")}
                 </p>
               </div>
               <div>
                 <h3 className="font-poppins text-lg font-semibold">4. Platform ve araçlar</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-text-on-ink-muted">
-                  MT4, MT5, cTrader veya brokerın kendi platformu. Kullandığınız EA veya
-                  gösterge varsa platform desteği belirleyici olur.
+                  {tr("MT4, MT5, cTrader veya brokerın kendi platformu. Kullandığınız EA veya gösterge varsa platform desteği belirleyici olur.")}
                 </p>
               </div>
             </div>
@@ -282,10 +281,10 @@ export default async function BrokerlarPage({
         <section>
           <div className="mx-auto max-w-3xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Sıkça Sorulan Sorular
+              {tr("Sıkça Sorulan Sorular")}
             </span>
             <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
-              Forex brokerleri hakkında
+              {tr("Forex brokerleri hakkında")}
             </h2>
             <div className="mt-8 divide-y divide-hairline-light border-t border-hairline-light">
               {faqs.map((f) => (
@@ -303,19 +302,19 @@ export default async function BrokerlarPage({
                 href="/prop-firmalar"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
-                Prop firma karşılaştırması →
+                {tr("Prop firma karşılaştırması →")}
               </Link>
               <Link
                 href="/cashback"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
-                Cashback programları →
+                {tr("Cashback programları →")}
               </Link>
               <Link
                 href="/pozisyon-hesaplayici"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
-                Pozisyon hesaplayıcı →
+                {tr("Pozisyon hesaplayıcı →")}
               </Link>
             </div>
           </div>

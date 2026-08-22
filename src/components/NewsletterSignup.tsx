@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useActionState } from "react";
 import { subscribeToNewsletter, type NewsletterFormState } from "@/lib/newsletter-actions";
@@ -6,13 +7,13 @@ import { subscribeToNewsletter, type NewsletterFormState } from "@/lib/newslette
 const initialState: NewsletterFormState = { ok: false };
 
 export default function NewsletterSignup({ source }: { source: string }) {
+  const tr = useTr();
   const [state, formAction, pending] = useActionState(subscribeToNewsletter, initialState);
 
   if (state.ok) {
     return (
       <p className="text-sm text-text-on-ink">
-        Teşekkürler — listeye eklendiniz. Size yalnızca gerçek güncellemeler
-        gönderiyoruz, spam yok.
+        {tr("Teşekkürler — listeye eklendiniz. Size yalnızca gerçek güncellemeler gönderiyoruz, spam yok.")}
       </p>
     );
   }

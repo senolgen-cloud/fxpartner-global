@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useEffect, useState } from "react";
 
@@ -27,6 +28,7 @@ function isStandalone(): boolean {
 // legitimately want to show at once; keeping them on opposite corners
 // means they never visually stack on top of each other.
 export default function AddToHomeScreen() {
+  const tr = useTr();
   const [deferredEvent, setDeferredEvent] = useState<BeforeInstallPromptEvent | null>(null);
   const [visible, setVisible] = useState(false);
   const [installed, setInstalled] = useState(false);
@@ -81,7 +83,7 @@ export default function AddToHomeScreen() {
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
           <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-signal">
-            FXPARTNER Uygulaması
+            {tr("FXPARTNER Uygulaması")}
           </span>
           {!installed && (
             <button
@@ -96,13 +98,12 @@ export default function AddToHomeScreen() {
         </div>
         {installed ? (
           <p id="a2hs-title" className="mt-2 text-sm leading-relaxed text-text-on-ink-muted">
-            Eklendi — FXPARTNER&apos;ı artık ana ekranından açabilirsin. 🎉
+            {tr("Eklendi — FXPARTNER'ı artık ana ekranından açabilirsin. 🎉")}
           </p>
         ) : (
           <>
             <p id="a2hs-title" className="mt-2 text-sm leading-relaxed text-text-on-ink-muted">
-              FXPARTNER&apos;ı ana ekranına ekle — tek dokunuşla aç, bildirimleri
-              daha güvenilir al.
+              {tr("FXPARTNER'ı ana ekranına ekle — tek dokunuşla aç, bildirimleri daha güvenilir al.")}
             </p>
             <div className="mt-4 flex gap-2">
               <button
@@ -117,7 +118,7 @@ export default function AddToHomeScreen() {
                 onClick={dismiss}
                 className="rounded-full px-3 py-2 text-center font-mono text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
               >
-                Şimdi değil
+                {tr("Şimdi değil")}
               </button>
             </div>
           </>

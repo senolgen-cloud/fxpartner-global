@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import Image from "next/image";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
@@ -11,6 +12,8 @@ import {
   getMarketAnalysisCoverImage,
 } from "@/data/marketAnalysis";
 import { newsArticleSchema, breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -21,7 +24,7 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = getMarketAnalysisPostBySlug(slug);
@@ -49,8 +52,11 @@ export async function generateMetadata({
 export default async function MarketAnalysisPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string ; locale: string }>;
 }) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const { slug } = await params;
   const post = getMarketAnalysisPostBySlug(slug);
   if (!post) notFound();
@@ -82,7 +88,7 @@ export default async function MarketAnalysisPostPage({
               href="/piyasa-analizi"
               className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              ← Tüm analizler
+              {tr("← Tüm analizler")}
             </Link>
             <p className="mt-6 font-mono text-xs text-text-on-ink-muted">
               {new Date(post.publishedAt).toLocaleDateString("tr-TR", {
@@ -157,25 +163,21 @@ export default async function MarketAnalysisPostPage({
 
             <div className="mt-10 rounded-2xl border border-hairline-light bg-paper p-6">
               <h3 className="font-poppins text-lg font-semibold text-text-dark">
-                Doğru broker ile işlem yapın
+                {tr("Doğru broker ile işlem yapın")}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                Piyasa gelişmelerini takip ederken, regülasyon, maliyet, platform
-                ve para çekme güvenilirliği kriterlerine göre karşılaştırılmış
-                brokerlere göz atın.
+                {tr("Piyasa gelişmelerini takip ederken, regülasyon, maliyet, platform ve para çekme güvenilirliği kriterlerine göre karşılaştırılmış brokerlere göz atın.")}
               </p>
               <Link
                 href="/brokerlar"
                 className="mt-4 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
               >
-                Broker Sıralamasını Gör
+                {tr("Broker Sıralamasını Gör")}
               </Link>
             </div>
 
             <p className="mt-10 text-xs leading-relaxed text-text-muted">
-              Bu içerik genel bilgilendirme amaçlıdır ve yatırım tavsiyesi
-              niteliği taşımaz. Yatırım kararlarınızı vermeden önce kendi
-              araştırmanızı yapmanız ve gerekirse bir uzmana danışmanız önerilir.
+              {tr("Bu içerik genel bilgilendirme amaçlıdır ve yatırım tavsiyesi niteliği taşımaz. Yatırım kararlarınızı vermeden önce kendi araştırmanızı yapmanız ve gerekirse bir uzmana danışmanız önerilir.")}
             </p>
 
             <div className="mt-10">

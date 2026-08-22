@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
@@ -14,6 +15,8 @@ import {
 } from "@/data/technicalAnalysis";
 import { getSponsoredBroker } from "@/data/brokers";
 import { breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -29,7 +32,7 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ date: string }>;
+  params: Promise<{ date: string; locale: string }>;
 }): Promise<Metadata> {
   const { date } = await params;
   const iso = bulletinSlugToIso(date);
@@ -56,8 +59,11 @@ export async function generateMetadata({
 export default async function TechnicalAnalysisBulletinPage({
   params,
 }: {
-  params: Promise<{ date: string }>;
+  params: Promise<{ date: string ; locale: string }>;
 }) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const { date } = await params;
   const iso = bulletinSlugToIso(date);
   if (!iso) notFound();
@@ -89,7 +95,7 @@ export default async function TechnicalAnalysisBulletinPage({
               href="/teknik-analiz"
               className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              ← Tüm bültenler
+              {tr("← Tüm bültenler")}
             </Link>
             <p className="mt-6 font-mono text-xs text-text-on-ink-muted">
               {new Date(iso).toLocaleDateString("tr-TR", { year: "numeric", month: "long", day: "numeric" })}
@@ -129,9 +135,7 @@ export default async function TechnicalAnalysisBulletinPage({
             </div>
 
             <p className="mt-10 text-sm leading-relaxed text-text-muted">
-              Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Belirtilen
-              seviyeler Trading Central kaynaklı teknik analiz verileridir ve gerçekleşmesi
-              garanti edilmez.
+              {tr("Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Belirtilen seviyeler Trading Central kaynaklı teknik analiz verileridir ve gerçekleşmesi garanti edilmez.")}
             </p>
 
             <div className="mt-10">

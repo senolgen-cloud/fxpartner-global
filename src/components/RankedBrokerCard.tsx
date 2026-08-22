@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { categoryInfo, type Broker, type BrokerCategory } from "@/data/brokers";
 import TiltWrapper from "./TiltWrapper";
@@ -131,14 +132,14 @@ function CardBody({
               rel="noopener noreferrer sponsored"
               className="lift-on-hover rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
             >
-              Hesap Aç
+              {tr("Hesap Aç")}
             </a>
             <Link
               href={`/brokers/${broker.slug}`}
               title={`${broker.name} tam inceleme`}
               className="rounded-full border border-hairline px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:border-text-on-ink"
             >
-              Tam İnceleme →
+              {tr("Tam İnceleme →")}
             </Link>
           </div>
         </div>
@@ -176,7 +177,7 @@ export default function RankedBrokerCard({
         <TiltWrapper>
           <div className="featured-card-ring relative overflow-hidden rounded-3xl border border-gold/30 bg-gradient-to-b from-ink-soft to-ink p-5 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)] sm:p-6 md:p-8">
             <span className="absolute right-6 top-6 hidden rounded-full border border-gold/40 bg-gold/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-gold sm:inline-block">
-              En Yüksek Puan
+              {tr("En Yüksek Puan")}
             </span>
             <CardBody broker={broker} featured reviewStats={reviewStats} />
           </div>

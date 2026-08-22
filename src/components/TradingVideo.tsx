@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import { tr } from "@/lib/chrome";
 
 const VIDEO_ID = "bAFd9WkdVGs";
 const VIDEO_TITLE = "Beginners Guide to Forex by Investopedia";
@@ -11,14 +12,13 @@ export default function TradingVideo() {
       <div className="mx-auto max-w-4xl px-6 py-20">
         <Reveal>
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
-            Eğitim
+            {tr("Eğitim")}
           </span>
           <h2 className="mt-3 font-display text-3xl font-semibold text-text-dark md:text-4xl">
-            Forex&apos;e başlangıç: temel bilgiler
+            {tr("Forex'e başlangıç: temel bilgiler")}
           </h2>
           <p className="mt-4 max-w-2xl text-text-muted">
-            Brokerları karşılaştırmaya dalmadan önce, piyasanın nasıl
-            işlediğini anlatan kısa bir video.
+            {tr("Brokerları karşılaştırmaya dalmadan önce, piyasanın nasıl işlediğini anlatan kısa bir video.")}
           </p>
         </Reveal>
 

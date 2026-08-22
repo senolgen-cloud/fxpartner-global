@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import { localizeBlogPost, localizeBlogPosts, localizeBrokers } from "@/lib/localizeContent";
@@ -7,6 +8,7 @@ import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import { blogPosts } from "@/data/blog";
 import { breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -41,6 +43,9 @@ export default async function BlogIndexPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const { locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   return (
@@ -63,10 +68,10 @@ export default async function BlogIndexPage({
               Blog
             </span>
             <h1 className="mt-4 max-w-2xl font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Broker seçiminde güvenle ilerlemeniz için rehberler
+              {tr("Broker seçiminde güvenle ilerlemeniz için rehberler")}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              Pazarlama metni değil; pratik, kendiniz doğrulayabileceğiniz kriterler.
+              {tr("Pazarlama metni değil; pratik, kendiniz doğrulayabileceğiniz kriterler.")}
             </p>
           </div>
         </section>

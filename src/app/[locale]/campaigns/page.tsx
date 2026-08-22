@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
@@ -6,6 +7,7 @@ import Image from "next/image";
 import Footer from "@/components/Footer";
 import { brokers } from "@/data/brokers";
 import { breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 const OG_IMAGE = `${SITE_URL}/campaigns/lite-finance-refer-a-friend.jpg`;
@@ -40,7 +42,14 @@ export async function generateMetadata({
   };
 }
 
-export default function CampaignsPage() {
+export default async function CampaignsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const campaigns = brokers.filter((b) => b.promotion);
 
   return (
@@ -63,13 +72,10 @@ export default function CampaignsPage() {
               Kampanyalar
             </span>
             <h1 className="mt-4 max-w-2xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Güncel broker kampanyaları
+              {tr("Güncel broker kampanyaları")}
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-on-ink-muted">
-              FXPARTNER partner brokerlarının aktif referans ve yatırım
-              kampanyaları, değiştikçe tek bir yerde toplanıyor. Şartlar
-              brokera ve ülkeye göre değişir — katılmadan önce her zaman
-              güncel koşulları doğrulayın.
+              {tr("FXPARTNER partner brokerlarının aktif referans ve yatırım kampanyaları, değiştikçe tek bir yerde toplanıyor. Şartlar brokera ve ülkeye göre değişir — katılmadan önce her zaman güncel koşulları doğrulayın.")}
             </p>
           </div>
         </section>
@@ -78,7 +84,7 @@ export default function CampaignsPage() {
           <div className="mx-auto max-w-4xl px-6 py-16">
             {campaigns.length === 0 ? (
               <p className="text-[15px] text-text-muted">
-                Şu anda aktif kampanya yok — yakında tekrar kontrol edin.
+                {tr("Şu anda aktif kampanya yok — yakında tekrar kontrol edin.")}
               </p>
             ) : (
               <div className="divide-y divide-hairline-light border-t border-hairline-light">

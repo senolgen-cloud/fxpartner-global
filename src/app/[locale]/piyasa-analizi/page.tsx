@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Image from "next/image";
@@ -6,6 +7,7 @@ import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import { marketAnalysisPosts, getMarketAnalysisCoverImage } from "@/data/marketAnalysis";
 import { breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -30,7 +32,14 @@ export async function generateMetadata({
   };
 }
 
-export default function MarketAnalysisIndexPage() {
+export default async function MarketAnalysisIndexPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   return (
     <>
       <script
@@ -55,11 +64,10 @@ export default function MarketAnalysisIndexPage() {
               Piyasa Analizleri
             </span>
             <h1 className="mt-4 max-w-2xl font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Günlük piyasa özetleri
+              {tr("Günlük piyasa özetleri")}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              Küresel borsalar, merkez bankası kararları ve ekonomik takvimdeki
-              önemli veriler — her gün güncellenir.
+              {tr("Küresel borsalar, merkez bankası kararları ve ekonomik takvimdeki önemli veriler — her gün güncellenir.")}
             </p>
           </div>
         </section>

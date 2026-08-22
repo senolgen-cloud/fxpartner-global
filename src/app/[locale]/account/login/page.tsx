@@ -1,8 +1,18 @@
 import Link from "@/components/LocaleLink";
+import { tr } from "@/lib/chrome";
 import Footer from "@/components/Footer";
 import SimpleSignInForm from "@/components/SimpleSignInForm";
+import { setServerLocale } from "@/lib/serverLocale";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 
-export default function LoginPage() {
+export default async function LoginPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   return (
     <>
       <main className="relative flex-1 overflow-hidden bg-ink">
@@ -26,11 +36,10 @@ export default function LoginPage() {
                 Hesap
               </span>
               <h1 className="mt-3 font-display text-3xl font-semibold text-text-on-ink">
-                Tekrar hoş geldiniz
+                {tr("Tekrar hoş geldiniz")}
               </h1>
               <p className="mt-3 text-text-on-ink-muted">
-                E-postanızı girin, size tek kullanımlık bir giriş bağlantısı
-                gönderelim. Şifreye gerek yok.
+                {tr("E-postanızı girin, size tek kullanımlık bir giriş bağlantısı gönderelim. Şifreye gerek yok.")}
               </p>
 
               <SimpleSignInForm />
@@ -38,7 +47,7 @@ export default function LoginPage() {
               <p className="mt-6 text-xs leading-relaxed text-text-on-ink-muted">
                 Henüz üye değil misiniz?{" "}
                 <Link href="/account/register" className="text-signal hover:text-signal-strong">
-                  Ücretsiz kayıt olun
+                  {tr("Ücretsiz kayıt olun")}
                 </Link>
                 .
               </p>
@@ -57,11 +66,10 @@ export default function LoginPage() {
                 <span className="text-4xl font-bold uppercase tracking-tight text-text-on-ink">
                   Tekrar
                   <br />
-                  Hoş Geldiniz
+                  {tr("Hoş Geldiniz")}
                 </span>
                 <p className="mt-4 text-sm text-text-on-ink/80">
-                  Broker incelemeleri, cashback takibi ve VIP Telegram
-                  erişimi — hepsi tek bir yerde.
+                  {tr("Broker incelemeleri, cashback takibi ve VIP Telegram erişimi — hepsi tek bir yerde.")}
                 </p>
               </div>
             </div>

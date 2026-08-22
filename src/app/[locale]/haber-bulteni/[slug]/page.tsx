@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
@@ -7,6 +8,8 @@ import { db } from "@/db";
 import { newsBulletins } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -17,7 +20,7 @@ async function getBulletin(slug: string) {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
   const bulletin = await getBulletin(slug);
@@ -41,8 +44,11 @@ export const revalidate = 900;
 export default async function NewsBulletinPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string ; locale: string }>;
 }) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const { slug } = await params;
   const bulletin = await getBulletin(slug);
   if (!bulletin) notFound();
@@ -87,7 +93,7 @@ export default async function NewsBulletinPage({
               href="/haber-bulteni"
               className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              ← Tüm bültenler
+              {tr("← Tüm bültenler")}
             </Link>
             <p className="mt-6 font-mono text-xs text-text-on-ink-muted">
               {bulletin.publishedAt.toLocaleDateString("tr-TR", {
@@ -117,7 +123,7 @@ export default async function NewsBulletinPage({
             ))}
 
             <p className="mt-10 text-sm leading-relaxed text-text-muted">
-              Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.
+              {tr("Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.")}
             </p>
 
             {sources.length > 0 && (

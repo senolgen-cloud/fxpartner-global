@@ -1,3 +1,4 @@
+import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { lookupBrokers, type LookupVerdict } from "@/data/brokerLookup";
 
@@ -41,11 +42,10 @@ export default function BrokerLookupFullIndex() {
   return (
     <div className="mt-8 space-y-4">
       <h2 className="font-display text-lg font-semibold text-text-dark">
-        Tam listeye göz atın
+        {tr("Tam listeye göz atın")}
       </h2>
       <p className="text-sm text-text-muted">
-        Sorgulama veritabanımızdaki her aracı kurum, değerlendirmeye göre
-        gruplandırılmış — aramadan göz atmak için bir bölümü genişletin.
+        {tr("Sorgulama veritabanımızdaki her aracı kurum, değerlendirmeye göre gruplandırılmış — aramadan göz atmak için bir bölümü genişletin.")}
       </p>
       {GROUPS.map((group) => {
         const entries = lookupBrokers.filter((b) => b.verdict === group.verdict);

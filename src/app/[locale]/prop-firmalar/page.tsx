@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
@@ -7,6 +8,7 @@ import PropFirmComparisonTable from "@/components/PropFirmComparisonTable";
 import PropFirmFeaturedCard from "@/components/PropFirmFeaturedCard";
 import { propFirmsByScore, getPropFirmScores } from "@/data/propFirms";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -72,7 +74,14 @@ const faqs = [
   },
 ];
 
-export default function PropFirmalarPage() {
+export default async function PropFirmalarPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const ranked = propFirmsByScore();
   const top = ranked[0];
 
@@ -127,8 +136,7 @@ export default function PropFirmalarPage() {
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
               Funded account veren firmaları kural seti, challenge ücreti, drawdown
               limitleri, kâr paylaşımı ve <strong className="text-text-on-ink">ödeme sicili</strong>{" "}
-              üzerinden karşılaştırın. Puanlama bağımsızdır; ticari ilişkimiz olan
-              firmalar açıkça etiketlenir ve aynı kriterlerden geçer.
+              {tr("üzerinden karşılaştırın. Puanlama bağımsızdır; ticari ilişkimiz olan firmalar açıkça etiketlenir ve aynı kriterlerden geçer.")}
             </p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">
               Şu an {ranked.length} firma izleniyor. Bir firmanın{" "}
@@ -159,17 +167,13 @@ export default function PropFirmalarPage() {
         <section>
           <div className="mx-auto max-w-3xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Nasıl değerlendiriyoruz
+              {tr("Nasıl değerlendiriyoruz")}
             </span>
             <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
-              Puanlama neye göre yapılıyor
+              {tr("Puanlama neye göre yapılıyor")}
             </h2>
             <p className="mt-5 text-[15px] leading-relaxed text-text-dark/90">
-              Her prop firma dört eksende, 5 üzerinden puanlanır ve Index puanı bu dört
-              eksenin ortalamasının 10&apos;luk karşılığıdır. Broker puanlamamızdan ayrı
-              bir rubrik kullanıyoruz, çünkü prop firma bir broker değildir: burada
-              ölçtüğümüz şey kaldıraç veya minimum yatırım değil, kural setinin
-              geçilebilirliği ve firmanın ödeme yapıp yapmadığıdır.
+              {tr("Her prop firma dört eksende, 5 üzerinden puanlanır ve Index puanı bu dört eksenin ortalamasının 10'luk karşılığıdır. Broker puanlamamızdan ayrı bir rubrik kullanıyoruz, çünkü prop firma bir broker değildir: burada ölçtüğümüz şey kaldıraç veya minimum yatırım değil, kural setinin geçilebilirliği ve firmanın ödeme yapıp yapmadığıdır.")}
             </p>
             <div className="mt-8 grid gap-5 md:grid-cols-2">
               <div className="rounded-2xl border border-hairline-light bg-paper p-6">
@@ -177,9 +181,7 @@ export default function PropFirmalarPage() {
                   Kural Seti
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                  Kâr hedefi, günlük ve toplam drawdown oranı, drawdown&apos;ın statik mi
-                  trailing mi olduğu, minimum işlem günü şartı. Trailing drawdown,
-                  statik olana göre belirgin şekilde zordur ve puanı düşürür.
+                  {tr("Kâr hedefi, günlük ve toplam drawdown oranı, drawdown'ın statik mi trailing mi olduğu, minimum işlem günü şartı. Trailing drawdown, statik olana göre belirgin şekilde zordur ve puanı düşürür.")}
                 </p>
               </div>
               <div className="rounded-2xl border border-hairline-light bg-paper p-6">
@@ -187,29 +189,23 @@ export default function PropFirmalarPage() {
                   Maliyet
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                  Challenge ücreti ve — çoğu karşılaştırmanın atladığı kısım — ücretin
-                  ne zaman iade edildiği. İlk ödemede iade eden bir firma, üçüncü
-                  ödemede iade edenden gerçek maliyet olarak daha ucuzdur.
+                  {tr("Challenge ücreti ve — çoğu karşılaştırmanın atladığı kısım — ücretin ne zaman iade edildiği. İlk ödemede iade eden bir firma, üçüncü ödemede iade edenden gerçek maliyet olarak daha ucuzdur.")}
                 </p>
               </div>
               <div className="rounded-2xl border border-hairline-light bg-paper p-6">
                 <h3 className="font-poppins text-lg font-semibold text-text-dark">
-                  Ödeme Sicili
+                  {tr("Ödeme Sicili")}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                  Kâr paylaşımı oranı, ödeme döngüsü ve en önemlisi doğrulanabilir ödeme
-                  geçmişi. Bu eksen, kapanma riskinin de ölçüldüğü yerdir: faaliyet
-                  süresi kısa olan firma, kuralları cömert olsa bile buradan puan kaybeder.
+                  {tr("Kâr paylaşımı oranı, ödeme döngüsü ve en önemlisi doğrulanabilir ödeme geçmişi. Bu eksen, kapanma riskinin de ölçüldüğü yerdir: faaliyet süresi kısa olan firma, kuralları cömert olsa bile buradan puan kaybeder.")}
                 </p>
               </div>
               <div className="rounded-2xl border border-hairline-light bg-paper p-6">
                 <h3 className="font-poppins text-lg font-semibold text-text-dark">
-                  Şeffaflık
+                  {tr("Şeffaflık")}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                  Kuralların ne kadar net yazıldığı, kurumsal kimliğin açıklığı,
-                  gizli kısıtların (örneğin &ldquo;en iyi gün&rdquo; kuralı, EA
-                  sınırlamaları) önceden ilan edilip edilmediği.
+                  {tr("Kuralların ne kadar net yazıldığı, kurumsal kimliğin açıklığı, gizli kısıtların (örneğin &ldquo;en iyi gün&rdquo; kuralı, EA sınırlamaları) önceden ilan edilip edilmediği.")}
                 </p>
               </div>
             </div>
@@ -228,10 +224,10 @@ export default function PropFirmalarPage() {
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-3xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-gold">
-              Önce bunu okuyun
+              {tr("Önce bunu okuyun")}
             </span>
             <h2 className="mt-3 font-poppins text-3xl font-semibold md:text-4xl">
-              Prop firmalarda gerçek riskler
+              {tr("Prop firmalarda gerçek riskler")}
             </h2>
             <div className="mt-8 space-y-5 text-[15px] leading-relaxed text-text-on-ink-muted">
               <p>
@@ -243,31 +239,22 @@ export default function PropFirmalarPage() {
               </p>
               <p>
                 <strong className="text-text-on-ink">Firma kapanma riski gerçektir.</strong>{" "}
-                2020-2026 arasında 80&apos;den fazla prop firma kapandı. Arkasında
-                düzenlenmiş bir broker bulunan veya uzun faaliyet geçmişi olan firmalar
-                bu riski düşürür, ancak sıfırlamaz.
+                {tr("2020-2026 arasında 80'den fazla prop firma kapandı. Arkasında düzenlenmiş bir broker bulunan veya uzun faaliyet geçmişi olan firmalar bu riski düşürür, ancak sıfırlamaz.")}
               </p>
               <p>
                 <strong className="text-text-on-ink">Düzenleyici tablo değişiyor.</strong>{" "}
-                İtalya&apos;da CONSOB, prop challenge&apos;larını manipüle edilebilir
-                zorluk seviyeleri ve ödenmeyen kâr payları gerekçesiyle uyardı; Belçika
-                FSMA ve İspanya CNMV benzer uyarılar yayımladı. AB&apos;de funded-account
-                modelinin MiFID II kapsamına alınması değerlendiriliyor. Türkiye&apos;de
-                ise faaliyet SPK tarafından düzenlenmemiş bir gri alandadır.
+                {tr("İtalya'da CONSOB, prop challenge'larını manipüle edilebilir zorluk seviyeleri ve ödenmeyen kâr payları gerekçesiyle uyardı; Belçika FSMA ve İspanya CNMV benzer uyarılar yayımladı. AB'de funded-account modelinin MiFID II kapsamına alınması değerlendiriliyor. Türkiye'de ise faaliyet SPK tarafından düzenlenmemiş bir gri alandadır.")}
               </p>
               <p>
                 <strong className="text-text-on-ink">Kural ihlali hesabı sıfırlar.</strong>{" "}
-                Copy trading yasağı, EA kısıtları ve haber ticareti sınırlamaları
-                gerçektir; ihlal durumunda birikmiş kâr ödenmeden hesap kapatılabilir.
-                Tablodaki her firma için copy trading durumunu detay satırında
-                gösteriyoruz.
+                {tr("Copy trading yasağı, EA kısıtları ve haber ticareti sınırlamaları gerçektir; ihlal durumunda birikmiş kâr ödenmeden hesap kapatılabilir. Tablodaki her firma için copy trading durumunu detay satırında gösteriyoruz.")}
               </p>
               <p className="text-sm">
                 Bu sayfadaki hiçbir içerik yatırım tavsiyesi değildir. Ayrıntılar için{" "}
                 <Link href="/terms" className="text-signal hover:text-signal-strong">
-                  Kullanım Şartları
+                  {tr("Kullanım Şartları")}
                 </Link>{" "}
-                sayfamıza bakın.
+                {tr("sayfamıza bakın.")}
               </p>
             </div>
           </div>
@@ -277,10 +264,10 @@ export default function PropFirmalarPage() {
         <section>
           <div className="mx-auto max-w-3xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Sıkça Sorulan Sorular
+              {tr("Sıkça Sorulan Sorular")}
             </span>
             <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
-              Prop firmalar hakkında
+              {tr("Prop firmalar hakkında")}
             </h2>
             <div className="mt-8 divide-y divide-hairline-light border-t border-hairline-light">
               {faqs.map((f) => (
@@ -298,19 +285,19 @@ export default function PropFirmalarPage() {
                 href="/prop-firmalar/indirim-kodlari"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
-                İndirim kodları →
+                {tr("İndirim kodları →")}
               </Link>
               <Link
                 href="/pozisyon-hesaplayici"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
-                Pozisyon hesaplayıcı →
+                {tr("Pozisyon hesaplayıcı →")}
               </Link>
               <Link
                 href="/brokerlar"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
-                Broker karşılaştırması →
+                {tr("Broker karşılaştırması →")}
               </Link>
             </div>
           </div>

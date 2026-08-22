@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
@@ -12,6 +13,8 @@ import {
   type PropFirm,
 } from "@/data/propFirms";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 const YEAR = new Date().getFullYear();
@@ -23,7 +26,7 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
   const firm = getPropFirm(slug);
@@ -137,8 +140,11 @@ function firmFaqs(firm: PropFirm) {
 export default async function PropFirmDetailPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string ; locale: string }>;
 }) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const { slug } = await params;
   const firm = getPropFirm(slug);
   if (!firm) notFound();
@@ -226,7 +232,7 @@ export default async function PropFirmDetailPage({
             <div className="mt-8 flex flex-wrap items-end gap-10">
               <div>
                 <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  Index Puanı
+                  {tr("Index Puanı")}
                 </span>
                 <p className="mt-1 font-poppins text-5xl font-semibold text-gold">
                   {scores.composite.toFixed(1)}
@@ -289,8 +295,7 @@ export default async function PropFirmDetailPage({
 
             {firm.payoutProof.status !== "verified" && (
               <p className="mt-4 max-w-2xl font-mono text-[11px] leading-relaxed text-text-on-ink-muted">
-                Bağımsız ödeme kanıtı doğrulamamız henüz tamamlanmadı. Hesap açmadan
-                önce kendi araştırmanızı yapın.
+                {tr("Bağımsız ödeme kanıtı doğrulamamız henüz tamamlanmadı. Hesap açmadan önce kendi araştırmanızı yapın.")}
               </p>
             )}
           </div>
@@ -326,9 +331,7 @@ export default async function PropFirmDetailPage({
                 {firm.name} challenge kuralları
               </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
-                Elenmelerin büyük çoğunluğu kâr hedefine ulaşamamaktan değil, zarar
-                limitinin aşılmasından kaynaklanır. Aşağıdaki limitler, işlem başına
-                riskinizi belirlemeniz gereken sınırlardır.
+                {tr("Elenmelerin büyük çoğunluğu kâr hedefine ulaşamamaktan değil, zarar limitinin aşılmasından kaynaklanır. Aşağıdaki limitler, işlem başına riskinizi belirlemeniz gereken sınırlardır.")}
               </p>
               <div className="mt-6 overflow-x-auto rounded-2xl border border-hairline-light">
                 <table className="w-full min-w-[620px] border-collapse text-left text-sm">
@@ -408,11 +411,10 @@ export default async function PropFirmDetailPage({
             {/* Ürün uyumu */}
             <div className="mt-14 border-t border-hairline-light pt-10">
               <h2 className="font-poppins text-2xl font-semibold text-text-dark md:text-3xl">
-                Copy trading, sinyal ve EA kullanımı
+                {tr("Copy trading, sinyal ve EA kullanımı")}
               </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
-                Fonlanmış hesabınızı kaybettirebilecek en yaygın sebep budur. Kural
-                ihlali durumunda birikmiş kâr ödenmeden hesap kapatılabilir.
+                {tr("Fonlanmış hesabınızı kaybettirebilecek en yaygın sebep budur. Kural ihlali durumunda birikmiş kâr ödenmeden hesap kapatılabilir.")}
               </p>
               <div className="mt-6 grid gap-4 sm:grid-cols-3">
                 {[
@@ -437,7 +439,7 @@ export default async function PropFirmDetailPage({
             <div className="mt-14 grid gap-8 border-t border-hairline-light pt-10 md:grid-cols-2">
               <div>
                 <h2 className="font-poppins text-xl font-semibold text-text-dark">
-                  Artıları
+                  {tr("Artıları")}
                 </h2>
                 <ul className="mt-4 space-y-2.5">
                   {firm.pros.map((p) => (
@@ -465,7 +467,7 @@ export default async function PropFirmDetailPage({
             <div className="mt-14 border-t border-hairline-light pt-10">
               <div className="rounded-2xl border border-gold/25 bg-gold/5 p-7">
                 <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-gold">
-                  FXPARTNER Değerlendirmesi
+                  {tr("FXPARTNER Değerlendirmesi")}
                 </span>
                 <p className="mt-4 text-[15px] leading-relaxed text-text-dark/90">
                   {firm.bestFor}
@@ -476,7 +478,7 @@ export default async function PropFirmDetailPage({
             {/* Ödeme kanıtı */}
             <div className="mt-14 border-t border-hairline-light pt-10">
               <h2 className="font-poppins text-2xl font-semibold text-text-dark md:text-3xl">
-                Ödeme sicili
+                {tr("Ödeme sicili")}
               </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
                 Durum:{" "}
@@ -536,13 +538,13 @@ export default async function PropFirmDetailPage({
                 href="/prop-firmalar"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
-                Tüm prop firmaları karşılaştır →
+                {tr("Tüm prop firmaları karşılaştır →")}
               </Link>
               <Link
                 href="/pozisyon-hesaplayici"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
-                Pozisyon hesaplayıcı →
+                {tr("Pozisyon hesaplayıcı →")}
               </Link>
             </div>
           </div>

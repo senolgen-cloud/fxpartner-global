@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import React, { useState } from "react";
 import Link from "@/components/LocaleLink";
@@ -167,6 +168,7 @@ function headlineRules(firm: PropFirm) {
 }
 
 export default function PropFirmComparisonTable() {
+  const tr = useTr();
   const [activeSegment, setActiveSegment] = useState<SegmentFilter>("cfd");
   const [activeModel, setActiveModel] = useState<ModelFilter>("Tümü");
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
@@ -326,7 +328,7 @@ export default function PropFirmComparisonTable() {
                           href={`/prop-firmalar/${firm.slug}`}
                           className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted hover:text-signal"
                         >
-                          İnceleme →
+                          {tr("İnceleme →")}
                         </Link>
                       </div>
                     </td>
@@ -365,7 +367,7 @@ export default function PropFirmComparisonTable() {
 
                           <div>
                             <h4 className="font-mono text-[11px] uppercase tracking-[0.15em] text-signal">
-                              Artılar
+                              {tr("Artılar")}
                             </h4>
                             <ul className="mt-2 space-y-1.5">
                               {firm.pros.map((p) => (
@@ -401,7 +403,7 @@ export default function PropFirmComparisonTable() {
                               </div>
                               <div className="rounded-lg border border-hairline bg-ink/40 px-3 py-2.5">
                                 <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-text-on-ink-muted">
-                                  Sinyal Servisi Kullanımı
+                                  {tr("Sinyal Servisi Kullanımı")}
                                 </p>
                                 <p className="mt-1 text-xs text-text-on-ink">
                                   {SIGNAL_NOTE[firm.signalServiceAllowed]}

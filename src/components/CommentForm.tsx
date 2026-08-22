@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useActionState } from "react";
 import { submitComment, type CommentFormState } from "@/app/[locale]/brokers/[slug]/actions";
@@ -12,13 +13,14 @@ export default function CommentForm({
   brokerSlug: string;
   signedIn: boolean;
 }) {
+  const tr = useTr();
   const action = submitComment.bind(null, brokerSlug);
   const [state, formAction, pending] = useActionState(action, initialState);
 
   if (state.ok) {
     return (
       <p className="rounded-xl border border-hairline-light bg-paper p-5 text-sm text-text-muted">
-        Teşekkürler — yorumunuz yayınlandı.
+        {tr("Teşekkürler — yorumunuz yayınlandı.")}
       </p>
     );
   }
@@ -42,7 +44,7 @@ export default function CommentForm({
           name="guestName"
           required
           maxLength={60}
-          placeholder="Adınız"
+          placeholder={tr("Adınız")}
           className="w-full max-w-xs rounded-xl border border-hairline-light bg-paper px-4 py-2.5 text-sm text-text-dark outline-none focus:border-signal"
         />
       )}
@@ -62,7 +64,7 @@ export default function CommentForm({
         name="body"
         required
         rows={3}
-        placeholder="Bu aracı kurumla deneyiminizi paylaşın…"
+        placeholder={tr("Bu aracı kurumla deneyiminizi paylaşın…")}
         className="w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
       />
       {state.error && <p className="text-xs text-alert">{state.error}</p>}

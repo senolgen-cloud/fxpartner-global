@@ -4,7 +4,9 @@ import EconomicCalendarBoard from "@/components/EconomicCalendarBoard";
 import { getWeekCalendar } from "@/lib/economicCalendar";
 import { breadcrumbSchema } from "@/lib/schema";
 import { getDictionary } from "@/lib/dictionary";
+import { tr } from "@/lib/chrome";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -33,7 +35,14 @@ export async function generateMetadata({
 // the initial render should still be a live fetch, not a build-time cache.
 export const dynamic = "force-dynamic";
 
-export default async function EconomicCalendarPage() {
+export default async function EconomicCalendarPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   let events: Awaited<ReturnType<typeof getWeekCalendar>> = [];
   try {
     events = await getWeekCalendar();
@@ -60,12 +69,10 @@ export default async function EconomicCalendarPage() {
           <div className="mx-auto max-w-6xl px-6 py-16">
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">Economic Calendar</span>
             <h1 className="mt-3 font-display text-3xl font-semibold md:text-4xl">
-              Bu Haftanın Piyasa Verileri
+              {tr("Bu Haftanın Piyasa Verileri")}
             </h1>
             <p className="mt-4 max-w-2xl text-text-on-ink-muted">
-              Orta ve yüksek önemdeki makroekonomik veriler — açıklanma saatinde gerçek rakamlarla otomatik
-              güncellenir. Bildirim aboneleri, yüksek önemli veriler açıklandığı anda gerçekleşen/beklenti/önceki
-              değerleriyle anında bildirim alır.
+              {tr("Orta ve yüksek önemdeki makroekonomik veriler — açıklanma saatinde gerçek rakamlarla otomatik güncellenir. Bildirim aboneleri, yüksek önemli veriler açıklandığı anda gerçekleşen/beklenti/önceki değerleriyle anında bildirim alır.")}
             </p>
           </div>
         </section>
@@ -77,8 +84,7 @@ export default async function EconomicCalendarPage() {
         <section className="border-t border-hairline">
           <div className="mx-auto max-w-3xl px-6 py-14">
             <p className="font-mono text-xs leading-relaxed text-text-on-ink-muted">
-              Veriler herkese açık ekonomik takvim kaynaklarından derlenir ve yalnızca bilgilendirme amaçlıdır,
-              yatırım tavsiyesi değildir.
+              {tr("Veriler herkese açık ekonomik takvim kaynaklarından derlenir ve yalnızca bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.")}
             </p>
           </div>
         </section>

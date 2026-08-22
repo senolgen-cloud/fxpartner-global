@@ -13,7 +13,9 @@ import { auth } from "@/auth";
 import { type AccessTier } from "@/lib/vip";
 import { maskLockedActiveSignal } from "@/lib/signalAccess";
 import { getDictionary } from "@/lib/dictionary";
+import { tr } from "@/lib/chrome";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const sponsoredBrokers = getSponsoredBrokerPool("signals");
 
@@ -73,7 +75,14 @@ export async function generateMetadata({
 // rather than a build-time snapshot.
 export const dynamic = "force-dynamic";
 
-export default async function SignalsPage() {
+export default async function SignalsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const session = await auth();
 
   const [active, closed, subscriptionRow] = await Promise.all([
@@ -154,10 +163,7 @@ export default async function SignalsPage() {
         <section className="border-t border-hairline">
           <div className="mx-auto max-w-3xl px-6 py-14">
             <p className="font-mono text-xs leading-relaxed text-text-on-ink-muted">
-              Bunlar FXPARTNER&apos;ın kendi takip edilen MT5 hesabında açılan gerçek işlemlerdir; yalnızca
-              bilgilendirme amacıyla paylaşılmaktadır — yatırım tavsiyesi değildir. Geçmiş sonuçlar gelecekteki
-              sonuçları garanti etmez; pozisyon büyüklüğünü ve zarar durdur seviyelerini her zaman kendi risk
-              toleransınıza göre belirleyin.
+              {tr("Bunlar FXPARTNER'ın kendi takip edilen MT5 hesabında açılan gerçek işlemlerdir; yalnızca bilgilendirme amacıyla paylaşılmaktadır — yatırım tavsiyesi değildir. Geçmiş sonuçlar gelecekteki sonuçları garanti etmez; pozisyon büyüklüğünü ve zarar durdur seviyelerini her zaman kendi risk toleransınıza göre belirleyin.")}
             </p>
           </div>
         </section>
@@ -165,7 +171,7 @@ export default async function SignalsPage() {
         <section className="border-t border-hairline">
           <div className="mx-auto max-w-3xl px-6 py-14">
             <h2 className="font-display text-2xl font-semibold text-text-on-ink">
-              Sık Sorulan Sorular
+              {tr("Sık Sorulan Sorular")}
             </h2>
             <div className="mt-6 divide-y divide-hairline border-t border-hairline">
               {faqs.map((faq) => (

@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useEffect, useState } from "react";
 
@@ -17,6 +18,7 @@ function Bar({ pair, counts, myVote, onVote, busy }: {
   onVote: (pair: string, vote: "bullish" | "bearish") => void;
   busy: boolean;
 }) {
+  const tr = useTr();
   const total = counts.bullish + counts.bearish;
   const bullishPct = total > 0 ? Math.round((counts.bullish / total) * 100) : 0;
   const bearishPct = total > 0 ? 100 - bullishPct : 0;
@@ -54,7 +56,7 @@ function Bar({ pair, counts, myVote, onVote, busy }: {
               : "border-hairline text-text-on-ink-muted hover:border-tick-up hover:text-tick-up"
           }`}
         >
-          ↗ Yükseliş
+          {tr("↗ Yükseliş")}
         </button>
         <button
           type="button"
@@ -66,7 +68,7 @@ function Bar({ pair, counts, myVote, onVote, busy }: {
               : "border-hairline text-text-on-ink-muted hover:border-tick-down hover:text-tick-down"
           }`}
         >
-          ↘ Düşüş
+          {tr("↘ Düşüş")}
         </button>
       </div>
     </div>
@@ -74,6 +76,7 @@ function Bar({ pair, counts, myVote, onVote, busy }: {
 }
 
 export default function SentimentPoll() {
+  const tr = useTr();
   const [counts, setCounts] = useState<Counts | null>(null);
   const [myVotes, setMyVotes] = useState<Votes>({});
   const [busy, setBusy] = useState(false);

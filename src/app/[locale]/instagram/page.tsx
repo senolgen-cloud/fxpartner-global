@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
@@ -11,6 +12,7 @@ import {
   technicalAnalysisPosts,
 } from "@/data/technicalAnalysis";
 import { breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 const INSTAGRAM_URL = "https://www.instagram.com/fxpartner_global/";
@@ -114,7 +116,14 @@ const transparency = [
   },
 ];
 
-export default function InstagramLandingPage() {
+export default async function InstagramLandingPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   return (
     <>
       <script
@@ -148,13 +157,10 @@ export default function InstagramLandingPage() {
               <span className="text-signal">Aradığınız her şey burada.</span>
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-text-on-ink-muted">
-              FXPARTNER, forex aracı kurumlarını regülasyon, maliyet ve şikayet kayıtlarına göre
-              inceleyen bağımsız bir kaynaktır. Aşağıdaki araçların tamamı ücretsizdir; hesap
-              açmanıza gerek yok.
+              {tr("FXPARTNER, forex aracı kurumlarını regülasyon, maliyet ve şikayet kayıtlarına göre inceleyen bağımsız bir kaynaktır. Aşağıdaki araçların tamamı ücretsizdir; hesap açmanıza gerek yok.")}
             </p>
             <p className="mx-auto mt-4 max-w-xl text-xs leading-relaxed text-text-on-ink-muted">
-              Bu sayfadaki hiçbir içerik yatırım tavsiyesi değildir. CFD ve kaldıraçlı işlemler
-              yüksek risk taşır; yatırdığınız tutarın tamamını kaybedebilirsiniz.
+              {tr("Bu sayfadaki hiçbir içerik yatırım tavsiyesi değildir. CFD ve kaldıraçlı işlemler yüksek risk taşır; yatırdığınız tutarın tamamını kaybedebilirsiniz.")}
             </p>
           </div>
         </section>
@@ -163,11 +169,10 @@ export default function InstagramLandingPage() {
         <section className="border-b border-hairline bg-ink-soft">
           <div className="mx-auto max-w-2xl px-6 py-14">
             <h2 className="text-center font-display text-lg font-semibold">
-              Aracı kurumunuz regüle mi?
+              {tr("Aracı kurumunuz regüle mi?")}
             </h2>
             <p className="mx-auto mt-2 max-w-md text-center text-sm text-text-on-ink-muted">
-              İsmi yazın — lisans durumunu, denetleyen kurumu ve bilinen şikayet örüntülerini
-              gösterelim.
+              {tr("İsmi yazın — lisans durumunu, denetleyen kurumu ve bilinen şikayet örüntülerini gösterelim.")}
             </p>
             <div className="mt-6">
               <HeroBrokerSearch />
@@ -182,7 +187,7 @@ export default function InstagramLandingPage() {
               <div className="flex flex-wrap items-end justify-between gap-4">
                 <div>
                   <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-                    Günlük Bülten
+                    {tr("Günlük Bülten")}
                   </span>
                   <h2 className="mt-3 font-display text-2xl font-semibold">
                     {getBulletinTitle(latestDate)}
@@ -192,7 +197,7 @@ export default function InstagramLandingPage() {
                   href={`/teknik-analiz/${isoToBulletinSlug(latestDate)}`}
                   className="rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
                 >
-                  Bülteni Oku
+                  {tr("Bülteni Oku")}
                 </Link>
               </div>
 
@@ -219,7 +224,7 @@ export default function InstagramLandingPage() {
               {bulletinDates.length > 1 && (
                 <div className="mt-8 flex flex-wrap items-center gap-2">
                   <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-text-on-ink-muted">
-                    Önceki günler
+                    {tr("Önceki günler")}
                   </span>
                   {bulletinDates.slice(1, 6).map((iso) => (
                     <Link
@@ -240,10 +245,10 @@ export default function InstagramLandingPage() {
         <section className="border-b border-hairline bg-ink-soft">
           <div className="mx-auto max-w-5xl px-6 py-16">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Ücretsiz Araçlar
+              {tr("Ücretsiz Araçlar")}
             </span>
             <h2 className="mt-3 font-display text-2xl font-semibold">
-              Instagram&apos;da bahsettiğimiz her şey
+              {tr("Instagram'da bahsettiğimiz her şey")}
             </h2>
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {tools.map((tool) => (
@@ -267,10 +272,10 @@ export default function InstagramLandingPage() {
         <section className="border-b border-hairline">
           <div className="mx-auto max-w-5xl px-6 py-16">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Yayın İlkelerimiz
+              {tr("Yayın İlkelerimiz")}
             </span>
             <h2 className="mt-3 font-display text-2xl font-semibold">
-              Instagram hesabımızda neyi paylaşmayız?
+              {tr("Instagram hesabımızda neyi paylaşmayız?")}
             </h2>
             <div className="mt-8 grid gap-4 md:grid-cols-3">
               {transparency.map((item) => (
@@ -283,13 +288,13 @@ export default function InstagramLandingPage() {
             <p className="mt-6 text-sm text-text-on-ink-muted">
               Nasıl çalıştığımızı ve gelir modelimizi{" "}
               <Link href="/about" className="text-signal underline-offset-4 hover:underline">
-                Hakkımızda
+                {tr("Hakkımızda")}
               </Link>{" "}
               sayfasında açıklıyoruz. Bir aracı kurumla sorun yaşadıysanız{" "}
               <Link href="/complaint" className="text-signal underline-offset-4 hover:underline">
-                şikayet kaydı
+                {tr("şikayet kaydı")}
               </Link>{" "}
-              açabilirsiniz.
+              {tr("açabilirsiniz.")}
             </p>
           </div>
         </section>
@@ -298,18 +303,17 @@ export default function InstagramLandingPage() {
         <section className="border-b border-hairline bg-ink-soft">
           <div className="mx-auto max-w-5xl px-6 py-16">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Bağlantıda Kalın
+              {tr("Bağlantıda Kalın")}
             </span>
             <h2 className="mt-3 font-display text-2xl font-semibold">
-              Günlük bülteni kaçırmayın
+              {tr("Günlük bülteni kaçırmayın")}
             </h2>
 
             <div className="mt-8 grid gap-4 md:grid-cols-3">
               <div className="rounded-2xl border border-hairline bg-ink p-6 md:col-span-1">
                 <h3 className="font-display text-base font-semibold">📧 E-posta bülteni</h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-on-ink-muted">
-                  Günlük teknik bülten ve broker güncellemeleri doğrudan e-postanıza. Spam yok,
-                  tek tıkla çıkabilirsiniz.
+                  {tr("Günlük teknik bülten ve broker güncellemeleri doğrudan e-postanıza. Spam yok, tek tıkla çıkabilirsiniz.")}
                 </p>
                 <div className="mt-4">
                   <NewsletterSignup source="instagram-landing" />
@@ -324,10 +328,10 @@ export default function InstagramLandingPage() {
               >
                 <h3 className="font-display text-base font-semibold">📣 Telegram kanalı</h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-on-ink-muted">
-                  Bülten yayınlandığında ilk bildirim burada. @fxpartnerglobal
+                  {tr("Bülten yayınlandığında ilk bildirim burada. @fxpartnerglobal")}
                 </p>
                 <span className="mt-4 inline-block text-sm font-medium text-signal">
-                  Kanala katıl →
+                  {tr("Kanala katıl →")}
                 </span>
               </a>
 
@@ -344,7 +348,7 @@ export default function InstagramLandingPage() {
                   X (Twitter)
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-on-ink-muted">
-                  Piyasa haberleri ve veri açıklamaları anlık akışta. @fxpartner_TR
+                  {tr("Piyasa haberleri ve veri açıklamaları anlık akışta. @fxpartner_TR")}
                 </p>
                 <span className="mt-4 inline-block text-sm font-medium text-signal">
                   Takip et →
@@ -359,23 +363,19 @@ export default function InstagramLandingPage() {
           <div className="mx-auto max-w-3xl px-6 py-14">
             <div className="rounded-2xl border border-alert/40 bg-alert/5 p-6">
               <h2 className="font-display text-base font-semibold text-text-on-ink">
-                Risk Uyarısı
+                {tr("Risk Uyarısı")}
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-text-on-ink-muted">
-                Kaldıraçlı forex ve CFD işlemleri yüksek risk taşır ve her yatırımcı için uygun
-                değildir. Kaldıraç, kâr kadar zararı da büyütür; yatırdığınız sermayenin tamamını
-                kaybetme ihtimaliniz vardır. Bu sitedeki içerikler genel bilgilendirme amaçlıdır,
-                kişiye özel yatırım tavsiyesi veya alım-satım önerisi değildir. İşlem yapmadan önce
-                bilgi ve tecrübenizi değerlendirin, gerekirse bağımsız bir uzmandan destek alın.
+                {tr("Kaldıraçlı forex ve CFD işlemleri yüksek risk taşır ve her yatırımcı için uygun değildir. Kaldıraç, kâr kadar zararı da büyütür; yatırdığınız sermayenin tamamını kaybetme ihtimaliniz vardır. Bu sitedeki içerikler genel bilgilendirme amaçlıdır, kişiye özel yatırım tavsiyesi veya alım-satım önerisi değildir. İşlem yapmadan önce bilgi ve tecrübenizi değerlendirin, gerekirse bağımsız bir uzmandan destek alın.")}
               </p>
               <p className="mt-3 text-xs leading-relaxed text-text-on-ink-muted">
                 Ayrıntılar için{" "}
                 <Link href="/terms" className="underline underline-offset-4">
-                  Kullanım Koşulları
+                  {tr("Kullanım Koşulları")}
                 </Link>{" "}
                 ve{" "}
                 <Link href="/privacy" className="underline underline-offset-4">
-                  Gizlilik Politikası
+                  {tr("Gizlilik Politikası")}
                 </Link>
                 .
               </p>

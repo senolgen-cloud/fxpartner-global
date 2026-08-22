@@ -1,4 +1,5 @@
 import Reveal from "@/components/Reveal";
+import { tr } from "@/lib/chrome";
 import AnimatedStat from "@/components/AnimatedStat";
 import HeroVideo from "@/components/HeroVideo";
 import Hero3DGlobe from "@/components/partners/Hero3DGlobe";
@@ -30,22 +31,19 @@ export default function PartnerHero({
                 aria-hidden="true"
                 className="signal-dot h-1.5 w-1.5 rounded-full bg-signal"
               />
-              Partner Programı
+              {tr("Partner Programı")}
             </span>
           </Reveal>
 
           <Reveal delay={90}>
             <h1 className="mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
-              Küresel partner işinizi büyütün.
+              {tr("Küresel partner işinizi büyütün.")}
             </h1>
           </Reveal>
 
           <Reveal delay={180}>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              Yatırımcıların başarılı olmasına yardımcı olurken FXPARTNER
-              ile ölçeklenebilir, düzenli bir gelir oluşturun — ana IB
-              anlaşmamız kapsamında kendi Sub-IB hesabınızı açın ve ömür
-              boyu komisyon kazanın.
+              {tr("Yatırımcıların başarılı olmasına yardımcı olurken FXPARTNER ile ölçeklenebilir, düzenli bir gelir oluşturun — ana IB anlaşmamız kapsamında kendi Sub-IB hesabınızı açın ve ömür boyu komisyon kazanın.")}
             </p>
           </Reveal>
 
@@ -61,7 +59,7 @@ export default function PartnerHero({
                 href="#how-it-works"
                 className="lift-on-hover rounded-full border border-hairline px-6 py-3 text-sm font-medium text-text-on-ink transition-colors hover:border-text-on-ink"
               >
-                Nasıl Çalışır
+                {tr("Nasıl Çalışır")}
               </a>
             </div>
           </Reveal>
@@ -70,7 +68,7 @@ export default function PartnerHero({
             <dl className="mt-16 grid grid-cols-2 gap-6 border-t border-hairline pt-8 sm:grid-cols-4">
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  Partner Aracı Kurumlar
+                  {tr("Partner Aracı Kurumlar")}
                 </dt>
                 <dd className="mt-1 font-display text-3xl font-semibold">
                   <AnimatedStat value={brokerCount} />
@@ -78,7 +76,7 @@ export default function PartnerHero({
               </div>
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  Kapsanan Düzenleyici Kurum
+                  {tr("Kapsanan Düzenleyici Kurum")}
                 </dt>
                 <dd className="mt-1 font-display text-3xl font-semibold">
                   <AnimatedStat value={regulatorCount} suffix="+" />
@@ -86,7 +84,7 @@ export default function PartnerHero({
               </div>
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  Katılım Maliyeti
+                  {tr("Katılım Maliyeti")}
                 </dt>
                 <dd className="mt-1 font-display text-3xl font-semibold">
                   <AnimatedStat value={0} prefix="$" />
@@ -94,10 +92,10 @@ export default function PartnerHero({
               </div>
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  Komisyon Süresi
+                  {tr("Komisyon Süresi")}
                 </dt>
                 <dd className="mt-1 font-display text-2xl font-semibold">
-                  Ömür Boyu
+                  {tr("Ömür Boyu")}
                 </dd>
               </div>
             </dl>

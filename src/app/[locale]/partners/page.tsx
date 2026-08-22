@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
@@ -20,6 +21,7 @@ import PartnerFAQ from "@/components/partners/PartnerFAQ";
 import { cashbackPrograms } from "@/data/cashback";
 import { getBrokerBySlug, brokers } from "@/data/brokers";
 import { breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -46,7 +48,14 @@ export async function generateMetadata({
 
 const regulatorCount = new Set(brokers.flatMap((b) => b.regulators)).size;
 
-export default function PartnersPage() {
+export default async function PartnersPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const eligibleBrokers = cashbackPrograms
     .map((p) => getBrokerBySlug(p.brokerSlug))
     .filter((b): b is NonNullable<typeof b> => Boolean(b));
@@ -71,10 +80,10 @@ export default function PartnersPage() {
           <div className="mx-auto max-w-4xl px-6 py-20 md:py-28">
             <Reveal>
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-                Nasıl çalışır
+                {tr("Nasıl çalışır")}
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
-                Başvurudan ömür boyu komisyona
+                {tr("Başvurudan ömür boyu komisyona")}
               </h2>
             </Reveal>
             <div className="mt-14">
@@ -87,10 +96,10 @@ export default function PartnersPage() {
           <div className="mx-auto max-w-5xl px-6 py-20 md:py-28">
             <Reveal>
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-                Komisyon hesaplayıcı
+                {tr("Komisyon hesaplayıcı")}
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
-                Ağınızın ne kazanabileceğini görün
+                {tr("Ağınızın ne kazanabileceğini görün")}
               </h2>
             </Reveal>
             <div className="mt-12">
@@ -106,12 +115,10 @@ export default function PartnersPage() {
                 Partner paneli
               </span>
               <h2 className="mt-3 max-w-lg font-poppins text-3xl font-semibold leading-tight md:text-4xl">
-                Her yönlendirmeyi, komisyonu ve ödemeyi tek yerden takip edin
+                {tr("Her yönlendirmeyi, komisyonu ve ödemeyi tek yerden takip edin")}
               </h2>
               <p className="mt-5 max-w-md text-text-on-ink-muted">
-                Onaylandıktan sonra, bizimkinden ayrı olan kendi partner
-                panelinize erişim kazanırsınız — yönlendirme aktivitesini,
-                kazanılan komisyonu ve ödeme durumunu buradan görürsünüz.
+                {tr("Onaylandıktan sonra, bizimkinden ayrı olan kendi partner panelinize erişim kazanırsınız — yönlendirme aktivitesini, kazanılan komisyonu ve ödeme durumunu buradan görürsünüz.")}
               </p>
             </Reveal>
             <Reveal delay={150}>
@@ -129,7 +136,7 @@ export default function PartnersPage() {
                 Partner seviyeleri
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
-                Ağınız büyüdükçe daha üst seviyelere yükselin
+                {tr("Ağınız büyüdükçe daha üst seviyelere yükselin")}
               </h2>
             </Reveal>
             <div className="mt-12">
@@ -145,7 +152,7 @@ export default function PartnersPage() {
                 Neden FXPARTNER
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
-                Gerçek kitleler getiren kişiler için tasarlandı
+                {tr("Gerçek kitleler getiren kişiler için tasarlandı")}
               </h2>
             </Reveal>
             <div className="mt-12">
@@ -158,10 +165,10 @@ export default function PartnersPage() {
           <div className="mx-auto max-w-4xl px-6 py-20 md:py-28">
             <Reveal>
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-                Sizin için hazırlanan içerikler
+                {tr("Sizin için hazırlanan içerikler")}
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
-                Paylaşacak içeriğiniz hiç bitmesin
+                {tr("Paylaşacak içeriğiniz hiç bitmesin")}
               </h2>
             </Reveal>
             <div className="mt-10">
@@ -177,10 +184,10 @@ export default function PartnersPage() {
           <div className="mx-auto max-w-5xl px-6 py-20 md:py-28">
             <Reveal>
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-                Küresel ağ
+                {tr("Küresel ağ")}
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
-                Her bölgeye yayılmış partnerler
+                {tr("Her bölgeye yayılmış partnerler")}
               </h2>
             </Reveal>
             <div className="mt-10">
@@ -192,13 +199,10 @@ export default function PartnersPage() {
         <section>
           <div className="mx-auto max-w-3xl px-6 py-16">
             <h2 className="font-poppins text-2xl font-semibold text-text-dark">
-              Aktif partner anlaşması olan brokerlar
+              {tr("Aktif partner anlaşması olan brokerlar")}
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-text-muted">
-              Sub-IB ortaklıkları şu anda, FXPARTNER&apos;ın zaten onaylı bir ana
-              IB anlaşmasına sahip olduğu aşağıdaki brokerlar için mümkündür.
-              Başvuruda tercihinizi belirtin — uygunluğu ve kesin şartları
-              doğrudan brokerla teyit edeceğiz.
+              {tr("Sub-IB ortaklıkları şu anda, FXPARTNER'ın zaten onaylı bir ana IB anlaşmasına sahip olduğu aşağıdaki brokerlar için mümkündür. Başvuruda tercihinizi belirtin — uygunluğu ve kesin şartları doğrudan brokerla teyit edeceğiz.")}
             </p>
             <div className="mt-8 divide-y divide-hairline-light border-t border-hairline-light">
               {eligibleBrokers.map((broker) => (
@@ -213,7 +217,7 @@ export default function PartnersPage() {
                     href={`/brokers/${broker.slug}`}
                     className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted transition-colors hover:text-text-dark"
                   >
-                    Detaylı inceleme →
+                    {tr("Detaylı inceleme →")}
                   </Link>
                 </div>
               ))}
@@ -224,7 +228,7 @@ export default function PartnersPage() {
         <section className="bg-paper">
           <div className="mx-auto max-w-3xl px-6 py-16">
             <h2 className="font-poppins text-2xl font-semibold text-text-dark">
-              Bu kimler için uygun
+              {tr("Bu kimler için uygun")}
             </h2>
             <ul className="mt-6 space-y-3 text-sm leading-relaxed text-text-muted">
               <li>— Trading ile ilgilenen bir kitlesi olan sosyal medya hesabı, YouTube kanalı veya blog yönetiyorsunuz.</li>
@@ -233,11 +237,7 @@ export default function PartnersPage() {
               <li>— Forex broker yönlendirmelerinin doğal bir uyum sağladığı bir işletme veya ağ yönetiyorsunuz.</li>
             </ul>
             <p className="mt-6 text-xs leading-relaxed text-text-muted">
-              Bu yatırım tavsiyesi değildir ve garantili bir gelir fırsatı
-              sunmaz — gerçek kazançlar tamamen yönlendirdiğiniz müşterilerin
-              işlem hacmine ve her brokerın nihai onay ve şartlarına bağlıdır.
-              FXPARTNER, spam yapmayı, yanıltmayı veya brokerı potansiyel
-              müşterilere yanlış tanıtmayı amaçlayan başvuruları kabul etmez.
+              {tr("Bu yatırım tavsiyesi değildir ve garantili bir gelir fırsatı sunmaz — gerçek kazançlar tamamen yönlendirdiğiniz müşterilerin işlem hacmine ve her brokerın nihai onay ve şartlarına bağlıdır. FXPARTNER, spam yapmayı, yanıltmayı veya brokerı potansiyel müşterilere yanlış tanıtmayı amaçlayan başvuruları kabul etmez.")}
             </p>
           </div>
         </section>
@@ -249,7 +249,7 @@ export default function PartnersPage() {
                 SSS
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
-                Sık sorulan sorular
+                {tr("Sık sorulan sorular")}
               </h2>
             </Reveal>
             <div className="mt-10">
@@ -275,12 +275,10 @@ export default function PartnersPage() {
                   className="glass-shimmer pointer-events-none absolute inset-y-0 left-0 w-1/3 skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/10 to-transparent"
                 />
                 <h2 className="font-display text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-                  Partner işinizi bugün kurmaya başlayın.
+                  {tr("Partner işinizi bugün kurmaya başlayın.")}
                 </h2>
                 <p className="mx-auto mt-5 max-w-xl text-text-on-ink-muted">
-                  Bir kez başvurun, bir brokerın partner masasıyla eşleşin
-                  ve getirdiğiniz traderlardan ömür boyu komisyon kazanmaya
-                  başlayın.
+                  {tr("Bir kez başvurun, bir brokerın partner masasıyla eşleşin ve getirdiğiniz traderlardan ömür boyu komisyon kazanmaya başlayın.")}
                 </p>
                 <a
                   href="#apply"
@@ -296,11 +294,10 @@ export default function PartnersPage() {
         <section id="apply" className="bg-paper scroll-mt-20">
           <div className="mx-auto max-w-2xl px-6 py-16">
             <h2 className="font-poppins text-2xl font-semibold text-text-dark">
-              Partner olarak başvurun
+              {tr("Partner olarak başvurun")}
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-text-muted">
-              Aşağıdaki formu doldurun, partnerlik ekibimiz e-posta yoluyla
-              sizinle iletişime geçecek.
+              {tr("Aşağıdaki formu doldurun, partnerlik ekibimiz e-posta yoluyla sizinle iletişime geçecek.")}
             </p>
             <div className="mt-8">
               <PartnerApplicationForm

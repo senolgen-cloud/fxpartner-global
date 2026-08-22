@@ -21,6 +21,7 @@ import { auth } from "@/auth";
 import { LocaleProvider } from "@/components/LocaleProvider";
 import { defaultLocale, hreflangCode, htmlLang, isLocale, locales, localePath, ogLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionary";
+import { setServerLocale } from "@/lib/serverLocale";
 import "../globals.css";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
@@ -143,6 +144,10 @@ export default async function RootLayout({
 }>) {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : defaultLocale;
+  // Recorded before anything under this layout renders, so tr() in a server
+  // component three levels down knows which tree it is in.
+  setServerLocale(locale);
+
   const session = await auth();
   const signedIn = Boolean(session?.user);
   const accountHref = signedIn ? "/account" : "/account/login";

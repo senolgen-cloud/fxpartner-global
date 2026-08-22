@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -30,6 +31,7 @@ const allSuggestions: Suggestion[] = [
 ];
 
 export default function HeroBrokerSearch() {
+  const tr = useTr();
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
@@ -77,7 +79,7 @@ export default function HeroBrokerSearch() {
           onKeyDown={(e) => {
             if (e.key === "Enter") goToLookup();
           }}
-          placeholder="Bir broker arayın (ör. XM, Octa, Trade360...)"
+          placeholder={tr("Bir broker arayın (ör. XM, Octa, Trade360...)")}
           className="w-full bg-transparent text-sm text-text-on-ink placeholder:text-text-on-ink-muted focus:outline-none"
           autoComplete="off"
         />

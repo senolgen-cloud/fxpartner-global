@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useMemo, useState } from "react";
 import { brokerCategories, categoryInfo, type Broker } from "@/data/brokers";
@@ -12,6 +13,7 @@ export default function BrokerList({
   brokers: Broker[];
   reviewStats?: Record<string, BrokerReviewStats>;
 }) {
+  const tr = useTr();
   const [active, setActive] = useState<string | null>(null);
 
   const filtered = useMemo(
@@ -32,7 +34,7 @@ export default function BrokerList({
               : "border-hairline text-text-on-ink-muted hover:border-text-on-ink hover:text-text-on-ink"
           }`}
         >
-          Tümü
+          {tr("Tümü")}
         </button>
         {brokerCategories.map((category) => (
           <button
@@ -53,7 +55,7 @@ export default function BrokerList({
       <div className="mt-8 flex flex-col gap-5">
         {filtered.length === 0 ? (
           <p className="py-10 text-sm text-text-on-ink-muted">
-            Bu kategoride henüz broker yok.
+            {tr("Bu kategoride henüz broker yok.")}
           </p>
         ) : (
           filtered.map((broker, i) => (

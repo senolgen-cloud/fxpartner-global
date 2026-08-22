@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
@@ -11,6 +12,7 @@ import {
   type TechnicalAnalysisPost,
 } from "@/data/technicalAnalysis";
 import { breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -45,7 +47,14 @@ function groupByDate(posts: TechnicalAnalysisPost[]) {
   return Array.from(groups.entries()).sort((a, b) => (a[0] < b[0] ? 1 : -1));
 }
 
-export default function TechnicalAnalysisIndexPage() {
+export default async function TechnicalAnalysisIndexPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const dateGroups = groupByDate(technicalAnalysisPosts);
 
   return (
@@ -66,11 +75,10 @@ export default function TechnicalAnalysisIndexPage() {
           <div className="mx-auto max-w-4xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">Teknik Analiz Bülteni</span>
             <h1 className="mt-4 max-w-2xl font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Gün içi pivot ve seviye analizleri
+              {tr("Gün içi pivot ve seviye analizleri")}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              Gerçek grafikler, pivot seviyeleri, destek/direnç bantları ve RSI/MACD
-              yorumlarıyla — her analiz yalnızca bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.
+              {tr("Gerçek grafikler, pivot seviyeleri, destek/direnç bantları ve RSI/MACD yorumlarıyla — her analiz yalnızca bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.")}
             </p>
           </div>
         </section>
@@ -89,7 +97,7 @@ export default function TechnicalAnalysisIndexPage() {
                   href={`/teknik-analiz/${isoToBulletinSlug(date)}`}
                   className="shrink-0 font-mono text-xs uppercase tracking-[0.15em] text-signal transition-colors hover:text-signal-strong"
                 >
-                  Bülteni Görüntüle →
+                  {tr("Bülteni Görüntüle →")}
                 </Link>
               </div>
 

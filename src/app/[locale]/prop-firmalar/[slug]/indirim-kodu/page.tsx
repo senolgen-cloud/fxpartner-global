@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
@@ -13,6 +14,8 @@ import {
   type PropFirm,
 } from "@/data/propFirms";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 const YEAR = new Date().getFullYear();
@@ -39,7 +42,7 @@ export const dynamicParams = false;
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
   const firm = getPropFirm(slug);
@@ -97,8 +100,11 @@ function discountFaqs(firm: PropFirm) {
 export default async function IndirimKoduPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string ; locale: string }>;
 }) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const { slug } = await params;
   const firm = getPropFirm(slug);
   const d = firm?.discount;
@@ -164,7 +170,7 @@ export default async function IndirimKoduPage({
 
             <div className="mt-8 rounded-2xl border border-signal/30 bg-signal/[0.06] p-6">
               <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                İndirim Kodu
+                {tr("İndirim Kodu")}
               </span>
               <DiscountCodeCopy code={code} percent={d.percent} />
               {linkOn && (
@@ -197,7 +203,7 @@ export default async function IndirimKoduPage({
         <section>
           <div className="mx-auto max-w-3xl px-6 py-16">
             <h2 className="font-poppins text-2xl font-semibold text-text-dark md:text-3xl">
-              Kod nasıl kullanılır
+              {tr("Kod nasıl kullanılır")}
             </h2>
             <ol className="mt-6 space-y-4">
               {[
@@ -219,7 +225,7 @@ export default async function IndirimKoduPage({
 
             <div className="mt-10 rounded-2xl border border-hairline-light bg-paper p-6">
               <h3 className="font-poppins text-base font-semibold text-text-dark">
-                Hangi hesap boyutlarında geçerli?
+                {tr("Hangi hesap boyutlarında geçerli?")}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-text-muted">
                 {firm.name} şu hesap büyüklüklerini sunuyor:{" "}
@@ -237,10 +243,10 @@ export default async function IndirimKoduPage({
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-3xl px-6 py-16">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-gold">
-              İndirimden önce
+              {tr("İndirimden önce")}
             </span>
             <h2 className="mt-3 font-poppins text-2xl font-semibold md:text-3xl">
-              Asıl maliyet challenge ücreti değil
+              {tr("Asıl maliyet challenge ücreti değil")}
             </h2>
             <div className="mt-6 space-y-5 text-[15px] leading-relaxed text-text-on-ink-muted">
               <p>
@@ -260,7 +266,7 @@ export default async function IndirimKoduPage({
                       getPropFirmScores(b).composite - getPropFirmScores(a).composite
                   )
                   .findIndex((f) => f.slug === firm.slug) + 1}
-                . sırada — ve o sıralama bu indirimden bağımsız olarak belirlendi.
+                {tr(". sırada — ve o sıralama bu indirimden bağımsız olarak belirlendi.")}
               </p>
               {firm.payoutProof.status !== "verified" && (
                 <p className="rounded-xl border border-hairline bg-ink-soft/60 p-4 text-sm">
@@ -286,7 +292,7 @@ export default async function IndirimKoduPage({
         <section>
           <div className="mx-auto max-w-3xl px-6 py-16">
             <h2 className="font-poppins text-2xl font-semibold text-text-dark md:text-3xl">
-              Sıkça sorulanlar
+              {tr("Sıkça sorulanlar")}
             </h2>
             <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
               {faqs.map((f) => (
@@ -302,7 +308,7 @@ export default async function IndirimKoduPage({
             {otherWithCodes.length > 0 && (
               <div className="mt-10">
                 <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                  Diğer indirim kodları
+                  {tr("Diğer indirim kodları")}
                 </h3>
                 <div className="mt-3 flex flex-wrap gap-4">
                   {otherWithCodes.map((f) => (
@@ -323,7 +329,7 @@ export default async function IndirimKoduPage({
                 href="/prop-firmalar"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
-                Tüm prop firmaları karşılaştır →
+                {tr("Tüm prop firmaları karşılaştır →")}
               </Link>
             </div>
           </div>

@@ -1,3 +1,4 @@
+import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import { auth, signOut } from "@/auth";
@@ -22,6 +23,8 @@ import { brokers } from "@/data/brokers";
 import { type PackageTier } from "@/lib/vip";
 import { PACKAGE_TIER_INFO, PACKAGE_TIER_ORDER } from "@/data/packageTiers";
 import { createNowPaymentsCheckout } from "@/app/[locale]/paketler/checkout-actions";
+import { setServerLocale } from "@/lib/serverLocale";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 
 const brokerNames = Object.fromEntries(brokers.map((b) => [b.slug, b.name]));
 
@@ -70,7 +73,14 @@ const TIER_LABEL: Record<PackageTier, string> = {
   vip: "VIP",
 };
 
-export default async function AccountPage() {
+export default async function AccountPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const session = await auth();
   const user = session!.user!;
 
@@ -130,7 +140,7 @@ export default async function AccountPage() {
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-                Üye Paneli
+                {tr("Üye Paneli")}
               </span>
               <h1 className="mt-3 font-display text-3xl font-semibold text-text-on-ink">
                 {user.name || user.email}
@@ -146,7 +156,7 @@ export default async function AccountPage() {
                 type="submit"
                 className="rounded-full border border-hairline px-4 py-2 text-sm text-text-on-ink transition-colors hover:border-text-on-ink"
               >
-                Çıkış yap
+                {tr("Çıkış yap")}
               </button>
             </form>
           </div>
@@ -156,7 +166,7 @@ export default async function AccountPage() {
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <h2 className="font-display text-lg font-semibold text-text-on-ink">
-                  Üyelik Durumu
+                  {tr("Üyelik Durumu")}
                 </h2>
                 {subscription ? (
                   <p className="mt-1 text-sm text-text-on-ink-muted">
@@ -186,7 +196,7 @@ export default async function AccountPage() {
                   href="/paketler"
                   className="shrink-0 rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
                 >
-                  Paketleri İncele →
+                  {tr("Paketleri İncele →")}
                 </Link>
               )}
             </div>
@@ -223,14 +233,12 @@ export default async function AccountPage() {
                       className="rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
                     >
                       {PACKAGE_TIER_INFO[PACKAGE_TIER_ORDER[PACKAGE_TIER_ORDER.indexOf(subscriptionTier) + 1]].name}
-                      &apos;e Yükselt →
+                      {tr("'e Yükselt →")}
                     </Link>
                   )}
                 </div>
                 <p className="mt-3 text-xs leading-relaxed text-text-on-ink-muted">
-                  Kripto ödemede otomatik yenileme yoktur — süreniz dolmadan
-                  önce &quot;Paketi Yenile&quot;ye tıklayarak erişiminizi
-                  kesintisiz sürdürebilirsiniz.
+                  {tr("Kripto ödemede otomatik yenileme yoktur — süreniz dolmadan önce \"Paketi Yenile\"ye tıklayarak erişiminizi kesintisiz sürdürebilirsiniz.")}
                 </p>
               </div>
             )}
@@ -245,7 +253,7 @@ export default async function AccountPage() {
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.15em] text-signal">
                   <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
-                  Canlı
+                  {tr("Canlı")}
                 </span>
                 <span className="font-mono text-xs text-text-on-ink-muted">
                   {activeSignalsCount.length} aktif
@@ -264,7 +272,7 @@ export default async function AccountPage() {
                 <p className="mt-1 text-sm text-text-on-ink-muted">Gerçek MT5 hesabından anlık sinyaller.</p>
               )}
               <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-signal transition-colors group-hover:text-signal-strong">
-                Sinyalleri Gör →
+                {tr("Sinyalleri Gör →")}
               </span>
             </Link>
 
@@ -286,7 +294,7 @@ export default async function AccountPage() {
                 AI Asistan
               </h3>
               <p className="mt-1 text-sm text-text-on-ink-muted">
-                Piyasalar, CPI, brokerlar ve stratejiler hakkında anında yanıt alın.
+                {tr("Piyasalar, CPI, brokerlar ve stratejiler hakkında anında yanıt alın.")}
               </p>
               <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-signal transition-colors group-hover:text-signal-strong">
                 {subscriptionTier === "pro" || subscriptionTier === "vip" ? "Soru Sor →" : "Yükselt →"}
@@ -299,8 +307,7 @@ export default async function AccountPage() {
               Profil
             </h2>
             <p className="mt-2 text-sm text-text-on-ink-muted">
-              İsteğe bağlı — aracı kurum incelemelerindeki yorumlarınızın
-              yanında gösterilir.
+              {tr("İsteğe bağlı — aracı kurum incelemelerindeki yorumlarınızın yanında gösterilir.")}
             </p>
             <form action={updateCountry} className="mt-4 flex flex-wrap items-center gap-3">
               <select
@@ -329,9 +336,7 @@ export default async function AccountPage() {
               FXPARTNER VIP Telegram Grubu
             </h2>
             <p className="mt-2 text-sm text-text-on-ink-muted">
-              Kayıtlı bir üye olarak VIP Telegram grubuna erişiminiz var.
-              Aşağıdaki bağlantı tek kullanımlıktır ve 24 saat içinde
-              geçerliliğini yitirir.
+              {tr("Kayıtlı bir üye olarak VIP Telegram grubuna erişiminiz var. Aşağıdaki bağlantı tek kullanımlıktır ve 24 saat içinde geçerliliğini yitirir.")}
             </p>
             <VipInviteClientTrigger action={generateVipLink} />
           </section>
@@ -341,9 +346,7 @@ export default async function AccountPage() {
               Forex Cashback
             </h2>
             <p className="mt-2 text-sm text-text-on-ink-muted">
-              Kazanç iadesini takip etmeye başlamak için katılımcı bir aracı
-              kurumla bir işlem hesabı bağlayın. Tutarlar partner panelimizden
-              manuel olarak kaydedilir, otomatik hesaplanmaz.
+              {tr("Kazanç iadesini takip etmeye başlamak için katılımcı bir aracı kurumla bir işlem hesabı bağlayın. Tutarlar partner panelimizden manuel olarak kaydedilir, otomatik hesaplanmaz.")}
             </p>
             <div className="mt-4">
               <CashbackLinkForm brokerNames={brokerNames} />
@@ -394,13 +397,13 @@ export default async function AccountPage() {
 
           <section className="mt-10">
             <h2 className="font-display text-xl font-semibold text-text-on-ink">
-              Şikayetleriniz
+              {tr("Şikayetleriniz")}
             </h2>
             {myComplaints.length === 0 ? (
               <p className="mt-4 text-sm text-text-on-ink-muted">
                 Henüz bir şikayet göndermediniz. Bir brokerla ilgili sorun mu yaşıyorsunuz?{" "}
                 <Link href="/complaint" className="text-signal hover:text-signal-strong">
-                  Şikayet gönderin
+                  {tr("Şikayet gönderin")}
                 </Link>
                 .
               </p>

@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -53,6 +54,7 @@ function getMonogram(name: string): string {
 // scrolling past the hero, same as the old quick-nav FAB did, so it never
 // competes with the hero's own CTAs.
 export default function QuickAccessHub({ topBrokers }: { topBrokers: Broker[] }) {
+  const tr = useTr();
   const [pastHero, setPastHero] = useState(false);
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -105,7 +107,7 @@ export default function QuickAccessHub({ topBrokers }: { topBrokers: Broker[] })
           {/* Quick nav */}
           <div className="p-4">
             <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-text-on-ink-muted">
-              Hızlı Erişim
+              {tr("Hızlı Erişim")}
             </span>
             <div className="mt-3 flex flex-col gap-1">
               {QUICK_LINKS.map((link) => (
@@ -158,7 +160,7 @@ export default function QuickAccessHub({ topBrokers }: { topBrokers: Broker[] })
               onClick={close}
               className="mt-3 flex items-center justify-between border-t border-hairline pt-3 text-[11px] font-medium text-signal transition-colors hover:text-signal-strong"
             >
-              Topluluğa Katıl
+              {tr("Topluluğa Katıl")}
               <span aria-hidden="true">→</span>
             </Link>
           </div>
@@ -179,7 +181,7 @@ export default function QuickAccessHub({ topBrokers }: { topBrokers: Broker[] })
                 rel="noopener noreferrer"
                 className="ml-auto shrink-0 rounded-full bg-signal px-3 py-1.5 text-[11px] font-medium text-on-signal transition-colors hover:bg-signal-strong"
               >
-                Katıl
+                {tr("Katıl")}
               </a>
             </div>
             <div className="mt-3 flex items-center gap-3">
@@ -198,7 +200,7 @@ export default function QuickAccessHub({ topBrokers }: { topBrokers: Broker[] })
                 rel="noopener noreferrer"
                 className="ml-auto shrink-0 rounded-full border border-hairline px-3 py-1.5 text-[11px] font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
               >
-                Başlat
+                {tr("Başlat")}
               </a>
             </div>
             <div className="mt-3 flex items-center gap-3">

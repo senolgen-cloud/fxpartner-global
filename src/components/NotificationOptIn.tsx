@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useEffect, useState } from "react";
 
@@ -49,6 +50,7 @@ function isStandalone(): boolean {
 }
 
 export default function NotificationOptIn() {
+  const tr = useTr();
   const [visible, setVisible] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
@@ -164,7 +166,7 @@ export default function NotificationOptIn() {
                 onClick={dismiss}
                 className="w-full rounded-full border border-hairline px-4 py-2 text-center text-xs font-medium text-text-on-ink-muted transition-colors hover:text-text-on-ink"
               >
-                Anladım
+                {tr("Anladım")}
               </button>
             </div>
           </>
@@ -174,13 +176,11 @@ export default function NotificationOptIn() {
               id="notification-optin-title"
               className="mt-2 text-sm leading-relaxed text-text-on-ink-muted"
             >
-              Yeni piyasa analizi, haber ve broker kampanyaları yayınlandığında
-              anında tarayıcı bildirimi al.
+              {tr("Yeni piyasa analizi, haber ve broker kampanyaları yayınlandığında anında tarayıcı bildirimi al.")}
             </p>
             {error && (
               <p className="mt-2 text-xs text-alert">
-                Bildirim izni alınamadı. Tarayıcınızın site ayarlarından bildirim izninin engellenmediğini
-                kontrol edip tekrar deneyin.
+                {tr("Bildirim izni alınamadı. Tarayıcınızın site ayarlarından bildirim izninin engellenmediğini kontrol edip tekrar deneyin.")}
               </p>
             )}
             <div className="mt-4 flex gap-2">
@@ -197,7 +197,7 @@ export default function NotificationOptIn() {
                 onClick={dismiss}
                 className="rounded-full px-3 py-2 text-center font-mono text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
               >
-                Şimdi değil
+                {tr("Şimdi değil")}
               </button>
             </div>
           </>

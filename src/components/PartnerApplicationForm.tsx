@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useActionState } from "react";
 import {
@@ -21,18 +22,17 @@ export default function PartnerApplicationForm({
 }: {
   brokers: { slug: string; name: string }[];
 }) {
+  const tr = useTr();
   const [state, formAction, pending] = useActionState(submitPartnerApplication, initialState);
 
   if (state.ok) {
     return (
       <div className="rounded-2xl border border-hairline-light bg-paper p-8 text-center">
         <h2 className="font-display text-2xl font-semibold text-text-dark">
-          Başvurunuz alındı
+          {tr("Başvurunuz alındı")}
         </h2>
         <p className="mt-3 text-text-muted">
-          Teşekkür ederiz. Ortaklıklar ekibimiz her başvuruyu inceler ve
-          ilgilendiğiniz aracı kurum için Sub-IB kurulumunu anlatmak üzere
-          e-posta ile sizinle iletişime geçer.
+          {tr("Teşekkür ederiz. Ortaklıklar ekibimiz her başvuruyu inceler ve ilgilendiğiniz aracı kurum için Sub-IB kurulumunu anlatmak üzere e-posta ile sizinle iletişime geçer.")}
         </p>
       </div>
     );
@@ -77,7 +77,7 @@ export default function PartnerApplicationForm({
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-            Ülke
+            {tr("Ülke")}
           </label>
           <input
             name="country"
@@ -87,7 +87,7 @@ export default function PartnerApplicationForm({
         </div>
         <div>
           <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-            Tercih Edilen Aracı Kurum
+            {tr("Tercih Edilen Aracı Kurum")}
           </label>
           <select
             name="brokerSlug"
@@ -105,7 +105,7 @@ export default function PartnerApplicationForm({
       </div>
       <div>
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Potansiyel müşterilere nasıl ulaşıyorsunuz?
+          {tr("Potansiyel müşterilere nasıl ulaşıyorsunuz?")}
         </label>
         <select
           name="audienceType"
@@ -114,7 +114,7 @@ export default function PartnerApplicationForm({
           className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
         >
           <option value="" disabled>
-            Bir seçenek belirleyin
+            {tr("Bir seçenek belirleyin")}
           </option>
           {audienceOptions.map((o) => (
             <option key={o.value} value={o.value}>
@@ -125,23 +125,21 @@ export default function PartnerApplicationForm({
       </div>
       <div>
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Kitleniz ve planınız hakkında bize bilgi verin
+          {tr("Kitleniz ve planınız hakkında bize bilgi verin")}
         </label>
         <textarea
           name="message"
           required
           rows={5}
           minLength={20}
-          placeholder="Yaklaşık kaç kişiye ulaştığınız, bu kişilerin yatırımcı olarak ne kadar aktif olduğu ve onları bir aracı kuruma nasıl yönlendireceğiniz."
+          placeholder={tr("Yaklaşık kaç kişiye ulaştığınız, bu kişilerin yatırımcı olarak ne kadar aktif olduğu ve onları bir aracı kuruma nasıl yönlendireceğiniz.")}
           className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
         />
       </div>
 
       <label className="flex items-start gap-2 text-xs leading-relaxed text-text-muted">
         <input type="checkbox" required className="mt-0.5" />
-        Bunun bir başvuru olduğunu, onay veya gelir garantisi vermediğini
-        anlıyorum ve FXPARTNER&apos;ın bu konuda benimle iletişime geçmesine
-        onay veriyorum.
+        {tr("Bunun bir başvuru olduğunu, onay veya gelir garantisi vermediğini anlıyorum ve FXPARTNER'ın bu konuda benimle iletişime geçmesine onay veriyorum.")}
       </label>
 
       {state.error && <p className="text-sm text-alert">{state.error}</p>}

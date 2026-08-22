@@ -1,3 +1,4 @@
+import { tr } from "@/lib/chrome";
 import { XM_COPYTRADE_URL } from "@/lib/copytrade";
 
 function CopyIcon({ className }: { className?: string }) {
@@ -47,12 +48,12 @@ export default function CopyTradeButton({
             {label ?? "Bu sinyalleri otomatik kopyalayın"}
           </span>
           <span className="text-sm text-text-on-ink-muted">
-            XM Copytrade ile hesabınıza bağlanın — her yeni işlem otomatik olarak sizde de açılır.
+            {tr("XM Copytrade ile hesabınıza bağlanın — her yeni işlem otomatik olarak sizde de açılır.")}
           </span>
         </span>
         <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-signal px-6 py-3 text-sm font-semibold text-on-signal transition-transform group-hover:scale-[1.03]">
           <CopyIcon className="h-4 w-4" />
-          Üye Ol &amp; Kopyala
+          {tr("Üye Ol & Kopyala")}
         </span>
       </a>
     );

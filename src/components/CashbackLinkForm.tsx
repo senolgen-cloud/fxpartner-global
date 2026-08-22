@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useActionState } from "react";
 import { linkCashbackAccount, type LinkAccountState } from "@/app/[locale]/account/cashback-actions";
@@ -11,13 +12,13 @@ export default function CashbackLinkForm({
 }: {
   brokerNames: Record<string, string>;
 }) {
+  const tr = useTr();
   const [state, formAction, pending] = useActionState(linkCashbackAccount, initialState);
 
   if (state.ok) {
     return (
       <p className="rounded-xl border border-hairline-light bg-paper p-4 text-sm text-text-muted">
-        Hesap gönderildi. Partner panelimizle doğrulayıp aktif olduğunda
-        burada onaylayacağız.
+        {tr("Hesap gönderildi. Partner panelimizle doğrulayıp aktif olduğunda burada onaylayacağız.")}
       </p>
     );
   }
@@ -26,7 +27,7 @@ export default function CashbackLinkForm({
     <form action={formAction} className="flex flex-col gap-3 sm:flex-row sm:items-end">
       <div className="flex-1">
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Aracı Kurum
+          {tr("Aracı Kurum")}
         </label>
         <select
           name="brokerSlug"
@@ -35,7 +36,7 @@ export default function CashbackLinkForm({
           className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-3 py-2.5 text-sm text-text-dark outline-none focus:border-signal"
         >
           <option value="" disabled>
-            Bir aracı kurum seçin
+            {tr("Bir aracı kurum seçin")}
           </option>
           {cashbackPrograms.map((p) => (
             <option key={p.brokerSlug} value={p.brokerSlug}>
@@ -46,12 +47,12 @@ export default function CashbackLinkForm({
       </div>
       <div className="flex-1">
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          İşlem Hesap Numarası
+          {tr("İşlem Hesap Numarası")}
         </label>
         <input
           name="accountNumber"
           required
-          placeholder="örn. 12345678"
+          placeholder={tr("örn. 12345678")}
           className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-3 py-2.5 text-sm text-text-dark outline-none focus:border-signal"
         />
       </div>

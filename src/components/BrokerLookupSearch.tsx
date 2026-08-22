@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useMemo, useState } from "react";
 import Link from "@/components/LocaleLink";
@@ -26,6 +27,7 @@ const VERDICT_META: Record<
 };
 
 export default function BrokerLookupSearch({ initialQuery = "" }: { initialQuery?: string }) {
+  const tr = useTr();
   const [query, setQuery] = useState(initialQuery);
 
   const results = useMemo(() => {
@@ -50,7 +52,7 @@ export default function BrokerLookupSearch({ initialQuery = "" }: { initialQuery
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Bir aracı kurum adı yazın (örn. XM, Octa, Trade360...)"
+          placeholder={tr("Bir aracı kurum adı yazın (örn. XM, Octa, Trade360...)")}
           className="w-full rounded-2xl border border-hairline-light bg-paper-high px-5 py-4 text-base text-text-dark placeholder:text-text-muted focus:border-signal focus:outline-none"
           autoComplete="off"
         />
@@ -69,15 +71,12 @@ export default function BrokerLookupSearch({ initialQuery = "" }: { initialQuery
             <strong className="text-text-dark">
               &ldquo;{query}&rdquo; henüz veritabanımızda yok.
             </strong>{" "}
-            Bu, güvenilir olduğu anlamına gelmez — henüz araştırmadığımız
-            anlamına gelir. Hesap açmadan önce şunları kontrol edin:
+            {tr("Bu, güvenilir olduğu anlamına gelmez — henüz araştırmadığımız anlamına gelir. Hesap açmadan önce şunları kontrol edin:")}
           </p>
           <ul className="mt-4 space-y-2">
             <li className="flex gap-3 text-[15px] text-text-dark/90">
               <span className="mt-1 text-signal">–</span>
-              Gerçekten lisanslı olduğunu teyit etmek için aracı kurumun
-              adını kendi ülkenizin düzenleyici web sitesinde (veya FCA,
-              ASIC, CySEC&apos;te) arayın.
+              {tr("Gerçekten lisanslı olduğunu teyit etmek için aracı kurumun adını kendi ülkenizin düzenleyici web sitesinde (veya FCA, ASIC, CySEC'te) arayın.")}
             </li>
             <li className="flex gap-3 text-[15px] text-text-dark/90">
               <span className="mt-1 text-signal">–</span>
@@ -136,7 +135,7 @@ export default function BrokerLookupSearch({ initialQuery = "" }: { initialQuery
                     title={`${b.name} tam incelemesi`}
                     className="mt-3 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal transition-colors hover:text-signal-strong"
                   >
-                    Tam incelemeyi gör →
+                    {tr("Tam incelemeyi gör →")}
                   </Link>
                 )}
               </div>

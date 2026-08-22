@@ -1,4 +1,5 @@
 import Link from "@/components/LocaleLink";
+import { tr } from "@/lib/chrome";
 
 // Shared "you need to sign in / upgrade" panel — used in place of a gated
 // feature (AI Assistant chat, Copytrade inquiry form, Community page) when
@@ -37,7 +38,7 @@ export default function UpgradeGate({
           href="/paketler"
           className="rounded-full bg-signal px-6 py-3 text-sm font-semibold text-on-signal transition-colors hover:bg-signal-strong"
         >
-          Paketleri İncele →
+          {tr("Paketleri İncele →")}
         </Link>
         {!signedIn && (
           <Link
@@ -48,7 +49,7 @@ export default function UpgradeGate({
                 : "border-hairline-light text-text-dark hover:border-signal hover:text-signal"
             }`}
           >
-            Giriş Yap
+            {tr("Giriş Yap")}
           </Link>
         )}
       </div>

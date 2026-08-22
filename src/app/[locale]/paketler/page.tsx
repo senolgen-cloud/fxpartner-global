@@ -8,7 +8,9 @@ import { breadcrumbSchema } from "@/lib/schema";
 import type { PackageTier } from "@/lib/vip";
 import { PACKAGE_TIER_INFO, PACKAGE_TIER_ORDER, FREE_TIER_INFO } from "@/data/packageTiers";
 import { getDictionary } from "@/lib/dictionary";
+import { tr } from "@/lib/chrome";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 const trackedBrokerCount = lookupBrokers.length;
@@ -118,7 +120,14 @@ function CheckIcon() {
   );
 }
 
-export default function PaketlerPage() {
+export default async function PaketlerPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   return (
     <>
       <script
@@ -151,8 +160,7 @@ export default function PaketlerPage() {
               Sinyaller. <span className="text-signal">Analiz.</span> Strateji.
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-text-on-ink-muted">
-              Gerçek MT5 hesabımızdan gelen anlık sinyaller, uzman piyasa analizleri ve
-              profesyonel risk yönetimi — ihtiyacına uygun pakette.
+              {tr("Gerçek MT5 hesabımızdan gelen anlık sinyaller, uzman piyasa analizleri ve profesyonel risk yönetimi — ihtiyacına uygun pakette.")}
             </p>
 
             <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-5">
@@ -201,7 +209,7 @@ export default function PaketlerPage() {
                 href="/account/register"
                 className="mt-8 w-full rounded-full border border-hairline px-6 py-3 text-center text-sm font-semibold text-text-on-ink transition-colors hover:border-tick-up hover:text-tick-up"
               >
-                Ücretsiz Hesap Aç →
+                {tr("Ücretsiz Hesap Aç →")}
               </Link>
             </div>
 
@@ -216,7 +224,7 @@ export default function PaketlerPage() {
               >
                 {t.featured && (
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-signal px-4 py-1 text-xs font-semibold uppercase tracking-wide text-on-signal">
-                    En Çok Tercih Edilen
+                    {tr("En Çok Tercih Edilen")}
                   </span>
                 )}
                 <h2 className={`font-display text-2xl font-bold ${t.accent}`}>{t.name}</h2>
@@ -281,7 +289,7 @@ export default function PaketlerPage() {
             <div>
               <div className="font-display text-2xl font-semibold">₿ Kripto</div>
               <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                Güvenli Ödeme
+                {tr("Güvenli Ödeme")}
               </div>
             </div>
           </div>
@@ -296,7 +304,7 @@ export default function PaketlerPage() {
                 <span className="text-signal">sistemli takip edin.</span>
               </p>
               <p className="mt-2 text-sm text-text-on-ink-muted">
-                FXPARTNER ile profesyonel forex deneyiminizi bugün başlatın.
+                {tr("FXPARTNER ile profesyonel forex deneyiminizi bugün başlatın.")}
               </p>
             </div>
             <div className="flex shrink-0 flex-col items-center gap-2">
@@ -304,7 +312,7 @@ export default function PaketlerPage() {
                 href="#paketler"
                 className="rounded-full bg-signal px-6 py-3 text-sm font-semibold text-on-signal transition-colors hover:bg-signal-strong"
               >
-                Paketleri İncele
+                {tr("Paketleri İncele")}
               </a>
               <a
                 href="https://t.me/fxpartnerglobal"
@@ -322,7 +330,7 @@ export default function PaketlerPage() {
         <section className="border-t border-hairline">
           <div className="mx-auto max-w-5xl px-6 py-14 text-center">
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
-              Güvenilir Broker Ortakları
+              {tr("Güvenilir Broker Ortakları")}
             </span>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
               {partnerLogos.map((p) => (
@@ -341,9 +349,7 @@ export default function PaketlerPage() {
 
         <div className="mx-auto max-w-5xl px-6 pb-14">
           <p className="text-center text-xs leading-relaxed text-text-on-ink-muted">
-            Forex işlemleri yüksek risk içerir ve tüm yatırımcılar için uygun olmayabilir. Yatırım
-            yapmadan önce riskleri anlamanız önemlidir. Geçmiş performans gelecekteki sonuçların
-            garantisi değildir.
+            {tr("Forex işlemleri yüksek risk içerir ve tüm yatırımcılar için uygun olmayabilir. Yatırım yapmadan önce riskleri anlamanız önemlidir. Geçmiş performans gelecekteki sonuçların garantisi değildir.")}
           </p>
         </div>
       </main>

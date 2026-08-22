@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useActionState } from "react";
 import { submitCashbackLead, type CashbackLeadState } from "@/app/actions/cashbackLead";
@@ -9,6 +10,7 @@ const fieldClass =
   "w-full rounded-xl border border-hairline bg-ink/60 px-4 py-3 text-sm text-text-on-ink placeholder:text-text-on-ink-muted outline-none transition-shadow focus:border-signal focus:shadow-[0_0_0_4px_rgba(47,111,240,0.18)]";
 
 export default function HeroCashbackForm() {
+  const tr = useTr();
   const [state, formAction, pending] = useActionState(submitCashbackLead, initialState);
 
   return (
@@ -33,21 +35,19 @@ export default function HeroCashbackForm() {
             Listeye eklendiniz
           </h3>
           <p className="mt-2 max-w-xs text-sm leading-relaxed text-text-on-ink-muted">
-            Kısa süre içinde sizinle iletişime geçerek bir broker seçmenize ve
-            cashback takibinizi kurmanıza yardımcı olacağız.
+            {tr("Kısa süre içinde sizinle iletişime geçerek bir broker seçmenize ve cashback takibinizi kurmanıza yardımcı olacağız.")}
           </p>
         </div>
       ) : (
         <>
           <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-gold">
-            Cashback Programı
+            {tr("Cashback Programı")}
           </span>
           <h3 className="mt-2 font-poppins text-2xl font-bold leading-tight text-text-on-ink">
-            Her işlemde nakit iade kazanın
+            {tr("Her işlemde nakit iade kazanın")}
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-text-on-ink-muted">
-            Bilgilerinizi bırakın, broker hesabınızda cashback takibini
-            sizin için kuralım — ek ücret yok, gizli şart yok.
+            {tr("Bilgilerinizi bırakın, broker hesabınızda cashback takibini sizin için kuralım — ek ücret yok, gizli şart yok.")}
           </p>
 
           <form action={formAction} className="mt-6 flex flex-col gap-3.5">
@@ -55,7 +55,7 @@ export default function HeroCashbackForm() {
             <input
               name="phone"
               type="tel"
-              placeholder="Telefon numarası"
+              placeholder={tr("Telefon numarası")}
               required
               className={fieldClass}
             />
@@ -79,7 +79,7 @@ export default function HeroCashbackForm() {
           </form>
 
           <p className="mt-4 text-center text-[11px] leading-relaxed text-text-on-ink-muted">
-            Bu bilgileri yalnızca cashback&apos;inizi kurmak ve onaylamak için kullanacağız — spam yok.
+            {tr("Bu bilgileri yalnızca cashback'inizi kurmak ve onaylamak için kullanacağız — spam yok.")}
           </p>
         </>
       )}

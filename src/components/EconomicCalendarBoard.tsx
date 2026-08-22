@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useEffect, useRef, useState } from "react";
 import type { CalendarImpact, EconomicEvent } from "@/lib/economicCalendar";
@@ -97,6 +98,7 @@ function EventRow({ event }: { event: EconomicEvent }) {
 }
 
 export default function EconomicCalendarBoard({ initialEvents }: { initialEvents: EconomicEvent[] }) {
+  const tr = useTr();
   const [events, setEvents] = useState(initialEvents);
   const mounted = useRef(true);
 
@@ -136,7 +138,7 @@ export default function EconomicCalendarBoard({ initialEvents }: { initialEvents
         </div>
         <span className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-signal">
           <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
-          Canlı
+          {tr("Canlı")}
         </span>
       </div>
 

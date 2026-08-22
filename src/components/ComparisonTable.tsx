@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import React, { useState } from "react";
 import Link from "@/components/LocaleLink";
@@ -11,6 +12,7 @@ import {
 import { COMPARISON_CRITERIA } from "@/lib/comparisonCriteria";
 
 export default function ComparisonTable() {
+  const tr = useTr();
   const [activeCategory, setActiveCategory] = useState<BrokerCategory | "All">(
     "All"
   );
@@ -121,7 +123,7 @@ export default function ComparisonTable() {
                         title={`${b.name} tam inceleme`}
                         className="font-mono text-xs text-signal transition-colors hover:text-text-on-ink"
                       >
-                        Görüntüle →
+                        {tr("Görüntüle →")}
                       </Link>
                     </td>
                   </tr>
@@ -136,7 +138,7 @@ export default function ComparisonTable() {
                         <div className="grid gap-4 rounded-xl border border-hairline bg-ink-soft/60 p-5 sm:grid-cols-2">
                           <div>
                             <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-signal">
-                              Güçlü Yönler
+                              {tr("Güçlü Yönler")}
                             </p>
                             <ul className="mt-2 space-y-1.5 text-[13px] leading-relaxed text-text-on-ink-muted">
                               {b.pros.map((pro) => (
@@ -146,7 +148,7 @@ export default function ComparisonTable() {
                           </div>
                           <div>
                             <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                              Ödünleşimler
+                              {tr("Ödünleşimler")}
                             </p>
                             <ul className="mt-2 space-y-1.5 text-[13px] leading-relaxed text-text-on-ink-muted">
                               {b.cons.map((con) => (

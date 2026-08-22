@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useEffect, useState } from "react";
 import { useActionState } from "react";
@@ -18,6 +19,7 @@ const DISMISS_DAYS = 30;
 const initialState: NewsletterFormState = { ok: false };
 
 export default function NewsletterPopup() {
+  const tr = useTr();
   const [open, setOpen] = useState(false);
   const [state, formAction, pending] = useActionState(subscribeToNewsletter, initialState);
 
@@ -81,11 +83,10 @@ export default function NewsletterPopup() {
           {state.ok ? (
             <>
               <h2 className="mt-4 font-display text-2xl font-semibold leading-tight text-text-on-ink">
-                Teşekkürler, aramıza hoş geldin.
+                {tr("Teşekkürler, aramıza hoş geldin.")}
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-text-on-ink-muted">
-                Yalnızca gerçekten değerli bulacağını düşündüğümüz şeyleri
-                göndereceğiz — spam yok.
+                {tr("Yalnızca gerçekten değerli bulacağını düşündüğümüz şeyleri göndereceğiz — spam yok.")}
               </p>
             </>
           ) : (
@@ -94,19 +95,14 @@ export default function NewsletterPopup() {
                 id="newsletter-popup-title"
                 className="mt-4 font-display text-2xl font-semibold leading-tight text-text-on-ink"
               >
-                FXPARTNER&apos;ı ziyaret ettiğin için teşekkür ederim.
+                {tr("FXPARTNER'ı ziyaret ettiğin için teşekkür ederim.")}
               </h2>
               <div className="mt-3 space-y-3 text-sm leading-relaxed text-text-on-ink-muted">
                 <p>
-                  Bu platformu, forex piyasasında gerçekten güvenilir bilgiye
-                  ulaşmanın zor olduğunu görerek kurduk. Zamanını ayırıp bizi
-                  keşfettiğin için gerçekten minnettarım.
+                  {tr("Bu platformu, forex piyasasında gerçekten güvenilir bilgiye ulaşmanın zor olduğunu görerek kurduk. Zamanını ayırıp bizi keşfettiğin için gerçekten minnettarım.")}
                 </p>
                 <p>
-                  Seninle bağlantımızı sürdürmek istersen, bültenimize abone
-                  olmanı rica ederim — yeni sinyaller, piyasa analizleri ve
-                  broker kampanyaları hakkında, yalnızca gerçekten işine
-                  yarayacak güncellemeleri paylaşıyoruz.
+                  {tr("Seninle bağlantımızı sürdürmek istersen, bültenimize abone olmanı rica ederim — yeni sinyaller, piyasa analizleri ve broker kampanyaları hakkında, yalnızca gerçekten işine yarayacak güncellemeleri paylaşıyoruz.")}
                 </p>
                 <p className="text-text-on-ink">
                   Erdem Torun
@@ -137,7 +133,7 @@ export default function NewsletterPopup() {
                     onClick={close}
                     className="font-mono text-xs uppercase tracking-[0.1em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
                   >
-                    Şimdi değil
+                    {tr("Şimdi değil")}
                   </button>
                   <button
                     type="submit"

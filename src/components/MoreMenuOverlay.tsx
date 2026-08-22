@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useState } from "react";
 import Link from "@/components/LocaleLink";
@@ -196,6 +197,7 @@ export default function MoreMenuOverlay({
   signedIn: boolean;
   accountHref: string;
 }) {
+  const tr = useTr();
   const { open, setOpen } = useMoreMenu();
   const locale = useLocale();
   const [activeGroup, setActiveGroup] = useState(GROUPS[0].key);
@@ -295,7 +297,7 @@ export default function MoreMenuOverlay({
               onClick={close}
               className="text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              Hesabım
+              {tr("Hesabım")}
             </Link>
           ) : (
             <div className="flex items-center gap-4">
@@ -304,14 +306,14 @@ export default function MoreMenuOverlay({
                 onClick={close}
                 className="text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
               >
-                Giriş Yap
+                {tr("Giriş Yap")}
               </Link>
               <Link
                 href="/account/register"
                 onClick={close}
                 className="text-sm font-medium text-signal transition-colors hover:text-signal-strong"
               >
-                Kayıt Ol
+                {tr("Kayıt Ol")}
               </Link>
             </div>
           )}
@@ -320,7 +322,7 @@ export default function MoreMenuOverlay({
             onClick={close}
             className="rounded-full bg-signal px-4 py-3 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
           >
-            Broker Karşılaştır
+            {tr("Broker Karşılaştır")}
           </Link>
         </div>
       </div>

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import SignInForm from "@/components/SignInForm";
 import { brokers } from "@/data/brokers";
+import { setServerLocale } from "@/lib/serverLocale";
 
 export async function generateMetadata({
   params,
@@ -27,7 +29,14 @@ export async function generateMetadata({
   };
 }
 
-export default function RegisterPage() {
+export default async function RegisterPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   return (
     <>
       <main className="relative flex-1 overflow-hidden bg-ink">
@@ -50,11 +59,10 @@ export default function RegisterPage() {
                 Hesap
               </span>
               <h1 className="mt-3 font-display text-3xl font-semibold text-text-on-ink">
-                Ücretsiz hesap oluşturun
+                {tr("Ücretsiz hesap oluşturun")}
               </h1>
               <p className="mt-3 text-text-on-ink-muted">
-                Bize kendinizden biraz bahsedin, size tek kullanımlık bir
-                giriş bağlantısı gönderelim. Şifreye gerek yok.
+                {tr("Bize kendinizden biraz bahsedin, size tek kullanımlık bir giriş bağlantısı gönderelim. Şifreye gerek yok.")}
               </p>
 
               <SignInForm brokers={brokers.map((b) => ({ slug: b.slug, name: b.name }))} />
@@ -62,7 +70,7 @@ export default function RegisterPage() {
               <p className="mt-6 text-xs leading-relaxed text-text-on-ink-muted">
                 Zaten üye misiniz?{" "}
                 <Link href="/account/login" className="text-signal hover:text-signal-strong">
-                  Giriş yapın
+                  {tr("Giriş yapın")}
                 </Link>
                 .
               </p>
@@ -79,13 +87,12 @@ export default function RegisterPage() {
             >
               <div className="flex h-full flex-col items-center justify-center px-8 text-center">
                 <span className="text-4xl font-bold uppercase tracking-tight text-text-on-ink">
-                  Hoş
+                  {tr("Hoş")}
                   <br />
                   Geldiniz
                 </span>
                 <p className="mt-4 text-sm text-text-on-ink/80">
-                  Broker incelemeleri, cashback takibi ve VIP Telegram
-                  erişimi — hepsi tek bir yerde.
+                  {tr("Broker incelemeleri, cashback takibi ve VIP Telegram erişimi — hepsi tek bir yerde.")}
                 </p>
               </div>
             </div>

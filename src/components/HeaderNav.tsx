@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useEffect, useRef, useState } from "react";
 import Link from "@/components/LocaleLink";
@@ -23,6 +24,7 @@ export default function HeaderNav({
   signedIn: boolean;
   accountHref: string;
 }) {
+  const tr = useTr();
   const pathname = useLocalePathname();
   const locale = useLocale();
   const [resourcesOpen, setResourcesOpen] = useState(false);
@@ -119,7 +121,7 @@ export default function HeaderNav({
             href={accountHref}
             className="whitespace-nowrap text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
           >
-            Hesabım
+            {tr("Hesabım")}
           </Link>
         ) : (
           <>
@@ -127,13 +129,13 @@ export default function HeaderNav({
               href="/account/login"
               className="whitespace-nowrap text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              Giriş Yap
+              {tr("Giriş Yap")}
             </Link>
             <Link
               href="/account/register"
               className="whitespace-nowrap rounded-full border border-hairline px-3.5 py-1.5 text-sm font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
             >
-              Kayıt Ol
+              {tr("Kayıt Ol")}
             </Link>
           </>
         )}
@@ -141,7 +143,7 @@ export default function HeaderNav({
           href="/brokerlar"
           className="whitespace-nowrap rounded-full bg-signal px-4 py-2 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
         >
-          Brokerları Karşılaştır
+          {tr("Brokerları Karşılaştır")}
         </Link>
       </div>
 

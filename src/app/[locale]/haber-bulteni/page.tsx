@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
@@ -7,6 +8,7 @@ import { db } from "@/db";
 import { newsBulletins } from "@/db/schema";
 import { desc } from "drizzle-orm";
 import { breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -33,7 +35,14 @@ export async function generateMetadata({
 
 export const revalidate = 900;
 
-export default async function NewsBulletinIndexPage() {
+export default async function NewsBulletinIndexPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const bulletins = await db.query.newsBulletins.findMany({
     orderBy: [desc(newsBulletins.publishedAt)],
     limit: 50,
@@ -56,14 +65,13 @@ export default async function NewsBulletinIndexPage() {
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-4xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Haber Bülteni
+              {tr("Haber Bülteni")}
             </span>
             <h1 className="mt-4 max-w-2xl font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Günün piyasa gelişmeleri, tek yerde
+              {tr("Günün piyasa gelişmeleri, tek yerde")}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              Farklı kaynaklardan derlenen haberleri özgün yorumla bir araya
-              getiriyoruz. Yatırım tavsiyesi değildir.
+              {tr("Farklı kaynaklardan derlenen haberleri özgün yorumla bir araya getiriyoruz. Yatırım tavsiyesi değildir.")}
             </p>
           </div>
         </section>
@@ -92,7 +100,7 @@ export default async function NewsBulletinIndexPage() {
                     </h2>
                     <p className="text-[15px] leading-relaxed text-text-muted">{b.excerpt}</p>
                     <span className="mt-1 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal">
-                      Bülteni oku →
+                      {tr("Bülteni oku →")}
                     </span>
                   </Link>
                 ))}

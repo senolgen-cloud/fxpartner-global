@@ -1,6 +1,15 @@
 import Footer from "@/components/Footer";
+import { setServerLocale } from "@/lib/serverLocale";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 
-export default function VerifyRequestPage() {
+export default async function VerifyRequestPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   return (
     <>
       <main className="flex-1 bg-paper-high">

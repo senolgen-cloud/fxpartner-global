@@ -6,6 +6,8 @@ import CashbackSetupForm from "@/components/CashbackSetupForm";
 import { getCashbackProgram, cashbackPrograms } from "@/data/cashback";
 import { getBrokerBySlug } from "@/data/brokers";
 import { breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -16,7 +18,7 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
   const broker = getBrokerBySlug(slug);
@@ -31,8 +33,11 @@ export async function generateMetadata({
 export default async function CashbackSetupPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string ; locale: string }>;
 }) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const { slug } = await params;
   const program = getCashbackProgram(slug);
   const broker = getBrokerBySlug(slug);

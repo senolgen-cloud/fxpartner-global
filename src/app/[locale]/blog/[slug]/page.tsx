@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { localizeBlogPost, localizeBlogPosts, localizeBrokers } from "@/lib/localizeContent";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Image from "next/image";
@@ -12,6 +13,7 @@ import XmInlineAd from "@/components/XmInlineAd";
 import { blogPosts, getBlogPostBySlug } from "@/data/blog";
 import { getBrokerBySlug, getSponsoredBroker, getSkyscraperBroker } from "@/data/brokers";
 import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -64,6 +66,9 @@ export default async function BlogPostPage({
 }: {
   params: Promise<{ slug: string; locale: string }>;
 }) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const { slug, locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const source = getBlogPostBySlug(slug);
@@ -106,7 +111,7 @@ export default async function BlogPostPage({
               href="/blog"
               className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
             >
-              ← Tüm rehberler
+              {tr("← Tüm rehberler")}
             </Link>
             <p className="mt-6 font-mono text-xs text-text-on-ink-muted">
               {new Date(post.publishedAt).toLocaleDateString("tr-TR", {
@@ -182,18 +187,16 @@ export default async function BlogPostPage({
 
               <div className="mt-14 rounded-2xl border border-hairline-light bg-paper p-6">
                 <h3 className="font-poppins text-lg font-semibold text-text-dark">
-                  Brokerları karşılaştırmaya hazır mısınız?
+                  {tr("Brokerları karşılaştırmaya hazır mısınız?")}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                  Gerçek brokerların regülasyon, maliyet, platform ve para çekme
-                  eksenlerinde nasıl puan aldığını görün — yukarıdaki çerçevenin
-                  aynısıyla.
+                  {tr("Gerçek brokerların regülasyon, maliyet, platform ve para çekme eksenlerinde nasıl puan aldığını görün — yukarıdaki çerçevenin aynısıyla.")}
                 </p>
                 <Link
                   href="/brokerlar"
                   className="mt-4 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
                 >
-                  Broker Sıralamalarını Gör
+                  {tr("Broker Sıralamalarını Gör")}
                 </Link>
               </div>
 

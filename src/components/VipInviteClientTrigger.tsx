@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useState, useTransition } from "react";
 
@@ -7,6 +8,7 @@ export default function VipInviteClientTrigger({
 }: {
   action: () => Promise<string>;
 }) {
+  const tr = useTr();
   const [link, setLink] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
@@ -31,7 +33,7 @@ export default function VipInviteClientTrigger({
         rel="noopener noreferrer"
         className="mt-4 inline-block rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
       >
-        FXPARTNER VIP&apos;e Katıl →
+        {tr("FXPARTNER VIP'e Katıl →")}
       </a>
     );
   }

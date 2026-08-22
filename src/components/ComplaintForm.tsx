@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useActionState, useState } from "react";
 import Link from "@/components/LocaleLink";
@@ -12,6 +13,7 @@ export default function ComplaintForm({
 }: {
   brokers: { slug: string; name: string }[];
 }) {
+  const tr = useTr();
   const [state, formAction, pending] = useActionState(submitComplaint, initialState);
   const [brokerSlug, setBrokerSlug] = useState("");
 
@@ -19,14 +21,14 @@ export default function ComplaintForm({
     return (
       <div className="rounded-2xl border border-hairline-light bg-paper p-8 text-center">
         <h2 className="font-display text-2xl font-semibold text-text-dark">
-          Şikayetiniz alındı
+          {tr("Şikayetiniz alındı")}
         </h2>
         <p className="mt-3 text-text-muted">
           Teşekkür ederiz. 48 saat içinde brokerla iletişime geçmeye
           çalışacağız ve e-posta ile geri dönüş yapacağız. Bir FXPARTNER
           hesabınız varsa, durumu{" "}
           <Link href="/account" className="text-signal hover:text-signal-strong">
-            hesap sayfanızdan
+            {tr("hesap sayfanızdan")}
           </Link>{" "}
           da takip edebilirsiniz.
         </p>
@@ -72,7 +74,7 @@ export default function ComplaintForm({
       </div>
       <div>
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          İlgili Aracı Kurum
+          {tr("İlgili Aracı Kurum")}
         </label>
         <select
           name="brokerSlug"
@@ -82,7 +84,7 @@ export default function ComplaintForm({
           className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
         >
           <option value="" disabled>
-            Bir aracı kurum seçin
+            {tr("Bir aracı kurum seçin")}
           </option>
           {brokers.map((b) => (
             <option key={b.slug} value={b.slug}>
@@ -95,30 +97,28 @@ export default function ComplaintForm({
           <input
             name="otherBrokerName"
             required
-            placeholder="Aracı kurum adı"
+            placeholder={tr("Aracı kurum adı")}
             className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
           />
         )}
       </div>
       <div>
         <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-          Detaylı Açıklama
+          {tr("Detaylı Açıklama")}
         </label>
         <textarea
           name="description"
           required
           rows={6}
           minLength={20}
-          placeholder="Mümkünse tarih ve tutarlarla birlikte ne olduğunu açıklayın."
+          placeholder={tr("Mümkünse tarih ve tutarlarla birlikte ne olduğunu açıklayın.")}
           className="mt-2 w-full rounded-xl border border-hairline-light bg-paper px-4 py-3 text-sm text-text-dark outline-none focus:border-signal"
         />
       </div>
 
       <label className="flex items-start gap-2 text-xs leading-relaxed text-text-muted">
         <input type="checkbox" required className="mt-0.5" />
-        FXPARTNER&apos;ın yukarıdaki bilgileri şikayetimi incelemek ve
-        broker ile benimle bu konuda iletişime geçmek için işlemesine
-        onay veriyorum.
+        {tr("FXPARTNER'ın yukarıdaki bilgileri şikayetimi incelemek ve broker ile benimle bu konuda iletişime geçmek için işlemesine onay veriyorum.")}
       </label>
 
       {state.error && <p className="text-sm text-alert">{state.error}</p>}

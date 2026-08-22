@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Footer from "@/components/Footer";
 import { breadcrumbSchema } from "@/lib/schema";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -27,7 +29,14 @@ export async function generateMetadata({
   };
 }
 
-export default function PrivacyPage() {
+export default async function PrivacyPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   return (
     <>
       <script
@@ -48,10 +57,10 @@ export default function PrivacyPage() {
               Yasal
             </span>
             <h1 className="mt-4 font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Gizlilik Politikası
+              {tr("Gizlilik Politikası")}
             </h1>
             <p className="mt-4 font-mono text-xs text-text-on-ink-muted">
-              Son güncelleme: Temmuz 2026
+              {tr("Son güncelleme: Temmuz 2026")}
             </p>
           </div>
         </section>
@@ -59,12 +68,7 @@ export default function PrivacyPage() {
         <section>
           <article className="mx-auto max-w-3xl px-6 py-16 text-[15px] leading-relaxed text-text-dark/90">
             <p>
-              Bu politika, FXPARTNER&apos;ın (&quot;biz&quot;) fxpartner.global
-              üzerinden hangi kişisel verileri topladığını, bunları neden
-              topladığını ve bunları nasıl kontrol edebileceğinizi açıklar.
-              Bu site üzerindeki her form için geçerlidir: hesap girişi,
-              aracı kurum yorumları, şikayet formu ve kazanç iade (cashback)
-              programı.
+              {tr("Bu politika, FXPARTNER'ın (\"biz\") fxpartner.global üzerinden hangi kişisel verileri topladığını, bunları neden topladığını ve bunları nasıl kontrol edebileceğinizi açıklar. Bu site üzerindeki her form için geçerlidir: hesap girişi, aracı kurum yorumları, şikayet formu ve kazanç iade (cashback) programı.")}
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
@@ -114,11 +118,10 @@ export default function PrivacyPage() {
             </ul>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Kimlerle paylaşıyoruz
+              {tr("Kimlerle paylaşıyoruz")}
             </h2>
             <p className="mt-4">
-              Verilerinizi satmıyoruz. Sitenin çalışabilmesi için az sayıda
-              hizmet sağlayıcı bizim adımıza bu verileri işler:
+              {tr("Verilerinizi satmıyoruz. Sitenin çalışabilmesi için az sayıda hizmet sağlayıcı bizim adımıza bu verileri işler:")}
             </p>
             <ul className="mt-4 space-y-2">
               <li>
@@ -146,18 +149,14 @@ export default function PrivacyPage() {
             </ul>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Ne kadar süre saklıyoruz
+              {tr("Ne kadar süre saklıyoruz")}
             </h2>
             <p className="mt-4">
-              Hesap, şikayet ve kazanç iade kayıtlarını hesabınız aktif
-              olduğu sürece veya açık bir şikayet ya da kazanç iade talebini
-              sonuçlandırmak için gerektiği kadar saklarız. İstediğiniz
-              zaman silme talebinde bulunabilirsiniz — aşağıdaki
-              &quot;Haklarınız&quot; bölümüne bakın.
+              {tr("Hesap, şikayet ve kazanç iade kayıtlarını hesabınız aktif olduğu sürece veya açık bir şikayet ya da kazanç iade talebini sonuçlandırmak için gerektiği kadar saklarız. İstediğiniz zaman silme talebinde bulunabilirsiniz — aşağıdaki \"Haklarınız\" bölümüne bakın.")}
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Haklarınız
+              {tr("Haklarınız")}
             </h2>
             <p className="mt-4">
               Kişisel bilgilerinize erişmemizi, bunları düzeltmemizi ya da
@@ -165,26 +164,18 @@ export default function PrivacyPage() {
               <a href="mailto:info@fxpartner.global" className="text-signal hover:text-signal-strong">
                 info@fxpartner.global
               </a>{" "}
-              adresine e-posta göndererek geri çekebilirsiniz. Makul bir
-              süre içinde yanıt vereceğiz.
+              {tr("adresine e-posta göndererek geri çekebilirsiniz. Makul bir süre içinde yanıt vereceğiz.")}
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Yatırım tavsiyesi değildir
+              {tr("Yatırım tavsiyesi değildir")}
             </h2>
             <p className="mt-4">
-              Verilerinizi nasıl işlediğimiz dahil, bu sitedeki hiçbir şey
-              yatırım tavsiyesi değildir. Aracı kurum sıralamaları, kazanç
-              iade oranları ve editoryal içerik yalnızca genel bilgi
-              amaçlıdır.
+              {tr("Verilerinizi nasıl işlediğimiz dahil, bu sitedeki hiçbir şey yatırım tavsiyesi değildir. Aracı kurum sıralamaları, kazanç iade oranları ve editoryal içerik yalnızca genel bilgi amaçlıdır.")}
             </p>
 
             <p className="mt-10 rounded-2xl border border-hairline-light bg-paper p-5 text-sm text-text-muted">
-              Bu politika, gerçek veri uygulamalarımızı sade bir dille
-              anlatır. Resmi bir hukuki incelemenin yerini tutmaz — bu
-              politikanın bulunduğunuz bölge için belirli bir düzenleyici
-              çerçeveyi (örn. KVKK veya GDPR) karşılaması gerekiyorsa, yetkin
-              bir avukata inceletin.
+              {tr("Bu politika, gerçek veri uygulamalarımızı sade bir dille anlatır. Resmi bir hukuki incelemenin yerini tutmaz — bu politikanın bulunduğunuz bölge için belirli bir düzenleyici çerçeveyi (örn. KVKK veya GDPR) karşılaması gerekiyorsa, yetkin bir avukata inceletin.")}
             </p>
           </article>
         </section>

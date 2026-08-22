@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
@@ -7,6 +8,7 @@ import CopytradeInquiryForm from "@/components/CopytradeInquiryForm";
 import UpgradeGate from "@/components/UpgradeGate";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { getViewerAccess, hasTierAccess } from "@/lib/tierAccess";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -50,7 +52,14 @@ const faqs = [
   },
 ];
 
-export default async function CopytradePage() {
+export default async function CopytradePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const { signedIn, tier } = await getViewerAccess();
   const canApply = hasTierAccess(tier, "vip");
 
@@ -78,26 +87,26 @@ export default async function CopytradePage() {
               Copytrade
             </span>
             <h1 className="mt-4 max-w-2xl font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              FXPARTNER&apos;ın işlemlerini kendi hesabınıza otomatik kopyalayın
+              {tr("FXPARTNER'ın işlemlerini kendi hesabınıza otomatik kopyalayın")}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
               Copier EA, gerçek ve takip edilen MT5 hesabımızdaki işlemleri
               sizin kendi hesabınıza otomatik olarak yansıtır —{" "}
               <strong className="text-text-on-ink">hesabınızın kontrolü her zaman sizde kalır.</strong>{" "}
-              FXPARTNER hiçbir zaman paranıza veya hesabınıza erişemez.
+              {tr("FXPARTNER hiçbir zaman paranıza veya hesabınıza erişemez.")}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#basvuru"
                 className="rounded-full bg-signal px-6 py-3 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
               >
-                Kurulum İçin Talep Gönder
+                {tr("Kurulum İçin Talep Gönder")}
               </a>
               <Link
                 href="/signals"
                 className="rounded-full border border-hairline px-6 py-3 text-sm font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
               >
-                Gerçek performans geçmişini görün →
+                {tr("Gerçek performans geçmişini görün →")}
               </Link>
             </div>
           </div>
@@ -106,20 +115,19 @@ export default async function CopytradePage() {
         <section>
           <div className="mx-auto max-w-4xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Nasıl Çalışır
+              {tr("Nasıl Çalışır")}
             </span>
             <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
-              Üç adımda kurulum
+              {tr("Üç adımda kurulum")}
             </h2>
             <div className="mt-10 grid gap-6 sm:grid-cols-3">
               <div className="rounded-2xl border border-hairline-light bg-paper p-6">
                 <p className="font-mono text-xs uppercase tracking-[0.15em] text-signal">01</p>
                 <h3 className="mt-3 font-poppins text-lg font-semibold text-text-dark">
-                  Talep gönderin
+                  {tr("Talep gönderin")}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                  Aşağıdaki formu doldurun, ekibimiz size Copier EA dosyasını
-                  ve kurulum rehberini e-posta ile iletsin.
+                  {tr("Aşağıdaki formu doldurun, ekibimiz size Copier EA dosyasını ve kurulum rehberini e-posta ile iletsin.")}
                 </p>
               </div>
               <div className="rounded-2xl border border-hairline-light bg-paper p-6">
@@ -128,21 +136,16 @@ export default async function CopytradePage() {
                   Kendi MT5&apos;inize kurun
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                  EA&apos;yı kendi MT5 hesabınıza (demo veya gerçek, tercihen
-                  önce demo) ekleyin ve lot çarpanınızı kendi risk
-                  toleransınıza göre ayarlayın.
+                  {tr("EA'yı kendi MT5 hesabınıza (demo veya gerçek, tercihen önce demo) ekleyin ve lot çarpanınızı kendi risk toleransınıza göre ayarlayın.")}
                 </p>
               </div>
               <div className="rounded-2xl border border-hairline-light bg-paper p-6">
                 <p className="font-mono text-xs uppercase tracking-[0.15em] text-signal">03</p>
                 <h3 className="mt-3 font-poppins text-lg font-semibold text-text-dark">
-                  Otomatik kopyalama başlasın
+                  {tr("Otomatik kopyalama başlasın")}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                  EA, FXPARTNER&apos;ın takip edilen hesabında yeni bir işlem
-                  açıldığında otomatik olarak sizin hesabınızda da orantılı
-                  bir pozisyon açar; master işlem kapandığında sizinkini de
-                  kapatır.
+                  {tr("EA, FXPARTNER'ın takip edilen hesabında yeni bir işlem açıldığında otomatik olarak sizin hesabınızda da orantılı bir pozisyon açar; master işlem kapandığında sizinkini de kapatır.")}
                 </p>
               </div>
             </div>
@@ -155,28 +158,24 @@ export default async function CopytradePage() {
               Kontrol Her Zaman Sizde
             </span>
             <h2 className="mt-3 max-w-xl font-poppins text-3xl font-semibold leading-tight md:text-4xl">
-              Bu bir hesap yönetimi hizmeti değildir
+              {tr("Bu bir hesap yönetimi hizmeti değildir")}
             </h2>
             <ul className="mt-8 space-y-4 text-[15px] leading-relaxed text-text-on-ink-muted">
               <li className="flex gap-3">
                 <span className="mt-1 text-signal">—</span>
-                Hesabınız, şifreniz ve paranız her zaman kendi kontrolünüzde
-                kalır; FXPARTNER hiçbir zaman erişemez.
+                {tr("Hesabınız, şifreniz ve paranız her zaman kendi kontrolünüzde kalır; FXPARTNER hiçbir zaman erişemez.")}
               </li>
               <li className="flex gap-3">
                 <span className="mt-1 text-signal">—</span>
-                Copier EA&apos;yı istediğiniz an kaldırarak kopyalamayı
-                anında durdurabilirsiniz.
+                {tr("Copier EA'yı istediğiniz an kaldırarak kopyalamayı anında durdurabilirsiniz.")}
               </li>
               <li className="flex gap-3">
                 <span className="mt-1 text-signal">—</span>
-                Kopyalanan işlemler gerçek, takip edilen bir hesaptan gelir —
-                simüle edilmiş veya geriye dönük test sonuçları değildir.
+                {tr("Kopyalanan işlemler gerçek, takip edilen bir hesaptan gelir — simüle edilmiş veya geriye dönük test sonuçları değildir.")}
               </li>
               <li className="flex gap-3">
                 <span className="mt-1 text-signal">—</span>
-                Gerçek işlemleri kopyalamak, gerçek zararları da kopyalamak
-                anlamına gelir. Kâr garantisi yoktur ve olmayacaktır.
+                {tr("Gerçek işlemleri kopyalamak, gerçek zararları da kopyalamak anlamına gelir. Kâr garantisi yoktur ve olmayacaktır.")}
               </li>
             </ul>
           </div>
@@ -186,7 +185,7 @@ export default async function CopytradePage() {
           <div className="mx-auto max-w-3xl px-6 py-20 md:py-28">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">SSS</span>
             <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
-              Sık sorulan sorular
+              {tr("Sık sorulan sorular")}
             </h2>
             <div className="mt-8 divide-y divide-hairline-light border-t border-hairline-light">
               {faqs.map((faq) => (
@@ -207,11 +206,10 @@ export default async function CopytradePage() {
         <section id="basvuru" className="bg-paper scroll-mt-20">
           <div className="mx-auto max-w-2xl px-6 py-16 md:py-20">
             <h2 className="font-poppins text-2xl font-semibold text-text-dark">
-              Kurulum için talep gönderin
+              {tr("Kurulum için talep gönderin")}
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-text-muted">
-              Formu doldurun, ekibimiz Copier EA dosyasını ve kurulum
-              rehberini size e-posta ile iletsin.
+              {tr("Formu doldurun, ekibimiz Copier EA dosyasını ve kurulum rehberini size e-posta ile iletsin.")}
             </p>
             <div className="mt-8">
               {canApply ? (
@@ -219,7 +217,7 @@ export default async function CopytradePage() {
               ) : (
                 <UpgradeGate
                   eyebrow="VIP Üyelere Özel"
-                  title="Copytrade kurulumu için VIP paketine katılın"
+                  title={tr("Copytrade kurulumu için VIP paketine katılın")}
                   description="FXPARTNER CopyTrade erişimi VIP paketinin bir parçasıdır — kurulum talebi göndermek için önce VIP'e katılın."
                   signedIn={signedIn}
                   dark={false}
@@ -227,13 +225,7 @@ export default async function CopytradePage() {
               )}
             </div>
             <p className="mt-8 rounded-2xl border border-hairline-light bg-paper-high p-5 text-xs leading-relaxed text-text-muted">
-              Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi
-              değildir. Forex ve CFD işlemleri kaldıraç içerir ve yatırdığınız
-              sermayenin tamamını kaybetmenize yol açabilir. Copytrade,
-              FXPARTNER&apos;ın takip edilen hesabındaki gerçek işlemleri
-              kopyalar — geçmiş performans gelecekteki sonuçları garanti
-              etmez. Yalnızca kaybetmeyi göze alabileceğiniz sermaye ile,
-              önce demo hesapta test ederek kullanın.
+              {tr("Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Forex ve CFD işlemleri kaldıraç içerir ve yatırdığınız sermayenin tamamını kaybetmenize yol açabilir. Copytrade, FXPARTNER'ın takip edilen hesabındaki gerçek işlemleri kopyalar — geçmiş performans gelecekteki sonuçları garanti etmez. Yalnızca kaybetmeyi göze alabileceğiniz sermaye ile, önce demo hesapta test ederek kullanın.")}
             </p>
           </div>
         </section>

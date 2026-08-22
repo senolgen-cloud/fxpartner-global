@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useMemo, useState } from "react";
 import {
@@ -21,6 +22,7 @@ export default function PositionSizeCalculator({
 }: {
   rates: Record<AccountCurrency, number>;
 }) {
+  const tr = useTr();
   const [balance, setBalance] = useState("1000");
   const [currency, setCurrency] = useState<AccountCurrency>("USD");
   const [pair, setPair] = useState<SupportedPair>("EUR/USD");
@@ -97,14 +99,14 @@ export default function PositionSizeCalculator({
 
         <div className="flex items-end">
           <p className="text-xs leading-relaxed text-text-on-ink-muted">
-            Kurlar canlı piyasa verisinden alınır (ECB referans kurları), birkaç dakikada bir güncellenir.
+            {tr("Kurlar canlı piyasa verisinden alınır (ECB referans kurları), birkaç dakikada bir güncellenir.")}
           </p>
         </div>
       </div>
 
       {!rows ? (
         <p className="mt-8 text-sm text-text-on-ink-muted">
-          Geçerli bir hesap bakiyesi ve stop loss (pip) girin.
+          {tr("Geçerli bir hesap bakiyesi ve stop loss (pip) girin.")}
         </p>
       ) : (
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

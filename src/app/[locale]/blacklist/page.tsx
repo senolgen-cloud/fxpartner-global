@@ -4,7 +4,9 @@ import Footer from "@/components/Footer";
 import { brokers } from "@/data/brokers";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { getDictionary } from "@/lib/dictionary";
+import { tr } from "@/lib/chrome";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
+import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -49,7 +51,14 @@ const faqs = [
   },
 ];
 
-export default function BlacklistPage() {
+export default async function BlacklistPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: pageLocale } = await params;
+  setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
   const flagged = WATCHLIST_SLUGS.map((slug) => brokers.find((b) => b.slug === slug)).filter(
     (b): b is NonNullable<typeof b> => Boolean(b)
   );
@@ -75,18 +84,13 @@ export default function BlacklistPage() {
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-4xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-alert">
-              Risk Uyarıları
+              {tr("Risk Uyarıları")}
             </span>
             <h1 className="mt-4 max-w-2xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Kaydolmadan önce dikkatlice araştırılması gereken aracı kurumlar
+              {tr("Kaydolmadan önce dikkatlice araştırılması gereken aracı kurumlar")}
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-on-ink-muted">
-              Bu aracı kurumlar bağımsız güven endekslerinde düşük puan
-              alıyor veya yayınlanan incelemelerde tekrarlayan şikayet
-              örüntülerine sahip. Bu hukuki bir dolandırıcılık tespiti
-              değildir — ek durum tespiti yapılması gerektiğine dair bir
-              sinyaldir. Kaynaklar her aracı kurumun tam incelemesinde
-              belirtilir.
+              {tr("Bu aracı kurumlar bağımsız güven endekslerinde düşük puan alıyor veya yayınlanan incelemelerde tekrarlayan şikayet örüntülerine sahip. Bu hukuki bir dolandırıcılık tespiti değildir — ek durum tespiti yapılması gerektiğine dair bir sinyaldir. Kaynaklar her aracı kurumun tam incelemesinde belirtilir.")}
             </p>
           </div>
         </section>
@@ -127,23 +131,22 @@ export default function BlacklistPage() {
 
             <div className="mt-14 rounded-2xl border border-hairline-light bg-paper p-6">
               <h3 className="font-display text-lg font-semibold text-text-dark">
-                Bir aracı kurumla kötü bir deneyim mi yaşadınız?
+                {tr("Bir aracı kurumla kötü bir deneyim mi yaşadınız?")}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                Şikayet bildirin, doğrulanmış ve tekrarlayan örüntüleri bu
-                sayfaya ve puanlamamıza yansıtalım.
+                {tr("Şikayet bildirin, doğrulanmış ve tekrarlayan örüntüleri bu sayfaya ve puanlamamıza yansıtalım.")}
               </p>
               <Link
                 href="/complaint"
                 className="mt-4 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
               >
-                Şikayet Gönder
+                {tr("Şikayet Gönder")}
               </Link>
             </div>
 
             <div className="mt-14">
               <h2 className="font-display text-2xl font-semibold text-text-dark">
-                Sıkça Sorulan Sorular
+                {tr("Sıkça Sorulan Sorular")}
               </h2>
               <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
                 {faqs.map((faq) => (

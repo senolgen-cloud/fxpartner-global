@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useEffect, useRef, useState } from "react";
 import { COUNTRY_OPTIONS, getCountryOption, type CountryOption } from "@/lib/countryLanguages";
@@ -22,6 +23,7 @@ function deleteCookie(name: string) {
 }
 
 export default function LanguageSwitcher() {
+  const tr = useTr();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [current, setCurrent] = useState<CountryOption>(TURKISH);
@@ -88,7 +90,7 @@ export default function LanguageSwitcher() {
               }`}
             >
               <span aria-hidden="true">🇹🇷</span>
-              Orijinal (Türkçe)
+              {tr("Orijinal (Türkçe)")}
             </button>
             {filtered.map((c) => (
               <button
@@ -112,8 +114,7 @@ export default function LanguageSwitcher() {
             )}
           </div>
           <p className="mt-2 border-t border-hairline px-2.5 pt-2 text-[10px] leading-relaxed text-text-on-ink-muted">
-            Google Translate ile makine çevirisi yapılmıştır. Orijinal
-            içerik Türkçedir.
+            {tr("Google Translate ile makine çevirisi yapılmıştır. Orijinal içerik Türkçedir.")}
           </p>
         </div>
       )}

@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useEffect, useState } from "react";
 
@@ -130,6 +131,7 @@ function InstructionsModal({
 // buttons work everywhere: native prompt when the browser supports it,
 // manual step-by-step instructions otherwise.
 export default function InstallAppButtons() {
+  const tr = useTr();
   const [deferredEvent, setDeferredEvent] = useState<BeforeInstallPromptEvent | null>(null);
   const [standalone, setStandalone] = useState(false);
   const [modal, setModal] = useState<"mobile" | "desktop" | null>(null);
@@ -174,7 +176,7 @@ export default function InstallAppButtons() {
           className="lift-on-hover flex items-center gap-2 rounded-full border border-hairline px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
         >
           <PhoneIcon />
-          Telefona Yükle
+          {tr("Telefona Yükle")}
         </button>
         <button
           type="button"
@@ -182,7 +184,7 @@ export default function InstallAppButtons() {
           className="lift-on-hover flex items-center gap-2 rounded-full border border-hairline px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
         >
           <DesktopIcon />
-          PC&apos;ye Yükle
+          {tr("PC'ye Yükle")}
         </button>
       </div>
 

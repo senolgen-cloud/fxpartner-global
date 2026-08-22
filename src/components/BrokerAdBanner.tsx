@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { tr } from "@/lib/chrome";
 import type { Broker } from "@/data/brokers";
 
 function getMonogram(name: string): string {
@@ -99,7 +100,7 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
         rel="noopener noreferrer sponsored"
         className="w-full shrink-0 rounded-full bg-signal px-5 py-2.5 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong sm:w-auto"
       >
-        Hesap Aç →
+        {tr("Hesap Aç →")}
       </a>
     </div>
   );
