@@ -334,7 +334,7 @@ export const brokers: Broker[] = [
     },
   },
   {
-    rank: 5,
+    rank: 6,
     slug: "bybit",
     name: "Bybit",
     logo: "/brokers/bybit logo.png",
@@ -367,7 +367,7 @@ export const brokers: Broker[] = [
     scoreWithdrawal: 3,
   },
   {
-    rank: 6,
+    rank: 5,
     slug: "avatrade",
     name: "AvaTrade",
     logo: "/brokers/avatrade.jpg",
