@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 import { lookupBrokers, type LookupVerdict } from "@/data/brokerLookup";
 
 // Server-rendered, unfiltered index of every Broker Lookup entry.

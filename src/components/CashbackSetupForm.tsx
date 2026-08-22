@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { submitCashbackSetup, type SetupState } from "@/app/cashback/[slug]/setup/actions";
+import { submitCashbackSetup, type SetupState } from "@/app/[locale]/cashback/[slug]/setup/actions";
 
 const initialState: SetupState = { ok: false };
 

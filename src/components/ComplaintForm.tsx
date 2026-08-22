@@ -1,7 +1,8 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { submitComplaint, type ComplaintFormState } from "@/app/complaint/actions";
+import Link from "@/components/LocaleLink";
+import { submitComplaint, type ComplaintFormState } from "@/app/[locale]/complaint/actions";
 
 const initialState: ComplaintFormState = { ok: false };
 const OTHER_VALUE = "other";
@@ -24,9 +25,9 @@ export default function ComplaintForm({
           Teşekkür ederiz. 48 saat içinde brokerla iletişime geçmeye
           çalışacağız ve e-posta ile geri dönüş yapacağız. Bir FXPARTNER
           hesabınız varsa, durumu{" "}
-          <a href="/account" className="text-signal hover:text-signal-strong">
+          <Link href="/account" className="text-signal hover:text-signal-strong">
             hesap sayfanızdan
-          </a>{" "}
+          </Link>{" "}
           da takip edebilirsiniz.
         </p>
       </div>

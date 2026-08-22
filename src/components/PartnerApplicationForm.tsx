@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import {
   submitPartnerApplication,
   type PartnerApplicationFormState,
-} from "@/app/partners/actions";
+} from "@/app/[locale]/partners/actions";
 
 const initialState: PartnerApplicationFormState = { ok: false };
 

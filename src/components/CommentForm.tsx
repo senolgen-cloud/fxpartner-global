@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { submitComment, type CommentFormState } from "@/app/brokers/[slug]/actions";
+import { submitComment, type CommentFormState } from "@/app/[locale]/brokers/[slug]/actions";
 
 const initialState: CommentFormState = { ok: false };
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { submitCopytradeInquiry, type CopytradeInquiryFormState } from "@/app/copytrade/actions";
+import { submitCopytradeInquiry, type CopytradeInquiryFormState } from "@/app/[locale]/copytrade/actions";
 
 const initialState: CopytradeInquiryFormState = { ok: false };
 

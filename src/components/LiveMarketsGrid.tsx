@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 import { getTickerPairs, type TickerPair } from "@/lib/rates";
 
 const TICK_UP = "#22c55e";

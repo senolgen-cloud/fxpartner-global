@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 import { categoryInfo, type Broker, type BrokerCategory } from "@/data/brokers";
 import TiltWrapper from "./TiltWrapper";
 import MiniScoreRings from "./MiniScoreRings";

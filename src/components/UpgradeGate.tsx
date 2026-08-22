@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 
 // Shared "you need to sign in / upgrade" panel — used in place of a gated
 // feature (AI Assistant chat, Copytrade inquiry form, Community page) when

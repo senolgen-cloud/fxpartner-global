@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 import type { tradeSignals, TradeSignalOutcome } from "@/db/schema";
 import { canViewSignal, requiredTierForPair, type AccessTier } from "@/lib/signalAccess";
 import { ACCESS_TIER_LABEL } from "@/data/packageTiers";

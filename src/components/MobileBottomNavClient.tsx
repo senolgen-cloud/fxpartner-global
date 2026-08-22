@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from "@/components/LocaleLink";
+import { useLocalePathname } from "@/components/useLocalePathname";
 import { useMoreMenu } from "@/components/MoreMenuContext";
 
 const ICONS = {
@@ -47,7 +47,7 @@ function isActive(pathname: string, href: string) {
 }
 
 export default function MobileBottomNavClient({ accountHref }: { accountHref: string }) {
-  const pathname = usePathname();
+  const pathname = useLocalePathname();
   const { open: moreOpen, setOpen: setMoreOpen } = useMoreMenu();
 
   const tabs: { href: string; label: string; icon: keyof typeof ICONS }[] = [

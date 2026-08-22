@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { submitLogin, type SimpleSignInState } from "@/app/account/login/simple-actions";
+import { submitLogin, type SimpleSignInState } from "@/app/[locale]/account/login/simple-actions";
 
 const initialState: SimpleSignInState = { ok: false };
 

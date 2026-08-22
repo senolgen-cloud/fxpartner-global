@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 
 // Shared VIP upsell CTA — used on /signals (dark theme) and broker review
 // pages (light theme). Points at this site's own /paketler checkout — the

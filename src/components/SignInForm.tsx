@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { submitSignIn, type SignInState } from "@/app/account/login/actions";
+import { submitSignIn, type SignInState } from "@/app/[locale]/account/login/actions";
 
 const initialState: SignInState = { ok: false };
 

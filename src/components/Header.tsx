@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 import { auth } from "@/auth";
 import HeaderNav from "@/components/HeaderNav";
 

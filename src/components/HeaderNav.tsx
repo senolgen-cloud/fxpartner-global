@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from "@/components/LocaleLink";
+import { useLocalePathname } from "@/components/useLocalePathname";
+import { useLocale } from "@/components/LocaleProvider";
+import { localePath } from "@/lib/i18n";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useMoreMenu } from "@/components/MoreMenuContext";
 import { primaryLinks, resourceLinks, type ResourceGroup } from "@/lib/navLinks";
@@ -21,7 +23,8 @@ export default function HeaderNav({
   signedIn: boolean;
   accountHref: string;
 }) {
-  const pathname = usePathname();
+  const pathname = useLocalePathname();
+  const locale = useLocale();
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const { open: mobileOpen, setOpen: setMobileOpen } = useMoreMenu();
   const resourcesRef = useRef<HTMLDivElement>(null);
@@ -44,7 +47,7 @@ export default function HeaderNav({
           return (
             <a
               key={link.href}
-              href={link.href}
+              href={localePath(locale, link.href)}
               aria-current={active ? "page" : undefined}
               className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors ${
                 active
@@ -93,7 +96,7 @@ export default function HeaderNav({
                       .map((link) => (
                         <a
                           key={link.href}
-                          href={link.href}
+                          href={localePath(locale, link.href)}
                           title={link.description}
                           onClick={() => setResourcesOpen(false)}
                           className="block rounded-xl px-2 py-2 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink"

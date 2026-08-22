@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { linkCashbackAccount, type LinkAccountState } from "@/app/account/cashback-actions";
+import { linkCashbackAccount, type LinkAccountState } from "@/app/[locale]/account/cashback-actions";
 import { cashbackPrograms } from "@/data/cashback";
 
 const initialState: LinkAccountState = { ok: false };

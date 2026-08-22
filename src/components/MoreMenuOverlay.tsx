@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import BrokerAdBanner from "@/components/BrokerAdBanner";
 import { useMoreMenu } from "@/components/MoreMenuContext";
+import { useLocale } from "@/components/LocaleProvider";
+import { localePath } from "@/lib/i18n";
 import { brokers } from "@/data/brokers";
 
 // The 4 highest-ranked partner brokers, shown as a horizontal ad slider at
@@ -194,6 +196,7 @@ export default function MoreMenuOverlay({
   accountHref: string;
 }) {
   const { open, setOpen } = useMoreMenu();
+  const locale = useLocale();
   const [activeGroup, setActiveGroup] = useState(GROUPS[0].key);
 
   if (!open) return null;
@@ -270,7 +273,7 @@ export default function MoreMenuOverlay({
             {active.links.map((link) => (
               <a
                 key={link.href}
-                href={link.href}
+                href={localePath(locale, link.href)}
                 onClick={close}
                 className="flex flex-col items-center gap-2 rounded-2xl bg-ink-soft px-2 py-4 text-center transition-colors hover:bg-ink-soft/70"
               >

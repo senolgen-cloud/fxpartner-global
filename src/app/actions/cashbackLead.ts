@@ -3,6 +3,7 @@
 import { db } from "@/db";
 import { cashbackLeads } from "@/db/schema";
 import { sendEmail } from "@/lib/email";
+import { getAttribution } from "@/lib/visitor";
 
 const NOTIFY_EMAIL = process.env.COMPLAINT_NOTIFY_EMAIL || "senolgen@gmail.com";
 
@@ -17,16 +18,18 @@ export async function submitCashbackLead(
   const email = String(formData.get("email") || "").trim();
 
   if (!fullName || fullName.length < 2) {
-    return { ok: false, error: "Please enter your full name." };
+    return { ok: false, error: "Lütfen ad ve soyadınızı girin." };
   }
   if (!phone || phone.length < 7) {
-    return { ok: false, error: "Please enter a valid phone number." };
+    return { ok: false, error: "Lütfen geçerli bir telefon numarası girin." };
   }
   if (!email || !email.includes("@")) {
-    return { ok: false, error: "Please enter a valid email address." };
+    return { ok: false, error: "Lütfen geçerli bir e-posta adresi girin." };
   }
 
-  await db.insert(cashbackLeads).values({ fullName, phone, email });
+  await db
+    .insert(cashbackLeads)
+    .values({ fullName, phone, email, ...(await getAttribution()) });
 
   await sendEmail({
     to: NOTIFY_EMAIL,
