@@ -63,21 +63,6 @@ export async function POST(req: NextRequest) {
 
   const currentPeriodEnd = new Date(Date.now() + PERIOD_DAYS * 24 * 60 * 60 * 1000);
 
-  // A webhook request carries NOWPayments' cookies, not the buyer's, so
-  // getAttribution() is useless here — the subscription inherits the
-  // first-touch source already recorded on the buyer's user row instead.
-  // Deliberately absent from the onConflictDoUpdate set below: a renewal
-  // must not rewrite what the first purchase recorded.
-  const [buyer] = await db
-    .select({
-      source: users.source,
-      campaign: users.campaign,
-      landingPath: users.landingPath,
-    })
-    .from(users)
-    .where(eq(users.id, order.userId))
-    .limit(1);
-
   await db
     .insert(vipSubscriptions)
     .values({
@@ -88,9 +73,6 @@ export async function POST(req: NextRequest) {
       status: "active",
       discountAccountId: order.discountAccountId,
       currentPeriodEnd,
-      source: buyer?.source ?? null,
-      campaign: buyer?.campaign ?? null,
-      landingPath: buyer?.landingPath ?? null,
     })
     .onConflictDoUpdate({
       target: vipSubscriptions.userId,

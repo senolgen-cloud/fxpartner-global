@@ -6,7 +6,6 @@ import { auth } from "@/auth";
 import { getCashbackProgram } from "@/data/cashback";
 import { getBrokerBySlug } from "@/data/brokers";
 import { sendEmail } from "@/lib/email";
-import { getAttribution } from "@/lib/visitor";
 
 const NOTIFY_EMAIL = process.env.COMPLAINT_NOTIFY_EMAIL || "senolgen@gmail.com";
 
@@ -20,7 +19,7 @@ export async function submitCashbackSetup(
   const program = getCashbackProgram(brokerSlug);
   const broker = getBrokerBySlug(brokerSlug);
   if (!program || !broker) {
-    return { ok: false, error: "Bu aracı kurum cashback programına dahil değil." };
+    return { ok: false, error: "This broker isn't part of the cashback program." };
   }
 
   const fullName = String(formData.get("fullName") || "").trim();
@@ -29,13 +28,13 @@ export async function submitCashbackSetup(
   const marketingOptIn = formData.get("marketingOptIn") === "on";
 
   if (!fullName || fullName.length < 2) {
-    return { ok: false, error: "Lütfen ad ve soyadınızı girin." };
+    return { ok: false, error: "Please enter your full name." };
   }
   if (!email || !email.includes("@")) {
-    return { ok: false, error: "Lütfen geçerli bir e-posta adresi girin." };
+    return { ok: false, error: "Please enter a valid email address." };
   }
   if (!accountNumber || accountNumber.length < 3) {
-    return { ok: false, error: "Lütfen geçerli bir işlem hesabı numarası girin." };
+    return { ok: false, error: "Please enter a valid trading account number." };
   }
 
   const session = await auth();
@@ -47,7 +46,6 @@ export async function submitCashbackSetup(
     email,
     accountNumber,
     marketingOptIn,
-    ...(await getAttribution()),
   });
 
   await sendEmail({

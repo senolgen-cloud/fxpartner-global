@@ -5,7 +5,6 @@ import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { signIn } from "@/auth";
 import { getBrokerBySlug } from "@/data/brokers";
-import { getAttribution } from "@/lib/visitor";
 
 export type SignInState = { ok: boolean; error?: string };
 
@@ -19,16 +18,16 @@ export async function submitSignIn(
   const preferredBroker = String(formData.get("preferredBroker") || "").trim();
 
   if (!fullName || fullName.length < 2) {
-    return { ok: false, error: "Lütfen ad ve soyadınızı girin." };
+    return { ok: false, error: "Please enter your full name." };
   }
   if (!phone || phone.length < 5) {
-    return { ok: false, error: "Lütfen geçerli bir telefon numarası girin." };
+    return { ok: false, error: "Please enter a valid phone number." };
   }
   if (!email || !email.includes("@")) {
-    return { ok: false, error: "Lütfen geçerli bir e-posta adresi girin." };
+    return { ok: false, error: "Please enter a valid email address." };
   }
   if (preferredBroker && !getBrokerBySlug(preferredBroker)) {
-    return { ok: false, error: "Lütfen geçerli bir aracı kurum seçin." };
+    return { ok: false, error: "Please select a valid broker." };
   }
 
   // Save/refresh the profile before sending the magic link, so a brand
@@ -51,7 +50,6 @@ export async function submitSignIn(
       email,
       phone,
       preferredBroker: preferredBroker || null,
-      ...(await getAttribution()),
     });
   }
 
