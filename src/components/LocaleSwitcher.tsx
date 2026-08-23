@@ -13,7 +13,17 @@ import { localeFlag, localeLabel, localePath, locales, splitLocale } from "@/lib
 // next/link directly, not LocaleLink — this is the one component whose whole
 // job is to leave the current locale, so prefixing it again would pin the
 // reader where they already are.
-export default function LocaleSwitcher({ className = "" }: { className?: string }) {
+// `compact` prints the ISO code instead of the language name. The header's
+// right-hand cluster already carries login, register and a CTA; three full
+// names added ~280px to it and pushed the last pills off the right edge.
+// The full names stay in the More menu, which has room and wraps.
+export default function LocaleSwitcher({
+  className = "",
+  compact = false,
+}: {
+  className?: string;
+  compact?: boolean;
+}) {
   const current = useLocale();
   const { path } = splitLocale(usePathname());
 
@@ -27,14 +37,18 @@ export default function LocaleSwitcher({ className = "" }: { className?: string 
             href={localePath(locale, path)}
             hrefLang={locale}
             aria-current={active ? "true" : undefined}
-            className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors ${
+            aria-label={localeLabel[locale]}
+            title={localeLabel[locale]}
+            className={`flex items-center gap-1.5 rounded-full ${compact ? "px-2" : "px-2.5"} py-1 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors ${
               active
                 ? "bg-signal text-on-signal"
                 : "text-text-on-ink-muted hover:text-text-on-ink"
             }`}
           >
-            <span aria-hidden="true">{localeFlag[locale]}</span>
-            <span className="notranslate">{localeLabel[locale]}</span>
+            {!compact && <span aria-hidden="true">{localeFlag[locale]}</span>}
+            <span className="notranslate">
+              {compact ? locale.toUpperCase() : localeLabel[locale]}
+            </span>
           </Link>
         );
       })}

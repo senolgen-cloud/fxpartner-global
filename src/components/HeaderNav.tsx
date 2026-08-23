@@ -43,7 +43,7 @@ export default function HeaderNav({
 
   return (
     <div className="flex shrink-0 items-center gap-3">
-      <nav className="hidden shrink-0 items-center gap-1 rounded-full border border-hairline bg-ink-soft/60 p-1 xl:flex">
+      <nav className="hidden shrink-0 items-center gap-0.5 rounded-full border border-hairline bg-ink-soft/60 p-1 xl:flex">
         {primaryLinks.map((link) => {
           const active = isActive(pathname, link.href);
           return (
@@ -51,13 +51,13 @@ export default function HeaderNav({
               key={link.href}
               href={localePath(locale, link.href)}
               aria-current={active ? "page" : undefined}
-              className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors ${
+              className={`whitespace-nowrap rounded-full px-2 py-1.5 text-[13px] font-medium transition-colors ${
                 active
                   ? "bg-signal text-on-signal"
                   : "text-text-on-ink-muted hover:text-text-on-ink"
               }`}
             >
-              {link.label}
+              {tr(link.label)}
             </a>
           );
         })}
@@ -66,9 +66,9 @@ export default function HeaderNav({
             type="button"
             onClick={() => setResourcesOpen((v) => !v)}
             aria-expanded={resourcesOpen}
-            className="flex items-center gap-1 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[13px] font-medium text-text-on-ink-muted transition-colors hover:text-text-on-ink"
+            className="flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-1.5 text-[13px] font-medium text-text-on-ink-muted transition-colors hover:text-text-on-ink"
           >
-            Kaynaklar
+            {tr("Kaynaklar")}
             <svg
               width="10"
               height="6"
@@ -90,7 +90,7 @@ export default function HeaderNav({
               {RESOURCE_GROUPS.map((group) => (
                 <div key={group}>
                   <span className="block px-2 font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    {group}
+                    {tr(group)}
                   </span>
                   <div className="mt-2">
                     {resourceLinks
@@ -99,11 +99,11 @@ export default function HeaderNav({
                         <a
                           key={link.href}
                           href={localePath(locale, link.href)}
-                          title={link.description}
+                          title={tr(link.description)}
                           onClick={() => setResourcesOpen(false)}
                           className="block rounded-xl px-2 py-2 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink"
                         >
-                          {link.label}
+                          {tr(link.label)}
                         </a>
                       ))}
                   </div>
@@ -114,8 +114,8 @@ export default function HeaderNav({
         </div>
       </nav>
 
-      <div className="hidden items-center gap-3 border-l border-hairline pl-3 xl:flex">
-        <LocaleSwitcher className="hidden lg:flex" />
+      <div className="hidden items-center gap-2 border-l border-hairline pl-2.5 xl:flex">
+        <LocaleSwitcher compact />
         {signedIn ? (
           <Link
             href={accountHref}

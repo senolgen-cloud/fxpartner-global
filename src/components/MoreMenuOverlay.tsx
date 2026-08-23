@@ -265,14 +265,14 @@ export default function MoreMenuOverlay({
                   : "bg-ink-soft text-text-on-ink-muted hover:text-text-on-ink"
               }`}
             >
-              {g.label}
+              {tr(g.label)}
             </button>
           ))}
         </div>
 
         {/* Icon grid for the active category */}
         <div className="px-4 py-6 md:px-6">
-          <h2 className="mb-3 font-display text-xl font-semibold">{active.label}</h2>
+          <h2 className="mb-3 font-display text-xl font-semibold">{tr(active.label)}</h2>
           <div className="grid grid-cols-3 gap-3">
             {active.links.map((link) => (
               <a
@@ -284,7 +284,7 @@ export default function MoreMenuOverlay({
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-ink text-signal">
                   <MenuIcon name={link.icon} />
                 </span>
-                <span className="text-xs font-medium leading-tight text-text-on-ink">{link.label}</span>
+                <span className="text-xs font-medium leading-tight text-text-on-ink">{tr(link.label)}</span>
               </a>
             ))}
           </div>

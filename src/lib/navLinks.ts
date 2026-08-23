@@ -7,8 +7,6 @@ export const primaryLinks = [
   { href: "/prop-firmalar", label: "Prop Firmalar" },
   { href: "/signals", label: "Sinyaller" },
   { href: "/ai-asistan", label: "AI Asistan" },
-  { href: "/topluluk", label: "Topluluk" },
-  { href: "/blog", label: "Blog" },
 ];
 
 export type ResourceGroup = "İçerik" | "Kazanç Programları" | "Araçlar ve Güven";
@@ -19,6 +17,18 @@ export const resourceLinks: {
   description: string;
   group: ResourceGroup;
 }[] = [
+  {
+    href: "/blog",
+    label: "Blog",
+    description: "Rehberler, broker incelemeleri ve piyasa yazıları",
+    group: "İçerik",
+  },
+  {
+    href: "/topluluk",
+    label: "Topluluk",
+    description: "FXPARTNER topluluğu, tartışmalar ve paylaşılan işlemler",
+    group: "İçerik",
+  },
   {
     href: "/piyasa-analizi",
     label: "Piyasa Analizi",

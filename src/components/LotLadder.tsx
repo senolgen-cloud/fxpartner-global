@@ -41,7 +41,12 @@ export default function LotLadder({
   const color = positive ? "text-tick-up" : "text-tick-down";
 
   return (
-    <div className={compact ? "" : "rounded-xl border border-hairline bg-ink/40 p-4"}>
+    // Container query, not a viewport one. This ladder sits inside a signal
+    // card whose width has nothing to do with the window: at a 700px viewport
+    // the card is 275px, and sm:grid-cols-4 was giving four 42px columns to
+    // hold values 73px wide, so every figure printed over its neighbour.
+    // 24rem is where four columns and their gaps actually fit.
+    <div className={compact ? "@container" : "@container rounded-xl border border-hairline bg-ink/40 p-4"}>
       <div className="flex items-baseline justify-between gap-4">
         <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
           {tr("Lot başına sonuç")}
@@ -52,9 +57,15 @@ export default function LotLadder({
         </span>
       </div>
 
-      <div className="mt-2.5 grid grid-cols-2 gap-x-6 gap-y-1.5 sm:grid-cols-4">
+      <div className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-1.5 @[24rem]:grid-cols-4">
         {rows.map(({ lots, money }) => (
-          <div key={lots} className="flex items-baseline justify-between gap-2">
+          // flex-wrap, not truncation: in the narrowest card two columns are
+          // 109px and the widest pair ("10.00 +$13.060,00") needs 125, so the
+          // value drops to its own line only on the rows that need it.
+          <div
+            key={lots}
+            className="flex flex-wrap items-baseline justify-between gap-x-2"
+          >
             <span className="font-mono text-xs text-text-on-ink-muted">
               {lots.toFixed(2)}
             </span>
