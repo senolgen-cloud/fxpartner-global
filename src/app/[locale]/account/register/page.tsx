@@ -9,7 +9,7 @@ import EmailSignInForm from "@/components/account/EmailSignInForm";
 import GoogleSignIn from "@/components/account/GoogleSignIn";
 import { submitLogin } from "@/app/[locale]/account/login/simple-actions";
 import { configuredProviders } from "@/lib/authProviders";
-import { COUNTRIES } from "@/lib/country";
+import { getCountries } from "@/lib/country";
 import { setServerLocale } from "@/lib/serverLocale";
 
 export async function generateMetadata({
@@ -76,7 +76,7 @@ export default async function RegisterPage({
         <EmailSignInForm
           action={submitLogin}
           submitLabel={tr("Ücretsiz hesap aç")}
-          countries={COUNTRIES}
+          countries={getCountries(isLocale(pageLocale) ? pageLocale : defaultLocale)}
         />
         {providers.google && <GoogleSignIn />}
       </AuthShell>

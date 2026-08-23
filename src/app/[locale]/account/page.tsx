@@ -18,7 +18,7 @@ import { createVipInviteLink } from "@/lib/telegram";
 import VipInviteClientTrigger from "@/components/VipInviteClientTrigger";
 import CashbackLinkForm from "@/components/CashbackLinkForm";
 import { updateCountry } from "./profile-actions";
-import { COUNTRIES } from "@/lib/country";
+import { getCountries } from "@/lib/country";
 import { brokers } from "@/data/brokers";
 import { type PackageTier } from "@/lib/vip";
 import { PACKAGE_TIER_INFO, PACKAGE_TIER_ORDER } from "@/data/packageTiers";
@@ -316,8 +316,8 @@ export default async function AccountPage({
                 defaultValue={user.country ?? ""}
                 className="rounded-xl border border-hairline bg-ink px-3 py-2 text-sm text-text-on-ink outline-none focus:border-signal"
               >
-                <option value="">Ülke belirtilmedi</option>
-                {COUNTRIES.map((c) => (
+                <option value="">{tr("Ülke belirtilmedi")}</option>
+                {getCountries(isLocale(pageLocale) ? pageLocale : defaultLocale).map((c) => (
                   <option key={c.code} value={c.code}>
                     {c.name}
                   </option>
