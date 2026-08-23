@@ -243,9 +243,7 @@ export default async function AboutPage({
         <section>
           <div className="mx-auto max-w-3xl px-6 py-16">
             <p className="rounded-2xl border border-hairline-light bg-paper p-6 text-sm leading-relaxed text-text-muted">
-              FXPARTNER, Erdem Torun tarafından kurulan FXPARTNER eğitim ve
-              CopyTrade ekosisteminin bir parçasıdır. Bu sitedeki hiçbir şey
-              {tr("yatırım tavsiyesi değildir — ayrıntılar için")}{" "}
+              {tr("FXPARTNER, Erdem Torun tarafından kurulan FXPARTNER eğitim ve CopyTrade ekosisteminin bir parçasıdır. Bu sitedeki hiçbir şey yatırım tavsiyesi değildir — ayrıntılar için")}{" "}
               <Link href="/terms" className="text-signal hover:text-signal-strong">
                 {tr("Kullanım Şartları")}
               </Link>

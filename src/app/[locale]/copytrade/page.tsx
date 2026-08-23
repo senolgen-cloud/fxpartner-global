@@ -91,8 +91,7 @@ export default async function CopytradePage({
               {tr("FXPARTNER'ın işlemlerini kendi hesabınıza otomatik kopyalayın")}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              Copier EA, gerçek ve takip edilen MT5 hesabımızdaki işlemleri
-              {tr("sizin kendi hesabınıza otomatik olarak yansıtır —")}{" "}
+              {tr("Copier EA, gerçek ve takip edilen MT5 hesabımızdaki işlemleri sizin kendi hesabınıza otomatik olarak yansıtır —")}{" "}
               <strong className="text-text-on-ink">{tr("hesabınızın kontrolü her zaman sizde kalır.")}</strong>{" "}
               {tr("FXPARTNER hiçbir zaman paranıza veya hesabınıza erişemez.")}
             </p>
@@ -217,9 +216,9 @@ export default async function CopytradePage({
                 <CopytradeInquiryForm />
               ) : (
                 <UpgradeGate
-                  eyebrow="VIP Üyelere Özel"
+                  eyebrow={tr("VIP Üyelere Özel")}
                   title={tr("Copytrade kurulumu için VIP paketine katılın")}
-                  description="FXPARTNER CopyTrade erişimi VIP paketinin bir parçasıdır — kurulum talebi göndermek için önce VIP'e katılın."
+                  description={tr("FXPARTNER CopyTrade erişimi VIP paketinin bir parçasıdır — kurulum talebi göndermek için önce VIP’e katılın.")}
                   signedIn={signedIn}
                   dark={false}
                 />

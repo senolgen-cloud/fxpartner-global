@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { tr } from "@/lib/chrome";
+import { trData } from "@/lib/localizeContent";
 import { getInlineAdCopy } from "@/lib/xm";
 import { getBrokerBySlug } from "@/data/brokers";
 
@@ -27,6 +28,9 @@ export default function XmInlineAd({
   brokerSlug?: string;
 }) {
   const { slug, copy } = getInlineAdCopy(brokerSlug);
+  // The copy table lives in lib/xm.ts and is keyed by broker; it is prose,
+  // so it goes through the same walk every other data table uses.
+  const text = trData(copy);
   const broker = getBrokerBySlug(slug);
   if (!broker) return null;
 
@@ -52,16 +56,16 @@ export default function XmInlineAd({
               <p className="notranslate mt-0.5 font-poppins text-base font-semibold text-text-on-ink">
                 {broker.name}
               </p>
-              <p className="mt-0.5 text-[13px] leading-snug text-text-on-ink-muted">{copy.pitch}</p>
+              <p className="mt-0.5 text-[13px] leading-snug text-text-on-ink-muted">{text.pitch}</p>
             </div>
           </div>
           <a
-            href={copy.affiliateUrl}
+            href={text.affiliateUrl}
             target="_blank"
             rel="noopener noreferrer sponsored"
             className="w-full shrink-0 rounded-full bg-signal px-5 py-2.5 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong sm:w-auto"
           >
-            {copy.ctaLabel}
+            {text.ctaLabel}
           </a>
         </div>
       </aside>
@@ -83,9 +87,9 @@ export default function XmInlineAd({
           )}
           <h3 className="notranslate font-poppins text-xl font-semibold text-text-on-ink">{broker.name}</h3>
         </div>
-        <p className="mt-4 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">{copy.finalPitch}</p>
+        <p className="mt-4 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">{text.finalPitch}</p>
         <ul className="mt-5 grid gap-2 sm:grid-cols-2">
-          {copy.points.map((point) => (
+          {text.points.map((point) => (
             <li key={point} className="flex gap-2.5 text-[13px] leading-snug text-text-on-ink-muted">
               <span className="mt-[3px] shrink-0 text-signal">–</span>
               {point}
@@ -93,12 +97,12 @@ export default function XmInlineAd({
           ))}
         </ul>
         <a
-          href={copy.affiliateUrl}
+          href={text.affiliateUrl}
           target="_blank"
           rel="noopener noreferrer sponsored"
           className="mt-6 inline-block rounded-full bg-signal px-6 py-3 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
         >
-          {copy.ctaLabel}
+          {text.ctaLabel}
         </a>
         <p className="mt-4 text-[11px] leading-relaxed text-text-on-ink-muted/70">
           {tr("Bu bir reklamdır. FXPARTNER, bu bağlantı üzerinden açılan hesaplardan komisyon kazanabilir; bu, sizin ödediğiniz spread veya komisyonu değiştirmez. Kaldıraçlı işlemler yüksek risk içerir.")}

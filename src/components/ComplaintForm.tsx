@@ -128,7 +128,7 @@ export default function ComplaintForm({
         disabled={pending}
         className="rounded-full bg-signal px-6 py-3 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
       >
-        {pending ? "Gönderiliyor…" : "Şikayet Gönder"}
+        {pending ? tr("Gönderiliyor…") : tr("Şikayet Gönder")}
       </button>
     </form>
   );

@@ -152,8 +152,7 @@ export default async function PrivacyPage({
               {tr("Haklarınız")}
             </h2>
             <p className="mt-4">
-              Kişisel bilgilerinize erişmemizi, bunları düzeltmemizi ya da
-              {tr("silmemizi isteyebilir, veya pazarlama iznini istediğiniz zaman")}{" "}
+              {tr("Kişisel bilgilerinize erişmemizi, bunları düzeltmemizi ya da silmemizi isteyebilir, veya pazarlama iznini istediğiniz zaman")}{" "}
               <a href="mailto:info@fxpartner.global" className="text-signal hover:text-signal-strong">
                 info@fxpartner.global
               </a>{" "}

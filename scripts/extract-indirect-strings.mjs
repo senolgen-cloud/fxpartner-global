@@ -27,12 +27,14 @@ const SOURCES = {
   "src/lib/brokerContent.ts": ["PLATFORM_BLURBS"],
   "src/lib/positionSize.ts": ["RISK_LABEL"],
   "src/app/[locale]/prop-firmalar/[slug]/page.tsx": ["COPY_TRADING_NOTE", "SIGNAL_NOTE", "EA_NOTE"],
+  "src/lib/xm.ts": ["INLINE_AD_COPY", "XM_AD_POINTS"],
 };
 
 const TURKISH = /[çğıöşüÇĞİÖŞÜ]/;
 const STRUCTURAL_KEYS = new Set([
   "slug", "href", "id", "icon", "key", "type", "src", "url", "code",
   "logo", "image", "color", "variant", "group", "path", "locale", "pair",
+  "affiliateUrl", "trackingUrl", "email", "phone",
   "symbol", "ticker", "currency", "date", "updatedAt", "publishedAt", "country",
 ]);
 

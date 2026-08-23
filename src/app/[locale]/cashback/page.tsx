@@ -73,9 +73,8 @@ export default async function CashbackPage({
               {tr("Partner bağlantımız üzerinden bir aracı kurumda işlem yaptığınızda, aracı kurum işlem hacminizden doğan komisyonun bir kısmını bize öder. Bunun bir kısmını, aracı kurum tarafından doğrudan işlem hesabınıza yatırılmak üzere size geri veririz.")}
             </p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">
-              Aşağıdan bir aracı kurum seçin, işlem hesap numaranızı gönderin,
-              biz de bunu partner kayıtlarımızla doğrulayalım — hesap
-              gerekmez. <strong className="text-text-on-ink">Aktif</strong>{" "}
+              {tr("Aşağıdan bir aracı kurum seçin, işlem hesap numaranızı gönderin, biz de bunu partner kayıtlarımızla doğrulayalım — hesap gerekmez.")}{" "}
+              <strong className="text-text-on-ink">{tr("Aktif")}</strong>{" "}
               {tr("işaretli programların koşulları aracı kurumla teyit edilmiştir;")}{" "}
               <strong className="text-text-on-ink">{tr("Tahmini")}</strong>{" "}
               {tr("işaretli oranlar nihai koşullar imzalandıkça değişebilir.")}

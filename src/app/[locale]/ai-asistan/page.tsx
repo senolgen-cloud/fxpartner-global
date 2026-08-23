@@ -160,9 +160,9 @@ export default async function AiAssistantPage({
           <AiMarketAssistant />
         ) : (
           <UpgradeGate
-            eyebrow="Pro & VIP Üyelere Özel"
+            eyebrow={tr("Pro & VIP Üyelere Özel")}
             title={tr("AI Piyasa Asistanı'na erişmek için Pro veya VIP paketine katılın")}
-            description="Sınırsız soru, anlık piyasa analizi ve strateji desteği — Pro paketinden itibaren açılır."
+            description={tr("Sınırsız soru, anlık piyasa analizi ve strateji desteği — Pro paketinden itibaren açılır.")}
             signedIn={signedIn}
           />
         )}

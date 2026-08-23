@@ -22,6 +22,7 @@ const TURKISH = /[çğıöşüÇĞİÖŞÜ]/;
 const STRUCTURAL_KEYS = new Set([
   "slug", "href", "id", "icon", "key", "type", "src", "url", "code",
   "logo", "image", "color", "variant", "group", "path", "locale", "pair",
+  "affiliateUrl", "trackingUrl", "email", "phone",
   "symbol", "ticker", "currency", "date", "updatedAt", "publishedAt",
 ]);
 

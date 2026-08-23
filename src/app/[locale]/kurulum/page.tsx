@@ -288,7 +288,7 @@ export default async function KurulumPage({
               <PlatformSection
                 id="windows"
                 icon={<WindowsIcon />}
-                eyebrow="Masaüstü"
+                eyebrow={tr("Masaüstü")}
                 title="Windows'ta kurulum (Chrome / Edge)"
                 steps={trData(WINDOWS_STEPS)}
               />
