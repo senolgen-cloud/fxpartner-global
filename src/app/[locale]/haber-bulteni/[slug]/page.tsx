@@ -9,6 +9,7 @@ import { newsBulletins } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
+import { pickTranslation } from "@/lib/translateContent";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
@@ -22,16 +23,19 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, locale: rawLocale } = await params;
   const bulletin = await getBulletin(slug);
   if (!bulletin) return {};
+  // Metadata too, not just the body: a Ukrainian search result showing a
+  // Turkish headline is the version of this bug a reader sees first.
+  const copy = pickTranslation(bulletin.translations, isLocale(rawLocale) ? rawLocale : defaultLocale, bulletin);
   return {
-    title: bulletin.title,
-    description: bulletin.excerpt,
+    title: copy.title,
+    description: copy.excerpt,
     alternates: { canonical: `/haber-bulteni/${bulletin.slug}` },
     openGraph: {
-      title: bulletin.title,
-      description: bulletin.excerpt,
+      title: copy.title,
+      description: copy.excerpt,
       url: `${SITE_URL}/haber-bulteni/${bulletin.slug}`,
       type: "article",
       publishedTime: bulletin.publishedAt.toISOString(),
@@ -54,7 +58,12 @@ export default async function NewsBulletinPage({
   if (!bulletin) notFound();
 
   const sources: string[] = JSON.parse(bulletin.sources || "[]");
-  const paragraphs = bulletin.body.split(/\n\n+/).filter(Boolean);
+  const copy = pickTranslation(
+    bulletin.translations,
+    isLocale(pageLocale) ? pageLocale : defaultLocale,
+    bulletin
+  );
+  const paragraphs = copy.body.split(/\n\n+/).filter(Boolean);
 
   return (
     <>
@@ -64,8 +73,8 @@ export default async function NewsBulletinPage({
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "NewsArticle",
-            headline: bulletin.title,
-            description: bulletin.excerpt,
+            headline: copy.title,
+            description: copy.excerpt,
             datePublished: bulletin.publishedAt.toISOString(),
             dateModified: bulletin.publishedAt.toISOString(),
             url: `${SITE_URL}/haber-bulteni/${bulletin.slug}`,

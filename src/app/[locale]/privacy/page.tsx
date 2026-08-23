@@ -80,13 +80,12 @@ export default async function PrivacyPage({
                 {tr("ad soyad, telefon numarası, e-posta adresi ve — isteğe bağlı olarak — hangi aracı kurumla işlem yaptığınız.")}
               </li>
               <li>
-                <strong>{tr("Aracı kurum yorumları:")}</strong> yorum metniniz,
-                isteğe bağlı 1-5 puanlama ve — belirtirseniz — ülkeniz
-                (yorumunuzun yanında herkese açık şekilde gösterilir).
+                <strong>{tr("Aracı kurum yorumları:")}</strong>{" "}
+                {tr("yorum metniniz, isteğe bağlı 1-5 puanlama ve — belirtirseniz — ülkeniz (yorumunuzun yanında herkese açık şekilde gösterilir).")}
               </li>
               <li>
-                <strong>{tr("Şikayet formu:")}</strong> ad soyad, telefon, e-posta,
-                ilgili aracı kurum ve sorununuzun açıklaması.
+                <strong>{tr("Şikayet formu:")}</strong>{" "}
+                {tr("ad soyad, telefon, e-posta, ilgili aracı kurum ve sorununuzun açıklaması.")}
               </li>
               <li>
                 <strong>{tr("Kazanç iade programı:")}</strong> ad soyad, e-posta,
@@ -126,22 +125,19 @@ export default async function PrivacyPage({
                 {tr("— hesap ve gönderim verilerinizi saklar.")}
               </li>
               <li>
-                <strong>Resend</strong> — giriş bağlantılarını ve bildirim
-                e-postalarını iletir.
+                <strong>Resend</strong>{" "}
+                {tr("— giriş bağlantılarını ve bildirim e-postalarını iletir.")}
               </li>
               <li>
-                <strong>Vercel</strong> — web sitesini ve uygulamayı barındırır.
+                <strong>Vercel</strong> {tr("— web sitesini ve uygulamayı barındırır.")}
               </li>
               <li>
-                <strong>Telegram</strong> — VIP grup daveti talep ederseniz,
-                bunu oluşturmak için Telegram&apos;ın API&apos;sini
-                çağırırız.
+                <strong>Telegram</strong>{" "}
+                {tr("— VIP grup daveti talep ederseniz, bunu oluşturmak için Telegram’ın API’sini çağırırız.")}
               </li>
               <li>
-                <strong>{tr("İlgili aracı kurum")}</strong> — bir şikayet veya
-                kazanç iade kaydı gönderirseniz, sağladığınız bilgileri
-                inceleyip işleme alabilmesi için ilgili aracı kurumla
-                paylaşırız.
+                <strong>{tr("İlgili aracı kurum")}</strong>{" "}
+                {tr("— bir şikayet veya kazanç iade kaydı gönderirseniz, sağladığınız bilgileri inceleyip işleme alabilmesi için ilgili aracı kurumla paylaşırız.")}
               </li>
             </ul>
 

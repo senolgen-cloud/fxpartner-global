@@ -116,7 +116,7 @@ export default function PositionSizeCalculator({
                 <span className="font-mono text-xs uppercase tracking-[0.15em] text-signal">
                   Risk %{r.riskPercent}
                 </span>
-                <span className="font-mono text-[11px] text-text-on-ink-muted">{r.label}</span>
+                <span className="font-mono text-[11px] text-text-on-ink-muted">{tr(r.label)}</span>
               </div>
 
               <p className="mt-3 font-display text-2xl font-semibold text-text-on-ink">

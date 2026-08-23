@@ -24,6 +24,8 @@ const SOURCES = {
   "src/components/PropFirmFeaturedCard.tsx": [],
   "src/components/LiveMarketsGrid.tsx": ["CARD_META"],
   "src/components/PartnerDashboardPreview.tsx": ["recentActivity"],
+  "src/lib/brokerContent.ts": ["PLATFORM_BLURBS"],
+  "src/lib/positionSize.ts": ["RISK_LABEL"],
 };
 
 const TURKISH = /[çğıöşüÇĞİÖŞÜ]/;

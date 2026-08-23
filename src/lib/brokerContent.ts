@@ -1,5 +1,6 @@
 import { Broker, TIER1_REGULATORS } from "@/data/brokers";
 import { trData } from "@/lib/localizeContent";
+import { trf } from "@/lib/chrome";
 
 const PLATFORM_BLURBS: [needle: string, blurb: string][] = [
   [
@@ -28,8 +29,12 @@ const PLATFORM_BLURBS: [needle: string, blurb: string][] = [
 function joinList(items: string[]): string {
   if (items.length === 0) return "";
   if (items.length === 1) return items[0];
-  if (items.length === 2) return `${items[0]} ve ${items[1]}`;
-  return `${items.slice(0, -1).join(", ")} ve ${items[items.length - 1]}`;
+  // "ve" is a word, not punctuation — English wants "and", Ukrainian "та".
+  if (items.length === 2) return trf("{a} ve {b}", { a: items[0], b: items[1] });
+  return trf("{list} ve {last}", {
+    list: items.slice(0, -1).join(", "),
+    last: items[items.length - 1],
+  });
 }
 
 function platformBlurb(name: string): string {
@@ -37,15 +42,22 @@ function platformBlurb(name: string): string {
   for (const [needle, blurb] of trData(PLATFORM_BLURBS)) {
     if (key.includes(needle)) return blurb;
   }
-  return `özel bir ${name} platformu`;
+  return trf("özel bir {name} platformu", { name });
 }
 
 export function platformParagraph(broker: Broker): string {
   const blurbs = broker.platforms.map(platformBlurb);
   if (blurbs.length === 1) {
-    return `${broker.name}, ${blurbs[0]} üzerinden işlem yapılmasını sağlar.`;
+    return trf("{broker}, {platform} üzerinden işlem yapılmasını sağlar.", {
+      broker: broker.name,
+      platform: blurbs[0],
+    });
   }
-  return `${broker.name}, ${broker.platforms.length} platformu destekler: ${joinList(blurbs)}.`;
+  return trf("{broker}, {count} platformu destekler: {list}.", {
+    broker: broker.name,
+    count: broker.platforms.length,
+    list: joinList(blurbs),
+  });
 }
 
 export function regulationParagraph(broker: Broker): string {
@@ -59,12 +71,26 @@ function baseRegulationParagraph(broker: Broker): string {
   const list = joinList(broker.regulators);
 
   if (tier1.length > 0 && other.length > 0) {
-    return `${broker.name}, ${broker.regulators.length} regülasyon lisansı taşıyor: ${list}. ${joinList(tier1)} Tier-1 otorite${tier1.length > 1 ? "leri" : "si"} — bunlar müşteri fonlarının ayrılmasını ve minimum sermaye rezervini şart koşar, bazı ülkelerde broker iflas ederse bir tazminat şemasını da destekler. Kalan lisans${other.length > 1 ? "lar" : ""} offshore'dur; bu genellikle daha hafif sermaye şartları ve arkasında bir yatırımcı tazminat şeması olmaması anlamına gelir.`;
+    // The Turkish suffixes (-leri/-si, -lar) are grammatical agreement that
+    // no other language reproduces, so they stay inside the two variants
+    // rather than being spliced in.
+    return trf(
+      tier1.length > 1
+        ? "{broker}, {count} regülasyon lisansı taşıyor: {list}. {tier1} Tier-1 otoriteleri — bunlar müşteri fonlarının ayrılmasını ve minimum sermaye rezervini şart koşar, bazı ülkelerde broker iflas ederse bir tazminat şemasını da destekler. Kalan lisanslar offshore’dur; bu genellikle daha hafif sermaye şartları ve arkasında bir yatırımcı tazminat şeması olmaması anlamına gelir."
+        : "{broker}, {count} regülasyon lisansı taşıyor: {list}. {tier1} Tier-1 otoritesi — bunlar müşteri fonlarının ayrılmasını ve minimum sermaye rezervini şart koşar, bazı ülkelerde broker iflas ederse bir tazminat şemasını da destekler. Kalan lisans offshore’dur; bu genellikle daha hafif sermaye şartları ve arkasında bir yatırımcı tazminat şeması olmaması anlamına gelir.",
+      { broker: broker.name, count: broker.regulators.length, list, tier1: joinList(tier1) }
+    );
   }
   if (tier1.length > 0) {
-    return `${broker.name}, ${broker.regulators.length} Tier-1 lisans altında faaliyet gösteriyor — ${list} — en güçlü regülasyon seviyesi olan bu lisanslar müşteri fonlarının ayrılmasını, minimum sermaye rezervini ve bazı ülkelerde broker iflas ederse bir tazminat şemasını şart koşar.`;
+    return trf(
+      "{broker}, {count} Tier-1 lisans altında faaliyet gösteriyor — {list} — en güçlü regülasyon seviyesi olan bu lisanslar müşteri fonlarının ayrılmasını, minimum sermaye rezervini ve bazı ülkelerde broker iflas ederse bir tazminat şemasını şart koşar.",
+      { broker: broker.name, count: broker.regulators.length, list }
+    );
   }
-  return `${broker.name}, ${list} tarafından lisanslıdır. Bunların hiçbiri Tier-1 otorite değildir (FCA, ASIC, CySEC, DFSA veya İrlanda Merkez Bankası) — offshore regülatörler genellikle daha hafif sermaye şartları taşır ve arkalarında bir yatırımcı tazminat şeması bulunmaz, bu yüzden canlı bir hesaba para yatırmadan önce bunu aşağıdaki güçlü yönlerle birlikte değerlendirmekte fayda var.`;
+  return trf(
+    "{broker}, {list} tarafından lisanslıdır. Bunların hiçbiri Tier-1 otorite değildir (FCA, ASIC, CySEC, DFSA veya İrlanda Merkez Bankası) — offshore regülatörler genellikle daha hafif sermaye şartları taşır ve arkalarında bir yatırımcı tazminat şeması bulunmaz, bu yüzden canlı bir hesaba para yatırmadan önce bunu aşağıdaki güçlü yönlerle birlikte değerlendirmekte fayda var.",
+    { broker: broker.name, list }
+  );
 }
 
 export function verdictParagraph(broker: Broker): string {
@@ -72,7 +98,10 @@ export function verdictParagraph(broker: Broker): string {
   const tradeoff = broker.cons[0]
     ? ` En önemli ödünü ${broker.cons[0]} — bunu yukarıdaki güçlü yönlerle birlikte değerlendirmekte fayda var.`
     : "";
-  return `${broker.bestFor} için ${broker.name} güçlü bir uyum sağlıyor: ${joinList(strengths)}.${tradeoff} Herhangi bir brokerda olduğu gibi, canlı bir hesaba para yatırmadan önce güncel spreadleri, kaldıracı ve bölgesel kullanılabilirliği ${broker.name}'ın resmi sitesinden doğrulayın.`;
+  return trf(
+    "{bestFor} için {broker} güçlü bir uyum sağlıyor: {strengths}.{tradeoff} Herhangi bir brokerda olduğu gibi, canlı bir hesaba para yatırmadan önce güncel spreadleri, kaldıracı ve bölgesel kullanılabilirliği {broker}’ın resmi sitesinden doğrulayın.",
+    { bestFor: broker.bestFor, broker: broker.name, strengths: joinList(strengths), tradeoff }
+  );
 }
 
 export function brokerFaqs(broker: Broker): { q: string; a: string }[] {

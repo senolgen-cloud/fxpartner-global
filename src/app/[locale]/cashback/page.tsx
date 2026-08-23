@@ -8,6 +8,7 @@ import { getDictionary } from "@/lib/dictionary";
 import { tr } from "@/lib/chrome";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import { setServerLocale } from "@/lib/serverLocale";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -42,7 +43,7 @@ export default async function CashbackPage({
 
   // Confirmed programs first — they're the ones a visitor can act on today;
   // the estimates sit below them.
-  const orderedPrograms = [...cashbackPrograms].sort(
+  const orderedPrograms = [...trData(cashbackPrograms)].sort(
     (a, b) => Number(b.status === "live") - Number(a.status === "live")
   );
 

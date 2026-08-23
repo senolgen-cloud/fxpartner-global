@@ -95,11 +95,11 @@ export async function generateMetadata({
   const broker = source ? localizeBrokerDeep(source, locale) : source;
   if (!broker) return {};
   return {
-    title: `${broker.name} İncelemesi`,
+    title: trf("{broker} İncelemesi", { broker: broker.name }),
     description: broker.summary,
     alternates: { canonical: `/brokers/${broker.slug}` },
     openGraph: {
-      title: `${broker.name} İncelemesi | FXPARTNER`,
+      title: trf("{broker} İncelemesi | FXPARTNER", { broker: broker.name }),
       description: broker.summary,
       url: `${SITE_URL}/brokers/${broker.slug}`,
       type: "article",

@@ -7,7 +7,7 @@ import { getDictionary } from "@/lib/dictionary";
 import { tr } from "@/lib/chrome";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import { setServerLocale } from "@/lib/serverLocale";
-import { trData } from "@/lib/localizeContent";
+import { localizeBrokers, trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -60,7 +60,10 @@ export default async function BlacklistPage({
   const { locale: pageLocale } = await params;
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
-  const flagged = WATCHLIST_SLUGS.map((slug) => brokers.find((b) => b.slug === slug)).filter(
+  // Localized once, not per slug: localizeBrokers walks the whole list and
+  // doing that inside the map would repeat the work for every entry.
+  const localBrokers = localizeBrokers(brokers, isLocale(pageLocale) ? pageLocale : defaultLocale);
+  const flagged = WATCHLIST_SLUGS.map((slug) => localBrokers.find((b) => b.slug === slug)).filter(
     (b): b is NonNullable<typeof b> => Boolean(b)
   );
 

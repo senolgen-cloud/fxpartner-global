@@ -421,5 +421,10 @@ export const newsBulletins = pgTable("news_bulletin", {
   excerpt: text("excerpt").notNull(),
   body: text("body").notNull(),
   sources: text("sources").notNull(), // JSON-encoded string[] of publisher names
+  // JSON-encoded { <locale>: { title, excerpt, body } }, written by the
+  // news-update cron at publish time — see src/lib/translateContent.ts.
+  // Null on every row written before translation existed, and on any row
+  // whose translation failed; both fall back to the Turkish above.
+  translations: text("translations"),
   publishedAt: timestamp("published_at").notNull().defaultNow(),
 });

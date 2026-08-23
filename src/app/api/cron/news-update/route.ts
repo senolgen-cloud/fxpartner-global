@@ -9,6 +9,7 @@ import { postTextToX } from "@/lib/x";
 import { db } from "@/db";
 import { newsBulletins } from "@/db/schema";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
+import { translateBulletin } from "@/lib/translateContent";
 
 // Owned by Haber & Editöryal Departmanı (Elif Sarman) — see
 // src/lib/departments.ts and docs/ORGANIZATION.md. Dedup uses the same
@@ -77,12 +78,23 @@ export const GET = withCronErrorAlert("news-update", async (req: NextRequest) =>
   const sources = Array.from(new Set(fresh.map((item) => item.source)));
   const slug = slugify(bulletin.title);
 
+  // Translated before the insert, not after: one row, written once, so a
+  // reader on /ua never sees the Turkish version briefly and then the
+  // Ukrainian one. A locale that fails is simply absent and falls back —
+  // the news going out is not allowed to depend on a translation.
+  const translations = await translateBulletin({
+    title: bulletin.title,
+    excerpt: bulletin.excerpt,
+    body: bulletin.body,
+  });
+
   await db.insert(newsBulletins).values({
     slug,
     title: bulletin.title,
     excerpt: bulletin.excerpt,
     body: bulletin.body,
     sources: JSON.stringify(sources),
+    translations: Object.keys(translations).length ? JSON.stringify(translations) : null,
   });
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";

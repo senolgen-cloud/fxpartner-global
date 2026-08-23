@@ -1,5 +1,5 @@
 "use client";
-import { useTr } from "@/components/useTr";
+import { useTr, useTrf } from "@/components/useTr";
 
 import { useMemo, useState } from "react";
 import Link from "@/components/LocaleLink";
@@ -28,6 +28,7 @@ const VERDICT_META: Record<
 
 export default function BrokerLookupSearch({ initialQuery = "" }: { initialQuery?: string }) {
   const tr = useTr();
+  const trf = useTrf();
   const [query, setQuery] = useState(initialQuery);
 
   const results = useMemo(() => {
@@ -60,8 +61,9 @@ export default function BrokerLookupSearch({ initialQuery = "" }: { initialQuery
 
       {query.trim() === "" && (
         <p className="mt-4 text-sm text-text-muted">
-          Aranabilir veritabanımızda {lookupBrokers.length} aracı kurum var.
-          Aramak için yukarıya bir isim yazmaya başlayın.
+          {trf("Aranabilir veritabanımızda {count} aracı kurum var. Aramak için yukarıya bir isim yazmaya başlayın.", {
+            count: lookupBrokers.length,
+          })}
         </p>
       )}
 

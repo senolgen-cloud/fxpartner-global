@@ -9,6 +9,7 @@ import { newsBulletins } from "@/db/schema";
 import { desc } from "drizzle-orm";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
+import { pickTranslation } from "@/lib/translateContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -43,10 +44,15 @@ export default async function NewsBulletinIndexPage({
   const { locale: pageLocale } = await params;
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
-  const bulletins = await db.query.newsBulletins.findMany({
+  const rows = await db.query.newsBulletins.findMany({
     orderBy: [desc(newsBulletins.publishedAt)],
     limit: 50,
   });
+  const locale = isLocale(pageLocale) ? pageLocale : defaultLocale;
+  const bulletins = rows.map((row) => ({
+    ...row,
+    ...pickTranslation(row.translations, locale, row),
+  }));
 
   return (
     <>

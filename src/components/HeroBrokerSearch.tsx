@@ -1,12 +1,14 @@
 "use client";
-import { useTr } from "@/components/useTr";
+import { useTr, useTrf } from "@/components/useTr";
 
 import { useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { brokers } from "@/data/brokers";
 import { lookupBrokers } from "@/data/brokerLookup";
 
-type Suggestion = { name: string; href: string; sub: string };
+// subKey is the Turkish sentence used as the catalogue key, resolved at
+// render; rank is present only on the ranked entries, whose key has a hole.
+type Suggestion = { name: string; href: string; subKey: string; rank?: string };
 
 const rankedByName = new Map(brokers.map((b) => [b.name.toLowerCase(), b]));
 
@@ -14,14 +16,15 @@ const allSuggestions: Suggestion[] = [
   ...brokers.map((b) => ({
     name: b.name,
     href: `/brokers/${b.slug}`,
-    sub: `#${String(b.rank).padStart(2, "0")} sırada · Tam inceleme`,
+    subKey: "#{rank} sırada · Tam inceleme",
+    rank: String(b.rank).padStart(2, "0"),
   })),
   ...lookupBrokers
     .filter((b) => !rankedByName.has(b.name.toLowerCase()))
     .map((b) => ({
       name: b.name,
       href: `/broker-lookup?q=${encodeURIComponent(b.name)}`,
-      sub:
+      subKey:
         b.verdict === "high-risk"
           ? "Yüksek risk — güven değerlendirmesi"
           : b.verdict === "caution"
@@ -32,6 +35,7 @@ const allSuggestions: Suggestion[] = [
 
 export default function HeroBrokerSearch() {
   const tr = useTr();
+  const trf = useTrf();
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
@@ -96,7 +100,9 @@ export default function HeroBrokerSearch() {
               <span className="notranslate block text-sm font-medium text-text-on-ink">
                 {s.name}
               </span>
-              <span className="mt-0.5 block text-xs text-text-on-ink-muted">{s.sub}</span>
+              <span className="mt-0.5 block text-xs text-text-on-ink-muted">
+                {s.rank ? trf(s.subKey, { rank: s.rank }) : tr(s.subKey)}
+              </span>
             </a>
           ))}
         </div>
@@ -105,7 +111,9 @@ export default function HeroBrokerSearch() {
       {open && query.trim() !== "" && results.length === 0 && (
         <div className="absolute inset-x-0 top-full z-30 mt-2 rounded-2xl border border-hairline bg-ink-soft p-4 shadow-2xl">
           <p className="text-sm text-text-on-ink-muted">
-            Henüz eşleşme yok — &ldquo;{query}&rdquo; için Broker Sorgulama&apos;da kontrol etmek üzere Enter&apos;a basın.
+            {trf("Henüz eşleşme yok — “{query}” için Broker Sorgulama’da kontrol etmek üzere Enter’a basın.", {
+              query,
+            })}
           </p>
         </div>
       )}
