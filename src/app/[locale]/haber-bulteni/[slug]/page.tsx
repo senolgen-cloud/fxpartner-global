@@ -3,7 +3,6 @@ import { tr, trLocale } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
-import ShareButtons from "@/components/ShareButtons";
 import { db } from "@/db";
 import { newsBulletins } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -144,9 +143,6 @@ export default async function NewsBulletinPage({
               </div>
             )}
 
-            <div className="mt-10">
-              <ShareButtons title={bulletin.title} text={bulletin.excerpt} />
-            </div>
           </article>
         </section>
       </main>

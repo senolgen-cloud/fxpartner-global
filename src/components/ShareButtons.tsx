@@ -7,13 +7,24 @@ import { useState } from "react";
 // site had a locale to read. Every caller passed "tr" and a Ukrainian reader
 // got Turkish buttons; the catalogue knows the actual locale.
 
+// Two surfaces: the light article body, and the dark footer — where the row
+// sits next to the existing "Bizi takip edin" icons and has to match them.
+type Tone = "light" | "dark";
+
+const BUTTON_TONE: Record<Tone, string> = {
+  light: "border-hairline-light bg-paper text-text-dark hover:border-text-dark",
+  dark: "border-hairline text-text-on-ink-muted hover:border-signal hover:text-signal",
+};
+
 function IconButton({
   label,
   onClick,
+  tone,
   children,
 }: {
   label: string;
   onClick: () => void;
+  tone: Tone;
   children: React.ReactNode;
 }) {
   return (
@@ -22,7 +33,7 @@ function IconButton({
       onClick={onClick}
       aria-label={label}
       title={label}
-      className="lift-on-hover flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline-light bg-paper text-text-dark transition-colors hover:border-text-dark"
+      className={`lift-on-hover flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors ${BUTTON_TONE[tone]}`}
     >
       {children}
     </button>
@@ -108,9 +119,12 @@ function CheckIcon() {
 export default function ShareButtons({
   title,
   text = "",
+  tone = "light",
 }: {
-  title: string;
+  /** Omit on the sitewide footer row: the page's own <title> is used instead. */
+  title?: string;
   text?: string;
+  tone?: Tone;
 }) {
   const tr = useTr();
   const [copied, setCopied] = useState(false);
@@ -121,25 +135,43 @@ export default function ShareButtons({
     return window.location.href;
   }
 
+  // Resolved at click time, not render time: the footer instance renders on
+  // every route without knowing which one, and document already carries the
+  // per-page, per-locale title and description Next.js put there.
+  function shareTitle(): string {
+    if (title) return title;
+    if (typeof document === "undefined") return "FXPARTNER";
+    return document.title || "FXPARTNER";
+  }
+
+  function shareText(): string {
+    if (text) return text;
+    if (typeof document === "undefined") return "";
+    return document.querySelector('meta[name="description"]')?.getAttribute("content") ?? "";
+  }
+
   function openShareWindow(shareUrl: string) {
     window.open(shareUrl, "_blank", "noopener,noreferrer,width=600,height=640");
   }
 
+  function summary(): string {
+    const body = shareText();
+    return body ? `${shareTitle()} — ${body}` : shareTitle();
+  }
+
   function shareToWhatsApp() {
-    const summary = text ? `${title} — ${text}` : title;
-    openShareWindow(`https://wa.me/?text=${encodeURIComponent(`${summary}\n${currentUrl()}`)}`);
+    openShareWindow(`https://wa.me/?text=${encodeURIComponent(`${summary()}\n${currentUrl()}`)}`);
   }
 
   function shareToTelegram() {
-    const summary = text ? `${title} — ${text}` : title;
     openShareWindow(
-      `https://t.me/share/url?url=${encodeURIComponent(currentUrl())}&text=${encodeURIComponent(summary)}`
+      `https://t.me/share/url?url=${encodeURIComponent(currentUrl())}&text=${encodeURIComponent(summary())}`
     );
   }
 
   function shareToX() {
     openShareWindow(
-      `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(currentUrl())}`
+      `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle())}&url=${encodeURIComponent(currentUrl())}`
     );
   }
 
@@ -162,27 +194,35 @@ export default function ShareButtons({
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-3 border-t border-hairline-light pt-8">
-      <span className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
+    <div
+      className={`flex flex-wrap items-center gap-3 ${
+        tone === "dark" ? "" : "border-t border-hairline-light pt-8"
+      }`}
+    >
+      <span
+        className={`font-mono text-xs uppercase tracking-[0.15em] ${
+          tone === "dark" ? "text-text-on-ink" : "text-text-muted"
+        }`}
+      >
         {t.label}
       </span>
       <div className="flex flex-wrap items-center gap-2">
-        <IconButton label="WhatsApp" onClick={shareToWhatsApp}>
+        <IconButton label="WhatsApp" onClick={shareToWhatsApp} tone={tone}>
           <WhatsAppIcon />
         </IconButton>
-        <IconButton label="Telegram" onClick={shareToTelegram}>
+        <IconButton label="Telegram" onClick={shareToTelegram} tone={tone}>
           <TelegramIcon />
         </IconButton>
-        <IconButton label="X (Twitter)" onClick={shareToX}>
+        <IconButton label="X (Twitter)" onClick={shareToX} tone={tone}>
           <XIcon />
         </IconButton>
-        <IconButton label="Facebook" onClick={shareToFacebook}>
+        <IconButton label="Facebook" onClick={shareToFacebook} tone={tone}>
           <FacebookIcon />
         </IconButton>
-        <IconButton label="LinkedIn" onClick={shareToLinkedIn}>
+        <IconButton label="LinkedIn" onClick={shareToLinkedIn} tone={tone}>
           <LinkedInIcon />
         </IconButton>
-        <IconButton label={copied ? t.copied : t.copy} onClick={copyLink}>
+        <IconButton label={copied ? t.copied : t.copy} onClick={copyLink} tone={tone}>
           {copied ? <CheckIcon /> : <LinkIcon />}
         </IconButton>
       </div>

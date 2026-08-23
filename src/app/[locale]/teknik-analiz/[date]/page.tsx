@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import TechnicalAnalysisCard from "@/components/TechnicalAnalysisCard";
 import BrokerAdBanner from "@/components/BrokerAdBanner";
 import VipCtaBanner from "@/components/VipCtaBanner";
-import ShareButtons from "@/components/ShareButtons";
 import {
   technicalAnalysisPosts,
   getBulletinTitle,
@@ -139,9 +138,6 @@ export default async function TechnicalAnalysisBulletinPage({
               {tr("Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Belirtilen seviyeler Trading Central kaynaklı teknik analiz verileridir ve gerçekleşmesi garanti edilmez.")}
             </p>
 
-            <div className="mt-10">
-              <ShareButtons title={title} text={posts.map((p) => p.headline).join(" · ")} />
-            </div>
           </div>
         </section>
       </main>

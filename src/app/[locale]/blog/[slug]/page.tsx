@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
-import ShareButtons from "@/components/ShareButtons";
 import BrokerAdBanner from "@/components/BrokerAdBanner";
 import BrokerSkyscraperAd from "@/components/BrokerSkyscraperAd";
 import XmInlineAd from "@/components/XmInlineAd";
@@ -200,9 +199,6 @@ export default async function BlogPostPage({
                 </Link>
               </div>
 
-              <div className="mt-10">
-                <ShareButtons title={post.title} text={post.excerpt} />
-              </div>
             </article>
             {railBroker && <BrokerSkyscraperAd broker={railBroker} />}
           </div>

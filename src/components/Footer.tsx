@@ -3,10 +3,21 @@ import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { brokers } from "@/data/brokers";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import ShareButtons from "@/components/ShareButtons";
 
 export default function Footer() {
   return (
     <footer className="border-t border-hairline bg-ink text-text-on-ink-muted">
+      {/* Sitewide share row. Lives here rather than on each page because
+          every route renders <Footer /> — so a new page gets the buttons
+          without anyone remembering to add them. No title prop: the
+          instance is shared by all routes and reads the page's own
+          document.title / meta description at click time. */}
+      <div className="border-b border-hairline">
+        <div className="mx-auto max-w-6xl px-6 py-6">
+          <ShareButtons tone="dark" />
+        </div>
+      </div>
       <div className="mx-auto max-w-6xl px-6 py-14">
         <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
@@ -45,7 +56,7 @@ export default function Footer() {
                 account) can verify site and profile point at each other. */}
             <div className="mt-8">
               <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink">
-                Bizi takip edin
+                {tr("Bizi takip edin")}
               </h3>
               <div className="mt-3 flex items-center gap-3">
                 <a
@@ -107,7 +118,7 @@ export default function Footer() {
           </div>
           <div>
             <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink">
-              Kaynaklar
+              {tr("Kaynaklar")}
             </h3>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
@@ -224,7 +235,7 @@ export default function Footer() {
           </p>
           <p className="mt-3">
             <strong className="text-text-on-ink-muted">{tr("Bağlı kuruluş bilgilendirmesi:")}</strong>{" "}
-            {tr("FXPARTNER, bu sayfada listelenen brokerların bazılarıyla ortaklık/referans ilişkisine sahiptir ve “Hesap Aç” bağlantıları üzerinden açılan hesaplardan komisyon kazanabilir. Bu durum ilgili kartta ayrıca belirtilir ve sıralama veya puanlama kriterlerimizi etkilemez.")}
+            {tr("FXPARTNER, bu sayfada listelenen brokerların bazılarıyla ortaklık/referans ilişkisine sahiptir ve “Resmi Sitesi” bağlantıları üzerinden açılan hesaplardan komisyon kazanabilir. Bu durum ilgili kartta ayrıca belirtilir ve sıralama veya puanlama kriterlerimizi etkilemez.")}
           </p>
           <p className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1">
             <span>© {new Date().getFullYear()} FXPARTNER. {tr("Tüm hakları saklıdır.")}</span>

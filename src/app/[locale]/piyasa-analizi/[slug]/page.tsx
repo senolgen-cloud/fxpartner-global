@@ -5,7 +5,6 @@ import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import FormattedText from "@/components/FormattedText";
-import ShareButtons from "@/components/ShareButtons";
 import {
   marketAnalysisPosts,
   getMarketAnalysisPostBySlug,
@@ -181,9 +180,6 @@ export default async function MarketAnalysisPostPage({
               {tr("Bu içerik genel bilgilendirme amaçlıdır ve yatırım tavsiyesi niteliği taşımaz. Yatırım kararlarınızı vermeden önce kendi araştırmanızı yapmanız ve gerekirse bir uzmana danışmanız önerilir.")}
             </p>
 
-            <div className="mt-10">
-              <ShareButtons title={post.title} text={post.excerpt} />
-            </div>
           </article>
         </section>
       </main>
