@@ -76,10 +76,15 @@ export default function TradingViewChart({ symbol }: { symbol: string }) {
     container.appendChild(script);
   }, [symbol]);
 
+  // Two divs on purpose. The embed script writes inline
+  // `width:100%;height:100%` onto whatever element it is appended to, which
+  // silently beat the height class when that element was also the sized one
+  // — the widget collapsed to the iframe's own ~275px instead of filling its
+  // column. The outer div owns the size; the inner one is the script's to
+  // stretch to 100% of it.
   return (
-    <div
-      className="tradingview-widget-container h-[420px] w-full overflow-hidden rounded-2xl border border-hairline sm:h-[520px]"
-      ref={containerRef}
-    />
+    <div className="h-[420px] w-full overflow-hidden rounded-2xl border border-hairline sm:h-[520px]">
+      <div className="tradingview-widget-container h-full w-full" ref={containerRef} />
+    </div>
   );
 }

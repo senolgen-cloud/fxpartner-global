@@ -1043,20 +1043,26 @@ export default function SignalsBoard({
               ))}
             </div>
           </div>
-          <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
+          {/* One column, the same one the Aktif Sinyaller cards sit in: the
+              chart spans the full content width and the performance panel
+              runs underneath it as a strip rather than stealing a third of
+              the row. */}
+          <div className="flex flex-col gap-6">
             <TradingViewChart symbol={chartSymbol} />
-            <div className="flex flex-col items-center justify-center gap-6 rounded-2xl border border-hairline bg-ink p-6">
-              <span className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted">
-                Performans
-              </span>
-              <PerformanceRing rate={winRate} />
-              <div className="grid w-full grid-cols-3 gap-2 border-t border-hairline pt-5 text-center">
+            <div className="flex flex-col items-center justify-center gap-6 rounded-2xl border border-hairline bg-ink p-6 sm:flex-row sm:gap-10">
+              <div className="flex flex-col items-center gap-4">
+                <span className="font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted">
+                  {tr("Performans")}
+                </span>
+                <PerformanceRing rate={winRate} />
+              </div>
+              <div className="grid w-full grid-cols-3 gap-2 border-t border-hairline pt-5 text-center sm:flex-1 sm:border-l sm:border-t-0 sm:pl-10 sm:pt-0">
                 <div>
                   <div className="tabular-stat font-display text-xl font-semibold">
                     {active.length + closed.length}
                   </div>
                   <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.1em] text-text-on-ink-muted">
-                    Toplam Sinyal
+                    {tr("Toplam Sinyal")}
                   </div>
                 </div>
                 <div>
@@ -1072,7 +1078,7 @@ export default function SignalsBoard({
                     {decisive.length - wins}
                   </div>
                   <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.1em] text-text-on-ink-muted">
-                    Kaybedilen
+                    {tr("Kaybedilen")}
                   </div>
                 </div>
               </div>
