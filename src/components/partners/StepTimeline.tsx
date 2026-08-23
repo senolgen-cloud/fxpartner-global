@@ -1,4 +1,5 @@
 "use client";
+import { useLocalizedData } from "@/components/useLocalizedData";
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
@@ -8,6 +9,7 @@ import { partnerSteps } from "@/data/partnerProgram";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function StepTimeline() {
+  const partnerStepsTr = useLocalizedData(partnerSteps);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const lineRef = useRef<HTMLDivElement | null>(null);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -76,7 +78,7 @@ export default function StepTimeline() {
         />
       </div>
       <div className="space-y-12">
-        {partnerSteps.map((step, i) => (
+        {partnerStepsTr.map((step, i) => (
           <div
             key={step.title}
             ref={(el) => {

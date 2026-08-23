@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
-import { localizeBroker } from "@/lib/localizeContent";
+import { tr, trLocale } from "@/lib/chrome";
+import { localizeBroker, trData } from "@/lib/localizeContent";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Image from "next/image";
 import Link from "@/components/LocaleLink";
@@ -157,7 +157,7 @@ export default async function BrokerDetailPage({
   // Only confirmed programs are promoted off /cashback — an estimate never
   // appears as a promise on a review page.
   const cashback = getLiveCashbackProgram(broker.slug);
-  const backedPropFirm = getPropFirmByBackingBroker(broker.slug);
+  const backedPropFirm = trData(getPropFirmByBackingBroker(broker.slug));
 
   const tier1Regulators = broker.regulators.filter((r) => TIER1_REGULATORS.has(r));
   const offshoreRegulators = broker.regulators.filter((r) => !TIER1_REGULATORS.has(r));
@@ -797,7 +797,7 @@ export default async function BrokerDetailPage({
                         <span className="font-mono text-xs text-gold">{c.rating}/5</span>
                       )}
                       <span className="font-mono text-xs text-text-muted">
-                        {new Date(c.createdAt).toLocaleDateString("tr-TR", {
+                        {new Date(c.createdAt).toLocaleDateString(trLocale(), {
                           year: "numeric",
                           month: "short",
                           day: "numeric",

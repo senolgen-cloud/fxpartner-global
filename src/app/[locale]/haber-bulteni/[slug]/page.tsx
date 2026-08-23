@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
+import { tr, trLocale } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
@@ -96,7 +96,7 @@ export default async function NewsBulletinPage({
               {tr("← Tüm bültenler")}
             </Link>
             <p className="mt-6 font-mono text-xs text-text-on-ink-muted">
-              {bulletin.publishedAt.toLocaleDateString("tr-TR", {
+              {bulletin.publishedAt.toLocaleDateString(trLocale(), {
                 year: "numeric",
                 month: "long",
                 day: "numeric",

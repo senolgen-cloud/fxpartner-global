@@ -1,5 +1,6 @@
 import { tr } from "@/lib/chrome";
 import { partnerTiers } from "@/data/partnerProgram";
+import { trData } from "@/lib/localizeContent";
 
 // Illustrative preview data only — this is a mock of what a partner's own
 // dashboard looks like, not a live feed of real referral activity.
@@ -14,8 +15,8 @@ const recentActivity = [
 ];
 
 const currentTierIndex = 2; // "Gold" — illustrative example partner
-const currentTier = partnerTiers[currentTierIndex];
-const nextTier = partnerTiers[currentTierIndex + 1];
+const currentTier = trData(partnerTiers)[currentTierIndex];
+const nextTier = trData(partnerTiers)[currentTierIndex + 1];
 const referredClients = 34;
 const tierProgress = nextTier
   ? Math.min(

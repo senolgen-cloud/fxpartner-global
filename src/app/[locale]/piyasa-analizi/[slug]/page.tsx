@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
+import { tr, trLocale } from "@/lib/chrome";
 import Image from "next/image";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
@@ -14,11 +14,12 @@ import {
 import { newsArticleSchema, breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export function generateStaticParams() {
-  return marketAnalysisPosts.map((p) => ({ slug: p.slug }));
+  return trData(marketAnalysisPosts).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -27,7 +28,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getMarketAnalysisPostBySlug(slug);
+  const post = trData(getMarketAnalysisPostBySlug(slug));
   if (!post) return {};
   // post.title already leads with "FXPARTNER " (e.g. "FXPARTNER Haftalık
   // Piyasa Görünümü | ...") for on-page/OG display, but the root layout's
@@ -58,7 +59,7 @@ export default async function MarketAnalysisPostPage({
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
   const { slug } = await params;
-  const post = getMarketAnalysisPostBySlug(slug);
+  const post = trData(getMarketAnalysisPostBySlug(slug));
   if (!post) notFound();
 
   return (
@@ -91,7 +92,7 @@ export default async function MarketAnalysisPostPage({
               {tr("← Tüm analizler")}
             </Link>
             <p className="mt-6 font-mono text-xs text-text-on-ink-muted">
-              {new Date(post.publishedAt).toLocaleDateString("tr-TR", {
+              {new Date(post.publishedAt).toLocaleDateString(trLocale(), {
                 year: "numeric",
                 month: "long",
                 day: "numeric",

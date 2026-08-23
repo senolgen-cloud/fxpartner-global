@@ -1,5 +1,5 @@
 "use client";
-import { useTr } from "@/components/useTr";
+import { useIntlLocale, useTr } from "@/components/useTr";
 
 import { useEffect, useRef, useState } from "react";
 import type { CalendarImpact, EconomicEvent } from "@/lib/economicCalendar";
@@ -41,8 +41,8 @@ function toEvent(e: EventJson): EconomicEvent {
 // actually expect, e.g. a 12:30 UTC release reads as 15:30.
 const DISPLAY_TZ = "Europe/Istanbul";
 
-function dayLabel(date: Date) {
-  return date.toLocaleDateString("tr-TR", { weekday: "long", day: "numeric", month: "long", timeZone: DISPLAY_TZ });
+function dayLabel(date: Date, intl: string) {
+  return date.toLocaleDateString(intl, { weekday: "long", day: "numeric", month: "long", timeZone: DISPLAY_TZ });
 }
 
 // yyyy-mm-dd in DISPLAY_TZ, via en-CA which formats dates in that order —
@@ -62,14 +62,14 @@ function groupByDay(events: EconomicEvent[]) {
   return [...groups.entries()].sort(([a], [b]) => a.localeCompare(b));
 }
 
-function EventRow({ event }: { event: EconomicEvent }) {
+function EventRow({ event, intl }: { event: EconomicEvent; intl: string }) {
   const isReleased = event.actual !== "";
   const isFuture = event.date.getTime() > Date.now();
 
   return (
     <div className="grid grid-cols-[64px_1fr_auto] items-center gap-3 border-b border-hairline px-4 py-3 last:border-0 sm:grid-cols-[64px_28px_1fr_100px_80px_80px_80px]">
       <span className="font-mono text-xs text-text-on-ink-muted">
-        {event.date.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit", timeZone: DISPLAY_TZ })}
+        {event.date.toLocaleTimeString(intl, { hour: "2-digit", minute: "2-digit", timeZone: DISPLAY_TZ })}
       </span>
       <span className="hidden text-base sm:inline" aria-hidden="true">
         {FLAGS[event.country] ?? "🏳️"}
@@ -99,6 +99,7 @@ function EventRow({ event }: { event: EconomicEvent }) {
 
 export default function EconomicCalendarBoard({ initialEvents }: { initialEvents: EconomicEvent[] }) {
   const tr = useTr();
+  const intl = useIntlLocale();
   const [events, setEvents] = useState(initialEvents);
   const mounted = useRef(true);
 
@@ -148,10 +149,10 @@ export default function EconomicCalendarBoard({ initialEvents }: { initialEvents
         groups.map(([day, dayEvents]) => (
           <div key={day}>
             <div className="border-b border-hairline bg-paper px-6 py-2 font-mono text-[11px] uppercase tracking-[0.1em] text-signal">
-              {dayLabel(dayEvents[0].date)}
+              {dayLabel(dayEvents[0].date, intl)}
             </div>
             {dayEvents.map((e) => (
-              <EventRow key={e.id} event={e} />
+              <EventRow key={e.id} event={e} intl={intl} />
             ))}
           </div>
         ))

@@ -1,4 +1,4 @@
-import { tr } from "@/lib/chrome";
+import { tr, trLocale } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import { auth, signOut } from "@/auth";
@@ -25,6 +25,7 @@ import { PACKAGE_TIER_INFO, PACKAGE_TIER_ORDER } from "@/data/packageTiers";
 import { createNowPaymentsCheckout } from "@/app/[locale]/paketler/checkout-actions";
 import { setServerLocale } from "@/lib/serverLocale";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
+import { trData } from "@/lib/localizeContent";
 
 const brokerNames = Object.fromEntries(brokers.map((b) => [b.slug, b.name]));
 
@@ -172,10 +173,10 @@ export default async function AccountPage({
                   <p className="mt-1 text-sm text-text-on-ink-muted">
                     {subscriptionTier ? TIER_LABEL[subscriptionTier] : "Paket"} paketi ·{" "}
                     <span className={VIP_STATUS_CLASS[subscription.status]}>
-                      {VIP_STATUS_LABEL[subscription.status]}
+                      {trData(VIP_STATUS_LABEL)[subscription.status]}
                     </span>
                     {subscription.currentPeriodEnd &&
-                      ` · ${subscription.currentPeriodEnd.toLocaleDateString("tr-TR", {
+                      ` · ${subscription.currentPeriodEnd.toLocaleDateString(trLocale(), {
                         day: "numeric",
                         month: "long",
                         year: "numeric",
@@ -207,10 +208,10 @@ export default async function AccountPage({
             {isActiveVip && subscriptionTier && (
               <div className="mt-6 border-t border-hairline pt-6">
                 <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  {PACKAGE_TIER_INFO[subscriptionTier].name} Paketinize Dahil
+                  {trData(PACKAGE_TIER_INFO)[subscriptionTier].name} Paketinize Dahil
                 </h3>
                 <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-                  {PACKAGE_TIER_INFO[subscriptionTier].features.map((f) => (
+                  {trData(PACKAGE_TIER_INFO)[subscriptionTier].features.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-sm text-text-on-ink-muted">
                       <span className="mt-0.5 text-tick-up">✓</span>
                       {f}
@@ -232,7 +233,7 @@ export default async function AccountPage({
                       href="/paketler"
                       className="rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
                     >
-                      {PACKAGE_TIER_INFO[PACKAGE_TIER_ORDER[PACKAGE_TIER_ORDER.indexOf(subscriptionTier) + 1]].name}
+                      {trData(PACKAGE_TIER_INFO)[PACKAGE_TIER_ORDER[PACKAGE_TIER_ORDER.indexOf(subscriptionTier) + 1]].name}
                       {tr("'e Yükselt →")}
                     </Link>
                   )}
@@ -370,7 +371,7 @@ export default async function AccountPage({
                         <span
                           className={`font-mono text-xs uppercase tracking-[0.1em] ${CASHBACK_STATUS_CLASS[acc.status]}`}
                         >
-                          {CASHBACK_STATUS_LABEL[acc.status]}
+                          {trData(CASHBACK_STATUS_LABEL)[acc.status]}
                         </span>
                       </div>
                       {records.length > 0 && (
@@ -414,7 +415,7 @@ export default async function AccountPage({
                     <div>
                       <p className="font-medium text-text-on-ink">{c.brokerName}</p>
                       <p className="mt-1 text-xs text-text-on-ink-muted">
-                        {new Date(c.createdAt).toLocaleDateString("tr-TR", {
+                        {new Date(c.createdAt).toLocaleDateString(trLocale(), {
                           year: "numeric",
                           month: "long",
                           day: "numeric",
@@ -422,7 +423,7 @@ export default async function AccountPage({
                       </p>
                     </div>
                     <span className={`font-mono text-xs uppercase tracking-[0.1em] ${STATUS_CLASS[c.status]}`}>
-                      {STATUS_LABEL[c.status]}
+                      {trData(STATUS_LABEL)[c.status]}
                     </span>
                   </div>
                 ))}

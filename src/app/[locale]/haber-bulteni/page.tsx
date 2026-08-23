@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
+import { tr, trLocale } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
@@ -89,7 +89,7 @@ export default async function NewsBulletinIndexPage({
                     className="group flex flex-col gap-2 py-8"
                   >
                     <span className="font-mono text-xs text-text-muted">
-                      {new Date(b.publishedAt).toLocaleDateString("tr-TR", {
+                      {new Date(b.publishedAt).toLocaleDateString(trLocale(), {
                         year: "numeric",
                         month: "long",
                         day: "numeric",

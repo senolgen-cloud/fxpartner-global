@@ -9,6 +9,7 @@ import UpgradeGate from "@/components/UpgradeGate";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { getViewerAccess, hasTierAccess } from "@/lib/tierAccess";
 import { setServerLocale } from "@/lib/serverLocale";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -78,7 +79,7 @@ export default async function CopytradePage({
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(trData(faqs))) }}
       />
       <main lang="tr" className="flex-1 bg-paper-high">
         <section className="bg-ink text-text-on-ink">
@@ -188,7 +189,7 @@ export default async function CopytradePage({
               {tr("Sık sorulan sorular")}
             </h2>
             <div className="mt-8 divide-y divide-hairline-light border-t border-hairline-light">
-              {faqs.map((faq) => (
+              {trData(faqs).map((faq) => (
                 <details key={faq.q} className="group py-5">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-text-dark">
                     {faq.q}

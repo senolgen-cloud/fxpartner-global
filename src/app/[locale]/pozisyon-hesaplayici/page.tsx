@@ -7,6 +7,7 @@ import PositionSizeCalculator from "@/components/PositionSizeCalculator";
 import { getLiveFxRates } from "@/lib/positionSize";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 
@@ -75,7 +76,7 @@ export default async function PositionSizeCalculatorPage({
           ),
         }}
       />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(trData(faqs))) }} />
 
       <main lang="tr" className="flex-1 bg-ink text-text-on-ink">
         <section className="border-b border-hairline">
@@ -104,7 +105,7 @@ export default async function PositionSizeCalculatorPage({
           <div className="mx-auto max-w-3xl px-6 py-16 md:py-20">
             <h2 className="text-2xl font-semibold md:text-3xl">{tr("Sık sorulan sorular")}</h2>
             <div className="mt-8 divide-y divide-hairline border-t border-hairline">
-              {faqs.map((faq) => (
+              {trData(faqs).map((faq) => (
                 <details key={faq.q} className="group py-5">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-text-on-ink">
                     {faq.q}

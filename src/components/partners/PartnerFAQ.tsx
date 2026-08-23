@@ -1,15 +1,17 @@
 "use client";
+import { useLocalizedData } from "@/components/useLocalizedData";
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { partnerFaqItems } from "@/data/partnerProgram";
 
 export default function PartnerFAQ() {
+  const partnerFaqItemsTr = useLocalizedData(partnerFaqItems);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <div className="divide-y divide-hairline-light border-t border-b border-hairline-light">
-      {partnerFaqItems.map((item, i) => {
+      {partnerFaqItemsTr.map((item, i) => {
         const isOpen = openIndex === i;
         return (
           <div key={item.question}>

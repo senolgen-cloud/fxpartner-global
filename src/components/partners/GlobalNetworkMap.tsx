@@ -1,7 +1,8 @@
 import { networkRegions, networkArcs } from "@/data/partnerProgram";
+import { trData } from "@/lib/localizeContent";
 
 function getRegion(key: string) {
-  return networkRegions.find((r) => r.key === key)!;
+  return trData(networkRegions).find((r) => r.key === key)!;
 }
 
 export default function GlobalNetworkMap() {
@@ -33,7 +34,7 @@ export default function GlobalNetworkMap() {
           );
         })}
 
-        {networkRegions.map((region) => (
+        {trData(networkRegions).map((region) => (
           <g key={region.key} transform={`translate(${region.x} ${region.y * 0.6})`}>
             <circle
               r={3.2}

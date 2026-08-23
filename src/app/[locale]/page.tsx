@@ -1,6 +1,6 @@
 import Link from "@/components/LocaleLink";
 import { tr } from "@/lib/chrome";
-import { localizeBlogPost, localizeBlogPosts, localizeBrokers } from "@/lib/localizeContent";
+import { localizeBlogPost, localizeBlogPosts, localizeBrokers, trData } from "@/lib/localizeContent";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Footer from "@/components/Footer";
 import BrokerList from "@/components/BrokerList";
@@ -122,6 +122,12 @@ export default async function Home({
 
   const { locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+
+  // The home page was handing the raw Turkish brokers to the list and the
+  // hero, so eighteen translated bestFor lines sat unused on the busiest
+  // page on the site. /brokerlar had always localized them.
+  const localBrokers = localizeBrokers(brokers, locale);
+
   // Prefer the latest still-open trade so the hero card reflects a real
   // signal a visitor could still act on; fall back to the latest closed
   // one so the card isn't empty between open trades.
@@ -142,7 +148,7 @@ export default async function Home({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(trData(faqs))) }}
       />
       <main className="flex-1">
         {/* Hero */}
@@ -196,7 +202,7 @@ export default async function Home({
           </div>
 
           <Reveal delay={200}>
-            <HeroEcosystemMockups brokers={brokers} latestSignal={latestSignal} />
+            <HeroEcosystemMockups brokers={localBrokers} latestSignal={latestSignal} />
           </Reveal>
           </div>
         </section>
@@ -224,7 +230,7 @@ export default async function Home({
             </Reveal>
 
             <div className="mt-12">
-              <BrokerList brokers={brokers} reviewStats={brokerReviewStats} />
+              <BrokerList brokers={localBrokers} reviewStats={brokerReviewStats} />
             </div>
           </div>
         </section>
@@ -247,7 +253,7 @@ export default async function Home({
                 {tr("Kendi sermayenizi riske atmadan işlem yapın")}
               </h2>
               <p className="mt-4 text-text-on-ink-muted">
-                Funded account veren {propFirms.length} firma; kural seti, challenge
+                Funded account veren {trData(propFirms).length} firma; kural seti, challenge
                 ücreti, drawdown limitleri ve ödeme sicili üzerinden bağımsız olarak
                 puanlandı. Ticari ilişkimiz olan firmalar açıkça etiketlenir.
               </p>
@@ -259,7 +265,7 @@ export default async function Home({
 
             <Reveal className="mt-10">
               <div className="grid gap-4 sm:grid-cols-3">
-                {propFirmsByScore()
+                {trData(propFirmsByScore())
                   .slice(0, 3)
                   .map((firm, i) => (
                     <div
@@ -305,7 +311,7 @@ export default async function Home({
                 href="/prop-firmalar"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
-                {propFirms.length} firmanın tamamını karşılaştır →
+                {trData(propFirms).length} firmanın tamamını karşılaştır →
               </Link>
             </Reveal>
           </div>
@@ -408,7 +414,7 @@ export default async function Home({
               </p>
             </Reveal>
             <div className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2">
-              {steps.map((step, i) => (
+              {trData(steps).map((step, i) => (
                 <Reveal key={step.n} delay={i * 90} className="flex gap-5">
                   <span className="font-display text-3xl font-light text-signal">
                     {step.n}
@@ -448,7 +454,7 @@ export default async function Home({
                   {tr("Hesap açma")}
                 </h3>
                 <ol className="mt-4 space-y-4">
-                  {accountSteps.map((step, i) => (
+                  {trData(accountSteps).map((step, i) => (
                     <li key={step} className="flex gap-4">
                       <span className="font-mono text-xs text-signal">
                         {String(i + 1).padStart(2, "0")}
@@ -465,7 +471,7 @@ export default async function Home({
                   {tr("İlk para çekme işleminiz")}
                 </h3>
                 <ol className="mt-4 space-y-4">
-                  {withdrawalSteps.map((step, i) => (
+                  {trData(withdrawalSteps).map((step, i) => (
                     <li key={step} className="flex gap-4">
                       <span className="font-mono text-xs text-signal">
                         {String(i + 1).padStart(2, "0")}
@@ -506,7 +512,7 @@ export default async function Home({
               </h2>
             </Reveal>
             <div className="mt-10 divide-y divide-hairline-light border-t border-hairline-light">
-              {faqs.map((faq) => (
+              {trData(faqs).map((faq) => (
                 <details key={faq.q} className="group py-5">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-medium text-text-dark transition-colors group-open:text-signal">
                     {faq.q}

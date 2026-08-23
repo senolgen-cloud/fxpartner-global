@@ -1,4 +1,5 @@
 import { tr } from "@/lib/chrome";
+import { trData } from "@/lib/localizeContent";
 const slides = [
   {
     eyebrow: "01 · Regülasyon",
@@ -52,7 +53,7 @@ export default function ShowcaseGallery() {
         className="mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-6 [-ms-overflow-style:none] [scrollbar-width:none] md:px-[max(1.5rem,calc((100%-72rem)/2))] [&::-webkit-scrollbar]:hidden"
         role="list"
       >
-        {slides.map((slide) => (
+        {trData(slides).map((slide) => (
           <article
             key={slide.eyebrow}
             role="listitem"

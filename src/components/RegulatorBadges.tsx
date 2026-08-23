@@ -1,5 +1,6 @@
 import Reveal from "@/components/Reveal";
 import { tr } from "@/lib/chrome";
+import { trData } from "@/lib/localizeContent";
 
 const regulators = [
   {
@@ -66,7 +67,7 @@ const regulators = [
 
 export default function RegulatorBadges() {
   return (
-    <section id="regulators" className="relative overflow-hidden bg-ink-soft">
+    <section id="trData(regulators)" className="relative overflow-hidden bg-ink-soft">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-hairline to-transparent"
@@ -85,7 +86,7 @@ export default function RegulatorBadges() {
         </Reveal>
 
         <div className="mt-12 flex flex-wrap justify-center gap-5">
-          {regulators.map((reg, i) => (
+          {trData(regulators).map((reg, i) => (
             <Reveal key={`${reg.abbr}-${reg.country}`} delay={i * 40}>
               <div className="lift-on-hover flex w-[280px] items-center gap-4 rounded-2xl border border-hairline bg-ink px-5 py-4 sm:w-[300px]">
                 <span

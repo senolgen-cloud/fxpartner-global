@@ -16,6 +16,7 @@ import {
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 const YEAR = new Date().getFullYear();
@@ -30,7 +31,7 @@ const YEAR = new Date().getFullYear();
  * `discount.status` "live" yapılması yeterli, başka hiçbir şey gerekmiyor.
  */
 function firmsWithLiveDiscount() {
-  return propFirms.filter((f) => f.discount?.status === "live" && f.discount.code);
+  return trData(propFirms).filter((f) => f.discount?.status === "live" && f.discount.code);
 }
 
 export function generateStaticParams() {
@@ -45,7 +46,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const firm = getPropFirm(slug);
+  const firm = trData(getPropFirm(slug));
   if (!firm?.discount || firm.discount.status !== "live") return {};
 
   const pct = firm.discount.percent;
@@ -84,7 +85,7 @@ function discountFaqs(firm: PropFirm) {
     },
     {
       q: `${firm.name} güvenilir mi?`,
-      a: `${firm.name} ${firm.founded} yılında kurulmuş${firm.backedBy ? ` ve ${firm.backedBy} altyapısını kullanan` : ""} bir prop firmadır; FXPARTNER'ın bağımsız değerlendirmesinde 10 üzerinden ${getPropFirmScores(firm).composite.toFixed(1)} puan alıyor. Ödeme kanıtı durumu: ${PAYOUT_STATUS_LABEL[firm.payoutProof.status]}. ${firm.payoutProof.note} İndirim oranı ne olursa olsun, firma seçimini ödeme siciline göre yapmanız gerekir — indirim iyi bir firmayı daha iyi yapar, kötü bir firmayı kurtarmaz.`,
+      a: `${firm.name} ${firm.founded} yılında kurulmuş${firm.backedBy ? ` ve ${firm.backedBy} altyapısını kullanan` : ""} bir prop firmadır; FXPARTNER'ın bağımsız değerlendirmesinde 10 üzerinden ${getPropFirmScores(firm).composite.toFixed(1)} puan alıyor. Ödeme kanıtı durumu: ${trData(PAYOUT_STATUS_LABEL)[firm.payoutProof.status]}. ${firm.payoutProof.note} İndirim oranı ne olursa olsun, firma seçimini ödeme siciline göre yapmanız gerekir — indirim iyi bir firmayı daha iyi yapar, kötü bir firmayı kurtarmaz.`,
     },
     ...(cheapestRule
       ? [
@@ -106,7 +107,7 @@ export default async function IndirimKoduPage({
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
   const { slug } = await params;
-  const firm = getPropFirm(slug);
+  const firm = trData(getPropFirm(slug));
   const d = firm?.discount;
   // Tek koşulda toplanıyor ki TS `d` ve `d.code` daraltmasını buradan
   // itibaren taşıyabilsin — parçalara bölündüğünde daraltma kayboluyor.
@@ -272,7 +273,7 @@ export default async function IndirimKoduPage({
                 <p className="rounded-xl border border-hairline bg-ink-soft/60 p-4 text-sm">
                   <strong className="text-text-on-ink">Dikkat:</strong> Bu firma için
                   {tr("bağımsız ödeme kanıtı doğrulamamız henüz tamamlanmadı (durum:")}{" "}
-                  {PAYOUT_STATUS_LABEL[firm.payoutProof.status]}). İndirim oranı ne
+                  {trData(PAYOUT_STATUS_LABEL)[firm.payoutProof.status]}). İndirim oranı ne
                   olursa olsun, hesap açmadan önce kendi araştırmanızı yapın.
                 </p>
               )}

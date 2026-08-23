@@ -1,5 +1,5 @@
 import Footer from "@/components/Footer";
-import { tr } from "@/lib/chrome";
+import { tr, trLocale } from "@/lib/chrome";
 import { db } from "@/db";
 import { aiAssistantLogs } from "@/db/schema";
 import { desc } from "drizzle-orm";
@@ -35,7 +35,7 @@ export default async function AdminAiAssistantLogsPage({
               logs.map((log) => (
                 <div key={log.id} className="rounded-2xl border border-hairline-light bg-white p-5">
                   <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">
-                    {log.createdAt.toLocaleString("tr-TR", { timeZone: "Europe/Istanbul" })}
+                    {log.createdAt.toLocaleString(trLocale(), { timeZone: "Europe/Istanbul" })}
                   </p>
                   <p className="mt-2 text-sm font-semibold text-text-dark">Soru: {log.question}</p>
                   <p className="mt-2 whitespace-pre-wrap text-sm text-text-muted">{log.reply}</p>

@@ -13,6 +13,7 @@ import {
 } from "@/data/technicalAnalysis";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 const INSTAGRAM_URL = "https://www.instagram.com/fxpartner_global/";
@@ -47,12 +48,12 @@ export async function generateMetadata({
 
 // Newest bulletin day first. ISO strings sort lexicographically, so a
 // plain string sort is correct here and avoids Date/timezone parsing.
-const bulletinDates = [...new Set(technicalAnalysisPosts.map((p) => p.publishedAt))]
+const bulletinDates = [...new Set(trData(technicalAnalysisPosts).map((p) => p.publishedAt))]
   .sort()
   .reverse();
 const latestDate: string | undefined = bulletinDates[0];
 const latestPosts = latestDate
-  ? technicalAnalysisPosts.filter((p) => p.publishedAt === latestDate).slice(0, 4)
+  ? trData(technicalAnalysisPosts).filter((p) => p.publishedAt === latestDate).slice(0, 4)
   : [];
 
 // Formatted from the ISO parts rather than through Date, so the rendered
@@ -190,7 +191,7 @@ export default async function InstagramLandingPage({
                     {tr("Günlük Bülten")}
                   </span>
                   <h2 className="mt-3 font-display text-2xl font-semibold">
-                    {getBulletinTitle(latestDate)}
+                    {trData(getBulletinTitle(latestDate))}
                   </h2>
                 </div>
                 <Link
@@ -241,7 +242,7 @@ export default async function InstagramLandingPage({
           </section>
         )}
 
-        {/* Free tools */}
+        {/* Free trData(tools) */}
         <section className="border-b border-hairline bg-ink-soft">
           <div className="mx-auto max-w-5xl px-6 py-16">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
@@ -251,7 +252,7 @@ export default async function InstagramLandingPage({
               {tr("Instagram'da bahsettiğimiz her şey")}
             </h2>
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {tools.map((tool) => (
+              {trData(tools).map((tool) => (
                 <Link
                   key={tool.href}
                   href={tool.href}
@@ -268,7 +269,7 @@ export default async function InstagramLandingPage({
           </div>
         </section>
 
-        {/* Editorial transparency — the positioning the account is built on */}
+        {/* Editorial trData(transparency) — the positioning the account is built on */}
         <section className="border-b border-hairline">
           <div className="mx-auto max-w-5xl px-6 py-16">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
@@ -278,7 +279,7 @@ export default async function InstagramLandingPage({
               {tr("Instagram hesabımızda neyi paylaşmayız?")}
             </h2>
             <div className="mt-8 grid gap-4 md:grid-cols-3">
-              {transparency.map((item) => (
+              {trData(transparency).map((item) => (
                 <div key={item.title} className="rounded-2xl border border-hairline bg-ink-soft p-6">
                   <h3 className="font-display text-base font-semibold">{item.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-text-on-ink-muted">{item.body}</p>

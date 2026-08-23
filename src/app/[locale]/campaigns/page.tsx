@@ -6,6 +6,7 @@ import Link from "@/components/LocaleLink";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 import { brokers } from "@/data/brokers";
+import { localizeBrokers } from "@/lib/localizeContent";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
 
@@ -50,7 +51,8 @@ export default async function CampaignsPage({
   const { locale: pageLocale } = await params;
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
-  const campaigns = brokers.filter((b) => b.promotion);
+  const locale: Locale = isLocale(pageLocale) ? pageLocale : defaultLocale;
+  const campaigns = localizeBrokers(brokers, locale).filter((b) => b.promotion);
 
   return (
     <>

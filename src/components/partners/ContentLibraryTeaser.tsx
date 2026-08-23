@@ -1,10 +1,11 @@
 import { tr } from "@/lib/chrome";
 import { contentLibraryCategories } from "@/data/partnerProgram";
+import { trData } from "@/lib/localizeContent";
 
 export default function ContentLibraryTeaser() {
   return (
     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {contentLibraryCategories.map((cat) => (
+      {trData(contentLibraryCategories).map((cat) => (
         <div
           key={cat.title}
           className="group relative overflow-hidden rounded-2xl border border-hairline-light bg-paper-high p-6 transition-colors hover:border-signal/40"

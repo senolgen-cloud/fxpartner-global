@@ -14,6 +14,7 @@ import { type AccessTier } from "@/lib/vip";
 import { maskLockedActiveSignal } from "@/lib/signalAccess";
 import { getDictionary } from "@/lib/dictionary";
 import { tr } from "@/lib/chrome";
+import { trData } from "@/lib/localizeContent";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import { setServerLocale } from "@/lib/serverLocale";
 
@@ -83,6 +84,11 @@ export default async function SignalsPage({
   const { locale: pageLocale } = await params;
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
+  // One translated copy for both consumers: the visible list and the FAQPage
+  // schema. A Ukrainian page advertising Turkish questions to a crawler is
+  // the same bug as showing them to a reader.
+  const localFaqs = trData(faqs);
+
   const session = await auth();
 
   const [active, closed, subscriptionRow] = await Promise.all([
@@ -138,7 +144,7 @@ export default async function SignalsPage({
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(localFaqs)) }}
       />
       <main className="flex-1 bg-ink text-text-on-ink">
         <SignalsBoard
@@ -174,7 +180,7 @@ export default async function SignalsPage({
               {tr("Sık Sorulan Sorular")}
             </h2>
             <div className="mt-6 divide-y divide-hairline border-t border-hairline">
-              {faqs.map((faq) => (
+              {localFaqs.map((faq) => (
                 <details key={faq.q} className="group py-5">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-text-on-ink">
                     {faq.q}

@@ -1,4 +1,5 @@
 "use client";
+import { useLocalizedData } from "@/components/useLocalizedData";
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -9,6 +10,11 @@ import {
 } from "@/data/partnerProgram";
 
 export default function ContentStudioPreview() {
+  // The typing animation walks this string character by character, so it has
+  // to be the translated one from the start — swapping mid-animation would
+  // restart the typing at a different length.
+  const prompt = useLocalizedData(contentStudioPrompt);
+  const samples = useLocalizedData(contentStudioSamples);
   const reducedMotion = usePrefersReducedMotion();
   const [started, setStarted] = useState(false);
   const [typed, setTyped] = useState("");
@@ -20,16 +26,16 @@ export default function ContentStudioPreview() {
     let i = 0;
     const interval = setInterval(() => {
       i++;
-      setTyped(contentStudioPrompt.slice(0, i));
-      if (i >= contentStudioPrompt.length) {
+      setTyped(prompt.slice(0, i));
+      if (i >= prompt.length) {
         clearInterval(interval);
         setTimeout(() => setShowResults(true), 500);
       }
     }, 60);
     return () => clearInterval(interval);
-  }, [started, reducedMotion]);
+  }, [started, reducedMotion, prompt]);
 
-  const displayedPrompt = reducedMotion ? contentStudioPrompt : typed;
+  const displayedPrompt = reducedMotion ? prompt : typed;
   const resultsVisible = reducedMotion ? started : showResults;
 
   return (
@@ -61,7 +67,7 @@ export default function ContentStudioPreview() {
 
       {resultsVisible && (
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          {contentStudioSamples.map((sample, i) => (
+          {samples.map((sample, i) => (
             <motion.div
               key={sample.channel}
               initial={{ opacity: 0, y: 16 }}

@@ -1,6 +1,7 @@
 import Link from "@/components/LocaleLink";
 import { tr } from "@/lib/chrome";
 import { getTickerPairs, type TickerPair } from "@/lib/rates";
+import { trData } from "@/lib/localizeContent";
 
 const TICK_UP = "#22c55e";
 const TICK_DOWN = "#e5484d";
@@ -42,7 +43,8 @@ function decorativePath(symbol: string, up: boolean): string {
 }
 
 function MarketCard({ pair }: { pair: TickerPair }) {
-  const meta = CARD_META[pair.symbol] ?? { label: pair.symbol, sub: pair.symbol };
+  const raw = trData(CARD_META)[pair.symbol] ?? { label: pair.symbol, sub: pair.symbol };
+  const meta = { label: tr(raw.label), sub: tr(raw.sub) };
   const up = pair.up ?? true;
   const color = pair.up === null ? "var(--text-on-ink-muted)" : up ? TICK_UP : TICK_DOWN;
 

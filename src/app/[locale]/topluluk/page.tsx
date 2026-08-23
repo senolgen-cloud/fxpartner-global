@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
+import { tr, trLocale } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
@@ -144,7 +144,7 @@ export default async function CommunityPage({
                         </div>
                         <p className="mt-3 text-sm leading-relaxed text-text-on-ink-muted">{c.body}</p>
                         <p className="mt-3 font-mono text-[11px] text-text-on-ink-muted">
-                          {c.createdAt.toLocaleDateString("tr-TR", {
+                          {c.createdAt.toLocaleDateString(trLocale(), {
                             day: "numeric",
                             month: "short",
                             year: "numeric",

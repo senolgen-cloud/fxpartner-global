@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
+import { tr, trLocale } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Image from "next/image";
@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import { marketAnalysisPosts, getMarketAnalysisCoverImage } from "@/data/marketAnalysis";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -75,7 +76,7 @@ export default async function MarketAnalysisIndexPage({
         <section>
           <div className="mx-auto max-w-3xl px-6 py-16">
             <div className="divide-y divide-hairline-light border-t border-hairline-light">
-              {marketAnalysisPosts
+              {trData(marketAnalysisPosts)
                 .slice()
                 .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1))
                 .map((post) => (
@@ -95,7 +96,7 @@ export default async function MarketAnalysisIndexPage({
                     </div>
                     <div className="min-w-0">
                       <span className="font-mono text-xs text-text-muted">
-                        {new Date(post.publishedAt).toLocaleDateString("tr-TR", {
+                        {new Date(post.publishedAt).toLocaleDateString(trLocale(), {
                           year: "numeric",
                           month: "long",
                           day: "numeric",

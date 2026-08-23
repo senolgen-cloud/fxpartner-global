@@ -1,4 +1,6 @@
 import { defaultLocale, type Locale } from "@/lib/i18n";
+import { translateChrome } from "@/lib/chrome";
+import { getServerLocale } from "@/lib/serverLocale";
 import type { Broker } from "@/data/brokers";
 import type { BlogPost } from "@/data/blog";
 import ukBrokers from "@/data/i18n/uk/brokers.json";
@@ -85,6 +87,59 @@ export function localizeBlogPost(post: BlogPost, locale: Locale): BlogPost {
 export function localizeBlogPosts(list: BlogPost[], locale: Locale): BlogPost[] {
   if (locale === defaultLocale) return list;
   return list.map((p) => localizeBlogPost(p, locale));
+}
+
+// Structural keys: their values are identifiers, not prose. Translating a
+// slug would break a route, and translating an icon name would break a
+// lookup, so the walk steps over them without looking.
+const STRUCTURAL_KEYS = new Set([
+  "slug", "href", "id", "icon", "key", "type", "src", "url", "code",
+  "logo", "image", "color", "variant", "group", "path", "locale", "pair",
+  "symbol", "ticker", "currency", "date", "updatedAt", "publishedAt",
+]);
+
+/**
+ * Translates every prose leaf of a Turkish-authored data tree.
+ *
+ * The five remaining data modules — prop firms, market and technical
+ * analysis, package tiers, the partner program — each have their own shape,
+ * and giving each one a localizeX() with its own key scheme would be five
+ * schemes to keep in sync with five files. They do not need one: tr() is
+ * keyed by the Turkish string itself, so the catalogue can be reached by
+ * walking the structure and looking up each leaf. No key naming, no drift,
+ * and a new field is translated the moment someone adds its string to the
+ * dictionary.
+ *
+ * Untranslated leaves come back as the Turkish they already were, which is
+ * the same fallback every other surface has.
+ */
+export function localizeData<T>(value: T, locale: Locale): T {
+  if (locale === defaultLocale) return value;
+  return walk(value, locale) as T;
+}
+
+function walk(value: unknown, locale: Locale): unknown {
+  if (typeof value === "string") return translateChrome(locale, value);
+  if (Array.isArray(value)) return value.map((item) => walk(item, locale));
+  if (value && typeof value === "object" && Object.getPrototypeOf(value) === Object.prototype) {
+    const out: Record<string, unknown> = {};
+    for (const [key, item] of Object.entries(value)) {
+      out[key] = STRUCTURAL_KEYS.has(key) ? item : walk(item, locale);
+    }
+    return out;
+  }
+  // Numbers, booleans, dates, class instances — nothing to translate, and
+  // rebuilding them would lose their identity.
+  return value;
+}
+
+/**
+ * Server-side companion to localizeData(), reading the locale the page
+ * recorded for this request. Same relationship tr() has to translateChrome():
+ * the caller does not repeat the locale it already established.
+ */
+export function trData<T>(value: T): T {
+  return localizeData(value, getServerLocale());
 }
 
 // Share of a content set that a locale actually has, for reporting.

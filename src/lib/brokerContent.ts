@@ -1,4 +1,5 @@
 import { Broker, TIER1_REGULATORS } from "@/data/brokers";
+import { trData } from "@/lib/localizeContent";
 
 const PLATFORM_BLURBS: [needle: string, blurb: string][] = [
   [
@@ -33,7 +34,7 @@ function joinList(items: string[]): string {
 
 function platformBlurb(name: string): string {
   const key = name.toLowerCase().replace(/[^a-z0-9]/g, "");
-  for (const [needle, blurb] of PLATFORM_BLURBS) {
+  for (const [needle, blurb] of trData(PLATFORM_BLURBS)) {
     if (key.includes(needle)) return blurb;
   }
   return `özel bir ${name} platformu`;

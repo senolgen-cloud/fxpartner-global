@@ -7,6 +7,7 @@ import BrokerLookupSearch from "@/components/BrokerLookupSearch";
 import BrokerLookupFullIndex from "@/components/BrokerLookupFullIndex";
 import { lookupBrokers } from "@/data/brokerLookup";
 import { faqSchema } from "@/lib/schema";
+import { trData } from "@/lib/localizeContent";
 
 export async function generateMetadata({
   params,
@@ -64,7 +65,7 @@ export default async function BrokerLookupPage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(lookupFaqs)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(trData(lookupFaqs))) }}
       />
       <main className="flex-1 bg-paper-high">
         <section className="bg-ink text-text-on-ink">
@@ -112,7 +113,7 @@ export default async function BrokerLookupPage({
                 {tr("Sıkça Sorulan Sorular")}
               </h2>
               <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
-                {lookupFaqs.map((faq) => (
+                {trData(lookupFaqs).map((faq) => (
                   <details key={faq.q} className="group py-5">
                     <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-text-dark">
                       {faq.q}

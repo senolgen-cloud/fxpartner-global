@@ -1,5 +1,5 @@
 "use client";
-import { useTr } from "@/components/useTr";
+import { useIntlLocale, useTr, useTrf } from "@/components/useTr";
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Link from "@/components/LocaleLink";
@@ -60,11 +60,14 @@ function playSignalChime() {
 // Only Pro/VIP instruments can ever be locked — free-tier FX signals are
 // public to everyone, signed in or not (see lib/signalAccess.ts), so this
 // is only ever reached for a paid tier and the prompt is always "upgrade".
-function lockPrompt(pair: string): { href: string; label: string; badge: string } {
+function lockPrompt(
+  pair: string,
+  trf: (text: string, vars: Record<string, string | number>) => string
+): { href: string; label: string; badge: string } {
   const required = requiredTierForPair(pair);
   return {
     href: "/paketler",
-    label: `Bu sinyal ${ACCESS_TIER_LABEL[required]} üyelere özel — Yükselt →`,
+    label: trf("Bu sinyal {tier} üyelere özel — Yükselt →", { tier: ACCESS_TIER_LABEL[required] }),
     badge: ACCESS_TIER_LABEL[required],
   };
 }
@@ -114,7 +117,8 @@ function PerformanceRing({ rate }: { rate: number | null }) {
 }
 
 function LockBadge({ pair }: { pair: string }) {
-  const { href, label, badge } = lockPrompt(pair);
+  const trf = useTrf();
+  const { href, label, badge } = lockPrompt(pair, trf);
   return (
     <Link
       href={href}
@@ -206,13 +210,13 @@ function SignalTable({
           <table className="w-full min-w-[720px] border-collapse text-sm">
             <thead>
               <tr className="border-b border-hairline text-left text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted">
-                <th className="px-6 py-3 font-medium">Saat</th>
-                <th className="px-4 py-3 font-medium">Parite</th>
+                <th className="px-6 py-3 font-medium">{tr("Saat")}</th>
+                <th className="px-4 py-3 font-medium">{tr("Parite")}</th>
                 <th className="px-4 py-3 font-medium">{tr("Yön")}</th>
                 <th className="px-4 py-3 font-medium">{tr("Giriş")}</th>
-                <th className="px-4 py-3 font-medium">{closedView ? "Kapanış" : "SL / TP"}</th>
-                <th className="px-4 py-3 font-medium">Lot</th>
-                <th className="px-6 py-3 text-right font-medium">{closedView ? "Sonuç" : "Durum"}</th>
+                <th className="px-4 py-3 font-medium">{closedView ? tr("Kapanış") : "SL / TP"}</th>
+                <th className="px-4 py-3 font-medium">{tr("Lot")}</th>
+                <th className="px-6 py-3 text-right font-medium">{closedView ? tr("Sonuç") : tr("Durum")}</th>
               </tr>
             </thead>
             <tbody>
@@ -355,6 +359,8 @@ function useCountUp(target: number, durationMs = 1400, decimals = 0) {
 
 function PipsStats({ closed }: { closed: Signal[] }) {
   const tr = useTr();
+  const trf = useTrf();
+  const intl = useIntlLocale();
   const decisive = closed
     .filter((s) => (s.outcome === "WIN" || s.outcome === "LOSS") && s.profit !== null)
     .slice()
@@ -496,7 +502,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
     null;
   const rangeLabel =
     firstAt && lastAt
-      ? `${firstAt.toLocaleDateString("tr-TR", { day: "numeric", month: "long" })} – ${lastAt.toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" })}`
+      ? `${firstAt.toLocaleDateString(intl, { day: "numeric", month: "long" })} – ${lastAt.toLocaleDateString(intl, { day: "numeric", month: "long", year: "numeric" })}`
       : null;
 
   return (
@@ -512,7 +518,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
               geçmişi ima eder ve yanlış olur. Limit veya veri değişirse
               etiket kendiliğinden doğru kalır. */}
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
-            {decisive.length} İşlem — Gerçekleşen K/Z
+            {trf("{count} İşlem — Gerçekleşen K/Z", { count: decisive.length })}
           </span>
           {rangeLabel && (
             <p className="mt-1 font-mono text-[11px] text-text-on-ink-muted">
@@ -532,10 +538,8 @@ function PipsStats({ closed }: { closed: Signal[] }) {
               edilmiş bir sinyal ölçüsü, hesap getirisi değil. Bu ayrım
               yazılmazsa sayı doğrudan getiri iddiası gibi okunuyor. */}
           <p className="mt-3 max-w-md text-xs leading-relaxed text-text-on-ink-muted">
-            Her işlem 1.00 lotluk pozisyona indirgenerek toplanmıştır — böylece
-            farklı enstrümanlar ve farklı lot büyüklükleri karşılaştırılabilir hale
-            gelir. <strong className="text-text-on-ink">Bu bir getiri oranı değildir</strong>;
-            gerçek sonucunuz kendi lot büyüklüğünüze ve giriş anınıza göre değişir.
+            {tr("Her işlem 1.00 lotluk pozisyona indirgenerek toplanmıştır — böylece farklı enstrümanlar ve farklı lot büyüklükleri karşılaştırılabilir hale gelir.")}{" "}
+            <strong className="text-text-on-ink">{tr("Bu bir getiri oranı değildir")}</strong>{tr("; gerçek sonucunuz kendi lot büyüklüğünüze ve giriş anınıza göre değişir.")}
           </p>
         </div>
 
@@ -611,7 +615,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
         </svg>
         <div className="mt-2 flex justify-between font-mono text-[10px] text-text-on-ink-muted">
           <span>{decisive[0]?.closedAt?.toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
-          <span>{decisive.length} işlem</span>
+          <span>{trf("{count} işlem", { count: decisive.length })}</span>
           <span>
             {decisive[decisive.length - 1]?.closedAt?.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
           </span>
@@ -694,10 +698,10 @@ function PipsStats({ closed }: { closed: Signal[] }) {
                     style={{ color: p.med >= 0 ? TICK_UP : TICK_DOWN }}
                     title={tr("Medyan işlem sonucu")}
                   >
-                    ort. {formatPerLot(p.med)}
+                    {tr("ort.")} {formatPerLot(p.med)}
                   </span>
                   <span className="w-20 shrink-0 text-right font-mono text-[11px] text-text-on-ink-muted">
-                    {p.count} işlem
+                    {trf("{count} işlem", { count: p.count })}
                   </span>
                   <span className="w-12 shrink-0 text-right font-mono text-[11px] text-text-on-ink-muted">
                     %{pairWinRate}
@@ -720,11 +724,10 @@ function PipsStats({ closed }: { closed: Signal[] }) {
             })}
           </div>
           <p className="mt-4 text-xs leading-relaxed text-text-on-ink-muted">
-            <span className="text-gold">⚠</span> işareti, o paritedeki toplamın
-            yarısından fazlasının tek bir işlemden geldiğini gösterir. Böyle
-            durumlarda toplam yerine{" "}
-            <strong className="text-text-on-ink">ort.</strong> (medyan) sütununa
-            bakın — tipik işlemin nasıl sonuçlandığını o söyler.
+            <span className="text-gold">⚠</span>{" "}
+            {tr("işareti, o paritedeki toplamın yarısından fazlasının tek bir işlemden geldiğini gösterir. Böyle durumlarda toplam yerine")}{" "}
+            <strong className="text-text-on-ink">{tr("ort.")}</strong>{" "}
+            {tr("(medyan) sütununa bakın — tipik işlemin nasıl sonuçlandığını o söyler.")}
           </p>
         </div>
       )}
@@ -734,6 +737,8 @@ function PipsStats({ closed }: { closed: Signal[] }) {
 
 function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: AccessTier | null }) {
   const tr = useTr();
+  const trf = useTrf();
+  const lock = lockPrompt(signal.pair, trf);
   const isBuy = signal.direction === "BUY";
   const isSell = signal.direction === "SELL";
   const directionColor = isSell ? TICK_DOWN : TICK_UP;
@@ -822,16 +827,16 @@ function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: Access
 
       {locked ? (
         <Link
-          href={lockPrompt(signal.pair).href}
+          href={lock.href}
           className="mt-3 flex items-center justify-center gap-1.5 rounded-lg border border-hairline border-dashed pt-3 pb-2 font-mono text-[11px] text-text-on-ink-muted transition-colors hover:border-gold hover:text-gold"
         >
-          {lockPrompt(signal.pair).label}
+          {lock.label}
         </Link>
       ) : (
         <>
           <div className="mt-3 flex items-center justify-between border-t border-hairline pt-3 font-mono text-[11px]">
             <span className="text-text-on-ink-muted">
-              {isClosed ? "Kapanış" : "Giriş"}{" "}
+              {isClosed ? tr("Kapanış") : tr("Giriş")}{" "}
               <span className="text-text-on-ink">{isClosed ? signal.closePrice : signal.entry}</span>
             </span>
             {signal.target1 && <span style={{ color: TICK_UP }}>TP {signal.target1}</span>}
@@ -962,7 +967,7 @@ export default function SignalsBoard({
               <div>
                 <div className="font-display text-3xl font-semibold">{active.length}</div>
                 <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  Aktif Sinyaller
+                  {tr("Aktif Sinyaller")}
                 </div>
               </div>
               <div>
@@ -974,7 +979,8 @@ export default function SignalsBoard({
               <div className="flex flex-col items-center">
                 <PerformanceRing rate={winRate} />
                 <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  Kazanma Oranı{decisive.length > 0 && decisive.length < 10 ? " (erken veri)" : ""}
+                  {tr("Kazanma Oranı")}
+                  {decisive.length > 0 && decisive.length < 10 ? ` ${tr("(erken veri)")}` : ""}
                 </div>
               </div>
             </div>
@@ -986,7 +992,7 @@ export default function SignalsBoard({
 
       <section className="mx-auto max-w-6xl px-6 py-16">
         <div className="mb-6 flex items-center justify-between">
-          <h2 className="font-display text-2xl font-semibold">Aktif Sinyaller</h2>
+          <h2 className="font-display text-2xl font-semibold">{tr("Aktif Sinyaller")}</h2>
           <span className="hidden items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-signal md:flex">
             <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
             {tr("Canlı")}

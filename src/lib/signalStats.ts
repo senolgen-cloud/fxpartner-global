@@ -3,6 +3,7 @@ import { tradeSignals } from "@/db/schema";
 import { and, eq, gte } from "drizzle-orm";
 import { requiredTierForPair } from "@/lib/signalAccess";
 import type { AccessTier } from "@/lib/vip";
+import { trData } from "@/lib/localizeContent";
 
 // Rolling track record for the tracked MT5 account, published in the public
 // Telegram/X signal posts. This is the single most persuasive thing we can
@@ -96,7 +97,7 @@ export async function getRecentSignalStats(
 
 export function statsLineTr(stats: SignalStats | null): string {
   if (!stats) return "";
-  return `📊 ${SCOPE_LABEL_TR[stats.scope]} · son ${stats.windowDays} gün: ${stats.trades} işlem · %${stats.winRate} isabet`;
+  return `📊 ${trData(SCOPE_LABEL_TR)[stats.scope]} · son ${stats.windowDays} gün: ${stats.trades} işlem · %${stats.winRate} isabet`;
 }
 
 export function statsLineEn(stats: SignalStats | null): string {

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { trData } from "@/lib/localizeContent";
 
 const iconProps = {
   viewBox: "0 0 24 24",
@@ -91,7 +92,7 @@ export default function HeroFeatureRow() {
     // the first word. Capped at 3 columns and switched to stacked cards,
     // which read fine at that width instead of wrapping awkwardly.
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-      {features.map((f) => (
+      {trData(features).map((f) => (
         <div
           key={f.key}
           className="flex flex-col items-start gap-3 rounded-2xl border border-hairline/70 bg-ink-soft/40 p-4 transition-colors hover:border-signal/40 hover:bg-ink-soft"

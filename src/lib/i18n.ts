@@ -36,6 +36,16 @@ export const ogLocale: Record<Locale, string> = {
   en: "en_US",
 };
 
+// What Intl should use for dates and numbers. Separate from htmlLang because
+// a bare language tag leaves the region to the runtime: "uk" alone can format
+// a date differently than "uk-UA" does, and a Ukrainian reader seeing a
+// month name in Turkish is exactly the bug this map exists to prevent.
+export const intlLocale: Record<Locale, string> = {
+  tr: "tr-TR",
+  ua: "uk-UA",
+  en: "en-GB",
+};
+
 export const localeLabel: Record<Locale, string> = {
   tr: "Türkçe",
   ua: "Українська",

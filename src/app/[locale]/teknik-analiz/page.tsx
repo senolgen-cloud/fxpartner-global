@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
+import { tr, trLocale } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
@@ -13,6 +13,7 @@ import {
 } from "@/data/technicalAnalysis";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -55,7 +56,7 @@ export default async function TechnicalAnalysisIndexPage({
   const { locale: pageLocale } = await params;
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
-  const dateGroups = groupByDate(technicalAnalysisPosts);
+  const dateGroups = groupByDate(trData(technicalAnalysisPosts));
 
   return (
     <>
@@ -89,9 +90,9 @@ export default async function TechnicalAnalysisIndexPage({
               <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
                 <div>
                   <span className="font-mono text-xs text-text-muted">
-                    {new Date(date).toLocaleDateString("tr-TR", { year: "numeric", month: "long", day: "numeric" })}
+                    {new Date(date).toLocaleDateString(trLocale(), { year: "numeric", month: "long", day: "numeric" })}
                   </span>
-                  <h2 className="mt-2 font-poppins text-3xl font-semibold text-text-dark">{getBulletinTitle(date)}</h2>
+                  <h2 className="mt-2 font-poppins text-3xl font-semibold text-text-dark">{trData(getBulletinTitle(date))}</h2>
                 </div>
                 <Link
                   href={`/teknik-analiz/${isoToBulletinSlug(date)}`}

@@ -99,7 +99,7 @@ export default function Footer() {
                     title={`${b.name} incelemesi`}
                     className="transition-colors hover:text-text-on-ink"
                   >
-                    <span className="notranslate">{b.name} </span>İncelemesi
+                    <span className="notranslate">{b.name} </span>{tr("İncelemesi")}
                   </Link>
                 </li>
               ))}
@@ -219,25 +219,15 @@ export default function Footer() {
 
         <div className="mt-12 border-t border-hairline pt-6 text-xs leading-relaxed text-text-on-ink-muted/80">
           <p>
-            <strong className="text-text-on-ink-muted">{tr("Risk uyarısı:")}</strong> Kaldıraçlı
-            forex ve türev ürünlerle işlem yapmak yüksek düzeyde risk taşır
-            ve yatırdığınız sermayenin tamamının kaybedilmesine yol
-            açabilir. Bu sayfadaki içerik yalnızca genel bilgilendirme
-            amaçlıdır ve yatırım tavsiyesi niteliği taşımaz. Minimum
-            depozit, kaldıraç ve regülasyon bilgileri ülkeye ve hesap
-            türüne göre değişebilir; işlem yapmadan önce güncel koşulları
-            broker&apos;ın resmi web sitesinden doğrulayın.
+            <strong className="text-text-on-ink-muted">{tr("Risk uyarısı:")}</strong>{" "}
+            {tr("Kaldıraçlı forex ve türev ürünlerle işlem yapmak yüksek düzeyde risk taşır ve yatırdığınız sermayenin tamamının kaybedilmesine yol açabilir. Bu sayfadaki içerik yalnızca genel bilgilendirme amaçlıdır ve yatırım tavsiyesi niteliği taşımaz. Minimum depozit, kaldıraç ve regülasyon bilgileri ülkeye ve hesap türüne göre değişebilir; işlem yapmadan önce güncel koşulları broker'ın resmi web sitesinden doğrulayın.")}
           </p>
           <p className="mt-3">
-            <strong className="text-text-on-ink-muted">{tr("Bağlı kuruluş bilgilendirmesi:")}</strong> FXPARTNER,
-            bu sayfada listelenen brokerların bazılarıyla ortaklık/referans
-            ilişkisine sahiptir ve &ldquo;Hesap Aç&rdquo; bağlantıları
-            üzerinden açılan hesaplardan komisyon kazanabilir. Bu durum
-            ilgili kartta ayrıca belirtilir ve sıralama veya puanlama
-            kriterlerimizi etkilemez.
+            <strong className="text-text-on-ink-muted">{tr("Bağlı kuruluş bilgilendirmesi:")}</strong>{" "}
+            {tr("FXPARTNER, bu sayfada listelenen brokerların bazılarıyla ortaklık/referans ilişkisine sahiptir ve “Hesap Aç” bağlantıları üzerinden açılan hesaplardan komisyon kazanabilir. Bu durum ilgili kartta ayrıca belirtilir ve sıralama veya puanlama kriterlerimizi etkilemez.")}
           </p>
           <p className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1">
-            <span>© {new Date().getFullYear()} FXPARTNER. Tüm hakları saklıdır.</span>
+            <span>© {new Date().getFullYear()} FXPARTNER. {tr("Tüm hakları saklıdır.")}</span>
             <Link href="/privacy" className="transition-colors hover:text-text-on-ink">
               {tr("Gizlilik Politikası")}
             </Link>

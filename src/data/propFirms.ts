@@ -108,10 +108,11 @@ export interface PropRuleSet {
 /** Drawdown değerini birimine göre okunabilir metne çevirir. */
 export function formatDrawdown(
   value: number | null,
-  unit: PropRuleSet["drawdownUnit"]
+  unit: PropRuleSet["drawdownUnit"],
+  intl = "tr-TR"
 ) {
   if (value === null) return "Yok";
-  return unit === "percent" ? `%${value}` : `$${value.toLocaleString("tr-TR")}`;
+  return unit === "percent" ? `%${value}` : `$${value.toLocaleString(intl)}`;
 }
 
 export interface PropFirm {

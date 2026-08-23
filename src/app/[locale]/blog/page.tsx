@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
+import { tr, trLocale } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import { localizeBlogPost, localizeBlogPosts, localizeBrokers } from "@/lib/localizeContent";
@@ -98,7 +98,7 @@ export default async function BlogIndexPage({
                   )}
                   <div className="min-w-0">
                     <span className="font-mono text-xs text-text-muted">
-                      {new Date(post.publishedAt).toLocaleDateString("tr-TR", {
+                      {new Date(post.publishedAt).toLocaleDateString(trLocale(), {
                         year: "numeric",
                         month: "long",
                         day: "numeric",

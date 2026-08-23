@@ -15,6 +15,7 @@ import {
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -26,7 +27,7 @@ const CATEGORY_TITLE_OVERRIDES: Partial<Record<BrokerCategory, string>> = {
 };
 
 function categoryTitle(name: BrokerCategory): string {
-  return CATEGORY_TITLE_OVERRIDES[name] ?? `${categoryInfo[name].label} Forex Brokerları`;
+  return trData(CATEGORY_TITLE_OVERRIDES)[name] ?? `${categoryInfo[name].label} Forex Brokerları`;
 }
 
 export function generateStaticParams() {

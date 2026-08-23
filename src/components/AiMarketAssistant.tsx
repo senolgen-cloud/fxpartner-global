@@ -1,5 +1,5 @@
 "use client";
-import { useTr } from "@/components/useTr";
+import { useIntlLocale, useTr } from "@/components/useTr";
 
 import { Fragment, useEffect, useRef, useState } from "react";
 
@@ -70,8 +70,8 @@ const WELCOME: ChatMessage = {
     "Aşağıdaki hazır sorulardan birini seçebilir veya sorunuzu yazabilirsiniz!",
 };
 
-function timeLabel() {
-  return new Date().toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
+function timeLabel(intl: string) {
+  return new Date().toLocaleTimeString(intl, { hour: "2-digit", minute: "2-digit" });
 }
 
 // Site-wide language selection lives in the same `googtrans` cookie the
@@ -90,6 +90,7 @@ function currentSiteLang(): string {
 
 export default function AiMarketAssistant() {
   const tr = useTr();
+  const intl = useIntlLocale();
   const [messages, setMessages] = useState<ChatMessage[]>([WELCOME]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -172,7 +173,7 @@ export default function AiMarketAssistant() {
                     m.role === "assistant" ? "text-text-on-ink-muted" : "text-on-signal/70"
                   }`}
                 >
-                  {timeLabel()}
+                  {timeLabel(intl)}
                 </div>
               </div>
             </div>

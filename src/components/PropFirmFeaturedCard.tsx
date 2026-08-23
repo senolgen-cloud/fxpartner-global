@@ -1,6 +1,7 @@
 import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { getFeaturedPartner, getPropFirmScores, hasActiveLink } from "@/data/propFirms";
+import { trData } from "@/lib/localizeContent";
 
 /**
  * Öne çıkarılan prop ortağı kartı.
@@ -10,15 +11,15 @@ import { getFeaturedPartner, getPropFirmScores, hasActiveLink } from "@/data/pro
  * Index puanının kartta olduğu gibi gösterilmesi (yükseltilmeden) bunu
  * sağlıyor — okuyucu firmanın tabloda kaçıncı olduğunu buradan da görebilir.
  *
- * Bkz. data/propFirms.ts → getFeaturedPartner().
+ * Bkz. data/trData(propFirms).ts → trData(getFeaturedPartner()).
  */
 export default function PropFirmFeaturedCard() {
-  const firm = getFeaturedPartner();
+  const firm = trData(getFeaturedPartner());
   if (!firm) return null;
 
   const { composite } = getPropFirmScores(firm);
   // Link ticari karara bağlı; rozet ise editoryal duruma. İkisi ayrı —
-  // bkz. propFirms.ts → hasActiveLink() / isPromotable().
+  // bkz. trData(propFirms).ts → hasActiveLink() / isPromotable().
   const linkOn = hasActiveLink(firm);
   const verified = firm.payoutProof.status === "verified";
   const d = firm.discount;
@@ -83,7 +84,7 @@ export default function PropFirmFeaturedCard() {
       </div>
 
       {/* Broker desteği iddiasının yanındaki zorunlu açıklama — bkz.
-          propFirms.ts → backingNote. "Destekli" ifadesi "regüle" diye
+          trData(propFirms).ts → backingNote. "Destekli" ifadesi "regüle" diye
           okunmamalı. */}
       {firm.backingNote && (
         <p className="mt-5 rounded-lg border border-hairline bg-ink/40 px-4 py-3 text-xs leading-relaxed text-text-on-ink-muted">

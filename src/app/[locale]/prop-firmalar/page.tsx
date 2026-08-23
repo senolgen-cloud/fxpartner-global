@@ -9,6 +9,7 @@ import PropFirmFeaturedCard from "@/components/PropFirmFeaturedCard";
 import { propFirmsByScore, getPropFirmScores } from "@/data/propFirms";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -82,7 +83,7 @@ export default async function PropFirmalarPage({
   const { locale: pageLocale } = await params;
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
-  const ranked = propFirmsByScore();
+  const ranked = trData(propFirmsByScore());
   const top = ranked[0];
 
   return (
@@ -100,7 +101,7 @@ export default async function PropFirmalarPage({
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(trData(faqs))) }}
       />
       {/* AEO: sıralamanın kendisi makine tarafından okunabilir olsun ki
           cevap motorları listeyi tek tek sayfaları taramadan alıntılayabilsin. */}
@@ -270,7 +271,7 @@ export default async function PropFirmalarPage({
               {tr("Prop firmalar hakkında")}
             </h2>
             <div className="mt-8 divide-y divide-hairline-light border-t border-hairline-light">
-              {faqs.map((f) => (
+              {trData(faqs).map((f) => (
                 <div key={f.q} className="py-6">
                   <h3 className="font-poppins text-base font-semibold text-text-dark">
                     {f.q}

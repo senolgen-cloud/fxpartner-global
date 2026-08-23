@@ -11,6 +11,7 @@ import { getDictionary } from "@/lib/dictionary";
 import { tr } from "@/lib/chrome";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import { setServerLocale } from "@/lib/serverLocale";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 const trackedBrokerCount = lookupBrokers.length;
@@ -57,7 +58,7 @@ const tiers = PACKAGE_TIER_ORDER.map((tier) => ({
   tier,
   ...PACKAGE_TIER_INFO[tier],
   accent: TIER_ACCENT[tier],
-  ctaLabel: TIER_CTA_LABEL[tier],
+  ctaLabel: trData(TIER_CTA_LABEL)[tier],
   featured: tier === "pro",
 }));
 
@@ -164,7 +165,7 @@ export default async function PaketlerPage({
             </p>
 
             <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-5">
-              {topFeatures.map((f) => (
+              {trData(topFeatures).map((f) => (
                 <div key={f.title} className="flex flex-col items-center gap-2">
                   <span className="flex h-12 w-12 items-center justify-center rounded-full border border-hairline bg-ink-soft text-signal">
                     <FeatureIcon name={f.icon} />
@@ -187,15 +188,15 @@ export default async function PaketlerPage({
                 folded into `tiers` because it has no price and no tier id to
                 hand to createNowPaymentsCheckout. */}
             <div className="relative flex flex-col rounded-2xl border border-hairline bg-ink-soft/60 p-8">
-              <h2 className="font-display text-2xl font-bold text-tick-up">{FREE_TIER_INFO.name}</h2>
-              <p className="mt-2 text-sm text-text-on-ink-muted">{FREE_TIER_INFO.blurb}</p>
+              <h2 className="font-display text-2xl font-bold text-tick-up">{trData(FREE_TIER_INFO).name}</h2>
+              <p className="mt-2 text-sm text-text-on-ink-muted">{trData(FREE_TIER_INFO).blurb}</p>
               <p className="mt-6 flex items-baseline gap-1">
                 <span className="font-display text-4xl font-bold text-text-on-ink">$0</span>
                 <span className="text-sm text-text-on-ink-muted">/ süresiz</span>
               </p>
 
               <ul className="mt-6 flex-1 space-y-2.5">
-                {FREE_TIER_INFO.features.map((f) => (
+                {trData(FREE_TIER_INFO).features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5 text-sm text-text-on-ink-muted">
                     <span className="text-tick-up">
                       <CheckIcon />

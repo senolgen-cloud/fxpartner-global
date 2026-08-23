@@ -9,6 +9,7 @@ import { getDictionary } from "@/lib/dictionary";
 import { tr } from "@/lib/chrome";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import { setServerLocale } from "@/lib/serverLocale";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 const OG_IMAGE = `${SITE_URL}/ai-asistan-preview.jpg`;
@@ -123,7 +124,7 @@ export default async function AiAssistantPage({
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(aiAssistantFaqs)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(trData(aiAssistantFaqs))) }}
       />
       <main lang="tr" className="mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-20">
         <div className="mb-10 text-center">
@@ -181,7 +182,7 @@ export default async function AiAssistantPage({
           </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((f) => (
+            {trData(features).map((f) => (
               <div
                 key={f.title}
                 className="rounded-2xl border border-hairline bg-ink-soft/40 p-6 transition-colors hover:border-signal/40"
@@ -235,7 +236,7 @@ export default async function AiAssistantPage({
               {tr("Sıkça Sorulan Sorular")}
             </h2>
             <div className="mt-8 divide-y divide-hairline border-t border-hairline">
-              {aiAssistantFaqs.map((faq) => (
+              {trData(aiAssistantFaqs).map((faq) => (
                 <details key={faq.q} className="group py-5">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-text-on-ink">
                     {faq.q}

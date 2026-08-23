@@ -1,4 +1,5 @@
 "use client";
+import { useLocalizedData } from "@/components/useLocalizedData";
 
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
@@ -51,11 +52,12 @@ const icons: Record<WhyCard["key"], ReactNode> = {
 };
 
 export default function WhyFxPartner() {
+  const whyFxPartnerCardsTr = useLocalizedData(whyFxPartnerCards);
   const reducedMotion = usePrefersReducedMotion();
 
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-      {whyFxPartnerCards.map((card, i) => (
+      {whyFxPartnerCardsTr.map((card, i) => (
         <div
           key={card.key}
           className="rounded-2xl border border-hairline-light bg-paper-high p-6"

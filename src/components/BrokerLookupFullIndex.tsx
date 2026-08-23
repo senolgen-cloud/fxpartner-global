@@ -1,6 +1,7 @@
 import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { lookupBrokers, type LookupVerdict } from "@/data/brokerLookup";
+import { trData } from "@/lib/localizeContent";
 
 // Server-rendered, unfiltered index of every Broker Lookup entry.
 //
@@ -47,7 +48,7 @@ export default function BrokerLookupFullIndex() {
       <p className="text-sm text-text-muted">
         {tr("Sorgulama veritabanımızdaki her aracı kurum, değerlendirmeye göre gruplandırılmış — aramadan göz atmak için bir bölümü genişletin.")}
       </p>
-      {GROUPS.map((group) => {
+      {trData(GROUPS).map((group) => {
         const entries = lookupBrokers.filter((b) => b.verdict === group.verdict);
         if (entries.length === 0) return null;
         return (

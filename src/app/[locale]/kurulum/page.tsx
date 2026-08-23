@@ -6,6 +6,7 @@ import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -230,7 +231,7 @@ export default async function KurulumPage({
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(trData(faqs))) }}
       />
       <main className="flex-1 bg-paper-high">
         <section className="bg-ink text-text-on-ink">
@@ -275,21 +276,21 @@ export default async function KurulumPage({
                 icon={<AppleIcon />}
                 eyebrow="iPhone / iPad"
                 title="iOS'ta kurulum (Safari)"
-                steps={IOS_STEPS}
+                steps={trData(IOS_STEPS)}
               />
               <PlatformSection
                 id="android"
                 icon={<AndroidIcon />}
                 eyebrow="Telefon / Tablet"
                 title="Android'de kurulum (Chrome)"
-                steps={ANDROID_STEPS}
+                steps={trData(ANDROID_STEPS)}
               />
               <PlatformSection
                 id="windows"
                 icon={<WindowsIcon />}
                 eyebrow="Masaüstü"
                 title="Windows'ta kurulum (Chrome / Edge)"
-                steps={WINDOWS_STEPS}
+                steps={trData(WINDOWS_STEPS)}
               />
             </div>
 
@@ -313,7 +314,7 @@ export default async function KurulumPage({
                 {tr("Sıkça Sorulan Sorular")}
               </h2>
               <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
-                {faqs.map((faq) => (
+                {trData(faqs).map((faq) => (
                   <details key={faq.q} className="group py-5">
                     <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-text-dark">
                       {faq.q}

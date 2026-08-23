@@ -14,6 +14,7 @@ import {
 } from "@/data/propFirms";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 const YEAR = new Date().getFullYear();
@@ -69,7 +70,7 @@ export default async function IndirimKodlariPage({
   const { locale: pageLocale } = await params;
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
-  const ranked = propFirmsByScore();
+  const ranked = trData(propFirmsByScore());
   const withLive = ranked.filter((f) => f.discount?.status === "live" && f.discount.code);
   const pending = ranked.filter((f) => f.discount?.status === "pending");
   const none = ranked.filter((f) => !f.discount);
@@ -93,7 +94,7 @@ export default async function IndirimKodlariPage({
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(trData(faqs))) }}
       />
 
       <main className="flex-1 bg-paper-high">
@@ -111,7 +112,7 @@ export default async function IndirimKodlariPage({
               {tr("Prop firma indirim kodları")}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              İzlediğimiz {propFirms.length} firmanın güncel kupon durumu. Yalnızca
+              İzlediğimiz {trData(propFirms).length} firmanın güncel kupon durumu. Yalnızca
               oranı ve uygulanma şekli teyit edilmiş kodlar sayı olarak yayımlanır.
             </p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">
@@ -160,7 +161,7 @@ export default async function IndirimKodlariPage({
                           </h3>
                           <p className="mt-1 font-mono text-[11px] text-text-muted">
                             Index {scores.composite.toFixed(1)} ·{" "}
-                            {PAYOUT_STATUS_LABEL[firm.payoutProof.status]} · challenge{" "}
+                            {trData(PAYOUT_STATUS_LABEL)[firm.payoutProof.status]} · challenge{" "}
                             {firm.challengeFeeFrom}&apos;den başlıyor
                           </p>
                         </div>
@@ -240,7 +241,7 @@ export default async function IndirimKodlariPage({
               {tr("Sıkça sorulanlar")}
             </h2>
             <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
-              {faqs.map((f) => (
+              {trData(faqs).map((f) => (
                 <div key={f.q} className="py-6">
                   <h3 className="font-poppins text-base font-semibold text-text-dark">
                     {f.q}

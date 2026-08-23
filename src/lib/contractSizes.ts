@@ -101,12 +101,18 @@ export function favorableMove(
 /** Merdivende gösterilecek standart lot basamakları. */
 export const LOT_LADDER = [0.01, 0.1, 1, 10] as const;
 
-/** $1.234,56 biçimi; sıfıra çok yakın değerlerde daha fazla ondalık. */
-export function formatMoney(value: number): string {
+/**
+ * $1.234,56 biçimi; sıfıra çok yakın değerlerde daha fazla ondalık.
+ *
+ * Grouping follows the reader: Turkish and Ukrainian write 13.060,00 and
+ * English writes 13,060.00, and getting that backwards changes the number
+ * a reader sees by three orders of magnitude.
+ */
+export function formatMoney(value: number, intl = "tr-TR"): string {
   const abs = Math.abs(value);
   const decimals = abs > 0 && abs < 1 ? 2 : 2;
   const sign = value > 0 ? "+" : value < 0 ? "−" : "";
-  return `${sign}$${abs.toLocaleString("tr-TR", {
+  return `${sign}$${abs.toLocaleString(intl, {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   })}`;

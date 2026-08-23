@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
+import { tr, trLocale } from "@/lib/chrome";
 import { localizeBlogPost, localizeBlogPosts, localizeBrokers } from "@/lib/localizeContent";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Image from "next/image";
@@ -114,7 +114,7 @@ export default async function BlogPostPage({
               {tr("← Tüm rehberler")}
             </Link>
             <p className="mt-6 font-mono text-xs text-text-on-ink-muted">
-              {new Date(post.publishedAt).toLocaleDateString("tr-TR", {
+              {new Date(post.publishedAt).toLocaleDateString(trLocale(), {
                 year: "numeric",
                 month: "long",
                 day: "numeric",

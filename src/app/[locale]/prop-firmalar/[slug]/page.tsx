@@ -15,12 +15,13 @@ import {
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 const YEAR = new Date().getFullYear();
 
 export function generateStaticParams() {
-  return propFirms.map((f) => ({ slug: f.slug }));
+  return trData(propFirms).map((f) => ({ slug: f.slug }));
 }
 
 export async function generateMetadata({
@@ -29,7 +30,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const firm = getPropFirm(slug);
+  const firm = trData(getPropFirm(slug));
   if (!firm) return {};
 
   const { composite } = getPropFirmScores(firm);
@@ -81,7 +82,7 @@ function firmFaqs(firm: PropFirm) {
       a:
         `${firm.name}, ${firm.founded} yılında kurulmuş${firm.backedBy ? ` ve ${firm.backedBy} altyapısını kullanan` : ""} bir prop firmadır. ` +
         `FXPARTNER'ın bağımsız değerlendirmesinde 10 üzerinden ${composite.toFixed(1)} puan alıyor. ` +
-        `Ödeme kanıtı durumu şu an "${PAYOUT_STATUS_LABEL[firm.payoutProof.status]}". ` +
+        `Ödeme kanıtı durumu şu an "${trData(PAYOUT_STATUS_LABEL)[firm.payoutProof.status]}". ` +
         `${firm.payoutProof.note} Prop firma sektöründe 2020-2026 arasında 80'den fazla firma kapandığı için, ` +
         `hangi firma olursa olsun challenge ücretini kaybetmeyi göze alabileceğiniz bir tutar olarak değerlendirmelisiniz.`,
     },
@@ -111,9 +112,9 @@ function firmFaqs(firm: PropFirm) {
     {
       q: `${firm.name}'da copy trading ve sinyal kullanılabilir mi?`,
       a:
-        `Copy trading: ${COPY_TRADING_NOTE[firm.copyTradingAllowed]} ` +
-        `Sinyal servisi: ${SIGNAL_NOTE[firm.signalServiceAllowed]} ` +
-        `EA (otomatik sistem): ${EA_NOTE[firm.eaAllowed]} ` +
+        `Copy trading: ${trData(COPY_TRADING_NOTE)[firm.copyTradingAllowed]} ` +
+        `Sinyal servisi: ${trData(SIGNAL_NOTE)[firm.signalServiceAllowed]} ` +
+        `EA (otomatik sistem): ${trData(EA_NOTE)[firm.eaAllowed]} ` +
         `Kural ihlali, birikmiş kâr ödenmeden hesabın kapatılmasıyla sonuçlanabilir; ` +
         `bu yüzden herhangi bir otomatik araç veya dış sinyal kullanmadan önce firmadan yazılı teyit almanız önerilir.`,
     },
@@ -146,7 +147,7 @@ export default async function PropFirmDetailPage({
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
   const { slug } = await params;
-  const firm = getPropFirm(slug);
+  const firm = trData(getPropFirm(slug));
   if (!firm) notFound();
 
   const scores = getPropFirmScores(firm);
@@ -220,7 +221,7 @@ export default async function PropFirmDetailPage({
                 </span>
               )}
               <span className="rounded-full border border-hairline bg-ink-soft px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
-                {PAYOUT_STATUS_LABEL[firm.payoutProof.status]}
+                {trData(PAYOUT_STATUS_LABEL)[firm.payoutProof.status]}
               </span>
             </div>
 
@@ -238,7 +239,7 @@ export default async function PropFirmDetailPage({
                   {scores.composite.toFixed(1)}
                 </p>
                 <p className="font-mono text-[11px] text-text-on-ink-muted">
-                  {propFirms.length} firma içinde {rankInList}. sırada
+                  {trData(propFirms).length} firma içinde {rankInList}. sırada
                 </p>
               </div>
               <dl className="grid grid-cols-2 gap-x-8 gap-y-3 text-sm sm:grid-cols-4">
@@ -418,9 +419,9 @@ export default async function PropFirmDetailPage({
               </p>
               <div className="mt-6 grid gap-4 sm:grid-cols-3">
                 {[
-                  ["Copy Trading", COPY_TRADING_NOTE[firm.copyTradingAllowed]],
-                  ["Sinyal Servisi", SIGNAL_NOTE[firm.signalServiceAllowed]],
-                  ["EA / Otomatik Sistem", EA_NOTE[firm.eaAllowed]],
+                  ["Copy Trading", trData(COPY_TRADING_NOTE)[firm.copyTradingAllowed]],
+                  ["Sinyal Servisi", trData(SIGNAL_NOTE)[firm.signalServiceAllowed]],
+                  ["EA / Otomatik Sistem", trData(EA_NOTE)[firm.eaAllowed]],
                 ].map(([label, note]) => (
                   <div
                     key={label}
@@ -483,7 +484,7 @@ export default async function PropFirmDetailPage({
               <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
                 Durum:{" "}
                 <strong className="text-text-dark">
-                  {PAYOUT_STATUS_LABEL[firm.payoutProof.status]}
+                  {trData(PAYOUT_STATUS_LABEL)[firm.payoutProof.status]}
                 </strong>{" "}
                 (son kontrol: {firm.payoutProof.lastCheckedAt})
               </p>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
+import { tr, trLocale } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
@@ -17,15 +17,16 @@ import { getSponsoredBroker } from "@/data/brokers";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 function postsForDate(iso: string) {
-  return technicalAnalysisPosts.filter((p) => p.publishedAt === iso);
+  return trData(technicalAnalysisPosts).filter((p) => p.publishedAt === iso);
 }
 
 export function generateStaticParams() {
-  const dates = new Set(technicalAnalysisPosts.map((p) => p.publishedAt));
+  const dates = new Set(trData(technicalAnalysisPosts).map((p) => p.publishedAt));
   return Array.from(dates).map((iso) => ({ date: isoToBulletinSlug(iso) }));
 }
 
@@ -40,7 +41,7 @@ export async function generateMetadata({
   const posts = postsForDate(iso);
   if (posts.length === 0) return {};
 
-  const title = getBulletinTitle(iso);
+  const title = trData(getBulletinTitle(iso));
   const description = `${posts.map((p) => p.instrument).join(", ")} için gün içi pivot, destek/direnç seviyeleri ve teknik görünüm — ${title}.`;
 
   return {
@@ -71,7 +72,7 @@ export default async function TechnicalAnalysisBulletinPage({
   const posts = postsForDate(iso);
   if (posts.length === 0) notFound();
 
-  const title = getBulletinTitle(iso);
+  const title = trData(getBulletinTitle(iso));
   const featuredBroker = getSponsoredBroker(iso);
 
   return (
@@ -98,7 +99,7 @@ export default async function TechnicalAnalysisBulletinPage({
               {tr("← Tüm bültenler")}
             </Link>
             <p className="mt-6 font-mono text-xs text-text-on-ink-muted">
-              {new Date(iso).toLocaleDateString("tr-TR", { year: "numeric", month: "long", day: "numeric" })}
+              {new Date(iso).toLocaleDateString(trLocale(), { year: "numeric", month: "long", day: "numeric" })}
             </p>
             <h1 className="mt-3 font-poppins text-4xl font-semibold leading-[1.15] tracking-tight md:text-5xl">
               {title}

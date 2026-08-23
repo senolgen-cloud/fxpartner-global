@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
-import { localizeBlogPost, localizeBlogPosts, localizeBrokers } from "@/lib/localizeContent";
+import { localizeBlogPost, localizeBlogPosts, localizeBrokers, trData } from "@/lib/localizeContent";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import BrokerList from "@/components/BrokerList";
@@ -112,7 +112,7 @@ export default async function BrokerlarPage({
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(trData(faqs))) }}
       />
       {/* AEO: sıralamanın kendisi makine tarafından okunabilir olsun ki cevap
           motorları listeyi tek tek broker sayfalarını taramadan alıntılayabilsin. */}
@@ -287,7 +287,7 @@ export default async function BrokerlarPage({
               {tr("Forex brokerleri hakkında")}
             </h2>
             <div className="mt-8 divide-y divide-hairline-light border-t border-hairline-light">
-              {faqs.map((f) => (
+              {trData(faqs).map((f) => (
                 <div key={f.q} className="py-6">
                   <h3 className="font-poppins text-base font-semibold text-text-dark">
                     {f.q}

@@ -1,14 +1,16 @@
 "use client";
+import { useLocalizedData } from "@/components/useLocalizedData";
 
 import { motion } from "framer-motion";
 import TiltWrapper from "@/components/TiltWrapper";
 import { partnerTiers } from "@/data/partnerProgram";
 
 export default function PartnerTierCards() {
+  const partnerTiersTr = useLocalizedData(partnerTiers);
   return (
     <div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {partnerTiers.map((tier, i) => {
+        {partnerTiersTr.map((tier, i) => {
           const isPremium = i >= 3;
 
           return (

@@ -7,6 +7,7 @@ import { getDictionary } from "@/lib/dictionary";
 import { tr } from "@/lib/chrome";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import { setServerLocale } from "@/lib/serverLocale";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -78,7 +79,7 @@ export default async function BlacklistPage({
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(trData(faqs))) }}
       />
       <main className="flex-1 bg-paper-high">
         <section className="bg-ink text-text-on-ink">
@@ -149,7 +150,7 @@ export default async function BlacklistPage({
                 {tr("Sıkça Sorulan Sorular")}
               </h2>
               <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
-                {faqs.map((faq) => (
+                {trData(faqs).map((faq) => (
                   <details key={faq.q} className="group py-5">
                     <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-text-dark">
                       {faq.q}

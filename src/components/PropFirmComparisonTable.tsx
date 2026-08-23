@@ -1,4 +1,5 @@
 "use client";
+import { useLocalizedData } from "@/components/useLocalizedData";
 import { useTr } from "@/components/useTr";
 
 import React, { useState } from "react";
@@ -168,13 +169,19 @@ function headlineRules(firm: PropFirm) {
   return [...firm.rules].sort((a, b) => b.maxDrawdown - a.maxDrawdown)[0];
 }
 
+// Ranked once at module scope, not per render: the ordering is derived from
+// static data and a fresh array on every render would defeat the memo in
+// useLocalizedData, re-walking the whole set for a value that never moves.
+const RANKED_FIRMS = propFirmsByScore();
+
 export default function PropFirmComparisonTable() {
   const tr = useTr();
+  const firms = useLocalizedData(RANKED_FIRMS);
   const [activeSegment, setActiveSegment] = useState<SegmentFilter>("cfd");
   const [activeModel, setActiveModel] = useState<ModelFilter>("Tümü");
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
 
-  const ranked = propFirmsByScore().filter((f) => f.segment === activeSegment);
+  const ranked = firms.filter((f) => f.segment === activeSegment);
   const filtered =
     activeModel === "Tümü"
       ? ranked
@@ -189,7 +196,7 @@ export default function PropFirmComparisonTable() {
       >
         {(Object.keys(SEGMENT_LABEL) as SegmentFilter[]).map((seg) => {
           const active = activeSegment === seg;
-          const count = propFirmsByScore().filter((f) => f.segment === seg).length;
+          const count = firms.filter((f) => f.segment === seg).length;
           return (
             <button
               key={seg}
@@ -311,7 +318,7 @@ export default function PropFirmComparisonTable() {
                           PAYOUT_BADGE[firm.payoutProof.status]
                         }`}
                       >
-                        {PAYOUT_STATUS_LABEL[firm.payoutProof.status]}
+                        {tr(PAYOUT_STATUS_LABEL[firm.payoutProof.status])}
                       </span>
                     </td>
 
