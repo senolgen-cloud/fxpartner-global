@@ -1,5 +1,5 @@
 "use client";
-import { useTr } from "@/components/useTr";
+import { useTr, useTrf } from "@/components/useTr";
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -36,6 +36,7 @@ const PROMOS = [
 // visit feel like a wall of back-to-back popups.
 export default function BonusPopup({ slug }: { slug: string }) {
   const tr = useTr();
+  const trf = useTrf();
   const [open, setOpen] = useState(false);
 
   const promo = PROMOS.find((p) => p.slug === slug);
@@ -118,7 +119,7 @@ export default function BonusPopup({ slug }: { slug: string }) {
               onClick={close}
               className="rounded-full bg-signal px-5 py-3 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
             >
-              {tr("Hesap Aç ve Bonusu Al")}
+              {trf("{broker} - Resmi Sitesi", { broker: broker.name })}
             </a>
             <button
               type="button"

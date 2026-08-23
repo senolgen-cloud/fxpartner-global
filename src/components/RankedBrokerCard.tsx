@@ -72,6 +72,7 @@ function CardBody({
   reviewStats?: BrokerReviewStats;
 }) {
   const tr = useTr();
+  const trf = useTrf();
   const categories = useLocalizedData(categoryInfo);
   return (
     <div className={featured ? "featured-card-depth-sm" : ""}>
@@ -143,7 +144,7 @@ function CardBody({
               rel="noopener noreferrer sponsored"
               className="lift-on-hover rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
             >
-              {tr("Hesap Aç")}
+              {trf("{broker} - Resmi Sitesi", { broker: broker.name })}
             </a>
             <Link
               href={`/brokers/${broker.slug}`}

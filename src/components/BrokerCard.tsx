@@ -1,4 +1,4 @@
-import { tr } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 import Image from "next/image";
 import Link from "@/components/LocaleLink";
 import type { Broker } from "@/data/brokers";
@@ -89,7 +89,7 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
               rel="noopener noreferrer sponsored"
               className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft hover:shadow-lg hover:shadow-ink/20"
             >
-              {tr("Hesap Aç")}
+              {trf("{broker} - Resmi Sitesi", { broker: broker.name })}
             </a>
             <Link
               href={`/brokers/${broker.slug}`}

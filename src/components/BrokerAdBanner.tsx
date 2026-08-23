@@ -5,7 +5,7 @@ import Image from "next/image";
 // of its own, but it is only ever rendered from one, so it is compiled into
 // the client bundle — where the per-request locale store does not exist and
 // tr() would quietly return Turkish to every reader.
-import { useTr } from "@/components/useTr";
+import { useTr, useTrf } from "@/components/useTr";
 import type { Broker } from "@/data/brokers";
 
 function getMonogram(name: string): string {
@@ -23,6 +23,7 @@ function getMonogram(name: string): string {
 // practice.
 export default function BrokerAdBanner({ broker }: { broker: Broker }) {
   const tr = useTr();
+  const trf = useTrf();
   if (broker.adImage) {
     // Two anchors rather than two <source>s in one: where a partner's media
     // kit tags each banner size with its own tracking link, the click has to
@@ -40,7 +41,7 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
         href={broker.adUrl ?? broker.referralUrl}
         target="_blank"
         rel="noopener noreferrer sponsored"
-        aria-label={`${broker.name} — Sponsorlu, Hesap Aç`}
+        aria-label={`${broker.name} — Sponsorlu, Resmi Sitesi`}
         className={`overflow-hidden rounded-2xl border border-hairline transition-opacity hover:opacity-90 ${
           broker.adImageMobile ? "hidden @[560px]:block" : "block"
         }`}
@@ -66,7 +67,7 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
           href={broker.adUrlMobile ?? broker.adUrl ?? broker.referralUrl}
           target="_blank"
           rel="noopener noreferrer sponsored"
-          aria-label={`${broker.name} — Sponsorlu, Hesap Aç`}
+          aria-label={`${broker.name} — Sponsorlu, Resmi Sitesi`}
           className="mx-auto block w-fit overflow-hidden rounded-2xl border border-hairline transition-opacity hover:opacity-90 @[560px]:hidden"
         >
           <span className="sr-only">Sponsorlu — {broker.name}</span>
@@ -107,7 +108,7 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
         rel="noopener noreferrer sponsored"
         className="w-full shrink-0 rounded-full bg-signal px-5 py-2.5 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong sm:w-auto"
       >
-        {tr("Hesap Aç →")}
+        {trf("{broker} - Resmi Sitesi", { broker: broker.name })}
       </a>
     </div>
   );

@@ -628,7 +628,8 @@ export const brokers: Broker[] = [
       imageWidth: 1672,
       imageHeight: 941,
       ctaUrl: "https://bit.ly/litefinance-vip",
-      ctaLabel: "Teminat Bonuslu Hesap Aç",
+      // No ctaLabel: falls back to the standard "{broker} - Resmi Sitesi"
+      // label, which is localized and matches every other broker CTA.
       contactEmail: "turkiye@litefinance.com",
     },
   },
