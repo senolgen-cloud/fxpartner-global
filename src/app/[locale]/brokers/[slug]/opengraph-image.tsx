@@ -2,7 +2,12 @@ import { ImageResponse } from "next/og";
 import { tr } from "@/lib/chrome";
 import { getBrokerBySlug, getBrokerScores } from "@/data/brokers";
 
-export const runtime = "edge";
+// Node, not edge. tr() reaches the translation catalogue, which is now 640KB
+// across the two locales — enough on its own to push this bundle past the
+// 1MB edge limit and fail the deploy after a clean build. An OG image is
+// generated once and cached at the CDN, so it gains nothing from the edge
+// runtime and loses nothing by leaving it.
+export const runtime = "nodejs";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
