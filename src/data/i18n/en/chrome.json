@@ -2452,5 +2452,6 @@
   "İşlemi Kopyala": "Copy Trade",
   "Bu İşlemi Kopyala": "Copy This Trade",
   "Bu sinyalleri otomatik kopyalayın": "Copy these signals automatically",
-  "Bu sinyal, takip edilen FXPARTNER MT5 hesabından otomatik olarak iletildi. Yatırım tavsiyesi değildir.": "This signal was sent automatically from the tracked FXPARTNER MT5 account. It is not investment advice."
+  "Bu sinyal, takip edilen FXPARTNER MT5 hesabından otomatik olarak iletildi. Yatırım tavsiyesi değildir.": "This signal was sent automatically from the tracked FXPARTNER MT5 account. It is not investment advice.",
+  "FXPARTNER canlı işlem sinyalleri — gerçek MT5 hesabından, sonuçlarıyla birlikte": "FXPARTNER live trading signals — from a real MT5 account, along with results"
 }

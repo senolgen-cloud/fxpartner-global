@@ -1,13 +1,26 @@
 import Image from "next/image";
+import SignalsPromoBanner from "@/components/SignalsPromoBanner";
 import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { brokers } from "@/data/brokers";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import ShareButtons from "@/components/ShareButtons";
 
-export default function Footer() {
+export default function Footer({
+  // The signals page is the one route that should not advertise the signals
+  // page. Decided by the caller rather than read from the pathname: Footer
+  // is a server component, and a client-side pathname check has to render
+  // once before it can hide anything.
+  showSignalsPromo = true,
+}: {
+  showSignalsPromo?: boolean;
+} = {}) {
   return (
     <footer className="border-t border-hairline bg-ink text-text-on-ink-muted">
+      {/* Sitewide signals banner, here for the same reason the share row is:
+          every route renders <Footer />, so a new page gets it without
+          anyone remembering to add it. Renders nothing on /signals itself. */}
+      {showSignalsPromo && <SignalsPromoBanner />}
       {/* Sitewide share row. Lives here rather than on each page because
           every route renders <Footer /> — so a new page gets the buttons
           without anyone remembering to add them. No title prop: the

@@ -195,7 +195,7 @@ export default async function SignalsPage({
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer showSignalsPromo={false} />
     </>
   );
 }
