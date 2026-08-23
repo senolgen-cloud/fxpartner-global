@@ -515,9 +515,9 @@ export const brokers: Broker[] = [
     // hangi şirkete bağlı. Numaralar okurun kendi doğrulayabileceği tek şey.
     regulationNote:
       "Grupta üç ayrı tüzel kişilik var ve hangisiyle sözleşme imzaladığınız hesabınızın hangi korumaya sahip olduğunu belirler. " +
-      "Liteforex (Europe) Ltd — Kıbrıs şirket sicil no HE230122, CySEC lisans no 093/08, MiFID II kapsamında düzenleniyor — yalnızca Avrupa Ekonomik Alanı müşterilerine hizmet veriyor. " +
+      "Liteforex (Europe) Ltd — Kıbrıs şirket sicil no HE230122, CySEC lisans no 093/08, MiFID II kapsamında düzenleniyor, iletişim support@liteforex.eu — yalnızca Avrupa Ekonomik Alanı müşterilerine hizmet veriyor. " +
       "LiteFinance Investment Limited — Mauritius şirket sicil no 178302, FSC lisans no GB20025921, “Yatırım Aracısı (Tam Hizmet Sağlayıcı, sigortacılık hariç)” kategorisinde lisanslı. " +
-      "LiteFinance Global LLC — Saint Vincent ve Grenadinler, sicil no 931 LLC 2021, kayıtlı adres Euro House, Richmond Hill Road, P.K. 2897, Kingstown, VC0100. Bu şirket AEA ülkeleri, ABD, İsrail ve Rusya sakinlerine hizmet vermiyor. " +
+      "LiteFinance Global LLC — Saint Vincent ve Grenadinler, sicil no 931 LLC 2021, kayıtlı adres Euro House, Richmond Hill Road, P.K. 2897, Kingstown, VC0100, iletişim support@litefinance.com. Bu şirket AEA ülkeleri, ABD, İsrail ve Rusya sakinlerine hizmet vermiyor. " +
       "Türkiye AEA dışında olduğu için buradan açılan hesaplar CySEC'li AB şirketine değil offshore tarafa bağlanır; dolayısıyla CySEC'in yatırımcı tazmin fonu Türkiye'deki bir hesap için geçerli değildir. Hesap açarken sözleşmenin hangi şirketle imzalandığını mutlaka kontrol edin.",
     platforms: ["MT4", "MT5", "cTrader", "LiteFinance WebTerminal"],
     headquarters: "Kıbrıs (AB) / Saint Vincent (global)",
