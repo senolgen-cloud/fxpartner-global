@@ -10,6 +10,7 @@ import { canViewSignal, requiredTierForPair, type AccessTier } from "@/lib/signa
 import { ACCESS_TIER_LABEL } from "@/data/packageTiers";
 import TradingViewChart from "./TradingViewChart";
 import LotLadder from "./LotLadder";
+import CopyTradeButton from "./CopyTradeButton";
 import { favorableMove } from "@/lib/contractSizes";
 
 type Signal = typeof tradeSignals.$inferSelect;
@@ -738,9 +739,115 @@ function PipsStats({ closed }: { closed: Signal[] }) {
   );
 }
 
+// Flags for the pair mark. Only the currencies we actually quote — an
+// unmapped leg falls back to its three-letter code, which is what metals,
+// indices and crypto get anyway (there is no flag for XAU or US100).
+const CURRENCY_FLAG: Record<string, string> = {
+  USD: "🇺🇸", EUR: "🇪🇺", GBP: "🇬🇧", JPY: "🇯🇵", CHF: "🇨🇭",
+  CAD: "🇨🇦", AUD: "🇦🇺", NZD: "🇳🇿", TRY: "🇹🇷", CNH: "🇨🇳",
+  SEK: "🇸🇪", NOK: "🇳🇴", ZAR: "🇿🇦", MXN: "🇲🇽", PLN: "🇵🇱",
+};
+
+/** EURUSD -> ["EUR","USD"]; anything else stays whole. */
+function splitPair(pair: string): [string, string | null] {
+  const p = pair.toUpperCase().replace(/[^A-Z0-9]/g, "");
+  if (p.length === 6 && /^[A-Z]{6}$/.test(p)) return [p.slice(0, 3), p.slice(3)];
+  return [p, null];
+}
+
+function prettyPair(pair: string): string {
+  const [base, quote] = splitPair(pair);
+  return quote ? `${base}/${quote}` : base;
+}
+
+// Two overlapping tokens for an FX pair, one for everything else — the
+// visual anchor that tells you which market a row is about before you read
+// anything.
+function PairMark({ pair }: { pair: string }) {
+  const [base, quote] = splitPair(pair);
+  const token = (code: string, i: number) => {
+    const flag = CURRENCY_FLAG[code];
+    return (
+      <span
+        key={i}
+        className={`flex h-9 w-9 items-center justify-center rounded-full border border-hairline bg-ink text-base ${
+          i > 0 ? "-ml-3" : ""
+        }`}
+        style={{ zIndex: 2 - i }}
+        aria-hidden="true"
+      >
+        {flag ?? <span className="font-mono text-[9px] font-semibold text-text-on-ink-muted">{code.slice(0, 3)}</span>}
+      </span>
+    );
+  };
+  return (
+    <span className="flex shrink-0 items-center">
+      {quote ? [token(base, 0), token(quote, 1)] : token(base, 0)}
+    </span>
+  );
+}
+
+// "3 sa önce" — the age of the signal at a glance, the way the reference
+// layout carries it. Falls back to the absolute date past a week, where
+// "9 g önce" stops being useful.
+function relativeAge(date: Date | null, intlLocale: string, tr: (t: string) => string): string {
+  if (!date) return "";
+  const mins = Math.max(0, Math.round((Date.now() - date.getTime()) / 60000));
+  if (mins < 1) return tr("şimdi");
+  if (mins < 60) return `${mins} ${tr("dk önce")}`;
+  const hours = Math.round(mins / 60);
+  if (hours < 24) return `${hours} ${tr("sa önce")}`;
+  const days = Math.round(hours / 24);
+  if (days <= 7) return `${days} ${tr("g önce")}`;
+  return date.toLocaleDateString(intlLocale, { day: "numeric", month: "short", year: "numeric" });
+}
+
+function LevelCell({
+  label,
+  value,
+  color,
+  locked,
+}: {
+  label: string;
+  value: string | null;
+  color?: string;
+  locked?: boolean;
+}) {
+  return (
+    <div className="min-w-0">
+      <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">{label}</div>
+      <div
+        className="mt-1 truncate font-mono text-sm font-semibold tabular-stat"
+        style={{ color: locked ? "var(--text-on-ink-muted)" : color ?? "var(--text-on-ink)" }}
+      >
+        {locked ? "••••" : value ?? "—"}
+      </div>
+    </div>
+  );
+}
+
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
 function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: AccessTier | null }) {
   const tr = useTr();
   const trf = useTrf();
+  const intl = useIntlLocale();
+  const [open, setOpen] = useState(false);
   const lock = lockPrompt(signal.pair, trf);
   const isBuy = signal.direction === "BUY";
   const isSell = signal.direction === "SELL";
@@ -763,109 +870,171 @@ function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: Access
   const resultUnit = null;
   const resultColor = outcomeColor(signal.outcome);
 
-  // Purely decorative — same as the homepage hero card's sparkline, never
-  // meant to represent a real intraday price series (we don't have one
-  // for most instruments), just a visual accent matching direction.
-  const sparklinePath = isSell
-    ? "M0 8 L20 10 L40 6 L60 18 L80 14 L100 26 L120 22 L140 32 L160 28 L180 36 L200 34"
-    : "M0 32 L20 30 L40 34 L60 22 L80 26 L100 14 L120 18 L140 8 L160 12 L180 4 L200 6";
+  const openedAt = signal.createdAt;
+  const closedAt = signal.closedAt;
+  const age = relativeAge(isClosed ? closedAt : openedAt, intl, tr);
+  const panelId = `signal-panel-${signal.id}`;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-hairline bg-gradient-to-b from-ink-soft to-ink p-5 shadow-[0_20px_50px_-25px_rgba(0,0,0,0.7)]">
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <span className="notranslate font-display text-lg font-semibold text-text-on-ink">{signal.pair}</span>
-          {(isBuy || isSell) && (
-            <span
-              className="rounded-full px-2.5 py-0.5 text-xs font-semibold"
-              style={{ background: `${directionColor}26`, color: directionColor }}
-            >
-              {signal.direction}
-            </span>
-          )}
-        </div>
-        {locked ? (
-          <LockBadge pair={signal.pair} />
-        ) : isClosed ? (
-          <span
-            className="rounded-full px-2.5 py-1 text-xs font-semibold text-on-signal"
-            style={{ background: outcomeColor(signal.outcome) }}
-          >
-            {signal.outcome ?? "KAPANDI"}
-          </span>
-        ) : (
-          <span className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-signal">
-            <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
-            {tr("Canlı")}
-          </span>
-        )}
-      </div>
-
-      {locked ? (
-        <p className="mt-2 font-display text-2xl font-bold tabular-stat text-text-on-ink-muted">••••••</p>
-      ) : isClosed && resultLine ? (
-        <p className="mt-2 font-display text-2xl font-bold tabular-stat" style={{ color: resultColor }}>
-          {resultLine} {resultUnit && <span className="text-sm font-medium text-text-on-ink-muted">{resultUnit}</span>}
-        </p>
-      ) : (
-        <p className="mt-2 font-display text-2xl font-bold tabular-stat text-text-on-ink">
-          {signal.entry}
-          <span className="ml-2 text-sm font-medium text-text-on-ink-muted">{tr("giriş")}</span>
-        </p>
-      )}
-
-      <svg viewBox="0 0 200 40" className="mt-3 h-9 w-full" style={{ color: locked ? "var(--text-on-ink-muted)" : directionColor }} fill="none">
-        <path d={sparklinePath} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity={locked ? 0.35 : 1} />
-      </svg>
-
-      {/* Lot merdiveni: "bu sinyali kendi lotumla uygulasaydım ne olurdu"
-          sorusunun cevabı. Kapanmış işlemde gerçekleşen hareket, açık
-          işlemde hedefe kadarki potansiyel hareket üzerinden. Kilitli
-          sinyalde gösterilmez — seviyeler zaten gizli. */}
-      {!locked && (
-        <div className="mt-3">
-          <LotLadder pair={signal.pair} priceMove={ladderMove} />
-        </div>
-      )}
-
-      {locked ? (
-        <Link
-          href={lock.href}
-          className="mt-3 flex items-center justify-center gap-1.5 rounded-lg border border-hairline border-dashed pt-3 pb-2 font-mono text-[11px] text-text-on-ink-muted transition-colors hover:border-gold hover:text-gold"
-        >
-          {lock.label}
-        </Link>
-      ) : (
-        <>
-          <div className="mt-3 flex items-center justify-between border-t border-hairline pt-3 font-mono text-[11px]">
-            <span className="text-text-on-ink-muted">
-              {isClosed ? tr("Kapanış") : tr("Giriş")}{" "}
-              <span className="text-text-on-ink">{isClosed ? signal.closePrice : signal.entry}</span>
-            </span>
-            {signal.target1 && <span style={{ color: TICK_UP }}>TP {signal.target1}</span>}
-            {signal.stop && <span style={{ color: TICK_DOWN }}>SL {signal.stop}</span>}
-          </div>
-
-          {(signal.target2 || (isClosed && signal.volume)) && (
-            <div className="mt-3 space-y-1.5 border-t border-hairline pt-3">
-              {signal.target2 && <Level label="Kâr Al 2" value={signal.target2} color={TICK_UP} />}
-              {isClosed && signal.volume && (
-                <Level label="Hacim" value={`${signal.volume} lot`} color="var(--text-on-ink-muted)" />
+    <div className="overflow-hidden rounded-2xl border border-hairline bg-gradient-to-b from-ink-soft to-ink shadow-[0_20px_50px_-25px_rgba(0,0,0,0.7)]">
+      {/* Header row: identity, the three levels, the action. Everything a
+          reader needs to decide whether to open the row at all. */}
+      <div className="flex flex-col gap-4 p-4 sm:p-5 lg:flex-row lg:items-center lg:gap-6">
+        <div className="flex min-w-0 items-center gap-3 lg:w-[24%] lg:shrink-0">
+          <PairMark pair={signal.pair} />
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="notranslate font-display text-base font-semibold text-text-on-ink">
+                {prettyPair(signal.pair)}
+              </span>
+              {(isBuy || isSell) && (
+                <span
+                  className="rounded-full px-2 py-0.5 text-[11px] font-semibold"
+                  style={{ background: `${directionColor}26`, color: directionColor }}
+                >
+                  {signal.direction}
+                </span>
               )}
             </div>
-          )}
-        </>
-      )}
+            <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-text-on-ink-muted">
+              {isClosed ? (
+                <span className="font-semibold" style={{ color: resultColor }}>
+                  {signal.outcome ?? tr("KAPANDI")}
+                </span>
+              ) : (
+                <span className="flex items-center gap-1.5 font-medium uppercase tracking-wide text-signal">
+                  <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
+                  {tr("Aktif")}
+                </span>
+              )}
+              {age && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <span>{age}</span>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
 
-      <p className="mt-3 font-mono text-[11px] text-text-on-ink-muted">
-        {(isClosed ? signal.closedAt : signal.createdAt)?.toLocaleString("en-US", {
-          month: "short",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          timeZone: "UTC",
-        })}
-      </p>
+        <div className="grid flex-1 grid-cols-3 gap-3 sm:gap-6">
+          <LevelCell label={tr("Giriş Fiyatı")} value={signal.entry} locked={locked} />
+          <LevelCell label={tr("Zarar Durdur")} value={signal.stop} color={TICK_DOWN} locked={locked} />
+          <LevelCell label={tr("Kâr Al")} value={signal.target1} color={TICK_UP} locked={locked} />
+        </div>
+
+        {isClosed && resultLine && !locked && (
+          <div className="min-w-0 lg:w-[13%] lg:shrink-0">
+            <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
+              {tr("Sonuç")}
+            </div>
+            <div className="mt-1 font-display text-lg font-bold tabular-stat" style={{ color: resultColor }}>
+              {resultLine}
+            </div>
+          </div>
+        )}
+
+        <div className="flex items-center gap-2 lg:shrink-0">
+          {locked ? (
+            <Link
+              href={lock.href}
+              className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-gold/40 bg-gold/10 px-4 py-2 text-[12px] font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/20"
+            >
+              🔒 {lock.badge}
+            </Link>
+          ) : (
+            /* Only while the trade is still open — "copy this trade" on a
+               position that closed days ago is an offer the reader cannot
+               take, and the history list is long enough that it would put
+               a hundred identical sponsored pills on one page. */
+            !isClosed && <CopyTradeButton variant="inline" />
+          )}
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls={panelId}
+            aria-label={open ? tr("Detayı kapat") : tr("Detayı aç")}
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hairline text-text-on-ink-muted transition-colors hover:border-signal hover:text-signal"
+          >
+            <Chevron open={open} />
+          </button>
+        </div>
+      </div>
+
+      {/* The chart mounts only once a row is opened — one TradingView embed
+          per visible card would be several heavy iframes on a page that
+          already polls every 15s. */}
+      {open && (
+        <div id={panelId} className="border-t border-hairline bg-ink/60 p-4 sm:p-5">
+          <div className="grid gap-5 lg:grid-cols-[minmax(0,300px)_1fr]">
+            <div className="min-w-0">
+              <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                {tr("Sinyal Detayı")}
+              </h3>
+              <div className="mt-3 space-y-1.5">
+                <Level
+                  label={tr("Açılış")}
+                  value={
+                    openedAt
+                      ? openedAt.toLocaleString(intl, {
+                          day: "numeric",
+                          month: "short",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          timeZone: "UTC",
+                        })
+                      : null
+                  }
+                  color="var(--text-on-ink)"
+                />
+                {isClosed && (
+                  <Level
+                    label={tr("Kapanış")}
+                    value={
+                      closedAt
+                        ? closedAt.toLocaleString(intl, {
+                            day: "numeric",
+                            month: "short",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            timeZone: "UTC",
+                          })
+                        : null
+                    }
+                    color="var(--text-on-ink)"
+                  />
+                )}
+                {isClosed && !locked && (
+                  <Level label={tr("Kapanış Fiyatı")} value={signal.closePrice} color="var(--text-on-ink)" />
+                )}
+                {!locked && <Level label={tr("Kâr Al 2")} value={signal.target2} color={TICK_UP} />}
+                {signal.volume && (
+                  <Level label={tr("Hacim")} value={`${signal.volume} lot`} color="var(--text-on-ink-muted)" />
+                )}
+              </div>
+
+              {/* Lot merdiveni: "bu sinyali kendi lotumla uygulasaydım ne
+                  olurdu" sorusunun cevabı. Kapanmış işlemde gerçekleşen,
+                  açık işlemde hedefe kadarki hareket üzerinden. Kilitli
+                  sinyalde gösterilmez — seviyeler zaten gizli. */}
+              {!locked && (
+                <div className="mt-4">
+                  <LotLadder pair={signal.pair} priceMove={ladderMove} />
+                </div>
+              )}
+
+              <p className="mt-4 text-[11px] leading-relaxed text-text-on-ink-muted">
+                {tr("Bu sinyal, takip edilen FXPARTNER MT5 hesabından otomatik olarak iletildi. Yatırım tavsiyesi değildir.")}
+              </p>
+
+              {!locked && !isClosed && <CopyTradeButton variant="card" />}
+            </div>
+
+            <TradingViewChart symbol={signal.pair} className="h-[280px] sm:h-[340px]" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -1010,11 +1179,9 @@ export default function SignalsBoard({
             takip edin.
           </p>
         ) : (
-          <div className="flex flex-wrap justify-center gap-5">
+          <div className="flex flex-col gap-4">
             {active.map((s) => (
-              <div key={s.id} className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[calc(25%-15px)]">
-                <SignalCard signal={s} viewerTier={viewerTier} />
-              </div>
+              <SignalCard key={s.id} signal={s} viewerTier={viewerTier} />
             ))}
           </div>
         )}
@@ -1096,11 +1263,9 @@ export default function SignalsBoard({
               {tr("Henüz kapanan sinyal yok — işlemler kapandıkça sonuçlar burada görünecek.")}
             </p>
           ) : (
-            <div className="mt-6 flex flex-wrap justify-center gap-5 md:hidden">
+            <div className="mt-6 flex flex-col gap-4 md:hidden">
               {closed.map((s) => (
-                <div key={s.id} className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]">
-                  <SignalCard signal={s} viewerTier={viewerTier} />
-                </div>
+                <SignalCard key={s.id} signal={s} viewerTier={viewerTier} />
               ))}
             </div>
           )}

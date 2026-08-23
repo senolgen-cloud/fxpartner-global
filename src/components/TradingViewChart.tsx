@@ -44,7 +44,15 @@ function toTradingViewSymbol(pair: string): string {
 // is how TradingView's embed accepts config, so it's built and injected
 // manually rather than rendered as JSX. Re-injected on every symbol change
 // since the widget has no public API to swap symbols after mount.
-export default function TradingViewChart({ symbol }: { symbol: string }) {
+export default function TradingViewChart({
+  symbol,
+  /** Sizing lives on the caller so a card can ask for a shorter chart than
+      the full-width one on the signals page. */
+  className = "h-[420px] sm:h-[520px]",
+}: {
+  symbol: string;
+  className?: string;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -83,7 +91,7 @@ export default function TradingViewChart({ symbol }: { symbol: string }) {
   // column. The outer div owns the size; the inner one is the script's to
   // stretch to 100% of it.
   return (
-    <div className="h-[420px] w-full overflow-hidden rounded-2xl border border-hairline sm:h-[520px]">
+    <div className={`w-full overflow-hidden rounded-2xl border border-hairline ${className}`}>
       <div className="tradingview-widget-container h-full w-full" ref={containerRef} />
     </div>
   );

@@ -1,4 +1,9 @@
-import { tr } from "@/lib/chrome";
+// Client helpers, not the server tr(): this component has no "use client" of
+// its own, but SignalsBoard does, so it is compiled into the client bundle —
+// where the per-request locale store does not exist and tr() would quietly
+// return Turkish to every reader. Same trap LotLadder hit; see
+// scripts/check-client-tr.mjs.
+import { useTr } from "@/components/useTr";
 import { XM_COPYTRADE_URL } from "@/lib/copytrade";
 
 function CopyIcon({ className }: { className?: string }) {
@@ -24,6 +29,8 @@ function CopyIcon({ className }: { className?: string }) {
  * the same tracked MT5 account these signals come from.
  *
  * - `card`    — compact, sits inside a single signal card
+ * - `inline`  — pill for a signal row's action area, no top margin, sized to
+ *               its label rather than the container
  * - `banner`  — full-width block for the top of the signals feed
  */
 export default function CopyTradeButton({
@@ -31,10 +38,25 @@ export default function CopyTradeButton({
   label,
   className = "",
 }: {
-  variant?: "card" | "banner";
+  variant?: "card" | "inline" | "banner";
   label?: string;
   className?: string;
 }) {
+  const tr = useTr();
+  if (variant === "inline") {
+    return (
+      <a
+        href={XM_COPYTRADE_URL}
+        target="_blank"
+        rel="noopener noreferrer sponsored"
+        className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-signal px-4 py-2 text-[12px] font-semibold text-on-signal transition-colors hover:bg-signal-strong ${className}`}
+      >
+        <CopyIcon className="h-3.5 w-3.5" />
+        {label ?? tr("İşlemi Kopyala")}
+      </a>
+    );
+  }
+
   if (variant === "banner") {
     return (
       <a
@@ -45,7 +67,7 @@ export default function CopyTradeButton({
       >
         <span className="flex flex-col gap-1">
           <span className="font-display text-lg font-semibold text-text-on-ink">
-            {label ?? "Bu sinyalleri otomatik kopyalayın"}
+            {label ?? tr("Bu sinyalleri otomatik kopyalayın")}
           </span>
           <span className="text-sm text-text-on-ink-muted">
             {tr("XM Copytrade ile hesabınıza bağlanın — her yeni işlem otomatik olarak sizde de açılır.")}
@@ -67,7 +89,7 @@ export default function CopyTradeButton({
       className={`mt-3 flex w-full items-center justify-center gap-1.5 rounded-lg border border-signal/40 bg-signal/10 px-3 py-2 text-[12px] font-semibold text-signal transition-colors hover:border-signal hover:bg-signal hover:text-on-signal ${className}`}
     >
       <CopyIcon className="h-3.5 w-3.5" />
-      {label ?? "Bu İşlemi Kopyala"}
+      {label ?? tr("Bu İşlemi Kopyala")}
     </a>
   );
 }
