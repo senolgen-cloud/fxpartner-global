@@ -367,6 +367,10 @@ export const aiAssistantLogs = pgTable("ai_assistant_log", {
     .$defaultFn(() => crypto.randomUUID()),
   question: text("question").notNull(),
   reply: text("reply").notNull(),
+  // Null on every row written while the assistant was Pro-only, and on any
+  // answer given to someone without an account. Counted per day to enforce a
+  // free member's allowance — see AI_FREE_DAILY_LIMIT.
+  userId: text("user_id"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 

@@ -7,6 +7,8 @@ import { type AccessTier } from "@/lib/vip";
 export type ViewerAccess = {
   signedIn: boolean;
   tier: AccessTier | null;
+  // Needed wherever a per-member allowance is counted; null when signed out.
+  userId: string | null;
 };
 
 // Server-side viewer access check, shared by page-level gating (AI
@@ -18,15 +20,19 @@ export type ViewerAccess = {
 // hasTierAccess below, since free ranks under both.
 export async function getViewerAccess(): Promise<ViewerAccess> {
   const session = await auth();
-  if (!session?.user?.id) return { signedIn: false, tier: null };
+  if (!session?.user?.id) return { signedIn: false, tier: null, userId: null };
 
   const subscription = await db.query.vipSubscriptions.findFirst({
     where: eq(vipSubscriptions.userId, session.user.id),
   });
   if (!subscription || subscription.status !== "active") {
-    return { signedIn: true, tier: "free" };
+    return { signedIn: true, tier: "free", userId: session.user.id };
   }
-  return { signedIn: true, tier: (subscription.tier as AccessTier | null) ?? "free" };
+  return {
+    signedIn: true,
+    tier: (subscription.tier as AccessTier | null) ?? "free",
+    userId: session.user.id,
+  };
 }
 
 const RANK: Record<AccessTier, number> = { free: 0, pro: 1, vip: 2 };

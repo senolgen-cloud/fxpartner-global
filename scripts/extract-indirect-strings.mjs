@@ -28,6 +28,7 @@ const SOURCES = {
   "src/lib/positionSize.ts": ["RISK_LABEL"],
   "src/app/[locale]/prop-firmalar/[slug]/page.tsx": ["COPY_TRADING_NOTE", "SIGNAL_NOTE", "EA_NOTE"],
   "src/lib/xm.ts": ["INLINE_AD_COPY", "XM_AD_POINTS"],
+  "src/components/AiMarketAssistant.tsx": ["SUGGESTED_QUESTIONS", "WELCOME"],
 };
 
 const TURKISH = /[çğıöşüÇĞİÖŞÜ]/;

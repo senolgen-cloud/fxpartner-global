@@ -1993,5 +1993,22 @@
   "Belirtmek istemiyorum": "I prefer not to say",
   "Şifre yok. Her girişte e-postanıza tek kullanımlık bir bağlantı gönderilir.": "No password. A one-time link is sent to your email on every login.",
   "veya": "or",
-  "Google ile devam et": "Continue with Google"
+  "Google ile devam et": "Continue with Google",
+  "Cevabınız hazır.": "Your answer is ready.",
+  "Görmek için ücretsiz bir hesap açın. Şifre yok — e-postanıza tek kullanımlık bir bağlantı gelir, ve sorduğunuz soru siz döndüğünüzde burada sizi bekliyor olur.": "Create a free account to view it. No password required — a one-time link will be sent to your email, and the question you asked will be waiting for you here when you return.",
+  "Zaten üyeyim": "Already a member",
+  "Bugünlük hakkınız doldu.": "You have reached your limit for today.",
+  "Ücretsiz üyelikte günde birkaç soru sorabilirsiniz; hakkınız gece yarısı yenilenir. Pro pakette sınır yok.": "With a free membership, you can ask a few questions a day; your limit resets at midnight. There is no limit in the Pro package.",
+  "Paketleri karşılaştır": "Compare packages",
+  "FXPARTNER AI Asistanı, forex, altın, kripto ve endeks piyasalarını analiz eden, sorularınızı yanıtlayan ve yatırım kararlarınızı daha bilinçli almanıza yardımcı olan yeni nesil bir yapay zeka deneyimidir. 7/24 erişilebilir. Soru sormak için üyelik gerekmez; cevabı görmek için ücretsiz bir hesap yeterlidir.": "The FXPARTNER AI Assistant is a next-generation artificial intelligence experience that analyzes forex, gold, crypto, and index markets, answers your questions, and helps you make more informed investment decisions. Accessible 24/7. No membership is required to ask a question; a free account is sufficient to view the answer.",
+  "Evet, ücretsiz bir hesapla kullanabilirsiniz. Soruyu üye olmadan da yazabilirsiniz; cevabı görmek için ücretsiz hesap açmanız yeterli ve ücretsiz üyelikte günde birkaç soru hakkınız var. Pro ve VIP paketlerinde soru sayısı sınırsızdır.": "Yes, you can use it with a free account. You can type your question without being a member; creating a free account is enough to see the answer, and you have a few questions per day with a free membership. The number of questions is unlimited in Pro and VIP packages.",
+  "fxpartner.global/ai-asistan adresine girip sorunuzu yazmanız yeterli. Cevabı görmek için ücretsiz bir hesapla giriş yapmanız istenir — sorduğunuz soru siz döndüğünüzde sizi bekliyor olur. Asistan Türkçe ve İngilizce dahil birden fazla dilde hizmet verir.": "Simply visit fxpartner.global/ai-asistan and type your question. You will be asked to log in with a free account to view the answer — the question you asked will be waiting for you when you return. The assistant serves in multiple languages, including Turkish and English.",
+  "TÜFE (CPI) verisi beklenenden düşük gelirse EUR/USD ne olur?": "What happens to EUR/USD if the CPI data comes in lower than expected?",
+  "Ons Altın (XAUUSD) güncel destek ve direnç seviyeleri neler?": "What are the current support and resistance levels for Gold (XAUUSD)?",
+  "Forex'te Lot ve Pip hesaplaması nasıl yapılır?": "How are Lot and Pip calculated in Forex?",
+  "ECB faiz indiriminin EUR üzerine etkileri nelerdir?": "What are the effects of an ECB rate cut on EUR?",
+  "Merhaba! Ben **FXPARTNER Yapay Zeka Piyasa Asistanı**.\n\n": "Hello! I am the **FXPARTNER AI Market Assistant**.\n\n",
+  "Forex pariteleri, Altın/Petrol analizi, makroekonomik verilerin piyasa etkileri (CPI, NFP, Faiz Kararları) veya teknik/temel analiz stratejileri hakkında sorularınızı yanıtlayabilirim.\n\n": "I can answer your questions regarding Forex pairs, Gold/Oil analysis, the market impacts of macroeconomic data (CPI, NFP, Interest Rate Decisions), or technical/fundamental analysis strategies.\n\n",
+  "Aşağıdaki hazır sorulardan birini seçebilir veya sorunuzu yazabilirsiniz!": "You can select one of the suggested questions below or type your own question!",
+  "Merhaba! Ben **FXPARTNER Yapay Zeka Piyasa Asistanı**.\n\nForex pariteleri, Altın/Petrol analizi, makroekonomik verilerin piyasa etkileri (CPI, NFP, Faiz Kararları) veya teknik/temel analiz stratejileri hakkında sorularınızı yanıtlayabilirim.\n\nAşağıdaki hazır sorulardan birini seçebilir veya sorunuzu yazabilirsiniz!": "Hello! I am the **FXPARTNER AI Market Assistant**.\n\nI can answer your questions about Forex pairs, Gold/Oil analysis, the market impacts of macroeconomic data (CPI, NFP, Interest Rate Decisions), or technical/fundamental analysis strategies.\n\nYou can select one of the ready-made questions below or write your question!"
 }

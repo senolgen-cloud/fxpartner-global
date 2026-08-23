@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 import AiMarketAssistant from "@/components/AiMarketAssistant";
-import UpgradeGate from "@/components/UpgradeGate";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
-import { getViewerAccess, hasTierAccess } from "@/lib/tierAccess";
+import { getViewerAccess } from "@/lib/tierAccess";
 import { getDictionary } from "@/lib/dictionary";
 import { tr } from "@/lib/chrome";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
@@ -48,11 +47,11 @@ const features = [
 const aiAssistantFaqs = [
   {
     q: "FXPARTNER AI Asistanı nedir?",
-    a: "FXPARTNER AI Asistanı, forex, altın, kripto ve endeks piyasalarını analiz eden, sorularınızı yanıtlayan ve yatırım kararlarınızı daha bilinçli almanıza yardımcı olan yeni nesil bir yapay zeka deneyimidir. 7/24 erişilebilir, Pro ve VIP paket üyelerine özeldir.",
+    a: "FXPARTNER AI Asistanı, forex, altın, kripto ve endeks piyasalarını analiz eden, sorularınızı yanıtlayan ve yatırım kararlarınızı daha bilinçli almanıza yardımcı olan yeni nesil bir yapay zeka deneyimidir. 7/24 erişilebilir. Soru sormak için üyelik gerekmez; cevabı görmek için ücretsiz bir hesap yeterlidir.",
   },
   {
     q: "FXPARTNER AI Asistanı ücretsiz mi?",
-    a: "Hayır. FXPARTNER AI Asistanı, Pro ve VIP paketlerinin bir parçasıdır — erişmek için bu paketlerden birine üye olmanız gerekir. Ücretsiz üyelikte AI Asistan yer almaz.",
+    a: "Evet, ücretsiz bir hesapla kullanabilirsiniz. Soruyu üye olmadan da yazabilirsiniz; cevabı görmek için ücretsiz hesap açmanız yeterli ve ücretsiz üyelikte günde birkaç soru hakkınız var. Pro ve VIP paketlerinde soru sayısı sınırsızdır.",
   },
   {
     q: "FXPARTNER AI Asistanı hangi konularda yardımcı olur?",
@@ -64,7 +63,7 @@ const aiAssistantFaqs = [
   },
   {
     q: "FXPARTNER AI Asistanı'na nasıl ulaşabilirim?",
-    a: "fxpartner.global/ai-asistan adresinden, Pro veya VIP paketinizle giriş yaparak sohbete başlayabilirsiniz. Asistan Türkçe ve İngilizce dahil birden fazla dilde hizmet verir.",
+    a: "fxpartner.global/ai-asistan adresine girip sorunuzu yazmanız yeterli. Cevabı görmek için ücretsiz bir hesapla giriş yapmanız istenir — sorduğunuz soru siz döndüğünüzde sizi bekliyor olur. Asistan Türkçe ve İngilizce dahil birden fazla dilde hizmet verir.",
   },
 ];
 
@@ -106,8 +105,9 @@ export default async function AiAssistantPage({
   const { locale: pageLocale } = await params;
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
-  const { signedIn, tier } = await getViewerAccess();
-  const canUse = hasTierAccess(tier, "pro");
+  // Only signedIn matters here now: the tier decides how many answers a
+  // member gets, and that is counted server-side in the route.
+  const { signedIn } = await getViewerAccess();
 
   return (
     <>
@@ -156,16 +156,14 @@ export default async function AiAssistantPage({
           />
         </div>
 
-        {canUse ? (
-          <AiMarketAssistant />
-        ) : (
-          <UpgradeGate
-            eyebrow={tr("Pro & VIP Üyelere Özel")}
-            title={tr("AI Piyasa Asistanı'na erişmek için Pro veya VIP paketine katılın")}
-            description={tr("Sınırsız soru, anlık piyasa analizi ve strateji desteği — Pro paketinden itibaren açılır.")}
-            signedIn={signedIn}
-          />
-        )}
+        {/* Everyone gets the box. A visitor with no account can type their
+            question and send it — the answer is what needs a member, and the
+            component asks for one in place, directly under their own
+            question. Hiding the box entirely, which is what an UpgradeGate
+            here did, means the strongest argument we have is never made:
+            nobody is persuaded by "sign up for AI analysis", and a lot of
+            people are persuaded by their own question sitting unanswered. */}
+        <AiMarketAssistant signedIn={signedIn} />
 
         {/* Rich SEO/AEO content — real crawlable text answering "what is
             FXPARTNER AI", not just the banner image above. */}

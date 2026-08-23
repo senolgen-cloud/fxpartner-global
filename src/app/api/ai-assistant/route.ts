@@ -4,6 +4,45 @@ import { brokers } from "@/data/brokers";
 import { db } from "@/db";
 import { aiAssistantLogs } from "@/db/schema";
 import { getViewerAccess, hasTierAccess } from "@/lib/tierAccess";
+import { and, eq, gte } from "drizzle-orm";
+
+/**
+ * Questions a signed-in free member may ask per day.
+ *
+ * Not a pricing rule so much as a spending one: each answer costs money per
+ * call and the free tier costs the member nothing, so without a ceiling the
+ * bill has no ceiling either. Pro and VIP are not counted at all.
+ *
+ * One number, in one place, meant to be changed.
+ */
+const AI_FREE_DAILY_LIMIT = 3;
+
+// Midnight in Istanbul rather than UTC: the allowance should reset when the
+// member's day does, and this audience sits almost entirely in one timezone.
+// Reusing the same DISPLAY_TZ the calendar and the signal board already use.
+function startOfLocalDay(): Date {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Istanbul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date());
+  const get = (type: string) => Number(parts.find((p) => p.type === type)?.value ?? 0);
+  const secondsIntoDay = get("hour") * 3600 + get("minute") * 60 + get("second");
+  return new Date(Date.now() - secondsIntoDay * 1000);
+}
+
+async function countQuestionsToday(userId: string): Promise<number> {
+  const rows = await db
+    .select({ id: aiAssistantLogs.id })
+    .from(aiAssistantLogs)
+    .where(and(eq(aiAssistantLogs.userId, userId), gte(aiAssistantLogs.createdAt, startOfLocalDay())));
+  return rows.length;
+}
 
 export const runtime = "nodejs";
 
@@ -137,12 +176,34 @@ async function callGemini(apiKey: string, contents: unknown, systemPrompt: strin
 }
 
 export async function POST(req: NextRequest) {
-  // Page-level gating (ai-asistan/page.tsx) hides the widget from
-  // non-Pro/VIP visitors, but that's cosmetic on its own — enforce the
-  // same rule here so the endpoint can't be called directly.
-  const { tier } = await getViewerAccess();
+  // Anyone may type a question; only a member gets the answer. The page
+  // renders the same rule, but that is cosmetic on its own — this endpoint
+  // is what actually spends money, so the check lives here.
+  //
+  // The two refusals are deliberately different. "signin" means the visitor
+  // has no account, and the UI turns it into a sign-up prompt with their
+  // question preserved. "limit" means they have one and have used today's
+  // allowance, which is an upgrade prompt instead. Collapsing both into one
+  // 403 would show the wrong offer to half the people who hit it.
+  const { signedIn, tier, userId } = await getViewerAccess();
+  if (!signedIn || !userId) {
+    return NextResponse.json(
+      { error: "Bu cevabı görmek için ücretsiz bir hesap gerekiyor.", reason: "signin" },
+      { status: 401 }
+    );
+  }
+
   if (!hasTierAccess(tier, "pro")) {
-    return NextResponse.json({ error: "AI Assistant requires a Pro or VIP package." }, { status: 403 });
+    const used = await countQuestionsToday(userId);
+    if (used >= AI_FREE_DAILY_LIMIT) {
+      return NextResponse.json(
+        {
+          error: `Bugünlük ücretsiz soru hakkınız doldu (${AI_FREE_DAILY_LIMIT}). Pro pakette sınırsız.`,
+          reason: "limit",
+        },
+        { status: 429 }
+      );
+    }
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
@@ -194,6 +255,7 @@ export async function POST(req: NextRequest) {
     await db.insert(aiAssistantLogs).values({
       question: String(lastUserMessage.content).slice(0, 2000),
       reply,
+      userId,
     });
   } catch (err) {
     console.error("Failed to log AI assistant Q&A:", err);

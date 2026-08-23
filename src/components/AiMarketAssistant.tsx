@@ -1,4 +1,5 @@
 "use client";
+import Link from "@/components/LocaleLink";
 import { useIntlLocale, useTr } from "@/components/useTr";
 
 import { Fragment, useEffect, useRef, useState } from "react";
@@ -88,18 +89,48 @@ function currentSiteLang(): string {
   return parts[2] || "en";
 }
 
-export default function AiMarketAssistant() {
+// Where an unanswered question waits while its author signs up. Same
+// origin, so the tab the magic link opens can read what the tab they typed
+// it in wrote.
+const PENDING_KEY = "fxp.ai.pending";
+
+export default function AiMarketAssistant({ signedIn = true }: { signedIn?: boolean }) {
   const tr = useTr();
   const intl = useIntlLocale();
-  const [messages, setMessages] = useState<ChatMessage[]>([WELCOME]);
+  // Translated once, on first render, so the greeting is in the reader’s
+  // language without the constant itself having to know about locales.
+  const [messages, setMessages] = useState<ChatMessage[]>(() => [
+    { ...WELCOME, content: tr(WELCOME.content) },
+  ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Set when the server refuses: "signin" for a visitor with no account,
+  // "limit" for a member who has used today's allowance. Two different
+  // offers, so they are two different states rather than one error string.
+  const [gate, setGate] = useState<null | "signin" | "limit">(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages, loading]);
+  }, [messages, loading, gate]);
+
+  // Coming back from sign-in with a question still pending: ask it, once,
+  // and clear it first so a failure cannot leave it looping.
+  useEffect(() => {
+    if (!signedIn) return;
+    let pending: string | null = null;
+    try {
+      pending = window.localStorage.getItem(PENDING_KEY);
+      if (pending) window.localStorage.removeItem(PENDING_KEY);
+    } catch {
+      // Private mode, or storage disabled. Nothing to restore.
+    }
+    if (pending?.trim()) void send(pending);
+    // Deliberately only on mount: this restores once per arrival, never on
+    // every render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function send(text: string) {
     const trimmed = text.trim();
@@ -109,6 +140,7 @@ export default function AiMarketAssistant() {
     setMessages(next);
     setInput("");
     setError(null);
+    setGate(null);
     setLoading(true);
 
     try {
@@ -118,6 +150,24 @@ export default function AiMarketAssistant() {
         body: JSON.stringify({ messages: next, lang: currentSiteLang() }),
       });
       const data = await res.json();
+
+      // The refusals are not errors to apologise for — they are the offer.
+      // The question stays on screen above them, which is the entire point.
+      if (res.status === 401 && data.reason === "signin") {
+        try {
+          window.localStorage.setItem(PENDING_KEY, trimmed);
+        } catch {
+          // Without storage the question is lost on redirect; the prompt
+          // still works, they just retype it. Not worth blocking on.
+        }
+        setGate("signin");
+        return;
+      }
+      if (res.status === 429 && data.reason === "limit") {
+        setGate("limit");
+        return;
+      }
+
       if (!res.ok) throw new Error(data.error || "Bilinmeyen hata");
       setMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
     } catch (err) {
@@ -130,7 +180,7 @@ export default function AiMarketAssistant() {
   return (
     <div className="mx-auto w-full max-w-3xl">
       <div className="mb-6 flex flex-wrap justify-center gap-2">
-        {SUGGESTED_QUESTIONS.map((q) => (
+        {SUGGESTED_QUESTIONS.map((key) => tr(key)).map((q) => (
           <button
             key={q}
             type="button"
@@ -189,6 +239,51 @@ export default function AiMarketAssistant() {
                 <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-text-on-ink-muted [animation-delay:-0.15s]" />
                 <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-text-on-ink-muted" />
               </div>
+            </div>
+          )}
+
+          {/* Sits directly under the question, in the conversation, where the
+              answer would have been. A modal or a redirect would take the
+              question off the screen, and the question is the argument. */}
+          {gate === "signin" && (
+            <div className="rounded-2xl border border-signal/40 bg-signal/[0.06] p-5">
+              <p className="font-display text-base font-semibold text-text-on-ink">
+                {tr("Cevabınız hazır.")}
+              </p>
+              <p className="mt-1.5 text-sm leading-relaxed text-text-on-ink-muted">
+                {tr("Görmek için ücretsiz bir hesap açın. Şifre yok — e-postanıza tek kullanımlık bir bağlantı gelir, ve sorduğunuz soru siz döndüğünüzde burada sizi bekliyor olur.")}
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <Link
+                  href="/account/register"
+                  className="rounded-full bg-signal px-5 py-2.5 text-sm font-semibold text-on-signal transition-colors hover:bg-signal-strong"
+                >
+                  {tr("Ücretsiz hesap aç")}
+                </Link>
+                <Link
+                  href="/account/login"
+                  className="rounded-full border border-hairline px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
+                >
+                  {tr("Zaten üyeyim")}
+                </Link>
+              </div>
+            </div>
+          )}
+
+          {gate === "limit" && (
+            <div className="rounded-2xl border border-gold/40 bg-gold/[0.06] p-5">
+              <p className="font-display text-base font-semibold text-text-on-ink">
+                {tr("Bugünlük hakkınız doldu.")}
+              </p>
+              <p className="mt-1.5 text-sm leading-relaxed text-text-on-ink-muted">
+                {tr("Ücretsiz üyelikte günde birkaç soru sorabilirsiniz; hakkınız gece yarısı yenilenir. Pro pakette sınır yok.")}
+              </p>
+              <Link
+                href="/paketler"
+                className="mt-4 inline-block rounded-full bg-signal px-5 py-2.5 text-sm font-semibold text-on-signal transition-colors hover:bg-signal-strong"
+              >
+                {tr("Paketleri karşılaştır")}
+              </Link>
             </div>
           )}
 
