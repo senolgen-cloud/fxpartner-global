@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Geist, JetBrains_Mono, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import NotificationOptIn from "@/components/NotificationOptIn";
@@ -19,7 +20,7 @@ import { localizeBrokers } from "@/lib/localizeContent";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import { auth } from "@/auth";
 import { LocaleProvider } from "@/components/LocaleProvider";
-import { defaultLocale, hreflangMap, htmlLang, isLocale, locales, localePath, ogLocale, type Locale } from "@/lib/i18n";
+import { hreflangMap, htmlLang, isLocale, locales, localePath, ogLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionary";
 import { setServerLocale } from "@/lib/serverLocale";
 import "../globals.css";
@@ -54,7 +55,16 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale: raw } = await params;
-  const locale: Locale = isLocale(raw) ? raw : defaultLocale;
+  // Not a locale means not a page. Falling back to Turkish here used to be
+  // harmless, because /brokerlar really was Turkish; now every real path is
+  // prefixed and proxy.ts redirects the ones that are not — except paths that
+  // look like files, which it deliberately leaves alone so /sw.js still
+  // works. A missing file therefore landed here with raw = "missing.gif" and
+  // got the Turkish homepage back with a 200. That is a soft 404: the reader
+  // sees the wrong page, and a crawler is told a broken asset URL is a valid
+  // one.
+  if (!isLocale(raw)) notFound();
+  const locale: Locale = raw;
   const t = getDictionary(locale);
   const languages = hreflangMap("/");
 
@@ -131,9 +141,9 @@ export async function generateMetadata({
   };
 }
 
-// Every locale tree is a build target. Turkish is reachable at both / (via
-// the rewrite in proxy.ts) and nothing else — the prefix only exists in the
-// URL for the other two.
+// Every locale tree is a build target, and every one of them is prefixed —
+// Turkish included. / and the other unprefixed paths are permanent redirects
+// issued by proxy.ts, not routes.
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
@@ -146,7 +156,10 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale: raw } = await params;
-  const locale: Locale = isLocale(raw) ? raw : defaultLocale;
+  // Same guard as generateMetadata: a first segment that is not a locale is
+  // not a page. See the note there for why this stopped being harmless.
+  if (!isLocale(raw)) notFound();
+  const locale: Locale = raw;
   // Recorded before anything under this layout renders, so tr() in a server
   // component three levels down knows which tree it is in.
   setServerLocale(locale);
