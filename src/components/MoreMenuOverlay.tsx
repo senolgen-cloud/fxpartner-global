@@ -213,12 +213,12 @@ export default function MoreMenuOverlay({
   return (
     <div className="fixed inset-0 z-[60] flex flex-col bg-ink text-text-on-ink motion-safe:animate-[fadeIn_0.15s_ease-out]">
       <div className="flex h-14 shrink-0 items-center justify-between border-b border-hairline px-4 md:h-16 md:px-6">
-        <span className="font-display text-lg font-semibold">Daha Fazla</span>
+        <span className="font-display text-lg font-semibold">{tr("Daha Fazla")}</span>
         <div className="flex items-center gap-2">
           <Link
             href={accountHref}
             onClick={close}
-            aria-label={signedIn ? "Hesabım" : "Giriş yap"}
+            aria-label={signedIn ? tr("Hesabım") : tr("Giriş Yap")}
             className="flex h-9 w-9 items-center justify-center rounded-full border border-hairline text-text-on-ink-muted transition-colors hover:border-signal hover:text-signal"
           >
             <MenuIcon name="account" />
@@ -226,7 +226,7 @@ export default function MoreMenuOverlay({
           <button
             type="button"
             onClick={close}
-            aria-label="Menüyü kapat"
+            aria-label={tr("Menüyü kapat")}
             className="flex h-9 w-9 items-center justify-center text-text-on-ink"
           >
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">

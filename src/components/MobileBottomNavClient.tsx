@@ -3,6 +3,7 @@
 import Link from "@/components/LocaleLink";
 import { useLocalePathname } from "@/components/useLocalePathname";
 import { useMoreMenu } from "@/components/MoreMenuContext";
+import { useTr } from "@/components/useTr";
 
 const ICONS = {
   home: (
@@ -49,6 +50,7 @@ function isActive(pathname: string, href: string) {
 export default function MobileBottomNavClient({ accountHref }: { accountHref: string }) {
   const pathname = useLocalePathname();
   const { open: moreOpen, setOpen: setMoreOpen } = useMoreMenu();
+  const tr = useTr();
 
   const tabs: { href: string; label: string; icon: keyof typeof ICONS }[] = [
     { href: "/", label: "Anasayfa", icon: "home" },
@@ -65,14 +67,14 @@ export default function MobileBottomNavClient({ accountHref }: { accountHref: st
 
   return (
     <nav
-      aria-label="Mobil gezinme"
+      aria-label={tr("Mobil gezinme")}
       className="grid grid-cols-6 border-t border-hairline bg-ink pb-[env(safe-area-inset-bottom)] sm:hidden"
     >
       {tabs.map((tab) => {
         const active = isActive(pathname, tab.href);
         return (
           <Link
-            key={tab.label}
+            key={tab.href}
             href={tab.href}
             aria-current={active ? "page" : undefined}
             className={`flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium transition-colors ${
@@ -80,7 +82,7 @@ export default function MobileBottomNavClient({ accountHref }: { accountHref: st
             }`}
           >
             <TabIcon name={tab.icon} />
-            {tab.label}
+            {tr(tab.label)}
           </Link>
         );
       })}
@@ -93,7 +95,7 @@ export default function MobileBottomNavClient({ accountHref }: { accountHref: st
         }`}
       >
         <TabIcon name="more" />
-        Daha Fazla
+        {tr("Daha Fazla")}
       </button>
     </nav>
   );
