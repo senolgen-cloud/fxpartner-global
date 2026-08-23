@@ -510,8 +510,15 @@ export const brokers: Broker[] = [
       "FSC (Mauritius)": "GB20025921",
       "SVG FSA (yalnızca şirket kaydı)": "931 LLC 2021",
     },
+    // Üç tüzel kişiliğin tamamı sicil numarasıyla yazılı, çünkü bu sayfanın
+    // tekrarladığı iddia tam olarak bu: "lisanslı mı" değil, sizin hesabınız
+    // hangi şirkete bağlı. Numaralar okurun kendi doğrulayabileceği tek şey.
     regulationNote:
-      "Grubun ayrıca CySEC lisanslı bir Avrupa şirketi var — Liteforex (Europe) Ltd, lisans no 093/08 — ancak bu şirket yalnızca Avrupa Ekonomik Alanı müşterilerine hizmet veriyor. Türkiye'den açılan hesaplar bu şirkete değil, offshore tarafa (LiteFinance Global LLC, Saint Vincent, kayıt no 931 LLC 2021 veya LiteFinance Investment Limited, Mauritius FSC) bağlanır; dolayısıyla CySEC'in yatırımcı tazmin fonu Türkiye'deki bir hesap için geçerli değildir. Hesap açarken sözleşmenin hangi şirketle imzalandığını mutlaka kontrol edin.",
+      "Grupta üç ayrı tüzel kişilik var ve hangisiyle sözleşme imzaladığınız hesabınızın hangi korumaya sahip olduğunu belirler. " +
+      "Liteforex (Europe) Ltd — Kıbrıs şirket sicil no HE230122, CySEC lisans no 093/08, MiFID II kapsamında düzenleniyor — yalnızca Avrupa Ekonomik Alanı müşterilerine hizmet veriyor. " +
+      "LiteFinance Investment Limited — Mauritius şirket sicil no 178302, FSC lisans no GB20025921, “Yatırım Aracısı (Tam Hizmet Sağlayıcı, sigortacılık hariç)” kategorisinde lisanslı. " +
+      "LiteFinance Global LLC — Saint Vincent ve Grenadinler, sicil no 931 LLC 2021, kayıtlı adres Euro House, Richmond Hill Road, P.K. 2897, Kingstown, VC0100. Bu şirket AEA ülkeleri, ABD, İsrail ve Rusya sakinlerine hizmet vermiyor. " +
+      "Türkiye AEA dışında olduğu için buradan açılan hesaplar CySEC'li AB şirketine değil offshore tarafa bağlanır; dolayısıyla CySEC'in yatırımcı tazmin fonu Türkiye'deki bir hesap için geçerli değildir. Hesap açarken sözleşmenin hangi şirketle imzalandığını mutlaka kontrol edin.",
     platforms: ["MT4", "MT5", "cTrader", "LiteFinance WebTerminal"],
     headquarters: "Kıbrıs (AB) / Saint Vincent (global)",
     referralUrl: "https://litefinance-tr.org/?uid=667827970",
