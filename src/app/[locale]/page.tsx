@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "@/components/LocaleLink";
 import { tr, trf } from "@/lib/chrome";
 import { localizeBlogPost, localizeBlogPosts, localizeBrokers, trData } from "@/lib/localizeContent";
@@ -164,7 +165,7 @@ export default async function Home({
           <HeroVideo />
           <HeroSpotlight />
 
-          <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-20 md:py-28 lg:grid-cols-[1fr_420px] lg:items-start lg:gap-16">
+          <div className="relative mx-auto grid max-w-6xl gap-12 px-6 pb-12 pt-20 md:pb-16 md:pt-28 lg:grid-cols-[1fr_420px] lg:items-start lg:gap-16">
           <div>
             <Reveal>
               <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-signal">
@@ -205,6 +206,38 @@ export default async function Home({
             <HeroEcosystemMockups brokers={localBrokers} latestSignal={latestSignal} />
           </Reveal>
           </div>
+
+          {/* The product itself, once, at a size where the dashboard on the
+              laptop screen is legible. It sits under the copy row rather than
+              inside the 420px right column, because the artwork is 1672x941:
+              squeezed into 420px the numbers on the screen become texture.
+              The right column keeps the live cards, which carry the current
+              signal and the current ranking - data a static render cannot.
+
+              No priority. At a normal viewport height this is below the fold,
+              and preloading a below-fold image only takes bandwidth from the
+              element that actually is the LCP. next/image starts the fetch
+              before it scrolls into view, and it ships ~70 KB of AVIF rather
+              than the 1.5 MB PNG on disk, so there is nothing to pop in. */}
+          <Reveal delay={380}>
+            <div className="relative mx-auto max-w-5xl px-6 pb-6 md:pb-10">
+              {/* Seats the transparent artwork on the dark section instead of
+                  leaving it floating: a soft pool of the same gold the globe
+                  in the image already throws. */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-12 bottom-24 h-40 rounded-[50%] bg-gold/10 blur-[90px]"
+              />
+              <Image
+                src="/fxpartner-hero-app.png"
+                alt={tr("FXPARTNER panelinin masaüstü ve mobil görünümü — canlı sinyaller, grafikler ve broker karşılaştırması")}
+                width={1672}
+                height={941}
+                sizes="(min-width: 1024px) 976px, 100vw"
+                className="relative h-auto w-full"
+              />
+            </div>
+          </Reveal>
         </section>
 
         {/* Ranked broker list */}
