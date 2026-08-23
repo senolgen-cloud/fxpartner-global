@@ -201,7 +201,7 @@ export default async function BlogPostPage({
               </div>
 
               <div className="mt-10">
-                <ShareButtons title={post.title} text={post.excerpt} locale="tr" />
+                <ShareButtons title={post.title} text={post.excerpt} />
               </div>
             </article>
             {railBroker && <BrokerSkyscraperAd broker={railBroker} />}

@@ -1,4 +1,5 @@
 import { scoreAxes, getBrokerScores, type Broker, type ScoreAxisKey } from "@/data/brokers";
+import { trData } from "@/lib/localizeContent";
 
 function Ladder({
   score,
@@ -58,7 +59,7 @@ export default function TrustIndex({
           wide ? "grid gap-x-8 gap-y-3 sm:grid-cols-2" : "space-y-2.5"
         }`}
       >
-        {scoreAxes.map((axis) => (
+        {trData(scoreAxes).map((axis) => (
           <div key={axis.key}>
             <div className="flex items-center justify-between gap-3">
               <span className={`font-mono text-[10px] uppercase tracking-[0.1em] ${mutedClass}`}>

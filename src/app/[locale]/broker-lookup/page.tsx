@@ -79,7 +79,7 @@ export default async function BrokerLookupPage({
             <p className="mt-5 text-lg leading-relaxed text-text-on-ink-muted">
               {trf(
                 "{count} aracı kurum arasında arama yapın — büyük düzenlenmiş isimlerden resmi düzenleyici uyarı listelerinde adı geçen firmalara kadar — ve her biri için dürüst, kaynaklı bir değerlendirme görün.",
-                { count: lookupBrokers.length }
+                { count: trData(lookupBrokers).length }
               )}
             </p>
           </div>

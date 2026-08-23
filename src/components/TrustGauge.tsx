@@ -1,4 +1,5 @@
 "use client";
+import { useTr, useTrf } from "@/components/useTr";
 
 import { useEffect, useState } from "react";
 
@@ -14,6 +15,8 @@ function toneForScore(score: number): { stroke: string; text: string; label: str
 }
 
 export default function TrustGauge({ score }: { score: number }) {
+  const tr = useTr();
+  const trf = useTrf();
   // Starts unfilled on both server and client render (mounted=false) so the
   // ring visibly sweeps in on mount instead of just appearing pre-filled —
   // same "animate from 0 after mount" trick as MiniScoreRings.
@@ -66,7 +69,7 @@ export default function TrustGauge({ score }: { score: number }) {
         <path d="M9 12l2 2 4-4" />
       </svg>
       <span className={`mt-1.5 font-mono text-[11px] uppercase tracking-[0.2em] ${tone.text}`}>
-        {tone.label} Güven Sinyali
+        {trf("{tone} Güven Sinyali", { tone: tr(tone.label) })}
       </span>
     </div>
   );

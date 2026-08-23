@@ -140,7 +140,7 @@ export default async function TechnicalAnalysisBulletinPage({
             </p>
 
             <div className="mt-10">
-              <ShareButtons title={title} text={posts.map((p) => p.headline).join(" · ")} locale="tr" />
+              <ShareButtons title={title} text={posts.map((p) => p.headline).join(" · ")} />
             </div>
           </div>
         </section>

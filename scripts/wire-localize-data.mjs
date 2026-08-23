@@ -43,7 +43,7 @@ const EXPORTS = [
   "PACKAGE_TIER_INFO", "FREE_TIER_INFO", "ACCESS_TIER_LABEL",
   // brokers — the category table only; broker records themselves go through
   // localizeBroker(), which has its own per-field overlay.
-  "categoryInfo",
+  "categoryInfo", "scoreAxes", "RISK_LEVEL_LABEL",
   // brokerLookup / cashback
   "lookupBrokers", "searchLookupBrokers",
   "cashbackPrograms", "getCashbackProgram", "getLiveCashbackProgram",

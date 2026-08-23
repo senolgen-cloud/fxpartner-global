@@ -1,6 +1,6 @@
 import { Broker, TIER1_REGULATORS } from "@/data/brokers";
 import { trData } from "@/lib/localizeContent";
-import { trf } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 
 const PLATFORM_BLURBS: [needle: string, blurb: string][] = [
   [
@@ -109,28 +109,37 @@ export function brokerFaqs(broker: Broker): { q: string; a: string }[] {
   const tier1Count = broker.regulators.filter((r) => TIER1_REGULATORS.has(r)).length;
   const tier1Clause =
     tier1Count === 0
-      ? "Bunların hiçbiri Tier-1 otorite değil"
+      ? tr("Bunların hiçbiri Tier-1 otorite değil")
       : tier1Count === n
-        ? `${n} lisansın tamamı Tier-1`
-        : `${n} lisanstan ${tier1Count} tanesi Tier-1 otorite`;
+        ? trf("{n} lisansın tamamı Tier-1", { n })
+        : trf("{n} lisanstan {tier1} tanesi Tier-1 otorite", { n, tier1: tier1Count });
   const faqs = [
     {
-      q: `${broker.name} regüle mi?`,
-      a: `${broker.name}, ${n} lisans taşıyor (${broker.regulators.join(", ")}). ${tier1Clause} — Tier-1 olarak kabul ettiğimiz otoriteler FCA, ASIC, CySEC, DFSA ve İrlanda Merkez Bankası'dır.`,
+      q: trf("{broker} regüle mi?", { broker: broker.name }),
+      a: trf(
+        "{broker}, {n} lisans taşıyor ({list}). {clause} — Tier-1 olarak kabul ettiğimiz otoriteler FCA, ASIC, CySEC, DFSA ve İrlanda Merkez Bankası’dır.",
+        { broker: broker.name, n, list: broker.regulators.join(", "), clause: tier1Clause }
+      ),
     },
     {
-      q: `${broker.name}'da minimum yatırım tutarı nedir?`,
-      a: `${broker.minDeposit}. Maksimum kaldıraç ${broker.maxLeverage}'e kadar çıkıyor, ancak tam rakam hesap türünüze ve ikamet ettiğiniz ülkeye bağlıdır.`,
+      q: trf("{broker}’da minimum yatırım tutarı nedir?", { broker: broker.name }),
+      a: trf(
+        "{deposit}. Maksimum kaldıraç {leverage}’e kadar çıkıyor, ancak tam rakam hesap türünüze ve ikamet ettiğiniz ülkeye bağlıdır.",
+        { deposit: broker.minDeposit, leverage: broker.maxLeverage }
+      ),
     },
     {
-      q: `${broker.name} hangi platformları destekliyor?`,
+      q: trf("{broker} hangi platformları destekliyor?", { broker: broker.name }),
       a: `${broker.platforms.join(", ")}.`,
     },
   ];
   if (broker.promotion) {
     faqs.push({
-      q: `${broker.name}'ın aktif bir kampanyası var mı?`,
-      a: `Evet — aşağıdaki ${broker.promotion.title} kampanyasına bakın veya tüm partner brokerlardaki güncel teklifler için Kampanyalar sayfamızı kontrol edin.`,
+      q: trf("{broker}’ın aktif bir kampanyası var mı?", { broker: broker.name }),
+      a: trf(
+        "Evet — aşağıdaki {promotion} kampanyasına bakın veya tüm partner brokerlardaki güncel teklifler için Kampanyalar sayfamızı kontrol edin.",
+        { promotion: broker.promotion.title }
+      ),
     });
   }
   if (broker.extraFaqs) {

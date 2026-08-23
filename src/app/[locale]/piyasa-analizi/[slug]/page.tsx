@@ -182,7 +182,7 @@ export default async function MarketAnalysisPostPage({
             </p>
 
             <div className="mt-10">
-              <ShareButtons title={post.title} text={post.excerpt} locale="tr" />
+              <ShareButtons title={post.title} text={post.excerpt} />
             </div>
           </article>
         </section>

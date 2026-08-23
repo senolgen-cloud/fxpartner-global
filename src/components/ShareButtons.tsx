@@ -1,13 +1,11 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useState } from "react";
 
-type Locale = "en" | "tr";
-
-const COPY: Record<Locale, { label: string; copy: string; copied: string }> = {
-  en: { label: "Share this page", copy: "Copy link", copied: "Link copied" },
-  tr: { label: "Bu sayfayı paylaş", copy: "Linki kopyala", copied: "Link kopyalandı" },
-};
+// Was a hand-rolled { en, tr } table with a locale prop, written before the
+// site had a locale to read. Every caller passed "tr" and a Ukrainian reader
+// got Turkish buttons; the catalogue knows the actual locale.
 
 function IconButton({
   label,
@@ -110,14 +108,13 @@ function CheckIcon() {
 export default function ShareButtons({
   title,
   text = "",
-  locale = "en",
 }: {
   title: string;
   text?: string;
-  locale?: Locale;
 }) {
+  const tr = useTr();
   const [copied, setCopied] = useState(false);
-  const t = COPY[locale];
+  const t = { label: tr("Bu sayfayı paylaş"), copy: tr("Linki kopyala"), copied: tr("Link kopyalandı") };
 
   function currentUrl(): string {
     if (typeof window === "undefined") return "";

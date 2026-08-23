@@ -1884,5 +1884,19 @@
   "{broker}, {count} platformu destekler: {list}.": "{broker} підтримує {count} платформ: {list}.",
   "{broker}, {count} Tier-1 lisans altında faaliyet gösteriyor — {list} — en güçlü regülasyon seviyesi olan bu lisanslar müşteri fonlarının ayrılmasını, minimum sermaye rezervini ve bazı ülkelerde broker iflas ederse bir tazminat şemasını şart koşar.": "{broker} працює під регулюванням {count} ліцензій Tier-1 — {list} — ці ліцензії, що відповідають найсуворішому рівню регулювання, вимагають сегрегації клієнтських коштів, наявності мінімального резерву капіталу та, у деяких країнах, системи компенсації на випадок банкрутства брокера.",
   "{broker}, {list} tarafından lisanslıdır. Bunların hiçbiri Tier-1 otorite değildir (FCA, ASIC, CySEC, DFSA veya İrlanda Merkez Bankası) — offshore regülatörler genellikle daha hafif sermaye şartları taşır ve arkalarında bir yatırımcı tazminat şeması bulunmaz, bu yüzden canlı bir hesaba para yatırmadan önce bunu aşağıdaki güçlü yönlerle birlikte değerlendirmekte fayda var.": "{broker} має ліцензію від {list}. Жоден із них не є регулятором Tier-1 (FCA, ASIC, CySEC, DFSA або Центральний банк Ірландії) — офшорні регулятори зазвичай мають м'якші вимоги до капіталу та не передбачають схеми компенсації інвесторам, тому перед внесенням коштів на реальний рахунок варто зважити це разом із наведеними нижче перевагами.",
-  "{bestFor} için {broker} güçlü bir uyum sağlıyor: {strengths}.{tradeoff} Herhangi bir brokerda olduğu gibi, canlı bir hesaba para yatırmadan önce güncel spreadleri, kaldıracı ve bölgesel kullanılabilirliği {broker}’ın resmi sitesinden doğrulayın.": "{broker} чудово підходить для {bestFor}: {strengths}.{tradeoff} Як і з будь-яким брокером, перед внесенням коштів на реальний рахунок перевірте актуальні спреди, кредитне плече та доступність у вашому регіоні на офіційному сайті {broker}."
+  "{bestFor} için {broker} güçlü bir uyum sağlıyor: {strengths}.{tradeoff} Herhangi bir brokerda olduğu gibi, canlı bir hesaba para yatırmadan önce güncel spreadleri, kaldıracı ve bölgesel kullanılabilirliği {broker}’ın resmi sitesinden doğrulayın.": "{broker} чудово підходить для {bestFor}: {strengths}.{tradeoff} Як і з будь-яким брокером, перед внесенням коштів на реальний рахунок перевірте актуальні спреди, кредитне плече та доступність у вашому регіоні на офіційному сайті {broker}.",
+  "Bu sayfayı paylaş": "Поділитися цією сторінкою",
+  "Linki kopyala": "Скопіювати посилання",
+  "Link kopyalandı": "Посилання скопійовано",
+  "{tone} Güven Sinyali": "{tone} Сигнал довіри",
+  "Bunların hiçbiri Tier-1 otorite değil": "Жоден із них не є регулятором Tier-1",
+  "{n} lisansın tamamı Tier-1": "Усі {n} ліцензій — Tier-1",
+  "{n} lisanstan {tier1} tanesi Tier-1 otorite": "З {n} ліцензій {tier1} — від регуляторів Tier-1",
+  "{broker} regüle mi?": "Чи регулюється {broker}?",
+  "{broker}, {n} lisans taşıyor ({list}). {clause} — Tier-1 olarak kabul ettiğimiz otoriteler FCA, ASIC, CySEC, DFSA ve İrlanda Merkez Bankası’dır.": "{broker} має {n} ліцензій ({list}). {clause} — регуляторами, які ми вважаємо Tier-1, є FCA, ASIC, CySEC, DFSA та Центральний банк Ірландії.",
+  "{broker}’da minimum yatırım tutarı nedir?": "Яка мінімальна сума інвестицій у {broker}?",
+  "{deposit}. Maksimum kaldıraç {leverage}’e kadar çıkıyor, ancak tam rakam hesap türünüze ve ikamet ettiğiniz ülkeye bağlıdır.": "{deposit}. Максимальне кредитне плече сягає {leverage}, але точна цифра залежить від вашого типу рахунку та країни проживання.",
+  "{broker} hangi platformları destekliyor?": "Які платформи підтримує {broker}?",
+  "{broker}’ın aktif bir kampanyası var mı?": "Чи має {broker} активну акцію?",
+  "Evet — aşağıdaki {promotion} kampanyasına bakın veya tüm partner brokerlardaki güncel teklifler için Kampanyalar sayfamızı kontrol edin.": "Так — перегляньте акцію {promotion} нижче або перевірте нашу сторінку Акції для актуальних пропозицій від усіх партнерських брокерів."
 }

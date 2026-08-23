@@ -145,7 +145,7 @@ export default async function NewsBulletinPage({
             )}
 
             <div className="mt-10">
-              <ShareButtons title={bulletin.title} text={bulletin.excerpt} locale="tr" />
+              <ShareButtons title={bulletin.title} text={bulletin.excerpt} />
             </div>
           </article>
         </section>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { tr, trf, trLocale } from "@/lib/chrome";
-import { localizeBrokerDeep, trData } from "@/lib/localizeContent";
+import { localizeBrokerDeep, localizeBrokers, trData } from "@/lib/localizeContent";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Image from "next/image";
 import Link from "@/components/LocaleLink";
@@ -145,7 +145,11 @@ export default async function BrokerDetailPage({
   const broker = source ? localizeBrokerDeep(source, locale) : source;
   if (!broker) notFound();
 
-  const otherBrokers = brokers.filter((b) => b.slug !== broker.slug).slice(0, 3);
+  // The cross-link strip renders taglines, which live in the same overlay
+  // the page above already uses — it was reading the raw Turkish list.
+  const otherBrokers = localizeBrokers(brokers, locale)
+    .filter((b) => b.slug !== broker.slug)
+    .slice(0, 3);
   // Ad slot: a sponsored broker gets to run its own banner on its own review
   // page too (that's the point of paying for the placement) — cross-sell to
   // another sponsored broker only when this one isn't a paying advertiser.
@@ -294,7 +298,7 @@ export default async function BrokerDetailPage({
                             : "border-tick-down/30 bg-tick-down/10 text-tick-down"
                       }`}
                     >
-                      {RISK_LEVEL_LABEL[riskLevel]}
+                      {trData(RISK_LEVEL_LABEL)[riskLevel]}
                     </span>
                   </div>
                   <div className="mt-4 flex items-center gap-4">
@@ -841,7 +845,7 @@ export default async function BrokerDetailPage({
 
         <section>
           <div className="mx-auto max-w-5xl px-6 pb-16">
-            <ShareButtons title={`${broker.name} İncelemesi`} text={broker.summary} locale="tr" />
+            <ShareButtons title={`${broker.name} İncelemesi`} text={broker.summary} />
           </div>
         </section>
       </main>
