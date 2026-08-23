@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { hreflangCode, locales, localePath, defaultLocale } from "@/lib/i18n";
+import { hreflangMap, locales, localePath, defaultLocale } from "@/lib/i18n";
 import { brokers, brokerCategories, categoryInfo } from "@/data/brokers";
 import { propFirms } from "@/data/propFirms";
 import { blogPosts } from "@/data/blog";
@@ -118,9 +118,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // than two pages competing for the same query.
   return turkishRoutes.flatMap((route) => {
     const path = route.url.replace(SITE_URL, "") || "/";
-    const languages = Object.fromEntries(
-      locales.map((l) => [hreflangCode[l], `${SITE_URL}${localePath(l, path)}`])
-    );
+    const languages = hreflangMap(path, SITE_URL);
     return locales.map((locale) => ({
       ...route,
       url: `${SITE_URL}${localePath(locale, path)}`,

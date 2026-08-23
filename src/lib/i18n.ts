@@ -28,6 +28,22 @@ export const hreflangCode: Record<Locale, string> = {
   en: "en",
 };
 
+/**
+ * The full hreflang set for one path, x-default included.
+ *
+ * x-default is what a search engine shows a reader whose language matches
+ * none of the three. It mattered less while Turkish sat on the bare URL and
+ * was the obvious fallback; now that every tree is prefixed, nothing is the
+ * default unless it says so. It points at Turkish, because that is the
+ * language the site is written in and the audience it is written for.
+ */
+export function hreflangMap(path: string, origin = ""): Record<string, string> {
+  const map: Record<string, string> = {};
+  for (const l of locales) map[hreflangCode[l]] = `${origin}${localePath(l, path)}`;
+  map["x-default"] = `${origin}${localePath(defaultLocale, path)}`;
+  return map;
+}
+
 // Open Graph wants language_TERRITORY, which is neither the URL segment nor
 // the bare language code.
 export const ogLocale: Record<Locale, string> = {
@@ -62,11 +78,15 @@ export function isLocale(value: string): value is Locale {
   return (locales as readonly string[]).includes(value);
 }
 
-// Prefixes a site-absolute path for the given locale. The default locale is
-// returned untouched, so every existing href keeps producing the URL it
-// always produced.
+// Prefixes a site-absolute path for the given locale.
+//
+// Every locale is prefixed, Turkish included: /tr/brokerlar, not /brokerlar.
+// Turkish used to be the bare default, which made it the one tree whose URL
+// did not say what language it was in — invisible in analytics, ambiguous to
+// a crawler deciding which of three near-identical pages to index, and a
+// special case every caller had to remember. proxy.ts sends the old
+// unprefixed paths here with a permanent redirect.
 export function localePath(locale: Locale, path: string): string {
-  if (locale === defaultLocale) return path;
   if (!path.startsWith("/")) return path;
   return path === "/" ? `/${locale}` : `/${locale}${path}`;
 }

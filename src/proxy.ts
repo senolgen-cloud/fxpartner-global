@@ -118,13 +118,18 @@ function isStaticFile(pathname: string): boolean {
   return last.includes(".");
 }
 
-// Turkish keeps the bare URL it has always had and is rewritten onto the
-// internal /tr tree; the other locales are already prefixed. No
-// Accept-Language redirect: every existing link, share and indexed URL
-// points at the unprefixed path, and silently moving a visitor (or a
-// crawler) off it would break more than it fixes. The language switcher is
-// the way across.
-function localeRewrite(request: NextRequest): NextResponse | null {
+// Every tree is prefixed now, Turkish included. An unprefixed path is an old
+// URL and gets a permanent redirect to /tr — 308 rather than 307, because
+// this move is not coming back and a crawler needs to be told that in order
+// to pass the old page’s standing to the new one.
+//
+// 308 rather than 301 for the same reason Next uses it: 301 lets a client
+// turn a POST into a GET on the way, and form posts come through this proxy.
+//
+// Still no Accept-Language redirect. Choosing a language for a visitor who
+// asked for a specific URL takes the choice away from them, and takes it away
+// from the crawler too.
+function localeRedirect(request: NextRequest): NextResponse | null {
   const { pathname, search } = request.nextUrl;
   if (isStaticFile(pathname)) return null;
 
@@ -134,7 +139,7 @@ function localeRewrite(request: NextRequest): NextResponse | null {
   const url = request.nextUrl.clone();
   url.pathname = `/${defaultLocale}${pathname === "/" ? "" : pathname}`;
   url.search = search;
-  return NextResponse.rewrite(url);
+  return NextResponse.redirect(url, 308);
 }
 
 export default async function proxy(request: NextRequest) {
@@ -147,7 +152,7 @@ export default async function proxy(request: NextRequest) {
     if (session?.user?.email !== ADMIN_EMAIL) {
       return NextResponse.redirect(new URL(localePath(locale, "/"), request.url));
     }
-    const response = localeRewrite(request) ?? NextResponse.next();
+    const response = localeRedirect(request) ?? NextResponse.next();
     applyAutoLanguage(request, response);
     applyVisitorId(request, response);
     applyAttribution(request, response);
@@ -170,7 +175,7 @@ export default async function proxy(request: NextRequest) {
     }
   }
 
-  const response = localeRewrite(request) ?? NextResponse.next();
+  const response = localeRedirect(request) ?? NextResponse.next();
   applyAutoLanguage(request, response);
   applyVisitorId(request, response);
   applyAttribution(request, response);

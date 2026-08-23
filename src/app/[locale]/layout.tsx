@@ -19,7 +19,7 @@ import { localizeBrokers } from "@/lib/localizeContent";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import { auth } from "@/auth";
 import { LocaleProvider } from "@/components/LocaleProvider";
-import { defaultLocale, hreflangCode, htmlLang, isLocale, locales, localePath, ogLocale, type Locale } from "@/lib/i18n";
+import { defaultLocale, hreflangMap, htmlLang, isLocale, locales, localePath, ogLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionary";
 import { setServerLocale } from "@/lib/serverLocale";
 import "../globals.css";
@@ -46,7 +46,8 @@ const poppins = Poppins({
 // Per-locale, because the title, the description and above all the
 // hreflang set differ by tree. hreflang is what stops Google reading /ua as
 // a duplicate of / and picking one: every page advertises its siblings, and
-// x-default points at Turkish, which is the tree with the bare URL.
+// x-default points at Turkish: the language the site is written in. No tree
+// has a bare URL any more, so nothing is the default unless it says so.
 export async function generateMetadata({
   params,
 }: {
@@ -55,9 +56,7 @@ export async function generateMetadata({
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : defaultLocale;
   const t = getDictionary(locale);
-  const languages = Object.fromEntries(
-    locales.map((l) => [hreflangCode[l], localePath(l, "/")])
-  );
+  const languages = hreflangMap("/");
 
   return {
   metadataBase: new URL(SITE_URL),
@@ -105,7 +104,11 @@ export async function generateMetadata({
     t["site.description"],
   alternates: {
     canonical: localePath(locale, "/"),
-    languages: { ...languages, "x-default": "/" },
+    // hreflangMap already supplies x-default. It used to be overridden with
+    // "/" here, which was right while Turkish lived on the bare URL and is
+    // wrong now: "/" issues a 308, and an hreflang pointing at a redirect is
+    // one a crawler is entitled to ignore.
+    languages,
   },
   openGraph: {
     title: t["site.title"],
