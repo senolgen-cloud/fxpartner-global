@@ -16,6 +16,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { scan } from "./lib/scope.mjs";
 
 const DRY = process.argv.includes("--dry");
 // useLocalizedData is a hook, so it is only legal at the top level of a
@@ -40,6 +41,9 @@ const EXPORTS = [
   "contentStudioPrompt", "contentStudioSamples", "partnerFaqItems", "networkRegions",
   // packageTiers
   "PACKAGE_TIER_INFO", "FREE_TIER_INFO", "ACCESS_TIER_LABEL",
+  // brokers — the category table only; broker records themselves go through
+  // localizeBroker(), which has its own per-field overlay.
+  "categoryInfo",
 ];
 
 // Exports whose values carry no prose: scores, ordering, booleans, arcs.
@@ -56,6 +60,8 @@ const STRUCTURAL_EXPORTS = new Set([
 const SKIP = [
   "src/app/api/",
   "src/app/sitemap.ts",
+  // A single Turkish index for crawlers, not a localized page.
+  "src/app/llms.txt/",
 ];
 
 function walk(dir, out = []) {
@@ -73,7 +79,7 @@ const results = [];
 for (const file of walk("src")) {
   if (SKIP.some((p) => file.startsWith(p))) continue;
   let source = fs.readFileSync(file, "utf8");
-  if (!/from "@\/data\/(propFirms|marketAnalysis|technicalAnalysis|partnerProgram|packageTiers)"/.test(source)) continue;
+  if (!/from "@\/data\/(propFirms|marketAnalysis|technicalAnalysis|partnerProgram|packageTiers|brokers)"/.test(source)) continue;
 
   const isClient = source.startsWith('"use client"');
   if (isClient && SERVER_ONLY) {
@@ -88,6 +94,7 @@ for (const file of walk("src")) {
   // check is not enough: a multi-line import puts each name on its own line
   // with no "import" keyword in sight, and wrapping one there produces
   // `import { trData(getPropFirm), }` — which is what the first run did.
+  let scope = scan(source);
   const importBlock = [...source.matchAll(/^import [\s\S]*?;$/gm)];
   const importsEnd = importBlock.length
     ? importBlock[importBlock.length - 1].index + importBlock[importBlock.length - 1][0].length
@@ -101,10 +108,16 @@ for (const file of walk("src")) {
     const read = new RegExp(`(?<![.\\w$])${name}(\\([^()]*\\))?(?![\\w("'\`])`, "g");
     source = source.replace(read, (match, _call, offset) => {
       if (offset < importsEnd) return match;
+      // Prose, not code: a doc comment naming the module is not a read.
+      if (scope.inert[offset]) return match;
+      // A top-level initialiser runs at import, where there is no request,
+      // so wrapping there would freeze the first locale served.
+      if (scope.runsAtImport(offset)) return match;
       if (source.slice(Math.max(0, offset - wrapper.length - 1), offset) === `${wrapper}(`) return match;
       changed++;
       return `${wrapper}(${match})`;
     });
+    scope = scan(source);
   }
 
   if (!changed) {

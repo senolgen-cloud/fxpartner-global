@@ -51,10 +51,12 @@ function getMonogram(name: string): string {
 }
 
 function ratingWord(rating: number): string {
-  if (rating >= 4.5) return "Mükemmel";
-  if (rating >= 3.5) return "Çok İyi";
-  if (rating >= 2.5) return "Ortalama";
-  return "Zayıf";
+  // Wrapped at the point of return rather than at the call sites, because
+  // every caller wants the reader's language and none wants the Turkish.
+  if (rating >= 4.5) return tr("Mükemmel");
+  if (rating >= 3.5) return tr("Çok İyi");
+  if (rating >= 2.5) return tr("Ortalama");
+  return tr("Zayıf");
 }
 
 // score is on the same 1-5 scale as getBrokerScores' individual axes.
@@ -528,7 +530,7 @@ export default async function BrokerDetailPage({
                         href={`/categories/${categoryInfo[c as BrokerCategory].slug}`}
                         className="rounded-full border border-hairline-light px-3 py-1.5 font-mono text-xs text-text-muted transition-colors hover:border-text-dark hover:text-text-dark"
                       >
-                        {categoryInfo[c as BrokerCategory].label}
+                        {trData(categoryInfo)[c as BrokerCategory].label}
                       </Link>
                     ))}
                   </div>

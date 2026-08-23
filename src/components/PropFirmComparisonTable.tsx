@@ -177,6 +177,7 @@ const RANKED_FIRMS = propFirmsByScore();
 export default function PropFirmComparisonTable() {
   const tr = useTr();
   const firms = useLocalizedData(RANKED_FIRMS);
+  const criteria = PROP_CRITERIA.map((c) => tr(c));
   const [activeSegment, setActiveSegment] = useState<SegmentFilter>("cfd");
   const [activeModel, setActiveModel] = useState<ModelFilter>("Tümü");
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
@@ -216,7 +217,7 @@ export default function PropFirmComparisonTable() {
                   : "text-text-on-ink-muted hover:text-text-on-ink"
               }`}
             >
-              {SEGMENT_LABEL[seg]} ({count})
+              {tr(SEGMENT_LABEL[seg])} ({count})
             </button>
           );
         })}
@@ -234,7 +235,7 @@ export default function PropFirmComparisonTable() {
                 : "border-hairline text-text-on-ink-muted hover:border-text-on-ink hover:text-text-on-ink"
             }`}
           >
-            {model === "Tümü" ? "Tümü" : MODEL_LABEL[model]}
+            {model === "Tümü" ? tr("Tümü") : tr(MODEL_LABEL[model])}
           </button>
         ))}
       </div>
@@ -246,7 +247,7 @@ export default function PropFirmComparisonTable() {
               <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
                 Prop Firma
               </th>
-              {PROP_CRITERIA.map((label) => (
+              {criteria.map((label) => (
                 <th
                   key={label}
                   className={`px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] ${

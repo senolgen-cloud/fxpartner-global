@@ -1,10 +1,17 @@
+"use client";
+
 import Image from "next/image";
-import { tr } from "@/lib/chrome";
+// Client helpers, not the server tr(): this component has no "use client"
+// of its own, but BrokerList does, so it is compiled into the client bundle
+// — where the per-request locale store does not exist and tr() would quietly
+// return Turkish to every reader.
+import { useTr, useTrf } from "@/components/useTr";
 import Link from "@/components/LocaleLink";
 import { categoryInfo, type Broker, type BrokerCategory } from "@/data/brokers";
 import TiltWrapper from "./TiltWrapper";
 import MiniScoreRings from "./MiniScoreRings";
 import type { BrokerReviewStats } from "@/lib/brokerReviews";
+import { useLocalizedData } from "@/components/useLocalizedData";
 
 function getMonogram(name: string): string {
   const words = name.trim().split(/\s+/);
@@ -30,6 +37,8 @@ function ratingWord(rating: number): string {
 // card. Never fabricates a review count: omits that clause entirely when
 // there's no rated-comment data for this broker yet.
 function RatingRow({ broker, reviewStats }: { broker: Broker; reviewStats?: BrokerReviewStats }) {
+  const tr = useTr();
+  const trf = useTrf();
   const full = Math.round(broker.rating);
   return (
     <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -43,10 +52,10 @@ function RatingRow({ broker, reviewStats }: { broker: Broker; reviewStats?: Brok
       <span className="tabular-stat text-sm font-semibold text-text-on-ink">
         {broker.rating.toFixed(1)}
       </span>
-      <span className="text-xs text-text-on-ink-muted">{ratingWord(broker.rating)}</span>
+      <span className="text-xs text-text-on-ink-muted">{tr(ratingWord(broker.rating))}</span>
       {reviewStats && reviewStats.ratingCount > 0 && (
         <span className="text-xs text-text-on-ink-muted">
-          · {reviewStats.ratingCount} yorum
+          · {trf("{count} yorum", { count: reviewStats.ratingCount })}
         </span>
       )}
     </div>
@@ -62,6 +71,8 @@ function CardBody({
   featured: boolean;
   reviewStats?: BrokerReviewStats;
 }) {
+  const tr = useTr();
+  const categories = useLocalizedData(categoryInfo);
   return (
     <div className={featured ? "featured-card-depth-sm" : ""}>
       {broker.promotion && (
@@ -153,7 +164,7 @@ function CardBody({
               href={`/categories/${categoryInfo[c as BrokerCategory].slug}`}
               className="rounded-full border border-hairline px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-text-on-ink-muted transition-colors hover:border-signal hover:text-signal"
             >
-              {categoryInfo[c as BrokerCategory].label}
+              {categories[c as BrokerCategory].label}
             </Link>
           ))}
         </div>
@@ -171,6 +182,8 @@ export default function RankedBrokerCard({
   featured?: boolean;
   reviewStats?: BrokerReviewStats;
 }) {
+  const tr = useTr();
+
   if (featured) {
     return (
       <article className="group relative">

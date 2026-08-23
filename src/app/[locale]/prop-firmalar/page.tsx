@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
@@ -132,19 +132,17 @@ export default async function PropFirmalarPage({
               Prop Firmalar
             </span>
             <h1 className="mt-4 font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              {YEAR} en iyi prop firmaları
+              {trf("{year} en iyi prop firmaları", { year: YEAR })}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              Funded account veren firmaları kural seti, challenge ücreti, drawdown
-              limitleri, kâr paylaşımı ve <strong className="text-text-on-ink">ödeme sicili</strong>{" "}
+              {tr("Funded account veren firmaları kural seti, challenge ücreti, drawdown limitleri, kâr paylaşımı ve")}{" "}
+              <strong className="text-text-on-ink">{tr("ödeme sicili")}</strong>{" "}
               {tr("üzerinden karşılaştırın. Puanlama bağımsızdır; ticari ilişkimiz olan firmalar açıkça etiketlenir ve aynı kriterlerden geçer.")}
             </p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">
-              Şu an {ranked.length} firma izleniyor. Bir firmanın{" "}
-              <strong className="text-text-on-ink">{tr("Ödeme Doğrulandı")}</strong> etiketi
-              alabilmesi için son 30 gün içinden kaynağı kayıtlı bağımsız ödeme kanıtı
-              sunmuş olması gerekir — bu doğrulama tamamlanmadan hiçbir firma site
-              genelinde önerilmez.
+              {trf("Şu an {count} firma izleniyor. Bir firmanın", { count: ranked.length })}{" "}
+              <strong className="text-text-on-ink">{tr("Ödeme Doğrulandı")}</strong>{" "}
+              {tr("etiketi alabilmesi için son 30 gün içinden kaynağı kayıtlı bağımsız ödeme kanıtı sunmuş olması gerekir — bu doğrulama tamamlanmadan hiçbir firma site genelinde önerilmez.")}
             </p>
           </div>
         </section>
@@ -214,7 +212,7 @@ export default async function PropFirmalarPage({
             <div className="mt-8 rounded-2xl border border-hairline-light bg-paper p-6">
               <p className="text-sm leading-relaxed text-text-muted">
                 <strong className="text-text-dark">{tr("Şu anki lider:")}</strong> {top.name} —{" "}
-                {getPropFirmScores(top).composite.toFixed(1)} Index puanı.{" "}
+                {trf("{score} Index puanı.", { score: getPropFirmScores(top).composite.toFixed(1) })}{" "}
                 {top.summary}
               </p>
             </div>
@@ -232,11 +230,10 @@ export default async function PropFirmalarPage({
             </h2>
             <div className="mt-8 space-y-5 text-[15px] leading-relaxed text-text-on-ink-muted">
               <p>
-                <strong className="text-text-on-ink">Challenge&apos;ların büyük
-                çoğunluğu başarısızlıkla sonuçlanır.</strong> Bu, kötü bir trader
-                olduğunuz anlamına gelmez; kural setleri zaten sıkı risk limitleriyle
-                tasarlanmıştır. Challenge ücretini, kaybetmeyi göze alabileceğiniz bir
-                tutar olarak değerlendirin.
+                <strong className="text-text-on-ink">
+                  {tr("Challenge’ların büyük çoğunluğu başarısızlıkla sonuçlanır.")}
+                </strong>{" "}
+                {tr("Bu, kötü bir trader olduğunuz anlamına gelmez; kural setleri zaten sıkı risk limitleriyle tasarlanmıştır. Challenge ücretini, kaybetmeyi göze alabileceğiniz bir tutar olarak değerlendirin.")}
               </p>
               <p>
                 <strong className="text-text-on-ink">{tr("Firma kapanma riski gerçektir.")}</strong>{" "}

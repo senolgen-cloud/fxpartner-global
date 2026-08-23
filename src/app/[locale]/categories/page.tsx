@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { brokerCategories, categoryInfo, brokers } from "@/data/brokers";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -71,7 +72,7 @@ export default async function CategoriesPage({
           <div className="mx-auto max-w-6xl px-6 py-16">
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {brokerCategories.map((category) => {
-                const info = categoryInfo[category];
+                const info = trData(categoryInfo)[category];
                 const count = brokers.filter((b) =>
                   b.categories.includes(category)
                 ).length;

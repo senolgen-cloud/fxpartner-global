@@ -15,8 +15,11 @@ const recentActivity = [
 ];
 
 const currentTierIndex = 2; // "Gold" — illustrative example partner
-const currentTier = trData(partnerTiers)[currentTierIndex];
-const nextTier = trData(partnerTiers)[currentTierIndex + 1];
+// Untranslated here on purpose: tierProgress below is arithmetic over the
+// thresholds, which do not change with language. The names are translated
+// where they are rendered instead.
+const currentTier = partnerTiers[currentTierIndex];
+const nextTier = partnerTiers[currentTierIndex + 1];
 const referredClients = 34;
 const tierProgress = nextTier
   ? Math.min(
@@ -63,7 +66,7 @@ export default function PartnerDashboardPreview() {
             className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-8 bg-gradient-to-t from-ink-soft to-transparent"
           />
           <div className="ticker-track-vertical">
-            {[...recentActivity, ...recentActivity].map((row, i) => (
+            {[...trData(recentActivity), ...trData(recentActivity)].map((row, i) => (
               <div
                 key={`${row.client}-${i}`}
                 className="flex items-center justify-between gap-3 border-b border-hairline/60 px-3 py-2.5"

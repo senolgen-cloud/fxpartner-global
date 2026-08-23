@@ -1,4 +1,4 @@
-import { tr } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { getFeaturedPartner, getPropFirmScores, hasActiveLink } from "@/data/propFirms";
 import { trData } from "@/lib/localizeContent";
@@ -11,7 +11,7 @@ import { trData } from "@/lib/localizeContent";
  * Index puanının kartta olduğu gibi gösterilmesi (yükseltilmeden) bunu
  * sağlıyor — okuyucu firmanın tabloda kaçıncı olduğunu buradan da görebilir.
  *
- * Bkz. data/trData(propFirms).ts → trData(getFeaturedPartner()).
+ * Bkz. data/propFirms.ts → getFeaturedPartner().
  */
 export default function PropFirmFeaturedCard() {
   const firm = trData(getFeaturedPartner());
@@ -19,7 +19,7 @@ export default function PropFirmFeaturedCard() {
 
   const { composite } = getPropFirmScores(firm);
   // Link ticari karara bağlı; rozet ise editoryal duruma. İkisi ayrı —
-  // bkz. trData(propFirms).ts → hasActiveLink() / isPromotable().
+  // bkz. propFirms.ts → hasActiveLink() / isPromotable().
   const linkOn = hasActiveLink(firm);
   const verified = firm.payoutProof.status === "verified";
   const d = firm.discount;
@@ -32,7 +32,9 @@ export default function PropFirmFeaturedCard() {
           {tr("Ortaklık yerleşimi")}
         </span>
         <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
-          Sıralama değil — tabloda {composite.toFixed(1)} puanla yer alıyor
+          {trf("Sıralama değil — tabloda {score} puanla yer alıyor", {
+            score: composite.toFixed(1),
+          })}
         </span>
       </div>
 
@@ -137,9 +139,15 @@ export default function PropFirmFeaturedCard() {
             karar, editoryal iddianın yerine geçmez. */}
         {!verified && (
           <span className="w-full font-mono text-[11px] leading-relaxed text-text-on-ink-muted">
-            Bağımsız ödeme kanıtı doğrulamamız henüz tamamlanmadı — bu firma
-            &ldquo;{firm.payoutProof.status === "monitored" ? "İzleniyor" : "Doğrulanmadı"}&rdquo;
-            statüsünde. Hesap açmadan önce kendi araştırmanızı yapın.
+            {trf(
+              "Bağımsız ödeme kanıtı doğrulamamız henüz tamamlanmadı — bu firma “{status}” statüsünde. Hesap açmadan önce kendi araştırmanızı yapın.",
+              {
+                status:
+                  firm.payoutProof.status === "monitored"
+                    ? tr("İzleniyor")
+                    : tr("Doğrulanmadı"),
+              }
+            )}
           </span>
         )}
       </div>

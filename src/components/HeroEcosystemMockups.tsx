@@ -91,7 +91,7 @@ function SignalCardBody({ signal }: { signal: TradeSignal }) {
       </svg>
       <div className="mt-3 flex items-center justify-between border-t border-hairline pt-3 font-mono text-[11px]">
         <span className="text-text-on-ink-muted">
-          {isClosed ? "Kapanış" : "Giriş"} <span className="text-text-on-ink">{isClosed ? signal.closePrice : signal.entry}</span>
+          {isClosed ? tr("Kapanış") : tr("Giriş")} <span className="text-text-on-ink">{isClosed ? signal.closePrice : signal.entry}</span>
         </span>
         {signal.target1 && <span className="text-tick-up">TP {signal.target1}</span>}
         {signal.stop && <span className="text-tick-down">SL {signal.stop}</span>}
@@ -135,7 +135,7 @@ export default function HeroEcosystemMockups({
       {/* AI Market Assistant */}
       <Link href="/ai-asistan" className="block transition-opacity hover:opacity-90">
         <CardShell
-          label="Yapay Zeka Piyasa Asistanı"
+          label={tr("Yapay Zeka Piyasa Asistanı")}
           icon={
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
               <rect x="4" y="5" width="16" height="11" rx="2.5" />
@@ -166,7 +166,7 @@ export default function HeroEcosystemMockups({
 
       {/* Trusted Brokers */}
       <CardShell
-        label="Güvenilir Brokerlar"
+        label={tr("Güvenilir Brokerlar")}
         icon={
           <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 3l7 3v5c0 4.6-3 8.4-7 9.9-4-1.5-7-5.3-7-9.9V6l7-3z" />

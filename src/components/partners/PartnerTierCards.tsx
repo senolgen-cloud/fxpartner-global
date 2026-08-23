@@ -1,5 +1,6 @@
 "use client";
 import { useLocalizedData } from "@/components/useLocalizedData";
+import { useTrf } from "@/components/useTr";
 
 import { motion } from "framer-motion";
 import TiltWrapper from "@/components/TiltWrapper";
@@ -7,6 +8,7 @@ import { partnerTiers } from "@/data/partnerProgram";
 
 export default function PartnerTierCards() {
   const partnerTiersTr = useLocalizedData(partnerTiers);
+  const trf = useTrf();
   return (
     <div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -40,7 +42,7 @@ export default function PartnerTierCards() {
                         isPremium ? "text-gold" : "text-signal"
                       }`}
                     >
-                      {tier.minReferred}+ müşteri
+                      {trf("{count}+ müşteri", { count: tier.minReferred })}
                     </span>
                   </div>
                   <p className="mt-2 text-sm font-medium text-text-muted">

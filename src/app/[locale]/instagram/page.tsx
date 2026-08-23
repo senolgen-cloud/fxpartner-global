@@ -48,13 +48,20 @@ export async function generateMetadata({
 
 // Newest bulletin day first. ISO strings sort lexicographically, so a
 // plain string sort is correct here and avoids Date/timezone parsing.
-const bulletinDates = [...new Set(trData(technicalAnalysisPosts).map((p) => p.publishedAt))]
+// Dates are locale-independent, so the grouping is still derived once at
+// import; only the posts themselves are translated, and that has to happen
+// per request — a trData() up here would freeze the first locale served.
+const bulletinDates = [...new Set(technicalAnalysisPosts.map((p) => p.publishedAt))]
   .sort()
   .reverse();
 const latestDate: string | undefined = bulletinDates[0];
-const latestPosts = latestDate
-  ? trData(technicalAnalysisPosts).filter((p) => p.publishedAt === latestDate).slice(0, 4)
-  : [];
+
+function latestBulletins() {
+  if (!latestDate) return [];
+  return trData(technicalAnalysisPosts)
+    .filter((p) => p.publishedAt === latestDate)
+    .slice(0, 4);
+}
 
 // Formatted from the ISO parts rather than through Date, so the rendered
 // day can never shift by one under a different server timezone.
@@ -203,7 +210,7 @@ export default async function InstagramLandingPage({
               </div>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                {latestPosts.map((post) => (
+                {latestBulletins().map((post) => (
                   <Link
                     key={post.slug}
                     href={`/teknik-analiz/${isoToBulletinSlug(post.publishedAt)}`}

@@ -74,7 +74,7 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
                 <span className="tabular-stat text-xs font-semibold text-text-dark">
                   {broker.rating.toFixed(1)}
                 </span>
-                <span className="text-xs text-text-muted">{ratingWord(broker.rating)}</span>
+                <span className="text-xs text-text-muted">{tr(ratingWord(broker.rating))}</span>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import Link from "@/components/LocaleLink";
-import { tr } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 import { localizeBlogPost, localizeBlogPosts, localizeBrokers, trData } from "@/lib/localizeContent";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Footer from "@/components/Footer";
@@ -219,7 +219,10 @@ export default async function Home({
                 {tr("Sıralamalar")}
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-on-ink md:text-4xl">
-                2026&apos;nın en çok tercih edilen {brokers.length} forex brokeri
+                {trf("{year}’nın en çok tercih edilen {count} forex brokeri", {
+                  year: 2026,
+                  count: brokers.length,
+                })}
               </h2>
               <p className="mt-4 text-text-on-ink-muted">
                 {tr("Her broker; regülasyon gücü, maliyet yapısı, platform desteği ve farklı yatırımcı profillerine uygunluk açısından değerlendirildi.")}
@@ -311,7 +314,7 @@ export default async function Home({
                 href="/prop-firmalar"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
-                {trData(propFirms).length} firmanın tamamını karşılaştır →
+                {trf("{count} firmanın tamamını karşılaştır →", { count: propFirms.length })}
               </Link>
             </Reveal>
           </div>

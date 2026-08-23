@@ -31,7 +31,7 @@ export default function ReviewBadge({
           {tr("FXPARTNER kullanıcı puanı")}
         </p>
         <p className="mt-1 font-display text-3xl font-semibold leading-none">
-          {wordForRating(rating)}
+          {tr(wordForRating(rating))}
         </p>
       </div>
 

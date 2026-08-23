@@ -32,7 +32,7 @@ function categoryTitle(name: BrokerCategory): string {
 
 export function generateStaticParams() {
   return brokerCategories.map((category) => ({
-    slug: categoryInfo[category].slug,
+    slug: trData(categoryInfo)[category].slug,
   }));
 }
 
@@ -80,7 +80,7 @@ export default async function CategoryPage({
             breadcrumbSchema([
               { name: "Ana Sayfa", url: SITE_URL },
               { name: "Kategoriler", url: `${SITE_URL}/categories` },
-              { name: categoryInfo[category.name].label, url: `${SITE_URL}/categories/${category.slug}` },
+              { name: trData(categoryInfo)[category.name].label, url: `${SITE_URL}/categories/${category.slug}` },
             ])
           ),
         }}
@@ -95,7 +95,7 @@ export default async function CategoryPage({
               {tr("← Tüm kategoriler")}
             </Link>
             <h1 className="mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              {categoryInfo[category.name].label}
+              {trData(categoryInfo)[category.name].label}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
               {category.description}
@@ -105,7 +105,7 @@ export default async function CategoryPage({
             </p>
             {topPick && (
               <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-text-on-ink-muted">
-                FXPARTNER Endeksi&apos;ne göre en yüksek puanlı {categoryInfo[category.name].label.toLowerCase()}{" "}
+                FXPARTNER Endeksi&apos;ne göre en yüksek puanlı {trData(categoryInfo)[category.name].label.toLowerCase()}{" "}
                 {tr("brokerı")}{" "}
                 <Link
                   href={`/brokers/${topPick.slug}`}

@@ -47,7 +47,7 @@ export default function BrokerList({
                 : "border-hairline text-text-on-ink-muted hover:border-text-on-ink hover:text-text-on-ink"
             }`}
           >
-            {categoryInfo[category].label}
+            {tr(categoryInfo[category].label)}
           </button>
         ))}
       </div>

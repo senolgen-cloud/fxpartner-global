@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import { localizeBlogPost, localizeBlogPosts, localizeBrokers, trData } from "@/lib/localizeContent";
@@ -144,12 +144,13 @@ export default async function BrokerlarPage({
               Forex Brokerleri
             </span>
             <h1 className="mt-4 font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              {YEAR} en iyi forex brokerleri
+              {trf("{year} en iyi forex brokerleri", { year: YEAR })}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
-              {brokers.length} aracı kurum; regülasyon gücü, gerçek işlem maliyeti,
-              platform desteği ve para çekme deneyimi üzerinden bağımsız olarak
-              puanlandı. Aynı kriterler herkese uygulanır.
+              {trf(
+                "{count} aracı kurum; regülasyon gücü, gerçek işlem maliyeti, platform desteği ve para çekme deneyimi üzerinden bağımsız olarak puanlandı. Aynı kriterler herkese uygulanır.",
+                { count: brokers.length }
+              )}
             </p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">
               <strong className="text-text-on-ink">{tr("Ortaklık, puanlamayı değiştirmez.")}</strong>{" "}
@@ -194,7 +195,7 @@ export default async function BrokerlarPage({
             </h2>
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {brokerCategories.map((cat) => {
-                const info = categoryInfo[cat];
+                const info = trData(categoryInfo)[cat];
                 const count = brokers.filter((b) =>
                   b.categories.includes(cat)
                 ).length;
@@ -233,11 +234,14 @@ export default async function BrokerlarPage({
               <div>
                 <h3 className="font-poppins text-lg font-semibold">{tr("1. Regülasyon")}</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-text-on-ink-muted">
-                  Sadece &ldquo;lisanslı mı&rdquo; değil, <strong className="text-text-on-ink">sizin
-                  hesabınızın hangi tüzel kişilik altında açıldığı</strong> önemli. Bir
-                  grubun AB lisansı olması, sizi offshore bir şirkete kaydediyorsa o lisans
-                  sizi korumaz. İncelemelerimizde bu ayrımı ayrıca belirtiyoruz. Şu an
-                  takip ettiğimiz düzenleyici kurum sayısı: {trackedRegulators}.
+                  {tr("Sadece “lisanslı mı” değil,")}{" "}
+                  <strong className="text-text-on-ink">
+                    {tr("sizin hesabınızın hangi tüzel kişilik altında açıldığı")}
+                  </strong>{" "}
+                  {tr("önemli. Bir grubun AB lisansı olması, sizi offshore bir şirkete kaydediyorsa o lisans sizi korumaz. İncelemelerimizde bu ayrımı ayrıca belirtiyoruz.")}{" "}
+                  {trf("Şu an takip ettiğimiz düzenleyici kurum sayısı: {count}.", {
+                    count: trackedRegulators,
+                  })}
                 </p>
               </div>
               <div>
@@ -271,7 +275,10 @@ export default async function BrokerlarPage({
             <div className="mt-10 rounded-2xl border border-hairline bg-ink-soft/60 p-6">
               <p className="text-sm leading-relaxed text-text-on-ink-muted">
                 <strong className="text-text-on-ink">{tr("Şu anki lider:")}</strong> {top.name} —{" "}
-                {getBrokerScores(top).composite.toFixed(1)} Index puanı. {top.summary}
+                {trf("{score} Index puanı.", {
+                  score: getBrokerScores(top).composite.toFixed(1),
+                })}{" "}
+                {top.summary}
               </p>
             </div>
           </div>

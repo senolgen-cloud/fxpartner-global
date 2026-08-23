@@ -13,6 +13,7 @@ import {
 } from "@/data/brokers";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -79,7 +80,7 @@ export default async function RegulationReportPage({
 
   const categoryRows = brokerCategories.map((c) => ({
     name: c,
-    slug: categoryInfo[c].slug,
+    slug: trData(categoryInfo)[c].slug,
     count: brokers.filter((b) => b.categories.includes(c)).length,
   }));
 

@@ -1,4 +1,10 @@
-import { tr } from "@/lib/chrome";
+"use client";
+
+// Client helpers, not the server tr(): this component has no "use client"
+// of its own, but it is only ever rendered from one, so it is compiled into
+// the client bundle — where the per-request locale store does not exist and
+// tr() would quietly return Turkish to every reader.
+import { useTr } from "@/components/useTr";
 import {
   LOT_LADDER,
   formatMoney,
@@ -27,6 +33,7 @@ export default function LotLadder({
   priceMove: number | null;
   compact?: boolean;
 }) {
+  const tr = useTr();
   const spec = getContractSpec(pair);
   if (!spec || priceMove === null) return null;
 

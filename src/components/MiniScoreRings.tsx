@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useEffect, useState } from "react";
 import { getBrokerScores, type Broker } from "@/data/brokers";
@@ -76,6 +77,7 @@ export default function MiniScoreRings({
   broker: Broker;
   tone?: "light" | "dark";
 }) {
+  const tr = useTr();
   const [mounted, setMounted] = useState(false);
   const scores = getBrokerScores(broker);
   const mutedClass = tone === "dark" ? "text-text-on-ink-muted" : "text-text-muted";
@@ -103,7 +105,7 @@ export default function MiniScoreRings({
         labelClass={labelClass}
       />
       <Ring
-        label="Çek."
+        label={tr("Çek.")}
         score={scores.withdrawal}
         mounted={mounted}
         mutedClass={mutedClass}

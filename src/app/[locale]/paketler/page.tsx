@@ -54,13 +54,20 @@ const TIER_CTA_LABEL: Record<PackageTier, string> = {
   vip: "VIP'e Katıl",
 };
 
-const tiers = PACKAGE_TIER_ORDER.map((tier) => ({
-  tier,
-  ...PACKAGE_TIER_INFO[tier],
-  accent: TIER_ACCENT[tier],
-  ctaLabel: trData(TIER_CTA_LABEL)[tier],
-  featured: tier === "pro",
-}));
+// Built per request, not at import: the whole point of this table is the
+// tier names, blurbs and feature lists, and assembling it once at module
+// load would serve the first locale to everyone.
+function buildTiers() {
+  const info = trData(PACKAGE_TIER_INFO);
+  const cta = trData(TIER_CTA_LABEL);
+  return PACKAGE_TIER_ORDER.map((tier) => ({
+    tier,
+    ...info[tier],
+    accent: TIER_ACCENT[tier],
+    ctaLabel: cta[tier],
+    featured: tier === "pro",
+  }));
+}
 
 const partnerLogos = [
   { slug: "xm", name: "XM Global", src: "/brokers/xm.png" },
@@ -214,7 +221,7 @@ export default async function PaketlerPage({
               </Link>
             </div>
 
-            {tiers.map((t) => (
+            {buildTiers().map((t) => (
               <div
                 key={t.tier}
                 className={`relative flex flex-col rounded-2xl border p-8 ${

@@ -1,4 +1,5 @@
 "use client";
+import { useTr } from "@/components/useTr";
 
 import { useEffect, useRef, useState } from "react";
 import { animate } from "framer-motion";
@@ -74,6 +75,7 @@ function SliderField({
 }
 
 export default function CommissionCalculator() {
+  const tr = useTr();
   const [referredTraders, setReferredTraders] = useState(
     calculatorDefaults.referredTraders
   );
@@ -91,21 +93,21 @@ export default function CommissionCalculator() {
     <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
       <div className="space-y-8">
         <SliderField
-          label="Referans edilen yatırımcı"
+          label={tr("Referans edilen yatırımcı")}
           value={referredTraders}
           min={1}
           max={200}
           onChange={setReferredTraders}
         />
         <SliderField
-          label="Ort. lot / yatırımcı / ay"
+          label={tr("Ort. lot / yatırımcı / ay")}
           value={avgLots}
           min={1}
           max={20}
           onChange={setAvgLots}
         />
         <SliderField
-          label="Lot başına komisyon"
+          label={tr("Lot başına komisyon")}
           value={commissionPerLot}
           min={1}
           max={15}
@@ -116,14 +118,14 @@ export default function CommissionCalculator() {
 
       <div className="rounded-3xl border border-hairline-light bg-paper-high p-8">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
-          Tahmini aylık gelir
+          {tr("Tahmini aylık gelir")}
         </p>
         <p className="mt-2 font-display text-4xl font-semibold text-text-dark">
           <AnimatedNumber value={monthly} prefix="$" />
         </p>
         <div className="my-6 h-px bg-hairline-light" />
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
-          Tahmini yıllık gelir
+          {tr("Tahmini yıllık gelir")}
         </p>
         <p className="mt-2 font-display text-3xl font-semibold text-signal">
           <AnimatedNumber value={yearly} prefix="$" />

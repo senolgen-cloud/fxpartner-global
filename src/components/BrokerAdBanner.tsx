@@ -1,5 +1,11 @@
+"use client";
+
 import Image from "next/image";
-import { tr } from "@/lib/chrome";
+// Client helpers, not the server tr(): this component has no "use client"
+// of its own, but it is only ever rendered from one, so it is compiled into
+// the client bundle — where the per-request locale store does not exist and
+// tr() would quietly return Turkish to every reader.
+import { useTr } from "@/components/useTr";
 import type { Broker } from "@/data/brokers";
 
 function getMonogram(name: string): string {
@@ -16,6 +22,7 @@ function getMonogram(name: string): string {
 // keeps it distinguishable from editorial content per affiliate-disclosure
 // practice.
 export default function BrokerAdBanner({ broker }: { broker: Broker }) {
+  const tr = useTr();
   if (broker.adImage) {
     // Two anchors rather than two <source>s in one: where a partner's media
     // kit tags each banner size with its own tracking link, the click has to

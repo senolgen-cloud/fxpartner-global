@@ -74,7 +74,14 @@ for (const file of walk("src")) {
     for (const lit of body.matchAll(/(?:(\w+)\s*:\s*)?"((?:[^"\\]|\\.)*)"/g)) {
       const key = lit[1];
       if (key && STRUCTURAL_KEYS.has(key)) continue;
-      const text = lit[2].replace(/\\"/g, '"').replace(/\\\\/g, "\\");
+      // Decode the escapes JS would, not just the quote. A key stored as the
+      // literal characters backslash-n never matches the real newline the
+      // runtime hands tr(), so the string silently stays Turkish.
+      const text = lit[2]
+        .replace(/\\n/g, "\n")
+        .replace(/\\t/g, "\t")
+        .replace(/\\"/g, '"')
+        .replace(/\\\\/g, "\\");
       if (!TURKISH.test(text) || text.trim().length < 2) continue;
       bag[text] = text;
       found = true;

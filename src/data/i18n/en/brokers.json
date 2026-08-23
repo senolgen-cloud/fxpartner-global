@@ -288,5 +288,14 @@
   "multibank.faq.1.q": "Is there an inactivity fee at MultiBank?",
   "multibank.faq.1.a": "Yes. According to independent reviews, a $60 inactivity fee is charged on accounts with no trading activity for 3 months. This is a noticeably short threshold compared to the 12-month period common in the industry; if you plan to leave your account idle for a long time, it is recommended to withdraw your balance or check the current fee schedule on the official website.",
   "multibank.faq.2.q": "What is the minimum deposit at MultiBank?",
-  "multibank.faq.2.a": "A Standard account can be opened with $50. However, tight spreads depend on the account type: the Pro account requires a $1,000 minimum deposit, while the ECN account starting from 0.0 pips requires $5,000. There is no cent or micro account option, so it is not a suitable structure for those who want to work with very small lots using small capital."
+  "multibank.faq.2.a": "A Standard account can be opened with $50. However, tight spreads depend on the account type: the Pro account requires a $1,000 minimum deposit, while the ECN account starting from 0.0 pips requires $5,000. There is no cent or micro account option, so it is not a suitable structure for those who want to work with very small lots using small capital.",
+  "xm.promo.tag": "Active Campaign",
+  "xm.promo.title": "XM Cashback Campaign — 17.369$ Paid So Far",
+  "xm.promo.intro": "Same trades, same market — but why not get cashback? Investors trading with the FXPARTNER partner code at XM Global have received a total of 17.369$ in cashback to date, and the rebate is credited to the account at the end of the day, without waiting for the end of the month. If you already have an XM account, you do not need to close your existing account or change your trades to take advantage of this benefit.",
+  "lite-finance.promo.tag": "Exclusive to FXPARTNER",
+  "lite-finance.promo.title": "%20 Margin Bonus — Unconditional, No Strings Attached",
+  "lite-finance.promo.intro": "For Lite Finance accounts opened via FXPARTNER, %20 of the amount you deposit is defined as a margin bonus. This is not a trading bonus: it is not added to your balance and tied to a volume requirement; it is added to your margin and directly increases your account's capacity to withstand volatility. Your profit belongs to you, there is no volume requirement.",
+  "fxpro.promo.tag": "New Account Opportunity",
+  "fxpro.promo.title": "%100 Welcome Bonus",
+  "fxpro.promo.intro": "FxPro offers a %100 welcome bonus for new accounts opened via the FXPARTNER referral link — a strong start for initial deposits."
 }
