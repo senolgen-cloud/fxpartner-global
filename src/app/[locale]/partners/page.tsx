@@ -22,6 +22,7 @@ import { cashbackPrograms } from "@/data/cashback";
 import { getBrokerBySlug, brokers } from "@/data/brokers";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -56,7 +57,7 @@ export default async function PartnersPage({
   const { locale: pageLocale } = await params;
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
-  const eligibleBrokers = cashbackPrograms
+  const eligibleBrokers = trData(cashbackPrograms)
     .map((p) => getBrokerBySlug(p.brokerSlug))
     .filter((b): b is NonNullable<typeof b> => Boolean(b));
 

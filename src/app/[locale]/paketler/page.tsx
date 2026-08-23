@@ -199,7 +199,7 @@ export default async function PaketlerPage({
               <p className="mt-2 text-sm text-text-on-ink-muted">{trData(FREE_TIER_INFO).blurb}</p>
               <p className="mt-6 flex items-baseline gap-1">
                 <span className="font-display text-4xl font-bold text-text-on-ink">$0</span>
-                <span className="text-sm text-text-on-ink-muted">/ süresiz</span>
+                <span className="text-sm text-text-on-ink-muted">{tr("/ süresiz")}</span>
               </p>
 
               <ul className="mt-6 flex-1 space-y-2.5">
@@ -239,7 +239,7 @@ export default async function PaketlerPage({
                 <p className="mt-2 text-sm text-text-on-ink-muted">{t.blurb}</p>
                 <p className="mt-6 flex items-baseline gap-1">
                   <span className="font-display text-4xl font-bold text-text-on-ink">${t.price}</span>
-                  <span className="text-sm text-text-on-ink-muted">/ aylık</span>
+                  <span className="text-sm text-text-on-ink-muted">{tr("/ aylık")}</span>
                 </p>
 
                 <ul className="mt-6 flex-1 space-y-2.5">
@@ -279,23 +279,23 @@ export default async function PaketlerPage({
             <div>
               <div className="font-display text-2xl font-semibold">{trackedBrokerCount}</div>
               <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                Takip Edilen Broker
+                {tr("Takip Edilen Broker")}
               </div>
             </div>
             <div>
-              <div className="font-display text-2xl font-semibold">Gerçek MT5</div>
+              <div className="font-display text-2xl font-semibold">{tr("Gerçek MT5")}</div>
               <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                Tracked Hesap
+                {tr("Takip Edilen Hesap")}
               </div>
             </div>
             <div>
               <div className="font-display text-2xl font-semibold">7/24</div>
               <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                Destek
+                {tr("Destek")}
               </div>
             </div>
             <div>
-              <div className="font-display text-2xl font-semibold">₿ Kripto</div>
+              <div className="font-display text-2xl font-semibold">₿ {tr("Kripto")}</div>
               <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
                 {tr("Güvenli Ödeme")}
               </div>

@@ -49,7 +49,7 @@ export default function BrokerLookupFullIndex() {
         {tr("Sorgulama veritabanımızdaki her aracı kurum, değerlendirmeye göre gruplandırılmış — aramadan göz atmak için bir bölümü genişletin.")}
       </p>
       {trData(GROUPS).map((group) => {
-        const entries = lookupBrokers.filter((b) => b.verdict === group.verdict);
+        const entries = trData(lookupBrokers).filter((b) => b.verdict === group.verdict);
         if (entries.length === 0) return null;
         return (
           <details key={group.verdict} className="group rounded-2xl border border-hairline-light bg-paper">

@@ -255,9 +255,7 @@ export default async function BrokerlarPage({
               <div>
                 <h3 className="font-poppins text-lg font-semibold">{tr("3. Para çekme deneyimi")}</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-text-on-ink-muted">
-                  Şikayetlerin büyük çoğunluğu buradan çıkar. En pratik yöntem: hesap
-                  açtıktan sonra küçük bir tutarla çekim testi yapmak. Tekrarlayan,
-                  {tr("kaynaklı çekim şikayeti olan brokerları")}{" "}
+                  {tr("Şikayetlerin büyük çoğunluğu buradan çıkar. En pratik yöntem: hesap açtıktan sonra küçük bir tutarla çekim testi yapmak. Tekrarlayan, kaynaklı çekim şikayeti olan brokerları")}{" "}
                   <Link href="/blacklist" className="text-signal hover:text-signal-strong">
                     {tr("risk uyarıları")}
                   </Link>{" "}

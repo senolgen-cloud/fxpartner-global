@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { tr, trLocale } from "@/lib/chrome";
-import { localizeBroker, trData } from "@/lib/localizeContent";
+import { tr, trf, trLocale } from "@/lib/chrome";
+import { localizeBrokerDeep, trData } from "@/lib/localizeContent";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Image from "next/image";
 import Link from "@/components/LocaleLink";
@@ -92,7 +92,7 @@ export async function generateMetadata({
   const { slug, locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const source = getBrokerBySlug(slug);
-  const broker = source ? localizeBroker(source, locale) : source;
+  const broker = source ? localizeBrokerDeep(source, locale) : source;
   if (!broker) return {};
   return {
     title: `${broker.name} İncelemesi`,
@@ -142,7 +142,7 @@ export default async function BrokerDetailPage({
   const { slug, locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const source = getBrokerBySlug(slug);
-  const broker = source ? localizeBroker(source, locale) : source;
+  const broker = source ? localizeBrokerDeep(source, locale) : source;
   if (!broker) notFound();
 
   const otherBrokers = brokers.filter((b) => b.slug !== broker.slug).slice(0, 3);
@@ -158,20 +158,20 @@ export default async function BrokerDetailPage({
   const riskLevel = getRiskLevel(broker);
   // Only confirmed programs are promoted off /cashback — an estimate never
   // appears as a promise on a review page.
-  const cashback = getLiveCashbackProgram(broker.slug);
+  const cashback = trData(getLiveCashbackProgram(broker.slug));
   const backedPropFirm = trData(getPropFirmByBackingBroker(broker.slug));
 
   const tier1Regulators = broker.regulators.filter((r) => TIER1_REGULATORS.has(r));
   const offshoreRegulators = broker.regulators.filter((r) => !TIER1_REGULATORS.has(r));
 
   const navSections = [
-    { id: "regulation", label: "Regülasyon" },
-    { id: "platforms", label: "Platformlar" },
-    { id: "pros-cons", label: "Artılar ve Eksiler" },
-    ...(broker.deepDive ? [{ id: "accounts", label: "Hesaplar" }] : []),
-    { id: "verdict", label: "Değerlendirme" },
-    { id: "faq", label: "SSS" },
-    { id: "reviews", label: "Yorumlar" },
+    { id: "regulation", label: tr("Regülasyon") },
+    { id: "platforms", label: tr("Platformlar") },
+    { id: "pros-cons", label: tr("Artılar ve Eksiler") },
+    ...(broker.deepDive ? [{ id: "accounts", label: tr("Hesaplar") }] : []),
+    { id: "verdict", label: tr("Değerlendirme") },
+    { id: "faq", label: tr("SSS") },
+    { id: "reviews", label: tr("Yorumlar") },
   ];
 
   const session = await auth();
@@ -283,7 +283,7 @@ export default async function BrokerDetailPage({
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-signal">
                         <path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7L2 9.2l7.1-.6L12 2z" />
                       </svg>
-                      Sıralama #{String(broker.rank).padStart(2, "0")}
+                      {trf("Sıralama #{rank}", { rank: String(broker.rank).padStart(2, "0") })}
                     </span>
                     <span
                       className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-mono text-xs uppercase tracking-[0.15em] ${
@@ -355,9 +355,9 @@ export default async function BrokerDetailPage({
                       neutral dash instead of a green check, same "no
                       unearned checkmarks" rule as ReviewBadge. */}
                   <div className="mt-5 grid grid-cols-3 gap-3">
-                    <ScoreCheck label="Regülasyon ve Güven" score={scores.regulation} />
-                    <ScoreCheck label="Para Çekme Güvenilirliği" score={scores.withdrawal} />
-                    <ScoreCheck label="Platform ve Araçlar" score={scores.platform} />
+                    <ScoreCheck label={tr("Regülasyon ve Güven")} score={scores.regulation} />
+                    <ScoreCheck label={tr("Para Çekme Güvenilirliği")} score={scores.withdrawal} />
+                    <ScoreCheck label={tr("Platform ve Araçlar")} score={scores.platform} />
                   </div>
 
                   <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -411,11 +411,11 @@ export default async function BrokerDetailPage({
           <div className="mx-auto max-w-5xl py-6 sm:px-6 sm:py-8">
             <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:grid sm:grid-cols-5 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 [&::-webkit-scrollbar]:hidden">
               {[
-                { icon: "deposit" as const, label: "Min. Yatırım", value: broker.minDeposit },
-                { icon: "leverage" as const, label: "Maks. Kaldıraç", value: broker.maxLeverage },
-                { icon: "founded" as const, label: "Kuruluş", value: String(broker.founded) },
-                { icon: "hq" as const, label: "Merkez", value: broker.headquarters },
-                { icon: "platforms" as const, label: "Platformlar", value: String(broker.platforms.length) },
+                { icon: "deposit" as const, label: tr("Min. Yatırım"), value: broker.minDeposit },
+                { icon: "leverage" as const, label: tr("Maks. Kaldıraç"), value: broker.maxLeverage },
+                { icon: "founded" as const, label: tr("Kuruluş"), value: String(broker.founded) },
+                { icon: "hq" as const, label: tr("Merkez"), value: broker.headquarters },
+                { icon: "platforms" as const, label: tr("Platformlar"), value: String(broker.platforms.length) },
               ].map((stat) => (
                 <div
                   key={stat.label}

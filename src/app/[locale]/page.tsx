@@ -256,9 +256,10 @@ export default async function Home({
                 {tr("Kendi sermayenizi riske atmadan işlem yapın")}
               </h2>
               <p className="mt-4 text-text-on-ink-muted">
-                Funded account veren {trData(propFirms).length} firma; kural seti, challenge
-                ücreti, drawdown limitleri ve ödeme sicili üzerinden bağımsız olarak
-                puanlandı. Ticari ilişkimiz olan firmalar açıkça etiketlenir.
+                {trf(
+                  "Funded account veren {count} firma; kural seti, challenge ücreti, drawdown limitleri ve ödeme sicili üzerinden bağımsız olarak puanlandı. Ticari ilişkimiz olan firmalar açıkça etiketlenir.",
+                  { count: trData(propFirms).length }
+                )}
               </p>
             </Reveal>
 
@@ -314,7 +315,7 @@ export default async function Home({
                 href="/prop-firmalar"
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
-                {trf("{count} firmanın tamamını karşılaştır →", { count: propFirms.length })}
+                {trf("{count} firmanın tamamını karşılaştır →", { count: trData(propFirms).length })}
               </Link>
             </Reveal>
           </div>
@@ -393,9 +394,7 @@ export default async function Home({
               <ComparisonTable />
             </Reveal>
             <p className="mt-6 max-w-2xl font-mono text-xs leading-relaxed text-text-on-ink-muted">
-              * Kaldıraç ve minimum depozit rakamları hesap türüne ve
-              yatırımcının ülkesine göre değişebilir. İşlem yapmadan önce
-              güncel koşulları broker&apos;ın resmi web sitesinden doğrulayın.
+              {tr("* Kaldıraç ve minimum depozit rakamları hesap türüne ve yatırımcının ülkesine göre değişebilir. İşlem yapmadan önce güncel koşulları broker’ın resmi web sitesinden doğrulayın.")}
             </p>
           </div>
         </section>

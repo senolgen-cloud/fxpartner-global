@@ -87,7 +87,8 @@ export default async function CommunityPage({
               {tr("👥 Küresel Yatırımcı Topluluğu")}
             </span>
             <h1 className="mt-4 font-display text-3xl font-semibold md:text-5xl">
-              Aktif Trader <span className="text-signal">Topluluğu &amp; Analizler</span>
+              {tr("Aktif Trader")}{" "}
+              <span className="text-signal">{tr("Topluluğu & Analizler")}</span>
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-text-on-ink-muted">
               {tr("Gerçek broker değerlendirmelerini keşfedin, piyasa beklenti anketine katılın ve resmi sosyal kanallarımıza katılarak anlık bilgilere ulaşın.")}
@@ -98,9 +99,9 @@ export default async function CommunityPage({
         {!signedIn && (
           <section className="mx-auto max-w-2xl px-6 py-16">
             <UpgradeGate
-              eyebrow="Üyelere Özel"
+              eyebrow={tr("Üyelere Özel")}
               title={tr("Topluluğu görmek için giriş yapın")}
-              description="Broker değerlendirmelerini, piyasa beklenti anketini ve topluluk kanallarımızı görmek için ücretsiz bir hesapla giriş yapmanız yeterli."
+              description={tr("Broker değerlendirmelerini, piyasa beklenti anketini ve topluluk kanallarımızı görmek için ücretsiz bir hesapla giriş yapmanız yeterli.")}
               signedIn={false}
             />
           </section>

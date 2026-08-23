@@ -249,7 +249,7 @@ export default async function AboutPage({
               <Link href="/terms" className="text-signal hover:text-signal-strong">
                 {tr("Kullanım Şartları")}
               </Link>
-              {" "}sayfamıza bakın. Sorularınız mı var? E-posta gönderin:{" "}
+              {" "}{tr("sayfamıza bakın. Sorularınız mı var? E-posta gönderin:")}{" "}
               <a
                 href="mailto:info@fxpartner.global"
                 className="text-signal hover:text-signal-strong"

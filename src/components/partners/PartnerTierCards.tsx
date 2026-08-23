@@ -1,6 +1,6 @@
 "use client";
 import { useLocalizedData } from "@/components/useLocalizedData";
-import { useTrf } from "@/components/useTr";
+import { useTr, useTrf } from "@/components/useTr";
 
 import { motion } from "framer-motion";
 import TiltWrapper from "@/components/TiltWrapper";
@@ -9,6 +9,7 @@ import { partnerTiers } from "@/data/partnerProgram";
 export default function PartnerTierCards() {
   const partnerTiersTr = useLocalizedData(partnerTiers);
   const trf = useTrf();
+  const tr = useTr();
   return (
     <div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -71,9 +72,7 @@ export default function PartnerTierCards() {
         })}
       </div>
       <p className="mt-8 text-xs leading-relaxed text-text-muted">
-        Örnek seviye yapısı — nihai referans eşikleri ve gelir paylaşım
-        oranları, partner olarak onaylandıktan sonra aracı kurum
-        anlaşmasına göre belirlenir.
+        {tr("Örnek seviye yapısı — nihai referans eşikleri ve gelir paylaşım oranları, partner olarak onaylandıktan sonra aracı kurum anlaşmasına göre belirlenir.")}
       </p>
     </div>
   );

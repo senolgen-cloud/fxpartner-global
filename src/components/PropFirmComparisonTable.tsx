@@ -459,20 +459,17 @@ export default function PropFirmComparisonTable() {
       </div>
 
       <p className="mt-4 text-xs leading-relaxed text-text-on-ink-muted">
-        Index puanı dört eksenin ortalamasıdır: kural seti, maliyet, ödeme sicili ve
-        şeffaflık. <strong className="text-text-on-ink">Ortaklık, puanlamayı değiştirmez</strong> —
-        ticari ilişkimiz olan firmalar &ldquo;Ortak&rdquo; etiketiyle işaretlenir ve
-        diğerleriyle aynı kriterlere göre değerlendirilir. Günlük DD / Maks. DD, firmanın
-        en geniş kural setini gösterir; sıkı planlar detay satırında listelenmiştir.
+        {tr("Index puanı dört eksenin ortalamasıdır: kural seti, maliyet, ödeme sicili ve şeffaflık.")}{" "}
+        <strong className="text-text-on-ink">{tr("Ortaklık, puanlamayı değiştirmez")}</strong>{" "}
+        {tr("— ticari ilişkimiz olan firmalar “Ortak” etiketiyle işaretlenir ve diğerleriyle aynı kriterlere göre değerlendirilir. Günlük DD / Maks. DD, firmanın en geniş kural setini gösterir; sıkı planlar detay satırında listelenmiştir.")}
       </p>
       <p className="mt-2 text-xs leading-relaxed text-text-on-ink-muted">
-        <strong className="text-text-on-ink">{tr("İndirim sütunu:")}</strong> Yalnızca koşulları
-        {tr("teyit edilmiş indirimler oran ve kodla gösterilir.")}{" "}
-        <span className="text-text-on-ink">Teyit bekliyor</span>, anlaşmanın var ama
-        oranın veya nasıl uygulandığının henüz doğrulanmadığı anlamına gelir — doğrulanana
-        {tr("kadar sayı yayımlamıyoruz.")}{" "}
-        <span className="text-text-on-ink">{tr("İndirim yok")}</span> ise o firmayla indirim
-        anlaşmamız olmadığını açıkça belirtir; boş bırakıp aratmıyoruz.
+        <strong className="text-text-on-ink">{tr("İndirim sütunu:")}</strong>{" "}
+        {tr("Yalnızca koşulları teyit edilmiş indirimler oran ve kodla gösterilir.")}{" "}
+        <span className="text-text-on-ink">{tr("Teyit bekliyor")}</span>
+        {tr(", anlaşmanın var ama oranın veya nasıl uygulandığının henüz doğrulanmadığı anlamına gelir — doğrulanana kadar sayı yayımlamıyoruz.")}{" "}
+        <span className="text-text-on-ink">{tr("İndirim yok")}</span>{" "}
+        {tr("ise o firmayla indirim anlaşmamız olmadığını açıkça belirtir; boş bırakıp aratmıyoruz.")}
       </p>
     </div>
   );

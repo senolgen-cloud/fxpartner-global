@@ -270,7 +270,7 @@ export default async function AccountPage({
                   {latestSignal.direction}
                 </p>
               ) : (
-                <p className="mt-1 text-sm text-text-on-ink-muted">Gerçek MT5 hesabından anlık sinyaller.</p>
+                <p className="mt-1 text-sm text-text-on-ink-muted">{tr("Gerçek MT5 hesabından anlık sinyaller.")}</p>
               )}
               <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-signal transition-colors group-hover:text-signal-strong">
                 {tr("Sinyalleri Gör →")}

@@ -66,9 +66,27 @@ export function localizeBroker(broker: Broker, locale: Locale): Broker {
   };
 }
 
+/**
+ * Overlay first, catalogue second.
+ *
+ * localizeBroker() names the fields it translates, which means a field added
+ * to the Broker type after it was written renders Turkish and nothing says
+ * so — forty-four strings on the review pages were doing exactly that. The
+ * walk catches whatever the named list missed, translating by the Turkish
+ * string itself, and leaves anything neither knows about as the Turkish it
+ * already was.
+ *
+ * Order matters: the per-slug overlay is the better translation (a human can
+ * fix "xm.summary" without touching any other broker), so it wins where it
+ * exists.
+ */
+export function localizeBrokerDeep(broker: Broker, locale: Locale): Broker {
+  return localizeData(localizeBroker(broker, locale), locale);
+}
+
 export function localizeBrokers(list: Broker[], locale: Locale): Broker[] {
   if (locale === defaultLocale) return list;
-  return list.map((b) => localizeBroker(b, locale));
+  return list.map((b) => localizeBrokerDeep(b, locale));
 }
 
 export function localizeBlogPost(post: BlogPost, locale: Locale): BlogPost {

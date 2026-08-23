@@ -8,11 +8,12 @@ import { getBrokerBySlug } from "@/data/brokers";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
+import { trData } from "@/lib/localizeContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 export function generateStaticParams() {
-  return cashbackPrograms.map((p) => ({ slug: p.brokerSlug }));
+  return trData(cashbackPrograms).map((p) => ({ slug: p.brokerSlug }));
 }
 
 export async function generateMetadata({
@@ -39,7 +40,7 @@ export default async function CashbackSetupPage({
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
   const { slug } = await params;
-  const program = getCashbackProgram(slug);
+  const program = trData(getCashbackProgram(slug));
   const broker = getBrokerBySlug(slug);
   if (!program || !broker) notFound();
 

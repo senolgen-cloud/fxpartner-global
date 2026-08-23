@@ -131,9 +131,7 @@ export default function CommissionCalculator() {
           <AnimatedNumber value={yearly} prefix="$" />
         </p>
         <p className="mt-6 text-xs leading-relaxed text-text-muted">
-          Yalnızca örnek amaçlıdır. Gerçek komisyon oranları ve ödeme
-          koşulları, partner olarak onaylandıktan sonra aracı kurum
-          anlaşmasına göre belirlenir.
+          {tr("Yalnızca örnek amaçlıdır. Gerçek komisyon oranları ve ödeme koşulları, partner olarak onaylandıktan sonra aracı kurum anlaşmasına göre belirlenir.")}
         </p>
       </div>
     </div>

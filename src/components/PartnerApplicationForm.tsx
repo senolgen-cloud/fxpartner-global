@@ -1,5 +1,6 @@
 "use client";
 import { useTr } from "@/components/useTr";
+import { useLocalizedData } from "@/components/useLocalizedData";
 
 import { useActionState } from "react";
 import {
@@ -22,6 +23,7 @@ export default function PartnerApplicationForm({
 }: {
   brokers: { slug: string; name: string }[];
 }) {
+  const audiences = useLocalizedData(audienceOptions);
   const tr = useTr();
   const [state, formAction, pending] = useActionState(submitPartnerApplication, initialState);
 
@@ -116,7 +118,7 @@ export default function PartnerApplicationForm({
           <option value="" disabled>
             {tr("Bir seçenek belirleyin")}
           </option>
-          {audienceOptions.map((o) => (
+          {audiences.map((o) => (
             <option key={o.value} value={o.value}>
               {o.label}
             </option>
@@ -149,7 +151,7 @@ export default function PartnerApplicationForm({
         disabled={pending}
         className="rounded-full bg-signal px-6 py-3 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
       >
-        {pending ? "Gönderiliyor…" : "Partner Olarak Başvur"}
+        {pending ? tr("Gönderiliyor…") : tr("Partner Olarak Başvur")}
       </button>
     </form>
   );

@@ -59,12 +59,13 @@ let files = 0;
 
 for (const file of walk("src")) {
   const source = fs.readFileSync(file, "utf8");
-  if (!source.includes("trData(")) continue;
+  if (!source.includes("trData(") && !source.includes("useLocalizedData(")) continue;
 
   let found = false;
   for (const m of source.matchAll(/^const ([A-Za-z_$][\w$]*)\s*(?::[^=]+)?=\s*([[{])/gm)) {
     const name = m[1];
-    if (!new RegExp(`trData\\(${name}\\)`).test(source)) continue;
+    // Both wrappers: trData() on the server, useLocalizedData() on the client.
+    if (!new RegExp(`(?:trData|useLocalizedData)\\(${name}\\)`).test(source)) continue;
     const end = spanOf(source, m.index + m[0].length - 1);
     if (end === -1) continue;
     const body = source.slice(m.index, end + 1);

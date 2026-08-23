@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Footer from "@/components/Footer";
@@ -59,7 +59,7 @@ export default async function BrokerLookupPage({
   searchParams: Promise<{ q?: string }>;
 }) {
   const { q } = await searchParams;
-  const highRiskCount = lookupBrokers.filter((b) => b.verdict === "high-risk").length;
+  const highRiskCount = trData(lookupBrokers).filter((b) => b.verdict === "high-risk").length;
 
   return (
     <>
@@ -77,10 +77,10 @@ export default async function BrokerLookupPage({
               {tr("Hesap açmadan önce herhangi bir aracı kurumu kontrol edin")}
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-text-on-ink-muted">
-              {lookupBrokers.length} aracı kurum arasında arama yapın — büyük
-              düzenlenmiş isimlerden resmi düzenleyici uyarı listelerinde adı
-              geçen firmalara kadar — ve her biri için dürüst, kaynaklı bir
-              değerlendirme görün.
+              {trf(
+                "{count} aracı kurum arasında arama yapın — büyük düzenlenmiş isimlerden resmi düzenleyici uyarı listelerinde adı geçen firmalara kadar — ve her biri için dürüst, kaynaklı bir değerlendirme görün.",
+                { count: lookupBrokers.length }
+              )}
             </p>
           </div>
         </section>
@@ -101,10 +101,10 @@ export default async function BrokerLookupPage({
                 lisanssız durum veya tekrarlayan bir şikayet örüntüsü —
                 cezai dolandırıcılık suçlaması değildir. Düzenleyici uyarı
                 listeleri haftalık olarak değişir; işlem yapmadan önce her
-                zaman bir aracı kurumun güncel durumunu ilgili
-                düzenleyicinin resmi web sitesinden teyit edin. Şu anda
-                yüksek risk olarak işaretlenmiş {highRiskCount} aracı
-                kurumu takip ediyoruz.
+                {tr("zaman bir aracı kurumun güncel durumunu ilgili düzenleyicinin resmi web sitesinden teyit edin.")}{" "}
+                {trf("Şu anda yüksek risk olarak işaretlenmiş {count} aracı kurumu takip ediyoruz.", {
+                  count: highRiskCount,
+                })}
               </p>
             </div>
 

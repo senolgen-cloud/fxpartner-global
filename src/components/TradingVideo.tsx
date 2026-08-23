@@ -1,5 +1,5 @@
 import Reveal from "./Reveal";
-import { tr } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 
 const VIDEO_ID = "bAFd9WkdVGs";
 const VIDEO_TITLE = "Beginners Guide to Forex by Investopedia";
@@ -37,9 +37,10 @@ export default function TradingVideo() {
         </Reveal>
 
         <p className="mt-3 font-mono text-xs text-text-muted">
-          Kaynak: {CHANNEL_NAME} (YouTube). Bu video FXPARTNER tarafından
-          üretilmemiştir; yalnızca genel bilgilendirme amaçlıdır ve
-          yatırım tavsiyesi değildir.
+          {trf(
+            "Kaynak: {channel} (YouTube). Bu video FXPARTNER tarafından üretilmemiştir; yalnızca genel bilgilendirme amaçlıdır ve yatırım tavsiyesi değildir.",
+            { channel: CHANNEL_NAME }
+          )}
         </p>
         <a
           href={VIDEO_URL}

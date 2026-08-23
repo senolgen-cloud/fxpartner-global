@@ -76,8 +76,8 @@ export default async function CashbackPage({
               biz de bunu partner kayıtlarımızla doğrulayalım — hesap
               gerekmez. <strong className="text-text-on-ink">Aktif</strong>{" "}
               {tr("işaretli programların koşulları aracı kurumla teyit edilmiştir;")}{" "}
-              <strong className="text-text-on-ink">Tahmini</strong> işaretli
-              oranlar nihai koşullar imzalandıkça değişebilir.
+              <strong className="text-text-on-ink">{tr("Tahmini")}</strong>{" "}
+              {tr("işaretli oranlar nihai koşullar imzalandıkça değişebilir.")}
             </p>
           </div>
         </section>

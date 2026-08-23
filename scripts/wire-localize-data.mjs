@@ -44,6 +44,9 @@ const EXPORTS = [
   // brokers — the category table only; broker records themselves go through
   // localizeBroker(), which has its own per-field overlay.
   "categoryInfo",
+  // brokerLookup / cashback
+  "lookupBrokers", "searchLookupBrokers",
+  "cashbackPrograms", "getCashbackProgram", "getLiveCashbackProgram",
 ];
 
 // Exports whose values carry no prose: scores, ordering, booleans, arcs.
@@ -64,6 +67,11 @@ const SKIP = [
   "src/app/llms.txt/",
 ];
 
+// Server actions validate and write; they have no reader. Translating a
+// record there costs a tree walk for nothing and risks a translated value
+// reaching the database.
+const SKIP_PATTERNS = [/actions\.ts$/];
+
 function walk(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (entry.name.startsWith(".") || entry.name === "node_modules") continue;
@@ -78,8 +86,9 @@ const results = [];
 
 for (const file of walk("src")) {
   if (SKIP.some((p) => file.startsWith(p))) continue;
+  if (SKIP_PATTERNS.some((re) => re.test(file))) continue;
   let source = fs.readFileSync(file, "utf8");
-  if (!/from "@\/data\/(propFirms|marketAnalysis|technicalAnalysis|partnerProgram|packageTiers|brokers)"/.test(source)) continue;
+  if (!/from "@\/data\/(propFirms|marketAnalysis|technicalAnalysis|partnerProgram|packageTiers|brokers|brokerLookup|cashback)"/.test(source)) continue;
 
   const isClient = source.startsWith('"use client"');
   if (isClient && SERVER_ONLY) {

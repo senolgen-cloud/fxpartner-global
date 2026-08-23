@@ -137,7 +137,8 @@ export default async function AiAssistantPage({
             {tr("📣 Telegram Kanalımıza Katılın")}
           </a>
           <h1 className="mb-4 text-3xl font-semibold text-text-on-ink sm:text-4xl md:text-5xl">
-            Daha Akıllı Analiz. <span className="text-signal">Daha Güçlü Yatırımlar.</span>
+            {tr("Daha Akıllı Analiz.")}{" "}
+            <span className="text-signal">{tr("Daha Güçlü Yatırımlar.")}</span>
           </h1>
           <p className="mx-auto max-w-2xl text-text-on-ink-muted">
             {tr("Piyasalar her saniye değişiyor. FXPARTNER AI Asistanı, yatırım yolculuğunuzda ihtiyaç duyduğunuz bilgiye saniyeler içinde ulaşmanızı sağlayan, modern ve akıllı bir yardımcınızdır.")}

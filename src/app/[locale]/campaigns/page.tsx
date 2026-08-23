@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
@@ -158,14 +158,16 @@ export default async function CampaignsPage({
                           href={`mailto:${broker.promotion!.contactEmail}`}
                           className="rounded-full border border-hairline-light px-5 py-2.5 text-sm font-medium text-text-dark transition-colors hover:border-text-dark"
                         >
-                          Referans Linkiniz İçin {broker.name}&apos;a E-posta Gönderin
+                          {trf("Referans Linkiniz İçin {broker}’a E-posta Gönderin", {
+                            broker: broker.name,
+                          })}
                         </a>
                       )}
                       <Link
                         href={`/brokers/${broker.slug}`}
                         className="rounded-full border border-hairline-light px-5 py-2.5 text-sm font-medium text-text-dark transition-colors hover:border-text-dark"
                       >
-                        {broker.name} Tam İnceleme →
+                        {trf("{broker} Tam İnceleme →", { broker: broker.name })}
                       </Link>
                     </div>
 

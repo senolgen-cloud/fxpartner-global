@@ -44,7 +44,9 @@ export default function ShowcaseGallery() {
             {tr("Endeksin İçinde")}
           </span>
           <h2 className="font-display text-3xl font-semibold text-text-on-ink md:text-4xl">
-            Her puanın <em className="font-poppins italic text-text-on-ink-muted">nasıl</em> kazanıldığını görün.
+            {tr("Her puanın")}{" "}
+            <em className="font-poppins italic text-text-on-ink-muted">{tr("nasıl")}</em>{" "}
+            {tr("kazanıldığını görün.")}
           </h2>
         </div>
       </div>

@@ -1,5 +1,6 @@
 "use client";
 import { useLocalizedData } from "@/components/useLocalizedData";
+import { useTr } from "@/components/useTr";
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -13,6 +14,7 @@ export default function ContentStudioPreview() {
   // The typing animation walks this string character by character, so it has
   // to be the translated one from the start — swapping mid-animation would
   // restart the typing at a different length.
+  const tr = useTr();
   const prompt = useLocalizedData(contentStudioPrompt);
   const samples = useLocalizedData(contentStudioSamples);
   const reducedMotion = usePrefersReducedMotion();
@@ -45,7 +47,7 @@ export default function ContentStudioPreview() {
       className="rounded-3xl border border-hairline-light bg-ink p-6 text-text-on-ink md:p-8"
     >
       <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-signal">
-        Partner İçerik Stüdyosu · Önizleme
+        {tr("Partner İçerik Stüdyosu · Önizleme")}
       </p>
       <div className="mt-4 rounded-xl border border-hairline bg-ink-soft px-4 py-3 font-mono text-sm text-text-on-ink">
         <span className="text-text-on-ink-muted">{"> "}</span>
@@ -87,8 +89,7 @@ export default function ContentStudioPreview() {
       )}
 
       <p className="mt-6 text-xs leading-relaxed text-text-on-ink-muted">
-        Sadece önizleme — partner içerik kütüphanesinde sunulan bir
-        özelliği gösterir, canlı bir üretici değildir.
+        {tr("Sadece önizleme — partner içerik kütüphanesinde sunulan bir özelliği gösterir, canlı bir üretici değildir.")}
       </p>
     </motion.div>
   );

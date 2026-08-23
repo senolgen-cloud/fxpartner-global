@@ -107,7 +107,7 @@ export default function PartnerDashboardPreview() {
         </div>
         <div>
           <p className="font-poppins text-2xl font-bold text-gold">
-            {currentTier.name}
+            {trData(currentTier).name}
           </p>
           <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-text-on-ink-muted">
             Mevcut Seviye
@@ -118,8 +118,8 @@ export default function PartnerDashboardPreview() {
       {nextTier && (
         <div className="mt-5">
           <div className="flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-            <span>{currentTier.name}</span>
-            <span>{nextTier.name}</span>
+            <span>{trData(currentTier).name}</span>
+            <span>{trData(nextTier).name}</span>
           </div>
           <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-hairline">
             <div

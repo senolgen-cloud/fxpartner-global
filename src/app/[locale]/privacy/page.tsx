@@ -76,9 +76,8 @@ export default async function PrivacyPage({
             </h2>
             <ul className="mt-4 space-y-2">
               <li>
-                <strong>{tr("Hesap girişi:")}</strong> ad soyad, telefon numarası,
-                e-posta adresi ve — isteğe bağlı olarak — hangi aracı
-                kurumla işlem yaptığınız.
+                <strong>{tr("Hesap girişi:")}</strong>{" "}
+                {tr("ad soyad, telefon numarası, e-posta adresi ve — isteğe bağlı olarak — hangi aracı kurumla işlem yaptığınız.")}
               </li>
               <li>
                 <strong>{tr("Aracı kurum yorumları:")}</strong> yorum metniniz,
@@ -95,9 +94,8 @@ export default async function PrivacyPage({
                 vermediğiniz.
               </li>
               <li>
-                <strong>Otomatik olarak:</strong> oturumunuzu açık tutan bir
-                oturum çerezi. Üçüncü taraf reklam veya izleme çerezi
-                kullanmıyoruz.
+                <strong>{tr("Otomatik olarak:")}</strong>{" "}
+                {tr("oturumunuzu açık tutan bir oturum çerezi. Üçüncü taraf reklam veya izleme çerezi kullanmıyoruz.")}
               </li>
             </ul>
 
@@ -111,9 +109,8 @@ export default async function PrivacyPage({
               <li>{tr("Size FXPARTNER VIP Telegram grubuna davet göndermek için.")}</li>
               <li>
                 {tr("Size tanıtım veya kampanya e-postaları göndermek için —")}{" "}
-                <strong>{tr("yalnızca")}</strong> kazanç iade formunda açıkça izin
-                verdiyseniz. O onay kutusu işaretlenmeden sizi asla bir
-                pazarlama listesine eklemeyiz.
+                <strong>{tr("yalnızca")}</strong>{" "}
+                {tr("kazanç iade formunda açıkça izin verdiyseniz. O onay kutusu işaretlenmeden sizi asla bir pazarlama listesine eklemeyiz.")}
               </li>
             </ul>
 
@@ -125,8 +122,8 @@ export default async function PrivacyPage({
             </p>
             <ul className="mt-4 space-y-2">
               <li>
-                <strong>Neon (Postgres)</strong> — hesap ve gönderim
-                verilerinizi saklar.
+                <strong>Neon (Postgres)</strong>{" "}
+                {tr("— hesap ve gönderim verilerinizi saklar.")}
               </li>
               <li>
                 <strong>Resend</strong> — giriş bağlantılarını ve bildirim

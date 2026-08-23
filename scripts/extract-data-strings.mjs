@@ -29,6 +29,11 @@ const MODULES = [
   "src/data/technicalAnalysis.ts",
   "src/data/partnerProgram.ts",
   "src/data/packageTiers.ts",
+  "src/data/brokerLookup.ts",
+  "src/data/cashback.ts",
+  // The broker records too: localizeBroker names the fields it covers, and
+  // localizeBrokerDeep now walks the rest through this catalogue.
+  "src/data/brokers.ts",
 ];
 
 const found = new Set();

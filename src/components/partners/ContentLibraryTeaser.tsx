@@ -1,4 +1,4 @@
-import { tr } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 import { contentLibraryCategories } from "@/data/partnerProgram";
 import { trData } from "@/lib/localizeContent";
 
@@ -15,7 +15,7 @@ export default function ContentLibraryTeaser() {
               {cat.title}
             </h3>
             <span className="whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.15em] text-text-muted">
-              {cat.itemCount} öğe
+              {trf("{count} öğe", { count: cat.itemCount })}
             </span>
           </div>
           <p className="mt-3 max-h-0 overflow-hidden text-sm leading-relaxed text-text-muted opacity-0 transition-all duration-300 group-hover:max-h-24 group-hover:opacity-100">
