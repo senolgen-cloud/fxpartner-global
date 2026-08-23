@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { defaultLocale, locales } from "@/lib/i18n";
+import { locales } from "@/lib/i18n";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -7,15 +7,18 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 // authenticated/operator-only surfaces with no indexable content, and
 // /api is a data/RPC layer, not a page — none of it is useful for search
 // or AI ingestion, and no business reason exists to expose it deliberately.
-// Locale-prefixed too: /ua/account is the same authenticated surface as
-// /account, and a crawler that only knows the Turkish path would happily
-// index the Ukrainian one.
+// Every locale, Turkish included. The filter here used to skip the default
+// locale because Turkish sat on the bare path — /account WAS the Turkish
+// URL. Moving Turkish to /tr left /tr/account and /tr/admin off this list
+// and therefore crawlable, which is the opposite of what the list is for.
+//
+// The bare paths stay too: they now 308 to /tr, and a disallowed URL is
+// never fetched, so a crawler holding an old link stops at the redirect
+// rather than following it into an authenticated surface.
 const PRIVATE_PATHS = ["/account", "/admin"];
 const DISALLOW = [
   ...PRIVATE_PATHS,
-  ...locales
-    .filter((l) => l !== defaultLocale)
-    .flatMap((l) => PRIVATE_PATHS.map((path) => `/${l}${path}`)),
+  ...locales.flatMap((l) => PRIVATE_PATHS.map((path) => `/${l}${path}`)),
   "/api/",
 ];
 
