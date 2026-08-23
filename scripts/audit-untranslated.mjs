@@ -94,7 +94,18 @@ const files = ONE ? [ONE] : walk("src");
 for (const file of files) {
   if (OVERLAY_OWNED.some((p) => file.startsWith(p))) continue;
   if (NOT_READER_FACING.some((p) => file.startsWith(p))) continue;
-  const lines = fs.readFileSync(file, "utf8").split("\n");
+  const source = fs.readFileSync(file, "utf8");
+  // Every literal already passed to tr() or trf(), anywhere in the file,
+  // including across line breaks. The Turkish in those calls IS the
+  // catalogue key, so counting it as untranslated reports the fix as the
+  // problem — which is what the single-line insideTr() check did once the
+  // calls got long enough to wrap.
+  const wrapped = new Set(
+    [...source.matchAll(/\btrf?\(\s*"((?:[^"\\]|\\.)*)"/g)].map((m) =>
+      m[1].replace(/\\"/g, '"').replace(/\\\\/g, "\\")
+    )
+  );
+  const lines = source.split("\n");
   let blockComment = false;
 
   lines.forEach((line, i) => {
@@ -109,7 +120,7 @@ for (const file of files) {
     for (const m of line.matchAll(/(["'`])((?:\\.|(?!\1)[^\\])*)\1/g)) {
       const text = m[2];
       if (!TURKISH.test(text)) continue;
-      if (insideTr(line, m.index)) continue;
+      if (insideTr(line, m.index) || wrapped.has(text)) continue;
       if (NON_COPY_KEY.test(line.slice(0, m.index))) continue;
       if (text.length < 2) continue;
       findings.push({ file, line: i + 1, kind: "string", text: text.slice(0, 120) });

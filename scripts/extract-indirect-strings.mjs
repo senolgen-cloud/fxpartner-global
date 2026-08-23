@@ -26,6 +26,7 @@ const SOURCES = {
   "src/components/PartnerDashboardPreview.tsx": ["recentActivity"],
   "src/lib/brokerContent.ts": ["PLATFORM_BLURBS"],
   "src/lib/positionSize.ts": ["RISK_LABEL"],
+  "src/app/[locale]/prop-firmalar/[slug]/page.tsx": ["COPY_TRADING_NOTE", "SIGNAL_NOTE", "EA_NOTE"],
 };
 
 const TURKISH = /[çğıöşüÇĞİÖŞÜ]/;

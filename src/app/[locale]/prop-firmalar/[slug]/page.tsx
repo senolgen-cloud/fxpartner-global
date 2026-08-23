@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
+import { tr, trf, trLocale } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
@@ -37,11 +37,20 @@ export async function generateMetadata({
   // Türkçe arama kalıbı: marka adı + "inceleme" / "yorum" / "güvenilir mi".
   // Üçü de başlıkta veya açıklamada geçiyor.
   return {
-    title: `${firm.name} İncelemesi ${YEAR} — Kurallar, Ücretler ve Ödeme`,
-    description: `${firm.name} prop firma incelemesi: challenge kuralları, drawdown limitleri, kâr paylaşımı, ücretler ve ödeme sicili. Bağımsız Index puanı ${composite.toFixed(1)}/10. ${firm.name} güvenilir mi, artıları ve eksileri neler?`,
+    title: trf("{firm} İncelemesi {year} — Kurallar, Ücretler ve Ödeme", {
+      firm: firm.name,
+      year: YEAR,
+    }),
+    description: trf(
+      "{firm} prop firma incelemesi: challenge kuralları, drawdown limitleri, kâr paylaşımı, ücretler ve ödeme sicili. Bağımsız Index puanı {score}/10. {firm} güvenilir mi, artıları ve eksileri neler?",
+      { firm: firm.name, score: composite.toFixed(1) }
+    ),
     alternates: { canonical: `/prop-firmalar/${firm.slug}` },
     openGraph: {
-      title: `${firm.name} İncelemesi — Index ${composite.toFixed(1)}/10`,
+      title: trf("{firm} İncelemesi — Index {score}/10", {
+        firm: firm.name,
+        score: composite.toFixed(1),
+      }),
       description: firm.tagline,
       url: `${SITE_URL}/prop-firmalar/${firm.slug}`,
     },
@@ -78,60 +87,111 @@ function firmFaqs(firm: PropFirm) {
 
   const faqs = [
     {
-      q: `${firm.name} güvenilir mi?`,
-      a:
-        `${firm.name}, ${firm.founded} yılında kurulmuş${firm.backedBy ? ` ve ${firm.backedBy} altyapısını kullanan` : ""} bir prop firmadır. ` +
-        `FXPARTNER'ın bağımsız değerlendirmesinde 10 üzerinden ${composite.toFixed(1)} puan alıyor. ` +
-        `Ödeme kanıtı durumu şu an "${trData(PAYOUT_STATUS_LABEL)[firm.payoutProof.status]}". ` +
-        `${firm.payoutProof.note} Prop firma sektöründe 2020-2026 arasında 80'den fazla firma kapandığı için, ` +
-        `hangi firma olursa olsun challenge ücretini kaybetmeyi göze alabileceğiniz bir tutar olarak değerlendirmelisiniz.`,
+      q: trf("{firm} güvenilir mi?", { firm: firm.name }),
+      a: [
+        // Two variants rather than a spliced clause: the "backed by" phrase
+        // is a relative clause in Turkish and a translator has to be able to
+        // move it, which they cannot do if it arrives as an opaque hole.
+        firm.backedBy
+          ? trf("{firm}, {year} yılında kurulmuş ve {backer} altyapısını kullanan bir prop firmadır.", {
+              firm: firm.name,
+              year: firm.founded,
+              backer: firm.backedBy,
+            })
+          : trf("{firm}, {year} yılında kurulmuş bir prop firmadır.", {
+              firm: firm.name,
+              year: firm.founded,
+            }),
+        trf("FXPARTNER’ın bağımsız değerlendirmesinde 10 üzerinden {score} puan alıyor.", {
+          score: composite.toFixed(1),
+        }),
+        trf("Ödeme kanıtı durumu şu an “{status}”.", {
+          status: trData(PAYOUT_STATUS_LABEL)[firm.payoutProof.status],
+        }),
+        firm.payoutProof.note,
+        tr("Prop firma sektöründe 2020-2026 arasında 80’den fazla firma kapandığı için, hangi firma olursa olsun challenge ücretini kaybetmeyi göze alabileceğiniz bir tutar olarak değerlendirmelisiniz."),
+      ].join(" "),
     },
     {
-      q: `${firm.name} challenge ücreti ne kadar?`,
-      a:
-        `${firm.name}'da challenge ücretleri ${firm.challengeFeeFrom} seviyesinden başlıyor. ` +
-        `Hesap büyüklükleri: ${firm.accountSizes.join(", ")}. ` +
-        (firm.discount?.status === "live" && firm.discount.code
-          ? `FXPARTNER okuyucuları için ${firm.discount.code} kodu ile %${firm.discount.percent} indirim geçerli.`
-          : `Şu anda doğrulanmış bir indirim kodumuz bulunmuyor.`),
+      q: trf("{firm} challenge ücreti ne kadar?", { firm: firm.name }),
+      a: [
+        trf("{firm}’da challenge ücretleri {fee} seviyesinden başlıyor.", {
+          firm: firm.name,
+          fee: firm.challengeFeeFrom,
+        }),
+        trf("Hesap büyüklükleri: {sizes}.", { sizes: firm.accountSizes.join(", ") }),
+        firm.discount?.status === "live" && firm.discount.code
+          ? trf("FXPARTNER okuyucuları için {code} kodu ile %{percent} indirim geçerli.", {
+              code: firm.discount.code,
+              percent: firm.discount.percent ?? 0,
+            })
+          : tr("Şu anda doğrulanmış bir indirim kodumuz bulunmuyor."),
+      ].join(" "),
     },
     {
-      q: `${firm.name} kuralları neler?`,
+      q: trf("{firm} kuralları neler?", { firm: firm.name }),
       a:
         firm.rules
-          .map(
-            (r) =>
-              `${r.name}: ${r.profitTargets.length === 0 ? "kâr hedefi yok (doğrudan fonlanmış hesap)" : `kâr hedefi %${r.profitTargets.join(", ardından %")}`}, günlük zarar limiti ${formatDrawdown(r.dailyDrawdown, r.drawdownUnit)}, toplam zarar limiti ${formatDrawdown(r.maxDrawdown, r.drawdownUnit)}` +
+          .map((r) => {
+            const target =
+              r.profitTargets.length === 0
+                ? tr("kâr hedefi yok (doğrudan fonlanmış hesap)")
+                : trf("kâr hedefi %{targets}", {
+                    targets: r.profitTargets.join(tr(", ardından %")),
+                  });
+            const limits = trf(
+              "{plan}: {target}, günlük zarar limiti {daily}, toplam zarar limiti {max}",
+              {
+                plan: r.name,
+                target,
+                daily: formatDrawdown(r.dailyDrawdown, r.drawdownUnit, trLocale()),
+                max: formatDrawdown(r.maxDrawdown, r.drawdownUnit, trLocale()),
+              }
+            );
+            return (
+              limits +
               (r.minTradingDays !== null
-                ? `, minimum ${r.minTradingDays} işlem günü`
-                : ", minimum işlem günü şartı yok")
-          )
+                ? trf(", minimum {days} işlem günü", { days: r.minTradingDays })
+                : tr(", minimum işlem günü şartı yok"))
+            );
+          })
           .join(". ") +
-        `. Kâr paylaşımı: ${firm.profitSplit}. Ödeme döngüsü: ${firm.payoutCycle}.`,
+        trf(". Kâr paylaşımı: {split}. Ödeme döngüsü: {cycle}.", {
+          split: firm.profitSplit,
+          cycle: firm.payoutCycle,
+        }),
     },
     {
-      q: `${firm.name}'da copy trading ve sinyal kullanılabilir mi?`,
-      a:
-        `Copy trading: ${trData(COPY_TRADING_NOTE)[firm.copyTradingAllowed]} ` +
-        `Sinyal servisi: ${trData(SIGNAL_NOTE)[firm.signalServiceAllowed]} ` +
-        `EA (otomatik sistem): ${trData(EA_NOTE)[firm.eaAllowed]} ` +
-        `Kural ihlali, birikmiş kâr ödenmeden hesabın kapatılmasıyla sonuçlanabilir; ` +
-        `bu yüzden herhangi bir otomatik araç veya dış sinyal kullanmadan önce firmadan yazılı teyit almanız önerilir.`,
+      q: trf("{firm}’da copy trading ve sinyal kullanılabilir mi?", { firm: firm.name }),
+      a: [
+        trf("Copy trading: {note}", { note: trData(COPY_TRADING_NOTE)[firm.copyTradingAllowed] }),
+        trf("Sinyal servisi: {note}", { note: trData(SIGNAL_NOTE)[firm.signalServiceAllowed] }),
+        trf("EA (otomatik sistem): {note}", { note: trData(EA_NOTE)[firm.eaAllowed] }),
+        tr("Kural ihlali, birikmiş kâr ödenmeden hesabın kapatılmasıyla sonuçlanabilir; bu yüzden herhangi bir otomatik araç veya dış sinyal kullanmadan önce firmadan yazılı teyit almanız önerilir."),
+      ].join(" "),
     },
   ];
 
   if (cheapest) {
     faqs.push({
-      q: `${firm.name} challenge'ı nasıl geçilir?`,
+      q: trf("{firm} challenge’ı nasıl geçilir?", { firm: firm.name }),
       a:
-        `${firm.name}'da elenmelerin büyük çoğunluğu kâr hedefine ulaşamamaktan değil, ` +
-        `zarar limitinin aşılmasından kaynaklanır. En sıkı planda ` +
+        trf(
+          "{firm}’da elenmelerin büyük çoğunluğu kâr hedefine ulaşamamaktan değil, zarar limitinin aşılmasından kaynaklanır. En sıkı planda",
+          { firm: firm.name }
+        ) +
+        " " +
         (cheapest.dailyDrawdown === null
-          ? `ayrı bir günlük zarar limiti yok; hesabı yöneten tek sınır ${formatDrawdown(cheapest.maxDrawdown, cheapest.drawdownUnit)} toplam limit`
-          : `günlük limit ${formatDrawdown(cheapest.dailyDrawdown, cheapest.drawdownUnit)}, toplam limit ${formatDrawdown(cheapest.maxDrawdown, cheapest.drawdownUnit)}`) +
-        `. Bu, hesap büyüklüğüne göre işlem başına riskinizi ` +
-        `önceden hesaplamanız gerektiği anlamına gelir — tek bir aşırı pozisyon her iki limiti de tetikleyebilir. ` +
-        `Pozisyon büyüklüğü hesaplamak için pozisyon hesaplayıcımızı kullanabilirsiniz.`,
+          ? trf("ayrı bir günlük zarar limiti yok; hesabı yöneten tek sınır {max} toplam limit", {
+              max: formatDrawdown(cheapest.maxDrawdown, cheapest.drawdownUnit, trLocale()),
+            })
+          : trf("günlük limit {daily}, toplam limit {max}", {
+              daily: formatDrawdown(cheapest.dailyDrawdown, cheapest.drawdownUnit, trLocale()),
+              max: formatDrawdown(cheapest.maxDrawdown, cheapest.drawdownUnit, trLocale()),
+            })) +
+        tr(
+          ". Bu, hesap büyüklüğüne göre işlem başına riskinizi önceden hesaplamanız gerektiği anlamına gelir — tek bir aşırı pozisyon her iki limiti de tetikleyebilir. Pozisyon büyüklüğü hesaplamak için pozisyon hesaplayıcımızı kullanabilirsiniz."
+        ),
     });
   }
 
@@ -239,15 +299,18 @@ export default async function PropFirmDetailPage({
                   {scores.composite.toFixed(1)}
                 </p>
                 <p className="font-mono text-[11px] text-text-on-ink-muted">
-                  {trData(propFirms).length} firma içinde {rankInList}. sırada
+                  {trf("{total} firma içinde {rank}. sırada", {
+                    total: propFirms.length,
+                    rank: rankInList,
+                  })}
                 </p>
               </div>
               <dl className="grid grid-cols-2 gap-x-8 gap-y-3 text-sm sm:grid-cols-4">
                 {[
-                  ["Kural Seti", scores.rules],
-                  ["Maliyet", scores.cost],
-                  ["Ödeme", scores.payout],
-                  ["Şeffaflık", scores.transparency],
+                  [tr("Kural Seti"), scores.rules],
+                  [tr("Maliyet"), scores.cost],
+                  [tr("Ödeme"), scores.payout],
+                  [tr("Şeffaflık"), scores.transparency],
                 ].map(([label, val]) => (
                   <div key={String(label)}>
                     <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-text-on-ink-muted">
@@ -307,11 +370,11 @@ export default async function PropFirmDetailPage({
           <div className="mx-auto max-w-4xl px-6 py-8">
             <dl className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
               {[
-                ["Kuruluş", String(firm.founded)],
-                ["Merkez", firm.headquarters],
-                ["Kâr Payı", firm.profitSplit],
-                ["Maks. Tahsis", firm.maxAllocation],
-                ["Ödeme Döngüsü", firm.payoutCycle],
+                [tr("Kuruluş"), String(firm.founded)],
+                [tr("Merkez"), firm.headquarters],
+                [tr("Kâr Payı"), firm.profitSplit],
+                [tr("Maks. Tahsis"), firm.maxAllocation],
+                [tr("Ödeme Döngüsü"), firm.payoutCycle],
               ].map(([label, val]) => (
                 <div key={label}>
                   <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-text-muted">
@@ -329,7 +392,7 @@ export default async function PropFirmDetailPage({
             {/* Kural setleri */}
             <div>
               <h2 className="font-poppins text-2xl font-semibold text-text-dark md:text-3xl">
-                {firm.name} challenge kuralları
+                {trf("{firm} challenge kuralları", { firm: firm.name })}
               </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
                 {tr("Elenmelerin büyük çoğunluğu kâr hedefine ulaşamamaktan değil, zarar limitinin aşılmasından kaynaklanır. Aşağıdaki limitler, işlem başına riskinizi belirlemeniz gereken sınırlardır.")}
@@ -338,7 +401,9 @@ export default async function PropFirmDetailPage({
                 <table className="w-full min-w-[620px] border-collapse text-left text-sm">
                   <thead>
                     <tr className="border-b border-hairline-light bg-paper">
-                      {["Plan", "Kâr Hedefi", "Günlük Zarar", "Toplam Zarar", "Min. Gün", "Ücret"].map(
+                      {["Plan", "Kâr Hedefi", "Günlük Zarar", "Toplam Zarar", "Min. Gün", "Ücret"]
+                        .map((h) => tr(h))
+                        .map(
                         (h) => (
                           <th
                             key={h}
@@ -404,8 +469,10 @@ export default async function PropFirmDetailPage({
               )}
 
               <p className="mt-3 font-mono text-[11px] text-text-muted">
-                Platformlar: {firm.platforms.join(", ")} · Hesap boyutları:{" "}
-                {firm.accountSizes.join(", ")}
+                {trf("Platformlar: {platforms} · Hesap boyutları: {sizes}", {
+                  platforms: firm.platforms.join(", "),
+                  sizes: firm.accountSizes.join(", "),
+                })}
               </p>
             </div>
 
@@ -520,7 +587,7 @@ export default async function PropFirmDetailPage({
             {/* SSS */}
             <div className="mt-14 border-t border-hairline-light pt-10">
               <h2 className="font-poppins text-2xl font-semibold text-text-dark md:text-3xl">
-                {firm.name} hakkında sıkça sorulanlar
+                {trf("{firm} hakkında sıkça sorulanlar", { firm: firm.name })}
               </h2>
               <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
                 {faqs.map((f) => (
