@@ -120,6 +120,14 @@ const STRUCTURAL_KEYS = new Set([
   "slug", "href", "id", "icon", "key", "type", "src", "url", "code",
   "logo", "image", "color", "variant", "group", "path", "locale", "pair",
   "affiliateUrl", "trackingUrl", "email", "phone",
+  // Values used as lookup keys or enum members, not shown as prose. These
+  // became dangerous the moment the copy test stopped requiring a Turkish
+  // diacritic: broker.categories holds "Beginners" and "Low Spread", which
+  // read as English copy but are the keys categoryInfo is indexed by —
+  // translating them made every broker card throw.
+  "categories", "category", "segment", "segments", "models", "platforms",
+  "regulators", "status", "outcome", "tier", "verdict", "unit",
+  "drawdownUnit", "direction", "scope", "role",
   "symbol", "ticker", "currency", "date", "updatedAt", "publishedAt",
 ]);
 

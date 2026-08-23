@@ -13,6 +13,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { looksLikeCopy } from "./lib/turkish.mjs";
 
 const args = process.argv.slice(2);
 const OUT = args.includes("--out") ? args[args.indexOf("--out") + 1] : "tmp/indirect.tr.json";
@@ -31,11 +32,18 @@ const SOURCES = {
   "src/components/AiMarketAssistant.tsx": ["SUGGESTED_QUESTIONS", "WELCOME"],
 };
 
-const TURKISH = /[çğıöşüÇĞİÖŞÜ]/;
 const STRUCTURAL_KEYS = new Set([
   "slug", "href", "id", "icon", "key", "type", "src", "url", "code",
   "logo", "image", "color", "variant", "group", "path", "locale", "pair",
   "affiliateUrl", "trackingUrl", "email", "phone",
+  // Values used as lookup keys or enum members, not shown as prose. These
+  // became dangerous the moment the copy test stopped requiring a Turkish
+  // diacritic: broker.categories holds "Beginners" and "Low Spread", which
+  // read as English copy but are the keys categoryInfo is indexed by —
+  // translating them made every broker card throw.
+  "categories", "category", "segment", "segments", "models", "platforms",
+  "regulators", "status", "outcome", "tier", "verdict", "unit",
+  "drawdownUnit", "direction", "scope", "role",
   "symbol", "ticker", "currency", "date", "updatedAt", "publishedAt", "country",
 ]);
 
@@ -82,7 +90,7 @@ for (const [file, names] of Object.entries(SOURCES)) {
         .replace(/\\t/g, "\t")
         .replace(/\\"/g, '"')
         .replace(/\\\\/g, "\\");
-      if (!TURKISH.test(text) || text.trim().length < 2) continue;
+      if (!looksLikeCopy(text)) continue;
       bag[text] = text;
       count++;
     }

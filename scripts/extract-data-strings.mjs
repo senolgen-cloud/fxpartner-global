@@ -9,6 +9,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { looksLikeCopy } from "./lib/turkish.mjs";
 import { pathToFileURL } from "node:url";
 
 const args = process.argv.slice(2);
@@ -19,10 +20,17 @@ const STRUCTURAL_KEYS = new Set([
   "slug", "href", "id", "icon", "key", "type", "src", "url", "code",
   "logo", "image", "color", "variant", "group", "path", "locale", "pair",
   "affiliateUrl", "trackingUrl", "email", "phone",
+  // Values used as lookup keys or enum members, not shown as prose. These
+  // became dangerous the moment the copy test stopped requiring a Turkish
+  // diacritic: broker.categories holds "Beginners" and "Low Spread", which
+  // read as English copy but are the keys categoryInfo is indexed by —
+  // translating them made every broker card throw.
+  "categories", "category", "segment", "segments", "models", "platforms",
+  "regulators", "status", "outcome", "tier", "verdict", "unit",
+  "drawdownUnit", "direction", "scope", "role",
   "symbol", "ticker", "currency", "date", "updatedAt", "publishedAt",
 ]);
 
-const TURKISH = /[çğıöşüÇĞİÖŞÜ]/;
 
 const MODULES = [
   "src/data/propFirms.ts",
@@ -41,7 +49,7 @@ const found = new Set();
 
 function walk(value) {
   if (typeof value === "string") {
-    if (TURKISH.test(value) && value.trim().length > 1) found.add(value);
+    if (looksLikeCopy(value)) found.add(value);
     return;
   }
   if (Array.isArray(value)) return value.forEach(walk);

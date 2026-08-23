@@ -10,9 +10,18 @@
 // literals, ternaries, template expressions, props. Those skips are invisible
 // until someone loads /en and reads a Turkish word, so this counts them.
 //
-// A string is reported when it contains Turkish-only letters, is not already
+// A string is reported when it looks like Turkish copy, is not already
 // inside a tr(...) or useTr()(...) call, and is not a comment, an import, a
 // className, a route or a data key.
+//
+// "Looks like Turkish" is a heuristic and it is worth knowing its edge. The
+// original test was a diacritic — ç, ğ, ı, ö, ş, ü — which misses every
+// Turkish phrase written in plain ASCII: "FX Sinyalleri", "Yapay Zeka
+// Analizi", "Spread ve swap, yan yana". Those rendered Turkish on /en for
+// months while this script reported the page clean. A function-word list
+// closes most of that gap; a two-word noun phrase with no function word and
+// no diacritic will still slip through, so a zero here means "nothing
+// obvious left", not "nothing left".
 
 import fs from "node:fs";
 import path from "node:path";
@@ -21,7 +30,17 @@ const args = process.argv.slice(2);
 const JSON_OUT = args.includes("--json");
 const ONE = args.includes("--file") ? args[args.indexOf("--file") + 1] : null;
 
-const TURKISH = /[çğıöşüÇĞİÖŞÜ]/;
+const DIACRITICS = /[çğıöşüÇĞİÖŞÜ]/;
+
+// Words a Turkish sentence long enough to matter almost always contains, and
+// that would be strange to find in English or Ukrainian copy. This is the
+// half of the test that catches ASCII-only Turkish.
+const TR_WORDS =
+  /(^|[^\p{L}])(ve|ile|için|bir|şu|nasıl|neden|hangi|kadar|daha|gibi|veya|değil|olarak|sonra|önce|göre|kendi|edildi|ediliyor|yapın|alın|olun|edin|yana|sinyalleri|analizi|brokerlar)([^\p{L}]|$)/iu;
+
+const TURKISH = {
+  test: (text) => DIACRITICS.test(text) || TR_WORDS.test(text),
+};
 
 // Files whose Turkish is translated through a different mechanism: the data
 // overlays (src/data/i18n/<locale>/{brokers,blog}.json) and the dictionaries
@@ -43,6 +62,11 @@ const OVERLAY_OWNED = [
   "src/data/technicalAnalysis.ts",
   "src/data/partnerProgram.ts",
   "src/data/packageTiers.ts",
+  "src/data/brokerLookup.ts",
+  "src/data/cashback.ts",
+  // A table definition, not copy. Its column names read like Turkish to a
+  // word list and are not shown to anyone.
+  "src/db/schema.ts",
 ];
 
 // Server-side text that is never localized: what the bots post to Telegram
