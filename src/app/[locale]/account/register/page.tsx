@@ -4,8 +4,12 @@ import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
-import SignInForm from "@/components/SignInForm";
-import { brokers } from "@/data/brokers";
+import AuthShell from "@/components/account/AuthShell";
+import EmailSignInForm from "@/components/account/EmailSignInForm";
+import GoogleSignIn from "@/components/account/GoogleSignIn";
+import { submitLogin } from "@/app/[locale]/account/login/simple-actions";
+import { configuredProviders } from "@/lib/authProviders";
+import { COUNTRIES } from "@/lib/country";
 import { setServerLocale } from "@/lib/serverLocale";
 
 export async function generateMetadata({
@@ -37,68 +41,45 @@ export default async function RegisterPage({
   const { locale: pageLocale } = await params;
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
+  const providers = configuredProviders();
+
   return (
     <>
-      <main className="relative flex-1 overflow-hidden bg-ink">
-        <div
-          className="hero-glow-signal pointer-events-none absolute -top-32 -left-24 h-[520px] w-[520px] rounded-full blur-3xl"
-          style={{ background: "color-mix(in srgb, var(--signal) 30%, transparent)" }}
+      <AuthShell
+        eyebrow={tr("Ücretsiz hesap")}
+        title={tr("Sinyalleri görmeye başlayın")}
+        intro={tr("E-postanız yeterli. Şifre yok, kart yok, iptal yok — çıkmak istediğinizde tek tıkla aboneliğinizi kapatabilirsiniz.")}
+        footer={
+          <>
+            {tr("Zaten üye misiniz?")}{" "}
+            <Link href="/account/login" className="text-signal hover:text-signal-strong">
+              {tr("Giriş yapın")}
+            </Link>
+            {". "}
+            {tr("Kayıt olarak")}{" "}
+            <Link href="/terms" className="text-signal hover:text-signal-strong">
+              {tr("Kullanım Şartları")}
+            </Link>{" "}
+            {tr("ve")}{" "}
+            <Link href="/privacy" className="text-signal hover:text-signal-strong">
+              {tr("Gizlilik Politikası")}
+            </Link>
+            {"’"}
+            {tr("nı kabul etmiş olursunuz.")}
+          </>
+        }
+      >
+        {/* The only field beyond the address, and it is optional: country is
+            what decides which brokers and which leverage actually apply to a
+            reader, so it earns its place. Name, phone and broker moved to
+            /account, where someone who has seen the product can fill them in. */}
+        <EmailSignInForm
+          action={submitLogin}
+          submitLabel={tr("Ücretsiz hesap aç")}
+          countries={COUNTRIES}
         />
-        <div
-          className="hero-glow-gold pointer-events-none absolute -bottom-40 -right-16 h-[420px] w-[420px] rounded-full blur-3xl"
-          style={{ background: "color-mix(in srgb, var(--signal) 18%, transparent)" }}
-        />
-
-        <div className="relative mx-auto max-w-4xl px-6 py-20">
-          <div
-            className="grid overflow-hidden rounded-[28px] border border-signal/30 bg-ink-soft shadow-[0_0_0_1px_color-mix(in_srgb,var(--signal)_25%,transparent),0_0_70px_-15px_var(--signal)] md:grid-cols-[1.15fr_0.85fr]"
-          >
-            {/* Form side */}
-            <div className="p-8 md:p-12">
-              <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
-                Hesap
-              </span>
-              <h1 className="mt-3 font-display text-3xl font-semibold text-text-on-ink">
-                {tr("Ücretsiz hesap oluşturun")}
-              </h1>
-              <p className="mt-3 text-text-on-ink-muted">
-                {tr("Bize kendinizden biraz bahsedin, size tek kullanımlık bir giriş bağlantısı gönderelim. Şifreye gerek yok.")}
-              </p>
-
-              <SignInForm brokers={brokers.map((b) => ({ slug: b.slug, name: b.name }))} />
-
-              <p className="mt-6 text-xs leading-relaxed text-text-on-ink-muted">
-                {tr("Zaten üye misiniz?")}{" "}
-                <Link href="/account/login" className="text-signal hover:text-signal-strong">
-                  {tr("Giriş yapın")}
-                </Link>
-                .
-              </p>
-            </div>
-
-            {/* Diagonal accent side — matches the reference's glowing split panel */}
-            <div
-              className="relative hidden md:block"
-              style={{
-                background:
-                  "linear-gradient(135deg, color-mix(in srgb, var(--signal) 55%, var(--ink)) 0%, var(--ink) 75%)",
-                clipPath: "polygon(18% 0, 100% 0, 100% 100%, 0% 100%)",
-              }}
-            >
-              <div className="flex h-full flex-col items-center justify-center px-8 text-center">
-                <span className="text-4xl font-bold uppercase tracking-tight text-text-on-ink">
-                  {tr("Hoş")}
-                  <br />
-                  Geldiniz
-                </span>
-                <p className="mt-4 text-sm text-text-on-ink/80">
-                  {tr("Broker incelemeleri, cashback takibi ve VIP Telegram erişimi — hepsi tek bir yerde.")}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
+        {providers.google && <GoogleSignIn />}
+      </AuthShell>
       <Footer />
     </>
   );

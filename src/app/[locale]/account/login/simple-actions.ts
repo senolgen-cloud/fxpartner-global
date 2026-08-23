@@ -1,6 +1,9 @@
 "use server";
 
 import { signIn } from "@/auth";
+import { db } from "@/db";
+import { users } from "@/db/schema";
+import { eq } from "drizzle-orm";
 
 export type SimpleSignInState = { ok: boolean; error?: string };
 
@@ -19,6 +22,23 @@ export async function submitLogin(
     return { ok: false, error: "Lütfen geçerli bir e-posta adresi girin." };
   }
 
-  await signIn("resend", { email, redirectTo: "/account" });
+  // Country is optional and arrives only from the register form. Saved
+  // before the link is sent so a member who never comes back still leaves us
+  // the one field that decides which brokers and signals apply to them.
+  const country = String(formData.get("country") || "").trim();
+  if (country) {
+    await db
+      .update(users)
+      .set({ country })
+      .where(eq(users.email, email))
+      .catch(() => {
+        // A brand new address has no row yet; the adapter creates it when the
+        // link is used, and /account can ask again. Not worth failing sign-in.
+      });
+  }
+
+  // redirect: false so the caller can render "check your inbox" in place
+  // instead of bouncing to the stock Auth.js verify page.
+  await signIn("resend", { email, redirect: false });
   return { ok: true };
 }

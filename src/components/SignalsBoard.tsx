@@ -1,5 +1,7 @@
 "use client";
 import { useIntlLocale, useTr, useTrf } from "@/components/useTr";
+import { formatPercent } from "@/lib/i18n";
+import { useLocale } from "@/components/LocaleProvider";
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Link from "@/components/LocaleLink";
@@ -359,6 +361,7 @@ function useCountUp(target: number, durationMs = 1400, decimals = 0) {
 
 function PipsStats({ closed }: { closed: Signal[] }) {
   const tr = useTr();
+  const locale = useLocale();
   const trf = useTrf();
   const intl = useIntlLocale();
   const decisive = closed
@@ -704,7 +707,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
                     {trf("{count} işlem", { count: p.count })}
                   </span>
                   <span className="w-12 shrink-0 text-right font-mono text-[11px] text-text-on-ink-muted">
-                    %{pairWinRate}
+                    {formatPercent(pairWinRate, locale)}
                   </span>
                   {/* Toplamı tek işlem belirlediyse söylenir. Aksi halde
                       "%63 kazanma ama net eksi" satırı çelişkili görünüyor

@@ -83,3 +83,17 @@ export function splitLocale(pathname: string): { locale: Locale; path: string } 
   }
   return { locale: defaultLocale, path: pathname };
 }
+
+/**
+ * A whole-number percentage, written the way the locale writes it.
+ *
+ * Turkish puts the sign first ("%65"), English and Ukrainian put it last
+ * ("65%"). Hard-coding either one is wrong in the other two trees, and Intl
+ * already knows the rule — it just needs the value as a fraction.
+ */
+export function formatPercent(value: number, locale: Locale): string {
+  return new Intl.NumberFormat(intlLocale[locale], {
+    style: "percent",
+    maximumFractionDigits: 0,
+  }).format(value / 100);
+}
