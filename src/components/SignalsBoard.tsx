@@ -10,7 +10,7 @@ import { canViewSignal, requiredTierForPair, type AccessTier } from "@/lib/signa
 import { ACCESS_TIER_LABEL } from "@/data/packageTiers";
 import TradingViewChart from "./TradingViewChart";
 import LotLadder from "./LotLadder";
-import CopyTradeButton from "./CopyTradeButton";
+import TradeNowButton from "./TradeNowButton";
 import { favorableMove } from "@/lib/contractSizes";
 
 type Signal = typeof tradeSignals.$inferSelect;
@@ -947,7 +947,7 @@ function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: Access
                position that closed days ago is an offer the reader cannot
                take, and the history list is long enough that it would put
                a hundred identical sponsored pills on one page. */
-            !isClosed && <CopyTradeButton variant="inline" />
+            !isClosed && <TradeNowButton variant="inline" />
           )}
           <button
             type="button"
@@ -1028,7 +1028,7 @@ function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: Access
                 {tr("Bu sinyal, takip edilen FXPARTNER MT5 hesabından otomatik olarak iletildi. Yatırım tavsiyesi değildir.")}
               </p>
 
-              {!locked && !isClosed && <CopyTradeButton variant="card" />}
+              {!locked && !isClosed && <TradeNowButton variant="card" />}
             </div>
 
             <TradingViewChart symbol={signal.pair} className="h-[280px] sm:h-[340px]" />
