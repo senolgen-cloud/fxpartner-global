@@ -1,5 +1,6 @@
 import Image from "next/image";
 import SignalsPromoBanner from "@/components/SignalsPromoBanner";
+import SponsoredLeaderboard from "@/components/SponsoredLeaderboard";
 import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { brokers } from "@/data/brokers";
@@ -12,8 +13,12 @@ export default function Footer({
   // is a server component, and a client-side pathname check has to render
   // once before it can hide anything.
   showSignalsPromo = true,
+  // The XM leaderboard, sitewide. Same reasoning as the signals banner: it
+  // rides on Footer so a new route carries it without anyone remembering.
+  showSponsoredBanner = true,
 }: {
   showSignalsPromo?: boolean;
+  showSponsoredBanner?: boolean;
 } = {}) {
   return (
     <footer className="border-t border-hairline bg-ink text-text-on-ink-muted">
@@ -21,6 +26,19 @@ export default function Footer({
           every route renders <Footer />, so a new page gets it without
           anyone remembering to add it. Renders nothing on /signals itself. */}
       {showSignalsPromo && <SignalsPromoBanner />}
+      {/* Sponsored, and after our own promo rather than before it: the
+          signals banner is the product this site is actually for. XM lends
+          the artwork; the link is ours — see SponsoredLeaderboard for why
+          the network's own click URL is not used. */}
+      {showSponsoredBanner && (
+        <div className="border-b border-hairline/60 px-6 py-8">
+          <SponsoredLeaderboard
+            brokerSlug="xm"
+            image="/campaigns/xm-deposit-bonus-600x90.jpg"
+            alt={tr("XM %100 depozito bonusu kampanyası")}
+          />
+        </div>
+      )}
       {/* Sitewide share row. Lives here rather than on each page because
           every route renders <Footer /> — so a new page gets the buttons
           without anyone remembering to add them. No title prop: the
