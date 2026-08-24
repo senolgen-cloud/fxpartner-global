@@ -1,10 +1,10 @@
-// Locale config for the /ua and /en trees.
+// Locale config for the /tr, /ua and /en trees.
 //
-// Turkish is the default and stays unprefixed: fxpartner.global/blog/x keeps
-// working exactly as it did, which matters because those URLs are already out
-// in Telegram posts, tweets and Google's index. Other locales live under a
-// path prefix — /ua/blog/x — and src/proxy.ts rewrites the unprefixed request
-// to the internal /tr/... route so the [locale] segment always has a value.
+// Every locale is prefixed, Turkish included: fxpartner.global/tr/blog/x. The
+// old unprefixed URLs are still out in Telegram posts, tweets and Google's
+// index, so src/proxy.ts answers them with a permanent redirect into /tr
+// rather than serving them: one canonical URL per page, and the tree a reader
+// is in is always visible in the address bar.
 
 export const locales = ["tr", "ua", "en"] as const;
 export type Locale = (typeof locales)[number];
@@ -91,13 +91,31 @@ export function localePath(locale: Locale, path: string): string {
   return path === "/" ? `/${locale}` : `/${locale}${path}`;
 }
 
-// Splits a pathname into its locale and the path as the rest of the app
-// thinks of it (i.e. without the prefix). Unprefixed paths are the default
-// locale.
+/**
+ * Splits a pathname into its locale and the path as the rest of the app
+ * thinks of it, i.e. with the prefix taken off.
+ *
+ * Every prefix is stripped, Turkish included. This used to carry an extra
+ * `&& first !== defaultLocale` condition, from when Turkish was the one
+ * tree sitting on the bare URL and so had no prefix to remove. Once Turkish
+ * moved to /tr, that condition started handing every caller back a path that
+ * still said /tr, and all three quietly did the wrong thing with it:
+ *
+ *   - LocaleSwitcher joined /ua to /tr/blog/x and linked at /ua/tr/blog/x,
+ *     so switching language from any Turkish page was a 404.
+ *   - useLocalePathname compared /tr/brokerlar against hrefs written the
+ *     Turkish way (/brokerlar), so no nav item was ever marked active.
+ *   - proxy.ts asks whether the path startsWith("/admin"). "/tr/admin" does
+ *     not, so the admin and account guards stopped running on the prefixed
+ *     URLs, and /tr/admin/cashback served the panel to anyone who asked.
+ *
+ * A pathname with no locale prefix still reports the default locale and comes
+ * back unchanged: proxy.ts redirects those, and reads this to know where to.
+ */
 export function splitLocale(pathname: string): { locale: Locale; path: string } {
   const segments = pathname.split("/");
   const first = segments[1];
-  if (first && isLocale(first) && first !== defaultLocale) {
+  if (first && isLocale(first)) {
     const rest = "/" + segments.slice(2).join("/");
     return { locale: first, path: rest === "/" ? "/" : rest.replace(/\/$/, "") };
   }
