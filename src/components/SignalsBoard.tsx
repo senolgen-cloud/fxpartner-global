@@ -671,7 +671,7 @@ function LevelCell({
   locked?: boolean;
 }) {
   return (
-    <div className="min-w-0 text-center lg:text-left">
+    <div className="min-w-0 text-center">
       <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">{label}</div>
       <div
         className="mt-1 truncate font-mono text-sm font-semibold tabular-stat"
@@ -716,8 +716,8 @@ function LivePriceCell({
     signed > 0 ? TICK_UP : signed < 0 ? TICK_DOWN : "var(--text-on-ink)";
 
   return (
-    <div className="min-w-0 text-center lg:text-left">
-      <div className="flex items-center justify-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted lg:justify-start">
+    <div className="min-w-0 text-center">
+      <div className="flex items-center justify-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
         {quote && (
           <span
             aria-hidden="true"
@@ -794,14 +794,14 @@ function SignalCard({
   const panelId = `signal-panel-${signal.id}`;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-hairline bg-gradient-to-b from-ink-soft to-ink shadow-[0_20px_50px_-25px_rgba(0,0,0,0.7)]">
+    <div className="mx-auto w-full max-w-2xl overflow-hidden rounded-2xl border border-hairline bg-gradient-to-b from-ink-soft to-ink shadow-[0_20px_50px_-25px_rgba(0,0,0,0.7)]">
       {/* Header row: identity, the three levels, the action. Everything a
           reader needs to decide whether to open the row at all. */}
-      <div className="flex flex-col gap-4 p-4 sm:p-5 lg:flex-row lg:items-center lg:gap-6">
-        <div className="flex min-w-0 items-center justify-center gap-3 lg:w-[24%] lg:shrink-0 lg:justify-start">
+      <div className="flex flex-col gap-4 p-4 sm:p-5">
+        <div className="flex min-w-0 items-center justify-center gap-3">
           <PairMark pair={signal.pair} />
           <div className="min-w-0">
-            <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
+            <div className="flex flex-wrap items-center justify-center gap-2">
               <span className="notranslate font-display text-base font-semibold text-text-on-ink">
                 {prettyPair(signal.pair)}
               </span>
@@ -814,7 +814,7 @@ function SignalCard({
                 </span>
               )}
             </div>
-            <div className="mt-1 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[11px] text-text-on-ink-muted lg:justify-start">
+            <div className="mt-1 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[11px] text-text-on-ink-muted">
               {isClosed ? (
                 <span className="font-semibold" style={{ color: resultColor }}>
                   {signal.outcome ?? tr("KAPANDI")}
@@ -836,9 +836,9 @@ function SignalCard({
         </div>
 
         {/* Four cells while the trade is open, three once it has closed —
-            "right now" is not a thing a finished trade has. Two-up on
-            mobile rather than four-across: at 375px a fourth column leaves
-            about 70px for a six-digit price. */}
+            "right now" is not a thing a finished trade has. Two-up below sm
+            rather than four-across: at 375px a fourth column leaves about
+            70px for a six-digit price. */}
         <div
           className={`grid flex-1 gap-3 sm:gap-6 ${
             isClosed ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"
@@ -862,7 +862,7 @@ function SignalCard({
         </div>
 
         {isClosed && resultLine && !locked && (
-          <div className="min-w-0 text-center lg:w-[13%] lg:shrink-0 lg:text-left">
+          <div className="min-w-0 text-center">
             <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
               {tr("Sonuç")}
             </div>
@@ -872,7 +872,7 @@ function SignalCard({
           </div>
         )}
 
-        <div className="flex items-center justify-center gap-2 lg:shrink-0 lg:justify-start">
+        <div className="flex items-center justify-center gap-2">
           {locked ? (
             <Link
               href={lock.href}
