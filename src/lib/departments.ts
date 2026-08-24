@@ -156,7 +156,15 @@ export const departments: Department[] = [
       "src/components/NotificationOptIn.tsx",
       "public/sw.js",
       ".github/workflows/telegram-cron.yml",
+      "src/app/api/cron/active-signals-digest/route.ts",
+      ".github/workflows/active-signals-digest.yml",
     ],
+    // active-signals-digest is the exception inside this active department:
+    // it is wired, tested and deliberately left on workflow_dispatch only.
+    // It posts open positions to a public channel, so compliance-brand signs
+    // off before it goes hourly — and "hourly" is itself the open question,
+    // since broker-review-share already had to come down from that cadence
+    // for flooding the channel. See the header of its workflow file.
     automation: "active",
   },
   {

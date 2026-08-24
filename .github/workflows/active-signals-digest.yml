@@ -1,0 +1,41 @@
+name: Active signals digest
+
+# PAUSED. Runs only when someone presses the button.
+#
+# Two gates stand between this file and an hourly post, and both are
+# deliberate:
+#
+# 1. compliance-brand has to sign off before any automation moves from
+#    "paused" to "active" — see src/lib/departments.ts. This one posts open
+#    positions to a public channel, so it is squarely that department's
+#    business.
+#
+# 2. Hourly is 24 posts a day, and this channel has already learned that
+#    lesson once: broker-review-share ran hourly until 2026-08-14, flooded
+#    the channel, and was cut to 4x/day. The route itself refuses to send a
+#    board it already sent today, which takes most of the sting out — but
+#    the cadence is still a judgement call, not a technical one.
+#
+# Its own workflow file rather than a job in telegram-cron.yml, because that
+# file's workflow_dispatch fires every job it contains — see the header of
+# broker-review-manual.yml for the same reasoning.
+#
+# To activate: uncomment the schedule block below and change the job's `if`
+# to include the schedule, exactly like the other crons.
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   # Top of every hour.
+  #   - cron: "0 * * * *"
+
+jobs:
+  # Owned by Sosyal Medya & Topluluk Departmanı — see src/lib/departments.ts.
+  active-signals-digest:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger active-signals-digest
+        run: |
+          curl -sf -w "\nHTTP %{http_code}\n" -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://fxpartner.global/api/cron/active-signals-digest"
