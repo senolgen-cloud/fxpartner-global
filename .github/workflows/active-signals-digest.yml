@@ -1,38 +1,38 @@
 name: Active signals digest
 
-# PAUSED. Runs only when someone presses the button.
+# ACTIVE since 2026-08-24, every 3 hours, per explicit owner request.
+# Owner approval stands in for the compliance-brand sign-off that
+# src/lib/departments.ts requires before an automation leaves "paused".
 #
-# Two gates stand between this file and an hourly post, and both are
-# deliberate:
+# Every 3 hours rather than hourly, also the owner's call, and the safer
+# read of this channel's history: broker-review-share ran hourly until
+# 2026-08-14, flooded the channel, and had to be cut to 4x/day.
 #
-# 1. compliance-brand has to sign off before any automation moves from
-#    "paused" to "active" — see src/lib/departments.ts. This one posts open
-#    positions to a public channel, so it is squarely that department's
-#    business.
+# Offset 20 minutes past the hour on purpose. On the hour, a */3 schedule
+# collides with market-analysis-share (0 */2) at 00/06/12/18 and with
+# broker-review-share (0 6,10,14,20) at 06:00 — three posts landing
+# together. blog-share already sits 30 minutes off market-analysis-share
+# for exactly this reason; :20 keeps this one clear of both.
 #
-# 2. Hourly is 24 posts a day, and this channel has already learned that
-#    lesson once: broker-review-share ran hourly until 2026-08-14, flooded
-#    the channel, and was cut to 4x/day. The route itself refuses to send a
-#    board it already sent today, which takes most of the sting out — but
-#    the cadence is still a judgement call, not a technical one.
+# 8 slots a day, two of them overnight in Turkey (03:20 and 00:20 TRT).
+# That is deliberate rather than an oversight: the route sends nothing when
+# the board has not changed since its last post, so a quiet night produces
+# no post at all instead of a 3am repeat.
 #
 # Its own workflow file rather than a job in telegram-cron.yml, because that
 # file's workflow_dispatch fires every job it contains — see the header of
 # broker-review-manual.yml for the same reasoning.
-#
-# To activate: uncomment the schedule block below and change the job's `if`
-# to include the schedule, exactly like the other crons.
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   # Top of every hour.
-  #   - cron: "0 * * * *"
+  schedule:
+    # Every 3 hours at :20 — 00:20, 03:20, 06:20 ... UTC.
+    - cron: "20 */3 * * *"
 
 jobs:
   # Owned by Sosyal Medya & Topluluk Departmanı — see src/lib/departments.ts.
   active-signals-digest:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '20 */3 * * *'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger active-signals-digest

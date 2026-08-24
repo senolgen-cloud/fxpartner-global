@@ -16,12 +16,11 @@ import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
 import { QUOTE_MAX_AGE_MS } from "@/app/api/live-prices/route";
 
-// Owned by Sinyal Operasyonları — see src/lib/departments.ts and
-// docs/ORGANIZATION.md. PAUSED: wired to workflow_dispatch only until
-// compliance-brand signs off, per the department rule that no automation
-// goes from paused to active without that review.
+// Owned by Sosyal Medya & Topluluk Departmanı — see src/lib/departments.ts
+// and docs/ORGANIZATION.md. Active since 2026-08-24 on a 3-hourly schedule,
+// per explicit owner request; see .github/workflows/active-signals-digest.yml.
 //
-// An hourly "here is the board right now" digest for Telegram and X.
+// A "here is the board right now" digest for Telegram and X.
 //
 // Two things it will not do, both deliberate:
 //
@@ -33,12 +32,13 @@ import { QUOTE_MAX_AGE_MS } from "@/app/api/live-prices/route";
 //    bought them. Free (FX) signals show their levels in full, exactly as
 //    the site does for a signed-out reader.
 //
-// 2. It does not send the same board twice in a day. Hourly is a lot of
-//    posts, and this channel has been here before: broker-review-share ran
-//    hourly until 2026-08-14, flooded the channel, and was cut to 4x/day.
-//    So the digest is skipped when the board is unchanged from a version
-//    already sent today. A run where nothing moved is a run with nothing to
-//    say.
+// 2. It does not send the same board twice in a day. Eight slots a day is
+//    still a lot of posts, and this channel has been here before:
+//    broker-review-share ran hourly until 2026-08-14, flooded the channel,
+//    and was cut to 4x/day. So the digest is skipped when the board is
+//    unchanged from a version already sent today. A run where nothing moved
+//    is a run with nothing to say — which is also what keeps the two
+//    overnight slots from becoming 3am repeats.
 function isAuthorized(req: NextRequest): boolean {
   const secret = process.env.CRON_SECRET;
   if (!secret) return false;
