@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import SignalsBoard from "@/components/SignalsBoard";
 import LiveMarketsGrid from "@/components/LiveMarketsGrid";
 import RotatingBrokerAd from "@/components/RotatingBrokerAd";
+import SponsoredLeaderboard from "@/components/SponsoredLeaderboard";
 import VipCtaBanner from "@/components/VipCtaBanner";
 import { db } from "@/db";
 import { tradeSignals, vipSubscriptions } from "@/db/schema";
@@ -157,6 +158,19 @@ export default async function SignalsPage({
         <section className="border-t border-hairline">
           <div className="mx-auto max-w-3xl px-6 py-14">
             <VipCtaBanner variant="dark" />
+          </div>
+        </section>
+
+        {/* XM own creative, on our own affiliate link. GOLD24-7 sits on this
+            page specifically: the board above publishes GOLD24-7 signals, so
+            the reader has just seen the instrument this banner is selling. */}
+        <section className="border-t border-hairline">
+          <div className="mx-auto max-w-3xl px-6 py-10">
+            <SponsoredLeaderboard
+              brokerSlug="xm"
+              image="/campaigns/xm-gold24-7-600x90.jpg"
+              alt={tr("XM GOLD24-7 — altını hafta sonu dahil her gün işleme açın")}
+            />
           </div>
         </section>
 
