@@ -437,3 +437,50 @@ button {
     animation: none;
   }
 }
+
+/* --- /signals opening visual ---
+   Runs on load, off the stylesheet, with no JavaScript in the path: this is
+   the first element on the page, and an entrance that depends on hydration
+   would show an empty screen to anyone whose bundle is slow to arrive.
+
+   Two animations, composed rather than chained. The entrance drives
+   `transform`; the float that follows drives the separate `translate`
+   property, so neither has to know the other's final value. */
+@keyframes signals-hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.965);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes signals-hero-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -10px;
+  }
+}
+
+.signals-hero-visual {
+  animation:
+    signals-hero-in 1.1s cubic-bezier(0.16, 1, 0.3, 1) both,
+    signals-hero-float 7s ease-in-out 1.3s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Someone who asked their system for less motion gets the image, not the
+     arrival. `both` on the entrance means removing it would leave the
+     element at its 0% frame — invisible — so it is replaced, not dropped. */
+  .signals-hero-visual {
+    animation: none;
+    opacity: 1;
+  }
+}
