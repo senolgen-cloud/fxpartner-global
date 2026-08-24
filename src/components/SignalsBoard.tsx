@@ -120,20 +120,6 @@ function PerformanceRing({ rate }: { rate: number | null }) {
   );
 }
 
-function LockBadge({ pair }: { pair: string }) {
-  const trf = useTrf();
-  const { href, label, badge } = lockPrompt(pair, trf);
-  return (
-    <Link
-      href={href}
-      title={label}
-      className="inline-flex items-center gap-1 rounded-full border border-gold/40 bg-gold/10 px-2.5 py-1 text-[11px] font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/20"
-    >
-      🔒 {badge}
-    </Link>
-  );
-}
-
 function outcomeColor(outcome: TradeSignalOutcome | null) {
   if (outcome === "WIN") return TICK_UP;
   if (outcome === "LOSS") return TICK_DOWN;
@@ -171,136 +157,6 @@ function Level({ label, value, color }: { label: string; value: string | null; c
       <span className="font-mono font-medium" style={{ color }}>
         {value}
       </span>
-    </div>
-  );
-}
-
-function LevelPair({ target1, stop }: { target1: string | null; stop: string | null }) {
-  if (!target1 && !stop) return <span className="text-text-on-ink-muted">—</span>;
-  return (
-    <span className="font-mono">
-      {stop ? <span style={{ color: TICK_DOWN }}>{stop}</span> : <span className="text-text-on-ink-muted">—</span>}
-      <span className="text-text-on-ink-muted"> / </span>
-      {target1 ? <span style={{ color: TICK_UP }}>{target1}</span> : <span className="text-text-on-ink-muted">—</span>}
-    </span>
-  );
-}
-
-function SignalTable({
-  title,
-  signals,
-  closedView,
-  viewerTier,
-}: {
-  title: string;
-  signals: Signal[];
-  closedView?: boolean;
-  viewerTier: AccessTier | null;
-}) {
-  const tr = useTr();
-  return (
-    <div className="hidden overflow-hidden rounded-2xl border border-hairline bg-ink-soft md:block">
-      <div className="flex items-center justify-between border-b border-hairline px-6 py-4">
-        <h2 className="font-display text-lg font-semibold text-text-on-ink">{title}</h2>
-        <span className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-signal">
-          <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
-          {tr("Canlı")}
-        </span>
-      </div>
-      {signals.length === 0 ? (
-        <p className="px-6 py-8 text-sm text-text-on-ink-muted">{tr("Henüz gösterilecek bir şey yok.")}</p>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[720px] border-collapse text-sm">
-            <thead>
-              <tr className="border-b border-hairline text-left text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted">
-                <th className="px-6 py-3 font-medium">{tr("Saat")}</th>
-                <th className="px-4 py-3 font-medium">{tr("Parite")}</th>
-                <th className="px-4 py-3 font-medium">{tr("Yön")}</th>
-                <th className="px-4 py-3 font-medium">{tr("Giriş")}</th>
-                <th className="px-4 py-3 font-medium">{closedView ? tr("Kapanış") : "SL / TP"}</th>
-                <th className="px-4 py-3 font-medium">{tr("Lot")}</th>
-                <th className="px-6 py-3 text-right font-medium">{closedView ? tr("Sonuç") : tr("Durum")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {signals.map((s) => {
-                const isSell = s.direction === "SELL";
-                const directionColor = isSell ? TICK_DOWN : TICK_UP;
-                // GERÇEK hesap sonucu. Bir süre burada 1-lota indirgenmiş
-                // değer gösterildi; küçük lotlarda bu sonucu 10-50 kat
-                // şişiriyordu (0.30 lotluk −$631,50'lik bir işlem ekranda
-                // −$2.105,00 görünüyordu). Ne olduğunu soran birine
-                // verilecek tek dürüst cevap gerçekleşen tutar.
-                const resultLine =
-                  s.profit !== null ? formatPerLot(parseFloat(s.profit)) : null;
-                // Past performance is public regardless of package — only
-                // closedView's live/active counterpart is the gated product.
-                const locked = closedView ? false : !canViewSignal(viewerTier, s.pair);
-                return (
-                  <tr key={s.id} className="border-b border-hairline last:border-0">
-                    <td className="whitespace-nowrap px-6 py-3.5 font-mono text-xs text-text-on-ink-muted">
-                      {(closedView ? s.closedAt : s.createdAt)?.toLocaleString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        timeZone: "UTC",
-                      })}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3.5 font-display font-semibold text-text-on-ink">
-                      {s.pair}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3.5">
-                      {s.direction ? (
-                        <span
-                          className="rounded-full border px-2.5 py-0.5 text-xs font-semibold"
-                          style={{ borderColor: directionColor, color: directionColor }}
-                        >
-                          {s.direction}
-                        </span>
-                      ) : (
-                        <span className="text-text-on-ink-muted">—</span>
-                      )}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3.5 font-mono text-text-on-ink">
-                      {locked ? "••••••" : s.entry}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3.5">
-                      {locked ? (
-                        <span className="font-mono text-text-on-ink-muted">•••• / ••••</span>
-                      ) : closedView ? (
-                        <span className="font-mono text-text-on-ink">{s.closePrice ?? "—"}</span>
-                      ) : (
-                        <LevelPair target1={s.target1} stop={s.stop} />
-                      )}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3.5 font-mono text-text-on-ink-muted">
-                      {locked ? "—" : s.volume ?? "—"}
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-3.5 text-right">
-                      {locked ? (
-                        <LockBadge pair={s.pair} />
-                      ) : closedView ? (
-                        <span
-                          className="rounded-full px-2.5 py-1 text-xs font-semibold text-on-signal"
-                          style={{ background: outcomeColor(s.outcome) }}
-                        >
-                          {resultLine ?? s.outcome ?? "CLOSED"}
-                        </span>
-                      ) : (
-                        <span className="rounded-full border border-signal px-2.5 py-1 text-xs font-semibold text-signal">
-                          Aktif
-                        </span>
-                      )}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      )}
     </div>
   );
 }
@@ -1275,6 +1131,32 @@ export default function SignalsBoard({
 
       {liveMarkets}
 
+      {/* Results sit directly under the open board, because "what happened
+          to the last ones" is the question a reader has the moment they have
+          finished reading "here is what is open now". The chart follows.
+
+          Same card as the active board at every width. This was a compact
+          table on desktop and cards only on mobile; the card reads better —
+          a result is one object carrying its own levels and outcome, not a
+          row to scan across — so the table is gone rather than kept as a
+          second way to render the same thing. */}
+      <section className="border-b border-hairline">
+        <div className="mx-auto max-w-6xl px-6 py-16">
+          <h2 className="font-display text-2xl font-semibold">{tr("Son Sinyaller")}</h2>
+          {closed.length === 0 ? (
+            <p className="mt-4 text-text-on-ink-muted">
+              {tr("Henüz kapanan sinyal yok — işlemler kapandıkça sonuçlar burada görünecek.")}
+            </p>
+          ) : (
+            <div className="mt-6 flex flex-col gap-4">
+              {closed.map((s) => (
+                <SignalCard key={s.id} signal={s} viewerTier={viewerTier} quote={quotes[s.pair]} />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
       <section className="border-b border-hairline bg-ink-soft/30">
         <div className="mx-auto max-w-6xl px-6 py-10">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
@@ -1340,23 +1222,6 @@ export default function SignalsBoard({
         </div>
       </section>
 
-      <section className="border-b border-hairline">
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <h2 className="font-display text-2xl font-semibold md:hidden">Son Sinyaller</h2>
-          <SignalTable title="Son Sinyaller" signals={closed} closedView viewerTier={viewerTier} />
-          {closed.length === 0 ? (
-            <p className="mt-4 text-text-on-ink-muted md:hidden">
-              {tr("Henüz kapanan sinyal yok — işlemler kapandıkça sonuçlar burada görünecek.")}
-            </p>
-          ) : (
-            <div className="mt-6 flex flex-col gap-4 md:hidden">
-              {closed.map((s) => (
-                <SignalCard key={s.id} signal={s} viewerTier={viewerTier} quote={quotes[s.pair]} />
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
     </>
   );
 }
