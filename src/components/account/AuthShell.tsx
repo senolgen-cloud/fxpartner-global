@@ -51,7 +51,7 @@ export default async function AuthShell({
       />
 
       <div className="relative mx-auto max-w-5xl px-5 py-12 sm:px-6 sm:py-20">
-        <div className="grid overflow-hidden rounded-[28px] border border-hairline bg-ink-soft shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)] lg:grid-cols-[0.92fr_1.08fr]">
+        <div className="grid overflow-hidden rounded-[32px] border border-hairline-light/70 bg-ink-soft shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)] lg:grid-cols-[0.92fr_1.08fr]">
           {/* Proof side. Second in the DOM on purpose: on a phone the form is
               what the reader came for, and the argument can wait below it. */}
           <div className="order-2 border-t border-hairline bg-gradient-to-b from-ink to-ink-soft p-8 lg:order-1 lg:border-t-0 lg:border-r lg:p-10">
@@ -103,18 +103,18 @@ export default async function AuthShell({
           </div>
 
           {/* Form side */}
-          <div className="order-1 p-8 sm:p-10 lg:order-2 lg:p-12">
+          <div className="order-1 p-8 sm:p-10 lg:order-2 lg:p-14">
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-on-ink-muted">
               {eyebrow}
             </span>
-            <h1 className="mt-3 font-display text-3xl font-semibold leading-tight text-text-on-ink sm:text-4xl">
+            <h1 className="mt-4 font-display text-3xl font-semibold leading-tight text-text-on-ink sm:text-4xl">
               {title}
             </h1>
-            <p className="mt-3 text-[15px] leading-relaxed text-text-on-ink-muted">{intro}</p>
+            <p className="mt-4 text-[15px] leading-relaxed text-text-on-ink-muted">{intro}</p>
 
             {children}
 
-            <div className="mt-8 border-t border-hairline pt-6 text-xs leading-relaxed text-text-on-ink-muted">
+            <div className="mt-8 border-t border-hairline pt-6 text-center text-xs leading-relaxed text-text-on-ink-muted">
               {footer}
             </div>
           </div>

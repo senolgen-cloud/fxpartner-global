@@ -17,6 +17,13 @@ const initial: SimpleSignInState = { ok: false };
  *
  * `country` stays because it is one tap, it is the field the signals and
  * broker availability actually depend on, and it is optional.
+ *
+ * The styling follows the reference we were pointed at: generous rounded
+ * fields, sentence-case labels sitting directly above them, one column, and a
+ * pill for the primary action. Not its palette, though — that reference is a
+ * white page, and this form sits between a dark header and a dark footer, so
+ * a white panel would read as a page that failed to load rather than a soft
+ * one. Soft here is the shape and the spacing, in the colours the site has.
  */
 export default function EmailSignInForm({
   action,
@@ -30,13 +37,15 @@ export default function EmailSignInForm({
   const tr = useTr();
   const [state, formAction, pending] = useActionState(action, initial);
 
+  // py-4 and rounded-2xl rather than py-3.5 and rounded-xl: the difference is
+  // small in the class name and most of the difference in how the form feels.
   const field =
-    "mt-2 w-full rounded-xl border border-hairline bg-ink px-4 py-3.5 text-[15px] text-text-on-ink outline-none transition-all placeholder:text-text-on-ink-muted/50 focus:border-signal focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--signal)_20%,transparent)]";
-  const label = "font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted";
+    "w-full rounded-2xl border border-hairline-light bg-ink/70 px-5 py-4 text-[15px] text-text-on-ink outline-none transition-all placeholder:text-text-on-ink-muted/45 hover:border-text-on-ink-muted/35 focus:border-signal focus:shadow-[0_0_0_4px_color-mix(in_srgb,var(--signal)_16%,transparent)]";
+  const label = "mb-2 block text-sm font-medium text-text-on-ink";
 
   if (state.ok) {
     return (
-      <div className="mt-8 rounded-2xl border border-signal/40 bg-signal/5 p-6">
+      <div className="mt-8 rounded-3xl border border-signal/35 bg-signal/[0.07] p-7">
         <p className="font-display text-lg font-semibold text-text-on-ink">
           {tr("Bağlantı yolda.")}
         </p>
@@ -48,7 +57,7 @@ export default function EmailSignInForm({
   }
 
   return (
-    <form action={formAction} className="mt-8 flex flex-col gap-4">
+    <form action={formAction} className="mt-8 flex flex-col gap-5">
       <div>
         <label htmlFor="email" className={label}>
           {tr("E-posta")}
@@ -69,7 +78,7 @@ export default function EmailSignInForm({
         <div>
           <label htmlFor="country" className={label}>
             {tr("Ülke")}{" "}
-            <span className="normal-case tracking-normal text-text-on-ink-muted/60">
+            <span className="font-normal text-text-on-ink-muted/70">
               {tr("(isteğe bağlı)")}
             </span>
           </label>
@@ -93,12 +102,12 @@ export default function EmailSignInForm({
       <button
         type="submit"
         disabled={pending}
-        className="mt-1 rounded-xl bg-signal px-5 py-3.5 text-[15px] font-semibold text-on-signal shadow-[0_0_28px_-6px_var(--signal)] transition-colors hover:bg-signal-strong disabled:opacity-60"
+        className="mt-1 w-full rounded-full bg-signal px-5 py-4 text-[15px] font-semibold text-on-signal shadow-[0_10px_30px_-10px_var(--signal)] transition-colors hover:bg-signal-strong disabled:cursor-not-allowed disabled:opacity-55"
       >
         {pending ? tr("Gönderiliyor…") : submitLabel}
       </button>
 
-      <p className="text-xs leading-relaxed text-text-on-ink-muted">
+      <p className="text-center text-xs leading-relaxed text-text-on-ink-muted">
         {tr("Şifre yok. Her girişte e-postanıza tek kullanımlık bir bağlantı gönderilir.")}
       </p>
     </form>

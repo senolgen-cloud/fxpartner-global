@@ -28,7 +28,7 @@ export default function GoogleSignIn({ callbackUrl }: { callbackUrl?: string }) 
         <input type="hidden" name="callbackUrl" value={callbackUrl ?? "/account"} />
         <button
           type="submit"
-          className="flex w-full items-center justify-center gap-3 rounded-xl border border-hairline bg-ink px-5 py-3.5 text-sm font-medium text-text-on-ink transition-colors hover:border-text-on-ink-muted/50"
+          className="flex w-full items-center justify-center gap-3 rounded-full border border-hairline-light bg-ink/70 px-5 py-4 text-[15px] font-medium text-text-on-ink transition-colors hover:border-text-on-ink-muted/45 hover:bg-ink"
         >
           <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
             <path
