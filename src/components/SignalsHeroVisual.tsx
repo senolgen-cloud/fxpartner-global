@@ -16,17 +16,16 @@ import { tr } from "@/lib/chrome";
 // whatever was actually painting first.
 export default function SignalsHeroVisual() {
   return (
-    <section className="relative overflow-hidden border-b border-hairline bg-ink">
-      <div
-        aria-hidden="true"
-        className="hero-glow-signal pointer-events-none absolute -left-32 -top-32 h-[420px] w-[420px] rounded-full bg-signal/20 blur-[120px]"
-      />
-      <div
-        aria-hidden="true"
-        className="hero-glow-gold pointer-events-none absolute -right-24 top-0 h-[380px] w-[380px] rounded-full bg-gold/15 blur-[120px]"
-      />
-
-      <div className="relative mx-auto max-w-6xl px-6 pb-6 pt-10 sm:pt-14">
+    // No glows and no border. Two 400px blurred circles read as ambient depth
+    // behind a wide desktop hero; inside a section this short they simply
+    // tint the whole thing, and on a phone the image arrived sitting on a
+    // teal panel that announced itself as a separate box against the black
+    // above and below it. The artwork already carries its own light — the
+    // gold globe and the glowing mark are painted into the PNG — so the page
+    // just needs to get out of its way and let it sit on the same background
+    // as everything else.
+    <section className="bg-ink">
+      <div className="mx-auto max-w-6xl px-6 pb-6 pt-10 sm:pt-14">
         <div className="signals-hero-visual mx-auto max-w-4xl">
           <Image
             src="/fxpartner-hero-app.png"
