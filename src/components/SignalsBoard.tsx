@@ -736,6 +736,33 @@ function LivePriceCell({
   );
 }
 
+/**
+ * Where these numbers come from.
+ *
+ * This is the page's central factual claim — real trades, real account, no
+ * result added or removed afterwards — so it is defined once and rendered
+ * wherever it needs repeating. Two hand-copied versions of a compliance
+ * statement is exactly the thing that quietly drifts apart, and the version
+ * that drifts is the one nobody is reading when it stops being true.
+ *
+ * `compact` is the same sentence at a smaller size, for the repeats further
+ * down the page where it is a reminder rather than the opening statement.
+ */
+function ProvenanceNote({ compact = false }: { compact?: boolean }) {
+  const tr = useTr();
+  return (
+    <p
+      className={
+        compact
+          ? "mt-3 max-w-3xl text-[13px] leading-relaxed text-text-on-ink-muted"
+          : "mt-4 max-w-2xl text-text-on-ink-muted"
+      }
+    >
+      {tr("Aşağıdaki her sinyal, otomatik bir EA aracılığıyla doğrudan takip edilen MT5 hesabımızdan gelir — Telegram kanalımızda ve X'te paylaşılanlarla aynı girişler, her işlem kapandığında gerçek ve doğrulanmış bir sonuçla birlikte. Burada hiçbir şey simüle edilmemiş veya sonradan eklenmemiştir.")}
+    </p>
+  );
+}
+
 function Chevron({ open }: { open: boolean }) {
   return (
     <svg
@@ -1073,9 +1100,7 @@ export default function SignalsBoard({
           <div className="flex flex-col items-center text-center">
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">{tr("Canlı Sinyaller")}</span>
             <h1 className="mt-3 font-display text-3xl font-semibold md:text-4xl">{tr("Gerçek Zamanlı İşlem Sinyalleri")}</h1>
-            <p className="mt-4 max-w-2xl text-text-on-ink-muted">
-              {tr("Aşağıdaki her sinyal, otomatik bir EA aracılığıyla doğrudan takip edilen MT5 hesabımızdan gelir — Telegram kanalımızda ve X'te paylaşılanlarla aynı girişler, her işlem kapandığında gerçek ve doğrulanmış bir sonuçla birlikte. Burada hiçbir şey simüle edilmemiş veya sonradan eklenmemiştir.")}
-            </p>
+            <ProvenanceNote />
 
             <div className="mt-10 flex flex-wrap justify-center gap-10">
               <div>
@@ -1107,6 +1132,7 @@ export default function SignalsBoard({
       <section className="mx-auto max-w-6xl px-6 py-16">
         <div className="mb-6 flex items-center justify-between">
           <h2 className="font-display text-2xl font-semibold">{tr("Aktif Sinyaller")}</h2>
+          <ProvenanceNote compact />
           <span className="hidden items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-signal md:flex">
             <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
             {tr("Canlı")}
@@ -1129,8 +1155,6 @@ export default function SignalsBoard({
         )}
       </section>
 
-      {liveMarkets}
-
       {/* Results sit directly under the open board, because "what happened
           to the last ones" is the question a reader has the moment they have
           finished reading "here is what is open now". The chart follows.
@@ -1143,6 +1167,7 @@ export default function SignalsBoard({
       <section className="border-b border-hairline">
         <div className="mx-auto max-w-6xl px-6 py-16">
           <h2 className="font-display text-2xl font-semibold">{tr("Son Sinyaller")}</h2>
+          <ProvenanceNote compact />
           {closed.length === 0 ? (
             <p className="mt-4 text-text-on-ink-muted">
               {tr("Henüz kapanan sinyal yok — işlemler kapandıkça sonuçlar burada görünecek.")}
@@ -1222,6 +1247,11 @@ export default function SignalsBoard({
         </div>
       </section>
 
+      {/* Last. This is context, not the product: a snapshot of where the wider
+          market sat while our positions were open. It was sitting between the
+          open board and the results, which put a row of unrelated instruments
+          in front of the answer to "how did the last ones go". */}
+      {liveMarkets}
     </>
   );
 }
