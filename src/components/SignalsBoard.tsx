@@ -11,6 +11,7 @@ import { ACCESS_TIER_LABEL } from "@/data/packageTiers";
 import TradingViewChart from "./TradingViewChart";
 import LotLadder from "./LotLadder";
 import TradeNowButton from "./TradeNowButton";
+import { useLiveQuotes, type LiveQuote } from "./useLiveQuotes";
 import { favorableMove } from "@/lib/contractSizes";
 
 type Signal = typeof tradeSignals.$inferSelect;
@@ -814,13 +815,66 @@ function LevelCell({
   locked?: boolean;
 }) {
   return (
-    <div className="min-w-0">
+    <div className="min-w-0 text-center lg:text-left">
       <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">{label}</div>
       <div
         className="mt-1 truncate font-mono text-sm font-semibold tabular-stat"
         style={{ color: locked ? "var(--text-on-ink-muted)" : color ?? "var(--text-on-ink)" }}
       >
         {locked ? "••••" : value ?? "—"}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * The current market price for an open signal's instrument.
+ *
+ * Colour is the move since entry read in the signal's own direction, so green
+ * means "this trade is up" for a SELL as much as for a BUY — a reader should
+ * not have to do the sign flip in their head.
+ *
+ * No quote renders as an em dash, never as zero and never as the last price
+ * we happened to hear. The market closes, terminals restart, and the EA does
+ * not watch every instrument that has history on this page; "we do not know
+ * right now" is a normal answer and has to look like one.
+ */
+function LivePriceCell({
+  label,
+  quote,
+  entry,
+  direction,
+}: {
+  label: string;
+  quote: LiveQuote | undefined;
+  entry: string;
+  direction: string | null;
+}) {
+  const now = quote ? parseFloat(quote.bid) : NaN;
+  const from = parseFloat(entry);
+  const signed =
+    Number.isFinite(now) && Number.isFinite(from) && direction
+      ? (now - from) * (direction === "SELL" ? -1 : 1)
+      : 0;
+  const color =
+    signed > 0 ? TICK_UP : signed < 0 ? TICK_DOWN : "var(--text-on-ink)";
+
+  return (
+    <div className="min-w-0 text-center lg:text-left">
+      <div className="flex items-center justify-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted lg:justify-start">
+        {quote && (
+          <span
+            aria-hidden="true"
+            className="signal-dot h-1.5 w-1.5 shrink-0 rounded-full bg-signal"
+          />
+        )}
+        {label}
+      </div>
+      <div
+        className="mt-1 truncate font-mono text-sm font-semibold tabular-stat"
+        style={{ color: quote ? color : "var(--text-on-ink-muted)" }}
+      >
+        {quote ? quote.bid : "—"}
       </div>
     </div>
   );
@@ -843,7 +897,15 @@ function Chevron({ open }: { open: boolean }) {
   );
 }
 
-function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: AccessTier | null }) {
+function SignalCard({
+  signal,
+  viewerTier,
+  quote,
+}: {
+  signal: Signal;
+  viewerTier: AccessTier | null;
+  quote?: LiveQuote;
+}) {
   const tr = useTr();
   const trf = useTrf();
   const intl = useIntlLocale();
@@ -880,10 +942,10 @@ function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: Access
       {/* Header row: identity, the three levels, the action. Everything a
           reader needs to decide whether to open the row at all. */}
       <div className="flex flex-col gap-4 p-4 sm:p-5 lg:flex-row lg:items-center lg:gap-6">
-        <div className="flex min-w-0 items-center gap-3 lg:w-[24%] lg:shrink-0">
+        <div className="flex min-w-0 items-center justify-center gap-3 lg:w-[24%] lg:shrink-0 lg:justify-start">
           <PairMark pair={signal.pair} />
           <div className="min-w-0">
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
               <span className="notranslate font-display text-base font-semibold text-text-on-ink">
                 {prettyPair(signal.pair)}
               </span>
@@ -896,7 +958,7 @@ function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: Access
                 </span>
               )}
             </div>
-            <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-text-on-ink-muted">
+            <div className="mt-1 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[11px] text-text-on-ink-muted lg:justify-start">
               {isClosed ? (
                 <span className="font-semibold" style={{ color: resultColor }}>
                   {signal.outcome ?? tr("KAPANDI")}
@@ -917,14 +979,34 @@ function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: Access
           </div>
         </div>
 
-        <div className="grid flex-1 grid-cols-3 gap-3 sm:gap-6">
+        {/* Four cells while the trade is open, three once it has closed —
+            "right now" is not a thing a finished trade has. Two-up on
+            mobile rather than four-across: at 375px a fourth column leaves
+            about 70px for a six-digit price. */}
+        <div
+          className={`grid flex-1 gap-3 sm:gap-6 ${
+            isClosed ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"
+          }`}
+        >
           <LevelCell label={tr("Giriş Fiyatı")} value={signal.entry} locked={locked} />
+          {/* Deliberately not gated on `locked`. The entry, stop and target
+              are ours and are what a package pays for; the market price is
+              the market's, and masking public data would only make the page
+              look like it is hiding something it is not. */}
+          {!isClosed && (
+            <LivePriceCell
+              label={tr("Şu An")}
+              quote={quote}
+              entry={signal.entry}
+              direction={signal.direction}
+            />
+          )}
           <LevelCell label={tr("Zarar Durdur")} value={signal.stop} color={TICK_DOWN} locked={locked} />
           <LevelCell label={tr("Kâr Al")} value={signal.target1} color={TICK_UP} locked={locked} />
         </div>
 
         {isClosed && resultLine && !locked && (
-          <div className="min-w-0 lg:w-[13%] lg:shrink-0">
+          <div className="min-w-0 text-center lg:w-[13%] lg:shrink-0 lg:text-left">
             <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
               {tr("Sonuç")}
             </div>
@@ -934,7 +1016,7 @@ function SignalCard({ signal, viewerTier }: { signal: Signal; viewerTier: Access
           </div>
         )}
 
-        <div className="flex items-center gap-2 lg:shrink-0">
+        <div className="flex items-center justify-center gap-2 lg:shrink-0 lg:justify-start">
           {locked ? (
             <Link
               href={lock.href}
@@ -1054,6 +1136,10 @@ export default function SignalsBoard({
   const [active, setActive] = useState(initialActive);
   const [closed, setClosed] = useState(initialClosed);
   const knownIds = useRef(new Set([...initialActive, ...initialClosed].map((s) => s.id)));
+  // One poller for the whole board, not one per card: the route answers with
+  // every instrument at once, and a page showing thirty signals would
+  // otherwise open thirty intervals to fetch the same document.
+  const quotes = useLiveQuotes();
 
   const chartPairs = useMemo(() => {
     const seen = new Set<string>();
@@ -1181,7 +1267,7 @@ export default function SignalsBoard({
         ) : (
           <div className="flex flex-col gap-4">
             {active.map((s) => (
-              <SignalCard key={s.id} signal={s} viewerTier={viewerTier} />
+              <SignalCard key={s.id} signal={s} viewerTier={viewerTier} quote={quotes[s.pair]} />
             ))}
           </div>
         )}
@@ -1265,7 +1351,7 @@ export default function SignalsBoard({
           ) : (
             <div className="mt-6 flex flex-col gap-4 md:hidden">
               {closed.map((s) => (
-                <SignalCard key={s.id} signal={s} viewerTier={viewerTier} />
+                <SignalCard key={s.id} signal={s} viewerTier={viewerTier} quote={quotes[s.pair]} />
               ))}
             </div>
           )}

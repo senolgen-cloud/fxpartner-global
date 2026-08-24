@@ -432,3 +432,27 @@ export const newsBulletins = pgTable("news_bulletin", {
   translations: text("translations"),
   publishedAt: timestamp("published_at").notNull().defaultNow(),
 });
+
+// Live bid/ask pushed by the MT5 EA, one row per instrument, overwritten in
+// place — this is a "what is the price right now" cache, not a price series.
+//
+// The EA is the source on purpose. The free APIs behind src/lib/rates.ts give
+// a real spot price for gold and BTC but only the ECB's once-a-day reference
+// fix for FX, and a day-old number printed next to a live signal's stop-loss
+// is worse than no number at all. The EA is already attached to the account
+// these signals come from, so its quote is the same feed that produced the
+// entry — the two can never disagree.
+//
+// `symbol` is whatever the EA calls the instrument in its report (GOLD,
+// GBPUSD, US100CASH), identical to trade_signal.pair, so matching a quote to
+// a signal is string equality and the site needs no symbol map of its own.
+//
+// Prices are text for the same reason trade_signal's are: the EA formats to
+// the instrument's own digit count, and a float round-trip would quietly turn
+// 1.16677 into 1.1667700000000001.
+export const liveQuotes = pgTable("live_quote", {
+  symbol: text("symbol").primaryKey(),
+  bid: text("bid").notNull(),
+  ask: text("ask").notNull(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
