@@ -28,7 +28,26 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     sessionsTable: sessions,
     verificationTokensTable: verificationTokens,
   }),
-  session: { strategy: "database" },
+  // Sign in once per device, then stay signed in on it.
+  //
+  // The default was 30 days from issue, which logs out a member who has been
+  // reading the board every week — the session ages even while it is in use.
+  // updateAge makes the window roll: any visit more than a day after the last
+  // refresh pushes the expiry back out to a full year. So a device that has
+  // signed in once never meets the login page again, and a device that has
+  // not is the only one asked for a magic link. Someone who stops visiting
+  // still ages out.
+  //
+  // A year is defensible here because this panel holds no money: no
+  // withdrawal, no stored card, no transfer. The riskiest action behind it is
+  // starting a crypto checkout, which hands off to the payment provider's own
+  // authenticated flow. Sign-out deletes the row immediately, on whichever
+  // device it is pressed.
+  session: {
+    strategy: "database",
+    maxAge: 365 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
+  },
   providers: [
     // Only when it is actually configured. A Google button that opens an
     // OAuth error page is worse than no Google button, and this file is

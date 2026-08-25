@@ -12,6 +12,7 @@ import TradingViewChart from "./TradingViewChart";
 import LotLadder from "./LotLadder";
 import TradeNowButton from "./TradeNowButton";
 import { useLiveQuotes, type LiveQuote } from "./useLiveQuotes";
+import { useCountUp } from "@/components/useCountUp";
 import { favorableMove } from "@/lib/contractSizes";
 
 type Signal = typeof tradeSignals.$inferSelect;
@@ -170,51 +171,6 @@ function formatDuration(ms: number) {
   if (days > 0) return `${days}g ${hours}s`;
   if (hours > 0) return `${hours}s ${minutes}dk`;
   return `${minutes}dk`;
-}
-
-function useCountUp(target: number, durationMs = 1400, decimals = 0) {
-  const [value, setValue] = useState(0);
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [started, setStarted] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setStarted(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.3 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!started) return;
-    // setTimeout instead of requestAnimationFrame — rAF is paused by the
-    // browser while the tab is backgrounded/not compositing, which would
-    // leave the counter stuck at 0 indefinitely; setTimeout keeps firing
-    // (just throttled) so the count always reaches its target.
-    let timer: ReturnType<typeof setTimeout>;
-    const start = performance.now();
-    const from = 0;
-    function tick() {
-      const t = Math.min(1, (performance.now() - start) / durationMs);
-      const eased = 1 - Math.pow(1 - t, 3);
-      setValue(from + (target - from) * eased);
-      if (t < 1) timer = setTimeout(tick, 16);
-    }
-    tick();
-    return () => clearTimeout(timer);
-     
-  }, [started, target, durationMs]);
-
-  const display = decimals > 0 ? value.toFixed(decimals) : Math.round(value).toLocaleString("en-US");
-  return { ref, display };
 }
 
 function PipsStats({ closed }: { closed: Signal[] }) {

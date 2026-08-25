@@ -33,6 +33,12 @@ export const users = pgTable("user", {
   phone: text("phone"),
   preferredBroker: text("preferred_broker"),
   isVip: boolean("is_vip").notNull().default(false),
+  // The accent behind the member monogram. A name and a colour is the whole
+  // of personalisation here, deliberately: an avatar upload needs storage,
+  // moderation and a broken-image state, and none of that buys more than a
+  // member seeing their own initial in a colour they picked. Null means the
+  // signal default.
+  accentColor: text("accent_color"),
   ...attribution,
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });

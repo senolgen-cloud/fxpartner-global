@@ -1,7 +1,9 @@
 import { tr, trLocale } from "@/lib/chrome";
-import { formatPercent } from "@/lib/i18n";
 import { getServerLocale } from "@/lib/serverLocale";
 import type { PackageTier } from "@/lib/vip";
+import { intlLocale } from "@/lib/i18n";
+import StatementFigure from "@/components/account/StatementFigure";
+import { accentHex } from "@/lib/accents";
 
 // The panel's opening move.
 //
@@ -34,48 +36,9 @@ const TIER_NAME: Record<PackageTier | "free", string> = {
   vip: "VIP",
 };
 
-function Figure({
-  label,
-  value,
-  hint,
-  live = false,
-  tone = "default",
-}: {
-  label: string;
-  value: string;
-  hint?: string;
-  live?: boolean;
-  tone?: "default" | "up";
-}) {
-  return (
-    <div className="flex-1 px-5 py-4 text-center sm:text-left">
-      <div className="flex items-center justify-center gap-1.5 sm:justify-start">
-        {live && (
-          <span
-            aria-hidden="true"
-            className="signal-dot h-1.5 w-1.5 shrink-0 rounded-full bg-signal"
-          />
-        )}
-        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-on-ink-muted">
-          {label}
-        </span>
-      </div>
-      <div
-        className={`mt-1.5 font-display text-2xl font-semibold tabular-stat ${
-          tone === "up" ? "text-tick-up" : "text-text-on-ink"
-        }`}
-      >
-        {value}
-      </div>
-      {hint && (
-        <div className="mt-0.5 text-[11px] leading-snug text-text-on-ink-muted">{hint}</div>
-      )}
-    </div>
-  );
-}
-
 export default function MemberStatement({
   action,
+  accent,
   name,
   email,
   memberSince,
@@ -88,6 +51,8 @@ export default function MemberStatement({
   /** Sign-out lives in the header rather than under it — a secondary action
    *  parked on its own line below the account summary reads like an orphan. */
   action?: React.ReactNode;
+  /** The colour the member picked in their profile. Null falls back to signal. */
+  accent?: string | null;
   name: string | null;
   email: string | null;
   memberSince: Date;
@@ -99,25 +64,35 @@ export default function MemberStatement({
 }) {
   const locale = getServerLocale();
   const displayName = name?.trim() || email?.split("@")[0] || tr("Üye");
+  const initial = displayName[0]?.toLocaleUpperCase("tr-TR") ?? "?";
+  const hex = accentHex(accent);
+  const intl = intlLocale[locale];
 
   return (
     <section className="overflow-hidden rounded-3xl border border-hairline-light/70 bg-gradient-to-b from-ink-soft to-ink">
       <div className="flex flex-col items-center gap-5 px-6 pt-8 text-center sm:flex-row sm:items-center sm:gap-6 sm:px-8 sm:text-left">
         <span
-          className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 font-mono text-[10px] font-semibold tracking-[0.1em] ${TIER_RING[tier]}`}
+          aria-hidden="true"
+          className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full font-display text-2xl font-semibold"
+          style={{ backgroundColor: `${hex}22`, color: hex, border: `2px solid ${hex}66` }}
         >
-          {TIER_NAME[tier]}
+          {initial}
         </span>
         <div className="min-w-0 flex-1">
           <h1 className="truncate font-display text-2xl font-semibold text-text-on-ink sm:text-3xl">
             {displayName}
           </h1>
-          <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-            {memberSince.toLocaleDateString(trLocale(), {
-              month: "long",
-              year: "numeric",
-            })}
-            {tr("'dan beri üye")}
+          <p className="mt-1.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted sm:justify-start">
+            <span className={`rounded-full border px-2 py-0.5 ${TIER_RING[tier]}`}>
+              {TIER_NAME[tier]}
+            </span>
+            {/* Stranded at the end of a line once the header centres and wraps on a
+                phone, so it shows only where the two halves share a line. */}
+            <span aria-hidden="true" className="hidden sm:inline">·</span>
+            <span>
+              {memberSince.toLocaleDateString(trLocale(), { month: "long", year: "numeric" })}
+              {tr("'dan beri üye")}
+            </span>
           </p>
         </div>
         {action && <div className="shrink-0">{action}</div>}
@@ -125,30 +100,32 @@ export default function MemberStatement({
 
       {/* The statement strip. Ruled, not carded — see the note above. */}
       <div className="mt-7 flex flex-col divide-y divide-hairline-light/60 border-t border-hairline-light/60 sm:flex-row sm:divide-x sm:divide-y-0">
-        <Figure
+        <StatementFigure
           label={tr("Şu an açık")}
-          value={String(openPositions)}
+          value={openPositions}
           hint={tr("takip edilen hesapta")}
           live={openPositions > 0}
+          locale={intl}
         />
-        <Figure
+        <StatementFigure
           label={tr("30 gün isabet")}
-          value={hitRate === null ? "—" : formatPercent(hitRate, locale)}
+          value={hitRate ?? 0}
+          suffix={hitRate === null ? "" : "%"}
           hint={
             hitRate === null
               ? tr("henüz yeterli işlem yok")
               : `${hitRateTrades} ${tr("kapanan işlem")}`
           }
+          locale={intl}
         />
-        <Figure
+        <StatementFigure
           label={tr("Biriken iade")}
-          value={
-            cashbackUsd > 0
-              ? `$${cashbackUsd.toLocaleString(trLocale(), { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-              : "$0.00"
-          }
+          value={cashbackUsd}
+          prefix="$"
+          decimals={2}
           hint={cashbackUsd > 0 ? tr("hesabınıza işlendi") : tr("broker hesabı bağlayın")}
           tone={cashbackUsd > 0 ? "up" : "default"}
+          locale={intl}
         />
       </div>
     </section>

@@ -17,7 +17,8 @@ import { eq, desc, inArray } from "drizzle-orm";
 import { createVipInviteLink } from "@/lib/telegram";
 import VipInviteClientTrigger from "@/components/VipInviteClientTrigger";
 import CashbackLinkForm from "@/components/CashbackLinkForm";
-import { updateCountry } from "./profile-actions";
+import { updateProfile } from "./profile-actions";
+import ProfileCard from "@/components/account/ProfileCard";
 import { getCountries } from "@/lib/country";
 import { brokers } from "@/data/brokers";
 import { type PackageTier } from "@/lib/vip";
@@ -162,6 +163,7 @@ export default async function AccountPage({
             hitRate={signalStats?.winRate ?? null}
             hitRateTrades={signalStats?.trades ?? 0}
             cashbackUsd={cashbackTotal}
+            accent={userRow?.accentColor ?? null}
             action={
               <form
                 action={async () => {
@@ -320,34 +322,18 @@ export default async function AccountPage({
             </Link>
           </div>
 
-          <section className="mt-10 rounded-2xl border border-hairline bg-ink-soft p-6">
-            <h2 className="font-display text-xl font-semibold text-text-on-ink">
-              Profil
-            </h2>
-            <p className="mt-2 text-sm text-text-on-ink-muted">
-              {tr("İsteğe bağlı — aracı kurum incelemelerindeki yorumlarınızın yanında gösterilir.")}
-            </p>
-            <form action={updateCountry} className="mt-4 flex flex-wrap items-center gap-3">
-              <select
-                name="country"
-                defaultValue={user.country ?? ""}
-                className="rounded-xl border border-hairline bg-ink px-3 py-2 text-sm text-text-on-ink outline-none focus:border-signal"
-              >
-                <option value="">{tr("Ülke belirtilmedi")}</option>
-                {getCountries(isLocale(pageLocale) ? pageLocale : defaultLocale).map((c) => (
-                  <option key={c.code} value={c.code}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-              <button
-                type="submit"
-                className="rounded-full border border-hairline px-4 py-2 text-sm text-text-on-ink transition-colors hover:border-text-on-ink"
-              >
-                Kaydet
-              </button>
-            </form>
-          </section>
+          <div className="mt-10">
+            <ProfileCard
+              action={updateProfile}
+              initialName={user.name ?? ""}
+              initialAccent={userRow?.accentColor ?? "signal"}
+              initialCountry={user.country ?? ""}
+              initialBroker={userRow?.preferredBroker ?? ""}
+              email={user.email ?? ""}
+              countries={getCountries(isLocale(pageLocale) ? pageLocale : defaultLocale)}
+              brokers={brokers.map((b) => ({ slug: b.slug, name: b.name }))}
+            />
+          </div>
 
           <section className="mt-10 rounded-2xl border border-hairline bg-ink-soft p-6">
             <h2 className="font-display text-xl font-semibold text-text-on-ink">
