@@ -3,7 +3,6 @@ import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
-import Footer from "@/components/Footer";
 import AuthShell from "@/components/account/AuthShell";
 import EmailSignInForm from "@/components/account/EmailSignInForm";
 import GoogleSignIn from "@/components/account/GoogleSignIn";
@@ -59,7 +58,7 @@ export default async function RegisterPage({
       <AuthShell
         eyebrow={tr("Ücretsiz hesap")}
         title={tr("Sinyalleri görmeye başlayın")}
-        intro={tr("E-postanız yeterli. Şifre yok, kart yok, iptal yok — çıkmak istediğinizde tek tıkla aboneliğinizi kapatabilirsiniz.")}
+        intro={tr("E-postanız yeterli. Şifre yok, kart yok; istediğiniz an tek tıkla çıkarsınız.")}
         footer={
           <>
             {tr("Zaten üye misiniz?")}{" "}
@@ -91,7 +90,6 @@ export default async function RegisterPage({
         />
         {providers.google && <GoogleSignIn />}
       </AuthShell>
-      <Footer />
     </>
   );
 }

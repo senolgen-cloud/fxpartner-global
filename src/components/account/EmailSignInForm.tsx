@@ -42,12 +42,12 @@ export default function EmailSignInForm({
   // py-4 and rounded-2xl rather than py-3.5 and rounded-xl: the difference is
   // small in the class name and most of the difference in how the form feels.
   const field =
-    "w-full rounded-2xl border border-hairline-light bg-ink/70 px-5 py-4 text-[15px] text-text-on-ink outline-none transition-all placeholder:text-text-on-ink-muted/45 hover:border-text-on-ink-muted/35 focus:border-signal focus:shadow-[0_0_0_4px_color-mix(in_srgb,var(--signal)_16%,transparent)]";
-  const label = "mb-2 block text-sm font-medium text-text-on-ink";
+    "w-full rounded-2xl border border-hairline-light bg-ink-soft px-5 py-[1.15rem] text-[16px] text-text-on-ink outline-none transition-all placeholder:text-text-on-ink-muted/40 hover:border-text-on-ink-muted/35 focus:border-signal focus:shadow-[0_0_0_4px_color-mix(in_srgb,var(--signal)_16%,transparent)]";
+  const label = "mb-2 block text-center text-sm font-medium text-text-on-ink";
 
   if (state.ok) {
     return (
-      <div className="mt-8 rounded-3xl border border-signal/35 bg-signal/[0.07] p-7">
+      <div className="mt-8 rounded-3xl border border-signal/35 bg-signal/[0.07] p-7 text-center">
         <p className="font-display text-lg font-semibold text-text-on-ink">
           {tr("Bağlantı yolda.")}
         </p>
@@ -59,7 +59,7 @@ export default function EmailSignInForm({
   }
 
   return (
-    <form action={formAction} className="mt-8 flex flex-col gap-5">
+    <form action={formAction} className="mt-7 flex flex-col gap-4">
       {/* Where the magic link should land. Read here rather than in the
           action: a server action runs as its own request and does not
           inherit the page's locale. */}
@@ -100,22 +100,41 @@ export default function EmailSignInForm({
       )}
 
       {state.error && (
-        <p role="alert" className="text-sm text-alert">
+        <p role="alert" className="text-center text-sm text-alert">
           {state.error}
         </p>
       )}
 
-      <button
-        type="submit"
-        disabled={pending}
-        className="mt-1 w-full rounded-full bg-signal px-5 py-4 text-[15px] font-semibold text-on-signal shadow-[0_10px_30px_-10px_var(--signal)] transition-colors hover:bg-signal-strong disabled:cursor-not-allowed disabled:opacity-55"
-      >
-        {pending ? tr("Gönderiliyor…") : submitLabel}
-      </button>
-
-      <p className="text-center text-xs leading-relaxed text-text-on-ink-muted">
-        {tr("Şifre yok. Her girişte e-postanıza tek kullanımlık bir bağlantı gönderilir.")}
-      </p>
+      <div className="mt-1 flex flex-col items-center gap-4">
+        <p className="text-center text-[13px] leading-relaxed text-text-on-ink-muted">
+          {tr("Şifre yok. Her girişte e-postanıza tek kullanımlık bir bağlantı gönderilir.")}
+        </p>
+        {/* aria-label carries the real instruction; the arrow is decoration.
+            56px so it clears the 44px touch target with room to spare. */}
+        <button
+          type="submit"
+          disabled={pending}
+          aria-label={pending ? tr("Gönderiliyor…") : submitLabel}
+          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-signal text-on-signal shadow-[0_12px_34px_-12px_var(--signal)] transition-colors hover:bg-signal-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal disabled:cursor-not-allowed disabled:opacity-55"
+        >
+          {pending ? (
+            <span
+              aria-hidden="true"
+              className="h-5 w-5 rounded-full border-2 border-on-signal/30 border-t-on-signal motion-safe:animate-spin"
+            />
+          ) : (
+            <svg aria-hidden="true" viewBox="0 0 24 24" className="h-6 w-6" fill="none">
+              <path
+                d="M5 12h13M13 6l6 6-6 6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
+        </button>
+      </div>
     </form>
   );
 }

@@ -164,7 +164,7 @@ export function welcomeEmailHtml(url: string, locale: Locale = defaultLocale): s
 
       <tr><td style="padding:28px 32px 32px;">
         <p style="margin:0;color:${MUTED};font-family:Helvetica,Arial,sans-serif;font-size:11px;line-height:1.7;">
-          ${t("FXPARTNER yatırım tavsiyesi vermez. Kaldıraçlı işlemler yüksek risk taşır ve yatırdığınız sermayenin tamamını kaybetmenize yol açabilir.")}
+          ${t("FXPARTNER bir aracı kurum değildir ve yatırım tavsiyesi vermez; içerikler eğitim amaçlıdır. Aracı kurumlarda kaldıraçlı işlem yapmak yüksek risk taşır ve sermayenizin tamamını kaybetmenize yol açabilir.")}
         </p>
         <p style="margin:10px 0 0;color:${MUTED};font-family:Helvetica,Arial,sans-serif;font-size:11px;">
           <a href="${SITE}" style="color:${MUTED};text-decoration:none;">fxpartner.global</a>

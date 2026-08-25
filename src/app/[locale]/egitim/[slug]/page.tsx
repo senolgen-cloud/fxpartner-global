@@ -171,7 +171,7 @@ export default async function EducationPostPage({
             ))}
 
             <p className="mt-10 text-sm leading-relaxed text-text-muted">
-              {tr("Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Kaldıraçlı işlemler yüksek risk taşır.")}
+              {tr("Bu içerik eğitim ve bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. FXPARTNER bir aracı kurum değildir ve yatırım hizmeti sunmaz.")}
             </p>
 
             {/* The next lesson, named. A bare "next" arrow asks the reader to

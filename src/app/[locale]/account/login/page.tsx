@@ -1,6 +1,5 @@
 import Link from "@/components/LocaleLink";
 import { tr } from "@/lib/chrome";
-import Footer from "@/components/Footer";
 import AuthShell from "@/components/account/AuthShell";
 import EmailSignInForm from "@/components/account/EmailSignInForm";
 import GoogleSignIn from "@/components/account/GoogleSignIn";
@@ -52,7 +51,6 @@ export default async function LoginPage({
         <EmailSignInForm action={submitLogin} submitLabel={tr("Giriş bağlantısı gönder")} />
         {providers.google && <GoogleSignIn />}
       </AuthShell>
-      <Footer />
     </>
   );
 }

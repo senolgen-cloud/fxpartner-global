@@ -4,6 +4,7 @@ import { Geist, JetBrains_Mono, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import NotificationOptIn from "@/components/NotificationOptIn";
 import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
+import ChromeGate from "@/components/ChromeGate";
 import AddToHomeScreen from "@/components/AddToHomeScreen";
 import NewsletterPopup from "@/components/NewsletterPopup";
 import QuickAccessHub from "@/components/QuickAccessHub";
@@ -187,15 +188,19 @@ export default async function RootLayout({
         />
         <LocaleProvider locale={locale}>
           <MoreMenuProvider>
-          <StickyChrome>
-            <Header standalone={false} />
-            <BrokerHeroSlider brokers={localizedBrokers} />
-          </StickyChrome>
+          <ChromeGate>
+            <StickyChrome>
+              <Header standalone={false} />
+              <BrokerHeroSlider brokers={localizedBrokers} />
+            </StickyChrome>
+          </ChromeGate>
           {children}
-          <div className="fixed inset-x-0 bottom-0 z-40">
-            <MobileBottomNav />
-            <Ticker />
-          </div>
+          <ChromeGate>
+            <div className="fixed inset-x-0 bottom-0 z-40">
+              <MobileBottomNav />
+              <Ticker />
+            </div>
+          </ChromeGate>
           {/* Mounted here (not nested inside the sticky header's z-40
               stacking context) so its own fixed z-[60] can actually paint
               above the mobile bottom nav/ticker — see MoreMenuOverlay. */}
@@ -204,9 +209,11 @@ export default async function RootLayout({
           <ServiceWorkerRegistrar />
           <NotificationOptIn />
           <AddToHomeScreen />
-          <NewsletterPopup />
-          <QuickAccessHub topBrokers={topBrokers} />
-          <LiveSupportWidget />
+          <ChromeGate>
+            <NewsletterPopup />
+            <QuickAccessHub topBrokers={topBrokers} />
+            <LiveSupportWidget />
+          </ChromeGate>
           <GoogleTranslateWidget />
           <Analytics />
         </LocaleProvider>

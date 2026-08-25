@@ -1,27 +1,42 @@
-import { tr } from "@/lib/chrome";
-import { trf } from "@/lib/chrome";
-import { brokers } from "@/data/brokers";
+import Link from "@/components/LocaleLink";
+import { tr, trf } from "@/lib/chrome";
 import { getRecentSignalStats } from "@/lib/signalStats";
 import { formatPercent } from "@/lib/i18n";
 import { getServerLocale } from "@/lib/serverLocale";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
 
-// The split panel behind /account/login and /account/register.
-//
-// The reference we were pointed at (fxleaders.com/account/login) fills its
-// left half with screenshots of its own product — a picture of a dashboard,
-// arrows drawn on top, "COMING SOON" over one of them. It is a mockup, and a
-// reader can tell.
-//
-// We have something a mockup cannot be: the numbers are real and already on
-// the site. Closed trades and the hit rate come out of the same table
-// /signals renders, over the same 30-day window, with breakeven closes
-// excluded the same way. If the last month went badly, this panel says so.
-// That is the whole argument for signing up, and inventing it would destroy
-// the only thing that makes it worth reading.
-//
-// When there are too few closed trades to be meaningful, getRecentSignalStats
-// returns null and the numbers are simply absent rather than padded out.
-
+/**
+ * The screen behind /account/login and /account/register.
+ *
+ * Reshaped against the TIO Markets app screens: one screen, one job,
+ * everything else off. It used to be a two-column card sitting under the
+ * full site — sticky header, broker carousel, tab bar, price tape, chat
+ * bubble on the button — and a left panel carrying three bullets, a broker
+ * count and a disclaimer before the reader reached the field. ChromeGate
+ * takes the furniture away; this takes the essay away.
+ *
+ * What the reference does well and is worth taking: an enormous headline,
+ * room around it, and the action anchored at the bottom of the screen where
+ * a thumb already is, with the cross-link beside it rather than buried.
+ *
+ * What is not taken: their orange, and the whole password apparatus — field,
+ * strength meter, "1 büyük harf" chips. This site signs in by emailed link.
+ * Copying the furniture of a password form onto a form with no password
+ * would be dressing up as a different product.
+ *
+ * No watermark. The reference has one on its splash screen, where there is
+ * nothing else, and none on its login screen — and this screen is the
+ * second kind: eyebrow, headline, intro, two fields, submit, proof line,
+ * footer and disclaimer, with no empty space for a mark to fill. Faded, the
+ * artwork vanished into the black; blended, it put the FX badge behind the
+ * eyebrow; pushed off the top, it read as a smudge rather than a mark. Three
+ * attempts to make it earn a place it does not have.
+ *
+ * The proof is one line now instead of a panel. The hit rate is the only
+ * number that argues for making an account, it is real, and it comes from
+ * the same table /signals renders. Three bullets underneath it were the
+ * accessory to take off.
+ */
 export default async function AuthShell({
   eyebrow,
   title,
@@ -37,87 +52,61 @@ export default async function AuthShell({
 }) {
   const stats = await getRecentSignalStats("all", 30);
   const locale = getServerLocale();
-  const trackedBrokers = brokers.length;
 
   return (
-    <main className="relative flex-1 overflow-hidden bg-ink">
-      <div
-        className="pointer-events-none absolute -top-40 -left-32 h-[560px] w-[560px] rounded-full blur-3xl"
-        style={{ background: "color-mix(in srgb, var(--signal) 22%, transparent)" }}
-      />
-      <div
-        className="pointer-events-none absolute -bottom-48 -right-24 h-[460px] w-[460px] rounded-full blur-3xl"
-        style={{ background: "color-mix(in srgb, var(--signal) 12%, transparent)" }}
-      />
+    <main className="relative flex min-h-[100dvh] flex-1 flex-col overflow-hidden bg-ink text-text-on-ink">
+      {/* flex-1, not a second min-h-[100dvh]: the main already claims the
+          viewport, and repeating it here added this element's own padding on
+          top of a full screen — 96px of scroll on a screen designed to have
+          none. */}
+      <div className="relative z-10 flex flex-1 flex-col px-6 pb-8 pt-6 sm:px-8">
+        {/* Top bar: a way back and a way to read this in your own language.
+            Nothing else — every other link is a way to leave. */}
+        <div className="mx-auto flex w-full max-w-md items-center justify-between">
+          <Link
+            href="/"
+            className="-ml-1 whitespace-nowrap rounded-full px-2 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-text-on-ink-muted transition-colors hover:text-text-on-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
+          >
+            {tr("← Ana sayfa")}
+          </Link>
+          <LocaleSwitcher compact />
+        </div>
 
-      <div className="relative mx-auto max-w-5xl px-5 py-12 sm:px-6 sm:py-20">
-        <div className="grid overflow-hidden rounded-[32px] border border-hairline-light/70 bg-ink-soft shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)] lg:grid-cols-[0.92fr_1.08fr]">
-          {/* Proof side. Second in the DOM on purpose: on a phone the form is
-              what the reader came for, and the argument can wait below it. */}
-          <div className="order-2 border-t border-hairline bg-gradient-to-b from-ink to-ink-soft p-8 lg:order-1 lg:border-t-0 lg:border-r lg:p-10">
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-signal">
-              {tr("Gerçek hesap, gerçek sonuç")}
-            </span>
+        <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center py-7 text-center">
+          <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-signal">
+            {eyebrow}
+          </span>
+          <h1 className="mt-4 font-display text-[clamp(2.25rem,9vw,3.25rem)] font-semibold leading-[1.05] tracking-tight">
+            {title}
+          </h1>
+          <p className="mt-4 text-[15px] leading-relaxed text-text-on-ink-muted">{intro}</p>
 
-            {stats ? (
-              <>
-                <div className="mt-6 flex items-baseline gap-2">
-                  <span className="font-display text-6xl font-bold tabular-stat text-text-on-ink">
-                    {formatPercent(stats.winRate, locale)}
-                  </span>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    {tr("isabet")}
-                  </span>
-                </div>
-                <p className="mt-2 text-sm leading-relaxed text-text-on-ink-muted">
-                  {trf("Son {days} günde kapanan {trades} işlem üzerinden. Başabaş kapanışlar sayılmaz.", {
-                    days: stats.windowDays,
-                    trades: stats.trades,
-                  })}
-                </p>
-              </>
-            ) : (
-              <p className="mt-6 text-sm leading-relaxed text-text-on-ink-muted">
-                {tr("Sinyaller, takip edilen gerçek bir MT5 hesabından yayınlanır. Her işlemin sonucu kapandığında olduğu gibi görünür.")}
-              </p>
-            )}
+          {children}
 
-            <ul className="mt-8 space-y-4 border-t border-hairline pt-8">
-              {[
-                tr("Her sinyal takip edilen gerçek bir MT5 hesabından — simülasyon değil, geriye dönük test değil."),
-                trf("{count} broker aynı dört kriterle bağımsız olarak puanlanır; ticari ilişkimiz olanlar açıkça etiketlenir.", {
-                  count: trackedBrokers,
-                }),
-                tr("Kaybeden işlemler de yayında kalır. Sonradan hiçbir sonuç kaldırılmaz."),
-              ].map((line) => (
-                <li key={line} className="flex gap-3 text-sm leading-relaxed text-text-on-ink-muted">
-                  <span aria-hidden="true" className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-signal" />
-                  {line}
-                </li>
-              ))}
-            </ul>
-
-            <p className="mt-8 font-mono text-[11px] leading-relaxed text-text-on-ink-muted/70">
-              {tr("Kaldıraçlı işlemler yüksek risk taşır. Geçmiş sonuçlar gelecek sonuçları garanti etmez.")}
+          {/* One line, and only when it is true. getRecentSignalStats returns
+              null below a meaningful sample, and an absent number is better
+              than a padded one on the page that asks for trust. */}
+          {stats && (
+            <p className="mt-6 flex flex-wrap items-baseline justify-center gap-x-2 gap-y-1 border-t border-hairline pt-4 text-[13px] leading-snug text-text-on-ink-muted">
+              <span className="font-display text-lg font-semibold tabular-stat text-text-on-ink">
+                {formatPercent(stats.winRate, locale)}
+              </span>
+              <span>
+                {trf("isabet — son {days} günde kapanan {trades} gerçek işlemde", {
+                  days: stats.windowDays,
+                  trades: stats.trades,
+                })}
+              </span>
             </p>
-          </div>
+          )}
+        </div>
 
-          {/* Form side */}
-          <div className="order-1 p-8 sm:p-10 lg:order-2 lg:p-14">
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-on-ink-muted">
-              {eyebrow}
-            </span>
-            <h1 className="mt-4 font-display text-3xl font-semibold leading-tight text-text-on-ink sm:text-4xl">
-              {title}
-            </h1>
-            <p className="mt-4 text-[15px] leading-relaxed text-text-on-ink-muted">{intro}</p>
-
-            {children}
-
-            <div className="mt-8 border-t border-hairline pt-6 text-center text-xs leading-relaxed text-text-on-ink-muted">
-              {footer}
-            </div>
-          </div>
+        {/* Anchored to the bottom of the screen, where the thumb is. */}
+        <div className="mx-auto w-full max-w-md">
+          <div className="text-center text-[13px] leading-relaxed text-text-on-ink-muted">{footer}</div>
+          <p className="mt-4 text-center font-mono text-[10px] leading-relaxed text-text-on-ink-muted/60">
+            {tr("FXPARTNER bir aracı kurum değildir ve yatırım hizmeti sunmaz. İçerikler eğitim ve bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.")}
+          </p>
         </div>
       </div>
     </main>

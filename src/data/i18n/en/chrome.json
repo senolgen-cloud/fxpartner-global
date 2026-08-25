@@ -2534,5 +2534,11 @@
   "Burada okuduğunuzu canlı tahtada görün": "See what you just read on the live board",
   "Açık ve kapanmış işlemler, giriş ve stop seviyeleriyle birlikte yayında. Ücretsiz üyelikle bildirimleri de açabilirsiniz.": "Open and closed trades are published with their entry and stop levels. A free account adds alerts.",
   "Canlı sinyalleri gör": "See the live signals",
-  "Ücretsiz üye ol": "Create a free account"
+  "Ücretsiz üye ol": "Create a free account",
+  "FXPARTNER bir aracı kurum değildir ve yatırım hizmeti sunmaz. İçerikler eğitim ve bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.": "FXPARTNER is not a broker and does not provide investment services. Everything here is educational and informational, not investment advice.",
+  "Bu içerik eğitim ve bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. FXPARTNER bir aracı kurum değildir ve yatırım hizmeti sunmaz.": "This content is educational and informational, not investment advice. FXPARTNER is not a broker and does not provide investment services.",
+  "FXPARTNER bir aracı kurum değildir ve yatırım tavsiyesi vermez; içerikler eğitim amaçlıdır. Aracı kurumlarda kaldıraçlı işlem yapmak yüksek risk taşır ve sermayenizin tamamını kaybetmenize yol açabilir.": "FXPARTNER is not a broker and does not give investment advice; everything here is educational. Trading on leverage at a brokerage carries a high level of risk and can cost you all of your capital.",
+  "← Ana sayfa": "← Home",
+  "isabet — son {days} günde kapanan {trades} gerçek işlemde": "hit rate — across {trades} real trades closed in the last {days} days",
+  "E-postanız yeterli. Şifre yok, kart yok; istediğiniz an tek tıkla çıkarsınız.": "Your email is enough. No password, no card; leave in one click whenever you like."
 }
