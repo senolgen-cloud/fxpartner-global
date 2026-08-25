@@ -456,3 +456,36 @@ export const liveQuotes = pgTable("live_quote", {
   ask: text("ask").notNull(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
+
+export const pendingOrderStateValues = ["waiting", "filled", "cancelled"] as const;
+export type PendingOrderState = (typeof pendingOrderStateValues)[number];
+
+// Pending orders the EA has placed but the market has not reached yet.
+//
+// Deliberately its own table rather than a third status on trade_signal. A
+// pending order is not a trade: it has no entry fill, no outcome, and it must
+// never reach getRecentSignalStats or the active board. Sixteen files read
+// trade_signal.status; adding "pending" there would have made every one of
+// them a place where an unfilled order could quietly join the published win
+// rate. Here it cannot, because nothing that counts trades looks in this
+// table at all.
+//
+// `state` closes the loop the announcement opens. Telling the channel about
+// an order and never saying it was cancelled leaves a signal standing that
+// never happened — on a page whose whole claim is that no result is quietly
+// removed, that is the one failure mode worth building around.
+export const pendingOrders = pgTable("pending_order", {
+  ticket: text("ticket").primaryKey(),
+  pair: text("pair").notNull(),
+  // BUY_LIMIT, SELL_LIMIT, BUY_STOP, SELL_STOP, …
+  orderType: text("order_type").notNull(),
+  direction: text("direction"),
+  price: text("price").notNull(),
+  stop: text("stop"),
+  target1: text("target1"),
+  volume: text("volume"),
+  state: text("state").$type<PendingOrderState>().notNull().default("waiting"),
+  telegramMessageId: text("telegram_message_id"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  resolvedAt: timestamp("resolved_at"),
+});

@@ -72,6 +72,12 @@ export async function sendTelegramMessage(
     // Each inner array is one row of buttons, rendered left-to-right —
     // e.g. [[{text: "Hesap Aç", url: "..."}, {text: "İncele", url: "..."}]].
     inlineKeyboard?: InlineKeyboardButton[][];
+    // Threads this message under an earlier one, the same way
+    // sendTelegramPhoto already does for a trade result replying to its
+    // entry post. A follow-up that corrects or closes an earlier
+    // announcement — "that pending order was cancelled" — is unreadable as a
+    // bare new post; it has to hang off the message it is about.
+    replyToMessageId?: string;
   } = {}
 ) {
   const { chatId } = getConfig();
@@ -80,6 +86,9 @@ export async function sendTelegramMessage(
     text,
     parse_mode: "HTML",
     disable_web_page_preview: options.disablePreview ?? false,
+    ...(options.replyToMessageId
+      ? { reply_parameters: { message_id: options.replyToMessageId } }
+      : {}),
     ...(options.inlineKeyboard
       ? { reply_markup: { inline_keyboard: options.inlineKeyboard } }
       : {}),
