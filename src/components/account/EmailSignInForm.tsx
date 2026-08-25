@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { useTr } from "@/components/useTr";
+import { useLocale } from "@/components/LocaleProvider";
 import type { SimpleSignInState } from "@/app/[locale]/account/login/simple-actions";
 
 const initial: SimpleSignInState = { ok: false };
@@ -35,6 +36,7 @@ export default function EmailSignInForm({
   countries?: { code: string; name: string }[];
 }) {
   const tr = useTr();
+  const locale = useLocale();
   const [state, formAction, pending] = useActionState(action, initial);
 
   // py-4 and rounded-2xl rather than py-3.5 and rounded-xl: the difference is
@@ -58,6 +60,10 @@ export default function EmailSignInForm({
 
   return (
     <form action={formAction} className="mt-8 flex flex-col gap-5">
+      {/* Where the magic link should land. Read here rather than in the
+          action: a server action runs as its own request and does not
+          inherit the page's locale. */}
+      <input type="hidden" name="locale" value={locale} />
       <div>
         <label htmlFor="email" className={label}>
           {tr("E-posta")}

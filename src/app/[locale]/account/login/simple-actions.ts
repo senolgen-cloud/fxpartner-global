@@ -1,6 +1,7 @@
 "use server";
 
 import { signIn } from "@/auth";
+import { defaultLocale, isLocale, localePath } from "@/lib/i18n";
 import { db } from "@/db";
 import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -37,8 +38,20 @@ export async function submitLogin(
       });
   }
 
+  // Where the link lands. Without redirectTo, Auth.js falls back to the
+  // Referer header (see next-auth/lib/actions), which is the login or
+  // register page the form was posted from — so a member who clicked the
+  // link in their mail was signed in and then handed straight back to the
+  // form they had just filled in, looking like the sign-in had failed.
+  const rawLocale = String(formData.get("locale") || "");
+  const locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+
   // redirect: false so the caller can render "check your inbox" in place
   // instead of bouncing to the stock Auth.js verify page.
-  await signIn("resend", { email, redirect: false });
+  await signIn("resend", {
+    email,
+    redirect: false,
+    redirectTo: localePath(locale, "/account"),
+  });
   return { ok: true };
 }

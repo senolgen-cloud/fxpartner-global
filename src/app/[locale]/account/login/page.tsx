@@ -8,6 +8,9 @@ import { submitLogin } from "@/app/[locale]/account/login/simple-actions";
 import { configuredProviders } from "@/lib/authProviders";
 import { setServerLocale } from "@/lib/serverLocale";
 import { defaultLocale, isLocale } from "@/lib/i18n";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
+import { localePath } from "@/lib/i18n";
 
 export default async function LoginPage({
   params,
@@ -16,6 +19,15 @@ export default async function LoginPage({
 }) {
   const { locale: pageLocale } = await params;
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
+
+
+  // A link already sitting in someone's inbox still points back here, and so
+  // does any bookmark. Whoever arrives signed in is done signing in — send
+  // them to the panel rather than showing them the form again, which reads
+  // as the sign-in having failed.
+  if ((await auth())?.user) {
+    redirect(localePath(isLocale(pageLocale) ? pageLocale : defaultLocale, "/account"));
+  }
 
   const providers = configuredProviders();
 
