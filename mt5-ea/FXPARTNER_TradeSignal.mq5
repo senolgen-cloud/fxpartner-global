@@ -13,6 +13,13 @@
 //|     it reports on every symbol traded on this account) and set   |
 //|     the inputs below, especially ApiSecret.                      |
 //|                                                                    |
+//|  When a live position is modified - stop pulled to breakeven, a   |
+//|  target moved, part of the volume taken off - it reports that to  |
+//|  /api/trade-update so the card on the site stops showing the      |
+//|  levels the trade opened with. Every open position is also        |
+//|  re-checked on the quote timer, so a change made while the EA was |
+//|  detached is picked up on the next sweep rather than lost.        |
+//|                                                                    |
 //|  It also pushes the bid/ask of every open position to             |
 //|  /api/live-prices every InpQuotePushSeconds, which is what feeds  |
 //|  the "SU AN" column beside each signal on the site. Set that to   |
@@ -20,7 +27,7 @@
 //|  same secret and the same allowed URL as the reports above.       |
 //+------------------------------------------------------------------+
 #property copyright "FXPARTNER"
-#property version   "1.30"
+#property version   "1.40"
 #property strict
 
 //--- inputs
@@ -33,6 +40,7 @@ input int    InpSlTpRetryDelayMs    = 500;                         // delay betw
 input int    InpWebRequestTimeoutMs = 5000;                        // WebRequest timeout (ms)
 input bool   InpReportPending       = true;                        // Bekleyen emir kurulunca siteye bildir (ve iptal edilirse iptali de bildir)
 input int    InpQuotePushSeconds    = 15;                          // Sitedeki "SU AN" fiyati icin acik pozisyonlarin bid/ask gonderme araligi (sn). 0 = kapali
+input bool   InpReportModifications = true;                        // Acik islemde SL/TP degisince veya kismi kapanista siteyi guncelle
 input double InpConfidence          = 0;                           // optional confidence 0-100 to include on the open card, 0 = omit
 
 //--- module-level (post-init) config
@@ -48,6 +56,12 @@ ulong  g_posTicket[];
 string g_posPair[];
 double g_posEntry[];
 string g_posDirection[];
+//--- last values reported to the site, so a sweep that finds nothing
+//    changed sends nothing. Without these the reconciliation below would
+//    re-post every open position on every quote tick.
+double g_posSL[];
+double g_posTP[];
+double g_posVolume[];
 
 //+------------------------------------------------------------------+
 int OnInit()
@@ -65,6 +79,12 @@ int OnInit()
    ArrayResize(g_posPair, 0);
    ArrayResize(g_posEntry, 0);
    ArrayResize(g_posDirection, 0);
+   // These are indexed in lockstep with the four above. Clearing only some
+   // of them on re-init leaves the rest holding the previous run's values at
+   // indices that now mean something else.
+   ArrayResize(g_posSL, 0);
+   ArrayResize(g_posTP, 0);
+   ArrayResize(g_posVolume, 0);
 
    // This EA was purely event driven. The quote push needs a heartbeat, so
    // a timer is started here; OnTimer does nothing else.
@@ -158,25 +178,28 @@ int FindTrackedIndex(ulong ticket)
    return -1;
   }
 
-void TrackPosition(ulong ticket, string pair, double entry, string direction)
+void TrackPosition(ulong ticket, string pair, double entry, string direction,
+                    double sl, double tp, double volume)
   {
    int idx = FindTrackedIndex(ticket);
-   if(idx >= 0)
+   if(idx < 0)
      {
-      g_posPair[idx]      = pair;
-      g_posEntry[idx]     = entry;
-      g_posDirection[idx] = direction;
-      return;
+      idx = ArraySize(g_posTicket);
+      ArrayResize(g_posTicket, idx + 1);
+      ArrayResize(g_posPair, idx + 1);
+      ArrayResize(g_posEntry, idx + 1);
+      ArrayResize(g_posDirection, idx + 1);
+      ArrayResize(g_posSL, idx + 1);
+      ArrayResize(g_posTP, idx + 1);
+      ArrayResize(g_posVolume, idx + 1);
+      g_posTicket[idx] = ticket;
      }
-   int n = ArraySize(g_posTicket);
-   ArrayResize(g_posTicket, n + 1);
-   ArrayResize(g_posPair, n + 1);
-   ArrayResize(g_posEntry, n + 1);
-   ArrayResize(g_posDirection, n + 1);
-   g_posTicket[n]      = ticket;
-   g_posPair[n]         = pair;
-   g_posEntry[n]        = entry;
-   g_posDirection[n]    = direction;
+   g_posPair[idx]      = pair;
+   g_posEntry[idx]     = entry;
+   g_posDirection[idx] = direction;
+   g_posSL[idx]        = sl;
+   g_posTP[idx]        = tp;
+   g_posVolume[idx]    = volume;
   }
 
 void UntrackPosition(ulong ticket)
@@ -189,10 +212,16 @@ void UntrackPosition(ulong ticket)
    g_posPair[idx]        = g_posPair[last];
    g_posEntry[idx]       = g_posEntry[last];
    g_posDirection[idx]   = g_posDirection[last];
+   g_posSL[idx]          = g_posSL[last];
+   g_posTP[idx]          = g_posTP[last];
+   g_posVolume[idx]      = g_posVolume[last];
    ArrayResize(g_posTicket, last);
    ArrayResize(g_posPair, last);
    ArrayResize(g_posEntry, last);
    ArrayResize(g_posDirection, last);
+   ArrayResize(g_posSL, last);
+   ArrayResize(g_posTP, last);
+   ArrayResize(g_posVolume, last);
   }
 
 //+------------------------------------------------------------------+
@@ -357,6 +386,7 @@ void ReportQuotes()
 void OnTimer()
   {
    ReportQuotes();
+   SweepModifications();
   }
 
 //+------------------------------------------------------------------+
@@ -510,7 +540,79 @@ void ReportOpen(ulong positionTicket)
 
    int status = HttpGet(url);
    if(status == 200)
-      TrackPosition(positionTicket, symbol, entry, direction);
+      TrackPosition(positionTicket, symbol, entry, direction, sl, tp, volume);
+  }
+
+//+------------------------------------------------------------------+
+//| Modification report                                              |
+//|                                                                   |
+//| Sends SL/TP/volume for one live position when any of them differs |
+//| from what was last sent. The site reads a level of 0 as "no such  |
+//| level", which is what a cleared stop should mean there too.       |
+//+------------------------------------------------------------------+
+void ReportModification(ulong positionTicket)
+  {
+   if(!InpReportModifications || InpApiSecret == "")
+      return;
+   if(!PositionSelectByTicket(positionTicket))
+      return;
+
+   if(InpMagicFilter != 0 && (long)PositionGetInteger(POSITION_MAGIC) != InpMagicFilter)
+      return;
+   if(InpMagicExclude != 0 && (long)PositionGetInteger(POSITION_MAGIC) == InpMagicExclude)
+      return;
+
+   // Only positions this EA actually announced. One opened before the EA was
+   // attached has no card on the site to correct.
+   int idx = FindTrackedIndex(positionTicket);
+   if(idx < 0)
+      return;
+
+   string symbol = PositionGetString(POSITION_SYMBOL);
+   double sl     = PositionGetDouble(POSITION_SL);
+   double tp     = PositionGetDouble(POSITION_TP);
+   double volume = PositionGetDouble(POSITION_VOLUME);
+
+   // Compared at the precision each value is actually sent with, so a
+   // repeated sweep does not keep finding a difference in a digit the site
+   // never sees.
+   bool slSame  = (FormatPrice(symbol, sl) == FormatPrice(symbol, g_posSL[idx]));
+   bool tpSame  = (FormatPrice(symbol, tp) == FormatPrice(symbol, g_posTP[idx]));
+   bool volSame = (DoubleToString(volume, 2) == DoubleToString(g_posVolume[idx], 2));
+   if(slSame && tpSame && volSame)
+      return;
+
+   string url = g_siteUrl + "/api/trade-update"
+      + "?key=" + g_encodedSecret
+      + "&ticket=" + IntegerToString((long)positionTicket)
+      + "&stop=" + FormatPrice(symbol, sl)
+      + "&target1=" + FormatPrice(symbol, tp)
+      + "&volume=" + DoubleToString(volume, 2);
+
+   int status = HttpGet(url);
+   if(status == 200)
+     {
+      g_posSL[idx]     = sl;
+      g_posTP[idx]     = tp;
+      g_posVolume[idx] = volume;
+     }
+  }
+
+//+------------------------------------------------------------------+
+//| Sweep every tracked position for changes we were not told about. |
+//|                                                                   |
+//| TRADE_TRANSACTION_POSITION covers the normal case, but it does    |
+//| not arrive for a change made while the EA was detached, and not   |
+//| every broker raises it for a server-side modification. The sweep  |
+//| costs one comparison per open position and sends nothing when     |
+//| nothing moved.                                                    |
+//+------------------------------------------------------------------+
+void SweepModifications()
+  {
+   if(!InpReportModifications)
+      return;
+   for(int i = ArraySize(g_posTicket) - 1; i >= 0; i--)
+      ReportModification(g_posTicket[i]);
   }
 
 //+------------------------------------------------------------------+
@@ -607,6 +709,14 @@ void OnTradeTransaction(const MqlTradeTransaction &trans,
       return;
      }
 
+   // A live position's SL/TP moved. No deal is booked for this, so it would
+   // never reach the DEAL_ADD gate below.
+   if(trans.type == TRADE_TRANSACTION_POSITION)
+     {
+      ReportModification(trans.position);
+      return;
+     }
+
    if(trans.type != TRADE_TRANSACTION_DEAL_ADD)
       return;
 
@@ -632,10 +742,15 @@ void OnTradeTransaction(const MqlTradeTransaction &trans,
      }
    else if(entry == DEAL_ENTRY_OUT || entry == DEAL_ENTRY_OUT_BY)
      {
-      // Only report once the position is actually gone - a partial close
-      // leaves it open, and we don't want a result card per fill.
+      // Only report a *result* once the position is actually gone - a
+      // partial close leaves it open, and we don't want a result card per
+      // fill. The remaining volume has changed, though, and the card on the
+      // site still claims the original size, so correct that instead.
       if(PositionSelectByTicket(positionId))
+        {
+         ReportModification(positionId);
          return;
+        }
       ReportClose(positionId, trans.deal);
      }
   }
