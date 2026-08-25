@@ -9,7 +9,7 @@ import {
   type CashbackLeadStatus,
 } from "@/db/schema";
 import { auth } from "@/auth";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "senolgen@gmail.com";
@@ -21,7 +21,12 @@ async function requireAdmin() {
 
 export async function setAccountStatus(accountId: string, status: CashbackAccountStatus) {
   await requireAdmin();
-  await db.update(cashbackAccounts).set({ status }).where(eq(cashbackAccounts.id, accountId));
+  // Stamped so the member's notifications can say when we answered.
+  // created_at is when they applied, which is a different date entirely.
+  await db
+    .update(cashbackAccounts)
+    .set({ status, statusChangedAt: sql`now()` })
+    .where(eq(cashbackAccounts.id, accountId));
   revalidatePath("/admin/cashback");
 }
 

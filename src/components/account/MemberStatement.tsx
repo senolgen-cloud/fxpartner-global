@@ -38,6 +38,7 @@ const TIER_NAME: Record<PackageTier | "free", string> = {
 
 export default function MemberStatement({
   action,
+  bell,
   accent,
   name,
   email,
@@ -51,6 +52,8 @@ export default function MemberStatement({
   /** Sign-out lives in the header rather than under it — a secondary action
    *  parked on its own line below the account summary reads like an orphan. */
   action?: React.ReactNode;
+  /** The notification bell, rendered beside the sign-out control. */
+  bell?: React.ReactNode;
   /** The colour the member picked in their profile. Null falls back to signal. */
   accent?: string | null;
   name: string | null;
@@ -95,7 +98,12 @@ export default function MemberStatement({
             </span>
           </p>
         </div>
-        {action && <div className="shrink-0">{action}</div>}
+        {(bell || action) && (
+          <div className="flex shrink-0 items-center gap-3">
+            {bell}
+            {action}
+          </div>
+        )}
       </div>
 
       {/* The statement strip. Ruled, not carded — see the note above. */}

@@ -2498,5 +2498,19 @@
   "Kaydediliyor…": "Зберігаємо…",
   "Seçilmedi": "Не вибрано",
   "Kullandığınız broker": "Ваш брокер",
-  "Sizi nasıl çağıracağımızı ve panelinizin rengini siz seçin.": "Оберіть, як до вас звертатися, і колір вашої панелі."
+  "Sizi nasıl çağıracağımızı ve panelinizin rengini siz seçin.": "Оберіть, як до вас звертатися, і колір вашої панелі.",
+  "Bildirimler": "Сповіщення",
+  "Son 30 günde yeni bir şey yok.": "За останні 30 днів нічого нового.",
+  "Yeni sinyal: {pair} {direction}": "Новий сигнал: {pair} {direction}",
+  "Yeni sinyal: {pair}": "Новий сигнал: {pair}",
+  "Giriş {entry}": "Вхід {entry}",
+  "{pair} kapandı": "{pair} закрито",
+  "{amount} · 1 lot": "{amount} · 1 лот",
+  "{period} iadeniz hesabınıza işlendi": "Ваш кешбек за {period} зараховано",
+  "{amount} · {broker}": "{amount} · {broker}",
+  "{amount}": "{amount}",
+  "{broker} · {account}": "{broker} · {account}",
+  "Kazanç iadesi hesabınız doğrulandı": "Ваш рахунок для кешбеку підтверджено",
+  "Kazanç iadesi hesabınız uygun bulunmadı": "Ваш рахунок для кешбеку не підійшов",
+  "Menüyü aç": "Відкрити меню"
 }

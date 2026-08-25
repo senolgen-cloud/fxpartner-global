@@ -3,7 +3,7 @@
 import { db } from "@/db";
 import { users } from "@/db/schema";
 import { auth } from "@/auth";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { ACCENT_IDS } from "@/lib/accents";
 
@@ -47,6 +47,27 @@ export async function updateProfile(formData: FormData) {
       country: /^[A-Z]{2}$/.test(countryRaw) ? countryRaw : null,
       preferredBroker: brokerSlugs.has(brokerRaw) ? brokerRaw : null,
     })
+    .where(eq(users.id, session.user.id));
+
+  revalidatePath("/account");
+}
+
+/**
+ * Move the read watermark to now.
+ *
+ * Called when the member opens the bell. Idempotent by nature — the only
+ * thing it can do is move the line forward, so a double click costs a write
+ * and changes nothing else.
+ */
+export async function markNotificationsSeen() {
+  const session = await auth();
+  if (!session?.user?.id) return;
+
+  // now(), not new Date(): the events this watermark is compared against are
+  // stamped by the database, and the two clocks are three hours apart here.
+  await db
+    .update(users)
+    .set({ notificationsSeenAt: sql`now()` })
     .where(eq(users.id, session.user.id));
 
   revalidatePath("/account");

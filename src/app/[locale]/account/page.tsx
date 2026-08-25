@@ -1,4 +1,4 @@
-import { tr, trLocale } from "@/lib/chrome";
+import { tr, trf, trLocale } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import { auth, signOut } from "@/auth";
@@ -17,7 +17,10 @@ import { eq, desc, inArray } from "drizzle-orm";
 import { createVipInviteLink } from "@/lib/telegram";
 import VipInviteClientTrigger from "@/components/VipInviteClientTrigger";
 import CashbackLinkForm from "@/components/CashbackLinkForm";
-import { updateProfile } from "./profile-actions";
+import { updateProfile, markNotificationsSeen } from "./profile-actions";
+import NotificationBell from "@/components/account/NotificationBell";
+import { getMemberNotifications } from "@/lib/memberNotifications";
+import type { AccessTier } from "@/lib/signalAccess";
 import ProfileCard from "@/components/account/ProfileCard";
 import { getCountries } from "@/lib/country";
 import { brokers } from "@/data/brokers";
@@ -130,10 +133,55 @@ export default async function AccountPage({
   const subscriptionTier: PackageTier | null = (subscription?.tier as PackageTier | null) ?? null;
   const isActiveVip = subscription?.status === "active";
 
-  const [signalStats, userRow] = await Promise.all([
+  const viewerTier: AccessTier = isActiveVip && subscriptionTier ? subscriptionTier : "free";
+
+  const [signalStats, userRow, notifications] = await Promise.all([
     getRecentSignalStats("all", 30),
     db.query.users.findFirst({ where: eq(users.id, user.id!) }),
+    getMemberNotifications(user.id!, viewerTier),
   ]);
+
+  // Translated and formatted here, not in the bell: the bell is a client
+  // component, and the server translator and request locale do not follow it
+  // across that boundary.
+  const relative = new Intl.RelativeTimeFormat(trLocale(), { numeric: "auto" });
+  // Any numeric variable in a notification is money — the only numbers these
+  // templates carry.
+  //
+  // Grouped en-US and prefixed "$" in every locale, deliberately: that is
+  // what the signals board and the figures at the top of this same panel
+  // print, and a P/L that reads "+$2,039.00" in one place must not read
+  // "+2 039,00 USD" in another two inches away. Currency notation is part of
+  // this site's chrome here, not a locale preference.
+  const money = (n: number) =>
+    `${n < 0 ? "−" : "+"}$${Math.abs(n).toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })}`;
+  const formatVars = (vars: Record<string, string | number>) =>
+    Object.fromEntries(
+      Object.entries(vars).map(([k, v]) => [k, typeof v === "number" ? money(v) : v])
+    );
+  const bellItems = notifications.items.map((n) => {
+    // Against the database's clock, not this process's — see the note in
+    // memberNotifications; they are three hours apart.
+    const minutes = Math.round((n.at.getTime() - notifications.now.getTime()) / 60000);
+    const when =
+      Math.abs(minutes) < 60
+        ? relative.format(minutes, "minute")
+        : Math.abs(minutes) < 60 * 24
+          ? relative.format(Math.round(minutes / 60), "hour")
+          : relative.format(Math.round(minutes / (60 * 24)), "day");
+    return {
+      id: n.id,
+      at: n.at.toISOString(),
+      when,
+      title: trf(n.title, n.titleVars),
+      detail: n.detail ? trf(n.detail, formatVars(n.detailVars)) : null,
+      href: n.href,
+      kind: n.kind,
+    };
+  });
 
   // Cashback is stored as text to keep the decimal exact on the way in, so it
   // is summed as a number only here, at the point of display.
@@ -164,6 +212,13 @@ export default async function AccountPage({
             hitRateTrades={signalStats?.trades ?? 0}
             cashbackUsd={cashbackTotal}
             accent={userRow?.accentColor ?? null}
+            bell={
+              <NotificationBell
+                items={bellItems}
+                unread={notifications.unread}
+                markSeen={markNotificationsSeen}
+              />
+            }
             action={
               <form
                 action={async () => {

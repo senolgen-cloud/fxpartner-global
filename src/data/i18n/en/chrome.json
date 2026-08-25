@@ -2498,5 +2498,19 @@
   "Kaydediliyor…": "Saving…",
   "Seçilmedi": "Not selected",
   "Kullandığınız broker": "Your broker",
-  "Sizi nasıl çağıracağımızı ve panelinizin rengini siz seçin.": "Choose what we call you and the colour of your panel."
+  "Sizi nasıl çağıracağımızı ve panelinizin rengini siz seçin.": "Choose what we call you and the colour of your panel.",
+  "Bildirimler": "Notifications",
+  "Son 30 günde yeni bir şey yok.": "Nothing new in the last 30 days.",
+  "Yeni sinyal: {pair} {direction}": "New signal: {pair} {direction}",
+  "Yeni sinyal: {pair}": "New signal: {pair}",
+  "Giriş {entry}": "Entry {entry}",
+  "{pair} kapandı": "{pair} closed",
+  "{amount} · 1 lot": "{amount} · 1 lot",
+  "{period} iadeniz hesabınıza işlendi": "Your {period} cashback has been credited",
+  "{amount} · {broker}": "{amount} · {broker}",
+  "{amount}": "{amount}",
+  "{broker} · {account}": "{broker} · {account}",
+  "Kazanç iadesi hesabınız doğrulandı": "Your cashback account has been verified",
+  "Kazanç iadesi hesabınız uygun bulunmadı": "Your cashback account was not eligible",
+  "Menüyü aç": "Open menu"
 }

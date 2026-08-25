@@ -153,7 +153,7 @@ export default function HeaderNav({
       <button
         type="button"
         onClick={() => setMobileOpen(!mobileOpen)}
-        aria-label={mobileOpen ? "Menüyü kapat" : "Menüyü aç"}
+        aria-label={mobileOpen ? tr("Menüyü kapat") : tr("Menüyü aç")}
         aria-expanded={mobileOpen}
         className="hidden h-9 w-9 items-center justify-center text-text-on-ink sm:flex xl:hidden"
       >

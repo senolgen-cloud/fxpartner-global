@@ -39,6 +39,12 @@ export const users = pgTable("user", {
   // member seeing their own initial in a colour they picked. Null means the
   // signal default.
   accentColor: text("accent_color"),
+  // How far the member has read their notifications. One watermark rather
+  // than a row per notification per member: the events themselves already
+  // live in trade_signal and cashback_record with their own timestamps, so
+  // a notifications table would be a second copy of data we already have,
+  // kept in sync by hand. Null means the bell has never been opened.
+  notificationsSeenAt: timestamp("notifications_seen_at"),
   ...attribution,
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
@@ -119,6 +125,10 @@ export const cashbackAccounts = pgTable("cashback_account", {
   // opted in to marketing/campaign emails, never assumed.
   marketingOptIn: boolean("marketing_opt_in").notNull().default(false),
   status: text("status").$type<CashbackAccountStatus>().notNull().default("pending"),
+  // When the status last moved. Without it a verification is invisible to
+  // the member's notifications: created_at is when they applied, which is
+  // not when we answered.
+  statusChangedAt: timestamp("status_changed_at"),
   ...attribution,
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
