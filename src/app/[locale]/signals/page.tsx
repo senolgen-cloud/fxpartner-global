@@ -149,6 +149,18 @@ export default async function SignalsPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(localFaqs)) }}
       />
       <main className="flex-1 bg-ink text-text-on-ink">
+        {/* Claim, then proof — the same order the homepage hero uses. The
+            eyebrow and h1 used to sit under the artwork, inside the board. */}
+        <div className="mx-auto max-w-4xl px-6 pt-14 text-center md:pt-20">
+          <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-signal">
+            <span aria-hidden="true" className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" />
+            {tr("Canlı Sinyaller")}
+          </span>
+          <h1 className="mx-auto mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
+            {tr("Gerçek Zamanlı İşlem Sinyalleri")}
+          </h1>
+        </div>
+
         <HeroProductShot priority />
         <SignalsBoard
           initialActive={maskedActive}

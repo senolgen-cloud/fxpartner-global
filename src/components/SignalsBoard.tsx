@@ -1049,12 +1049,13 @@ export default function SignalsBoard({
   return (
     <>
       <section className="border-b border-hairline">
-        <div className="mx-auto max-w-6xl px-6 py-16">
+        {/* The eyebrow and h1 that used to open this section now sit above the
+            product shot, in the page itself — so the counts below read as the
+            caption to the artwork rather than a second header. Padding is
+            asymmetric for the same reason: the image is directly above. */}
+        <div className="mx-auto max-w-6xl px-6 pb-16 pt-2">
           <div className="flex flex-col items-center text-center">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">{tr("Canlı Sinyaller")}</span>
-            <h1 className="mt-3 font-display text-3xl font-semibold md:text-4xl">{tr("Gerçek Zamanlı İşlem Sinyalleri")}</h1>
-
-            <div className="mt-10 flex flex-wrap justify-center gap-10">
+            <div className="flex flex-wrap justify-center gap-10">
               <div>
                 <div className="font-display text-3xl font-semibold">{active.length}</div>
                 <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
