@@ -1,6 +1,6 @@
-// FXPARTNER web push service worker. Deliberately minimal — no offline
-// caching/PWA behavior, just push display and click routing, so it can't
-// interfere with Next.js's own asset serving.
+// FXPARTNER service worker. Deliberately minimal — push display, click
+// routing, and a fetch handler that does nothing. No offline caching, so it
+// cannot interfere with Next.js’s own asset serving or serve a stale price.
 
 self.addEventListener("push", (event) => {
   let data = { title: "FXPARTNER", body: "", url: "/" };
@@ -43,3 +43,17 @@ self.addEventListener("notificationclick", (event) => {
     })()
   );
 });
+
+// Present so the site can be installed, and deliberately doing nothing.
+//
+// Chrome will not offer "Install app" — on Android or the desktop — for a
+// site whose service worker has no fetch handler. Until this existed the
+// install prompt never fired at all, which meant the Home Screen icon was
+// only ever reachable on iOS, where Safari uses apple-touch-icon and asks
+// no such thing.
+//
+// It does not call respondWith, so every request goes to the network
+// exactly as it would with no worker registered. That is the point: this
+// site serves live prices and open positions, and a cache in front of them
+// would show someone a signal that has already closed.
+self.addEventListener("fetch", () => {});

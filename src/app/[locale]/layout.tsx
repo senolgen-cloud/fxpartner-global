@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Geist, JetBrains_Mono, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import NotificationOptIn from "@/components/NotificationOptIn";
+import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
 import AddToHomeScreen from "@/components/AddToHomeScreen";
 import NewsletterPopup from "@/components/NewsletterPopup";
 import QuickAccessHub from "@/components/QuickAccessHub";
@@ -200,6 +201,7 @@ export default async function RootLayout({
               above the mobile bottom nav/ticker — see MoreMenuOverlay. */}
           <MoreMenuOverlay signedIn={signedIn} accountHref={accountHref} />
           </MoreMenuProvider>
+          <ServiceWorkerRegistrar />
           <NotificationOptIn />
           <AddToHomeScreen />
           <NewsletterPopup />
