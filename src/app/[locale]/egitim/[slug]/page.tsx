@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { tr, trLocale } from "@/lib/chrome";
+import { tr, trLocale, trf } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import { db } from "@/db";
 import { educationPosts } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { and, asc, desc, eq, gt, isNotNull, lt } from "drizzle-orm";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
 import { pickTranslation } from "@/lib/translateContent";
@@ -15,6 +15,30 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 async function getPost(slug: string) {
   return db.query.educationPosts.findFirst({ where: eq(educationPosts.slug, slug) });
+}
+
+/**
+ * The lesson either side of this one.
+ *
+ * By lesson number rather than date, because the number is what the reader
+ * is being walked through — and a post written later can carry an earlier
+ * number if a subject was retried after failing its policy checks.
+ */
+async function getNeighbours(lessonNo: number | null) {
+  if (lessonNo == null) return { prev: null, next: null };
+  const [prev, next] = await Promise.all([
+    db.query.educationPosts.findFirst({
+      where: and(isNotNull(educationPosts.lessonNo), lt(educationPosts.lessonNo, lessonNo)),
+      orderBy: desc(educationPosts.lessonNo),
+      columns: { slug: true, title: true, lessonNo: true },
+    }),
+    db.query.educationPosts.findFirst({
+      where: and(isNotNull(educationPosts.lessonNo), gt(educationPosts.lessonNo, lessonNo)),
+      orderBy: asc(educationPosts.lessonNo),
+      columns: { slug: true, title: true, lessonNo: true },
+    }),
+  ]);
+  return { prev: prev ?? null, next: next ?? null };
 }
 
 export async function generateMetadata({
@@ -56,6 +80,7 @@ export default async function EducationPostPage({
   if (!post) notFound();
 
   const copy = pickTranslation(post.translations, locale, post);
+  const neighbours = post ? await getNeighbours(post.lessonNo) : { prev: null, next: null };
 
   // Blocks separated by blank lines; single newlines inside a block are kept
   // by whitespace-pre-line, because the emoji bullet lists these posts are
@@ -108,12 +133,22 @@ export default async function EducationPostPage({
             >
               {tr("← Tüm eğitim yazıları")}
             </Link>
-            <p className="mt-6 font-mono text-xs text-text-on-ink-muted">
-              {post.publishedAt.toLocaleDateString(trLocale(), {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
+            <p className="mt-6 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-mono text-xs uppercase tracking-[0.15em] text-text-on-ink-muted">
+              {post.lessonNo != null && (
+                <>
+                  <span className="text-signal">
+                    {trf("FXPARTNER Akademi · Ders {n}", { n: post.lessonNo })}
+                  </span>
+                  <span aria-hidden="true">·</span>
+                </>
+              )}
+              <span className="normal-case tracking-normal">
+                {post.publishedAt.toLocaleDateString(trLocale(), {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </span>
             </p>
             <h1 className="mt-3 font-poppins text-4xl font-semibold leading-[1.15] tracking-tight md:text-5xl">
               {copy.title}
@@ -138,6 +173,71 @@ export default async function EducationPostPage({
             <p className="mt-10 text-sm leading-relaxed text-text-muted">
               {tr("Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Kaldıraçlı işlemler yüksek risk taşır.")}
             </p>
+
+            {/* The next lesson, named. A bare "next" arrow asks the reader to
+                take a chance; the title tells them what they would be
+                reading, which is the only honest reason to click. */}
+            {(neighbours.prev || neighbours.next) && (
+              <nav
+                aria-label={tr("Dersler arası gezinme")}
+                className="mt-12 grid gap-4 border-t border-hairline-light pt-8 sm:grid-cols-2"
+              >
+                {neighbours.prev ? (
+                  <Link
+                    href={`/egitim/${neighbours.prev.slug}`}
+                    className="group rounded-2xl border border-hairline-light p-5 transition-colors hover:border-signal"
+                  >
+                    <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
+                      {trf("← Ders {n}", { n: neighbours.prev.lessonNo ?? 0 })}
+                    </span>
+                    <span className="mt-1.5 block font-poppins text-[15px] font-semibold leading-snug text-text-dark transition-colors group-hover:text-signal">
+                      {neighbours.prev.title}
+                    </span>
+                  </Link>
+                ) : (
+                  <span aria-hidden="true" className="hidden sm:block" />
+                )}
+                {neighbours.next && (
+                  <Link
+                    href={`/egitim/${neighbours.next.slug}`}
+                    className="group rounded-2xl border border-hairline-light p-5 text-right transition-colors hover:border-signal"
+                  >
+                    <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-signal">
+                      {trf("Ders {n} →", { n: neighbours.next.lessonNo ?? 0 })}
+                    </span>
+                    <span className="mt-1.5 block font-poppins text-[15px] font-semibold leading-snug text-text-dark transition-colors group-hover:text-signal">
+                      {neighbours.next.title}
+                    </span>
+                  </Link>
+                )}
+              </nav>
+            )}
+
+            {/* One invitation, not three. What the account actually gives a
+                reader of these pages is the live board the lessons describe —
+                so that is what it offers, rather than a generic sign-up. */}
+            <aside className="mt-8 rounded-2xl border border-signal/30 bg-signal/[0.06] p-6 text-center">
+              <p className="font-poppins text-lg font-semibold text-text-dark">
+                {tr("Burada okuduğunuzu canlı tahtada görün")}
+              </p>
+              <p className="mx-auto mt-2 max-w-xl text-[15px] leading-relaxed text-text-muted">
+                {tr("Açık ve kapanmış işlemler, giriş ve stop seviyeleriyle birlikte yayında. Ücretsiz üyelikle bildirimleri de açabilirsiniz.")}
+              </p>
+              <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+                <Link
+                  href="/signals"
+                  className="rounded-full bg-signal px-6 py-3 text-sm font-semibold text-on-signal transition-colors hover:bg-signal-strong"
+                >
+                  {tr("Canlı sinyalleri gör")}
+                </Link>
+                <Link
+                  href="/account/register"
+                  className="rounded-full border border-hairline px-6 py-3 text-sm font-semibold text-text-dark transition-colors hover:border-text-dark"
+                >
+                  {tr("Ücretsiz üye ol")}
+                </Link>
+              </div>
+            </aside>
           </article>
         </section>
       </main>

@@ -2521,5 +2521,18 @@
   "İşlem hesabınızı bağlayın": "Link your trading account",
   "Kazanç iadesi ancak bağlı bir işlem hesabıyla takip edilebilir. Hesabınızı bağladığınızda tutarlar buraya işlenir.": "Cashback can only be tracked against a linked trading account. Once you link yours, the amounts are credited here.",
   "Turu atla": "Skip the tour",
-  "Sonraki": "Next"
+  "Sonraki": "Next",
+  "FXPARTNER Akademi": "FXPARTNER Academy",
+  "FXPARTNER Akademi · Ders {n}": "FXPARTNER Academy · Lesson {n}",
+  "Ders {n}": "Lesson {n}",
+  "← Ders {n}": "← Lesson {n}",
+  "Ders {n} →": "Lesson {n} →",
+  "Dersi oku →": "Read the lesson →",
+  "Dersler arası gezinme": "Lesson navigation",
+  "{n} ders yayında · sırayla okumak için 1. dersten başlayın": "{n} lessons published · start at lesson 1 to read them in order",
+  "Yön tahmini yok, seviye önerisi yok. Buradaki dersler fiyat nereye giderse gitsin geçerli olan şeyleri anlatır: pozisyon büyüklüğü, emir mekaniği ve karar alma disiplini. Yatırım tavsiyesi değildir.": "No direction calls, no level suggestions. These lessons cover what holds true wherever price goes: position sizing, order mechanics and the discipline of deciding. This is not investment advice.",
+  "Burada okuduğunuzu canlı tahtada görün": "See what you just read on the live board",
+  "Açık ve kapanmış işlemler, giriş ve stop seviyeleriyle birlikte yayında. Ücretsiz üyelikle bildirimleri de açabilirsiniz.": "Open and closed trades are published with their entry and stop levels. A free account adds alerts.",
+  "Canlı sinyalleri gör": "See the live signals",
+  "Ücretsiz üye ol": "Create a free account"
 }

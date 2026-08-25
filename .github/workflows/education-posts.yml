@@ -1,18 +1,15 @@
 name: Education posts
 
-# PAUSED. Runs only when someone presses the button.
+# ACTIVE since 2026-08-25: two lessons a day, 07:40 UTC.
 #
-# compliance-brand signs off before any automation leaves "paused" — see
-# src/lib/departments.ts. This one publishes generated prose under the site's
-# name, which is exactly that department's remit.
-#
-# Two things to weigh before scheduling it, both real:
+# Released from "paused" after the compliance-brand review that gate exists
+# for — see the route header for what it checked. Cadence was the owner's
+# call: two, not the four originally asked for.
 #
 # 1. Volume. The blog is 28 hand-written posts in 35 days — 0.8 a day. Four a
-#    day is five times that, and Google's spam guidance on scaled content
+#    day was five times that, and Google's spam guidance on scaled content
 #    targets precisely the pattern of many pages produced quickly to win
-#    rankings. On a site whose product is judgement, that is a reputational
-#    bet, not just an SEO one.
+#    rankings. Two sits close to the site's own pace.
 #
 # 2. The queue is finite on purpose. src/lib/educationTopics.ts now holds 77
 #    subjects: about 19 days at four a day, 38 at two, 76 at one. When it
@@ -24,22 +21,19 @@ name: Education posts
 # publishing, to see what this actually writes before deciding. All three
 # passed the policy checks, ran 220-260 words, and stayed on process — no
 # market call, no return figure. The sample is in the commit message.
-#
-# To activate: uncomment the schedule and add it to the job's `if`.
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   # 07:40 UTC — clear of every other content cron.
-  #   - cron: "40 7 * * *"
+  schedule:
+    # 07:40 UTC — clear of every other content cron.
+    - cron: "40 7 * * *"
 
 jobs:
   # Owned by Haber & Editöryal Departmanı — see src/lib/departments.ts.
   education-posts:
-    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger education-posts
         run: |
           curl -sf -w "\nHTTP %{http_code}\n" -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            "https://fxpartner.global/api/cron/education-posts"
+            "https://fxpartner.global/api/cron/education-posts?count=2"

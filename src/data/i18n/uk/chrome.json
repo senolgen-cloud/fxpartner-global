@@ -2521,5 +2521,18 @@
   "İşlem hesabınızı bağlayın": "Прив'яжіть торговий рахунок",
   "Kazanç iadesi ancak bağlı bir işlem hesabıyla takip edilebilir. Hesabınızı bağladığınızda tutarlar buraya işlenir.": "Кешбек можна відстежувати лише за прив'язаним торговим рахунком. Щойно ви його прив'яжете, суми з'являться тут.",
   "Turu atla": "Пропустити тур",
-  "Sonraki": "Далі"
+  "Sonraki": "Далі",
+  "FXPARTNER Akademi": "Академія FXPARTNER",
+  "FXPARTNER Akademi · Ders {n}": "Академія FXPARTNER · Урок {n}",
+  "Ders {n}": "Урок {n}",
+  "← Ders {n}": "← Урок {n}",
+  "Ders {n} →": "Урок {n} →",
+  "Dersi oku →": "Читати урок →",
+  "Dersler arası gezinme": "Навігація між уроками",
+  "{n} ders yayında · sırayla okumak için 1. dersten başlayın": "Опубліковано уроків: {n} · починайте з уроку 1, щоб читати послідовно",
+  "Yön tahmini yok, seviye önerisi yok. Buradaki dersler fiyat nereye giderse gitsin geçerli olan şeyleri anlatır: pozisyon büyüklüğü, emir mekaniği ve karar alma disiplini. Yatırım tavsiyesi değildir.": "Жодних прогнозів напрямку чи рівнів. Ці уроки про те, що лишається правдою хоч куди піде ціна: розмір позиції, механіка ордерів і дисципліна рішень. Це не інвестиційна порада.",
+  "Burada okuduğunuzu canlı tahtada görün": "Побачте прочитане на живому табло",
+  "Açık ve kapanmış işlemler, giriş ve stop seviyeleriyle birlikte yayında. Ücretsiz üyelikle bildirimleri de açabilirsiniz.": "Відкриті та закриті угоди публікуються разом із рівнями входу і стопу. Безкоштовний акаунт додає сповіщення.",
+  "Canlı sinyalleri gör": "Дивитися живі сигнали",
+  "Ücretsiz üye ol": "Створити безкоштовний акаунт"
 }

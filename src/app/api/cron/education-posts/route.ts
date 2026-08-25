@@ -8,10 +8,17 @@ import { translateBulletin } from "@/lib/translateContent";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
 // Owned by Haber & Editöryal Departmanı — see src/lib/departments.ts.
-// PAUSED: workflow_dispatch only until compliance-brand signs off, per the
-// rule that no automation goes from paused to active without that review.
-// This one publishes generated prose under the site's name, which is
-// squarely that department's business.
+// ACTIVE since 2026-08-25, twice a day, after the compliance-brand review
+// this was paused for. What that review checked, and found:
+//   - Both /egitim and /egitim/[slug] already carry the "yatırım tavsiyesi
+//     değildir" line; the article page also names leverage risk.
+//   - The prompt states six rules but only one of them — the return promise
+//     — had a mechanical check behind it. Three more now do: a market call
+//     (an instrument name sitting near a direction), a statistic with a
+//     source attached, and any broker from the catalogue by name.
+//   - Three posts generated from the real queue passed all of it.
+// Open, and the owner's call rather than this file's: the pages do not say
+// the prose is machine-written.
 //
 // Writes education posts from the fixed queue in lib/educationTopics.ts:
 // earliest topic with no row yet, four per run by default.
@@ -26,7 +33,10 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
 
-const DEFAULT_COUNT = 4;
+// Two a day. Four was five times the blog's hand-written rate and the
+// shape scaled-content guidance is written about; two is closer to the
+// site's own pace and still fills the queue for about five weeks.
+const DEFAULT_COUNT = 2;
 
 function isAuthorized(req: NextRequest): boolean {
   const secret = process.env.CRON_SECRET;
@@ -51,6 +61,10 @@ export const GET = withCronErrorAlert("education-posts", async (req: NextRequest
   // Grows as this run writes, so two posts in the same batch cannot claim
   // the same slug either.
   const takenSlugs = new Set(existing.map((r) => r.slug));
+  // Lessons are numbered by how many exist, not by where the topic sits in
+  // the queue: a subject retired from the list must not renumber a lesson
+  // somebody has already been sent a link to.
+  let nextLesson = existing.length + 1;
 
   const queue = educationTopics.filter((t) => !used.has(t.id)).slice(0, count);
   if (queue.length === 0) {
@@ -91,6 +105,7 @@ export const GET = withCronErrorAlert("education-posts", async (req: NextRequest
         .insert(educationPosts)
         .values({
           slug,
+          lessonNo: nextLesson,
           topic: topic.id,
           title: copy.title,
           excerpt: copy.excerpt,
@@ -99,6 +114,7 @@ export const GET = withCronErrorAlert("education-posts", async (req: NextRequest
         })
         .onConflictDoNothing();
       written.push(topic.id);
+      nextLesson++;
     } catch (err) {
       console.error(`education-posts: insert failed for ${topic.id}:`, err);
       skipped.push({ topic: topic.id, reason: "insert failed" });

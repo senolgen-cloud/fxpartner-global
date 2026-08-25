@@ -1,4 +1,5 @@
 import type { EducationTopic } from "@/lib/educationTopics";
+import { brokers } from "@/data/brokers";
 
 const GEMINI_MODEL = "gemini-3.6-flash";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
@@ -53,12 +54,43 @@ body: yazının tamamı. Satır sonları için gerçek yeni satır karakteri kul
 // the obvious violations are caught here and the post is dropped rather than
 // stored. Dropping one post costs nothing — the queue simply serves it again
 // on the next run.
+//
+// The prompt states six rules. Until this ran on a schedule only one of them
+// — the return promise — had a check behind it, which meant the other five
+// were being enforced by asking nicely. These cover three more. The
+// remaining two (tone, and certainty language) are matters of degree that a
+// regex reads badly, and stay with the prompt.
 const FORBIDDEN = [
   /garanti(li|siyle|si)?\b/i,
   /kesin kâr|kesin kazan|kesinlikle kazan/i,
   /%\s*\d+\s*(kâr|kazanç|getiri)\s*(garanti|kesin)/i,
   /zengin ol|hızlı para kazan/i,
 ];
+
+// A market call. Every topic on the list is process or mechanics and none of
+// them needs to name an instrument, so an instrument sitting near a
+// direction is the shape of the one thing this site does not do.
+const INSTRUMENTS =
+  /(EUR\/?USD|GBP\/?USD|USD\/?TRY|USD\/?JPY|XAU\/?USD|XAG\/?USD|BTC\/?USD|ETH\/?USD|GOLD|ALTIN|GÜMÜŞ|BITCOIN|NASDAQ|US100|US30|SP500)/i;
+// Turkish letters, not \b. JS word boundaries are ASCII-only, so "ş" reads
+// as a non-word character and \b after "alış" never matches — which is how
+// "GOLD için alış yönü uygun" walked straight past this check in testing.
+const TR_LETTER = "a-zA-ZçğıöşüÇĞİÖŞÜ";
+const DIRECTION = new RegExp(
+  `(?<![${TR_LETTER}])(al[ıi][şs]|sat[ıi][şs]|long|short|y[üu]kseli[şs] bekle|d[üu][şs][üu][şs] bekle|hedef fiyat)(?![${TR_LETTER}])`,
+  "i"
+);
+
+// A statistic with a source attached is a statistic the model invented: the
+// generator has no research to cite and is told not to pretend otherwise.
+const SOURCED_STAT = /(ara[şs]t[ıi]rma|[çc]al[ıi][şs]ma|istatistik|veriler?e g[öo]re|rapor)[^.]{0,40}%\s*\d+/i;
+
+// Any broker from the catalogue. The prompt forbids recommending one; this
+// checks against the real list rather than a guess at what it might name.
+const BROKER_NAMES = brokers
+  .map((b) => b.name)
+  .filter((n) => n.length >= 3)
+  .map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
 
 export function findPolicyProblems(copy: EducationCopy): string[] {
   const text = `${copy.title}\n${copy.excerpt}\n${copy.body}`;
@@ -67,6 +99,22 @@ export function findPolicyProblems(copy: EducationCopy): string[] {
     const m = text.match(re);
     if (m) problems.push(`yasak ifade: "${m[0]}"`);
   }
+  const instrument = text.match(INSTRUMENTS);
+  if (instrument && DIRECTION.test(text)) {
+    problems.push(`piyasa görüşü izlenimi: "${instrument[0]}" + yön ifadesi`);
+  }
+
+  const stat = text.match(SOURCED_STAT);
+  if (stat) problems.push(`kaynaklı istatistik iddiası: "${stat[0].slice(0, 60)}"`);
+
+  for (const name of BROKER_NAMES) {
+    const hit = text.match(new RegExp(`\\b${name}\\b`, "i"));
+    if (hit) {
+      problems.push(`broker adı geçiyor: "${hit[0]}"`);
+      break;
+    }
+  }
+
   if (copy.body.length < 400) problems.push(`gövde çok kısa (${copy.body.length} karakter)`);
   if (copy.excerpt.length > 260) problems.push(`özet çok uzun (${copy.excerpt.length} karakter)`);
   if (!copy.title.trim()) problems.push("başlık boş");

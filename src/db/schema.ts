@@ -531,6 +531,10 @@ export const pendingOrders = pgTable("pending_order", {
 // translation failed, which falls back to Turkish rather than shipping half
 // a post.
 export const educationPosts = pgTable("education_post", {
+  // Which lesson of FXPARTNER Akademi this is. Stored rather than derived
+  // from the topic list index, so reordering or retiring a subject never
+  // renumbers a lesson somebody has already been linked to.
+  lessonNo: integer("lesson_no"),
   id: text("id")
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
