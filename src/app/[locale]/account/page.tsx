@@ -26,6 +26,9 @@ import { createNowPaymentsCheckout } from "@/app/[locale]/paketler/checkout-acti
 import { setServerLocale } from "@/lib/serverLocale";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import { trData } from "@/lib/localizeContent";
+import MemberStatement from "@/components/account/MemberStatement";
+import { getRecentSignalStats } from "@/lib/signalStats";
+import { users } from "@/db/schema";
 
 const brokerNames = Object.fromEntries(brokers.map((b) => [b.slug, b.name]));
 
@@ -126,6 +129,18 @@ export default async function AccountPage({
   const subscriptionTier: PackageTier | null = (subscription?.tier as PackageTier | null) ?? null;
   const isActiveVip = subscription?.status === "active";
 
+  const [signalStats, userRow] = await Promise.all([
+    getRecentSignalStats("all", 30),
+    db.query.users.findFirst({ where: eq(users.id, user.id!) }),
+  ]);
+
+  // Cashback is stored as text to keep the decimal exact on the way in, so it
+  // is summed as a number only here, at the point of display.
+  const cashbackTotal = myCashbackRecords.reduce((sum, r) => {
+    const n = Number(r.amountUsd);
+    return Number.isFinite(n) ? sum + n : sum;
+  }, 0);
+
   async function generateVipLink() {
     "use server";
     const s = await auth();
@@ -137,30 +152,32 @@ export default async function AccountPage({
   return (
     <>
       <main className="flex-1 bg-ink text-text-on-ink">
-        <div className="mx-auto max-w-3xl px-6 py-16">
-          <div className="flex flex-wrap items-start justify-between gap-4">
-            <div>
-              <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-                {tr("Üye Paneli")}
-              </span>
-              <h1 className="mt-3 font-display text-3xl font-semibold text-text-on-ink">
-                {user.name || user.email}
-              </h1>
-            </div>
-            <form
-              action={async () => {
-                "use server";
-                await signOut({ redirectTo: "/" });
-              }}
-            >
-              <button
-                type="submit"
-                className="rounded-full border border-hairline px-4 py-2 text-sm text-text-on-ink transition-colors hover:border-text-on-ink"
+        <div className="mx-auto max-w-5xl px-6 py-16">
+          <MemberStatement
+            name={user.name ?? null}
+            email={user.email ?? null}
+            memberSince={userRow?.createdAt ?? new Date()}
+            tier={isActiveVip && subscriptionTier ? subscriptionTier : "free"}
+            openPositions={activeSignalsCount.length}
+            hitRate={signalStats?.winRate ?? null}
+            hitRateTrades={signalStats?.trades ?? 0}
+            cashbackUsd={cashbackTotal}
+            action={
+              <form
+                action={async () => {
+                  "use server";
+                  await signOut({ redirectTo: "/" });
+                }}
               >
-                {tr("Çıkış yap")}
-              </button>
-            </form>
-          </div>
+                <button
+                  type="submit"
+                  className="rounded-full border border-hairline px-4 py-2 text-sm text-text-on-ink-muted transition-colors hover:border-text-on-ink hover:text-text-on-ink"
+                >
+                  {tr("Çıkış yap")}
+                </button>
+              </form>
+            }
+          />
 
           {/* VIP membership status */}
           <section className="mt-8 rounded-2xl border border-hairline bg-ink-soft p-6">
