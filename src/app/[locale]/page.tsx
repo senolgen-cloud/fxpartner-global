@@ -17,6 +17,7 @@ import HeroFeatureRow from "@/components/HeroFeatureRow";
 import InstallAppButtons from "@/components/InstallAppButtons";
 import HeroEcosystemMockups from "@/components/HeroEcosystemMockups";
 import ShowcaseGallery from "@/components/ShowcaseGallery";
+import SponsoredLeaderboard from "@/components/SponsoredLeaderboard";
 import RegulatorBadges from "@/components/RegulatorBadges";
 import HeroBrokerSearch from "@/components/HeroBrokerSearch";
 import PropFirmFeaturedCard from "@/components/PropFirmFeaturedCard";
@@ -267,6 +268,21 @@ export default async function Home({
 
             <div className="mt-12">
               <BrokerList brokers={localBrokers} reviewStats={brokerReviewStats} />
+            </div>
+
+            {/* Below the ranking, not above it: an advertiser does not get to
+                stand in front of the list this page exists to publish. TIO
+                Markets has no entry in brokers.ts, so the destination is
+                passed straight in — a creative can run without us first
+                inventing a review to hang it on. */}
+            <div className="mt-14">
+              <SponsoredLeaderboard
+                href="https://tiomarkets.com/register/?cmp=0b1x0w8w&refid=4095&bannerid=3684"
+                image="/campaigns/tiomarkets-970x250.png"
+                alt={tr("TIO Markets — 250.000’den fazla müşteri tarafından tercih ediliyor")}
+                width={970}
+                height={250}
+              />
             </div>
           </div>
         </section>
