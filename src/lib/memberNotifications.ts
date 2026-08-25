@@ -24,13 +24,16 @@ import { canViewSignal, type AccessTier } from "@/lib/signalAccess";
  *
  * Every timestamp here — the events, the watermark, and the "now" the
  * caller renders ages against — comes from the database, never from the
- * application. They do not agree: writing SQL now() into one of these
- * timestamp columns and reading it back lands three hours behind a JS Date
- * written the same second, because the column carries no time zone and the
- * session's is not UTC. Mixing the two would mark a signal read three hours
- * before the member saw it, and label a fresh one "3 hours ago". Picking one
- * clock costs a scalar in a query we were already making and needs no
- * hard-coded offset, which would rot the first time that setting changes.
+ * application.
+ *
+ * These columns carry no time zone, so their values only mean anything if
+ * everyone reading them agrees on which zone that is. The server pins
+ * itself to UTC for exactly this reason (src/instrumentation.ts), and with
+ * that in place a JS Date and SQL now() land on the same instant. Taking
+ * both sides from the database anyway keeps the comparison exact without
+ * depending on that pin holding: a watermark three hours off would mark a
+ * signal read before the member ever saw it, and label a fresh one
+ * "3 hours ago". scripts/check-db-clock.mjs guards the pin.
  *
  * Money is handed over as a number, never as a formatted string: the
  * grouping and the currency placement belong to the reader's locale, and
