@@ -319,7 +319,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
     null;
   const rangeLabel =
     firstAt && lastAt
-      ? `${firstAt.toLocaleDateString(intl, { day: "numeric", month: "long" })} – ${lastAt.toLocaleDateString(intl, { day: "numeric", month: "long", year: "numeric" })}`
+      ? `${firstAt.toLocaleDateString(intl, { day: "numeric", month: "long", timeZone: "UTC" })} – ${lastAt.toLocaleDateString(intl, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}`
       : null;
 
   return (
@@ -327,7 +327,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
       ref={totalCount.ref}
       className="mt-10 overflow-hidden rounded-2xl border border-hairline bg-ink-soft p-6 md:p-8"
     >
-      <div className="flex flex-wrap items-end justify-between gap-6">
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div>
           {/* Etiket tamamen veriden türetiliyor: işlem sayısı da tarih
               aralığı da. Sayfa yalnızca son N kapanmış işlemi yüklüyor
@@ -351,45 +351,38 @@ function PipsStats({ closed }: { closed: Signal[] }) {
               {isPositive ? "+" : "−"}${totalCount.display}
             </span>
           </div>
-          {/* Rakamın ne olduğu ve ne OLMADIĞI birlikte yazılıyor: normalize
-              edilmiş bir sinyal ölçüsü, hesap getirisi değil. Bu ayrım
-              yazılmazsa sayı doğrudan getiri iddiası gibi okunuyor. */}
-          <p className="mt-3 max-w-md text-xs leading-relaxed text-text-on-ink-muted">
-            {tr("Her işlem 1.00 lotluk pozisyona indirgenerek toplanmıştır — böylece farklı enstrümanlar ve farklı lot büyüklükleri karşılaştırılabilir hale gelir.")}{" "}
-            <strong className="text-text-on-ink">{tr("Bu bir getiri oranı değildir")}</strong>{tr("; gerçek sonucunuz kendi lot büyüklüğünüze ve giriş anınıza göre değişir.")}
-          </p>
         </div>
 
-        <div className="flex flex-wrap gap-6">
-          <div>
-            <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">{tr("En İyi")}</div>
-            <div ref={bestCount.ref} className="mt-1 font-display text-xl font-semibold" style={{ color: TICK_UP }}>
+        <div className="grid grid-cols-2 divide-x divide-hairline rounded-xl border border-hairline sm:grid-cols-4 lg:min-w-[26rem]">
+          <div className="px-4 py-3">
+            <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">{tr("En İyi")}</div>
+            <div ref={bestCount.ref} className="mt-1 font-display text-lg font-semibold tabular-stat" style={{ color: TICK_UP }}>
               +${bestCount.display}
             </div>
           </div>
-          <div>
-            <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">{tr("En Kötü")}</div>
+          <div className="px-4 py-3">
+            <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">{tr("En Kötü")}</div>
             <div
               ref={worstCount.ref}
-              className="mt-1 font-display text-xl font-semibold"
+              className="mt-1 font-display text-lg font-semibold tabular-stat"
               style={{ color: TICK_DOWN }}
             >
               −${worstCount.display}
             </div>
           </div>
-          <div>
-            <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">W / L</div>
-            <div className="mt-1 font-display text-xl font-semibold text-text-on-ink">
+          <div className="px-4 py-3">
+            <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">W / L</div>
+            <div className="mt-1 font-display text-lg font-semibold tabular-stat text-text-on-ink">
               <span style={{ color: TICK_UP }}>{wins.length}</span>
               <span className="text-text-on-ink-muted"> / </span>
               <span style={{ color: TICK_DOWN }}>{losses.length}</span>
             </div>
           </div>
-          <div>
-            <div className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+          <div className="px-4 py-3">
+            <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
               {tr("Ort. Süre")}
             </div>
-            <div className="mt-1 font-display text-xl font-semibold text-text-on-ink">{avgDurationLabel}</div>
+            <div className="mt-1 font-display text-lg font-semibold tabular-stat text-text-on-ink">{avgDurationLabel}</div>
           </div>
         </div>
       </div>
@@ -431,10 +424,10 @@ function PipsStats({ closed }: { closed: Signal[] }) {
           )}
         </svg>
         <div className="mt-2 flex justify-between font-mono text-[10px] text-text-on-ink-muted">
-          <span>{decisive[0]?.closedAt?.toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
+          <span>{decisive[0]?.closedAt?.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" })}</span>
           <span>{trf("{count} işlem", { count: decisive.length })}</span>
           <span>
-            {decisive[decisive.length - 1]?.closedAt?.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+            {decisive[decisive.length - 1]?.closedAt?.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" })}
           </span>
         </div>
       </div>
@@ -451,7 +444,6 @@ function PipsStats({ closed }: { closed: Signal[] }) {
               return (
                 <div key={month} className="flex flex-1 flex-col items-center gap-2">
                   <span className="font-mono text-[11px] font-medium" style={{ color: barColor }}>
-                    {value >= 0 ? "+" : ""}
                     {formatPerLot(value)}
                   </span>
                   <div className="flex h-24 w-full items-end justify-center">
@@ -483,64 +475,62 @@ function PipsStats({ closed }: { closed: Signal[] }) {
               const widthPct = Math.max(3, (Math.abs(p.total) / pairMax) * 100);
               const pairWinRate = Math.round((p.wins / p.count) * 100);
               return (
-                <div key={p.pair} className="flex items-center gap-3">
-                  <span className="w-20 shrink-0 font-display text-sm font-semibold text-text-on-ink">
-                    {p.pair}
-                  </span>
-                  <div className="relative h-6 flex-1 overflow-hidden rounded-md bg-ink">
+                <div key={p.pair} className="rounded-xl px-3 py-2.5 transition-colors hover:bg-ink/60">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <span className="font-display text-sm font-semibold text-text-on-ink">
+                      {p.pair}
+                      {/* Toplamı tek işlem belirlediyse söylenir. Aksi halde
+                          "%63 kazanma ama net eksi" satırı çelişkili görünüyor
+                          ve okuyucu veriye güvenmiyor. */}
+                      {p.dominated && (
+                        <span
+                          title={tr("Bu toplamın yarısından fazlasını tek bir işlem oluşturuyor — medyana bakın")}
+                          className="ml-1.5 cursor-help font-mono text-[11px] text-gold"
+                        >
+                          ⚠
+                        </span>
+                      )}
+                    </span>
+                    <span
+                      className="shrink-0 font-mono text-sm font-semibold tabular-stat"
+                      style={{ color: barColor }}
+                    >
+                      {formatPerLot(p.total)}
+                    </span>
+                  </div>
+                  <div className="relative mt-2 h-2 overflow-hidden rounded-full bg-ink">
                     <div
-                      className="pair-bar-in h-full rounded-md"
+                      className="pair-bar-in h-full rounded-full"
                       style={
                         {
                           "--final-width": `${widthPct}%`,
-                          background: `${barColor}4d`,
-                          borderRight: `2px solid ${barColor}`,
+                          background: barColor,
                           animationDelay: `${i * 70}ms`,
                         } as React.CSSProperties
                       }
                     />
                   </div>
-                  <span
-                    className="w-20 shrink-0 text-right font-mono text-xs font-semibold"
-                    style={{ color: barColor }}
-                  >
-                    {p.total >= 0 ? "+" : ""}
-                    {formatPerLot(p.total)}
-                  </span>
-                  {/* Medyan: toplamın yanındaki "tipik işlem" ölçüsü.
-                      Toplam tek bir uç işlemle ele geçirilebiliyor, medyan
-                      geçirilemiyor. */}
-                  <span
-                    className="w-24 shrink-0 text-right font-mono text-[11px]"
-                    style={{ color: p.med >= 0 ? TICK_UP : TICK_DOWN }}
-                    title={tr("Medyan işlem sonucu")}
-                  >
-                    {tr("ort.")} {formatPerLot(p.med)}
-                  </span>
-                  <span className="w-20 shrink-0 text-right font-mono text-[11px] text-text-on-ink-muted">
-                    {trf("{count} işlem", { count: p.count })}
-                  </span>
-                  <span className="w-12 shrink-0 text-right font-mono text-[11px] text-text-on-ink-muted">
-                    {formatPercent(pairWinRate, locale)}
-                  </span>
-                  {/* Toplamı tek işlem belirlediyse söylenir. Aksi halde
-                      "%63 kazanma ama net eksi" satırı çelişkili görünüyor
-                      ve okuyucu veriye güvenmiyor. */}
-                  <span className="w-5 shrink-0 text-right">
-                    {p.dominated && (
-                      <span
-                        title={tr("Bu toplamın yarısından fazlasını tek bir işlem oluşturuyor — medyana bakın")}
-                        className="cursor-help font-mono text-[11px] text-gold"
-                      >
-                        ⚠
-                      </span>
-                    )}
-                  </span>
+                  <div className="mt-1.5 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[11px] text-text-on-ink-muted">
+                    {/* Medyan: toplamın yanındaki "tipik işlem" ölçüsü.
+                        Toplam tek bir uç işlemle ele geçirilebiliyor, medyan
+                        geçirilemiyor. */}
+                    <span title={tr("Medyan işlem sonucu")} style={{ color: p.med >= 0 ? TICK_UP : TICK_DOWN }}>
+                      {tr("ort.")} {formatPerLot(p.med)}
+                    </span>
+                    <span aria-hidden="true">·</span>
+                    <span>{formatPercent(pairWinRate, locale)}</span>
+                    <span aria-hidden="true">·</span>
+                    <span>{trf("{count} işlem", { count: p.count })}</span>
+                  </div>
                 </div>
               );
             })}
           </div>
-          <p className="mt-4 text-xs leading-relaxed text-text-on-ink-muted">
+          <p className="mt-5 border-t border-hairline pt-5 text-xs leading-relaxed text-text-on-ink-muted">
+            {tr("Her işlem 1.00 lotluk pozisyona indirgenerek toplanmıştır — böylece farklı enstrümanlar ve farklı lot büyüklükleri karşılaştırılabilir hale gelir.")}{" "}
+            <strong className="text-text-on-ink">{tr("Bu bir getiri oranı değildir")}</strong>{tr("; gerçek sonucunuz kendi lot büyüklüğünüze ve giriş anınıza göre değişir.")}
+          </p>
+          <p className="mt-3 text-xs leading-relaxed text-text-on-ink-muted">
             <span className="text-gold">⚠</span>{" "}
             {tr("işareti, o paritedeki toplamın yarısından fazlasının tek bir işlemden geldiğini gösterir. Böyle durumlarda toplam yerine")}{" "}
             <strong className="text-text-on-ink">{tr("ort.")}</strong>{" "}
