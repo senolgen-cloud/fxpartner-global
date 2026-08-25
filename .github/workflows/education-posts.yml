@@ -1,0 +1,39 @@
+name: Education posts
+
+# PAUSED. Runs only when someone presses the button.
+#
+# compliance-brand signs off before any automation leaves "paused" — see
+# src/lib/departments.ts. This one publishes generated prose under the site's
+# name, which is exactly that department's remit.
+#
+# Two things to weigh before scheduling it, both real:
+#
+# 1. Volume. The blog is 28 hand-written posts in 35 days — 0.8 a day. Four a
+#    day is five times that, and Google's spam guidance on scaled content
+#    targets precisely the pattern of many pages produced quickly to win
+#    rankings. On a site whose product is judgement, that is a reputational
+#    bet, not just an SEO one.
+#
+# 2. The queue is finite on purpose. src/lib/educationTopics.ts holds 40
+#    subjects, so four a day empties it in ten days and the run then writes
+#    nothing rather than inventing filler. Extending the schedule means
+#    extending the list with subjects worth writing about.
+#
+# To activate: uncomment the schedule and add it to the job's `if`.
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   # 07:40 UTC — clear of every other content cron.
+  #   - cron: "40 7 * * *"
+
+jobs:
+  # Owned by Haber & Editöryal Departmanı — see src/lib/departments.ts.
+  education-posts:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger education-posts
+        run: |
+          curl -sf -w "\nHTTP %{http_code}\n" -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://fxpartner.global/api/cron/education-posts"

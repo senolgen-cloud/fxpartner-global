@@ -59,6 +59,9 @@ export const tr = {
   "page.ekonomik-takvim.description": "Canlı ekonomik takvim — CPI, NFP, faiz kararları ve diğer önemli makroekonomik veriler, açıklandığı anda gerçek rakamlarla.",
   "page.haber-bulteni.title": "Haber Bülteni",
   "page.haber-bulteni.description": "Günün öne çıkan finans ve forex piyasası gelişmelerini özgün yorumla derleyen günlük haber bülteni.",
+  "page.egitim.title": "Eğitim",
+  "page.egitim.description":
+    "İşlem disiplini, risk yönetimi ve platform mekaniği üzerine yatırımcı eğitim yazıları. Yön tahmini ya da seviye önerisi içermez; yatırım tavsiyesi değildir.",
   "page.instagram.title": "Instagram",
   "page.instagram.description": "@fxpartner_global Instagram hesabından gelenler için giriş sayfası — broker regülasyon sorgusu, günlük teknik analiz bülteni, risk uyarı listesi ve pozisyon hesaplayıcı.",
   "page.kurulum.title": "Uygulama Kurulum Rehberi (iOS, Android, Windows)",

@@ -489,3 +489,36 @@ export const pendingOrders = pgTable("pending_order", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
   resolvedAt: timestamp("resolved_at"),
 });
+
+// Education posts, generated on a schedule and stored here rather than in
+// src/data/blog.ts.
+//
+// That file is 285 KB for 28 hand-written posts — roughly 10 KB each. At four
+// posts a day it would pass a megabyte within a month and fifteen within a
+// year, in a single TypeScript module that a dozen pages import. Editorial
+// posts someone actually wrote belong in source, where they can be reviewed
+// in a diff; generated ones belong in a table, the same way news_bulletin
+// already works.
+//
+// `topic` is the curated subject the post was written from, and it is unique:
+// the generator draws from a fixed list in src/lib/educationTopics.ts and
+// never revisits one. Unbounded generation drifts and repeats itself, and
+// nothing looks worse on a site selling judgement than the same article
+// twice under two titles.
+//
+// `translations` holds { <locale>: { title, excerpt, body } }, written at
+// publish time by the same helper the news bulletins use. Null when
+// translation failed, which falls back to Turkish rather than shipping half
+// a post.
+export const educationPosts = pgTable("education_post", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  slug: text("slug").notNull().unique(),
+  topic: text("topic").notNull().unique(),
+  title: text("title").notNull(),
+  excerpt: text("excerpt").notNull(),
+  body: text("body").notNull(),
+  translations: text("translations"),
+  publishedAt: timestamp("published_at").notNull().defaultNow(),
+});

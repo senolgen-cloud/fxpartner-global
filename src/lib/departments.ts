@@ -67,7 +67,12 @@ export const departments: Department[] = [
       "src/lib/news.ts",
       "src/lib/relevance-filter.ts",
       "src/lib/translate.ts",
-    ],
+          "src/app/api/cron/education-posts/route.ts",
+      "src/lib/educationTopics.ts",
+      "src/lib/educationPost.ts",
+      "src/app/[locale]/egitim",
+      ".github/workflows/education-posts.yml",
+],
     // "active" as of 2026-08-05: blog-share (announces manually-written
     // /blog posts) is scheduled, per the user's explicit request in that
     // session to automate posting. news-update (external news
@@ -79,7 +84,12 @@ export const departments: Department[] = [
     // Still silently no-ops/fails until DEEPL_API_KEY is set in Vercel
     // production, see docs/ORGANIZATION.md, but no further code change
     // is needed once that key is added.
-    automation: "active",
+        // education-posts is the paused exception in this department: wired,
+    // tested and deliberately left on workflow_dispatch. It publishes
+    // generated prose under the site name, so compliance-brand signs off
+    // before it goes on a schedule — and the cadence is its own question,
+    // since four a day is five times the blog's hand-written rate.
+automation: "active",
   },
   {
     id: "broker-intelligence",
