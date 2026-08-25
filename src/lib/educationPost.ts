@@ -141,7 +141,11 @@ export async function generateEducationPost(topic: EducationTopic): Promise<Educ
   return copy;
 }
 
-export function slugifyEducation(topicId: string, title: string): string {
+export function slugifyEducation(
+  topicId: string,
+  title: string,
+  taken: ReadonlySet<string> = new Set()
+): string {
   const base = title
     .toLowerCase()
     .replace(/ı/g, "i")
@@ -155,7 +159,21 @@ export function slugifyEducation(topicId: string, title: string): string {
     .replace(/\s+/g, "-")
     .slice(0, 70)
     .replace(/-+$/, "");
-  // The topic id is the tail rather than the head so the readable words lead
-  // the URL, and it guarantees uniqueness even if two titles slugify the same.
-  return `${base || "egitim"}-${topicId}`;
+  // The topic id used to be glued on unconditionally, which guaranteed
+  // uniqueness at the cost of ending every Turkish URL in an English tag:
+  // ".../kaybi-kovalamak-zarari-geri-alma-isleminin-mekanigi-revenge-trading".
+  // These pages exist to rank in Turkish, so that tail was working against
+  // the one job they have. Each topic is published exactly once and the ids
+  // are unique, so a clash needs two different topics to produce the same
+  // title — rare enough to handle when it happens rather than to pay for on
+  // every URL.
+  const clean = base || "egitim";
+  if (!taken.has(clean)) return clean;
+
+  const withTopic = `${clean}-${topicId}`;
+  if (!taken.has(withTopic)) return withTopic;
+
+  let n = 2;
+  while (taken.has(`${withTopic}-${n}`)) n++;
+  return `${withTopic}-${n}`;
 }

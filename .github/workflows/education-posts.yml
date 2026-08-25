@@ -14,10 +14,16 @@ name: Education posts
 #    rankings. On a site whose product is judgement, that is a reputational
 #    bet, not just an SEO one.
 #
-# 2. The queue is finite on purpose. src/lib/educationTopics.ts holds 40
-#    subjects, so four a day empties it in ten days and the run then writes
-#    nothing rather than inventing filler. Extending the schedule means
-#    extending the list with subjects worth writing about.
+# 2. The queue is finite on purpose. src/lib/educationTopics.ts now holds 77
+#    subjects: about 19 days at four a day, 38 at two, 76 at one. When it
+#    empties the run writes nothing rather than inventing filler, so a longer
+#    schedule means adding subjects worth writing about, not loosening the
+#    prompt.
+#
+# Three posts were generated from the real queue on 2026-08-25 without
+# publishing, to see what this actually writes before deciding. All three
+# passed the policy checks, ran 220-260 words, and stayed on process — no
+# market call, no return figure. The sample is in the commit message.
 #
 # To activate: uncomment the schedule and add it to the job's `if`.
 

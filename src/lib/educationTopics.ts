@@ -76,6 +76,57 @@ export const educationTopics: EducationTopic[] = [
   { id: "platform-security", brief: "Hesap güvenliği: iki adımlı doğrulama, cihaz hijyeni, oltalama" },
   { id: "vps-and-connection", brief: "Bağlantı kopması, VPS kullanımı ve otomatik sistemlerde süreklilik" },
   { id: "reading-a-statement", brief: "Hesap ekstresini okumak: komisyon, swap, net sonuç" },
+
+  // --- more psychology, added when the first batch was ten days from
+  //     running out. Same boundary as everything above: nothing here is a
+  //     market view, a forecast, or a reason to open a position. ---
+  { id: "confirmation-bias", brief: "Doğrulama yanlılığı: kararınızı destekleyen veriyi arayıp aksini görmezden gelmek" },
+  { id: "anchoring-to-entry", brief: "Giriş fiyatına demirlemek: pozisyonu fiyat değil, maliyet üzerinden değerlendirmek" },
+  { id: "recency-bias", brief: "Son birkaç işlemin bütün stratejiye dair yargıyı gölgelemesi" },
+  { id: "comparing-with-others", brief: "Başkasının sonuçlarıyla kıyaslamanın kendi risk kurallarınıza etkisi" },
+  { id: "overtrading-frequency", brief: "İşlem sıklığı: çok işlem açmanın maliyet ve karar kalitesi üzerindeki etkisi" },
+  { id: "news-reaction-reflex", brief: "Haber sonrası ilk harekete tepki verme refleksi ve veri anındaki koşullar" },
+  { id: "following-a-signal", brief: "Herhangi bir sinyal kaynağını takip ederken kendi risk kurallarınızı korumak" },
+  { id: "missed-trade-regret", brief: "Kaçırılan işlem pişmanlığı ve bunun bir sonraki karara taşınması" },
+
+  // --- risk, continued ---
+  { id: "adding-to-a-loser", brief: "Zarardaki pozisyona eklemek: ortalama düşürmenin mekaniği ve risk üzerindeki etkisi" },
+  { id: "portfolio-heat", brief: "Aynı anda açık toplam risk: tek tek küçük, toplamda büyük pozisyonlar" },
+  { id: "risk-of-ruin", brief: "Hesabı tüketme riski kavramı: risk yüzdesi ile arka arkaya zarar arasındaki ilişki" },
+  { id: "fixed-vs-percent-risk", brief: "Sabit tutarla risk almak ile bakiyenin yüzdesiyle risk almak arasındaki fark" },
+  { id: "account-currency-effect", brief: "Hesap para biriminin kâr/zarar ve teminat hesabına etkisi" },
+  { id: "scaling-out", brief: "Pozisyonu kademeli kapatmanın mekaniği: kalan hacim, stop ve risk nasıl değişir" },
+
+  // --- orders and execution, continued ---
+  { id: "lot-sizes-explained", brief: "Standart, mini ve mikro lot: hacim birimlerinin gerçekte ne ifade ettiği" },
+  { id: "pip-and-point", brief: "Pip ve puan farkı, sembole göre değişen ondalık hane sayısı" },
+  { id: "contract-size", brief: "Sözleşme büyüklüğü: aynı lotun farklı enstrümanlarda neden farklı risk taşıdığı" },
+  { id: "trailing-stop-mechanics", brief: "İz süren stop nasıl çalışır, hangi koşullarda tetiklenir ve sınırları nelerdir" },
+  { id: "break-even-stop", brief: "Stop'u başabaşa çekmenin mekaniği ve pozisyonun risk profiline etkisi" },
+  { id: "order-modification", brief: "Açık pozisyonda seviye değiştirmek: nasıl işler, nelere dikkat edilir" },
+  { id: "gap-openings", brief: "Hafta başı ve haber sonrası fiyat boşlukları: emirlerin nasıl etkilendiği" },
+  { id: "symbol-specifications", brief: "Sembol özellikleri penceresi nasıl okunur: teminat, adım, minimum hacim" },
+
+  // --- instrument mechanics (mechanics only, never a view on the market) ---
+  { id: "metals-mechanics", brief: "Metal sembollerinin işleyiş farkları: sözleşme büyüklüğü, seans, teminat" },
+  { id: "indices-cfd-mechanics", brief: "Endeks CFD'lerinin mekaniği: dayanak, seans saatleri ve fiyatlama" },
+  { id: "crypto-cfd-mechanics", brief: "Kripto CFD'lerinde 7/24 işleyiş, hafta sonu ve teminat farkları" },
+  { id: "volume-on-cfds", brief: "CFD platformlarında görünen hacmin ne olduğu ve neden brokera özgü olduğu" },
+
+  // --- statistics and review, continued ---
+  { id: "max-consecutive-losses", brief: "Arka arkaya en fazla kaç zarar: bir stratejiyi değerlendirirken bakılan ölçü" },
+  { id: "equity-curve-reading", brief: "Bakiye eğrisi nasıl okunur: eğim, düşüş dönemleri ve toparlanma" },
+  { id: "benchmarking-your-results", brief: "Kendi sonuçlarınızı neye göre ölçmek: dönem, örneklem ve karşılaştırma sorunu" },
+  { id: "strategy-change-discipline", brief: "Stratejiyi ne zaman değiştirmeli: birkaç zarardan sonra mı, veriye bakarak mı" },
+
+  // --- account, safety and paperwork ---
+  { id: "kyc-process", brief: "Kimlik doğrulama (KYC) süreci: hangi belgeler istenir, neden istenir" },
+  { id: "two-factor-authentication", brief: "İki adımlı doğrulama ve işlem hesabı için hesap güvenliği alışkanlıkları" },
+  { id: "scam-red-flags", brief: "Dolandırıcılık işaretleri: garanti getiri vaadi, baskı, doğrulanamayan kimlik" },
+  { id: "record-keeping", brief: "İşlem kayıtlarını saklamak: ekstre, dekont ve neden birikmesi gerektiği" },
+  { id: "support-escalation", brief: "Broker desteğine sorun bildirmek: ne yazılır, hangi kayıtlar eklenir" },
+  { id: "chart-timeframes", brief: "Zaman dilimlerinin mekaniği: aynı verinin farklı periyotlarda nasıl göründüğü" },
+  { id: "indicator-lag", brief: "Göstergelerde gecikme kavramı: hesaplama geçmiş veriye dayandığında ne olur" }
 ];
 
 /** Topic lookup by id, for rendering a stored post's subject. */

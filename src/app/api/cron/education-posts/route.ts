@@ -44,10 +44,13 @@ export const GET = withCronErrorAlert("education-posts", async (req: NextRequest
   const count = Number.isFinite(requested) ? Math.min(Math.max(1, requested), 6) : DEFAULT_COUNT;
 
   const existing = await db
-    .select({ topic: educationPosts.topic })
+    .select({ topic: educationPosts.topic, slug: educationPosts.slug })
     .from(educationPosts)
     .orderBy(desc(educationPosts.publishedAt));
   const used = new Set(existing.map((r) => r.topic));
+  // Grows as this run writes, so two posts in the same batch cannot claim
+  // the same slug either.
+  const takenSlugs = new Set(existing.map((r) => r.slug));
 
   const queue = educationTopics.filter((t) => !used.has(t.id)).slice(0, count);
   if (queue.length === 0) {
@@ -80,11 +83,14 @@ export const GET = withCronErrorAlert("education-posts", async (req: NextRequest
     // model, and a bad translation is a row someone can edit.
     const translations = await translateBulletin(copy);
 
+    const slug = slugifyEducation(topic.id, copy.title, takenSlugs);
+    takenSlugs.add(slug);
+
     try {
       await db
         .insert(educationPosts)
         .values({
-          slug: slugifyEducation(topic.id, copy.title),
+          slug,
           topic: topic.id,
           title: copy.title,
           excerpt: copy.excerpt,
