@@ -167,7 +167,7 @@ export default async function Home({
           <HeroSpotlight />
 
           <div className="relative mx-auto grid max-w-6xl gap-12 px-6 pb-12 pt-20 md:pb-16 md:pt-28 lg:grid-cols-[1fr_420px] lg:items-start lg:gap-16">
-          <div>
+          <div className="text-center">
             <Reveal>
               <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-signal">
                 <span
@@ -179,7 +179,7 @@ export default async function Home({
             </Reveal>
 
             <Reveal delay={90}>
-              <h1 className="mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
+              <h1 className="mx-auto mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
                 Trading.
                 <br />
                 <span className="text-signal">{tr("Ama daha akıllı...")}</span>
@@ -187,7 +187,7 @@ export default async function Home({
             </Reveal>
 
             <Reveal delay={180}>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
+              <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
                 {tr("FXPARTNER, daha akıllı işlem yapmanız için hepsi bir arada platformdur. Sinyaller, yapay zeka içgörüleri, ekonomik takvim, güvenilir brokerlar ve küresel bir topluluk.")}
               </p>
             </Reveal>

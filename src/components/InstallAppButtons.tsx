@@ -169,7 +169,7 @@ export default function InstallAppButtons() {
 
   return (
     <>
-      <div className="mt-4 flex flex-wrap items-center gap-3">
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
         <button
           type="button"
           onClick={() => handleClick("mobile")}
