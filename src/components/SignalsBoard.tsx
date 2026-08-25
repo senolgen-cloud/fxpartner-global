@@ -754,7 +754,7 @@ function LivePriceCell({
 function ProvenanceNote() {
   const tr = useTr();
   return (
-    <p className="mt-3 max-w-3xl text-[13px] leading-relaxed text-text-on-ink-muted">
+    <p className="mx-auto mt-3 max-w-3xl text-center text-[13px] leading-relaxed text-text-on-ink-muted">
       {tr("Aşağıdaki her sinyal, otomatik bir EA aracılığıyla doğrudan takip edilen MT5 hesabımızdan gelir — Telegram kanalımızda ve X'te paylaşılanlarla aynı girişler, her işlem kapandığında gerçek ve doğrulanmış bir sonuçla birlikte. Burada hiçbir şey simüle edilmemiş veya sonradan eklenmemiştir.")}
     </p>
   );
@@ -1126,13 +1126,15 @@ export default function SignalsBoard({
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16">
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="font-display text-2xl font-semibold">{tr("Aktif Sinyaller")}</h2>
+        <div className="mb-6 text-center">
+          <div className="flex items-center justify-center gap-3">
+            <h2 className="font-display text-2xl font-semibold">{tr("Aktif Sinyaller")}</h2>
+            <span className="hidden items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-signal md:flex">
+              <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
+              {tr("Canlı")}
+            </span>
+          </div>
           <ProvenanceNote />
-          <span className="hidden items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-signal md:flex">
-            <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
-            {tr("Canlı")}
-          </span>
         </div>
         {active.length === 0 ? (
           <p className="text-text-on-ink-muted">
@@ -1162,10 +1164,12 @@ export default function SignalsBoard({
           second way to render the same thing. */}
       <section className="border-b border-hairline">
         <div className="mx-auto max-w-6xl px-6 py-16">
-          <h2 className="font-display text-2xl font-semibold">{tr("Son Sinyaller")}</h2>
-          <ProvenanceNote />
+          <div className="text-center">
+            <h2 className="font-display text-2xl font-semibold">{tr("Son Sinyaller")}</h2>
+            <ProvenanceNote />
+          </div>
           {closed.length === 0 ? (
-            <p className="mt-4 text-text-on-ink-muted">
+            <p className="mt-4 text-center text-text-on-ink-muted">
               {tr("Henüz kapanan sinyal yok — işlemler kapandıkça sonuçlar burada görünecek.")}
             </p>
           ) : (
@@ -1180,9 +1184,9 @@ export default function SignalsBoard({
 
       <section className="border-b border-hairline bg-ink-soft/30">
         <div className="mx-auto max-w-6xl px-6 py-10">
-          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <div className="mb-4 flex flex-col items-center gap-3">
             <h2 className="font-display text-xl font-semibold">{tr("Canlı Grafik")}</h2>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap justify-center gap-2">
               {chartPairs.map((pair) => (
                 <button
                   key={pair}
