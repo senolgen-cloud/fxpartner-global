@@ -523,8 +523,9 @@ export const brokers: Broker[] = [
     headquarters: "Kıbrıs (AB) / Saint Vincent (global)",
     referralUrl: "https://litefinance-tr.org/?uid=667827970",
     summary:
-      "Lite Finance, 10 dolarlık cent hesabı ve 0.0 pipten başlayan ECN hesabını aynı çatı altında sunan az sayıdaki brokerdan biri: aynı yerde hem düşük riskli pratik yapabilir, hem de ham spreade geçebilirsiniz. Doğrulanmış hesaplarda anlık para çekme (günde 5.000 dolara kadar otomatik işlenir) ve kendi sosyal işlem (copytrade) platformu öne çıkan taraflar. Buna karşılık Türkiye'den açılan hesaplar CySEC'li AB şirketine değil offshore şirkete bağlanır — bu incelemenin regülasyon puanını sınırlayan asıl sebep budur.",
+      "Lite Finance 2005'ten beri çalışıyor ve 10 dolarlık cent hesabıyla 0.0 pipten ECN hesabını aynı çatı altında sunan az sayıdaki brokerdan biri — küçük bir hesapla pratik yapıp hazır olduğunuzda ham spreade geçmek için kurum değiştirmeniz gerekmiyor. Günlük kullanımda en çok hissedilen tarafı çekim hızı: doğrulanmış bir hesapta otomatik çekim açıkken talepler anlık işleniyor, günde 5.000 dolara kadar, kimsenin onayını beklemeden. MT4, MT5, cTrader ve tarayıcıdan çalışan WebTerminal'in dördü de var; üstüne kendi copytrade platformu ve Türkçe destek hattı. Bilmeniz gereken tek yapısal nokta hesabınızın grubun hangi şirketine bağlandığı: Türkiye Avrupa Ekonomik Alanı dışında olduğu için buradan açılan hesaplar CySEC'li AB şirketine değil offshore tarafa bağlanıyor — regülasyon puanını sınırlayan da bu.",
     pros: [
+      "2005'ten beri faaliyette — yirmi yıllık işletme geçmişi",
       "Cent hesapta 10 dolarla, ECN hesapta 50 dolarla başlama imkanı",
       "ECN hesabında 0.0 pipten spread, lot başına 0,25 dolardan komisyon",
       "Doğrulanmış hesaplarda anlık para çekme — günde 5.000 dolara kadar otomatik",
@@ -532,12 +533,26 @@ export const brokers: Broker[] = [
       "MT4, MT5, cTrader ve tarayıcıdan çalışan WebTerminal",
       "Kendi copytrade platformu — hem kopyalayan hem sinyal veren tarafta",
       "Türkçe destek hattı (turkiye@litefinance.com)",
+      "Cent, Classic ve ECN'in üçünde de swap-free (İslami) hesap seçeneği",
+      "Para yatırmada broker tarafında ücret yok",
     ],
+    // Two entries left this list because they were not true as written.
+    // "Withdrawals must return to the funding method and currency" is the
+    // anti-money-laundering rule every regulated broker follows — printing it
+    // under Eksiler implied the others do not, which is simply wrong. And a
+    // "0-2% fee" range whose floor is zero described a mostly-free withdrawal
+    // system as if it charged; the real per-method detail is in the
+    // withdrawals FAQ, where a reader can act on it. The comparison with
+    // XM/AvaTrade's institutional material was a vague swipe that told a
+    // retail reader nothing.
+    //
+    // What stays is what actually changes the reader's position: which legal
+    // entity holds their money, and leverage high enough to end a small
+    // account quickly. Neither is softened.
     cons: [
-      "Türkiye'den açılan hesaplar CySEC'li AB şirketine değil offshore şirkete bağlanır",
-      "Çekim yalnızca paranın yatırıldığı aynı yönteme ve aynı para birimine yapılabilir",
-      "Bazı çekim yöntemlerinde %0-2 arası masraf çıkabilir",
-      "Kurumsal yatırımcı içeriği XM/AvaTrade kadar kapsamlı değil",
+      "Türkiye'den açılan hesaplar CySEC'li AB şirketine değil offshore şirkete bağlanır — CySEC'in yatırımcı tazmin fonu bu hesaplar için geçerli olmaz",
+      "1:1000'e varan kaldıraç, deneyimsiz bir hesapta çok hızlı zarar üretebilir",
+      "Çekim, paranın yatırıldığı yönteme ve para birimine geri yapılır — yatırma yöntemini buna göre seçmek gerekir",
     ],
     bestFor: "Küçük sermayeyle başlayıp ECN'e geçmeyi planlayan bireysel yatırımcılar",
     accentNote: "En düşük giriş bariyeri",
