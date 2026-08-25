@@ -172,7 +172,7 @@ export default async function Home({
               420px panel with the artwork below the fold; stacked and
               centred, each part lands where the eye already is and the gap
               the image used to leave under itself is gone. */}
-          <div className="relative mx-auto max-w-4xl px-6 pt-14 text-center md:pt-20">
+          <div className="relative mx-auto max-w-4xl px-6 pt-8 text-center md:pt-8">
             <Reveal>
               <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-signal">
                 <span
@@ -184,7 +184,7 @@ export default async function Home({
             </Reveal>
 
             <Reveal delay={90}>
-              <h1 className="mx-auto mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
+              <h1 className="mx-auto mt-4 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
                 Trading.
                 <br />
                 <span className="text-signal">{tr("Ama daha akıllı...")}</span>
@@ -192,13 +192,18 @@ export default async function Home({
             </Reveal>
           </div>
 
-          <HeroProductShot priority />
+          {/* Capped by height, not width. This is the first screen a
+              visitor sees, and at full width the artwork alone was taller
+              than the space left under the headline — the paragraph and the
+              buttons fell below the fold on a laptop. Height is what is
+              actually scarce here, so that is what is constrained. */}
+          <HeroProductShot priority imageClassName="md:w-auto md:max-h-[max(12rem,calc(100vh-35rem))]" />
 
           {/* Lighter than the headline it follows, deliberately: at text-lg it
               competed with the title for the same attention. Smaller, wider
               tracking and a narrower measure make it read as the caption to
               the picture above it rather than a second headline. */}
-          <div className="relative mx-auto max-w-4xl px-6 pb-12 text-center md:pb-16">
+          <div className="relative mx-auto max-w-4xl px-6 pb-10 text-center md:pb-12">
             <Reveal delay={180}>
               <p className="mx-auto max-w-lg text-[15px] font-light leading-relaxed tracking-[0.01em] text-text-on-ink-muted md:text-base">
                 {tr("FXPARTNER, daha akıllı işlem yapmanız için hepsi bir arada platformdur. Sinyaller, yapay zeka içgörüleri, ekonomik takvim, güvenilir brokerlar ve küresel bir topluluk.")}

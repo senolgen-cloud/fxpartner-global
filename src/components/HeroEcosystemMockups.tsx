@@ -110,7 +110,7 @@ export default function HeroEcosystemMockups({
   const topBrokers = [...brokers].sort((a, b) => a.rank - b.rank).slice(0, 4);
 
   return (
-    <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 lg:gap-5">
+    <div className="grid gap-4 sm:grid-cols-3 lg:gap-5">
       {/* Forex Signals */}
       <Link href="/signals" className="block transition-opacity hover:opacity-90">
         <CardShell

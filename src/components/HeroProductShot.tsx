@@ -15,7 +15,15 @@ import { tr } from "@/lib/chrome";
 // lands. At the top of a page it is the LCP element and should be
 // preloaded; anywhere below the fold, preloading it steals bandwidth from
 // whatever is actually painting first.
-export default function HeroProductShot({ priority = false }: { priority?: boolean }) {
+export default function HeroProductShot({
+  priority = false,
+  imageClassName = "",
+}: {
+  priority?: boolean;
+  /** Extra classes on the image — the homepage caps its height so the whole
+   *  hero fits the first screen. */
+  imageClassName?: string;
+}) {
   return (
     // No glows and no border. Two 400px blurred circles read as ambient depth
     // behind a wide desktop hero; inside a section this short they simply
@@ -42,7 +50,7 @@ export default function HeroProductShot({ priority = false }: { priority?: boole
             height={941}
             priority={priority}
             sizes="(min-width: 1024px) 896px, 100vw"
-            className="h-auto w-full"
+            className={`mx-auto h-auto w-full ${imageClassName}`}
           />
         </div>
       </div>
