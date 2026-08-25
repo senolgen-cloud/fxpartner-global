@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { tr } from "@/lib/chrome";
 
-// The first thing /signals shows: the product itself, arriving.
+// The product shot that opens both /signals and the homepage: the thing
+// itself, arriving, before anything is claimed about it.
 //
 // The entrance is pure CSS rather than the site's <Reveal>. Reveal starts at
 // opacity 0 and waits for an IntersectionObserver to fire after hydration,
@@ -10,11 +11,11 @@ import { tr } from "@/lib/chrome";
 // empty screen where the page's opening image should be. A keyframe runs off
 // the stylesheet, before any script, and cannot fail that way.
 //
-// priority, because on this page the image is the LCP element. That is the
-// opposite of the call made for the same artwork on the homepage, where it
-// sits below the fold and preloading it would have stolen bandwidth from
-// whatever was actually painting first.
-export default function SignalsHeroVisual() {
+// priority is the caller’s call, because it depends on where the image
+// lands. At the top of a page it is the LCP element and should be
+// preloaded; anywhere below the fold, preloading it steals bandwidth from
+// whatever is actually painting first.
+export default function HeroProductShot({ priority = false }: { priority?: boolean }) {
   return (
     // No glows and no border. Two 400px blurred circles read as ambient depth
     // behind a wide desktop hero; inside a section this short they simply
@@ -24,8 +25,13 @@ export default function SignalsHeroVisual() {
     // gold globe and the glowing mark are painted into the PNG — so the page
     // just needs to get out of its way and let it sit on the same background
     // as everything else.
-    <section className="bg-ink">
-      <div className="mx-auto max-w-6xl px-6 pb-6 pt-10 sm:pt-14">
+    // No background of its own. The artwork is a transparent PNG, and on the
+    // homepage this sits over the hero’s glows and video — an opaque bg-ink
+    // here painted a flat black box across them, which read as the image
+    // having a background it does not have. /signals gets its black from the
+    // main element either way.
+    <section className="relative">
+      <div className="mx-auto max-w-6xl px-6 pb-4 pt-6 sm:pt-8">
         <div className="signals-hero-visual mx-auto max-w-4xl">
           <Image
             src="/fxpartner-hero-app.png"
@@ -34,7 +40,7 @@ export default function SignalsHeroVisual() {
             )}
             width={1672}
             height={941}
-            priority
+            priority={priority}
             sizes="(min-width: 1024px) 896px, 100vw"
             className="h-auto w-full"
           />

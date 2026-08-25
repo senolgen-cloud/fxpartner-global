@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "@/components/LocaleLink";
 import { tr, trf } from "@/lib/chrome";
 import { localizeBlogPost, localizeBlogPosts, localizeBrokers, trData } from "@/lib/localizeContent";
@@ -15,6 +14,7 @@ import TradingVideo from "@/components/TradingVideo";
 import HeroCashbackForm from "@/components/HeroCashbackForm";
 import HeroFeatureRow from "@/components/HeroFeatureRow";
 import InstallAppButtons from "@/components/InstallAppButtons";
+import HeroProductShot from "@/components/HeroProductShot";
 import HeroEcosystemMockups from "@/components/HeroEcosystemMockups";
 import ShowcaseGallery from "@/components/ShowcaseGallery";
 import SponsoredLeaderboard from "@/components/SponsoredLeaderboard";
@@ -166,8 +166,13 @@ export default async function Home({
           <HeroVideo />
           <HeroSpotlight />
 
-          <div className="relative mx-auto grid max-w-6xl gap-12 px-6 pb-12 pt-20 md:pb-16 md:pt-28 lg:grid-cols-[1fr_420px] lg:items-start lg:gap-16">
-          <div className="text-center">
+          {/* Claim, then proof, then the detail: the headline says what this
+              is for, the product shot shows it, and only then does the
+              paragraph explain. The copy used to sit in a column beside a
+              420px panel with the artwork below the fold; stacked and
+              centred, each part lands where the eye already is and the gap
+              the image used to leave under itself is gone. */}
+          <div className="relative mx-auto max-w-4xl px-6 pt-14 text-center md:pt-20">
             <Reveal>
               <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-signal">
                 <span
@@ -185,9 +190,17 @@ export default async function Home({
                 <span className="text-signal">{tr("Ama daha akıllı...")}</span>
               </h1>
             </Reveal>
+          </div>
 
+          <HeroProductShot priority />
+
+          {/* Lighter than the headline it follows, deliberately: at text-lg it
+              competed with the title for the same attention. Smaller, wider
+              tracking and a narrower measure make it read as the caption to
+              the picture above it rather than a second headline. */}
+          <div className="relative mx-auto max-w-4xl px-6 pb-12 text-center md:pb-16">
             <Reveal delay={180}>
-              <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
+              <p className="mx-auto max-w-lg text-[15px] font-light leading-relaxed tracking-[0.01em] text-text-on-ink-muted md:text-base">
                 {tr("FXPARTNER, daha akıllı işlem yapmanız için hepsi bir arada platformdur. Sinyaller, yapay zeka içgörüleri, ekonomik takvim, güvenilir brokerlar ve küresel bir topluluk.")}
               </p>
             </Reveal>
@@ -195,48 +208,21 @@ export default async function Home({
             <Reveal delay={290}>
               <InstallAppButtons />
             </Reveal>
+          </div>
 
-            <Reveal delay={320}>
-              <div className="mt-12 border-t border-hairline pt-10">
-                <HeroFeatureRow />
-              </div>
+          <div className="relative mx-auto max-w-6xl px-6 pb-12 md:pb-16">
+            <Reveal delay={200}>
+              <HeroEcosystemMockups brokers={localBrokers} latestSignal={latestSignal} />
             </Reveal>
           </div>
 
-          <Reveal delay={200}>
-            <HeroEcosystemMockups brokers={localBrokers} latestSignal={latestSignal} />
-          </Reveal>
-          </div>
-
-          {/* The product itself, once, at a size where the dashboard on the
-              laptop screen is legible. It sits under the copy row rather than
-              inside the 420px right column, because the artwork is 1672x941:
-              squeezed into 420px the numbers on the screen become texture.
-              The right column keeps the live cards, which carry the current
-              signal and the current ranking - data a static render cannot.
-
-              No priority. At a normal viewport height this is below the fold,
-              and preloading a below-fold image only takes bandwidth from the
-              element that actually is the LCP. next/image starts the fetch
-              before it scrolls into view, and it ships ~70 KB of AVIF rather
-              than the 1.5 MB PNG on disk, so there is nothing to pop in. */}
-          <Reveal delay={380}>
-            <div className="relative mx-auto max-w-5xl px-6 pb-6 md:pb-10">
-              {/* Seats the transparent artwork on the dark section instead of
-                  leaving it floating: a soft pool of the same gold the globe
-                  in the image already throws. */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-x-12 bottom-24 h-40 rounded-[50%] bg-gold/10 blur-[90px]"
-              />
-              <Image
-                src="/fxpartner-hero-app.png"
-                alt={tr("FXPARTNER panelinin masaüstü ve mobil görünümü — canlı sinyaller, grafikler ve broker karşılaştırması")}
-                width={1672}
-                height={941}
-                sizes="(min-width: 1024px) 976px, 100vw"
-                className="relative h-auto w-full"
-              />
+          {/* Moved out of the hero column and down here: in the hero it was
+              two rows of bordered cards between the headline and everything
+              else. As one line under the fold it says the same thing without
+              being a section of its own. */}
+          <Reveal delay={320}>
+            <div className="relative mx-auto max-w-5xl border-t border-hairline px-6 py-8">
+              <HeroFeatureRow />
             </div>
           </Reveal>
         </section>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import SignalsBoard from "@/components/SignalsBoard";
-import SignalsHeroVisual from "@/components/SignalsHeroVisual";
+import HeroProductShot from "@/components/HeroProductShot";
 import LiveMarketsGrid from "@/components/LiveMarketsGrid";
 import RotatingBrokerAd from "@/components/RotatingBrokerAd";
 import SponsoredLeaderboard from "@/components/SponsoredLeaderboard";
@@ -149,7 +149,7 @@ export default async function SignalsPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(localFaqs)) }}
       />
       <main className="flex-1 bg-ink text-text-on-ink">
-        <SignalsHeroVisual />
+        <HeroProductShot priority />
         <SignalsBoard
           initialActive={maskedActive}
           initialClosed={closed}

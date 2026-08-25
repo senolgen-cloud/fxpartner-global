@@ -10,6 +10,8 @@ const iconProps = {
   strokeLinejoin: "round" as const,
 };
 
+// `body` is retained on the data because the fuller cards still exist in
+// the site elsewhere; this row simply does not render it.
 const features: { key: string; icon: ReactNode; title: string; body: string }[] = [
   {
     key: "signals",
@@ -85,31 +87,22 @@ const features: { key: string; icon: ReactNode; title: string; body: string }[] 
 
 export default function HeroFeatureRow() {
   return (
-    // This row lives in the hero's 1fr column next to a fixed 420px mockup
-    // panel, so it never actually gets much wider than ~670px regardless of
-    // viewport — a 5-across row (previously lg:grid-cols-5) squeezed each
-    // item into ~110px and forced titles like "FX Signals" to break after
-    // the first word. Capped at 3 columns and switched to stacked cards,
-    // which read fine at that width instead of wrapping awkwardly.
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+    // Six boxed cards with a sentence each was a block of furniture in the
+    // middle of the page — two rows of bordered panels the reader had to get
+    // past. What it is actually for is a glance: here is what the site does.
+    // So the boxes go, the sentences go, and each item is an icon and its
+    // name on one line. It reads in a second and costs about a fifth of the
+    // height.
+    <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-4 sm:gap-x-10">
       {trData(features).map((f) => (
-        <div
+        <li
           key={f.key}
-          className="flex flex-col items-start gap-3 rounded-2xl border border-hairline/70 bg-ink-soft/40 p-4 transition-colors hover:border-signal/40 hover:bg-ink-soft"
+          className="flex items-center gap-2.5 text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
         >
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-hairline bg-ink text-signal">
-            {f.icon}
-          </span>
-          <div className="min-w-0">
-            <p className="font-display text-sm font-semibold text-text-on-ink">
-              {f.title}
-            </p>
-            <p className="mt-1 text-xs leading-relaxed text-text-on-ink-muted">
-              {f.body}
-            </p>
-          </div>
-        </div>
+          <span className="shrink-0 text-signal">{f.icon}</span>
+          <span className="whitespace-nowrap font-medium">{f.title}</span>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

@@ -87,11 +87,19 @@ function CardBody({
         </div>
       )}
 
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+      {/* lg, not sm. The right-hand half — three score rings and two
+          buttons — is shrink-0 at 495px, and the left half needs about 394
+          more before the name has room. Going horizontal at 640px left the
+          name block 38px wide: the broker name truncated to nothing and the
+          rating stacked one word per line. It goes horizontal when the row
+          can actually hold both halves. */}
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between lg:gap-4">
         <div className="flex min-w-0 items-center gap-4">
           <span
             className={`shrink-0 font-poppins font-extrabold leading-none text-white/[0.06] transition-colors group-hover:text-gold/40 ${
-              featured ? "featured-card-depth text-6xl md:text-7xl" : "text-4xl md:text-5xl"
+              featured
+                ? "featured-card-depth text-4xl sm:text-6xl md:text-7xl"
+                : "text-3xl sm:text-4xl md:text-5xl"
             }`}
             aria-hidden="true"
           >
@@ -120,7 +128,7 @@ function CardBody({
             <div className="min-w-0">
               <h3
                 className={`truncate font-poppins font-semibold text-text-on-ink ${
-                  featured ? "text-2xl md:text-3xl" : "text-lg md:text-xl"
+                  featured ? "text-xl sm:text-2xl md:text-3xl" : "text-base sm:text-lg md:text-xl"
                 }`}
               >
                 <span className="notranslate">{broker.name}</span>
@@ -137,19 +145,23 @@ function CardBody({
 
         <div className="flex shrink-0 flex-col items-center gap-3 sm:flex-row sm:gap-4">
           <MiniScoreRings broker={broker} tone="dark" />
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
             <a
               href={broker.referralUrl}
               target="_blank"
               rel="noopener noreferrer sponsored"
-              className="lift-on-hover rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
+              aria-label={trf("{broker} - Resmi Sitesi", { broker: broker.name })}
+              className="lift-on-hover whitespace-nowrap rounded-full bg-signal px-4 py-2 text-[13px] font-medium text-on-signal transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30 sm:px-5 sm:py-2.5 sm:text-sm"
             >
-              {trf("{broker} - Resmi Sitesi", { broker: broker.name })}
+              <span className="hidden sm:inline">
+                {trf("{broker} - Resmi Sitesi", { broker: broker.name })}
+              </span>
+              <span className="sm:hidden">{tr("Resmi Sitesi")}</span>
             </a>
             <Link
               href={`/brokers/${broker.slug}`}
               title={`${broker.name} tam inceleme`}
-              className="rounded-full border border-hairline px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:border-text-on-ink"
+              className="whitespace-nowrap rounded-full border border-hairline px-4 py-2 text-[13px] font-medium text-text-on-ink transition-colors hover:border-text-on-ink sm:px-5 sm:py-2.5 sm:text-sm"
             >
               {tr("Tam İnceleme →")}
             </Link>
