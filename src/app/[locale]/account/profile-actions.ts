@@ -72,3 +72,20 @@ export async function markNotificationsSeen() {
 
   revalidatePath("/account");
 }
+
+/**
+ * Remember that the member has been shown the panel tour.
+ *
+ * Written on finish and on skip alike: someone who dismissed it has decided
+ * about it, and offering it again next visit would be the software
+ * disagreeing with them.
+ */
+export async function finishPanelTour() {
+  const session = await auth();
+  if (!session?.user?.id) return;
+
+  await db
+    .update(users)
+    .set({ tourSeenAt: sql`now()` })
+    .where(eq(users.id, session.user.id));
+}

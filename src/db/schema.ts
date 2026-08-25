@@ -45,6 +45,10 @@ export const users = pgTable("user", {
   // a notifications table would be a second copy of data we already have,
   // kept in sync by hand. Null means the bell has never been opened.
   notificationsSeenAt: timestamp("notifications_seen_at"),
+  // When the member finished or skipped the panel tour. Kept here rather
+  // than in localStorage so it follows them to their next device instead of
+  // greeting them a second time on the phone they signed in on later.
+  tourSeenAt: timestamp("tour_seen_at"),
   ...attribution,
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });

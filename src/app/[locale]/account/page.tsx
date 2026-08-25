@@ -17,7 +17,8 @@ import { eq, desc, inArray } from "drizzle-orm";
 import { createVipInviteLink } from "@/lib/telegram";
 import VipInviteClientTrigger from "@/components/VipInviteClientTrigger";
 import CashbackLinkForm from "@/components/CashbackLinkForm";
-import { updateProfile, markNotificationsSeen } from "./profile-actions";
+import { updateProfile, markNotificationsSeen, finishPanelTour } from "./profile-actions";
+import PanelTour from "@/components/account/PanelTour";
 import NotificationBell from "@/components/account/NotificationBell";
 import { getMemberNotifications } from "@/lib/memberNotifications";
 import type { AccessTier } from "@/lib/signalAccess";
@@ -377,7 +378,7 @@ export default async function AccountPage({
             </Link>
           </div>
 
-          <div className="mt-10">
+          <div className="mt-10" data-tour="profile">
             <ProfileCard
               action={updateProfile}
               initialName={user.name ?? ""}
@@ -400,7 +401,10 @@ export default async function AccountPage({
             <VipInviteClientTrigger action={generateVipLink} />
           </section>
 
-          <section className="mt-10 rounded-2xl border border-hairline bg-ink-soft p-6">
+          <section
+            data-tour="cashback"
+            className="mt-10 rounded-2xl border border-hairline bg-ink-soft p-6"
+          >
             <h2 className="font-display text-xl font-semibold text-text-on-ink">
               Forex Cashback
             </h2>
@@ -490,6 +494,7 @@ export default async function AccountPage({
           </section>
         </div>
       </main>
+      {!userRow?.tourSeenAt && <PanelTour finish={finishPanelTour} />}
       <Footer />
     </>
   );

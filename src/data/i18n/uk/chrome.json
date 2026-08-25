@@ -2512,5 +2512,14 @@
   "{broker} · {account}": "{broker} · {account}",
   "Kazanç iadesi hesabınız doğrulandı": "Ваш рахунок для кешбеку підтверджено",
   "Kazanç iadesi hesabınız uygun bulunmadı": "Ваш рахунок для кешбеку не підійшов",
-  "Menüyü aç": "Відкрити меню"
+  "Menüyü aç": "Відкрити меню",
+  "Hesabın canlı durumu": "Рахунок у реальному часі",
+  "Takip edilen hesapta şu an açık olan işlem sayısı, son 30 günün isabet oranı ve size işlenen toplam iade.": "Скільки угод зараз відкрито на відстежуваному рахунку, влучність за останні 30 днів і нарахований вам кешбек.",
+  "Yeni sinyaller, kapanan işlemler ve hesabınıza işlenen iadeler burada birikir. Zilde bir sayı varsa okumadığınız bir şey var demektir.": "Тут збираються нові сигнали, закриті угоди та нарахований кешбек. Число на дзвіночку означає, що є непрочитане.",
+  "Paneli kendinize göre ayarlayın": "Налаштуйте панель під себе",
+  "Size nasıl hitap edeceğimizi ve panelin vurgu rengini buradan seçersiniz. Ülke ve broker seçiminiz hangi kampanyaların size uygun olduğunu belirler.": "Тут ви обираєте, як до вас звертатися, і акцентний колір панелі. Країна та брокер визначають, які пропозиції вам доступні.",
+  "İşlem hesabınızı bağlayın": "Прив'яжіть торговий рахунок",
+  "Kazanç iadesi ancak bağlı bir işlem hesabıyla takip edilebilir. Hesabınızı bağladığınızda tutarlar buraya işlenir.": "Кешбек можна відстежувати лише за прив'язаним торговим рахунком. Щойно ви його прив'яжете, суми з'являться тут.",
+  "Turu atla": "Пропустити тур",
+  "Sonraki": "Далі"
 }

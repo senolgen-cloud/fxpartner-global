@@ -100,14 +100,17 @@ export default function MemberStatement({
         </div>
         {(bell || action) && (
           <div className="flex shrink-0 items-center gap-3">
-            {bell}
+            {bell && <div data-tour="bell">{bell}</div>}
             {action}
           </div>
         )}
       </div>
 
       {/* The statement strip. Ruled, not carded — see the note above. */}
-      <div className="mt-7 flex flex-col divide-y divide-hairline-light/60 border-t border-hairline-light/60 sm:flex-row sm:divide-x sm:divide-y-0">
+      <div
+        data-tour="figures"
+        className="mt-7 flex flex-col divide-y divide-hairline-light/60 border-t border-hairline-light/60 sm:flex-row sm:divide-x sm:divide-y-0"
+      >
         <StatementFigure
           label={tr("Şu an açık")}
           value={openPositions}

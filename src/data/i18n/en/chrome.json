@@ -2512,5 +2512,14 @@
   "{broker} · {account}": "{broker} · {account}",
   "Kazanç iadesi hesabınız doğrulandı": "Your cashback account has been verified",
   "Kazanç iadesi hesabınız uygun bulunmadı": "Your cashback account was not eligible",
-  "Menüyü aç": "Open menu"
+  "Menüyü aç": "Open menu",
+  "Hesabın canlı durumu": "The account, live",
+  "Takip edilen hesapta şu an açık olan işlem sayısı, son 30 günün isabet oranı ve size işlenen toplam iade.": "How many trades are open on the tracked account right now, the hit rate over the last 30 days, and the cashback credited to you so far.",
+  "Yeni sinyaller, kapanan işlemler ve hesabınıza işlenen iadeler burada birikir. Zilde bir sayı varsa okumadığınız bir şey var demektir.": "New signals, closed trades and cashback credited to you collect here. A number on the bell means there is something you have not read.",
+  "Paneli kendinize göre ayarlayın": "Make the panel yours",
+  "Size nasıl hitap edeceğimizi ve panelin vurgu rengini buradan seçersiniz. Ülke ve broker seçiminiz hangi kampanyaların size uygun olduğunu belirler.": "Choose what we call you and the panel's accent colour here. Your country and broker decide which offers apply to you.",
+  "İşlem hesabınızı bağlayın": "Link your trading account",
+  "Kazanç iadesi ancak bağlı bir işlem hesabıyla takip edilebilir. Hesabınızı bağladığınızda tutarlar buraya işlenir.": "Cashback can only be tracked against a linked trading account. Once you link yours, the amounts are credited here.",
+  "Turu atla": "Skip the tour",
+  "Sonraki": "Next"
 }
