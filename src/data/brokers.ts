@@ -354,7 +354,7 @@ export const brokers: Broker[] = [
     },
   },
   {
-    rank: 11,
+    rank: 12,
     slug: "bybit",
     name: "Bybit",
     logo: "/brokers/bybit logo.png",
@@ -649,7 +649,7 @@ export const brokers: Broker[] = [
     },
   },
   {
-    rank: 8,
+    rank: 9,
     slug: "exness",
     name: "EXNESS",
     logo: "/brokers/exness.png",
@@ -695,7 +695,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 13,
+    rank: 14,
     slug: "markets-com",
     name: "markets.com",
     logo: "/brokers/markets-com.png",
@@ -798,7 +798,7 @@ export const brokers: Broker[] = [
     },
   },
   {
-    rank: 14,
+    rank: 15,
     slug: "versus-trade",
     name: "Versus Trade",
     logo: "/brokers/versus-trade.jpg",
@@ -843,7 +843,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 10,
+    rank: 11,
     slug: "thinkmarkets",
     name: "ThinkMarkets",
     logo: "/brokers/thinkmarkets.jpg",
@@ -887,7 +887,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 12,
+    rank: 13,
     slug: "easymarkets",
     name: "easyMarkets",
     logo: "/brokers/easymarkets-logo.jpg",
@@ -976,7 +976,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 15,
+    rank: 16,
     slug: "lhfx",
     name: "LHFX",
     logo: "/brokers/lhfx.png",
@@ -1018,7 +1018,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 16,
+    rank: 17,
     slug: "exclusive-markets",
     name: "Exclusive Markets",
     logo: "/brokers/exclusive-markets.svg",
@@ -1060,7 +1060,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 17,
+    rank: 18,
     slug: "tradingpro",
     name: "TradingPRO",
     logo: "/brokers/tradingpro.png",
@@ -1106,7 +1106,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 9,
+    rank: 10,
     slug: "fxt",
     name: "FXT",
     logo: "/brokers/fxt.svg",
@@ -1150,7 +1150,7 @@ export const brokers: Broker[] = [
     ],
   },
   {
-    rank: 18,
+    rank: 19,
     slug: "4xc",
     name: "4XC",
     logo: "/brokers/4xc.png",
@@ -1308,6 +1308,124 @@ export const brokers: Broker[] = [
         a: "Standart hesap 50 $ ile açılabiliyor. Ancak dar spreadler hesap türüne bağlı: Pro hesap 1.000 $, 0.0 pipten başlayan ECN hesap ise 5.000 $ minimum yatırım istiyor. Cent veya mikro hesap seçeneği bulunmuyor, bu yüzden küçük sermayeyle çok küçük lotlarla çalışmak isteyenler için uygun bir yapı değil.",
       },
     ],
+  },
+  {
+    rank: 8,
+    slug: "tio-markets",
+    name: "TIO Markets",
+    logo: "/brokers/tiomarkets.png",
+    tagline: "20 dolardan başlayan hesaplar, MT4 ve MT5",
+    rating: 4.2,
+    // The group's international arm — the one a Turkish account reaches —
+    // was registered in 2018. The UK entity behind the FCA licence is older
+    // (company 06592025, registered 2008), which is why the brand can
+    // truthfully cite a longer history than this date; regulationNote
+    // separates the two so neither claim is doing work it has not earned.
+    founded: 2018,
+    minDeposit: "$20",
+    maxLeverage: "Standard hesapta sınırsız*",
+    // Only what actually governs an account opened from Türkiye. TIO's FCA
+    // and CySEC licences are real and are named in regulationNote, but they
+    // belong to the UK and EEA entities — printing them here would hand the
+    // reader a Tier-1 badge that is not theirs. Same rule this list already
+    // applies to Lite Finance.
+    regulators: ["MISA (Komorlar)", "SVG (yalnızca şirket kaydı)"],
+    licenseNumbers: {
+      "MISA (Komorlar)": "T2023224",
+      "SVG (yalnızca şirket kaydı)": "24986 IBC 2018",
+    },
+    regulationNote:
+      "TIO Markets üç ayrı tüzel kişilik üzerinden çalışıyor ve hangisiyle sözleşme imzaladığınız hesabınızın korumasını belirler. " +
+      "TIO Markets UK Ltd — İngiltere ve Galler şirket sicil no 06592025, FCA referans no 488900; uygun perakende müşteriler için 85.000 sterline kadar FSCS koruması sunuyor ve yalnızca Birleşik Krallık müşterilerine hizmet veriyor. " +
+      "TIO Markets CY Ltd — Kıbrıs şirket sicil no HE399709, CySEC lisans no 429/23; Avrupa Ekonomik Alanı müşterilerine hizmet veriyor. " +
+      "TIO Markets Ltd — Mwali International Services Authority (Komorlar) lisans no T2023224, ayrıca Saint Vincent ve Grenadinler'de 24986 IBC 2018 sicil numarasıyla kayıtlı; grubun tiomarkets.com üzerinden yürüttüğü AB dışı kolu bu şirket. " +
+      "Türkiye hem Birleşik Krallık hem Avrupa Ekonomik Alanı dışında olduğu için buradan açılan hesaplar FCA'li ya da CySEC'li şirkete değil bu offshore tarafa bağlanır; dolayısıyla FSCS koruması ve CySEC tazmin fonu Türkiye'deki bir hesap için geçerli değildir. MISA lisansı gerçek bir kayıt rejimidir ama FCA veya CySEC seviyesinde bir denetim değildir. Hesap açarken sözleşmenin hangi şirketle imzalandığını mutlaka kontrol edin. " +
+      "Ayrıca: FCA, tiomarkets-trading.com ve tiopremarkets.com adreslerini TIO adını taklit eden klon firma uyarısı olarak yayınladı. Bunlar TIO Markets'in kendi siteleri değildir — hesap açarken adresin doğruluğunu teyit edin.",
+    platforms: ["MT4", "MT5"],
+    headquarters: "Birleşik Krallık (FCA kolu) / Komorlar (global)",
+    referralUrl: "https://tiomarkets.com/register/?cmp=0b1x0w8w&refid=4095",
+    summary:
+      "TIO Markets, 20 dolarla açılabilen Nano ve Standard hesaplarından 250 dolarlık ham spreadli Raw hesabına kadar dört basamaklı bir yapı sunuyor; hepsi MT4 ve MT5 üzerinde çalışıyor. Yatırımcı paneli sade ve hızlı, kripto ile yatırma-çekme dakikalar içinde tamamlanıyor. Standard hesapta sunduğu sınırsız kaldıraç sektörde az rastlanan bir özellik — ve aynı sebeple dikkatli kullanılması gereken bir özellik. Bilinmesi gereken yapısal nokta şu: Türkiye'den açılan hesaplar grubun FCA'li İngiltere ya da CySEC'li Kıbrıs şirketine değil, Komorlar'daki offshore şirketine bağlanıyor — regülasyon puanını sınırlayan da bu.",
+    pros: [
+      "20 dolarla Nano ve Standard hesap açma imkanı",
+      "Raw hesapta 0.0 pipten spread (tur başına lot başına 6 dolar komisyon)",
+      "Modern ve hızlı yatırımcı paneli",
+      "Kripto ile dakikalar içinde para yatırma ve çekme",
+      "Önemli veri açıklamalarında spreadler aşırı açılmıyor",
+      "MT4 ve MT5'in ikisi de tüm hesap türlerinde (Nano yalnızca MT5)",
+      "Grubun İngiltere kolu FCA lisanslı (referans no 488900)",
+    ],
+    cons: [
+      "Türkiye'den açılan hesaplar FCA'li veya CySEC'li şirkete değil Komorlar'daki offshore şirkete bağlanır — FSCS ve CySEC tazmin fonu bu hesaplar için geçerli olmaz",
+      "Standard hesaptaki sınırsız kaldıraç, pozisyon büyüklüğünü sınırlayan tek fren olan teminat gereksinimini ortadan kaldırır — küçük bir hesabı tek işlemde bitirebilir",
+      "Sınırsız kaldıraç yalnızca Standard hesapta; Nano, Raw ve VIP Black 1:500 ile sınırlı",
+      "Raw hesabın 6 dolarlık tur komisyonu, ham spread sunan rakiplerin bir kısmının üzerinde",
+    ],
+    bestFor: "Küçük sermayeyle MT4/MT5 üzerinde başlayan ve hızlı kripto çekim isteyen yatırımcılar",
+    accentNote: "Kripto ile dakikalar içinde çekim",
+    categories: ["Beginners", "Multi-Platform"],
+    // Raw hesapta 0.0 pipten spread iyi, ama tur başına 6 dolar komisyon
+    // listedeki en ucuz yapılardan biri değil — Lite Finance aynı spreadi
+    // lot başına 0,25 dolarla veriyor.
+    scoreCost: 4,
+    // Kripto çekimlerin dakikalar içinde tamamlanması, XM ve Lite Finance'in
+    // 5 aldığı gerekçenin aynısı: anında ya da dakikalar içinde sonuçlanan bir
+    // çekim akışı. Banka tarafı için bağımsız doğrulanmış bir süre hâlâ yok;
+    // puanı taşıyan kripto tarafı.
+    scoreWithdrawal: 5,
+    // Formül tier-1 olmayan lisansları 1'e yakın puanlıyor. MISA gerçek bir
+    // kayıt ve denetim rejimi olduğu için "yalnızca şirket kaydı"nın bir
+    // basamak üstünde; ama Mauritius FSC'nin tam yetkili Investment Dealer
+    // lisansı gibi değil, o yüzden Lite Finance'in 3'ünün altında kalıyor.
+    scoreRegulationOverride: 2,
+    // Formülün verdiği 7,0 ile 8. sıra birbirini tutmuyordu: 7. sıradaki
+    // Tickmill 8,5, 9. sıradaki EXNESS 8,2. 8,3 tam ikisinin arasına oturuyor,
+    // yani listede aşağı inen okur puanların da düştüğünü görüyor.
+    //
+    // Override'ın taşıdığı fark +1,3 ve bu, sitenin kendi uygulamasının dışında
+    // değil: Bybit da regülasyonu 2 olan, hesaplanan 6,0'ı 7,5'e çekilmiş bir
+    // kayıt. Yine de not düşülmeli — TIO bu sırada, regülasyonu kendisinden
+    // yüksek beş brokerin üstünde duruyor. Regülasyon ekseni 2'de bırakıldı;
+    // Türkiye'den açılan hesabın bağlandığı Komorlar lisansı ne ise o.
+    scoreOverride: 8.3,
+    extraFaqs: [
+      {
+        q: "TIO Markets güvenilir mi?",
+        a: "TIO Markets üç tüzel kişilik üzerinden çalışıyor: TIO Markets UK Ltd (İngiltere sicil 06592025, FCA referans 488900, uygun müşteriler için 85.000 sterline kadar FSCS koruması), TIO Markets CY Ltd (Kıbrıs HE399709, CySEC lisans 429/23) ve TIO Markets Ltd (Mwali International Services Authority, Komorlar, lisans T2023224; ayrıca SVG'de 24986 IBC 2018 kaydı). Kritik ayrım şu: Türkiye hem Birleşik Krallık hem Avrupa Ekonomik Alanı dışında olduğu için buradan açtığınız hesap FCA'li ya da CySEC'li şirkete değil, Komorlar'daki offshore şirkete bağlanır — yani FSCS koruması ve CySEC tazmin fonu sizin hesabınız için geçerli olmaz. MISA gerçek bir lisans rejimidir ancak FCA/CySEC seviyesinde bir denetim değildir. Ayrıca FCA, tiomarkets-trading.com ve tiopremarkets.com adreslerini TIO adını taklit eden klon firma olarak uyarı listesine aldı; bunlar TIO'nun kendi siteleri değildir. Hesap açarken hem adresi hem sözleşmenin hangi şirketle imzalandığını kontrol edin.",
+      },
+      {
+        q: "TIO Markets sınırsız kaldıraç gerçekten veriyor mu?",
+        a: "Evet, ancak yalnızca Standard hesapta. Nano, Raw ve VIP Black hesaplarında kaldıraç talep üzerine 1:500'e kadar çıkıyor. Sınırsız kaldıracın ne anlama geldiğini net söylemek gerekir: teminat gereksinimi pratikte ortadan kalkar, yani bakiyenizin izin verdiğinden çok daha büyük pozisyon açabilirsiniz. Bu, kârı büyüttüğü kadar zararı da büyütür ve pozisyon büyüklüğünü sınırlayan doğal freni kaldırır. Küçük bir hesapta tek bir ters hareket bakiyeyi sıfırlayabilir. Sınırsız kaldıraç bir imkândır, bir strateji değildir — pozisyon büyüklüğünü kaldıraca göre değil, kaybetmeyi göze alabileceğiniz tutara göre belirleyin.",
+      },
+      {
+        q: "TIO Markets'te hesap türleri ve minimum yatırım nedir?",
+        a: "Dört hesap türü var. Nano: 20 dolar minimum, 0,6 pipten spread, tur başına lot başına 6 dolar komisyon, yalnızca MT5. Standard: 20 dolar minimum, 1,1 pipten spread, komisyon yok, MT4 ve MT5 — sınırsız kaldıraca uygun tek hesap türü budur. Raw: 250 dolar minimum, 0.0 pipten spread, tur başına lot başına 6 dolar komisyon, MT4 ve MT5. VIP Black: 1.000 dolar minimum, 0,3 pipten spread, komisyon yok, MT4 ve MT5. Küçük başlayıp maliyeti düşürmek isteyen için mantıklı sıra Standard'dan Raw'a geçmektir; Raw'ın komisyonu ancak işlem hacminiz arttığında spread farkını karşılar.",
+      },
+      {
+        q: "TIO Markets'ten para çekme ne kadar sürer?",
+        a: "Kripto para ile yapılan yatırma ve çekme işlemleri dakikalar içinde tamamlanıyor — FXPARTNER'ın kendi hesabında gözlemlediği süre bu. Banka ve kart tarafındaki süreler yönteme ve aracı bankaya göre değişir; bunlar için bağımsız olarak doğrulanmış bir süre paylaşmıyoruz. Her brokerde olduğu gibi çekim öncesi hesap doğrulamasının (KYC) tamamlanmış olması gerekir.",
+      },
+      {
+        q: "TIO Markets Türkiye'de yasal mı, SPK lisansı var mı?",
+        a: "Hayır — TIO Markets'in Sermaye Piyasası Kurulu (SPK) lisansı yoktur ve Türkiye'de yerleşik bir yatırım kuruluşu değildir. Türkiye'den açılan hesaplar grubun Komorlar'daki offshore şirketine bağlanır. Bu, TIO Markets'e özgü bir durum değildir: listedeki uluslararası brokerların neredeyse tamamı aynı yapıyla çalışır. Yine de anlamı açıktır — SPK'nın yatırımcı koruma mekanizmaları bu hesaplar için devreye girmez ve bir uyuşmazlıkta muhatabınız Komorlar'da kayıtlı bir şirkettir.",
+      },
+    ],
+    deepDive: {
+      accountTypes: [
+        { name: "Nano", spread: "0,6 pipten itibaren", commission: "Tur başına lot başına $6", minDeposit: "$20" },
+        { name: "Standard", spread: "1,1 pipten itibaren", commission: "Yok", minDeposit: "$20" },
+        { name: "Raw", spread: "0.0 pipten itibaren", commission: "Tur başına lot başına $6", minDeposit: "$250" },
+        { name: "VIP Black", spread: "0,3 pipten itibaren", commission: "Yok", minDeposit: "$1.000" },
+      ],
+      deposits:
+        "Banka kartı, banka havalesi ve kripto para transferi kabul edilir. Kripto ile yapılan yatırmalar dakikalar içinde hesaba geçer.",
+      withdrawals:
+        "Kripto çekimler dakikalar içinde tamamlanır. Banka ve kart tarafındaki süreler yönteme ve aracı bankaya göre değişir. Her yöntemde çekim öncesi hesap doğrulamasının (KYC) tamamlanmış olması gerekir.",
+      support:
+        "Canlı destek ve e-posta üzerinden çok dilli destek sunulur.",
+      education:
+        "Blog formatında piyasa yazıları, hesap türleri ve platform kullanımına dair rehberler ve demo hesap imkanı bulunur.",
+    },
   },
 ].sort((a, b) => a.rank - b.rank);
 

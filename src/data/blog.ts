@@ -32,6 +32,82 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    // A signed, first-person piece, and the only kind of content on this site
+    // that is one person's experience rather than a checked figure. That
+    // difference has to be visible from the title down, or it borrows the
+    // authority of the broker pages — which carry licence numbers a reader
+    // can verify — for observations that nobody can verify but me. Hence the
+    // byline in the title, the first paragraph saying plainly what this is,
+    // and the closing section handing the reader back to the reviewed entry.
+    //
+    // adBrokerSlug pins the slot to TIO: a post arguing for one broker must
+    // not open with a competitor's banner.
+    slug: "tio-markets-trader-notlari",
+    title: "TIO Markets'te Altı Ay: Bir Trader'ın Notları — Erdem Torun",
+    excerpt:
+      "FXPARTNER'ın kurucusu Erdem Torun'un kendi hesabından TIO Markets izlenimleri: panel, kripto çekim hızı, spread davranışı ve sınırsız kaldıracın gerçekte ne anlama geldiği.",
+    publishedAt: "2026-08-25",
+    readingMinutes: 6,
+    lang: "tr",
+    adBrokerSlug: "tio-markets",
+    sections: [
+      {
+        paragraphs: [
+          "Bu yazı bir inceleme değil, bir kullanım notu. Sitedeki broker sayfaları lisans numaralarıyla, doğrulanabilir rakamlarla yazılır; burada anlattıklarım ise kendi hesabımda gördüklerim. İkisini karıştırmayın: aşağıdakiler benim deneyimim, sizinki farklı olabilir.",
+          "TIO Markets'i bir süredir kullanıyorum ve genel izlenimim olumlu. Neyi neden beğendiğimi, bir de hesap açmadan önce mutlaka bilmeniz gerekeni yazayım.",
+        ],
+      },
+      {
+        heading: "Panel, işini görüyor",
+        paragraphs: [
+          "Yatırımcı paneli bu işte çoğu kişinin küçümsediği ama günlük olarak en çok temas ettiği yer. TIO'nunki sade ve hızlı: para yatırma, çekme, hesap geçişi ve doküman yükleme birkaç tıkla bitiyor. Menülerde kaybolmuyorsunuz, işlem geçmişi anlaşılır duruyor.",
+          "Bunu ayrıca yazma sebebim şu: sektörde paneli hâlâ 2010'lardan kalma, çekim talebini üç ayrı sayfaya bölen kurumlar var. Modern bir panel lüks değil, kurumun yazılım tarafına bakıp bakmadığının göstergesi.",
+        ],
+      },
+      {
+        heading: "Kripto ile çekim dakikalar sürüyor",
+        paragraphs: [
+          "Benim için en belirleyici tarafı bu oldu. Kripto ile yaptığım yatırma ve çekme işlemleri dakikalar içinde tamamlandı. Talebi giriyorsunuz, işlem geçiyor.",
+          "Para çekme hızı bir brokerde ölçebileceğiniz en dürüst metriktir; çünkü pazarlama yapılamaz, ya olur ya olmaz. Bir kurumu değerlendirirken spreadden önce buraya bakarım.",
+          "Banka ve kart tarafındaki süreler için aynı şeyi söyleyemem — orada aracı bankalar devreye giriyor ve deneyimim kripto kadar net değil. O yüzden o tarafa dair bir süre vermiyorum.",
+        ],
+      },
+      {
+        heading: "Spreadler veri saatlerinde saçmalamıyor",
+        paragraphs: [
+          "Normal piyasa koşullarında spreadlerin makul olması beklenen bir şey. Asıl test, önemli veri açıklamalarında ne olduğu: tarım dışı istihdam, faiz kararı, enflasyon verisi. Bazı kurumlarda spread o dakikalarda öyle açılır ki stopunuz sizi piyasa hareket etmeden vurur.",
+          "TIO'da veri saatlerinde tabii ki genişleme oluyor — bu her yerde olur, likidite çekilir. Ama absürt bir açılma görmedim. Bu, haber saatlerinde pozisyon taşıyorsanız somut bir fark demektir.",
+        ],
+      },
+      {
+        heading: "Sınırsız kaldıraç: ne olduğunu bilerek kullanın",
+        paragraphs: [
+          "TIO'nun Standard hesabında sınırsız kaldıraç var. Sektörde az rastlanan bir imkân ve bunu bir artı olarak yazıyorum — ama ne olduğunu net söylemeden yazmam.",
+          "Sınırsız kaldıraç, teminat gereksinimini pratikte ortadan kaldırır. Yani pozisyon büyüklüğünüzü sınırlayan doğal fren kalkar. Kârı büyüttüğü kadar zararı da büyütür; küçük bir hesapta tek bir ters hareket bakiyeyi sıfırlayabilir.",
+          "Ben bunu pozisyon büyüklüğünü artırmak için değil, aynı pozisyonu daha az teminat bloke ederek taşımak için kullanışlı buluyorum. Aradaki fark her şeydir. Kaldıraç bir imkândır, bir strateji değildir — pozisyon büyüklüğünü kaldıracın izin verdiğine göre değil, kaybetmeyi göze alabileceğiniz tutara göre belirleyin.",
+          "Not: sınırsız kaldıraç yalnızca Standard hesapta geçerli. Nano, Raw ve VIP Black hesaplarında üst sınır 1:500.",
+        ],
+      },
+      {
+        heading: "Hesap açmadan önce bilmeniz gereken",
+        paragraphs: [
+          "Burada tonu değiştirmeden ama açıkça söylemem gereken bir şey var, çünkü yazının başında \"benim deneyimim\" dedim ve bu kısım deneyim değil, yapısal bir gerçek.",
+          "TIO Markets üç ayrı şirket üzerinden çalışıyor: İngiltere'de FCA lisanslı TIO Markets UK Ltd, Kıbrıs'ta CySEC lisanslı TIO Markets CY Ltd ve Komorlar'da MISA lisanslı TIO Markets Ltd. Türkiye hem Birleşik Krallık hem Avrupa Ekonomik Alanı dışında olduğu için buradan açtığınız hesap üçüncüsüne bağlanır.",
+          "Pratikte anlamı şu: FCA'in FSCS koruması ve CySEC'in tazmin fonu sizin hesabınız için devreye girmez. Bu TIO'ya özgü bir durum değil — listedeki uluslararası brokerların neredeyse tamamı aynı yapıyla çalışıyor. Ama bilmek ile bilmemek arasında fark var, ve sözleşmeyi imzalarken hangi şirketle imzaladığınızı görmek sizin hakkınız.",
+          "Bir de şu: FCA, TIO adını taklit eden tiomarkets-trading.com ve tiopremarkets.com adreslerini klon firma uyarısı olarak yayınladı. Bunlar TIO'nun kendi siteleri değil. Hesap açarken adresi kontrol edin.",
+        ],
+      },
+      {
+        heading: "Özetle",
+        paragraphs: [
+          "TIO Markets temiz çalışan bir kurum. Panel modern, kripto çekim gerçekten hızlı, spreadler veri saatlerinde kontrolden çıkmıyor ve global bir firmadan beklenen özelliklerin çoğu yerinde. Küçük sermayeyle MT4/MT5 üzerinde başlamak isteyen biri için makul bir tercih.",
+          "Karşılığında bilerek kabul ettiğiniz şey, hesabınızın offshore tarafa bağlı olması. Bu takas size uygunsa sorun yok; uygun değilse tier-1 lisanslı bir alternatif aramanız gerekir.",
+          "Lisans numaraları, hesap türleri ve puanlamanın tamamı için TIO Markets inceleme sayfasına bakabilirsiniz.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "how-to-choose-a-forex-broker",
     coverImage: "/blog/how-to-choose-a-forex-broker-cover.png",
     title: "2026'da Forex Brokerı Nasıl Seçilir: Eksiksiz Rehber",
