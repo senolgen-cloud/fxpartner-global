@@ -32,6 +32,164 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    // Second signed piece on the site, and the same rule applies as on the
+    // TIO one: this is one trader's opinion, not a checked figure, and the
+    // reader has to be able to tell which is which. Everything attributed to
+    // LiteFinance below is what their own ECN account page states — cited
+    // once, in prose, rather than after every sentence.
+    //
+    // The source text arrived with a citation marker glued to the end of
+    // almost every claim, each carrying utm_source=chatgpt.com. Those are
+    // stripped: a reader does not need to be told eleven times where one
+    // page came from, and shipping a tracking parameter that says the copy
+    // was drafted by a chatbot is not something to publish under a byline.
+    //
+    // Q&A headings are the point of the piece — they are what a
+    // question-shaped search actually matches, and they render as h2.
+    slug: "litefinance-scalping-ecn-erdem-torun",
+    title: "Erdem Hoca Anlatıyor: LiteFinance ile Scalping ve ECN Deneyimi",
+    excerpt:
+      "FXPARTNER kurucusu Erdem Torun'la röportaj: scalping yapan bir trader broker seçerken neye bakmalı, LiteFinance'ın ECN koşulları neden dikkat çekiyor ve \"0.0 spread\" gerçekte ne anlama geliyor.",
+    publishedAt: "2026-08-26",
+    readingMinutes: 9,
+    coverImage: "/blog/erdem-hoca-litefinance.png",
+    lang: "tr",
+    adBrokerSlug: "lite-finance",
+    sections: [
+      {
+        paragraphs: [
+          "Bu yazı bir röportaj. Aşağıdaki görüşler FXPARTNER kurucusu ve trader Erdem Torun'a ait; sitedeki broker sayfaları gibi lisans numarasıyla doğrulanabilir bir inceleme değil. LiteFinance'ın hesap koşullarına dair aktarılan bilgiler ise brokerin kendi ECN hesap sayfasındaki güncel beyanlarına dayanıyor — hesap açmadan önce o sayfadan teyit edin, koşullar ülkeye ve döneme göre değişebiliyor.",
+          "Forex piyasasında işlem yapan herkesin bir noktada kendine sorduğu bir soru var: benim işlem tarzıma uygun broker hangisi? Özellikle kısa vadeli işlem yapan, scalping stratejileri kullanan ve maliyetleri düşük tutmak isteyen traderlar için spread, emir gerçekleştirme kalitesi ve işlem koşulları çok daha belirleyici hale geliyor.",
+        ],
+      },
+      {
+        heading: "Bir trader broker seçerken ilk olarak neye bakmalı?",
+        paragraphs: [
+          "Benim için tek bir kriter yok. Spread, işlem maliyetleri, emir gerçekleştirme, platform, likidite, stratejilere getirilen kısıtlamalar ve para yönetimi — bunların hepsine birlikte bakmak gerekiyor.",
+          "Ama scalping yapan bir trader için spread çok daha önemli. Çünkü scalping mantığında bazen çok küçük fiyat hareketlerinden işlem alınır; dolayısıyla işlem maliyeti stratejinin genel performansını doğrudan etkiler.",
+          "LiteFinance tarafında dikkatimi çeken noktalardan biri ECN hesaplardaki düşük değişken spread yapısı. Brokerin kendi ECN sayfasında spreadlerin 0.0 puandan başlayabildiği ve ayrıca lot başına komisyon uygulandığı belirtiliyor.",
+        ],
+      },
+      {
+        heading: "LiteFinance neden özellikle scalping yapan traderların ilgisini çekiyor?",
+        paragraphs: [
+          "Çünkü scalping yapan traderın ihtiyacı farklı. Ben bir işlem açtığımda \"bu pozisyonu mutlaka birkaç saat taşımalıyım\" düşüncesinde değilim. Bazen birkaç dakikada kapatırım, bazen piyasanın verdiği fırsata göre daha uzun beklerim.",
+          "Burada benim için önemli olan, stratejimin broker tarafından gereksiz şekilde sınırlandırılmaması. LiteFinance'ın ECN hesabında scalping ve haber işlemlerine izin verildiği, işlemlerin sınırsız süreyle açık tutulabildiği belirtiliyor. Bu bir özgürlük; çünkü işlem süresini stratejinin kendisi belirlemeli.",
+        ],
+      },
+      {
+        heading: "\"Sınırsız işlem süresi\" tam olarak ne demek?",
+        paragraphs: [
+          "Bir traderın açtığı pozisyonu, sırf kısa sürede açıp kapattığı için broker tarafından bir süre kısıtlamasına tabi tutulmaması demek.",
+          "Scalping yapan biri için işlem bazen 30 saniye, bazen 3 dakika, bazen 15 dakika sürer. Başka bir trader aynı pozisyonu birkaç saat taşıyabilir. Önemli olan kararı stratejinin vermesi — brokerin kuralının değil.",
+        ],
+      },
+      {
+        heading: "Spread neden bu kadar önemli?",
+        paragraphs: [
+          "Çünkü spread, traderın işlem maliyetlerinden biri. Gün içinde çok sayıda pozisyon açıp kapatan bir scalper için bu maliyet zaman içinde ciddi bir fark oluşturur.",
+          "Bu yüzden scalping yapan traderlara sadece \"spread kaç?\" diye sormayın diyorum. Şunlara birlikte bakın:",
+        ],
+        list: [
+          "Spread yapısı nasıl — sabit mi, değişken mi?",
+          "Komisyon var mı, varsa lot başına ne kadar?",
+          "Emir gerçekleştirme nasıl?",
+          "İşlem stratejiniz destekleniyor mu?",
+          "Haber saatlerinde işlem koşulları nasıl değişiyor?",
+          "Pozisyonu istediğiniz süre taşıyabiliyor musunuz?",
+        ],
+      },
+      {
+        heading: "LiteFinance ile sadece scalping mi yapılır?",
+        paragraphs: [
+          "Hayır, ve bu önemli. Bir brokerı tek bir strateji üzerinden değerlendirmemek gerekiyor. Piyasada scalping de var, day trading de, swing de, daha uzun vadeli yaklaşımlar da.",
+          "Benim LiteFinance tarafında öne çıkardığım nokta, ECN altyapısının düşük spread isteyen traderlara hitap etmesi. Bugün scalping yaparsınız, yarın intraday işlem yaparsınız, başka bir dönemde swing stratejisine geçersiniz. Önemli olan seçtiğiniz hesabın o anki işlem tarzınıza uygun olması.",
+        ],
+      },
+      {
+        heading: "\"0.0 spread\" gerçekten sıfır maliyet mi?",
+        paragraphs: [
+          "Hayır, ve burada önemli bir ayrım var. LiteFinance'ın ECN sayfasında değişken spreadin 0.0 puandan başlayabildiği belirtiliyor; ama aynı sayfada lot başına komisyon uygulandığı da yazıyor.",
+          "\"0.0 spread\" demek işlemin ücretsiz olduğu anlamına gelmez. ECN hesaplarda spreadin yanında komisyonu da hesaba katmak zorundasınız.",
+          "Ben traderlara her zaman toplam maliyete bakmalarını öneriyorum: spread + komisyon + olası kayma. Bu hesabı yapmadan sadece \"spread sıfır\" demek doğru bir değerlendirme olmaz.",
+        ],
+      },
+      {
+        heading: "Yeni başlayan bir trader LiteFinance'ta scalping yapabilir mi?",
+        paragraphs: [
+          "Yapabilir, ama yeni başlayan birinin doğrudan gerçek parayla scalping yapmasını önermiyorum. Scalping hızlı karar vermeyi gerektirir ve düşük zaman dilimlerinde fiyat hareketleri çok daha gürültülüdür.",
+          "Önce demo hesapta stratejiyi test edin. LiteFinance'ın demo ECN hesabında gerçek piyasa koşullarına yakın fiyatlar, market execution ve scalping desteği bulunduğu belirtiliyor.",
+          "Önce sistemi test edin, sonra küçük hacimlerle başlayın, sonra performansınızı ölçün. Hacmi ancak gerçekten disiplinli olduğunuzu gördüğünüzde artırın.",
+        ],
+      },
+      {
+        heading: "FXPARTNER burada nerede devreye giriyor?",
+        paragraphs: [
+          "Biz traderlara sadece \"şu brokerı kullanın\" demek istemiyoruz. Amacımız, traderın o brokerı ve o hesap türünü neden seçtiğini anlaması.",
+          "LiteFinance tarafında FXPARTNER üzerinden ilerleyen traderlara özel %20 bonus avantajı sunuyoruz. Ama bonusların hesap türüne, ülkeye ve dönemsel kampanya şartlarına bağlı olabileceğini özellikle belirtmek isterim — kayıt ve yatırım öncesinde güncel koşulları LiteFinance üzerinden kontrol edin.",
+        ],
+      },
+      {
+        heading: "Düşük spread mi önemli, bonus mu?",
+        paragraphs: [
+          "Kesinlikle tek başına bonus değil. Bonus \"risksiz kazanç\" anlamına gelmez; forex ve CFD işlemlerinde risk her zaman vardır.",
+          "Ben bir trader olarak önce işlem koşullarına bakarım. Scalping yapan biri için düşük spread ve işlem maliyetleri çok daha belirleyicidir. Bonusu bunun üzerine gelen ek bir avantaj olarak değerlendiririm.",
+          "Sıralama benim için net: önce altyapı, sonra işlem koşulları, sonra maliyetler. Bonus en sonda gelir.",
+        ],
+      },
+      {
+        heading: "LiteFinance deneyiminizi tek cümleyle özetlerseniz?",
+        paragraphs: [
+          "\"Traderın stratejisine müdahale etmeyen, düşük spread odaklı ECN koşulları ve scalping özgürlüğü sunan bir broker alternatifi arıyorsanız, LiteFinance inceleme listenizde olmalı.\"",
+          "Kısa vadeli işlem yapan traderlar için düşük spreadin ne kadar önemli olduğunu bilen biri olarak LiteFinance'ın ECN tarafını bu yüzden değerli buluyorum.",
+        ],
+      },
+      {
+        heading: "LiteFinance ECN hesabı: öne çıkan koşullar",
+        paragraphs: [
+          "Brokerin kendi ECN hesap sayfasında belirtilen başlıklar şunlar. Hepsi LiteFinance'ın beyanıdır ve değişebilir; işlem öncesinde teyit edin.",
+        ],
+        list: [
+          "0.0 puandan başlayabilen değişken spread, ayrıca lot başına komisyon",
+          "Scalping ve haber işlemlerine izin",
+          "İşlemlerde sınırsız süre",
+          "Market execution",
+          "MT4, MT5 ve cTrader desteği",
+          "Minimum depozito 50 USD, minimum işlem hacmi 0.01 lot",
+          "FXPARTNER üzerinden başvuranlara özel %20 bonus avantajı (kampanya şartlarına tabi)",
+        ],
+      },
+      {
+        heading: "Erdem Hoca'dan son bir not",
+        paragraphs: [
+          "Yıllardır piyasada şunu görüyorum: traderların büyük bölümü strateji arıyor, yeni indikatör arıyor, yeni sinyal arıyor. Ama bazen çok daha temel bir şeyi gözden kaçırıyor — işlem yaptığı koşulları.",
+          "Spread, komisyon, emir gerçekleştirme ve işlem özgürlüğü; kullandığınız strateji kadar önemli olabilir. Özellikle scalping yapıyorsanız küçük maliyetler zaman içinde büyür.",
+          "Bu yüzden broker seçimini sadece \"güvenilir mi?\" sorusuyla sınırlamayın. \"Benim işlem tarzıma uygun mu?\" diye sorun.",
+          "— Erdem Torun, FXPARTNER",
+        ],
+      },
+      {
+        heading: "Sık sorulan sorular",
+        paragraphs: [
+          "LiteFinance scalping'e izin veriyor mu? Evet — brokerin güncel ECN hesap bilgilerinde scalping ve haber işlemlerine izin verildiği belirtiliyor.",
+          "LiteFinance ECN spread kaç? ECN sayfasında değişken spreadlerin 0.0 puandan başlayabildiği belirtiliyor; ayrıca lot başına işlem komisyonu uygulanıyor.",
+          "İşlemler ne kadar süre açık kalabilir? ECN hesabın güncel koşullarında işlem süresi için sınırsız süre belirtiliyor.",
+          "LiteFinance'ta MT5 kullanılabilir mi? ECN hesabı için MT4, MT5 ve cTrader listeleniyor.",
+          "Minimum yatırım ne kadar? ECN hesap bilgilerinde minimum depozito 50 USD olarak belirtiliyor; hesap türüne ve güncel koşullara göre değişebilir.",
+          "FXPARTNER ile %20 bonus var mı? FXPARTNER üzerinden sunulan kampanya kapsamında %20 bonus avantajı bulunuyor. Şartlar ve uygunluk koşulları değişebileceğinden kayıt ve yatırım öncesinde güncel şartları kontrol edin.",
+          "LiteFinance güvenilir mi? Bir brokerı değerlendirirken marka bilinirliği tek başına yeterli değil. Şirketin güncel hukuki yapısını, faaliyet gösterdiği kuruluşları, düzenleyici bilgilerini, ücretlerini ve risk açıklamalarını kendi ülkeniz açısından ayrıca inceleyin.",
+        ],
+      },
+      {
+        heading: "Risk uyarısı",
+        paragraphs: [
+          "Forex ve CFD işlemleri yüksek risk içerir ve yatırılan sermayenin tamamının kaybedilmesi mümkündür. Kaldıraç, kazanç kadar kayıpları da büyütür. Buradaki bilgiler yatırım tavsiyesi değildir; FXPARTNER bir aracı kurum değildir ve yatırım hizmeti sunmaz.",
+          "Bonuslar, spreadler, komisyonlar, hesap türleri ve kampanya koşulları zaman içinde veya ülkeye göre değişebilir. İşlem öncesinde LiteFinance'ın güncel resmî koşullarını kontrol edin.",
+        ],
+      },
+    ],
+  },
+  {
     // A signed, first-person piece, and the only kind of content on this site
     // that is one person's experience rather than a checked figure. That
     // difference has to be visible from the title down, or it borrows the
