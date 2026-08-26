@@ -500,6 +500,13 @@ export const brokers: Broker[] = [
     // (litefinance-tr.org/?uid=…) and the banner would advertise one address
     // while navigating to another.
     adUrl: "https://bit.ly/litefinance-vip",
+    // The right rail creative. 821x1915 is the artwork's own size — the
+    // rail renders it at w-40 (160px) and the browser scales it, so the
+    // ratio is what matters here, not the pixel count.
+    adImageTall: "/reklam/lite-banner-fxpartner77.png",
+    adImageTallWidth: 821,
+    adImageTallHeight: 1915,
+    adUrlTall: "https://bit.ly/litefinance-vip",
     tagline: "10 dolardan başlayan cent hesap, 0.0 pipten ECN",
     rating: 4.5,
     founded: 2005,
@@ -1443,14 +1450,35 @@ export function getBrokerBySlug(slug: string): Broker | undefined {
 // campaign on/off doesn't require touching the broker's editorial data.
 export const SPONSORED_BROKER_SLUGS = ["xm", "fxpro", "lite-finance", "avatrade", "bybit", "multibank"];
 
+// Sponsors whose creatives only run on pages already about them. They stay
+// in SPONSORED_BROKER_SLUGS — their own review page still carries their
+// banner, and a post that pins them via adBrokerSlug still gets them —
+// but they are kept out of the hashed rotation, so they never turn up as
+// filler beside a competitor's article.
+export const TOPIC_LOCKED_SPONSOR_SLUGS = ["multibank"];
+
+const isRotatable = (slug: string) =>
+  SPONSORED_BROKER_SLUGS.includes(slug) && !TOPIC_LOCKED_SPONSOR_SLUGS.includes(slug);
+
 // The right rail is only worth rendering for a broker that actually has a
 // skyscraper creative — stretching a leaderboard into a 160px column, or
 // holding an empty 160px gutter open, are both worse than no rail. Returns
 // undefined when no sponsor has one, and the caller drops the column.
-export function getSkyscraperBroker(seed: string, excludeSlug?: string): Broker | undefined {
-  const pool = brokers.filter(
-    (b) => SPONSORED_BROKER_SLUGS.includes(b.slug) && b.adImageTall && b.slug !== excludeSlug
-  );
+export function getSkyscraperBroker(seed: string, relatedSlug?: string): Broker | undefined {
+  // When the page is already about a sponsor that has a skyscraper, that is
+  // the one to run. The rail elsewhere on the page deliberately avoids
+  // repeating a brand, but here repetition is the point: a reader deep in a
+  // LiteFinance interview is the reader most likely to click LiteFinance.
+  // It is also what keeps a topic-locked sponsor on its own pages — the
+  // rotation below can never reach it.
+  const own = relatedSlug
+    ? brokers.find(
+        (b) => b.slug === relatedSlug && SPONSORED_BROKER_SLUGS.includes(b.slug) && b.adImageTall
+      )
+    : undefined;
+  if (own) return own;
+
+  const pool = brokers.filter((b) => isRotatable(b.slug) && b.adImageTall);
   if (pool.length === 0) return undefined;
   let hash = 0;
   for (let i = 0; i < seed.length; i++) hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
@@ -1463,10 +1491,8 @@ export function getSkyscraperBroker(seed: string, excludeSlug?: string): Broker 
 // request/reload. `excludeSlug` keeps a broker's own review page from
 // advertising itself.
 export function getSponsoredBroker(seed: string, excludeSlug?: string): Broker {
-  const pool = brokers.filter(
-    (b) => SPONSORED_BROKER_SLUGS.includes(b.slug) && b.slug !== excludeSlug
-  );
-  const candidates = pool.length > 0 ? pool : brokers.filter((b) => SPONSORED_BROKER_SLUGS.includes(b.slug));
+  const pool = brokers.filter((b) => isRotatable(b.slug) && b.slug !== excludeSlug);
+  const candidates = pool.length > 0 ? pool : brokers.filter((b) => isRotatable(b.slug));
   let hash = 0;
   for (let i = 0; i < seed.length; i++) hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
   return candidates[hash % candidates.length];
@@ -1477,10 +1503,8 @@ export function getSponsoredBroker(seed: string, excludeSlug?: string): Broker {
 // that cycle through sponsors client-side (see RotatingBrokerAd) rather
 // than showing the same one broker on every visit.
 export function getSponsoredBrokerPool(seed: string, excludeSlug?: string): Broker[] {
-  const pool = brokers.filter(
-    (b) => SPONSORED_BROKER_SLUGS.includes(b.slug) && b.slug !== excludeSlug
-  );
-  const candidates = pool.length > 0 ? pool : brokers.filter((b) => SPONSORED_BROKER_SLUGS.includes(b.slug));
+  const pool = brokers.filter((b) => isRotatable(b.slug) && b.slug !== excludeSlug);
+  const candidates = pool.length > 0 ? pool : brokers.filter((b) => isRotatable(b.slug));
   let hash = 0;
   for (let i = 0; i < seed.length; i++) hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
   const offset = hash % candidates.length;

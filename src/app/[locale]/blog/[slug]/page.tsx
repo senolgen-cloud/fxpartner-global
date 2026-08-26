@@ -81,8 +81,9 @@ export default async function BlogPostPage({
   const adPositions = inlineAdPositions(post.sections.length);
   // Right rail, wide screens only, and only when a sponsor actually has a
   // skyscraper — otherwise the column is dropped entirely rather than left
-  // empty. Excludes whichever broker the post already argues for, so a
-  // reader isn't shown the same brand twice on one page.
+  // empty. The second argument is the broker this post is about: it gets
+  // the rail when it has a skyscraper of its own, and otherwise the rail
+  // rotates. See getSkyscraperBroker.
   const railBroker = getSkyscraperBroker(post.slug, post.adBrokerSlug ?? featuredBroker.slug);
 
   return (
