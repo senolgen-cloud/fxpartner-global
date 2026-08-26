@@ -1068,7 +1068,6 @@ export default function SignalsBoard({
             </div>
           </div>
 
-          <PipsStats closed={closed} />
         </div>
       </section>
 
@@ -1126,6 +1125,12 @@ export default function SignalsBoard({
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      <section className="border-b border-hairline">
+        <div className="mx-auto max-w-6xl px-6 pb-16">
+          <PipsStats closed={closed} />
         </div>
       </section>
 
