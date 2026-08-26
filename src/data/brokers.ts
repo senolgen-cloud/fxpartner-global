@@ -1260,6 +1260,12 @@ export const brokers: Broker[] = [
     ],
     bestFor: "Düzenleyici genişliğe önem veren ve ECN maliyetleri için sermaye ayırabilen yatırımcılar",
     accentNote: "ASIC, BaFin ve CySEC lisanslı",
+    // Placement withdrawn: MultiBank stays in the ranking on its editorial
+    // score, but runs no advertising anywhere on the site — its review page
+    // carries LiteFinance instead (BROKER_AD_OVERRIDES). The creatives are
+    // kept, unread, so the placement can be switched back on by putting the
+    // slug back in SPONSORED_BROKER_SLUGS.
+    //
     // MultiBank's own IB creatives rather than in-house ones, so these are
     // standard IAB sizes instead of this file's usual 1672x941: the 728x90
     // leaderboard on desktop, the 300x250 square on phones where a
@@ -1448,17 +1454,15 @@ export function getBrokerBySlug(slug: string): Broker | undefined {
 // Brokers currently running paid ad placements (BrokerAdBanner). Kept as an
 // explicit slug list rather than a `sponsored` field on Broker so turning a
 // campaign on/off doesn't require touching the broker's editorial data.
-export const SPONSORED_BROKER_SLUGS = ["xm", "fxpro", "lite-finance", "avatrade", "bybit", "multibank"];
+export const SPONSORED_BROKER_SLUGS = ["xm", "fxpro", "lite-finance", "avatrade", "bybit"];
 
-// Sponsors whose creatives only run on pages already about them. They stay
-// in SPONSORED_BROKER_SLUGS — their own review page still carries their
-// banner, and a post that pins them via adBrokerSlug still gets them —
-// but they are kept out of the hashed rotation, so they never turn up as
-// filler beside a competitor's article.
-export const TOPIC_LOCKED_SPONSOR_SLUGS = ["multibank"];
-
-const isRotatable = (slug: string) =>
-  SPONSORED_BROKER_SLUGS.includes(slug) && !TOPIC_LOCKED_SPONSOR_SLUGS.includes(slug);
+// A non-advertising broker's review page normally cross-sells to whichever
+// sponsor the hash picks. This names the sponsor explicitly instead, for a
+// broker whose own placement ended: the page keeps earning, and it does so
+// through a partner chosen rather than drawn.
+export const BROKER_AD_OVERRIDES: Record<string, string> = {
+  multibank: "lite-finance",
+};
 
 // The right rail is only worth rendering for a broker that actually has a
 // skyscraper creative — stretching a leaderboard into a 160px column, or
@@ -1476,7 +1480,7 @@ export function getSkyscraperBroker(seed: string, pinnedSlug?: string): Broker |
   // rotation below can never reach it.
   if (pinnedSlug) return brokers.find((b) => b.slug === pinnedSlug && b.adImageTall);
 
-  const pool = brokers.filter((b) => isRotatable(b.slug) && b.adImageTall);
+  const pool = brokers.filter((b) => SPONSORED_BROKER_SLUGS.includes(b.slug) && b.adImageTall);
   if (pool.length === 0) return undefined;
   let hash = 0;
   for (let i = 0; i < seed.length; i++) hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
@@ -1489,8 +1493,11 @@ export function getSkyscraperBroker(seed: string, pinnedSlug?: string): Broker |
 // request/reload. `excludeSlug` keeps a broker's own review page from
 // advertising itself.
 export function getSponsoredBroker(seed: string, excludeSlug?: string): Broker {
-  const pool = brokers.filter((b) => isRotatable(b.slug) && b.slug !== excludeSlug);
-  const candidates = pool.length > 0 ? pool : brokers.filter((b) => isRotatable(b.slug));
+  const pool = brokers.filter(
+    (b) => SPONSORED_BROKER_SLUGS.includes(b.slug) && b.slug !== excludeSlug
+  );
+  const candidates =
+    pool.length > 0 ? pool : brokers.filter((b) => SPONSORED_BROKER_SLUGS.includes(b.slug));
   let hash = 0;
   for (let i = 0; i < seed.length; i++) hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
   return candidates[hash % candidates.length];
@@ -1501,8 +1508,11 @@ export function getSponsoredBroker(seed: string, excludeSlug?: string): Broker {
 // that cycle through sponsors client-side (see RotatingBrokerAd) rather
 // than showing the same one broker on every visit.
 export function getSponsoredBrokerPool(seed: string, excludeSlug?: string): Broker[] {
-  const pool = brokers.filter((b) => isRotatable(b.slug) && b.slug !== excludeSlug);
-  const candidates = pool.length > 0 ? pool : brokers.filter((b) => isRotatable(b.slug));
+  const pool = brokers.filter(
+    (b) => SPONSORED_BROKER_SLUGS.includes(b.slug) && b.slug !== excludeSlug
+  );
+  const candidates =
+    pool.length > 0 ? pool : brokers.filter((b) => SPONSORED_BROKER_SLUGS.includes(b.slug));
   let hash = 0;
   for (let i = 0; i < seed.length; i++) hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
   const offset = hash % candidates.length;

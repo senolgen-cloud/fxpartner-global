@@ -17,6 +17,7 @@ import {
   getBrokerScores,
   getSponsoredBroker,
   SPONSORED_BROKER_SLUGS,
+  BROKER_AD_OVERRIDES,
   categoryInfo,
   TIER1_REGULATORS,
   getRiskLevel,
@@ -152,9 +153,13 @@ export default async function BrokerDetailPage({
   // Ad slot: a sponsored broker gets to run its own banner on its own review
   // page too (that's the point of paying for the placement) — cross-sell to
   // another sponsored broker only when this one isn't a paying advertiser.
+  // BROKER_AD_OVERRIDES names that cross-sell instead of leaving it to the
+  // hash, for a broker whose own placement was withdrawn.
+  const adOverride = BROKER_AD_OVERRIDES[broker.slug];
   const featuredBroker = SPONSORED_BROKER_SLUGS.includes(broker.slug)
     ? broker
-    : getSponsoredBroker(broker.slug, broker.slug);
+    : (adOverride ? getBrokerBySlug(adOverride) : undefined) ??
+      getSponsoredBroker(broker.slug, broker.slug);
   const faqs = brokerFaqs(broker);
   const reviewPost = getBlogPostBySlug(`${broker.slug}-review`);
   const scores = getBrokerScores(broker);
