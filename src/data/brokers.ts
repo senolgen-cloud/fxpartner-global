@@ -491,10 +491,15 @@ export const brokers: Broker[] = [
     // creative. Filename deliberately has no "%20" in it — the original
     // upload did, and a literal %20 in a public path decodes back to a
     // space, so Next/Image would 404 on it.
-    ogImage: "/campaigns/litefinance-teminat-bonusu.png",
-    adImage: "/campaigns/litefinance-teminat-bonusu.png",
-    adImageWidth: 1672,
-    adImageHeight: 941,
+    ogImage: "/reklam/litefinance-reklam10-fxpartner.png",
+    adImage: "/reklam/litefinance-reklam10-fxpartner.png",
+    adImageWidth: 1774,
+    adImageHeight: 887,
+    // The creative prints bit.ly/litefinance-vip on itself, so that is where
+    // clicking it goes. Without adUrl the slot falls through to referralUrl
+    // (litefinance-tr.org/?uid=…) and the banner would advertise one address
+    // while navigating to another.
+    adUrl: "https://bit.ly/litefinance-vip",
     tagline: "10 dolardan başlayan cent hesap, 0.0 pipten ECN",
     rating: 4.5,
     founded: 2005,
@@ -639,9 +644,9 @@ export const brokers: Broker[] = [
         "İşlemlerine devam et; bonus teminat tarafında durur, kârın kendi bakiyende birikir.",
       ],
       note: "Teminat bonusu çekilebilir bir bakiye değildir; hesabın teminat tabanını büyütür ve çekim yapıldığında hesaptan düşülebilir. Bonus daha büyük pozisyon açmak için değil, mevcut pozisyonun nefes payını genişletmek için tasarlanmıştır. Kampanya koşulları değişebilir; katılmadan önce güncel şartları FXPARTNER veya Lite Finance'in Türkiye destek hattından teyit edin. Kaldıraçlı işlemler yüksek risk içerir.",
-      image: "/campaigns/litefinance-teminat-bonusu.png",
-      imageWidth: 1672,
-      imageHeight: 941,
+      image: "/reklam/litefinance-reklam10-fxpartner.png",
+      imageWidth: 1774,
+      imageHeight: 887,
       ctaUrl: "https://bit.ly/litefinance-vip",
       // No ctaLabel: falls back to the standard "{broker} - Resmi Sitesi"
       // label, which is localized and matches every other broker CTA.
