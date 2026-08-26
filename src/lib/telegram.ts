@@ -1,3 +1,5 @@
+import { brokers } from "@/data/brokers";
+
 const API_BASE = "https://api.telegram.org";
 
 // Appended to every outbound Telegram message so each post nudges
@@ -29,6 +31,29 @@ export function contactButtonRow(): InlineKeyboardButton[] {
 // back into the actual product, not just the bare site link in the
 // caption text. The broker digest (broker-review-share) builds its own
 // per-broker button rows and appends contactButtonRow() itself.
+/**
+ * The top three of the ranking, as their own row of buttons.
+ *
+ * Read from src/data/brokers.ts rather than written out here, so the row
+ * follows the ranking instead of drifting from it — when TIO Markets moved
+ * to 8th, nothing about this row had to be remembered.
+ *
+ * Referral links, which is what the equivalent buttons on the site are. A
+ * broker with no referralUrl falls back to its review page: better a real
+ * page than a dead button.
+ */
+export function topBrokerButtonRow(): InlineKeyboardButton[] {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
+  return brokers
+    .slice()
+    .sort((a, b) => a.rank - b.rank)
+    .slice(0, 3)
+    .map((b) => ({
+      text: `${b.rank}. ${b.name}`,
+      url: b.referralUrl || `${siteUrl}/brokers/${b.slug}`,
+    }));
+}
+
 export function mainServicesKeyboard(): InlineKeyboardButton[][] {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
   return [
@@ -37,6 +62,10 @@ export function mainServicesKeyboard(): InlineKeyboardButton[][] {
       { text: "🤖 AI Asistan", url: `${siteUrl}/ai-asistan` },
     ],
     [{ text: "📊 Broker Karşılaştırmaları", url: siteUrl }],
+    // Three across: Telegram shrinks the label to fit the row, and these are
+    // short enough to stay readable where "📊 Broker Karşılaştırmaları"
+    // needs a row to itself.
+    topBrokerButtonRow(),
     contactButtonRow(),
   ];
 }
