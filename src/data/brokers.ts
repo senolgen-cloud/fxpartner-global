@@ -1464,19 +1464,17 @@ const isRotatable = (slug: string) =>
 // skyscraper creative — stretching a leaderboard into a 160px column, or
 // holding an empty 160px gutter open, are both worse than no rail. Returns
 // undefined when no sponsor has one, and the caller drops the column.
-export function getSkyscraperBroker(seed: string, relatedSlug?: string): Broker | undefined {
-  // When the page is already about a sponsor that has a skyscraper, that is
-  // the one to run. The rail elsewhere on the page deliberately avoids
-  // repeating a brand, but here repetition is the point: a reader deep in a
-  // LiteFinance interview is the reader most likely to click LiteFinance.
-  // It is also what keeps a topic-locked sponsor on its own pages — the
+export function getSkyscraperBroker(seed: string, pinnedSlug?: string): Broker | undefined {
+  // A page that pins a broker belongs to that broker. It gets the rail when
+  // it has a skyscraper of its own — a reader deep in a LiteFinance
+  // interview is the reader most likely to click LiteFinance, so repeating
+  // the brand is the point here, unlike the rotation below. When it has no
+  // skyscraper the column is dropped instead: what a single-brand page must
+  // never carry is a rival's ad beside the argument for it.
+  //
+  // This is also what keeps a topic-locked sponsor on its own pages — the
   // rotation below can never reach it.
-  const own = relatedSlug
-    ? brokers.find(
-        (b) => b.slug === relatedSlug && SPONSORED_BROKER_SLUGS.includes(b.slug) && b.adImageTall
-      )
-    : undefined;
-  if (own) return own;
+  if (pinnedSlug) return brokers.find((b) => b.slug === pinnedSlug && b.adImageTall);
 
   const pool = brokers.filter((b) => isRotatable(b.slug) && b.adImageTall);
   if (pool.length === 0) return undefined;

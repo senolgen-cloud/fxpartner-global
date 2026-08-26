@@ -79,12 +79,13 @@ export default async function BlogPostPage({
     (post.adBrokerSlug ? getBrokerBySlug(post.adBrokerSlug) : undefined) ??
     getSponsoredBroker(post.slug);
   const adPositions = inlineAdPositions(post.sections.length);
-  // Right rail, wide screens only, and only when a sponsor actually has a
-  // skyscraper — otherwise the column is dropped entirely rather than left
-  // empty. The second argument is the broker this post is about: it gets
-  // the rail when it has a skyscraper of its own, and otherwise the rail
-  // rotates. See getSkyscraperBroker.
-  const railBroker = getSkyscraperBroker(post.slug, post.adBrokerSlug ?? featuredBroker.slug);
+  // Right rail, wide screens only, and only when there is a skyscraper to
+  // put in it — otherwise the column is dropped entirely rather than left
+  // empty. adBrokerSlug is passed raw, not defaulted to featuredBroker:
+  // a post that pins a broker is that broker's page and the rail follows
+  // it, while a post that pins nobody keeps the rotation. Defaulting here
+  // would make a rotated sponsor look pinned. See getSkyscraperBroker.
+  const railBroker = getSkyscraperBroker(post.slug, post.adBrokerSlug);
 
   return (
     <>
