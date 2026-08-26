@@ -353,6 +353,7 @@ export const blogPosts: BlogPost[] = [
     // Review 2026" as the head phrase on both pages would have both
     // competing for the same query instead of each owning a distinct one.
     slug: "xm-review",
+    adBrokerSlug: "xm",
     coverImage: "/blog/xm-review-cover.png",
     title: "XM Hesapları, Ücretleri ve Regülasyonu Açıklandı (2026 Detaylı İnceleme)",
     excerpt:
@@ -2806,6 +2807,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "xm-nakit-iadesi-nasil-calisir",
+    adBrokerSlug: "xm",
     // Square build of the 16:9 campaign banner — the post page renders covers
     // at aspect-square, so the wide original would lose its headline to the
     // crop. Blurred fill behind, untouched banner letterboxed on top.
