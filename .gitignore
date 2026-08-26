@@ -63,3 +63,6 @@ tmp/
 
 # Throwaway worktree used to build exactly what is committed.
 .verify-tree/
+
+# Bir patch dosyası public/ altında durursa herkese açık sunulur.
+fxpartner-blog-xm.patch
