@@ -34,7 +34,9 @@ export const blogPosts: BlogPost[] = [
   {
     // Second signed piece on the site, and the same rule applies as on the
     // TIO one: this is one trader's opinion, not a checked figure, and the
-    // reader has to be able to tell which is which. Everything attributed to
+    // reader has to be able to tell which is which. Signed by Nilüfer
+    // Altundağ, spelled as the cover art spells it — the article and the
+    // picture at the top of it have to agree on the writer's name. Everything attributed to
     // LiteFinance below is what their own ECN account page states — cited
     // once, in prose, rather than after every sentence.
     //
@@ -46,19 +48,19 @@ export const blogPosts: BlogPost[] = [
     //
     // Q&A headings are the point of the piece — they are what a
     // question-shaped search actually matches, and they render as h2.
-    slug: "litefinance-scalping-ecn-erdem-torun",
-    title: "Erdem Hoca Anlatıyor: LiteFinance ile Scalping ve ECN Deneyimi",
+    slug: "litefinance-scalping-ecn-nilufer-altundag",
+    title: "Nilüfer Hoca Anlatıyor: LiteFinance ile Scalping ve ECN Deneyimi",
     excerpt:
-      "FXPARTNER kurucusu Erdem Torun'la röportaj: scalping yapan bir trader broker seçerken neye bakmalı, LiteFinance'ın ECN koşulları neden dikkat çekiyor ve \"0.0 spread\" gerçekte ne anlama geliyor.",
+      "FXPARTNER'dan profesyonel trader Nilüfer Altundağ'la röportaj: scalping yapan bir trader broker seçerken neye bakmalı, LiteFinance'ın ECN koşulları neden dikkat çekiyor ve \"0.0 spread\" gerçekte ne anlama geliyor.",
     publishedAt: "2026-08-26",
     readingMinutes: 9,
-    coverImage: "/blog/erdem-hoca-litefinance.png",
+    coverImage: "/blog/nilufer-litefinance.png",
     lang: "tr",
     adBrokerSlug: "lite-finance",
     sections: [
       {
         paragraphs: [
-          "Bu yazı bir röportaj. Aşağıdaki görüşler FXPARTNER kurucusu ve trader Erdem Torun'a ait; sitedeki broker sayfaları gibi lisans numarasıyla doğrulanabilir bir inceleme değil. LiteFinance'ın hesap koşullarına dair aktarılan bilgiler ise brokerin kendi ECN hesap sayfasındaki güncel beyanlarına dayanıyor — hesap açmadan önce o sayfadan teyit edin, koşullar ülkeye ve döneme göre değişebiliyor.",
+          "Bu yazı bir röportaj. Aşağıdaki görüşler FXPARTNER'dan profesyonel trader Nilüfer Altundağ'a ait; sitedeki broker sayfaları gibi lisans numarasıyla doğrulanabilir bir inceleme değil. LiteFinance'ın hesap koşullarına dair aktarılan bilgiler ise brokerin kendi ECN hesap sayfasındaki güncel beyanlarına dayanıyor — hesap açmadan önce o sayfadan teyit edin, koşullar ülkeye ve döneme göre değişebiliyor.",
           "Forex piyasasında işlem yapan herkesin bir noktada kendine sorduğu bir soru var: benim işlem tarzıma uygun broker hangisi? Özellikle kısa vadeli işlem yapan, scalping stratejileri kullanan ve maliyetleri düşük tutmak isteyen traderlar için spread, emir gerçekleştirme kalitesi ve işlem koşulları çok daha belirleyici hale geliyor.",
         ],
       },
@@ -160,12 +162,12 @@ export const blogPosts: BlogPost[] = [
         ],
       },
       {
-        heading: "Erdem Hoca'dan son bir not",
+        heading: "Nilüfer Hoca'dan son bir not",
         paragraphs: [
           "Yıllardır piyasada şunu görüyorum: traderların büyük bölümü strateji arıyor, yeni indikatör arıyor, yeni sinyal arıyor. Ama bazen çok daha temel bir şeyi gözden kaçırıyor — işlem yaptığı koşulları.",
           "Spread, komisyon, emir gerçekleştirme ve işlem özgürlüğü; kullandığınız strateji kadar önemli olabilir. Özellikle scalping yapıyorsanız küçük maliyetler zaman içinde büyür.",
           "Bu yüzden broker seçimini sadece \"güvenilir mi?\" sorusuyla sınırlamayın. \"Benim işlem tarzıma uygun mu?\" diye sorun.",
-          "— Erdem Torun, FXPARTNER",
+          "— Nilüfer Altundağ, FXPARTNER",
         ],
       },
       {
