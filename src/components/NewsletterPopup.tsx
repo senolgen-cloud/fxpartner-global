@@ -77,7 +77,7 @@ export default function NewsletterPopup() {
 
         <div className="p-7">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-            FXPARTNER Kurucusundan Bir Not
+            {tr("FXPARTNER Kurucusundan Bir Not")}
           </span>
 
           {state.ok ? (
@@ -107,7 +107,7 @@ export default function NewsletterPopup() {
                 <p className="text-text-on-ink">
                   Erdem Torun
                   <br />
-                  <span className="text-text-on-ink-muted">FXPARTNER Kurucusu</span>
+                  <span className="text-text-on-ink-muted">{tr("FXPARTNER Kurucusu")}</span>
                 </p>
               </div>
 
@@ -115,7 +115,7 @@ export default function NewsletterPopup() {
                 <input type="hidden" name="source" value="popup" />
                 <div>
                   <label htmlFor="newsletter-popup-email" className="text-xs font-medium text-text-on-ink">
-                    E-posta
+                    {tr("E-posta")}
                   </label>
                   <input
                     id="newsletter-popup-email"
@@ -140,7 +140,7 @@ export default function NewsletterPopup() {
                     disabled={pending}
                     className="rounded-full bg-signal px-6 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
                   >
-                    {pending ? "…" : "Gönder"}
+                    {pending ? "…" : tr("Gönder")}
                   </button>
                 </div>
               </form>

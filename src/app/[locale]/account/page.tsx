@@ -262,8 +262,8 @@ export default async function AccountPage({
                   // tier, and saying so is what makes the upgrade an upgrade
                   // rather than a first purchase.
                   <p className="mt-1 text-sm text-text-on-ink-muted">
-                    <span className="text-tick-up">Ücretsiz üyelik</span> · Anlık
-                    push bildirimleri ve cashback açık.
+                    <span className="text-tick-up">{tr("Ücretsiz üyelik")}</span> ·{" "}
+                    {tr("Anlık push bildirimleri ve cashback açık.")}
                   </p>
                 )}
               </div>

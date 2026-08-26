@@ -192,7 +192,7 @@ export default function PropFirmComparisonTable() {
     <div>
       <div
         role="tablist"
-        aria-label="Enstrüman segmenti"
+        aria-label={tr("Enstrüman segmenti")}
         className="mb-4 inline-flex rounded-full border border-hairline p-1"
       >
         {(Object.keys(SEGMENT_LABEL) as SegmentFilter[]).map((seg) => {

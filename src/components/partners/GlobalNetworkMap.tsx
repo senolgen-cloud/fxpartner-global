@@ -1,5 +1,6 @@
 import { networkRegions, networkArcs } from "@/data/partnerProgram";
 import { trData } from "@/lib/localizeContent";
+import { tr } from "@/lib/chrome";
 
 function getRegion(key: string) {
   return trData(networkRegions).find((r) => r.key === key)!;
@@ -12,7 +13,9 @@ export default function GlobalNetworkMap() {
         viewBox="0 0 100 60"
         className="h-auto w-full"
         role="img"
-        aria-label="FXPARTNER'ın Avrupa, MENA, Asya-Pasifik, Afrika ve Amerika kıtalarına yayılan partner ağının stilize diyagramı"
+        aria-label={tr(
+          "FXPARTNER'ın Avrupa, MENA, Asya-Pasifik, Afrika ve Amerika kıtalarına yayılan partner ağının stilize diyagramı"
+        )}
       >
         {networkArcs.map(([fromKey, toKey], i) => {
           const from = getRegion(fromKey);

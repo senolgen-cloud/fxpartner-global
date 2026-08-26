@@ -41,7 +41,7 @@ export default function XmInlineAd({
   if (variant === "inline") {
     return (
       <aside
-        aria-label="Sponsorlu içerik"
+        aria-label={tr("Sponsorlu içerik")}
         className="my-12 overflow-hidden rounded-2xl border border-hairline bg-ink text-text-on-ink"
       >
         <div className="flex flex-col gap-5 px-6 py-6 sm:flex-row sm:items-center sm:justify-between">
@@ -74,7 +74,7 @@ export default function XmInlineAd({
 
   return (
     <aside
-      aria-label="Sponsorlu içerik"
+      aria-label={tr("Sponsorlu içerik")}
       className="mt-14 overflow-hidden rounded-2xl border border-hairline bg-ink text-text-on-ink"
     >
       <div className="px-6 py-7 sm:px-8 sm:py-8">

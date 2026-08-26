@@ -1,5 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramPhoto, mainServicesKeyboard, telegramContactCta } from "@/lib/telegram";
+import {
+  sendTelegramPhoto,
+  mainServicesKeyboard,
+  telegramContactCta,
+  arabicChatId,
+} from "@/lib/telegram";
+import { formatMessage } from "@/lib/chrome";
+import { localePath, type Locale } from "@/lib/i18n";
 import { postTradeSignalToX } from "@/lib/x";
 import { sendPushToMembers, sendPushToNonMembers } from "@/lib/push";
 import { getRecentSignalStats, statsLineTr, statsLineEn } from "@/lib/signalStats";
@@ -121,28 +128,57 @@ export async function GET(req: NextRequest) {
   const dirEmoji = publicDirection === "SELL" ? "🔴" : "🟢";
   const trStats = statsLineTr(stats);
 
-  const caption =
-    (publicDirection
-      ? `${dirEmoji} <b>${pair.toUpperCase()}</b> · <b>${publicDirection}</b> — pozisyon az önce açıldı\n\n`
-      : `<b>${pair.toUpperCase()}</b> üzerinde yeni bir işlem açıldı\n\n`) +
-    (confidence ? `🎯 Sinyal güveni: <b>%${confidence}</b>\n` : "") +
-    (trStats ? `${trStats}\n` : "") +
-    (openLevels
-      ? `📈 Giriş: <b>${entry}</b>\n` +
-        (hasTarget1 ? `🎯 TP: <b>${target1}</b>\n` : "") +
-        (hasStop ? `🛑 SL: <b>${stop}</b>\n` : "")
-      : "") +
-    `\n⚡ Gerçek hesap, gerçek işlem — takip edilen MT5 hesabımızda açıldığı an paylaşılıyor. Kapandığında sonucu da aynı yerde yayınlanacak, kazanç da kayıp da.\n\n` +
-    (openLevels
-      ? `🎁 Forex sinyalleri herkese açık yayınlanıyor. GOLD, endeks, kripto ve enerji sinyalleri Pro/VIP üyelere özel.\n\n`
-      : `🔒 Giriş, TP ve SL seviyeleri ${ACCESS_TIER_LABEL[requiredTier]} üyelere özel — bu seviyeler olmadan pozisyon yönetilemez.\n\n`) +
-    `⚠️ Bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Pozisyon büyüklüğünü ve riskini kendi toleransına göre belirle. Geçmiş sonuçlar gelecekteki sonuçları garanti etmez.\n\n` +
-    (openLevels
-      ? `👉 <a href="${siteUrl}/signals">Tüm işlem geçmişi ve anlık bildirimler: fxpartner.global/signals</a>\n\n`
-      : `👉 <a href="${siteUrl}/paketler">Seviyeleri anlık görmek için paketlere göz atın</a>\n\n`) +
-    telegramContactCta();
+  // Built per locale rather than once in Turkish, so the same post can go to
+  // the Arabic channel in Arabic. Every sentence is a template keyed by its
+  // Turkish self — the same convention the site's chrome uses — which means
+  // the Arabic comes from the dictionary that is already translated and
+  // reviewed, not from a second copy of the copy kept in sync by hand.
+  const buildCaption = (locale: Locale) => {
+    const t = (text: string, vars: Record<string, string | number> = {}) =>
+      formatMessage(locale, text, vars);
+    const at = (path: string) => `${siteUrl}${localePath(locale, path)}`;
+    return (
+      (publicDirection
+        ? `${dirEmoji} <b>${pair.toUpperCase()}</b> · <b>${publicDirection}</b> — ${t("pozisyon az önce açıldı")}\n\n`
+        : `<b>${pair.toUpperCase()}</b> ${t("üzerinde yeni bir işlem açıldı")}\n\n`) +
+      (confidence ? `🎯 ${t("Sinyal güveni")}: <b>%${confidence}</b>\n` : "") +
+      (trStats ? `${trStats}\n` : "") +
+      (openLevels
+        ? `📈 ${t("Giriş")}: <b>${entry}</b>\n` +
+          (hasTarget1 ? `🎯 TP: <b>${target1}</b>\n` : "") +
+          (hasStop ? `🛑 SL: <b>${stop}</b>\n` : "")
+        : "") +
+      `\n⚡ ${t("Gerçek hesap, gerçek işlem — takip edilen MT5 hesabımızda açıldığı an paylaşılıyor. Kapandığında sonucu da aynı yerde yayınlanacak, kazanç da kayıp da.")}\n\n` +
+      (openLevels
+        ? `🎁 ${t("Forex sinyalleri herkese açık yayınlanıyor. GOLD, endeks, kripto ve enerji sinyalleri Pro/VIP üyelere özel.")}\n\n`
+        : `🔒 ${t("Giriş, TP ve SL seviyeleri {tier} üyelere özel — bu seviyeler olmadan pozisyon yönetilemez.", { tier: ACCESS_TIER_LABEL[requiredTier] })}\n\n`) +
+      `⚠️ ${t("Bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Pozisyon büyüklüğünü ve riskini kendi toleransına göre belirle. Geçmiş sonuçlar gelecekteki sonuçları garanti etmez.")}\n\n` +
+      (openLevels
+        ? `👉 <a href="${at("/signals")}">${t("Tüm işlem geçmişi ve anlık bildirimler")}: fxpartner.global${localePath(locale, "/signals")}</a>\n\n`
+        : `👉 <a href="${at("/paketler")}">${t("Seviyeleri anlık görmek için paketlere göz atın")}</a>\n\n`) +
+      telegramContactCta()
+    );
+  };
+
+  const caption = buildCaption("tr");
 
   const result = await sendTelegramPhoto(imageUrl, caption, { inlineKeyboard: mainServicesKeyboard() });
+
+  // The Arabic channel, when it exists. Deliberately after the Turkish send
+  // and deliberately swallowed: the Turkish post is the one with 16k readers
+  // waiting on it, and a failure to mirror must never fail the request that
+  // published it or block the DB write below.
+  const arChat = arabicChatId();
+  if (arChat) {
+    try {
+      await sendTelegramPhoto(imageUrl, buildCaption("ar"), {
+        chatId: arChat,
+        inlineKeyboard: mainServicesKeyboard("ar"),
+      });
+    } catch (err) {
+      console.error("Arabic channel mirror failed:", err);
+    }
+  }
 
   // Best-effort: X posting failing (rate limit, expired token, etc.) should
   // never take down the Telegram send, which is the primary channel.

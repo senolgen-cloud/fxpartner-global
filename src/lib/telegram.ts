@@ -1,4 +1,6 @@
 import { brokers } from "@/data/brokers";
+import { formatMessage } from "@/lib/chrome";
+import { localePath, type Locale } from "@/lib/i18n";
 
 const API_BASE = "https://api.telegram.org";
 
@@ -21,8 +23,10 @@ export function telegramContactCta(): string {
   return `📩 Detaylı Bilgi ve İletişim: ${CONTACT_HANDLE}`;
 }
 
-export function contactButtonRow(): InlineKeyboardButton[] {
-  return [{ text: "📩 Detaylı Bilgi ve İletişim", url: CONTACT_URL }];
+export function contactButtonRow(locale: Locale = "tr"): InlineKeyboardButton[] {
+  return [
+    { text: `📩 ${formatMessage(locale, "Detaylı Bilgi ve İletişim", {})}`, url: CONTACT_URL },
+  ];
 }
 
 // One shared set of buttons pointing at FXPARTNER's three core services,
@@ -54,19 +58,36 @@ export function topBrokerButtonRow(): InlineKeyboardButton[] {
     }));
 }
 
-export function mainServicesKeyboard(): InlineKeyboardButton[][] {
+/**
+ * The Arabic channel, or null when there is not one yet.
+ *
+ * Null is the normal state until a channel exists and TELEGRAM_AR_CHAT_ID is
+ * set in the environment, and every caller treats it as "skip" rather than
+ * an error. That is what makes this safe to ship before the channel is
+ * created: nothing is sent, nothing throws, and the day the variable appears
+ * the Arabic posts start without another deploy.
+ */
+export function arabicChatId(): string | null {
+  return process.env.TELEGRAM_AR_CHAT_ID?.trim() || null;
+}
+
+export function mainServicesKeyboard(locale: Locale = "tr"): InlineKeyboardButton[][] {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
+  // Links go to the reader's own tree: an Arabic post that lands a reader on
+  // a Turkish page has wasted the translation.
+  const at = (path: string) => `${siteUrl}${localePath(locale, path)}`;
+  const t = (text: string) => formatMessage(locale, text, {});
   return [
     [
-      { text: "📈 Sinyaller", url: `${siteUrl}/signals` },
-      { text: "🤖 AI Asistan", url: `${siteUrl}/ai-asistan` },
+      { text: `📈 ${t("Sinyaller")}`, url: at("/signals") },
+      { text: `🤖 ${t("AI Asistan")}`, url: at("/ai-asistan") },
     ],
-    [{ text: "📊 Broker Karşılaştırmaları", url: siteUrl }],
+    [{ text: `📊 ${t("Broker Karşılaştırmaları")}`, url: at("/brokerlar") }],
     // Three across: Telegram shrinks the label to fit the row, and these are
     // short enough to stay readable where "📊 Broker Karşılaştırmaları"
     // needs a row to itself.
     topBrokerButtonRow(),
-    contactButtonRow(),
+    contactButtonRow(locale),
   ];
 }
 
@@ -107,11 +128,13 @@ export async function sendTelegramMessage(
     // announcement — "that pending order was cancelled" — is unreadable as a
     // bare new post; it has to hang off the message it is about.
     replyToMessageId?: string;
+    /** Overrides the main channel — see arabicChatId(). */
+    chatId?: string;
   } = {}
 ) {
   const { chatId } = getConfig();
   return callTelegram("sendMessage", {
-    chat_id: chatId,
+    chat_id: options.chatId ?? chatId,
     text,
     parse_mode: "HTML",
     disable_web_page_preview: options.disablePreview ?? false,
@@ -132,11 +155,16 @@ export async function sendTelegramMessage(
 export async function sendTelegramPhoto(
   photoUrl: string,
   caption: string,
-  options: { replyToMessageId?: string; inlineKeyboard?: InlineKeyboardButton[][] } = {}
+  options: {
+    replyToMessageId?: string;
+    inlineKeyboard?: InlineKeyboardButton[][];
+    /** Overrides the main channel — see arabicChatId(). */
+    chatId?: string;
+  } = {}
 ) {
   const { chatId } = getConfig();
   return callTelegram("sendPhoto", {
-    chat_id: chatId,
+    chat_id: options.chatId ?? chatId,
     photo: photoUrl,
     caption,
     parse_mode: "HTML",

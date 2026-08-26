@@ -108,7 +108,7 @@ export default function SentimentPoll() {
   }
 
   if (!counts) {
-    return <div className="animate-pulse text-xs text-text-on-ink-muted">Yükleniyor…</div>;
+    return <div className="animate-pulse text-xs text-text-on-ink-muted">{tr("Yükleniyor…")}</div>;
   }
 
   return (
