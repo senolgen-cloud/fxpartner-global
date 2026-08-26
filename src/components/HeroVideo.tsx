@@ -42,7 +42,7 @@ export default function HeroVideo() {
       <video
         ref={videoRef}
         className="h-full w-full object-cover opacity-20 mix-blend-screen"
-        src={shouldLoad ? "/videos/network-globe-opener.mp4" : undefined}
+        src={shouldLoad ? "/videos/yapay-zeka-intro.mp4" : undefined}
         autoPlay={shouldLoad}
         muted
         loop
