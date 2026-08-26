@@ -149,7 +149,7 @@ export default function NotificationBell({
           <div
             ref={panel}
             style={{ top: pos.top, left: pos.left, width: pos.width }}
-            className="fixed z-50 overflow-hidden rounded-2xl border border-hairline bg-ink-soft text-left shadow-2xl motion-safe:animate-[fadeIn_0.15s_ease-out]"
+            className="fixed z-50 overflow-hidden rounded-2xl border border-hairline bg-ink-soft text-start shadow-2xl motion-safe:animate-[fadeIn_0.15s_ease-out]"
           >
             <p className="border-b border-hairline px-4 py-3 font-mono text-[10px] uppercase tracking-[0.18em] text-text-on-ink-muted">
               {tr("Bildirimler")}

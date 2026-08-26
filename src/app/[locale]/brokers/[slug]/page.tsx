@@ -254,7 +254,7 @@ export default async function BrokerDetailPage({
         target="_blank"
         rel="noopener noreferrer sponsored"
         aria-label={trf("{broker} - Resmi Sitesi", { broker: broker.name })}
-        className="group fixed right-3 top-1/2 z-40 flex -translate-y-1/2 items-center gap-2 rounded-full bg-signal py-3 pl-3 pr-3 text-on-signal shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur transition-all duration-200 hover:bg-signal-strong hover:pr-5 active:scale-95 sm:right-5"
+        className="group fixed right-3 top-1/2 z-40 flex -translate-y-1/2 items-center gap-2 rounded-full bg-signal py-3 ps-3 pe-3 text-on-signal shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur transition-all duration-200 hover:bg-signal-strong hover:pe-5 active:scale-95 sm:right-5"
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
           <path d="M13 5l7 7-7 7M5 12h14" />
@@ -577,22 +577,22 @@ export default async function BrokerDetailPage({
                   {tr("Hesap Türleri")}
                 </h2>
                 <div className="mt-5 overflow-x-auto rounded-2xl border border-hairline-light">
-                  <table className="w-full min-w-[480px] border-collapse text-left text-sm">
+                  <table className="w-full min-w-[480px] border-collapse text-start text-sm">
                     <thead>
                       <tr className="border-b border-hairline-light bg-paper font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">
-                        <th className="py-3 pl-5 pr-4 font-medium">Hesap</th>
-                        <th className="py-3 pr-4 font-medium">Spread</th>
-                        <th className="py-3 pr-4 font-medium">Komisyon</th>
-                        <th className="py-3 pr-5 font-medium">{tr("Min. Yatırım")}</th>
+                        <th className="py-3 ps-5 pe-4 font-medium">Hesap</th>
+                        <th className="py-3 pe-4 font-medium">Spread</th>
+                        <th className="py-3 pe-4 font-medium">Komisyon</th>
+                        <th className="py-3 pe-5 font-medium">{tr("Min. Yatırım")}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-hairline-light">
                       {broker.deepDive.accountTypes.map((acc) => (
                         <tr key={acc.name} className="transition-colors hover:bg-paper">
-                          <td className="py-3 pl-5 pr-4 font-medium text-text-dark">{acc.name}</td>
-                          <td className="py-3 pr-4 text-text-dark/90">{acc.spread}</td>
-                          <td className="py-3 pr-4 text-text-dark/90">{acc.commission}</td>
-                          <td className="py-3 pr-5 text-text-dark/90">{acc.minDeposit}</td>
+                          <td className="py-3 ps-5 pe-4 font-medium text-text-dark">{acc.name}</td>
+                          <td className="py-3 pe-4 text-text-dark/90">{acc.spread}</td>
+                          <td className="py-3 pe-4 text-text-dark/90">{acc.commission}</td>
+                          <td className="py-3 pe-5 text-text-dark/90">{acc.minDeposit}</td>
                         </tr>
                       ))}
                     </tbody>

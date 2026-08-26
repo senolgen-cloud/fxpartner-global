@@ -27,7 +27,7 @@ export default function StickyCTA({ brokerCount }: { brokerCount: number }) {
           : "pointer-events-none translate-y-4 opacity-0"
       }`}
     >
-      <div className="mx-auto flex max-w-xl items-center justify-between gap-4 rounded-full border border-hairline bg-ink/90 py-2.5 pl-5 pr-2.5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-md">
+      <div className="mx-auto flex max-w-xl items-center justify-between gap-4 rounded-full border border-hairline bg-ink/90 py-2.5 ps-5 pe-2.5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-md">
         <div className="min-w-0">
           <p className="truncate text-sm font-medium text-text-on-ink">
             {brokerCount} broker · ücretsiz karşılaştırma

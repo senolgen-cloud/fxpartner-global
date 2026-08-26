@@ -25,6 +25,7 @@ const BATCH_SIZE = 25;
 
 const LOCALE_NAMES = {
   uk: "Ukrainian (українська)",
+  ar: "Arabic (العربية), Modern Standard Arabic as written for a Gulf/UAE readership",
   en: "English",
   ru: "Russian (русский)",
   de: "German (Deutsch)",

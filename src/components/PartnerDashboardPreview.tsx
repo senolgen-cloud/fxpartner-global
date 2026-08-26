@@ -44,7 +44,7 @@ export default function PartnerDashboardPreview() {
             {tr("Partner Paneli · Örnek önizleme")}
           </p>
         </div>
-        <div className="rounded-xl border border-gold/30 bg-gold/10 px-3 py-2 text-right">
+        <div className="rounded-xl border border-gold/30 bg-gold/10 px-3 py-2 text-end">
           <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-gold">
             Bu Ay
           </p>

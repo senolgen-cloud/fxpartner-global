@@ -37,7 +37,7 @@ export default function StatementFigure({
   const { ref, display } = useCountUp(value, 1100, decimals, locale);
 
   return (
-    <div ref={ref} className="flex-1 px-5 py-4 text-center sm:text-left">
+    <div ref={ref} className="flex-1 px-5 py-4 text-center sm:text-start">
       <div className="flex items-center justify-center gap-1.5 sm:justify-start">
         {live && (
           <span

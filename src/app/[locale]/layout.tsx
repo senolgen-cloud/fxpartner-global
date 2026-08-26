@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Geist, JetBrains_Mono, Poppins } from "next/font/google";
+import { Geist, JetBrains_Mono, Noto_Sans_Arabic, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import NotificationOptIn from "@/components/NotificationOptIn";
 import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
@@ -22,7 +22,16 @@ import { localizeBrokers } from "@/lib/localizeContent";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import { auth } from "@/auth";
 import { LocaleProvider } from "@/components/LocaleProvider";
-import { hreflangMap, htmlLang, isLocale, locales, localePath, ogLocale, type Locale } from "@/lib/i18n";
+import {
+  hreflangMap,
+  htmlLang,
+  isLocale,
+  localeDir,
+  locales,
+  localePath,
+  ogLocale,
+  type Locale,
+} from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionary";
 import { setServerLocale } from "@/lib/serverLocale";
 import "../globals.css";
@@ -44,6 +53,21 @@ const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
+});
+
+// Geist, Poppins and JetBrains Mono are all latin-only: an Arabic page set
+// in them falls back to whatever the device happens to have, which on
+// Windows is Times-like and on Android is often nothing at all. Noto Sans
+// Arabic covers the script properly and carries the weights the display and
+// body faces use, so /ar reads as one typeface rather than three.
+//
+// Loaded on every tree because next/font emits the CSS variable at build
+// time and only the /ar tree references it — the font file itself is
+// fetched by a browser that actually renders Arabic glyphs.
+const notoArabic = Noto_Sans_Arabic({
+  variable: "--font-arabic",
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
 });
 
 // Per-locale, because the title, the description and above all the
@@ -175,7 +199,11 @@ export default async function RootLayout({
   return (
     <html
       lang={htmlLang[locale]}
-      className={`${geist.variable} ${jetbrainsMono.variable} ${poppins.variable} h-full antialiased`}
+      // On <html>, not lower: set anywhere else and the browser still lays
+      // the page out left to right around it, which leaves the scrollbar,
+      // the list markers and every inline arrow on the wrong side.
+      dir={localeDir[locale]}
+      className={`${geist.variable} ${jetbrainsMono.variable} ${poppins.variable} ${notoArabic.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-text-dark pb-24 sm:pb-12">
         <script

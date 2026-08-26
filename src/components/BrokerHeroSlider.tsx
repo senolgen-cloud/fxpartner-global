@@ -61,7 +61,7 @@ function Card({ broker }: { broker: Broker }) {
 
 function Row({ brokers, hidden }: { brokers: Broker[]; hidden?: boolean }) {
   return (
-    <div aria-hidden={hidden || undefined} className="flex shrink-0 items-center gap-4 pr-4">
+    <div aria-hidden={hidden || undefined} className="flex shrink-0 items-center gap-4 pe-4">
       {brokers.map((b, i) => (
         <Card key={`${hidden ? "dup" : "src"}-${b.slug}-${i}`} broker={b} />
       ))}
@@ -127,7 +127,7 @@ export default function BrokerHeroSlider({ brokers }: { brokers: Broker[] }) {
           pausedRef.current = false;
         }}
       >
-        <div ref={trackRef} className="flex w-max pl-6">
+        <div ref={trackRef} className="flex w-max ps-6">
           <div ref={rowRef}>
             <Row brokers={sorted} />
           </div>

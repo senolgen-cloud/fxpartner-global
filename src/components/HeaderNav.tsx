@@ -114,7 +114,7 @@ export default function HeaderNav({
         </div>
       </nav>
 
-      <div className="hidden items-center gap-2 border-l border-hairline pl-2.5 xl:flex">
+      <div className="hidden items-center gap-2 border-l border-hairline ps-2.5 xl:flex">
         <LocaleSwitcher compact />
         {signedIn ? (
           <Link

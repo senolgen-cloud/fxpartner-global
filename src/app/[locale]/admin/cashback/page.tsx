@@ -83,7 +83,7 @@ export default async function AdminCashbackPage({
                       {lead.source}
                       {lead.campaign ? ` · ${lead.campaign}` : ""}
                       {lead.landingPath && (
-                        <span className="ml-2 tracking-normal text-text-muted normal-case">
+                        <span className="ms-2 tracking-normal text-text-muted normal-case">
                           {lead.landingPath}
                         </span>
                       )}

@@ -95,7 +95,7 @@ export default function HeroBrokerSearch() {
             <a
               key={s.href}
               href={s.href}
-              className="block border-b border-hairline px-4 py-3 text-left transition-colors last:border-b-0 hover:bg-ink"
+              className="block border-b border-hairline px-4 py-3 text-start transition-colors last:border-b-0 hover:bg-ink"
             >
               <span className="notranslate block text-sm font-medium text-text-on-ink">
                 {s.name}

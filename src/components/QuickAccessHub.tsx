@@ -179,7 +179,7 @@ export default function QuickAccessHub({ topBrokers }: { topBrokers: Broker[] })
                 href="https://t.me/fxpartnerglobal"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-auto shrink-0 rounded-full bg-signal px-3 py-1.5 text-[11px] font-medium text-on-signal transition-colors hover:bg-signal-strong"
+                className="ms-auto shrink-0 rounded-full bg-signal px-3 py-1.5 text-[11px] font-medium text-on-signal transition-colors hover:bg-signal-strong"
               >
                 {tr("Katıl")}
               </a>
@@ -198,7 +198,7 @@ export default function QuickAccessHub({ topBrokers }: { topBrokers: Broker[] })
                 href="https://t.me/fxpartner_chat_bot?start=site"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-auto shrink-0 rounded-full border border-hairline px-3 py-1.5 text-[11px] font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
+                className="ms-auto shrink-0 rounded-full border border-hairline px-3 py-1.5 text-[11px] font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
               >
                 {tr("Başlat")}
               </a>
@@ -217,7 +217,7 @@ export default function QuickAccessHub({ topBrokers }: { topBrokers: Broker[] })
                 href="https://x.com/fxpartner_TR"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-auto shrink-0 rounded-full border border-hairline px-3 py-1.5 text-[11px] font-medium text-text-on-ink transition-colors hover:border-text-on-ink"
+                className="ms-auto shrink-0 rounded-full border border-hairline px-3 py-1.5 text-[11px] font-medium text-text-on-ink transition-colors hover:border-text-on-ink"
               >
                 Takip Et
               </a>

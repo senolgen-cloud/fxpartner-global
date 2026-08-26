@@ -305,7 +305,7 @@ export default async function PaketlerPage({
 
         {/* CTA banner */}
         <section className="mx-auto max-w-5xl px-6 py-16">
-          <div className="flex flex-col items-center justify-between gap-8 rounded-2xl border border-hairline bg-ink-soft p-8 text-center md:flex-row md:text-left">
+          <div className="flex flex-col items-center justify-between gap-8 rounded-2xl border border-hairline bg-ink-soft p-8 text-center md:flex-row md:text-start">
             <div>
               <p className="font-display text-2xl font-semibold">
                 {tr("Piyasayı takip etmek yerine,")}{" "}

@@ -2,6 +2,7 @@ import { defaultLocale, intlLocale, type Locale } from "@/lib/i18n";
 import { getServerLocale } from "@/lib/serverLocale";
 import uk from "@/data/i18n/uk/chrome.json";
 import en from "@/data/i18n/en/chrome.json";
+import ar from "@/data/i18n/ar/chrome.json";
 
 // Page and component copy — the headings, paragraphs and button labels that
 // live in JSX rather than in src/data.
@@ -14,7 +15,7 @@ import en from "@/data/i18n/en/chrome.json";
 
 type Overlay = Record<string, string>;
 
-const overlays: Partial<Record<Locale, Overlay>> = { ua: uk, en };
+const overlays: Partial<Record<Locale, Overlay>> = { ua: uk, en, ar };
 
 export function translateChrome(locale: Locale, text: string): string {
   if (locale === defaultLocale) return text;

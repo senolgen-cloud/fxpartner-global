@@ -85,7 +85,7 @@ export default function LanguageSwitcher() {
             <button
               type="button"
               onClick={() => selectLanguage(TURKISH)}
-              className={`flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition-colors hover:bg-ink ${
+              className={`flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-start text-sm transition-colors hover:bg-ink ${
                 current.lang === "tr" ? "text-signal" : "text-text-on-ink"
               }`}
             >
@@ -97,7 +97,7 @@ export default function LanguageSwitcher() {
                 key={c.code}
                 type="button"
                 onClick={() => selectLanguage(c)}
-                className={`flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition-colors hover:bg-ink ${
+                className={`flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-start text-sm transition-colors hover:bg-ink ${
                   current.lang === c.lang && current.code === c.code
                     ? "text-signal"
                     : "text-text-on-ink"

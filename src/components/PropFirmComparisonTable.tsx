@@ -241,7 +241,7 @@ export default function PropFirmComparisonTable() {
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-hairline">
-        <table className="w-full min-w-[1020px] border-collapse text-left">
+        <table className="w-full min-w-[1020px] border-collapse text-start">
           <thead>
             <tr className="border-b border-hairline bg-ink-soft">
               <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
@@ -323,7 +323,7 @@ export default function PropFirmComparisonTable() {
                       </span>
                     </td>
 
-                    <td className="px-5 py-4 text-right">
+                    <td className="px-5 py-4 text-end">
                       <div className="flex items-center justify-end gap-4">
                         <button
                           type="button"

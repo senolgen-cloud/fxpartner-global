@@ -5,7 +5,7 @@ import type { TickerPair } from "@/lib/rates";
 
 function TickerRow({ pairs }: { pairs: TickerPair[] }) {
   return (
-    <div className="flex shrink-0 items-center gap-8 pr-8">
+    <div className="flex shrink-0 items-center gap-8 pe-8">
       {pairs.map((p) => (
         <div key={p.symbol} className="flex items-center gap-2 whitespace-nowrap">
           <span className="font-mono text-xs tracking-wide text-text-on-ink-muted">

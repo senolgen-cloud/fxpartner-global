@@ -19,7 +19,7 @@ export default function PartnerFAQ() {
               type="button"
               onClick={() => setOpenIndex(isOpen ? null : i)}
               aria-expanded={isOpen}
-              className="flex w-full items-center justify-between gap-4 py-5 text-left"
+              className="flex w-full items-center justify-between gap-4 py-5 text-start"
             >
               <span className="font-poppins text-base font-semibold text-text-dark">
                 {item.question}

@@ -200,7 +200,7 @@ export default async function EducationPostPage({
                 {neighbours.next && (
                   <Link
                     href={`/egitim/${neighbours.next.slug}`}
-                    className="group rounded-2xl border border-hairline-light p-5 text-right transition-colors hover:border-signal"
+                    className="group rounded-2xl border border-hairline-light p-5 text-end transition-colors hover:border-signal"
                   >
                     <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-signal">
                       {trf("Ders {n} →", { n: neighbours.next.lessonNo ?? 0 })}

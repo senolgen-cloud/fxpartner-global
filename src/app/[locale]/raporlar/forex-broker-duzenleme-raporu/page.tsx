@@ -169,7 +169,7 @@ export default async function RegulationReportPage({
               {tr("Bir broker birden fazla düzenleyici altında lisanslı olabileceği için toplam, incelenen broker sayısından fazla olabilir.")}
             </p>
             <div className="mt-6 overflow-x-auto rounded-2xl border border-hairline-light">
-              <table className="w-full min-w-[420px] text-left text-sm">
+              <table className="w-full min-w-[420px] text-start text-sm">
                 <thead className="bg-paper text-xs uppercase tracking-[0.1em] text-text-muted">
                   <tr>
                     <th className="px-4 py-3 font-medium">{tr("Düzenleyici")}</th>
@@ -201,7 +201,7 @@ export default async function RegulationReportPage({
               {tr("Kategoriye göre broker sayısı")}
             </h2>
             <div className="mt-6 overflow-x-auto rounded-2xl border border-hairline-light">
-              <table className="w-full min-w-[420px] text-left text-sm">
+              <table className="w-full min-w-[420px] text-start text-sm">
                 <thead className="bg-paper text-xs uppercase tracking-[0.1em] text-text-muted">
                   <tr>
                     <th className="px-4 py-3 font-medium">Kategori</th>
@@ -233,7 +233,7 @@ export default async function RegulationReportPage({
               {tr("Düzenleme, maliyet, platform ve çekim güvenilirliği eksenlerinin ortalamasından hesaplanan bileşik puana göre sıralanmıştır. Tam metodoloji için her broker'ın kendi inceleme sayfasındaki eksen kırılımına bakabilirsiniz.")}
             </p>
             <div className="mt-6 overflow-x-auto rounded-2xl border border-hairline-light">
-              <table className="w-full min-w-[480px] text-left text-sm">
+              <table className="w-full min-w-[480px] text-start text-sm">
                 <thead className="bg-paper text-xs uppercase tracking-[0.1em] text-text-muted">
                   <tr>
                     <th className="px-4 py-3 font-medium">#</th>

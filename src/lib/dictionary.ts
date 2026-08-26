@@ -1,6 +1,7 @@
 import { defaultLocale, type Locale } from "@/lib/i18n";
 import uk from "@/data/i18n/uk/ui.json";
 import en from "@/data/i18n/en/ui.json";
+import ar from "@/data/i18n/ar/ui.json";
 
 // UI chrome — the strings that aren't editorial content: titles, nav labels,
 // buttons, the standing disclaimer. Turkish is the source and lives here in
@@ -99,7 +100,7 @@ export type UiKey = keyof typeof tr;
 export type Dictionary = Record<UiKey, string>;
 
 // Keyed by URL segment: the Ukrainian tree is /ua, its strings are uk.json.
-const overlays: Partial<Record<Locale, Record<string, string>>> = { ua: uk, en };
+const overlays: Partial<Record<Locale, Record<string, string>>> = { ua: uk, en, ar };
 
 export function getDictionary(locale: Locale): Dictionary {
   if (locale === defaultLocale) return tr;

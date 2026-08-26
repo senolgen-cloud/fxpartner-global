@@ -62,6 +62,36 @@ body {
   font-family: var(--font-sans);
 }
 
+/* The Arabic tree.
+ *
+ * Geist, Poppins and JetBrains Mono are all latin-only, so an Arabic page
+ * set in them falls back to whatever the device happens to have — Times on
+ * Windows, sometimes nothing on Android. Noto Sans Arabic leads every text
+ * stack here, with the latin faces kept behind it for the Latin runs that
+ * stay Latin on this page anyway: broker names, MT5, EURUSD, licence
+ * numbers.
+ *
+ * Mono is the exception and keeps JetBrains first. Everything it sets is a
+ * price, a lot size or a pair code, and tabular alignment is the entire
+ * reason that face is there.
+ */
+[dir="rtl"] {
+  --font-display: var(--font-arabic), var(--font-geist), system-ui, sans-serif;
+  --font-sans: var(--font-arabic), var(--font-geist), system-ui, sans-serif;
+  --font-poppins: var(--font-arabic), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), var(--font-arabic), ui-monospace, monospace;
+}
+
+/* Arabic joins. Letter-spacing is a latin device, and the tracked-out
+ * small-caps treatment this site uses for eyebrows turns Arabic into a
+ * smear of disconnected glyphs. Zeroed across the tree rather than per
+ * utility: there is no width of tracking that is correct for this script,
+ * and a substring match needs none of the escaping that an arbitrary-value
+ * class selector does. */
+[dir="rtl"] [class*="tracking-"] {
+  letter-spacing: 0;
+}
+
 ::selection {
   background: var(--signal);
   color: var(--on-signal);

@@ -84,7 +84,7 @@ export default function StepTimeline() {
             ref={(el) => {
               stepRefs.current[i] = el;
             }}
-            className="relative pl-12 sm:pl-16"
+            className="relative ps-12 sm:ps-16"
           >
             <div className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full border border-signal bg-paper-high font-mono text-xs font-semibold text-signal sm:h-10 sm:w-10">
               {i + 1}

@@ -43,7 +43,7 @@ export default function ComparisonTable() {
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-hairline">
-        <table className="w-full min-w-[840px] border-collapse text-left">
+        <table className="w-full min-w-[840px] border-collapse text-start">
           <thead>
             <tr className="border-b border-hairline bg-ink-soft">
               <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
@@ -117,7 +117,7 @@ export default function ComparisonTable() {
                     <td className="px-5 py-4 font-mono text-xs text-text-on-ink-muted">
                       {b.platforms.join(" / ")}
                     </td>
-                    <td className="px-5 py-4 text-right">
+                    <td className="px-5 py-4 text-end">
                       <Link
                         href={`/brokers/${b.slug}`}
                         title={`${b.name} tam inceleme`}

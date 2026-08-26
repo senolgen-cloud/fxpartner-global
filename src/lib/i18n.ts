@@ -1,4 +1,4 @@
-// Locale config for the /tr, /ua and /en trees.
+// Locale config for the /tr, /ua, /en and /ar trees.
 //
 // Every locale is prefixed, Turkish included: fxpartner.global/tr/blog/x. The
 // old unprefixed URLs are still out in Telegram posts, tweets and Google's
@@ -6,7 +6,7 @@
 // rather than serving them: one canonical URL per page, and the tree a reader
 // is in is always visible in the address bar.
 
-export const locales = ["tr", "ua", "en"] as const;
+export const locales = ["tr", "ua", "en", "ar"] as const;
 export type Locale = (typeof locales)[number];
 
 export const defaultLocale: Locale = "tr";
@@ -19,6 +19,18 @@ export const htmlLang: Record<Locale, string> = {
   tr: "tr",
   ua: "uk",
   en: "en",
+  ar: "ar",
+};
+
+// Arabic is the only tree that reads right to left, and the direction has to
+// reach the <html> element: set anywhere lower and the browser still lays the
+// page out left to right around it, which puts the scrollbar, the list
+// bullets and every inline arrow on the wrong side.
+export const localeDir: Record<Locale, "ltr" | "rtl"> = {
+  tr: "ltr",
+  ua: "ltr",
+  en: "ltr",
+  ar: "rtl",
 };
 
 // What hreflang advertises for each tree.
@@ -26,6 +38,7 @@ export const hreflangCode: Record<Locale, string> = {
   tr: "tr",
   ua: "uk",
   en: "en",
+  ar: "ar",
 };
 
 /**
@@ -50,6 +63,9 @@ export const ogLocale: Record<Locale, string> = {
   tr: "tr_TR",
   ua: "uk_UA",
   en: "en_US",
+  // AE rather than a generic ar: the audience this tree is for is the Gulf,
+  // and the territory is what decides date order and numeral shape.
+  ar: "ar_AE",
 };
 
 // What Intl should use for dates and numbers. Separate from htmlLang because
@@ -60,18 +76,25 @@ export const intlLocale: Record<Locale, string> = {
   tr: "tr-TR",
   ua: "uk-UA",
   en: "en-GB",
+  // -u-nu-latn forces Western digits. Left to itself, ar-AE formats numbers
+  // in Eastern Arabic numerals (١٫١٦٧١٣), and this site is full of prices,
+  // lot sizes and licence numbers that a trader reads against MT5 and a
+  // broker's own dashboard — both of which show 1.16713.
+  ar: "ar-AE-u-nu-latn",
 };
 
 export const localeLabel: Record<Locale, string> = {
   tr: "Türkçe",
   ua: "Українська",
   en: "English",
+  ar: "العربية",
 };
 
 export const localeFlag: Record<Locale, string> = {
   tr: "🇹🇷",
   ua: "🇺🇦",
   en: "🇬🇧",
+  ar: "🇦🇪",
 };
 
 export function isLocale(value: string): value is Locale {

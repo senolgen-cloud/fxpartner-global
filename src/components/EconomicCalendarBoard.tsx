@@ -75,9 +75,9 @@ function EventRow({ event, intl }: { event: EconomicEvent; intl: string }) {
         {FLAGS[event.country] ?? "🏳️"}
       </span>
       <span className="text-sm text-text-on-ink">
-        <span className="mr-2 inline sm:hidden">{FLAGS[event.country] ?? "🏳️"}</span>
+        <span className="me-2 inline sm:hidden">{FLAGS[event.country] ?? "🏳️"}</span>
         {event.title}
-        <span className="ml-2 font-mono text-[10px] uppercase text-text-on-ink-muted">{event.country}</span>
+        <span className="ms-2 font-mono text-[10px] uppercase text-text-on-ink-muted">{event.country}</span>
       </span>
       <span
         className="hidden font-mono text-[10px] font-semibold uppercase tracking-wide sm:block"

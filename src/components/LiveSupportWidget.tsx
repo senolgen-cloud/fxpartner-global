@@ -46,7 +46,7 @@ export default function LiveSupportWidget() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2.5 rounded-full border border-hairline bg-ink py-2 pl-3 pr-4 text-sm font-medium text-text-on-ink shadow-xl transition-colors hover:border-signal hover:text-signal"
+            className="flex items-center gap-2.5 rounded-full border border-hairline bg-ink py-2 ps-3 pe-4 text-sm font-medium text-text-on-ink shadow-xl transition-colors hover:border-signal hover:text-signal"
           >
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#25D366]/15 text-[#25D366]">
               <WhatsAppIcon />
@@ -57,7 +57,7 @@ export default function LiveSupportWidget() {
             href={TELEGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2.5 rounded-full border border-hairline bg-ink py-2 pl-3 pr-4 text-sm font-medium text-text-on-ink shadow-xl transition-colors hover:border-signal hover:text-signal"
+            className="flex items-center gap-2.5 rounded-full border border-hairline bg-ink py-2 ps-3 pe-4 text-sm font-medium text-text-on-ink shadow-xl transition-colors hover:border-signal hover:text-signal"
           >
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-signal/15 text-signal">
               <TelegramIcon />

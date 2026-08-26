@@ -485,7 +485,7 @@ function PipsStats({ closed }: { closed: Signal[] }) {
                       {p.dominated && (
                         <span
                           title={tr("Bu toplamın yarısından fazlasını tek bir işlem oluşturuyor — medyana bakın")}
-                          className="ml-1.5 cursor-help font-mono text-[11px] text-gold"
+                          className="ms-1.5 cursor-help font-mono text-[11px] text-gold"
                         >
                           ⚠
                         </span>
@@ -574,7 +574,7 @@ function PairMark({ pair }: { pair: string }) {
       <span
         key={i}
         className={`flex h-9 w-9 items-center justify-center rounded-full border border-hairline bg-ink text-base ${
-          i > 0 ? "-ml-3" : ""
+          i > 0 ? "-ms-3" : ""
         }`}
         style={{ zIndex: 2 - i }}
         aria-hidden="true"
@@ -1168,7 +1168,7 @@ export default function SignalsBoard({
                 </span>
                 <PerformanceRing rate={winRate} />
               </div>
-              <div className="grid w-full grid-cols-3 gap-2 border-t border-hairline pt-5 text-center sm:flex-1 sm:border-l sm:border-t-0 sm:pl-10 sm:pt-0">
+              <div className="grid w-full grid-cols-3 gap-2 border-t border-hairline pt-5 text-center sm:flex-1 sm:border-l sm:border-t-0 sm:ps-10 sm:pt-0">
                 <div>
                   <div className="tabular-stat font-display text-xl font-semibold">
                     {active.length + closed.length}

@@ -218,7 +218,7 @@ export default async function IndirimKodlariPage({
                     className="font-poppins text-sm font-semibold text-text-on-ink hover:text-signal"
                   >
                     {firm.name}
-                    <span className="ml-2 font-mono text-[10px] uppercase tracking-[0.1em] text-text-on-ink-muted">
+                    <span className="ms-2 font-mono text-[10px] uppercase tracking-[0.1em] text-text-on-ink-muted">
                       {firm.segment === "futures" ? "Futures" : "CFD"}
                     </span>
                   </Link>

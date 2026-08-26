@@ -350,7 +350,7 @@ export default async function PropFirmDetailPage({
                       {d.code}
                     </span>
                     {typeof d.percent === "number" && (
-                      <span className="ml-2 font-semibold text-gold">%{d.percent}</span>
+                      <span className="ms-2 font-semibold text-gold">%{d.percent}</span>
                     )}
                   </Link>
                 )}
@@ -398,7 +398,7 @@ export default async function PropFirmDetailPage({
                 {tr("Elenmelerin büyük çoğunluğu kâr hedefine ulaşamamaktan değil, zarar limitinin aşılmasından kaynaklanır. Aşağıdaki limitler, işlem başına riskinizi belirlemeniz gereken sınırlardır.")}
               </p>
               <div className="mt-6 overflow-x-auto rounded-2xl border border-hairline-light">
-                <table className="w-full min-w-[620px] border-collapse text-left text-sm">
+                <table className="w-full min-w-[620px] border-collapse text-start text-sm">
                   <thead>
                     <tr className="border-b border-hairline-light bg-paper">
                       {["Plan", "Kâr Hedefi", "Günlük Zarar", "Toplam Zarar", "Min. Gün", "Ücret"]

@@ -186,7 +186,7 @@ export default function AiMarketAssistant({ signedIn = true }: { signedIn?: bool
             type="button"
             onClick={() => send(q)}
             disabled={loading}
-            className="flex items-center gap-2 rounded-full border border-hairline bg-ink-soft px-4 py-2 text-left text-sm text-text-on-ink-muted transition-colors hover:border-signal hover:text-text-on-ink disabled:opacity-50"
+            className="flex items-center gap-2 rounded-full border border-hairline bg-ink-soft px-4 py-2 text-start text-sm text-text-on-ink-muted transition-colors hover:border-signal hover:text-text-on-ink disabled:opacity-50"
           >
             <span className="text-signal">⚡</span>
             {q}

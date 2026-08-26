@@ -65,7 +65,7 @@ export default async function AuthShell({
         <div className="mx-auto flex w-full max-w-md items-center justify-between">
           <Link
             href="/"
-            className="-ml-1 whitespace-nowrap rounded-full px-2 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-text-on-ink-muted transition-colors hover:text-text-on-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
+            className="-ms-1 whitespace-nowrap rounded-full px-2 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-text-on-ink-muted transition-colors hover:text-text-on-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
           >
             {tr("← Ana sayfa")}
           </Link>

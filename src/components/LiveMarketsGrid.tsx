@@ -55,7 +55,7 @@ function MarketCard({ pair }: { pair: TickerPair }) {
           <span className="notranslate font-display text-lg font-semibold text-text-on-ink">
             {pair.symbol.replace("/", "")}
           </span>
-          <span className="ml-2 text-xs text-text-on-ink-muted">{meta.label}</span>
+          <span className="ms-2 text-xs text-text-on-ink-muted">{meta.label}</span>
         </div>
         {pair.delta && (
           <span

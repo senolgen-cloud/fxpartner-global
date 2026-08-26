@@ -130,7 +130,7 @@ export default function PropFirmFeaturedCard() {
               {d.code}
             </span>
             {typeof d.percent === "number" && (
-              <span className="ml-2 font-semibold text-gold">%{d.percent}</span>
+              <span className="ms-2 font-semibold text-gold">%{d.percent}</span>
             )}
           </span>
         )}

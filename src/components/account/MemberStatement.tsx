@@ -73,7 +73,7 @@ export default function MemberStatement({
 
   return (
     <section className="overflow-hidden rounded-3xl border border-hairline-light/70 bg-gradient-to-b from-ink-soft to-ink">
-      <div className="flex flex-col items-center gap-5 px-6 pt-8 text-center sm:flex-row sm:items-center sm:gap-6 sm:px-8 sm:text-left">
+      <div className="flex flex-col items-center gap-5 px-6 pt-8 text-center sm:flex-row sm:items-center sm:gap-6 sm:px-8 sm:text-start">
         <span
           aria-hidden="true"
           className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full font-display text-2xl font-semibold"
