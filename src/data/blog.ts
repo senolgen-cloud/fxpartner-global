@@ -48,7 +48,7 @@ export const blogPosts: BlogPost[] = [
     //
     // Q&A headings are the point of the piece — they are what a
     // question-shaped search actually matches, and they render as h2.
-    slug: "litefinance-scalping-ecn-nilufer-altundag",
+    slug: "fxpartner-nilufer-altundag-roportaj",
     title: "Nilüfer Hoca Anlatıyor: LiteFinance ile Scalping ve ECN Deneyimi",
     excerpt:
       "FXPARTNER'dan profesyonel trader Nilüfer Altundağ'la röportaj: scalping yapan bir trader broker seçerken neye bakmalı, LiteFinance'ın ECN koşulları neden dikkat çekiyor ve \"0.0 spread\" gerçekte ne anlama geliyor.",
