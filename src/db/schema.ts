@@ -109,6 +109,34 @@ export const comments = pgTable("comment", {
   rating: integer("rating"),
   body: text("body").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
+
+  // Structured review fields, added 2026-08-27. EVERY ONE IS NULLABLE and
+  // must stay that way: the twenty reviews collected before this date have
+  // a rating and a body and nothing else, and they are real reviews that
+  // must keep rendering rather than being back-filled with invented detail.
+  // The display degrades to the old shape whenever these are absent.
+  //
+  // `body` keeps its meaning as the overall verdict, so a legacy review is
+  // simply one where only the overall was ever asked for.
+  title: text("title"),
+  // How long they have used this broker: "<1", "1-3", "3-5", "5+" (years).
+  // Free text rather than an enum so a value the form stops offering does
+  // not break rows already carrying it.
+  experience: text("experience"),
+  liked: text("liked"),
+  improved: text("improved"),
+  // Per-axis scores, 1-5. Deliberately the same four axes the FXPARTNER
+  // Index scores editorially — regulation is not among them because a
+  // trader cannot observe it, and asking them to rate it would produce a
+  // number that reads as evidence and is not.
+  ratingPlatform: integer("rating_platform"),
+  ratingPricing: integer("rating_pricing"),
+  ratingService: integer("rating_service"),
+  ratingWithdrawal: integer("rating_withdrawal"),
+  // The broker's own answer, entered by an admin. Nothing here is written
+  // by the broker directly.
+  brokerReply: text("broker_reply"),
+  brokerReplyAt: timestamp("broker_reply_at"),
 });
 
 export const cashbackAccountStatusValues = ["pending", "verified", "rejected"] as const;

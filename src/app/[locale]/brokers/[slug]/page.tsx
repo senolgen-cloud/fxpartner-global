@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr, trf, trLocale } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 import { localizeBrokerDeep, localizeBrokers, trData } from "@/lib/localizeContent";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 import Image from "next/image";
@@ -26,6 +26,7 @@ import {
 } from "@/data/brokers";
 import TrustIndex from "@/components/TrustIndex";
 import CommentForm from "@/components/CommentForm";
+import BrokerReviewCard from "@/components/BrokerReviewCard";
 import { auth } from "@/auth";
 import { db } from "@/db";
 import { comments as commentsTable, users as usersTable } from "@/db/schema";
@@ -195,6 +196,16 @@ export default async function BrokerDetailPage({
       userName: usersTable.name,
       userCountry: usersTable.country,
       guestName: commentsTable.guestName,
+      title: commentsTable.title,
+      experience: commentsTable.experience,
+      liked: commentsTable.liked,
+      improved: commentsTable.improved,
+      ratingPlatform: commentsTable.ratingPlatform,
+      ratingPricing: commentsTable.ratingPricing,
+      ratingService: commentsTable.ratingService,
+      ratingWithdrawal: commentsTable.ratingWithdrawal,
+      brokerReply: commentsTable.brokerReply,
+      brokerReplyAt: commentsTable.brokerReplyAt,
     })
     .from(commentsTable)
     .leftJoin(usersTable, eq(commentsTable.userId, usersTable.id))
@@ -797,25 +808,12 @@ export default async function BrokerDetailPage({
             {brokerComments.length > 0 && (
               <div className="mt-8 divide-y divide-hairline-light border-t border-hairline-light">
                 {brokerComments.map((c) => (
-                  <div key={c.id} className="py-5">
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium text-text-dark">
-                        {c.userName || "FXPARTNER kullanıcısı"}
-                      </span>
-                      {c.userCountry && <span aria-hidden="true">{flagEmoji(c.userCountry)}</span>}
-                      {c.rating && (
-                        <span className="font-mono text-xs text-gold">{c.rating}/5</span>
-                      )}
-                      <span className="font-mono text-xs text-text-muted">
-                        {new Date(c.createdAt).toLocaleDateString(trLocale(), {
-                          year: "numeric",
-                          month: "short",
-                          day: "numeric",
-                        })}
-                      </span>
-                    </div>
-                    <p className="mt-2 text-[15px] leading-relaxed text-text-dark/90">{c.body}</p>
-                  </div>
+                  <BrokerReviewCard
+                    key={c.id}
+                    review={c}
+                    brokerName={broker.name}
+                    flag={c.userCountry ? flagEmoji(c.userCountry) : null}
+                  />
                 ))}
               </div>
             )}
