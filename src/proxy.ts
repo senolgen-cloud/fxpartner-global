@@ -3,6 +3,7 @@ import { defaultLocale, isLocale, localePath, splitLocale } from "@/lib/i18n";
 import type { NextRequest } from "next/server";
 import { auth } from "@/auth";
 import { COUNTRY_TO_LANG } from "@/lib/countryLanguages";
+import { CONSENT_COOKIE, parseDecision, type Decision } from "@/lib/consent";
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "senolgen@gmail.com";
 
@@ -41,12 +42,11 @@ function applyAutoLanguage(request: NextRequest, response: NextResponse) {
 // benefit, and under an opt-in reading of ePrivacy they must not be written
 // before consent and must be cleared after a refusal. A banner that leaves
 // the cookies in place is decoration.
-const CONSENT_COOKIE = "fxp_consent";
-type Consent = "all" | "essential" | null;
-
-function readConsent(request: NextRequest): Consent {
-  const value = request.cookies.get(CONSENT_COOKIE)?.value;
-  return value === "all" || value === "essential" ? value : null;
+// The cookie carries the decision and the id of the row that recorded it
+// (see src/lib/consent.ts and consentRecords in src/db/schema.ts); only
+// the decision matters here.
+function readConsent(request: NextRequest): Decision | null {
+  return parseDecision(request.cookies.get(CONSENT_COOKIE)?.value);
 }
 
 /** Removes a cookie the reader has declined, if a past visit set it. */
@@ -60,7 +60,7 @@ function revoke(request: NextRequest, response: NextResponse, name: string) {
 // off it via src/lib/visitor.ts instead of each reinventing its own cookie.
 const VISITOR_COOKIE = "fxp_vid";
 
-function applyVisitorId(request: NextRequest, response: NextResponse, consent: Consent) {
+function applyVisitorId(request: NextRequest, response: NextResponse, consent: Decision | null) {
   if (consent !== "all") {
     revoke(request, response, VISITOR_COOKIE);
     return;
@@ -113,7 +113,7 @@ function classifyReferer(referer: string | null, selfHost: string): string | nul
   return host.slice(0, 64);
 }
 
-function applyAttribution(request: NextRequest, response: NextResponse, consent: Consent) {
+function applyAttribution(request: NextRequest, response: NextResponse, consent: Decision | null) {
   if (consent !== "all") {
     revoke(request, response, ATTR_COOKIE);
     return;

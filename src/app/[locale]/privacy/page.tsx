@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CookiePreferencesButton from "@/components/CookiePreferencesButton";
 import { tr } from "@/lib/chrome";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
@@ -156,9 +157,15 @@ export default async function PrivacyPage({
             </div>
             <p className="mt-4 text-sm text-text-dark/80">
               {tr(
-                "Tercihinizi değiştirmek isterseniz tarayıcınızın site verilerini temizlemeniz yeterlidir; çerez bandı yeniden çıkar ve yeniden seçim yapabilirsiniz."
+                "Verdiğiniz yanıtı kayıt altına alıyoruz: yanıtın kendisi, hangi çerez listesine verildiği, tarih ve saat, dil ve ülke bilgisi ile tarayıcınızın kimlik satırı. Bunu size gösterdiğimiz seçeneği ve verdiğiniz yanıtı ispatlayabilmek için tutuyoruz. IP adresinizi saklamıyoruz ve bu kayıt sizi tanımlayan bir bilgi içermiyor."
               )}
             </p>
+            <p className="mt-3 text-sm text-text-dark/80">
+              {tr(
+                "Fikrinizi değiştirmek her zaman mümkün. Aşağıdaki düğme çerez bandını yeniden açar; siz yeni bir seçim yapana kadar isteğe bağlı çerezler yazılmaz, daha önce yazılanlar silinir."
+              )}
+            </p>
+            <CookiePreferencesButton />
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
               Neden topluyoruz

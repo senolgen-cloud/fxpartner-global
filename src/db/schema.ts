@@ -546,3 +546,36 @@ export const educationPosts = pgTable("education_post", {
   translations: text("translations"),
   publishedAt: timestamp("published_at").notNull().defaultNow(),
 });
+
+// Proof that a reader was asked and what they answered.
+//
+// The cookie in their browser records the decision so the middleware can
+// honour it; this table records that the decision happened, which is what
+// an authority asks for and what a cookie alone can never show — a cookie
+// is written by us and can be edited by anyone.
+//
+// `id` is generated per answer and stored in the fxp_consent cookie
+// alongside the decision, so a specific browser's answer can be traced
+// back to its row. It is deliberately NOT fxp_vid: that is one of the very
+// cookies being consented to, and identifying the consent by it would mean
+// tracking someone in order to record that they refused tracking. A
+// consent-record id is itself strictly necessary, so it needs no consent.
+//
+// Nothing here identifies a person. No IP address: the country header is
+// enough to evidence which regime applied, without storing an identifier.
+// The user agent is kept truncated as evidence of which browser answered,
+// not as something to look anyone up by.
+//
+// `policyVersion` is what makes a consent expirable. When the cookie list
+// on the privacy page changes materially, bump POLICY_VERSION and every
+// older answer stops counting — consent is to a specific set of cookies,
+// not to the idea of cookies.
+export const consentRecords = pgTable("consent_record", {
+  id: text("id").primaryKey(),
+  decision: text("decision").notNull(), // "all" | "essential"
+  policyVersion: text("policy_version").notNull(),
+  locale: text("locale"),
+  country: text("country"),
+  userAgent: text("user_agent"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});

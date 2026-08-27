@@ -3,10 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "@/components/LocaleLink";
 import { useTr } from "@/components/useTr";
+import { useLocale } from "@/components/LocaleProvider";
+import { CONSENT_COOKIE, cookieValue, type Decision } from "@/lib/consent";
 
-// Kept in sync with the same constant in src/proxy.ts, which is the only
-// place that reads it.
-const CONSENT_COOKIE = "fxp_consent";
 const ONE_YEAR = 60 * 60 * 24 * 365;
 
 function hasChosen(): boolean {
@@ -33,7 +32,9 @@ function hasChosen(): boolean {
  */
 export default function CookieConsent() {
   const tr = useTr();
+  const locale = useLocale();
   const [visible, setVisible] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   // Never rendered during SSR: the server has no way to know what this
   // browser already chose, and guessing would flash a banner at readers
@@ -42,8 +43,27 @@ export default function CookieConsent() {
     if (!hasChosen()) setVisible(true);
   }, []);
 
-  function choose(value: "all" | "essential") {
-    document.cookie = `${CONSENT_COOKIE}=${value}; path=/; max-age=${ONE_YEAR}; SameSite=Lax`;
+  // The record is written first so its id can go into the cookie, but a
+  // failure to record must never cost the reader their choice: on any
+  // error the cookie is still written, just without an id.
+  async function choose(decision: Decision) {
+    if (saving) return;
+    setSaving(true);
+
+    let id: string | null = null;
+    try {
+      const res = await fetch("/api/consent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ decision, locale }),
+      });
+      if (res.ok) id = (await res.json())?.id ?? null;
+    } catch {
+      // Offline, blocked, or down — fall through and honour the choice.
+    }
+
+    document.cookie =
+      `${CONSENT_COOKIE}=${cookieValue(decision, id)}; path=/; max-age=${ONE_YEAR}; SameSite=Lax`;
     setVisible(false);
     window.location.reload();
   }
@@ -77,14 +97,16 @@ export default function CookieConsent() {
           <button
             type="button"
             onClick={() => choose("essential")}
-            className="rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-white/10"
+            disabled={saving}
+            className="rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-white/10 disabled:opacity-60"
           >
             {tr("Yalnızca gerekli")}
           </button>
           <button
             type="button"
             onClick={() => choose("all")}
-            className="rounded-full bg-signal px-5 py-2.5 text-sm font-semibold text-on-signal transition-colors hover:bg-signal-strong"
+            disabled={saving}
+            className="rounded-full bg-signal px-5 py-2.5 text-sm font-semibold text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
           >
             {tr("Tümünü kabul et")}
           </button>
