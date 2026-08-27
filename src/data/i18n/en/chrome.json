@@ -2690,5 +2690,9 @@
   "İndirim, firma seçme kriteri değildir.": "A discount is not a criterion for choosing a firm.",
   "Tekrarlayan şikayet örüntülerini kontrol etmek için aracı kurumun adını “scam” veya “withdrawal” kelimeleriyle birlikte bağımsız inceleme sitelerinde arayın.": "Search the broker's name along with the words “scam” or “withdrawal” on independent review sites to check for recurring complaint patterns.",
   "“Garantili getiri” veya “risksiz işlem” gibi vaatler her zaman kırmızı bayraktır.": "Promises such as “guaranteed return” or “risk-free trading” are always red flags.",
-  "Oluşturuluyor...": "Generating..."
+  "Oluşturuluyor...": "Generating...",
+  "Kapanan işlem yok": "No closed trades",
+  "%{rate} isabet": "%{rate} accuracy",
+  "Bugün": "Today",
+  "Bu Hafta": "This Week"
 }

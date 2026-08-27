@@ -2690,5 +2690,9 @@
   "İndirim, firma seçme kriteri değildir.": "الخصم ليس معيارًا لاختيار الشركة.",
   "Tekrarlayan şikayet örüntülerini kontrol etmek için aracı kurumun adını “scam” veya “withdrawal” kelimeleriyle birlikte bağımsız inceleme sitelerinde arayın.": "للتحقق من أنماط الشكاوى المتكررة، ابحث عن اسم شركة الوساطة مصحوبًا بكلمات \"scam\" أو \"withdrawal\" في مواقع التقييم المستقلة.",
   "“Garantili getiri” veya “risksiz işlem” gibi vaatler her zaman kırmızı bayraktır.": "تُعد الوعود مثل \"عائد مضمون\" أو \"تداول بدون مخاطر\" مؤشر خطر دائمًا.",
-  "Oluşturuluyor...": "جاري الإنشاء..."
+  "Oluşturuluyor...": "جاري الإنشاء...",
+  "Kapanan işlem yok": "لا توجد صفقات مغلقة",
+  "%{rate} isabet": "%{rate} دقة",
+  "Bugün": "اليوم",
+  "Bu Hafta": "هذا الأسبوع"
 }

@@ -4,6 +4,7 @@ import { and, eq, gte } from "drizzle-orm";
 import { requiredTierForPair } from "@/lib/signalAccess";
 import type { AccessTier } from "@/lib/vip";
 import { trData } from "@/lib/localizeContent";
+import { MIN_TRADES_FOR_RATE } from "@/lib/signalPeriods";
 
 // Rolling track record for the tracked MT5 account, published in the public
 // Telegram/X signal posts. This is the single most persuasive thing we can
@@ -48,7 +49,7 @@ export type SignalStats = {
 // null and simply omit the line rather than publishing a flattering number
 // off a thin sample. This bites most on the narrower tier scopes, which is
 // the intended behaviour: no sample, no claim.
-const MIN_TRADES = 15;
+const MIN_TRADES = MIN_TRADES_FOR_RATE;
 
 const SCOPE_LABEL_TR: Record<StatsScope, string> = {
   all: "Tüm sinyaller",

@@ -19,6 +19,7 @@ import { tr } from "@/lib/chrome";
 import { trData } from "@/lib/localizeContent";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import { setServerLocale } from "@/lib/serverLocale";
+import { getSignalPeriods } from "@/lib/signalPeriods";
 
 const sponsoredBrokers = getSponsoredBrokerPool("signals");
 
@@ -167,6 +168,7 @@ export default async function SignalsPage({
           initialClosed={closed}
           liveMarkets={<LiveMarketsGrid />}
           viewerTier={viewerTier}
+          periods={getSignalPeriods()}
         />
 
         <section className="border-t border-hairline">

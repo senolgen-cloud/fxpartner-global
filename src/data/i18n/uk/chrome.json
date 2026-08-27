@@ -2690,5 +2690,9 @@
   "İndirim, firma seçme kriteri değildir.": "Знижка не є критерієм вибору фірми.",
   "Tekrarlayan şikayet örüntülerini kontrol etmek için aracı kurumun adını “scam” veya “withdrawal” kelimeleriyle birlikte bağımsız inceleme sitelerinde arayın.": "Щоб перевірити наявність повторюваних шаблонів скарг, шукайте назву брокера разом зі словами “scam” або “withdrawal” на незалежних сайтах відгуків.",
   "“Garantili getiri” veya “risksiz işlem” gibi vaatler her zaman kırmızı bayraktır.": "Обіцянки на кшталт “гарантований прибуток” або “безризикова торгівля” — це завжди червоний прапорець.",
-  "Oluşturuluyor...": "Створюється..."
+  "Oluşturuluyor...": "Створюється...",
+  "Kapanan işlem yok": "Немає закритих угод",
+  "%{rate} isabet": "%{rate} точність",
+  "Bugün": "Сьогодні",
+  "Bu Hafta": "Цього тижня"
 }

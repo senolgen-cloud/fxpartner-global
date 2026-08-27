@@ -15,6 +15,7 @@ import TradeNowButton from "./TradeNowButton";
 import { useLiveQuotes, type LiveQuote } from "./useLiveQuotes";
 import { useCountUp } from "@/components/useCountUp";
 import { favorableMove } from "@/lib/contractSizes";
+import { MIN_TRADES_FOR_RATE, type SignalPeriods } from "@/lib/signalPeriods";
 
 type Signal = typeof tradeSignals.$inferSelect;
 type SignalJson = Omit<Signal, "createdAt" | "closedAt"> & {
@@ -172,6 +173,90 @@ function formatDuration(ms: number) {
   if (days > 0) return `${days}g ${hours}s`;
   if (hours > 0) return `${hours}s ${minutes}dk`;
   return `${minutes}dk`;
+}
+
+// Bugün ve bu hafta kapanan işlemler.
+//
+// Kazanma oranı BİLEREK yalnızca haftada, o da yeterli işlem varsa
+// gösteriliyor. signalStats.ts'in koyduğu kural burada da geçerli: ince bir
+// örneklem üzerinde oran, kanıt kılığında gürültüdür. Bir günde iki işlem
+// kapanıp ikisi de kazançsa "%100 isabet" yazmak, sayfanın geri kalanının
+// özenle kaçındığı şeydir. Gün için sayılar ve gerçekleşen tutar veriliyor —
+// bunlar oran değil, olgu.
+function PeriodBox({
+  label,
+  since,
+  closed,
+  showRate,
+}: {
+  label: string;
+  since: number;
+  closed: Signal[];
+  showRate: boolean;
+}) {
+  const tr = useTr();
+  const trf = useTrf();
+
+  const decisive = closed.filter(
+    (x) =>
+      (x.outcome === "WIN" || x.outcome === "LOSS") &&
+      x.profit !== null &&
+      (x.closedAt?.getTime() ?? 0) >= since
+  );
+  const wins = decisive.filter((x) => x.outcome === "WIN").length;
+  const losses = decisive.length - wins;
+  const total = decisive.reduce((sum, x) => sum + parseFloat(x.profit as string), 0);
+  const positive = total >= 0;
+  const rate = decisive.length > 0 ? Math.round((wins / decisive.length) * 100) : 0;
+
+  return (
+    <div className="rounded-xl border border-hairline px-5 py-4">
+      <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+        {label}
+      </div>
+
+      {decisive.length === 0 ? (
+        // Sıfır işlemi "+$0.00" diye göstermek, işlem yapılıp başa baş
+        // çıkılmış gibi okunur. Kapanan işlem olmaması ayrı bir durum ve
+        // öyle yazılıyor.
+        <p className="mt-2 text-sm text-text-on-ink-muted">{tr("Kapanan işlem yok")}</p>
+      ) : (
+        <>
+          <div
+            className="mt-2 font-display text-3xl font-bold tabular-stat"
+            style={{ color: positive ? TICK_UP : TICK_DOWN }}
+          >
+            {positive ? "+" : "−"}${Math.abs(total).toFixed(2)}
+          </div>
+          <div className="mt-1.5 flex items-center gap-2 font-mono text-xs text-text-on-ink-muted">
+            <span>{trf("{count} işlem", { count: decisive.length })}</span>
+            <span aria-hidden="true">·</span>
+            <span>
+              <span style={{ color: TICK_UP }}>{wins}</span>
+              <span> / </span>
+              <span style={{ color: TICK_DOWN }}>{losses}</span>
+            </span>
+            {showRate && decisive.length >= MIN_TRADES_FOR_RATE && (
+              <>
+                <span aria-hidden="true">·</span>
+                <span>{trf("%{rate} isabet", { rate })}</span>
+              </>
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+function PeriodSummary({ closed, periods }: { closed: Signal[]; periods: SignalPeriods }) {
+  const tr = useTr();
+  return (
+    <div className="grid gap-4 sm:grid-cols-2">
+      <PeriodBox label={tr("Bugün")} since={periods.dayStart} closed={closed} showRate={false} />
+      <PeriodBox label={tr("Bu Hafta")} since={periods.weekStart} closed={closed} showRate />
+    </div>
+  );
 }
 
 function PipsStats({ closed }: { closed: Signal[] }) {
@@ -1049,11 +1134,13 @@ export default function SignalsBoard({
   initialClosed,
   liveMarkets,
   viewerTier,
+  periods,
 }: {
   initialActive: Signal[];
   initialClosed: Signal[];
   liveMarkets?: ReactNode;
   viewerTier: AccessTier | null;
+  periods: SignalPeriods;
 }) {
   const tr = useTr();
   const [active, setActive] = useState(initialActive);
@@ -1227,7 +1314,10 @@ export default function SignalsBoard({
 
       <section className="border-b border-hairline">
         <div className="mx-auto max-w-6xl px-6 pb-16">
-          <PipsStats closed={closed} />
+          <PeriodSummary closed={closed} periods={periods} />
+          <div className="mt-8">
+            <PipsStats closed={closed} />
+          </div>
         </div>
       </section>
 
