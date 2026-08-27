@@ -5,6 +5,7 @@ import { useLocale } from "@/components/LocaleProvider";
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Link from "@/components/LocaleLink";
+import InstrumentMark from "@/components/InstrumentMark";
 import type { tradeSignals, TradeSignalOutcome } from "@/db/schema";
 import { canViewSignal, requiredTierForPair, type AccessTier } from "@/lib/signalAccess";
 import { ACCESS_TIER_LABEL } from "@/data/packageTiers";
@@ -545,12 +546,6 @@ function PipsStats({ closed }: { closed: Signal[] }) {
 // Flags for the pair mark. Only the currencies we actually quote — an
 // unmapped leg falls back to its three-letter code, which is what metals,
 // indices and crypto get anyway (there is no flag for XAU or US100).
-const CURRENCY_FLAG: Record<string, string> = {
-  USD: "🇺🇸", EUR: "🇪🇺", GBP: "🇬🇧", JPY: "🇯🇵", CHF: "🇨🇭",
-  CAD: "🇨🇦", AUD: "🇦🇺", NZD: "🇳🇿", TRY: "🇹🇷", CNH: "🇨🇳",
-  SEK: "🇸🇪", NOK: "🇳🇴", ZAR: "🇿🇦", MXN: "🇲🇽", PLN: "🇵🇱",
-};
-
 /** EURUSD -> ["EUR","USD"]; anything else stays whole. */
 function splitPair(pair: string): [string, string | null] {
   const p = pair.toUpperCase().replace(/[^A-Z0-9]/g, "");
@@ -561,41 +556,6 @@ function splitPair(pair: string): [string, string | null] {
 function prettyPair(pair: string): string {
   const [base, quote] = splitPair(pair);
   return quote ? `${base}/${quote}` : base;
-}
-
-// Two overlapping tokens for an FX pair, one for everything else — the
-// visual anchor that tells you which market a row is about before you read
-// anything.
-function PairMark({ pair }: { pair: string }) {
-  const [base, quote] = splitPair(pair);
-  const token = (code: string, i: number) => {
-    const flag = CURRENCY_FLAG[code];
-    return (
-      <span
-        key={i}
-        className={`flex h-9 w-9 items-center justify-center rounded-full border border-hairline bg-ink text-base ${
-          i > 0 ? "-ms-3" : ""
-        }`}
-        style={{ zIndex: 2 - i }}
-        aria-hidden="true"
-      >
-        {flag ?? (
-          // One initial, not the first three characters. GOLD was rendering
-          // as "GOL" and US100CASH as "US1", which reads as text that got
-          // cut off rather than as a mark — a single letter is obviously a
-          // monogram and cannot be mistaken for a truncation.
-          <span className="font-display text-[13px] font-semibold text-text-on-ink-muted">
-            {code.slice(0, 1)}
-          </span>
-        )}
-      </span>
-    );
-  };
-  return (
-    <span className="flex shrink-0 items-center">
-      {quote ? [token(base, 0), token(quote, 1)] : token(base, 0)}
-    </span>
-  );
 }
 
 // "3 sa önce" — the age of the signal at a glance, the way the reference
@@ -824,7 +784,7 @@ function SignalCard({
       <div className="flex flex-col gap-4 p-4 sm:p-5">
         <div className="flex min-w-0 items-center justify-between gap-3">
           <div className="flex min-w-0 items-center gap-2.5">
-            <PairMark pair={signal.pair} />
+            <InstrumentMark pair={signal.pair} />
             <span className="notranslate truncate font-display text-[17px] font-semibold tracking-[-0.01em] text-text-on-ink">
               {prettyPair(signal.pair)}
             </span>
