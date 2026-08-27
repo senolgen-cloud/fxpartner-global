@@ -590,13 +590,20 @@ function LevelCell({
     <div className="min-w-0 text-start">
       <div className="text-[11px] leading-none text-text-on-ink-muted">{label}</div>
       {locked ? (
-        // A redaction bar, not a row of dots. Four dots at 14px read as a
-        // value that failed to load; a block reads as one deliberately
-        // withheld, which is what it is.
+        // A redaction plate, not a row of dots and not a grey block. Four
+        // dots at 14px read as a value that failed to load; flat grey reads
+        // as a page that broke. Gold is the package colour everywhere else
+        // on this card, and the slow sheen says something is behind this
+        // rather than missing from it.
         <span
           aria-label={ariaLocked}
-          className="mt-2 block h-[15px] w-16 rounded bg-text-on-ink-muted/20"
-        />
+          className="relative mt-2 block h-[15px] w-16 overflow-hidden rounded border border-gold/25 bg-gold/10"
+        >
+          <span
+            aria-hidden="true"
+            className="motion-safe:glass-shimmer absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-gold/25 to-transparent"
+          />
+        </span>
       ) : (
         <div
           className="mt-1.5 truncate font-mono text-[17px] font-semibold leading-none tabular-stat"
@@ -884,14 +891,31 @@ function SignalCard({
           </div>
         )}
 
+        {/* A locked card used to be four blanks and a lock pill, which
+            reads as a page that failed rather than as an offer. It now says
+            which three numbers are behind the lock — the reader can see
+            exactly what they would be buying — and carries the broker CTA
+            as well, because a reader who will not subscribe today can still
+            take the trade. */}
+        {locked && (
+          <p className="text-[13px] leading-relaxed text-text-on-ink-muted">
+            {trf("Giriş, zarar durdur ve kâr al seviyeleri {tier} üyelikte açılır.", {
+              tier: lock.badge,
+            })}
+          </p>
+        )}
+
         <div className="flex items-center justify-between gap-2">
           {locked ? (
-            <Link
-              href={lock.href}
-              className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-gold/40 bg-gold/10 px-4 py-2 text-[12px] font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/20"
-            >
-              🔒 {lock.badge}
-            </Link>
+            <div className="flex min-w-0 flex-wrap items-center gap-2">
+              <Link
+                href={lock.href}
+                className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-gold/40 bg-gold/15 px-4 py-2 text-[12px] font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/25"
+              >
+                🔒 {trf("{tier} ile aç", { tier: lock.badge })}
+              </Link>
+              {!isClosed && <TradeNowButton variant="inline" />}
+            </div>
           ) : (
             /* Only while the trade is still open — "copy this trade" on a
                position that closed days ago is an offer the reader cannot

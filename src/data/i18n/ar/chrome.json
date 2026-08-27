@@ -2650,5 +2650,7 @@
   "Zarar durdur": "إيقاف الخسارة",
   "Kâr al": "جني الأرباح",
   "Giriş fiyatı": "سعر الدخول",
-  "Numaralı derslerle işlem disiplini ve risk yönetimi": "انضباط التداول وإدارة المخاطر من خلال الدروس المرقمة"
+  "Numaralı derslerle işlem disiplini ve risk yönetimi": "انضباط التداول وإدارة المخاطر من خلال الدروس المرقمة",
+  "Giriş, zarar durdur ve kâr al seviyeleri {tier} üyelikte açılır.": "تُفتح مستويات الدخول وإيقاف الخسارة وأخذ الأرباح في عضوية {tier}.",
+  "{tier} ile aç": "افتح باستخدام {tier}"
 }

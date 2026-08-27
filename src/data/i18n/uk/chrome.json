@@ -2650,5 +2650,7 @@
   "Zarar durdur": "Стоп-лос",
   "Kâr al": "Тейк-профіт",
   "Giriş fiyatı": "Ціна входу",
-  "Numaralı derslerle işlem disiplini ve risk yönetimi": "Торгова дисципліна та управління ризиками з пронумерованими уроками"
+  "Numaralı derslerle işlem disiplini ve risk yönetimi": "Торгова дисципліна та управління ризиками з пронумерованими уроками",
+  "Giriş, zarar durdur ve kâr al seviyeleri {tier} üyelikte açılır.": "Рівні входу, стоп-лосс та тейк-профіт відкриваються на рівні членства {tier}.",
+  "{tier} ile aç": "Відкрити з {tier}"
 }
