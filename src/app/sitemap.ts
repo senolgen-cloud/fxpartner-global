@@ -34,6 +34,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/pozisyon-hesaplayici`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${SITE_URL}/blacklist`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${SITE_URL}/complaint`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${SITE_URL}/app`, changeFrequency: "monthly", priority: 0.6 },
+    // /kurulum was never listed here either. Both are install pages and both
+    // are things people search for by name.
+    { url: `${SITE_URL}/kurulum`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/instagram`, changeFrequency: "weekly", priority: 0.4 },
     { url: `${SITE_URL}/privacy`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE_URL}/terms`, changeFrequency: "yearly", priority: 0.3 },

@@ -231,6 +231,11 @@ export default function Footer({
                 </Link>
               </li>
               <li>
+                <Link href="/app" className="transition-colors hover:text-text-on-ink">
+                  {tr("Uygulama")}
+                </Link>
+              </li>
+              <li>
                 <Link href="/kurulum" className="transition-colors hover:text-text-on-ink">
                   Kurulum Rehberi
                 </Link>

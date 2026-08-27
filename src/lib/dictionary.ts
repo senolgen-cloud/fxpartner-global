@@ -65,6 +65,9 @@ export const tr = {
     "İşlem disiplini, risk yönetimi ve platform mekaniği üzerine yatırımcı eğitim yazıları. Yön tahmini ya da seviye önerisi içermez; yatırım tavsiyesi değildir.",
   "page.instagram.title": "Instagram",
   "page.instagram.description": "@fxpartner_global Instagram hesabından gelenler için giriş sayfası — broker regülasyon sorgusu, günlük teknik analiz bülteni, risk uyarı listesi ve pozisyon hesaplayıcı.",
+  "page.app.title": "FXPARTNER Uygulaması",
+  "page.app.description":
+    "FXPARTNER uygulamasını telefonunuzun veya bilgisayarınızın ana ekranına ekleyin: canlı işlem sinyalleri, anlık bildirimler, ekonomik takvim ve broker karşılaştırma. App Store veya Play Store gerekmez.",
   "page.kurulum.title": "Uygulama Kurulum Rehberi (iOS, Android, Windows)",
   "page.kurulum.description": "FXPARTNER'ı iPhone, Android telefon veya Windows bilgisayarınıza uygulama gibi kurun. Adım adım kurulum rehberi ve bildirimleri açma talimatları.",
   "page.paketler.title": "Paketler",
