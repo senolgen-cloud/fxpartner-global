@@ -2706,5 +2706,12 @@
   "Tam inceleme": "Повний огляд",
   "Oran hesap türüne ve aylık işlem hacmine göre değişir; ECN hesaplarda komisyon üzerinden, Classic ve Cent hesaplarda spread üzerinden hesaplanır.": "Ставка змінюється залежно від типу рахунку та щомісячного обсягу торгівлі; на рахунках ECN вона розраховується від комісії, а на рахунках Classic та Cent — від спреду.",
   "Genişletilmiş takvim": "Розширений календар",
-  "Aynı haftanın ikinci bir kaynaktan görünümü — beklenti ve revizyon detaylarıyla. Yukarıdaki tablo bizim kendi verimizdir ve bildirimlerimiz onu esas alır.": "Перегляд того ж тижня з другого джерела — з деталями очікувань та переглядів. Таблиця вище є нашими власними даними, і наші сповіщення спираються на неї."
+  "Aynı haftanın ikinci bir kaynaktan görünümü — beklenti ve revizyon detaylarıyla. Yukarıdaki tablo bizim kendi verimizdir ve bildirimlerimiz onu esas alır.": "Перегляд того ж тижня з другого джерела — з деталями очікувань та переглядів. Таблиця вище є нашими власними даними, і наші сповіщення спираються на неї.",
+  "Min. yatırım": "Мін. інвестиція",
+  "Kaldıraç": "Кредитне плече",
+  "Canlı Hesap Aç": "Відкрити реальний рахунок",
+  "İnceleme": "Огляд",
+  "En iyi 5 broker": "5 найкращих брокерів",
+  "{count} brokerin tamamı": "Усі {count} брокерів",
+  "Sponsorlu bağlantılar. Sıralama, regülasyon, maliyet, platform ve para çekme eksenlerinden oluşan FXPARTNER Index puanına göredir; ortaklık geliri sıralamayı etkilemez.": "Спонсорські посилання. Рейтинг базується на балах FXPARTNER Index, що формуються за критеріями регулювання, витрат, платформи та виведення коштів; партнерський дохід не впливає на рейтинг."
 }

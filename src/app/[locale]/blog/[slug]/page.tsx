@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import BrokerAdBanner from "@/components/BrokerAdBanner";
 import BrokerSkyscraperAd from "@/components/BrokerSkyscraperAd";
 import XmInlineAd from "@/components/XmInlineAd";
+import TopBrokersStrip from "@/components/TopBrokersStrip";
 import { blogPosts, getBlogPostBySlug } from "@/data/blog";
 import { getBrokerBySlug, getSponsoredBroker, getSkyscraperBroker } from "@/data/brokers";
 import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
@@ -186,21 +187,16 @@ export default async function BlogPostPage({
 
               <XmInlineAd variant="final" brokerSlug={post.adBrokerSlug} />
 
-              <div className="mt-14 rounded-2xl border border-hairline-light bg-paper p-6">
-                <h3 className="font-poppins text-lg font-semibold text-text-dark">
-                  {tr("Brokerları karşılaştırmaya hazır mısınız?")}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                  {tr("Gerçek brokerların regülasyon, maliyet, platform ve para çekme eksenlerinde nasıl puan aldığını görün — yukarıdaki çerçevenin aynısıyla.")}
-                </p>
-                <Link
-                  href="/brokerlar"
-                  className="mt-4 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
-                >
-                  {tr("Broker Sıralamalarını Gör")}
-                </Link>
+              {/* The top-five strip replaces the card that used to sit here
+                  inviting the reader to go and look at broker rankings. It
+                  is the same invitation with the brokers actually in it, and
+                  it deliberately does not add a block: a post already
+                  carries a banner at the top, an inline unit mid-body and a
+                  final one, and a sixth promotional slot would be the point
+                  where the article is mostly advertising. */}
+              <div className="mt-14">
+                <TopBrokersStrip />
               </div>
-
             </article>
             {railBroker && <BrokerSkyscraperAd broker={railBroker} />}
           </div>

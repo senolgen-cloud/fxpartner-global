@@ -2706,5 +2706,12 @@
   "Tam inceleme": "مراجعة كاملة",
   "Oran hesap türüne ve aylık işlem hacmine göre değişir; ECN hesaplarda komisyon üzerinden, Classic ve Cent hesaplarda spread üzerinden hesaplanır.": "تختلف النسبة حسب نوع الحساب وحجم التداول الشهري؛ وتُحسب بناءً على العمولة في حسابات ECN، وعلى الفروق السعرية في حسابات Classic و Cent.",
   "Genişletilmiş takvim": "التقويم الموسع",
-  "Aynı haftanın ikinci bir kaynaktan görünümü — beklenti ve revizyon detaylarıyla. Yukarıdaki tablo bizim kendi verimizdir ve bildirimlerimiz onu esas alır.": "عرض للأسبوع نفسه من مصدر ثانٍ — مع تفاصيل التوقعات والمراجعات. الجدول أعلاه هو بياناتنا الخاصة وتعتمد إشعاراتنا عليه."
+  "Aynı haftanın ikinci bir kaynaktan görünümü — beklenti ve revizyon detaylarıyla. Yukarıdaki tablo bizim kendi verimizdir ve bildirimlerimiz onu esas alır.": "عرض للأسبوع نفسه من مصدر ثانٍ — مع تفاصيل التوقعات والمراجعات. الجدول أعلاه هو بياناتنا الخاصة وتعتمد إشعاراتنا عليه.",
+  "Min. yatırım": "الحد الأدنى للاستثمار",
+  "Kaldıraç": "الرافعة المالية",
+  "Canlı Hesap Aç": "افتح حساباً حقيقياً",
+  "İnceleme": "مراجعة",
+  "En iyi 5 broker": "أفضل 5 وسطاء",
+  "{count} brokerin tamamı": "جميع الوسطاء الـ {count}",
+  "Sponsorlu bağlantılar. Sıralama, regülasyon, maliyet, platform ve para çekme eksenlerinden oluşan FXPARTNER Index puanına göredir; ortaklık geliri sıralamayı etkilemez.": "روابط برعاية. يعتمد الترتيب على درجة FXPARTNER Index القائمة على معايير التنظيم والتكلفة والمنصة وسحب الأموال؛ ولا تؤثر إيرادات الشراكة على الترتيب."
 }

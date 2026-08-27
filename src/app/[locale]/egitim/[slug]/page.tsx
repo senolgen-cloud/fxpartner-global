@@ -3,6 +3,7 @@ import { tr, trLocale, trf } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
+import TopBrokersStrip from "@/components/TopBrokersStrip";
 import { db } from "@/db";
 import { educationPosts } from "@/db/schema";
 import { and, asc, desc, eq, gt, isNotNull, lt } from "drizzle-orm";
@@ -238,6 +239,15 @@ export default async function EducationPostPage({
                 </Link>
               </div>
             </aside>
+
+            {/* After the lesson's own CTA, not instead of it. That one asks
+                the reader to go and watch the live board — the product — and
+                it is the right close for a lesson. This asks a different
+                question, the one that only makes sense once they have
+                decided to trade at all, so it goes last. */}
+            <div className="mt-10">
+              <TopBrokersStrip />
+            </div>
           </article>
         </section>
       </main>

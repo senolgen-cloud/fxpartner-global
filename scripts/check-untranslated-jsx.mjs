@@ -48,6 +48,7 @@ const BRAND_NAMES = new Set([
   "Instagram",
   "WhatsApp",
   "FXPARTNER",
+  "FXPARTNER Index",
   "MetaTrader",
   "TradingView",
 ]);

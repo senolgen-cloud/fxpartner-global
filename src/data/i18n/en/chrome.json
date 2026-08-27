@@ -2706,5 +2706,12 @@
   "Tam inceleme": "Full review",
   "Oran hesap türüne ve aylık işlem hacmine göre değişir; ECN hesaplarda komisyon üzerinden, Classic ve Cent hesaplarda spread üzerinden hesaplanır.": "The rate varies depending on the account type and monthly trading volume; on ECN accounts it is calculated based on commission, and on Classic and Cent accounts based on spread.",
   "Genişletilmiş takvim": "Extended calendar",
-  "Aynı haftanın ikinci bir kaynaktan görünümü — beklenti ve revizyon detaylarıyla. Yukarıdaki tablo bizim kendi verimizdir ve bildirimlerimiz onu esas alır.": "View of the same week from a second source — with expectation and revision details. The table above is our own data and our notifications are based on it."
+  "Aynı haftanın ikinci bir kaynaktan görünümü — beklenti ve revizyon detaylarıyla. Yukarıdaki tablo bizim kendi verimizdir ve bildirimlerimiz onu esas alır.": "View of the same week from a second source — with expectation and revision details. The table above is our own data and our notifications are based on it.",
+  "Min. yatırım": "Min. deposit",
+  "Kaldıraç": "Leverage",
+  "Canlı Hesap Aç": "Open Live Account",
+  "İnceleme": "Review",
+  "En iyi 5 broker": "Top 5 brokers",
+  "{count} brokerin tamamı": "All {count} brokers",
+  "Sponsorlu bağlantılar. Sıralama, regülasyon, maliyet, platform ve para çekme eksenlerinden oluşan FXPARTNER Index puanına göredir; ortaklık geliri sıralamayı etkilemez.": "Sponsored links. Ranking is based on the FXPARTNER Index score, which consists of regulation, cost, platform, and withdrawal axes; affiliate revenue does not affect the ranking."
 }
