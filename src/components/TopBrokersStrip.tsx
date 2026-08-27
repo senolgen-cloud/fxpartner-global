@@ -31,7 +31,7 @@ function BrokerMiniCard({ broker, rank }: { broker: Broker; rank: number }) {
   const score = getBrokerScores(broker).composite;
 
   return (
-    <li className="flex w-[224px] shrink-0 snap-start flex-col rounded-2xl border border-hairline bg-ink-soft/40 p-4 md:w-auto">
+    <li className="flex w-[228px] shrink-0 snap-start flex-col rounded-2xl border border-hairline bg-ink-soft/40 p-4">
       <div className="flex items-start justify-between gap-3">
         <div className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-ink p-2">
           {broker.logo ? (
@@ -51,7 +51,10 @@ function BrokerMiniCard({ broker, rank }: { broker: Broker; rank: number }) {
         </span>
       </div>
 
-      <h3 className="mt-3 truncate font-poppins text-[15px] font-semibold text-text-on-ink">
+      {/* Two lines rather than truncate. At the width this card actually
+          gets, truncate turned "MultiBank Group" into "MultiBank …" — a
+          broker card that cannot say which broker it is. */}
+      <h3 className="mt-3 font-poppins text-[15px] font-semibold leading-snug text-text-on-ink">
         {broker.name}
       </h3>
 
@@ -64,23 +67,39 @@ function BrokerMiniCard({ broker, rank }: { broker: Broker; rank: number }) {
         </span>
       </div>
 
-      <dl className="mt-3 space-y-1.5 border-t border-hairline pt-3 text-[13px]">
-        <div className="flex items-baseline justify-between gap-2">
-          <dt className="text-text-on-ink-muted">{tr("Min. yatırım")}</dt>
-          <dd className="font-mono tabular-stat text-text-on-ink">{broker.minDeposit}</dd>
+      {/* Label above value, not label-left/value-right. Side by side, "Min.
+          yatırım" broke across two lines and left "$5" stranded on the first
+          one, so the row read as a fragment and a number that belonged to
+          nothing. Stacked, each pair holds together at any width. mt-auto
+          pushes this block down so the CTA sits on the same baseline across
+          all five cards even when one name wraps to two lines. */}
+      <dl className="mt-auto grid grid-cols-2 gap-3 border-t border-hairline pt-3">
+        <div>
+          <dt className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
+            {tr("Min. yatırım")}
+          </dt>
+          <dd className="mt-0.5 font-mono text-[13px] tabular-stat text-text-on-ink">
+            {broker.minDeposit}
+          </dd>
         </div>
-        <div className="flex items-baseline justify-between gap-2">
-          <dt className="text-text-on-ink-muted">{tr("Kaldıraç")}</dt>
-          <dd className="font-mono tabular-stat text-text-on-ink">{broker.maxLeverage}</dd>
+        <div>
+          <dt className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
+            {tr("Kaldıraç")}
+          </dt>
+          <dd className="mt-0.5 font-mono text-[13px] tabular-stat text-text-on-ink">
+            {broker.maxLeverage}
+          </dd>
         </div>
       </dl>
 
-      {/* min-h-11 so the tap target clears 44px on a phone. */}
+      {/* h-11 exactly, and nowrap. A rounded-full button whose label wraps to
+          three lines is not a pill, it is an ellipse — which is what these
+          were at the width five cards get inside a 768px article column. */}
       <a
         href={broker.referralUrl}
         target="_blank"
         rel="noopener noreferrer sponsored"
-        className="mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-signal px-4 text-sm font-semibold text-ink transition-colors hover:bg-signal-strong"
+        className="mt-4 flex h-11 items-center justify-center whitespace-nowrap rounded-full bg-signal px-3 text-[13px] font-semibold text-ink transition-colors hover:bg-signal-strong"
       >
         {tr("Canlı Hesap Aç")}
       </a>
@@ -120,11 +139,16 @@ export default function TopBrokersStrip() {
         </Link>
       </div>
 
-      {/* Five cards do not fit across 375px and never will, so the phone
-          scrolls them instead of stacking five full-width blocks that would
-          push the end of the article a screen and a half further down.
-          Snap points so a swipe lands on a card rather than between two. */}
-      <ul className="-mx-5 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-5 md:overflow-visible md:px-0 md:pb-0">
+      {/* Scrolls at every width, and this is the correction of a real
+          mistake. It used to become a five-column grid at md, which looked
+          right in the abstract and was wrong in the article: the reading
+          column is max-w-3xl, so five columns left each card about 140px.
+          The names truncated to "MultiBank …", the deposit label broke away
+          from its own figure, and the CTA wrapped to three lines inside a
+          rounded-full — an ellipse, not a button. Five cards do not fit in
+          768px any more than they fit in 375px. A strip that scrolls is
+          honest at both, and snap points land a swipe on a card. */}
+      <ul className="-mx-5 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2">
         {five.map((broker, i) => (
           <BrokerMiniCard key={broker.slug} broker={broker} rank={i + 1} />
         ))}
