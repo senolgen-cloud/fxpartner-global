@@ -9,9 +9,12 @@ import { locales, defaultLocale, type Locale } from "@/lib/i18n";
 // translation can be corrected by editing a row.
 //
 // Same model and the same rules as scripts/translate.mjs, because the
-// output lands in the same place a reader looks: numbers survive
-// byte-for-byte, proper nouns stay, and a risk disclaimer stays a risk
-// disclaimer.
+// output lands in the same place a reader looks: numbers keep their value,
+// proper nouns stay, and a risk disclaimer stays a risk disclaimer.
+//
+// "Keep the value" rather than "keep the bytes": Turkish writes thousands
+// with a dot, and an English reader shown "80.000 dollars" reads eighty.
+// The separator follows the target language; the digits never move.
 
 const GEMINI_MODEL = "gemini-3.6-flash";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
@@ -19,6 +22,10 @@ const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GE
 const LOCALE_NAMES: Record<string, string> = {
   ua: "Ukrainian (українська)",
   en: "English",
+  // Added with the Arabic locale. Without an entry here the prompt asked
+  // for a translation "into ar", which is a locale code, not a language —
+  // every other rule in the prompt is precise and this one was a guess.
+  ar: "Arabic (العربية)",
 };
 
 const DO_NOT_TRANSLATE = [
@@ -40,7 +47,7 @@ function prompt(locale: string, copy: BulletinCopy): string {
 
 RULES — breaking any of these makes the output unusable:
 1. Return a JSON object with exactly the keys "title", "excerpt" and "body". Nothing else.
-2. Never invent, round, convert or drop a number: prices, percentages, dates, basis points and index levels stay byte-for-byte identical.
+2. Never invent, round, convert or drop a number: the VALUE of every price, percentage, date, basis point and index level must be identical to the source. You may — and should — write the thousands and decimal separators the way the target language writes them, because Turkish "80.000" read as English is eighty, not eighty thousand. Changing a separator is allowed; changing a digit, rounding, or converting a currency is not.
 3. Keep these terms exactly as written: ${DO_NOT_TRANSLATE.join(", ")}.
 4. Preserve the paragraph breaks in "body" exactly as they appear.
 5. Keep the register: factual news prose. Do not add analysis, predictions, enthusiasm or a call to action that is not in the source.
