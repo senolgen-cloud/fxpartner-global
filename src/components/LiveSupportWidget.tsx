@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useScrollIdle } from "@/components/useScrollIdle";
 
 const WHATSAPP_NUMBER = "380930071903";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
@@ -42,10 +43,10 @@ function TelegramIcon() {
 //
 // It never hides while its own panel is open, and focus brings it straight
 // back, so a keyboard user is never tabbed onto something invisible.
-const SETTLE_MS = 450;
+
 export default function LiveSupportWidget() {
   const [open, setOpen] = useState(false);
-  const [scrolling, setScrolling] = useState(false);
+  const scrolling = useScrollIdle();
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -54,22 +55,6 @@ export default function LiveSupportWidget() {
     }
     document.addEventListener("mousedown", onClickOutside);
     return () => document.removeEventListener("mousedown", onClickOutside);
-  }, []);
-
-  useEffect(() => {
-    let settle: ReturnType<typeof setTimeout>;
-    // Passive: this listener must never be able to delay a scroll, which
-    // is the one thing a scroll handler on a phone can actually ruin.
-    const onScroll = () => {
-      setScrolling(true);
-      clearTimeout(settle);
-      settle = setTimeout(() => setScrolling(false), SETTLE_MS);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      clearTimeout(settle);
-    };
   }, []);
 
   const hidden = scrolling && !open;

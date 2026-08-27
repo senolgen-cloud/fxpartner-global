@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useScrollIdle } from "@/components/useScrollIdle";
 import type { TickerPair } from "@/lib/rates";
 
 function TickerRow({ pairs }: { pairs: TickerPair[] }) {
@@ -32,6 +33,7 @@ function TickerRow({ pairs }: { pairs: TickerPair[] }) {
 // freeze this and fall back to a visible native scrollbar (which read as
 // a stray white bar between the ticker and the section below it).
 export default function TickerClient({ pairs }: { pairs: TickerPair[] }) {
+  const scrolling = useScrollIdle();
   const trackRef = useRef<HTMLDivElement>(null);
   const rowRef = useRef<HTMLDivElement>(null);
   const pausedRef = useRef(false);
@@ -72,7 +74,15 @@ export default function TickerClient({ pairs }: { pairs: TickerPair[] }) {
 
   return (
     <div
-      className="overflow-hidden border-y border-hairline bg-ink-soft py-2 md:py-2.5"
+      // Collapsed rather than faded: fading would leave the 33px it
+      // occupies behind, and the point is to hand that back. Height and
+      // opacity move together so the bottom nav slides down with it.
+      aria-hidden={scrolling || undefined}
+      className={`overflow-hidden border-y border-hairline bg-ink-soft transition-[max-height,opacity,padding] duration-200 ease-out ${
+        scrolling
+          ? "max-h-0 border-y-0 py-0 opacity-0"
+          : "max-h-20 py-2 opacity-100 md:py-2.5"
+      } motion-reduce:transition-none`}
       onMouseEnter={() => {
         pausedRef.current = true;
       }}

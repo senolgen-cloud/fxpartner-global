@@ -15,7 +15,15 @@ export default async function Header({ standalone = true }: { standalone?: boole
       }`}
     >
       <div className="relative mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 md:h-16 [@media(max-height:520px)]:h-11">
-        <Link href="/" className="flex shrink-0 items-center gap-2">
+        {/* Centred on a phone, where the bar holds only the logo and the
+            menu button and a left-aligned mark leaves the middle empty.
+            Absolute rather than a three-column grid so the nav on the right
+            keeps its own width — from md up the bar has real navigation in
+            it and the logo goes back to the start edge. */}
+        <Link
+          href="/"
+          className="absolute left-1/2 flex shrink-0 -translate-x-1/2 items-center gap-2 md:static md:translate-x-0"
+        >
           <Image
             src="/fxpartner-logo.png"
             alt="FXPARTNER"
