@@ -93,7 +93,7 @@ export default async function EducationIndexPage({
             ) : (
               <div className="divide-y divide-hairline-light border-t border-hairline-light">
                 {posts.map((p) => (
-                  <Link key={p.id} href={`/egitim/${p.slug}`} className="group flex flex-col gap-2 py-8">
+                  <Link key={p.id} href={`/egitim/${p.slug}`} className="group flex flex-col gap-1.5 py-5 sm:gap-2 sm:py-7">
                     <span className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs text-text-muted">
                       {p.lessonNo != null && (
                         <>
@@ -111,13 +111,12 @@ export default async function EducationIndexPage({
                         })}
                       </span>
                     </span>
-                    <h2 className="font-poppins text-2xl font-semibold text-text-dark transition-colors group-hover:text-signal">
+                    <h2 className="font-poppins text-lg font-semibold leading-snug text-text-dark transition-colors group-hover:text-signal sm:text-2xl">
                       {p.title}
                     </h2>
-                    <p className="text-[15px] leading-relaxed text-text-muted">{p.excerpt}</p>
-                    <span className="mt-1 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal">
-                      {tr("Dersi oku →")}
-                    </span>
+                    <p className="line-clamp-2 text-[14px] leading-relaxed text-text-muted sm:line-clamp-3 sm:text-[15px]">
+                      {p.excerpt}
+                    </p>
                   </Link>
                 ))}
               </div>

@@ -83,15 +83,15 @@ export default async function BlogIndexPage({
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="group flex gap-6 py-8"
+                  className="group flex gap-4 py-5 sm:gap-6 sm:py-7"
                 >
                   {post.coverImage && (
-                    <div className="relative hidden h-28 w-28 shrink-0 overflow-hidden rounded-xl border border-hairline-light sm:block">
+                    <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-hairline-light sm:h-28 sm:w-28 sm:rounded-xl">
                       <Image
                         src={post.coverImage}
                         alt={post.title}
                         fill
-                        sizes="112px"
+                        sizes="(min-width: 640px) 112px, 64px"
                         className="object-cover"
                       />
                     </div>
@@ -105,15 +105,17 @@ export default async function BlogIndexPage({
                       })}{" "}
                       · {post.readingMinutes} dk okuma
                     </span>
-                    <h2 className="mt-2 font-poppins text-2xl font-semibold text-text-dark transition-colors group-hover:text-signal">
+                    <h2 className="mt-1.5 font-poppins text-lg font-semibold leading-snug text-text-dark transition-colors group-hover:text-signal sm:text-2xl">
                       {post.title}
                     </h2>
-                    <p className="mt-2 text-[15px] leading-relaxed text-text-muted">
+                    {/* Two lines. A list is for choosing what to read, not
+                        for reading, and six lines of excerpt per row is the
+                        difference between scanning thirty-one posts and
+                        scrolling past them. The full excerpt opens with the
+                        post. */}
+                    <p className="mt-1.5 line-clamp-2 text-[14px] leading-relaxed text-text-muted sm:line-clamp-3 sm:text-[15px]">
                       {post.excerpt}
                     </p>
-                    <span className="mt-3 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal">
-                      Rehberi oku →
-                    </span>
                   </div>
                 </Link>
               ))}
