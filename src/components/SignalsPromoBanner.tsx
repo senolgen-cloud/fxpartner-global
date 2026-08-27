@@ -19,6 +19,13 @@ import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 // hijacking the whole screen. `preload="none"` keeps the 233 KB off the wire
 // until the reader is actually near it, which is what the GIF's loading="lazy"
 // was doing before.
+//
+// The poster is a frame from three seconds in, not the opening one. The
+// clip fades up from black over its first second, so the frame it used to
+// hold was a dark blur with nothing readable on it — and that frame is what
+// anyone saw who had reduced motion switched on, or who looked before
+// playback started. A poster's whole job is to say what the video says
+// while the video is not saying it.
 export default function SignalsPromoBanner() {
   const tr = useTr();
   const reducedMotion = usePrefersReducedMotion();
@@ -37,7 +44,8 @@ export default function SignalsPromoBanner() {
         {reducedMotion ? (
           // Someone who has asked their system for less motion should not be
           // handed a looping animation because it happens to be an ad. The
-          // first frame carries the same message.
+          // poster frame carries the same headline and product shot, so this
+          // is the same banner standing still — not a placeholder for one.
           <img
             src="/fxpartner-sinyalleri-poster.webp"
             alt={label}
