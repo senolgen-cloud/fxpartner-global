@@ -32,8 +32,20 @@ function TelegramIcon() {
 // nav goes (MobileBottomNavClient is sm:hidden) and only the 37px ticker
 // is left, where 96px is already comfortable — hence the same breakpoint
 // here as the one that removes the nav.
+//
+// It also steps aside while the page is being scrolled. A button fixed
+// over the page covers something wherever it is put — raising it only
+// changes what — and on a phone the thing it covers is often a link or a
+// call to action in the middle of being read. Fading out during the scroll
+// and coming back when the reader settles keeps it reachable without
+// having it sit on top of the sentence someone is reading on the way past.
+//
+// It never hides while its own panel is open, and focus brings it straight
+// back, so a keyboard user is never tabbed onto something invisible.
+const SETTLE_MS = 450;
 export default function LiveSupportWidget() {
   const [open, setOpen] = useState(false);
+  const [scrolling, setScrolling] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -44,11 +56,37 @@ export default function LiveSupportWidget() {
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, []);
 
+  useEffect(() => {
+    let settle: ReturnType<typeof setTimeout>;
+    // Passive: this listener must never be able to delay a scroll, which
+    // is the one thing a scroll handler on a phone can actually ruin.
+    const onScroll = () => {
+      setScrolling(true);
+      clearTimeout(settle);
+      settle = setTimeout(() => setScrolling(false), SETTLE_MS);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      clearTimeout(settle);
+    };
+  }, []);
+
+  const hidden = scrolling && !open;
+
   return (
     <div
       ref={rootRef}
       data-behind-sheet
-      className="fixed bottom-28 left-3 z-30 flex flex-col items-start gap-2.5 sm:bottom-24"
+      className={[
+        "fixed bottom-28 left-3 z-30 flex flex-col items-start gap-2.5 sm:bottom-24",
+        "transition-opacity duration-200 focus-within:opacity-100 focus-within:pointer-events-auto",
+        // The slide is motion-safe; the fade is not. Someone who asked for
+        // less motion still wants the button out of the way, and an opacity
+        // change is not what they were asking to be spared.
+        "motion-safe:transition-[opacity,transform] motion-safe:duration-200",
+        hidden ? "pointer-events-none opacity-0 motion-safe:translate-y-2" : "opacity-100",
+      ].join(" ")}
     >
       {open && (
         <div className="flex flex-col items-start gap-2.5 motion-safe:animate-[popIn_0.15s_ease-out]">
