@@ -271,7 +271,7 @@ export default function Footer({
           </p>
           <p className="mt-3">
             <strong className="text-text-on-ink-muted">{tr("Bağlı kuruluş bilgilendirmesi:")}</strong>{" "}
-            {tr("FXPARTNER, bu sayfada listelenen brokerların bazılarıyla ortaklık/referans ilişkisine sahiptir ve “Resmi Sitesi” bağlantıları üzerinden açılan hesaplardan komisyon kazanabilir. Bu durum ilgili kartta ayrıca belirtilir ve sıralama veya puanlama kriterlerimizi etkilemez.")}
+            {tr("FXPARTNER, bu sayfada listelenen brokerların bazılarıyla ortaklık/referans ilişkisine sahiptir ve “Siteye Git” bağlantıları üzerinden açılan hesaplardan komisyon kazanabilir. Bu durum ilgili kartta ayrıca belirtilir ve sıralama veya puanlama kriterlerimizi etkilemez.")}
           </p>
           <p className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1">
             <span>© {new Date().getFullYear()} FXPARTNER. {tr("Tüm hakları saklıdır.")}</span>

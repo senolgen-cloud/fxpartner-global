@@ -152,7 +152,7 @@ export default async function CampaignsPage({
                         className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
                       >
                         {broker.promotion!.ctaLabel ??
-                          trf("{broker} - Resmi Sitesi", { broker: broker.name })}
+                          trf("{broker} - Siteye Git", { broker: broker.name })}
                       </a>
                       {broker.promotion!.contactEmail && (
                         <a

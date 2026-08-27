@@ -2425,11 +2425,6 @@
   "Daha Fazla": "More",
   "Mobil gezinme": "Mobile navigation",
   "Menüyü kapat": "Close menu",
-  "{broker} - Resmi Sitesi": "{broker} - Official Site",
-  "Resmi Sitesi": "Official Site",
-  "XM - Resmi Sitesi →": "XM - Official Site →",
-  "Lite Finance - Resmi Sitesi →": "Lite Finance - Official Site →",
-  "FXPARTNER, bu sayfada listelenen brokerların bazılarıyla ortaklık/referans ilişkisine sahiptir ve “Resmi Sitesi” bağlantıları üzerinden açılan hesaplardan komisyon kazanabilir. Bu durum ilgili kartta ayrıca belirtilir ve sıralama veya puanlama kriterlerimizi etkilemez.": "FXPARTNER has a partnership/referral relationship with some of the brokers listed on this page and may earn a commission on accounts opened via “Official Site” links. This is specified separately on the relevant card and does not affect our ranking or scoring criteria.",
   "Bizi takip edin": "Follow us",
   "Performans": "Performance",
   "Toplam Sinyal": "Total Signals",
@@ -2735,5 +2730,8 @@
   "Neyin gelişmesini isterdi?": "What would they like to be improved?",
   "Genel": "General",
   "{broker} yanıtı": "{broker} response",
-  "Siteye Git": "Visit Site"
+  "Siteye Git": "Visit Site",
+  "{broker} - Siteye Git": "{broker} - Go to Site",
+  "Güncel bonus koşulları için {broker}'in resmi sitesini kontrol edin · Bonus kampanyaları bazı bölgelerde/hesap türlerinde geçerli olmayabilir · Şartlar ve koşullar geçerlidir": "Check {broker}'s official website for current bonus conditions · Bonus campaigns may not be valid in some regions/account types · Terms and conditions apply",
+  "FXPARTNER, bu sayfada listelenen brokerların bazılarıyla ortaklık/referans ilişkisine sahiptir ve “Siteye Git” bağlantıları üzerinden açılan hesaplardan komisyon kazanabilir. Bu durum ilgili kartta ayrıca belirtilir ve sıralama veya puanlama kriterlerimizi etkilemez.": "FXPARTNER has a partnership/referral relationship with some of the brokers listed on this page and may earn commissions from accounts opened via “Visit Site” links. This is indicated separately on the relevant card and does not affect our ranking or scoring criteria."
 }

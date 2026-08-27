@@ -89,7 +89,7 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
               rel="noopener noreferrer sponsored"
               className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft hover:shadow-lg hover:shadow-ink/20"
             >
-              {trf("{broker} - Resmi Sitesi", { broker: broker.name })}
+              {trf("{broker} - Siteye Git", { broker: broker.name })}
             </a>
             <Link
               href={`/brokers/${broker.slug}`}

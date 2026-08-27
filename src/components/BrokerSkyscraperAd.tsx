@@ -38,7 +38,7 @@ export default function BrokerSkyscraperAd({ broker }: { broker: Broker }) {
           href={broker.adUrlTall ?? broker.adUrl ?? broker.referralUrl}
           target="_blank"
           rel="noopener noreferrer sponsored"
-          aria-label={`${broker.name} — Sponsorlu, Resmi Sitesi`}
+          aria-label={`${broker.name} — Sponsorlu, Siteye Git`}
           className="block overflow-hidden rounded-2xl border border-hairline transition-opacity hover:opacity-90"
         >
           <span className="sr-only">Sponsorlu — {broker.name}</span>

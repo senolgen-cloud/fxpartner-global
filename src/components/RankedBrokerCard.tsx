@@ -164,10 +164,10 @@ function CardBody({
               href={broker.referralUrl}
               target="_blank"
               rel="noopener noreferrer sponsored"
-              aria-label={trf("{broker} - Resmi Sitesi", { broker: broker.name })}
+              aria-label={trf("{broker} - Siteye Git", { broker: broker.name })}
               className="inline-flex h-11 flex-1 items-center justify-center whitespace-nowrap rounded-xl bg-signal px-4 text-[13px] font-semibold text-on-signal transition-colors hover:bg-signal-strong sm:flex-none sm:px-5"
             >
-              {tr("Resmi Sitesi")}
+              {tr("Siteye Git")}
             </a>
             <Link
               href={`/brokers/${broker.slug}`}

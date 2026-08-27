@@ -42,7 +42,7 @@ export const INLINE_AD_COPY: Record<string, InlineAdCopy> = {
     finalPitch:
       "Bu yazıdaki maliyet, marjin ve platform hesaplarını kendi hesabınızda denemek isterseniz — XM demo hesabı ücretsizdir ve gerçek para yatırmadan platformu test etmenizi sağlar.",
     points: XM_AD_POINTS,
-    ctaLabel: "XM - Resmi Sitesi →",
+    ctaLabel: "XM - Siteye Git →",
   },
   "lite-finance": {
     // No dedicated in-article tracking link exists for Lite Finance yet, so
@@ -60,7 +60,7 @@ export const INLINE_AD_COPY: Record<string, InlineAdCopy> = {
       "Doğrulanmış hesapta anlık para çekme",
       "MT4, MT5, cTrader ve WebTerminal desteği",
     ],
-    ctaLabel: "Lite Finance - Resmi Sitesi →",
+    ctaLabel: "Lite Finance - Siteye Git →",
   },
 };
 

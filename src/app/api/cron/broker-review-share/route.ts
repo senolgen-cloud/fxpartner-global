@@ -62,7 +62,7 @@ export const GET = withCronErrorAlert("broker-review-share", async (req: NextReq
   // everything else.
   const inlineKeyboard = [
     ...top5.map(({ broker }) => [
-      { text: `${broker.name} — Resmi Sitesi`, url: broker.referralUrl },
+      { text: `${broker.name} — Siteye Git`, url: broker.referralUrl },
       { text: "İncele", url: `${siteUrl}/brokers/${broker.slug}` },
     ]),
     contactButtonRow(),

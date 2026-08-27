@@ -86,7 +86,7 @@ export default function BonusPopup({ slug }: { slug: string }) {
             rel="noopener noreferrer sponsored"
             onClick={close}
           >
-            {trf("{broker} - Resmi Sitesi", { broker: broker.name })}
+            {trf("{broker} - Siteye Git", { broker: broker.name })}
           </SheetLinkAction>
         </>
       }

@@ -655,7 +655,7 @@ export const brokers: Broker[] = [
       imageWidth: 1672,
       imageHeight: 941,
       ctaUrl: "https://bit.ly/litefinance-vip",
-      // No ctaLabel: falls back to the standard "{broker} - Resmi Sitesi"
+      // No ctaLabel: falls back to the standard "{broker} - Siteye Git"
       // label, which is localized and matches every other broker CTA.
       contactEmail: "turkiye@litefinance.com",
     },

@@ -41,7 +41,7 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
         href={broker.adUrl ?? broker.referralUrl}
         target="_blank"
         rel="noopener noreferrer sponsored"
-        aria-label={`${broker.name} — Sponsorlu, Resmi Sitesi`}
+        aria-label={`${broker.name} — Sponsorlu, Siteye Git`}
         className={`overflow-hidden rounded-2xl border border-hairline transition-opacity hover:opacity-90 ${
           broker.adImageMobile ? "hidden @[560px]:block" : "block"
         }`}
@@ -67,7 +67,7 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
           href={broker.adUrlMobile ?? broker.adUrl ?? broker.referralUrl}
           target="_blank"
           rel="noopener noreferrer sponsored"
-          aria-label={`${broker.name} — Sponsorlu, Resmi Sitesi`}
+          aria-label={`${broker.name} — Sponsorlu, Siteye Git`}
           className="mx-auto block w-fit overflow-hidden rounded-2xl border border-hairline transition-opacity hover:opacity-90 @[560px]:hidden"
         >
           <span className="sr-only">Sponsorlu — {broker.name}</span>
@@ -108,7 +108,7 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
         rel="noopener noreferrer sponsored"
         className="w-full shrink-0 rounded-full bg-signal px-5 py-2.5 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong sm:w-auto"
       >
-        {trf("{broker} - Resmi Sitesi", { broker: broker.name })}
+        {trf("{broker} - Siteye Git", { broker: broker.name })}
       </a>
     </div>
   );
