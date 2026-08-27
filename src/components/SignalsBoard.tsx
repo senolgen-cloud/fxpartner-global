@@ -763,6 +763,12 @@ function SignalCard({
   // olmadan bu sayı bir hesap getirisi gibi okunuyor.
   const resultUnit = null;
   const resultColor = outcomeColor(signal.outcome);
+  // What the rail means changes when the trade does. While it is open the
+  // reader's question is which way it is pointing, so the rail is the
+  // direction. Once it has closed the question is only whether it won, and
+  // a red rail on a finished SELL that made money reads as a loss — which
+  // is exactly how it was being read.
+  const railColor = isClosed ? resultColor : directionColor;
 
   const openedAt = signal.createdAt;
   const closedAt = signal.closedAt;
@@ -775,7 +781,7 @@ function SignalCard({
     // word does. Logical border so it stays on the reading edge in Arabic.
     <div
       className="mx-auto w-full max-w-2xl overflow-hidden rounded-2xl border border-s-[3px] border-hairline bg-gradient-to-b from-ink-soft to-ink shadow-[0_20px_50px_-25px_rgba(0,0,0,0.7)]"
-      style={{ borderInlineStartColor: directionColor }}
+      style={{ borderInlineStartColor: railColor }}
     >
       {/* Header row: identity on the reading edge, state on the far one.
           It used to be centred, along with the numbers below it — which is
@@ -791,7 +797,15 @@ function SignalCard({
             {(isBuy || isSell) && (
               <span
                 className="shrink-0 rounded-md px-1.5 py-0.5 text-[11px] font-bold leading-none"
-                style={{ background: `${directionColor}26`, color: directionColor }}
+                // Neutral once closed, for the same reason as the rail: on a
+                // finished card the only thing red and green are allowed to
+                // mean is won and lost. The word SELL still says which side
+                // it was — that information is in the label, not the colour.
+                style={
+                  isClosed
+                    ? { background: "rgba(255,255,255,0.08)", color: "var(--text-on-ink-muted)" }
+                    : { background: `${directionColor}26`, color: directionColor }
+                }
               >
                 {signal.direction}
               </span>
