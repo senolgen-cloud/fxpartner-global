@@ -47,6 +47,12 @@ export default function BonusPopup({ slug }: { slug: string }) {
   useEffect(() => {
     if (!promo) return;
     if (sessionStorage.getItem(DISMISS_KEY)) return;
+    // Ready early, shown when it is polite: interruptionSlot will not let
+    // this onto the screen inside the first seconds of a visit or of this
+    // page, or within the quiet period after another sheet. 1.5s used to
+    // be when a reader saw it, and landing on a broker page and being
+    // interrupted a second and a half later is the complaint this whole
+    // policy exists to answer.
     const timer = setTimeout(() => setOpen(true), 1500);
     return () => clearTimeout(timer);
   }, [promo]);

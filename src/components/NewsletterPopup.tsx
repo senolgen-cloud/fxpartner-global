@@ -7,12 +7,15 @@ import { useEffect, useState } from "react";
 import { useActionState } from "react";
 import { subscribeToNewsletter, type NewsletterFormState } from "@/lib/newsletter-actions";
 
-// Sitewide, once-per-visitor. Deliberately a long delay (unlike
-// BonusPopup's 1.5s) so it never stacks with the broker-specific bonus
-// popup or the Telegram prompt — by 45s those have already been seen and
-// dismissed or acted on. Dismissing hides it for 30 days; subscribing
-// hides it forever (both stored client-side, no server round-trip needed
-// just to remember that).
+// Sitewide, once-per-visitor. The delay below is this component saying
+// when it considers itself relevant; whether the reader actually sees it
+// then is interruptionSlot's decision — it holds every sheet to a minimum
+// dwell, a cooldown after the previous one, and a cap per visit. Keeping
+// its own delay long anyway means it is late in the queue rather than
+// racing the broker campaign for the same moment.
+//
+// Dismissing hides it for 30 days; subscribing hides it forever (both
+// stored client-side, no server round-trip needed just to remember that).
 const DISMISS_KEY = "fxpartner-newsletter-popup-dismissed-until";
 const SUBSCRIBED_KEY = "fxpartner-newsletter-popup-subscribed";
 const SHOW_DELAY_MS = 45000;
