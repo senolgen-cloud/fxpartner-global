@@ -1,7 +1,29 @@
 name: Telegram content cron
 
 on:
+  # A manual run used to fire every job in this file, because each one was
+  # guarded on "is this a dispatch" and nothing narrower. Triggering the
+  # workflow to test one cron therefore also posted a BTC chart to the
+  # channel from market-update — a job whose own comment says it is paused.
+  # "Paused" meant "has no schedule", which is not the same thing.
+  #
+  # Now a dispatch has to say what it wants. The default runs the scheduled
+  # jobs only; market-update is not among them and has to be named.
   workflow_dispatch:
+    inputs:
+      job:
+        description: "Which job to run"
+        required: true
+        default: scheduled
+        type: choice
+        options:
+          - scheduled
+          - blog-share
+          - market-analysis-share
+          - campaign-digest
+          - economic-calendar-alert
+          - broker-review-share
+          - market-update
   schedule:
     # market-analysis-share (Piyasa Analizi): checks every 2h whether
     # today's /piyasa-analizi post is live; only actually sends once
@@ -41,7 +63,7 @@ jobs:
   # XAU/USD, US100, oil etc. now goes through market-analysis-share
   # (real researched write-ups in src/data/marketAnalysis.ts) instead.
   market-update:
-    if: github.event_name == 'workflow_dispatch'
+    if: inputs.job == 'market-update'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger market-update
@@ -51,7 +73,9 @@ jobs:
 
   # Owned by Piyasa Analizi Departmanı — see docs/ORGANIZATION.md.
   market-analysis-share:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 */2 * * *'
+    if: >-
+      github.event.schedule == '0 */2 * * *' ||
+      inputs.job == 'scheduled' || inputs.job == 'market-analysis-share'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger market-analysis-share
@@ -61,7 +85,9 @@ jobs:
 
   # Owned by Reklam & Kampanya Departmanı — see docs/ORGANIZATION.md.
   campaign-digest:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 9 * * 1'
+    if: >-
+      github.event.schedule == '0 9 * * 1' ||
+      inputs.job == 'scheduled' || inputs.job == 'campaign-digest'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger campaign-digest
@@ -75,7 +101,9 @@ jobs:
   # run — three times a day, so a backlog drains at a pace a channel can
   # absorb without a new post waiting half a day to be announced.
   blog-share:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '30 9,15,21 * * *'
+    if: >-
+      github.event.schedule == '30 9,15,21 * * *' ||
+      inputs.job == 'scheduled' || inputs.job == 'blog-share'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger blog-share
@@ -89,7 +117,9 @@ jobs:
   # per owner approval — see the automation governance note in
   # src/lib/departments.ts.
   economic-calendar-alert:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '*/5 * * * *'
+    if: >-
+      github.event.schedule == '*/5 * * * *' ||
+      inputs.job == 'scheduled' || inputs.job == 'economic-calendar-alert'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger economic-calendar-alert
@@ -99,7 +129,9 @@ jobs:
 
   # Owned by Broker İstihbaratı & İnceleme Departmanı — see docs/ORGANIZATION.md.
   broker-review-share:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 6,10,14,20 * * *'
+    if: >-
+      github.event.schedule == '0 6,10,14,20 * * *' ||
+      inputs.job == 'scheduled' || inputs.job == 'broker-review-share'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger broker-review-share

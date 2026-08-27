@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramPhoto, telegramSiteCta, telegramContactCta, mainServicesKeyboard } from "@/lib/telegram";
-import { getCandles, SYMBOLS } from "@/lib/market-data";
+import { getCandles, MAX_CANDLE_AGE_MS, SYMBOLS } from "@/lib/market-data";
 import { sma, rsi } from "@/lib/technicals";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
@@ -21,6 +21,21 @@ export const GET = withCronErrorAlert("market-update", async (req: NextRequest) 
   const symbolId = "BTCUSD"; // TODO: rotate across symbols once more have a real intraday data source
   const config = SYMBOLS[symbolId];
   const candles = await getCandles(symbolId);
+
+  // A price is a factual claim, and an old one is a false claim stated
+  // with confidence. If the newest candle is not recent, this posts
+  // nothing rather than posting a number it cannot stand behind.
+  const newest = candles.length ? candles[candles.length - 1][0] : 0;
+  const age = Date.now() - newest;
+  if (!candles.length || age > MAX_CANDLE_AGE_MS) {
+    return NextResponse.json({
+      ok: true,
+      posted: false,
+      reason: "stale candles",
+      newestCandleAgeMinutes: candles.length ? Math.round(age / 60000) : null,
+    });
+  }
+
   const closes = candles.map((c) => c[4]);
   const last = closes.length - 1;
   const currentPrice = closes[last];
@@ -29,7 +44,13 @@ export const GET = withCronErrorAlert("market-update", async (req: NextRequest) 
   const rsiValue = rsi(closes, 14)[last];
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
-  const imageUrl = `${siteUrl}/api/og/market-chart?symbol=${symbolId}`;
+  // The caption and the chart used to fetch the same feed independently,
+  // which is how they came to disagree by $15,000. The numbers are
+  // computed once here and handed to the image, so the two cannot drift
+  // apart again whatever the feed does.
+  const imageUrl =
+    `${siteUrl}/api/og/market-chart?symbol=${symbolId}` +
+    `&price=${currentPrice}&ma10=${ma10 ?? ""}&ma20=${ma20 ?? ""}&rsi=${rsiValue ?? ""}`;
 
   const aboveMA10 = ma10 !== null && currentPrice >= ma10;
   const aboveMA20 = ma20 !== null && currentPrice >= ma20;

@@ -43,12 +43,25 @@ export async function GET(request: Request) {
   const rsi14 = rsi(closes, 14);
 
   const last = closes.length - 1;
-  const currentPrice = closes[last];
+
+  // The caller may hand over the figures it already computed. The chart
+  // shape still comes from the candles, but the numbers printed on it are
+  // whatever the caption says — the two fetched this feed separately
+  // before, and drifted $15,000 apart when one side got a stale cache.
+  // A bare request with no overrides still works and reads the feed.
+  const num = (key: string): number | null => {
+    const raw = searchParams.get(key);
+    if (raw === null || raw === "") return null;
+    const n = Number(raw);
+    return Number.isFinite(n) ? n : null;
+  };
+
+  const currentPrice = num("price") ?? closes[last];
   const firstPrice = closes[0];
   const isUp = currentPrice >= firstPrice;
-  const rsiValue = rsi14[last];
-  const ma10Value = ma10[last];
-  const ma20Value = ma20[last];
+  const rsiValue = num("rsi") ?? rsi14[last];
+  const ma10Value = num("ma10") ?? ma10[last];
+  const ma20Value = num("ma20") ?? ma20[last];
 
   const priceMin = Math.min(...lows);
   const priceMax = Math.max(...highs);
