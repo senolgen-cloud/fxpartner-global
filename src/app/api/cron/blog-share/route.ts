@@ -9,6 +9,8 @@ import {
 import { sendPushToAll, type PushResult } from "@/lib/push";
 import { postTextToX, postTradeSignalToX } from "@/lib/x";
 import { blogPosts } from "@/data/blog";
+import { localizeBlogPost } from "@/lib/localizeContent";
+import { localePath } from "@/lib/i18n";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
@@ -92,7 +94,10 @@ export const GET = withCronErrorAlert("blog-share", async (req: NextRequest) => 
 
   let push: PushResult | { error: string } = { sent: 0, removed: 0, failed: 0 };
   try {
-    push = await sendPushToAll({ title: target.title, body: target.excerpt, url: `/blog/${target.slug}` });
+    push = await sendPushToAll((locale) => {
+      const copy = localizeBlogPost(target, locale);
+      return { title: copy.title, body: copy.excerpt, url: localePath(locale, `/blog/${target.slug}`) };
+    });
   } catch (err) {
     push = { error: (err as Error).message };
   }

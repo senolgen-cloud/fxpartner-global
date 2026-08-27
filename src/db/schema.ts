@@ -303,6 +303,14 @@ export const pushSubscriptions = pgTable("push_subscription", {
   p256dh: text("p256dh").notNull(),
   auth: text("auth").notNull(),
   userAgent: text("user_agent"),
+  // Which language tree the reader was on when they allowed notifications.
+  // Without it every push went out in Turkish to everyone, including the
+  // /en, /ua and /ar readers — the Telegram side of the same routes was
+  // already localised, push was simply never wired to a locale.
+  //
+  // Null on every row written before this existed, and read as Turkish,
+  // which is what those readers have been getting all along.
+  locale: text("locale"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 

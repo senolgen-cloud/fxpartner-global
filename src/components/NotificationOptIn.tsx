@@ -1,5 +1,6 @@
 "use client";
 import { useTr } from "@/components/useTr";
+import { useLocale } from "@/components/LocaleProvider";
 import Sheet, { SheetAction, SheetBody, SheetNote, SheetTitle } from "@/components/Sheet";
 import { PRIORITY, useInterruptionSlot } from "@/components/interruptionSlot";
 
@@ -53,6 +54,7 @@ function isStandalone(): boolean {
 
 export default function NotificationOptIn() {
   const tr = useTr();
+  const locale = useLocale();
   const [visible, setVisible] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
@@ -109,7 +111,10 @@ export default function NotificationOptIn() {
         fetch("/api/push/subscribe", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(subscription.toJSON()),
+          // The page's own locale rides along with the subscription. Without
+          // it the server has no way to know which language this phone
+          // should be spoken to in, and every push went out in Turkish.
+          body: JSON.stringify({ ...subscription.toJSON(), locale }),
         }),
         ENABLE_TIMEOUT_MS
       );

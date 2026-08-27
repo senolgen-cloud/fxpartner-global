@@ -5,6 +5,8 @@ import { db } from "@/db";
 import { economicCalendarAlerts } from "@/db/schema";
 import { inArray } from "drizzle-orm";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
+import { formatMessage } from "@/lib/chrome";
+import { defaultLocale, localePath, type Locale } from "@/lib/i18n";
 
 // Owned by Piyasa Analizi Departmanı — see src/lib/departments.ts.
 // Runs every 5 minutes from .github/workflows/telegram-cron.yml, active
@@ -39,22 +41,31 @@ function line(event: EconomicEvent): string {
   return `${event.country} ${event.title}: ${event.actual} (bek. ${event.forecast || "—"})`;
 }
 
-function buildPayload(events: EconomicEvent[]): { title: string; body: string; url: string } {
+function buildPayload(events: EconomicEvent[], loc: Locale): { title: string; body: string; url: string } {
+  const t = (text: string, vars: Record<string, string | number> = {}) =>
+    formatMessage(loc, text, vars);
+
   if (events.length === 1) {
     const event = events[0];
     return {
+      // The release's own name comes from the calendar feed and is not
+      // ours to translate; the labels around it are.
       title: `${event.title} (${event.country})`,
-      body: `Gerçekleşen: ${event.actual} · Beklenti: ${event.forecast || "—"} · Önceki: ${event.previous || "—"}`,
-      url: "/ekonomik-takvim",
+      body: t("Gerçekleşen: {actual} · Beklenti: {forecast} · Önceki: {previous}", {
+        actual: event.actual,
+        forecast: event.forecast || "—",
+        previous: event.previous || "—",
+      }),
+      url: localePath(loc, "/ekonomik-takvim"),
     };
   }
 
   const shown = events.slice(0, MAX_EVENTS_IN_BODY).map(line);
   const rest = events.length - shown.length;
   return {
-    title: `${events.length} önemli veri açıklandı`,
-    body: shown.join(" · ") + (rest > 0 ? ` · +${rest} veri daha` : ""),
-    url: "/ekonomik-takvim",
+    title: t("{count} önemli veri açıklandı", { count: events.length }),
+    body: shown.join(" · ") + (rest > 0 ? ` · ${t("+{rest} veri daha", { rest })}` : ""),
+    url: localePath(loc, "/ekonomik-takvim"),
   };
 }
 
@@ -92,7 +103,8 @@ export const GET = withCronErrorAlert("economic-calendar-alert", async (req: Nex
       ok: true,
       dryRun: true,
       candidates: candidates.length,
-      wouldSend: candidates.length > 0 ? buildPayload(candidates) : null,
+      // The dry run reports the Turkish copy; it is a diagnostic, not a send.
+      wouldSend: candidates.length > 0 ? buildPayload(candidates, defaultLocale) : null,
       recentReleases,
     });
   }
@@ -119,7 +131,7 @@ export const GET = withCronErrorAlert("economic-calendar-alert", async (req: Nex
 
   let push: PushResult | { error: string };
   try {
-    push = await sendPushToAll(buildPayload(toNotify));
+    push = await sendPushToAll((loc) => buildPayload(toNotify, loc));
   } catch (err) {
     // Nothing is marked as notified, so the next run (5 minutes from now,
     // still inside the freshness window) retries the same releases.

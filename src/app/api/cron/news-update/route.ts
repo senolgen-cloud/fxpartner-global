@@ -9,7 +9,8 @@ import { postTextToX } from "@/lib/x";
 import { db } from "@/db";
 import { newsBulletins } from "@/db/schema";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
-import { translateBulletin } from "@/lib/translateContent";
+import { translateBulletin, pickTranslation } from "@/lib/translateContent";
+import { localePath } from "@/lib/i18n";
 
 // Owned by Haber & Editöryal Departmanı (Elif Sarman) — see
 // src/lib/departments.ts and docs/ORGANIZATION.md. Dedup uses the same
@@ -117,10 +118,16 @@ export const GET = withCronErrorAlert("news-update", async (req: NextRequest) =>
   // site page and the Telegram post have already gone out.
   let push: PushResult | { error: string };
   try {
-    push = await sendPushToAll({
-      title: bulletin.title,
-      body: bulletin.excerpt,
-      url: `/haber-bulteni/${slug}`,
+    // Every locale's copy already exists — it was translated for the row
+    // ten lines up. The URL is prefixed too: unprefixed it 308s to /tr, so
+    // an Arabic reader tapping an Arabic notification landed on Turkish.
+    push = await sendPushToAll((locale) => {
+      const copy = pickTranslation(JSON.stringify(translations), locale, bulletin);
+      return {
+        title: copy.title,
+        body: copy.excerpt,
+        url: localePath(locale, `/haber-bulteni/${slug}`),
+      };
     });
   } catch (err) {
     console.error("News bulletin push failed:", err);

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { sendTelegramMessage, telegramSiteCta, telegramContactCta, mainServicesKeyboard } from "@/lib/telegram";
 import { sendPushToAll, type PushResult } from "@/lib/push";
 import { marketAnalysisPosts } from "@/data/marketAnalysis";
+import { localizeData } from "@/lib/localizeContent";
+import { localePath } from "@/lib/i18n";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
@@ -45,7 +47,14 @@ export const GET = withCronErrorAlert("market-analysis-share", async (req: NextR
 
   let push: PushResult | { error: string } = { sent: 0, removed: 0, failed: 0 };
   try {
-    push = await sendPushToAll({ title: latest.title, body: latest.excerpt, url: `/piyasa-analizi/${latest.slug}` });
+    push = await sendPushToAll((locale) => {
+      const copy = localizeData(latest, locale);
+      return {
+        title: copy.title,
+        body: copy.excerpt,
+        url: localePath(locale, `/piyasa-analizi/${latest.slug}`),
+      };
+    });
   } catch (err) {
     push = { error: (err as Error).message };
   }

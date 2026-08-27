@@ -250,23 +250,36 @@ export async function GET(req: NextRequest) {
   // instant levels-on-your-phone is exactly what the free account buys
   // (see the header comment in lib/signalAccess.ts).
   const [memberPush, teaserPush] = await Promise.allSettled([
-    sendPushToMembers({
-      title: publicDirection
-        ? `${dirEmoji} ${pair.toUpperCase()} ${publicDirection} açıldı`
-        : `Yeni işlem: ${pair.toUpperCase()}`,
-      body: openLevels
-        ? `Giriş ${entry}${hasTarget1 ? ` · TP ${target1}` : ""}${hasStop ? ` · SL ${stop}` : ""}`
-        : confidence
-          ? `Sinyal güveni %${confidence} · Giriş, TP ve SL için dokunun.`
-          : "Giriş, TP ve SL seviyeleri için dokunun.",
-      url: "/signals",
+    // The Telegram half of this route has been translated all along; the
+    // push half was writing Turkish template literals straight into every
+    // phone. Same catalogue, same helper, per subscriber's own language.
+    sendPushToMembers((loc) => {
+      const p = (text: string, vars: Record<string, string | number> = {}) =>
+        formatMessage(loc, text, vars);
+      return {
+        title: publicDirection
+          ? `${dirEmoji} ${pair.toUpperCase()} ${publicDirection} ` + p("açıldı")
+          : p("Yeni işlem: {pair}", { pair: pair.toUpperCase() }),
+        body: openLevels
+          ? `${p("Giriş")} ${entry}${hasTarget1 ? ` · TP ${target1}` : ""}${hasStop ? ` · SL ${stop}` : ""}`
+          : confidence
+            ? p("Sinyal güveni %{confidence} · Giriş, TP ve SL için dokunun.", { confidence })
+            : p("Giriş, TP ve SL seviyeleri için dokunun."),
+        url: localePath(loc, "/signals"),
+      };
     }),
-    sendPushToNonMembers({
-      title: publicDirection
-        ? `${dirEmoji} ${pair.toUpperCase()} ${publicDirection} açıldı`
-        : `Yeni işlem: ${pair.toUpperCase()}`,
-      body: "Giriş, TP ve SL seviyeleri anında üyelere gidiyor. Ücretsiz hesap aç, sonraki sinyali kaçırma.",
-      url: "/account/login",
+    sendPushToNonMembers((loc) => {
+      const p = (text: string, vars: Record<string, string | number> = {}) =>
+        formatMessage(loc, text, vars);
+      return {
+        title: publicDirection
+          ? `${dirEmoji} ${pair.toUpperCase()} ${publicDirection} ` + p("açıldı")
+          : p("Yeni işlem: {pair}", { pair: pair.toUpperCase() }),
+        body: p(
+          "Giriş, TP ve SL seviyeleri anında üyelere gidiyor. Ücretsiz hesap aç, sonraki sinyali kaçırma."
+        ),
+        url: localePath(loc, "/account/login"),
+      };
     }),
   ]);
 

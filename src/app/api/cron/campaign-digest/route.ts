@@ -4,6 +4,8 @@ import { sendPushToAll, type PushResult } from "@/lib/push";
 import { brokers } from "@/data/brokers";
 import { getCashbackProgram } from "@/data/cashback";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
+import { formatMessage } from "@/lib/chrome";
+import { localePath } from "@/lib/i18n";
 
 // Owned by Reklam & Kampanya Departmanı (Sena Yıldırım) — see
 // src/lib/departments.ts and docs/ORGANIZATION.md. Paused by default:
@@ -49,11 +51,12 @@ export const GET = withCronErrorAlert("campaign-digest", async (req: NextRequest
 
   let push: PushResult | { error: string } = { sent: 0, removed: 0, failed: 0 };
   try {
-    push = await sendPushToAll({
-      title: "Bu haftanın aktif broker kampanyaları",
+    push = await sendPushToAll((loc) => ({
+      title: formatMessage(loc, "Bu haftanın aktif broker kampanyaları", {}),
+      // Broker names are proper nouns and stay as they are in every tree.
       body: campaigns.map((b) => b.name).join(", "),
-      url: "/campaigns",
-    });
+      url: localePath(loc, "/campaigns"),
+    }));
   } catch (err) {
     push = { error: (err as Error).message };
   }

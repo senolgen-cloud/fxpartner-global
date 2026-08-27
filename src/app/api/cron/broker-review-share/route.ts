@@ -4,6 +4,8 @@ import { brokers, getBrokerScores } from "@/data/brokers";
 import { sendPushToAll, type PushResult } from "@/lib/push";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
+import { formatMessage } from "@/lib/chrome";
+import { localePath } from "@/lib/i18n";
 
 // Owned by Broker İstihbaratı & İnceleme Departmanı — see
 // src/lib/departments.ts and docs/ORGANIZATION.md. Was one broker's review
@@ -80,11 +82,11 @@ export const GET = withCronErrorAlert("broker-review-share", async (req: NextReq
   let push: PushResult | { skipped: string } | { error: string } = { skipped: "already pushed today" };
   if (!(await isAlreadyPostedToTelegram(todayKey))) {
     try {
-      push = await sendPushToAll({
-        title: "FXPARTNER Index — Günün En İyi 5 Brokeri",
+      push = await sendPushToAll((loc) => ({
+        title: formatMessage(loc, "FXPARTNER Index — Günün En İyi 5 Brokeri", {}),
         body: top5.map(({ broker, scores }) => `${broker.name} ${scores.composite.toFixed(1)}`).join(" · "),
-        url: "/brokerlar",
-      });
+        url: localePath(loc, "/brokerlar"),
+      }));
       await markPostedToTelegram(todayKey);
     } catch (err) {
       // Not marked, so the next run today retries — the Telegram post has

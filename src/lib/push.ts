@@ -2,6 +2,7 @@ import webpush from "web-push";
 import { db } from "@/db";
 import { pushSubscriptions } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 
 let configured = false;
 
@@ -23,6 +24,27 @@ export interface PushPayload {
   url: string;
 }
 
+/**
+ * What to send, per language.
+ *
+ * A caller that passes a plain payload sends the same text to everyone,
+ * which is what every caller did before locales were stored and is still
+ * right for anything genuinely language-free. A caller that passes a
+ * function gets asked once per language actually present in the
+ * subscriber list — so a bulletin can hand back the translation it already
+ * has in its own row rather than re-translating anything.
+ */
+export type PushPayloadFor = PushPayload | ((locale: Locale) => PushPayload);
+
+function resolve(payload: PushPayloadFor, locale: Locale): PushPayload {
+  return typeof payload === "function" ? payload(locale) : payload;
+}
+
+/** Rows written before the column existed have been getting Turkish. */
+function localeOf(row: { locale: string | null }): Locale {
+  return row.locale && isLocale(row.locale) ? row.locale : defaultLocale;
+}
+
 export interface PushResult {
   sent: number;
   removed: number;
@@ -37,7 +59,7 @@ export interface PushResult {
 // ones. Use this for open, top-of-funnel content (blog posts, campaign
 // digests, market analysis, economic-calendar alerts) — things whose whole
 // job is reach. For trade signals use sendPushToMembers below instead.
-export async function sendPushToAll(payload: PushPayload): Promise<PushResult> {
+export async function sendPushToAll(payload: PushPayloadFor): Promise<PushResult> {
   return broadcast(payload, await db.query.pushSubscriptions.findMany(), "all");
 }
 
@@ -49,7 +71,7 @@ export async function sendPushToAll(payload: PushPayload): Promise<PushResult> {
 // push subscription (userId null) is skipped here rather than rejected at
 // subscribe time, so the same browser opt-in still works for the content
 // pushes above — and gets the teaser below instead.
-export async function sendPushToMembers(payload: PushPayload): Promise<PushResult> {
+export async function sendPushToMembers(payload: PushPayloadFor): Promise<PushResult> {
   const subs = await db.query.pushSubscriptions.findMany();
   return broadcast(
     payload,
@@ -64,7 +86,7 @@ export async function sendPushToMembers(payload: PushPayload): Promise<PushResul
 // so they get a teaser telling them a signal just went out and that the
 // levels-on-your-phone part needs a (free) account. Never send the actual
 // entry/TP/SL levels through this.
-export async function sendPushToNonMembers(payload: PushPayload): Promise<PushResult> {
+export async function sendPushToNonMembers(payload: PushPayloadFor): Promise<PushResult> {
   const subs = await db.query.pushSubscriptions.findMany();
   return broadcast(
     payload,
@@ -94,11 +116,23 @@ function endpointHost(endpoint: string): string {
 // meant a wrong VAPID key or a rate-limited push service looked exactly
 // like a healthy run in the cron output.
 async function broadcast(
-  payload: PushPayload,
+  payload: PushPayloadFor,
   subs: PushSubscriptionRow[],
   audience: string
 ): Promise<PushResult> {
   ensureConfigured();
+
+  // Resolved once per language present, not once per subscriber: a
+  // thousand Turkish subscribers should cost one lookup, not a thousand.
+  const byLocale = new Map<Locale, PushPayload>();
+  const payloadFor = (locale: Locale) => {
+    let p = byLocale.get(locale);
+    if (!p) {
+      p = resolve(payload, locale);
+      byLocale.set(locale, p);
+    }
+    return p;
+  };
 
   let sent = 0;
   let removed = 0;
@@ -113,7 +147,7 @@ async function broadcast(
             endpoint: sub.endpoint,
             keys: { p256dh: sub.p256dh, auth: sub.auth },
           },
-          JSON.stringify(payload)
+          JSON.stringify(payloadFor(localeOf(sub)))
         );
         sent += 1;
       } catch (err) {
