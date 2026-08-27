@@ -94,9 +94,71 @@ export default async function PrivacyPage({
               </li>
               <li>
                 <strong>{tr("Otomatik olarak:")}</strong>{" "}
-                {tr("oturumunuzu açık tutan bir oturum çerezi. Üçüncü taraf reklam veya izleme çerezi kullanmıyoruz.")}
+                {tr("aşağıda tek tek listelenen çerezler. Reklam ağlarına ait üçüncü taraf izleme çerezi kullanmıyoruz.")}
               </li>
             </ul>
+
+            <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
+              {tr("Kullandığımız çerezler")}
+            </h2>
+            <p className="mt-4">
+              {tr(
+                "Kullandığımız çerezlerin tamamı budur. İlk üçü olmadan site çalışmaz, bu yüzden onlar için onay istemiyoruz. Son ikisi isteğe bağlıdır ve yalnızca çerez bandında \"Tümünü kabul et\" derseniz yazılır; \"Yalnızca gerekli\" derseniz yazılmaz, daha önce yazılmışsa silinir."
+              )}
+            </p>
+            <div className="mt-4 overflow-x-auto">
+              <table className="w-full min-w-[34rem] border-collapse text-sm">
+                <thead>
+                  <tr className="border-b border-hairline text-start">
+                    <th className="py-2 pe-4 text-start font-medium">{tr("Çerez")}</th>
+                    <th className="py-2 pe-4 text-start font-medium">{tr("Süre")}</th>
+                    <th className="py-2 text-start font-medium">{tr("Ne için")}</th>
+                  </tr>
+                </thead>
+                <tbody className="text-text-dark/80">
+                  <tr className="border-b border-hairline">
+                    <td className="py-3 pe-4 font-mono text-xs">fxp_lang</td>
+                    <td className="py-3 pe-4">{tr("1 yıl")}</td>
+                    <td className="py-3">
+                      {tr("Siteyi hangi dilde okuduğunuz. İlk ziyarette ülkenize göre seçilir, siz değiştirdiğinizde seçiminiz saklanır.")}
+                    </td>
+                  </tr>
+                  <tr className="border-b border-hairline">
+                    <td className="py-3 pe-4 font-mono text-xs">googtrans</td>
+                    <td className="py-3 pe-4">{tr("1 yıl")}</td>
+                    <td className="py-3">
+                      {tr("Sayfa çevirisi için kullandığımız Google Çeviri bileşeninin kendi çerezi; fxp_lang ile birlikte yazılır. Google'a ait olduğu için üçüncü taraf bir çerezdir, ancak reklam veya profilleme amacı taşımaz.")}
+                    </td>
+                  </tr>
+                  <tr className="border-b border-hairline">
+                    <td className="py-3 pe-4 font-mono text-xs">{tr("oturum çerezi")}</td>
+                    <td className="py-3 pe-4">{tr("Oturum boyunca")}</td>
+                    <td className="py-3">
+                      {tr("Üye girişi yaptığınızda oturumunuzu açık tutar. Yalnızca giriş yapan üyelerde bulunur.")}
+                    </td>
+                  </tr>
+                  <tr className="border-b border-hairline">
+                    <td className="py-3 pe-4 font-mono text-xs">fxp_vid</td>
+                    <td className="py-3 pe-4">{tr("2 yıl")}</td>
+                    <td className="py-3">
+                      {tr("İsteğe bağlı. Tarayıcınıza verilen, adınıza veya e-postanıza bağlı olmayan rastgele bir kimlik. Aynı ziyaretçiye aynı şeyi iki kez göstermemek gibi işler için ayrılmıştır.")}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 pe-4 font-mono text-xs">fxp_attr</td>
+                    <td className="py-3 pe-4">{tr("2 yıl")}</td>
+                    <td className="py-3">
+                      {tr("İsteğe bağlı. Siteye ilk kez hangi kanaldan geldiğinizi tutar: kaynak, kampanya adı ve giriş yaptığınız sayfanın yolu. Adres satırındaki sorgu bilgisi bilinçli olarak kaydedilmez.")}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-4 text-sm text-text-dark/80">
+              {tr(
+                "Tercihinizi değiştirmek isterseniz tarayıcınızın site verilerini temizlemeniz yeterlidir; çerez bandı yeniden çıkar ve yeniden seçim yapabilirsiniz."
+              )}
+            </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
               Neden topluyoruz

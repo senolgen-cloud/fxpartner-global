@@ -6,6 +6,7 @@ import NotificationOptIn from "@/components/NotificationOptIn";
 import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
 import ChromeGate from "@/components/ChromeGate";
 import AddToHomeScreen from "@/components/AddToHomeScreen";
+import CookieConsent from "@/components/CookieConsent";
 import NewsletterPopup from "@/components/NewsletterPopup";
 import QuickAccessHub from "@/components/QuickAccessHub";
 import LiveSupportWidget from "@/components/LiveSupportWidget";
@@ -237,6 +238,7 @@ export default async function RootLayout({
           <ServiceWorkerRegistrar />
           <NotificationOptIn />
           <AddToHomeScreen />
+          <CookieConsent />
           <ChromeGate>
             <NewsletterPopup />
             <QuickAccessHub topBrokers={topBrokers} />

@@ -31,13 +31,40 @@ function applyAutoLanguage(request: NextRequest, response: NextResponse) {
   }
 }
 
+// What the reader has agreed to. "all" is everything below; "essential"
+// is the language cookies and the auth session and nothing else; null
+// means they have not been asked yet.
+//
+// fxp_lang/googtrans keep the site in the language the reader picked and
+// the session cookie keeps them logged in — a site cannot function without
+// those, so they are not gated. fxp_vid and fxp_attr are ours, for our
+// benefit, and under an opt-in reading of ePrivacy they must not be written
+// before consent and must be cleared after a refusal. A banner that leaves
+// the cookies in place is decoration.
+const CONSENT_COOKIE = "fxp_consent";
+type Consent = "all" | "essential" | null;
+
+function readConsent(request: NextRequest): Consent {
+  const value = request.cookies.get(CONSENT_COOKIE)?.value;
+  return value === "all" || value === "essential" ? value : null;
+}
+
+/** Removes a cookie the reader has declined, if a past visit set it. */
+function revoke(request: NextRequest, response: NextResponse, name: string) {
+  if (request.cookies.has(name)) response.cookies.delete(name);
+}
+
 // Stable, anonymous per-browser ID — set once on a visitor's first request
 // and never rotated after. Pure infrastructure for now (no feature reads it
 // yet): future personalization/attribution/push-prompt-dedup work can key
 // off it via src/lib/visitor.ts instead of each reinventing its own cookie.
 const VISITOR_COOKIE = "fxp_vid";
 
-function applyVisitorId(request: NextRequest, response: NextResponse) {
+function applyVisitorId(request: NextRequest, response: NextResponse, consent: Consent) {
+  if (consent !== "all") {
+    revoke(request, response, VISITOR_COOKIE);
+    return;
+  }
   if (request.cookies.has(VISITOR_COOKIE)) return;
   response.cookies.set(VISITOR_COOKIE, crypto.randomUUID(), {
     path: "/",
@@ -86,7 +113,11 @@ function classifyReferer(referer: string | null, selfHost: string): string | nul
   return host.slice(0, 64);
 }
 
-function applyAttribution(request: NextRequest, response: NextResponse) {
+function applyAttribution(request: NextRequest, response: NextResponse, consent: Consent) {
+  if (consent !== "all") {
+    revoke(request, response, ATTR_COOKIE);
+    return;
+  }
   if (request.cookies.has(ATTR_COOKIE)) return;
 
   const params = request.nextUrl.searchParams;
@@ -142,6 +173,15 @@ function localeRedirect(request: NextRequest): NextResponse | null {
   return NextResponse.redirect(url, 308);
 }
 
+// Every response leaves through here, so the consent value is read once
+// and the three writers agree on it.
+function applyCookies(request: NextRequest, response: NextResponse) {
+  const consent = readConsent(request);
+  applyAutoLanguage(request, response);
+  applyVisitorId(request, response, consent);
+  applyAttribution(request, response, consent);
+}
+
 export default async function proxy(request: NextRequest) {
   // Auth and attribution reason about the path the reader sees, not the
   // internal one, so the locale prefix is stripped first.
@@ -153,9 +193,7 @@ export default async function proxy(request: NextRequest) {
       return NextResponse.redirect(new URL(localePath(locale, "/"), request.url));
     }
     const response = localeRedirect(request) ?? NextResponse.next();
-    applyAutoLanguage(request, response);
-    applyVisitorId(request, response);
-    applyAttribution(request, response);
+    applyCookies(request, response);
     return response;
   }
 
@@ -168,17 +206,13 @@ export default async function proxy(request: NextRequest) {
     const session = await auth();
     if (!session?.user) {
       const response = NextResponse.redirect(new URL(localePath(locale, "/account/login"), request.url));
-      applyAutoLanguage(request, response);
-      applyVisitorId(request, response);
-      applyAttribution(request, response);
+      applyCookies(request, response);
       return response;
     }
   }
 
   const response = localeRedirect(request) ?? NextResponse.next();
-  applyAutoLanguage(request, response);
-  applyVisitorId(request, response);
-  applyAttribution(request, response);
+  applyCookies(request, response);
   return response;
 }
 
