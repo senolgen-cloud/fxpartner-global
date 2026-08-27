@@ -172,37 +172,37 @@ export default function Footer({
               </li>
               <li>
                 <Link href="/partners" className="transition-colors hover:text-text-on-ink">
-                  Ortak Olun
+                  {tr("Ortak Olun")}
                 </Link>
               </li>
               <li>
                 <Link href="/copytrade" className="transition-colors hover:text-text-on-ink">
-                  Copytrade
+                  {tr("Copytrade")}
                 </Link>
               </li>
               <li>
                 <Link href="/cashback" className="transition-colors hover:text-text-on-ink">
-                  Cashback
+                  {tr("Cashback")}
                 </Link>
               </li>
               <li>
                 <Link href="/campaigns" className="transition-colors hover:text-text-on-ink">
-                  Kampanyalar
+                  {tr("Kampanyalar")}
                 </Link>
               </li>
               <li>
                 <Link href="/paketler" className="transition-colors hover:text-text-on-ink">
-                  Paketler
+                  {tr("Paketler")}
                 </Link>
               </li>
               <li>
                 <Link href="/blog" className="transition-colors hover:text-text-on-ink">
-                  Blog
+                  {tr("Blog")}
                 </Link>
               </li>
               <li>
                 <Link href="/piyasa-analizi" className="transition-colors hover:text-text-on-ink">
-                  Piyasa Analizi
+                  {tr("Piyasa Analizi")}
                 </Link>
               </li>
               <li>
@@ -212,7 +212,7 @@ export default function Footer({
               </li>
               <li>
                 <Link href="/broker-lookup" className="transition-colors hover:text-text-on-ink">
-                  Broker Sorgulama
+                  {tr("Broker Sorgulama")}
                 </Link>
               </li>
               <li>

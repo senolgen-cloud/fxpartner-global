@@ -29,7 +29,7 @@ export default function SignInForm({
         <input name="phone" type="tel" required className={fieldClass} />
       </div>
       <div>
-        <label className={labelClass}>E-posta</label>
+        <label className={labelClass}>{tr("E-posta")}</label>
         <input
           name="email"
           type="email"
@@ -44,7 +44,7 @@ export default function SignInForm({
           <span className="normal-case text-text-on-ink-muted/70">{tr("(isteğe bağlı)")}</span>
         </label>
         <select name="preferredBroker" defaultValue="" className={fieldClass}>
-          <option value="">Belirtmek istemiyorum</option>
+          <option value="">{tr("Belirtmek istemiyorum")}</option>
           {brokers.map((b) => (
             <option key={b.slug} value={b.slug}>
               {b.name}

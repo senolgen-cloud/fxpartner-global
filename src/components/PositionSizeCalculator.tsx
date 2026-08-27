@@ -73,7 +73,7 @@ export default function PositionSizeCalculator({
         </div>
 
         <div>
-          <label className={labelClass}>Parite</label>
+          <label className={labelClass}>{tr("Parite")}</label>
           <select
             value={pair}
             onChange={(e) => setPair(e.target.value as SupportedPair)}

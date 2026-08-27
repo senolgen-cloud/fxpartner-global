@@ -71,7 +71,7 @@ export default async function CampaignsPage({
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-4xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-gold">
-              Kampanyalar
+              {tr("Kampanyalar")}
             </span>
             <h1 className="mt-4 max-w-2xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
               {tr("Güncel broker kampanyaları")}

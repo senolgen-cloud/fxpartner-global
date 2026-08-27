@@ -76,7 +76,7 @@ export default function PropFirmFeaturedCard() {
           </div>
           <div>
             <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-text-on-ink-muted">
-              Destek
+              {tr("Destek")}
             </dt>
             <dd className="mt-1 font-poppins text-lg font-semibold text-text-on-ink">
               {firm.backedBy ?? "—"}

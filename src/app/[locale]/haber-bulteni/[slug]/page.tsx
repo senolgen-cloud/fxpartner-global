@@ -137,7 +137,7 @@ export default async function NewsBulletinPage({
             {sources.length > 0 && (
               <div className="mt-6 rounded-xl border border-hairline-light bg-paper p-4">
                 <h3 className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-                  Kaynaklar
+                  {tr("Kaynaklar")}
                 </h3>
                 <p className="mt-2 text-sm text-text-dark/80">{sources.join(" · ")}</p>
               </div>

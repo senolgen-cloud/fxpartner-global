@@ -2682,5 +2682,13 @@
   "Açık işlemlerinizi ve bekleyen emirlerinizi kontrol edin.": "تحقق من صفقاتك المفتوحة وأوامرك المعلقة.",
   "{until} sonra: {title}": "بعد {until}: {title}",
   "Beklenti: {forecast} · Önceki: {previous}": "التوقعات: {forecast} · السابق: {previous}",
-  "{until} sonra {count} önemli veri açıklanacak": "سيتم الإعلان عن {count} من البيانات المهمة بعد {until}"
+  "{until} sonra {count} önemli veri açıklanacak": "سيتم الإعلان عن {count} من البيانات المهمة بعد {until}",
+  ". Kod ödeme ekranında elle giriliyor.": ". يتم إدخال الرمز يدويًا في صفحة الدفع.",
+  "Challenge’ların büyük çoğunluğu ilk denemede geçilemez. Yani gerçek maliyetiniz genellikle tek bir ücret değil, birkaç denemenin toplamıdır.": "لا يمكن اجتياز غالبية التحديات في المحاولة الأولى. أي أن تكلفتك الحقيقية عادةً لا تكون رسومًا واحدة فقط، بل إجمالي عدة محاولات.",
+  "%{percent} indirim, bu toplam üzerinde anlamlıdır": "خصم %{percent} ذو مغزى على هذا الإجمالي",
+  "— tek bir satın alma üzerinde düşündüğünüzden daha az.": "— أقل مما تعتقد في عملية شراء واحدة.",
+  "İndirim, firma seçme kriteri değildir.": "الخصم ليس معيارًا لاختيار الشركة.",
+  "Tekrarlayan şikayet örüntülerini kontrol etmek için aracı kurumun adını “scam” veya “withdrawal” kelimeleriyle birlikte bağımsız inceleme sitelerinde arayın.": "للتحقق من أنماط الشكاوى المتكررة، ابحث عن اسم شركة الوساطة مصحوبًا بكلمات \"scam\" أو \"withdrawal\" في مواقع التقييم المستقلة.",
+  "“Garantili getiri” veya “risksiz işlem” gibi vaatler her zaman kırmızı bayraktır.": "تُعد الوعود مثل \"عائد مضمون\" أو \"تداول بدون مخاطر\" مؤشر خطر دائمًا.",
+  "Oluşturuluyor...": "جاري الإنشاء..."
 }

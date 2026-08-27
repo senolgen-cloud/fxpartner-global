@@ -102,7 +102,7 @@ export default async function IndirimKodlariPage({
           <div className="mx-auto max-w-3xl px-6 py-16 md:py-20">
             <nav className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
               <Link href="/prop-firmalar" className="hover:text-signal">
-                Prop Firmalar
+                {tr("Prop Firmalar")}
               </Link>
               <span className="mx-2">/</span>
               <span className="text-text-on-ink">{tr("İndirim Kodları")}</span>
@@ -116,8 +116,7 @@ export default async function IndirimKodlariPage({
               oranı ve uygulanma şekli teyit edilmiş kodlar sayı olarak yayımlanır.
             </p>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">
-              <strong className="text-text-on-ink">İndirim, firma seçme kriteri
-              değildir.</strong> Prop firmada asıl ürün ödemedir — ödeme sicili zayıf
+              <strong className="text-text-on-ink">{tr("İndirim, firma seçme kriteri değildir.")}</strong> Prop firmada asıl ürün ödemedir — ödeme sicili zayıf
               bir firmanın kuponu ne kadar yüksek olursa olsun bu riski karşılamaz.
             </p>
           </div>

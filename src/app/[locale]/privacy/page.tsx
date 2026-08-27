@@ -201,7 +201,7 @@ export default async function PrivacyPage({
                 <strong>Vercel</strong> {tr("— web sitesini ve uygulamayı barındırır.")}
               </li>
               <li>
-                <strong>Telegram</strong>{" "}
+                <strong>{tr("Telegram")}</strong>{" "}
                 {tr("— VIP grup daveti talep ederseniz, bunu oluşturmak için Telegram’ın API’sini çağırırız.")}
               </li>
               <li>

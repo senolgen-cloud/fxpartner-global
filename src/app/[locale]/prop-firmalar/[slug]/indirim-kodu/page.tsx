@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { tr } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
@@ -147,7 +147,7 @@ export default async function IndirimKoduPage({
           <div className="mx-auto max-w-3xl px-6 py-16 md:py-20">
             <nav className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
               <Link href="/prop-firmalar" className="hover:text-signal">
-                Prop Firmalar
+                {tr("Prop Firmalar")}
               </Link>
               <span className="mx-2">/</span>
               <Link
@@ -165,8 +165,7 @@ export default async function IndirimKoduPage({
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-on-ink-muted">
               {firm.name} challenge ücretinde{" "}
-              <strong className="text-gold">%{d.percent} indirim</strong>. Kod ödeme
-              ekranında elle giriliyor.
+              <strong className="text-gold">%{d.percent} indirim</strong>{tr(". Kod ödeme ekranında elle giriliyor.")}
             </p>
 
             <div className="mt-8 rounded-2xl border border-signal/30 bg-signal/[0.06] p-6">
@@ -251,11 +250,13 @@ export default async function IndirimKoduPage({
             </h2>
             <div className="mt-6 space-y-5 text-[15px] leading-relaxed text-text-on-ink-muted">
               <p>
-                Challenge&apos;ların büyük çoğunluğu ilk denemede geçilemez. Yani
-                gerçek maliyetiniz genellikle tek bir ücret değil, birkaç denemenin
-                toplamıdır. <strong className="text-text-on-ink">%{d.percent} indirim,
-                bu toplam üzerinde anlamlıdır</strong> — tek bir satın alma üzerinde
-                düşündüğünüzden daha az.
+                {tr(
+                  "Challenge’ların büyük çoğunluğu ilk denemede geçilemez. Yani gerçek maliyetiniz genellikle tek bir ücret değil, birkaç denemenin toplamıdır."
+                )}{" "}
+                <strong className="text-text-on-ink">
+                  {trf("%{percent} indirim, bu toplam üzerinde anlamlıdır", { percent: d.percent ?? "" })}
+                </strong>{" "}
+                {tr("— tek bir satın alma üzerinde düşündüğünüzden daha az.")}
               </p>
               <p>
                 {tr("Bu yüzden firma seçimini indirim oranına göre yapmayın. Sıralamamızda")}{" "}

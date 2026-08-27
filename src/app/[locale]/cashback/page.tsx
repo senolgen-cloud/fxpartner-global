@@ -64,7 +64,7 @@ export default async function CashbackPage({
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-3xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-gold">
-              Cashback
+              {tr("Cashback")}
             </span>
             <h1 className="mt-4 font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
               {tr("İşlem maliyetinizin bir kısmını geri alın")}

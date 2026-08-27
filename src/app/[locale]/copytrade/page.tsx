@@ -85,7 +85,7 @@ export default async function CopytradePage({
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-4xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Copytrade
+              {tr("Copytrade")}
             </span>
             <h1 className="mt-4 max-w-2xl font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
               {tr("FXPARTNER'ın işlemlerini kendi hesabınıza otomatik kopyalayın")}
@@ -183,7 +183,7 @@ export default async function CopytradePage({
 
         <section>
           <div className="mx-auto max-w-3xl px-6 py-20 md:py-28">
-            <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">SSS</span>
+            <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">{tr("SSS")}</span>
             <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
               {tr("Sık sorulan sorular")}
             </h2>

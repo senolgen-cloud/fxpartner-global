@@ -336,7 +336,7 @@ export default async function AccountPage({
                 </span>
               </div>
               <h3 className="mt-3 font-display text-xl font-semibold text-text-on-ink">
-                Sinyaller
+                {tr("Sinyaller")}
               </h3>
               {latestSignal ? (
                 <p className="mt-1 text-sm text-text-on-ink-muted">
@@ -367,7 +367,7 @@ export default async function AccountPage({
                 )}
               </div>
               <h3 className="mt-3 font-display text-xl font-semibold text-text-on-ink">
-                AI Asistan
+                {tr("AI Asistan")}
               </h3>
               <p className="mt-1 text-sm text-text-on-ink-muted">
                 {tr("Piyasalar, CPI, brokerlar ve stratejiler hakkında anında yanıt alın.")}

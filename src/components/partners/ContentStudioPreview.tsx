@@ -63,7 +63,7 @@ export default function ContentStudioPreview() {
             aria-hidden="true"
             className="signal-dot h-1.5 w-1.5 rounded-full bg-signal"
           />
-          Oluşturuluyor...
+          {tr("Oluşturuluyor...")}
         </div>
       )}
 

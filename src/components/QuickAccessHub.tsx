@@ -173,7 +173,7 @@ export default function QuickAccessHub({ topBrokers }: { topBrokers: Broker[] })
                 📣
               </span>
               <div className="min-w-0">
-                <h3 className="text-sm font-semibold text-text-on-ink">Telegram</h3>
+                <h3 className="text-sm font-semibold text-text-on-ink">{tr("Telegram")}</h3>
                 <p className="truncate text-[11px] text-text-on-ink-muted">@fxpartnerglobal</p>
               </div>
               <a

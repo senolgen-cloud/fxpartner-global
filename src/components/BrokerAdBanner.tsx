@@ -95,7 +95,7 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
           )}
         </span>
         <div className="min-w-0">
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-signal">Sponsorlu</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-signal">{tr("Sponsorlu")}</span>
           <p className="notranslate mt-0.5 truncate font-poppins text-base font-semibold text-text-on-ink">
             {broker.name}
           </p>

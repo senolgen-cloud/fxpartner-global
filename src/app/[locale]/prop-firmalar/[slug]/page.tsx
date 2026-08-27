@@ -268,7 +268,7 @@ export default async function PropFirmDetailPage({
           <div className="mx-auto max-w-4xl px-6 py-16 md:py-20">
             <nav className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
               <Link href="/prop-firmalar" className="hover:text-signal">
-                Prop Firmalar
+                {tr("Prop Firmalar")}
               </Link>
               <span className="mx-2">/</span>
               <span className="text-text-on-ink">{firm.name}</span>

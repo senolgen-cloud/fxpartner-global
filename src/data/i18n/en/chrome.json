@@ -2682,5 +2682,13 @@
   "Açık işlemlerinizi ve bekleyen emirlerinizi kontrol edin.": "Check your open trades and pending orders.",
   "{until} sonra: {title}": "In {until}: {title}",
   "Beklenti: {forecast} · Önceki: {previous}": "Forecast: {forecast} · Previous: {previous}",
-  "{until} sonra {count} önemli veri açıklanacak": "In {until}, {count} important data will be released"
+  "{until} sonra {count} önemli veri açıklanacak": "In {until}, {count} important data will be released",
+  ". Kod ödeme ekranında elle giriliyor.": ". The code is entered manually on the payment screen.",
+  "Challenge’ların büyük çoğunluğu ilk denemede geçilemez. Yani gerçek maliyetiniz genellikle tek bir ücret değil, birkaç denemenin toplamıdır.": "The vast majority of challenges cannot be passed on the first attempt. Meaning your real cost is usually not just a single fee, but the total of several attempts.",
+  "%{percent} indirim, bu toplam üzerinde anlamlıdır": "A %{percent} discount is meaningful on this total",
+  "— tek bir satın alma üzerinde düşündüğünüzden daha az.": "— less than you think on a single purchase.",
+  "İndirim, firma seçme kriteri değildir.": "A discount is not a criterion for choosing a firm.",
+  "Tekrarlayan şikayet örüntülerini kontrol etmek için aracı kurumun adını “scam” veya “withdrawal” kelimeleriyle birlikte bağımsız inceleme sitelerinde arayın.": "Search the broker's name along with the words “scam” or “withdrawal” on independent review sites to check for recurring complaint patterns.",
+  "“Garantili getiri” veya “risksiz işlem” gibi vaatler her zaman kırmızı bayraktır.": "Promises such as “guaranteed return” or “risk-free trading” are always red flags.",
+  "Oluşturuluyor...": "Generating..."
 }

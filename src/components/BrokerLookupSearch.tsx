@@ -82,14 +82,13 @@ export default function BrokerLookupSearch({ initialQuery = "" }: { initialQuery
             </li>
             <li className="flex gap-3 text-[15px] text-text-dark/90">
               <span className="mt-1 text-signal">–</span>
-              Tekrarlayan şikayet örüntülerini kontrol etmek için aracı
-              kurumun adını &ldquo;scam&rdquo; veya &ldquo;withdrawal&rdquo;
-              kelimeleriyle birlikte bağımsız inceleme sitelerinde arayın.
+              {tr(
+                "Tekrarlayan şikayet örüntülerini kontrol etmek için aracı kurumun adını “scam” veya “withdrawal” kelimeleriyle birlikte bağımsız inceleme sitelerinde arayın."
+              )}
             </li>
             <li className="flex gap-3 text-[15px] text-text-dark/90">
               <span className="mt-1 text-signal">–</span>
-              &ldquo;Garantili getiri&rdquo; veya &ldquo;risksiz işlem&rdquo;
-              gibi vaatler her zaman kırmızı bayraktır.
+              {tr("“Garantili getiri” veya “risksiz işlem” gibi vaatler her zaman kırmızı bayraktır.")}
             </li>
           </ul>
         </div>

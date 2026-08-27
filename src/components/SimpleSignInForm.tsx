@@ -1,11 +1,13 @@
 "use client";
 
 import { useActionState } from "react";
+import { useTr } from "@/components/useTr";
 import { submitLogin, type SimpleSignInState } from "@/app/[locale]/account/login/simple-actions";
 
 const initialState: SimpleSignInState = { ok: false };
 
 export default function SimpleSignInForm() {
+  const tr = useTr();
   const [state, formAction, pending] = useActionState(submitLogin, initialState);
 
   const fieldClass =
@@ -15,7 +17,7 @@ export default function SimpleSignInForm() {
   return (
     <form action={formAction} className="mt-8 flex flex-col gap-3">
       <div>
-        <label className={labelClass}>E-posta</label>
+        <label className={labelClass}>{tr("E-posta")}</label>
         <input
           name="email"
           type="email"

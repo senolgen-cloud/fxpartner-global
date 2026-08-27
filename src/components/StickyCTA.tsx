@@ -45,7 +45,7 @@ export default function StickyCTA({ brokerCount }: { brokerCount: number }) {
           </a>
           <button
             type="button"
-            aria-label="Kapat"
+            aria-label={tr("Kapat")}
             onClick={() => setDismissed(true)}
             className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-full text-text-on-ink-muted transition-colors hover:bg-ink-soft hover:text-text-on-ink sm:flex"
           >

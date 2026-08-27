@@ -57,7 +57,7 @@ export default async function CategoriesPage({
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-              Kategoriler
+              {tr("Kategoriler")}
             </span>
             <h1 className="mt-4 max-w-2xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
               {tr("İhtiyacınıza uygun bir broker bulun")}

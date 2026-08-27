@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { tr } from "@/lib/chrome";
 import type { Broker } from "@/data/brokers";
 
 // The right rail: a skyscraper beside long-form content on wide screens,
@@ -31,7 +32,7 @@ export default function BrokerSkyscraperAd({ broker }: { broker: Broker }) {
   const railWidth = Math.min(MAX_WIDTH, Math.round(SLOT_HEIGHT * (w / h)));
 
   return (
-    <aside className="hidden shrink-0 py-16 xl:block" aria-label="Sponsorlu">
+    <aside className="hidden shrink-0 py-16 xl:block" aria-label={tr("Sponsorlu")}>
       <div className="sticky top-[170px]" style={{ width: railWidth }}>
         <a
           href={broker.adUrlTall ?? broker.adUrl ?? broker.referralUrl}
@@ -51,7 +52,7 @@ export default function BrokerSkyscraperAd({ broker }: { broker: Broker }) {
           />
         </a>
         <p className="mt-2 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-text-muted">
-          Sponsorlu
+          {tr("Sponsorlu")}
         </p>
       </div>
     </aside>

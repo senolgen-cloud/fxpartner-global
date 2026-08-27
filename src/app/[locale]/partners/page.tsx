@@ -247,7 +247,7 @@ export default async function PartnersPage({
           <div className="mx-auto max-w-3xl px-6 py-20 md:py-28">
             <Reveal>
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
-                SSS
+                {tr("SSS")}
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-dark md:text-4xl">
                 {tr("Sık sorulan sorular")}
@@ -285,7 +285,7 @@ export default async function PartnersPage({
                   href="#apply"
                   className="lift-on-hover mt-9 inline-block rounded-full bg-signal px-8 py-3.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30"
                 >
-                  Partner Ol
+                  {tr("Partner Ol")}
                 </a>
               </div>
             </Reveal>

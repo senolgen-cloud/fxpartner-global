@@ -63,6 +63,7 @@ function InstructionsModal({
   ios: boolean;
   onClose: () => void;
 }) {
+  const tr = useTr();
   const steps =
     kind === "mobile"
       ? ios
@@ -104,7 +105,7 @@ function InstructionsModal({
           <button
             type="button"
             onClick={onClose}
-            aria-label="Kapat"
+            aria-label={tr("Kapat")}
             className="font-mono text-base text-text-on-ink-muted transition-colors hover:text-text-on-ink"
           >
             ×

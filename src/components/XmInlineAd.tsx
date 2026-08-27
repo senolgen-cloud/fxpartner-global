@@ -52,7 +52,7 @@ export default function XmInlineAd({
               </span>
             )}
             <div className="min-w-0">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-signal">Sponsorlu</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-signal">{tr("Sponsorlu")}</span>
               <p className="notranslate mt-0.5 font-poppins text-base font-semibold text-text-on-ink">
                 {broker.name}
               </p>
@@ -78,7 +78,7 @@ export default function XmInlineAd({
       className="mt-14 overflow-hidden rounded-2xl border border-hairline bg-ink text-text-on-ink"
     >
       <div className="px-6 py-7 sm:px-8 sm:py-8">
-        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-signal">Sponsorlu</span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-signal">{tr("Sponsorlu")}</span>
         <div className="mt-3 flex items-center gap-4">
           {logo && (
             <span className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-ink-soft">

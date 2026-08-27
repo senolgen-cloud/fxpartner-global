@@ -62,7 +62,7 @@ export default function ComplaintForm({
         </div>
         <div>
           <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-            E-posta
+            {tr("E-posta")}
           </label>
           <input
             name="email"

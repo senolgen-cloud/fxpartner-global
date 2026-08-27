@@ -129,7 +129,7 @@ export default async function PropFirmalarPage({
         <section className="bg-ink text-text-on-ink">
           <div className="mx-auto max-w-3xl px-6 py-16 md:py-20">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-gold">
-              Prop Firmalar
+              {tr("Prop Firmalar")}
             </span>
             <h1 className="mt-4 font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
               {trf("{year} en iyi prop firmaları", { year: YEAR })}
@@ -177,7 +177,7 @@ export default async function PropFirmalarPage({
             <div className="mt-8 grid gap-5 md:grid-cols-2">
               <div className="rounded-2xl border border-hairline-light bg-paper p-6">
                 <h3 className="font-poppins text-lg font-semibold text-text-dark">
-                  Kural Seti
+                  {tr("Kural Seti")}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
                   {tr("Kâr hedefi, günlük ve toplam drawdown oranı, drawdown'ın statik mi trailing mi olduğu, minimum işlem günü şartı. Trailing drawdown, statik olana göre belirgin şekilde zordur ve puanı düşürür.")}
@@ -185,7 +185,7 @@ export default async function PropFirmalarPage({
               </div>
               <div className="rounded-2xl border border-hairline-light bg-paper p-6">
                 <h3 className="font-poppins text-lg font-semibold text-text-dark">
-                  Maliyet
+                  {tr("Maliyet")}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
                   {tr("Challenge ücreti ve — çoğu karşılaştırmanın atladığı kısım — ücretin ne zaman iade edildiği. İlk ödemede iade eden bir firma, üçüncü ödemede iade edenden gerçek maliyet olarak daha ucuzdur.")}

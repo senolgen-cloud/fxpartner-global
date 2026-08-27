@@ -86,14 +86,14 @@ export default async function TermsPage({
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Hesaplar
+              {tr("Hesaplar")}
             </h2>
             <p className="mt-4">
               {tr("Hesap oluştururken, şikayet bildirirken veya cashback için kaydolurken gönderdiğiniz bilgilerin doğruluğundan ve giriş yapmak için kullandığınız e-posta gelen kutunuzun güvenliğini sağlamaktan siz sorumlusunuz.")}
             </p>
 
             <h2 className="mt-10 font-poppins text-2xl font-semibold text-text-dark">
-              Yorumlar
+              {tr("Yorumlar")}
             </h2>
             <p className="mt-4">
               {tr("Bir broker incelemesine yorum bıraktığınızda, bunun gerçek deneyiminizi veya görüşünüzü yansıttığını onaylamış olursunuz. Yanlış, kötüye kullanım içeren, spam niteliğinde veya incelenen brokerla ilgisi olmayan yorumları kaldırabiliriz.")}

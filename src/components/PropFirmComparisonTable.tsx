@@ -98,7 +98,7 @@ function DiscountCell({ firm }: { firm: PropFirm }) {
         title={d.note}
         className="font-mono text-[11px] text-text-on-ink-muted underline decoration-dotted underline-offset-2"
       >
-        Teyit bekliyor
+        {tr("Teyit bekliyor")}
       </span>
     );
   }

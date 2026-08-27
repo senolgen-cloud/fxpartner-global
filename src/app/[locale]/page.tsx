@@ -294,7 +294,7 @@ export default async function Home({
           <div className="mx-auto max-w-6xl px-6 py-20">
             <Reveal className="mx-auto max-w-2xl text-center">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-gold">
-                Prop Firmalar
+                {tr("Prop Firmalar")}
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-on-ink md:text-4xl">
                 {tr("Kendi sermayenizi riske atmadan işlem yapın")}
@@ -383,7 +383,7 @@ export default async function Home({
               <dl className="mx-auto grid max-w-3xl grid-cols-2 gap-8 text-center sm:grid-cols-4">
                 <div>
                   <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    Takip Edilen Broker
+                    {tr("Takip Edilen Broker")}
                   </dt>
                   <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
                     <AnimatedStat value={trackedBrokerCount} />
@@ -551,7 +551,7 @@ export default async function Home({
           <div className="mx-auto max-w-3xl px-6 py-20">
             <Reveal className="text-center">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted">
-                SSS
+                {tr("SSS")}
               </span>
               <h2 className="mt-3 font-display text-3xl font-semibold text-text-dark md:text-4xl">
                 {tr("Sıkça sorulan sorular")}

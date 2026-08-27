@@ -529,7 +529,7 @@ export default async function BrokerDetailPage({
               {broker.categories.length > 0 && (
                 <div className="mt-6">
                   <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                    Kategoriler
+                    {tr("Kategoriler")}
                   </h3>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {broker.categories.map((c) => (
@@ -585,7 +585,7 @@ export default async function BrokerDetailPage({
                   <table className="w-full min-w-[480px] border-collapse text-start text-sm">
                     <thead>
                       <tr className="border-b border-hairline-light bg-paper font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted">
-                        <th className="py-3 ps-5 pe-4 font-medium">Hesap</th>
+                        <th className="py-3 ps-5 pe-4 font-medium">{tr("Hesap")}</th>
                         <th className="py-3 pe-4 font-medium">Spread</th>
                         <th className="py-3 pe-4 font-medium">Komisyon</th>
                         <th className="py-3 pe-5 font-medium">{tr("Min. Yatırım")}</th>

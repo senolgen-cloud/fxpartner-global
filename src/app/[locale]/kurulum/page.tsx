@@ -256,7 +256,7 @@ export default async function KurulumPage({
                 href="#android"
                 className="rounded-full border border-hairline px-4 py-2 text-sm font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
               >
-                Android
+                {tr("Android")}
               </a>
               <a
                 href="#windows"

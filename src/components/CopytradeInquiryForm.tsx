@@ -36,7 +36,7 @@ export default function CopytradeInquiryForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
-            E-posta
+            {tr("E-posta")}
           </label>
           <input
             name="email"

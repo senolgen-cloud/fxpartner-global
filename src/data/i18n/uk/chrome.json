@@ -2682,5 +2682,13 @@
   "Açık işlemlerinizi ve bekleyen emirlerinizi kontrol edin.": "Перевірте свої відкриті угоди та відкладені ордери.",
   "{until} sonra: {title}": "Через {until}: {title}",
   "Beklenti: {forecast} · Önceki: {previous}": "Прогноз: {forecast} · Попереднє: {previous}",
-  "{until} sonra {count} önemli veri açıklanacak": "Через {until} буде опубліковано {count} важливих даних"
+  "{until} sonra {count} önemli veri açıklanacak": "Через {until} буде опубліковано {count} важливих даних",
+  ". Kod ödeme ekranında elle giriliyor.": ". Код вводиться вручну на екрані оплати.",
+  "Challenge’ların büyük çoğunluğu ilk denemede geçilemez. Yani gerçek maliyetiniz genellikle tek bir ücret değil, birkaç denemenin toplamıdır.": "Переважна більшість челенджів не проходиться з першої спроби. Тобто ваші реальні витрати — це зазвичай не одна плата, а сума кількох спроб.",
+  "%{percent} indirim, bu toplam üzerinde anlamlıdır": "Знижка %{percent} має значення для цієї загальної суми",
+  "— tek bir satın alma üzerinde düşündüğünüzden daha az.": "— менше, ніж ви думаєте, для однієї покупки.",
+  "İndirim, firma seçme kriteri değildir.": "Знижка не є критерієм вибору фірми.",
+  "Tekrarlayan şikayet örüntülerini kontrol etmek için aracı kurumun adını “scam” veya “withdrawal” kelimeleriyle birlikte bağımsız inceleme sitelerinde arayın.": "Щоб перевірити наявність повторюваних шаблонів скарг, шукайте назву брокера разом зі словами “scam” або “withdrawal” на незалежних сайтах відгуків.",
+  "“Garantili getiri” veya “risksiz işlem” gibi vaatler her zaman kırmızı bayraktır.": "Обіцянки на кшталт “гарантований прибуток” або “безризикова торгівля” — це завжди червоний прапорець.",
+  "Oluşturuluyor...": "Створюється..."
 }

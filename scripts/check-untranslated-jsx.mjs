@@ -38,6 +38,20 @@ const TURKISH = /[ğışöçüĞİŞÖÇÜ]/;
 const KNOWN = new Set(
   Object.keys(JSON.parse(fs.readFileSync("src/data/i18n/en/chrome.json", "utf8")))
 );
+// Proper nouns that happen to also be catalogue keys. "Telegram" is a
+// translatable word in a sentence like "Telegram kanalımız" and a brand
+// name on a button that opens Telegram — the KNOWN test cannot tell those
+// apart, and a checker that reports the same false positive forever is a
+// checker people stop reading.
+const BRAND_NAMES = new Set([
+  "Telegram",
+  "Instagram",
+  "WhatsApp",
+  "FXPARTNER",
+  "MetaTrader",
+  "TradingView",
+]);
+
 const VISIBLE_ATTR = /\b(?:aria-label|title|placeholder|alt)=\{?"([^"]{3,})"/g;
 /** >  text  < with no tags, braces or quotes between — newlines allowed. */
 const JSX_TEXT = />\s*([^<>{}"'`][^<>{}"'`]*?)\s*</g;
@@ -67,6 +81,7 @@ for (const file of walk("src")) {
   const consider = (text, idx) => {
     const t = text.replace(/\s+/g, " ").trim();
     if (!t) return;
+    if (BRAND_NAMES.has(t)) return;
     if (!TURKISH.test(t) && !KNOWN.has(t)) return;
     // Utility-class strings and file paths slip through the text matcher.
     if (/^[a-z0-9-]+(\s+[a-z0-9:./[\]%-]+)*$/.test(t)) return;
