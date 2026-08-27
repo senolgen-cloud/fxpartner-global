@@ -148,25 +148,47 @@ function CardBody({
 
         <div className="flex shrink-0 flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
           <MiniScoreRings broker={broker} tone="dark" />
-          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+          {/* One row, not two stacked pills.
+              These were two bordered rounded-full buttons that wrapped onto
+              separate lines on a phone and took roughly a hundred pixels of
+              a card whose actual content is the score. Two pills of equal
+              visual weight also make the reader choose between them, when
+              only one of the two is the action.
+              So: one filled primary, one ghost secondary that reads as a
+              link rather than a button, rounded-xl rather than full, and
+              side by side at every width. Still 44px tall — the weight
+              comes off the borders and the fill, not off the tap target,
+              which is the one dimension a thumb actually needs. */}
+          <div className="flex w-full items-center gap-2 sm:w-auto">
             <a
               href={broker.referralUrl}
               target="_blank"
               rel="noopener noreferrer sponsored"
               aria-label={trf("{broker} - Resmi Sitesi", { broker: broker.name })}
-              className="lift-on-hover whitespace-nowrap rounded-full bg-signal px-4 py-2 text-[13px] font-medium text-on-signal transition-colors hover:bg-signal-strong hover:shadow-lg hover:shadow-signal/30 sm:px-5 sm:py-2.5 sm:text-sm"
+              className="inline-flex h-11 flex-1 items-center justify-center whitespace-nowrap rounded-xl bg-signal px-4 text-[13px] font-semibold text-on-signal transition-colors hover:bg-signal-strong sm:flex-none sm:px-5"
             >
-              <span className="hidden sm:inline">
-                {trf("{broker} - Resmi Sitesi", { broker: broker.name })}
-              </span>
-              <span className="sm:hidden">{tr("Resmi Sitesi")}</span>
+              {tr("Resmi Sitesi")}
             </a>
             <Link
               href={`/brokers/${broker.slug}`}
               title={`${broker.name} tam inceleme`}
-              className="whitespace-nowrap rounded-full border border-hairline px-4 py-2 text-[13px] font-medium text-text-on-ink transition-colors hover:border-text-on-ink sm:px-5 sm:py-2.5 sm:text-sm"
+              className="inline-flex h-11 shrink-0 items-center gap-1 rounded-xl px-3 text-[13px] font-medium text-text-on-ink-muted transition-colors hover:bg-ink-soft hover:text-text-on-ink"
             >
-              {tr("Tam İnceleme →")}
+              {tr("İnceleme")}
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                className="shrink-0"
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
             </Link>
           </div>
         </div>
