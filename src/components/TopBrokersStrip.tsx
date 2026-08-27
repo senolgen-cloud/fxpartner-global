@@ -101,7 +101,7 @@ function BrokerMiniCard({ broker, rank }: { broker: Broker; rank: number }) {
         rel="noopener noreferrer sponsored"
         className="mt-4 flex h-11 items-center justify-center whitespace-nowrap rounded-full bg-signal px-3 text-[13px] font-semibold text-ink transition-colors hover:bg-signal-strong"
       >
-        {tr("Canlı Hesap Aç")}
+        {tr("Siteye Git")}
       </a>
       <Link
         href={`/brokers/${broker.slug}`}
