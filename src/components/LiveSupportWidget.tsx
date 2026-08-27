@@ -39,7 +39,11 @@ export default function LiveSupportWidget() {
   }, []);
 
   return (
-    <div ref={rootRef} className="fixed bottom-24 left-3 z-30 flex flex-col items-start gap-2.5">
+    <div
+      ref={rootRef}
+      data-behind-sheet
+      className="fixed bottom-24 left-3 z-30 flex flex-col items-start gap-2.5"
+    >
       {open && (
         <div className="flex flex-col items-start gap-2.5 motion-safe:animate-[popIn_0.15s_ease-out]">
           <a

@@ -5,6 +5,8 @@ import Link from "@/components/LocaleLink";
 import { useTr } from "@/components/useTr";
 import { useLocale } from "@/components/LocaleProvider";
 import { CONSENT_COOKIE, cookieValue, type Decision } from "@/lib/consent";
+import Sheet, { SheetAction, SheetBody, SheetNote, SheetTitle } from "@/components/Sheet";
+import { PRIORITY, useInterruptionSlot } from "@/components/interruptionSlot";
 
 const ONE_YEAR = 60 * 60 * 24 * 365;
 
@@ -17,7 +19,7 @@ function hasChosen(): boolean {
  * fxp_vid (a stable anonymous browser id) and fxp_attr (first-touch
  * attribution). The language cookies and the auth session are not offered
  * as a choice — without them the site cannot do what the reader came for —
- * and that is stated on the banner rather than left implied.
+ * and that is stated on the sheet rather than left implied.
  *
  * proxy.ts writes nothing gated until this cookie says "all", so the
  * default before any answer is the strict one. Declining also clears
@@ -29,6 +31,10 @@ function hasChosen(): boolean {
  * gone. Reloading the same URL lets the middleware write it from exactly
  * the request the reader consented on, instead of losing first-touch to
  * the price of asking.
+ *
+ * Rendered as a modal sheet with no dismiss: there is no third answer, and
+ * a close button on a consent prompt is one — the reader who takes it has
+ * refused, but nothing recorded that they did.
  */
 export default function CookieConsent() {
   const tr = useTr();
@@ -37,7 +43,7 @@ export default function CookieConsent() {
   const [saving, setSaving] = useState(false);
 
   // Never rendered during SSR: the server has no way to know what this
-  // browser already chose, and guessing would flash a banner at readers
+  // browser already chose, and guessing would flash a sheet at readers
   // who answered months ago.
   useEffect(() => {
     if (!hasChosen()) setVisible(true);
@@ -68,50 +74,38 @@ export default function CookieConsent() {
     window.location.reload();
   }
 
-  if (!visible) return null;
+  // Highest priority in the slot, and the reason the slot exists: a
+  // newsletter sheet and a consent sheet both anchor to the bottom edge,
+  // so without this they land on top of each other — which is exactly what
+  // happened the first time this was tested.
+  const owns = useInterruptionSlot("consent", PRIORITY.consent, visible);
 
   return (
-    <div
-      role="dialog"
-      aria-modal="false"
-      aria-label={tr("Çerez tercihi")}
-      className="fixed inset-x-0 bottom-0 z-[70] border-t border-hairline bg-ink/95 text-text-on-ink backdrop-blur-md"
-      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
-    >
-      <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-5 lg:flex-row lg:items-center lg:justify-between">
-        <div className="text-sm leading-relaxed text-text-on-ink-muted">
-          <p className="font-poppins text-base font-semibold text-text-on-ink">
-            {tr("Çerezler hakkında")}
-          </p>
-          <p className="mt-1.5">
-            {tr(
-              "Dilinizi hatırlayan ve oturumunuzu açık tutan çerezler sitenin çalışması için zorunludur. Bunların dışında, sizi tanıyan anonim bir kimlik ve siteye hangi kanaldan geldiğinizi tutan bir kayıt kullanmak istiyoruz — bunlar isteğe bağlı."
-            )}{" "}
-            <Link href="/privacy" className="underline underline-offset-4 hover:text-text-on-ink">
-              {tr("Ayrıntılar gizlilik sayfamızda.")}
-            </Link>
-          </p>
-        </div>
-
-        <div className="flex shrink-0 flex-col gap-2.5 sm:flex-row">
-          <button
-            type="button"
-            onClick={() => choose("essential")}
-            disabled={saving}
-            className="rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-white/10 disabled:opacity-60"
-          >
+    <Sheet
+      open={owns}
+      labelledBy="cookie-consent-title"
+      footer={
+        <>
+          <SheetAction tone="secondary" onClick={() => choose("essential")} disabled={saving}>
             {tr("Yalnızca gerekli")}
-          </button>
-          <button
-            type="button"
-            onClick={() => choose("all")}
-            disabled={saving}
-            className="rounded-full bg-signal px-5 py-2.5 text-sm font-semibold text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
-          >
+          </SheetAction>
+          <SheetAction tone="primary" onClick={() => choose("all")} disabled={saving}>
             {tr("Tümünü kabul et")}
-          </button>
-        </div>
-      </div>
-    </div>
+          </SheetAction>
+        </>
+      }
+    >
+      <SheetTitle id="cookie-consent-title">{tr("Çerezler")}</SheetTitle>
+      <SheetBody>
+        {tr(
+          "Dilinizi hatırlayan ve oturumunuzu açık tutan çerezler sitenin çalışması için zorunludur. Bunların dışında, sizi tanıyan anonim bir kimlik ve siteye hangi kanaldan geldiğinizi tutan bir kayıt kullanmak istiyoruz — bunlar isteğe bağlı."
+        )}
+      </SheetBody>
+      <SheetNote>
+        <Link href="/privacy" className="underline underline-offset-4 hover:text-text-on-ink">
+          {tr("Hangi çerezi ne için kullandığımız")}
+        </Link>
+      </SheetNote>
+    </Sheet>
   );
 }

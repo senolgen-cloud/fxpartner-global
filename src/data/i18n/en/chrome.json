@@ -2572,5 +2572,22 @@
   "Tercihinizi değiştirmek isterseniz tarayıcınızın site verilerini temizlemeniz yeterlidir; çerez bandı yeniden çıkar ve yeniden seçim yapabilirsiniz.": "If you wish to change your preference, simply clear your browser's site data; the cookie banner will reappear and you can make a selection again.",
   "Çerez tercihimi değiştir": "Change my cookie preferences",
   "Verdiğiniz yanıtı kayıt altına alıyoruz: yanıtın kendisi, hangi çerez listesine verildiği, tarih ve saat, dil ve ülke bilgisi ile tarayıcınızın kimlik satırı. Bunu size gösterdiğimiz seçeneği ve verdiğiniz yanıtı ispatlayabilmek için tutuyoruz. IP adresinizi saklamıyoruz ve bu kayıt sizi tanımlayan bir bilgi içermiyor.": "We record your response: the response itself, which cookie list it was given for, date and time, language and country information, and your browser's user agent string. We keep this to be able to prove the option we showed you and the response you gave. We do not store your IP address, and this record does not contain information that identifies you.",
-  "Fikrinizi değiştirmek her zaman mümkün. Aşağıdaki düğme çerez bandını yeniden açar; siz yeni bir seçim yapana kadar isteğe bağlı çerezler yazılmaz, daha önce yazılanlar silinir.": "It is always possible to change your mind. The button below reopens the cookie banner; until you make a new selection, optional cookies will not be written, and previously written ones will be deleted."
+  "Fikrinizi değiştirmek her zaman mümkün. Aşağıdaki düğme çerez bandını yeniden açar; siz yeni bir seçim yapana kadar isteğe bağlı çerezler yazılmaz, daha önce yazılanlar silinir.": "It is always possible to change your mind. The button below reopens the cookie banner; until you make a new selection, optional cookies will not be written, and previously written ones will be deleted.",
+  "Kapat": "Close",
+  "Çerezler": "Cookies",
+  "Hangi çerezi ne için kullandığımız": "Which cookies we use and for what purpose",
+  "Ana Ekrana Ekle": "Add to Home Screen",
+  "Ana ekranına eklendi": "Added to your home screen",
+  "FXPARTNER'ı ana ekranına ekle": "Add FXPARTNER to your home screen",
+  "FXPARTNER'ı artık ana ekranından açabilirsin.": "You can now open FXPARTNER from your home screen.",
+  "Tek dokunuşla aç, bildirimleri daha güvenilir al.": "Open with a single tap, receive notifications more reliably.",
+  "Açılıyor...": "Opening...",
+  "Tekrar Dene": "Try Again",
+  "Bildirimleri Aç": "Turn On Notifications",
+  "Önce ana ekrana ekle": "Add to home screen first",
+  "Bildirimleri aç": "Turn on notifications",
+  "Ekledikten sonra uygulamayı ana ekrandan aç, bildirimler orada açılabilir.": "After adding, open the app from the home screen; notifications can be enabled there.",
+  "Aramıza hoş geldin": "Welcome",
+  "Bu platformu, forex piyasasında gerçekten güvenilir bilgiye ulaşmanın zor olduğunu görerek kurduk. Seninle bağlantımızı sürdürmek istersen bültenimize abone ol — yeni sinyaller, piyasa analizleri ve broker kampanyaları hakkında yalnızca işine yarayacak güncellemeleri paylaşıyoruz.": "We founded this platform after seeing how difficult it is to access truly reliable information in the forex market. If you would like to stay in touch with us, subscribe to our newsletter — we share only useful updates regarding new signals, market analysis, and broker campaigns.",
+  "Kampanyası": "Campaign"
 }

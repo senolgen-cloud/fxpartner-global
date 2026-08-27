@@ -2572,5 +2572,22 @@
   "Tercihinizi değiştirmek isterseniz tarayıcınızın site verilerini temizlemeniz yeterlidir; çerez bandı yeniden çıkar ve yeniden seçim yapabilirsiniz.": "إذا كنت ترغب في تغيير تفضيلك، فكل ما عليك فعله هو مسح بيانات الموقع من متصفحك؛ سيظهر شريط ملفات تعريف الارتباط مرة أخرى ويمكنك الاختيار من جديد.",
   "Çerez tercihimi değiştir": "تغيير تفضيلات ملفات تعريف الارتباط",
   "Verdiğiniz yanıtı kayıt altına alıyoruz: yanıtın kendisi, hangi çerez listesine verildiği, tarih ve saat, dil ve ülke bilgisi ile tarayıcınızın kimlik satırı. Bunu size gösterdiğimiz seçeneği ve verdiğiniz yanıtı ispatlayabilmek için tutuyoruz. IP adresinizi saklamıyoruz ve bu kayıt sizi tanımlayan bir bilgi içermiyor.": "نحن نسجل إجابتك: الإجابة نفسها، وقائمة ملفات تعريف الارتباط التي قُدمت لها، والتاريخ والوقت، ومعلومات اللغة والدولة، وسلسلة معرف المتصفح الخاص بك. نحتفظ بهذه البيانات لنتمكن من إثبات الخيار الذي عرضناه عليك والإجابة التي قدمتها. نحن لا نخزن عنوان IP الخاص بك، ولا يحتوي هذا السجل على أي معلومات تحدد هويتك.",
-  "Fikrinizi değiştirmek her zaman mümkün. Aşağıdaki düğme çerez bandını yeniden açar; siz yeni bir seçim yapana kadar isteğe bağlı çerezler yazılmaz, daha önce yazılanlar silinir.": "يمكنك تغيير رأيك في أي وقت. يعيد الزر أدناه فتح شريط ملفات تعريف الارتباط؛ ولن يتم ضبط ملفات تعريف الارتباط الاختيارية حتى تقوم بإجراء تحديد جديد، وسيتم حذف الملفات التي تم ضبطها سابقاً."
+  "Fikrinizi değiştirmek her zaman mümkün. Aşağıdaki düğme çerez bandını yeniden açar; siz yeni bir seçim yapana kadar isteğe bağlı çerezler yazılmaz, daha önce yazılanlar silinir.": "يمكنك تغيير رأيك في أي وقت. يعيد الزر أدناه فتح شريط ملفات تعريف الارتباط؛ ولن يتم ضبط ملفات تعريف الارتباط الاختيارية حتى تقوم بإجراء تحديد جديد، وسيتم حذف الملفات التي تم ضبطها سابقاً.",
+  "Kapat": "إغلاق",
+  "Çerezler": "ملفات تعريف الارتباط",
+  "Hangi çerezi ne için kullandığımız": "ما ملفات تعريف الارتباط التي نستخدمها ولأي غرض",
+  "Ana Ekrana Ekle": "إضافة إلى الشاشة الرئيسية",
+  "Ana ekranına eklendi": "تمت الإضافة إلى الشاشة الرئيسية",
+  "FXPARTNER'ı ana ekranına ekle": "أضف FXPARTNER إلى شاشتك الرئيسية",
+  "FXPARTNER'ı artık ana ekranından açabilirsin.": "يمكنك الآن فتح FXPARTNER من شاشتك الرئيسية.",
+  "Tek dokunuşla aç, bildirimleri daha güvenilir al.": "افتح بنقرة واحدة، واحصل على الإشعارات بموثوقية أكبر.",
+  "Açılıyor...": "جاري الفتح...",
+  "Tekrar Dene": "إعادة المحاولة",
+  "Bildirimleri Aç": "تفعيل الإشعارات",
+  "Önce ana ekrana ekle": "أضف إلى الشاشة الرئيسية أولاً",
+  "Bildirimleri aç": "تفعيل الإشعارات",
+  "Ekledikten sonra uygulamayı ana ekrandan aç, bildirimler orada açılabilir.": "بعد الإضافة، افتح التطبيق من الشاشة الرئيسية، حيث يمكن تفعيل الإشعارات هناك.",
+  "Aramıza hoş geldin": "مرحباً بك معنا",
+  "Bu platformu, forex piyasasında gerçekten güvenilir bilgiye ulaşmanın zor olduğunu görerek kurduk. Seninle bağlantımızı sürdürmek istersen bültenimize abone ol — yeni sinyaller, piyasa analizleri ve broker kampanyaları hakkında yalnızca işine yarayacak güncellemeleri paylaşıyoruz.": "أنشأنا هذه المنصة بعد أن أدركنا صعوبة الوصول إلى معلومات موثوقة بحق في سوق الفوركس. إذا كنت ترغب في البقاء على تواصل معنا، اشترك في نشرتنا الإخبارية — فنحن نشارك فقط التحديثات المفيدة لك بشأن التوصيات الجديدة، وتحليلات السوق، وحملات الوساطة.",
+  "Kampanyası": "حملة"
 }

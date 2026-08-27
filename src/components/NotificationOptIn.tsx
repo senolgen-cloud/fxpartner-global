@@ -1,5 +1,7 @@
 "use client";
 import { useTr } from "@/components/useTr";
+import Sheet, { SheetAction, SheetBody, SheetNote, SheetTitle } from "@/components/Sheet";
+import { PRIORITY, useInterruptionSlot } from "@/components/interruptionSlot";
 
 import { useEffect, useState } from "react";
 
@@ -123,86 +125,61 @@ export default function NotificationOptIn() {
     }
   }
 
-  if (!visible) return null;
+  const owns = useInterruptionSlot("push", PRIORITY.nudge, visible);
 
+  // Two different asks share this sheet. On an iPhone that has not been
+  // installed to the home screen there is no permission to grant yet —
+  // WebKit only offers push to an installed app — so the sheet explains
+  // the one step that has to happen first instead of showing a button
+  // that cannot work.
   return (
-    <div
-      role="dialog"
-      aria-labelledby="notification-optin-title"
-      // sm:bottom-40 clears QuickAccessHub's FAB (bottom-24, h-14) sitting
-      // in the same corner on desktop — on mobile there's no competing
-      // widget at bottom-16, so that offset stays as-is.
-      className="fixed bottom-16 right-4 z-40 w-[calc(100%-2rem)] max-w-xs rounded-2xl border border-hairline bg-ink text-text-on-ink shadow-2xl motion-safe:animate-[popIn_0.25s_ease-out] sm:bottom-40 sm:right-6"
-    >
-      <div className="p-5">
-        <div className="flex items-start justify-between gap-3">
-          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-signal">
-            FXPARTNER Bildirimleri
-          </span>
-          <button
-            type="button"
-            onClick={dismiss}
-            aria-label="Kapat"
-            className="shrink-0 font-mono text-base text-text-on-ink-muted transition-colors hover:text-text-on-ink"
-          >
-            ×
-          </button>
-        </div>
-        {needsIosInstall ? (
-          <>
-            <p
-              id="notification-optin-title"
-              className="mt-2 text-sm leading-relaxed text-text-on-ink-muted"
-            >
-              {tr("iPhone'da bildirim alabilmek için önce FXPARTNER'ı ana ekranına eklemen gerekiyor:")}{" "}
-              <span className="text-text-on-ink">{tr("Paylaş")}</span> (
-              <span aria-hidden="true">⬆️</span>) →{" "}
-              <span className="text-text-on-ink">&quot;Ana Ekrana Ekle&quot;</span>. Ekledikten
-              sonra uygulamayı ana ekrandan aç, bildirimler orada açılabilir.
-            </p>
-            <div className="mt-4">
-              <button
-                type="button"
-                onClick={dismiss}
-                className="w-full rounded-full border border-hairline px-4 py-2 text-center text-xs font-medium text-text-on-ink-muted transition-colors hover:text-text-on-ink"
-              >
-                {tr("Anladım")}
-              </button>
-            </div>
-          </>
+    <Sheet
+      open={owns}
+      variant="passive"
+      desktopAlign="end"
+      onDismiss={dismiss}
+      labelledBy="notification-optin-title"
+      footer={
+        needsIosInstall ? (
+          <SheetAction tone="secondary" onClick={dismiss}>
+            {tr("Anladım")}
+          </SheetAction>
         ) : (
           <>
-            <p
-              id="notification-optin-title"
-              className="mt-2 text-sm leading-relaxed text-text-on-ink-muted"
-            >
-              {tr("Yeni piyasa analizi, haber ve broker kampanyaları yayınlandığında anında tarayıcı bildirimi al.")}
-            </p>
-            {error && (
-              <p className="mt-2 text-xs text-alert">
-                {tr("Bildirim izni alınamadı. Tarayıcınızın site ayarlarından bildirim izninin engellenmediğini kontrol edip tekrar deneyin.")}
-              </p>
-            )}
-            <div className="mt-4 flex gap-2">
-              <button
-                type="button"
-                onClick={enable}
-                disabled={busy}
-                className="flex-1 rounded-full bg-signal px-4 py-2 text-center text-xs font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
-              >
-                {busy ? "Açılıyor..." : error ? "Tekrar Dene" : "Bildirimleri Aç"}
-              </button>
-              <button
-                type="button"
-                onClick={dismiss}
-                className="rounded-full px-3 py-2 text-center font-mono text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
-              >
-                {tr("Şimdi değil")}
-              </button>
-            </div>
+            <SheetAction tone="secondary" onClick={dismiss}>
+              {tr("Şimdi değil")}
+            </SheetAction>
+            <SheetAction tone="primary" onClick={enable} disabled={busy}>
+              {busy ? tr("Açılıyor...") : error ? tr("Tekrar Dene") : tr("Bildirimleri Aç")}
+            </SheetAction>
           </>
-        )}
-      </div>
-    </div>
+        )
+      }
+    >
+      <SheetTitle id="notification-optin-title">
+        {needsIosInstall ? tr("Önce ana ekrana ekle") : tr("Bildirimleri aç")}
+      </SheetTitle>
+      {needsIosInstall ? (
+        <SheetBody>
+          {tr("iPhone'da bildirim alabilmek için önce FXPARTNER'ı ana ekranına eklemen gerekiyor:")}{" "}
+          <span className="text-text-on-ink">{tr("Paylaş")}</span> →{" "}
+          <span className="text-text-on-ink">{tr("Ana Ekrana Ekle")}</span>.{" "}
+          {tr("Ekledikten sonra uygulamayı ana ekrandan aç, bildirimler orada açılabilir.")}
+        </SheetBody>
+      ) : (
+        <>
+          <SheetBody>
+            {tr("Yeni piyasa analizi, haber ve broker kampanyaları yayınlandığında anında tarayıcı bildirimi al.")}
+          </SheetBody>
+          {error && (
+            <SheetNote>
+              <span className="text-alert">
+                {tr("Bildirim izni alınamadı. Tarayıcınızın site ayarlarından bildirim izninin engellenmediğini kontrol edip tekrar deneyin.")}
+              </span>
+            </SheetNote>
+          )}
+        </>
+      )}
+    </Sheet>
   );
 }

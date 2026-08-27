@@ -54,6 +54,17 @@
   --font-sans: var(--font-geist);
   --font-mono: var(--font-jetbrains-mono);
   --font-poppins: var(--font-poppins);
+  /* System sheets are set in the platform's own face.
+   *
+   * On an iPhone, iPad or Mac this resolves to the real SF Pro — which is
+   * the honest way to take Apple's typography as the reference, rather
+   * than shipping a lookalike and hoping. Everywhere else it falls to
+   * Geist, which is already loaded and is SF's closest cousin among the
+   * faces this site ships. Noto Sans Arabic stays ahead of both in the
+   * RTL tree, where SF has no Arabic coverage worth using.
+   */
+  --font-apple: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    var(--font-geist), "Segoe UI", system-ui, sans-serif;
 }
 
 body {
@@ -76,6 +87,7 @@ body {
  * reason that face is there.
  */
 [dir="rtl"] {
+  --font-apple: var(--font-arabic), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --font-display: var(--font-arabic), var(--font-geist), system-ui, sans-serif;
   --font-sans: var(--font-arabic), var(--font-geist), system-ui, sans-serif;
   --font-poppins: var(--font-arabic), system-ui, sans-serif;
@@ -513,4 +525,74 @@ button {
     animation: none;
     opacity: 1;
   }
+}
+
+/* ── System sheets ──────────────────────────────────────────────────────
+ *
+ * The curve is Apple's own sheet easing. A sheet that rises on a generic
+ * ease-out reads as a web overlay; this one decelerates the way a UIKit
+ * sheet does, and that single detail is most of what makes it feel native.
+ */
+@keyframes sheet-rise {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes sheet-card-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes sheet-scrim-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sheet-rise {
+  animation: sheet-rise 420ms cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+.sheet-card-in {
+  animation: sheet-card-in 260ms cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+.sheet-scrim-in {
+  animation: sheet-scrim-in 200ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet-rise,
+  .sheet-card-in,
+  .sheet-scrim-in {
+    animation: none;
+  }
+}
+
+/* Everything that floats over the page steps aside for a modal sheet.
+ * Transitioned rather than switched so it reads as the sheet taking the
+ * screen, not as controls blinking out of existence. */
+[data-behind-sheet] {
+  transition: opacity 200ms ease-out, visibility 200ms;
+}
+
+body[data-sheet="modal"] [data-behind-sheet] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-behind-sheet] {
+    transition: none;
+  }
+}
+
+/* Not the generated font-apple utility.
+ *
+ * Tailwind inlines that one's value at build time, so the [dir="rtl"]
+ * override of --font-apple never reached it and Arabic sheets were set in
+ * a Latin-only stack — the exact failure the RTL font block exists to
+ * prevent. Reading the variable at use time is what makes the override
+ * work. */
+.sheet-type {
+  font-family: var(--font-apple);
 }

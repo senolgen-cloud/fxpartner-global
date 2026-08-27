@@ -2572,5 +2572,22 @@
   "Tercihinizi değiştirmek isterseniz tarayıcınızın site verilerini temizlemeniz yeterlidir; çerez bandı yeniden çıkar ve yeniden seçim yapabilirsiniz.": "Якщо ви хочете змінити свій вибір, вам достатньо очистити дані сайту у своєму браузері; банер cookie з'явиться знову, і ви зможете зробити вибір повторно.",
   "Çerez tercihimi değiştir": "Змінити налаштування файлів cookie",
   "Verdiğiniz yanıtı kayıt altına alıyoruz: yanıtın kendisi, hangi çerez listesine verildiği, tarih ve saat, dil ve ülke bilgisi ile tarayıcınızın kimlik satırı. Bunu size gösterdiğimiz seçeneği ve verdiğiniz yanıtı ispatlayabilmek için tutuyoruz. IP adresinizi saklamıyoruz ve bu kayıt sizi tanımlayan bir bilgi içermiyor.": "Ми фіксуємо вашу відповідь: саму відповідь, до якого списку файлів cookie її надано, дату та час, інформацію про мову та країну, а також рядок ідентифікації вашого браузера. Ми зберігаємо це, щоб підтвердити наданий вам варіант та вашу відповідь. Ми не зберігаємо вашу IP-адресу, і цей запис не містить інформації, яка вас ідентифікує.",
-  "Fikrinizi değiştirmek her zaman mümkün. Aşağıdaki düğme çerez bandını yeniden açar; siz yeni bir seçim yapana kadar isteğe bağlı çerezler yazılmaz, daha önce yazılanlar silinir.": "Ви завжди можете змінити своє рішення. Кнопка нижче знову відкриває банер файлів cookie; поки ви не зробите новий вибір, необов'язкові файли cookie не зберігатимуться, а раніше створені будуть видалені."
+  "Fikrinizi değiştirmek her zaman mümkün. Aşağıdaki düğme çerez bandını yeniden açar; siz yeni bir seçim yapana kadar isteğe bağlı çerezler yazılmaz, daha önce yazılanlar silinir.": "Ви завжди можете змінити своє рішення. Кнопка нижче знову відкриває банер файлів cookie; поки ви не зробите новий вибір, необов'язкові файли cookie не зберігатимуться, а раніше створені будуть видалені.",
+  "Kapat": "Закрити",
+  "Çerezler": "Файли cookie",
+  "Hangi çerezi ne için kullandığımız": "Які файли cookie та для чого ми використовуємо",
+  "Ana Ekrana Ekle": "Додати на головний екран",
+  "Ana ekranına eklendi": "Додано на головний екран",
+  "FXPARTNER'ı ana ekranına ekle": "Додай FXPARTNER на головний екран",
+  "FXPARTNER'ı artık ana ekranından açabilirsin.": "Тепер ти можеш відкривати FXPARTNER зі свого головного екрана.",
+  "Tek dokunuşla aç, bildirimleri daha güvenilir al.": "Відкривай в один дотик і отримуй сповіщення надійніше.",
+  "Açılıyor...": "Відкривається...",
+  "Tekrar Dene": "Спробувати знову",
+  "Bildirimleri Aç": "Увімкнути сповіщення",
+  "Önce ana ekrana ekle": "Спочатку додай на головний екран",
+  "Bildirimleri aç": "Увімкнути сповіщення",
+  "Ekledikten sonra uygulamayı ana ekrandan aç, bildirimler orada açılabilir.": "Після додавання відкривай застосунок із головного екрана, там можна буде увімкнути сповіщення.",
+  "Aramıza hoş geldin": "Ласкаво просимо до нас",
+  "Bu platformu, forex piyasasında gerçekten güvenilir bilgiye ulaşmanın zor olduğunu görerek kurduk. Seninle bağlantımızı sürdürmek istersen bültenimize abone ol — yeni sinyaller, piyasa analizleri ve broker kampanyaları hakkında yalnızca işine yarayacak güncellemeleri paylaşıyoruz.": "Ми створили цю платформу, побачивши, як важко знайти дійсно надійну інформацію на ринку форекс. Якщо хочеш залишатися з нами на зв'язку, підпишися на нашу розсилку — ми ділимося лише корисною інформацією про нові сигнали, аналіз ринку та акції брокерів.",
+  "Kampanyası": "Акція"
 }

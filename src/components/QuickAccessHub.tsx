@@ -98,6 +98,7 @@ export default function QuickAccessHub({ topBrokers }: { topBrokers: Broker[] })
   return (
     <div
       ref={rootRef}
+      data-behind-sheet
       className={`fixed bottom-24 right-6 z-30 hidden flex-col items-end gap-3 transition-all duration-300 sm:flex ${
         pastHero ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"
       }`}

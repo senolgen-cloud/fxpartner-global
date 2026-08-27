@@ -1,5 +1,7 @@
 "use client";
 import { useTr } from "@/components/useTr";
+import Sheet, { SheetAction, SheetBody, SheetTitle } from "@/components/Sheet";
+import { PRIORITY, useInterruptionSlot } from "@/components/interruptionSlot";
 
 import { useEffect, useState } from "react";
 
@@ -23,10 +25,10 @@ function isStandalone(): boolean {
   );
 }
 
-// Bottom-left, mirroring NotificationOptIn's bottom-right — the two are
-// independent browser prompts (install vs. push permission) that can both
-// legitimately want to show at once; keeping them on opposite corners
-// means they never visually stack on top of each other.
+// Install and push permission can both become available at the same
+// moment. As corner toasts they simply sat on opposite sides; as sheets
+// they would land on top of each other, so both go through the shared
+// interruption slot and the second one waits its turn.
 export default function AddToHomeScreen() {
   const tr = useTr();
   const [deferredEvent, setDeferredEvent] = useState<BeforeInstallPromptEvent | null>(null);
@@ -68,62 +70,36 @@ export default function AddToHomeScreen() {
     dismiss();
   }
 
-  if (!visible) return null;
+  const owns = useInterruptionSlot("a2hs", PRIORITY.nudge, visible);
 
   return (
-    <div
-      role="dialog"
-      aria-labelledby="a2hs-title"
-      // bottom-40 (not the old bottom-16) clears LiveSupportWidget, which
-      // sits at bottom-24 left-3 on every breakpoint (not desktop-only like
-      // the old CommunityWidget/DesktopQuickNavFab pair was), so this needs
-      // the extra clearance on mobile too, not just sm:.
-      className="fixed bottom-40 left-4 z-40 w-[calc(100%-2rem)] max-w-xs rounded-2xl border border-hairline bg-ink text-text-on-ink shadow-2xl motion-safe:animate-[popIn_0.25s_ease-out] sm:bottom-44 sm:left-6"
-    >
-      <div className="p-5">
-        <div className="flex items-start justify-between gap-3">
-          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-signal">
-            {tr("FXPARTNER Uygulaması")}
-          </span>
-          {!installed && (
-            <button
-              type="button"
-              onClick={dismiss}
-              aria-label="Kapat"
-              className="shrink-0 font-mono text-base text-text-on-ink-muted transition-colors hover:text-text-on-ink"
-            >
-              ×
-            </button>
-          )}
-        </div>
-        {installed ? (
-          <p id="a2hs-title" className="mt-2 text-sm leading-relaxed text-text-on-ink-muted">
-            {tr("Eklendi — FXPARTNER'ı artık ana ekranından açabilirsin. 🎉")}
-          </p>
-        ) : (
+    <Sheet
+      open={owns}
+      variant="passive"
+      desktopAlign="end"
+      onDismiss={installed ? undefined : dismiss}
+      labelledBy="a2hs-title"
+      footer={
+        installed ? undefined : (
           <>
-            <p id="a2hs-title" className="mt-2 text-sm leading-relaxed text-text-on-ink-muted">
-              {tr("FXPARTNER'ı ana ekranına ekle — tek dokunuşla aç, bildirimleri daha güvenilir al.")}
-            </p>
-            <div className="mt-4 flex gap-2">
-              <button
-                type="button"
-                onClick={install}
-                className="flex-1 rounded-full bg-signal px-4 py-2 text-center text-xs font-medium text-on-signal transition-colors hover:bg-signal-strong"
-              >
-                Ana Ekrana Ekle
-              </button>
-              <button
-                type="button"
-                onClick={dismiss}
-                className="rounded-full px-3 py-2 text-center font-mono text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
-              >
-                {tr("Şimdi değil")}
-              </button>
-            </div>
+            <SheetAction tone="secondary" onClick={dismiss}>
+              {tr("Şimdi değil")}
+            </SheetAction>
+            <SheetAction tone="primary" onClick={install}>
+              {tr("Ana Ekrana Ekle")}
+            </SheetAction>
           </>
-        )}
-      </div>
-    </div>
+        )
+      }
+    >
+      <SheetTitle id="a2hs-title">
+        {installed ? tr("Ana ekranına eklendi") : tr("FXPARTNER'ı ana ekranına ekle")}
+      </SheetTitle>
+      <SheetBody>
+        {installed
+          ? tr("FXPARTNER'ı artık ana ekranından açabilirsin.")
+          : tr("Tek dokunuşla aç, bildirimleri daha güvenilir al.")}
+      </SheetBody>
+    </Sheet>
   );
 }

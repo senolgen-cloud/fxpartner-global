@@ -225,7 +225,7 @@ export default async function RootLayout({
           </ChromeGate>
           {children}
           <ChromeGate>
-            <div className="fixed inset-x-0 bottom-0 z-40">
+            <div data-behind-sheet className="fixed inset-x-0 bottom-0 z-40">
               <MobileBottomNav />
               <Ticker />
             </div>

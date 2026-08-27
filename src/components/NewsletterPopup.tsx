@@ -1,5 +1,7 @@
 "use client";
 import { useTr } from "@/components/useTr";
+import Sheet, { SheetAction, SheetBody, SheetTitle } from "@/components/Sheet";
+import { PRIORITY, useInterruptionSlot } from "@/components/interruptionSlot";
 
 import { useEffect, useState } from "react";
 import { useActionState } from "react";
@@ -38,116 +40,76 @@ export default function NewsletterPopup() {
     }
   }, [state.ok]);
 
-  useEffect(() => {
-    if (!open) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open]);
-
   function close() {
     setOpen(false);
     localStorage.setItem(DISMISS_KEY, String(Date.now() + DISMISS_DAYS * 24 * 60 * 60 * 1000));
   }
 
-  if (!open) return null;
+  const owns = useInterruptionSlot("newsletter", PRIORITY.offer, open);
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/70 p-4 motion-safe:animate-[fadeIn_0.2s_ease-out]"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="newsletter-popup-title"
-      onClick={close}
+    <Sheet
+      open={owns}
+      onDismiss={close}
+      labelledBy="newsletter-popup-title"
+      footer={
+        state.ok ? (
+          <SheetAction tone="primary" onClick={close}>
+            {tr("Kapat")}
+          </SheetAction>
+        ) : undefined
+      }
     >
-      <div
-        className="relative w-full max-w-md rounded-2xl border border-hairline bg-ink text-text-on-ink shadow-2xl motion-safe:animate-[popIn_0.25s_ease-out]"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          type="button"
-          onClick={close}
-          aria-label="Kapat"
-          className="absolute right-4 top-4 font-mono text-lg text-text-on-ink-muted transition-colors hover:text-text-on-ink"
-        >
-          ×
-        </button>
+      {state.ok ? (
+        <>
+          <SheetTitle id="newsletter-popup-title">{tr("Aramıza hoş geldin")}</SheetTitle>
+          <SheetBody>
+            {tr("Yalnızca gerçekten değerli bulacağını düşündüğümüz şeyleri göndereceğiz — spam yok.")}
+          </SheetBody>
+        </>
+      ) : (
+        <>
+          <SheetTitle id="newsletter-popup-title">
+            {tr("FXPARTNER'ı ziyaret ettiğin için teşekkür ederim.")}
+          </SheetTitle>
+          <SheetBody>
+            {tr("Bu platformu, forex piyasasında gerçekten güvenilir bilgiye ulaşmanın zor olduğunu görerek kurduk. Seninle bağlantımızı sürdürmek istersen bültenimize abone ol — yeni sinyaller, piyasa analizleri ve broker kampanyaları hakkında yalnızca işine yarayacak güncellemeleri paylaşıyoruz.")}
+          </SheetBody>
+          <p className="mt-3 text-[13px] leading-[1.4] text-text-on-ink-muted">
+            <span className="text-text-on-ink">Erdem Torun</span>
+            <br />
+            {tr("FXPARTNER Kurucusu")}
+          </p>
 
-        <div className="p-7">
-          <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-            {tr("FXPARTNER Kurucusundan Bir Not")}
-          </span>
-
-          {state.ok ? (
-            <>
-              <h2 className="mt-4 font-display text-2xl font-semibold leading-tight text-text-on-ink">
-                {tr("Teşekkürler, aramıza hoş geldin.")}
-              </h2>
-              <p className="mt-3 text-sm leading-relaxed text-text-on-ink-muted">
-                {tr("Yalnızca gerçekten değerli bulacağını düşündüğümüz şeyleri göndereceğiz — spam yok.")}
-              </p>
-            </>
-          ) : (
-            <>
-              <h2
-                id="newsletter-popup-title"
-                className="mt-4 font-display text-2xl font-semibold leading-tight text-text-on-ink"
-              >
-                {tr("FXPARTNER'ı ziyaret ettiğin için teşekkür ederim.")}
-              </h2>
-              <div className="mt-3 space-y-3 text-sm leading-relaxed text-text-on-ink-muted">
-                <p>
-                  {tr("Bu platformu, forex piyasasında gerçekten güvenilir bilgiye ulaşmanın zor olduğunu görerek kurduk. Zamanını ayırıp bizi keşfettiğin için gerçekten minnettarım.")}
-                </p>
-                <p>
-                  {tr("Seninle bağlantımızı sürdürmek istersen, bültenimize abone olmanı rica ederim — yeni sinyaller, piyasa analizleri ve broker kampanyaları hakkında, yalnızca gerçekten işine yarayacak güncellemeleri paylaşıyoruz.")}
-                </p>
-                <p className="text-text-on-ink">
-                  Erdem Torun
-                  <br />
-                  <span className="text-text-on-ink-muted">{tr("FXPARTNER Kurucusu")}</span>
-                </p>
-              </div>
-
-              <form action={formAction} className="mt-6 flex flex-col gap-3">
-                <input type="hidden" name="source" value="popup" />
-                <div>
-                  <label htmlFor="newsletter-popup-email" className="text-xs font-medium text-text-on-ink">
-                    {tr("E-posta")}
-                  </label>
-                  <input
-                    id="newsletter-popup-email"
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="you@email.com"
-                    className="mt-1.5 w-full rounded-full border border-hairline bg-ink-soft px-4 py-2.5 text-sm text-text-on-ink outline-none focus:border-signal"
-                  />
-                </div>
-                {state.error && <p className="text-xs text-alert">{state.error}</p>}
-                <div className="mt-1 flex items-center justify-between gap-3">
-                  <button
-                    type="button"
-                    onClick={close}
-                    className="font-mono text-xs uppercase tracking-[0.1em] text-text-on-ink-muted transition-colors hover:text-text-on-ink"
-                  >
-                    {tr("Şimdi değil")}
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={pending}
-                    className="rounded-full bg-signal px-6 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong disabled:opacity-60"
-                  >
-                    {pending ? "…" : tr("Gönder")}
-                  </button>
-                </div>
-              </form>
-            </>
-          )}
-        </div>
-      </div>
-    </div>
+          <form action={formAction} className="mt-5 flex flex-col gap-2.5">
+            <input type="hidden" name="source" value="popup" />
+            <label htmlFor="newsletter-popup-email" className="sr-only">
+              {tr("E-posta")}
+            </label>
+            {/* 16px and not smaller: iOS zooms the whole page in when a
+                focused input is under 16px, which on a bottom sheet throws
+                the layout across the screen mid-typing. */}
+            <input
+              id="newsletter-popup-email"
+              name="email"
+              type="email"
+              required
+              autoComplete="email"
+              placeholder={tr("E-posta")}
+              className="h-[50px] w-full rounded-[14px] border border-white/10 bg-white/[0.06] px-4 text-[16px] text-text-on-ink outline-none placeholder:text-text-on-ink-muted/70 focus:border-signal sm:h-11 sm:text-[15px]"
+            />
+            {state.error && <p className="text-[13px] text-alert">{state.error}</p>}
+            <div className="mt-1 flex flex-col gap-2.5 sm:flex-row sm:justify-end">
+              <SheetAction tone="secondary" type="button" onClick={close}>
+                {tr("Şimdi değil")}
+              </SheetAction>
+              <SheetAction tone="primary" type="submit" disabled={pending}>
+                {pending ? "…" : tr("Gönder")}
+              </SheetAction>
+            </div>
+          </form>
+        </>
+      )}
+    </Sheet>
   );
 }
