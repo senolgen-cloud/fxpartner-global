@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import EconomicCalendarBoard from "@/components/EconomicCalendarBoard";
+import MyfxbookCalendarWidget from "@/components/MyfxbookCalendarWidget";
 import { getWeekCalendar } from "@/lib/economicCalendar";
 import { breadcrumbSchema } from "@/lib/schema";
 import { getDictionary } from "@/lib/dictionary";
@@ -79,6 +80,26 @@ export default async function EconomicCalendarPage({
 
         <section className="mx-auto max-w-6xl px-6 py-16">
           <EconomicCalendarBoard initialEvents={events} />
+        </section>
+
+        {/* Myfxbook's calendar sits below our own board rather than in place
+            of it. Our board is the feed /api/cron/economic-calendar-alert
+            reads: swap it out and the page would show one set of figures
+            while the channel's alerts quoted another. This is the second
+            opinion — consensus and revisions our feed does not carry — and
+            it is labelled as coming from elsewhere. */}
+        <section className="border-t border-hairline">
+          <div className="mx-auto max-w-6xl px-6 py-14">
+            <h2 className="font-display text-xl font-semibold text-text-on-ink">
+              {tr("Genişletilmiş takvim")}
+            </h2>
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-text-on-ink-muted">
+              {tr("Aynı haftanın ikinci bir kaynaktan görünümü — beklenti ve revizyon detaylarıyla. Yukarıdaki tablo bizim kendi verimizdir ve bildirimlerimiz onu esas alır.")}
+            </p>
+            <div className="mt-6">
+              <MyfxbookCalendarWidget />
+            </div>
+          </div>
         </section>
 
         <section className="border-t border-hairline">

@@ -2704,5 +2704,7 @@
   "Aracı kurum hacminizden doğan komisyonun payını öder; biz de bunun çoğunu hesabınıza geri veririz.": "Брокер сплачує частку комісії, що виникає з вашого обсягу торгівлі, а ми повертаємо більшу її частину на ваш рахунок.",
   "Cashback Al": "Отримати кешбек",
   "Tam inceleme": "Повний огляд",
-  "Oran hesap türüne ve aylık işlem hacmine göre değişir; ECN hesaplarda komisyon üzerinden, Classic ve Cent hesaplarda spread üzerinden hesaplanır.": "Ставка змінюється залежно від типу рахунку та щомісячного обсягу торгівлі; на рахунках ECN вона розраховується від комісії, а на рахунках Classic та Cent — від спреду."
+  "Oran hesap türüne ve aylık işlem hacmine göre değişir; ECN hesaplarda komisyon üzerinden, Classic ve Cent hesaplarda spread üzerinden hesaplanır.": "Ставка змінюється залежно від типу рахунку та щомісячного обсягу торгівлі; на рахунках ECN вона розраховується від комісії, а на рахунках Classic та Cent — від спреду.",
+  "Genişletilmiş takvim": "Розширений календар",
+  "Aynı haftanın ikinci bir kaynaktan görünümü — beklenti ve revizyon detaylarıyla. Yukarıdaki tablo bizim kendi verimizdir ve bildirimlerimiz onu esas alır.": "Перегляд того ж тижня з другого джерела — з деталями очікувань та переглядів. Таблиця вище є нашими власними даними, і наші сповіщення спираються на неї."
 }

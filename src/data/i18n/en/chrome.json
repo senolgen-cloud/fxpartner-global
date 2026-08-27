@@ -2704,5 +2704,7 @@
   "Aracı kurum hacminizden doğan komisyonun payını öder; biz de bunun çoğunu hesabınıza geri veririz.": "The broker pays a share of the commission generated from your volume, and we return most of it back to your account.",
   "Cashback Al": "Get Cashback",
   "Tam inceleme": "Full review",
-  "Oran hesap türüne ve aylık işlem hacmine göre değişir; ECN hesaplarda komisyon üzerinden, Classic ve Cent hesaplarda spread üzerinden hesaplanır.": "The rate varies depending on the account type and monthly trading volume; on ECN accounts it is calculated based on commission, and on Classic and Cent accounts based on spread."
+  "Oran hesap türüne ve aylık işlem hacmine göre değişir; ECN hesaplarda komisyon üzerinden, Classic ve Cent hesaplarda spread üzerinden hesaplanır.": "The rate varies depending on the account type and monthly trading volume; on ECN accounts it is calculated based on commission, and on Classic and Cent accounts based on spread.",
+  "Genişletilmiş takvim": "Extended calendar",
+  "Aynı haftanın ikinci bir kaynaktan görünümü — beklenti ve revizyon detaylarıyla. Yukarıdaki tablo bizim kendi verimizdir ve bildirimlerimiz onu esas alır.": "View of the same week from a second source — with expectation and revision details. The table above is our own data and our notifications are based on it."
 }
