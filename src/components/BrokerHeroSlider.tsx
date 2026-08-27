@@ -25,15 +25,15 @@ function Card({ broker }: { broker: Broker }) {
     <Link
       href={`/brokers/${broker.slug}`}
       title={`${broker.name} incelemesi — ${broker.tagline}`}
-      className="group flex w-[248px] shrink-0 items-center gap-3.5 rounded-2xl border border-hairline bg-ink-soft/70 p-4 transition-colors hover:border-signal/50 hover:bg-ink-soft"
+      className="group flex w-[200px] shrink-0 items-center gap-2.5 rounded-xl border border-hairline bg-ink-soft/70 p-2.5 transition-colors hover:border-signal/50 hover:bg-ink-soft"
     >
-      <div className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-ink p-2">
+      <div className="relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-ink p-1.5">
         {broker.logo ? (
           <Image
             src={broker.logo}
             alt={broker.name}
             fill
-            sizes="44px"
+            sizes="32px"
             className="object-contain"
           />
         ) : (
@@ -42,18 +42,18 @@ function Card({ broker }: { broker: Broker }) {
           </span>
         )}
       </div>
-      <div className="min-w-0">
-        <div className="flex items-center gap-2">
-          <span className="notranslate truncate font-display text-sm font-semibold text-text-on-ink">
-            {broker.name}
-          </span>
-          <span className="shrink-0 font-mono text-[10px] text-gold">
-            #{String(broker.rank).padStart(2, "0")}
-          </span>
-        </div>
-        <p className="mt-0.5 truncate text-xs text-text-on-ink-muted transition-colors group-hover:text-text-on-ink">
-          {broker.tagline}
-        </p>
+      {/* Name and rank, and nothing else. The tagline used to sit under
+          them and was truncated on every single card — "MT4/MT5 üzerinden
+          yükse…" tells a reader nothing they did not already know, and it
+          was the reason each card needed two lines. The full tagline is
+          still in the link's title, and the review page is one tap away. */}
+      <div className="flex min-w-0 items-center gap-2">
+        <span className="notranslate truncate font-display text-sm font-semibold text-text-on-ink">
+          {broker.name}
+        </span>
+        <span className="shrink-0 font-mono text-[10px] text-gold">
+          #{String(broker.rank).padStart(2, "0")}
+        </span>
       </div>
     </Link>
   );
@@ -117,7 +117,7 @@ export default function BrokerHeroSlider({ brokers }: { brokers: Broker[] }) {
   }, []);
 
   return (
-    <div className="border-b border-hairline bg-ink py-2">
+    <div className="border-b border-hairline bg-ink py-1.5 [@media(max-height:520px)]:hidden">
       <div
         className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
         onMouseEnter={() => {
