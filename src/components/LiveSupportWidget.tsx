@@ -23,9 +23,15 @@ function TelegramIcon() {
 }
 
 // Sitewide floating "Canlı Destek" button — left side, deliberately opposite
-// the right-edge QuickAccessHub FAB so it never stacks with it. Same
-// bottom-24 rail as that widget so it sits above the mobile bottom nav /
-// ticker on every breakpoint.
+// the right-edge QuickAccessHub FAB so it never stacks with it.
+//
+// The offset is measured, not shared, because the stack it has to clear is
+// not the same on both sides of sm. Below 640px the bottom nav (63px) and
+// the ticker (33px) come to 97px, and the old bottom-24 (96px) left the
+// button sitting flush on top of the nav with no gap at all. At 640px the
+// nav goes (MobileBottomNavClient is sm:hidden) and only the 37px ticker
+// is left, where 96px is already comfortable — hence the same breakpoint
+// here as the one that removes the nav.
 export default function LiveSupportWidget() {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -42,7 +48,7 @@ export default function LiveSupportWidget() {
     <div
       ref={rootRef}
       data-behind-sheet
-      className="fixed bottom-24 left-3 z-30 flex flex-col items-start gap-2.5"
+      className="fixed bottom-28 left-3 z-30 flex flex-col items-start gap-2.5 sm:bottom-24"
     >
       {open && (
         <div className="flex flex-col items-start gap-2.5 motion-safe:animate-[popIn_0.15s_ease-out]">
