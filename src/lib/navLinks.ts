@@ -24,6 +24,12 @@ export const resourceLinks: {
     group: "İçerik",
   },
   {
+    href: "/egitim",
+    label: "FXPARTNER Akademi",
+    description: "Numaralı derslerle işlem disiplini ve risk yönetimi",
+    group: "İçerik",
+  },
+  {
     href: "/topluluk",
     label: "Topluluk",
     description: "FXPARTNER topluluğu, tartışmalar ve paylaşılan işlemler",

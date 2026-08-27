@@ -6,7 +6,7 @@ import { blogPosts } from "@/data/blog";
 import { cashbackPrograms } from "@/data/cashback";
 import { marketAnalysisPosts } from "@/data/marketAnalysis";
 import { db } from "@/db";
-import { newsBulletins } from "@/db/schema";
+import { educationPosts, newsBulletins } from "@/db/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -19,6 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/brokerlar`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE_URL}/categories`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${SITE_URL}/egitim`, changeFrequency: "daily", priority: 0.7 },
     { url: `${SITE_URL}/piyasa-analizi`, changeFrequency: "daily", priority: 0.7 },
     { url: `${SITE_URL}/haber-bulteni`, changeFrequency: "daily", priority: 0.7 },
     { url: `${SITE_URL}/teknik-analiz`, changeFrequency: "daily", priority: 0.7 },
@@ -104,6 +105,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.5,
   }));
 
+  // The lessons are rows, not files, so nothing in the repo points at them
+  // and a crawler has no other way in.
+  const lessons = await db.query.educationPosts.findMany();
+  const lessonRoutes: MetadataRoute.Sitemap = lessons.map((l) => ({
+    url: `${SITE_URL}/egitim/${l.slug}`,
+    lastModified: new Date(l.publishedAt),
+    changeFrequency: "monthly",
+    priority: 0.5,
+  }));
+
   const turkishRoutes = [
     ...staticRoutes,
     ...brokerRoutes,
@@ -114,6 +125,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...cashbackSetupRoutes,
     ...marketAnalysisRoutes,
     ...bulletinRoutes,
+    ...lessonRoutes,
   ];
 
   // Every URL is listed once per locale, and each entry declares the whole
