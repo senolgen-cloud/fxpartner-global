@@ -2652,5 +2652,7 @@
   "Giriş fiyatı": "Entry price",
   "Numaralı derslerle işlem disiplini ve risk yönetimi": "Trading discipline and risk management with numbered lessons",
   "Giriş, zarar durdur ve kâr al seviyeleri {tier} üyelikte açılır.": "Entry, stop-loss, and take-profit levels are unlocked with {tier} membership.",
-  "{tier} ile aç": "Unlock with {tier}"
+  "{tier} ile aç": "Unlock with {tier}",
+  "Açılış zamanı": "Opening time",
+  "Kapanış zamanı": "Closing time"
 }

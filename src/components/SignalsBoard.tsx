@@ -573,6 +573,33 @@ function relativeAge(date: Date | null, intlLocale: string, tr: (t: string) => s
   return date.toLocaleDateString(intlLocale, { day: "numeric", month: "short", year: "numeric" });
 }
 
+/** The closed card's row: opening price, closing price, result. */
+function ClosedCell({
+  label,
+  value,
+  color,
+  strong,
+}: {
+  label: string;
+  value: string | null;
+  color?: string;
+  strong?: boolean;
+}) {
+  return (
+    <div className="min-w-0 text-start">
+      <div className="text-[10px] leading-none text-text-on-ink-muted">{label}</div>
+      <div
+        className={`mt-1 truncate font-mono leading-none tabular-stat ${
+          strong ? "text-[15px] font-bold" : "text-[13px] font-semibold"
+        }`}
+        style={{ color: color ?? "var(--text-on-ink)" }}
+      >
+        {value ?? "—"}
+      </div>
+    </div>
+  );
+}
+
 function LevelCell({
   label,
   value,
@@ -837,11 +864,14 @@ function SignalCard({
             "right now" is not a thing a finished trade has. Two-up below sm
             rather than four-across: at 375px a fourth column leaves about
             70px for a six-digit price. */}
-        <div
-          className={`grid flex-1 gap-3 sm:gap-6 ${
-            isClosed ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"
-          }`}
-        >
+        {isClosed ? (
+          <div className="grid grid-cols-3 gap-3">
+            <ClosedCell label={tr("Açılış")} value={signal.entry} />
+            <ClosedCell label={tr("Kapanış")} value={signal.closePrice} />
+            <ClosedCell label={tr("Sonuç")} value={resultLine} color={resultColor} strong />
+          </div>
+        ) : (
+        <div className="grid flex-1 grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-6">
           <LevelCell
             // Not just "Giriş": that word is also the site's word for signing
             // in, and the shared catalogue entry translated this cell into
@@ -879,16 +909,6 @@ function SignalCard({
             ariaLocked={tr("Pakete özel")}
           />
         </div>
-
-        {isClosed && resultLine && !locked && (
-          <div className="min-w-0 text-center">
-            <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
-              {tr("Sonuç")}
-            </div>
-            <div className="mt-1 font-display text-lg font-bold tabular-stat" style={{ color: resultColor }}>
-              {resultLine}
-            </div>
-          </div>
         )}
 
         {/* A locked card used to be four blanks and a lock pill, which
@@ -953,7 +973,7 @@ function SignalCard({
               </h3>
               <div className="mt-3 space-y-1.5">
                 <Level
-                  label={tr("Açılış")}
+                  label={tr("Açılış zamanı")}
                   value={
                     openedAt
                       ? openedAt.toLocaleString(intl, {
@@ -969,7 +989,7 @@ function SignalCard({
                 />
                 {isClosed && (
                   <Level
-                    label={tr("Kapanış")}
+                    label={tr("Kapanış zamanı")}
                     value={
                       closedAt
                         ? closedAt.toLocaleString(intl, {
@@ -984,8 +1004,14 @@ function SignalCard({
                     color="var(--text-on-ink)"
                   />
                 )}
+                {/* Stop and target left the closed card's face; they live
+                    here now so nothing was lost, only moved. The closing
+                    price is on the card itself and is not repeated. */}
                 {isClosed && !locked && (
-                  <Level label={tr("Kapanış Fiyatı")} value={signal.closePrice} color="var(--text-on-ink)" />
+                  <>
+                    <Level label={tr("Zarar durdur")} value={signal.stop} color={TICK_DOWN} />
+                    <Level label={tr("Kâr al")} value={signal.target1} color={TICK_UP} />
+                  </>
                 )}
                 {!locked && <Level label={tr("Kâr Al 2")} value={signal.target2} color={TICK_UP} />}
                 {signal.volume && (
