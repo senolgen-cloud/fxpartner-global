@@ -25,15 +25,15 @@ function Card({ broker }: { broker: Broker }) {
     <Link
       href={`/brokers/${broker.slug}`}
       title={`${broker.name} incelemesi — ${broker.tagline}`}
-      className="group flex w-[200px] shrink-0 items-center gap-2.5 rounded-xl border border-hairline bg-ink-soft/70 p-2.5 transition-colors hover:border-signal/50 hover:bg-ink-soft"
+      className="group flex w-[188px] shrink-0 items-center gap-2.5 rounded-lg border border-hairline bg-ink-soft/70 px-2.5 py-1.5 transition-colors hover:border-signal/50 hover:bg-ink-soft"
     >
-      <div className="relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-ink p-1.5">
+      <div className="relative flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-md bg-ink p-1">
         {broker.logo ? (
           <Image
             src={broker.logo}
             alt={broker.name}
             fill
-            sizes="32px"
+            sizes="28px"
             className="object-contain"
           />
         ) : (
@@ -61,7 +61,7 @@ function Card({ broker }: { broker: Broker }) {
 
 function Row({ brokers, hidden }: { brokers: Broker[]; hidden?: boolean }) {
   return (
-    <div aria-hidden={hidden || undefined} className="flex shrink-0 items-center gap-4 pe-4">
+    <div aria-hidden={hidden || undefined} className="flex shrink-0 items-center gap-3 pe-3">
       {brokers.map((b, i) => (
         <Card key={`${hidden ? "dup" : "src"}-${b.slug}-${i}`} broker={b} />
       ))}
@@ -88,7 +88,7 @@ export default function BrokerHeroSlider({ brokers }: { brokers: Broker[] }) {
     if (!track || !row) return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const speed = reduceMotion ? 65 : 110; // px/sec
+    const speed = reduceMotion ? 95 : 165; // px/sec
 
     let rowWidth = row.getBoundingClientRect().width;
     const onResize = () => {
@@ -117,7 +117,7 @@ export default function BrokerHeroSlider({ brokers }: { brokers: Broker[] }) {
   }, []);
 
   return (
-    <div className="border-b border-hairline bg-ink py-1.5 [@media(max-height:520px)]:hidden">
+    <div className="border-b border-hairline bg-ink py-1 [@media(max-height:520px)]:hidden">
       <div
         className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
         onMouseEnter={() => {
