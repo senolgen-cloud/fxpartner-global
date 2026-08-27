@@ -2675,5 +2675,12 @@
   "FXPARTNER Index — Günün En İyi 5 Brokeri": "FXPARTNER Index — Top 5 Brokers of the Day",
   "Gerçekleşen: {actual} · Beklenti: {forecast} · Önceki: {previous}": "Actual: {actual} · Forecast: {forecast} · Previous: {previous}",
   "{count} önemli veri açıklandı": "{count} important data released",
-  "+{rest} veri daha": "+{rest} more data"
+  "+{rest} veri daha": "+{rest} more data",
+  "{m} dk": "{m} min",
+  "{h} sa": "{h} h",
+  "{h} sa {m} dk": "{h} h {m} min",
+  "Açık işlemlerinizi ve bekleyen emirlerinizi kontrol edin.": "Check your open trades and pending orders.",
+  "{until} sonra: {title}": "In {until}: {title}",
+  "Beklenti: {forecast} · Önceki: {previous}": "Forecast: {forecast} · Previous: {previous}",
+  "{until} sonra {count} önemli veri açıklanacak": "In {until}, {count} important data will be released"
 }

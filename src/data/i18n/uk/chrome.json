@@ -2675,5 +2675,12 @@
   "FXPARTNER Index — Günün En İyi 5 Brokeri": "FXPARTNER Index — Топ-5 брокерів дня",
   "Gerçekleşen: {actual} · Beklenti: {forecast} · Önceki: {previous}": "Фактичне значення: {actual} · Прогноз: {forecast} · Попереднє значення: {previous}",
   "{count} önemli veri açıklandı": "Опубліковано {count} важливих даних",
-  "+{rest} veri daha": "Ще +{rest} даних"
+  "+{rest} veri daha": "Ще +{rest} даних",
+  "{m} dk": "{m} хв",
+  "{h} sa": "{h} год",
+  "{h} sa {m} dk": "{h} год {m} хв",
+  "Açık işlemlerinizi ve bekleyen emirlerinizi kontrol edin.": "Перевірте свої відкриті угоди та відкладені ордери.",
+  "{until} sonra: {title}": "Через {until}: {title}",
+  "Beklenti: {forecast} · Önceki: {previous}": "Прогноз: {forecast} · Попереднє: {previous}",
+  "{until} sonra {count} önemli veri açıklanacak": "Через {until} буде опубліковано {count} важливих даних"
 }

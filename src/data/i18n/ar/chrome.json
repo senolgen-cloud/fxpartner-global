@@ -2675,5 +2675,12 @@
   "FXPARTNER Index — Günün En İyi 5 Brokeri": "مؤشر FXPARTNER — أفضل 5 وسطاء اليوم",
   "Gerçekleşen: {actual} · Beklenti: {forecast} · Önceki: {previous}": "الفعلي: {actual} · المتوقع: {forecast} · السابق: {previous}",
   "{count} önemli veri açıklandı": "تم الإعلان عن {count} بيانات مهمة",
-  "+{rest} veri daha": "+{rest} بيانات إضافية"
+  "+{rest} veri daha": "+{rest} بيانات إضافية",
+  "{m} dk": "{m} د",
+  "{h} sa": "{h} س",
+  "{h} sa {m} dk": "{h} س {m} د",
+  "Açık işlemlerinizi ve bekleyen emirlerinizi kontrol edin.": "تحقق من صفقاتك المفتوحة وأوامرك المعلقة.",
+  "{until} sonra: {title}": "بعد {until}: {title}",
+  "Beklenti: {forecast} · Önceki: {previous}": "التوقعات: {forecast} · السابق: {previous}",
+  "{until} sonra {count} önemli veri açıklanacak": "سيتم الإعلان عن {count} من البيانات المهمة بعد {until}"
 }
