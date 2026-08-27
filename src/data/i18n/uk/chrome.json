@@ -2654,5 +2654,7 @@
   "Giriş, zarar durdur ve kâr al seviyeleri {tier} üyelikte açılır.": "Рівні входу, стоп-лосс та тейк-профіт відкриваються на рівні членства {tier}.",
   "{tier} ile aç": "Відкрити з {tier}",
   "Açılış zamanı": "Час відкриття",
-  "Kapanış zamanı": "Час закриття"
+  "Kapanış zamanı": "Час закриття",
+  "İhtiyacınız olan her şey tek bir ekranda": "Все, що вам потрібно, на одному екрані",
+  "FXPARTNER uygulamasında EUR/USD grafiği": "Графік EUR/USD у додатку FXPARTNER"
 }

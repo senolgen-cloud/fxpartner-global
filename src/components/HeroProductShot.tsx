@@ -18,11 +18,22 @@ import { tr } from "@/lib/chrome";
 export default function HeroProductShot({
   priority = false,
   imageClassName = "",
+  src = "/fxpartner-hero-app.png",
+  alt,
+  width = 1672,
+  height = 941,
+  maxWidthClassName = "max-w-4xl",
 }: {
   priority?: boolean;
   /** Extra classes on the image — the homepage caps its height so the whole
    *  hero fits the first screen. */
   imageClassName?: string;
+  /** The artwork. Defaults to the desktop-and-phone lockup /signals uses. */
+  src?: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  maxWidthClassName?: string;
 }) {
   return (
     // No glows and no border. Two 400px blurred circles read as ambient depth
@@ -40,14 +51,17 @@ export default function HeroProductShot({
     // main element either way.
     <section className="relative">
       <div className="mx-auto max-w-6xl px-6 pb-4 pt-6 sm:pt-8">
-        <div className="signals-hero-visual mx-auto max-w-4xl">
+        <div className={`signals-hero-visual mx-auto ${maxWidthClassName}`}>
           <Image
-            src="/fxpartner-hero-app.png"
-            alt={tr(
-              "FXPARTNER panelinin masaüstü ve mobil görünümü — canlı sinyaller, grafikler ve broker karşılaştırması"
-            )}
-            width={1672}
-            height={941}
+            src={src}
+            alt={
+              alt ??
+              tr(
+                "FXPARTNER panelinin masaüstü ve mobil görünümü — canlı sinyaller, grafikler ve broker karşılaştırması"
+              )
+            }
+            width={width}
+            height={height}
             priority={priority}
             sizes="(min-width: 1024px) 896px, 100vw"
             className={`mx-auto h-auto w-full ${imageClassName}`}

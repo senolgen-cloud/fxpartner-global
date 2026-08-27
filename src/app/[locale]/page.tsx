@@ -184,32 +184,36 @@ export default async function Home({
             </Reveal>
 
             <Reveal delay={90}>
-              <h1 className="mx-auto mt-4 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
-                Trading.
-                <br />
-                <span className="text-signal">{tr("Ama daha akıllı...")}</span>
+              <h1 className="mx-auto mt-4 max-w-4xl bg-gradient-to-b from-[var(--text-on-ink)] via-[var(--text-on-ink)] to-[var(--text-on-ink-muted)] bg-clip-text font-poppins text-[2rem] font-bold leading-[1.12] tracking-[-0.02em] text-balance text-transparent sm:text-5xl lg:text-6xl">
+                {/* No hard break. At 60px it lands on two lines by itself,
+                    and a forced one left "şey" stranded alone on a 375px
+                    phone. text-balance lets the browser even the lines out
+                    at whatever width it is given. */}
+                {tr("İhtiyacınız olan her şey tek bir ekranda")}
               </h1>
             </Reveal>
-          </div>
 
-          {/* Capped by height, not width. This is the first screen a
-              visitor sees, and at full width the artwork alone was taller
-              than the space left under the headline — the paragraph and the
-              buttons fell below the fold on a laptop. Height is what is
-              actually scarce here, so that is what is constrained. */}
-          <HeroProductShot priority imageClassName="md:w-auto md:max-h-[max(12rem,calc(100vh-35rem))]" />
-
-          {/* Lighter than the headline it follows, deliberately: at text-lg it
-              competed with the title for the same attention. Smaller, wider
-              tracking and a narrower measure make it read as the caption to
-              the picture above it rather than a second headline. */}
-          <div className="relative mx-auto max-w-4xl px-6 pb-10 text-center md:pb-12">
-            <Reveal delay={180}>
-              <p className="mx-auto max-w-lg text-[15px] font-light leading-relaxed tracking-[0.01em] text-text-on-ink-muted md:text-base">
+            <Reveal delay={150}>
+              <p className="mx-auto mt-5 max-w-xl text-[15px] font-light leading-relaxed tracking-[0.01em] text-text-on-ink-muted md:text-base">
                 {tr("FXPARTNER, daha akıllı işlem yapmanız için hepsi bir arada platformdur. Sinyaller, yapay zeka içgörüleri, ekonomik takvim, güvenilir brokerlar ve küresel bir topluluk.")}
               </p>
             </Reveal>
+          </div>
 
+          {/* Width, not height. The previous artwork was 1672x941 and at
+              full width stood taller than the room under the headline, so
+              height was the thing to constrain. This one is 939x377: wide
+              and short, and a height cap only made it small. */}
+          <HeroProductShot
+            priority
+            src="/fxpartner-trading-yatay.webp"
+            width={939}
+            height={377}
+            alt={tr("FXPARTNER uygulamasında EUR/USD grafiği")}
+            maxWidthClassName="max-w-3xl"
+          />
+
+          <div className="relative mx-auto max-w-4xl px-6 pb-10 text-center md:pb-12">
             <Reveal delay={290}>
               <InstallAppButtons />
             </Reveal>
