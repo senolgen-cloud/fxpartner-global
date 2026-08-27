@@ -2644,5 +2644,10 @@
   "iPhone'da bildirim gelmiyor, neden?": "Чому на iPhone не надходять сповіщення?",
   "iOS'ta bildirimler yalnızca uygulama ana ekrana eklendikten sonra çalışır — Safari sekmesinden asla çalışmaz. Ekledikten sonra uygulamayı ana ekrandan açın ve bildirim iznini orada verin.": "На iOS сповіщення працюють лише після того, як додаток буде додано на початковий екран — вони ніколи не працюють із вкладки Safari. Після додавання відкрийте додаток із початкового екрана та надайте там дозвіл на сповіщення.",
   "Ana Sayfa": "Головна сторінка",
-  "Uygulama": "Додаток"
+  "Uygulama": "Додаток",
+  "Pakete özel": "Спеціально для пакета",
+  "Şu an": "Наразі",
+  "Zarar durdur": "Стоп-лос",
+  "Kâr al": "Тейк-профіт",
+  "Giriş fiyatı": "Ціна входу"
 }

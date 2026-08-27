@@ -579,7 +579,15 @@ function PairMark({ pair }: { pair: string }) {
         style={{ zIndex: 2 - i }}
         aria-hidden="true"
       >
-        {flag ?? <span className="font-mono text-[9px] font-semibold text-text-on-ink-muted">{code.slice(0, 3)}</span>}
+        {flag ?? (
+          // One initial, not the first three characters. GOLD was rendering
+          // as "GOL" and US100CASH as "US1", which reads as text that got
+          // cut off rather than as a mark — a single letter is obviously a
+          // monogram and cannot be mistaken for a truncation.
+          <span className="font-display text-[13px] font-semibold text-text-on-ink-muted">
+            {code.slice(0, 1)}
+          </span>
+        )}
       </span>
     );
   };
@@ -610,21 +618,33 @@ function LevelCell({
   value,
   color,
   locked,
+  ariaLocked,
 }: {
   label: string;
   value: string | null;
   color?: string;
   locked?: boolean;
+  ariaLocked?: string;
 }) {
   return (
-    <div className="min-w-0 text-center">
-      <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">{label}</div>
-      <div
-        className="mt-1 truncate font-mono text-sm font-semibold tabular-stat"
-        style={{ color: locked ? "var(--text-on-ink-muted)" : color ?? "var(--text-on-ink)" }}
-      >
-        {locked ? "••••" : value ?? "—"}
-      </div>
+    <div className="min-w-0 text-start">
+      <div className="text-[11px] leading-none text-text-on-ink-muted">{label}</div>
+      {locked ? (
+        // A redaction bar, not a row of dots. Four dots at 14px read as a
+        // value that failed to load; a block reads as one deliberately
+        // withheld, which is what it is.
+        <span
+          aria-label={ariaLocked}
+          className="mt-2 block h-[15px] w-16 rounded bg-text-on-ink-muted/20"
+        />
+      ) : (
+        <div
+          className="mt-1.5 truncate font-mono text-[17px] font-semibold leading-none tabular-stat"
+          style={{ color: color ?? "var(--text-on-ink)" }}
+        >
+          {value ?? "—"}
+        </div>
+      )}
     </div>
   );
 }
@@ -646,11 +666,13 @@ function LivePriceCell({
   quote,
   entry,
   direction,
+  locked,
 }: {
   label: string;
   quote: LiveQuote | undefined;
   entry: string;
   direction: string | null;
+  locked?: boolean;
 }) {
   const now = quote ? parseFloat(quote.bid) : NaN;
   const from = parseFloat(entry);
@@ -661,9 +683,22 @@ function LivePriceCell({
   const color =
     signed > 0 ? TICK_UP : signed < 0 ? TICK_DOWN : "var(--text-on-ink)";
 
+  // The move since entry, read in the signal's own direction. Percent
+  // rather than price units because one card is GOLD at 4,596 and the next
+  // is EURUSD at 1.08 — "+2.15" means opposite things on those two and
+  // "+0.05%" means the same thing on both.
+  //
+  // Hidden while the signal is locked. The price is public and the entry is
+  // not, and a percentage between them hands back the entry to anyone
+  // willing to do one division — which is the whole thing the lock sells.
+  const pct =
+    !locked && Number.isFinite(signed) && Number.isFinite(from) && from !== 0 && quote
+      ? (signed / from) * 100
+      : null;
+
   return (
-    <div className="min-w-0 text-center">
-      <div className="flex items-center justify-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
+    <div className="min-w-0 text-start">
+      <div className="flex items-center gap-1.5 text-[11px] leading-none text-text-on-ink-muted">
         {quote && (
           <span
             aria-hidden="true"
@@ -672,11 +707,22 @@ function LivePriceCell({
         )}
         {label}
       </div>
-      <div
-        className="mt-1 truncate font-mono text-sm font-semibold tabular-stat"
-        style={{ color: quote ? color : "var(--text-on-ink-muted)" }}
-      >
-        {quote ? quote.bid : "—"}
+      <div className="mt-1.5 flex min-w-0 items-baseline gap-1.5">
+        <span
+          className="truncate font-mono text-[17px] font-semibold leading-none tabular-stat"
+          style={{ color: quote ? color : "var(--text-on-ink-muted)" }}
+        >
+          {quote ? quote.bid : "—"}
+        </span>
+        {pct !== null && (
+          <span
+            className="shrink-0 font-mono text-[11px] font-semibold leading-none tabular-stat"
+            style={{ color }}
+          >
+            {pct >= 0 ? "+" : ""}
+            {pct.toFixed(2)}%
+          </span>
+        )}
       </div>
     </div>
   );
@@ -764,44 +810,45 @@ function SignalCard({
   const panelId = `signal-panel-${signal.id}`;
 
   return (
-    <div className="mx-auto w-full max-w-2xl overflow-hidden rounded-2xl border border-hairline bg-gradient-to-b from-ink-soft to-ink shadow-[0_20px_50px_-25px_rgba(0,0,0,0.7)]">
-      {/* Header row: identity, the three levels, the action. Everything a
-          reader needs to decide whether to open the row at all. */}
+    // The rail down the start edge is the card's one loud element: reading
+    // a column of these, the mix of green and red lands before a single
+    // word does. Logical border so it stays on the reading edge in Arabic.
+    <div
+      className="mx-auto w-full max-w-2xl overflow-hidden rounded-2xl border border-s-[3px] border-hairline bg-gradient-to-b from-ink-soft to-ink shadow-[0_20px_50px_-25px_rgba(0,0,0,0.7)]"
+      style={{ borderInlineStartColor: directionColor }}
+    >
+      {/* Header row: identity on the reading edge, state on the far one.
+          It used to be centred, along with the numbers below it — which is
+          the one thing a reader cannot do with four prices they are meant
+          to compare. */}
       <div className="flex flex-col gap-4 p-4 sm:p-5">
-        <div className="flex min-w-0 items-center justify-center gap-3">
-          <PairMark pair={signal.pair} />
-          <div className="min-w-0">
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              <span className="notranslate font-display text-base font-semibold text-text-on-ink">
-                {prettyPair(signal.pair)}
+        <div className="flex min-w-0 items-center justify-between gap-3">
+          <div className="flex min-w-0 items-center gap-2.5">
+            <PairMark pair={signal.pair} />
+            <span className="notranslate truncate font-display text-[17px] font-semibold tracking-[-0.01em] text-text-on-ink">
+              {prettyPair(signal.pair)}
+            </span>
+            {(isBuy || isSell) && (
+              <span
+                className="shrink-0 rounded-md px-1.5 py-0.5 text-[11px] font-bold leading-none"
+                style={{ background: `${directionColor}26`, color: directionColor }}
+              >
+                {signal.direction}
               </span>
-              {(isBuy || isSell) && (
-                <span
-                  className="rounded-full px-2 py-0.5 text-[11px] font-semibold"
-                  style={{ background: `${directionColor}26`, color: directionColor }}
-                >
-                  {signal.direction}
-                </span>
-              )}
-            </div>
-            <div className="mt-1 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[11px] text-text-on-ink-muted">
-              {isClosed ? (
-                <span className="font-semibold" style={{ color: resultColor }}>
-                  {signal.outcome ?? tr("KAPANDI")}
-                </span>
-              ) : (
-                <span className="flex items-center gap-1.5 font-medium uppercase tracking-wide text-signal">
-                  <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
-                  {tr("Aktif")}
-                </span>
-              )}
-              {age && (
-                <>
-                  <span aria-hidden="true">·</span>
-                  <span>{age}</span>
-                </>
-              )}
-            </div>
+            )}
+          </div>
+          <div className="flex shrink-0 flex-col items-end gap-0.5 text-[11px] leading-none text-text-on-ink-muted">
+            {isClosed ? (
+              <span className="font-semibold" style={{ color: resultColor }}>
+                {signal.outcome ?? tr("KAPANDI")}
+              </span>
+            ) : (
+              <span className="flex items-center gap-1.5 font-medium text-signal">
+                <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
+                {tr("Aktif")}
+              </span>
+            )}
+            {age && <span>{age}</span>}
           </div>
         </div>
 
@@ -814,21 +861,42 @@ function SignalCard({
             isClosed ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"
           }`}
         >
-          <LevelCell label={tr("Giriş Fiyatı")} value={signal.entry} locked={locked} />
+          <LevelCell
+            // Not just "Giriş": that word is also the site's word for signing
+            // in, and the shared catalogue entry translated this cell into
+            // "تسجيل الدخول" — a price labelled "log in".
+            label={tr("Giriş fiyatı")}
+            value={signal.entry}
+            locked={locked}
+            ariaLocked={tr("Pakete özel")}
+          />
           {/* Deliberately not gated on `locked`. The entry, stop and target
               are ours and are what a package pays for; the market price is
               the market's, and masking public data would only make the page
               look like it is hiding something it is not. */}
           {!isClosed && (
             <LivePriceCell
-              label={tr("Şu An")}
+              label={tr("Şu an")}
               quote={quote}
               entry={signal.entry}
               direction={signal.direction}
+              locked={locked}
             />
           )}
-          <LevelCell label={tr("Zarar Durdur")} value={signal.stop} color={TICK_DOWN} locked={locked} />
-          <LevelCell label={tr("Kâr Al")} value={signal.target1} color={TICK_UP} locked={locked} />
+          <LevelCell
+            label={tr("Zarar durdur")}
+            value={signal.stop}
+            color={TICK_DOWN}
+            locked={locked}
+            ariaLocked={tr("Pakete özel")}
+          />
+          <LevelCell
+            label={tr("Kâr al")}
+            value={signal.target1}
+            color={TICK_UP}
+            locked={locked}
+            ariaLocked={tr("Pakete özel")}
+          />
         </div>
 
         {isClosed && resultLine && !locked && (
@@ -842,7 +910,7 @@ function SignalCard({
           </div>
         )}
 
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-between gap-2">
           {locked ? (
             <Link
               href={lock.href}

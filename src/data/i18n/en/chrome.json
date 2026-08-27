@@ -2644,5 +2644,10 @@
   "iPhone'da bildirim gelmiyor, neden?": "I'm not getting notifications on iPhone, why?",
   "iOS'ta bildirimler yalnızca uygulama ana ekrana eklendikten sonra çalışır — Safari sekmesinden asla çalışmaz. Ekledikten sonra uygulamayı ana ekrandan açın ve bildirim iznini orada verin.": "On iOS, notifications only work after the app is added to the home screen — they never work from a Safari tab. After adding it, open the app from the home screen and grant notification permission there.",
   "Ana Sayfa": "Home",
-  "Uygulama": "App"
+  "Uygulama": "App",
+  "Pakete özel": "Package specific",
+  "Şu an": "Currently",
+  "Zarar durdur": "Stop loss",
+  "Kâr al": "Take profit",
+  "Giriş fiyatı": "Entry price"
 }
