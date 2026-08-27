@@ -11,12 +11,13 @@ on:
     # broker campaigns + cashback rates, Monday mornings.
     - cron: "0 9 * * 1"
     # blog-share (Haber & Editöryal): one item per run from the shared
-    # blog + Akademi backlog, oldest first. Twice a day, not every two
-    # hours: at 12 runs a day the backlog of unshared posts would empty
-    # into the channel in three days, which is the flood this cron was
-    # written to avoid. Offset 30 minutes from market-analysis-share so
-    # the two never fire together.
-    - cron: "30 9,17 * * *"
+    # blog + Akademi backlog, oldest first. Three times a day, not every
+    # two hours: at 12 runs a day the backlog would empty into the channel
+    # in a couple of days, which is the flood this cron was written to
+    # avoid. Three spreads the queue across waking hours and caps a newly
+    # published post's wait at six hours rather than twelve. Offset 30
+    # minutes from market-analysis-share so the two never fire together.
+    - cron: "30 9,15,21 * * *"
     # economic-calendar-alert (Piyasa Analizi): checks every 5 min for
     # freshly-released medium/high-impact figures. Activated per owner
     # approval on 2026-08-07 — see src/lib/departments.ts.
@@ -71,9 +72,10 @@ jobs:
   # Owned by Haber & Editöryal Departmanı — see docs/ORGANIZATION.md.
   # Announces written content (Telegram + web push) from one queue holding
   # both /blog posts and FXPARTNER Akademi lessons, oldest first, one per
-  # run — twice a day, so a backlog drains at a pace a channel can absorb.
+  # run — three times a day, so a backlog drains at a pace a channel can
+  # absorb without a new post waiting half a day to be announced.
   blog-share:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '30 9,17 * * *'
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '30 9,15,21 * * *'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger blog-share
