@@ -2694,5 +2694,15 @@
   "Kapanan işlem yok": "No closed trades",
   "%{rate} isabet": "%{rate} accuracy",
   "Bugün": "Today",
-  "Bu Hafta": "This Week"
+  "Bu Hafta": "This Week",
+  "Nasıl çalışır?": "How it works",
+  "Hesabınızı bağlayın": "Connect your account",
+  "Partner bağlantımızdan yeni bir hesap açın ya da mevcut hesap numaranızı gönderin.": "Open a new account via our partner link or submit your existing account number.",
+  "Her zamanki gibi işlem yapın": "Trade as usual",
+  "Spreadleriniz, kaldıracınız ve koşullarınız değişmez — doğrudan aracı kurumda açmışsınız gibi.": "Your spreads, leverage and conditions remain unchanged — just as if you opened directly with the broker.",
+  "İadenizi alın": "Get your rebate",
+  "Aracı kurum hacminizden doğan komisyonun payını öder; biz de bunun çoğunu hesabınıza geri veririz.": "The broker pays a share of the commission generated from your volume, and we return most of it back to your account.",
+  "Cashback Al": "Get Cashback",
+  "Tam inceleme": "Full review",
+  "Oran hesap türüne ve aylık işlem hacmine göre değişir; ECN hesaplarda komisyon üzerinden, Classic ve Cent hesaplarda spread üzerinden hesaplanır.": "The rate varies depending on the account type and monthly trading volume; on ECN accounts it is calculated based on commission, and on Classic and Cent accounts based on spread."
 }

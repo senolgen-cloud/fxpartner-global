@@ -2694,5 +2694,15 @@
   "Kapanan işlem yok": "Немає закритих угод",
   "%{rate} isabet": "%{rate} точність",
   "Bugün": "Сьогодні",
-  "Bu Hafta": "Цього тижня"
+  "Bu Hafta": "Цього тижня",
+  "Nasıl çalışır?": "Як це працює?",
+  "Hesabınızı bağlayın": "Підключіть свій рахунок",
+  "Partner bağlantımızdan yeni bir hesap açın ya da mevcut hesap numaranızı gönderin.": "Відкрийте новий рахунок за нашим партнерським посиланням або надішліть номер існуючого рахунку.",
+  "Her zamanki gibi işlem yapın": "Торгуйте як зазвичай",
+  "Spreadleriniz, kaldıracınız ve koşullarınız değişmez — doğrudan aracı kurumda açmışsınız gibi.": "Ваші спреди, кредитне плече та умови не змінюються — так само, як якщо б ви відкрили рахунок безпосередньо у брокера.",
+  "İadenizi alın": "Отримайте своє повернення",
+  "Aracı kurum hacminizden doğan komisyonun payını öder; biz de bunun çoğunu hesabınıza geri veririz.": "Брокер сплачує частку комісії, що виникає з вашого обсягу торгівлі, а ми повертаємо більшу її частину на ваш рахунок.",
+  "Cashback Al": "Отримати кешбек",
+  "Tam inceleme": "Повний огляд",
+  "Oran hesap türüne ve aylık işlem hacmine göre değişir; ECN hesaplarda komisyon üzerinden, Classic ve Cent hesaplarda spread üzerinden hesaplanır.": "Ставка змінюється залежно від типу рахунку та щомісячного обсягу торгівлі; на рахунках ECN вона розраховується від комісії, а на рахунках Classic та Cent — від спреду."
 }

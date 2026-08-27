@@ -41,8 +41,13 @@ export const cashbackPrograms: CashbackProgram[] = [
   {
     brokerSlug: "lite-finance",
     rateLabel: "%50'ye kadar nakit iade",
+    // The note keeps every condition on the rate and nothing else. It used
+    // to close with "İade, Lite Finance tarafından doğrudan işlem hesabınıza
+    // yatırılır" — the same sentence the pitch directly above it already
+    // ends on, so the row said it twice and ran to six lines of grey text on
+    // a phone. The qualifying half is what a reader needs next to a number.
     rateNote:
-      "Oran hesap türüne ve aylık işlem hacmine göre değişir; ECN hesaplarda komisyon üzerinden, Classic ve Cent hesaplarda spread üzerinden hesaplanır. İade, Lite Finance tarafından doğrudan işlem hesabınıza yatırılır.",
+      "Oran hesap türüne ve aylık işlem hacmine göre değişir; ECN hesaplarda komisyon üzerinden, Classic ve Cent hesaplarda spread üzerinden hesaplanır.",
     status: "live",
     pitch:
       "Mevcut hesabınızı kapatmanıza gerek yok; iade, işlem hacminize göre Lite Finance tarafından doğrudan işlem hesabınıza yatırılır.",
