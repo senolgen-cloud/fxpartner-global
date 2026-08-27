@@ -115,15 +115,15 @@ export async function generateMetadata({
     statusBarStyle: "black-translucent",
     title: "FXPARTNER",
   },
-  // Two framings of the same logo, by how much room the slot has. The
-  // browser tab renders at 16-32px, where the FXPARTNER wordmark under the
-  // monogram is an unreadable smudge, so `icon` (and app/favicon.ico) carry
-  // the FX mark alone. The Home Screen / installed-app icon is large enough
-  // for the full lockup, so apple-touch-icon and manifest.json keep it.
+  // One logo everywhere, by request. This used to be two framings — the FX
+  // monogram alone in the tab, the full lockup on the Home Screen — because
+  // at 16px the word PARTNER under the monogram is a smudge. The owner asked
+  // for the lockup in both, so favicon.ico is built from the same artwork at
+  // 16/32/48/64 and the mark-only files are gone.
   icons: {
     icon: [
-      { url: "/fxpartner-mark-192.png", sizes: "192x192", type: "image/png" },
-      { url: "/fxpartner-mark-512.png", sizes: "512x512", type: "image/png" },
+      { url: "/fxpartner-icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/fxpartner-icon-512.png", sizes: "512x512", type: "image/png" },
     ],
     apple: "/fxpartner-icon.png",
   },
