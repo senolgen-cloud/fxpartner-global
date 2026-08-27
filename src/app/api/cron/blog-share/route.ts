@@ -9,18 +9,29 @@ import {
 import { sendPushToAll, type PushResult } from "@/lib/push";
 import { postTextToX, postTradeSignalToX } from "@/lib/x";
 import { blogPosts } from "@/data/blog";
+import { db } from "@/db";
+import { educationPosts } from "@/db/schema";
+import { pickTranslation } from "@/lib/translateContent";
 import { localizeBlogPost } from "@/lib/localizeContent";
-import { localePath } from "@/lib/i18n";
+import { localePath, type Locale } from "@/lib/i18n";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
 // Owned by Haber & Editöryal Departmanı — see src/lib/departments.ts and
-// docs/ORGANIZATION.md. Announces /blog posts to Telegram + web push once
-// they're live. Unlike market-analysis-share (one post per day), several
-// blog posts can go live at once, so this posts the single OLDEST
-// not-yet-announced entry per run — with the every-2h schedule in
-// telegram-cron.yml, a backlog drains one post per run instead of
-// flooding the channel all at once.
+// docs/ORGANIZATION.md. Announces written content to Telegram + web push
+// once it is live: one item per run, oldest first, so a backlog trickles
+// out instead of arriving as a wall.
+//
+// Two sources, one queue. /blog posts live in source; FXPARTNER Akademi
+// lessons live in the education_post table and had never been announced
+// anywhere — five lessons published and none of them shared. They are the
+// same kind of thing to a reader, so they share a backlog and a cadence
+// rather than getting a second cron that would have to be kept in step
+// with this one.
+//
+// Ordered by publication date ascending. Taking the array's first unposted
+// entry meant newest-first, since blog.ts is authored that way — which for
+// a backlog is exactly backwards.
 
 // X counts every link as 23 characters regardless of its real length, and the
 // hard cap is 280. Reserve the link allowance plus the two newlines that
@@ -57,11 +68,56 @@ export const GET = withCronErrorAlert("blog-share", async (req: NextRequest) => 
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  let target: (typeof blogPosts)[number] | undefined;
-  for (const post of blogPosts) {
-    const key = `blog:${post.slug}`;
-    if (!(await isAlreadyPostedToTelegram(key))) {
-      target = post;
+  type Item = {
+    kind: "blog" | "lesson";
+    slug: string;
+    title: string;
+    excerpt: string;
+    coverImage?: string;
+    publishedAt: Date;
+    path: string;
+    /** Per-locale copy for the push, resolved at send time. */
+    localized: (locale: Locale) => { title: string; excerpt: string };
+  };
+
+  const lessons = await db.query.educationPosts.findMany();
+
+  const candidates: Item[] = [
+    ...blogPosts.map((p) => ({
+      kind: "blog" as const,
+      slug: p.slug,
+      title: p.title,
+      excerpt: p.excerpt,
+      coverImage: p.coverImage,
+      publishedAt: new Date(p.publishedAt),
+      path: `/blog/${p.slug}`,
+      localized: (locale: Locale) => {
+        const c = localizeBlogPost(p, locale);
+        return { title: c.title, excerpt: c.excerpt };
+      },
+    })),
+    ...lessons.map((l) => ({
+      kind: "lesson" as const,
+      slug: l.slug,
+      title: l.title,
+      excerpt: l.excerpt,
+      publishedAt: new Date(l.publishedAt),
+      path: `/egitim/${l.slug}`,
+      localized: (locale: Locale) => {
+        const c = pickTranslation(l.translations, locale, {
+          title: l.title,
+          excerpt: l.excerpt,
+          body: l.body,
+        });
+        return { title: c.title, excerpt: c.excerpt };
+      },
+    })),
+  ].sort((a, b) => a.publishedAt.getTime() - b.publishedAt.getTime());
+
+  let target: Item | undefined;
+  for (const item of candidates) {
+    if (!(await isAlreadyPostedToTelegram(`${item.kind}:${item.slug}`))) {
+      target = item;
       break;
     }
   }
@@ -71,7 +127,7 @@ export const GET = withCronErrorAlert("blog-share", async (req: NextRequest) => 
   }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
-  const url = `${siteUrl}/blog/${target.slug}`;
+  const url = `${siteUrl}${target.path}`;
   const text =
     `<b>${target.title}</b>\n\n${target.excerpt}\n\n` +
     `Devamını oku: ${url}\n\n` +
@@ -90,13 +146,14 @@ export const GET = withCronErrorAlert("blog-share", async (req: NextRequest) => 
     photoUrl && text.length <= 1024
       ? await sendTelegramPhoto(photoUrl, text, { inlineKeyboard: keyboard })
       : await sendTelegramMessage(text, { inlineKeyboard: keyboard });
-  await markPostedToTelegram(`blog:${target.slug}`);
+  await markPostedToTelegram(`${target.kind}:${target.slug}`);
 
   let push: PushResult | { error: string } = { sent: 0, removed: 0, failed: 0 };
   try {
+    const item = target;
     push = await sendPushToAll((locale) => {
-      const copy = localizeBlogPost(target, locale);
-      return { title: copy.title, body: copy.excerpt, url: localePath(locale, `/blog/${target.slug}`) };
+      const copy = item.localized(locale);
+      return { title: copy.title, body: copy.excerpt, url: localePath(locale, item.path) };
     });
   } catch (err) {
     push = { error: (err as Error).message };
@@ -114,5 +171,14 @@ export const GET = withCronErrorAlert("blog-share", async (req: NextRequest) => 
     x = { error: (err as Error).message };
   }
 
-  return NextResponse.json({ ok: true, posted: true, slug: target.slug, result, push, x });
+  return NextResponse.json({
+    ok: true,
+    posted: true,
+    kind: target.kind,
+    slug: target.slug,
+    remaining: candidates.length - candidates.indexOf(target) - 1,
+    result,
+    push,
+    x,
+  });
 });

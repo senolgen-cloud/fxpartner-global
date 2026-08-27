@@ -10,10 +10,13 @@ on:
     # campaign-digest (Reklam & Kampanya): weekly roundup of active
     # broker campaigns + cashback rates, Monday mornings.
     - cron: "0 9 * * 1"
-    # blog-share (Haber & Editöryal): checks every 2h for the oldest
-    # not-yet-announced /blog post and posts one per run — offset by 30
-    # minutes from market-analysis-share so the two don't fire together.
-    - cron: "30 */2 * * *"
+    # blog-share (Haber & Editöryal): one item per run from the shared
+    # blog + Akademi backlog, oldest first. Twice a day, not every two
+    # hours: at 12 runs a day the backlog of unshared posts would empty
+    # into the channel in three days, which is the flood this cron was
+    # written to avoid. Offset 30 minutes from market-analysis-share so
+    # the two never fire together.
+    - cron: "30 9,17 * * *"
     # economic-calendar-alert (Piyasa Analizi): checks every 5 min for
     # freshly-released medium/high-impact figures. Activated per owner
     # approval on 2026-08-07 — see src/lib/departments.ts.
@@ -66,11 +69,11 @@ jobs:
             https://fxpartner.global/api/cron/campaign-digest
 
   # Owned by Haber & Editöryal Departmanı — see docs/ORGANIZATION.md.
-  # Announces /blog posts (Telegram + web push) as they're published,
-  # one oldest-unposted entry per run so a same-day batch trickles out
-  # across the day instead of flooding the channel at once.
+  # Announces written content (Telegram + web push) from one queue holding
+  # both /blog posts and FXPARTNER Akademi lessons, oldest first, one per
+  # run — twice a day, so a backlog drains at a pace a channel can absorb.
   blog-share:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '30 */2 * * *'
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '30 9,17 * * *'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger blog-share
