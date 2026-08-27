@@ -147,25 +147,29 @@ export function useInterruptionSlot(id: string, priority: number, wanted: boolea
   const [allowed, setAllowed] = useState(false);
 
   useEffect(() => {
-    if (!wanted) {
-      setAllowed(false);
-      return;
-    }
     let timer: ReturnType<typeof setTimeout> | undefined;
+
+    // Always scheduled, never called straight from the effect body. The
+    // rules read the clock and storage, so the answer cannot be computed
+    // during render without a hydration mismatch, and setting state
+    // synchronously in an effect cascades a second render before paint.
+    // A frame's delay before a sheet appears costs nothing here.
     const check = () => {
       // Already on screen: the rules gate appearing, never staying.
-      if (shown.has(id)) {
-        setAllowed(true);
-        return;
-      }
-      const wait = waitFor(priority);
+      const wait = shown.has(id) ? 0 : waitFor(priority);
       if (wait === 0) {
         setAllowed(true);
       } else if (Number.isFinite(wait)) {
         timer = setTimeout(check, wait + 50);
       }
     };
-    check();
+
+    if (wanted) {
+      timer = setTimeout(check, 0);
+    } else {
+      timer = setTimeout(() => setAllowed(false), 0);
+    }
+
     return () => clearTimeout(timer);
   }, [id, priority, wanted]);
 
