@@ -96,10 +96,10 @@ function CardBody({
       <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between lg:gap-4">
         <div className="flex min-w-0 items-center gap-4">
           <span
-            className={`shrink-0 font-poppins font-extrabold leading-none text-white/[0.06] transition-colors group-hover:text-gold/40 ${
+            className={`hidden shrink-0 font-poppins font-extrabold leading-none text-white/[0.06] transition-colors group-hover:text-gold/40 sm:block ${
               featured
-                ? "featured-card-depth text-4xl sm:text-6xl md:text-7xl"
-                : "text-3xl sm:text-4xl md:text-5xl"
+                ? "featured-card-depth sm:text-6xl md:text-7xl"
+                : "sm:text-4xl md:text-5xl"
             }`}
             aria-hidden="true"
           >
@@ -127,11 +127,14 @@ function CardBody({
             </div>
             <div className="min-w-0">
               <h3
-                className={`truncate font-poppins font-semibold text-text-on-ink ${
+                className={`flex items-baseline gap-2 font-poppins font-semibold text-text-on-ink ${
                   featured ? "text-xl sm:text-2xl md:text-3xl" : "text-base sm:text-lg md:text-xl"
                 }`}
               >
-                <span className="notranslate">{broker.name}</span>
+                <span className="notranslate truncate">{broker.name}</span>
+                <span className="shrink-0 font-mono text-[11px] font-normal text-gold sm:hidden">
+                  #{String(broker.rank).padStart(2, "0")}
+                </span>
               </h3>
               <p className="mt-1 truncate text-sm text-text-on-ink-muted">
                 En iyi {broker.bestFor.charAt(0).toLowerCase() + broker.bestFor.slice(1)}
@@ -143,7 +146,7 @@ function CardBody({
           </div>
         </div>
 
-        <div className="flex shrink-0 flex-col items-center gap-3 sm:flex-row sm:gap-4">
+        <div className="flex shrink-0 flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
           <MiniScoreRings broker={broker} tone="dark" />
           <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
             <a
@@ -175,7 +178,7 @@ function CardBody({
             <Link
               key={c}
               href={`/categories/${categoryInfo[c as BrokerCategory].slug}`}
-              className="rounded-full border border-hairline px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-text-on-ink-muted transition-colors hover:border-signal hover:text-signal"
+              className="rounded-full border border-hairline px-2.5 py-1 text-[11px] text-text-on-ink-muted transition-colors hover:border-signal hover:text-signal"
             >
               {categories[c as BrokerCategory].label}
             </Link>
