@@ -7,6 +7,7 @@ import Image from "next/image";
 // return Turkish to every reader.
 import { useTr, useTrf } from "@/components/useTr";
 import Link from "@/components/LocaleLink";
+import ChevronRight from "@/components/ChevronRight";
 import { categoryInfo, type Broker, type BrokerCategory } from "@/data/brokers";
 import TiltWrapper from "./TiltWrapper";
 import MiniScoreRings from "./MiniScoreRings";
@@ -175,20 +176,7 @@ function CardBody({
               className="inline-flex h-11 shrink-0 items-center gap-1 rounded-xl px-3 text-[13px] font-medium text-text-on-ink-muted transition-colors hover:bg-ink-soft hover:text-text-on-ink"
             >
               {tr("İnceleme")}
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                className="shrink-0"
-              >
-                <path d="M9 18l6-6-6-6" />
-              </svg>
+              <ChevronRight />
             </Link>
           </div>
         </div>

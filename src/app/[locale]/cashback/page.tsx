@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "@/components/LocaleLink";
+import ChevronRight from "@/components/ChevronRight";
 import Footer from "@/components/Footer";
 import { cashbackPrograms } from "@/data/cashback";
 import { getBrokerBySlug } from "@/data/brokers";
@@ -259,15 +260,16 @@ export default async function CashbackPage({
                               scarce here. */}
                           <Link
                             href={`/cashback/${broker.slug}/setup`}
-                            className="inline-flex min-h-11 items-center rounded-full bg-ink px-5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
+                            className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-xl bg-ink px-5 text-[13px] font-semibold text-text-on-ink transition-colors hover:bg-ink-soft"
                           >
                             {tr("Cashback Al")}
                           </Link>
                           <Link
                             href={`/brokers/${broker.slug}`}
-                            className="text-sm text-text-muted underline-offset-4 transition-colors hover:text-text-dark hover:underline"
+                            className="inline-flex h-11 items-center gap-1 whitespace-nowrap rounded-xl px-3 text-[13px] font-medium text-text-muted transition-colors hover:bg-hairline-light/60 hover:text-text-dark"
                           >
-                            {tr("Tam inceleme")}
+                            {tr("İnceleme")}
+                            <ChevronRight />
                           </Link>
                         </div>
                       </div>

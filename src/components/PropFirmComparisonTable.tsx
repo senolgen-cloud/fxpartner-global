@@ -4,6 +4,7 @@ import { useTr } from "@/components/useTr";
 
 import React, { useState } from "react";
 import Link from "@/components/LocaleLink";
+import ChevronRight from "@/components/ChevronRight";
 import {
   propFirmsByScore,
   getPropFirmScores,
@@ -324,20 +325,25 @@ export default function PropFirmComparisonTable() {
                     </td>
 
                     <td className="px-5 py-4 text-end">
-                      <div className="flex items-center justify-end gap-4">
+                      {/* Row actions, same vocabulary as the cards: no mono
+                          uppercase, no arrow glyph, and a 44px target
+                          instead of an 11px line of text that a thumb has
+                          to hunt for inside a table cell. */}
+                      <div className="flex items-center justify-end gap-1">
                         <button
                           type="button"
                           onClick={() => setExpandedSlug(open ? null : firm.slug)}
                           aria-expanded={open}
-                          className="font-mono text-[11px] uppercase tracking-[0.1em] text-signal hover:text-signal-strong"
+                          className="inline-flex h-11 items-center whitespace-nowrap rounded-xl px-3 text-[13px] font-medium text-signal transition-colors hover:bg-ink-soft"
                         >
-                          {open ? "Kapat" : "Detay"}
+                          {open ? tr("Kapat") : tr("Detay")}
                         </button>
                         <Link
                           href={`/prop-firmalar/${firm.slug}`}
-                          className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted hover:text-signal"
+                          className="inline-flex h-11 items-center gap-1 whitespace-nowrap rounded-xl px-3 text-[13px] font-medium text-text-on-ink-muted transition-colors hover:bg-ink-soft hover:text-text-on-ink"
                         >
-                          {tr("İnceleme →")}
+                          {tr("İnceleme")}
+                          <ChevronRight />
                         </Link>
                       </div>
                     </td>

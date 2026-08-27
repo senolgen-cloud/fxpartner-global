@@ -1,5 +1,6 @@
 import { tr, trf } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
+import ChevronRight from "@/components/ChevronRight";
 import { getFeaturedPartner, getPropFirmScores, hasActiveLink } from "@/data/propFirms";
 import { trData } from "@/lib/localizeContent";
 
@@ -105,23 +106,34 @@ export default function PropFirmFeaturedCard() {
         </p>
       )}
 
-      <div className="mt-6 flex flex-wrap items-center gap-5 border-t border-hairline pt-5">
-        <Link
-          href="/prop-firmalar"
-          className="rounded-full bg-signal px-5 py-2.5 font-mono text-xs uppercase tracking-[0.1em] text-ink transition-colors hover:bg-signal-strong"
-        >
-          {tr("İncelemeyi gör")}
-        </Link>
-        {linkOn && (
-          <a
-            href={firm.referralUrl}
-            target="_blank"
-            rel="nofollow sponsored noopener noreferrer"
-            className="font-mono text-xs uppercase tracking-[0.1em] text-signal hover:text-signal-strong"
+      {/* Same one-row shape as the broker cards: a filled primary and a
+          ghost secondary, both 44px, rounded-xl. Was a mono uppercase pill
+          beside a mono uppercase text link ending in an arrow — two
+          different weights of the same shouting, and the arrow points the
+          wrong way once /ar flips the page. */}
+      <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-4 border-t border-hairline pt-5">
+        {/* The two actions travel together in their own row; the discount
+            code and the unverified-payout warning are siblings of that
+            pair, not of each button, and still wrap away from it. */}
+        <div className="flex w-full items-center gap-2 sm:w-auto">
+          <Link
+            href="/prop-firmalar"
+            className="inline-flex h-11 flex-1 items-center justify-center whitespace-nowrap rounded-xl bg-signal px-4 text-[13px] font-semibold text-ink transition-colors hover:bg-signal-strong sm:flex-none sm:px-5"
           >
-            {firm.name}&apos;a git →
-          </a>
-        )}
+            {tr("İncelemeyi gör")}
+          </Link>
+          {linkOn && (
+            <a
+              href={firm.referralUrl}
+              target="_blank"
+              rel="nofollow sponsored noopener noreferrer"
+              className="inline-flex h-11 shrink-0 items-center gap-1 whitespace-nowrap rounded-xl px-3 text-[13px] font-medium text-text-on-ink-muted transition-colors hover:bg-ink-soft hover:text-text-on-ink"
+            >
+              {tr("Siteye Git")}
+              <ChevronRight />
+            </a>
+          )}
+        </div>
 
         {discountLive && d.code && (
           <span className="font-mono text-xs text-text-on-ink-muted">
