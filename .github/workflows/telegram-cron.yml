@@ -25,35 +25,32 @@ on:
           - broker-review-share
           - market-update
   schedule:
-    # market-analysis-share (Piyasa Analizi): checks every 2h whether
-    # today's /piyasa-analizi post is live; only actually sends once
-    # per day thanks to the DB-backed dedup in telegram-posted-store.ts.
-    - cron: "0 */2 * * *"
-    # campaign-digest (Reklam & Kampanya): weekly roundup of active
-    # broker campaigns + cashback rates, Monday mornings.
-    - cron: "0 9 * * 1"
-    # blog-share (Haber & Editöryal): one item per run from the shared
-    # blog + Akademi backlog, oldest first. Three times a day, not every
-    # two hours: at 12 runs a day the backlog would empty into the channel
-    # in a couple of days, which is the flood this cron was written to
-    # avoid. Three spreads the queue across waking hours and caps a newly
-    # published post's wait at six hours rather than twelve. Offset 30
-    # minutes from market-analysis-share so the two never fire together.
-    - cron: "30 9,15,21 * * *"
-    # economic-calendar-alert (Piyasa Analizi): checks every 5 min for
-    # freshly-released medium/high-impact figures. Activated per owner
-    # approval on 2026-08-07 — see src/lib/departments.ts.
+    # economic-calendar-alert (Piyasa Analizi): checks for freshly-released
+    # medium/high-impact figures, and warns 90 minutes before one is due.
+    # Activated per owner approval on 2026-08-07 — see src/lib/departments.ts.
+    # This is web push, not a channel post, so the four-hour channel pace
+    # does not apply to it: a figure that has just printed is worth nothing
+    # three hours later.
     - cron: "*/5 * * * *"
+    #
+    # EVERY CONTENT CRON BELOW LOST ITS SCHEDULE ON 2026-08-27.
+    #
+    # market-analysis-share (was 0 */2), campaign-digest (was 0 9 * * 1),
+    # blog-share (was 30 9,15,21) and broker-review-share (was 0 6,10,14,20)
+    # are now called by /api/cron/channel-dispatch, scheduled in
+    # channel-dispatch-cron.yml. The owner asked for one channel post every
+    # four hours; six crons each holding their own schedule could not
+    # deliver that, because none of them could see the others. blog-share at
+    # 09:30 and broker-review-share at 10:00 landed half an hour apart and
+    # then the channel went quiet until the afternoon.
+    #
+    # The jobs below still exist and still work — they are dispatchable by
+    # name for a manual run — they simply no longer decide when to fire.
+    #
     # news-update (Haber & Editöryal): moved to its own workflow file,
     # news-update-cron.yml, on 2026-08-17 — this file's */5-minute
     # schedule was silently starving news-update's twice-daily tick (see
-    # that file's header comment for the full story).
-    # broker-review-share (Broker İstihbaratı & İnceleme): top-5-brokers
-    # digest, 4x/day at 09:00 / 13:00 / 17:00 / 23:00 Turkey time
-    # (= 06:00 / 10:00 / 14:00 / 20:00 UTC). Was hourly (24 posts/day)
-    # until 2026-08-14, briefly cut to weekly, then set to this owner-
-    # requested 4x/day cadence.
-    - cron: "0 6,10,14,20 * * *"
+    # that file's header comment for the full story). Now dispatched too.
 
 jobs:
   # Owned by Piyasa Analizi Departmanı — see docs/ORGANIZATION.md.
@@ -73,9 +70,7 @@ jobs:
 
   # Owned by Piyasa Analizi Departmanı — see docs/ORGANIZATION.md.
   market-analysis-share:
-    if: >-
-      github.event.schedule == '0 */2 * * *' ||
-      inputs.job == 'scheduled' || inputs.job == 'market-analysis-share'
+    if: inputs.job == 'market-analysis-share'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger market-analysis-share
@@ -85,9 +80,7 @@ jobs:
 
   # Owned by Reklam & Kampanya Departmanı — see docs/ORGANIZATION.md.
   campaign-digest:
-    if: >-
-      github.event.schedule == '0 9 * * 1' ||
-      inputs.job == 'scheduled' || inputs.job == 'campaign-digest'
+    if: inputs.job == 'campaign-digest'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger campaign-digest
@@ -101,9 +94,7 @@ jobs:
   # run — three times a day, so a backlog drains at a pace a channel can
   # absorb without a new post waiting half a day to be announced.
   blog-share:
-    if: >-
-      github.event.schedule == '30 9,15,21 * * *' ||
-      inputs.job == 'scheduled' || inputs.job == 'blog-share'
+    if: inputs.job == 'blog-share'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger blog-share
@@ -129,9 +120,7 @@ jobs:
 
   # Owned by Broker İstihbaratı & İnceleme Departmanı — see docs/ORGANIZATION.md.
   broker-review-share:
-    if: >-
-      github.event.schedule == '0 6,10,14,20 * * *' ||
-      inputs.job == 'scheduled' || inputs.job == 'broker-review-share'
+    if: inputs.job == 'broker-review-share'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger broker-review-share

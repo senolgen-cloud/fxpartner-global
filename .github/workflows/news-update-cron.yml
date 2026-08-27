@@ -7,11 +7,14 @@ name: News bulletin cron
 # list` that the news-update job had a 0/300 fire rate there, always
 # "skipped" — this file gives the twice-daily bulletin its own
 # uncontested schedule so it actually fires.
+# Schedule removed 2026-08-27: the bulletin is now one of the sources in
+# /api/cron/channel-dispatch's rotation, which paces every channel post to
+# one per four hours. It kept its own twice-daily cron (09:15 / 18:15 Turkey
+# time) until then. The split-file reasoning above still holds and is why
+# the dispatcher also lives in a file of its own; this file stays for the
+# manual run.
 on:
   workflow_dispatch:
-  schedule:
-    # 09:15 / 18:15 Turkey time = 06:15 / 15:15 UTC.
-    - cron: "15 6,15 * * *"
 
 jobs:
   news-update:

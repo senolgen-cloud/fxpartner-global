@@ -23,16 +23,22 @@ name: Active signals digest
 # file's workflow_dispatch fires every job it contains — see the header of
 # broker-review-manual.yml for the same reasoning.
 
+# Schedule removed 2026-08-27. The digest is now one of the sources in
+# /api/cron/channel-dispatch's rotation, which paces every channel post to
+# one per four hours per the owner's instruction. Left on its own 3-hourly
+# cron it would have posted straight past that pace — the one thing the
+# dispatcher exists to prevent.
+#
+# The collision-avoidance reasoning above is now handled for it: the
+# dispatcher never lets two content posts land together, so no source needs
+# to be offset from any other any more.
 on:
   workflow_dispatch:
-  schedule:
-    # Every 3 hours at :20 — 00:20, 03:20, 06:20 ... UTC.
-    - cron: "20 */3 * * *"
 
 jobs:
   # Owned by Sosyal Medya & Topluluk Departmanı — see src/lib/departments.ts.
   active-signals-digest:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '20 */3 * * *'
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger active-signals-digest

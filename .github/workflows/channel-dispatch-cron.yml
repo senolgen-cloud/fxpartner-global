@@ -1,0 +1,31 @@
+name: Telegram channel dispatch
+
+# The channel's only content scheduler, owner-set on 2026-08-27: one post
+# every four hours.
+#
+# IN ITS OWN FILE ON PURPOSE. telegram-cron.yml still runs a */5 schedule
+# (economic-calendar-alert), and GitHub drops the less frequent ticks in a
+# workflow that also holds a very frequent one — that is exactly how the
+# news bulletin reached a 0/300 fire rate before it was split out into
+# news-update-cron.yml. This dispatcher gets an uncontested schedule for
+# the same reason.
+#
+# Hourly rather than every four hours, because the pace is enforced in the
+# database, not here. GitHub runs these schedules late and unevenly (the
+# measured average gap on a "*/5" workflow was 55 minutes, the worst 226),
+# so a four-hour cron would drift and occasionally skip a window entirely.
+# An hourly tick that mostly returns "paced" costs nothing and guarantees
+# the channel is served within an hour of each window opening.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 * * * *"
+
+jobs:
+  channel-dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger channel-dispatch
+        run: |
+          curl -sf -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            https://fxpartner.global/api/cron/channel-dispatch
