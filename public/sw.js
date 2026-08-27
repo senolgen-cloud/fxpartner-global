@@ -13,8 +13,16 @@ self.addEventListener("push", (event) => {
   event.waitUntil(
     self.registration.showNotification(data.title, {
       body: data.body,
-      icon: "/fxpartner-logo.png",
-      badge: "/fxpartner-logo.png",
+      // The square app icon, not /fxpartner-logo.png. That file is the wide
+      // horizontal wordmark used in the header, the footer and the welcome
+      // email, where a lockup belongs — dropped into a notification's
+      // square icon slot it letterboxed down to an illegible strip, and it
+      // still carried the old artwork after the icons were rebuilt.
+      icon: "/fxpartner-icon-192.png",
+      // No badge on purpose. Android renders it as a monochrome silhouette,
+      // so any full-bleed colour image becomes a solid blob; with none set
+      // the platform falls back to the app icon, which is the better of the
+      // two. A real badge would be a dedicated transparent monochrome mark.
       data: { url: data.url },
       // Explicit, not just relying on the platform default: silent:false is
       // what actually makes the OS play its notification sound, and the
