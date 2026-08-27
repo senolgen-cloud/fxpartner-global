@@ -908,20 +908,25 @@ function SignalCard({
         <div className="flex items-center justify-between gap-2">
           {locked ? (
             <div className="flex min-w-0 flex-wrap items-center gap-2">
+              {/* Same gesture as the trade pill next to it, in the package
+                  colour — the two have to read as one family or the card
+                  looks like it borrowed a button from somewhere else. */}
               <Link
                 href={lock.href}
-                className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-gold/40 bg-gold/15 px-4 py-2 text-[12px] font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/25"
+                className="group inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-gold/45 bg-gold/10 px-4 py-2 text-[12px] font-semibold text-gold transition-colors duration-200 hover:border-gold hover:bg-gold hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink motion-safe:hover:-translate-y-px motion-safe:active:translate-y-0 motion-safe:transition-[colors,transform]"
               >
                 🔒 {trf("{tier} ile aç", { tier: lock.badge })}
               </Link>
               {!isClosed && <TradeNowButton variant="inline" />}
             </div>
           ) : (
-            /* Only while the trade is still open — "copy this trade" on a
-               position that closed days ago is an offer the reader cannot
-               take, and the history list is long enough that it would put
-               a hundred identical sponsored pills on one page. */
-            !isClosed && <TradeNowButton variant="inline" />
+            /* On closed cards too, by request. The button does not offer to
+               copy a finished trade — it opens the broker — so it is a live
+               offer on any card. The old objection was density: this list
+               runs to dozens of rows. That is answered by the button being
+               outlined rather than filled, so thirty of them read as thirty
+               quiet links instead of a wall of accent colour. */
+            <TradeNowButton variant="inline" />
           )}
           <button
             type="button"
