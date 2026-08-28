@@ -126,7 +126,62 @@ export const educationTopics: EducationTopic[] = [
   { id: "record-keeping", brief: "İşlem kayıtlarını saklamak: ekstre, dekont ve neden birikmesi gerektiği" },
   { id: "support-escalation", brief: "Broker desteğine sorun bildirmek: ne yazılır, hangi kayıtlar eklenir" },
   { id: "chart-timeframes", brief: "Zaman dilimlerinin mekaniği: aynı verinin farklı periyotlarda nasıl göründüğü" },
-  { id: "indicator-lag", brief: "Göstergelerde gecikme kavramı: hesaplama geçmiş veriye dayandığında ne olur" }
+  { id: "indicator-lag", brief: "Göstergelerde gecikme kavramı: hesaplama geçmiş veriye dayandığında ne olur" },
+
+  // --- Üçüncü parti, 2026-08-28. Aynı sınır: hiçbiri piyasa görüşü,
+  //     tahmin ya da pozisyon açma gerekçesi değil.
+  //
+  //     Bu partide iki yeni eksen var. Biri maliyet: ilk iki parti riski ve
+  //     emri anlattı, ama bir işlemin ne kadar tuttuğunu — spread, komisyon
+  //     ve swap'ın toplamını — hiçbir ders tek başına ele almıyordu.
+  //     Diğeri otomasyon: siteye MT5 tarafından gelen okur EA, backtest ve
+  //     aşırı optimizasyon sorularıyla geliyor ve bunların hepsi mekanik,
+  //     yani bu listenin tam kapsamında. ---
+
+  // --- işlem maliyeti ---
+  { id: "total-cost-of-a-trade", brief: "Bir işlemin toplam maliyeti: spread, komisyon ve swap birlikte nasıl hesaplanır" },
+  { id: "cost-vs-holding-period", brief: "Maliyetin elde tutma süresine göre değişmesi: gün içi işlemde spread, uzun pozisyonda swap ağır basar" },
+  { id: "commission-vs-spread-math", brief: "Komisyonlu hesapla spread'li hesabı aynı işlem üzerinden karşılaştırmak" },
+  { id: "currency-conversion-cost", brief: "Kâr/zararın hesap para birimine çevrilmesi ve bu çevrimin maliyeti" },
+  { id: "inactivity-fee", brief: "Hareketsizlik ücreti ve uyuyan hesap kuralları: nasıl işler, nasıl önlenir" },
+  { id: "deposit-withdrawal-mismatch", brief: "Yatırma ve çekme yöntemi uyuşmazlığı: neden aynı kanaldan geri döner" },
+
+  // --- swap ve gün dönümü ---
+  { id: "rollover-time", brief: "Gün dönümü saati: günlük mumun ve swap'ın hangi ana göre değiştiği" },
+  { id: "triple-swap-day", brief: "Üç katı swap uygulanan gün: sebebi ve hangi pozisyonları etkilediği" },
+  { id: "broker-server-time", brief: "Broker sunucu saati ile yerel saatin farkı ve grafikte ne değiştirdiği" },
+
+  // --- otomasyon ve test ---
+  { id: "expert-advisor-basics", brief: "Otomatik işlem sistemleri (EA) nasıl çalışır: neyi otomatikleştirir, neyi otomatikleştirmez" },
+  { id: "backtest-quality", brief: "Backtest kalite raporu nasıl okunur: modelleme kalitesi, veri aralığı ve spread varsayımı" },
+  { id: "curve-fitting", brief: "Aşırı optimizasyon (curve fitting): geçmişe fazla uydurulmuş parametrelerin belirtileri" },
+  { id: "forward-testing", brief: "İleri test: bir sistemi canlı öncesi gerçek koşullarda izlemek" },
+  { id: "automation-failure-modes", brief: "Otomatik sistemin durduğu anlar: bağlantı, sembol adı, teminat ve sunucu kesintileri" },
+
+  // --- hesap büyüklükleri ve tablolar ---
+  { id: "balance-equity-margin", brief: "Bakiye, varlık (equity), kullanılan ve serbest teminat arasındaki fark" },
+  { id: "margin-level-percent", brief: "Teminat seviyesi yüzdesi nasıl hesaplanır ve hangi eşiklerde ne olur" },
+  { id: "hedging-same-symbol", brief: "Aynı sembolde ters pozisyon açmanın mekaniği: teminat, maliyet ve net risk" },
+  { id: "partial-close-vs-opposite", brief: "Pozisyonu kısmen kapatmak ile ters pozisyon açmak arasındaki mekanik fark" },
+
+  // --- ölçüm ve kayıt ---
+  { id: "profit-factor", brief: "Kâr faktörü: brüt kârın brüt zarara oranı ve tek başına neyi söylemediği" },
+  { id: "average-win-vs-loss", brief: "Ortalama kazanç ile ortalama kaybı karşılaştırmak ve kazanma oranıyla birlikte okumak" },
+  { id: "r-multiple-bookkeeping", brief: "İşlemleri R katları olarak kaydetmek: farklı büyüklükteki işlemleri aynı ölçekte görmek" },
+  { id: "trade-tagging", brief: "İşlemleri etiketleyerek gruplamak: hangi koşulun hangi sonucu ürettiğini ayırmak" },
+
+  // --- psikoloji, devam ---
+  { id: "decision-fatigue", brief: "Karar yorgunluğu: gün içinde alınan karar sayısının karar kalitesine etkisi" },
+  { id: "one-more-trade", brief: "Gün sonunda 'bir işlem daha' refleksi ve kapanış kuralı belirlemek" },
+  { id: "process-vs-outcome", brief: "Süreç ile sonucu ayırmak: doğru karar zararla, yanlış karar kârla kapanabilir" },
+  { id: "social-feed-influence", brief: "Sosyal medya akışının kendi işlem planınız üzerindeki etkisi" },
+  { id: "rule-breaking-audit", brief: "Kendi kurallarını çiğnediğin işlemleri ayrı saymak: sistem mi sorunlu, uygulama mı" },
+
+  // --- platform kullanımı ---
+  { id: "price-alerts", brief: "Fiyat alarmı kurmak ile bekleyen emir bırakmak arasındaki fark" },
+  { id: "chart-types", brief: "Mum, bar ve çizgi grafiğin mekaniği: aynı veriden hangi bilgiyi gösterir" },
+  { id: "watchlist-hygiene", brief: "İzleme listesini dar tutmak: takip edilen sembol sayısının karar kalitesine etkisi" },
+  { id: "multi-device-sessions", brief: "Aynı hesaba birden fazla cihazdan bağlanmak: neyin senkronize olduğu, neyin olmadığı" }
 ];
 
 /** Topic lookup by id, for rendering a stored post's subject. */
