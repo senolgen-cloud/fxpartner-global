@@ -156,11 +156,32 @@ export default function HeaderNav({
           </svg>
         </Link>
         {!signedIn && (
+          // A person with a plus, next to the plain person that is sign-in.
+          // The two are deliberately the same glyph with one mark of
+          // difference: they are the same subject, and drawing them from
+          // unrelated icons would hide that. The plus is what distinguishes
+          // "get in" from "start one".
           <Link
             href="/account/register"
-            className="ms-1 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
+            aria-label={tr("Kayıt Ol")}
+            title={tr("Kayıt Ol")}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-on-ink-muted transition-colors hover:bg-ink-soft hover:text-text-on-ink"
           >
-            {tr("Kayıt Ol")}
+            <svg
+              width="19"
+              height="19"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="9" cy="8" r="3.5" />
+              <path d="M2 20c0-3.3 3.1-6 7-6 1.2 0 2.3.25 3.3.7" />
+              <path d="M18 14v6M15 17h6" />
+            </svg>
           </Link>
         )}
         <Link
