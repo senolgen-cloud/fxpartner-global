@@ -3,6 +3,7 @@ import Link from "@/components/LocaleLink";
 import { auth } from "@/auth";
 import HeaderNav from "@/components/HeaderNav";
 import AppBackButton from "@/components/AppBackButton";
+import HeaderQuickActions from "@/components/HeaderQuickActions";
 
 export default async function Header({ standalone = true }: { standalone?: boolean } = {}) {
   const session = await auth();
@@ -24,15 +25,15 @@ export default async function Header({ standalone = true }: { standalone?: boole
             centred and the nav sits at the end. Renders nothing at all
             outside the installed app. */}
         <AppBackButton />
-        {/* Centred on a phone, where the bar holds only the logo and the
-            menu button and a left-aligned mark leaves the middle empty.
-            Absolute rather than a three-column grid so the nav on the right
-            keeps its own width — from md up the bar has real navigation in
-            it and the logo goes back to the start edge. */}
-        <Link
-          href="/"
-          className="absolute left-1/2 flex shrink-0 -translate-x-1/2 items-center gap-2 md:static md:translate-x-0"
-        >
+        {/* Start edge at every width now. It used to be absolutely centred
+            on a phone, and the reason given was that the bar held only the
+            logo and a menu button so a left-aligned mark left the middle
+            empty. The bar is not empty any more — profile and notifications
+            sit at the end — and an absolutely positioned logo does not
+            participate in the row, so it cannot be pushed out of their way:
+            at 320px the two icons overlapped it by 14px. Start edge, end
+            actions, and the row lays itself out. */}
+        <Link href="/" className="flex shrink-0 items-center gap-2">
           <Image
             src="/fxpartner-logo.png"
             alt="FXPARTNER"
@@ -45,7 +46,18 @@ export default async function Header({ standalone = true }: { standalone?: boole
             Global
           </span>
         </Link>
-        <HeaderNav signedIn={signedIn} accountHref={accountHref} />
+        {/* The end of the bar. HeaderNav owns everything from xl up; these
+            two only exist below that, where the row was empty on a phone
+            and the account was reachable solely through the bottom nav. */}
+        {/* ms-auto, not justify-between on the parent. The back button is
+            the only thing at the start and it renders nothing outside the
+            installed app, so with one flex child left the row put these
+            icons where the back button would have been — at the start,
+            under the centred logo. */}
+        <div className="ms-auto flex shrink-0 items-center gap-1">
+          <HeaderQuickActions signedIn={signedIn} accountHref={accountHref} />
+          <HeaderNav signedIn={signedIn} accountHref={accountHref} />
+        </div>
       </div>
     </header>
   );
