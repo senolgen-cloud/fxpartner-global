@@ -12,6 +12,7 @@ import { ACCESS_TIER_LABEL } from "@/data/packageTiers";
 import TradingViewChart from "./TradingViewChart";
 import LotLadder from "./LotLadder";
 import TradeNowButton from "./TradeNowButton";
+import CopyTradeButton from "./CopyTradeButton";
 import { useLiveQuotes, type LiveQuote } from "./useLiveQuotes";
 import { useCountUp } from "@/components/useCountUp";
 import { favorableMove } from "@/lib/contractSizes";
@@ -1009,7 +1010,10 @@ function SignalCard({
                runs to dozens of rows. That is answered by the button being
                outlined rather than filled, so thirty of them read as thirty
                quiet links instead of a wall of accent colour. */
-            <TradeNowButton variant="inline" />
+            <>
+              <TradeNowButton variant="inline" />
+              <CopyTradeButton variant="inline" />
+            </>
           )}
           <button
             type="button"
@@ -1097,6 +1101,7 @@ function SignalCard({
               </p>
 
               {!locked && !isClosed && <TradeNowButton variant="card" />}
+              {!locked && <CopyTradeButton variant="card" />}
             </div>
 
             <TradingViewChart symbol={signal.pair} className="h-[280px] sm:h-[340px]" />
