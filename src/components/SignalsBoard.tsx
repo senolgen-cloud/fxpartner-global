@@ -15,6 +15,7 @@ import TradeNowButton from "./TradeNowButton";
 import { useLiveQuotes, type LiveQuote } from "./useLiveQuotes";
 import { useCountUp } from "@/components/useCountUp";
 import { favorableMove } from "@/lib/contractSizes";
+import { playChime, unlockAudio } from "@/lib/chime";
 import { MIN_TRADES_FOR_RATE, type SignalPeriods } from "@/lib/signalPeriods";
 
 type Signal = typeof tradeSignals.$inferSelect;
@@ -31,38 +32,15 @@ function toSignal(s: SignalJson): Signal {
   return { ...s, createdAt: new Date(s.createdAt), closedAt: s.closedAt ? new Date(s.closedAt) : null };
 }
 
-// Two-tone chime via Web Audio — no audio file to ship/host, and it sounds
-// identical everywhere. Browsers block audio until the page has seen a user
-// gesture, so the AudioContext is created lazily on first click/keydown
-// rather than on mount; until that first gesture fires, a signal arriving
-// won't audibly chime (the push notification below still covers that case).
-let sharedAudioCtx: AudioContext | null = null;
-
-function unlockAudio() {
-  if (sharedAudioCtx) return;
-  const Ctx = window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-  if (Ctx) sharedAudioCtx = new Ctx();
-}
-
-function playSignalChime() {
-  if (!sharedAudioCtx) return;
-  const ctx = sharedAudioCtx;
-  if (ctx.state === "suspended") ctx.resume();
-  const now = ctx.currentTime;
-  [880, 1320].forEach((freq, i) => {
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.type = "sine";
-    osc.frequency.value = freq;
-    const start = now + i * 0.14;
-    gain.gain.setValueAtTime(0, start);
-    gain.gain.linearRampToValueAtTime(0.2, start + 0.02);
-    gain.gain.exponentialRampToValueAtTime(0.001, start + 0.28);
-    osc.connect(gain).connect(ctx.destination);
-    osc.start(start);
-    osc.stop(start + 0.3);
-  });
-}
+// The chime moved to lib/chime.ts when the notification bell needed it too.
+// Two copies would have drifted the moment either was tuned — and they did:
+// the bell was given a three-note triad while this file was still holding
+// the original two tones, so an arriving signal and an arriving notification
+// would have sounded like different products.
+//
+// Browsers still block audio until the page has seen a user gesture, so
+// nothing is audible before the first click or keydown; the push
+// notification below covers a signal that arrives before then.
 
 // Only Pro/VIP instruments can ever be locked — free-tier FX signals are
 // public to everyone, signed in or not (see lib/signalAccess.ts), so this
@@ -1199,7 +1177,7 @@ export default function SignalsBoard({
         // result isn't something a member needs to react to immediately,
         // and it would fire on every result the moment the board loads.
         const hasNewActiveSignal = data.active.some((s) => !knownIds.current.has(s.id));
-        if (hasNewActiveSignal) playSignalChime();
+        if (hasNewActiveSignal) playChime();
         setActive(data.active.map(toSignal));
         setClosed(data.closed.map(toSignal));
         for (const s of [...data.active, ...data.closed]) knownIds.current.add(s.id);
