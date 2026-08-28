@@ -145,12 +145,19 @@ export default async function AiAssistantPage({
           </p>
         </div>
 
-        <div className="mb-14 overflow-hidden rounded-2xl border border-hairline shadow-sm">
+        {/* No frame. The artwork is a transparent PNG — 37% of its pixels
+            are fully clear — and it was uploaded that way on purpose so the
+            cards float on the page. The old wrapper had a border, a corner
+            radius and a shadow, which around transparency draws a box around
+            nothing: a rounded rectangle enclosing empty space with the
+            illustration loose inside it. overflow-hidden went with them; it
+            existed to clip the old opaque image to the radius. */}
+        <div className="mb-14">
           <Image
-            src="/ai-asistan/ai-asistan-banner.png"
+            src="/ai-asistan/ai-asistan-banner-v2.png"
             alt={tr("FXPARTNER AI Asistanı — daha akıllı analiz, daha güçlü yatırımlar")}
-            width={1672}
-            height={941}
+            width={1536}
+            height={1024}
             className="h-auto w-full"
             priority
           />
