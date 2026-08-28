@@ -41,6 +41,54 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "gunluk-bulten-2026-08-28",
+    title: "FXPARTNER Günlük Bülten | 28.08.2026",
+    excerpt:
+      "Fed Başkanı Kevin Warsh'ın ilk Jackson Hole konuşması öncesi piyasalar temkinli; beklentilerin üzerinde gelen PCE verisiyle altın 4.600 doların altına geriledi. Nvidia'nın güçlü bilançosu teknoloji hisselerini sırtlarken euro üç aylık zirvesine yakın seyrediyor.",
+    publishedAt: "2026-08-28",
+    readingMinutes: 5,
+    intro:
+      "Küresel piyasaların gözü, Fed Başkanı Kevin Warsh'ın Jackson Hole Ekonomi Politikası Sempozyumu'nda saat 17:00'de (GMT+3) yapacağı ilk ana konuşmada. Konuşma öncesinde açıklanan PCE enflasyon verisinin beklentilerin üzerinde gelmesi altında kâr satışlarını tetiklerken doları destekliyor. Bu arada Nvidia'nın güçlü bilançosu teknoloji hisselerindeki ralliyi sürdürüyor.",
+    news: [
+      {
+        icon: "🏛️",
+        heading: "Fed Başkanı Warsh'ın İlk Jackson Hole Konuşması Öncesi Piyasalar Temkinli",
+        body: "Mayıs ayında görevi Jerome Powell'dan devralan **Fed Başkanı Kevin Warsh**, bugün saat 10:00'da (ABD Doğu saati) Jackson Hole Ekonomi Politikası Sempozyumu'nda **ilk ana konuşmasını** yapacak. CNBC'nin 31 ekonomist ve stratejistle yaptığı ankete göre katılımcıların yalnızca **%8'i** Warsh'ın konuşmasında 'faiz indirimi' sinyali vermesini beklerken, **%80'i** Warsh'tan ekonomik görüşlerini daha ayrıntılı açıklamasını istiyor. Hazine Bakanı Scott Bessent'in kısa süre önce duyurduğu tahvil geri alım genişlemesi de tahvil getirileri üzerinden Fed'e ek baskı yaratıyor.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın: Enflasyon Verisi Sonrası 4.600 Doların Altına Geriledi",
+        body: "XAU/USD, Asya seansında **4.580 dolar** civarına gerileyerek üç aylık zirvesinden uzaklaştı. Bugün açıklanan PCE verisinin beklentilerin üzerinde gelmesi, Fed'in faiz artırma ihtimalini canlı tutarak altında kâr satışlarını tetikledi. Piyasalar şimdi Warsh'ın konuşmasından gelecek sinyalleri bekliyor.",
+      },
+      {
+        icon: "🇺🇸",
+        heading: "PCE Enflasyonu Beklentilerin Üzerinde Geldi",
+        body: "ABD'de temmuz ayına ait **PCE fiyat endeksi**, yıllık bazda **%3,7** ile bir önceki aya göre değişmeyerek **%3,6'lık piyasa beklentisinin üzerinde** geldi. Çekirdek PCE yıllık bazda **%3,3** ile beklentiyle uyumlu gerçekleşirken, aylık bazda genel PCE **%0,1'lik beklentinin üzerinde %0,2** arttı. Veri, Fed'in enflasyonla mücadelesinin henüz tamamlanmadığına işaret ediyor.",
+      },
+      {
+        icon: "💶",
+        heading: "EUR/USD: Dolar Zayıflığıyla Üç Aylık Zirveye Yakın",
+        body: "EUR/USD, **1,1652** seviyesinde işlem görerek mayıs ortasından bu yana en yüksek seviyelerine yakın seyrini sürdürüyor. Hazine'nin tahvil geri alımlarını genişletme kararının getirileri baskılaması doları zayıflatırken, ECB'nin Eylül toplantısında yeni bir faiz artışı yapacağına dair beklenti neredeyse tam fiyatlanmış durumda.",
+      },
+      {
+        icon: "💻",
+        heading: "Nvidia Bilançosu Teknoloji Rallisini Sürdürdü",
+        body: "Nvidia, Perşembe günü açıkladığı çeyrek bilançosunda **96,2 milyar dolar gelir** (yıllık **%106 artış**) ve **hisse başına 2,22 dolar kâr** açıkladı; şirketin güçlü gelir projeksiyonu hisselerinin **%8,7 yükselmesini** sağladı. Ralli çip sektörüne de yayılırken, Nasdaq Composite **%1,57 artışla 26.541,35 puana**, S&P 500 ise **%0,72 artışla 7.730,99 puana** yükseldi.",
+      },
+    ],
+    calendarLabel: "28 Ağustos 2026",
+    calendarEvents: [
+      {
+        time: "17:00 (GMT+3)",
+        icon: "🇺🇸",
+        title: "Fed Başkanı Kevin Warsh'ın Jackson Hole Ana Konuşması",
+        note: "Warsh'ın Fed Başkanı olarak yapacağı ilk büyük konuşma; faiz patikasına dair somut bir sinyal verip vermeyeceği yakından izlenecek. Konuşma, dolar, altın ve ABD tahvil getirilerinde sert hareketlere yol açabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-07-24",
     title: "FXPARTNER Günlük Piyasa Özeti | 24.07.2026",
     excerpt:
