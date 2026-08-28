@@ -1259,7 +1259,7 @@ export default function SignalsBoard({
             takip edin.
           </p>
         ) : (
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             {active.map((s) => (
               <SignalCard key={s.id} signal={s} viewerTier={viewerTier} quote={quotes[s.pair]} />
             ))}
@@ -1287,7 +1287,7 @@ export default function SignalsBoard({
               {tr("Henüz kapanan sinyal yok — işlemler kapandıkça sonuçlar burada görünecek.")}
             </p>
           ) : (
-            <div className="mt-6 flex flex-col gap-4">
+            <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
               {closed.map((s) => (
                 <SignalCard key={s.id} signal={s} viewerTier={viewerTier} quote={quotes[s.pair]} />
               ))}
