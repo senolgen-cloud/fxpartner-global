@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { db } from "@/db";
 import { educationPosts } from "@/db/schema";
 import { asc } from "drizzle-orm";
+import { topicsWithVisual } from "@/lib/educationVisuals";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
 import { pickTranslation } from "@/lib/translateContent";
@@ -72,6 +73,10 @@ export default async function EducationIndexPage({
   });
   const posts = rows.map((row) => ({ ...row, ...pickTranslation(row.translations, locale, row) }));
 
+  // Which lessons carry a diagram. Built once rather than looked up per row:
+  // the list is short, but the index renders sixty of them.
+  const illustrated = topicsWithVisual();
+
   return (
     <>
       <script
@@ -104,6 +109,17 @@ export default async function EducationIndexPage({
                 })}
               </p>
             )}
+            {/* The figures are worth their own entrance. Several of them are
+                what a reader actually came for — the sizing formula, where a
+                buy limit goes — and finding them means opening the one lesson
+                that happens to carry them. */}
+            <Link
+              href="/egitim/gorsel-anlatimlar"
+              className="mt-7 inline-flex items-center gap-2 rounded-full border border-signal/40 bg-signal/10 px-5 py-2.5 text-sm font-semibold text-signal transition-colors hover:bg-signal/20"
+            >
+              {tr("Görsel anlatımlar")}
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </section>
 
@@ -131,6 +147,14 @@ export default async function EducationIndexPage({
                           day: "numeric",
                         })}
                       </span>
+                      {illustrated.has(p.topic) && (
+                        <>
+                          <span aria-hidden="true">·</span>
+                          <span className="uppercase tracking-[0.15em] text-text-muted">
+                            {tr("Görsel anlatımlı")}
+                          </span>
+                        </>
+                      )}
                     </span>
                     <h2 className="font-poppins text-lg font-semibold leading-snug text-text-dark transition-colors group-hover:text-signal sm:text-2xl">
                       {p.title}

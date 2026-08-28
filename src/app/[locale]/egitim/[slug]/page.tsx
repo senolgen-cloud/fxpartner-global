@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { Fragment } from "react";
 import { tr, trLocale, trf } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import TopBrokersStrip from "@/components/TopBrokersStrip";
+import LessonFigure from "@/components/education/LessonFigure";
+import { getVisualForTopic } from "@/lib/educationVisuals";
 import { db } from "@/db";
 import { educationPosts } from "@/db/schema";
 import { and, asc, desc, eq, gt, isNotNull, lt } from "drizzle-orm";
@@ -93,6 +96,11 @@ export default async function EducationPostPage({
   const copy = pickTranslation(post.translations, locale, post);
   const neighbours = post ? await getNeighbours(post.lessonNo) : { prev: null, next: null };
 
+  // Keyed on the topic rather than the slug: the slug comes out of the
+  // generator and can change if a subject is rewritten, the topic is the
+  // queue's own identifier and does not.
+  const visual = getVisualForTopic(post.topic);
+
   // Blocks separated by blank lines; single newlines inside a block are kept
   // by whitespace-pre-line, because the emoji bullet lists these posts are
   // written in are one block of several lines and collapsing them would run
@@ -173,13 +181,30 @@ export default async function EducationPostPage({
         <section>
           <article className="mx-auto max-w-3xl px-6 py-16">
             {blocks.map((b, i) => (
-              <p
-                key={i}
-                className={`whitespace-pre-line text-[16px] leading-relaxed text-text-dark/90 ${i > 0 ? "mt-5" : ""}`}
-              >
-                {b}
-              </p>
+              <Fragment key={i}>
+                <p
+                  className={`whitespace-pre-line text-[16px] leading-relaxed text-text-dark/90 ${i > 0 ? "mt-5" : ""}`}
+                >
+                  {b}
+                </p>
+                {/* After the opening, not above it. The intro is the two or
+                    three sentences that tell the reader they are in the right
+                    place; a diagram wedged in front of it answers a question
+                    nobody has been asked yet. */}
+                {visual && i === 0 && (
+                  <div className="my-8">
+                    <LessonFigure visual={visual} />
+                  </div>
+                )}
+              </Fragment>
             ))}
+
+            {/* A body that somehow arrived empty still gets its figure. */}
+            {visual && blocks.length === 0 && (
+              <div className="mb-8">
+                <LessonFigure visual={visual} />
+              </div>
+            )}
 
             <p className="mt-10 text-sm leading-relaxed text-text-muted">
               {tr("Bu içerik eğitim ve bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. FXPARTNER bir aracı kurum değildir ve yatırım hizmeti sunmaz.")}
