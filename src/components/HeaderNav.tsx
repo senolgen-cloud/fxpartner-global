@@ -141,14 +141,19 @@ export default function HeaderNav({
             it is. aria-label is gone from these, deliberately: with visible
             text an aria-label would override it for a screen reader and
             they would hear a name the page does not show. */}
-        {/* The trade-card treatment: a lit outline over a wash of its own
-            colour, filling solid on hover. Green and red are the board's
-            buy and sell — used here as a pair that reads as one control
-            split in two, not as approval and warning. Nothing is being
-            judged; they are two doors. */}
+        {/* The colour is an edge, not an outline. A full ring in green and
+            red made two small buttons the loudest thing in the bar and read
+            as status — approved, denied — which is not what sign-in and
+            sign-up are. A stripe on the leading edge marks the pair with
+            the board's buy and sell without either button claiming to be a
+            verdict. Label stays white; the colour identifies, it does not
+            speak.
+            border-s, so the stripe follows the reading direction and lands
+            on the right-hand edge in Arabic rather than stranded behind the
+            text. */}
         <Link
           href={accountHref}
-          className="inline-flex h-9 items-center gap-1.5 whitespace-nowrap rounded-lg border border-tick-up/45 bg-tick-up/10 px-3 text-sm font-semibold text-tick-up transition-colors hover:border-tick-up hover:bg-tick-up hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tick-up focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+          className="inline-flex h-9 items-center gap-1.5 whitespace-nowrap rounded-lg border-s-[3px] border-s-tick-up bg-ink-soft/70 px-3 text-sm font-semibold text-text-on-ink transition-colors hover:bg-ink-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tick-up focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         >
           <svg
             width="18"
@@ -173,7 +178,7 @@ export default function HeaderNav({
           // they are two doors into the same room.
           <Link
             href="/account/register"
-            className="inline-flex h-9 items-center gap-1.5 whitespace-nowrap rounded-lg border border-tick-down/45 bg-tick-down/10 px-3 text-sm font-semibold text-tick-down transition-colors hover:border-tick-down hover:bg-tick-down hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tick-down focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            className="inline-flex h-9 items-center gap-1.5 whitespace-nowrap rounded-lg border-s-[3px] border-s-tick-down bg-ink-soft/70 px-3 text-sm font-semibold text-text-on-ink transition-colors hover:bg-ink-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tick-down focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
             <svg
               width="18"
