@@ -41,6 +41,54 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-08-28-2100",
+    title: "FXPARTNER Piyasa Özeti | 28.08.2026 Akşam Güncellemesi",
+    excerpt:
+      "Fed Başkanı Kevin Warsh'ın şahin bulunan Jackson Hole konuşması sonrası dolar endeksi yükselirken altın %1'in üzerinde değer kaybetti; Eylül ayı faiz artırımı ihtimali %35 civarından %56'ya sıçradı, EUR/USD 1,16'nın altına geriledi.",
+    publishedAt: "2026-08-28",
+    readingMinutes: 4,
+    intro:
+      "Fed Başkanı Kevin Warsh, Jackson Hole Ekonomi Politikası Sempozyumu'ndaki ilk ana konuşmasında beklenenden şahin bir ton kullanarak enflasyonla mücadelenin öncelik olmayı sürdürdüğünü vurguladı. Konuşma sonrası dolar güçlenirken, faiz artırım ihtimalinin yeniden fiyatlanmasıyla altında ve euroda sert hareketler görüldü.",
+    news: [
+      {
+        icon: "🏛️",
+        heading: "Warsh: Enflasyon Görünümü Henüz Yeterince İyileşmedi",
+        body: "**Fed Başkanı Kevin Warsh**, Jackson Hole'daki konuşmasında \"Bu yazki PCE ve TÜFE verileri beklentilerden iyi gelmiş olsa da, bunlar bana temel eğilimin anlamlı şekilde iyileştiğini söylemiyor\" ifadesini kullanarak fiyat istikrarının Fed için **birincil öncelik** olmaya devam ettiğini belirtti. Warsh ayrıca **%2'lik enflasyon hedefinin \"kesin ve değişmez\"** olduğunu yineleyerek, piyasa katılımcılarının bir sonraki hamleleri için öncelikle Fed'e bakmasını teşvik eden bir yaklaşımı benimsemeyeceklerinin altını çizdi.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar Endeksi (DXY) Şahin Mesajla Yükseldi",
+        body: "**ABD Dolar Endeksi (DXY)**, Warsh'ın konuşması sonrası **%0,36 yükselişle 99,50** seviyesine çıkarak haftayı güçlü kapanışa yaklaştırdı. Endeks, psikolojik **100,00** seviyesinin yeniden test edilmesi ihtimalini gündeme getirdi.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın: ABD Seansında Sert Satış, Günlük Kayıp %1'i Aştı",
+        body: "XAU/USD, konuşma öncesinde **4.600 dolar** civarında işlem görürken, Warsh'ın şahin açıklamalarının ardından ABD seansında sert satışa maruz kaldı ve gün içi düşüşte **4.531 dolara** kadar geriledi; bu da konuşma öncesi seviyeye göre **%1,2'ye varan bir kayba** işaret ediyor.",
+      },
+      {
+        icon: "💶",
+        heading: "EUR/USD: Güçlü Euro Bölgesi Enflasyonuna Rağmen 1,16'nın Altında",
+        body: "EUR/USD, **%0,38 değer kaybıyla 1,1609** seviyesine gerileyerek **19 Ağustos'tan bu yana en düşük** seviyesini gördü. Fransa'da yıllık uyumlaştırılmış enflasyonun **%2,7'ye**, İspanya'da ise **2023'ten bu yana en yüksek seviye olan %4,5'e** yükselmesine rağmen, Warsh'ın şahin duruşu doları öne çıkardı.",
+      },
+      {
+        icon: "📈",
+        heading: "Eylül Faiz Artırım İhtimali %56'ya Sıçradı",
+        body: "CME FedWatch verilerine göre, Fed'in **Eylül toplantısında 25 baz puanlık faiz artışı** yapma ihtimali, Warsh'ın konuşması öncesindeki **%34-36 bandından %56-57'ye** yükseldi. Buna paralel olarak **2 yıllık ABD tahvil getirisi**, Temmuz sonundan bu yana en yüksek seviyesi olan **%4,31'e** çıktı.",
+      },
+    ],
+    calendarLabel: "15-16 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "16 Eylül Çarşamba",
+        icon: "🇺🇸",
+        title: "FOMC Faiz Kararı",
+        note: "Warsh'ın şahin sinyalleri sonrası piyasalar Eylül toplantısında faiz artışı ihtimalini %56-57 seviyesine kadar fiyatladı. Toplantı sonucu; dolar, altın ve ABD tahvil getirilerinde belirleyici olmaya aday.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "gunluk-bulten-2026-08-28",
     title: "FXPARTNER Günlük Bülten | 28.08.2026",
     excerpt:
