@@ -131,9 +131,13 @@ export async function GET(req: NextRequest) {
     }
   }
 
+  // Always silent. A close is a result, not a call to action, and it posts
+  // as a reply under its own entry — a reader who cared about that trade
+  // finds it there. Eighteen of the day's forty interruptions were these.
   const result = await sendTelegramPhoto(imageUrl, caption, {
     replyToMessageId: original?.telegramMessageId ?? undefined,
     inlineKeyboard: mainServicesKeyboard(),
+    silent: true,
   });
 
   // Best-effort, same as /api/trade-signal — an X failure never blocks the

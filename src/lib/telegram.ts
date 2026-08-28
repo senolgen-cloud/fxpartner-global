@@ -130,6 +130,17 @@ export async function sendTelegramMessage(
     replyToMessageId?: string;
     /** Overrides the main channel — see arabicChatId(). */
     chatId?: string;
+    /**
+     * Posts without buzzing anyone's phone. The message still lands in the
+     * channel, still threads, still reads identically — only the push is
+     * suppressed.
+     *
+     * This is the lever for volume. A channel's problem is almost never how
+     * many messages it holds; it is how many times it interrupts someone.
+     * Silencing a post keeps the record complete and costs the reader
+     * nothing.
+     */
+    silent?: boolean;
   } = {}
 ) {
   const { chatId } = getConfig();
@@ -138,6 +149,7 @@ export async function sendTelegramMessage(
     text,
     parse_mode: "HTML",
     disable_web_page_preview: options.disablePreview ?? false,
+    ...(options.silent ? { disable_notification: true } : {}),
     ...(options.replyToMessageId
       ? { reply_parameters: { message_id: options.replyToMessageId } }
       : {}),
@@ -160,6 +172,17 @@ export async function sendTelegramPhoto(
     inlineKeyboard?: InlineKeyboardButton[][];
     /** Overrides the main channel — see arabicChatId(). */
     chatId?: string;
+    /**
+     * Posts without buzzing anyone's phone. The message still lands in the
+     * channel, still threads, still reads identically — only the push is
+     * suppressed.
+     *
+     * This is the lever for volume. A channel's problem is almost never how
+     * many messages it holds; it is how many times it interrupts someone.
+     * Silencing a post keeps the record complete and costs the reader
+     * nothing.
+     */
+    silent?: boolean;
   } = {}
 ) {
   const { chatId } = getConfig();
@@ -168,6 +191,7 @@ export async function sendTelegramPhoto(
     photo: photoUrl,
     caption,
     parse_mode: "HTML",
+    ...(options.silent ? { disable_notification: true } : {}),
     ...(options.replyToMessageId ? { reply_parameters: { message_id: options.replyToMessageId } } : {}),
     ...(options.inlineKeyboard
       ? { reply_markup: { inline_keyboard: options.inlineKeyboard } }

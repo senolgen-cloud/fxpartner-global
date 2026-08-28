@@ -10,6 +10,7 @@ import { localePath, type Locale } from "@/lib/i18n";
 import { postTradeSignalToX } from "@/lib/x";
 import { sendPushToMembers, sendPushToNonMembers } from "@/lib/push";
 import { getRecentSignalStats, statsLineTr, statsLineEn } from "@/lib/signalStats";
+import { shouldAlertForSignal } from "@/lib/signalAlertPace";
 import { requiredTierForPair } from "@/lib/signalAccess";
 import { ACCESS_TIER_LABEL } from "@/data/packageTiers";
 import { db } from "@/db";
@@ -162,7 +163,14 @@ export async function GET(req: NextRequest) {
 
   const caption = buildCaption("tr");
 
-  const result = await sendTelegramPhoto(imageUrl, caption, { inlineKeyboard: mainServicesKeyboard() });
+  // Posts either way; only the buzz is rationed. See signalAlertPace for the
+  // measurement behind the hour.
+  const alert = await shouldAlertForSignal();
+
+  const result = await sendTelegramPhoto(imageUrl, caption, {
+    inlineKeyboard: mainServicesKeyboard(),
+    silent: !alert,
+  });
 
   // The Arabic channel, when it exists. Deliberately after the Turkish send
   // and deliberately swallowed: the Turkish post is the one with 16k readers
@@ -171,9 +179,13 @@ export async function GET(req: NextRequest) {
   const arChat = arabicChatId();
   if (arChat) {
     try {
+      // The mirror follows the Turkish channel's decision rather than
+      // asking again — a second call would consume the window and leave
+      // one of the two channels silent for no reason.
       await sendTelegramPhoto(imageUrl, buildCaption("ar"), {
         chatId: arChat,
         inlineKeyboard: mainServicesKeyboard("ar"),
+        silent: !alert,
       });
     } catch (err) {
       console.error("Arabic channel mirror failed:", err);

@@ -6,6 +6,7 @@ import { sendPushToMembers, sendPushToNonMembers } from "@/lib/push";
 import { db } from "@/db";
 import { pendingOrders } from "@/db/schema";
 import { requiredTierForPair } from "@/lib/signalAccess";
+import { shouldAlertForSignal } from "@/lib/signalAlertPace";
 import { ACCESS_TIER_LABEL } from "@/data/packageTiers";
 
 // Called by the MT5 EA the moment a pending order is placed — before the
@@ -101,6 +102,7 @@ export async function GET(req: NextRequest) {
 
     const result = await sendTelegramMessage(text, {
       replyToMessageId: existing.telegramMessageId ?? undefined,
+      silent: true,
     });
 
     return NextResponse.json({ ok: true, posted: true, action: "cancelled", telegram: result });
@@ -147,6 +149,7 @@ export async function GET(req: NextRequest) {
 
   const telegram = await sendTelegramMessage(text, {
     inlineKeyboard: mainServicesKeyboard(),
+    silent: !(await shouldAlertForSignal()),
   });
 
   await db
