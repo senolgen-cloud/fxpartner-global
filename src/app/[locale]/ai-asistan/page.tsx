@@ -128,14 +128,11 @@ export default async function AiAssistantPage({
       />
       <main lang="tr" className="mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-20">
         <div className="mb-10 text-center">
-          <a
-            href="https://t.me/fxpartnerglobal"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mb-4 inline-flex items-center gap-2 rounded-full border border-hairline bg-ink-soft px-4 py-1.5 text-xs font-medium uppercase tracking-wide text-signal transition-colors hover:border-signal hover:text-text-on-ink"
-          >
-            {tr("📣 Telegram Kanalımıza Katılın")}
-          </a>
+          {/* The "Telegram Kanalımıza Katılın" pill stood above the headline
+              and is gone at the owner's request. It sent a reader arriving
+              for the AI assistant somewhere else before they had seen what
+              the page offers, and the channel is reachable from the footer
+              and the More menu on every page anyway. */}
           <h1 className="mb-4 text-3xl font-semibold text-text-on-ink sm:text-4xl md:text-5xl">
             {tr("Daha Akıllı Analiz.")}{" "}
             <span className="text-signal">{tr("Daha Güçlü Yatırımlar.")}</span>
