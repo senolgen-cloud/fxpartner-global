@@ -17,8 +17,8 @@ export default function BrandLoader({ splash = false }: { splash?: boolean }) {
         splash
           ? // Covers the page it sits over. The content underneath is
             // already rendered — this is on top of it, not instead of it.
-            "brand-splash pointer-events-none fixed inset-0 z-[100] flex flex-col items-center justify-center gap-6 bg-ink"
-          : "flex min-h-[60vh] flex-col items-center justify-center gap-6 bg-ink"
+            "brand-splash pointer-events-none fixed inset-0 z-[100] flex flex-col items-center justify-center gap-6 bg-black"
+          : "flex min-h-[60vh] flex-col items-center justify-center gap-6 bg-black"
       }
       // Route loading is worth announcing; the splash is decoration over
       // content that is already there and announcing it would interrupt a

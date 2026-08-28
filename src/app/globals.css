@@ -626,6 +626,18 @@ body[data-sheet="modal"] [data-behind-sheet] {
   animation: brand-sheen 1.9s ease-in-out infinite;
   mix-blend-mode: screen;
   pointer-events: none;
+  /* Masked to the wordmark itself. Without this the sheen is a rectangle:
+     screen-blending lightens whatever it crosses, and the logo PNG is
+     transparent everywhere except the letters, so the highlight lit the
+     empty box around them and a lighter panel swept across the screen. The
+     mask confines it to the artwork alpha, so the light travels over the
+     letters and nothing else. */
+  -webkit-mask-image: url("/fxpartner-logo.png");
+  mask-image: url("/fxpartner-logo.png");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 @keyframes brand-sheen {
   to {

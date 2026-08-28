@@ -140,7 +140,7 @@ export default async function NewsBulletinPage({
                 day: "numeric",
               })}
             </p>
-            <h1 className="mt-3 font-poppins text-4xl font-semibold leading-[1.15] tracking-tight md:text-5xl">
+            <h1 className="mt-3 font-poppins text-2xl font-semibold leading-[1.25] tracking-tight sm:text-3xl md:text-4xl">
               {copy.title}
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-on-ink-muted">

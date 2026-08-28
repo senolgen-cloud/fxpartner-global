@@ -101,7 +101,7 @@ export default async function NewsBulletinIndexPage({
                         day: "numeric",
                       })}
                     </span>
-                    <h2 className="font-poppins text-2xl font-semibold text-text-dark transition-colors group-hover:text-signal">
+                    <h2 className="font-poppins text-lg font-semibold leading-snug text-text-dark transition-colors group-hover:text-signal sm:text-xl">
                       {b.title}
                     </h2>
                     <p className="text-[15px] leading-relaxed text-text-muted">{b.excerpt}</p>

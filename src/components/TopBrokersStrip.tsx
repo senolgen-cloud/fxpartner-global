@@ -31,9 +31,21 @@ function BrokerMiniCard({ broker, rank }: { broker: Broker; rank: number }) {
   const score = getBrokerScores(broker).composite;
 
   return (
-    <li className="flex w-[228px] shrink-0 snap-start flex-col rounded-2xl border border-hairline bg-ink-soft/40 p-4">
-      <div className="flex items-start justify-between gap-3">
-        <div className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-ink p-2">
+    // A ROW ON A PHONE, A COLUMN ABOVE IT.
+    //
+    // These scrolled horizontally at every width. On a desktop that is
+    // right — five columns do not fit a 768px article. On a phone it hid
+    // the thing it was showing: card two sat half off the screen and cards
+    // three onward were behind a swipe most readers never make. Stacked,
+    // every broker is simply there.
+    //
+    // Stacked does not mean the same tall card full width, which would be
+    // 250px each and three of them a screen and a half. Laid out as a row —
+    // mark, name and score, then the figures, then the action — a card is
+    // about 150px and reads left to right like a table line.
+    <li className="flex w-full shrink-0 snap-start flex-col rounded-2xl border border-hairline bg-ink-soft/40 p-3.5 sm:w-[228px] sm:p-4">
+      <div className="flex items-start gap-3">
+        <div className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-ink p-2 sm:h-12 sm:w-12">
           {broker.logo ? (
             <Image src={broker.logo} alt="" fill sizes="48px" className="object-contain p-2" />
           ) : (
@@ -45,20 +57,38 @@ function BrokerMiniCard({ broker, rank }: { broker: Broker; rank: number }) {
             </span>
           )}
         </div>
+
+        {/* Name and score share the row with the mark on a phone; above sm
+            they drop under it as before. */}
+        <div className="min-w-0 flex-1 sm:hidden">
+          <h3 className="font-poppins text-[15px] font-semibold leading-snug text-text-on-ink">
+            {broker.name}
+          </h3>
+          <div className="mt-0.5 flex items-baseline gap-1.5">
+            <span className="font-display text-xl font-bold tabular-stat text-signal">
+              {score.toFixed(1)}
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+              {tr("Index")}
+            </span>
+          </div>
+        </div>
+
         {/* Rank, not a badge shouting "1". The order is already the order. */}
         <span className="font-mono text-[11px] tabular-stat text-text-on-ink-muted">
           {String(rank).padStart(2, "0")}
         </span>
       </div>
 
-      {/* Two lines rather than truncate. At the width this card actually
-          gets, truncate turned "MultiBank Group" into "MultiBank …" — a
-          broker card that cannot say which broker it is. */}
-      <h3 className="mt-3 font-poppins text-[15px] font-semibold leading-snug text-text-on-ink">
+      {/* The column-layout name and score, hidden on the phone where they
+          have already been shown beside the mark. Two lines rather than
+          truncate: at the width this card gets above sm, truncate turned
+          "MultiBank Group" into "MultiBank …" — a broker card that cannot
+          say which broker it is. */}
+      <h3 className="mt-3 hidden font-poppins text-[15px] font-semibold leading-snug text-text-on-ink sm:block">
         {broker.name}
       </h3>
-
-      <div className="mt-1 flex items-baseline gap-1.5">
+      <div className="mt-1 hidden items-baseline gap-1.5 sm:flex">
         <span className="font-display text-2xl font-bold tabular-stat text-signal">
           {score.toFixed(1)}
         </span>
@@ -69,11 +99,9 @@ function BrokerMiniCard({ broker, rank }: { broker: Broker; rank: number }) {
 
       {/* Label above value, not label-left/value-right. Side by side, "Min.
           yatırım" broke across two lines and left "$5" stranded on the first
-          one, so the row read as a fragment and a number that belonged to
-          nothing. Stacked, each pair holds together at any width. mt-auto
-          pushes this block down so the CTA sits on the same baseline across
-          all five cards even when one name wraps to two lines. */}
-      <dl className="mt-auto grid grid-cols-2 gap-3 border-t border-hairline pt-3">
+          one. mt-auto pushes this down so the action sits on the same
+          baseline across cards even when one name wraps. */}
+      <dl className="mt-3 grid grid-cols-2 gap-3 border-t border-hairline pt-3 sm:mt-auto">
         <div>
           <dt className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
             {tr("Min. yatırım")}
@@ -92,23 +120,24 @@ function BrokerMiniCard({ broker, rank }: { broker: Broker; rank: number }) {
         </div>
       </dl>
 
-      {/* h-11 exactly, and nowrap. A rounded-full button whose label wraps to
-          three lines is not a pill, it is an ellipse — which is what these
-          were at the width five cards get inside a 768px article column. */}
-      <a
-        href={broker.referralUrl}
-        target="_blank"
-        rel="noopener noreferrer sponsored"
-        className="mt-4 flex h-11 items-center justify-center whitespace-nowrap rounded-full bg-signal px-3 text-[13px] font-semibold text-ink transition-colors hover:bg-signal-strong"
-      >
-        {tr("Siteye Git")}
-      </a>
-      <Link
-        href={`/brokers/${broker.slug}`}
-        className="mt-2 text-center text-xs text-text-on-ink-muted underline-offset-4 transition-colors hover:text-text-on-ink hover:underline"
-      >
-        {tr("İnceleme")}
-      </Link>
+      {/* Side by side on a phone, where the row has width to spare and
+          stacking them adds 40px to every card for nothing. */}
+      <div className="mt-3 flex items-center gap-3 sm:mt-4 sm:block">
+        <a
+          href={broker.referralUrl}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          className="flex h-11 flex-1 items-center justify-center whitespace-nowrap rounded-full bg-signal px-3 text-[13px] font-semibold text-ink transition-colors hover:bg-signal-strong sm:w-full sm:flex-none"
+        >
+          {tr("Siteye Git")}
+        </a>
+        <Link
+          href={`/brokers/${broker.slug}`}
+          className="shrink-0 text-center text-xs text-text-on-ink-muted underline-offset-4 transition-colors hover:text-text-on-ink hover:underline sm:mt-2 sm:block sm:w-full"
+        >
+          {tr("İnceleme")}
+        </Link>
+      </div>
     </li>
   );
 }
@@ -148,7 +177,7 @@ export default function TopBrokersStrip({ count = 5 }: { count?: number } = {}) 
           rounded-full — an ellipse, not a button. Five cards do not fit in
           768px any more than they fit in 375px. A strip that scrolls is
           honest at both, and snap points land a swipe on a card. */}
-      <ul className="-mx-5 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2">
+      <ul className="mt-5 flex flex-col gap-3 sm:-mx-5 sm:snap-x sm:snap-mandatory sm:flex-row sm:overflow-x-auto sm:px-5 sm:pb-2">
         {shown.map((broker, i) => (
           <BrokerMiniCard key={broker.slug} broker={broker} rank={i + 1} />
         ))}
