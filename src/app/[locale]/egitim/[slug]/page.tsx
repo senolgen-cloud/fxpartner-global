@@ -62,6 +62,16 @@ export async function generateMetadata({
       url: `${SITE_URL}/egitim/${post.slug}`,
       type: "article",
       publishedTime: post.publishedAt.toISOString(),
+      // Lessons carry no artwork of their own, so a shared link produced a
+      // bare text card. The section image at least says which series the
+      // link belongs to. Its real 1536x1024 is declared rather than a
+      // claimed 1200x630 — a scraper that trusts the numbers and finds a
+      // different shape renders a broken box.
+      images: [{ url: `${SITE_URL}/fxpartner-akademi.png`, width: 1536, height: 1024 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [`${SITE_URL}/fxpartner-akademi.png`],
     },
   };
 }

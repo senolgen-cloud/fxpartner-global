@@ -13,6 +13,10 @@ import { pickTranslation } from "@/lib/translateContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
+// One constant for the link preview and the picture on the page, so the two
+// can never drift into showing different artwork for the same section.
+const ACADEMY_IMAGE = "/fxpartner-akademi.png";
+
 export async function generateMetadata({
   params,
 }: {
@@ -30,6 +34,23 @@ export async function generateMetadata({
       languages: Object.fromEntries(
         locales.map((l) => [hreflangCode[l], localePath(l, "/egitim")])
       ),
+    },
+    openGraph: {
+      title: t["page.egitim.title"],
+      description: t["page.egitim.description"],
+      url: `${SITE_URL}${localePath(locale, "/egitim")}`,
+      type: "website",
+      // The artwork is 1536x1024, a 3:2 frame. Declared at its real size
+      // rather than a claimed 1200x630: a scraper that trusts the numbers
+      // and gets a different shape renders a broken box, and every platform
+      // crops to its own ratio anyway. Worth knowing that the ones enforcing
+      // 1.91:1 take about 110px off the top and bottom, which clips the
+      // eyebrow and part of the footer bar in the picture.
+      images: [{ url: `${SITE_URL}${ACADEMY_IMAGE}`, width: 1536, height: 1024 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [`${SITE_URL}${ACADEMY_IMAGE}`],
     },
   };
 }
