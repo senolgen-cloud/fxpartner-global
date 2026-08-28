@@ -2706,7 +2706,6 @@
   "Kaldıraç": "Кредитне плече",
   "Canlı Hesap Aç": "Відкрити реальний рахунок",
   "İnceleme": "Огляд",
-  "En iyi 5 broker": "5 найкращих брокерів",
   "{count} brokerin tamamı": "Усі {count} брокерів",
   "Sponsorlu bağlantılar. Sıralama, regülasyon, maliyet, platform ve para çekme eksenlerinden oluşan FXPARTNER Index puanına göredir; ortaklık geliri sıralamayı etkilemez.": "Спонсорські посилання. Рейтинг базується на балах FXPARTNER Index, що формуються за критеріями регулювання, витрат, платформи та виведення коштів; партнерський дохід не впливає на рейтинг.",
   "Para çekme": "Виведення коштів",
@@ -2740,5 +2739,7 @@
   "Dil": "Мова",
   "Üye Ol": "Зареєструватися",
   "Site dili": "Мова сайту",
-  "Otomatik çeviri": "Автоматичний переклад"
+  "Otomatik çeviri": "Автоматичний переклад",
+  "Son bültenler": "Останні бюлетені",
+  "En iyi {n} broker": "Найкращі {n} брокерів"
 }

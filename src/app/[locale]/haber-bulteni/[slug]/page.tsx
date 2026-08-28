@@ -3,9 +3,10 @@ import { tr, trLocale } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
+import TopBrokersStrip from "@/components/TopBrokersStrip";
 import { db } from "@/db";
 import { newsBulletins } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { desc, eq, ne } from "drizzle-orm";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
 import { pickTranslation } from "@/lib/translateContent";
@@ -15,6 +16,18 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
 async function getBulletin(slug: string) {
   return db.query.newsBulletins.findFirst({ where: eq(newsBulletins.slug, slug) });
+}
+
+// The five most recent, this one excluded — a "latest" list that includes
+// the page you are already on wastes one of its five slots telling you
+// where you are.
+async function getRecentBulletins(excludeSlug: string) {
+  return db.query.newsBulletins.findMany({
+    where: ne(newsBulletins.slug, excludeSlug),
+    orderBy: [desc(newsBulletins.publishedAt)],
+    limit: 5,
+    columns: { slug: true, title: true, publishedAt: true, translations: true },
+  });
 }
 
 export async function generateMetadata({
@@ -57,12 +70,29 @@ export default async function NewsBulletinPage({
   if (!bulletin) notFound();
 
   const sources: string[] = JSON.parse(bulletin.sources || "[]");
+  const recentRows = await getRecentBulletins(bulletin.slug);
   const copy = pickTranslation(
     bulletin.translations,
     isLocale(pageLocale) ? pageLocale : defaultLocale,
     bulletin
   );
   const paragraphs = copy.body.split(/\n\n+/).filter(Boolean);
+  // Each headline through the same translation pick as the body. A "latest"
+  // list in Turkish under an English article is the same bug as a Turkish
+  // article under an English title.
+  const recent = recentRows.map((row) => ({
+    slug: row.slug,
+    publishedAt: row.publishedAt,
+    // The fallback is shaped, not fetched. pickTranslation wants a whole
+    // bulletin to fall back to, but this list needs one field, and pulling
+    // five full bodies out of the database to read five titles is a page's
+    // worth of text fetched and thrown away. Only .title is ever read.
+    title: pickTranslation(
+      row.translations,
+      isLocale(pageLocale) ? pageLocale : defaultLocale,
+      { title: row.title, excerpt: "", body: "" }
+    ).title,
+  }));
 
   return (
     <>
@@ -89,7 +119,7 @@ export default async function NewsBulletinPage({
             breadcrumbSchema([
               { name: "Ana Sayfa", url: SITE_URL },
               { name: "Haber Bülteni", url: `${SITE_URL}/haber-bulteni` },
-              { name: bulletin.title, url: `${SITE_URL}/haber-bulteni/${bulletin.slug}` },
+              { name: copy.title, url: `${SITE_URL}/haber-bulteni/${bulletin.slug}` },
             ])
           ),
         }}
@@ -111,10 +141,10 @@ export default async function NewsBulletinPage({
               })}
             </p>
             <h1 className="mt-3 font-poppins text-4xl font-semibold leading-[1.15] tracking-tight md:text-5xl">
-              {bulletin.title}
+              {copy.title}
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-on-ink-muted">
-              {bulletin.excerpt}
+              {copy.excerpt}
             </p>
           </div>
         </section>
@@ -143,6 +173,47 @@ export default async function NewsBulletinPage({
               </div>
             )}
 
+            {/* The page used to stop here, at the sources box. A bulletin
+                is a single dated piece with nothing after it — no next
+                thing to read, no reason to stay — which is why it reads as
+                empty however much text is in it. */}
+            {recent.length > 0 && (
+              <nav
+                aria-label={tr("Son bültenler")}
+                className="mt-14 border-t border-hairline-light pt-8"
+              >
+                <h2 className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted">
+                  {tr("Son bültenler")}
+                </h2>
+                <ul className="mt-4 divide-y divide-hairline-light border-t border-hairline-light">
+                  {recent.map((item) => (
+                    <li key={item.slug}>
+                      <Link
+                        href={`/haber-bulteni/${item.slug}`}
+                        className="flex items-baseline gap-3 py-3 transition-colors hover:bg-paper"
+                      >
+                        <span className="shrink-0 font-mono text-[11px] text-text-muted">
+                          {item.publishedAt.toLocaleDateString(trLocale(), {
+                            day: "2-digit",
+                            month: "short",
+                          })}
+                        </span>
+                        {/* Two lines, then cut. These headlines run past a
+                            hundred characters; left unclamped, five of them
+                            are a page of their own. */}
+                        <span className="line-clamp-2 text-[15px] font-medium leading-snug text-text-dark">
+                          {item.title}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
+
+            <div className="mt-12">
+              <TopBrokersStrip count={3} />
+            </div>
           </article>
         </section>
       </main>

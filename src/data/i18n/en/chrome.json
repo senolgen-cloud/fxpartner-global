@@ -2706,7 +2706,6 @@
   "Kaldıraç": "Leverage",
   "Canlı Hesap Aç": "Open Live Account",
   "İnceleme": "Review",
-  "En iyi 5 broker": "Top 5 brokers",
   "{count} brokerin tamamı": "All {count} brokers",
   "Sponsorlu bağlantılar. Sıralama, regülasyon, maliyet, platform ve para çekme eksenlerinden oluşan FXPARTNER Index puanına göredir; ortaklık geliri sıralamayı etkilemez.": "Sponsored links. Ranking is based on the FXPARTNER Index score, which consists of regulation, cost, platform, and withdrawal axes; affiliate revenue does not affect the ranking.",
   "Para çekme": "Withdrawal",
@@ -2740,5 +2739,7 @@
   "Dil": "Language",
   "Üye Ol": "Sign Up",
   "Site dili": "Site language",
-  "Otomatik çeviri": "Automatic translation"
+  "Otomatik çeviri": "Automatic translation",
+  "Son bültenler": "Latest newsletters",
+  "En iyi {n} broker": "Best {n} brokers"
 }

@@ -2706,7 +2706,6 @@
   "Kaldıraç": "الرافعة المالية",
   "Canlı Hesap Aç": "افتح حساباً حقيقياً",
   "İnceleme": "مراجعة",
-  "En iyi 5 broker": "أفضل 5 وسطاء",
   "{count} brokerin tamamı": "جميع الوسطاء الـ {count}",
   "Sponsorlu bağlantılar. Sıralama, regülasyon, maliyet, platform ve para çekme eksenlerinden oluşan FXPARTNER Index puanına göredir; ortaklık geliri sıralamayı etkilemez.": "روابط برعاية. يعتمد الترتيب على درجة FXPARTNER Index القائمة على معايير التنظيم والتكلفة والمنصة وسحب الأموال؛ ولا تؤثر إيرادات الشراكة على الترتيب.",
   "Para çekme": "سحب الأموال",
@@ -2740,5 +2739,7 @@
   "Dil": "اللغة",
   "Üye Ol": "تسجيل",
   "Site dili": "لغة الموقع",
-  "Otomatik çeviri": "الترجمة التلقائية"
+  "Otomatik çeviri": "الترجمة التلقائية",
+  "Son bültenler": "أحدث النشرات",
+  "En iyi {n} broker": "أفضل {n} وسيط"
 }

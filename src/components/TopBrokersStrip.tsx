@@ -21,10 +21,10 @@ import { tr, trf } from "@/lib/chrome";
 
 // Order is editorial only in that the axes and weights are ours — the
 // ranking itself is derived, so this cannot drift from /brokerlar.
-function topFive(): Broker[] {
+function topByScore(count: number): Broker[] {
   return [...brokers]
     .sort((a, b) => getBrokerScores(b).composite - getBrokerScores(a).composite)
-    .slice(0, 5);
+    .slice(0, count);
 }
 
 function BrokerMiniCard({ broker, rank }: { broker: Broker; rank: number }) {
@@ -113,8 +113,8 @@ function BrokerMiniCard({ broker, rank }: { broker: Broker; rank: number }) {
   );
 }
 
-export default function TopBrokersStrip() {
-  const five = topFive();
+export default function TopBrokersStrip({ count = 5 }: { count?: number } = {}) {
+  const shown = topByScore(count);
 
   return (
     <section className="rounded-2xl border border-hairline bg-ink p-5 text-text-on-ink md:p-6">
@@ -128,7 +128,7 @@ export default function TopBrokersStrip() {
             FXPARTNER Index
           </span>
           <h2 className="mt-1.5 font-display text-xl font-semibold">
-            {tr("En iyi 5 broker")}
+            {trf("En iyi {n} broker", { n: count })}
           </h2>
         </div>
         <Link
@@ -149,7 +149,7 @@ export default function TopBrokersStrip() {
           768px any more than they fit in 375px. A strip that scrolls is
           honest at both, and snap points land a swipe on a card. */}
       <ul className="-mx-5 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2">
-        {five.map((broker, i) => (
+        {shown.map((broker, i) => (
           <BrokerMiniCard key={broker.slug} broker={broker} rank={i + 1} />
         ))}
       </ul>
