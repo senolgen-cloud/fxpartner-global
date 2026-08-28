@@ -10,16 +10,23 @@ import Image from "next/image";
 // Deliberately not a spinner. A spinner says "something is happening"; the
 // mark says which site it is happening on, which is the only thing worth
 // saying to someone who has just arrived and is looking at nothing else.
+//
+// BOTH VARIANTS COVER THE VIEWPORT, and the route one has to. It was a
+// min-h-[60vh] block inside <main>, which meant its black ended partway
+// down the screen and the shell's own background — bg-paper, a dark navy,
+// not black — showed below it. Two different darks meeting at a horizontal
+// line, with the chat button and the bottom bar sitting in the lighter one:
+// the loader looked like a panel dropped on the page rather than the page
+// loading. Fixed and full-bleed, there is no seam to see.
 export default function BrandLoader({ splash = false }: { splash?: boolean }) {
   return (
     <div
-      className={
-        splash
-          ? // Covers the page it sits over. The content underneath is
-            // already rendered — this is on top of it, not instead of it.
-            "brand-splash pointer-events-none fixed inset-0 z-[100] flex flex-col items-center justify-center gap-6 bg-black"
-          : "flex min-h-[60vh] flex-col items-center justify-center gap-6 bg-black"
-      }
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center gap-6 bg-black ${
+        // The splash sits over content that is already rendered and takes
+        // itself away; the route loader IS the content until the segment
+        // resolves, so it must stay interactive-blocking and must not fade.
+        splash ? "brand-splash pointer-events-none" : ""
+      }`}
       // Route loading is worth announcing; the splash is decoration over
       // content that is already there and announcing it would interrupt a
       // screen reader for nothing.
