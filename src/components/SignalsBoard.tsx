@@ -1002,6 +1002,7 @@ function SignalCard({
                 🔒 {trf("{tier} ile aç", { tier: lock.badge })}
               </Link>
               {!isClosed && <TradeNowButton variant="inline" />}
+              <CopyTradeButton variant="inline" />
             </div>
           ) : (
             /* On closed cards too, by request. The button does not offer to
@@ -1101,7 +1102,7 @@ function SignalCard({
               </p>
 
               {!locked && !isClosed && <TradeNowButton variant="card" />}
-              {!locked && <CopyTradeButton variant="card" />}
+              <CopyTradeButton variant="card" />
             </div>
 
             <TradingViewChart symbol={signal.pair} className="h-[280px] sm:h-[340px]" />

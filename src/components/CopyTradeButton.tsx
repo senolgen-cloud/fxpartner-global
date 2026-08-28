@@ -32,10 +32,14 @@ function CopyIcon({ className }: { className?: string }) {
  *
  * SITS BESIDE TradeNowButton, NOT INSTEAD OF IT. They are different offers:
  * one opens a broker so the reader can place the trade themselves, this one
- * mirrors the account automatically. Both are outlined rather than filled,
- * for the reason the closed-card comment in SignalsBoard already gives —
- * this list runs to dozens of rows, and two filled buttons per row would be
- * a wall of accent colour.
+ * mirrors the account automatically.
+ *
+ * FILLED, WHERE TradeNowButton IS OUTLINED. Gold was the first choice and
+ * it was wrong: the locked card already carries a gold "unlock" pill, so a
+ * locked row showed two buttons in exactly the same colour saying different
+ * things. Filled signal separates it from both — the gold outline that
+ * unlocks, and the signal outline that opens a broker — and it makes the
+ * copy offer the loudest thing in the row, which is what it is meant to be.
  *
  * Offered on closed trades as well as open ones, and that is deliberate
  * rather than an oversight: it does not offer to copy a finished trade,
@@ -58,7 +62,7 @@ export default function CopyTradeButton({
         href={COPYTRADE_URL}
         target="_blank"
         rel="noopener noreferrer sponsored"
-        className={`group inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-gold/45 bg-gold/10 px-4 py-2 text-[12px] font-semibold text-gold transition-colors duration-200 hover:border-gold hover:bg-gold hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink motion-safe:hover:-translate-y-px motion-safe:active:translate-y-0 motion-safe:transition-[colors,transform] ${className}`}
+        className={`group inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-signal px-4 py-2 text-[12px] font-semibold text-on-signal transition-colors duration-200 hover:bg-signal-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2 focus-visible:ring-offset-ink motion-safe:hover:-translate-y-px motion-safe:active:translate-y-0 motion-safe:transition-[colors,transform] ${className}`}
       >
         <CopyIcon className="h-3.5 w-3.5" />
         {tr("Kopyala")}
@@ -71,7 +75,7 @@ export default function CopyTradeButton({
       href={COPYTRADE_URL}
       target="_blank"
       rel="noopener noreferrer sponsored"
-      className={`mt-2 flex w-full items-center justify-center gap-1.5 rounded-lg border border-gold/40 bg-gold/10 px-3 py-2 text-[12px] font-semibold text-gold transition-colors hover:border-gold hover:bg-gold hover:text-ink ${className}`}
+      className={`mt-2 flex w-full items-center justify-center gap-1.5 rounded-lg bg-signal px-3 py-2 text-[12px] font-semibold text-on-signal transition-colors hover:bg-signal-strong ${className}`}
     >
       <CopyIcon className="h-3.5 w-3.5" />
       {tr("Kopyala")}
