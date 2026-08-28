@@ -43,8 +43,8 @@ export default function HeaderNav({
   }, []);
 
   return (
-    <div className="flex shrink-0 items-center gap-3">
-      <nav className="hidden shrink-0 items-center gap-0.5 rounded-full border border-hairline bg-ink-soft/60 p-1 xl:flex">
+    <div className="flex flex-1 items-center justify-end gap-3">
+      <nav className="hidden shrink-0 items-center gap-0.5 rounded-full border border-hairline bg-ink-soft/60 p-1 xl:absolute xl:start-1/2 xl:flex xl:-translate-x-1/2 rtl:xl:translate-x-1/2">
         {primaryLinks.map((link) => {
           const active = isActive(pathname, link.href);
           return (
@@ -134,15 +134,25 @@ export default function HeaderNav({
       <div className="hidden items-center gap-1 border-s border-hairline ps-2 xl:flex">
         <LocaleMenu />
         {signedIn && <HeaderBell size="desktop" />}
+        {/* Icon and label together. The label carries the meaning and the
+            icon makes the pair findable at a glance — which also settles
+            the twin-glyph worry from the icon-only version: two person
+            marks side by side are only ambiguous while neither says what
+            it is. aria-label is gone from these, deliberately: with visible
+            text an aria-label would override it for a screen reader and
+            they would hear a name the page does not show. */}
+        {/* The trade-card treatment: a lit outline over a wash of its own
+            colour, filling solid on hover. Green and red are the board's
+            buy and sell — used here as a pair that reads as one control
+            split in two, not as approval and warning. Nothing is being
+            judged; they are two doors. */}
         <Link
           href={accountHref}
-          aria-label={signedIn ? tr("Hesabım") : tr("Giriş Yap")}
-          title={signedIn ? tr("Hesabım") : tr("Giriş Yap")}
-          className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-on-ink-muted transition-colors hover:bg-ink-soft hover:text-text-on-ink"
+          className="inline-flex h-9 items-center gap-1.5 whitespace-nowrap rounded-lg border border-tick-up/45 bg-tick-up/10 px-3 text-sm font-semibold text-tick-up transition-colors hover:border-tick-up hover:bg-tick-up hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tick-up focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         >
           <svg
-            width="19"
-            height="19"
+            width="18"
+            height="18"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -150,26 +160,24 @@ export default function HeaderNav({
             strokeLinecap="round"
             strokeLinejoin="round"
             aria-hidden="true"
+            className="shrink-0"
           >
             <circle cx="12" cy="8" r="3.5" />
             <path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6" />
           </svg>
+          {signedIn ? tr("Hesabım") : tr("Giriş Yap")}
         </Link>
         {!signedIn && (
-          // A person with a plus, next to the plain person that is sign-in.
-          // The two are deliberately the same glyph with one mark of
-          // difference: they are the same subject, and drawing them from
-          // unrelated icons would hide that. The plus is what distinguishes
-          // "get in" from "start one".
+          // The same person glyph with a plus. Same subject, one mark of
+          // difference — drawing them from unrelated icons would hide that
+          // they are two doors into the same room.
           <Link
             href="/account/register"
-            aria-label={tr("Kayıt Ol")}
-            title={tr("Kayıt Ol")}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-on-ink-muted transition-colors hover:bg-ink-soft hover:text-text-on-ink"
+            className="inline-flex h-9 items-center gap-1.5 whitespace-nowrap rounded-lg border border-tick-down/45 bg-tick-down/10 px-3 text-sm font-semibold text-tick-down transition-colors hover:border-tick-down hover:bg-tick-down hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tick-down focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
             <svg
-              width="19"
-              height="19"
+              width="18"
+              height="18"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -177,19 +185,22 @@ export default function HeaderNav({
               strokeLinecap="round"
               strokeLinejoin="round"
               aria-hidden="true"
+              className="shrink-0"
             >
               <circle cx="9" cy="8" r="3.5" />
               <path d="M2 20c0-3.3 3.1-6 7-6 1.2 0 2.3.25 3.3.7" />
               <path d="M18 14v6M15 17h6" />
             </svg>
+            {tr("Üye Ol")}
           </Link>
         )}
-        <Link
-          href="/brokerlar"
-          className="ms-1 inline-flex h-9 items-center whitespace-nowrap rounded-lg bg-signal px-4 text-sm font-semibold text-on-signal transition-colors hover:bg-signal-strong"
-        >
-          {tr("Brokerları Karşılaştır")}
-        </Link>
+        {/* The "Brokerları Karşılaştır" pill stood here and is gone at the
+            owner's request. It pointed at /brokerlar — the same destination
+            as "Broker Sıralaması", the first pill in the nav two inches to
+            its left. The bar was asking twice for the same click, and the
+            filled treatment made the duplicate the loudest thing in the
+            row. Removing it also gives the account links room to carry
+            their labels. */}
       </div>
 
       {/* Hidden below sm — the phone-width MobileBottomNav's "Daha Fazla"

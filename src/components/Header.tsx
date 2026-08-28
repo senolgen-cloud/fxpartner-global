@@ -49,12 +49,17 @@ export default async function Header({ standalone = true }: { standalone?: boole
         {/* The end of the bar. HeaderNav owns everything from xl up; these
             two only exist below that, where the row was empty on a phone
             and the account was reachable solely through the bottom nav. */}
-        {/* ms-auto, not justify-between on the parent. The back button is
-            the only thing at the start and it renders nothing outside the
-            installed app, so with one flex child left the row put these
-            icons where the back button would have been — at the start,
-            under the centred logo. */}
-        <div className="ms-auto flex shrink-0 items-center gap-1">
+        {/* flex-1, not ms-auto. The nav is centred inside this group at the
+            owner's request, and centring needs room to be centred in — with
+            ms-auto the group shrank to its contents and pushed the whole
+            thing, nav included, hard against the end of the bar. Taking the
+            remaining width lets the nav sit in the middle of it with the
+            account cluster still at the end.
+
+            The back button stays the only thing before the logo and still
+            renders nothing outside the installed app; flex-1 here means the
+            row no longer depends on it existing. */}
+        <div className="flex flex-1 items-center justify-end gap-1">
           <HeaderQuickActions signedIn={signedIn} accountHref={accountHref} />
           <HeaderNav signedIn={signedIn} accountHref={accountHref} />
         </div>
