@@ -4,7 +4,7 @@ import { useTr } from "@/components/useTr";
 import { useState } from "react";
 import Link from "@/components/LocaleLink";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import LocaleSwitcher from "@/components/LocaleSwitcher";
+import LocaleMenu from "@/components/LocaleMenu";
 import BrokerAdBanner from "@/components/BrokerAdBanner";
 import { useMoreMenu } from "@/components/MoreMenuContext";
 import { useLocale } from "@/components/LocaleProvider";
@@ -36,7 +36,8 @@ type IconName =
   | "complaint"
   | "warning"
   | "info"
-  | "account";
+  | "account"
+  | "register";
 
 const iconProps = {
   viewBox: "0 0 24 24",
@@ -121,6 +122,15 @@ function MenuIcon({ name }: { name: IconName }) {
       <>
         <circle cx="12" cy="8" r="3.5" />
         <path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6" />
+      </>
+    ),
+    // The same person with a plus — the glyph the desktop bar uses for
+    // sign-up, so one action does not have two drawings.
+    register: (
+      <>
+        <circle cx="9" cy="8" r="3.5" />
+        <path d="M2 20c0-3.3 3.1-6 7-6 1.2 0 2.3.25 3.3.7" />
+        <path d="M18 14v6M15 17h6" />
       </>
     ),
   };
@@ -248,8 +258,31 @@ export default function MoreMenuOverlay({
         </div>
 
         <div className="px-4 pt-5 md:px-6">
-          <LocaleSwitcher className="mb-3 flex-wrap" />
-          <LanguageSwitcher />
+          {/* Two controls that look alike and are not.
+              LocaleMenu moves between the four trees the site is actually
+              written in; LanguageSwitcher hands the page to Google Translate
+              for everything else. Swapping the four locale chips for the
+              desktop dropdown made them identical globes stacked on top of
+              each other, which is worse than the mismatch it fixed — so
+              each now says which it is. A reader deserves to know which one
+              gives them a page someone wrote and which gives them a machine
+              rendering of it. */}
+          <div className="flex flex-wrap items-start gap-x-6 gap-y-3">
+            <div>
+              <span className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                {tr("Site dili")}
+              </span>
+              <div className="inline-flex rounded-lg border border-hairline">
+                <LocaleMenu />
+              </div>
+            </div>
+            <div>
+              <span className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                {tr("Otomatik çeviri")}
+              </span>
+              <LanguageSwitcher />
+            </div>
+          </div>
         </div>
 
         {/* Category tabs */}
@@ -274,12 +307,13 @@ export default function MoreMenuOverlay({
         <div className="px-4 py-6 md:px-6">
           <h2 className="mb-3 font-display text-xl font-semibold">{tr(active.label)}</h2>
           <div className="grid grid-cols-3 gap-3">
-            {active.links.map((link) => (
+            {active.links.map((link, i) => (
               <a
                 key={link.href}
                 href={localePath(locale, link.href)}
                 onClick={close}
-                className="flex flex-col items-center gap-2 rounded-2xl bg-ink-soft px-2 py-4 text-center transition-colors hover:bg-ink-soft/70"
+                style={{ animationDelay: `${i * 30}ms` }}
+                className="menu-item-in flex flex-col items-center gap-2 rounded-2xl bg-ink-soft px-2 py-4 text-center transition-colors hover:bg-ink-soft/70"
               >
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-ink text-signal">
                   <MenuIcon name={link.icon} />
@@ -290,40 +324,46 @@ export default function MoreMenuOverlay({
           </div>
         </div>
 
-        <div className="mt-2 flex flex-col gap-3 border-t border-hairline px-4 py-6 md:px-6">
+        {/* Same pair as the desktop bar: icon, white label, and the board's
+            buy-and-sell colour as a stripe on the leading edge rather than
+            a ring. Sign-in used to be muted grey text and sign-up a signal-
+            coloured link — two different weights for two halves of one
+            choice.
+
+            The "Broker Karşılaştır" pill that filled the foot of this menu
+            is gone for the reason it went from the header: it pointed at
+            /brokerlar, which is already the third card in the Popüler grid
+            a thumb's width above it. */}
+        <div className="mt-2 border-t border-hairline px-4 py-6 md:px-6">
           {signedIn ? (
             <Link
               href={accountHref}
               onClick={close}
-              className="text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
+              className="inline-flex h-11 items-center gap-2 whitespace-nowrap rounded-lg border-s-[3px] border-s-tick-up bg-ink-soft/70 px-4 text-sm font-semibold text-text-on-ink transition-colors hover:bg-ink-soft"
             >
+              <MenuIcon name="account" />
               {tr("Hesabım")}
             </Link>
           ) : (
-            <div className="flex items-center gap-4">
+            <div className="grid grid-cols-2 gap-3">
               <Link
                 href="/account/login"
                 onClick={close}
-                className="text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
+                className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-s-[3px] border-s-tick-up bg-ink-soft/70 px-4 text-sm font-semibold text-text-on-ink transition-colors hover:bg-ink-soft"
               >
+                <MenuIcon name="account" />
                 {tr("Giriş Yap")}
               </Link>
               <Link
                 href="/account/register"
                 onClick={close}
-                className="text-sm font-medium text-signal transition-colors hover:text-signal-strong"
+                className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg border-s-[3px] border-s-tick-down bg-ink-soft/70 px-4 text-sm font-semibold text-text-on-ink transition-colors hover:bg-ink-soft"
               >
-                {tr("Kayıt Ol")}
+                <MenuIcon name="register" />
+                {tr("Üye Ol")}
               </Link>
             </div>
           )}
-          <Link
-            href="/brokerlar"
-            onClick={close}
-            className="rounded-full bg-signal px-4 py-3 text-center text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
-          >
-            {tr("Broker Karşılaştır")}
-          </Link>
         </div>
       </div>
     </div>
