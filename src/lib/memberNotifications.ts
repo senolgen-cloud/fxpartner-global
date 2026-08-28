@@ -60,6 +60,98 @@ export type MemberNotification = {
 const WINDOW_DAYS = 30;
 const MAX_ITEMS = 20;
 
+/**
+ * Just the number on the bell.
+ *
+ * Split out for the header, which wants a badge on every page and none of
+ * the twenty formatted items behind it.
+ *
+ * IT MUST NOT WRITE THE WATERMARK, and that is the whole reason this could
+ * not simply call getMemberNotifications and read .unread. That function
+ * stamps notificationsSeenAt on first sight, which is right when the panel
+ * is actually open and being read. Run from the header it would stamp on
+ * the first page load of a session, so the bell would mark everything read
+ * before the member ever looked at it and the badge would never appear
+ * again. A member who has never opened the panel gets 0 here and the stamp
+ * happens when they do open it.
+ *
+ * Counts only what is newer than the watermark rather than scanning the
+ * whole window, and stops at MAX_ITEMS because the panel itself only ever
+ * shows that many — a badge promising 34 above a list of 20 is a badge that
+ * lies about what a tap will produce.
+ */
+export async function getUnreadNotificationCount(
+  userId: string,
+  viewerTier: AccessTier | null
+): Promise<number> {
+  const me = await db.query.users.findFirst({
+    where: eq(users.id, userId),
+    columns: { notificationsSeenAt: true },
+  });
+  const seenAt = me?.notificationsSeenAt ?? null;
+  if (!seenAt) return 0;
+
+  // Nothing older than the window can be unread-and-shown, so the watermark
+  // is clamped to it rather than trusted on its own: a member away for a
+  // year would otherwise have every row in the window counted.
+  const floor = new Date(Date.now() - WINDOW_DAYS * 24 * 60 * 60 * 1000);
+  const since = seenAt > floor ? seenAt : floor;
+
+  const myAccounts = await db
+    .select()
+    .from(cashbackAccounts)
+    .where(eq(cashbackAccounts.userId, userId));
+  const accountIds = myAccounts.map((a) => a.id);
+
+  const [signals, records] = await Promise.all([
+    db
+      .select({
+        pair: tradeSignals.pair,
+        createdAt: tradeSignals.createdAt,
+        closedAt: tradeSignals.closedAt,
+        outcome: tradeSignals.outcome,
+      })
+      .from(tradeSignals)
+      .where(gt(tradeSignals.createdAt, floor))
+      // ORDER BY IS LOAD-BEARING, not tidiness. A LIMIT without one returns
+      // an arbitrary 120 of the matching rows, and on this table it handed
+      // back the oldest — the newest row in the result was nine days behind
+      // the newest row in the window, so every recent signal was cut off
+      // before the count ever looked at it and the badge read 0 forever.
+      .orderBy(desc(tradeSignals.createdAt))
+      .limit(120),
+    accountIds.length
+      ? db
+          .select({ id: cashbackRecords.id })
+          .from(cashbackRecords)
+          .where(
+            and(
+              inArray(cashbackRecords.accountId, accountIds),
+              gt(cashbackRecords.createdAt, since)
+            )
+          )
+          .limit(MAX_ITEMS)
+      : Promise.resolve([]),
+  ]);
+
+  let n = records.length;
+
+  for (const s of signals) {
+    // Same two rules the panel applies: an opening the member cannot read
+    // is not news to them, and a closing is public whatever their tier.
+    if (s.createdAt > since && canViewSignal(viewerTier, s.pair)) n++;
+    if (s.closedAt && s.outcome && s.closedAt > since) n++;
+  }
+
+  for (const a of myAccounts) {
+    if (!a.statusChangedAt || a.statusChangedAt <= since) continue;
+    if (a.status === "pending") continue;
+    n++;
+  }
+
+  return Math.min(n, MAX_ITEMS);
+}
+
 export async function getMemberNotifications(
   userId: string,
   viewerTier: AccessTier | null

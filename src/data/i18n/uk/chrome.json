@@ -2735,5 +2735,6 @@
   "Güncel bonus koşulları için {broker}'in resmi sitesini kontrol edin · Bonus kampanyaları bazı bölgelerde/hesap türlerinde geçerli olmayabilir · Şartlar ve koşullar geçerlidir": "Перевірте офіційний сайт {broker} щодо актуальних умов бонусів · Бонусні акції можуть бути недоступні в деяких регіонах/для певних типів рахунків · Застосовуються умови та положення",
   "FXPARTNER, bu sayfada listelenen brokerların bazılarıyla ortaklık/referans ilişkisine sahiptir ve “Siteye Git” bağlantıları üzerinden açılan hesaplardan komisyon kazanabilir. Bu durum ilgili kartta ayrıca belirtilir ve sıralama veya puanlama kriterlerimizi etkilemez.": "FXPARTNER має партнерські/реферальні відносини з деякими брокерами, переліченими на цій сторінці, і може отримувати комісію з рахунків, відкритих за посиланнями «Перейти на сайт». Це окремо зазначається на відповідній картці та не впливає на наші критерії ранжування чи оцінювання.",
   "Detay": "Деталі",
-  "Geri": "Назад"
+  "Geri": "Назад",
+  "Bildirimler, {n} okunmamış": "Сповіщення, {n} непрочитаних"
 }
