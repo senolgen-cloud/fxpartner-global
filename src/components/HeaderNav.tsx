@@ -43,7 +43,7 @@ export default function HeaderNav({
   }, []);
 
   return (
-    <div className="flex flex-1 items-center justify-end gap-3">
+    <div className="flex items-center justify-end gap-3">
       <nav className="hidden shrink-0 items-center gap-0.5 rounded-full border border-hairline bg-ink-soft/60 p-1 xl:absolute xl:start-1/2 xl:flex xl:-translate-x-1/2 rtl:xl:translate-x-1/2">
         {primaryLinks.map((link) => {
           const active = isActive(pathname, link.href);

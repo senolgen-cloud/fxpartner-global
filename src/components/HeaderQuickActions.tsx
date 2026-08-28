@@ -1,6 +1,7 @@
 import Link from "@/components/LocaleLink";
 import { tr } from "@/lib/chrome";
 import HeaderBell from "@/components/HeaderBell";
+import LocaleMenu from "@/components/LocaleMenu";
 
 // Profile and notifications at the end of the header bar, where a phone's
 // header was otherwise empty: the hamburger only appears from sm up, so
@@ -26,6 +27,11 @@ export default function HeaderQuickActions({
 }) {
   return (
     <div className="flex items-center gap-0.5 xl:hidden">
+      {/* Language first, then notifications, then the account — the same
+          order as the desktop cluster, so the two headers do not disagree
+          about where a control lives. It was reachable only from inside the
+          More menu on a phone before this. */}
+      <LocaleMenu />
       {signedIn && <HeaderBell />}
       <Link
         href={accountHref}
