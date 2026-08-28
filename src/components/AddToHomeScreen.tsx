@@ -1,5 +1,6 @@
 "use client";
 import { useTr } from "@/components/useTr";
+import { isStandalone } from "@/lib/standalone";
 import Sheet, { SheetAction, SheetBody, SheetTitle } from "@/components/Sheet";
 import { PRIORITY, useInterruptionSlot } from "@/components/interruptionSlot";
 
@@ -16,13 +17,6 @@ const DISMISS_KEY = "fxpartner-a2hs-dismissed";
 interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>;
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
-}
-
-function isStandalone(): boolean {
-  return (
-    window.matchMedia("(display-mode: standalone)").matches ||
-    (navigator as Navigator & { standalone?: boolean }).standalone === true
-  );
 }
 
 // Install and push permission can both become available at the same

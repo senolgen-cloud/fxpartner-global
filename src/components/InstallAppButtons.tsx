@@ -1,5 +1,6 @@
 "use client";
 import { useTr } from "@/components/useTr";
+import { isStandalone } from "@/lib/standalone";
 
 import { useEffect, useState } from "react";
 
@@ -14,13 +15,6 @@ interface BeforeInstallPromptEvent extends Event {
 
 function isIOS(): boolean {
   return /iPad|iPhone|iPod/.test(navigator.userAgent) && !("MSStream" in window);
-}
-
-function isStandalone(): boolean {
-  return (
-    window.matchMedia("(display-mode: standalone)").matches ||
-    (navigator as Navigator & { standalone?: boolean }).standalone === true
-  );
 }
 
 function isMobileUA(): boolean {
