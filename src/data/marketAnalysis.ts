@@ -41,6 +41,54 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-08-28-1800",
+    title: "FXPARTNER Piyasa Güncellemesi | 28.08.2026 – Warsh Konuşması Sonrası",
+    excerpt:
+      "Fed Başkanı Kevin Warsh'ın Jackson Hole'daki ilk konuşması şahin çıktı: enflasyonda 'daha yapılacak iş var' dedi, dolar güçlendi, altın 4.600 doların altına sarktı ve EUR/USD 1,16 bölgesine geriledi. Ayrı bir gelişmede Stripe-Advent konsorsiyumunun PayPal teklifinden vazgeçmesi hisseyi sert vurdu.",
+    publishedAt: "2026-08-28",
+    readingMinutes: 4,
+    intro:
+      "Sabah bültenimizde beklenti olarak paylaştığımız Fed Başkanı Kevin Warsh'ın Jackson Hole Ekonomi Politikası Sempozyumu'ndaki ilk ana konuşması saat 17:00'de (GMT+3) gerçekleşti. Warsh'ın şahin tonu piyasalarda hızlı bir tepkiye yol açarken, aynı gün Stripe ve Advent'in PayPal'a yönelik dev satın alma teklifinden vazgeçmesi de gündemi belirledi.",
+    news: [
+      {
+        icon: "🏛️",
+        heading: "Warsh'tan Şahin Mesaj: 'Enflasyonda Henüz İş Bitmedi'",
+        body: "Mayıs ayında göreve başlayan **Fed Başkanı Kevin Warsh**, Jackson Hole'daki ilk büyük konuşmasında net bir faiz patikası taahhüdünden kaçınarak belirsizliği sürdürdü, ancak enflasyona dair tonu belirgin şekilde sertleşti. Warsh, bu yazki enflasyon verilerinin beklentilerden iyi gelmesine rağmen **'alt trendlerin anlamlı biçimde iyileştiğini göstermediğini'** söyleyerek Fed'in **'daha yapılacak işi olduğunu'** vurguladı. Ekonominin genelinde güçlü bir görünüm olduğunu, yapay zekâ yatırımlarının ve tüketici harcamalarının desteğiyle büyümenin dirençli kaldığını da sözlerine ekledi.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın 4.600 Doların Altına Sarktı",
+        body: "XAU/USD, konuşma öncesi **4.600-4.650 dolar** bandında dengeli seyrederken, Warsh'ın şahin çıkışının ardından **%1,2'ye varan düşüşle** bu haftanın çok-günlük diplerine geriledi ve **4.600 dolar** desteğinin altına sarktı. Güçlenen dolar ve yükselen tahvil getirileri, metal üzerindeki satış baskısının başlıca nedeni oldu.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar Güçlendi, EUR/USD 1,16 Bölgesine Geriledi",
+        body: "Warsh'ın konuşmasının ardından **ABD doları belirgin şekilde toparlandı.** Konuşma öncesinde **1,1650** civarında yatay seyreden EUR/USD, açıklamaların ardından hızlanan bir düşüşle **1,1600** seviyesindeki çok-günlük diplerine geriledi.",
+      },
+      {
+        icon: "📈",
+        heading: "2 Yıllık Tahvil Getirisi Yükseldi, Eylül Faiz Artışı İhtimali Arttı",
+        body: "Şahin tondan sonra **ABD 2 yıllık tahvil getirisi 6,6 baz puan yükselerek %4,29'a** çıktı. Piyasalarda **16-17 Eylül'deki FOMC toplantısında** bir faiz artışı ihtimali güçlenerek **%46'ya** yükseldi.",
+      },
+      {
+        icon: "💳",
+        heading: "PayPal, Stripe-Advent'in Teklifi Geri Çekmesiyle Sert Düştü",
+        body: "Bloomberg'in haberine göre **Stripe ve özel sermaye şirketi Advent International**'ın oluşturduğu konsorsiyum, hisse başına **60,50 dolardan** ve şirketi yaklaşık **53 milyar dolar** değerleyen satın alma teklifini geri çekti. PayPal yönetim kurulunun teklifi yetersiz bulması ve düzenleyici/finansman engellerinin gündeme gelmesinin ardından gelen haberle **PayPal hisseleri seans öncesinde %15-16 oranında sert değer kaybetti.**",
+      },
+    ],
+    calendarLabel: "28 Ağustos 2026",
+    calendarEvents: [
+      {
+        time: "16-17 Eylül 2026",
+        icon: "🇺🇸",
+        title: "FOMC Faiz Kararı Toplantısı",
+        note: "Warsh'ın şahin çıkışı sonrası piyasalarda faiz artışı ihtimali fiyatlanmaya başladı; toplantıya kadar açıklanacak enflasyon ve istihdam verileri karar için belirleyici olacak.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "gunluk-bulten-2026-08-28",
     title: "FXPARTNER Günlük Bülten | 28.08.2026",
     excerpt:
