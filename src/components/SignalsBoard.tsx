@@ -827,6 +827,202 @@ function Chevron({ open }: { open: boolean }) {
   );
 }
 
+
+/**
+ * One card per instrument-and-direction, when there is more than one.
+ *
+ * The copy account opens the same setup repeatedly — all nine open signals
+ * were GOLD in the same direction, and the closed history collapses from 209
+ * trades to 29 groups, the largest of them 50 GOLD SELLs. A board repeating
+ * one instrument fifty times is not showing fifty things.
+ *
+ * NOTHING IS HIDDEN AND NOTHING IS SUMMARISED AWAY. Expanding shows every
+ * trade in the group as the card it always was, with its own levels and its
+ * own result. The header carries three numbers together — how many, how they
+ * split, and the net — because any one alone misleads. This file already
+ * learned that: SILVER ran 63% winners and still lost $7,954, because one
+ * trade was larger than the five that won. A net without a count reads as a
+ * verdict on every trade in it; a count without a net hides which way they
+ * went.
+ *
+ * Real account P/L is summed, never a per-lot normalisation — see PipsStats
+ * for the version of this that shipped wrong.
+ */
+function SignalGroup({
+  signals,
+  viewerTier,
+  quotes,
+}: {
+  signals: Signal[];
+  viewerTier: AccessTier | null;
+  quotes: Record<string, LiveQuote>;
+}) {
+  const tr = useTr();
+  const trf = useTrf();
+  const intl = useIntlLocale();
+  const [open, setOpen] = useState(false);
+
+  const first = signals[0];
+  const isClosed = first.status === "closed";
+  const isBuy = first.direction === "BUY";
+  const isSell = first.direction === "SELL";
+  const directionColor = isSell ? TICK_DOWN : TICK_UP;
+
+  const decisive = signals.filter(
+    (x) => (x.outcome === "WIN" || x.outcome === "LOSS") && x.profit !== null
+  );
+  const wins = decisive.filter((x) => x.outcome === "WIN").length;
+  const losses = decisive.length - wins;
+  const net = decisive.reduce((sum, x) => sum + parseFloat(x.profit as string), 0);
+  const positive = net >= 0;
+
+  // Newest first inside the group, and the group is as recent as its most
+  // recent trade.
+  const ordered = [...signals].sort(
+    (a, b) =>
+      ((isClosed ? b.closedAt : b.createdAt)?.getTime() ?? 0) -
+      ((isClosed ? a.closedAt : a.createdAt)?.getTime() ?? 0)
+  );
+  const age = relativeAge(isClosed ? ordered[0].closedAt : ordered[0].createdAt, intl, tr);
+  const panelId = `signal-group-${first.id}`;
+  const railColor = isClosed ? (positive ? TICK_UP : TICK_DOWN) : directionColor;
+
+  return (
+    <div
+      className="mx-auto w-full max-w-2xl overflow-hidden rounded-2xl border border-s-[3px] border-hairline bg-gradient-to-b from-ink-soft to-ink shadow-[0_20px_50px_-25px_rgba(0,0,0,0.7)]"
+      style={{ borderInlineStartColor: railColor }}
+    >
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={panelId}
+        className="flex w-full items-center gap-2.5 p-4 text-start transition-colors hover:bg-white/[0.02] sm:p-5"
+      >
+        <InstrumentMark pair={first.pair} />
+
+        {/* Two lines on a phone, one on anything wider. Measured at 375px: the
+            fixed parts alone — mark 60, direction 35, count 19, split+net 163,
+            gaps and padding 72 — come to 349 in a 324px card, so a single row
+            has nothing left for the instrument name. It does not wrap, it
+            truncates, and the name is the one thing that must never be the
+            item that vanishes. Identity above, numbers below. */}
+        <span className="flex min-w-0 flex-1 flex-col gap-1 sm:flex-row sm:items-center sm:gap-2.5">
+          <span className="flex min-w-0 items-center gap-2">
+            {/* min-w-0 is what lets truncate act at all: every sibling here is
+                shrink-0, so without it this item keeps its auto minimum and
+                pushes the numbers out of the card instead of ellipsing. */}
+            <span className="notranslate min-w-0 truncate font-display text-[17px] font-semibold tracking-[-0.01em] text-text-on-ink">
+              {prettyPair(first.pair)}
+            </span>
+            {(isBuy || isSell) && (
+              <span
+                className="shrink-0 rounded-md px-1.5 py-0.5 text-[11px] font-bold leading-none"
+                style={
+                  isClosed
+                    ? { background: "rgba(255,255,255,0.08)", color: "var(--text-on-ink-muted)" }
+                    : { background: `${directionColor}26`, color: directionColor }
+                }
+              >
+                {first.direction}
+              </span>
+            )}
+            <span
+              className="shrink-0 rounded-md bg-signal/20 px-1.5 py-0.5 font-mono text-[11px] font-bold leading-none text-signal"
+              aria-label={trf("{n} işlem", { n: signals.length })}
+            >
+              {signals.length}
+            </span>
+          </span>
+
+          {/* whitespace-nowrap because these items shrink before they overflow:
+              without it the minus sign and the amount land on separate lines
+              rather than the row simply being too wide. The column is 196px on
+              a 375px screen, which the split and the net fit inside — the age
+              does not, and it is the one thing here that every card in the
+              group repeats anyway. */}
+          <span className="flex shrink-0 items-center gap-2.5 whitespace-nowrap sm:ms-auto">
+            {isClosed && decisive.length > 0 && (
+              <>
+                {/* The split sits beside the net, not behind a tap. It is what
+                    stops one large trade speaking for all of them. */}
+                <span className="font-mono text-[11px] leading-none">
+                  <span style={{ color: TICK_UP }}>{wins}</span>
+                  <span className="text-text-on-ink-muted"> / </span>
+                  <span style={{ color: TICK_DOWN }}>{losses}</span>
+                </span>
+                <span
+                  className="font-mono text-[15px] font-semibold tabular-stat"
+                  style={{ color: positive ? TICK_UP : TICK_DOWN }}
+                >
+                  {positive ? "+" : "−"}
+                  {formatPerLot(Math.abs(net)).replace("+", "")}
+                </span>
+              </>
+            )}
+            {!isClosed && (
+              <span className="flex items-center gap-1.5 text-[11px] font-medium leading-none text-signal">
+                <span className="signal-dot h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
+                {tr("Aktif")}
+              </span>
+            )}
+            {age && (
+              <span className="hidden text-[11px] leading-none text-text-on-ink-muted sm:inline">
+                {age}
+              </span>
+            )}
+          </span>
+        </span>
+
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className={`shrink-0 text-text-on-ink-muted transition-transform ${open ? "rotate-180" : ""}`}
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
+
+      {open && (
+        <div id={panelId} className="flex flex-col gap-3 border-t border-hairline p-3">
+          {ordered.map((sig) => (
+            <SignalCard
+              key={sig.id}
+              signal={sig}
+              viewerTier={viewerTier}
+              quote={quotes[sig.pair]}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Groups by instrument and direction, newest group first, and leaves a lone
+ * trade as a plain card — wrapping one signal in a "1" badge and a chevron
+ * would add a tap to reach what was already on screen.
+ */
+function groupSignals(signals: Signal[]): Signal[][] {
+  const byKey = new Map<string, Signal[]>();
+  for (const s of signals) {
+    const key = `${s.pair}|${s.direction ?? "-"}`;
+    const list = byKey.get(key);
+    if (list) list.push(s);
+    else byKey.set(key, [s]);
+  }
+  const newest = (g: Signal[]) =>
+    Math.max(...g.map((x) => (x.closedAt ?? x.createdAt).getTime()));
+  return [...byKey.values()].sort((a, b) => newest(b) - newest(a));
+}
 function SignalCard({
   signal,
   viewerTier,
@@ -1260,9 +1456,23 @@ export default function SignalsBoard({
           </p>
         ) : (
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            {active.map((s) => (
-              <SignalCard key={s.id} signal={s} viewerTier={viewerTier} quote={quotes[s.pair]} />
-            ))}
+            {groupSignals(active).map((g) =>
+              g.length === 1 ? (
+                <SignalCard
+                  key={g[0].id}
+                  signal={g[0]}
+                  viewerTier={viewerTier}
+                  quote={quotes[g[0].pair]}
+                />
+              ) : (
+                <SignalGroup
+                  key={g[0].id}
+                  signals={g}
+                  viewerTier={viewerTier}
+                  quotes={quotes}
+                />
+              )
+            )}
           </div>
         )}
       </section>
@@ -1288,9 +1498,23 @@ export default function SignalsBoard({
             </p>
           ) : (
             <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
-              {closed.map((s) => (
-                <SignalCard key={s.id} signal={s} viewerTier={viewerTier} quote={quotes[s.pair]} />
-              ))}
+              {groupSignals(closed).map((g) =>
+                g.length === 1 ? (
+                  <SignalCard
+                    key={g[0].id}
+                    signal={g[0]}
+                    viewerTier={viewerTier}
+                    quote={quotes[g[0].pair]}
+                  />
+                ) : (
+                  <SignalGroup
+                    key={g[0].id}
+                    signals={g}
+                    viewerTier={viewerTier}
+                    quotes={quotes}
+                  />
+                )
+              )}
             </div>
           )}
         </div>
