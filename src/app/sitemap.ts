@@ -20,6 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/categories`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/egitim`, changeFrequency: "daily", priority: 0.7 },
+    { url: `${SITE_URL}/egitim/gorsel-anlatimlar`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/piyasa-analizi`, changeFrequency: "daily", priority: 0.7 },
     { url: `${SITE_URL}/haber-bulteni`, changeFrequency: "daily", priority: 0.7 },
     { url: `${SITE_URL}/teknik-analiz`, changeFrequency: "daily", priority: 0.7 },
