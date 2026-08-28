@@ -6,7 +6,8 @@ import Link from "@/components/LocaleLink";
 import { useLocalePathname } from "@/components/useLocalePathname";
 import { useLocale } from "@/components/LocaleProvider";
 import { localePath } from "@/lib/i18n";
-import LocaleSwitcher from "@/components/LocaleSwitcher";
+import LocaleMenu from "@/components/LocaleMenu";
+import HeaderBell from "@/components/HeaderBell";
 import { useMoreMenu } from "@/components/MoreMenuContext";
 import { primaryLinks, resourceLinks, type ResourceGroup } from "@/lib/navLinks";
 
@@ -86,24 +87,35 @@ export default function HeaderNav({
             </svg>
           </button>
           {resourcesOpen && (
-            <div className="absolute right-0 top-full mt-3 grid w-[min(46rem,calc(100vw-3rem))] grid-cols-3 gap-1 rounded-2xl border border-hairline bg-ink-soft p-4 shadow-2xl motion-safe:animate-[popIn_0.15s_ease-out]">
-              {RESOURCE_GROUPS.map((group) => (
+            // Each item carries its own description now instead of hiding it
+            // in a title attribute nobody hovers long enough to see. The
+            // panel is narrower for it — three columns of bare labels were
+            // 46rem of mostly empty space — and the rows stagger in rather
+            // than the whole sheet appearing at once, which is what makes a
+            // menu feel opened rather than switched on.
+            <div className="menu-panel-in absolute end-0 top-full z-50 mt-3 grid w-[min(42rem,calc(100vw-3rem))] grid-cols-3 gap-x-2 gap-y-1 rounded-2xl border border-hairline bg-ink-soft p-3 shadow-2xl">
+              {RESOURCE_GROUPS.map((group, gi) => (
                 <div key={group}>
-                  <span className="block px-2 font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                  <span className="block px-2 pb-1 pt-1.5 font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
                     {tr(group)}
                   </span>
-                  <div className="mt-2">
+                  <div>
                     {resourceLinks
                       .filter((link) => link.group === group)
-                      .map((link) => (
+                      .map((link, li) => (
                         <a
                           key={link.href}
                           href={localePath(locale, link.href)}
-                          title={tr(link.description)}
                           onClick={() => setResourcesOpen(false)}
-                          className="block rounded-xl px-2 py-2 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink"
+                          style={{ animationDelay: `${gi * 40 + li * 25}ms` }}
+                          className="menu-item-in group/item block rounded-xl px-2 py-1.5 transition-colors hover:bg-ink"
                         >
-                          {tr(link.label)}
+                          <span className="block text-sm font-medium text-text-on-ink">
+                            {tr(link.label)}
+                          </span>
+                          <span className="mt-0.5 block text-[11px] leading-snug text-text-on-ink-muted">
+                            {tr(link.description)}
+                          </span>
                         </a>
                       ))}
                   </div>
@@ -114,34 +126,46 @@ export default function HeaderNav({
         </div>
       </nav>
 
-      <div className="hidden items-center gap-2 border-l border-hairline ps-2.5 xl:flex">
-        <LocaleSwitcher compact />
-        {signedIn ? (
-          <Link
-            href={accountHref}
-            className="whitespace-nowrap text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
+      {/* The right-hand cluster. It used to be four language chips, one or
+          two text links and a pill — five different visual treatments in
+          about 400px, none of which agreed with the others. Now: one
+          language control, the same two icons the phone header carries, and
+          a single filled action, separated by one hairline. */}
+      <div className="hidden items-center gap-1 border-s border-hairline ps-2 xl:flex">
+        <LocaleMenu />
+        {signedIn && <HeaderBell size="desktop" />}
+        <Link
+          href={accountHref}
+          aria-label={signedIn ? tr("Hesabım") : tr("Giriş Yap")}
+          title={signedIn ? tr("Hesabım") : tr("Giriş Yap")}
+          className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-on-ink-muted transition-colors hover:bg-ink-soft hover:text-text-on-ink"
+        >
+          <svg
+            width="19"
+            height="19"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
           >
-            {tr("Hesabım")}
+            <circle cx="12" cy="8" r="3.5" />
+            <path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6" />
+          </svg>
+        </Link>
+        {!signedIn && (
+          <Link
+            href="/account/register"
+            className="ms-1 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
+          >
+            {tr("Kayıt Ol")}
           </Link>
-        ) : (
-          <>
-            <Link
-              href="/account/login"
-              className="whitespace-nowrap text-sm text-text-on-ink-muted transition-colors hover:text-text-on-ink"
-            >
-              {tr("Giriş Yap")}
-            </Link>
-            <Link
-              href="/account/register"
-              className="whitespace-nowrap rounded-full border border-hairline px-3.5 py-1.5 text-sm font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
-            >
-              {tr("Kayıt Ol")}
-            </Link>
-          </>
         )}
         <Link
           href="/brokerlar"
-          className="whitespace-nowrap rounded-full bg-signal px-4 py-2 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
+          className="ms-1 inline-flex h-9 items-center whitespace-nowrap rounded-lg bg-signal px-4 text-sm font-semibold text-on-signal transition-colors hover:bg-signal-strong"
         >
           {tr("Brokerları Karşılaştır")}
         </Link>

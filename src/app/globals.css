@@ -596,3 +596,124 @@ body[data-sheet="modal"] [data-behind-sheet] {
 .sheet-type {
   font-family: var(--font-apple);
 }
+
+/* ---------------------------------------------------------------------
+   Brand loader — the animated mark shown while a route is loading, and
+   once over the page on a fresh document load.
+
+   The wordmark sits still and a highlight sweeps across it, rather than
+   the mark itself spinning or bouncing: a logo that moves is a logo being
+   animated, a logo that catches the light is a logo being lit. The bar
+   underneath is an indeterminate progress hint, not a percentage — it
+   travels rather than fills, because nothing here knows how far along the
+   load is and a bar that fills to 90% and waits is a lie about progress.
+   --------------------------------------------------------------------- */
+.brand-loader-mark {
+  position: relative;
+  overflow: hidden;
+}
+.brand-loader-mark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 35%,
+    color-mix(in srgb, var(--signal) 55%, transparent) 50%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+  animation: brand-sheen 1.9s ease-in-out infinite;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+@keyframes brand-sheen {
+  to {
+    transform: translateX(120%);
+  }
+}
+.brand-loader-bar {
+  position: relative;
+  overflow: hidden;
+}
+.brand-loader-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  border-radius: inherit;
+  background: var(--signal);
+  animation: brand-bar-travel 1.4s ease-in-out infinite;
+}
+@keyframes brand-bar-travel {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+/* The splash over a fresh document. Pure CSS and self-dismissing, so the
+   page underneath is in the DOM from the first byte and a crawler — or a
+   reader whose JavaScript never arrives — is never left staring at it. */
+.brand-splash {
+  animation: brand-splash-out 0.85s ease-in 0.35s forwards;
+}
+@keyframes brand-splash-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-loader-mark::after,
+  .brand-loader-bar::after {
+    animation: none;
+  }
+  .brand-loader-bar::after {
+    width: 100%;
+    opacity: 0.35;
+  }
+  /* Still dismisses — it just does not fade. Leaving it on screen would
+     trap anyone who asked for less motion behind a permanent splash. */
+  .brand-splash {
+    animation-duration: 0.01s;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Dropdown menu. The panel lifts, and its rows arrive a beat behind it in
+   reading order — the thing that separates a menu that opened from one
+   that was switched on. Delays are set inline per row so the stagger
+   follows the real order of the groups rather than a fixed list.
+   --------------------------------------------------------------------- */
+.menu-panel-in {
+  animation: menu-panel-in 0.18s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+  transform-origin: top center;
+}
+@keyframes menu-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.985);
+  }
+}
+.menu-item-in {
+  animation: menu-item-in 0.22s ease-out both;
+}
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Still appears, just without travelling. Someone who asked for less
+     motion still needs the menu to open. */
+  .menu-panel-in,
+  .menu-item-in {
+    animation: none;
+  }
+}

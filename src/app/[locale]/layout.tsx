@@ -5,6 +5,8 @@ import { Analytics } from "@vercel/analytics/next";
 import NotificationOptIn from "@/components/NotificationOptIn";
 import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
 import ChromeGate from "@/components/ChromeGate";
+import BrandSplash from "@/components/BrandSplash";
+import { NotificationProvider } from "@/components/NotificationProvider";
 import AddToHomeScreen from "@/components/AddToHomeScreen";
 import CookieConsent from "@/components/CookieConsent";
 import NewsletterPopup from "@/components/NewsletterPopup";
@@ -207,6 +209,13 @@ export default async function RootLayout({
       className={`${geist.variable} ${jetbrainsMono.variable} ${poppins.variable} ${notoArabic.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-text-dark pb-24 sm:pb-12">
+        {/* One-shot splash over a fresh document. Pure CSS: it dismisses
+            itself on a timer with no JavaScript involved, so the page
+            underneath is complete in the DOM from the first byte and a
+            crawler, or a reader whose JS never arrives, is never held
+            behind it. Client-side route changes do not re-run it — those
+            get loading.tsx instead. */}
+        <BrandSplash />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
@@ -216,6 +225,10 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
         />
         <LocaleProvider locale={locale}>
+          {/* One poller for the page. The bell renders in both the phone
+              header and the desktop cluster and each is only hidden from
+              the other by CSS, so state inside the button would run twice. */}
+          <NotificationProvider signedIn={signedIn}>
           <MoreMenuProvider>
           <ChromeGate>
             <StickyChrome>
@@ -246,6 +259,7 @@ export default async function RootLayout({
           </ChromeGate>
           <GoogleTranslateWidget />
           <Analytics />
+          </NotificationProvider>
         </LocaleProvider>
       </body>
     </html>
