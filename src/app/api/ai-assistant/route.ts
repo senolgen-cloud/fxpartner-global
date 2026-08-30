@@ -5,6 +5,7 @@ import { db } from "@/db";
 import { aiAssistantLogs } from "@/db/schema";
 import { getViewerAccess, hasTierAccess } from "@/lib/tierAccess";
 import { and, eq, gte } from "drizzle-orm";
+import { GEMINI_URL } from "@/lib/gemini";
 
 /**
  * Questions a signed-in free member may ask per day.
@@ -46,8 +47,6 @@ async function countQuestionsToday(userId: string): Promise<number> {
 
 export const runtime = "nodejs";
 
-const GEMINI_MODEL = "gemini-3.6-flash";
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };

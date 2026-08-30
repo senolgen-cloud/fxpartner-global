@@ -1,4 +1,5 @@
 import { locales, defaultLocale, type Locale } from "@/lib/i18n";
+import { GEMINI_URL } from "@/lib/gemini";
 
 // Translation for content that is written by a job rather than by a person.
 //
@@ -16,8 +17,6 @@ import { locales, defaultLocale, type Locale } from "@/lib/i18n";
 // with a dot, and an English reader shown "80.000 dollars" reads eighty.
 // The separator follows the target language; the digits never move.
 
-const GEMINI_MODEL = "gemini-3.6-flash";
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
 const LOCALE_NAMES: Record<string, string> = {
   ua: "Ukrainian (українська)",

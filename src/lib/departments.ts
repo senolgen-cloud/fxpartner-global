@@ -195,6 +195,13 @@ export const departments: Department[] = [
       // Asistanın gerçekte ne cevapladığını görmenin tek yolu, yani ürünün
       // denetim yüzeyi.
       "src/app/[locale]/admin/ai-sorulari",
+      // Modelin adının yazılı olduğu tek yer, ve onu tek yer tutan denetim.
+      // Scriptler .mjs olduğu için TypeScript modülünü import edemiyor;
+      // scripts/lib/gemini.mjs değeri kopyalamak yerine gemini.ts'ten
+      // okuyor, böylece "tek yer" gerçekten tek yer kalıyor.
+      "src/lib/gemini.ts",
+      "scripts/lib/gemini.mjs",
+      "scripts/check-gemini-model.mjs",
     ],
     // "active", çünkü asistan bir insan araya girmeden markanın adına
     // konuşuyor — takvimli değil, istek anında, ama denetimsiz. Uyumluluk &
@@ -206,12 +213,12 @@ export const departments: Department[] = [
     // şey içerik, ve içerik onu yazan departmanın. Bu departman asistan
     // ürününün sahibi, sitenin yapay zeka kullanımının değil.
     //
-    // AÇIK İŞ: "gemini-3.6-flash" altı ayrı dosyada ayrı ayrı yazılı
-    // (educationPost, bulletin, translateContent, bu route, ve iki script).
-    // Model yükseltmesi altı düzenleme demek ve biri atlanırsa kimse fark
-    // etmez. Paylaşılan bir sabit bu departmanın işi olurdu; scriptler .mjs
-    // olduğu için tek bir modül yetmiyor, o yüzden burada tespit olarak
-    // duruyor.
+    // Model adı artık tek yerde: lib/gemini.ts. Altı dosyada ayrı ayrı
+    // yazılıydı ve yükseltme altı düzenleme demekti; biri atlanırsa hiçbir
+    // şey bozulmuyor, sadece o yüzey eski modeli çağırmaya devam ediyordu.
+    // Sabit bu departmanın, çünkü sitenin hangi modelle konuştuğu tek bir
+    // karar ve tek bir sahibi olmalı — en çok çağıran taraf olduğu için
+    // değil.
     automation: "active",
   },
   {

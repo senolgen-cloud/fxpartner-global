@@ -15,9 +15,8 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { GEMINI_URL } from "./lib/gemini.mjs";
 
-const GEMINI_MODEL = "gemini-3.6-flash";
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
 // Enough strings per call to keep it cheap, few enough that one bad batch is
 // cheap to retry and stays well inside the output token budget.

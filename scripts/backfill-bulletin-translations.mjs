@@ -13,6 +13,7 @@
 
 import fs from "node:fs";
 import { neon } from "@neondatabase/serverless";
+import { GEMINI_URL } from "./lib/gemini.mjs";
 
 const args = process.argv.slice(2);
 const DRY = args.includes("--dry");
@@ -26,8 +27,6 @@ function readEnv(name) {
   return v;
 }
 
-const GEMINI_MODEL = "gemini-3.6-flash";
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 const LOCALE_NAMES = { ua: "Ukrainian (українська)", en: "English" };
 const DO_NOT_TRANSLATE = [
   "FXPARTNER", "XM Global", "Lite Finance", "FxPro", "AvaTrade", "IC Markets",
