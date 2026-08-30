@@ -128,11 +128,29 @@ export const departments: Department[] = [
       focus: "Kayıt/giriş akışı, erişim kademeleri, üye paneli, bildirim tercihleri",
       voice: "Açık ve zorlamasız; bir üyeyi yükseltmeye ikna etmez, ne aldığını söyler",
     },
-    // Kadrosu yok. On iki kişinin tamamı başka departmanlara yerleşmişti ve
-    // sırf roster boş kalmasın diye birini buraya kaydırmak, yanlış bir
-    // atamayı görünür bir boşluğa tercih etmek olurdu. Boşluk kayıtlı
-    // duruyor; doldurmak kurucunun kararı.
-    team: [],
+    team: [
+      {
+        // Uyumluluk & Marka'dan taşındı, 30.08.2026.
+        //
+        // Konusu zaten buydu, sadece diğer taraftan bakıyordu: çerez onayı
+        // ZİYARETÇİNİN verisiyle ilgili, bu departmansa ÜYENİN verisiyle —
+        // kimlik doğrulama, oturum, tercihler, hesabı üzerindeki kontrolü.
+        //
+        // Kalan üç iki-kişilik departmandan ikisi (Haber & Editöryal, Piyasa
+        // Analizi) günde iki kez yeni metin yazıyor ve editörsüz kalamaz;
+        // Uyumluluk & Marka ise "manual" — üretmiyor, denetliyor. Ve bu kez
+        // AI departmanındaki çıkar çatışması yok: Üyelik & Hesap markanın
+        // adına cümle kurmuyor, dolayısıyla uyumluluk kendi kendini
+        // denetlemiş olmuyor.
+        //
+        // Çerez onayı ve /privacy onunla gelmedi: ikisi de yasal metin
+        // meselesi ve Uyumluluk & Marka'nın çekirdeği. Nilüfer Hatun'un
+        // görev tanımı onları kapsayacak şekilde genişletildi.
+        name: "Akif Tuncel",
+        title: "Hesap Güvenliği ve Veri Sorumlusu",
+        focus: "Kimlik doğrulama ve oturum güvenliği, üyenin kendi verisi üzerindeki kontrolü, bildirim tercihleri",
+      },
+    ],
     owns: [
       // Kimlik doğrulama.
       "src/auth.ts",
@@ -538,12 +556,7 @@ automation: "active",
       {
         name: "Nilüfer Hatun",
         title: "Uyumluluk Uzmanı",
-        focus: "Yasal uyarı metinleri, şikayet süreci, bir otomasyonu 'active'e almadan önceki son okuma",
-      },
-      {
-        name: "Akif Tuncel",
-        title: "Veri Koruma Sorumlusu",
-        focus: "Çerez onayı ve consent kayıtları, /privacy metninin uygulamayla uyumu",
+        focus: "Yasal uyarı metinleri, çerez onayı ve /privacy, şikayet süreci, bir otomasyonu 'active'e almadan önceki son okuma",
       },
     ],
     owns: [
