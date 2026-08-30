@@ -1,7 +1,6 @@
 import type { NewsItem } from "./news";
+import { GEMINI_URL } from "@/lib/gemini";
 
-const GEMINI_MODEL = "gemini-3.6-flash";
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
 export type Bulletin = {
   title: string;
