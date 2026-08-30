@@ -41,12 +41,12 @@ tutmak, makine yazımı metni gerçek bir insanın imzasıyla yayınlamak olurdu
 | Departman | Kişi | Görev | Sorumluluk |
 |---|---|---|---|
 | Sinyal & Copytrade | Sezgin Ünal | Sinyal Operasyonu Sorumlusu | MT5 köprüsünün sağlığı, pano doğruluğu, copytrade başvuruları |
+| Yapay Zeka Asistanı | Taner Turan | Asistan Kalite Sorumlusu | Soru kaydını okumak, istem ve red kuralları, kademe limitleri |
 | Piyasa Analizi | Mehmet Ali Erdoğan | Kıdemli Teknik Analist | Günlük teknik analiz, `/teknik-analiz` enstrüman kapsamı |
 | Piyasa Analizi | Tuğçe Süslü | Makro Ekonomist | Ekonomik takvim yorumu, veri günleri |
 | Haber & Editöryal | Şebnem Köser | Akademi Editörü | Akademi ders serisi, konu kuyruğu, görsel anlatım metinleri |
 | Haber & Editöryal | Yunus Emre Coşkun | Haber Editörü | Haber filtreleme ve çeviri kalitesi, `/haber-bulteni` |
 | Broker İstihbaratı | Dilek Arabacıoğlu | Regülasyon Araştırmacısı | Lisans doğrulama, `/broker-lookup`, risk uyarı listesi |
-| Broker İstihbaratı | Taner Turan | Broker Analisti | Maliyet/spread karşılaştırması, `/categories`, prop firma incelemeleri |
 | Ortaklık & Cashback | Erden Tarlan | Ortaklık Yöneticisi | IB/rev-share takibi, cashback oranı doğrulama, `/partners` |
 | Reklam & Kampanya | Gülşah Avcı | Kampanya Küratörü | Kampanya şartlarının kaynağından doğrulanması, `/campaigns` |
 | Sosyal Medya & Topluluk | Esmanur Bulut | Sosyal Medya Uzmanı | Instagram yayın planı, görsel içerik |
@@ -187,9 +187,29 @@ sorumluluk değil, dosyalama olurdu:
 - **diğer** — `navLinks.ts`, `visitor.ts`, `usePrefersReducedMotion.ts` ve
   kayıt defterinin kendisi, `departments.ts`
 
-### Kadrosu olmayan iki departman
+### Yapay Zeka Asistanı'na kadro (30.08.2026)
 
-Üyelik & Hesap ve Yapay Zeka Asistanı'nın kadrosu yok. On iki kişinin
-tamamı 28.08.2026'da diğer departmanlara yerleşmişti ve sonradan açılan bu
-iki departmana sırf roster dolu görünsün diye birini kaydırmak, görünür bir
-boşluğu yanlış bir atamayla takas etmek olurdu. Boşluk kayıtlı duruyor.
+Taner Turan Broker İstihbaratı'ndan buraya taşındı. Bu departmanın günlük
+işi modelin ne cevapladığını okuyup yanlışı yakalamak, ve asistan sorulara
+canlı kurlarla broker kataloğundan cevap veriyor — kataloğu bilen biri,
+yanlış bir cevabı kayıtta görebilecek olan kişi.
+
+Kimin taşınacağı tek gerçek karardı. İki kişilik dört departman vardı:
+
+- **Uyumluluk & Marka** elendi. Asistanın `active` olmasının sebebi zaten
+  onların denetimi; denetleyeni denetlenenin içine koymak olurdu.
+- Kalan üçü de `active`, ama **ne ürettikleri** aynı değil. Haber &
+  Editöryal ile Piyasa Analizi'nin otomasyonu günde iki kez **yeni metin**
+  yazıyor ve editörsüz kalamaz. Broker İstihbaratı'nınki
+  (`broker-review-share`) mevcut inceleme sayfaları arasında dönüyor — yeni
+  içerik üretmiyor, dolayısıyla bir kişiyle de dönmeye devam eder.
+
+Broker İstihbaratı'nın çekirdeği (lisans doğrulama, `/broker-lookup`, risk
+uyarı listesi) Dilek Arabacıoğlu'nda kalıyor; taşınan, kataloğun
+karşılaştırma tarafıydı ve asistanın en çok soru aldığı alan da o.
+
+### Kadrosu olmayan tek departman
+
+Üyelik & Hesap'ın kadrosu yok. Sırf roster dolu görünsün diye birini
+kaydırmak, görünür bir boşluğu yanlış bir atamayla takas etmek olurdu;
+boşluk kayıtlı duruyor.
