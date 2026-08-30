@@ -2,6 +2,27 @@
 // route (src/app/api/cron/*) and every editorial data file should be
 // owned by exactly one department here — this is the source of truth
 // other code and docs/ORGANIZATION.md refer back to, not a duplicate.
+/**
+ * A real person on the department's staff.
+ *
+ * Deliberately NOT the `expert` field below. That one is an editorial
+ * persona — a name and a voice that generated copy is written in — and
+ * putting a real colleague there would sign machine-written prose with a
+ * real person's name. These two things look similar in a registry and are
+ * not the same thing at all, so they are separate fields.
+ *
+ * No biography, employer history or credential is recorded here. The people
+ * below joined with careers behind them; none of that was written down when
+ * the roster was set, and inventing it for a real person is worse than
+ * leaving it out. Add it when they supply it themselves.
+ */
+export interface TeamMember {
+  name: string;
+  title: string;
+  /** What they are responsible for, named in terms of this repo's surfaces. */
+  focus: string;
+}
+
 export interface Department {
   id: string;
   name: string;
@@ -12,6 +33,11 @@ export interface Department {
     focus: string;
     voice: string;
   };
+  /**
+   * The people in the department. Added 2026-08-28; before that every
+   * department was one persona and no staff.
+   */
+  team: TeamMember[];
   owns: string[];
   // "active": runs unattended on a schedule.
   // "paused": code exists, wired to a department, but only fires via
@@ -32,6 +58,21 @@ export const departments: Department[] = [
       focus: "Teknik analiz (SMA/RSI), günlük piyasa özeti",
       voice: "Sakin, sayısal, asla 'kesin yön' iddiası yok",
     },
+    team: [
+      {
+        name: "Mehmet Ali Erdoğan",
+        title: "Kıdemli Teknik Analist",
+        focus: "Günlük teknik analiz üretimi ve /teknik-analiz sayfasının enstrüman kapsamı",
+      },
+      {
+        // Soyadı el yazısı listeden net okunamadı; teyit edilip
+        // tamamlanacak. Bir insanın adını tahminle yazmaktansa eksik
+        // bırakmak doğrusu.
+        name: "Tuğçe",
+        title: "Makro Ekonomist",
+        focus: "Ekonomik takvim yorumu, veri günlerinde beklenti/gerçekleşen okuması",
+      },
+    ],
     owns: [
       "src/app/api/cron/market-update/route.ts",
       "src/app/api/cron/market-analysis-share/route.ts",
@@ -59,6 +100,18 @@ export const departments: Department[] = [
       focus: "Haber filtreleme, sadık çeviri, blog editörlüğü",
       voice: "Güvenilir, tarafsız, kaynağa bağlı",
     },
+    team: [
+      {
+        name: "Şebnem Köse",
+        title: "Akademi Editörü",
+        focus: "FXPARTNER Akademi ders serisi, konu kuyruğu ve görsel anlatımların metinleri",
+      },
+      {
+        name: "Yunus Emre Coşkun",
+        title: "Haber Editörü",
+        focus: "Haber filtreleme ve çeviri kalitesi, /haber-bulteni günlük bülteni",
+      },
+    ],
     owns: [
       "src/app/api/cron/news-update/route.ts",
       "src/app/api/cron/blog-share/route.ts",
@@ -102,6 +155,18 @@ automation: "active",
       focus: "Broker skorlama, regülasyon takibi, karşılaştırma",
       voice: "Titiz, kanıta dayalı, asla abartılı övgü yok",
     },
+    team: [
+      {
+        name: "Dilek Arabacıoğlu",
+        title: "Regülasyon Araştırmacısı",
+        focus: "Lisans doğrulama, /broker-lookup sorgu verisi, risk uyarı listesinin beslenmesi",
+      },
+      {
+        name: "Taner Turan",
+        title: "Broker Analisti",
+        focus: "Maliyet ve spread karşılaştırmaları, /categories sıralamaları, prop firma incelemeleri",
+      },
+    ],
     owns: [
       "src/data/brokers.ts",
       "src/app/brokers",
@@ -125,6 +190,13 @@ automation: "active",
       focus: "Rev-share anlaşmaları, cashback onboarding akışı",
       voice: "Sözleşmeye sadık, oranları asla teyitsiz kesinleştirmez",
     },
+    team: [
+      {
+        name: "Erdem Tarlan",
+        title: "Ortaklık Yöneticisi",
+        focus: "IB/rev-share anlaşmalarının takibi, cashback oranlarının kaynağından doğrulanması, /partners başvuruları",
+      },
+    ],
     owns: [
       "src/data/cashback.ts",
       "src/app/cashback",
@@ -144,6 +216,13 @@ automation: "active",
       focus: "Kampanya küratörlüğü, haftalık özet, referral copy",
       voice: "Net, kar vaadi yok, her zaman 'şartlar değişebilir' notu var",
     },
+    team: [
+      {
+        name: "Gülşah Avcı",
+        title: "Kampanya Küratörü",
+        focus: "Kampanya şartlarının brokerın resmi sayfasından doğrulanması ve /campaigns içeriğinin güncelliği",
+      },
+    ],
     owns: ["src/app/campaigns", "src/app/api/cron/campaign-digest/route.ts"],
     automation: "active",
   },
@@ -158,6 +237,18 @@ automation: "active",
       focus: "Telegram gönderim altyapısı, web push bildirimleri, VIP davet akışı, ton tutarlılığı",
       voice: "Premium ama samimi, asla spam sıklığında değil",
     },
+    team: [
+      {
+        name: "Esmanur Bulut",
+        title: "Sosyal Medya Uzmanı",
+        focus: "Instagram yayın planı (docs/instagram-strategy.md) ve görsel içerik üretimi",
+      },
+      {
+        name: "Sezgin Ünal",
+        title: "Topluluk ve Sinyal Operasyonu",
+        focus: "Telegram kanalı, sinyal panosu duyurularının temposu, VIP davet akışı",
+      },
+    ],
     owns: [
       "src/lib/telegram.ts",
       "src/lib/push.ts",
@@ -187,6 +278,18 @@ automation: "active",
       focus: "Yasal uyarı metinleri, marka ses rehberi, kara liste/şikayet süreci",
       voice: "Temkinli, asla korku odaklı pazarlamaya izin vermez",
     },
+    team: [
+      {
+        name: "Nilüfer Hatun",
+        title: "Uyumluluk Uzmanı",
+        focus: "Yasal uyarı metinleri, şikayet süreci, bir otomasyonu 'active'e almadan önceki son okuma",
+      },
+      {
+        name: "Arif Tuncel",
+        title: "Veri Koruma Sorumlusu",
+        focus: "Çerez onayı ve consent kayıtları, /privacy metninin uygulamayla uyumu",
+      },
+    ],
     owns: ["src/app/terms", "src/app/privacy", "src/app/blacklist", "src/app/complaint"],
     automation: "manual",
   },
