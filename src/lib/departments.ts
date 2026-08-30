@@ -184,9 +184,28 @@ export const departments: Department[] = [
       focus: "Asistan istem tasarımı, kademe limitleri, soru kaydının incelenmesi",
       voice: "Bilmediğini bilmediğini söyler; tavsiye değil bilgi verir",
     },
-    // Kadrosu yok — Üyelik & Hesap ile aynı sebep: on iki kişinin tamamı
-    // yerleşmişti ve boş roster, yanlış atamadan iyidir.
-    team: [],
+    team: [
+      {
+        // Broker İstihbaratı'ndan taşındı, 30.08.2026.
+        //
+        // Bu departmanın günlük işi, modelin ne cevapladığını okuyup yanlışı
+        // yakalamak — ve asistan sorulara canlı kurlarla broker kataloğundan
+        // cevap veriyor. Kataloğu bilen biri, yanlış bir cevabı kayıtta
+        // görebilecek olan kişi.
+        //
+        // İki kişilik dört departman vardı. Uyumluluk & Marka elenir, çünkü
+        // asistanın "active" olmasının sebebi zaten onların denetimi;
+        // denetleyeni denetlenenin içine koymak olurdu. Kalan üçü de
+        // "active", ama ne ürettikleri aynı değil: Haber & Editöryal ile
+        // Piyasa Analizi'nin otomasyonu günde iki kez YENİ metin yazıyor ve
+        // editörsüz kalamaz. Broker İstihbaratı'nınki (broker-review-share)
+        // mevcut inceleme sayfaları arasında dönüyor — yeni içerik
+        // üretmiyor, dolayısıyla bir kişiyle de dönmeye devam eder.
+        name: "Taner Turan",
+        title: "Asistan Kalite Sorumlusu",
+        focus: "Soru kaydını okuyup yanlış cevapları yakalamak, istem ve red kurallarının bakımı, kademe limitlerinin maliyet tarafı",
+      },
+    ],
     owns: [
       "src/app/[locale]/ai-asistan",
       "src/app/api/ai-assistant/route.ts",
@@ -354,11 +373,6 @@ automation: "active",
         name: "Dilek Arabacıoğlu",
         title: "Regülasyon Araştırmacısı",
         focus: "Lisans doğrulama, /broker-lookup sorgu verisi, risk uyarı listesinin beslenmesi",
-      },
-      {
-        name: "Taner Turan",
-        title: "Broker Analisti",
-        focus: "Maliyet ve spread karşılaştırmaları, /categories sıralamaları, prop firma incelemeleri",
       },
     ],
     owns: [
