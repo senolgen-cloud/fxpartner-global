@@ -27,6 +27,47 @@ sahibidir.
 Her departmanın tam görev tanımı, sahip olduğu dosyalar ve "expert" persona
 detayı `src/lib/departments.ts` içindeki `Department` kayıtlarındadır.
 
+## Ekip (28.08.2026'da katıldı)
+
+On iki kişi departmanlara dağıtıldı. `src/lib/departments.ts` içindeki
+`team` alanında duruyorlar — yukarıdaki tabloda görünen `expert` alanında
+**değil**, ve bu kasıtlı: `expert` üretilen içeriğin editöryal sesi olan
+kurgusal bir personadır, `team` ise gerçek kişilerdir. İkisini aynı alanda
+tutmak, makine yazımı metni gerçek bir insanın imzasıyla yayınlamak olurdu.
+
+| Departman | Kişi | Görev | Sorumluluk |
+|---|---|---|---|
+| Piyasa Analizi | Mehmet Ali Erdoğan | Kıdemli Teknik Analist | Günlük teknik analiz, `/teknik-analiz` enstrüman kapsamı |
+| Piyasa Analizi | Tuğçe *(soyadı teyit bekliyor)* | Makro Ekonomist | Ekonomik takvim yorumu, veri günleri |
+| Haber & Editöryal | Şebnem Köse | Akademi Editörü | Akademi ders serisi, konu kuyruğu, görsel anlatım metinleri |
+| Haber & Editöryal | Yunus Emre Coşkun | Haber Editörü | Haber filtreleme ve çeviri kalitesi, `/haber-bulteni` |
+| Broker İstihbaratı | Dilek Arabacıoğlu | Regülasyon Araştırmacısı | Lisans doğrulama, `/broker-lookup`, risk uyarı listesi |
+| Broker İstihbaratı | Taner Turan | Broker Analisti | Maliyet/spread karşılaştırması, `/categories`, prop firma incelemeleri |
+| Ortaklık & Cashback | Erdem Tarlan | Ortaklık Yöneticisi | IB/rev-share takibi, cashback oranı doğrulama, `/partners` |
+| Reklam & Kampanya | Gülşah Avcı | Kampanya Küratörü | Kampanya şartlarının kaynağından doğrulanması, `/campaigns` |
+| Sosyal Medya & Topluluk | Esmanur Bulut | Sosyal Medya Uzmanı | Instagram yayın planı, görsel içerik |
+| Sosyal Medya & Topluluk | Sezgin Ünal | Topluluk ve Sinyal Operasyonu | Telegram kanalı, sinyal duyuru temposu, VIP akışı |
+| Uyumluluk & Marka | Nilüfer Hatun | Uyumluluk Uzmanı | Yasal metinler, şikayet süreci, otomasyon 'active' onayı |
+| Uyumluluk & Marka | Arif Tuncel | Veri Koruma Sorumlusu | Çerez onayı ve consent kayıtları, `/privacy` |
+
+**Kayda geçmeyen:** kimsenin özgeçmişi, önceki işvereni ya da sertifikası.
+Roster kurulurken bu bilgiler verilmedi; gerçek bir kişi adına kariyer
+uydurmak, alanı boş bırakmaktan kötüdür. Kendileri ilettiğinde eklenir.
+
+**Görev dağılımı bir öneridir.** Kimin hangi alanda uzman olduğu
+bilinmediği için atamalar kişilerin geçmişine değil, departmanların
+ihtiyacına göre yapıldı. Yer değiştirmeleri tek satırlık bir düzenleme.
+
+### Hâlâ departmanı olmayan alanlar
+
+Roster kurulurken çıktı: sitenin bazı yüzeyleri hiçbir departmana ait
+değil. `/signals` (sinyal panosu, `signalAccess`/`signalStats`/`SignalsBoard`),
+`/copytrade` ve `mt5-ea/`, `/prop-firmalar`, `/ai-asistan`, `/account`
+(üyelik, bildirim tercihleri) ve `/pozisyon-hesaplayici`. Bunların bir
+kısmı ürünün merkezinde — özellikle sinyal panosu. Yeni bir departman
+açmak organizasyon şemasını değiştirmek demek, o yüzden burada yalnızca
+tespit olarak duruyor; kararı kurucuya ait.
+
 ### Telegram içerik çeşitliliği (2026-07-26 güncellemesi)
 
 Telegram kanalı artık sadece BTC/USD grafiğiyle sınırlı değil — dört farklı
