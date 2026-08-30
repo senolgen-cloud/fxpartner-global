@@ -105,10 +105,17 @@ export default function BonusPopup({ slug }: { slug: string }) {
         </span>
       </div>
 
+      {/* Translated like every other string in this sheet. They were the
+          two that were not, and because they are read out of PROMOS rather
+          than written as literals in the JSX, check-untranslated-jsx never
+          saw them: it reads text nodes, and `{promo.headline}` is an
+          expression. The visible result was a Ukrainian page whose buttons
+          and small print were Ukrainian around a Turkish headline and a
+          Turkish paragraph. */}
       <div className="mt-3.5">
-        <SheetTitle id="bonus-popup-title">{promo.headline}</SheetTitle>
+        <SheetTitle id="bonus-popup-title">{tr(promo.headline)}</SheetTitle>
       </div>
-      <SheetBody>{promo.body}</SheetBody>
+      <SheetBody>{tr(promo.body)}</SheetBody>
       <SheetNote>
         {trf(
           "Güncel bonus koşulları için {broker}'in resmi sitesini kontrol edin · Bonus kampanyaları bazı bölgelerde/hesap türlerinde geçerli olmayabilir · Şartlar ve koşullar geçerlidir",
