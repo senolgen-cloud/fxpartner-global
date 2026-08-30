@@ -41,20 +41,25 @@ tutmak, makine yazımı metni gerçek bir insanın imzasıyla yayınlamak olurdu
 |---|---|---|---|
 | Sinyal & Copytrade | Sezgin Ünal | Sinyal Operasyonu Sorumlusu | MT5 köprüsünün sağlığı, pano doğruluğu, copytrade başvuruları |
 | Piyasa Analizi | Mehmet Ali Erdoğan | Kıdemli Teknik Analist | Günlük teknik analiz, `/teknik-analiz` enstrüman kapsamı |
-| Piyasa Analizi | Tuğçe *(soyadı teyit bekliyor)* | Makro Ekonomist | Ekonomik takvim yorumu, veri günleri |
-| Haber & Editöryal | Şebnem Köse | Akademi Editörü | Akademi ders serisi, konu kuyruğu, görsel anlatım metinleri |
+| Piyasa Analizi | Tuğçe Süslü | Makro Ekonomist | Ekonomik takvim yorumu, veri günleri |
+| Haber & Editöryal | Şebnem Köser | Akademi Editörü | Akademi ders serisi, konu kuyruğu, görsel anlatım metinleri |
 | Haber & Editöryal | Yunus Emre Coşkun | Haber Editörü | Haber filtreleme ve çeviri kalitesi, `/haber-bulteni` |
 | Broker İstihbaratı | Dilek Arabacıoğlu | Regülasyon Araştırmacısı | Lisans doğrulama, `/broker-lookup`, risk uyarı listesi |
 | Broker İstihbaratı | Taner Turan | Broker Analisti | Maliyet/spread karşılaştırması, `/categories`, prop firma incelemeleri |
-| Ortaklık & Cashback | Erdem Tarlan | Ortaklık Yöneticisi | IB/rev-share takibi, cashback oranı doğrulama, `/partners` |
+| Ortaklık & Cashback | Erden Tarlan | Ortaklık Yöneticisi | IB/rev-share takibi, cashback oranı doğrulama, `/partners` |
 | Reklam & Kampanya | Gülşah Avcı | Kampanya Küratörü | Kampanya şartlarının kaynağından doğrulanması, `/campaigns` |
 | Sosyal Medya & Topluluk | Esmanur Bulut | Sosyal Medya Uzmanı | Instagram yayın planı, görsel içerik |
 | Uyumluluk & Marka | Nilüfer Hatun | Uyumluluk Uzmanı | Yasal metinler, şikayet süreci, otomasyon 'active' onayı |
-| Uyumluluk & Marka | Arif Tuncel | Veri Koruma Sorumlusu | Çerez onayı ve consent kayıtları, `/privacy` |
+| Uyumluluk & Marka | Akif Tuncel | Veri Koruma Sorumlusu | Çerez onayı ve consent kayıtları, `/privacy` |
 
 **Kayda geçmeyen:** kimsenin özgeçmişi, önceki işvereni ya da sertifikası.
 Roster kurulurken bu bilgiler verilmedi; gerçek bir kişi adına kariyer
 uydurmak, alanı boş bırakmaktan kötüdür. Kendileri ilettiğinde eklenir.
+
+**İsimler teyitli.** Roster el yazısı bir listeden kuruldu ve dört okuma
+şüpheliydi; biri (bir soyadı) tahmin edilmek yerine boş bırakılmıştı.
+Dördü de 28.08.2026'da kurucuya doğrulatıldı: Tuğçe Süslü, Şebnem Köser,
+Erden Tarlan, Akif Tuncel.
 
 **Görev dağılımı bir öneridir.** Kimin hangi alanda uzman olduğu
 bilinmediği için atamalar kişilerin geçmişine değil, departmanların
