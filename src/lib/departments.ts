@@ -180,10 +180,7 @@ export const departments: Department[] = [
         focus: "Günlük teknik analiz üretimi ve /teknik-analiz sayfasının enstrüman kapsamı",
       },
       {
-        // Soyadı el yazısı listeden net okunamadı; teyit edilip
-        // tamamlanacak. Bir insanın adını tahminle yazmaktansa eksik
-        // bırakmak doğrusu.
-        name: "Tuğçe",
+        name: "Tuğçe Süslü",
         title: "Makro Ekonomist",
         focus: "Ekonomik takvim yorumu, veri günlerinde beklenti/gerçekleşen okuması",
       },
@@ -217,7 +214,7 @@ export const departments: Department[] = [
     },
     team: [
       {
-        name: "Şebnem Köse",
+        name: "Şebnem Köser",
         title: "Akademi Editörü",
         focus: "FXPARTNER Akademi ders serisi, konu kuyruğu ve görsel anlatımların metinleri",
       },
@@ -307,7 +304,7 @@ automation: "active",
     },
     team: [
       {
-        name: "Erdem Tarlan",
+        name: "Erden Tarlan",
         title: "Ortaklık Yöneticisi",
         focus: "IB/rev-share anlaşmalarının takibi, cashback oranlarının kaynağından doğrulanması, /partners başvuruları",
       },
@@ -398,7 +395,7 @@ automation: "active",
         focus: "Yasal uyarı metinleri, şikayet süreci, bir otomasyonu 'active'e almadan önceki son okuma",
       },
       {
-        name: "Arif Tuncel",
+        name: "Akif Tuncel",
         title: "Veri Koruma Sorumlusu",
         focus: "Çerez onayı ve consent kayıtları, /privacy metninin uygulamayla uyumu",
       },
@@ -408,7 +405,7 @@ automation: "active",
       "src/app/[locale]/privacy",
       "src/app/[locale]/blacklist",
       "src/app/[locale]/complaint",
-      // Arif Tuncel'in görev tanımı zaten bunları anıyordu; departman
+      // Akif Tuncel'in görev tanımı zaten bunları anıyordu; departman
       // dosyalara sahip değildi.
       "src/lib/consent.ts",
       "src/app/api/consent/route.ts",
