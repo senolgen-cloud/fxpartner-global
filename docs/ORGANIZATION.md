@@ -91,106 +91,36 @@ kadro kararı kurucunun.
 
 ### Kayıt defterinin kendisi denetleniyor
 
-`scripts/check-department-owns.mjs`, her departmanın sahiplendiği yolun
-gerçekten var olduğunu kontrol ediyor. Bu doküman ve `departments.ts`
-"tek doğruluk kaynağı" iddiasında; olmayan dosyaları gösteren bir kayıt
-defteri, hiç kayıt tutmamaktan kötüdür çünkü yetkiliymiş gibi okunur ve
-sessizce yanlıştır.
+`scripts/check-department-owns.mjs` üç şeyi kontrol ediyor:
 
-Denetim yazılır yazılmaz **13 bayat yol** buldu: `src/app/blog`,
-`src/app/campaigns`, `src/app/terms` ve arkadaşları — site çok dilli
-yapıya geçtiğinde `src/app/[locale]/` altına taşınmış, kayıt defterinde
-eski hâlleriyle kalmışlardı. Hepsi düzeltildi; 8 departman, 69 yol,
-tamamı yerinde.
+1. **Sahiplenilen her yol gerçekten var mı.** Bu denetim yazılır yazılmaz 13
+   bayat yol buldu — `src/app/blog`, `src/app/campaigns`, `src/app/terms` ve
+   arkadaşları, site çok dilli yapıya geçtiğinde `src/app/[locale]/` altına
+   taşınmış ve kayıt defterinde eski hâlleriyle kalmışlardı.
+2. **Hiçbir yol iki departmana ait değil.** Bu dokümanın kendi iddiası, ve
+   iki sahip sıfır sahiple aynı arıza: bir şey bozulduğunda ya kimsenin adı
+   yoktur ya da ikisi de diğerinin sandığını düşünür.
+3. **Her rotanın bir sahibi var.** Asıl çürüyecek yer burası: yeni bir sayfa
+   yayına girer, kimse buraya eklemez, ve kayıt defteri sessizce siteyi
+   anlatmayı bırakır.
 
-### Üyelik & Hesap Departmanı (28.08.2026'da açıldı)
+Üçünün de düştüğü kasten doğrulandı: bozuk yol, çift sahip, sahipsiz rota.
 
-`/account` sitedeki en büyük sahipsiz alandı: kayıt, giriş, kimlik
-doğrulama, erişim kademeleri, üye paneli ve bildirim kutusu. Departman
-`src/auth.ts`'ten `memberNotifications.ts`'e kadar bu zinciri sahipleniyor.
+Bugün: **10 departman, 148 yol** — tamamı yerinde, her biri tek sahipli, ve
+`src/app/[locale]/` altındaki her rota kapsanıyor.
 
-**`tierAccess.ts` ve `vip.ts` sinyal departmanından buraya taşındı.** Oraya
-"üyelik departmanı yok, bunları kullanan tek yüzey pano" notuyla ödünç
-konmuşlardı ve not, departman açılırsa taşınacaklarını söylüyordu. Pano
-onları kullanmaya devam ediyor — kullanmak sahiplenmek değil.
+### Kasıtlı olarak sahipsiz: platform katmanı
 
-**Bildirim sınırı:** gönderim altyapısı (`push.ts`, `sw.js`,
-`api/push/*`, `NotificationOptIn`) Sosyal Medya & Topluluk'ta kalıyor,
-çünkü orası yayın kanalı. Üyenin zilde ne gördüğü, neyin okunmuş sayıldığı
-ve tercihleri (`memberNotifications.ts`, `api/notifications`, `HeaderBell`,
-`NotificationProvider`) burada.
+Kütüphaneler rota gibi denetlenmiyor, çünkü on altı modül gerçekten hiçbir
+departmanın konusu değil ama her departmanın yolu. Bunlara sahip atamak
+sorumluluk değil, dosyalama olurdu:
 
-**Kadrosu yok.** On iki kişinin tamamı başka departmanlara yerleşmişti;
-sırf roster boş görünmesin diye birini buraya kaydırmak, yanlış bir atamayı
-görünür bir boşluğa tercih etmek olurdu. Boşluk kayıtlı duruyor.
-
-### Kayıt defterinin kendisi denetleniyor
-
-`scripts/check-department-owns.mjs` iki şeyi kontrol ediyor: sahiplenilen
-her yolun gerçekten var olduğunu, ve **hiçbir yolun iki departmana ait
-olmadığını**. İkincisi bu dokümanın kendi iddiası ("her sorumluluk tam
-olarak bir departmana ait") ve iki sahip, sıfır sahiple aynı arıza: bir şey
-bozulduğunda ya kimsenin adı yoktur ya da ikisi de diğerinin sandığını
-düşünür.
-
-Denetim yazılır yazılmaz **13 bayat yol** buldu: `src/app/blog`,
-`src/app/campaigns`, `src/app/terms` ve arkadaşları — site çok dilli
-yapıya geçtiğinde `src/app/[locale]/` altına taşınmış, kayıt defterinde
-eski hâlleriyle kalmışlardı. Hepsi düzeltildi.
-
-Bugün: **9 departman, 88 yol**, tamamı yerinde ve her biri tek sahipli.
-Denetim hem bozuk yolda hem çift sahipte düşüyor — ikisi de kasten
-bozulup doğrulandı.
-
-### Yapay Zeka Asistanı Departmanı (28.08.2026'da açıldı)
-
-Asistan sorulara sitenin kendi verisiyle cevap veriyor (canlı kurlar,
-broker kataloğu) ve departman ne söylediğinden, neyi söylemeyi
-reddettiğinden ve her cevabın maliyetinden sorumlu. `/ai-asistan`,
-asistan API'si, `AiMarketAssistant` ve `/admin/ai-sorulari` onun.
-
-`/admin/ai-sorulari` küçük görünür ama ürünün denetim yüzeyi: sorulan her
-soru `ai_assistant_log`'a yazılıyor ve asistanın gerçekte ne cevapladığını
-görmenin tek yolu o sayfa.
-
-**Otomasyonu `active`.** Takvimli değil — istek anında çalışıyor — ama bir
-insan araya girmeden markanın adına konuşuyor. Uyumluluk & Marka'nın
-"active olan her şey benim onayımdan geçer" kuralı bu yüzden buraya da
-uygulanmalı. (Üyelik & Hesap `manual`: orada da istek anında çalışan kod
-var ama hiçbiri markanın adına cümle kurmuyor.)
-
-**Sahiplenmediği şey: model çağıran her modül.** `educationPost.ts`,
-`bulletin.ts` ve `translateContent.ts` da Gemini'ye gidiyor; ürettikleri
-şey içerik ve içerik onu yazan departmanın. Bu departman asistan ürününün
-sahibi, sitenin yapay zeka kullanımının değil. Üçü de Haber & Editöryal'da.
-
-**İnsan desteği de değil.** `LiveSupportWidget` (WhatsApp/Telegram) Sosyal
-Medya & Topluluk'ta: biri modelin cevapladığı soru, diğeri bir insana
-gidiyor.
-
-**Açık iş:** `"gemini-3.6-flash"` altı ayrı dosyada ayrı ayrı yazılı —
-`educationPost`, `bulletin`, `translateContent`, asistan route'u ve iki
-script. Model yükseltmesi altı düzenleme demek ve biri atlanırsa kimse fark
-etmez. Paylaşılan bir sabit bu departmanın işi olurdu; scriptler `.mjs`
-olduğu için tek bir modül yetmiyor, o yüzden şimdilik tespit.
-
-### Kayıt defterinin kendisi denetleniyor
-
-`scripts/check-department-owns.mjs` iki şeyi kontrol ediyor: sahiplenilen
-her yolun gerçekten var olduğunu, ve **hiçbir yolun iki departmana ait
-olmadığını**. İkincisi bu dokümanın kendi iddiası ("her sorumluluk tam
-olarak bir departmana ait") ve iki sahip, sıfır sahiple aynı arıza: bir şey
-bozulduğunda ya kimsenin adı yoktur ya da ikisi de diğerinin sandığını
-düşünür.
-
-Denetim yazılır yazılmaz **13 bayat yol** buldu: `src/app/blog`,
-`src/app/campaigns`, `src/app/terms` ve arkadaşları — site çok dilli
-yapıya geçtiğinde `src/app/[locale]/` altına taşınmış, kayıt defterinde
-eski hâlleriyle kalmışlardı. Hepsi düzeltildi.
-
-Bugün: **10 departman, 95 yol**, tamamı yerinde ve her biri tek sahipli.
-Denetim hem bozuk yolda hem çift sahipte düşüyor — ikisi de kasten
-bozulup doğrulandı.
+- **i18n** — `chrome.ts`, `i18n.ts`, `dictionary.ts`, `localizeContent.ts`,
+  `serverLocale.ts`, `country.ts`, `countryLanguages.ts`
+- **SEO / paylaşım kartları** — `schema.ts`, `ogAssets.ts`, `ogIcons.tsx`
+- **operasyon** — `cron-wrapper.ts`, `notify.ts` (cron hatası uyarıları)
+- **diğer** — `navLinks.ts`, `visitor.ts`, `usePrefersReducedMotion.ts` ve
+  kayıt defterinin kendisi, `departments.ts`
 
 ### Kadrosu olmayan iki departman
 
@@ -198,20 +128,3 @@ bozulup doğrulandı.
 tamamı 28.08.2026'da diğer departmanlara yerleşmişti ve sonradan açılan bu
 iki departmana sırf roster dolu görünsün diye birini kaydırmak, görünür bir
 boşluğu yanlış bir atamayla takas etmek olurdu. Boşluk kayıtlı duruyor.
-
-### Hâlâ departmanı olmayan alanlar
-
-`/prop-firmalar`, `/teknik-analiz`, `/haber-bulteni`, `/broker-lookup`,
-`/brokerlar`, `/raporlar`, `/topluluk`, `/paketler`, `/instagram`,
-`/kurulum`, `/app` ve `/about`.
-
-Hepsi mevcut bir departmanın doğal uzantısı ve tek satırlık bir ekleme:
-`/teknik-analiz` → Piyasa Analizi, `/haber-bulteni` → Haber & Editöryal,
-`/broker-lookup` ve `/brokerlar` → Broker İstihbaratı, `/prop-firmalar` →
-Broker İstihbaratı ya da Ortaklık. Artık gerçekten yeni bir departman
-isteyen yüzey kalmadı.
-
-Bir de departmansız **plumbing** var: `chrome.ts`, `localizeContent.ts` ve
-i18n katmanının geri kalanı. Bunlar bir departmanın konusu değil, her
-departmanın içinden geçtiği altyapı; keyfi bir sahip atamaktansa böyle
-kayıtlı durmaları daha dürüst.
