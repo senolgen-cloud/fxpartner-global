@@ -162,6 +162,49 @@ export const departments: Department[] = [
     // yok ve olması da gerekmiyor.
     automation: "manual",
   },
+  // Üyelikten sonra, içerik departmanlarından önce: bu üçü (sinyal, üyelik,
+  // asistan) okurun kullandığı ürün yüzeyleri.
+  {
+    id: "ai-assistant",
+    name: "Yapay Zeka Asistanı Departmanı",
+    mission:
+      "Asistanın sorulara sitenin kendi verisiyle cevap vermesini sağlamak: canlı kurlar ve broker kataloğu. Ne söylediğinden, neyi söylemeyi reddettiğinden ve her cevabın maliyetinden sorumlu.",
+    expert: {
+      name: "Cem Yalçın",
+      title: "Yapay Zeka Ürün Direktörü",
+      focus: "Asistan istem tasarımı, kademe limitleri, soru kaydının incelenmesi",
+      voice: "Bilmediğini bilmediğini söyler; tavsiye değil bilgi verir",
+    },
+    // Kadrosu yok — Üyelik & Hesap ile aynı sebep: on iki kişinin tamamı
+    // yerleşmişti ve boş roster, yanlış atamadan iyidir.
+    team: [],
+    owns: [
+      "src/app/[locale]/ai-asistan",
+      "src/app/api/ai-assistant/route.ts",
+      "src/components/AiMarketAssistant.tsx",
+      // Sorulan her soru ai_assistant_log'a yazılıyor; bu sayfa onu okuyor.
+      // Asistanın gerçekte ne cevapladığını görmenin tek yolu, yani ürünün
+      // denetim yüzeyi.
+      "src/app/[locale]/admin/ai-sorulari",
+    ],
+    // "active", çünkü asistan bir insan araya girmeden markanın adına
+    // konuşuyor — takvimli değil, istek anında, ama denetimsiz. Uyumluluk &
+    // Marka'nın "active olan her şey benim onayımdan geçer" kuralı tam da bu
+    // yüzden buraya da uygulanmalı.
+    //
+    // SAHİPLENMEDİĞİ ŞEY: model çağıran her modül. educationPost.ts,
+    // bulletin.ts ve translateContent.ts da Gemini'ye gidiyor ama ürettikleri
+    // şey içerik, ve içerik onu yazan departmanın. Bu departman asistan
+    // ürününün sahibi, sitenin yapay zeka kullanımının değil.
+    //
+    // AÇIK İŞ: "gemini-3.6-flash" altı ayrı dosyada ayrı ayrı yazılı
+    // (educationPost, bulletin, translateContent, bu route, ve iki script).
+    // Model yükseltmesi altı düzenleme demek ve biri atlanırsa kimse fark
+    // etmez. Paylaşılan bir sabit bu departmanın işi olurdu; scriptler .mjs
+    // olduğu için tek bir modül yetmiyor, o yüzden burada tespit olarak
+    // duruyor.
+    automation: "active",
+  },
   {
     id: "market-intelligence",
     name: "Piyasa Analizi Departmanı",
@@ -232,6 +275,10 @@ export const departments: Department[] = [
       "src/lib/news.ts",
       "src/lib/relevance-filter.ts",
       "src/lib/translate.ts",
+      // İkisi de Gemini'ye gidiyor ama ürettikleri şey içerik; asistan
+      // departmanının değil, yazının sahibinin işi.
+      "src/lib/bulletin.ts",
+      "src/lib/translateContent.ts",
           "src/app/api/cron/education-posts/route.ts",
       "src/lib/educationTopics.ts",
       "src/lib/educationPost.ts",
@@ -369,6 +416,10 @@ automation: "active",
       "src/lib/signalAlertPace.ts",
       "src/app/api/community/sentiment/route.ts",
       "src/components/SentimentPoll.tsx",
+      // İnsan destek kanalı. Yapay Zeka Asistanı Departmanı'nın karşı
+      // tarafı: biri modelin cevapladığı soru, bu WhatsApp'ta bir insana
+      // gidiyor.
+      "src/components/LiveSupportWidget.tsx",
     ],
     // active-signals-digest activated 2026-08-24 per explicit owner request,
     // every 3 hours rather than the hourly it was first asked for — the same
