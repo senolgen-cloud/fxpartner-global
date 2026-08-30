@@ -42,6 +42,7 @@ tutmak, makine yazımı metni gerçek bir insanın imzasıyla yayınlamak olurdu
 |---|---|---|---|
 | Sinyal & Copytrade | Sezgin Ünal | Sinyal Operasyonu Sorumlusu | MT5 köprüsünün sağlığı, pano doğruluğu, copytrade başvuruları |
 | Yapay Zeka Asistanı | Taner Turan | Asistan Kalite Sorumlusu | Soru kaydını okumak, istem ve red kuralları, kademe limitleri |
+| Üyelik & Hesap | Akif Tuncel | Hesap Güvenliği ve Veri Sorumlusu | Kimlik doğrulama ve oturum güvenliği, üyenin verisi üzerindeki kontrolü, bildirim tercihleri |
 | Piyasa Analizi | Mehmet Ali Erdoğan | Kıdemli Teknik Analist | Günlük teknik analiz, `/teknik-analiz` enstrüman kapsamı |
 | Piyasa Analizi | Tuğçe Süslü | Makro Ekonomist | Ekonomik takvim yorumu, veri günleri |
 | Haber & Editöryal | Şebnem Köser | Akademi Editörü | Akademi ders serisi, konu kuyruğu, görsel anlatım metinleri |
@@ -50,8 +51,7 @@ tutmak, makine yazımı metni gerçek bir insanın imzasıyla yayınlamak olurdu
 | Ortaklık & Cashback | Erden Tarlan | Ortaklık Yöneticisi | IB/rev-share takibi, cashback oranı doğrulama, `/partners` |
 | Reklam & Kampanya | Gülşah Avcı | Kampanya Küratörü | Kampanya şartlarının kaynağından doğrulanması, `/campaigns` |
 | Sosyal Medya & Topluluk | Esmanur Bulut | Sosyal Medya Uzmanı | Instagram yayın planı, görsel içerik |
-| Uyumluluk & Marka | Nilüfer Hatun | Uyumluluk Uzmanı | Yasal metinler, şikayet süreci, otomasyon 'active' onayı |
-| Uyumluluk & Marka | Akif Tuncel | Veri Koruma Sorumlusu | Çerez onayı ve consent kayıtları, `/privacy` |
+| Uyumluluk & Marka | Nilüfer Hatun | Uyumluluk Uzmanı | Yasal metinler, çerez onayı ve `/privacy`, şikayet süreci, otomasyon 'active' onayı |
 
 **Kayda geçmeyen:** kimsenin özgeçmişi, önceki işvereni ya da sertifikası.
 Roster kurulurken bu bilgiler verilmedi; gerçek bir kişi adına kariyer
@@ -208,8 +208,28 @@ Broker İstihbaratı'nın çekirdeği (lisans doğrulama, `/broker-lookup`, risk
 uyarı listesi) Dilek Arabacıoğlu'nda kalıyor; taşınan, kataloğun
 karşılaştırma tarafıydı ve asistanın en çok soru aldığı alan da o.
 
-### Kadrosu olmayan tek departman
+### Üyelik & Hesap'a kadro (30.08.2026)
 
-Üyelik & Hesap'ın kadrosu yok. Sırf roster dolu görünsün diye birini
-kaydırmak, görünür bir boşluğu yanlış bir atamayla takas etmek olurdu;
-boşluk kayıtlı duruyor.
+Akif Tuncel Uyumluluk & Marka'dan buraya taşındı. Konusu zaten buydu,
+sadece diğer taraftan bakıyordu: çerez onayı **ziyaretçinin** verisiyle
+ilgili, bu departman ise **üyenin** verisiyle — kimlik doğrulama, oturum,
+tercihler, hesabı üzerindeki kontrolü.
+
+Kaynak yine ölçütle seçildi. Kalan üç iki-kişilik departmandan ikisi (Haber
+& Editöryal, Piyasa Analizi) günde iki kez yeni metin yazıyor ve editörsüz
+kalamaz; Uyumluluk & Marka `manual` — üretmiyor, denetliyor. Ve bu kez AI
+departmanındaki çıkar çatışması yok: Üyelik & Hesap markanın adına cümle
+kurmuyor, dolayısıyla uyumluluk kendi kendini denetlemiş olmuyor.
+
+**Çerez onayı ve `/privacy` onunla gelmedi.** İkisi de yasal metin meselesi
+ve Uyumluluk & Marka'nın çekirdeği; dosyalar orada kaldı ve Nilüfer
+Hatun'un görev tanımı onları kapsayacak şekilde genişletildi — sahiplenilen
+bir dosyanın arkasında adı geçen biri olmalı.
+
+### Kadro dağılımı
+
+On departmanın hepsinin kadrosu var. Sekizi tek kişilik; yalnızca Haber &
+Editöryal ile Piyasa Analizi iki kişilik, ve ikisi de otomasyonu yeni metin
+üreten departmanlar. Bundan sonraki her taşıma bu iki çiftten birini
+bozmak zorunda kalır — yani bir sonraki kadro ihtiyacı, taşımayla değil işe
+alımla çözülmeli.
