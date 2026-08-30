@@ -18,6 +18,7 @@ sahibidir.
 |---|---|---|---|
 | Sinyal & Copytrade | Onur Bektaş — Sinyal Operasyonları Direktörü | MT5 köprüsü, `/signals` panosu, `/copytrade`, pozisyon hesaplayıcı | **Active** (olay tetiklemeli) |
 | Üyelik & Hesap | Selin Arıkan — Üye Deneyimi Direktörü | Kayıt/giriş ve kimlik doğrulama, erişim kademeleri, üye paneli, bildirim kutusu | Manual |
+| Yapay Zeka Asistanı | Cem Yalçın — Yapay Zeka Ürün Direktörü | `/ai-asistan`, asistan API'si, kademe limitleri, soru kaydı | **Active** (istek anında, denetimsiz) |
 | Piyasa Analizi | Kaan Ediz — Baş Piyasa Analisti | Teknik analiz (market-update, BTC/USD, 2x/gün), günlük piyasa özeti duyurusu (market-analysis-share) | **Active** |
 | Haber & Editöryal | Elif Sarman — Editöryal Direktör | Haber filtreleme/çeviri, `/blog`, blog-share duyurusu | **Active** — news-update hâlâ paused, bkz. aşağıdaki blok |
 | Broker İstihbaratı & İnceleme | Deniz Akar — Baş Broker Analisti | Broker skorlama, `/brokers`, `/categories` | Manual |
@@ -141,14 +142,76 @@ Bugün: **9 departman, 88 yol**, tamamı yerinde ve her biri tek sahipli.
 Denetim hem bozuk yolda hem çift sahipte düşüyor — ikisi de kasten
 bozulup doğrulandı.
 
+### Yapay Zeka Asistanı Departmanı (28.08.2026'da açıldı)
+
+Asistan sorulara sitenin kendi verisiyle cevap veriyor (canlı kurlar,
+broker kataloğu) ve departman ne söylediğinden, neyi söylemeyi
+reddettiğinden ve her cevabın maliyetinden sorumlu. `/ai-asistan`,
+asistan API'si, `AiMarketAssistant` ve `/admin/ai-sorulari` onun.
+
+`/admin/ai-sorulari` küçük görünür ama ürünün denetim yüzeyi: sorulan her
+soru `ai_assistant_log`'a yazılıyor ve asistanın gerçekte ne cevapladığını
+görmenin tek yolu o sayfa.
+
+**Otomasyonu `active`.** Takvimli değil — istek anında çalışıyor — ama bir
+insan araya girmeden markanın adına konuşuyor. Uyumluluk & Marka'nın
+"active olan her şey benim onayımdan geçer" kuralı bu yüzden buraya da
+uygulanmalı. (Üyelik & Hesap `manual`: orada da istek anında çalışan kod
+var ama hiçbiri markanın adına cümle kurmuyor.)
+
+**Sahiplenmediği şey: model çağıran her modül.** `educationPost.ts`,
+`bulletin.ts` ve `translateContent.ts` da Gemini'ye gidiyor; ürettikleri
+şey içerik ve içerik onu yazan departmanın. Bu departman asistan ürününün
+sahibi, sitenin yapay zeka kullanımının değil. Üçü de Haber & Editöryal'da.
+
+**İnsan desteği de değil.** `LiveSupportWidget` (WhatsApp/Telegram) Sosyal
+Medya & Topluluk'ta: biri modelin cevapladığı soru, diğeri bir insana
+gidiyor.
+
+**Açık iş:** `"gemini-3.6-flash"` altı ayrı dosyada ayrı ayrı yazılı —
+`educationPost`, `bulletin`, `translateContent`, asistan route'u ve iki
+script. Model yükseltmesi altı düzenleme demek ve biri atlanırsa kimse fark
+etmez. Paylaşılan bir sabit bu departmanın işi olurdu; scriptler `.mjs`
+olduğu için tek bir modül yetmiyor, o yüzden şimdilik tespit.
+
+### Kayıt defterinin kendisi denetleniyor
+
+`scripts/check-department-owns.mjs` iki şeyi kontrol ediyor: sahiplenilen
+her yolun gerçekten var olduğunu, ve **hiçbir yolun iki departmana ait
+olmadığını**. İkincisi bu dokümanın kendi iddiası ("her sorumluluk tam
+olarak bir departmana ait") ve iki sahip, sıfır sahiple aynı arıza: bir şey
+bozulduğunda ya kimsenin adı yoktur ya da ikisi de diğerinin sandığını
+düşünür.
+
+Denetim yazılır yazılmaz **13 bayat yol** buldu: `src/app/blog`,
+`src/app/campaigns`, `src/app/terms` ve arkadaşları — site çok dilli
+yapıya geçtiğinde `src/app/[locale]/` altına taşınmış, kayıt defterinde
+eski hâlleriyle kalmışlardı. Hepsi düzeltildi.
+
+Bugün: **10 departman, 95 yol**, tamamı yerinde ve her biri tek sahipli.
+Denetim hem bozuk yolda hem çift sahipte düşüyor — ikisi de kasten
+bozulup doğrulandı.
+
+### Kadrosu olmayan iki departman
+
+Üyelik & Hesap ve Yapay Zeka Asistanı'nın kadrosu yok. On iki kişinin
+tamamı 28.08.2026'da diğer departmanlara yerleşmişti ve sonradan açılan bu
+iki departmana sırf roster dolu görünsün diye birini kaydırmak, görünür bir
+boşluğu yanlış bir atamayla takas etmek olurdu. Boşluk kayıtlı duruyor.
+
 ### Hâlâ departmanı olmayan alanlar
 
-`/ai-asistan`, `/prop-firmalar`, `/teknik-analiz`, `/haber-bulteni`,
-`/broker-lookup`, `/brokerlar`, `/raporlar`, `/topluluk`, `/paketler`,
-`/instagram`, `/kurulum`, `/app` ve `/about`.
+`/prop-firmalar`, `/teknik-analiz`, `/haber-bulteni`, `/broker-lookup`,
+`/brokerlar`, `/raporlar`, `/topluluk`, `/paketler`, `/instagram`,
+`/kurulum`, `/app` ve `/about`.
 
-Neredeyse hepsi mevcut bir departmanın doğal uzantısı ve tek satırlık bir
-ekleme: `/teknik-analiz` → Piyasa Analizi, `/haber-bulteni` → Haber &
-Editöryal, `/broker-lookup` ve `/brokerlar` → Broker İstihbaratı,
-`/prop-firmalar` → Broker İstihbaratı ya da Ortaklık. Gerçekten yeni bir
-sahip isteyen tek alan `/ai-asistan`. Karar kurucunun.
+Hepsi mevcut bir departmanın doğal uzantısı ve tek satırlık bir ekleme:
+`/teknik-analiz` → Piyasa Analizi, `/haber-bulteni` → Haber & Editöryal,
+`/broker-lookup` ve `/brokerlar` → Broker İstihbaratı, `/prop-firmalar` →
+Broker İstihbaratı ya da Ortaklık. Artık gerçekten yeni bir departman
+isteyen yüzey kalmadı.
+
+Bir de departmansız **plumbing** var: `chrome.ts`, `localizeContent.ts` ve
+i18n katmanının geri kalanı. Bunlar bir departmanın konusu değil, her
+departmanın içinden geçtiği altyapı; keyfi bir sahip atamaktansa böyle
+kayıtlı durmaları daha dürüst.
