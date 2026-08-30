@@ -16,7 +16,8 @@ sahibidir.
 
 | Departman | Uzman | Sorumluluk | Otomasyon |
 |---|---|---|---|
-| Sinyal & Copytrade | Onur Bektaş — Sinyal Operasyonları Direktörü | MT5 köprüsü, `/signals` panosu ve erişim kademeleri, `/copytrade`, pozisyon hesaplayıcı | **Active** (olay tetiklemeli) |
+| Sinyal & Copytrade | Onur Bektaş — Sinyal Operasyonları Direktörü | MT5 köprüsü, `/signals` panosu, `/copytrade`, pozisyon hesaplayıcı | **Active** (olay tetiklemeli) |
+| Üyelik & Hesap | Selin Arıkan — Üye Deneyimi Direktörü | Kayıt/giriş ve kimlik doğrulama, erişim kademeleri, üye paneli, bildirim kutusu | Manual |
 | Piyasa Analizi | Kaan Ediz — Baş Piyasa Analisti | Teknik analiz (market-update, BTC/USD, 2x/gün), günlük piyasa özeti duyurusu (market-analysis-share) | **Active** |
 | Haber & Editöryal | Elif Sarman — Editöryal Direktör | Haber filtreleme/çeviri, `/blog`, blog-share duyurusu | **Active** — news-update hâlâ paused, bkz. aşağıdaki blok |
 | Broker İstihbaratı & İnceleme | Deniz Akar — Baş Broker Analisti | Broker skorlama, `/brokers`, `/categories` | Manual |
@@ -96,16 +97,53 @@ yapıya geçtiğinde `src/app/[locale]/` altına taşınmış, kayıt defterinde
 eski hâlleriyle kalmışlardı. Hepsi düzeltildi; 8 departman, 69 yol,
 tamamı yerinde.
 
+### Üyelik & Hesap Departmanı (28.08.2026'da açıldı)
+
+`/account` sitedeki en büyük sahipsiz alandı: kayıt, giriş, kimlik
+doğrulama, erişim kademeleri, üye paneli ve bildirim kutusu. Departman
+`src/auth.ts`'ten `memberNotifications.ts`'e kadar bu zinciri sahipleniyor.
+
+**`tierAccess.ts` ve `vip.ts` sinyal departmanından buraya taşındı.** Oraya
+"üyelik departmanı yok, bunları kullanan tek yüzey pano" notuyla ödünç
+konmuşlardı ve not, departman açılırsa taşınacaklarını söylüyordu. Pano
+onları kullanmaya devam ediyor — kullanmak sahiplenmek değil.
+
+**Bildirim sınırı:** gönderim altyapısı (`push.ts`, `sw.js`,
+`api/push/*`, `NotificationOptIn`) Sosyal Medya & Topluluk'ta kalıyor,
+çünkü orası yayın kanalı. Üyenin zilde ne gördüğü, neyin okunmuş sayıldığı
+ve tercihleri (`memberNotifications.ts`, `api/notifications`, `HeaderBell`,
+`NotificationProvider`) burada.
+
+**Kadrosu yok.** On iki kişinin tamamı başka departmanlara yerleşmişti;
+sırf roster boş görünmesin diye birini buraya kaydırmak, yanlış bir atamayı
+görünür bir boşluğa tercih etmek olurdu. Boşluk kayıtlı duruyor.
+
+### Kayıt defterinin kendisi denetleniyor
+
+`scripts/check-department-owns.mjs` iki şeyi kontrol ediyor: sahiplenilen
+her yolun gerçekten var olduğunu, ve **hiçbir yolun iki departmana ait
+olmadığını**. İkincisi bu dokümanın kendi iddiası ("her sorumluluk tam
+olarak bir departmana ait") ve iki sahip, sıfır sahiple aynı arıza: bir şey
+bozulduğunda ya kimsenin adı yoktur ya da ikisi de diğerinin sandığını
+düşünür.
+
+Denetim yazılır yazılmaz **13 bayat yol** buldu: `src/app/blog`,
+`src/app/campaigns`, `src/app/terms` ve arkadaşları — site çok dilli
+yapıya geçtiğinde `src/app/[locale]/` altına taşınmış, kayıt defterinde
+eski hâlleriyle kalmışlardı. Hepsi düzeltildi.
+
+Bugün: **9 departman, 88 yol**, tamamı yerinde ve her biri tek sahipli.
+Denetim hem bozuk yolda hem çift sahipte düşüyor — ikisi de kasten
+bozulup doğrulandı.
+
 ### Hâlâ departmanı olmayan alanlar
 
-`/account` (üyelik, bildirim tercihleri), `/ai-asistan`, `/prop-firmalar`,
-`/teknik-analiz`, `/haber-bulteni`, `/broker-lookup`, `/brokerlar`,
-`/raporlar`, `/topluluk`, `/paketler`, `/instagram`, `/kurulum`, `/app`
-ve `/about`.
+`/ai-asistan`, `/prop-firmalar`, `/teknik-analiz`, `/haber-bulteni`,
+`/broker-lookup`, `/brokerlar`, `/raporlar`, `/topluluk`, `/paketler`,
+`/instagram`, `/kurulum`, `/app` ve `/about`.
 
-Bir kısmı bir departmanın doğal uzantısı (`/teknik-analiz` → Piyasa
-Analizi, `/haber-bulteni` → Haber & Editöryal, `/broker-lookup` ve
-`/brokerlar` → Broker İstihbaratı) ve tek satırlık bir ekleme. `/account`
-ise gerçekten kimsenin olmadığı bir alan: üyelik, kademeler ve bildirim
-tercihleri şu an sinyal departmanının `tierAccess`/`vip` üzerinden ödünç
-sahiplendiği plumbing. Karar kurucunun.
+Neredeyse hepsi mevcut bir departmanın doğal uzantısı ve tek satırlık bir
+ekleme: `/teknik-analiz` → Piyasa Analizi, `/haber-bulteni` → Haber &
+Editöryal, `/broker-lookup` ve `/brokerlar` → Broker İstihbaratı,
+`/prop-firmalar` → Broker İstihbaratı ya da Ortaklık. Gerçekten yeni bir
+sahip isteyen tek alan `/ai-asistan`. Karar kurucunun.
