@@ -89,6 +89,71 @@ Operasyonu" unvanıyla konmuştu, çünkü sinyalin departmanı yoktu.
 Departmanın sahiplendiği yüzey alanına göre tek kişi az; bu bir tespit,
 kadro kararı kurucunun.
 
+### Üyelik & Hesap Departmanı (28.08.2026'da açıldı)
+
+`/account` sitedeki en büyük sahipsiz alandı: kayıt, giriş, kimlik
+doğrulama, erişim kademeleri, üye paneli ve bildirim kutusu. Departman
+`src/auth.ts`'ten `memberNotifications.ts`'e kadar bu zinciri sahipleniyor.
+
+**`tierAccess.ts` ve `vip.ts` sinyal departmanından buraya taşındı.** Oraya
+"üyelik departmanı yok, bunları kullanan tek yüzey pano" notuyla ödünç
+konmuşlardı ve not, departman açılırsa taşınacaklarını söylüyordu. Pano
+onları kullanmaya devam ediyor — kullanmak sahiplenmek değil.
+
+**Bildirim sınırı:** gönderim altyapısı (`push.ts`, `sw.js`,
+`api/push/*`, `NotificationOptIn`) Sosyal Medya & Topluluk'ta kalıyor,
+çünkü orası yayın kanalı. Üyenin zilde ne gördüğü, neyin okunmuş sayıldığı
+ve tercihleri (`memberNotifications.ts`, `api/notifications`, `HeaderBell`,
+`NotificationProvider`) burada.
+
+### Yapay Zeka Asistanı Departmanı (28.08.2026'da açıldı)
+
+Asistan sorulara sitenin kendi verisiyle cevap veriyor (canlı kurlar,
+broker kataloğu) ve departman ne söylediğinden, neyi söylemeyi
+reddettiğinden ve her cevabın maliyetinden sorumlu. `/ai-asistan`,
+asistan API'si, `AiMarketAssistant` ve `/admin/ai-sorulari` onun.
+
+`/admin/ai-sorulari` küçük görünür ama ürünün denetim yüzeyi: sorulan her
+soru `ai_assistant_log`'a yazılıyor ve asistanın gerçekte ne cevapladığını
+görmenin tek yolu o sayfa.
+
+**Otomasyonu `active`.** Takvimli değil — istek anında çalışıyor — ama bir
+insan araya girmeden markanın adına konuşuyor. Uyumluluk & Marka'nın
+"active olan her şey benim onayımdan geçer" kuralı bu yüzden buraya da
+uygulanmalı. (Üyelik & Hesap `manual`: orada da istek anında çalışan kod
+var ama hiçbiri markanın adına cümle kurmuyor.)
+
+**Sahiplenmediği şey: model çağıran her modül.** `educationPost.ts`,
+`bulletin.ts` ve `translateContent.ts` da Gemini'ye gidiyor; ürettikleri
+şey içerik ve içerik onu yazan departmanın. Bu departman asistan ürününün
+sahibi, sitenin yapay zeka kullanımının değil. Üçü de Haber & Editöryal'da.
+
+**İnsan desteği de değil.** `LiveSupportWidget` (WhatsApp/Telegram) Sosyal
+Medya & Topluluk'ta: biri modelin cevapladığı soru, diğeri bir insana
+gidiyor.
+
+**Model adı tek yerde: `src/lib/gemini.ts`.** Altı dosyada ayrı ayrı
+yazılıydı — `educationPost`, `bulletin`, `translateContent`, asistan
+route'u ve iki script — ve her biri aynı istek URL'ini kendi kopyasından
+kuruyordu. Yükseltme altı düzenleme demekti ve biri atlanırsa yakalanması
+en zor biçimde bozuluyordu: hiçbir şey kırılmıyor, hiçbir uyarı çıkmıyor,
+sadece o yüzey eski modeli çağırmaya devam ediyor.
+
+Scriptler `.mjs` ve TypeScript modülünü import edemiyor, o yüzden
+`scripts/lib/gemini.mjs` değeri **kopyalamıyor, `gemini.ts`'ten okuyor** —
+iki yer bir yer değildir ve unutulan hep ikincisidir.
+
+`scripts/check-gemini-model.mjs` ikisini birden koruyor: modelin
+`gemini.ts` dışında hiçbir dosyada adının geçmemesi, ve scriptlerin
+okuyucusunun hâlâ çalışması. İkinci kural birleştirmenin kendi yarattığı
+kırılganlık için: okuyucu `gemini.ts`'in şekline bağlı ve bozulursa aksi
+hâlde ancak bir sonraki çeviri çalıştırmasında ortaya çıkardı. İki dal da
+kırılarak doğrulandı.
+
+Sabit bu departmanın — en çok çağıran taraf olduğu için değil, sitenin
+hangi modelle konuştuğu tek bir karar olduğu ve tek bir sahibi olması
+gerektiği için.
+
 ### Kayıt defterinin kendisi denetleniyor
 
 `scripts/check-department-owns.mjs` üç şeyi kontrol ediyor:
@@ -106,7 +171,7 @@ kadro kararı kurucunun.
 
 Üçünün de düştüğü kasten doğrulandı: bozuk yol, çift sahip, sahipsiz rota.
 
-Bugün: **10 departman, 148 yol** — tamamı yerinde, her biri tek sahipli, ve
+Bugün: **10 departman, 151 yol** — tamamı yerinde, her biri tek sahipli, ve
 `src/app/[locale]/` altındaki her rota kapsanıyor.
 
 ### Kasıtlı olarak sahipsiz: platform katmanı
