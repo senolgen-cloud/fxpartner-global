@@ -19,6 +19,13 @@
  * same failure as none: when something breaks, nobody's name is on it, or
  * two people each assume it was the other's.
  *
+ * Third rule: every route under src/app/[locale]/ must have an owner. That
+ * is the half that actually rots — a new page ships, nobody adds it here,
+ * and the registry silently stops describing the site. Libraries are not
+ * checked this way; the i18n, SEO and ops layers underneath are genuinely
+ * nobody's subject and everybody's path, and forcing an owner on them would
+ * be filing, not accountability.
+ *
  * Comments are stripped before parsing, and each department's `owns` array
  * is read by matching brackets from its own `id`, rather than with one
  * regex across the file — a greedy match here silently attributes one
@@ -78,6 +85,16 @@ for (const match of ids) {
   }
 }
 
+// Route coverage. A route counts as owned when any owned path names it or
+// something inside it — `admin` is covered by `admin/cashback`.
+const ROUTES_DIR = "src/app/[locale]";
+for (const entry of fs.readdirSync(ROUTES_DIR, { withFileTypes: true })) {
+  if (!entry.isDirectory() || entry.name.startsWith("[")) continue;
+  const route = `${ROUTES_DIR}/${entry.name}`;
+  const covered = [...owners.keys()].some((p) => p === route || p.startsWith(`${route}/`));
+  if (!covered) problems.push(`route "${route}" belongs to no department`);
+}
+
 if (problems.length) {
   console.error("department ownership:");
   for (const p of problems) console.error(`  ${p}`);
@@ -85,5 +102,6 @@ if (problems.length) {
 }
 
 console.log(
-  `department ownership: ${ids.length} departments, ${checked} owned paths, all present`
+  `department ownership: ${ids.length} departments, ${checked} owned paths, ` +
+    "all present, each with one owner, every route covered"
 );

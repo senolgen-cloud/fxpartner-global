@@ -157,6 +157,15 @@ export const departments: Department[] = [
       "src/app/api/notifications/route.ts",
       "src/components/HeaderBell.tsx",
       "src/components/NotificationProvider.tsx",
+      "src/app/[locale]/paketler",
+      "src/data/packageTiers.ts",
+      // Abonelik ödemesi.
+      "src/lib/nowpayments.ts",
+      // Üyeye giden e-postalar.
+      "src/lib/email.ts",
+      "src/lib/welcomeEmail.ts",
+      // Zilin sesi.
+      "src/lib/chime.ts",
     ],
     // Kayıt, giriş ve panel istek anında çalışıyor; zamanlanmış hiçbir iş
     // yok ve olması da gerekmiyor.
@@ -238,6 +247,15 @@ export const departments: Department[] = [
       "src/lib/technicals.ts",
       "src/lib/telegram-posted-store.ts",
       "src/lib/economicCalendar.ts",
+      "src/app/[locale]/teknik-analiz",
+      "src/data/technicalAnalysis.ts",
+      "src/components/TechnicalAnalysisCard.tsx",
+      "src/app/api/technical-analysis-share/route.ts",
+      ".github/workflows/technical-analysis-share.yml",
+      "src/data/marketAnalysis.ts",
+      // Canlı kur beslemesi. Asistan ve ticker da kullanıyor; kullanmak
+      // sahiplenmek değil.
+      "src/lib/rates.ts",
     ],
     // economic-calendar-alert scheduled (every 5 min) as of 2026-08-07 per
     // owner approval — same "department active, one owned cron still
@@ -284,6 +302,16 @@ export const departments: Department[] = [
       "src/lib/educationPost.ts",
       "src/app/[locale]/egitim",
       ".github/workflows/education-posts.yml",
+      "src/app/[locale]/haber-bulteni",
+      // Bültenin okur listesi. Toplama formu pazarlama gibi görünür ama
+      // topladığı şey bu departmanın yazdığı bülteni okuyacak kişiler.
+      "src/lib/newsletter-actions.ts",
+      "src/components/NewsletterSignup.tsx",
+      "src/components/NewsletterPopup.tsx",
+      // Akademi görsel anlatımları — /egitim zaten burada.
+      "src/lib/educationVisuals.ts",
+      "src/components/education",
+      "scripts/check-education-visuals.mjs",
 ],
     // "active" as of 2026-08-05: blog-share (announces manually-written
     // /blog posts) is scheduled, per the user's explicit request in that
@@ -332,6 +360,26 @@ automation: "active",
       "src/app/[locale]/categories",
       "src/lib/brokerContent.ts",
       "src/app/api/cron/broker-review-share",
+      // Türkçe liste sayfası — /brokers ile aynı katalog, ayrı URL.
+      "src/app/[locale]/brokerlar",
+      "src/lib/brokerReviews.ts",
+      "src/lib/comparisonCriteria.ts",
+      "src/lib/monogram.ts",
+      "src/components/ComparisonTable.tsx",
+      // İsimle regülasyon sorgusu.
+      "src/app/[locale]/broker-lookup",
+      "src/data/brokerLookup.ts",
+      "src/components/BrokerLookupSearch.tsx",
+      "src/components/BrokerLookupFullIndex.tsx",
+      // Prop firmalar broker gibi inceleniyor ve karşılaştırılıyor, o yüzden
+      // burada. İndirim kodlarının ticari tarafı Ortaklık'ın ilişkisi;
+      // sayfalar buranın işi.
+      "src/app/[locale]/prop-firmalar",
+      "src/data/propFirms.ts",
+      "src/components/PropFirmComparisonTable.tsx",
+      "src/components/PropFirmFeaturedCard.tsx",
+      // Broker düzenleme raporu — kataloğun toplu okuması.
+      "src/app/[locale]/raporlar",
     ],
     // broker-review-share cron posts one broker review page per hour to
     // Telegram, rotating through src/data/brokers.ts — activated per
@@ -361,6 +409,8 @@ automation: "active",
       "src/app/[locale]/cashback",
       "src/app/[locale]/admin/cashback",
       "src/app/[locale]/partners",
+      "src/data/partnerProgram.ts",
+      "src/components/partners",
     ],
     automation: "manual",
   },
@@ -382,7 +432,17 @@ automation: "active",
         focus: "Kampanya şartlarının brokerın resmi sayfasından doğrulanması ve /campaigns içeriğinin güncelliği",
       },
     ],
-    owns: ["src/app/[locale]/campaigns", "src/app/api/cron/campaign-digest/route.ts"],
+    owns: [
+      "src/app/[locale]/campaigns",
+      "src/app/api/cron/campaign-digest/route.ts",
+      // Yazı gövdelerine ve sayfa kenarlarına giren sponsorlu yerleşimler.
+      "src/lib/xm.ts",
+      "src/components/XmInlineAd.tsx",
+      "src/components/BrokerAdBanner.tsx",
+      "src/components/BrokerSkyscraperAd.tsx",
+      "src/components/RotatingBrokerAd.tsx",
+      "src/components/SponsoredLeaderboard.tsx",
+    ],
     automation: "active",
   },
   {
@@ -420,6 +480,20 @@ automation: "active",
       // tarafı: biri modelin cevapladığı soru, bu WhatsApp'ta bir insana
       // gidiyor.
       "src/components/LiveSupportWidget.tsx",
+      "src/app/[locale]/topluluk",
+      "src/app/[locale]/instagram",
+      // Sinyal kartlarını X'e gönderiyor. İçerik sinyalin, kanal buranın —
+      // active-signals-digest ile aynı ayrım.
+      "src/lib/x.ts",
+      "src/lib/telegram-pace.ts",
+      // Uygulama kurulumu. Yayın kanalının uzantısı: iki sayfanın da vaadi
+      // bildirim, ve service worker zaten burada.
+      "src/app/[locale]/app",
+      "src/app/[locale]/kurulum",
+      "src/lib/standalone.ts",
+      "src/components/AddToHomeScreen.tsx",
+      "src/components/InstallAppButtons.tsx",
+      "src/components/ServiceWorkerRegistrar.tsx",
     ],
     // active-signals-digest activated 2026-08-24 per explicit owner request,
     // every 3 hours rather than the hourly it was first asked for — the same
@@ -461,6 +535,8 @@ automation: "active",
       "src/lib/consent.ts",
       "src/app/api/consent/route.ts",
       "src/components/CookieConsent.tsx",
+      // Şirketin kendini anlattığı sayfa — marka metni.
+      "src/app/[locale]/about",
     ],
     automation: "manual",
   },
