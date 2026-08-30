@@ -14,6 +14,11 @@
  * — routes that moved under `src/app/[locale]/` when the site went
  * multi-locale, and had been stale in the registry ever since.
  *
+ * The file also says every responsibility belongs to *exactly* one
+ * department, so a path claimed twice is checked as well. Two owners is the
+ * same failure as none: when something breaks, nobody's name is on it, or
+ * two people each assume it was the other's.
+ *
  * Comments are stripped before parsing, and each department's `owns` array
  * is read by matching brackets from its own `id`, rather than with one
  * regex across the file — a greedy match here silently attributes one
@@ -45,6 +50,7 @@ function bracketSlice(text, from) {
 
 const ids = [...code.matchAll(/\bid:\s*"([a-z0-9-]+)"/g)];
 const problems = [];
+const owners = new Map();
 let checked = 0;
 
 if (ids.length === 0) problems.push(`${SOURCE}: no departments found — has the file changed shape?`);
@@ -66,6 +72,9 @@ for (const match of ids) {
   for (const path of paths) {
     checked++;
     if (!fs.existsSync(path)) problems.push(`${id}: owns "${path}", which does not exist`);
+    const already = owners.get(path);
+    if (already) problems.push(`"${path}" is owned by both ${already} and ${id}`);
+    else owners.set(path, id);
   }
 }
 

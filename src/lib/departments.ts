@@ -88,11 +88,10 @@ export const departments: Department[] = [
       "src/lib/signalAccess.ts",
       "src/lib/signalPeriods.ts",
       "src/lib/signalStats.ts",
-      // Üyelik kademesi aslında bir üyelik konusu, ama üyelik departmanı
-      // yok ve bunları kullanan tek yüzey pano. Bir gün /account kendi
-      // departmanını alırsa ikisi oraya taşınır.
-      "src/lib/tierAccess.ts",
-      "src/lib/vip.ts",
+      // tierAccess.ts ve vip.ts burada değil: 28.08.2026'da Üyelik & Hesap
+      // Departmanı açılınca oraya taşındılar, tam da buradaki not öyle
+      // olacağını söylediği için. Pano onları kullanmaya devam ediyor;
+      // kullanmak sahiplenmek değil.
       // Copytrade.
       "src/app/[locale]/copytrade",
       "src/data/copytrade.ts",
@@ -115,6 +114,53 @@ export const departments: Department[] = [
     // tanımı zaten "diğer departmanların içeriğini tek bir marka sesiyle
     // yayınlamak" — yayın kanalı onların, içerik bizim.
     automation: "active",
+  },
+  // Sinyalin hemen ardından, çünkü ikisi birbirine kenetli: panoyu kimin
+  // görebildiğine bu departmanın kademeleri karar veriyor.
+  {
+    id: "membership-account",
+    name: "Üyelik & Hesap Departmanı",
+    mission:
+      "Üyeliğin tamamı: kayıt, giriş ve kimlik doğrulama, erişim kademeleri, üye paneli, bildirim kutusu ve üyenin kendi hesabı üzerindeki kontrolü.",
+    expert: {
+      name: "Selin Arıkan",
+      title: "Üye Deneyimi Direktörü",
+      focus: "Kayıt/giriş akışı, erişim kademeleri, üye paneli, bildirim tercihleri",
+      voice: "Açık ve zorlamasız; bir üyeyi yükseltmeye ikna etmez, ne aldığını söyler",
+    },
+    // Kadrosu yok. On iki kişinin tamamı başka departmanlara yerleşmişti ve
+    // sırf roster boş kalmasın diye birini buraya kaydırmak, yanlış bir
+    // atamayı görünür bir boşluğa tercih etmek olurdu. Boşluk kayıtlı
+    // duruyor; doldurmak kurucunun kararı.
+    team: [],
+    owns: [
+      // Kimlik doğrulama.
+      "src/auth.ts",
+      "src/lib/authProviders.ts",
+      "src/app/api/auth/[...nextauth]/route.ts",
+      // Panel ve akışlar.
+      "src/app/[locale]/account",
+      "src/components/account",
+      "src/components/SignInForm.tsx",
+      "src/components/SimpleSignInForm.tsx",
+      "src/components/UpgradeGate.tsx",
+      "src/lib/accents.ts",
+      // Erişim kademeleri. Sinyal panosunu bunlar kilitliyor ama kademe bir
+      // üyelik kavramı; pano onları kullanıyor, sahiplenmiyor.
+      "src/lib/tierAccess.ts",
+      "src/lib/vip.ts",
+      // Bildirim KUTUSU — gönderim değil. Sınır şurada: push altyapısı
+      // (push.ts, sw.js, api/push/*, NotificationOptIn) Sosyal Medya &
+      // Topluluk'ta, çünkü orası yayın kanalı. Üyenin zilde ne gördüğü,
+      // neyin okunmuş sayıldığı ve tercihlerinin ne olduğu burada.
+      "src/lib/memberNotifications.ts",
+      "src/app/api/notifications/route.ts",
+      "src/components/HeaderBell.tsx",
+      "src/components/NotificationProvider.tsx",
+    ],
+    // Kayıt, giriş ve panel istek anında çalışıyor; zamanlanmış hiçbir iş
+    // yok ve olması da gerekmiyor.
+    automation: "manual",
   },
   {
     id: "market-intelligence",
@@ -323,6 +369,9 @@ automation: "active",
       ".github/workflows/telegram-cron.yml",
       "src/app/api/cron/active-signals-digest/route.ts",
       ".github/workflows/active-signals-digest.yml",
+      "src/lib/signalAlertPace.ts",
+      "src/app/api/community/sentiment/route.ts",
+      "src/components/SentimentPoll.tsx",
     ],
     // active-signals-digest activated 2026-08-24 per explicit owner request,
     // every 3 hours rather than the hourly it was first asked for — the same
@@ -354,7 +403,17 @@ automation: "active",
         focus: "Çerez onayı ve consent kayıtları, /privacy metninin uygulamayla uyumu",
       },
     ],
-    owns: ["src/app/[locale]/terms", "src/app/[locale]/privacy", "src/app/[locale]/blacklist", "src/app/[locale]/complaint"],
+    owns: [
+      "src/app/[locale]/terms",
+      "src/app/[locale]/privacy",
+      "src/app/[locale]/blacklist",
+      "src/app/[locale]/complaint",
+      // Arif Tuncel'in görev tanımı zaten bunları anıyordu; departman
+      // dosyalara sahip değildi.
+      "src/lib/consent.ts",
+      "src/app/api/consent/route.ts",
+      "src/components/CookieConsent.tsx",
+    ],
     automation: "manual",
   },
 ];
