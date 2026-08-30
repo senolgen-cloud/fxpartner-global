@@ -47,6 +47,75 @@ export interface Department {
 }
 
 export const departments: Department[] = [
+  // First in the list on purpose. The signal board is what the site is for;
+  // everything else — reviews, education, campaigns — is built around a
+  // tracked account publishing what it actually did. It went without a
+  // department until 2026-08-28 only because nobody had written one down.
+  {
+    id: "signals-copytrade",
+    name: "Sinyal & Copytrade Departmanı",
+    mission:
+      "Takip edilen MT5 hesabının işlemlerini olduğu gibi yayınlamak; panonun erişim kademelerini, istatistiklerini ve kopyalama akışını doğru tutmak. Bir sinyal bir tavsiye değil, gerçekleşmiş bir işlemin kaydıdır.",
+    expert: {
+      name: "Onur Bektaş",
+      title: "Sinyal Operasyonları Direktörü",
+      focus: "MT5 köprüsü, sinyal panosu, erişim kademeleri, copytrade akışı",
+      voice: "Yalnızca olanı bildirir; 'şunu al' demez, 'şu işlem açıldı' der",
+    },
+    team: [
+      {
+        // Sosyal Medya & Topluluk'tan buraya taşındı. Oraya "Topluluk ve
+        // Sinyal Operasyonu" unvanıyla konmuştu, çünkü sinyalin departmanı
+        // yoktu; artık var.
+        name: "Sezgin Ünal",
+        title: "Sinyal Operasyonu Sorumlusu",
+        focus: "MT5 köprüsünün sağlığı, panodaki açık/kapalı işlem doğruluğu, copytrade başvuruları",
+      },
+    ],
+    owns: [
+      // MT5 köprüsü: EA'lar bu uçlara yazar, pano bu uçlardan okur.
+      "mt5-ea",
+      "src/app/api/trade-signal/route.ts",
+      "src/app/api/trade-update/route.ts",
+      "src/app/api/trade-result/route.ts",
+      "src/app/api/pending-order/route.ts",
+      "src/app/api/signals/route.ts",
+      "src/app/api/live-prices/route.ts",
+      // Pano ve erişim.
+      "src/app/[locale]/signals",
+      "src/components/SignalsBoard.tsx",
+      "src/components/SignalsPromoBanner.tsx",
+      "src/lib/signalAccess.ts",
+      "src/lib/signalPeriods.ts",
+      "src/lib/signalStats.ts",
+      // Üyelik kademesi aslında bir üyelik konusu, ama üyelik departmanı
+      // yok ve bunları kullanan tek yüzey pano. Bir gün /account kendi
+      // departmanını alırsa ikisi oraya taşınır.
+      "src/lib/tierAccess.ts",
+      "src/lib/vip.ts",
+      // Copytrade.
+      "src/app/[locale]/copytrade",
+      "src/data/copytrade.ts",
+      "src/components/CopyTradeButton.tsx",
+      "src/components/CopytradeInquiryForm.tsx",
+      // "Bu hareket kaç lotta ne eder" — pozisyon büyüklüğü tarafı.
+      "src/app/[locale]/pozisyon-hesaplayici",
+      "src/components/PositionSizeCalculator.tsx",
+      "src/components/LotLadder.tsx",
+      "src/lib/positionSize.ts",
+      "src/lib/contractSizes.ts",
+    ],
+    // Bu departmanın otomasyonu takvimle değil olayla çalışıyor: EA bir
+    // işlem açtığında uç nokta tetikleniyor, cron beklemiyor. Yukarıdaki
+    // üç değerin böyle bir karşılığı yok; "active" en yakını, çünkü
+    // insan müdahalesi olmadan sürekli çalışıyor.
+    //
+    // Panoyu Telegram'a DUYURMAK burada değil: active-signals-digest ve
+    // signalAlertPace.ts Sosyal Medya & Topluluk'ta kalıyor. O departmanın
+    // tanımı zaten "diğer departmanların içeriğini tek bir marka sesiyle
+    // yayınlamak" — yayın kanalı onların, içerik bizim.
+    automation: "active",
+  },
   {
     id: "market-intelligence",
     name: "Piyasa Analizi Departmanı",
@@ -77,8 +146,8 @@ export const departments: Department[] = [
       "src/app/api/cron/market-update/route.ts",
       "src/app/api/cron/market-analysis-share/route.ts",
       "src/app/api/cron/economic-calendar-alert/route.ts",
-      "src/app/piyasa-analizi",
-      "src/app/ekonomik-takvim",
+      "src/app/[locale]/piyasa-analizi",
+      "src/app/[locale]/ekonomik-takvim",
       "src/lib/market-data.ts",
       "src/lib/technicals.ts",
       "src/lib/telegram-posted-store.ts",
@@ -115,7 +184,7 @@ export const departments: Department[] = [
     owns: [
       "src/app/api/cron/news-update/route.ts",
       "src/app/api/cron/blog-share/route.ts",
-      "src/app/blog",
+      "src/app/[locale]/blog",
       "src/data/blog.ts",
       "src/lib/news.ts",
       "src/lib/relevance-filter.ts",
@@ -169,8 +238,8 @@ automation: "active",
     ],
     owns: [
       "src/data/brokers.ts",
-      "src/app/brokers",
-      "src/app/categories",
+      "src/app/[locale]/brokers",
+      "src/app/[locale]/categories",
       "src/lib/brokerContent.ts",
       "src/app/api/cron/broker-review-share",
     ],
@@ -199,9 +268,9 @@ automation: "active",
     ],
     owns: [
       "src/data/cashback.ts",
-      "src/app/cashback",
-      "src/app/admin/cashback",
-      "src/app/partners",
+      "src/app/[locale]/cashback",
+      "src/app/[locale]/admin/cashback",
+      "src/app/[locale]/partners",
     ],
     automation: "manual",
   },
@@ -223,7 +292,7 @@ automation: "active",
         focus: "Kampanya şartlarının brokerın resmi sayfasından doğrulanması ve /campaigns içeriğinin güncelliği",
       },
     ],
-    owns: ["src/app/campaigns", "src/app/api/cron/campaign-digest/route.ts"],
+    owns: ["src/app/[locale]/campaigns", "src/app/api/cron/campaign-digest/route.ts"],
     automation: "active",
   },
   {
@@ -242,11 +311,6 @@ automation: "active",
         name: "Esmanur Bulut",
         title: "Sosyal Medya Uzmanı",
         focus: "Instagram yayın planı (docs/instagram-strategy.md) ve görsel içerik üretimi",
-      },
-      {
-        name: "Sezgin Ünal",
-        title: "Topluluk ve Sinyal Operasyonu",
-        focus: "Telegram kanalı, sinyal panosu duyurularının temposu, VIP davet akışı",
       },
     ],
     owns: [
@@ -290,7 +354,7 @@ automation: "active",
         focus: "Çerez onayı ve consent kayıtları, /privacy metninin uygulamayla uyumu",
       },
     ],
-    owns: ["src/app/terms", "src/app/privacy", "src/app/blacklist", "src/app/complaint"],
+    owns: ["src/app/[locale]/terms", "src/app/[locale]/privacy", "src/app/[locale]/blacklist", "src/app/[locale]/complaint"],
     automation: "manual",
   },
 ];
