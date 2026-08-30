@@ -139,10 +139,17 @@ oturumda depoya giremiyordu; bir sonraki denemede de giremeyecek.
 - Şablonun parlak yeşili (`#37d37a`) marka turkuazına (`#0891b2`) çekildi.
 - Turkuaz zeminde okunmayan koyu gövde metni beyaza alındı.
 - Alt bant: *"Yatırım tavsiyesi değildir · fxpartner.global/egitim"*.
+- Şablonun üç stok görseli (bir grafik, bir sunucu odası, bir hesap makinesi)
+  silindi. Konuyla ilgileri yoktu ve FXPARTNER'ın görsel diliyle de
+  bağdaşmıyorlardı — site fotoğraf kullanmıyor.
+- Boşalan yer dekorasyonla değil **içerikle** dolduruldu: sitedeki şeklin
+  sayılı örneği (10.000 bakiye · %1 risk · 20 pip stop → **0,50 lot**) ve pip
+  değerinin enstrümana göre değiştiğini söyleyen not. Üç adım da tam genişliğe
+  alındı.
 
-Sosyal paylaşım için kullanılabilir (bkz. `docs/instagram-strategy.md`), ama hâlâ
-şablonun konuyla ilgisiz stok görsellerini taşıyor. **Sitedeki şekiller bu tasarımdan
-türetilmedi ve ona bağlı değil** — kod tarafı kendi başına tamamdır.
+Artık sosyal paylaşımda kullanılabilir (bkz. `docs/instagram-strategy.md`).
+**Sitedeki şekiller yine de bu tasarımdan türetilmedi ve ona bağlı değil** —
+kod tarafı kendi başına tamamdır; bu, aynı içeriğin paylaşılabilir sürümü.
 
 **Sonraki tur için:** Canva'yı sitenin şekillerini üretmek için değil, onların sosyal
 sürümlerini üretmek için kullanmak daha doğru. O durumda da metin `generate-design`'a
