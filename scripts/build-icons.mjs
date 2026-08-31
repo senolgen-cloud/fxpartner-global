@@ -142,6 +142,33 @@ for (const size of [512, 192]) {
   written.push(file);
 }
 
+// The loading screen's sheen mask. Same artwork with its luminance moved
+// into the alpha channel: for light emitted on a black field that is
+// exactly its coverage, so the highlight sweeping across the loader is
+// confined to the globe, the ring and the lettering instead of lighting the
+// whole square. Derived here rather than drawn by hand so it cannot drift
+// from the icon it is a mask for — see .brand-loader-mark in globals.css.
+const MASK_SIZE = 512;
+{
+  const filled = await render(art, MASK_SIZE, FILL.any);
+  const { data, info } = await sharp(filled).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  const mask = Buffer.alloc(MASK_SIZE * MASK_SIZE * 4);
+  for (let i = 0, p = 0; i < data.length; i += info.channels, p += 4) {
+    mask[p] = 255;
+    mask[p + 1] = 255;
+    mask[p + 2] = 255;
+    mask[p + 3] = Math.round(0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2]);
+  }
+  const file = path.join(OUT, `${BASE}-mark-alpha.png`);
+  fs.writeFileSync(
+    file,
+    await sharp(mask, { raw: { width: MASK_SIZE, height: MASK_SIZE, channels: 4 } })
+      .png({ compressionLevel: 9 })
+      .toBuffer()
+  );
+  written.push(file);
+}
+
 // The tab. Four sizes because Windows shortcuts and older browsers pick
 // different ones, and 16 is not a downscale of 48 that anyone would like.
 const faviconSizes = [16, 32, 48, 64];

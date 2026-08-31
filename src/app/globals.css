@@ -626,14 +626,22 @@ body[data-sheet="modal"] [data-behind-sheet] {
   animation: brand-sheen 1.9s ease-in-out infinite;
   mix-blend-mode: screen;
   pointer-events: none;
-  /* Masked to the wordmark itself. Without this the sheen is a rectangle:
-     screen-blending lightens whatever it crosses, and the logo PNG is
-     transparent everywhere except the letters, so the highlight lit the
-     empty box around them and a lighter panel swept across the screen. The
-     mask confines it to the artwork alpha, so the light travels over the
-     letters and nothing else. */
-  -webkit-mask-image: url("/fxpartner-logo.png");
-  mask-image: url("/fxpartner-logo.png");
+  /* Masked to the mark itself. Without this the sheen is a rectangle:
+     screen-blending lightens whatever it crosses, so the highlight lit the
+     empty box around the artwork and a lighter panel swept across the
+     screen. The mask confines it to the artwork, so the light travels over
+     the globe and the letters and nothing else.
+
+     A SEPARATE FILE, not the icon. The icon is opaque — a black square with
+     the mark lit on it — so masking with its own alpha would select the
+     whole square and bring the rectangle straight back. The mask file is
+     the same artwork with its luminance moved into the alpha channel, which
+     for light emitted on a black field is exactly its coverage: it selects
+     the globe, the ring and the lettering at the strength each one glows.
+     Built by scripts/build-icons.mjs alongside the icons it is derived
+     from, so the two cannot drift apart. */
+  -webkit-mask-image: url("/icon-fxpartner-2026-mark-alpha.png");
+  mask-image: url("/icon-fxpartner-2026-mark-alpha.png");
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
   -webkit-mask-repeat: no-repeat;
