@@ -41,6 +41,61 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-08-31-2200",
+    title: "FXPARTNER Piyasa Özeti | 31.08.2026 Gece Güncellemesi",
+    excerpt:
+      "İran, Ürdün'deki King Hussein ve Al Azraq üsleriyle BAE'deki Al Minhad hava üssünü füze ve dronlarla vurdu; Ürdün ordusu hava sahasına giren sekiz füzeyi düşürdüğünü açıkladı. Saldırının can kaybı olmadan geri püskürtülmesi petroldeki sert yükselişi bir miktar geriletirken, dolar Cuma günkü kazancının bir kısmını veriyor, altın toparlanmaya çalışıyor ve Tim Cook 15 yılın ardından Apple CEO'luğunu John Ternus'a devrediyor.",
+    publishedAt: "2026-08-31",
+    readingMinutes: 4,
+    intro:
+      "Gece saatlerinde gelen gelişmeler, İran'ın ABD'nin Larak Adası'ndaki saldırısına verdiği karşılığı netleştirdi: İran Devrim Muhafızları Ordusu (IRGC), Ürdün'deki iki ABD üssüne füze ve drone saldırısı düzenlerken Birleşik Arap Emirlikleri'ndeki bir üssü de hedef aldığını iddia etti. Saldırının büyük ölçüde savunma sistemleriyle etkisiz hale getirilmesi ve can kaybı bildirilmemesi, erken saatlerdeki sert petrol yükselişinin bir kısmının geri alınmasına yol açtı. Bu arada dolar, Fed Başkanı Warsh'ın şahin mesajıyla kazandığı ivmenin bir bölümünü kaybederken, kurumsal tarafta Apple'da tarihi bir liderlik değişimi gerçekleşiyor.",
+    news: [
+      {
+        icon: "💥",
+        heading: "İran'dan Ürdün ve BAE'deki ABD Üslerine Füze ve Drone Saldırısı",
+        body: "IRGC, Larak Adası'ndaki saldırının karşılığı olarak Ürdün'de **King Hussein** ve **Al Azraq** üslerini füze ve dronlarla hedef aldığını, teknik altyapı, bakım tesisleri ve savaş uçağı konuşlanma noktalarında **\"ağır hasar\"** oluşturduğunu iddia etti — bu iddia bağımsız olarak henüz doğrulanmadı. Ürdün Ordusu, hava sahasına giren **sekiz füzeyi** düşürdüğünü açıklarken, ABD Merkez Kuvvetler Komutanlığı (CENTCOM) tüm füzelerin etkisiz hale getirildiğini bildirdi. IRGC ayrıca BAE'deki **Al Minhad Hava Üssü'nü** dronlarla vurduğunu öne sürdü; BAE Savunma Bakanlığı ise üssünün hedef alındığı iddiasını reddederek hava kuvvetlerinin bölgesel sularına yaklaşan bir dronu etkisiz hale getirdiğini duyurdu. Saldırının can kaybı olmadan püskürtülmesi, erken saatlerde **%3'ün üzerinde** yükselen Brent ve WTI petrolün kazancının bir kısmını geri vermesine yol açtı; piyasalar gelişmeyi şimdilik sınırlı ölçekli bir karşılık olarak fiyatlıyor.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar, Cuma Günkü Sert Yükselişin Bir Kısmını Geri Veriyor",
+        body: "ABD Dolar Endeksi (**DXY**), Fed Başkanı Kevin Warsh'ın şahin Jackson Hole mesajıyla kaydettiği güçlü haftalık kazancın ardından **%0,1 gerileyerek 99,60** seviyesine indi. **EUR/USD**, Warsh'ın şahin duruşuna rağmen **1,1600** seviyesinin çevresinde güç toplamaya çalışırken, **USD/JPY** Cuma günkü **160,20** zirvesinden **159,50** bandına geriledi; yen, Avrupa seansında kayıplarının bir kısmını telafi etti.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın, Cuma Günkü Sert Satışın Ardından Toparlanmaya Çalışıyor",
+        body: "XAU/USD, Warsh'ın açıklamaları sonrası **%3'ün üzerinde** değer kaybettiği Cuma seansının ardından **%0,2 yükselişle 4.464,65 dolar** seviyesine çıktı. Buna karşın altın vadeli işlemleri **%0,4 gerileyerek 4.513,50 dolar** seviyesinde işlem gördü; yatırımcılar hem Eylül faiz artırımı beklentilerini hem de bölgesel jeopolitik gelişmeleri birlikte fiyatlamaya devam ediyor.",
+      },
+      {
+        icon: "🍏",
+        heading: "Tim Cook, 15 Yılın Ardından Apple CEO'luğunu Bırakıyor",
+        body: "**Tim Cook**, Steve Jobs'tan görevi devraldığı **24 Ağustos 2011'den** bu yana sürdürdüğü Apple CEO'luğunu bugün itibarıyla bırakıyor. Şirketin donanım mühendisliğinden sorumlu Kıdemli Başkan Yardımcısı **John Ternus**, **1 Eylül** itibarıyla CEO koltuğuna geçerken, Cook stratejik danışmanlık sağlayacağı **İcra Kurulu Başkanlığı** görevine geçiş yapıyor. Liderlik değişimi, Apple hissesinin ağırlıklı bulunduğu Nasdaq ve Dow Jones endeksleri açısından yakından izleniyor.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "Hafta Boyunca",
+        icon: "🇮🇷",
+        title: "İran-ABD Gerilimi",
+        note: "Ürdün ve BAE'deki üslere yönelik saldırının ardından bölgesel gerginliğin seyri ve olası yeni adımlar yakından izlenecek; gelişmeler petrol ve güvenli liman varlıkları üzerinde etkili olmaya aday.",
+      },
+      {
+        time: "Hafta Boyunca",
+        icon: "💻",
+        title: "Dell ve Broadcom Bilançoları",
+        note: "Bu hafta açıklanacak teknoloji sektörü bilançoları, Nasdaq'taki yapay zekâ temalı rallinin sürdürülebilirliğine dair yeni sinyaller verebilir.",
+      },
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Fed'in Eylül faiz kararı öncesi işgücü piyasasına dair son büyük veri; sürpriz bir sonuç faiz artırım beklentilerini yeniden fiyatlayabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-08-31-1500",
     title: "FXPARTNER Piyasa Özeti | 31.08.2026 Öğleden Sonra Güncellemesi",
     excerpt:
