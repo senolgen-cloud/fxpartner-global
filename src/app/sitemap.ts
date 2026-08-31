@@ -27,6 +27,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/raporlar/forex-broker-duzenleme-raporu`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${SITE_URL}/partners`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${SITE_URL}/copytrade`, changeFrequency: "weekly", priority: 0.7 },
+    // Five public pages were missing from this list entirely — crawlable
+    // (robots.ts disallows only /account, /admin and /api) but never
+    // announced, so a crawler could only reach them by following an
+    // internal link. /signals is the one that stings: it is the product the
+    // header, the home page and the Telegram channel all point at.
+    { url: `${SITE_URL}/signals`, changeFrequency: "daily", priority: 0.8 },
+    { url: `${SITE_URL}/ai-asistan`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${SITE_URL}/ekonomik-takvim`, changeFrequency: "daily", priority: 0.7 },
+    { url: `${SITE_URL}/topluluk`, changeFrequency: "weekly", priority: 0.6 },
+    // On a site about who to trust with money, the page saying who we are
+    // is not decoration.
+    { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/prop-firmalar`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/prop-firmalar/indirim-kodlari`, changeFrequency: "weekly", priority: 0.75 },
     { url: `${SITE_URL}/cashback`, changeFrequency: "weekly", priority: 0.7 },
