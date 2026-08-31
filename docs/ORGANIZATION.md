@@ -233,3 +233,41 @@ Editöryal ile Piyasa Analizi iki kişilik, ve ikisi de otomasyonu yeni metin
 üreten departmanlar. Bundan sonraki her taşıma bu iki çiftten birini
 bozmak zorunda kalır — yani bir sonraki kadro ihtiyacı, taşımayla değil işe
 alımla çözülmeli.
+
+### Akademi bir gün yayın yapmadı — sebebi ve kalıcı çözümü (31.08.2026)
+
+31 Ağustos'ta hiçbir ders yayınlanmadı. Bozulan bir şey yoktu: **iş hiç
+çalışmadı.**
+
+GitHub'ın zamanlanmış işleri "en iyi çaba" ile çalışır. Bu iş `40 7 * * *`
+diyordu, ama son altı gündeki gerçek çalışma saatleri 08:22, 18:24, 19:34,
+13:21, 13:17 — hepsi saatlerce sapmış — ve 31'inin çalışması tamamen
+düşürüldü. Günde tek slotun ikinci şansı yok: düşen bir çalışma, eksik bir
+gün demek. Ve hiçbir yerde alarm çalmıyor; site iyi görünüyor, sadece
+sessizce bir ders eksik.
+
+Saatlik `channel-dispatch` bu sorunu hiç yaşamadı, çünkü kaçan bir saat bir
+saat sonra tekrar deneniyor. Doğru cevap platform değiştirmek değil, işi
+**aynı şekle sokmak: sık dene, bir kez yayınla.**
+
+İki yarım, ancak birlikte çalışıyor:
+
+1. **Günde dört deneme** (07:40, 11:40, 15:40, 19:40 UTC). Bir günü tamamen
+   kaybetmek için artık dördünün de düşmesi gerekiyor.
+2. **Günlük tavan** (`src/lib/educationCadence.ts`). O gün kaç ders
+   yayınlandığı sayılıyor; ilk isabet eden deneme günün iki dersini yazıyor,
+   kalanlar tek sorguyla "bugünkü zaten yayında" deyip dönüyor.
+
+Tek başına ikisi de hata: tavansız denemeler günde sekiz ders yayınlar — tam
+olarak iki-ders kadansının önlemek için var olduğu patlama; denemesiz tavan
+ise bu işin başladığı yer.
+
+**Kaçan gün kaçmış kalıyor.** Sayaç bugünün, birikmiş borcun değil. Dün
+eksik kaldı diye bugün dört ders yayınlamak, kadansın engellediği şeyin ta
+kendisi olurdu.
+
+`scripts/check-education-cadence.mjs` üç şeyi birden denetliyor: takvimde
+birden fazla ve farklı saatte deneme olduğunu, rotanın tavanı gerçekten
+uyguladığını (hesaplayıp yok saymadığını), ve aritmetiğin kendisini —
+sekiz vaka gerçekten çalıştırılıyor, `?count=` ile günlük kotanın
+aşılabildiği vaka dahil.
