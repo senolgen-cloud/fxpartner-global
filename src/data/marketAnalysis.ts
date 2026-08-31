@@ -41,6 +41,55 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-08-31-1500",
+    title: "FXPARTNER Piyasa Özeti | 31.08.2026 Öğleden Sonra Güncellemesi",
+    excerpt:
+      "ABD'nin Hürmüz Boğazı yakınlarında İran'a ait roketatarları vurmasının ardından petrol %3'ün üzerinde yükseldi (Brent 91, WTI 86 doların üzerinde); Wall Street vadeli işlemleri hafif geriledi, yen 160 sınırını aşarak müdahale ihtimalini yeniden gündeme getirdi, dolar Warsh sonrası güçlü seyrini sürdürüyor.",
+    publishedAt: "2026-08-31",
+    readingMinutes: 4,
+    intro:
+      "Öğleden sonra seansında piyasaların gündemine, ABD ordusunun Pazar günü Hürmüz Boğazı yakınında İran'a ait roketatarları vurması damgasını vurdu. Yaklaşık bir aylık göreli sakinliğin ardından gelen saldırı jeopolitik risk primini yeniden canlandırırken, petrol fiyatlarındaki sert yükseliş ve yenin 160 sınırını aşması güne damgasını vuran diğer başlıklar oldu.",
+    news: [
+      {
+        icon: "🛢️",
+        heading: "ABD'nin İran'a Saldırısı Sonrası Petrol %3'ün Üzerinde Yükseldi",
+        body: "ABD ordusu, Pazar günü **Hürmüz Boğazı** yakınındaki **Larak Adası'nda**, denize mayın atmaya hazırlandığı belirlenen iki İran roketatarını vurdu. ABD Merkez Kuvvetler Komutanlığı (CENTCOM) sözcüsü Kaptan Tim Hawkins'in doğruladığı saldırı, yaklaşık bir aylık sakinliğin ardından gelen ilk doğrudan askeri hareket oldu. İran Devrim Muhafızları Ordusu (IRGC), saldırıda can kaybı ve yaralı olduğunu açıklayarak **\"karşılık vereceklerini\"** duyurdu. Gelişme sonrası ham petrol fiyatları sert yükseldi: **Brent petrol %3'ün üzerinde artışla 91 doların**, **WTI ham petrolü ise %3'ün üzerinde artışla 86 doların** üzerine çıktı.",
+      },
+      {
+        icon: "📉",
+        heading: "Wall Street Vadeli İşlemleri Geriledi, Ay Genelinde Güçlü Görünüm Korunuyor",
+        body: "İran'a yönelik saldırı haberinin ardından ABD vadeli endeks işlemleri hafif geriledi; **S&P 500 vadeli işlemleri %0,12**, **Nasdaq 100 vadeli işlemleri %0,11** değer kaybederken **Dow Jones vadeli işlemleri** yatay seyretti. Buna rağmen Wall Street ay genelinde güçlü bir görünüm sergiliyor: **Dow Jones ay başından bu yana %2,1** yükselirken, **S&P 500 ve Nasdaq Composite** sırasıyla **yaklaşık %3 ve %4** artışla mayıstan bu yana ilk aylık kazançlarına doğru ilerliyor.",
+      },
+      {
+        icon: "💴",
+        heading: "Yen 160 Sınırını Aştı, Müdahale İhtimali Yeniden Masada",
+        body: "USD/JPY, Fed Başkanı Warsh'ın şahin Jackson Hole çıkışının doları desteklemesinin ardından Cuma günü **%0,5 değer kaybıyla 160,20** seviyesine geriledi. Piyasa stratejistleri, yenin daha da zayıflaması halinde Japon yetkililerin yeniden piyasaya müdahale edebileceği eşik seviyeler olarak **161** ve ardından **162-163 bandını** işaret ediyor. Yen, geçtiğimiz ay sonundaki rekor müdahale döneminde kazandığı değerin **yarısından fazlasını** şimdiden geri vermiş durumda.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar Endeksi Warsh Sonrası Güçlü Seyrini Koruyor",
+        body: "ABD Doları, Fed Başkanı Kevin Warsh'ın şahin Jackson Hole açıklamalarının ardından yaklaşık **bir ayın en güçlü kazancını** kaydettikten sonra Asya seansında büyük rakipleri karşısında dar bir bantta seyrini sürdürüyor. Artan Eylül faiz artırımı beklentileri, doları destekleyen ana unsur olmaya devam ediyor.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "Hafta Boyunca",
+        icon: "🇮🇷",
+        title: "İran'ın Olası Misilleme Adımı",
+        note: "IRGC'nin saldırıya karşılık vereceğini açıklaması, Hürmüz Boğazı çevresinde yeni bir gerginlik dalgasına yol açabilir; gelişmeler petrol ve güvenli liman varlıkları üzerinde etkili olmaya aday.",
+      },
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Fed'in Eylül faiz kararı öncesi işgücü piyasasına dair son büyük veri; sürpriz bir sonuç faiz artırım beklentilerini yeniden fiyatlayabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "gunluk-bulten-2026-08-31-1200",
     title: "FXPARTNER Günlük Bülten | 31.08.2026",
     excerpt:
