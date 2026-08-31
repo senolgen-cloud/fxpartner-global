@@ -9,6 +9,8 @@ import { newsBulletins } from "@/db/schema";
 import { desc } from "drizzle-orm";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
+import { loadOptional } from "@/lib/dbOptional";
+import DataUnavailable from "@/components/DataUnavailable";
 import { pickTranslation } from "@/lib/translateContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
@@ -44,10 +46,19 @@ export default async function NewsBulletinIndexPage({
   const { locale: pageLocale } = await params;
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
-  const rows = await db.query.newsBulletins.findMany({
-    orderBy: [desc(newsBulletins.publishedAt)],
-    limit: 50,
-  });
+  // Same reasoning as the lesson index: the page keeps its header and its
+  // structure, and the empty state below is not allowed to tell a reader
+  // that no bulletin has been published when ninety of them exist and are
+  // merely out of reach.
+  const { data: rows, unavailable } = await loadOptional(
+    "haber-bulteni: bulletins",
+    [] as (typeof newsBulletins.$inferSelect)[],
+    () =>
+      db.query.newsBulletins.findMany({
+        orderBy: [desc(newsBulletins.publishedAt)],
+        limit: 50,
+      })
+  );
   const locale = isLocale(pageLocale) ? pageLocale : defaultLocale;
   const bulletins = rows.map((row) => ({
     ...row,
@@ -84,7 +95,9 @@ export default async function NewsBulletinIndexPage({
 
         <section>
           <div className="mx-auto max-w-3xl px-6 py-16">
-            {bulletins.length === 0 ? (
+            {unavailable ? (
+              <DataUnavailable what={tr("Bülten listesi")} />
+            ) : bulletins.length === 0 ? (
               <p className="text-text-muted">{tr("Henüz bülten yayınlanmadı.")}</p>
             ) : (
               <div className="divide-y divide-hairline-light border-t border-hairline-light">

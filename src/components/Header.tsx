@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "@/components/LocaleLink";
-import { auth } from "@/auth";
+import { optionalSession } from "@/lib/optionalSession";
 import HeaderNav from "@/components/HeaderNav";
 import AppBackButton from "@/components/AppBackButton";
 import HeaderQuickActions from "@/components/HeaderQuickActions";
 
 export default async function Header({ standalone = true }: { standalone?: boolean } = {}) {
-  const session = await auth();
+  const session = await optionalSession();
   const signedIn = Boolean(session?.user);
   const accountHref = signedIn ? "/account" : "/account/login";
 

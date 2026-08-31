@@ -23,7 +23,7 @@ import BrokerHeroSlider from "@/components/BrokerHeroSlider";
 import { brokers } from "@/data/brokers";
 import { localizeBrokers } from "@/lib/localizeContent";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
-import { auth } from "@/auth";
+import { optionalSession } from "@/lib/optionalSession";
 import { LocaleProvider } from "@/components/LocaleProvider";
 import {
   hreflangMap,
@@ -193,7 +193,7 @@ export default async function RootLayout({
   // component three levels down knows which tree it is in.
   setServerLocale(locale);
 
-  const session = await auth();
+  const session = await optionalSession();
   const signedIn = Boolean(session?.user);
   const accountHref = signedIn ? "/account" : "/account/login";
   const localizedBrokers = localizeBrokers(rankedBrokers, locale);

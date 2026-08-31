@@ -11,7 +11,7 @@ import { tradeSignals, vipSubscriptions } from "@/db/schema";
 import { getSponsoredBrokerPool } from "@/data/brokers";
 import { desc, eq, and } from "drizzle-orm";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
-import { auth } from "@/auth";
+import { optionalSession } from "@/lib/optionalSession";
 import { type AccessTier } from "@/lib/vip";
 import { maskLockedActiveSignal } from "@/lib/signalAccess";
 import { getDictionary } from "@/lib/dictionary";
@@ -20,6 +20,10 @@ import { trData } from "@/lib/localizeContent";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import { setServerLocale } from "@/lib/serverLocale";
 import { getSignalPeriods } from "@/lib/signalPeriods";
+import { loadOptional } from "@/lib/dbOptional";
+import DataUnavailable from "@/components/DataUnavailable";
+
+type TradeSignal = typeof tradeSignals.$inferSelect;
 
 const sponsoredBrokers = getSponsoredBrokerPool("signals");
 
@@ -92,34 +96,62 @@ export default async function SignalsPage({
   // the same bug as showing them to a reader.
   const localFaqs = trData(faqs);
 
-  const session = await auth();
+  const session = await optionalSession();
 
-  const [active, closed, subscriptionRow] = await Promise.all([
-    db.query.tradeSignals.findMany({
-      where: eq(tradeSignals.status, "active"),
-      orderBy: desc(tradeSignals.createdAt),
-      limit: 30,
-    }),
-    db.query.tradeSignals.findMany({
-      where: eq(tradeSignals.status, "closed"),
-      orderBy: desc(tradeSignals.closedAt),
-      // 30 değil 250: sayfadaki kazanma oranı ve K/Z toplamı bu diziden
-      // hesaplanıyor, yani limit doğrudan yayınlanan rakamı belirliyordu.
-      // 30'da kalırken halka %59 gösteriyordu; tüm geçmiş üzerinden gerçek
-      // oran %63,4. Kısacası limit, performansı olduğundan kötü gösteriyordu.
-      // 250, mevcut 123 kapanmış işlemin rahatça üstünde ve satır sayısı
-      // sayfayı zorlamıyor.
-      limit: 250,
-    }),
+  // The board is why this page exists, so an unreadable board is the one
+  // thing here worth admitting to. Everything around it — the live market
+  // grid, the VIP explanation, the FAQ, the disclaimer — is worth reading
+  // on its own, and a reader who came for signals is better served by a
+  // page that says "back in a minute" than by an error screen that says
+  // nothing and offers nowhere to go.
+  const [board, subscriptionRow] = await Promise.all([
+    loadOptional(
+      "signals: board",
+      { active: [] as TradeSignal[], closed: [] as TradeSignal[] },
+      async () => {
+        const [active, closed] = await Promise.all([
+          db.query.tradeSignals.findMany({
+            where: eq(tradeSignals.status, "active"),
+            orderBy: desc(tradeSignals.createdAt),
+            limit: 30,
+          }),
+          db.query.tradeSignals.findMany({
+            where: eq(tradeSignals.status, "closed"),
+            orderBy: desc(tradeSignals.closedAt),
+            // 30 değil 250: sayfadaki kazanma oranı ve K/Z toplamı bu
+            // diziden hesaplanıyor, yani limit doğrudan yayınlanan rakamı
+            // belirliyordu. 30'da kalırken halka %59 gösteriyordu; tüm
+            // geçmiş üzerinden gerçek oran %63,4. Kısacası limit,
+            // performansı olduğundan kötü gösteriyordu. 250, mevcut 123
+            // kapanmış işlemin rahatça üstünde ve satır sayısı sayfayı
+            // zorlamıyor.
+            limit: 250,
+          }),
+        ]);
+        return { active, closed };
+      }
+    ),
+    // The subscription read is its own failure: losing it must not empty
+    // the board, and losing the board must not silently downgrade a paying
+    // member. Failing it closed costs a VIP reader the unmasked rows for a
+    // few minutes; failing it open would hand them to everybody.
     session?.user?.id
-      ? db.query.vipSubscriptions.findFirst({
-          where: and(
-            eq(vipSubscriptions.userId, session.user.id),
-            eq(vipSubscriptions.status, "active")
-          ),
-        })
+      ? db.query.vipSubscriptions
+          .findFirst({
+            where: and(
+              eq(vipSubscriptions.userId, session.user.id),
+              eq(vipSubscriptions.status, "active")
+            ),
+          })
+          .catch((err) => {
+            console.error("signals: subscription unavailable, masking as free —", err);
+            return null;
+          })
       : Promise.resolve(null),
   ]);
+
+  const { data: signals, unavailable: signalsUnavailable } = board;
+  const { active, closed } = signals;
 
   // Signed out -> null (everything masked, including the free FX signals —
   // that mask is the registration prompt). Signed in with no active
@@ -163,6 +195,11 @@ export default async function SignalsPage({
         </div>
 
         <HeroProductShot priority />
+        {signalsUnavailable && (
+          <div className="mx-auto max-w-3xl px-6 pt-6">
+            <DataUnavailable what={tr("Sinyal panosu")} />
+          </div>
+        )}
         <SignalsBoard
           initialActive={maskedActive}
           initialClosed={closed}

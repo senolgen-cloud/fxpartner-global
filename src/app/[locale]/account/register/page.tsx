@@ -10,7 +10,7 @@ import { submitLogin } from "@/app/[locale]/account/login/simple-actions";
 import { configuredProviders } from "@/lib/authProviders";
 import { getCountries } from "@/lib/country";
 import { setServerLocale } from "@/lib/serverLocale";
-import { auth } from "@/auth";
+import { optionalSession } from "@/lib/optionalSession";
 import { redirect } from "next/navigation";
 
 export async function generateMetadata({
@@ -47,7 +47,7 @@ export default async function RegisterPage({
   // does any bookmark. Whoever arrives signed in is done signing in — send
   // them to the panel rather than showing them the form again, which reads
   // as the sign-in having failed.
-  if ((await auth())?.user) {
+  if ((await optionalSession())?.user) {
     redirect(localePath(isLocale(pageLocale) ? pageLocale : defaultLocale, "/account"));
   }
 

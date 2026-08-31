@@ -10,6 +10,8 @@ import { asc } from "drizzle-orm";
 import { topicsWithVisual } from "@/lib/educationVisuals";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
+import { loadOptional } from "@/lib/dbOptional";
+import DataUnavailable from "@/components/DataUnavailable";
 import { pickTranslation } from "@/lib/translateContent";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
@@ -67,10 +69,20 @@ export default async function EducationIndexPage({
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
   const locale = isLocale(pageLocale) ? pageLocale : defaultLocale;
 
-  const rows = await db.query.educationPosts.findMany({
-    orderBy: [asc(educationPosts.lessonNo), asc(educationPosts.publishedAt)],
-    limit: 60,
-  });
+  // The lesson list is the page, but not all of it: the header, the
+  // academy explanation and the link to the visual explainers — which are
+  // components in the repo, not rows — are all still worth serving. What
+  // must not happen is the empty state below claiming no lesson has been
+  // published yet, which during an outage is false a hundred times over.
+  const { data: rows, unavailable } = await loadOptional(
+    "egitim: lessons",
+    [] as (typeof educationPosts.$inferSelect)[],
+    () =>
+      db.query.educationPosts.findMany({
+        orderBy: [asc(educationPosts.lessonNo), asc(educationPosts.publishedAt)],
+        limit: 60,
+      })
+  );
   const posts = rows.map((row) => ({ ...row, ...pickTranslation(row.translations, locale, row) }));
 
   // Which lessons carry a diagram. Built once rather than looked up per row:
@@ -125,7 +137,9 @@ export default async function EducationIndexPage({
 
         <section>
           <div className="mx-auto max-w-3xl px-6 py-16">
-            {posts.length === 0 ? (
+            {unavailable ? (
+              <DataUnavailable what={tr("Ders listesi")} />
+            ) : posts.length === 0 ? (
               <p className="text-center text-text-muted">{tr("Henüz eğitim yazısı yayınlanmadı.")}</p>
             ) : (
               <div className="divide-y divide-hairline-light border-t border-hairline-light">

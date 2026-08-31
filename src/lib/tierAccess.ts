@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { optionalSession } from "@/lib/optionalSession";
 import { db } from "@/db";
 import { vipSubscriptions } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -19,12 +19,21 @@ export type ViewerAccess = {
 // account is the price. Pro/VIP-gated pages still deny "free" via
 // hasTierAccess below, since free ranks under both.
 export async function getViewerAccess(): Promise<ViewerAccess> {
-  const session = await auth();
+  const session = await optionalSession();
   if (!session?.user?.id) return { signedIn: false, tier: null, userId: null };
 
-  const subscription = await db.query.vipSubscriptions.findFirst({
-    where: eq(vipSubscriptions.userId, session.user.id),
-  });
+  // Both reads fail closed when the database is unreachable: an unreadable
+  // session is a signed-out reader, and an unreadable subscription is
+  // "free". A gate that opens when its lock breaks is not a gate, and the
+  // cost of the other direction is that a paying member briefly sees the
+  // upgrade prompt during an outage — visible, temporary, and not a
+  // giveaway of paid signals.
+  const subscription = await db.query.vipSubscriptions
+    .findFirst({ where: eq(vipSubscriptions.userId, session.user.id) })
+    .catch((err) => {
+      console.error("subscription unavailable, treating the reader as free —", err);
+      return null;
+    });
   if (!subscription || subscription.status !== "active") {
     return { signedIn: true, tier: "free", userId: session.user.id };
   }

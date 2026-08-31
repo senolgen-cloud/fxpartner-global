@@ -21,6 +21,22 @@ import type { AccessTier } from "@/lib/signalAccess";
 export const dynamic = "force-dynamic";
 
 export async function GET(req: Request) {
+  try {
+    return await respond(req);
+  } catch (err) {
+    // The bell polls this on every page, for every signed-in reader. When
+    // the database is down that is a 500 every few seconds per open tab —
+    // the loudest thing in the error log and, on 2026-08-31, most of it.
+    //
+    // 503 with an empty payload instead: the client bails on `!res.ok` and
+    // keeps whatever count it already had, so nothing flickers to zero and
+    // no notification is marked read. The next poll picks it back up.
+    console.error("notifications unavailable —", err);
+    return NextResponse.json({ unread: 0, items: [] }, { status: 503 });
+  }
+}
+
+async function respond(req: Request) {
   const session = await auth();
   const userId = session?.user?.id;
   if (!userId) {

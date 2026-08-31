@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 import SentimentPoll from "@/components/SentimentPoll";
 import UpgradeGate from "@/components/UpgradeGate";
 import { db } from "@/db";
+import { loadOptional } from "@/lib/dbOptional";
+import DataUnavailable from "@/components/DataUnavailable";
 import { comments as commentsTable, users as usersTable } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
 import { getBrokerBySlug } from "@/data/brokers";
@@ -40,6 +42,26 @@ export async function generateMetadata({
 
 export const dynamic = "force-dynamic";
 
+/** The community feed: the newest rated comments across every broker. */
+function loadRecentComments() {
+  return db
+    .select({
+      id: commentsTable.id,
+      body: commentsTable.body,
+      rating: commentsTable.rating,
+      brokerSlug: commentsTable.brokerSlug,
+      createdAt: commentsTable.createdAt,
+      userName: usersTable.name,
+      userCountry: usersTable.country,
+    })
+    .from(commentsTable)
+    .innerJoin(usersTable, eq(commentsTable.userId, usersTable.id))
+    .orderBy(desc(commentsTable.createdAt))
+    .limit(20);
+}
+
+type CommunityCommentRow = Awaited<ReturnType<typeof loadRecentComments>>[number];
+
 export default async function CommunityPage({
   params,
 }: {
@@ -50,22 +72,21 @@ export default async function CommunityPage({
 
   const { signedIn } = await getViewerAccess();
 
-  const recentComments = signedIn
-    ? await db
-        .select({
-          id: commentsTable.id,
-          body: commentsTable.body,
-          rating: commentsTable.rating,
-          brokerSlug: commentsTable.brokerSlug,
-          createdAt: commentsTable.createdAt,
-          userName: usersTable.name,
-          userCountry: usersTable.country,
-        })
-        .from(commentsTable)
-        .innerJoin(usersTable, eq(commentsTable.userId, usersTable.id))
-        .orderBy(desc(commentsTable.createdAt))
-        .limit(20)
-    : [];
+  // getViewerAccess already fails closed, so an outage usually lands a
+  // reader on the signed-out variant of this page and never runs the query
+  // below. This covers the other order — a session that read fine and a
+  // comment feed that did not — with the same answer the rest of the site
+  // gives: the page, minus the section it could not fill.
+  // getViewerAccess already fails closed, so an outage usually lands a
+  // reader on the signed-out variant of this page and never runs the query
+  // below. This covers the other order — a session that read fine and a
+  // comment feed that did not — with the same answer the rest of the site
+  // gives: the page, minus the section it could not fill.
+  const { data: recentComments, unavailable: commentsUnavailable } = await loadOptional(
+    "topluluk: recent comments",
+    [] as CommunityCommentRow[],
+    async () => (signedIn ? loadRecentComments() : [])
+  );
 
   return (
     <>
@@ -115,7 +136,9 @@ export default async function CommunityPage({
                 {tr("💬 Son Broker Değerlendirmeleri")}
               </h2>
               <div className="mt-6 space-y-4">
-                {recentComments.length === 0 ? (
+                {commentsUnavailable ? (
+                  <DataUnavailable what={tr("Son değerlendirmeler")} />
+                ) : recentComments.length === 0 ? (
                   <p className="rounded-2xl border border-hairline bg-ink-soft p-6 text-sm text-text-on-ink-muted">
                     {tr("Henüz bir değerlendirme yok — ilk yorumu bırakan siz olun.")}
                   </p>

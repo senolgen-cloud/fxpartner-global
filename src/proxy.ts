@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { defaultLocale, isLocale, localePath, splitLocale } from "@/lib/i18n";
 import type { NextRequest } from "next/server";
-import { auth } from "@/auth";
+import { optionalSession } from "@/lib/optionalSession";
 import { COUNTRY_TO_LANG } from "@/lib/countryLanguages";
 import { CONSENT_COOKIE, parseDecision, type Decision } from "@/lib/consent";
 
@@ -188,7 +188,11 @@ export default async function proxy(request: NextRequest) {
   const { locale, path } = splitLocale(request.nextUrl.pathname);
 
   if (path.startsWith("/admin")) {
-    const session = await auth();
+    // optionalSession, not auth(): an unreadable session store used to
+    // throw here, and a throw in the proxy is a 500 on every request to
+    // the site rather than on one page. It fails closed — no session means
+    // not the admin, so the guard below sends the reader home.
+    const session = await optionalSession();
     if (session?.user?.email !== ADMIN_EMAIL) {
       return NextResponse.redirect(new URL(localePath(locale, "/"), request.url));
     }
@@ -203,7 +207,7 @@ export default async function proxy(request: NextRequest) {
     !path.startsWith("/account/register") &&
     !path.startsWith("/account/verify")
   ) {
-    const session = await auth();
+    const session = await optionalSession();
     if (!session?.user) {
       const response = NextResponse.redirect(new URL(localePath(locale, "/account/login"), request.url));
       applyCookies(request, response);

@@ -11,6 +11,7 @@ import HeroBrokerSearch from "@/components/HeroBrokerSearch";
 import { brokers, brokerCategories, categoryInfo, getBrokerScores } from "@/data/brokers";
 import { lookupBrokers } from "@/data/brokerLookup";
 import { getBrokerReviewStats } from "@/lib/brokerReviews";
+import { loadOptional } from "@/lib/dbOptional";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
 
@@ -89,7 +90,16 @@ export default async function BrokerlarPage({
 
   const { locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
-  const reviewStats = await getBrokerReviewStats();
+  // No notice for this one, deliberately. A missing aggregate makes the
+  // "· 12 yorum" suffix disappear from a card; it never renders a false
+  // "no reviews yet", because RankedBrokerCard already guards on the count
+  // being present. Nothing on the page becomes untrue, so nothing needs
+  // apologising for — the log line is the whole of the reporting.
+  const { data: reviewStats } = await loadOptional(
+    "brokerlar: review stats",
+    {} as Awaited<ReturnType<typeof getBrokerReviewStats>>,
+    getBrokerReviewStats
+  );
   const ranked = localizeBrokers([...brokers], locale).sort((a, b) => a.rank - b.rank);
   const top = ranked[0];
   const trackedRegulators = new Set([

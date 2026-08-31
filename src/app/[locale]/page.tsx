@@ -29,6 +29,7 @@ import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
 import { getBrokerReviewStats } from "@/lib/brokerReviews";
+import { loadOptional } from "@/lib/dbOptional";
 import { setServerLocale } from "@/lib/serverLocale";
 
 const trackedBrokerCount = lookupBrokers.length;
@@ -133,18 +134,34 @@ export default async function Home({
   // Prefer the latest still-open trade so the hero card reflects a real
   // signal a visitor could still act on; fall back to the latest closed
   // one so the card isn't empty between open trades.
-  const latestSignal =
-    (await db.query.tradeSignals.findFirst({
-      where: eq(tradeSignals.status, "active"),
-      orderBy: desc(tradeSignals.createdAt),
-    })) ??
-    (await db.query.tradeSignals.findFirst({
-      where: eq(tradeSignals.status, "closed"),
-      orderBy: desc(tradeSignals.closedAt),
-    })) ??
-    null;
+  //
+  // Optional, both of them. This page is overwhelmingly built from the
+  // repo — the hero, eighteen brokers, the comparison table, the FAQ — and
+  // exactly two things on it come from the database. Letting either one
+  // take the home page down, as they did on 2026-08-31, is the wrong
+  // trade by a wide margin: the hero card sits empty between open trades
+  // anyway, and the ranking already renders without ratings for a broker
+  // nobody has reviewed.
+  const { data: latestSignal } = await loadOptional<typeof tradeSignals.$inferSelect | null>(
+    "home: latest signal",
+    null,
+    async () =>
+      (await db.query.tradeSignals.findFirst({
+        where: eq(tradeSignals.status, "active"),
+        orderBy: desc(tradeSignals.createdAt),
+      })) ??
+      (await db.query.tradeSignals.findFirst({
+        where: eq(tradeSignals.status, "closed"),
+        orderBy: desc(tradeSignals.closedAt),
+      })) ??
+      null
+  );
 
-  const brokerReviewStats = await getBrokerReviewStats();
+  const { data: brokerReviewStats } = await loadOptional(
+    "home: broker review stats",
+    {} as Awaited<ReturnType<typeof getBrokerReviewStats>>,
+    getBrokerReviewStats
+  );
 
   return (
     <>
