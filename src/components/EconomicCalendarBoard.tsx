@@ -105,7 +105,8 @@ export default function EconomicCalendarBoard({ initialEvents }: { initialEvents
 
   useEffect(() => {
     mounted.current = true;
-    const interval = setInterval(async () => {
+
+    async function poll() {
       try {
         const res = await fetch("/api/economic-calendar", { cache: "no-store" });
         if (!res.ok || !mounted.current) return;
@@ -115,10 +116,27 @@ export default function EconomicCalendarBoard({ initialEvents }: { initialEvents
       } catch {
         // Transient fetch failure — next poll tick retries.
       }
+    }
+
+    // A hidden tab still runs its interval, and polling one is pure waste —
+    // the same rule useLiveQuotes and the notification badge already follow.
+    // A calendar left open in a background tab is otherwise a request a
+    // minute, indefinitely, for a page nobody is looking at.
+    const interval = setInterval(() => {
+      if (document.visibilityState === "visible") void poll();
     }, POLL_MS);
+
+    // Refetch on the edge back into view, so a reader returning to the tab
+    // is never looking at a release that has already been published.
+    const onVisible = () => {
+      if (document.visibilityState === "visible") void poll();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+
     return () => {
       mounted.current = false;
       clearInterval(interval);
+      document.removeEventListener("visibilitychange", onVisible);
     };
   }, []);
 

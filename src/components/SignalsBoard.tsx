@@ -29,7 +29,17 @@ type Signal = typeof tradeSignals.$inferSelect;
 
 const TICK_UP = "#22c55e";
 const TICK_DOWN = "#e5484d";
-const POLL_MS = 15000;
+// Thirty seconds, not fifteen.
+//
+// This route is the single largest consumer of serverless CPU on the site —
+// one open tab ran four requests a minute for as long as it stayed open, and
+// at fifteen seconds the monthly Active CPU allowance was already 169% spent.
+// Halving the rate halves that bill outright, and costs a reader almost
+// nothing: an EA-reported signal takes longer than fifteen seconds to reach
+// this route in the first place, and the visibility handling below refetches
+// the moment a tab comes back into view, so nobody is ever looking at a
+// board that is a poll period behind.
+const POLL_MS = 30000;
 
 function toSignal(s: SignalJson): Signal {
   return { ...s, createdAt: new Date(s.createdAt), closedAt: s.closedAt ? new Date(s.closedAt) : null };
@@ -1460,10 +1470,30 @@ export default function SignalsBoard({
       }
     }
 
-    const interval = setInterval(poll, POLL_MS);
+    // A hidden tab still runs its interval, and polling one is pure waste:
+    // nobody is reading the board, the chime is for signals nobody is there
+    // to hear, and every tick is a serverless invocation billed against the
+    // same allowance a visible reader is using. Background tabs are also the
+    // long-lived ones — the tab left open all afternoon is exactly the one
+    // that was costing the most.
+    const tick = () => {
+      if (document.visibilityState === "visible") void poll();
+    };
+    const interval = setInterval(tick, POLL_MS);
+
+    // Coming back into view is the moment the board matters, so it refetches
+    // on that edge instead of waiting out the rest of the period. This is
+    // what makes the slower interval free: a returning reader sees current
+    // data immediately, however long the tab sat hidden.
+    const onVisible = () => {
+      if (document.visibilityState === "visible") void poll();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+
     return () => {
       cancelled = true;
       clearInterval(interval);
+      document.removeEventListener("visibilitychange", onVisible);
     };
   }, []);
 
