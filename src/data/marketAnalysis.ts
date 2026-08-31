@@ -41,6 +41,65 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "gunluk-bulten-2026-08-31-1200",
+    title: "FXPARTNER Günlük Bülten | 31.08.2026",
+    excerpt:
+      "Fed Başkanı Warsh'ın şahin Jackson Hole çıkışının ardından altın %3'ün üzerinde değer kaybederek 4.450 dolar bandına geriledi; Eylül faiz artırım ihtimali CME FedWatch'ta %57'de kalıcı hale gelirken dolar endeksi 99 seviyesinde konsolide oluyor, Almanya'da eyalet enflasyon verileri yukarı yönlü sürpriz yaptı.",
+    publishedAt: "2026-08-31",
+    readingMinutes: 4,
+    intro:
+      "Ağustos ayının son işlem gününde piyasalar, Fed Başkanı Kevin Warsh'ın geçen haftaki şahin Jackson Hole konuşmasının etkilerini fiyatlamaya devam ediyor. Altındaki sert düzeltme ve güçlenen Eylül faiz artırımı beklentisi gündemin merkezinde yer alırken, Almanya'dan gelen eyalet bazlı enflasyon verileri gün içinde açıklanacak ulusal öncü TÜFE rakamına dair sinyal veriyor.",
+    news: [
+      {
+        icon: "🥇",
+        heading: "Altın: Warsh Sonrası Kayıplar Sürüyor, 4.450 Dolar Bandına Geriledi",
+        body: "XAU/USD, Fed Başkanı **Kevin Warsh**'ın Jackson Hole'daki şahin açıklamalarının ardından **%3'ün üzerinde değer kaybederek 4.450-4.460 dolar** bandına geriledi. Ons altın, üç haftalık ralli sürecinde **yaklaşık %14 değer kazanarak 4.700 dolara** yakın seviyeleri görmüştü; ancak Warsh'ın enflasyonla mücadelenin sürmesi gerektiği yönündeki mesajı sonrası güçlenen faiz artırım beklentisiyle metal, gerileyişini sürdürüyor.",
+      },
+      {
+        icon: "📈",
+        heading: "Eylül Faiz Artırımı İhtimali CME FedWatch'ta %57'de Kalıcı Hale Geldi",
+        body: "**CME FedWatch** verilerine göre Fed'in **16 Eylül** toplantısında 25 baz puanlık faiz artışı yapma ihtimali, Warsh'ın konuşması öncesindeki **%35-40 bandından %57'ye** yükseldikten sonra bu seviyede istikrar kazandı. Aralık ayına kadar en az bir faiz artışı yapılması ihtimali ise **%88'in üzerinde** fiyatlanmaya devam ediyor.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar Endeksi (DXY) 99 Seviyesinde Konsolide Oluyor",
+        body: "ABD Dolar Endeksi (**DXY**), Cuma günkü Warsh kaynaklı sert yükselişin ardından **99,0 seviyesinin** çevresinde konsolide oluyor. Piyasalar, endeksin yön bulması için haftanın ilerleyen günlerinde gelecek Fed üyesi açıklamalarını ve makro verileri yakından izliyor.",
+      },
+      {
+        icon: "💶",
+        heading: "EUR/USD 1,16 Seviyesinin Çevresinde Toparlanma Çabasında",
+        body: "EUR/USD, şahin Fed beklentilerine rağmen **1,1590-1,1600 bandına** toparlanarak haftaya nispeten dirençli başladı. Buna karşın **UOB** gibi kurumlar, paritede **aşağı yönlü risklerin** halen gündemde olduğunu vurguluyor.",
+      },
+      {
+        icon: "🇩🇪",
+        heading: "Almanya'da Eyalet Enflasyon Verileri Yükseldi, Ulusal TÜFE Bekleniyor",
+        body: "Almanya'nın öncü eyalet enflasyon verilerinde **Baden-Württemberg TÜFE'si** yıllık **%2,5'ten %2,6'ya**, **Kuzey Ren-Vestfalya TÜFE'si** ise **%2,7'den %2,9'a** yükseldi. Bu veriler, gün içinde açıklanacak Almanya geneli öncü TÜFE rakamının da yukarı yönlü sürpriz yapabileceğine işaret ediyor; bu durum ECB'nin Eylül toplantısı öncesi enflasyon görünümünü yeniden şekillendirebilir.",
+      },
+      {
+        icon: "🛢️",
+        heading: "ABD'den İran'a Yönelik Yaptırımlarda Sertleşme",
+        body: "ABD Hazine Bakanı **Scott Bessent**, \"Operation Economic Outcast\" kapsamında İran'a yönelik **haftalık yeni ikincil yaptırımlar** uygulanmasını beklediklerini açıkladı; yaptırımların dijital varlıklar, teknoloji, altın, havacılık ve denizcilik alanlarını kapsayacağı belirtiliyor. Ortadoğu'da süregelen gerilimin sürmesi, güvenli liman varlıkları ve enerji fiyatları üzerindeki risk primini canlı tutuyor.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "31 Ağustos Pazartesi",
+        icon: "🇩🇪",
+        title: "Almanya Öncü TÜFE (Ağustos)",
+        note: "Eyalet verilerindeki yukarı yönlü sürprizin ardından ulusal rakam da beklentilerin üzerinde gelirse EUR paritelerinde volatilite artabilir.",
+      },
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Fed'in Eylül faiz kararı öncesi işgücü piyasasına dair son büyük veri; sürpriz bir sonuç %57 seviyesindeki faiz artırım beklentisini yeniden fiyatlayabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-08-28-2100",
     title: "FXPARTNER Piyasa Özeti | 28.08.2026 Akşam Güncellemesi",
     excerpt:
