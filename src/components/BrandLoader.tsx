@@ -34,14 +34,20 @@ export default function BrandLoader({ splash = false }: { splash?: boolean }) {
       aria-live={splash ? undefined : "polite"}
       aria-hidden={splash ? true : undefined}
     >
+      {/* The app icon, not the wordmark. What a reader sees while the site
+          loads should be the mark they tapped on their home screen and the
+          one in their browser tab — a different lockup at the moment of
+          arrival reads as a different product. The icon carries its own
+          black field, which is the loader's background, so it lands with no
+          visible edge. */}
       <div className="brand-loader-mark">
         <Image
-          src="/fxpartner-logo.png"
+          src="/icon-fxpartner-2026-512.png"
           alt=""
-          width={900}
-          height={232}
+          width={512}
+          height={512}
           priority
-          className="h-9 w-auto md:h-11"
+          className="h-28 w-28 md:h-36 md:w-36"
         />
       </div>
       <div className="brand-loader-bar h-0.5 w-40 rounded-full bg-hairline" />
