@@ -4,7 +4,7 @@ import { and, eq, gte } from "drizzle-orm";
 import { requiredTierForPair } from "@/lib/signalAccess";
 import type { AccessTier } from "@/lib/vip";
 import { trData } from "@/lib/localizeContent";
-import { MIN_TRADES_FOR_RATE } from "@/lib/signalPeriods";
+import { MIN_TRADES_FOR_RATE, SIGNALS_EPOCH } from "@/lib/signalPeriods";
 
 // Rolling track record for the tracked MT5 account, published in the public
 // Telegram/X signal posts. This is the single most persuasive thing we can
@@ -69,12 +69,22 @@ export async function getRecentSignalStats(
   scope: StatsScope = "all",
   windowDays = 30
 ): Promise<SignalStats | null> {
-  const since = new Date(Date.now() - windowDays * 24 * 60 * 60 * 1000);
+  // Clamped to the reset: "son 30 gün" may not reach back past the day the
+  // record starts, or the posts would quote a rate the board no longer shows.
+  // The rolling window narrows on its own as the new record ages past it.
+  const requested = new Date(Date.now() - windowDays * 24 * 60 * 60 * 1000);
+  const since = requested > SIGNALS_EPOCH ? requested : SIGNALS_EPOCH;
 
   const rows = await db
     .select({ pair: tradeSignals.pair, outcome: tradeSignals.outcome })
     .from(tradeSignals)
-    .where(and(eq(tradeSignals.status, "closed"), gte(tradeSignals.closedAt, since)));
+    .where(
+      and(
+        eq(tradeSignals.status, "closed"),
+        gte(tradeSignals.closedAt, since),
+        gte(tradeSignals.createdAt, SIGNALS_EPOCH)
+      )
+    );
 
   // BE (breakeven) closes are excluded from both sides — they're neither a
   // win nor a loss, and counting them as losses would understate the rate

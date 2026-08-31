@@ -7,6 +7,7 @@ import {
 } from "@/db/schema";
 import { and, desc, eq, gt, inArray, sql } from "drizzle-orm";
 import { canViewSignal, type AccessTier } from "@/lib/signalAccess";
+import { SIGNALS_EPOCH } from "@/lib/signalPeriods";
 
 /**
  * What the bell shows a member.
@@ -94,7 +95,10 @@ export async function getUnreadNotificationCount(
   // Nothing older than the window can be unread-and-shown, so the watermark
   // is clamped to it rather than trusted on its own: a member away for a
   // year would otherwise have every row in the window counted.
-  const floor = new Date(Date.now() - WINDOW_DAYS * 24 * 60 * 60 * 1000);
+  // Never older than the reset — the bell must not offer a member a signal
+  // that /signals no longer shows.
+  const window = new Date(Date.now() - WINDOW_DAYS * 24 * 60 * 60 * 1000);
+  const floor = window > SIGNALS_EPOCH ? window : SIGNALS_EPOCH;
   const since = seenAt > floor ? seenAt : floor;
 
   const myAccounts = await db

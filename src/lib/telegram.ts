@@ -71,6 +71,28 @@ export function arabicChatId(): string | null {
   return process.env.TELEGRAM_AR_CHAT_ID?.trim() || null;
 }
 
+/**
+ * The VIP group's SIGNALS topic, or null when it is not configured.
+ *
+ * TELEGRAM_VIP_CHAT_ID has existed for a while but only ever minted invite
+ * links; nothing posted to the group. The members are paying for the levels
+ * the public channel withholds, and until now the only place they could see
+ * them was the site.
+ *
+ * BOTH VALUES OR NOTHING. The group is a forum, so a message without
+ * message_thread_id does not land in SIGNALS — it lands in General, beside
+ * the join notices. A signal in the wrong topic is worse than no signal:
+ * the reader stops trusting where to look. So a missing topic id disables
+ * the post rather than guessing, exactly as a missing Arabic channel id
+ * skips the Arabic post.
+ */
+export function vipSignalTarget(): { chatId: string; threadId: string } | null {
+  const chatId = process.env.TELEGRAM_VIP_CHAT_ID?.trim();
+  const threadId = process.env.TELEGRAM_VIP_TOPIC_ID?.trim();
+  if (!chatId || !threadId) return null;
+  return { chatId, threadId };
+}
+
 export function mainServicesKeyboard(locale: Locale = "tr"): InlineKeyboardButton[][] {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
   // Links go to the reader's own tree: an Arabic post that lands a reader on
@@ -131,6 +153,11 @@ export async function sendTelegramMessage(
     /** Overrides the main channel — see arabicChatId(). */
     chatId?: string;
     /**
+     * The forum topic to post into. A supergroup with topics ignores nothing
+     * without this — it just files the message under General.
+     */
+    threadId?: string;
+    /**
      * Posts without buzzing anyone's phone. The message still lands in the
      * channel, still threads, still reads identically — only the push is
      * suppressed.
@@ -146,6 +173,7 @@ export async function sendTelegramMessage(
   const { chatId } = getConfig();
   return callTelegram("sendMessage", {
     chat_id: options.chatId ?? chatId,
+    ...(options.threadId ? { message_thread_id: options.threadId } : {}),
     text,
     parse_mode: "HTML",
     disable_web_page_preview: options.disablePreview ?? false,
@@ -173,6 +201,11 @@ export async function sendTelegramPhoto(
     /** Overrides the main channel — see arabicChatId(). */
     chatId?: string;
     /**
+     * The forum topic to post into. A supergroup with topics ignores nothing
+     * without this — it just files the message under General.
+     */
+    threadId?: string;
+    /**
      * Posts without buzzing anyone's phone. The message still lands in the
      * channel, still threads, still reads identically — only the push is
      * suppressed.
@@ -188,6 +221,7 @@ export async function sendTelegramPhoto(
   const { chatId } = getConfig();
   return callTelegram("sendPhoto", {
     chat_id: options.chatId ?? chatId,
+    ...(options.threadId ? { message_thread_id: options.threadId } : {}),
     photo: photoUrl,
     caption,
     parse_mode: "HTML",

@@ -62,3 +62,32 @@ export function getSignalPeriods(now: Date = new Date()): SignalPeriods {
 // posts have to apply the same rule. Below this many decisive trades a rate
 // is noise dressed up as evidence, whatever surface is showing it.
 export const MIN_TRADES_FOR_RATE = 15;
+
+// ─────────────────────────────────────────────────────────────────────────
+// The reset.
+//
+// The board carried the whole history of the tracked MT5 account, which
+// mixed two different things: the period when the account was being wired
+// up and the EA was still being tuned, and the period when it is actually
+// being traded as the thing readers follow. Owner's call, 31 Aug 2026: the
+// record starts today, on a $100 account, and everything before it is off
+// the board.
+//
+// It is a cutoff, not a DELETE. The old rows stay in `trade_signal` for two
+// reasons that both matter: a position opened before the cutoff can still
+// report its close through /api/trade-result, and that close has to find
+// its original row so the result replies to the original post instead of
+// appearing as an orphan card; and a published track record that can be
+// quietly rewritten is not a track record. Every READ that feeds a public
+// number filters to this instant instead — see scripts/check-signals-epoch.mjs,
+// which fails the build if a new read forgets.
+//
+// Anchored in SIGNAL_TZ, the same zone "Bugün" uses, so the first day of
+// the new record is exactly the reader's day and not a UTC day that started
+// three hours earlier.
+export const SIGNALS_EPOCH = new Date("2026-08-31T00:00:00+03:00");
+
+// What the account started the new record with, in USD. The board reports
+// its balance against this, so a $2.40 day reads as what it is on a $100
+// account rather than as a rounding error on an unstated one.
+export const SIGNALS_START_BALANCE = 100;

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq, gte } from "drizzle-orm";
 import {
   sendTelegramMessage,
   telegramSiteCta,
@@ -12,6 +12,7 @@ import { tradeSignals, liveQuotes } from "@/db/schema";
 import { requiredTierForPair } from "@/lib/signalAccess";
 import { ACCESS_TIER_LABEL } from "@/data/packageTiers";
 import { getRecentSignalStats, statsLineTr } from "@/lib/signalStats";
+import { SIGNALS_EPOCH } from "@/lib/signalPeriods";
 import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-posted-store";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
 import { QUOTE_MAX_AGE_MS } from "@/app/api/live-prices/route";
@@ -64,7 +65,9 @@ export const GET = withCronErrorAlert("active-signals-digest", async (req: NextR
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
 
   const active = await db.query.tradeSignals.findMany({
-    where: eq(tradeSignals.status, "active"),
+    // Same cutoff the /signals board applies: the digest is a picture of that
+    // board, so a pre-reset position still open in MT5 belongs in neither.
+    where: and(eq(tradeSignals.status, "active"), gte(tradeSignals.createdAt, SIGNALS_EPOCH)),
     orderBy: desc(tradeSignals.createdAt),
     limit: 20,
   });

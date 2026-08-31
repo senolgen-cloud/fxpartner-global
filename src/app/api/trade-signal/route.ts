@@ -4,6 +4,7 @@ import {
   mainServicesKeyboard,
   telegramContactCta,
   arabicChatId,
+  vipSignalTarget,
 } from "@/lib/telegram";
 import { formatMessage } from "@/lib/chrome";
 import { localePath, type Locale } from "@/lib/i18n";
@@ -111,22 +112,28 @@ export async function GET(req: NextRequest) {
     console.error("Signal stats lookup failed:", err);
   }
 
-  const cardParams = new URLSearchParams({ pair });
-  if (publicDirection) cardParams.set("direction", publicDirection);
-  if (confidence) cardParams.set("confidence", confidence);
-  // Passing entry+stop is what switches the OG card out of its locked
-  // layout into the full one with the sparkline and real TP/SL boxes.
-  if (openLevels) {
-    cardParams.set("entry", entry);
-    if (hasStop) cardParams.set("stop", stop);
-    if (hasTarget1) cardParams.set("target1", target1);
-  }
-  if (stats) {
-    cardParams.set("statTrades", String(stats.trades));
-    cardParams.set("statWinRate", String(stats.winRate));
-    cardParams.set("statDays", String(stats.windowDays));
-  }
-  const imageUrl = `${siteUrl}/api/og/trade-signal?${cardParams.toString()}`;
+  // Two cards can be needed for one signal now: the public channel gets the
+  // locked layout for a gated instrument, the paid VIP group always gets the
+  // full one. Same builder, one argument apart.
+  const cardUrl = (withLevels: boolean) => {
+    const cardParams = new URLSearchParams({ pair });
+    if (publicDirection) cardParams.set("direction", publicDirection);
+    if (confidence) cardParams.set("confidence", confidence);
+    // Passing entry+stop is what switches the OG card out of its locked
+    // layout into the full one with the sparkline and real TP/SL boxes.
+    if (withLevels) {
+      cardParams.set("entry", entry);
+      if (hasStop) cardParams.set("stop", stop);
+      if (hasTarget1) cardParams.set("target1", target1);
+    }
+    if (stats) {
+      cardParams.set("statTrades", String(stats.trades));
+      cardParams.set("statWinRate", String(stats.winRate));
+      cardParams.set("statDays", String(stats.windowDays));
+    }
+    return `${siteUrl}/api/og/trade-signal?${cardParams.toString()}`;
+  };
+  const imageUrl = cardUrl(openLevels);
 
   const dirEmoji = publicDirection === "SELL" ? "🔴" : "🟢";
   const trStats = statsLineTr(stats);
@@ -136,7 +143,13 @@ export async function GET(req: NextRequest) {
   // Turkish self — the same convention the site's chrome uses — which means
   // the Arabic comes from the dictionary that is already translated and
   // reviewed, not from a second copy of the copy kept in sync by hand.
-  const buildCaption = (locale: Locale) => {
+  // "vip" is the paid group's copy of the same post: every level shown
+  // whatever the instrument's tier, and no upsell tail — the reader has
+  // already bought the thing the public tail is selling, and being sold to
+  // inside the product you paid for is the fastest way to make a paid group
+  // feel like a mailing list.
+  const buildCaption = (locale: Locale, variant: "public" | "vip" = "public") => {
+    const levels = variant === "vip" || openLevels;
     const t = (text: string, vars: Record<string, string | number> = {}) =>
       formatMessage(locale, text, vars);
     const at = (path: string) => `${siteUrl}${localePath(locale, path)}`;
@@ -146,17 +159,19 @@ export async function GET(req: NextRequest) {
         : `<b>${pair.toUpperCase()}</b> ${t("üzerinde yeni bir işlem açıldı")}\n\n`) +
       (confidence ? `🎯 ${t("Sinyal güveni")}: <b>%${confidence}</b>\n` : "") +
       (trStats ? `${trStats}\n` : "") +
-      (openLevels
+      (levels
         ? `📈 ${t("Giriş")}: <b>${entry}</b>\n` +
           (hasTarget1 ? `🎯 TP: <b>${target1}</b>\n` : "") +
           (hasStop ? `🛑 SL: <b>${stop}</b>\n` : "")
         : "") +
       `\n⚡ ${t("Gerçek hesap, gerçek işlem — takip edilen MT5 hesabımızda açıldığı an paylaşılıyor. Kapandığında sonucu da aynı yerde yayınlanacak, kazanç da kayıp da.")}\n\n` +
-      (openLevels
-        ? `🎁 ${t("Forex sinyalleri herkese açık yayınlanıyor. GOLD, endeks, kripto ve enerji sinyalleri Pro/VIP üyelere özel.")}\n\n`
-        : `🔒 ${t("Giriş, TP ve SL seviyeleri {tier} üyelere özel — bu seviyeler olmadan pozisyon yönetilemez.", { tier: ACCESS_TIER_LABEL[requiredTier] })}\n\n`) +
+      (variant === "vip"
+        ? `💎 ${t("Bu sinyal VIP üyelere özel olarak paylaşıldı — her enstrüman, tüm seviyeler.")}\n\n`
+        : levels
+          ? `🎁 ${t("Forex sinyalleri herkese açık yayınlanıyor. GOLD, endeks, kripto ve enerji sinyalleri Pro/VIP üyelere özel.")}\n\n`
+          : `🔒 ${t("Giriş, TP ve SL seviyeleri {tier} üyelere özel — bu seviyeler olmadan pozisyon yönetilemez.", { tier: ACCESS_TIER_LABEL[requiredTier] })}\n\n`) +
       `⚠️ ${t("Bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Pozisyon büyüklüğünü ve riskini kendi toleransına göre belirle. Geçmiş sonuçlar gelecekteki sonuçları garanti etmez.")}\n\n` +
-      (openLevels
+      (levels
         ? `👉 <a href="${at("/signals")}">${t("Tüm işlem geçmişi ve anlık bildirimler")}: fxpartner.global${localePath(locale, "/signals")}</a>\n\n`
         : `👉 <a href="${at("/paketler")}">${t("Seviyeleri anlık görmek için paketlere göz atın")}</a>\n\n`) +
       telegramContactCta()
@@ -191,6 +206,32 @@ export async function GET(req: NextRequest) {
       });
     } catch (err) {
       console.error("Arabic channel mirror failed:", err);
+    }
+  }
+
+  // The paid VIP group's SIGNALS topic, when it is configured.
+  //
+  // Until now the group's members could only see the levels on the site,
+  // while the public channel got the post — the wrong way round for the
+  // people paying. This sends them the full card and the full caption at
+  // the same moment, in the topic they are looking at.
+  //
+  // Best-effort and last, for the same reason as the Arabic mirror: a
+  // failure here must not fail the request or block the DB write below, and
+  // it must not cost the public channel its post. Silent-when-paced follows
+  // the public channel's decision rather than asking again — a paid group
+  // that buzzes eight times an hour gets muted like any other.
+  const vipTarget = vipSignalTarget();
+  if (vipTarget) {
+    try {
+      await sendTelegramPhoto(cardUrl(true), buildCaption("tr", "vip"), {
+        chatId: vipTarget.chatId,
+        threadId: vipTarget.threadId,
+        inlineKeyboard: mainServicesKeyboard(),
+        silent: !alert,
+      });
+    } catch (err) {
+      console.error("VIP group signal post failed:", err);
     }
   }
 
