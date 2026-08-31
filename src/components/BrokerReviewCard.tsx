@@ -9,11 +9,15 @@ import { tr, trf, trLocale } from "@/lib/chrome";
 // legacy review simply renders as the name, score, date and verdict it
 // always was. Nothing is stubbed, and nothing says "not specified".
 
+// Dates as ISO strings, because the comments are read once and shared
+// between readers (lib/cachedReads.ts) and a shared cache stores JSON. Both
+// use sites below already went through new Date(...), so nothing here
+// changed except the type finally saying what arrives.
 export type BrokerReview = {
   id: string;
   body: string;
   rating: number | null;
-  createdAt: Date;
+  createdAt: string;
   userName: string | null;
   userCountry?: string | null;
   title: string | null;
@@ -25,7 +29,7 @@ export type BrokerReview = {
   ratingService: number | null;
   ratingWithdrawal: number | null;
   brokerReply: string | null;
-  brokerReplyAt: Date | null;
+  brokerReplyAt: string | null;
 };
 
 // A switch of literals rather than a lookup table, because tr() only makes

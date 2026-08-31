@@ -4,12 +4,10 @@ import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
-import { db } from "@/db";
-import { newsBulletins } from "@/db/schema";
-import { desc } from "drizzle-orm";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
 import { loadOptional } from "@/lib/dbOptional";
+import { cachedBulletinIndex, type BulletinJson } from "@/lib/cachedReads";
 import DataUnavailable from "@/components/DataUnavailable";
 import { pickTranslation } from "@/lib/translateContent";
 
@@ -50,14 +48,14 @@ export default async function NewsBulletinIndexPage({
   // structure, and the empty state below is not allowed to tell a reader
   // that no bulletin has been published when ninety of them exist and are
   // merely out of reach.
+  // Same reasoning as the lesson index: the page keeps its header and its
+  // structure, and the empty state below is not allowed to tell a reader
+  // that no bulletin has been published when ninety of them exist and are
+  // merely out of reach.
   const { data: rows, unavailable } = await loadOptional(
     "haber-bulteni: bulletins",
-    [] as (typeof newsBulletins.$inferSelect)[],
-    () =>
-      db.query.newsBulletins.findMany({
-        orderBy: [desc(newsBulletins.publishedAt)],
-        limit: 50,
-      })
+    [] as BulletinJson[],
+    () => cachedBulletinIndex(50)
   );
   const locale = isLocale(pageLocale) ? pageLocale : defaultLocale;
   const bulletins = rows.map((row) => ({

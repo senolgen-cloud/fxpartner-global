@@ -13,6 +13,8 @@ import { getRecentSignalStats, statsLineTr, statsLineEn } from "@/lib/signalStat
 import { shouldAlertForSignal } from "@/lib/signalAlertPace";
 import { requiredTierForPair } from "@/lib/signalAccess";
 import { ACCESS_TIER_LABEL } from "@/data/packageTiers";
+import { revalidateTag } from "next/cache";
+import { CACHE_TAGS } from "@/lib/cachedReads";
 import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
 
@@ -245,6 +247,10 @@ export async function GET(req: NextRequest) {
           xTweetId: "tweetId" in (xResult ?? {}) ? (xResult as { tweetId: string }).tweetId : null,
         })
         .onConflictDoNothing();
+      // The board is read once and shared (lib/cachedReads.ts), so the row
+      // that was just written has to clear it — otherwise the /signals poll
+      // keeps answering from the copy taken before this trade existed.
+      revalidateTag(CACHE_TAGS.signals, "max");
     } catch (err) {
       console.error("Failed to store trade signal for later result linking:", err);
     }

@@ -6,6 +6,8 @@ import { isAlreadyPostedToTelegram, markPostedToTelegram } from "@/lib/telegram-
 import { sendTelegramMessage, telegramSiteCta, telegramContactCta, mainServicesKeyboard } from "@/lib/telegram";
 import { sendPushToAll, type PushResult } from "@/lib/push";
 import { postTextToX } from "@/lib/x";
+import { revalidateTag } from "next/cache";
+import { CACHE_TAGS } from "@/lib/cachedReads";
 import { db } from "@/db";
 import { newsBulletins } from "@/db/schema";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
@@ -97,6 +99,10 @@ export const GET = withCronErrorAlert("news-update", async (req: NextRequest) =>
     sources: JSON.stringify(sources),
     translations: Object.keys(translations).length ? JSON.stringify(translations) : null,
   });
+
+  // The bulletin index is read once and shared (lib/cachedReads.ts): without
+  // this the bulletin goes out on Telegram before it appears on the site.
+  revalidateTag(CACHE_TAGS.bulletins, "max");
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
   const text =

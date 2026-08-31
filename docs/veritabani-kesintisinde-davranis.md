@@ -89,7 +89,59 @@ Bu ortamda gerçek bir veritabanı yok, dolayısıyla ulaşılamayan bir
 - Gerçek tarayıcıda (Chromium) ders ve bülten sayfaları: hata sınırı
   Türkçe, Ukraynaca ve Arapça olarak render oldu; header ve footer yerinde.
 
-## 5. Açık kalan
+## 5. Paylaşılan okumalar — faturayı düşüren kısım
+
+Bozulma kesintiyi dayanılır kılar; **sebebini** azaltan şey bu bölüm.
+
+Neon sorgu sayısına değil **compute süresine** göre faturalanıyor ve boşta
+kalınca uyuyor. Yani pahalı olan sorgunun büyüklüğü değil, veritabanını
+uyandırma sayısı — ve site bunu neredeyse her istekte yapıyordu. En kötüsü
+bir sayfa bile değildi: `/signals` her **15 saniyede** bir `/api/signals`'ı
+yokluyor, yani açık bırakılmış tek bir sekme dakikada iki sorgu çalıştırıyor
+ve veritabanı hiç uyuyamıyordu.
+
+Bu verilerin hiçbiri okuyucuya özel değil. Sinyal panosu herkes için aynı
+satırlar (maskeleme sonradan, kişiye göre uygulanıyor); ders listesi, bülten
+listesi ve broker puan ortalamaları da herkes için aynı. Bu yüzden bir kez
+okunup paylaşılıyorlar — `src/lib/cachedReads.ts`.
+
+**Ölçüm** (sahte bir Neon ucu, gönderilen her SQL sayıldı; aynı derleme, aynı
+istekler):
+
+| İstek | Önce | Sonra |
+|---|---|---|
+| 5 × `/api/signals` | 10 sorgu | **2** |
+| 5 × `/tr` | 15 sorgu | **0** |
+| 5 × `/tr/egitim` | 5 sorgu | **0** |
+| 5 × `/tr/brokers/xm` | 5 sorgu | **0** |
+| 5 × `/tr/haber-bulteni` | 5 sorgu | **0** |
+| +20 × `/api/signals` (bir sekme, beş dakika) | 40 sorgu | **0** |
+
+Sıfırlar önbelleğin derleme sırasında ısınmasından: bir dağıtımdan sonra
+production'da da durum bu.
+
+**Süre taban, mekanizma değil.** Her girdi bir etiket taşıyor ve veriyi
+*yazan* kod o etiketi temizliyor — yeni bir sinyal, yeni bir yorum, yeni bir
+ders anında görünüyor, TTL'in dolmasını beklemiyor. TTL yalnızca kaçırılan
+bir temizliğin ne kadar sürebileceğini sınırlıyor.
+`scripts/check-cache-tags.mjs` her etiketin bir temizleyicisi olduğunu
+denetliyor; temizleyicisi olmayan etiket, olmayı bekleyen bayat bir sayfadır.
+
+**Tarih tuzağı.** `unstable_cache` değeri `JSON.stringify` ile saklayıp
+`JSON.parse` ile döndürüyor: `Date` girer, **string** çıkar. En kötü hata
+biçimi bu — ilk istek çalışır, sonraki her istek (yani önbelleğin var olma
+sebebi olanlar) `.toISOString()` üzerinde patlar. Bu yüzden derleyici buna
+izin vermiyor: `JsonSafe<T>` tipi, tarih taşıyan bir okumayı reddediyor.
+Paylaşılan okumalar tarihlerini ISO string'e kendileri çeviriyor — zaten her
+tüketici `new Date(...)` yapıyordu.
+
+**Paylaşılmayanlar, bilerek:** oturum (tanımı gereği kişiye özel; çerezi
+olmayan okuyucu için hiç sorgu çalışmıyor), abonelik/tier (kişiye özel), ve
+makale sayfaları — `/egitim/[slug]`, `/haber-bulteni/[slug]` — görüntüleme
+başına tek sorgu, buna karşılık bileşenleri satırın `Date` alanları üzerinde
+doğrudan metot çağırıyor. Küçük kazanç, gerçek risk.
+
+## 6. Açık kalan
 
 - **Kotanın kendisi.** Bu iş kesintiyi görünür ve dayanılır kılar; onu
   önlemez. Neon/Vercel plan kararı hâlâ verilmedi (bkz. oturum notları).

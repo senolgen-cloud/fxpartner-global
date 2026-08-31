@@ -6,11 +6,9 @@ import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import SentimentPoll from "@/components/SentimentPoll";
 import UpgradeGate from "@/components/UpgradeGate";
-import { db } from "@/db";
 import { loadOptional } from "@/lib/dbOptional";
+import { cachedCommunityComments, type CommunityCommentJson } from "@/lib/cachedReads";
 import DataUnavailable from "@/components/DataUnavailable";
-import { comments as commentsTable, users as usersTable } from "@/db/schema";
-import { desc, eq } from "drizzle-orm";
 import { getBrokerBySlug } from "@/data/brokers";
 import { flagEmoji } from "@/lib/country";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -42,26 +40,6 @@ export async function generateMetadata({
 
 export const dynamic = "force-dynamic";
 
-/** The community feed: the newest rated comments across every broker. */
-function loadRecentComments() {
-  return db
-    .select({
-      id: commentsTable.id,
-      body: commentsTable.body,
-      rating: commentsTable.rating,
-      brokerSlug: commentsTable.brokerSlug,
-      createdAt: commentsTable.createdAt,
-      userName: usersTable.name,
-      userCountry: usersTable.country,
-    })
-    .from(commentsTable)
-    .innerJoin(usersTable, eq(commentsTable.userId, usersTable.id))
-    .orderBy(desc(commentsTable.createdAt))
-    .limit(20);
-}
-
-type CommunityCommentRow = Awaited<ReturnType<typeof loadRecentComments>>[number];
-
 export default async function CommunityPage({
   params,
 }: {
@@ -84,8 +62,8 @@ export default async function CommunityPage({
   // gives: the page, minus the section it could not fill.
   const { data: recentComments, unavailable: commentsUnavailable } = await loadOptional(
     "topluluk: recent comments",
-    [] as CommunityCommentRow[],
-    async () => (signedIn ? loadRecentComments() : [])
+    [] as CommunityCommentJson[],
+    async () => (signedIn ? cachedCommunityComments(20) : [])
   );
 
   return (
@@ -168,7 +146,7 @@ export default async function CommunityPage({
                         </div>
                         <p className="mt-3 text-sm leading-relaxed text-text-on-ink-muted">{c.body}</p>
                         <p className="mt-3 font-mono text-[11px] text-text-on-ink-muted">
-                          {c.createdAt.toLocaleDateString(trLocale(), {
+                          {new Date(c.createdAt).toLocaleDateString(trLocale(), {
                             day: "numeric",
                             month: "short",
                             year: "numeric",

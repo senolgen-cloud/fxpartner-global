@@ -93,11 +93,24 @@ function walk(dir, out = []) {
   return out;
 }
 
+// A page reads the database whether it does so directly or through the
+// shared reads in lib/cachedReads.ts. Counting only the direct import is
+// how this check went briefly blind: moving six pages onto the shared
+// reads dropped its coverage from six pages to one and it still reported
+// success, because a page that no longer imports @/db looked to it like a
+// page that no longer touches the database.
+// `import type` does not count: SignalsBoard and the hero card import the
+// row's *shape* from cachedReads and never run a query — the import is
+// erased at build time. Only a value import reads anything.
+// [^;]* rather than a single-line match, so a multi-line import list is
+// still seen; it cannot run past the statement's own semicolon.
+const READS_DB = /import\s+(?!type\b)[^;]*from\s+"@\/(db|lib\/cachedReads)";/;
+
 let covered = 0;
 const seen = new Set();
 for (const file of [...walk("src/app"), ...walk("src/components")]) {
   const src = read(file);
-  if (!/from "@\/db"/.test(src)) continue;
+  if (!READS_DB.test(src)) continue;
   seen.add(file);
   if (src.includes("loadOptional(")) {
     covered++;

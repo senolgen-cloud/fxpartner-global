@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { desc } from "drizzle-orm";
+import { revalidateTag } from "next/cache";
+import { CACHE_TAGS } from "@/lib/cachedReads";
 import { db } from "@/db";
 import { educationPosts } from "@/db/schema";
 import { educationTopics } from "@/lib/educationTopics";
@@ -113,6 +115,10 @@ export const GET = withCronErrorAlert("education-posts", async (req: NextRequest
           translations: Object.keys(translations).length ? JSON.stringify(translations) : null,
         })
         .onConflictDoNothing();
+      // The lesson index is read once and shared (lib/cachedReads.ts), so a
+      // newly published lesson has to clear it or it stays invisible on
+      // /egitim until the TTL runs out.
+      revalidateTag(CACHE_TAGS.lessons, "max");
       written.push(topic.id);
       nextLesson++;
     } catch (err) {

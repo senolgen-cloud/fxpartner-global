@@ -25,10 +25,8 @@ import { brokers } from "@/data/brokers";
 import { propFirms, propFirmsByScore, getPropFirmScores } from "@/data/propFirms";
 import { lookupBrokers } from "@/data/brokerLookup";
 import { faqSchema } from "@/lib/schema";
-import { db } from "@/db";
-import { tradeSignals } from "@/db/schema";
-import { desc, eq } from "drizzle-orm";
-import { getBrokerReviewStats } from "@/lib/brokerReviews";
+import type { BrokerReviewStats } from "@/lib/brokerReviews";
+import { cachedLatestSignal, cachedBrokerReviewStats, type SignalJson } from "@/lib/cachedReads";
 import { loadOptional } from "@/lib/dbOptional";
 import { setServerLocale } from "@/lib/serverLocale";
 
@@ -142,25 +140,16 @@ export default async function Home({
   // trade by a wide margin: the hero card sits empty between open trades
   // anyway, and the ranking already renders without ratings for a broker
   // nobody has reviewed.
-  const { data: latestSignal } = await loadOptional<typeof tradeSignals.$inferSelect | null>(
+  const { data: latestSignal } = await loadOptional(
     "home: latest signal",
-    null,
-    async () =>
-      (await db.query.tradeSignals.findFirst({
-        where: eq(tradeSignals.status, "active"),
-        orderBy: desc(tradeSignals.createdAt),
-      })) ??
-      (await db.query.tradeSignals.findFirst({
-        where: eq(tradeSignals.status, "closed"),
-        orderBy: desc(tradeSignals.closedAt),
-      })) ??
-      null
+    null as SignalJson | null,
+    cachedLatestSignal
   );
 
   const { data: brokerReviewStats } = await loadOptional(
     "home: broker review stats",
-    {} as Awaited<ReturnType<typeof getBrokerReviewStats>>,
-    getBrokerReviewStats
+    {} as Record<string, BrokerReviewStats>,
+    cachedBrokerReviewStats
   );
 
   return (

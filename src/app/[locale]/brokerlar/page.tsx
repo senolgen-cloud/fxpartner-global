@@ -10,7 +10,8 @@ import ComparisonTable from "@/components/ComparisonTable";
 import HeroBrokerSearch from "@/components/HeroBrokerSearch";
 import { brokers, brokerCategories, categoryInfo, getBrokerScores } from "@/data/brokers";
 import { lookupBrokers } from "@/data/brokerLookup";
-import { getBrokerReviewStats } from "@/lib/brokerReviews";
+import type { BrokerReviewStats } from "@/lib/brokerReviews";
+import { cachedBrokerReviewStats } from "@/lib/cachedReads";
 import { loadOptional } from "@/lib/dbOptional";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
@@ -97,8 +98,8 @@ export default async function BrokerlarPage({
   // apologising for — the log line is the whole of the reporting.
   const { data: reviewStats } = await loadOptional(
     "brokerlar: review stats",
-    {} as Awaited<ReturnType<typeof getBrokerReviewStats>>,
-    getBrokerReviewStats
+    {} as Record<string, BrokerReviewStats>,
+    cachedBrokerReviewStats
   );
   const ranked = localizeBrokers([...brokers], locale).sort((a, b) => a.rank - b.rank);
   const top = ranked[0];

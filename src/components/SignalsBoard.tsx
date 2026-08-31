@@ -18,12 +18,9 @@ import { useCountUp } from "@/components/useCountUp";
 import { favorableMove } from "@/lib/contractSizes";
 import { playChime, unlockAudio } from "@/lib/chime";
 import { MIN_TRADES_FOR_RATE, type SignalPeriods } from "@/lib/signalPeriods";
+import type { SignalJson } from "@/lib/cachedReads";
 
 type Signal = typeof tradeSignals.$inferSelect;
-type SignalJson = Omit<Signal, "createdAt" | "closedAt"> & {
-  createdAt: string;
-  closedAt: string | null;
-};
 
 const TICK_UP = "#22c55e";
 const TICK_DOWN = "#e5484d";
@@ -1316,15 +1313,19 @@ export default function SignalsBoard({
   viewerTier,
   periods,
 }: {
-  initialActive: Signal[];
-  initialClosed: Signal[];
+  // JSON in, Dates inside. The rows are read once and shared between
+  // readers (see lib/cachedReads.ts), and a shared cache stores JSON — so
+  // the dates arrive as strings from the first render exactly as they
+  // already did from every poll, and are revived in one place below.
+  initialActive: SignalJson[];
+  initialClosed: SignalJson[];
   liveMarkets?: ReactNode;
   viewerTier: AccessTier | null;
   periods: SignalPeriods;
 }) {
   const tr = useTr();
-  const [active, setActive] = useState(initialActive);
-  const [closed, setClosed] = useState(initialClosed);
+  const [active, setActive] = useState(() => initialActive.map(toSignal));
+  const [closed, setClosed] = useState(() => initialClosed.map(toSignal));
   const knownIds = useRef(new Set([...initialActive, ...initialClosed].map((s) => s.id)));
   // One poller for the whole board, not one per card: the route answers with
   // every instrument at once, and a page showing thirty signals would

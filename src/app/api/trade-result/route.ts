@@ -4,6 +4,8 @@ import { postTradeSignalToX } from "@/lib/x";
 import { sendPushToMembers } from "@/lib/push";
 import { getRecentSignalStats, statsLineTr, statsLineEn } from "@/lib/signalStats";
 import { requiredTierForPair } from "@/lib/signalAccess";
+import { revalidateTag } from "next/cache";
+import { CACHE_TAGS } from "@/lib/cachedReads";
 import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -126,6 +128,10 @@ export async function GET(req: NextRequest) {
           closedAt: new Date(),
         })
         .where(eq(tradeSignals.ticket, ticket));
+      // The board is read once and shared (lib/cachedReads.ts), so the row
+      // that was just written has to clear it — otherwise the /signals poll
+      // keeps answering from the copy taken before this trade existed.
+      revalidateTag(CACHE_TAGS.signals, "max");
     } catch (err) {
       console.error("Failed to record trade-signal close:", err);
     }

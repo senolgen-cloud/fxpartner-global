@@ -7,9 +7,9 @@ import RotatingBrokerAd from "@/components/RotatingBrokerAd";
 import SponsoredLeaderboard from "@/components/SponsoredLeaderboard";
 import VipCtaBanner from "@/components/VipCtaBanner";
 import { db } from "@/db";
-import { tradeSignals, vipSubscriptions } from "@/db/schema";
+import { vipSubscriptions } from "@/db/schema";
 import { getSponsoredBrokerPool } from "@/data/brokers";
-import { desc, eq, and } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { optionalSession } from "@/lib/optionalSession";
 import { type AccessTier } from "@/lib/vip";
@@ -21,9 +21,8 @@ import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales
 import { setServerLocale } from "@/lib/serverLocale";
 import { getSignalPeriods } from "@/lib/signalPeriods";
 import { loadOptional } from "@/lib/dbOptional";
+import { cachedSignalBoard, type SignalJson } from "@/lib/cachedReads";
 import DataUnavailable from "@/components/DataUnavailable";
-
-type TradeSignal = typeof tradeSignals.$inferSelect;
 
 const sponsoredBrokers = getSponsoredBrokerPool("signals");
 
@@ -105,36 +104,21 @@ export default async function SignalsPage({
   // page that says "back in a minute" than by an error screen that says
   // nothing and offers nowhere to go.
   const [board, subscriptionRow] = await Promise.all([
+    // 250 closed, not 30: the win rate and the P/L total on this page are
+    // computed from that array, so the limit decides the published figure.
+    // At 30 it showed 59% while the real rate over the whole history is
+    // 63.4% — the limit was making the record look worse than it is. 250
+    // sits comfortably above the 123 closed trades there are today.
     loadOptional(
       "signals: board",
-      { active: [] as TradeSignal[], closed: [] as TradeSignal[] },
-      async () => {
-        const [active, closed] = await Promise.all([
-          db.query.tradeSignals.findMany({
-            where: eq(tradeSignals.status, "active"),
-            orderBy: desc(tradeSignals.createdAt),
-            limit: 30,
-          }),
-          db.query.tradeSignals.findMany({
-            where: eq(tradeSignals.status, "closed"),
-            orderBy: desc(tradeSignals.closedAt),
-            // 30 değil 250: sayfadaki kazanma oranı ve K/Z toplamı bu
-            // diziden hesaplanıyor, yani limit doğrudan yayınlanan rakamı
-            // belirliyordu. 30'da kalırken halka %59 gösteriyordu; tüm
-            // geçmiş üzerinden gerçek oran %63,4. Kısacası limit,
-            // performansı olduğundan kötü gösteriyordu. 250, mevcut 123
-            // kapanmış işlemin rahatça üstünde ve satır sayısı sayfayı
-            // zorlamıyor.
-            limit: 250,
-          }),
-        ]);
-        return { active, closed };
-      }
+      { active: [] as SignalJson[], closed: [] as SignalJson[] },
+      () => cachedSignalBoard(250)
     ),
     // The subscription read is its own failure: losing it must not empty
     // the board, and losing the board must not silently downgrade a paying
     // member. Failing it closed costs a VIP reader the unmasked rows for a
-    // few minutes; failing it open would hand them to everybody.
+    // few minutes; failing it open would hand them to everybody. Not
+    // cached either — it is one member's answer, not everybody's.
     session?.user?.id
       ? db.query.vipSubscriptions
           .findFirst({

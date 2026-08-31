@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
+import { CACHE_TAGS } from "@/lib/cachedReads";
 import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
@@ -87,6 +89,10 @@ export async function GET(req: NextRequest) {
     .update(tradeSignals)
     .set(next)
     .where(and(eq(tradeSignals.ticket, ticket), eq(tradeSignals.status, "active")));
+
+  // Edited levels are what a reader acts on, so the shared board must not
+  // keep serving the old ones. See lib/cachedReads.ts.
+  revalidateTag(CACHE_TAGS.signals, "max");
 
   return NextResponse.json({ ok: true, changed: true, fields: changed });
 }
