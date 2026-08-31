@@ -41,6 +41,60 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-08-31-2200",
+    title: "FXPARTNER Piyasa Özeti | 31.08.2026 Akşam Güncellemesi",
+    excerpt:
+      "İran, ABD'nin Hürmüz Boğazı vuruşuna karşılık Ürdün ve BAE'deki Amerikan üslerini balistik füzelerle vurdu; Wall Street günü kayıpla kapattı (Dow %0,9, S&P 500 %0,3, Nasdaq %0,5 geriledi), altın 4.443 dolara geriledi, Eylül faiz artırım ihtimali CME FedWatch'ta %60'ın üzerine çıktı.",
+    publishedAt: "2026-08-31",
+    readingMinutes: 4,
+    intro:
+      "Günün ilerleyen saatlerinde jeopolitik gerilim yeni bir boyuta taşındı: İran, ABD'nin Hürmüz Boğazı'ndaki Larak Adası vuruşuna karşılık Ürdün'deki ve Birleşik Arap Emirlikleri'ndeki Amerikan askeri varlıklarını balistik füzelerle hedef aldı. Gelişme, gün içinde zaten kayıplı seyreden Wall Street endekslerindeki satışları derinleştirirken, altın ve Eylül faiz artırımı beklentilerindeki hareketlilik de sürüyor.",
+    news: [
+      {
+        icon: "🎯",
+        heading: "İran, Ürdün ve BAE'deki ABD Üslerini Füzelerle Vurdu",
+        body: "İran Devrim Muhafızları Ordusu (IRGC), ABD'nin Pazar günü **Larak Adası'ndaki** roketatar vuruşuna karşılık Ürdün'deki **King Hussein** ve **Al Azraq** üslerini balistik füzelerle hedef aldı; BAE'deki Amerikan askeri varlıklarına yönelik de saldırı düzenlendi. Ürdün Silahlı Kuvvetleri, ülke hava sahasına giren **sekiz füzeyi** düşürdüğünü açıklarken, ABD kaynakları gelen füzelerin **neredeyse tamamının** engellendiğini belirtti. Başkan **Trump**, Fox News'e yaptığı açıklamada İran'ın saldırısına **\"sert karşılık\"** verileceğini söyledi.",
+      },
+      {
+        icon: "📉",
+        heading: "Wall Street Günü Kayıpla Kapattı, Dow'un 5 Günlük Yükseliş Serisi Sona Erdi",
+        body: "**Dow Jones**, **%0,9 (464 puan)** değer kaybıyla **53.885,10** puandan kapanarak beş günlük yükseliş serisini sonlandırdı. **S&P 500** **%0,3** düşüşle **7.711,76** puana, **Nasdaq Composite** ise yapay zeka hisselerindeki zayıf performansla **%0,5** gerileyerek **26.402,42** puana indi. Yükselen petrol fiyatlarının enflasyon riskini artırması ve Fed'in olası Eylül faiz artırımına dair endişeler satışları tetikledi.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın 4.443 Dolara Geriledi",
+        body: "XAU/USD, güne göre **%0,24** değer kaybıyla **4.443** dolar seviyesinde işlem görüyor. Fed Başkanı Warsh'ın şahin Jackson Hole çıkışı sonrası güçlenen dolar ile artan Eylül faiz artırım beklentisi, jeopolitik gerilime rağmen metal üzerindeki baskıyı sürdürüyor.",
+      },
+      {
+        icon: "📈",
+        heading: "Eylül Faiz Artırımı İhtimali %60'ın Üzerine Çıktı",
+        body: "**CME FedWatch** verilerine göre Fed'in **16 Eylül** toplantısında 25 baz puanlık faiz artışı yapma ihtimali, Cuma günkü yaklaşık **%56** seviyesinden **%60,4'e** yükseldi. Fed fonu vadeli işlemleri yatırımcıları, Eylül kararını artık bir **\"yazı tura\"** olarak değerlendiriyor.",
+      },
+      {
+        icon: "💴",
+        heading: "Yen 160 Bandında, Müdahale İzlenimi Sürüyor",
+        body: "USD/JPY, **160,01-160,20** bandında işlem görmeye devam ediyor. Stratejistler, yenin daha da zayıflaması halinde Japon yetkililerin **161** ve ardından **162-163** bandında yeniden piyasaya müdahale edebileceğini belirtiyor.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "Hafta Boyunca",
+        icon: "🇮🇷",
+        title: "ABD'nin Olası Karşı Yanıtı",
+        note: "Trump'ın İran'ın Ürdün ve BAE saldırısına 'sert karşılık' vereceğini açıklamasının ardından, ABD'nin atacağı adım Hürmüz Boğazı ve bölgesel enerji altyapısı üzerindeki riski canlı tutmaya aday.",
+      },
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Fed'in Eylül faiz kararı öncesi işgücü piyasasına dair son büyük veri; sürpriz bir sonuç %60 seviyesindeki faiz artırım beklentisini yeniden fiyatlayabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-08-31-1500",
     title: "FXPARTNER Piyasa Özeti | 31.08.2026 Öğleden Sonra Güncellemesi",
     excerpt:
