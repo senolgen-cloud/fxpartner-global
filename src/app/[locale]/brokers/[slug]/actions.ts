@@ -3,7 +3,8 @@
 import { db } from "@/db";
 import { comments } from "@/db/schema";
 import { auth } from "@/auth";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { CACHE_TAGS } from "@/lib/cachedReads";
 
 export type CommentFormState = { ok: boolean; error?: string };
 
@@ -64,5 +65,9 @@ export async function submitComment(
   });
 
   revalidatePath(`/brokers/${brokerSlug}`);
+  // revalidatePath alone does not reach the shared comment read — that is a
+  // tagged cache, and it also feeds the rating aggregate on /brokerlar and
+  // the home ranking, which are not this path. See lib/cachedReads.ts.
+  revalidateTag(CACHE_TAGS.brokerComments, "max");
   return { ok: true };
 }

@@ -4,13 +4,11 @@ import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
-import { db } from "@/db";
-import { educationPosts } from "@/db/schema";
-import { asc } from "drizzle-orm";
 import { topicsWithVisual } from "@/lib/educationVisuals";
 import { breadcrumbSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
 import { loadOptional } from "@/lib/dbOptional";
+import { cachedLessonIndex, type LessonJson } from "@/lib/cachedReads";
 import DataUnavailable from "@/components/DataUnavailable";
 import { pickTranslation } from "@/lib/translateContent";
 
@@ -74,14 +72,15 @@ export default async function EducationIndexPage({
   // components in the repo, not rows — are all still worth serving. What
   // must not happen is the empty state below claiming no lesson has been
   // published yet, which during an outage is false a hundred times over.
+  // The lesson list is the page, but not all of it: the header, the
+  // academy explanation and the link to the visual explainers — which are
+  // components in the repo, not rows — are all still worth serving. What
+  // must not happen is the empty state below claiming no lesson has been
+  // published yet, which during an outage is false a hundred times over.
   const { data: rows, unavailable } = await loadOptional(
     "egitim: lessons",
-    [] as (typeof educationPosts.$inferSelect)[],
-    () =>
-      db.query.educationPosts.findMany({
-        orderBy: [asc(educationPosts.lessonNo), asc(educationPosts.publishedAt)],
-        limit: 60,
-      })
+    [] as LessonJson[],
+    () => cachedLessonIndex(60)
   );
   const posts = rows.map((row) => ({ ...row, ...pickTranslation(row.translations, locale, row) }));
 

@@ -2,9 +2,12 @@ import Image from "next/image";
 import { tr } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import type { Broker } from "@/data/brokers";
-import type { tradeSignals } from "@/db/schema";
+import type { SignalJson } from "@/lib/cachedReads";
 
-type TradeSignal = typeof tradeSignals.$inferSelect;
+// The cached shape, with its dates as ISO strings — this card shows the
+// pair, the direction and the levels, and never reads a date, so there is
+// nothing here that wants them revived.
+type TradeSignal = SignalJson;
 
 function getMonogram(name: string): string {
   const words = name.trim().split(/\s+/);
