@@ -6,9 +6,36 @@ import { blogPosts } from "@/data/blog";
 import { cashbackPrograms } from "@/data/cashback";
 import { marketAnalysisPosts } from "@/data/marketAnalysis";
 import { db } from "@/db";
-import { educationPosts, newsBulletins } from "@/db/schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
+
+/**
+ * Rows the sitemap wants and can, at a push, live without.
+ *
+ * Two of the lists below come from the database, and a sitemap route that
+ * throws fails the whole build. On 2026-08-31 that is exactly what happened:
+ * the database hit its compute quota, `/sitemap.xml` could not read
+ * news_bulletin, and every deployment stopped — including the ones that had
+ * nothing to do with the database at all.
+ *
+ * That trade is the wrong way round. A sitemap missing its lesson and
+ * bulletin rows for one build is recoverable: the next build puts them back,
+ * and both sets are linked from their own index pages, so a crawler still
+ * has a way in. A site that cannot deploy at all is not recoverable by
+ * waiting — it just accumulates undeployed commits.
+ *
+ * Loud on the way past, though. A sitemap that quietly shrank by several
+ * hundred URLs and told nobody would be a worse bug than the one this
+ * avoids, so the failure is logged with the name of what went missing.
+ */
+async function rowsOrNone<T>(what: string, load: () => Promise<T[]>): Promise<T[]> {
+  try {
+    return await load();
+  } catch (err) {
+    console.error(`sitemap: ${what} unavailable, continuing without them —`, err);
+    return [];
+  }
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -98,7 +125,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  const bulletins = await db.query.newsBulletins.findMany();
+  const bulletins = await rowsOrNone("news bulletins", () =>
+    db.query.newsBulletins.findMany()
+  );
   const bulletinRoutes: MetadataRoute.Sitemap = bulletins.map((b) => ({
     url: `${SITE_URL}/haber-bulteni/${b.slug}`,
     lastModified: new Date(b.publishedAt),
@@ -108,7 +137,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // The lessons are rows, not files, so nothing in the repo points at them
   // and a crawler has no other way in.
-  const lessons = await db.query.educationPosts.findMany();
+  const lessons = await rowsOrNone("education lessons", () =>
+    db.query.educationPosts.findMany()
+  );
   const lessonRoutes: MetadataRoute.Sitemap = lessons.map((l) => ({
     url: `${SITE_URL}/egitim/${l.slug}`,
     lastModified: new Date(l.publishedAt),
