@@ -1,6 +1,6 @@
 name: Education posts
 
-# ACTIVE since 2026-08-25: two lessons a day, 07:40 UTC.
+# ACTIVE since 2026-08-25: two lessons a day, first attempt 07:40 UTC.
 #
 # Released from "paused" after the compliance-brand review that gate exists
 # for — see the route header for what it checked. Cadence was the owner's
@@ -25,8 +25,24 @@ name: Education posts
 on:
   workflow_dispatch:
   schedule:
-    # 07:40 UTC — clear of every other content cron.
+    # FOUR ATTEMPTS, TWO LESSONS. A single daily slot has no second chance,
+    # and GitHub's scheduled runs are best-effort: over the six days to
+    # 2026-08-31 every run landed hours off this slot — 08:22, 18:24, 19:34,
+    # 13:21, 13:17 — and the run for the 31st was dropped altogether, so a
+    # day went by with no lesson. The hourly channel dispatcher never had
+    # that problem, because a missed hour is retried an hour later.
+    #
+    # Publishing is capped per UTC day in the route (lessonsAllowedNow), so
+    # the first attempt that lands writes the day's two lessons and the rest
+    # cost one query and return "already published". Losing a whole day now
+    # takes four consecutive drops instead of one.
+    #
+    # 07:40 stays the intended hour and is still clear of every other
+    # content cron; the later three are catch-up.
     - cron: "40 7 * * *"
+    - cron: "40 11 * * *"
+    - cron: "40 15 * * *"
+    - cron: "40 19 * * *"
 
 jobs:
   # Owned by Haber & Editöryal Departmanı — see src/lib/departments.ts.

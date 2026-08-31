@@ -6,6 +6,7 @@ import { db } from "@/db";
 import { educationPosts } from "@/db/schema";
 import { educationTopics } from "@/lib/educationTopics";
 import { generateEducationPost, slugifyEducation } from "@/lib/educationPost";
+import { DAILY_LESSON_TARGET, lessonsAllowedNow, startOfUtcDay } from "@/lib/educationCadence";
 import { translateBulletin } from "@/lib/translateContent";
 import { withCronErrorAlert } from "@/lib/cron-wrapper";
 
@@ -35,10 +36,10 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
 
-// Two a day. Four was five times the blog's hand-written rate and the
-// shape scaled-content guidance is written about; two is closer to the
-// site's own pace and still fills the queue for about five weeks.
-const DEFAULT_COUNT = 2;
+// The cadence lives in lib/educationPost.ts, next to the rule that enforces
+// it. This route decides nothing about how often the site publishes; it
+// asks.
+const DEFAULT_COUNT = DAILY_LESSON_TARGET;
 
 function isAuthorized(req: NextRequest): boolean {
   const secret = process.env.CRON_SECRET;
@@ -56,9 +57,32 @@ export const GET = withCronErrorAlert("education-posts", async (req: NextRequest
   const count = Number.isFinite(requested) ? Math.min(Math.max(1, requested), 6) : DEFAULT_COUNT;
 
   const existing = await db
-    .select({ topic: educationPosts.topic, slug: educationPosts.slug })
+    .select({
+      topic: educationPosts.topic,
+      slug: educationPosts.slug,
+      publishedAt: educationPosts.publishedAt,
+    })
     .from(educationPosts)
     .orderBy(desc(educationPosts.publishedAt));
+
+  // Counted from the rows already fetched rather than with a second query:
+  // this route runs several times a day now and most of those runs do
+  // nothing, so the cheap path should stay one wakeup, not two.
+  const dayStart = startOfUtcDay();
+  const publishedToday = existing.filter((r) => r.publishedAt >= dayStart).length;
+  const allowed = lessonsAllowedNow(publishedToday, count);
+  if (allowed === 0) {
+    // The ordinary outcome of a catch-up run, and not an error. See
+    // lessonsAllowedNow for why the job attempts more often than it writes.
+    return NextResponse.json({
+      ok: true,
+      written: 0,
+      reason: "today's lessons are already published",
+      publishedToday,
+      dailyTarget: DAILY_LESSON_TARGET,
+    });
+  }
+
   const used = new Set(existing.map((r) => r.topic));
   // Grows as this run writes, so two posts in the same batch cannot claim
   // the same slug either.
@@ -68,7 +92,7 @@ export const GET = withCronErrorAlert("education-posts", async (req: NextRequest
   // somebody has already been sent a link to.
   let nextLesson = existing.length + 1;
 
-  const queue = educationTopics.filter((t) => !used.has(t.id)).slice(0, count);
+  const queue = educationTopics.filter((t) => !used.has(t.id)).slice(0, allowed);
   if (queue.length === 0) {
     // Not an error. The list is finite by design; when it empties, someone
     // adds subjects worth writing about rather than the machine inventing
