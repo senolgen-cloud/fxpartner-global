@@ -72,8 +72,17 @@ function withoutComments(src) {
             .replace(/^[ \t]*\/\/.*$/gm, (m) => m.replace(/[^\n]/g, " "));
 }
 
+// The one file that cannot use the dictionary. global-error.tsx replaces
+// the whole document when the root layout itself failed, so the locale
+// context, the stylesheet and the catalogue are all gone or suspect — it
+// carries two hardcoded sentences, Turkish and English, on purpose. See the
+// note at the top of that file. Listing it forever would train people to
+// skim past this report, which is the only thing it has going for it.
+const EXEMPT = new Set(["src/app/global-error.tsx"]);
+
 const findings = [];
 for (const file of walk("src")) {
+  if (EXEMPT.has(file.replace(/\\/g, "/"))) continue;
   const raw = fs.readFileSync(file, "utf8");
   const src = withoutComments(raw);
   const lineOf = (idx) => src.slice(0, idx).split("\n").length;

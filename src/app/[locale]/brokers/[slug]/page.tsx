@@ -27,7 +27,9 @@ import {
 import TrustIndex from "@/components/TrustIndex";
 import CommentForm from "@/components/CommentForm";
 import BrokerReviewCard from "@/components/BrokerReviewCard";
-import { auth } from "@/auth";
+import { optionalSession } from "@/lib/optionalSession";
+import { loadOptional } from "@/lib/dbOptional";
+import DataUnavailable from "@/components/DataUnavailable";
 import { db } from "@/db";
 import { comments as commentsTable, users as usersTable } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
@@ -132,6 +134,46 @@ function SnapshotIcon({ name }: { name: keyof typeof SNAPSHOT_ICONS }) {
   );
 }
 
+/**
+ * The reader comments on one broker.
+ *
+ * Left join, not inner: commenting no longer requires an account, so a
+ * row's author is either a real user (userName) or a guest (guestName) —
+ * an inner join here would silently drop every guest comment.
+ *
+ * Lifted out of the component so the row shape has a name the fallback can
+ * be typed against; an empty array with no type would widen to never[] and
+ * take the map below with it.
+ */
+function loadBrokerComments(slug: string) {
+  return db
+    .select({
+      id: commentsTable.id,
+      body: commentsTable.body,
+      rating: commentsTable.rating,
+      createdAt: commentsTable.createdAt,
+      userName: usersTable.name,
+      userCountry: usersTable.country,
+      guestName: commentsTable.guestName,
+      title: commentsTable.title,
+      experience: commentsTable.experience,
+      liked: commentsTable.liked,
+      improved: commentsTable.improved,
+      ratingPlatform: commentsTable.ratingPlatform,
+      ratingPricing: commentsTable.ratingPricing,
+      ratingService: commentsTable.ratingService,
+      ratingWithdrawal: commentsTable.ratingWithdrawal,
+      brokerReply: commentsTable.brokerReply,
+      brokerReplyAt: commentsTable.brokerReplyAt,
+    })
+    .from(commentsTable)
+    .leftJoin(usersTable, eq(commentsTable.userId, usersTable.id))
+    .where(eq(commentsTable.brokerSlug, slug))
+    .orderBy(desc(commentsTable.createdAt));
+}
+
+type BrokerCommentRow = Awaited<ReturnType<typeof loadBrokerComments>>[number];
+
 export default async function BrokerDetailPage({
   params,
 }: {
@@ -183,34 +225,20 @@ export default async function BrokerDetailPage({
     { id: "reviews", label: tr("Yorumlar") },
   ];
 
-  const session = await auth();
+  const session = await optionalSession();
   // Left join, not inner: commenting no longer requires an account, so a
   // row's author is either a real user (userName) or a guest (guestName) —
   // an inner join here would silently drop every guest comment.
-  const brokerCommentsRaw = await db
-    .select({
-      id: commentsTable.id,
-      body: commentsTable.body,
-      rating: commentsTable.rating,
-      createdAt: commentsTable.createdAt,
-      userName: usersTable.name,
-      userCountry: usersTable.country,
-      guestName: commentsTable.guestName,
-      title: commentsTable.title,
-      experience: commentsTable.experience,
-      liked: commentsTable.liked,
-      improved: commentsTable.improved,
-      ratingPlatform: commentsTable.ratingPlatform,
-      ratingPricing: commentsTable.ratingPricing,
-      ratingService: commentsTable.ratingService,
-      ratingWithdrawal: commentsTable.ratingWithdrawal,
-      brokerReply: commentsTable.brokerReply,
-      brokerReplyAt: commentsTable.brokerReplyAt,
-    })
-    .from(commentsTable)
-    .leftJoin(usersTable, eq(commentsTable.userId, usersTable.id))
-    .where(eq(commentsTable.brokerSlug, broker.slug))
-    .orderBy(desc(commentsTable.createdAt));
+  //
+  // Optional: this page is a long editorial review that lives in the repo —
+  // spreads, regulation, account types, the verdict, the FAQ — with reader
+  // comments as its last section. Losing that section is a loss; losing the
+  // review over it, as happened on 2026-08-31, is absurd.
+  const { data: brokerCommentsRaw, unavailable: commentsUnavailable } = await loadOptional(
+    `brokers/${broker.slug}: comments`,
+    [] as BrokerCommentRow[],
+    () => loadBrokerComments(broker.slug)
+  );
 
   const brokerComments = brokerCommentsRaw.map((c) => ({
     ...c,
@@ -792,8 +820,13 @@ export default async function BrokerDetailPage({
         <section id="reviews" className="scroll-mt-8 bg-paper-high">
           <div className="mx-auto max-w-5xl px-6 py-16">
             <h2 className="font-display text-2xl font-semibold text-text-dark">
-              Yorumlar ({brokerComments.length})
+              {/* No count while the list is unreachable: "Yorumlar (0)" on a
+                  broker with forty reviews is a worse answer than no number
+                  at all. */}
+              {commentsUnavailable ? tr("Yorumlar") : `Yorumlar (${brokerComments.length})`}
             </h2>
+
+            {commentsUnavailable && <DataUnavailable what={tr("Yorumlar")} className="mt-6" />}
 
             {aggregate && (
               <div className="mt-6">

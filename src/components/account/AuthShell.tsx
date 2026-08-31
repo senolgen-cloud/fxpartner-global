@@ -1,6 +1,7 @@
 import Link from "@/components/LocaleLink";
 import { tr, trf } from "@/lib/chrome";
 import { getRecentSignalStats } from "@/lib/signalStats";
+import { loadOptional } from "@/lib/dbOptional";
 import { formatPercent } from "@/lib/i18n";
 import { getServerLocale } from "@/lib/serverLocale";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
@@ -50,7 +51,17 @@ export default async function AuthShell({
   children: React.ReactNode;
   footer: React.ReactNode;
 }) {
-  const stats = await getRecentSignalStats("all", 30);
+  // Optional, and the shape of the fallback matters: this component already
+  // omits the line when the sample is too thin, so "unreadable" simply
+  // reuses that path — no number rather than a wrong one. It also has to
+  // hold, because AuthShell wraps the login page and the login page is
+  // prerendered at build time: an uncaught throw here fails the whole
+  // build, the way the sitemap did on 2026-08-31.
+  const { data: stats } = await loadOptional(
+    "auth shell: signal stats",
+    null as Awaited<ReturnType<typeof getRecentSignalStats>>,
+    () => getRecentSignalStats("all", 30)
+  );
   const locale = getServerLocale();
 
   return (

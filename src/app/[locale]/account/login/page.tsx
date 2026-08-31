@@ -7,7 +7,7 @@ import { submitLogin } from "@/app/[locale]/account/login/simple-actions";
 import { configuredProviders } from "@/lib/authProviders";
 import { setServerLocale } from "@/lib/serverLocale";
 import { defaultLocale, isLocale } from "@/lib/i18n";
-import { auth } from "@/auth";
+import { optionalSession } from "@/lib/optionalSession";
 import { redirect } from "next/navigation";
 import { localePath } from "@/lib/i18n";
 
@@ -24,7 +24,7 @@ export default async function LoginPage({
   // does any bookmark. Whoever arrives signed in is done signing in — send
   // them to the panel rather than showing them the form again, which reads
   // as the sign-in having failed.
-  if ((await auth())?.user) {
+  if ((await optionalSession())?.user) {
     redirect(localePath(isLocale(pageLocale) ? pageLocale : defaultLocale, "/account"));
   }
 
