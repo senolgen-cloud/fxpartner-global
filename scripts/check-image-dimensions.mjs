@@ -88,6 +88,15 @@ for (const variant of VARIANTS) {
   }
 }
 
+// Blog covers. They carry no declared size — the article frame is square
+// and crops whatever it is given — so existence is the whole claim. It is
+// worth checking anyway: a cover is referenced by a path in a data file and
+// nothing resolves it at build time, so a renamed or deleted file is a
+// broken image on a published article and a dead og:image on every share of
+// it, with no error anywhere. Renaming one on 2026-08-31 to force social
+// platforms to re-scrape is exactly how that mistake gets made.
+const BLOG = "src/data/blog.ts";
+
 // The app icons: manifest.json, the Next metadata, and the service worker.
 const MANIFEST = "public/manifest.json";
 const LAYOUT = "src/app/[locale]/layout.tsx";
@@ -108,6 +117,14 @@ function declared(url, sizes, where) {
   if (actual.width !== w || actual.height !== h) {
     problems.push({ url, issue: `${where} declares ${w}×${h}, file is ${actual.width}×${actual.height}` });
   }
+}
+
+if (fs.existsSync(BLOG)) {
+  const covers = [...fs.readFileSync(BLOG, "utf8").matchAll(/coverImage:\s*"([^"]+)"/g)];
+  if (covers.length === 0) problems.push({ url: BLOG, issue: "declares no covers — has the file changed shape?" });
+  for (const [, url] of covers) declared(url, null, "a blog post");
+} else {
+  problems.push({ url: BLOG, issue: "is missing" });
 }
 
 if (fs.existsSync(MANIFEST)) {
