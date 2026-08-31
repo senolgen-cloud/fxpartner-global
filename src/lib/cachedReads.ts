@@ -1,8 +1,9 @@
 import { unstable_cache } from "next/cache";
 import { db } from "@/db";
 import { tradeSignals, newsBulletins, educationPosts, comments, users } from "@/db/schema";
-import { asc, desc, eq } from "drizzle-orm";
+import { and, asc, desc, eq, gte } from "drizzle-orm";
 import { getBrokerReviewStats } from "@/lib/brokerReviews";
+import { SIGNALS_EPOCH } from "@/lib/signalPeriods";
 
 /**
  * The database reads that many requests can share.
@@ -106,16 +107,24 @@ function signalToJson(s: SignalRow): SignalJson {
  * server without going through a caller that masks it.
  */
 export const cachedSignalBoard = cachedRead(
-  ["signal-board"],
+  // "-v2" because the cutoff below changes what these keys mean. Without the
+  // bump, readers holding the pre-reset entry would keep being served the old
+  // history until the TTL happened to expire.
+  ["signal-board-v2"],
   async (closedLimit: number) => {
     const [active, closed] = await Promise.all([
       db.query.tradeSignals.findMany({
-        where: eq(tradeSignals.status, "active"),
+        // SIGNALS_EPOCH — the record starts on the reset date, and it is
+        // applied in SQL rather than filtered afterwards so the pre-reset
+        // rows are never read, paged or paid for.
+        where: and(eq(tradeSignals.status, "active"), gte(tradeSignals.createdAt, SIGNALS_EPOCH)),
         orderBy: desc(tradeSignals.createdAt),
         limit: 30,
       }),
       db.query.tradeSignals.findMany({
-        where: eq(tradeSignals.status, "closed"),
+        // On createdAt, not closedAt: a trade opened before the reset does
+        // not join the new record by closing after it.
+        where: and(eq(tradeSignals.status, "closed"), gte(tradeSignals.createdAt, SIGNALS_EPOCH)),
         orderBy: desc(tradeSignals.closedAt),
         limit: closedLimit,
       }),
@@ -130,15 +139,15 @@ export const cachedSignalBoard = cachedRead(
  * between open trades so the card is never empty.
  */
 export const cachedLatestSignal = cachedRead(
-  ["latest-signal"],
+  ["latest-signal-v2"],
   async (): Promise<SignalJson | null> => {
     const row =
       (await db.query.tradeSignals.findFirst({
-        where: eq(tradeSignals.status, "active"),
+        where: and(eq(tradeSignals.status, "active"), gte(tradeSignals.createdAt, SIGNALS_EPOCH)),
         orderBy: desc(tradeSignals.createdAt),
       })) ??
       (await db.query.tradeSignals.findFirst({
-        where: eq(tradeSignals.status, "closed"),
+        where: and(eq(tradeSignals.status, "closed"), gte(tradeSignals.createdAt, SIGNALS_EPOCH)),
         orderBy: desc(tradeSignals.closedAt),
       })) ??
       null;

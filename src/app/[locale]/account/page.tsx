@@ -13,7 +13,7 @@ import {
   type CashbackAccountStatus,
   type VipSubscriptionStatus,
 } from "@/db/schema";
-import { eq, desc, inArray } from "drizzle-orm";
+import { and, eq, desc, gte, inArray } from "drizzle-orm";
 import { createVipInviteLink } from "@/lib/telegram";
 import VipInviteClientTrigger from "@/components/VipInviteClientTrigger";
 import CashbackLinkForm from "@/components/CashbackLinkForm";
@@ -21,6 +21,7 @@ import { updateProfile, markNotificationsSeen, finishPanelTour } from "./profile
 import PanelTour from "@/components/account/PanelTour";
 import NotificationBell from "@/components/account/NotificationBell";
 import { getMemberNotifications } from "@/lib/memberNotifications";
+import { SIGNALS_EPOCH } from "@/lib/signalPeriods";
 import type { AccessTier } from "@/lib/signalAccess";
 import ProfileCard from "@/components/account/ProfileCard";
 import { getCountries } from "@/lib/country";
@@ -108,7 +109,8 @@ export default async function AccountPage({
       where: eq(vipSubscriptions.userId, user.id!),
     }),
     db.query.tradeSignals.findFirst({
-      where: eq(tradeSignals.status, "active"),
+      // Same cutoff /signals applies — see SIGNALS_EPOCH.
+      where: and(eq(tradeSignals.status, "active"), gte(tradeSignals.createdAt, SIGNALS_EPOCH)),
       orderBy: desc(tradeSignals.createdAt),
     }),
   ]);

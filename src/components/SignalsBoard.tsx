@@ -17,7 +17,12 @@ import { useLiveQuotes, type LiveQuote } from "./useLiveQuotes";
 import { useCountUp } from "@/components/useCountUp";
 import { favorableMove } from "@/lib/contractSizes";
 import { playChime, unlockAudio } from "@/lib/chime";
-import { MIN_TRADES_FOR_RATE, type SignalPeriods } from "@/lib/signalPeriods";
+import {
+  MIN_TRADES_FOR_RATE,
+  SIGNALS_EPOCH,
+  SIGNALS_START_BALANCE,
+  type SignalPeriods,
+} from "@/lib/signalPeriods";
 import type { SignalJson } from "@/lib/cachedReads";
 
 type Signal = typeof tradeSignals.$inferSelect;
@@ -225,12 +230,78 @@ function PeriodBox({
   );
 }
 
+// The account balance, stated rather than implied.
+//
+// Every other number on this page is a delta — "+$2.40 bugün" says nothing
+// about whether that is a good day without the size of the account it was
+// made on. The record restarted on a $100 account (SIGNALS_START_BALANCE),
+// so the balance is start + everything realised since, and the percentage
+// beside it is the honest headline: the same $2.40 is 2.4% here and noise
+// on an account whose size was never given.
+//
+// Summing `closed` is exactly right and not an approximation: the rows
+// reaching this component are already filtered to the reset (see
+// cachedReads.ts), so this is the whole realised record, not a window of it.
+function BalanceBox({ closed }: { closed: Signal[] }) {
+  const tr = useTr();
+  const trf = useTrf();
+
+  const realised = closed
+    .filter((x) => x.profit !== null && x.outcome !== null)
+    .reduce((sum, x) => sum + parseFloat(x.profit as string), 0);
+  const balance = SIGNALS_START_BALANCE + realised;
+  const positive = realised >= 0;
+  const changePct = (realised / SIGNALS_START_BALANCE) * 100;
+
+  return (
+    <div className="rounded-xl border border-hairline bg-ink-soft/40 px-5 py-4">
+      <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+        {tr("Bakiye")}
+      </div>
+      <div className="mt-2 font-display text-3xl font-bold tabular-stat">
+        ${balance.toFixed(2)}
+      </div>
+      <div className="mt-1.5 flex flex-wrap items-center gap-2 font-mono text-xs text-text-on-ink-muted">
+        <span>{trf("Başlangıç ${amount}", { amount: SIGNALS_START_BALANCE.toFixed(2) })}</span>
+        {realised !== 0 && (
+          <>
+            <span aria-hidden="true">·</span>
+            <span style={{ color: positive ? TICK_UP : TICK_DOWN }}>
+              {positive ? "+" : "−"}%{Math.abs(changePct).toFixed(2)}
+            </span>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function PeriodSummary({ closed, periods }: { closed: Signal[]; periods: SignalPeriods }) {
   const tr = useTr();
+  const trf = useTrf();
+  const intl = useIntlLocale();
+  const startedOn = new Intl.DateTimeFormat(intl, {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "Europe/Istanbul",
+  }).format(SIGNALS_EPOCH);
+
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
-      <PeriodBox label={tr("Bugün")} since={periods.dayStart} closed={closed} showRate={false} />
-      <PeriodBox label={tr("Bu Hafta")} since={periods.weekStart} closed={closed} showRate />
+    <div>
+      <div className="grid gap-4 sm:grid-cols-3">
+        <BalanceBox closed={closed} />
+        <PeriodBox label={tr("Bugün")} since={periods.dayStart} closed={closed} showRate={false} />
+        <PeriodBox label={tr("Bu Hafta")} since={periods.weekStart} closed={closed} showRate />
+      </div>
+      {/* Said out loud, because a track record that quietly starts somewhere
+          is the thing readers are right to distrust. */}
+      <p className="mt-3 text-center text-[11px] text-text-on-ink-muted">
+        {trf("Bu kayıt {date} tarihinde ${amount} bakiyeyle başladı; öncesindeki işlemler bu tabloya dahil değildir.", {
+          date: startedOn,
+          amount: SIGNALS_START_BALANCE.toFixed(2),
+        })}
+      </p>
     </div>
   );
 }
@@ -1436,6 +1507,18 @@ export default function SignalsBoard({
         </div>
       </section>
 
+      {/* Where the record stands, directly above the open board.
+          It used to sit far below, under the results, which meant the page
+          showed a reader positions long before it told them what account
+          those positions are being taken on. The balance and the day are
+          how a reader is supposed to read the cards underneath, so they
+          come first. PipsStats — the curve, the per-pair breakdown, the
+          long-form evidence — stays below the results, where someone who
+          has decided to dig in will look for it. */}
+      <section className="mx-auto max-w-6xl px-6 pt-10">
+        <PeriodSummary closed={closed} periods={periods} />
+      </section>
+
       <section className="mx-auto max-w-6xl px-6 py-16">
         <div className="mb-6 text-center">
           <div className="flex items-center justify-center gap-3">
@@ -1523,10 +1606,7 @@ export default function SignalsBoard({
 
       <section className="border-b border-hairline">
         <div className="mx-auto max-w-6xl px-6 pb-16">
-          <PeriodSummary closed={closed} periods={periods} />
-          <div className="mt-8">
-            <PipsStats closed={closed} />
-          </div>
+          <PipsStats closed={closed} />
         </div>
       </section>
 
