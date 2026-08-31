@@ -1436,7 +1436,11 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "litefinance-anlik-para-cekme",
     adBrokerSlug: "lite-finance",
-    coverImage: "/blog/litefinance-anlik-para-cekme-cover.png",
+    // Dated because the artwork was replaced, not because the post was. The
+    // old file was a generated credit card whose chip and embossed number
+    // did not survive a close look; a new name is what makes a social
+    // platform re-scrape rather than keep serving its cached copy of it.
+    coverImage: "/blog/litefinance-anlik-para-cekme-cover-20260831.png",
     lang: "tr",
     title: "LiteFinance'te Anlık Para Çekme: Üç Şart ve Gerçek Süreler",
     excerpt:
