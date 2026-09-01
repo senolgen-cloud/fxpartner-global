@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-01-2100",
+    title: "FXPARTNER Piyasa Özeti | 01.09.2026 Gece Güncellemesi",
+    excerpt:
+      "ABD ISM İmalat Sanayi PMI Ağustos'ta 55,2 beklentisinin altında 54,6'ya geriledi; altın yükselen ABD tahvil getirileriyle %1,9 değer kaybederek 19 Ağustos'tan bu yana en düşük seviyeye indi, 10 yıllık tahvil getirisi ise Ocak 2025'ten bu yana en yüksek seviye olan %4,78-4,80 bandına çıktı.",
+    publishedAt: "2026-09-01",
+    readingMinutes: 3,
+    intro:
+      "Gece seansında gündeme, gün içinde açıklanan ABD imalat sanayi verisinin beklentilerin altında kalması ve buna karşın ABD tahvil getirilerindeki sert yükseliş damga vurdu. Hürmüz Boğazı'ndaki jeopolitik gerilimin sürmesiyle yükselen enflasyon endişeleri, Fed'in Eylül'de faiz artıracağı beklentisini güçlendirmeye devam ederken, bu durum altın üzerindeki baskıyı artırdı.",
+    news: [
+      {
+        icon: "🏭",
+        heading: "ABD ISM İmalat Sanayi PMI Ağustos'ta Beklentilerin Altında Kaldı: 54,6",
+        body: "**ISM İmalat Sanayi PMI**, Ağustos'ta **54,6** ile hem Temmuz'daki **55,6** seviyesinin hem de piyasa beklentisi olan **55,2**'nin altında geldi. Veri, imalat sektöründeki genişlemenin sekizinci aya taşındığını gösterse de **Yeni Siparişler Endeksi**'nin **56,7'den 53,7'ye**, **İstihdam Endeksi**'nin ise beklenen **53,0**'ün belirgin altında **51,2**'ye gerilemesiyle sektördeki ivme kaybına işaret etti.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın 19 Ağustos'tan Bu Yana En Düşük Seviyeye Geriledi",
+        body: "XAU/USD, **%1,9 değer kaybıyla 4.360-4.375 dolar** bandına geriledi; bu seviye **19 Ağustos'tan bu yana** görülen en düşük fiyatı temsil ediyor. Yükselen ABD tahvil getirileri, faiz getirisi olmayan külçe altını daha az cazip hale getirirken, Hürmüz Boğazı'ndaki jeopolitik gerilime rağmen altının güvenli liman talebi bu baskıyı dengelemeye yetmedi.",
+      },
+      {
+        icon: "📊",
+        heading: "ABD 10 Yıllık Tahvil Getirisi Ocak 2025'ten Bu Yana En Yüksek Seviyede",
+        body: "**ABD 10 yıllık tahvil getirisi**, Ortadoğu'daki gerilimin körüklediği enflasyon endişeleri ve güçlenen Eylül faiz artırımı beklentisiyle **%4,78-4,80 bandına** yükselerek **Ocak 2025'ten bu yana en yüksek** seviyesini gördü. **30 yıllık tahvil getirisi** de **%5,28**'e çıkarak, Hazine Bakanı Bessent'in geçen ay tahvil geri alımlarını genişletme kararı öncesindeki seviyelere yaklaştı.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Fed'in Eylül faiz kararı öncesi işgücü piyasasına dair son büyük veri; zayıf gelen ISM imalat verisinin ardından sürpriz bir sonuç %66 seviyesindeki faiz artırım beklentisini yeniden fiyatlayabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-01-1800",
     title: "FXPARTNER Piyasa Özeti | 01.09.2026 Akşam Güncellemesi",
     excerpt:
