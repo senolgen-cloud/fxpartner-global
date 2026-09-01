@@ -18,7 +18,7 @@ self.addEventListener("push", (event) => {
       // email, where a lockup belongs — dropped into a notification's
       // square icon slot it letterboxed down to an illegible strip, and it
       // still carried the old artwork after the icons were rebuilt.
-      icon: "/icon-fxpartner-2026-192.png",
+      icon: "/icon-fxpartner-2026-192.png?v=2",
       // No badge on purpose. Android renders it as a monochrome silhouette,
       // so any full-bleed colour image becomes a solid blob; with none set
       // the platform falls back to the app icon, which is the better of the

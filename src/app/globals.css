@@ -640,8 +640,8 @@ body[data-sheet="modal"] [data-behind-sheet] {
      the globe, the ring and the lettering at the strength each one glows.
      Built by scripts/build-icons.mjs alongside the icons it is derived
      from, so the two cannot drift apart. */
-  -webkit-mask-image: url("/icon-fxpartner-2026-mark-alpha.png");
-  mask-image: url("/icon-fxpartner-2026-mark-alpha.png");
+  -webkit-mask-image: url("/icon-fxpartner-2026-mark-alpha.png?v=2");
+  mask-image: url("/icon-fxpartner-2026-mark-alpha.png?v=2");
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
   -webkit-mask-repeat: no-repeat;

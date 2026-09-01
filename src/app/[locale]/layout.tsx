@@ -129,12 +129,12 @@ export async function generateMetadata({
   // showing it as long as the URL is the same.
   icons: {
     icon: [
-      { url: "/icon-fxpartner-2026-192.png", sizes: "192x192", type: "image/png" },
-      { url: "/icon-fxpartner-2026-512.png", sizes: "512x512", type: "image/png" },
+      { url: "/icon-fxpartner-2026-192.png?v=2", sizes: "192x192", type: "image/png" },
+      { url: "/icon-fxpartner-2026-512.png?v=2", sizes: "512x512", type: "image/png" },
     ],
     // iOS renders this at 180 and rounds the corners itself; handing it the
     // exact size beats making it downscale the 1024.
-    apple: [{ url: "/icon-fxpartner-2026-apple-180.png", sizes: "180x180", type: "image/png" }],
+    apple: [{ url: "/icon-fxpartner-2026-apple-180.png?v=2", sizes: "180x180", type: "image/png" }],
   },
   title: {
     default: t["site.title"],
