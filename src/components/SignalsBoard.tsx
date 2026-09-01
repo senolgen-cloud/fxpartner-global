@@ -1498,39 +1498,6 @@ export default function SignalsBoard({
 
   return (
     <>
-      <section className="border-b border-hairline">
-        {/* The eyebrow and h1 that used to open this section now sit above the
-            product shot, in the page itself — so the counts below read as the
-            caption to the artwork rather than a second header. Padding is
-            asymmetric for the same reason: the image is directly above. */}
-        <div className="mx-auto max-w-6xl px-6 pb-16 pt-2">
-          <div className="flex flex-col items-center text-center">
-            <div className="flex flex-wrap justify-center gap-10">
-              <div>
-                <div className="font-display text-3xl font-semibold">{active.length}</div>
-                <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  {tr("Aktif Sinyaller")}
-                </div>
-              </div>
-              <div>
-                <div className="font-display text-3xl font-semibold">{decisive.length}</div>
-                <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  {tr("Kapanan İşlemler")}
-                </div>
-              </div>
-              <div className="flex flex-col items-center">
-                <PerformanceRing rate={winRate} />
-                <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  {tr("Kazanma Oranı")}
-                  {decisive.length > 0 && decisive.length < 10 ? ` ${tr("(erken veri)")}` : ""}
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
       {/* Where the record stands, directly above the open board.
           It used to sit far below, under the results, which meant the page
           showed a reader positions long before it told them what account
@@ -1563,7 +1530,15 @@ export default function SignalsBoard({
             takip edin.
           </p>
         ) : (
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          // One card in a two-column grid sits in the left half with a hole
+          // beside it, which reads as a layout that failed rather than as a
+          // board with one trade on it. A single card gets a column of its
+          // own, centred; two or more still fill the row.
+          <div
+            className={`grid grid-cols-1 gap-4 ${
+              groupSignals(active).length === 1 ? "mx-auto max-w-3xl" : "lg:grid-cols-2"
+            }`}
+          >
             {groupSignals(active).map((g) =>
               g.length === 1 ? (
                 <SignalCard
@@ -1605,7 +1580,11 @@ export default function SignalsBoard({
               {tr("Henüz kapanan sinyal yok — işlemler kapandıkça sonuçlar burada görünecek.")}
             </p>
           ) : (
-            <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div
+              className={`mt-6 grid grid-cols-1 gap-4 ${
+                groupSignals(closed).length === 1 ? "mx-auto max-w-3xl" : "lg:grid-cols-2"
+              }`}
+            >
               {groupSignals(closed).map((g) =>
                 g.length === 1 ? (
                   <SignalCard
