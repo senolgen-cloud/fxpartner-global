@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
-import { sendTelegramMessage, mainServicesKeyboard } from "@/lib/telegram";
-import { postTextToX } from "@/lib/x";
-import { sendPushToMembers, sendPushToNonMembers } from "@/lib/push";
+import { sendSignalMessage, mainServicesKeyboard } from "@/lib/telegram";
+import { sendPushToMembers } from "@/lib/push";
 import { db } from "@/db";
 import { pendingOrders } from "@/db/schema";
 import { requiredTierForPair } from "@/lib/signalAccess";
@@ -100,7 +99,7 @@ export async function GET(req: NextRequest) {
       `Fiyat ${existing.price} seviyesine gelmeden emir kaldırıldı — bu kurulum gerçekleşmedi. ` +
       `Aynı emri kurduysanız siz de kaldırabilirsiniz.`;
 
-    const result = await sendTelegramMessage(text, {
+    const result = await sendSignalMessage(text, {
       replyToMessageId: existing.telegramMessageId ?? undefined,
       silent: true,
     });
@@ -126,7 +125,10 @@ export async function GET(req: NextRequest) {
   const direction = orderType.startsWith("BUY") ? "BUY" : "SELL";
 
   const tier = requiredTierForPair(pair);
-  const showLevels = tier === "free";
+  // The announcement only reaches the paid group now, so there is nobody
+  // left to withhold the order price from. The tier still scopes the push
+  // copy below and what /signals shows a visitor.
+  const showLevels = true;
   const dirEmoji = direction === "BUY" ? "🟢" : "🔴";
   const typeLabel = TYPE_LABEL[orderType] ?? orderType;
 
@@ -147,7 +149,7 @@ export async function GET(req: NextRequest) {
     `⚠️ Yalnızca bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. ` +
     `Geçmiş sonuçlar gelecekteki sonuçları garanti etmez.`;
 
-  const telegram = await sendTelegramMessage(text, {
+  const telegram = await sendSignalMessage(text, {
     inlineKeyboard: mainServicesKeyboard(),
     silent: !(await shouldAlertForSignal()),
   });
@@ -172,35 +174,22 @@ export async function GET(req: NextRequest) {
     .onConflictDoNothing();
 
   // Best-effort from here — the announcement has already gone out, and a
-  // failed tweet or push must not turn into a retry that posts it twice.
-  let xResult: { tweetId: string } | { error: string };
+  // failed push must not turn into a retry that posts it twice.
+  //
+  // The tweet and the non-member teaser that used to sit here are gone with
+  // the rest of the public signal flow: both advertised an order the reader
+  // is no longer going to be shown. Members are still told the order exists,
+  // without its price, and the tap lands on /signals where the tier gate
+  // decides the rest.
   try {
-    xResult = await postTextToX(
-      `⏳ BEKLEYEN EMİR — ${pair} ${typeLabel}\n\n` +
-        `Fiyat seviyeye gelirse açılacak. Detaylar: ${siteUrl}/tr/signals\n\n` +
-        `Yatırım tavsiyesi değildir.`
-    );
+    await sendPushToMembers({
+      title: `⏳ ${pair} ${typeLabel} emri kuruldu`,
+      body: `Seviyeler ${ACCESS_TIER_LABEL[tier]} üyelere özel — görmek için dokunun.`,
+      url: "/signals",
+    });
   } catch (err) {
-    xResult = { error: err instanceof Error ? err.message : String(err) };
+    console.error("Pending push failed (members):", err);
   }
 
-  const [memberPush, teaserPush] = await Promise.allSettled([
-    sendPushToMembers({
-      title: `⏳ ${pair} ${typeLabel} emri kuruldu`,
-      body: showLevels
-        ? `Emir ${price}${isRealLevel(stop) ? ` · SL ${stop}` : ""}${isRealLevel(target1) ? ` · TP ${target1}` : ""}`
-        : `Seviyeler ${ACCESS_TIER_LABEL[tier]} üyelere özel — görmek için dokunun.`,
-      url: "/signals",
-    }),
-    sendPushToNonMembers({
-      title: `⏳ ${pair} ${typeLabel} emri kuruldu`,
-      body: "Emir seviyeleri anında üyelere gidiyor. Ücretsiz hesap aç, bir sonrakini kaçırma.",
-      url: "/account/login",
-    }),
-  ]);
-
-  if (memberPush.status === "rejected") console.error("Pending push failed (members):", memberPush.reason);
-  if (teaserPush.status === "rejected") console.error("Pending push failed (non-members):", teaserPush.reason);
-
-  return NextResponse.json({ ok: true, posted: true, ticket, pair, orderType, tier, telegram, x: xResult });
+  return NextResponse.json({ ok: true, posted: telegram !== null, ticket, pair, orderType, tier, telegram });
 }

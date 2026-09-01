@@ -1,19 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
-  sendTelegramPhoto,
+  sendSignalPhoto,
   mainServicesKeyboard,
   telegramContactCta,
-  arabicChatId,
-  vipSignalTarget,
 } from "@/lib/telegram";
 import { formatMessage } from "@/lib/chrome";
 import { localePath, type Locale } from "@/lib/i18n";
-import { postTradeSignalToX } from "@/lib/x";
-import { sendPushToMembers, sendPushToNonMembers } from "@/lib/push";
-import { getRecentSignalStats, statsLineTr, statsLineEn } from "@/lib/signalStats";
+import { sendPushToMembers } from "@/lib/push";
+import { getRecentSignalStats, statsLineTr } from "@/lib/signalStats";
 import { shouldAlertForSignal } from "@/lib/signalAlertPace";
 import { requiredTierForPair } from "@/lib/signalAccess";
-import { ACCESS_TIER_LABEL } from "@/data/packageTiers";
 import { revalidateTag } from "next/cache";
 import { CACHE_TAGS } from "@/lib/cachedReads";
 import { db } from "@/db";
@@ -87,20 +83,15 @@ export async function GET(req: NextRequest) {
   const PUBLISH_DIRECTION = true;
   const publicDirection = PUBLISH_DIRECTION ? dirWord : "";
 
-  // Which tier this instrument belongs to decides the stat we quote, the
-  // call to action, and whether the levels themselves go out.
+  // Which tier this instrument belongs to decides the stat we quote. It no
+  // longer decides what the post contains — see openLevels below.
   const requiredTier = requiredTierForPair(pair);
-  const isFreeTier = requiredTier === "free";
 
-  // Free-tier (FX) levels go out openly on Telegram/X. Deliberate trade:
-  // it's the strongest possible shop window — a follower can verify the
-  // call against the chart in real time and watch the result post land on
-  // the same numbers — but it also means FX levels no longer require the
-  // free account, so registration has to be earned by the on-site history,
-  // push alerts and the Pro upsell instead. Set to false to go back to
-  // levels-locked-for-everyone.
-  const PUBLISH_FREE_TIER_LEVELS = true;
-  const openLevels = PUBLISH_FREE_TIER_LEVELS && isFreeTier;
+  // Every level, every time. The only audience left is the paid group, and
+  // withholding from the people who paid for it is the one thing that would
+  // make no sense at all. The tier still decides what /signals shows a
+  // visitor; it no longer decides anything about this post.
+  const openLevels = true;
 
   // The rolling track record, scoped to this signal's own tier — see the
   // header comment in lib/signalStats.ts for why it isn't one blended
@@ -112,9 +103,7 @@ export async function GET(req: NextRequest) {
     console.error("Signal stats lookup failed:", err);
   }
 
-  // Two cards can be needed for one signal now: the public channel gets the
-  // locked layout for a gated instrument, the paid VIP group always gets the
-  // full one. Same builder, one argument apart.
+  // One card, always the full layout — see openLevels above.
   const cardUrl = (withLevels: boolean) => {
     const cardParams = new URLSearchParams({ pair });
     if (publicDirection) cardParams.set("direction", publicDirection);
@@ -133,7 +122,6 @@ export async function GET(req: NextRequest) {
     }
     return `${siteUrl}/api/og/trade-signal?${cardParams.toString()}`;
   };
-  const imageUrl = cardUrl(openLevels);
 
   const dirEmoji = publicDirection === "SELL" ? "🔴" : "🟢";
   const trStats = statsLineTr(stats);
@@ -148,8 +136,8 @@ export async function GET(req: NextRequest) {
   // already bought the thing the public tail is selling, and being sold to
   // inside the product you paid for is the fastest way to make a paid group
   // feel like a mailing list.
-  const buildCaption = (locale: Locale, variant: "public" | "vip" = "public") => {
-    const levels = variant === "vip" || openLevels;
+  const buildCaption = (locale: Locale) => {
+    const levels = openLevels;
     const t = (text: string, vars: Record<string, string | number> = {}) =>
       formatMessage(locale, text, vars);
     const at = (path: string) => `${siteUrl}${localePath(locale, path)}`;
@@ -165,11 +153,7 @@ export async function GET(req: NextRequest) {
           (hasStop ? `🛑 SL: <b>${stop}</b>\n` : "")
         : "") +
       `\n⚡ ${t("Gerçek hesap, gerçek işlem — takip edilen MT5 hesabımızda açıldığı an paylaşılıyor. Kapandığında sonucu da aynı yerde yayınlanacak, kazanç da kayıp da.")}\n\n` +
-      (variant === "vip"
-        ? `💎 ${t("Bu sinyal VIP üyelere özel olarak paylaşıldı — her enstrüman, tüm seviyeler.")}\n\n`
-        : levels
-          ? `🎁 ${t("Forex sinyalleri herkese açık yayınlanıyor. GOLD, endeks, kripto ve enerji sinyalleri Pro/VIP üyelere özel.")}\n\n`
-          : `🔒 ${t("Giriş, TP ve SL seviyeleri {tier} üyelere özel — bu seviyeler olmadan pozisyon yönetilemez.", { tier: ACCESS_TIER_LABEL[requiredTier] })}\n\n`) +
+      `💎 ${t("Bu sinyal VIP üyelere özel olarak paylaşıldı — her enstrüman, tüm seviyeler.")}\n\n` +
       `⚠️ ${t("Bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Pozisyon büyüklüğünü ve riskini kendi toleransına göre belirle. Geçmiş sonuçlar gelecekteki sonuçları garanti etmez.")}\n\n` +
       (levels
         ? `👉 <a href="${at("/signals")}">${t("Tüm işlem geçmişi ve anlık bildirimler")}: fxpartner.global${localePath(locale, "/signals")}</a>\n\n`
@@ -184,89 +168,18 @@ export async function GET(req: NextRequest) {
   // measurement behind the hour.
   const alert = await shouldAlertForSignal();
 
-  const result = await sendTelegramPhoto(imageUrl, caption, {
+  // One destination: the paid group's SIGNALS topic. The public channel, the
+  // Arabic mirror and the tweet all used to fire here too; they are gone,
+  // and sendSignalPhoto is what makes that a fact of the code rather than a
+  // convention — there is no chat id in this file to fall back to.
+  //
+  // Null means no destination was configured. It is logged inside the
+  // sender, and it deliberately does not fail the request: the row below
+  // still has to be written, or /signals loses a trade that really happened.
+  const result = await sendSignalPhoto(cardUrl(true), caption, {
     inlineKeyboard: mainServicesKeyboard(),
     silent: !alert,
   });
-
-  // The Arabic channel, when it exists. Deliberately after the Turkish send
-  // and deliberately swallowed: the Turkish post is the one with 16k readers
-  // waiting on it, and a failure to mirror must never fail the request that
-  // published it or block the DB write below.
-  const arChat = arabicChatId();
-  if (arChat) {
-    try {
-      // The mirror follows the Turkish channel's decision rather than
-      // asking again — a second call would consume the window and leave
-      // one of the two channels silent for no reason.
-      await sendTelegramPhoto(imageUrl, buildCaption("ar"), {
-        chatId: arChat,
-        inlineKeyboard: mainServicesKeyboard("ar"),
-        silent: !alert,
-      });
-    } catch (err) {
-      console.error("Arabic channel mirror failed:", err);
-    }
-  }
-
-  // The paid VIP group's SIGNALS topic, when it is configured.
-  //
-  // Until now the group's members could only see the levels on the site,
-  // while the public channel got the post — the wrong way round for the
-  // people paying. This sends them the full card and the full caption at
-  // the same moment, in the topic they are looking at.
-  //
-  // Best-effort and last, for the same reason as the Arabic mirror: a
-  // failure here must not fail the request or block the DB write below, and
-  // it must not cost the public channel its post. Silent-when-paced follows
-  // the public channel's decision rather than asking again — a paid group
-  // that buzzes eight times an hour gets muted like any other.
-  const vipTarget = vipSignalTarget();
-  if (vipTarget) {
-    try {
-      await sendTelegramPhoto(cardUrl(true), buildCaption("tr", "vip"), {
-        chatId: vipTarget.chatId,
-        threadId: vipTarget.threadId,
-        inlineKeyboard: mainServicesKeyboard(),
-        silent: !alert,
-      });
-    } catch (err) {
-      console.error("VIP group signal post failed:", err);
-    }
-  }
-
-  // Best-effort: X posting failing (rate limit, expired token, etc.) should
-  // never take down the Telegram send, which is the primary channel.
-  let xResult: { tweetId: string } | { error: string } | null = null;
-  try {
-    // No URL in the tweet body on purpose — a post containing a link costs
-    // $0.20/request on X's pay-per-use pricing vs $0.015 without one, and
-    // the card image already carries a QR code + FXPARTNER branding.
-    // Same disclosure line as Telegram above: direction + confidence public,
-    // entry/TP/SL locked. Front-loaded because X truncates, and the old
-    // version buried the actual news under a features list.
-    const tweetText =
-      (publicDirection
-        ? `${dirEmoji} ${pair.toUpperCase()} ${publicDirection} — just opened on our live tracked account\n\n`
-        : `${pair.toUpperCase()} — new trade just opened on our live tracked account\n\n`) +
-      (confidence ? `🎯 Signal confidence: ${confidence}%\n` : "") +
-      (statsLineEn(stats) ? `${statsLineEn(stats)}\n` : "") +
-      (openLevels
-        ? `\n📈 Entry: ${entry}\n` +
-          (hasTarget1 ? `🎯 TP: ${target1}\n` : "") +
-          (hasStop ? `🛑 SL: ${stop}\n` : "")
-        : "") +
-      `\nWe post the close too — wins and losses alike, on the same account, no cherry-picking.\n\n` +
-      (openLevels
-        ? `🎁 Forex signals are published in full, free. GOLD, indices, crypto and energy are Pro/VIP-only.\n\n`
-        : `🔒 Entry, TP and SL are ${ACCESS_TIER_LABEL[requiredTier]}-only — you can't manage the position without them.\n\n`) +
-      `⚠️ Not investment advice. Size positions to your own risk. Past results don't guarantee future ones.\n\n` +
-      `#fxpartner #forex #fxsignals #forextrading #trading`;
-    xResult = await postTradeSignalToX(imageUrl, tweetText);
-  } catch (err) {
-    console.error("X post failed:", err);
-    xResult = { error: err instanceof Error ? err.message : "unknown error" };
-  }
 
   // Best-effort: only lets a later /api/trade-result reply to this post
   // instead of standing alone. Never block/fail the signal itself over it.
@@ -285,7 +198,6 @@ export async function GET(req: NextRequest) {
           volume: volume || null,
           status: "active",
           telegramMessageId: result?.message_id != null ? String(result.message_id) : null,
-          xTweetId: "tweetId" in (xResult ?? {}) ? (xResult as { tweetId: string }).tweetId : null,
         })
         .onConflictDoNothing();
       // The board is read once and shared (lib/cachedReads.ts), so the row
@@ -297,53 +209,34 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  // Best-effort, same as the X post above — a push failure never blocks the
-  // signal itself, which has already gone out on Telegram/X by this point.
+  // Best-effort — a push failure never blocks the signal itself, which has
+  // already gone out to the group by this point.
   //
-  // Two audiences, two payloads. Members get the levels. Subscriptions with
-  // no account behind them (the majority of the list) used to get nothing
-  // at all here, which wasted both a granted notification permission and
-  // the one moment they're most likely to register — so they get a teaser
-  // pointing at sign-up instead. The teaser carries only what already went
-  // out publicly on Telegram and X (pair + direction), never the levels:
-  // instant levels-on-your-phone is exactly what the free account buys
-  // (see the header comment in lib/signalAccess.ts).
-  const [memberPush, teaserPush] = await Promise.allSettled([
-    // The Telegram half of this route has been translated all along; the
-    // push half was writing Turkish template literals straight into every
-    // phone. Same catalogue, same helper, per subscriber's own language.
-    sendPushToMembers((loc) => {
+  // ONE AUDIENCE HERE TOO, AND NO LEVELS IN IT. The teaser to subscriptions
+  // with no account behind them is gone: it advertised "levels go to members
+  // instantly", which stopped being true the moment signals moved to the
+  // paid group, and an acquisition push for a thing the reader will not get
+  // is worse than no push. Members still get told a trade opened, but the
+  // body no longer carries entry/TP/SL — those are the group's now. The tap
+  // lands on /signals, where the site's own tier gate decides what that
+  // particular reader may see.
+  try {
+    await sendPushToMembers((loc) => {
       const p = (text: string, vars: Record<string, string | number> = {}) =>
         formatMessage(loc, text, vars);
       return {
         title: publicDirection
           ? `${dirEmoji} ${pair.toUpperCase()} ${publicDirection} ` + p("açıldı")
           : p("Yeni işlem: {pair}", { pair: pair.toUpperCase() }),
-        body: openLevels
-          ? `${p("Giriş")} ${entry}${hasTarget1 ? ` · TP ${target1}` : ""}${hasStop ? ` · SL ${stop}` : ""}`
-          : confidence
-            ? p("Sinyal güveni %{confidence} · Giriş, TP ve SL için dokunun.", { confidence })
-            : p("Giriş, TP ve SL seviyeleri için dokunun."),
+        body: confidence
+          ? p("Sinyal güveni %{confidence} · Giriş, TP ve SL için dokunun.", { confidence })
+          : p("Giriş, TP ve SL seviyeleri için dokunun."),
         url: localePath(loc, "/signals"),
       };
-    }),
-    sendPushToNonMembers((loc) => {
-      const p = (text: string, vars: Record<string, string | number> = {}) =>
-        formatMessage(loc, text, vars);
-      return {
-        title: publicDirection
-          ? `${dirEmoji} ${pair.toUpperCase()} ${publicDirection} ` + p("açıldı")
-          : p("Yeni işlem: {pair}", { pair: pair.toUpperCase() }),
-        body: p(
-          "Giriş, TP ve SL seviyeleri anında üyelere gidiyor. Ücretsiz hesap aç, sonraki sinyali kaçırma."
-        ),
-        url: localePath(loc, "/account/login"),
-      };
-    }),
-  ]);
+    });
+  } catch (err) {
+    console.error("Push notification failed (members):", err);
+  }
 
-  if (memberPush.status === "rejected") console.error("Push notification failed (members):", memberPush.reason);
-  if (teaserPush.status === "rejected") console.error("Push notification failed (non-members):", teaserPush.reason);
-
-  return NextResponse.json({ ok: true, pair, result, x: xResult });
+  return NextResponse.json({ ok: true, pair, posted: result !== null, result });
 }
