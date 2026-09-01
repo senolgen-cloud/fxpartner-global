@@ -27,6 +27,7 @@ import { lookupBrokers } from "@/data/brokerLookup";
 import { faqSchema } from "@/lib/schema";
 import type { BrokerReviewStats } from "@/lib/brokerReviews";
 import { cachedLatestSignal, cachedBrokerReviewStats, type SignalJson } from "@/lib/cachedReads";
+import { maskLockedActiveSignal } from "@/lib/signalAccess";
 import { loadOptional } from "@/lib/dbOptional";
 import { setServerLocale } from "@/lib/serverLocale";
 
@@ -140,11 +141,30 @@ export default async function Home({
   // trade by a wide margin: the hero card sits empty between open trades
   // anyway, and the ranking already renders without ratings for a broker
   // nobody has reviewed.
-  const { data: latestSignal } = await loadOptional(
+  const { data: rawLatestSignal } = await loadOptional(
     "home: latest signal",
     null as SignalJson | null,
     cachedLatestSignal
   );
+
+  // Masked as if nobody were signed in, and deliberately WITHOUT reading the
+  // session.
+  //
+  // This card was publishing the live entry, TP and SL of the newest trade to
+  // every anonymous visitor of the busiest page on the site — including
+  // Pro/VIP instruments. The /signals page and /api/signals have masked for a
+  // long time; this render path never did, so the levels the rest of the
+  // system withholds were sitting in the shop window.
+  //
+  // Passing null rather than the viewer's real tier is the point: reading the
+  // session here would put a per-request query back on the home page, which
+  // is exactly what the shared-read work took off it. A member loses nothing
+  // — the hero is a shop window, and /signals shows them the real numbers.
+  // Free-tier pairs are untouched either way, because an anonymous viewer is
+  // entitled to those.
+  const latestSignal = rawLatestSignal
+    ? maskLockedActiveSignal(rawLatestSignal, null)
+    : null;
 
   const { data: brokerReviewStats } = await loadOptional(
     "home: broker review stats",
