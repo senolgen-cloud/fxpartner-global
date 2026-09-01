@@ -23,20 +23,20 @@ export async function GET(request: Request) {
   const lastPrice = searchParams.get("last") ?? "";
   const bias = (searchParams.get("bias") ?? "BEARISH").toUpperCase();
   const headline = searchParams.get("headline") ?? "";
-  const resistances = (searchParams.get("resistances") ?? "")
-    .split(",")
-    .filter(Boolean)
-    .map((s) => {
-      const [price, strength] = s.split(":");
-      return { price, strength: Number(strength ?? 0) };
-    });
-  const supports = (searchParams.get("supports") ?? "")
-    .split(",")
-    .filter(Boolean)
-    .map((s) => {
-      const [price, strength] = s.split(":");
-      return { price, strength: Number(strength ?? 0) };
-    });
+  // ";" and not "," between levels: the prices arrive in Turkish notation
+  // ("1,1614", "4.458", "309,13"), so splitting on a comma tears every
+  // decimal in half and the ladder renders "309" and "13" as two levels.
+  // See the matching join in components/TechnicalAnalysisCard.tsx.
+  const levels = (raw: string | null) =>
+    (raw ?? "")
+      .split(";")
+      .filter(Boolean)
+      .map((s) => {
+        const [price, strength] = s.split(":");
+        return { price, strength: Number(strength ?? 0) };
+      });
+  const resistances = levels(searchParams.get("resistances"));
+  const supports = levels(searchParams.get("supports"));
 
   if (!instrument || !pivot) {
     return new Response("Missing required params: instrument, pivot", { status: 400 });

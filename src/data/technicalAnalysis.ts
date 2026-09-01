@@ -25,9 +25,12 @@ export interface TechnicalAnalysisPost {
   // ladder instead of (or next to) the coded card. Omit when no chart was
   // provided for that instrument (e.g. Apple below).
   chartImage?: string;
-  // Both lists ordered farthest-from-pivot -> nearest-to-pivot (so they read
-  // top-to-bottom as a ladder around the PIVOT row). Never include a level
-  // equal to the pivot price itself — the pivot row already shows it.
+  // Both lists ordered by DESCENDING price, so the card renders one ladder
+  // reading top-to-bottom: resistances (highest first) above the PIVOT row,
+  // supports (highest first) below it. For resistances that is
+  // farthest-from-pivot first; for supports it is nearest-first. Never
+  // include a level equal to the pivot price itself — the pivot row already
+  // shows it.
   resistances: TechnicalLevel[];
   supports: TechnicalLevel[];
   preference: string; // "Our preference" paragraph, TR
@@ -43,6 +46,7 @@ export const bulletinTitles: Record<string, string> = {
   "2026-08-13": "13.08.2026 - Gün Ortası Teknik Analiz Bülteni",
   "2026-08-18": "18.08.2026 - Gün İçi Teknik Analiz Bülteni",
   "2026-08-19": "19.08.2026 - Gün İçi Teknik Analiz Bülteni",
+  "2026-09-01": "01.09.2026 - Gün İçi Teknik Analiz Bülteni",
 };
 
 export function getBulletinTitle(publishedAt: string): string {
@@ -115,7 +119,7 @@ export const technicalAnalysisPosts: TechnicalAnalysisPost[] = [
   },
   {
     slug: "altin-gun-ici-2026-08-13",
-    instrument: "Gold",
+    instrument: "Altın",
     timeframe: "30 DK",
     publishedAt: "2026-08-13",
     pivot: "4433",
@@ -277,7 +281,7 @@ export const technicalAnalysisPosts: TechnicalAnalysisPost[] = [
   },
   {
     slug: "altin-gun-ici-2026-08-18",
-    instrument: "Gold",
+    instrument: "Altın",
     timeframe: "Gün İçi",
     publishedAt: "2026-08-18",
     pivot: "4.428",
@@ -303,7 +307,7 @@ export const technicalAnalysisPosts: TechnicalAnalysisPost[] = [
   },
   {
     slug: "silver-gun-ici-2026-08-18",
-    instrument: "Silver",
+    instrument: "Gümüş",
     timeframe: "Gün İçi",
     publishedAt: "2026-08-18",
     pivot: "66,08",
@@ -356,7 +360,7 @@ export const technicalAnalysisPosts: TechnicalAnalysisPost[] = [
   },
   {
     slug: "altin-gun-ici-2026-08-19",
-    instrument: "Gold",
+    instrument: "Altın",
     timeframe: "30 Dakika",
     publishedAt: "2026-08-19",
     pivot: "4.386",
@@ -456,6 +460,209 @@ export const technicalAnalysisPosts: TechnicalAnalysisPost[] = [
       "83,30 altına sarkma, toparlanmayı geçersiz kılar ve fiyatı 82,25-81,30 destek bandına çekebilir.",
     comment:
       "RSI 59,21 ile yükseliş yönünü destekleyen bölgede, MACD 0,42 ile pozitif ve sinyal çizgisinin üzerinde — teknik yapı alım tarafını destekliyor. Temelde ise fiyatı esas taşıyan unsur arz tarafı: Ortadoğu'daki jeopolitik gerginlik ve Umman Boğazı üzerinden geçen ticaret rotalarındaki tıkanıklık, Brent'i 91 doların üzerine taşırken WTI'ı da aynı risk primiyle yukarı çekiyor. Bir trader için kritik nokta, bu yükselişin makro büyüme endişesinden değil jeopolitik arz riskinden beslenmesi — yani gerginlik dinmeden 83,30 pivotunun altına sarkma ihtimali düşük görünüyor, ancak olası bir de-eskalasyon haberi hızlı bir geri çekilmeyi tetikleyebilir.",
+    source: "Trading Central",
+  },
+  {
+    slug: "eur-usd-gun-ici-2026-09-01",
+    instrument: "EUR/USD",
+    timeframe: "30 Dakika",
+    publishedAt: "2026-09-01",
+    pivot: "1,1614",
+    bias: "BEARISH",
+    headline: "EUR/USD Gün İçi: Hedef 1,1562",
+    resistances: [
+      { price: "1,1650", strength: 1 },
+      { price: "1,1636", strength: 1 },
+    ],
+    supports: [
+      { price: "1,1562", strength: 1 },
+      { price: "1,1548", strength: 1 },
+    ],
+    preference:
+      "1,1614 direnç olarak kaldığı sürece aşağı yönlü hareketin devam etmesini bekliyoruz; 1,1562 ve ardından 1,1548 hedefte.",
+    alternative: "1,1614 seviyesinin üzerinde bir hareket 1,1636 ve 1,1650 seviyelerini gündeme getirir.",
+    comment:
+      "RSI (bağıl güç endeksi) 50'nin altında. MACD (trend sapma göstergesi) sinyal çizgisinin altında ve negatif. Yapılandırma olumsuz; cari fiyat 20 ve 50 hareketli ortalamalarının altında (sırasıyla 1,1608 ve 1,1608 seviyelerinde) ve üst Bollinger bandının altında seyrediyor. Dikkat edilmesi gereken nokta, 20 ve 50 ortalamanın aynı seviyede üst üste gelmiş olması: bu, bandın sıkıştığını ve pivot ile ortalamalar arasında yalnızca 6 puanlık bir alan kaldığını gösteriyor. Bu kadar dar bir alanda pivotun hemen üstüne konan bir zarar durdur emri, yönden bağımsız olarak gürültüye takılabilir.",
+    source: "Trading Central",
+  },
+  {
+    slug: "wti-gun-ici-2026-09-01",
+    instrument: "Ham Petrol (WTI)",
+    timeframe: "30 Dakika",
+    publishedAt: "2026-09-01",
+    pivot: "85,30",
+    bias: "BULLISH",
+    headline: "Ham Petrol (WTI) Gün İçi: Hedef 89,60",
+    resistances: [
+      { price: "91,00", strength: 1 },
+      { price: "89,60", strength: 1 },
+    ],
+    supports: [
+      { price: "84,15", strength: 1 },
+      { price: "83,30", strength: 1 },
+    ],
+    preference:
+      "85,30 seviyesinin üzerinde alış pozisyonları tercih ediliyor; ilk hedef 89,60, ardından 91,00.",
+    alternative: "85,30 seviyesinin altında 84,15 ve 83,30 hedefli düşüş görülebilir.",
+    comment:
+      "85,30 seviyesi üzerindeki kırılım pozitif bir sinyal ve fiyatı 89,60 seviyesine yönlendiriyor. Bültenin tek yükseliş yönlü kurulumu bu; buna karşılık koşullu olduğu için dikkat gerektiriyor. Senaryo 85,30'un kırılmasına bağlı — fiyat bu seviyenin altındayken alım yapmak, henüz teyit edilmemiş bir kurulumu erken satın almak anlamına gelir. Teyit için 85,30 üzerinde bir kapanış beklemek, aynı hedeflere daha küçük bir riskle girmeyi sağlar.",
+    source: "Trading Central",
+  },
+  {
+    slug: "altin-gun-ici-2026-09-01",
+    instrument: "Altın",
+    timeframe: "30 Dakika",
+    publishedAt: "2026-09-01",
+    pivot: "4458",
+    bias: "BEARISH",
+    headline: "Altın Gün İçi: Hedef 4.323 — RSI aşırı satımda",
+    resistances: [
+      { price: "4538", strength: 1 },
+      { price: "4508", strength: 1 },
+    ],
+    supports: [
+      { price: "4323", strength: 1 },
+      { price: "4293", strength: 1 },
+    ],
+    preference:
+      "4.458 direnç olarak kaldığı sürece aşağı yönlü hareketin devam etmesini bekliyoruz; 4.323 ve ardından 4.293 hedefte.",
+    alternative: "4.458 seviyesinin üzerinde bir hareket 4.508 ve 4.538 seviyelerini gündeme getirir.",
+    comment:
+      "RSI (bağıl güç endeksi) aşırı satış gösteriyor (30'un altında). MACD (trend sapma göstergesi) sinyal çizgisinin altında ve negatif. Yapılandırma olumsuz; cari fiyat 20 ve 50 hareketli ortalamalarının altında (sırasıyla 4.435 ve 4.439 seviyelerinde) ve üst Bollinger bandının altında. Bültenin kendi başlığının da işaret ettiği gibi asıl risk burada: aşırı satım bölgesinde trend yönünde satış, teknik olarak en kırılgan kurulum tipidir, çünkü olası bir tepki yükselişinin tam karşısında durulur. Daha temkinli yaklaşım, 4.458'e doğru bir tepki bekleyip bu seviyeden reddedilmeyi gördükten sonra pozisyon almaktır.",
+    source: "Trading Central",
+  },
+  {
+    slug: "gbp-usd-gun-ici-2026-09-01",
+    instrument: "GBP/USD",
+    timeframe: "30 Dakika",
+    publishedAt: "2026-09-01",
+    pivot: "1,3567",
+    bias: "BEARISH",
+    headline: "GBP/USD Gün İçi: Hedef 1,3497",
+    resistances: [
+      { price: "1,3609", strength: 1 },
+      { price: "1,3593", strength: 1 },
+    ],
+    supports: [
+      { price: "1,3512", strength: 1 },
+      { price: "1,3497", strength: 1 },
+    ],
+    preference:
+      "1,3567 direnç olarak kaldığı sürece aşağı yönlü seyrin sürmesini bekliyoruz; 1,3512 ve ardından 1,3497 hedefte.",
+    alternative: "1,3567 seviyesinin üzerinde bir hareket 1,3593 ve 1,3609 seviyelerini gündeme getirir.",
+    comment:
+      "RSI (bağıl güç endeksi) 50'nin altında. MACD (trend sapma göstergesi) sinyal çizgisinin altında ve negatif. Cari fiyat 20 ve 50 hareketli ortalamalarının altında (sırasıyla 1,3544 ve 1,3546 seviyelerinde). Teknik tablo EUR/USD ile aynı yönde, yani bu iki kurulum bağımsız değil: ikisi de aynı dolar hareketine bahis oynuyor. İkisini birden aynı büyüklükte açmak riski çeşitlendirmez, tek bir pozisyonu ikiye katlar.",
+    source: "Trading Central",
+  },
+  {
+    slug: "usd-jpy-gun-ici-2026-09-01",
+    instrument: "USD/JPY",
+    timeframe: "30 Dakika",
+    publishedAt: "2026-09-01",
+    pivot: "160,07",
+    bias: "BEARISH",
+    headline: "USD/JPY Gün İçi: Pivot eşiğinde",
+    resistances: [
+      { price: "160,58", strength: 1 },
+      { price: "160,39", strength: 1 },
+    ],
+    supports: [
+      { price: "159,18", strength: 1 },
+      { price: "158,99", strength: 1 },
+    ],
+    preference:
+      "160,07 direnç olarak kaldığı sürece aşağı yönlü hareketin devam etmesini bekliyoruz; 159,18 ve ardından 158,99 hedefte.",
+    alternative: "160,07 seviyesinin üzerinde bir hareket 160,39 ve 160,58 seviyelerini gündeme getirir.",
+    comment:
+      "Fiyat pivotumuza tehlikeli biçimde yaklaşıyor; tersine dönüş için son fırsatlardan biri. Bültende bu parite için RSI ve MACD okuması verilmemiş, dolayısıyla senaryo tamamen 160,07 seviyesinin korunup korunmamasına bağlı — bu seviye aşılırsa aşağı yönlü tez teknik olarak geçersizleşir ve yeniden değerlendirmek gerekir.",
+    source: "Trading Central",
+  },
+  {
+    slug: "usd-cad-gun-ici-2026-09-01",
+    instrument: "USD/CAD",
+    timeframe: "30 Dakika",
+    publishedAt: "2026-09-01",
+    pivot: "1,3888",
+    bias: "BEARISH",
+    headline: "USD/CAD Gün İçi: Eğilim yol ayrımında",
+    resistances: [
+      { price: "1,3928", strength: 1 },
+      { price: "1,3913", strength: 1 },
+    ],
+    supports: [
+      { price: "1,3832", strength: 1 },
+      { price: "1,3817", strength: 1 },
+    ],
+    preference:
+      "1,3888 direnç olarak kaldığı sürece aşağı yönlü hareketin devam etmesini bekliyoruz; 1,3832 ve ardından 1,3817 hedefte.",
+    alternative: "1,3888 seviyesinin üzerinde bir hareket 1,3913 ve 1,3928 seviyelerini gündeme getirir.",
+    comment:
+      "Fiyat pivotumuza tehlikeli biçimde yaklaşıyor; tersine dönüş için son fırsatlardan biri. Bu kurulumun bültendeki en tutarlı yanı petrolle olan ilişkisi: WTI tarafında 85,30 üzerinde yükseliş senaryosu öne çıkıyor ve petroldeki güçlenme, petrol ihracatçısı Kanada'nın para birimini destekleyerek USD/CAD'deki aşağı yönlü tezle aynı yöne işaret ediyor. İki senaryo birbirini teyit ediyor; buna karşılık petrol 85,30'un altında kalırsa bu destek de ortadan kalkar.",
+    source: "Trading Central",
+  },
+  {
+    slug: "aud-usd-gun-ici-2026-09-01",
+    instrument: "AUD/USD",
+    timeframe: "30 Dakika",
+    publishedAt: "2026-09-01",
+    pivot: "0,7169",
+    bias: "BEARISH",
+    headline: "AUD/USD Gün İçi: Hedef 0,7131",
+    resistances: [
+      { price: "0,7195", strength: 1 },
+      { price: "0,7185", strength: 1 },
+    ],
+    supports: [
+      { price: "0,7131", strength: 1 },
+      { price: "0,7122", strength: 1 },
+    ],
+    preference:
+      "0,7169 direnç olarak kaldığı sürece aşağı yönlü hareketin devam etmesini bekliyoruz; 0,7131 ve ardından 0,7122 hedefte.",
+    alternative: "0,7169 seviyesinin üzerinde bir hareket 0,7185 ve 0,7195 seviyelerini gündeme getirir.",
+    comment:
+      "RSI (bağıl güç endeksi) 50'nin altında. MACD (trend sapma göstergesi) sinyal çizgisinin altında ve negatif. Yapılandırma olumsuz; cari fiyat 20 ve 50 hareketli ortalamalarının altında (sırasıyla 0,7167 ve 0,7165 seviyelerinde) ve üst Bollinger bandının altında. Pivot ile ilk alternatif seviye arasındaki mesafe yalnızca 16 puan — bültendeki en dar geçersizleşme aralığı. Bu, pozisyon büyüklüğü hesaplanırken dikkat gerektirir: dar aralık düşük riskli değil, yalnızca dar demektir.",
+    source: "Trading Central",
+  },
+  {
+    slug: "dow-jones-gun-ici-2026-09-01",
+    instrument: "Dow Jones (CME)",
+    timeframe: "30 Dakika",
+    publishedAt: "2026-09-01",
+    pivot: "53340",
+    bias: "BEARISH",
+    headline: "Dow Jones Gün İçi: Hedef 52.790",
+    resistances: [
+      { price: "53760", strength: 1 },
+      { price: "53570", strength: 1 },
+    ],
+    supports: [
+      { price: "52790", strength: 1 },
+      { price: "52600", strength: 1 },
+    ],
+    preference:
+      "53.340 seviyesinin altında satış pozisyonları tercih ediliyor; ilk hedef 52.790, ardından 52.600.",
+    alternative: "53.340 seviyesinin üzerinde 53.570 ve 53.760 hedefli yükseliş görülebilir.",
+    comment:
+      "RSI göstergesi ayı yönlü ve daha da azalış öngörüyor. Endeksin kurulumu, bültendeki döviz paritelerinden bağımsız olması bakımından dikkat çekici: dolar yönüne dair çelişkili sinyallerden etkilenmiyor, kendi momentumuyla değerlendirilebiliyor.",
+    source: "Trading Central",
+  },
+  {
+    slug: "apple-gun-ici-2026-09-01",
+    instrument: "Apple",
+    timeframe: "30 Dakika",
+    publishedAt: "2026-09-01",
+    pivot: "313,55",
+    bias: "BULLISH",
+    headline: "Apple Gün İçi: Sıçrama öncesi 313,55'e geri çekilme aranıyor",
+    resistances: [],
+    supports: [
+      { price: "310,78", strength: 1 },
+      { price: "309,13", strength: 1 },
+    ],
+    preference: "Bir sıçramadan önce 313,55 yönünde bir düşüş aranıyor.",
+    alternative: "313,55 seviyesinin altında bir hareket 310,78 ve 309,13 seviyelerini getirir.",
+    comment:
+      "RSI (bağıl güç endeksi) 50'nin üzerinde. MACD (trend sapma göstergesi) sinyal çizgisinin altında ve negatif; RSI'da 50 seviyesinin aşağı yönlü delinmesi zararı büyütebilir. Cari fiyat 20 ve 50 hareketli ortalamalarının üzerinde (sırasıyla 316,93 ve 315,69 seviyelerinde). Bültenin bu maddesi bir kurulumdan çok bir bekleme notu: yukarı yönlü hiçbir hedef seviye verilmemiş, yalnızca 313,55 altındaki senaryo tanımlanmış. Hedefi olmayan bir fikir üzerinden pozisyon boyutu ve risk hesaplanamayacağı için burada izlemekle yetinmek daha doğru.",
     source: "Trading Central",
   },
 ];

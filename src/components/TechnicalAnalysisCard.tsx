@@ -14,8 +14,12 @@ function codedCardImageUrl(post: TechnicalAnalysisPost) {
     pivot: post.pivot,
     bias: post.bias,
     headline: post.headline,
-    resistances: post.resistances.map((r) => `${r.price}:${r.strength}`).join(","),
-    supports: post.supports.map((s) => `${s.price}:${s.strength}`).join(","),
+    // Separated by ";" and not "," because the prices are written the Turkish
+    // way — "1,1614", "309,13" — so a comma-joined list splits back apart in
+    // the middle of every decimal, and the card renders "309" and "13" as two
+    // separate support levels. The ";" cannot occur inside a price.
+    resistances: post.resistances.map((r) => `${r.price}:${r.strength}`).join(";"),
+    supports: post.supports.map((s) => `${s.price}:${s.strength}`).join(";"),
   });
   if (post.lastPrice) params.set("last", post.lastPrice);
   return `${SITE_URL}/api/og/technical-analysis?${params.toString()}`;
