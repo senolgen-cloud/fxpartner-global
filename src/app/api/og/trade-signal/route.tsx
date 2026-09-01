@@ -117,7 +117,19 @@ export async function GET(request: Request) {
   // as if it were an actual level.
   const isRealLevel = (v: string | null): v is string => v !== null && parseFloat(v) > 0;
 
-  const locked = !entry || !stop;
+  // Locked means the caller withheld the levels, and the only thing that says
+  // so is a missing entry.
+  //
+  // This also required a missing stop, and that was a real bug on a real
+  // post: a trade opened with no stop loss set arrives with entry and target
+  // but no stop, so the caller sends no stop param and the card locked
+  // itself — a padlock reading "seviyeler üyelere özel" printed directly
+  // above a caption listing the entry and the target. The post contradicted
+  // itself, and neither half was wrong on its own.
+  //
+  // A trade genuinely running without a stop is worth showing as such. It
+  // renders "—" under ZARAR DURDUR, which is the true statement.
+  const locked = !entry;
   const hasTarget1 = !locked && isRealLevel(target1);
   const hasStop = !locked && isRealLevel(stop);
 
