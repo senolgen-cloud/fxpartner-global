@@ -104,12 +104,15 @@ export const MIN_TRADES_FOR_RATE = 15;
 // so this string is a timestamp from the account history read literally.
 export const SIGNALS_EPOCH = new Date("2026-09-01T11:25:00+03:00");
 
-// What the account starts the new record with, in USD. The board reports
-// its balance against this, so a $2.40 day reads as what it is on a $100
-// account rather than as a rounding error on an unstated one.
+// What the account starts the new record with, in USD. The board reports its
+// balance against this, so a $24 day reads as what it is on a $1,000 account
+// rather than as a number on an unstated one.
+//
+// Owner-set to 1000 on 2026-09-01, replacing the 100 the September record
+// opened on.
 //
 // CHANGE THIS THE DAY THE ACCOUNT IS REFUNDED WITH A DIFFERENT AMOUNT. It
 // is a published claim about real money, not a display default: every
 // percentage on /signals is computed against it, so a balance that does not
 // match the terminal makes every one of them wrong.
-export const SIGNALS_START_BALANCE = 100;
+export const SIGNALS_START_BALANCE = 1000;
