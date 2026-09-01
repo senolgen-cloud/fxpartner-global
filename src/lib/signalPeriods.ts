@@ -82,10 +82,27 @@ export const MIN_TRADES_FOR_RATE = 15;
 // number filters to this instant instead — see scripts/check-signals-epoch.mjs,
 // which fails the build if a new read forgets.
 //
-// Anchored in SIGNAL_TZ, the same zone "Bugün" uses, so the first day of
-// the new record is exactly the reader's day and not a UTC day that started
-// three hours earlier.
-export const SIGNALS_EPOCH = new Date("2026-08-31T00:00:00+03:00");
+// The exact instant the account was funded, not midnight that day.
+//
+// This started as 00:00 on the reset date, and that was correct only by
+// luck: the $100 deposit landed at 16:08:41 and the first trade opened
+// three minutes later, so the sixteen hours in between happened to contain
+// no reported trade. Had one been reported — a position still running on
+// the account this one was funded from — it would have been counted into a
+// balance that claims to start at $100, and nothing here would have caught
+// it.
+//
+// The deposit is the moment this page's claim becomes true, so that is
+// where the record starts. Reconciled against the terminal on 2026-09-01:
+// summing every closed row the site holds from here gives +404.04, which is
+// the account's own Kar figure to the cent. The balance shown differs from
+// the terminal's by the 43.94 credit bonus, and that is deliberate — a
+// published track record should show what the trading earned, not what the
+// broker gifted.
+//
+// Written in SIGNAL_TZ, which is also the terminal's server time (UTC+3),
+// so this string is the timestamp in the account history read literally.
+export const SIGNALS_EPOCH = new Date("2026-08-31T16:08:41+03:00");
 
 // What the account started the new record with, in USD. The board reports
 // its balance against this, so a $2.40 day reads as what it is on a $100
