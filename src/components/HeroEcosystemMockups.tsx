@@ -54,6 +54,13 @@ function SignalCardBody({ signal }: { signal: TradeSignal }) {
   const directionBg = isSell ? "bg-tick-down/15" : "bg-tick-up/15";
   const isClosed = signal.status === "closed";
 
+  // An empty entry on a live trade is what maskLockedActiveSignal leaves
+  // behind — the page hands this card the masked signal (see the comment
+  // where it is masked). Rendering it as an empty price would look like the
+  // card had failed to load; a locked state says what is actually true.
+  const locked = !isClosed && signal.entry === "";
+  const dots = "••••••";
+
   const resultLine = signal.pips
     ? `${parseFloat(signal.pips) > 0 ? "+" : ""}${signal.pips}`
     : signal.profit
@@ -79,7 +86,7 @@ function SignalCardBody({ signal }: { signal: TradeSignal }) {
         </p>
       ) : (
         <p className="mt-2 font-display text-2xl font-bold tabular-stat text-text-on-ink">
-          {signal.entry}
+          <span className={locked ? "text-text-on-ink-muted" : ""}>{locked ? dots : signal.entry}</span>
           <span className="ms-2 text-sm font-medium text-text-on-ink-muted">{tr("giriş")}</span>
         </p>
       )}
@@ -94,10 +101,19 @@ function SignalCardBody({ signal }: { signal: TradeSignal }) {
       </svg>
       <div className="mt-3 flex items-center justify-between border-t border-hairline pt-3 font-mono text-[11px]">
         <span className="text-text-on-ink-muted">
-          {isClosed ? tr("Kapanış") : tr("Giriş")} <span className="text-text-on-ink">{isClosed ? signal.closePrice : signal.entry}</span>
+          {isClosed ? tr("Kapanış") : tr("Giriş")}{" "}
+          <span className={locked ? "text-text-on-ink-muted" : "text-text-on-ink"}>
+            {locked ? dots : isClosed ? signal.closePrice : signal.entry}
+          </span>
         </span>
-        {signal.target1 && <span className="text-tick-up">TP {signal.target1}</span>}
-        {signal.stop && <span className="text-tick-down">SL {signal.stop}</span>}
+        {locked ? (
+          <span className="text-gold">🔒 {tr("Üyelere Özel")}</span>
+        ) : (
+          <>
+            {signal.target1 && <span className="text-tick-up">TP {signal.target1}</span>}
+            {signal.stop && <span className="text-tick-down">SL {signal.stop}</span>}
+          </>
+        )}
       </div>
     </>
   );
