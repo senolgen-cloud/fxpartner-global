@@ -66,14 +66,32 @@ export const MIN_TRADES_FOR_RATE = 15;
 // ─────────────────────────────────────────────────────────────────────────
 // The reset.
 //
-// The board carried the whole history of the tracked MT5 account, which
-// mixed two different things: the period when the account was being wired
-// up and the EA was still being tuned, and the period when it is actually
-// being traded as the thing readers follow. Owner's call, 31 Aug 2026: the
-// record starts today, on a $100 account, and everything before it is off
-// the board.
+// The published record starts here and nothing before it is on the board.
+// Owner's call; this is the second time it has moved, and both moves are
+// worth remembering because they were for opposite reasons.
 //
-// It is a cutoff, not a DELETE. The old rows stay in `trade_signal` for two
+// 31 Aug 2026, 16:08:41 — the board carried the whole history of the tracked
+// MT5 account, which mixed the period when the account was being wired up
+// and the EA still being tuned with the period when it is actually being
+// traded. The epoch moved to the instant the account was funded with $100:
+// the moment this page's claim about a starting balance becomes true. (It
+// was briefly midnight that day, which was correct only by luck — the
+// sixteen hours before the deposit happened to contain no reported trade,
+// and a position still running on the account this one was funded from
+// would have been counted into a balance claiming to start at $100.)
+//
+// 1 Sep 2026, 11:25 — that record ended the way leveraged accounts end. It
+// stood at +404.04 at 10:44, then five positions closed together between
+// 11:23 and 11:24 for −232.26, −102.57, −91.80, −59.70 and −50.00: −536.33
+// in ninety seconds, taking the record to −132.29 and the published balance
+// below zero. September starts fresh from a fresh account.
+//
+// The instant is placed just after that last close (11:24:19) rather than
+// at "now" when this was written, so no trade could fall into the gap
+// between the two — and no position was open at the time, so nothing was
+// cut off mid-flight either.
+//
+// IT IS A CUTOFF, NOT A DELETE. The old rows stay in `trade_signal` for two
 // reasons that both matter: a position opened before the cutoff can still
 // report its close through /api/trade-result, and that close has to find
 // its original row so the result replies to the original post instead of
@@ -82,29 +100,16 @@ export const MIN_TRADES_FOR_RATE = 15;
 // number filters to this instant instead — see scripts/check-signals-epoch.mjs,
 // which fails the build if a new read forgets.
 //
-// The exact instant the account was funded, not midnight that day.
-//
-// This started as 00:00 on the reset date, and that was correct only by
-// luck: the $100 deposit landed at 16:08:41 and the first trade opened
-// three minutes later, so the sixteen hours in between happened to contain
-// no reported trade. Had one been reported — a position still running on
-// the account this one was funded from — it would have been counted into a
-// balance that claims to start at $100, and nothing here would have caught
-// it.
-//
-// The deposit is the moment this page's claim becomes true, so that is
-// where the record starts. Reconciled against the terminal on 2026-09-01:
-// summing every closed row the site holds from here gives +404.04, which is
-// the account's own Kar figure to the cent. The balance shown differs from
-// the terminal's by the 43.94 credit bonus, and that is deliberate — a
-// published track record should show what the trading earned, not what the
-// broker gifted.
-//
 // Written in SIGNAL_TZ, which is also the terminal's server time (UTC+3),
-// so this string is the timestamp in the account history read literally.
-export const SIGNALS_EPOCH = new Date("2026-08-31T16:08:41+03:00");
+// so this string is a timestamp from the account history read literally.
+export const SIGNALS_EPOCH = new Date("2026-09-01T11:25:00+03:00");
 
-// What the account started the new record with, in USD. The board reports
+// What the account starts the new record with, in USD. The board reports
 // its balance against this, so a $2.40 day reads as what it is on a $100
 // account rather than as a rounding error on an unstated one.
+//
+// CHANGE THIS THE DAY THE ACCOUNT IS REFUNDED WITH A DIFFERENT AMOUNT. It
+// is a published claim about real money, not a display default: every
+// percentage on /signals is computed against it, so a balance that does not
+// match the terminal makes every one of them wrong.
 export const SIGNALS_START_BALANCE = 100;
