@@ -1,56 +1,47 @@
 import { ImageResponse } from "next/og";
-import {
-  INK,
-  INK_SOFT,
-  HAIRLINE,
-  TEXT_ON_INK,
-  TEXT_ON_INK_MUTED,
-  SIGNAL,
-  TICK_UP,
-  TICK_DOWN,
-  LOGO_DATA_URI,
-} from "@/lib/ogAssets";
-import {
-  Sparkline,
-  TelegramIcon,
-  YoutubeIcon,
-  InstagramIcon,
-  FacebookIcon,
-  SocialIcon,
-} from "@/lib/ogIcons";
-import { LOT_LADDER, favorableMove, moneyForMove } from "@/lib/contractSizes";
+import { TICK_UP, TICK_DOWN } from "@/lib/ogAssets";
 import { splitPair } from "@/lib/ogIcons";
 
 export const runtime = "edge";
 
-// The card the signal post carries, drawn here rather than composited over a
-// design file.
+// Composited over the design file (public/trade-card-poster.png), which is
+// the owner's own draft: logo lockup, device mockups, the download call to
+// action, the feature row and the footer are all painted into that PNG. The
+// only per-trade region is the bordered box near the top, which this route
+// masks and redraws.
 //
-// It used to be public/trade-card-bg.png with one 332px-wide column left
-// blank for this route to fill in — which meant the trade itself, the whole
-// reason the post exists, occupied about a fifteenth of the image while the
-// rest repeated the same static marketing on every signal. Everything on the
-// card is now drawn from the trade, so the card is the trade.
+// This replaces a version that drew the whole card from the trade data. That
+// one carried more of the trade — signal confidence, the rolling record, the
+// lot ladder — because it had the room. The poster does not: between the box
+// and the laptop mockup there are about twenty-five pixels. Those numbers now
+// live only in the Telegram caption, which still carries them.
 //
-// Square on purpose. The result card (/api/og/trade-result) is square and the
-// two appear together in a thread — an opening call in 4:5 followed by its
-// result in 1:1 reads as two different products. Portrait would suit the
-// group better than the old 1.91:1 preview shape, but not at the cost of the
-// pair, so if it moves both move.
-const SIZE = 1254;
-const PAD = 64;
+// Portrait, because the design file is. The result card
+// (/api/og/trade-result) is still square, so an opening call and its result
+// no longer match shape in a thread.
+const WIDTH = 1086;
+const HEIGHT = 1448;
 
-// Deterministic thousands grouping, rather than toLocaleString("tr-TR").
-// Intl locale data on the edge runtime is not guaranteed, and the failure is
-// silent and expensive: a fallback to en-US grouping renders $4.670,00 as
-// $4,670.00 — the same glyphs, a different number to a Turkish reader.
-function money(value: number): string {
-  const sign = value > 0 ? "+" : value < 0 ? "−" : "";
-  const abs = Math.abs(value);
-  const [whole, frac] = abs.toFixed(2).split(".");
-  const grouped = whole.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  return `${sign}$${grouped},${frac}`;
-}
+// Pixel geometry of the box in trade-card-poster.png, measured off that file
+// by scanning for its border — keep in sync if the design file is replaced.
+const BOX_LEFT = 146;
+const BOX_TOP = 157;
+const BOX_WIDTH = 790;
+const BOX_HEIGHT = 280;
+// The mask sits inside the border rather than over it, so the gold frame in
+// the design file survives and only the sample trade printed inside it is
+// covered.
+const MASK_INSET = 3;
+// Sampled from the box's interior in the design file, so the mask is
+// invisible against it.
+const BOX_FILL = "#050607";
+
+// Sampled from the design file too: the warm gold of its frame and pill.
+const GOLD = "#e0a75a";
+const GOLD_DIM = "#b69c72";
+const LABEL = "#8f8b86";
+const VALUE = "#f4f4f5";
+const COLUMN_RULE = "#43382c";
 
 function pct(from: number, to: number): string {
   if (!from) return "";
@@ -58,29 +49,40 @@ function pct(from: number, to: number): string {
   return `${v > 0 ? "+" : v < 0 ? "−" : ""}%${Math.abs(v).toFixed(2)}`;
 }
 
-function Label({ children }: { children: string }) {
-  // Pre-uppercased in the source, never via textTransform: CSS uppercasing
-  // runs under a non-Turkish locale here and turns "Sinyal Detayı" into
-  // "SINYAL DETAYI", dropping the dotted İ.
-  return (
-    <span style={{ display: "flex", fontSize: 15, letterSpacing: 2, color: TEXT_ON_INK_MUTED }}>
-      {children}
-    </span>
-  );
-}
-
-function DetailRow({ label, value }: { label: string; value: string }) {
+function Column({
+  label,
+  value,
+  delta,
+  color,
+  ruled,
+}: {
+  label: string;
+  value: string;
+  delta: string;
+  color: string;
+  ruled: boolean;
+}) {
   return (
     <div
       style={{
         display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginTop: 14,
+        flexDirection: "column",
+        flexGrow: 1,
+        flexBasis: 0,
+        paddingLeft: ruled ? 34 : 0,
+        borderLeft: ruled ? `1px solid ${COLUMN_RULE}` : "none",
       }}
     >
-      <span style={{ fontSize: 22, color: TEXT_ON_INK_MUTED }}>{label}</span>
-      <span style={{ fontSize: 22, fontWeight: 700, color: TEXT_ON_INK }}>{value}</span>
+      {/* Pre-uppercased in the source, never via textTransform: CSS
+          uppercasing runs under a non-Turkish locale here and turns "Giriş"
+          into "GIRIS", dropping the dotted İ and the ş. */}
+      <span style={{ display: "flex", fontSize: 20, letterSpacing: 2, color: LABEL }}>{label}</span>
+      <span style={{ display: "flex", marginTop: 12, fontSize: 46, fontWeight: 700, color }}>
+        {value}
+      </span>
+      <span style={{ display: "flex", marginTop: 8, fontSize: 21, color: delta ? color : "transparent" }}>
+        {delta || "—"}
+      </span>
     </div>
   );
 }
@@ -92,303 +94,169 @@ export async function GET(request: Request) {
   const target1 = searchParams.get("target1");
   const stop = searchParams.get("stop");
   const direction = (searchParams.get("direction") ?? "").toUpperCase(); // BUY | SELL
-  const confidence = searchParams.get("confidence");
-  const volume = searchParams.get("volume");
-  // Pre-formatted by the caller. The card is re-fetched by Telegram long
-  // after the post, so a time computed here would drift away from the trade
-  // it describes; and formatting a date in a time zone needs ICU data the
-  // edge runtime does not promise.
-  const opened = searchParams.get("opened");
-  // Rolling track record, passed in by the caller rather than queried here —
-  // this route is edge/`ImageResponse` and gets re-fetched on every post, so
-  // it stays a pure renderer with no DB round-trip.
-  // Source of the numbers: lib/signalStats.ts (count-based only).
-  const statTrades = searchParams.get("statTrades");
-  const statWinRate = searchParams.get("statWinRate");
-  const statDays = searchParams.get("statDays") ?? "30";
-  const hasStats = Boolean(statTrades && statWinRate);
 
   if (!pair) {
     return new Response("Missing required param: pair", { status: 400 });
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
+
   // A price of 0 means the EA hadn't detected a real SL/TP yet when it read
-  // the position (it only retries for ~3s after open) — never display that
-  // as if it were an actual level.
+  // the position (it only retries for ~3s after open) — never display that as
+  // if it were an actual level.
   const isRealLevel = (v: string | null): v is string => v !== null && parseFloat(v) > 0;
 
   // Locked means the caller withheld the levels, and the only thing that says
-  // so is a missing entry.
-  //
-  // This also required a missing stop, and that was a real bug on a real
-  // post: a trade opened with no stop loss set arrives with entry and target
-  // but no stop, so the caller sends no stop param and the card locked
-  // itself — a padlock reading "seviyeler üyelere özel" printed directly
-  // above a caption listing the entry and the target. The post contradicted
-  // itself, and neither half was wrong on its own.
-  //
-  // A trade genuinely running without a stop is worth showing as such. It
-  // renders "—" under ZARAR DURDUR, which is the true statement.
+  // so is a missing entry. It must not also require a missing stop: a trade
+  // opened with no stop loss set arrives with an entry and a target but no
+  // stop, and testing for that locked the card while the caption below it
+  // listed the levels in full.
   const locked = !entry;
   const hasTarget1 = !locked && isRealLevel(target1);
   const hasStop = !locked && isRealLevel(stop);
 
-  const directionColor = direction === "SELL" ? TICK_DOWN : TICK_UP;
-  const directionLabel = direction === "SELL" ? "SELL" : direction === "BUY" ? "BUY" : "";
   const entryNum = entry ? parseFloat(entry) : 0;
   // "EUR/USD" for an FX pair, "GOLD" for everything else — splitPair returns
   // an empty quote for the instruments that are not two currencies, and a
   // trailing slash on GOLD would read as a typo.
   const [base, quote] = splitPair(pair);
   const pairLabel = quote ? `${base}/${quote}` : pair;
+  // The design file's badge holds a gold-bars glyph, which is only true of
+  // one instrument. The base code is the generic version of the same thing.
+  const badge = base.slice(0, 4);
 
-  // "What this move is worth per lot" — the same ladder the site shows under
-  // a signal, and the one number a reader actually converts into a decision.
-  // Empty when the instrument has no contract spec: an invented dollar figure
-  // is worse than no dollar figure.
-  const move = hasTarget1 ? favorableMove(entry, target1, direction) : null;
-  const ladder =
-    move === null
-      ? []
-      : LOT_LADDER.map((lots) => ({
-          lots: lots as number,
-          value: moneyForMove(pair, move, lots),
-        })).filter((r): r is { lots: number; value: number } => r.value !== null);
+  // The draft draws BUY in gold. SELL is not drawn in the draft at all, and a
+  // sell that looks exactly like a buy is the one difference on this card a
+  // reader cannot afford to miss — so the pill keeps the drafted shape and
+  // takes the direction's colour.
+  const isSell = direction === "SELL";
+  const directionLabel = isSell ? "SELL" : direction === "BUY" ? "BUY" : "";
+  const pillColor = directionLabel ? (isSell ? TICK_DOWN : GOLD) : GOLD;
 
   return new ImageResponse(
     (
-      <div
-        style={{
-          width: SIZE,
-          height: SIZE,
-          display: "flex",
-          flexDirection: "column",
-          padding: PAD,
-          background: INK,
-          fontFamily: "sans-serif",
-        }}
-      >
-        {/* Brand bar */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={LOGO_DATA_URI} height={54} alt="" />
-          <span style={{ fontSize: 22, color: TEXT_ON_INK_MUTED }}>fxpartner.global</span>
-        </div>
+      <div style={{ width: WIDTH, height: HEIGHT, display: "flex", position: "relative", fontFamily: "sans-serif" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`${siteUrl}/trade-card-poster.png`}
+          width={WIDTH}
+          height={HEIGHT}
+          alt=""
+          style={{ position: "absolute", left: 0, top: 0 }}
+        />
 
-        {/* The card */}
+        {/* Mask over the sample trade printed into the design file. */}
         <div
           style={{
+            position: "absolute",
+            left: BOX_LEFT + MASK_INSET,
+            top: BOX_TOP + MASK_INSET,
+            width: BOX_WIDTH - MASK_INSET * 2,
+            height: BOX_HEIGHT - MASK_INSET * 2,
+            background: BOX_FILL,
+            display: "flex",
+          }}
+        />
+
+        <div
+          style={{
+            position: "absolute",
+            left: BOX_LEFT,
+            top: BOX_TOP,
+            width: BOX_WIDTH,
+            height: BOX_HEIGHT,
             display: "flex",
             flexDirection: "column",
-            flexGrow: 1,
-            marginTop: 30,
-            padding: 44,
-            borderRadius: 28,
-            border: `1px solid ${HAIRLINE}`,
-            background: INK_SOFT,
+            justifyContent: "space-between",
+            padding: "34px 56px",
           }}
         >
-          {/* Instrument + direction + live marker */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-              <span style={{ fontSize: 62, fontWeight: 800, color: TEXT_ON_INK, letterSpacing: -1 }}>
-                {pairLabel}
-              </span>
-              {directionLabel && (
-                <div
-                  style={{
-                    display: "flex",
-                    fontSize: 22,
-                    fontWeight: 800,
-                    letterSpacing: 1,
-                    color: "#ffffff",
-                    background: directionColor,
-                    borderRadius: 999,
-                    padding: "8px 26px",
-                  }}
-                >
-                  {directionLabel}
-                </div>
-              )}
-            </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <div style={{ display: "flex", width: 12, height: 12, borderRadius: 999, background: TICK_UP }} />
-              <span style={{ fontSize: 24, color: TICK_UP }}>Aktif</span>
-            </div>
-          </div>
-
-          {/* Levels, or the locked stand-in */}
-          {locked ? (
+          {/* Instrument, badge, direction */}
+          <div style={{ display: "flex", alignItems: "center" }}>
             <div
               style={{
                 display: "flex",
-                flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                flexGrow: 1,
-                textAlign: "center",
+                width: 78,
+                height: 78,
+                borderRadius: 39,
+                border: `2px solid ${GOLD_DIM}`,
+                color: GOLD,
+                fontSize: badge.length > 3 ? 22 : 26,
+                fontWeight: 700,
               }}
             >
-              {confidence ? (
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                  <Label>SİNYAL GÜVENİ</Label>
-                  <span style={{ fontSize: 120, fontWeight: 800, color: SIGNAL, letterSpacing: -3 }}>
-                    %{confidence}
-                  </span>
-                </div>
-              ) : (
-                <span style={{ fontSize: 90 }}>🔒</span>
-              )}
-              <span style={{ fontSize: 30, color: TEXT_ON_INK_MUTED, marginTop: 18 }}>
-                Giriş, kâr al ve zarar durdur seviyeleri üyelere özel
+              {badge}
+            </div>
+            <span
+              style={{
+                display: "flex",
+                marginLeft: 30,
+                fontSize: 58,
+                fontWeight: 700,
+                color: VALUE,
+                letterSpacing: -1,
+              }}
+            >
+              {pairLabel}
+            </span>
+            {directionLabel && (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginLeft: 32,
+                  padding: "10px 34px",
+                  borderRadius: 32,
+                  border: `2px solid ${pillColor}`,
+                  color: pillColor,
+                  fontSize: 30,
+                  fontWeight: 700,
+                  letterSpacing: 1,
+                }}
+              >
+                {directionLabel}
+              </div>
+            )}
+          </div>
+
+          {/* Levels */}
+          {locked ? (
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span style={{ display: "flex", fontSize: 20, letterSpacing: 2, color: LABEL }}>
+                GİRİŞ · ZARAR DURDUR · KÂR AL
               </span>
-              {hasStats && (
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: 26 }}>
-                  <span style={{ fontSize: 40, fontWeight: 800, color: TICK_UP }}>%{statWinRate} isabet</span>
-                  <span style={{ fontSize: 22, color: TEXT_ON_INK_MUTED, marginTop: 4 }}>
-                    son {statDays} günde {statTrades} işlem
-                  </span>
-                </div>
-              )}
+              <span style={{ display: "flex", marginTop: 14, fontSize: 38, fontWeight: 700, color: GOLD }}>
+                Seviyeler üyelere özel
+              </span>
+              <span style={{ display: "flex", marginTop: 8, fontSize: 21, color: LABEL }}>
+                fxpartner.global/paketler
+              </span>
             </div>
           ) : (
-            // A real element, not a fragment: Satori flattens fragments in a
-            // way that dropped this whole block onto the header's row the
-            // first time round — levels, detail and sparkline all laid out
-            // side by side and half of it off the canvas.
-            <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-              <div style={{ display: "flex", marginTop: 40 }}>
-                <div style={{ display: "flex", flexDirection: "column", width: 340 }}>
-                  <Label>GİRİŞ FİYATI</Label>
-                  <span style={{ fontSize: 62, fontWeight: 800, color: TEXT_ON_INK, marginTop: 8 }}>
-                    {entry}
-                  </span>
-                </div>
-                <div style={{ display: "flex", width: 1, background: HAIRLINE, marginRight: 36 }} />
-                <div style={{ display: "flex", flexDirection: "column", width: 330 }}>
-                  <Label>ZARAR DURDUR</Label>
-                  <span style={{ fontSize: 62, fontWeight: 800, color: TICK_DOWN, marginTop: 8 }}>
-                    {hasStop ? stop : "—"}
-                  </span>
-                  {hasStop && (
-                    <span style={{ fontSize: 24, color: TICK_DOWN, marginTop: 2 }}>
-                      {pct(entryNum, parseFloat(stop))}
-                    </span>
-                  )}
-                </div>
-                <div style={{ display: "flex", width: 1, background: HAIRLINE, marginRight: 36 }} />
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <Label>KÂR AL</Label>
-                  <span style={{ fontSize: 62, fontWeight: 800, color: TICK_UP, marginTop: 8 }}>
-                    {hasTarget1 ? target1 : "—"}
-                  </span>
-                  {hasTarget1 && (
-                    <span style={{ fontSize: 24, color: TICK_UP, marginTop: 2 }}>
-                      {pct(entryNum, parseFloat(target1))}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <div style={{ display: "flex", height: 1, background: HAIRLINE, marginTop: 40 }} />
-
-              {/* Detail on the left, the shape of the move on the right */}
-              <div style={{ display: "flex", flexGrow: 1, marginTop: 34 }}>
-                <div style={{ display: "flex", flexDirection: "column", width: 600 }}>
-                  <Label>SİNYAL DETAYI</Label>
-                  {opened && <DetailRow label="Açılış zamanı" value={opened} />}
-                  {volume && <DetailRow label="Hacim" value={`${volume} lot`} />}
-                  {confidence && <DetailRow label="Sinyal güveni" value={`%${confidence}`} />}
-                  {hasStats && (
-                    <DetailRow
-                      label={`Son ${statDays} gün`}
-                      value={`${statTrades} işlem · %${statWinRate} isabet`}
-                    />
-                  )}
-
-                  {ladder.length > 0 && (
-                    <div style={{ display: "flex", flexDirection: "column", marginTop: 30 }}>
-                      <Label>KÂR AL SEVİYESİNDE, LOT BAŞINA</Label>
-                      <div style={{ display: "flex", flexWrap: "wrap", marginTop: 12 }}>
-                        {ladder.map(({ lots, value }) => (
-                          <div
-                            key={lots}
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              width: 290,
-                              marginTop: 10,
-                              paddingRight: 20,
-                            }}
-                          >
-                            <span style={{ fontSize: 22, color: TEXT_ON_INK_MUTED }}>
-                              {lots.toFixed(2)} lot
-                            </span>
-                            <span style={{ fontSize: 22, fontWeight: 700, color: TICK_UP }}>
-                              {money(value)}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    flexGrow: 1,
-                  }}
-                >
-                  <Sparkline
-                    seed={`${pair}-${entry}-${direction}`}
-                    color={directionColor}
-                    trendUp={direction !== "SELL"}
-                    width={440}
-                    height={330}
-                  />
-                </div>
-              </div>
+            <div style={{ display: "flex" }}>
+              <Column label="GİRİŞ FİYATI" value={entry as string} delta="" color={VALUE} ruled={false} />
+              <Column
+                label="ZARAR DURDUR"
+                value={hasStop ? (stop as string) : "—"}
+                delta={hasStop ? pct(entryNum, parseFloat(stop as string)) : ""}
+                color={hasStop ? TICK_DOWN : LABEL}
+                ruled
+              />
+              <Column
+                label="KÂR AL"
+                value={hasTarget1 ? (target1 as string) : "—"}
+                delta={hasTarget1 ? pct(entryNum, parseFloat(target1 as string)) : ""}
+                color={hasTarget1 ? TICK_UP : LABEL}
+                ruled
+              />
             </div>
           )}
-
-          <span style={{ display: "flex", fontSize: 20, color: TEXT_ON_INK_MUTED, marginTop: 26 }}>
-            Bu sinyal, takip edilen FXPARTNER MT5 hesabından otomatik olarak iletildi. Yatırım
-            tavsiyesi değildir.
-          </span>
-        </div>
-
-        {/* Footer */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginTop: 26,
-          }}
-        >
-          <span style={{ fontSize: 22, color: TEXT_ON_INK_MUTED }}>
-            İşlem risk içerir. Yatırım tavsiyesi değildir.
-          </span>
-          <div style={{ display: "flex", gap: 14 }}>
-            <SocialIcon>
-              <TelegramIcon color={TEXT_ON_INK_MUTED} />
-            </SocialIcon>
-            <SocialIcon>
-              <YoutubeIcon color={TEXT_ON_INK_MUTED} />
-            </SocialIcon>
-            <SocialIcon>
-              <InstagramIcon color={TEXT_ON_INK_MUTED} />
-            </SocialIcon>
-            <SocialIcon>
-              <FacebookIcon color={TEXT_ON_INK_MUTED} />
-            </SocialIcon>
-          </div>
         </div>
       </div>
     ),
-    { width: SIZE, height: SIZE }
+    { width: WIDTH, height: HEIGHT }
   );
 }

@@ -37,8 +37,13 @@ import {
 
 export const runtime = "edge";
 
-// Square, matching /api/og/trade-signal — built to also be posted as an
-// Instagram feed/story image, which wants 1:1.
+// Square — built to also be posted as an Instagram feed/story image, which
+// wants 1:1.
+//
+// It no longer matches /api/og/trade-signal, which moved to the portrait
+// poster the owner designed. An opening call and its result therefore arrive
+// in a thread as two different shapes; if that reads badly, this is the half
+// that moves.
 const SIZE = 1080;
 
 type Outcome = "WIN" | "LOSS" | "BE";
