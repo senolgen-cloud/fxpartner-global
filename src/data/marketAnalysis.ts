@@ -41,6 +41,55 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-01-1500",
+    title: "FXPARTNER Piyasa Özeti | 01.09.2026 Öğleden Sonra Güncellemesi",
+    excerpt:
+      "Hürmüz Boğazı'nda Umman'ın Hasab kenti açıklarında Suudi tankeri Sidr ve Güney Koreli tanker Senegal Prosperity dakikalar arayla projektillerle vuruldu; petrol yeniden yükseldi (Brent 91,28, WTI 86,57 dolar), Euro Bölgesi Ağustos enflasyonu %2,9'dan %3,3'e sıçradı, EUR/USD 1,16 bandında ve USD/TRY 48 TL'nin üzerinde seyrediyor.",
+    publishedAt: "2026-09-01",
+    readingMinutes: 3,
+    intro:
+      "Öğleden sonra seansında Hürmüz Boğazı'ndaki gerilim yeni bir halkayla devam etti: Umman'ın Hasab kenti açıklarında, biri Suudi Arabistanlı Bahri şirketine ait süper tanker Sidr, diğeri Güney Koreli Sinokor Group'a ait Senegal Prosperity adlı tanker, birbirini izleyen dakikalar içinde bilinmeyen projektillerle vuruldu. Gelişme petrol fiyatlarını yeniden yukarı çekerken, Euro Bölgesi'nden gelen sıcak enflasyon verisi de günün diğer önemli başlığı oldu.",
+    news: [
+      {
+        icon: "⚓",
+        heading: "Hürmüz'de İki Tankere Daha Saldırı: Sidr ve Senegal Prosperity Vuruldu",
+        body: "Suudi Arabistanlı **Bahri** şirketine ait süper tanker **Sidr** ile Güney Koreli **Sinokor Group**'a ait **Senegal Prosperity** adlı tanker, Umman'ın **Hasab** kenti açıklarında Hürmüz Boğazı'ndan çıkış yaparken **birbirini izleyen dakikalar içinde** bilinmeyen projektillerle vuruldu. Denizcilik güvenlik kaynağı **Marisks**, yakın eş zamanlı olayların **\"Umman koridorundaki tehdit ortamının yeni bir tırmanışına işaret ettiğini\"** belirtti. Olay, bu sabah duyurulan mayın vakasının ardından bölgedeki deniz taşımacılığı risklerinin canlı kaldığını gösteriyor.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol Yeniden Yükselişte: Brent 91, WTI 86,5 Dolar Bandında",
+        body: "Art arda gelen tanker saldırılarının ardından **Brent petrol %0,87 artışla 91,28 dolara**, **WTI ham petrolü ise %0,94 artışla 86,57 dolara** yükseldi. Buna rağmen BAE, Suudi Arabistan, Kuveyt ve Irak gibi büyük Körfez üreticileri Hürmüz üzerinden ihracatlarını sürdürüyor; Çin, Japonya ve Güney Kore gibi Asyalı alıcılar ise kayıpları telafi etmek için Arjantin gibi uzak tedarikçilere yöneliyor.",
+      },
+      {
+        icon: "🇪🇺",
+        heading: "Euro Bölgesi Enflasyonu Ağustos'ta %3,3'e Yükseldi",
+        body: "Eurostat'ın öncü verilerine göre euro bölgesi yıllık enflasyonu **Temmuz'daki %2,9'dan Ağustos'ta %3,3'e** yükseldi. Artışta enerji fiyatlarındaki sıçrama belirleyici oldu: yıllık enerji enflasyonu **%10,3'ten %14,3'e** çıktı. Çekirdek enflasyon (enerji ve gıda hariç) ise **%2,4'e** geriledi. Veri, ECB'nin Eylül toplantısı öncesi enflasyon görünümünü karmaşıklaştırıyor.",
+      },
+      {
+        icon: "💶",
+        heading: "EUR/USD 1,16 Bandında, USD/TRY 48 TL'nin Üzerinde",
+        body: "EUR/USD, sıcak enflasyon verisine rağmen **1,1600-1,1620 bandında** yatay seyrediyor. USD/TRY ise **48,03-48,08 TL bandında** işlem görerek ağustos başındaki **47,60-47,70 TL** bandının belirgin şekilde üzerinde, yükseliş trendini sürdürüyor.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "Bugün 17:00 (GMT+3)",
+        icon: "🇺🇸",
+        title: "ABD ISM İmalat Sanayi PMI (Ağustos)",
+        note: "Piyasa beklentisi Temmuz'daki 55,6'dan 55,2'ye hafif bir gerileme yönünde; veri doların ve ABD tahvil getirilerinin kısa vadeli yönünü etkileyebilir.",
+      },
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Fed'in Eylül faiz kararı öncesi işgücü piyasasına dair son büyük veri; sürpriz bir sonuç faiz artırım beklentisini yeniden fiyatlayabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-01-0900",
     title: "FXPARTNER Piyasa Özeti | 01.09.2026 Sabah Güncellemesi",
     excerpt:
