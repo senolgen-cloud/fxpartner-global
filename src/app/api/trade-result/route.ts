@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendSignalPhoto, mainServicesKeyboard, telegramContactCta } from "@/lib/telegram";
+import { sendSignalPhoto, mainServicesKeyboard } from "@/lib/telegram";
 import { sendPushToMembers } from "@/lib/push";
 import { getRecentSignalStats, statsLineTr } from "@/lib/signalStats";
 import { requiredTierForPair } from "@/lib/signalAccess";
@@ -97,20 +97,25 @@ export async function GET(req: NextRequest) {
   }
   const trStats = statsLineTr(stats);
 
+  // Short, matching the opening call — see the caption comment in
+  // /api/trade-signal for the reasoning. Two lines here are not just noise
+  // but the wrong argument in the wrong room: "seçip ayıklamıyoruz" and
+  // "yalnızca kazananları gösteren bir kanal değiliz" are answers to a
+  // suspicion a stranger has, and this post lands as a reply under the entry
+  // it belongs to, in a group that watched that entry go out. The proof is
+  // the thread, not a sentence claiming there is one.
+  //
+  // The rolling record stays: it is the one line here that is evidence
+  // rather than assertion, and a result is exactly when a reader wants it.
   const caption =
     `<b>${pair.toUpperCase()}</b>${direction ? ` ${direction}` : ""} — ${outcomeEmoji} <b>${outcomeWord}</b>\n\n` +
     `📈 Giriş: <b>${entry}</b>\n` +
     `🏁 Kapanış: <b>${close}</b>` +
-    (resultLine ? `\n📊 Sonuç: <b>${resultLine}</b>` : "") +
-    `\n\n${
-      outcome === "WIN"
-        ? "🔥 Bu işlemin yönünü açıldığı anda paylaşmıştık — sonucu da burada. Seçip ayıklamıyoruz."
-        : "📌 Kaybeden işlemi de aynı yerde yayınlıyoruz. Yalnızca kazananları gösteren bir kanal değiliz."
-    }\n\n` +
-    (trStats ? `${trStats}\n\n` : "") +
-    `⚠️ Geçmiş sonuçlar gelecekteki sonuçları garanti etmez. Bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.\n\n` +
-    `👉 <a href="${siteUrl}/signals">Tüm işlem geçmişi: fxpartner.global/signals</a>\n\n` +
-    telegramContactCta();
+    // 💰 rather than 📊: statsLineTr already opens with 📊, and the two landed
+    // on consecutive lines looking like one repeated bullet.
+    (resultLine ? `\n💰 Sonuç: <b>${resultLine}</b>` : "") +
+    (trStats ? `\n${trStats}` : "") +
+    `\n\n⚠️ Geçmiş sonuçlar gelecekteki sonuçları garanti etmez.`;
 
   // Best-effort: record the real close data against the original row so
   // /signals can show it — never blocks the actual result post.
