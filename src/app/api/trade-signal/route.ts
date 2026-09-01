@@ -1,9 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import {
-  sendSignalPhoto,
-  mainServicesKeyboard,
-  telegramContactCta,
-} from "@/lib/telegram";
+import { sendSignalPhoto, mainServicesKeyboard } from "@/lib/telegram";
 import { formatMessage } from "@/lib/chrome";
 import { localePath, type Locale } from "@/lib/i18n";
 import { sendPushToMembers } from "@/lib/push";
@@ -154,29 +150,39 @@ export async function GET(req: NextRequest) {
   // already bought the thing the public tail is selling, and being sold to
   // inside the product you paid for is the fastest way to make a paid group
   // feel like a mailing list.
+  // Short, because the audience changed.
+  //
+  // The old caption was written for a public channel that had to be
+  // convinced: a paragraph on the account being real, a line explaining that
+  // the post is VIP-only, a three-sentence disclaimer, a link to /signals and
+  // a contact handle. In the paid group every one of those is spent on
+  // someone who has already joined, already paid, and is looking for four
+  // numbers. It ran to eleven lines to deliver three.
+  //
+  // What survives: the instrument and direction, the levels, the record when
+  // there is enough of one to quote, and one line of risk warning. The levels
+  // stay in the text even though the card now carries them — text can be
+  // copied into a terminal and read when images fail to load; a picture
+  // cannot.
+  //
+  // What went, and where it went instead: /signals and the contact handle are
+  // both buttons under the post already (mainServicesKeyboard), so in the
+  // text they were a second copy of a tap the reader can already see.
   const buildCaption = (locale: Locale) => {
-    const levels = openLevels;
     const t = (text: string, vars: Record<string, string | number> = {}) =>
       formatMessage(locale, text, vars);
-    const at = (path: string) => `${siteUrl}${localePath(locale, path)}`;
     return (
       (publicDirection
-        ? `${dirEmoji} <b>${pair.toUpperCase()}</b> · <b>${publicDirection}</b> — ${t("pozisyon az önce açıldı")}\n\n`
+        ? `${dirEmoji} <b>${pair.toUpperCase()}</b> · <b>${publicDirection}</b>\n\n`
         : `<b>${pair.toUpperCase()}</b> ${t("üzerinde yeni bir işlem açıldı")}\n\n`) +
-      (confidence ? `🎯 ${t("Sinyal güveni")}: <b>%${confidence}</b>\n` : "") +
-      (trStats ? `${trStats}\n` : "") +
-      (levels
+      (openLevels
         ? `📈 ${t("Giriş")}: <b>${entry}</b>\n` +
           (hasTarget1 ? `🎯 TP: <b>${target1}</b>\n` : "") +
           (hasStop ? `🛑 SL: <b>${stop}</b>\n` : "")
         : "") +
-      `\n⚡ ${t("Gerçek hesap, gerçek işlem — takip edilen MT5 hesabımızda açıldığı an paylaşılıyor. Kapandığında sonucu da aynı yerde yayınlanacak, kazanç da kayıp da.")}\n\n` +
-      `💎 ${t("Bu sinyal VIP üyelere özel olarak paylaşıldı — her enstrüman, tüm seviyeler.")}\n\n` +
-      `⚠️ ${t("Bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Pozisyon büyüklüğünü ve riskini kendi toleransına göre belirle. Geçmiş sonuçlar gelecekteki sonuçları garanti etmez.")}\n\n` +
-      (levels
-        ? `👉 <a href="${at("/signals")}">${t("Tüm işlem geçmişi ve anlık bildirimler")}: fxpartner.global${localePath(locale, "/signals")}</a>\n\n`
-        : `👉 <a href="${at("/paketler")}">${t("Seviyeleri anlık görmek için paketlere göz atın")}</a>\n\n`) +
-      telegramContactCta()
+      (confidence ? `💠 ${t("Sinyal güveni")}: <b>%${confidence}</b>\n` : "") +
+      (trStats ? `${trStats}\n` : "") +
+      `\n⚠️ ${t("Yatırım tavsiyesi değildir. Pozisyon büyüklüğünü kendi riskine göre belirle.")}`
     );
   };
 
