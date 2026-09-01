@@ -9,6 +9,7 @@ import { localePath, type Locale } from "@/lib/i18n";
 import { sendPushToMembers } from "@/lib/push";
 import { getRecentSignalStats, statsLineTr } from "@/lib/signalStats";
 import { shouldAlertForSignal } from "@/lib/signalAlertPace";
+import { SIGNAL_TZ } from "@/lib/signalPeriods";
 import { requiredTierForPair } from "@/lib/signalAccess";
 import { revalidateTag } from "next/cache";
 import { CACHE_TAGS } from "@/lib/cachedReads";
@@ -103,6 +104,17 @@ export async function GET(req: NextRequest) {
     console.error("Signal stats lookup failed:", err);
   }
 
+  // "1 Eyl 13:32" in the desk's own zone, the same one /signals anchors its
+  // day boundaries to (SIGNAL_TZ) — a card stamped in UTC would read three
+  // hours behind the chart the reader is looking at.
+  const openedLabel = new Intl.DateTimeFormat("tr-TR", {
+    timeZone: SIGNAL_TZ,
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date());
+
   // One card, always the full layout — see openLevels above.
   const cardUrl = (withLevels: boolean) => {
     const cardParams = new URLSearchParams({ pair });
@@ -115,6 +127,12 @@ export async function GET(req: NextRequest) {
       if (hasStop) cardParams.set("stop", stop);
       if (hasTarget1) cardParams.set("target1", target1);
     }
+    if (volume) cardParams.set("volume", volume);
+    // Formatted here rather than in the card. The card runs on the edge and
+    // is re-fetched by Telegram long after the post, so a time computed there
+    // would drift away from the trade it describes — and formatting in a time
+    // zone needs ICU data the edge runtime does not promise.
+    cardParams.set("opened", openedLabel);
     if (stats) {
       cardParams.set("statTrades", String(stats.trades));
       cardParams.set("statWinRate", String(stats.winRate));
