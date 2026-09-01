@@ -41,6 +41,55 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-01-0900",
+    title: "FXPARTNER Piyasa Özeti | 01.09.2026 Sabah Güncellemesi",
+    excerpt:
+      "İran Devrim Muhafızları Ordusu (IRGC), kimliği açıklanmayan bir süpertankerin Hürmüz Boğazı'nda iki deniz mayınına çarparak alevler içinde kaldığını duyurdu; Trump İran'a karşılığın 'çok sınırlı' olacağını söylerken CENTCOM hafta sonki vuruşu 'sınırlı ve hassas bir hareket' olarak nitelendirdi, petrol yüksek seyrini koruyor ve CME FedWatch'ta Eylül faiz artırım ihtimali %65-66 bandına yükseldi.",
+    publishedAt: "2026-09-01",
+    readingMinutes: 4,
+    intro:
+      "Haftanın ikinci işlem gününde piyasaların gündemine Hürmüz Boğazı'ndaki gerilimin yeni bir boyutu damga vurdu: İran Devrim Muhafızları Ordusu (IRGC), kimliği açıklanmayan bir süpertankerin bölgede iki deniz mayınına çarparak alevler içinde kaldığını ve seyrini durdurduğunu açıkladı. Gelişme, Başkan Trump'ın İran'a yönelik karşılığın 'çok sınırlı' olacağını söylemesiyle ve petrol fiyatlarındaki yüksek seyrin sürmesiyle aynı güne denk geldi.",
+    news: [
+      {
+        icon: "⚓",
+        heading: "IRGC: Süpertanker Hürmüz'de Mayına Çarparak Alevler İçinde Kaldı",
+        body: "İran Devrim Muhafızları Ordusu (IRGC) Deniz Kuvvetleri, kimliği, bayrağı ve mürettebatı açıklanmayan bir süpertankerin, İran'ın 'yetkisiz' ilan ettiği bir güzergahtan geçmeye çalışırken **iki deniz mayınına** çarparak alevler içinde kaldığını ve seyrini durdurduğunu duyurdu; can kaybına dair bilgi paylaşılmadı. IRGC, kurallarını ihlal eden diğer gemilerin de aynı akıbetle karşılaşabileceği uyarısında bulunarak deniz taşımacılığı şirketlerinin ABD ordusunun talimatlarını izlememesini istedi. Olay, Trump yönetiminin boğazı mayınlardan temizlediği yönündeki önceki açıklamalarını da gölgede bırakıyor.",
+      },
+      {
+        icon: "🎯",
+        heading: "Trump: Karşılık 'Çok Sınırlı' Olacak, CENTCOM Vuruşu Doğruladı",
+        body: "Beyaz Saray'da gazetecilere konuşan Başkan **Trump**, İran'a yönelik olası askeri karşılığın **'çok sınırlı'** olacağını söyledi. ABD Merkez Kuvvetler Komutanlığı (**CENTCOM**), hafta sonu Hürmüz Boğazı'nda mayın döşemeye hazırlandığı belirlenen İran unsurlarına yönelik **'sınırlı ve hassas bir hareket'** gerçekleştirdiğini teyit etti. İran tarafında ise IRGC, ABD'nin vuruşunun **'cezalandırılacağını'** yineledi.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol Yüksek Seyrini Koruyor",
+        body: "**Brent petrol** Pazartesi günü **90 dolara yakın** kapanırken, **WTI** **86 doların üzerinde** işlem görmeye devam ediyor. Bloomberg'e göre gerilime rağmen Hürmüz Boğazı üzerinden halen günde **6-8 milyon varil** ham petrol akışı sürüyor; analistler ise güzergah üzerindeki risk priminin canlı kaldığını vurguluyor.",
+      },
+      {
+        icon: "📈",
+        heading: "Eylül Faiz Artırımı İhtimali %65-66 Bandına Yükseldi",
+        body: "**CME FedWatch** aracına göre Fed'in **16 Eylül** toplantısında 25 baz puanlık faiz artışı yapma ihtimali, hafta başındaki **%60**'ın hemen üzerindeki seviyeden **%65-66 bandına** yükseldi. Fed Başkanı **Kevin Warsh**'ın şahin Jackson Hole çıkışının etkisi, artan jeopolitik risklerle birlikte piyasalarda fiyatlanmaya devam ediyor.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "Hafta Boyunca",
+        icon: "🇮🇷",
+        title: "Hürmüz Boğazı'nda Gerilim",
+        note: "Trump'ın karşılığın 'çok sınırlı' olacağını belirtmesi tırmanmayı sınırlayabilir; ancak süpertankere yönelik mayın uyarısı Hürmüz'deki risklerin canlı kaldığına işaret ediyor.",
+      },
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Fed'in Eylül faiz kararı öncesi işgücü piyasasına dair son büyük veri; sürpriz bir sonuç %65-66 seviyesindeki faiz artırım beklentisini yeniden fiyatlayabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-08-31-2200",
     title: "FXPARTNER Piyasa Özeti | 31.08.2026 Akşam Güncellemesi",
     excerpt:
