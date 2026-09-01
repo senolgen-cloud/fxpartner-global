@@ -95,7 +95,6 @@ export const departments: Department[] = [
       // Copytrade.
       "src/app/[locale]/copytrade",
       "src/data/copytrade.ts",
-      "src/components/CopyTradeButton.tsx",
       "src/components/CopytradeInquiryForm.tsx",
       // "Bu hareket kaç lotta ne eder" — pozisyon büyüklüğü tarafı.
       "src/app/[locale]/pozisyon-hesaplayici",

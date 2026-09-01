@@ -12,7 +12,6 @@ import { ACCESS_TIER_LABEL } from "@/data/packageTiers";
 import TradingViewChart from "./TradingViewChart";
 import LotLadder from "./LotLadder";
 import TradeNowButton from "./TradeNowButton";
-import CopyTradeButton from "./CopyTradeButton";
 import { useLiveQuotes, type LiveQuote } from "./useLiveQuotes";
 import { useCountUp } from "@/components/useCountUp";
 import { favorableMove } from "@/lib/contractSizes";
@@ -1276,19 +1275,15 @@ function SignalCard({
                 🔒 {trf("{tier} ile aç", { tier: lock.badge })}
               </Link>
               {!isClosed && <TradeNowButton variant="inline" />}
-              <CopyTradeButton variant="inline" />
             </div>
           ) : (
             /* On closed cards too, by request. The button does not offer to
-               copy a finished trade — it opens the broker — so it is a live
+               trade a finished setup — it opens the broker — so it is a live
                offer on any card. The old objection was density: this list
                runs to dozens of rows. That is answered by the button being
                outlined rather than filled, so thirty of them read as thirty
                quiet links instead of a wall of accent colour. */
-            <>
-              <TradeNowButton variant="inline" />
-              <CopyTradeButton variant="inline" />
-            </>
+            <TradeNowButton variant="inline" />
           )}
           <button
             type="button"
@@ -1376,7 +1371,6 @@ function SignalCard({
               </p>
 
               {!locked && !isClosed && <TradeNowButton variant="card" />}
-              <CopyTradeButton variant="card" />
             </div>
 
             <TradingViewChart symbol={signal.pair} className="h-[280px] sm:h-[340px]" />
