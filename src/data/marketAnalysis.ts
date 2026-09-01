@@ -41,6 +41,39 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-01-1800",
+    title: "FXPARTNER Piyasa Özeti | 01.09.2026 Akşam Güncellemesi",
+    excerpt:
+      "İran Cumhurbaşkanı Mesud Pezeşkiyan, Bişkek'teki Şanghay İşbirliği Örgütü Zirvesi'nde ABD'nin 17 Haziran mutabakat zaptındaki taahhütlerine dönmesi halinde İran'ın da derhal karşılık vereceğini açıkladı; diplomatik girişime rağmen petrol yüksek seyrini koruyor (Brent 91 doların, WTI 86,5 doların üzerinde).",
+    publishedAt: "2026-09-01",
+    readingMinutes: 3,
+    intro:
+      "Akşam seansında gündeme, Hürmüz Boğazı'ndaki gerilimin sürdüğü günlerin ardından gelen bir diplomatik hamle damga vurdu: İran Cumhurbaşkanı Mesud Pezeşkiyan, Kırgızistan'ın başkenti Bişkek'te düzenlenen Şanghay İşbirliği Örgütü (ŞİÖ) Zirvesi'nde, ABD ile 17 Haziran'da imzalanan mutabakat zaptına dönüş çağrısı yaptı. Gelişme, tanker saldırıları ve karşılıklı ateşin sürdüğü bir haftanın ardından geldi; petrol fiyatları ise diplomatik girişime rağmen yüksek seyrini büyük ölçüde koruyor.",
+    news: [
+      {
+        icon: "🕊️",
+        heading: "Pezeşkiyan: ABD Taahhütlerine Dönerse İran Derhal Karşılık Verecek",
+        body: "İran Cumhurbaşkanı **Mesud Pezeşkiyan**, Bişkek'teki **Şanghay İşbirliği Örgütü (ŞİÖ) Zirvesi**'nde yaptığı konuşmada, **\"ABD mutabakat zaptındaki taahhütlerine dönerse, İran İslam Cumhuriyeti de derhal karşılık verecektir\"** dedi. Pezeşkiyan'ın atıfta bulunduğu mutabakat zaptı, kendisi ile Başkan **Trump** arasında **17 Haziran**'da imzalanmıştı ve ateşkes, Hürmüz Boğazı'nın mayınlardan temizlenerek gemi trafiğine açılması ile 60 günlük doğrudan görüşme sürecini öngörüyordu. Ancak anlaşma kısa süre sonra çökmüş, taraflar son haftalarda yeniden ateş alışverişine girmişti.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol Diplomatik Girişime Rağmen Yüksek Seyrini Koruyor",
+        body: "Diplomatik açılıma karşın petrol fiyatları güne göre yükselişini sürdürdü: **Brent petrol %0,6 artışla 91 doların**, **WTI ham petrolü ise %0,9 artışla 86,5 doların** üzerinde işlem gördü. Hürmüz Boğazı'nda hafta içinde art arda yaşanan tanker saldırıları ve İran-ABD arasındaki karşılıklı ateş, yatırımcıların Pezeşkiyan'ın çağrısını temkinli karşılamasına yol açtı; kalıcı bir ateşkesin somutlaşması için ABD tarafından bir yanıt bekleniyor.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Fed'in Eylül faiz kararı öncesi işgücü piyasasına dair son büyük veri; sürpriz bir sonuç faiz artırım beklentisini yeniden fiyatlayabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-01-1500",
     title: "FXPARTNER Piyasa Özeti | 01.09.2026 Öğleden Sonra Güncellemesi",
     excerpt:
