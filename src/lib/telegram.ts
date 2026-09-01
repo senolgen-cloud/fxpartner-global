@@ -79,17 +79,30 @@ export function arabicChatId(): string | null {
  * the public channel withholds, and until now the only place they could see
  * them was the site.
  *
- * BOTH VALUES OR NOTHING. The group is a forum, so a message without
+ * THE TOPIC MATTERS. The group is a forum, so a message without
  * message_thread_id does not land in SIGNALS — it lands in General, beside
  * the join notices. A signal in the wrong topic is worse than no signal:
- * the reader stops trusting where to look. So a missing topic id disables
- * the post rather than guessing, exactly as a missing Arabic channel id
- * skips the Arabic post.
+ * the reader stops trusting where to look.
+ *
+ * So the topic is not guessed — but it is also not a secret, and it does not
+ * belong in the environment the way the chat id does. It is the number in
+ * the group's own public invite link (t.me/FXpartnerVIP/666), owner-confirmed
+ * on 2026-09-01, and it changes about as often as the group is recreated.
+ * Keeping it here makes it reviewable and versioned, and means the feature
+ * ships with the deploy rather than waiting on a dashboard edit. Setting
+ * TELEGRAM_VIP_TOPIC_ID still overrides it, so a moved topic needs no
+ * release.
+ *
+ * The chat id stays in the environment and there is still no fallback for
+ * it: without it there is no group to post to at all, and inventing one is
+ * exactly the failure this guards against.
  */
+const VIP_SIGNALS_TOPIC_ID = "666";
+
 export function vipSignalTarget(): { chatId: string; threadId: string } | null {
   const chatId = process.env.TELEGRAM_VIP_CHAT_ID?.trim();
-  const threadId = process.env.TELEGRAM_VIP_TOPIC_ID?.trim();
-  if (!chatId || !threadId) return null;
+  if (!chatId) return null;
+  const threadId = process.env.TELEGRAM_VIP_TOPIC_ID?.trim() || VIP_SIGNALS_TOPIC_ID;
   return { chatId, threadId };
 }
 
@@ -135,6 +148,25 @@ async function callTelegram(method: string, body: Record<string, unknown>) {
   return data.result;
 }
 
+/**
+ * The forum-topic field, or nothing.
+ *
+ * Telegram types message_thread_id as an integer. A numeric string happens to
+ * survive the JSON body, but anything non-numeric would not — and the failure
+ * mode is not an error, it is the message quietly landing in General where no
+ * member is looking. Parsing here means a bad value skips the field instead of
+ * being sent as-is.
+ */
+function forumTopic(threadId?: string): { message_thread_id?: number } {
+  if (!threadId) return {};
+  const id = Number(threadId);
+  if (!Number.isInteger(id) || id <= 0) {
+    console.error(`Ignoring non-numeric Telegram topic id: ${threadId}`);
+    return {};
+  }
+  return { message_thread_id: id };
+}
+
 export type InlineKeyboardButton = { text: string; url: string };
 
 export async function sendTelegramMessage(
@@ -173,7 +205,7 @@ export async function sendTelegramMessage(
   const { chatId } = getConfig();
   return callTelegram("sendMessage", {
     chat_id: options.chatId ?? chatId,
-    ...(options.threadId ? { message_thread_id: options.threadId } : {}),
+    ...forumTopic(options.threadId),
     text,
     parse_mode: "HTML",
     disable_web_page_preview: options.disablePreview ?? false,
@@ -221,7 +253,7 @@ export async function sendTelegramPhoto(
   const { chatId } = getConfig();
   return callTelegram("sendPhoto", {
     chat_id: options.chatId ?? chatId,
-    ...(options.threadId ? { message_thread_id: options.threadId } : {}),
+    ...forumTopic(options.threadId),
     photo: photoUrl,
     caption,
     parse_mode: "HTML",
