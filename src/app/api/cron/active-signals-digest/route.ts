@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { and, desc, eq, gte } from "drizzle-orm";
 import {
-  sendTelegramMessage,
+  sendSignalMessage,
   telegramSiteCta,
   telegramContactCta,
   mainServicesKeyboard,
 } from "@/lib/telegram";
-import { postTextToX } from "@/lib/x";
 import { db } from "@/db";
 import { tradeSignals, liveQuotes } from "@/db/schema";
 import { requiredTierForPair } from "@/lib/signalAccess";
@@ -157,29 +156,19 @@ export const GET = withCronErrorAlert("active-signals-digest", async (req: NextR
     .filter((l) => l !== undefined)
     .join("\n");
 
-  const telegram = await sendTelegramMessage(telegramText, {
+  const telegram = await sendSignalMessage(telegramText, {
     inlineKeyboard: mainServicesKeyboard(),
   });
 
-  // X counts characters hard, so it gets the count and the proof rather than
-  // the full board — the link carries the rest.
-  const xText = [
-    `📊 AKTİF SİNYALLER — ${active.length} açık pozisyon`,
-    statsLine ? statsLine : "",
-    "",
-    `Canlı takip: ${siteUrl}/tr/signals`,
-    "",
-    "Yatırım tavsiyesi değildir.",
-  ]
-    .filter(Boolean)
-    .join("\n");
+  // The tweet that used to go out beside this is gone with the rest of the
+  // public signal flow — it advertised a board only the paid group can see
+  // now, which is an advert for a locked door.
 
-  let xResult: { tweetId: string } | { error: string };
-  try {
-    xResult = await postTextToX(xText);
-  } catch (err) {
-    // A failed tweet must not lose the Telegram post or retry it next hour.
-    xResult = { error: err instanceof Error ? err.message : String(err) };
+  // Only claim the window if something actually went out. With no
+  // destination configured sendSignalMessage returns null, and marking the
+  // key anyway would burn this digest's slot on a post nobody received.
+  if (telegram === null) {
+    return NextResponse.json({ ok: true, posted: false, reason: "no signal destination configured" });
   }
 
   await markPostedToTelegram(key);
@@ -192,6 +181,5 @@ export const GET = withCronErrorAlert("active-signals-digest", async (req: NextR
     lockedCount,
     quotesUsed: quotes.size,
     telegram,
-    x: xResult,
   });
 });

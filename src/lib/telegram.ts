@@ -72,12 +72,20 @@ export function arabicChatId(): string | null {
 }
 
 /**
- * The VIP group's SIGNALS topic, or null when it is not configured.
+ * Where a trade signal goes: the VIP group's SIGNALS topic, or nowhere.
  *
- * TELEGRAM_VIP_CHAT_ID has existed for a while but only ever minted invite
- * links; nothing posted to the group. The members are paying for the levels
- * the public channel withholds, and until now the only place they could see
- * them was the site.
+ * THIS IS THE ONLY DESTINATION, as of 2026-09-01. Signals used to go to the
+ * public channel, mirrored to the Arabic channel, tweeted, and pushed to
+ * everyone with the app installed, with the VIP group added last as an
+ * extra. Owner's call: they now go to the paid group and nowhere else. A
+ * signal is the product members pay for, and it was being given away in
+ * four places at once.
+ *
+ * Which is why there is no fallback here and none in the senders below. If
+ * this returns null the signal is not posted at all — publishing it to the
+ * public channel "so it does not get lost" would be exactly the leak this
+ * change exists to close, and a silent leak is worse than a silent gap. The
+ * row is still written either way, so /signals keeps the record.
  *
  * THE TOPIC MATTERS. The group is a forum, so a message without
  * message_thread_id does not land in SIGNALS — it lands in General, beside
@@ -99,7 +107,7 @@ export function arabicChatId(): string | null {
  */
 const VIP_SIGNALS_TOPIC_ID = "666";
 
-export function vipSignalTarget(): { chatId: string; threadId: string } | null {
+export function signalDestination(): { chatId: string; threadId: string } | null {
   const chatId = process.env.TELEGRAM_VIP_CHAT_ID?.trim();
   if (!chatId) return null;
   const threadId = process.env.TELEGRAM_VIP_TOPIC_ID?.trim() || VIP_SIGNALS_TOPIC_ID;
@@ -168,6 +176,108 @@ function forumTopic(threadId?: string): { message_thread_id?: number } {
 }
 
 export type InlineKeyboardButton = { text: string; url: string };
+
+/**
+ * Post a signal — the opening call, the result, a pending order, the digest.
+ *
+ * Every signal-publishing route goes through these two rather than calling
+ * sendTelegramMessage/sendTelegramPhoto directly, so "where do signals go"
+ * is answered in one place instead of five. scripts/check-signal-channel.mjs
+ * fails the build if a signal route reaches for the raw senders again.
+ *
+ * Returns null when there is no destination configured, having said so in
+ * the log. Callers treat that as "not posted", never as an error worth
+ * failing the EA's request over: the trade still has to be recorded.
+ *
+ * THE REPLY IS BEST-EFFORT, and that is load-bearing rather than defensive.
+ * A result post quotes the opening post by message id, and every id stored
+ * before this change belongs to the public channel — Telegram cannot find
+ * those in the group and rejects the whole send. So every reply is sent with
+ * allow_sending_without_reply, which makes Telegram post it standalone
+ * instead of failing. Otherwise every position opened before the move would
+ * lose its result post entirely, and a result never published is the one
+ * thing this site promises never to do. (A retry-without-the-reply would
+ * also work, but it can double-post when the first call succeeded and only
+ * its response was lost; one request cannot.)
+ */
+async function sendToSignalChannel(
+  method: "sendMessage" | "sendPhoto",
+  body: Record<string, unknown>,
+  replyToMessageId?: string
+) {
+  const target = signalDestination();
+  if (!target) {
+    console.error(
+      "No signal destination configured (TELEGRAM_VIP_CHAT_ID is unset) — signal not posted."
+    );
+    return null;
+  }
+
+  const base = {
+    ...body,
+    chat_id: target.chatId,
+    ...forumTopic(target.threadId),
+  };
+
+  return callTelegram(method, {
+    ...base,
+    ...(replyToMessageId
+      ? {
+          reply_parameters: {
+            message_id: replyToMessageId,
+            allow_sending_without_reply: true,
+          },
+        }
+      : {}),
+  });
+}
+
+export async function sendSignalMessage(
+  text: string,
+  options: {
+    replyToMessageId?: string;
+    inlineKeyboard?: InlineKeyboardButton[][];
+    silent?: boolean;
+  } = {}
+) {
+  return sendToSignalChannel(
+    "sendMessage",
+    {
+      text,
+      parse_mode: "HTML",
+      disable_web_page_preview: true,
+      ...(options.inlineKeyboard
+        ? { reply_markup: { inline_keyboard: options.inlineKeyboard } }
+        : {}),
+      ...(options.silent ? { disable_notification: true } : {}),
+    },
+    options.replyToMessageId
+  );
+}
+
+export async function sendSignalPhoto(
+  photoUrl: string,
+  caption: string,
+  options: {
+    replyToMessageId?: string;
+    inlineKeyboard?: InlineKeyboardButton[][];
+    silent?: boolean;
+  } = {}
+) {
+  return sendToSignalChannel(
+    "sendPhoto",
+    {
+      photo: photoUrl,
+      caption,
+      parse_mode: "HTML",
+      ...(options.inlineKeyboard
+        ? { reply_markup: { inline_keyboard: options.inlineKeyboard } }
+        : {}),
+      ...(options.silent ? { disable_notification: true } : {}),
+    },
+    options.replyToMessageId
+  );
+}
 
 export async function sendTelegramMessage(
   text: string,

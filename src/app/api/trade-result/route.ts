@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendTelegramPhoto, mainServicesKeyboard, telegramContactCta } from "@/lib/telegram";
-import { postTradeSignalToX } from "@/lib/x";
+import { sendSignalPhoto, mainServicesKeyboard, telegramContactCta } from "@/lib/telegram";
 import { sendPushToMembers } from "@/lib/push";
-import { getRecentSignalStats, statsLineTr, statsLineEn } from "@/lib/signalStats";
+import { getRecentSignalStats, statsLineTr } from "@/lib/signalStats";
 import { requiredTierForPair } from "@/lib/signalAccess";
 import { revalidateTag } from "next/cache";
 import { CACHE_TAGS } from "@/lib/cachedReads";
@@ -140,34 +139,20 @@ export async function GET(req: NextRequest) {
   // Always silent. A close is a result, not a call to action, and it posts
   // as a reply under its own entry — a reader who cared about that trade
   // finds it there. Eighteen of the day's forty interruptions were these.
-  const result = await sendTelegramPhoto(imageUrl, caption, {
+  // Goes to the same place the opening call went — the paid group's SIGNALS
+  // topic — and quotes it, so a member reading a result sees the entry it
+  // belongs to directly above.
+  //
+  // The quote is allowed to fail: every message id stored before signals
+  // moved to the group belongs to the public channel and cannot be found
+  // here. sendSignalPhoto sends those with allow_sending_without_reply, so
+  // the result still posts, standalone. A result standing alone is a small
+  // loss; a result never published is the promise this site is built on.
+  const result = await sendSignalPhoto(imageUrl, caption, {
     replyToMessageId: original?.telegramMessageId ?? undefined,
     inlineKeyboard: mainServicesKeyboard(),
     silent: true,
   });
-
-  // Best-effort, same as /api/trade-signal — an X failure never blocks the
-  // Telegram result post, which is the primary channel.
-  let xResult: { tweetId: string } | { error: string } | null = null;
-  try {
-    const tweetText =
-      `${pair.toUpperCase()}${direction ? ` ${direction}` : ""} ${outcomeEmoji} ${outcomeWord}${resultLine ? ` — ${resultLine}` : ""}\n` +
-      `Entry ${entry} → Close ${close}\n\n` +
-      `${
-        outcome === "WIN"
-          ? "🔥 We called the direction publicly when this opened — here's how it closed. Nothing cherry-picked."
-          : "📌 We post the losers too, on the same account, in the same place."
-      }\n\n` +
-      (statsLineEn(stats) ? `${statsLineEn(stats)}\n\n` : "") +
-      `⚠️ Past results don't guarantee future ones. Not investment advice — always size positions and set stops to your own risk tolerance.\n\n` +
-      `#fxpartner #forex #fxsignals #forextrading #trading`;
-    xResult = await postTradeSignalToX(imageUrl, tweetText, {
-      replyToTweetId: original?.xTweetId ?? undefined,
-    });
-  } catch (err) {
-    console.error("X post failed:", err);
-    xResult = { error: err instanceof Error ? err.message : "unknown error" };
-  }
 
   // Best-effort, same reasoning as /api/trade-signal — never blocks the
   // result post itself.
@@ -181,5 +166,5 @@ export async function GET(req: NextRequest) {
     console.error("Push notification failed:", err);
   }
 
-  return NextResponse.json({ ok: true, pair, outcome, result, x: xResult });
+  return NextResponse.json({ ok: true, pair, outcome, posted: result !== null, result });
 }
