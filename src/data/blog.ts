@@ -3069,6 +3069,791 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    "slug": "warsh-jackson-hole-konusmasi-piyasa-fiyatlamasi",
+    "coverImage": "/blog/warsh-jackson-hole-konusmasi-piyasa-fiyatlamasi-cover.png",
+    "title": "Warsh Konuşmasından Önce: Piyasa Eylül'de Artırım Değil, Aralık'ta Artırım Fiyatlıyordu",
+    "excerpt": "28 Ağustos sabahı, Warsh'ın ilk Jackson Hole konuşmasından saatler önce yazıldı. Piyasa Eylül artırımına %33.9, Aralık'a kadar en az bir artırıma %74 olasılık veriyordu; bu ayrımın anlamını ve seviyelere yansımasını ele alıyoruz.",
+    "publishedAt": "2026-08-28",
+    "readingMinutes": 10,
+    "lang": "tr",
+    "sections": [
+      {
+        "heading": "Güncelleme — 1 Eylül 2026",
+        "paragraphs": [
+          "Bu yazı 28 Ağustos sabahı, konuşmadan saatler önce yazıldı ve o anki fiyatlamayı anlatıyor. Warsh konuşmasını 28 Ağustos'ta yaptı ve ton şahin çıktı: enflasyonun hâlâ çok yüksek olduğunu, bu yazın daha iyi gelen enflasyon okumalarının altta yatan eğilimin anlamlı biçimde düzeldiğini göstermediğini ve önümüzdeki aylarda faiz artırımı gerekebileceğini söyledi. Metindeki %33,9'luk Eylül fiyatlaması konuşmanın ardından belirgin biçimde yukarı kaydı; bu satırlar o günkü tabloyu gösterdiği haliyle bırakıldı. Aşağıdaki üç senaryodan gerçekleşen, şahin ton senaryosudur."
+        ],
+      },
+      {
+        "paragraphs": [
+          "Bugün 14:00 GMT'de (ABD Doğu saatiyle 10:00) Kevin Warsh, Fed Başkanı olarak ilk Jackson Hole açılış konuşmasını yapacak. Sempozyum 27-29 Ağustos tarihlerinde Wyoming'deki Jackson Lake Lodge'da toplanıyor; sempozyumun kendisini ve bu yılki temasını daha önce ayrı bir yazıda ele almıştık. Buradaki soru sempozyum değil, konuşmanın bugünkü fiyatlamaya ne yapacağı.",
+          "Konuşmanın takvimdeki yeri, içeriğinden bağımsız olarak önemli: 16 Eylül FOMC toplantısına tam 19 gün kaldı. Yani Warsh, karar öncesinde piyasayla kurulacak son büyük ölçekli iletişim kanallarından birinde konuşuyor.",
+          "Ancak bu yazının asıl konusu konuşmanın kendisi değil. Asıl konu, piyasanın fiyatlamasında şu anda duran ve çoğu yorumda gözden kaçan bir ayrım: piyasa faiz artırımının olacağına büyük ölçüde inanıyor, ama ne zaman olacağına inanmıyor. Bu iki cümle aynı anda doğru ve aralarındaki boşluk, bugünkü konuşmanın gerçek işlevini açıklıyor."
+        ],
+      },
+      {
+        "heading": "%33.9 ile %74 arasındaki fark tam olarak neyi anlatıyor?",
+        "paragraphs": [
+          "CME FedWatch'a göre 16 Eylül toplantısında 25 baz puanlık bir artırım olasılığı %33.9. Aynı anda, Aralık ayı sonuna kadar en az bir artırım yapılmış olma olasılığı %74. Faiz indirimi ise fiyatlamada neredeyse hiç yok — bu, yılın ilk yarısındaki tartışmalara kıyasla belirgin bir zihniyet değişimi.",
+          "Bu iki rakamı yan yana koyduğunuzda ortaya tek bir hikâye çıkıyor. Piyasa, mevcut %3.50-3.75 hedef aralığının yılı bu haliyle bitirmeyeceğini düşünüyor; yani yönde ciddi bir uzlaşı var. Buna karşılık Eylül'e verilen üçte birlik olasılık, katılımcıların büyük çoğunluğunun Fed'in daha fazla veri görmeden hareket etmeyeceğini varsaydığını gösteriyor.",
+          "Pratik anlamı şu: Eylül toplantısı, piyasa açısından bir \"karar toplantısı\" değil bir \"sinyal toplantısı\" olarak konumlanmış durumda. Faiz sabit kalsa bile, karar metninin ve projeksiyonların Ekim-Aralık penceresini nasıl çerçevelediği fiyatlamayı Eylül kararının kendisinden daha fazla oynatabilir.",
+          "Bu tür bir yapı, opsiyon ve vadeli piyasalarda tipik olarak şuna yol açar: yakın vadeli oynaklık beklentisi görece bastırılmış kalırken, yıl sonuna uzanan vadelerde risk primi yüksek durur. Tek bir konuşma, bu iki ucu birbirine yaklaştırabilir ya da daha da açabilir."
+        ],
+      },
+      {
+        "heading": "26 Ağustos verileri fiyatlamayı neden sertleştirdi?",
+        "paragraphs": [
+          "Bu haftanın ortasında gelen veri seti, artırım tarafındaki fiyatlamanın neden bu kadar sağlamlaştığını büyük ölçüde açıklıyor. Üç başlığı ayrı ayrı okumak gerekiyor:"
+        ],
+        "list": [
+          "Çekirdek PCE yıllık %3.3 geldi. Beklenti %3.3, önceki de %3.3 idi. Yani üç ay üst üste aynı seviyede çakılı kaldı — dezenflasyonun durduğu anlamına gelen türden bir yatay seyir.",
+          "Manşet PCE yıllık %3.7 ile %3.6 beklentisinin üzerinde, yani beklentiden sıcak geldi. Aylık bazda hem manşet hem çekirdek +%0.2 arttı.",
+          "İkinci çeyrek GSYH yıllıklandırılmış %1.5 ile öncü tahminle aynı kaldı. Birinci çeyrekteki %2.1'in altında ama bir daralma sinyali değil.",
+          "Veri sonrası dolar genelinde güçlendi ve ABD Hazine getirileri yükseldi — piyasanın tepkisi doğrudan sıkı tarafa döndü."
+        ],
+      },
+      {
+        "heading": "Ne enflasyon iniyor ne büyüme çöküyor: Fed'in iki yönlü baskısı",
+        "paragraphs": [
+          "Bu üç verinin birlikte anlattığı şey, tek tek anlattıklarından daha önemli. Yukarıdaki tabloyu tek cümleye indirirsek: enflasyon inmiyor, büyüme de çökmüyor. Enflasyon hedefin belirgin şekilde üzerinde ve inişini durdurmuş görünüyor; büyüme ise yavaşlamış ama çökmüş değil. Merkez bankacılığı açısından bu, faiz indirimi için en zayıf kombinasyonlardan biridir.",
+          "İndirim argümanı genellikle iki dayanaktan birine yaslanır: ya enflasyon ikna edici biçimde hedefe yakınsıyordur, ya da ekonomi indirim gerektirecek kadar hızlı soğuyordur. Şu anda ikisi de elde yok. %3.3'te sabitlenmiş bir çekirdek ölçü, ilk dayanağı ortadan kaldırıyor; %1.5'lik bir büyüme, zayıf ama acil müdahale çağıran bir rakam değil.",
+          "Temmuz FOMC'de faizin sabit tutulmasına rağmen Logan, Hammack ve Kashkari'nin 25 baz puanlık artırım yönünde muhalefet şerhi düşmüş olması da bu tabloyla uyumlu. Kurul içinde artırımı savunan görünür bir azınlık var ve son veriler bu azınlığın argümanını zayıflatmadı.",
+          "Buna karşılık tablonun diğer yarısı zayıf ve Eylül'e neden yalnızca üçte bir olasılık verildiğini o yarı açıklıyor. Temmuz tarım dışı istihdam -23.000 geldi ve önceki aylarda ciddi aşağı revizyonlar yapıldı. Temmuz perakende satışlar -%0.6 ile daraldı. İstihdam ve tüketim aynı anda zayıflıyorsa, enflasyon yüksek diye hemen sıkılaştırmaya gitmek riskli bir tercih olur.",
+          "Fed'in karşı karşıya olduğu baskı bu yüzden iki yönlü. Fiyat istikrarı tarafı sıkılaştırmayı, istihdam tarafı beklemeyi hatta gevşemeyi işaret ediyor. Bu ikilem çözülmediği sürece en rasyonel kurumsal davranış, hareket etmeden önce daha fazla veri toplamaktır.",
+          "Takvim de bunu destekliyor. 4 Eylül 12:30 GMT'de ABD tarım dışı istihdam, ortalama saatlik kazanç ve işsizlik oranı açıklanacak (önceki değerler: 57.000 bordro, +%0.1 kazanç, %4.2 işsizlik). Bu rapor 16 Eylül kararından önceki en belirleyici tek veri. Eylül olasılığının %33.9'da kalmasının en somut nedeni, piyasanın bu raporu görmeden pozisyon almak istememesi.",
+          "Aynı hafta içinde 1 Eylül'de ABD ISM imalat PMI (önceki 55.6), 2 Eylül'de ADP istihdam (önceki 44.000), 3 Eylül'de ISM hizmet PMI (önceki 54.1) da geliyor. Bu takvimi Ekonomik Takvim aracından takip edip her veriyi tek tek değil, birbirini doğrulayıp doğrulamadığına bakarak okumak daha isabetli sonuç veriyor."
+        ],
+      },
+      {
+        "heading": "Warsh'ın konuşmasının işlevi yön değil, zamanlama sinyali",
+        "paragraphs": [
+          "Buraya kadar anlatılanlar birleştiğinde, bugünkü konuşmanın piyasa açısından ne işe yaradığı netleşiyor. Yön konusunda zaten geniş bir uzlaşı var: %74'lük Aralık olasılığı, artırımın olacağı varsayımının fiyata büyük ölçüde girdiğini gösteriyor. Dolayısıyla Warsh'ın \"enflasyon yüksek, dikkatliyiz\" demesi tek başına yeni bilgi taşımaz.",
+          "Yeni bilgi taşıyacak olan şey zamanlama. Konuşmanın piyasa açısından değerli olabilecek tek bileşeni, Eylül ile Aralık arasındaki o boşluğa dair bir ipucu vermesi. Aciliyet vurgusu mu var, sabır vurgusu mu? Veri bağımlılığı mı öne çıkarılıyor, yoksa enflasyonun kalıcılığı mı?",
+          "Burada dikkat edilmesi gereken bir nokta daha var: sempozyumun bu yılki teması ödemeler ve finansal inovasyon. Yani açılış konuşmasının doğal içeriği yapısal ve kurumsal konular olabilir; para politikası duruşuna dair doğrudan bir bölüm hiç bulunmayabilir. Bu ihtimal, aşağıdaki senaryolardan neden en olasısının \"belirgin bir şey söylememe\" olduğunu da açıklıyor."
+        ],
+      },
+      {
+        "heading": "Konuşmadan ne çıkarsa ne olur: üç senaryo ve aktarım mekanizmaları",
+        "paragraphs": [
+          "Aşağıdaki senaryolar tahmin değil. Her biri, belirli bir ton çıktığında hangi zincirin işleyeceğini ve hangi teknik seviyelerin gündeme geleceğini tarif ediyor. Amaç, haber geldiğinde ne olacağını bilmek değil; olan şeyi hızlı okuyabilmek."
+        ],
+        "list": [
+          "Şahin ton (enflasyonun kalıcılığına vurgu, aciliyet ima eden ifadeler): Eylül olasılığı %33.9'dan yukarı kayar, kısa vadeli getiriler yükselir, dolar genelinde güçlenir. Altında ilk gündeme gelecek bölge 4.530 $ (10 günlük hareketli ortalama civarı); burası kırılırsa 4.450 $ ve ardından 4.411 $ konuşulur. Bitcoin tarafında 79.027 $ seviyesinden aşağı, 79.000 $'ın alt bandındaki destek test edilir.",
+          "Güvercin ton (istihdam zayıflığına ve iki yönlü riske vurgu): Eylül olasılığı geriler, Aralık fiyatlaması da bir miktar yumuşar. Dolar geri çekilirse EUR/USD'nin 1.1650 civarından yukarı toparlanma alanı doğar. Altında 4.576 $ üzerinde tutunma denemesi ve 4.700 $ direncine yöneliş gündeme gelir; 4.700 $ aşılmadıkça 4.800-4.900 $ bandı erken bir hedef olur.",
+          "Belirgin bir şey söylememe (en olası senaryo — tema gereği ödemeler ve finansal inovasyona odaklanma, politika duruşuna dair yeni ifade kullanmama): Fiyatlama büyük ölçüde yerinde kalır, oynaklık konuşma sırasında yükselip sonrasında hızla sönümlenir. Bu durumda altın 4.530-4.700 $ bandının içinde sıkışmaya devam eder ve inisiyatif 4 Eylül istihdam raporuna devredilir.",
+          "Üç senaryonun ortak yanı: hiçbiri seviyeleri kendi başına belirlemiyor. Belirleyen şey, konuşmanın Eylül-Aralık boşluğunu daraltıp daraltmadığı. Seviyeler bu değişimin ölçüldüğü yer, nedeni değil."
+        ],
+      },
+      {
+        "heading": "Altın, dolar ve Bitcoin: bugünkü teknik zemin nerede duruyor?",
+        "paragraphs": [
+          "Altın spot tarafta 4.576 $ civarında, gün içinde yaklaşık %0.5 aşağıda. ABD altın vadelisi 4.629 $ (-%0.8). Hafta içinde üç ayın zirvesi görüldü; karşılaştırma için 20 Ağustos'ta seviye 4.367 $ idi. Yani konuşma öncesindeki geri çekilme, sert bir yükselişin ardından geliyor — bu, kâr realizasyonu ile trend dönüşünü ayırt etmeyi zorlaştıran bir zemin.",
+          "Teknik tarafta 5 ve 10 günlük hareketli ortalamalar 144 günlüğün üzerine çıkarak golden cross oluşturdu ve günlük grafikte daha yüksek zirveler ile daha yüksek dipler yapısı korunuyor. Bu yapı bozulmadığı sürece 4.530 $ üzerindeki hareketler düzeltme kapsamında değerlendirilebilir; 4.450 $ altı ise yapının kendisini sorgulatır. Yukarıda ilk ciddi engel 4.700 $.",
+          "Değerli metallerin geri kalanı da aynı yönde: gümüş 68.54 $ (-%1), platin 1.834,83 $ (-%0.6), paladyum 1.339,84 $ (-%0.8). Yani bu bir altına özgü hareket değil, dolar kaynaklı genel bir baskı.",
+          "Döviz tarafında EUR/USD, 26 Ağustos PCE verisi sonrası birkaç günün dibine, 1.1650 civarına geriledi; 17 Ağustos'ta 1.1597 seviyesinden 1.1600 direncini test ediyordu. GBP/USD 1.3600'ün altına çekildi, USD/JPY yukarı yönlü. Üç paritenin aynı yöne bakması, hareketin dolar tarafından sürüldüğünü doğruluyor.",
+          "Bitcoin 27 Ağustos'u 79.027 $ ile (+%0.59) kapattı. Hafta içinde 80.000 $ üzeri görüldü, 81.000 $ aşıldıktan sonra geri çekilme geldi. 20 Ağustos'ta 68.000-69.000 $ bandındaydı; yıllık dip kapanışı 59.963 $ idi. Geçen hafta bir short squeeze tek günde 1,4 milyar doların üzerinde düşüş yönlü pozisyonu tasfiye etti — bu, mevcut seviyenin altında kaldıraçlı pozisyonların ne kadar hızlı zincirleme tasfiye olabildiğini gösteren somut bir örnek. Ethereum 2.506 $ (+%2.58), Solana 102,17 $ (+%5.76), XRP 1,4224 $ (-%0.76)."
+        ],
+      },
+      {
+        "heading": "Haber anında işlem yapmanın görünmeyen maliyetleri",
+        "paragraphs": [
+          "Yukarıdaki seviyeler normal piyasa koşullarında anlamlıdır. 14:00 GMT'nin ilk dakikalarında ise piyasa mikro yapısı değişir ve bu değişim, doğru yönü tahmin etmiş bir işlemi bile zarara çevirebilir. Haberden hemen önce ve sonra tipik olarak şunlar olur: likidite sağlayıcılar emir defterinden çekilir, spreadler birkaç katına çıkar, gerçekleşme fiyatı ekranda görülenden farklı olur ve fiyat bazı seviyeleri hiç işlem görmeden atlar.",
+          "En kritik nokta sonuncusu. Stop emri, fiyat o seviyeye ulaştığında piyasa emrine dönüşür; boşlukla atlanan bir seviyede emir, stop'un konulduğu yerde değil boşluğun bittiği yerde gerçekleşir. Yani stop'un varlığı, kaybın stop seviyesiyle sınırlı kalacağı anlamına gelmez.",
+          "Somut korunma listesi:"
+        ],
+        "list": [
+          "Pozisyon büyüklüğünü normal koşullardaki hesabınıza göre değil, birkaç kat genişlemiş bir spread ve kayma varsayımına göre belirleyin. Pozisyon Hesaplayıcı ile bu senaryoyu önceden ölçmek, haber anında karar vermekten çok daha güvenilirdir.",
+          "Açıklama saatinden birkaç dakika önce yeni pozisyon açmamayı bir kural haline getirin; ilk dalgayı izleyip ikinci hareketi değerlendirmek çoğu zaman daha okunaklı bir tabloya işaret eder.",
+          "Mevcut pozisyonlarda kaldıraç kullanımını haber öncesinde azaltmayı düşünün — teminat seviyesi, oynaklık patlamasında en hızlı bozulan büyüklüktür.",
+          "Stop'un boşlukla atlanabileceğini varsayarak, kabul edebileceğiniz kaybı stop mesafesiyle değil pozisyon büyüklüğüyle sınırlayın.",
+          "Konuşma saatini gün içi planınıza önceden yazın. XM'in interaktif ekonomik takvimi gibi araçlar bu saatleri işaretlemeyi kolaylaştırır; ayrıca micro lot düzeyinde küçük adımlarla işlem yapabilmek, oynak seanslarda pozisyon büyüklüğünü kademeli ayarlamaya imkân verir.",
+          "Emir tipini bilinçli seçin: sabit fiyat isteyen bir yaklaşımda limit emirler, hızlı gerçekleşme isteyen bir yaklaşımda piyasa emirleri farklı riskler taşır ve haber anında bu fark büyür."
+        ],
+      },
+      {
+        "heading": "Konuşmadan sonra dikkat edilecek asıl şey ne?",
+        "paragraphs": [
+          "Bugün 14:00 GMT'de asıl izlenmesi gereken, altının ilk beş dakikada ne kadar hareket ettiği değil. İzlenmesi gereken, konuşmadan sonra Eylül olasılığının %33.9'dan nereye gittiği ve Aralık'a kadarki %74'lük olasılığın korunup korunmadığı. Bu iki rakam arasındaki mesafe daralıyorsa piyasa zamanlama konusunda ikna olmaya başlamış demektir; mesafe aynı kalıyorsa konuşma yeni bilgi taşımamış demektir ve inisiyatif doğrudan 4 Eylül istihdam raporuna geçer.",
+          "Fiyatlar bu değişimin sonucu, nedeni değil. Altındaki 4.530 $ ve 4.450 $ destekleri, 4.700 $ direnci, EUR/USD'deki 1.1650 bölgesi ve Bitcoin'deki 79.000 $ alt bandı — bunların hepsi faiz beklentisindeki kaymanın okunduğu göstergeler. Seviyeleri tek başına takip etmek, termometreye bakıp ateşin nedenini tahmin etmeye benziyor.",
+          "Önümüzdeki hafta bu tabloya ek girdiler getirecek: 1 Eylül ISM imalat PMI ve Euro Bölgesi öncü TÜFE, 2 Eylül ADP istihdam ve Kanada Merkez Bankası kararı, 3 Eylül ISM hizmet PMI ve 4 Eylül ABD istihdam raporu. Fed'in 16 Eylül kararına giden yol, tek bir konuşmadan değil bu verilerin toplamından geçiyor.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz."
+        ],
+      },
+    ],
+  },
+  {
+    "slug": "altin-golden-cross-4530-destegi-agustos-sonu",
+    "coverImage": "/blog/altin-golden-cross-4530-destegi-agustos-sonu-cover.png",
+    "title": "Altın Sekiz Günde 200 Dolar Yükseldi: Golden Cross ve 4.530 Desteğinin Anlamı",
+    "excerpt": "Altın 20 Ağustos'taki 4.367 dolardan 4.576 dolar civarına çıktı ve golden cross oluştu. Seviye haritası, iki senaryo, PCE sonrası temel çerçeve ve somut pozisyon büyüklüğü hesabı.",
+    "publishedAt": "2026-08-28",
+    "readingMinutes": 10,
+    "lang": "tr",
+    "sections": [
+      {
+        "heading": "Güncelleme — 1 Eylül 2026",
+        "paragraphs": [
+          "Bu yazı 28 Ağustos'ta, Warsh'ın Jackson Hole konuşmasından önce yazıldı; içindeki fiyat ve seviyeler o günün tablosudur. Warsh konuşmasını 28 Ağustos'ta yaptı ve ton şahin çıktı: enflasyonun hâlâ çok yüksek olduğunu, bu yazın daha iyi gelen enflasyon okumalarının altta yatan eğilimin anlamlı biçimde düzeldiğini göstermediğini ve önümüzdeki aylarda faiz artırımı gerekebileceğini söyledi. Metindeki %33,9'luk Eylül fiyatlaması konuşmanın ardından belirgin biçimde yukarı kaydı; bu satırlar o günkü tabloyu gösterdiği haliyle bırakıldı. Aşağıdaki teknik çerçeve ve pozisyon büyüklüğü hesabı yönteme dairdir ve geçerliliğini korur; seviyeleri güncel fiyatla birlikte okuyun."
+        ],
+      },
+      {
+        "paragraphs": [
+          "Sekiz gün önce, 20 Ağustos'ta altının ons fiyatı 4.367 dolar seviyesindeydi. Bugün, 28 Ağustos Cuma günü spot fiyat 4.576 dolar civarında işlem görüyor. Aradaki fark yaklaşık 209 dolar; yüzde olarak kabaca %4,8. Değerli metaller tarafında sekiz güne sığdırılması alışılmadık bir hareket ve hafta içinde fiyatın üç ayın zirvesini görmesiyle sonuçlandı.",
+          "Bugünün tablosu ise haftanın geri kalanından farklı. Altın gün içinde yaklaşık %0,5 geriliyor, ABD altın vadelisi 4.629 dolar seviyesinde ve günlük kaybı %0,8. Geri çekilmenin en görünür sebebi takvimde: Kevin Warsh'ın Fed Başkanı olarak ilk Jackson Hole açılış konuşması bugün 14:00 GMT'de yapılacak. Piyasa, sekiz günlük yükselişin bir kısmını konuşma öncesinde masadan kaldırmış görünüyor.",
+          "Bu yazının amacı yükselişi alkışlamak değil: teknik tabloyu olduğu gibi ortaya koymak, verilerin desteklemediği bir yönde fiyatın neden bu şekilde hareket ettiğini tartışmak ve en sonda çoğu analizin atladığı kısma gelmek — bu aralıkta pozisyon büyüklüğünün nasıl hesaplandığı."
+        ],
+      },
+      {
+        "heading": "Golden cross oluştu — ama bu ne demek, ne demek değil?",
+        "paragraphs": [
+          "Teknik tarafta haftanın öne çıkan gelişmesi, 5 ve 10 günlük hareketli ortalamaların 144 günlük hareketli ortalamanın üzerine çıkması oldu. Kısa vadeli ortalamaların uzun vadeli ortalamayı yukarı yönlü kesmesine piyasa dilinde golden cross deniyor.",
+          "Mekaniği basit: 5 günlük ortalama son bir haftanın, 144 günlük ortalama kabaca son yedi ayın ortalama kapanış seviyesini temsil eder. Kısa ortalamanın uzun ortalamayı yukarı kesmesi, son günlerin ortalama fiyatının son yedi ayın ortalamasının üzerine çıktığı anlamına gelir. Yani bu bir tahmin değil, bir ölçüm.",
+          "Buradan çıkan en önemli sonuç şu: golden cross gecikmeli bir sinyaldir. Fiyat 4.367'den 4.576'ya çıktığı için ortalamalar kesişti; ortalamalar kesiştiği için fiyat çıkmadı. Sekiz günlük 209 dolarlık hareketin büyük bölümü, formasyon grafik üzerinde görünür hale geldiğinde çoktan yaşanmıştı. Sinyali gördükten sonra girmek, hareketin başlangıcını değil ortasını ya da sonunu yakalamak anlamına gelebilir.",
+          "İkinci nokta: golden cross tek başına bir alım gerekçesi değildir. Yatay ve gürültülü piyasalarda kısa ortalamalar uzun ortalamayı defalarca keser; bu kesişmelerin çoğu takip eden bir trend üretmez. Formasyonun anlamlı olması için fiyat yapısının, temel tarafın ve en önemlisi görüşün yanlış çıktığı noktayı belirleyen bir seviyenin de yerinde olması gerekir.",
+          "Bugünkü tabloda golden cross'a değer katan şey, yalnız gelmemiş olması. Günlük grafikte fiyat aynı zamanda daha yüksek zirveler ve daha yüksek dipler yapıyor. Bu yapı ortalama kesişmesinden daha ilkel ama daha doğrudan bir bilgidir: her geri çekilme bir öncekinden daha yukarıda alıcı buluyor. Golden cross bu yapının aritmetik yansımasıdır; yapı bozulursa formasyonun tek başına taşıyacağı bir ağırlık kalmaz. Kısacası golden cross bir emir değil, bir bağlamdır: yönü söyler, giriş noktasını söylemez."
+        ],
+      },
+      {
+        "heading": "Seviye haritası: 4.530, 4.450, 4.411 ve yukarıda 4.700",
+        "paragraphs": [
+          "Teknik seviyeler sihirli sayılar değil; fiyatın daha önce tepki verdiği ya da hesaplama yoluyla türetilen referans noktalarıdır. Şu an takip edilen seviyeler ve her birinin neden orada olduğu:"
+        ],
+        "list": [
+          "4.530 dolar — İlk ve en yakın destek. 10 günlük hareketli ortalamanın bulunduğu bölgeye denk geliyor. Sekiz günlük yükselişin ortalama maliyet çizgisi burada olduğu için kısa vadeli alıcıların en yoğun bulunduğu bant burası. Golden cross'un teknik anlamının korunması da bu bölgenin altına sarkmamaya bağlı.",
+          "4.450 dolar — İkinci destek. 4.530 kaybedilirse sekiz günlük hareketin orta bölgesine dönüş anlamına gelir; kısa vadeli yükselişin geri verilen kısmını ölçen ilk ciddi eşik.",
+          "4.411 dolar — Üçüncü ve en kritik destek. Buraya kadar geri çekilme, 20 Ağustos'taki 4.367 dolarlık başlangıç seviyesine yaklaşmak, yani sekiz günlük hareketin neredeyse tamamının geri verilmesi demektir. Daha yüksek dipler yapısının test edileceği yer burası.",
+          "4.700 dolar — İlk direnç. Yuvarlak seviye olması ve mevcut fiyata en yakın önemli eşik olması nedeniyle satış emirlerinin yoğunlaşması beklenen bölge. 4.576'dan buraya yaklaşık 124 dolarlık mesafe var.",
+          "4.800-4.900 dolar bandı — 4.700 aşılırsa gündeme gelen bir sonraki bölge. Tek bir çizgi değil bir bant olarak tanımlanıyor; bu da fiyatın orada net bir referanstan çok geniş bir sıkışma alanıyla karşılaşabileceği anlamına geliyor.",
+          "Aktif işlem aralığı — 4.530 ile 4.700 arası, yani 170 dolarlık bant, şu anki tabloda fiyatın en olası hareket alanı ve aşağıdaki pozisyon hesabının girdisi."
+        ],
+      },
+      {
+        "heading": "İki senaryo: 4.530 üzerinde tutunma ve 4.530 altında kapanış",
+        "paragraphs": [
+          "Seviye haritasını senaryoya çevirmenin faydası, kararı fiyat hareketinden önce vermeyi mümkün kılmasıdır. Aşağıdaki iki senaryo tahmin değil, koşullu okuma çerçevesi:"
+        ],
+        "list": [
+          "Senaryo 1 — Günlük kapanışlar 4.530 üzerinde kalır: 10 günlük ortalama destek olarak çalışmaya devam eder, daha yüksek dipler yapısı korunur ve golden cross'un işaret ettiği bağlam bozulmaz. Yukarıda ilk hedef 4.700 dolar, aşılması halinde 4.800-4.900 bandı gündeme gelir. Bu senaryoda 4.530 aynı zamanda doğal bir geçersizlik seviyesidir; görüşün yanlış olduğunu söyleyecek nokta baştan bellidir.",
+          "Senaryo 1'in zayıf noktası: 4.576'dan 4.700'e 124 dolar mesafe varken 4.530'un hemen altına konacak stop 50-60 dolar aralığında kalır. Oran kağıt üzerinde makul görünse de, tek bir konuşmanın gün içinde %0,5'lik hareket yarattığı ortamda bu mesafe dardır.",
+          "Senaryo 2 — Günlük kapanış 4.530'un altında gerçekleşir: Kısa vadeli momentum bozulur, sıradaki referans 4.450 dolar olur. Tepki gelmezse 4.411 devreye girer. 4.411'in altı, yükselişin 20 Ağustos'taki 4.367 başlangıcına dönmesi demektir ve daha yüksek dipler yapısını doğrudan sorgulatır.",
+          "Senaryo 2'de golden cross ne olur: Fiyat 4.530'un altına yerleşirse kısa vadeli ortalamalar aşağı döner ve formasyon zamanla geçersizleşir. Bu, gecikmeli sinyalin ikinci yüzüdür.",
+          "Her iki senaryoda ortak olan: Gün içi bir dokunuş ile günlük kapanış aynı şey değildir. Hangisine baktığınıza baştan karar vermek, sonradan gelen bahaneleri ortadan kaldırır."
+        ],
+      },
+      {
+        "heading": "Veriler dolar lehineydi, altın neden düşmedi?",
+        "paragraphs": [
+          "26 Ağustos'ta açıklanan veriler teoride altın için olumsuz bir bileşim oluşturdu. Manşet PCE yıllık %3,7 geldi; beklenti %3,6 idi, yani veri beklentiden sıcak. Çekirdek PCE yıllık %3,3 ile hem beklentiye hem önceki aya eşit, yani sabit. Aylık bazda hem manşet hem çekirdek +%0,2. Büyüme tarafında 2. çeyrek GSYH yıllıklandırılmış %1,5 olarak açıklandı; öncü tahminle aynı, ama 1. çeyrekteki %2,1'in altında.",
+          "Veri sonrası tepki ders kitabına uygundu: dolar genelinde güçlendi, Hazine getirileri yükseldi. Faiz getirisi olmayan bir varlık için bu ikisi birlikte olumsuz sayılır — güçlü dolar altını diğer para birimleri cinsinden pahalılaştırır, yükselen getiriler altın tutmanın fırsat maliyetini artırır. Buna rağmen altın hafta içinde üç ayın zirvesini gördü.",
+          "Soru burada: bu bileşim altını neden aşağı çekmedi? Kesin bir cevap vermek mümkün değil, ama tartışmayı üç çerçevede yürütmek anlamlı görünüyor. Birinci çerçeve reel faiz. Altını nominal getiriden çok, enflasyondan arındırılmış getiri ilgilendirir. Nominal getiriler yükselirken enflasyon da yukarıda kalıyorsa — manşet PCE %3,7'de — ikisi arasındaki fark nominal hareketin gösterdiği kadar açılmamış olabilir. Bu durumda altının fırsat maliyeti göründüğü kadar artmaz.",
+          "İkinci çerçeve enflasyon korunması. Çekirdek PCE'nin %3,3'te sabit kalması, enflasyonun düşme sürecinin durduğu şeklinde okunabilir; manşetin beklentiyi aşması da bu okumayı besliyor. Enflasyonun inatçı olduğu algısı, altını günlük fiyatlamadan bağımsız olarak korunma aracı gören kesim için gerekçe üretir.",
+          "Üçüncü çerçeve merkez bankası talebi. Rezerv amaçlı altın alımları, günlük faiz ve dolar hareketlerine duyarsız çalışan bir talep kaynağıdır. Bu talep fiyat sinyaline değil rezerv politikasına tepki verdiği için kısa vadeli makro etkilerin bir kısmını soğurabilir.",
+          "Hangi çerçevenin ne kadar ağırlık taşıdığını söyleyecek verimiz yok. Söylenebilecek olan şu: fiyat verilerin işaret ettiği yönün tersine hareket ettiğinde, model yanlış demek yerine modelin dışında kalan bir talep unsuru olduğunu düşünmek daha yararlı. Bugünkü %0,5'lik geri çekilme ise bu dengenin ne kadar kırılgan olabildiğini hatırlatıyor."
+        ],
+      },
+      {
+        "heading": "Altın yalnız mı hareket ediyor, yoksa metal kompleksiyle mi?",
+        "paragraphs": [
+          "Bu sorunun cevabı, altındaki hareketi neye bağlayacağınızı belirler. Bugünkü tablo şöyle: gümüş 68,54 dolar (-%1), platin 1.834,83 dolar (-%0,6), paladyum 1.339,84 dolar (-%0,8). Altın ise -%0,5.",
+          "Dördü de aynı yönde ve büyüklükleri birbirine yakın. Gümüş en fazla, altın en az geriliyor. Bu, altına özgü bir haber akışının değil, komplekse yayılan ortak bir etkenin — muhtemelen dolar ve getirilerdeki hareketin ya da Warsh konuşması öncesi genel risk azaltmanın — sonucu olduğunu düşündürüyor.",
+          "Ayrımın önemi şurada: geri çekilme metal kompleksinin tamamını kapsıyorsa, bu altının kendi teknik yapısıyla ilgili bir bozulma değil, dışsal ve muhtemelen kısa süreli bir baskı olabilir. Altın düşerken gümüş ve platin yatay ya da yukarı kalsaydı, bu altına özgü bir satış anlamına gelir ve daha ciddiye alınması gerekirdi. Gümüşün altından daha fazla gerilemesi de tipik bir davranış: gümüş ve platin, sanayi talebi bileşenleri nedeniyle büyüme beklentilerine altından daha duyarlıdır ve genellikle daha oynak hareket eder. 2. çeyrek GSYH'nin %1,5 ile 1. çeyrekteki %2,1'in altında kalması, bu duyarlılığın neden devrede olabileceğini açıklıyor. Kompleksin geneline bakmak bir işlem sinyali değil, haberin altına mı yoksa metallerin tümüne mi ait olduğunu ayırt etme yoludur."
+        ],
+      },
+      {
+        "heading": "170 dolarlık bant, pozisyon büyüklüğünü nasıl belirler?",
+        "paragraphs": [
+          "Teknik analizin en çok, pozisyon büyüklüğünün en az konuşulan kısım olması tuhaf bir dengesizlik. Oysa 4.530-4.700 aralığının 170 dolarlık genişliği, hangi seviyeden gireceğinizden daha belirleyici.",
+          "Önce mekanik: XAUUSD işlemlerinde standart lot 100 onstur; yani altın fiyatındaki 1 dolarlık hareket standart lotta 100 dolar kar veya zarar eder. 170 dolarlık bandın tamamı ise standart lotta 17.000 dolarlık bir hareket demektir.",
+          "Şimdi somut hesap. 5.000 dolarlık bir hesap düşünün ve işlem başına riski %1 ile sınırlayın; bu 50 dolar eder. 4.576 civarından alım yapıp stop'u 4.530 desteğinin biraz altına, kabaca 60 dolarlık mesafeye koyduğunuzu varsayalım. Formül basittir: risk tutarı bölü (stop mesafesi çarpı standart lot ons sayısı). Hesap şöyle çıkar: 50 / (60 x 100) = 0,0083 lot.",
+          "Bu sayının anlamını yumuşatmadan söylemek gerekiyor: çoğu brokerın minimum lot adımı 0,01 lottur ve 0,0083 lot bu adımın altındadır. Yani 5.000 dolarlık bir hesapta %1 risk kuralına ve 60 dolarlık stop mesafesine aynı anda sadık kalarak bu işlemi açmak teknik olarak mümkün değildir. Dürüst seçenekler sınırlıdır ve hepsinin bir bedeli vardır:"
+        ],
+        "list": [
+          "İşlemi hiç açmamak. Kurallara uyan bir pozisyon büyüklüğü yoksa en tutarlı karar pozisyon almamaktır; çoğu kişinin duymak istemediği ama en az hasarlı seçenek budur.",
+          "Stop mesafesini daraltmak. 60 dolar yerine 20 dolarlık bir stop, 50 / (20 x 100) = 0,025 lot verir ve minimum adımın üzerine çıkar. Bedeli açık: dar stop, gün içi normal dalgalanmada tetiklenme olasılığını ciddi biçimde artırır.",
+          "Minimum lotta açıp riski kabullenmek. 0,01 lot ile 60 dolarlık stop, 60 dolar zarar demektir; bu da 5.000 dolarlık hesapta %1,2 risktir. Kuralı bir kez esnetmenin ikinci kez esnetmeyi kolaylaştırdığını da hesaba katmak gerekir.",
+          "Hesabı önce yapmak, sonra girmek. Lot büyüklüğü işleme girdikten sonra düzeltilecek bir ayrıntı değil, girip girmeyeceğinizi belirleyen ön koşuldur. Sitedeki Pozisyon Hesaplayıcı aracı bu aritmetiği bakiye, risk yüzdesi ve stop mesafesi girdileriyle saniyeler içinde verir.",
+          "Brokerın koşullarını kontrol etmek. Minimum lot adımı, altın spread'inin veri saatlerindeki davranışı ve negatif bakiye koruması, bu hesabın girdileridir. Örneğin XM Global ASIC (443670), CySEC (120/10), DFSA (F003484) ve FSC (Belize) lisanslarını taşıyor ve negatif bakiye koruması sunuyor; buna karşılık raw-spread seçenekleri sınırlı ve cTrader desteklenmiyor. Broker Sorgulama aracı bu koşulları karşılaştırmak için başlangıç noktası olabilir."
+        ],
+      },
+      {
+        "heading": "Takvim riski: bugün 14:00 GMT, 4 Eylül ve 16 Eylül",
+        "paragraphs": [
+          "Yukarıdaki teknik ve pozisyon çerçevesi, önümüzdeki üç takvim başlığı hesaba katılmadan eksik kalır:"
+        ],
+        "list": [
+          "Bugün 14:00 GMT — Kevin Warsh'ın Fed Başkanı olarak ilk Jackson Hole açılış konuşması. Konuşma 16 Eylül FOMC'den 19 gün önce geliyor, yani karar öncesi yön verme potansiyeli yüksek. Altındaki bugünkü %0,5'lik geri çekilme büyük ölçüde bu beklentiyle ilgili görünüyor.",
+          "4 Eylül 12:30 GMT — ABD tarım dışı istihdam, ortalama saatlik kazanç ve işsizlik oranı. Önceki veriler 57.000 bordro, +%0,1 kazanç ve %4,2 işsizlik. Temmuz verisinin -23.000 gelmesi ve önceki aylarda ciddi aşağı revizyonlar yapılmış olması, bu başlığın sıradan bir istihdam verisinden daha fazla dikkat çekmesine yol açacaktır.",
+          "16 Eylül — FOMC faiz kararı. Politika faizi hedef aralığı şu an %3,50-3,75. CME FedWatch verisine göre Eylül'de 25 baz puan artırım olasılığı %33,9, Aralık'a kadar en az bir artırım olasılığı %74; faiz indirimi fiyatlamada neredeyse yok. Temmuz toplantısında Logan, Hammack ve Kashkari artırım yönünde muhalefet şerhi düşmüştü.",
+          "Ortak sonuç — Üç başlık da, dar stop mesafeleriyle taşınan pozisyonların en kırılgan olduğu anlardır. Veri saatlerinde spread genişleyebilir ve fiyat sıçrayarak hareket edebilir; bu, stop emrinin belirlediğiniz seviyeden değil daha kötü bir seviyeden gerçekleşmesi anlamına gelebilir. Bu saatlerin hangi pozisyonu etkilediğini önceden yazmak, veri sonrası verilen kararlardan daha iyi sonuç verir; sitedeki Ekonomik Takvim başlıkları saatiyle birlikte listeliyor."
+        ],
+      },
+      {
+        "heading": "Toparlarken",
+        "paragraphs": [
+          "Sekiz günde 209 dolarlık, yaklaşık %4,8'lik yükseliş ve ardından gelen golden cross, altındaki kısa vadeli yapının yukarı yönlü olduğunu gösteriyor; günlük grafikteki daha yüksek zirve ve daha yüksek dip dizisi bu okumayı destekliyor. Ancak formasyonun gecikmeli olduğunu ve hareketin büyük bölümünün sinyal görünür hale gelmeden önce yaşandığını göz ardı etmemek gerekiyor.",
+          "Karar noktası net: 4.530 dolar. Üzerinde tutunulduğu sürece 4.700 ve ardından 4.800-4.900 bandı gündemde kalır; altında günlük kapanış gerçekleşirse sıradaki referanslar 4.450 ve 4.411 olur. Temel tarafta ise beklentiden sıcak gelen %3,7'lik manşet PCE, %3,3'te sabit çekirdek ve %1,5'lik GSYH sonrası güçlenen dolar ile yükselen getirilere rağmen altının ayakta kalması, fiyatlamanın içinde tek bir veriye indirgenemeyen unsurlar olduğunu düşündürüyor.",
+          "Pratik tarafta akılda kalması gereken tek satır ise şu: 0,0083 lot. 5.000 dolarlık bir hesapta %1 risk ve 60 dolarlık stop mesafesi, çoğu brokerın minimum lot adımının altında bir pozisyon büyüklüğü üretiyor. Bu, altının küçük hesaplar için zor bir enstrüman olduğunu matematikle gösteriyor. Hesabınızı işleme girmeden önce yapmak, girdikten sonra fark etmekten her zaman daha ucuzdur.",
+          "Bugün 14:00 GMT'deki Warsh konuşması, 4 Eylül 12:30 GMT'deki tarım dışı istihdam ve 16 Eylül FOMC, önümüzdeki üç haftanın yön belirleyicileri. Seviyeler ve senaryolar ancak bu takvimle birlikte okunduğunda anlam kazanır.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz."
+        ],
+      },
+    ],
+  },
+  {
+    "slug": "bitcoin-short-squeeze-80-bin-dolar-likidasyon",
+    "coverImage": "/blog/bitcoin-short-squeeze-80-bin-dolar-likidasyon-cover.png",
+    "title": "Bitcoin Sekiz Günde 68 Binden 79 Bine: Short Squeeze Nasıl Çalışır?",
+    "excerpt": "Bitcoin 20 Ağustos'taki 68-69 bin dolar bandından 27 Ağustos kapanışında 79.027 dolara çıktı. Bu yazı fiyatı değil, hareketi üreten short squeeze mekanizmasını adım adım anlatıyor.",
+    "publishedAt": "2026-08-28",
+    "readingMinutes": 10,
+    "lang": "tr",
+    "sections": [
+      {
+        "heading": "Güncelleme — 1 Eylül 2026",
+        "paragraphs": [
+          "Bu yazı 28 Ağustos'ta, Warsh'ın Jackson Hole konuşmasından önce yazıldı; içindeki fiyatlar o günün tablosudur. Warsh konuşmasını 28 Ağustos'ta yaptı ve ton şahin çıktı: enflasyonun hâlâ çok yüksek olduğunu, bu yazın daha iyi gelen enflasyon okumalarının altta yatan eğilimin anlamlı biçimde düzeldiğini göstermediğini ve önümüzdeki aylarda faiz artırımı gerekebileceğini söyledi. Metindeki %33,9'luk Eylül fiyatlaması konuşmanın ardından belirgin biçimde yukarı kaydı; bu satırlar o günkü tabloyu gösterdiği haliyle bırakıldı. Yazının asıl konusu olan short squeeze mekanizması fiyattan bağımsızdır ve olduğu gibi geçerlidir."
+        ],
+      },
+      {
+        "paragraphs": [
+          "20 Ağustos'ta Bitcoin 68.000-69.000 dolar bandındaydı. 27 Ağustos kapanışında fiyat 79.027 dolar, günlük değişim +%0.59. Arada geçen sekiz günde piyasa 80.000 doların üzerini gördü, 81.000 doları da aştı ve ardından geri çekildi. Şu an konuşulan destek bölgesi 79.000 doların alt bandı.",
+          "Bu hareketi daha da dikkat çekici kılan referans noktası, yılın dip kapanışı: 59.963 dolar. Yani Bitcoin, yıllık dibinden bakıldığında ciddi bir toparlanma içinde ve 20 Ağustos itibarıyla bile bu dipten belirgin biçimde uzaklaşmıştı. Sekiz günlük son bacak ise bu toparlanmanın üzerine eklendi.",
+          "Bu tür bir hareketi \"boğa piyasası geri döndü\" diye özetlemek kolay ama öğretici değil. Çünkü buradaki yükselişin önemli bir kısmı yeni alıcıların iştahından değil, mevcut satıcıların pozisyonlarını kapatmak zorunda kalmasından geldi. Geçen hafta tek bir günde 1,4 milyar doların üzerinde düşüş yönlü pozisyon tasfiye edildi. Bu yazının amacı fiyat tahmini yapmak değil; bir short squeeze'in nasıl çalıştığını, neden hızlandığını ve neden kendi kendini tükettiğini mekanizma düzeyinde anlatmak. Mekanizmayı anlayan bir trader, bir sonraki benzer hareketi haberden önce fark etme şansına sahip olur."
+        ],
+      },
+      {
+        "heading": "Short squeeze nedir? Zincirin ilk halkası: açığa satış",
+        "paragraphs": [
+          "Açığa satış, elinde olmayan bir varlığı satmaktır. Trader, fiyatın düşeceğini düşünür; varlığı bugünkü fiyattan satar, daha ucuza geri alıp pozisyonu kapatmayı ve aradaki farkı kâr yazmayı hedefler. Kripto türev piyasalarında bu işlem çoğunlukla vadesiz sözleşmeler veya CFD gibi kaldıraçlı araçlarla yapılır; yani trader varlığın tamamını değil, bir teminat yatırır.",
+          "Teminat burada kritik kavramdır. Kaldıraçlı bir short pozisyonda hesabınızdaki para, pozisyonun taşıyabileceği zararın tamponudur. Fiyat sizin lehinize, yani aşağı giderse teminat şişer. Fiyat aleyhinize, yani yukarı giderse teminat erimeye başlar. Erime belirli bir eşiği geçtiğinde aracı kurum ya da borsa ek teminat ister; ek teminat gelmezse pozisyon otomatik olarak kapatılır. Buna likidasyon veya tasfiye denir.",
+          "Şimdi kilit noktaya gelelim: Bir short pozisyonu kapatmanın tek yolu, satılan varlığı geri ALMAKTIR. Yani zorunlu likidasyon bir satış emri değil, bir ALIM emri üretir. Piyasada düşüş bekleyen tarafın çaresizliği, defterde alıcı olarak görünür. Mekanizmanın bütün paradoksu buradadır."
+        ],
+      },
+      {
+        "heading": "Zincirleme reaksiyon nasıl kuruluyor?",
+        "paragraphs": [
+          "Squeeze, tek bir olayın değil bir döngünün adıdır. Adım adım şöyle işler:",
+          "Bu döngü kendi kendini besleyen bir geri besleme halkasıdır. Fiyat yükseldiği için likidasyon olur, likidasyon olduğu için fiyat daha da yükselir. Klasik arz-talep dengesinden farkı şudur: Buradaki alıcıların çoğu almak istemiyor, almak zorunda. Fiyat ne kadar mantıksız görünürse görünsün, teminatı biten pozisyonun tercihi yoktur.",
+          "Böyle dönemlerde yükselişin hızı, normal bir trend hareketinin hızından belirgin biçimde ayrışır. Bitcoin'in sekiz günde 68-69 bin bandından 80 binin üzerine çıkması ve ardından 81 bini aşması, bu tür bir sıkışmanın imzasını taşıyor. Hareketin ardından gelen geri çekilme de aynı imzanın bir parçası."
+        ],
+        "list": [
+          "Fiyat, çok sayıda short pozisyonun teminat sınırına yakın bir seviyeye doğru yükselir.",
+          "İlk grup pozisyon likide olur ve kapanmak için piyasadan alım yapar.",
+          "Bu alımlar fiyatı biraz daha yukarı iter.",
+          "Yeni fiyat, bir üst kademedeki short pozisyonların teminat sınırını tetikler.",
+          "Onlar da kapanmak için alım yapar; fiyat yeniden yükselir.",
+          "Döngü, sıradaki likidasyon kademeleri tükenene kadar sürer."
+        ],
+      },
+      {
+        "heading": "1,4 milyar dolarlık tek günlük tasfiye ne büyüklükte bir şey?",
+        "paragraphs": [
+          "Geçen hafta tek bir günde 1,4 milyar doların üzerinde düşüş yönlü pozisyonun tasfiye edildiği aktarıldı. Bu rakamı doğru okumak için iki şeyi ayırmak gerekiyor.",
+          "Birincisi, bu 1,4 milyar dolar kaybedilen para değil, kapatılan pozisyonların nominal büyüklüğüdür. Kaldıraçlı bir yapıda yatırılan teminat bunun küçük bir kısmıdır; kaybedilen tutar teminat tarafındadır. İkincisi ve daha önemlisi, bu nominal büyüklüğün tamamı piyasaya alım emri olarak yansır. Yani mesele kaybın kimde kaldığı değil, defterde ne kadar zorunlu alım oluştuğudur.",
+          "Bu ölçekte bir zorunlu alım dalgası, birkaç saat içinde emir defterindeki satış kademelerini yiyip bitirebilir. Bu yüzden squeeze anlarında fiyat kademeli değil sıçramalı hareket eder; grafikte uzun gövdeli mumlar ve dar geri çekilmeler görülür. Aynı sebeple böyle bir günde teknik seviyelerin \"tutması\" beklentisi çoğu zaman boşa çıkar: Seviyeye saygı gösterecek bir irade yoktur, mekanik bir kapanış akışı vardır.",
+          "Bir karşılaştırma noktası olarak Bitcoin'in aynı dönemdeki fiyat aralığını düşünün: 20 Ağustos'ta 68-69 bin dolar, 27 Ağustos kapanışında 79.027 dolar. Sekiz günde yaklaşık 10 bin dolarlık bir yer değiştirme, tek günde tasfiye edilen 1,4 milyar dolarlık pozisyonla aynı hikâyenin iki farklı ölçüsüdür."
+        ],
+      },
+      {
+        "heading": "Neden her short squeeze kendi yakıtını tüketir?",
+        "paragraphs": [
+          "Squeeze'in en çok yanlış anlaşılan tarafı budur. Hareket şiddetlidir ama sürdürülebilir değildir, çünkü yakıtı sonludur. Yakıt, piyasadaki açık short pozisyonların kendisidir. Her likidasyon, bu havuzdan bir parça eksiltir. Tasfiye edilecek short kalmadığında, zorunlu alım akışı da durur.",
+          "Bu noktada geriye sadece gönüllü alıcılar kalır. Gönüllü alıcılar ise 81 bin dolar seviyesinde, birkaç gün önce 68 bin doları görmüş bir varlığı almak için mekanik bir zorunluluk taşımaz; fiyata bakar, değerlendirir, beklemeyi seçebilir. Alım tarafındaki basınç aniden düşerken satış tarafında kâr realizasyonu devreye girdiğinde denge hızla değişir.",
+          "Bitcoin'in 81.000 doları aştıktan sonra geri çekilmesini bu çerçevede okumak mümkün. Bu bir tahmin değil, mekanizmanın doğal sonucudur: Zorunlu alım akışıyla ulaşılan seviyeler, o akış kesildiğinde savunmasız kalır. Fiyatın 79.000 doların alt bandı civarında bir destek arayışına girmesi de aynı mantığın devamıdır — piyasa, mekanik olmayan gerçek talebin nerede olduğunu test eder.",
+          "Buradan çıkan pratik sonuç şudur: Squeeze ile üretilen zirveler, aynı hacimle savunulmaz. Bir hareketin ne kadarının zorunlu alımdan, ne kadarının gerçek talepten geldiğini ayırt edemiyorsanız, o zirveyi trend teyidi saymak riskli olur. Bu ayrımın nasıl yapılacağı bir sonraki bölümün konusu."
+        ],
+      },
+      {
+        "heading": "Bir trader squeeze belirtilerini nasıl fark eder?",
+        "paragraphs": [
+          "Squeeze'i önceden kesin olarak bilmek mümkün değil; ama koşullarının olgunlaştığını gösteren gözlenebilir veriler var. Bunların hiçbiri tek başına sinyal değildir, birlikte okunur. Aşağıdaki başlıkların tamamı büyük kripto borsalarının kendi türev veri sayfalarından, borsa API'lerinden ve türev piyasa verisi toplayan analitik platformlardan takip edilebilir; ayrıca FXPARTNER Akademi içeriklerinde bu kavramların temel tanımlarına ulaşabilirsiniz.",
+          "Bu göstergeleri birlikte okuduğunuzda ortaya bir tablo çıkar: Kalabalık short pozisyonlanma, yüksek açık pozisyon ve fiyatın hemen üzerinde yoğun bir likidasyon kümesi. Bu üçü aynı anda varsa, ortam squeeze'e uygundur. Yine de \"uygun ortam\" ile \"gerçekleşecek hareket\" aynı şey değildir; bu veriler olasılığı yönetmeye yarar, kesinlik üretmez.",
+          "Ters yönü de aynı derecede geçerlidir: Aynı göstergeler aşırı long yığılması gösterdiğinde bu kez aşağı yönlü bir long squeeze zemini oluşur. Mekanizma simetriktir, sadece yönü değişir."
+        ],
+        "list": [
+          "Fonlama oranları: Vadesiz sözleşmelerde long ve short taraf arasında periyodik olarak ödenen orandır. Kalıcı olarak negatife geçmesi, short tarafın kalabalıklaştığına işaret eder — yani squeeze için yakıt birikiyor demektir.",
+          "Açık pozisyon (open interest): Piyasada açık duran türev sözleşmelerin toplam büyüklüğüdür. Fiyat yatay seyrederken açık pozisyonun artması, kaldıracın sistemde biriktiğini gösterir.",
+          "Yoğunlaşmış likidasyon seviyeleri: Likidasyon haritaları, hangi fiyat bölgelerinde büyük miktarda pozisyonun teminat sınırına yaklaştığını gösterir. Bu kümelerin fiyata yakınlığı, tetiklenme riskini belirler.",
+          "Spot ile türev arasındaki ayrışma: Hareketin spot hacimle değil ağırlıkla türev tarafıyla ilerlemesi, yükselişin mekanik bileşeninin büyük olduğuna işaret eder.",
+          "Hareketin hızı ve mum yapısı: Kademeli değil sıçramalı ilerleyen, geri çekilmeleri çok dar kalan bir yükseliş zorunlu alım akışına özgüdür."
+        ],
+      },
+      {
+        "heading": "Ethereum, Solana ve XRP neden aynı hikâyeyi anlatmıyor?",
+        "paragraphs": [
+          "Kripto piyasası çoğu zaman tek blok gibi hareket ediyormuş izlenimi verir, ancak son günlerin verisi bunun her zaman doğru olmadığını gösteriyor. Ethereum 2.506 dolar seviyesinde ve günlük bazda %2.58 yükseldi. Solana 102,17 dolarda ve %5.76 ile grubun en güçlü performansını gösterdi. XRP ise 1,4224 dolarda ve %0.76 geriledi.",
+          "Bu tabloda dikkat çeken şey XRP'nin ayrışması. Genel risk iştahının arttığı, Bitcoin'in haftalık bazda güçlü bir toparlanma sergilediği bir ortamda bir büyük varlığın eksi bölgede kapanması, o varlığa özgü bir şeyin çalıştığı anlamına gelir. XRP'nin bu ayrışmasının nedenini elimizdeki veriyle kesin olarak söylemek mümkün değil; ayrışmanın kendisi, hareketin tüm kripto varlıkları aynı ölçüde kapsamadığını gösteriyor.",
+          "Bu ayrım pratik olarak önemli. Bir varlıkta fiyat hareketinin kaynağı temel bir gelişme mi, yoksa pozisyonlanmanın kendisi mi? Bitcoin'in yükselişinin bir kısmı short pozisyonların çözülmesiydi; XRP'nin geri kalışının bir kısmı ise long tarafın çözülmesi olarak okunuyor. İkisi de aynı ailedendir: Fiyatı belirleyen, haber değil pozisyon.",
+          "Solana'nın %5.76'lık günlük yükselişi ile XRP'nin %0.76'lık düşüşü arasındaki fark, aynı gün içinde aynı piyasada bile korelasyonun ne kadar dağılabileceğini gösteriyor. Sepet halinde kripto pozisyonu taşıyan bir trader için bu, çeşitlendirmenin sanıldığı kadar koruma sağlamayabileceği anlamına gelir; hepsi aynı anda düşebilir, ama hepsi aynı anda yükselmeyebilir."
+        ],
+      },
+      {
+        "heading": "Makro bağlantı: bugün 14:00 GMT'de ne oluyor?",
+        "paragraphs": [
+          "Kripto uzun süredir makrodan bağımsız bir varlık sınıfı değil. 26 Ağustos'ta açıklanan manşet PCE enflasyonu yıllık %3.7 ile beklentinin (%3.6) üzerinde geldi; çekirdek PCE %3.3 ile beklentiye uygundu. Beklentiden sıcak gelen manşet veri sonrası dolar genelinde güçlendi ve Hazine getirileri yükseldi. Bitcoin aynı gün baskı altında kaldı, ancak 27 Ağustos'u 79.027 dolardan kapattı.",
+          "Bu tepki-toparlanma dizisi, kriptonun faiz beklentisine duyarlılığını gösteriyor. Sıkı para politikası beklentisi arttığında risk varlıkları baskı görür; beklenti gevşediğinde kaldıraçlı alım iştahı geri gelir. Şu anki fiyatlamada Fed politika faizi %3.50-3.75 aralığında ve piyasa bir indirimi neredeyse hiç fiyatlamıyor. CME FedWatch verilerine göre Eylül ayında 25 baz puanlık ARTIRIM olasılığı %33.9; Aralık'a kadar en az bir artırım olasılığı ise %74. Temmuz FOMC'de Logan, Hammack ve Kashkari artırım yönünde muhalefet şerhi düşmüştü.",
+          "Bugünün asıl riski Jackson Hole'da. Fed Başkanı Kevin Warsh'ın başkan sıfatıyla ilk açılış konuşması saat 10:00 ET, yani 14:00 GMT'de yapılacak. Konuşma, 16 Eylül FOMC toplantısından 19 gün önce geliyor. Bu zamanlama konuşmayı sıradan bir sempozyum açılışının ötesine taşıyor: Piyasa, Eylül'e dair bir ipucu arayacak.",
+          "Kripto açısından mekanik bağlantı şudur: Warsh'ın tonu şahin algılanırsa artırım olasılığı yukarı fiyatlanır, dolar ve getiriler güçlenir, kaldıraçlı long pozisyonlar baskı görür. Squeeze sonrası zaten incelmiş bir alıcı tabanının üzerine böyle bir haber gelirse, hareket ters yöne aynı mekanikle işleyebilir. Bugün pozisyon taşıyan bir trader için 14:00 GMT, takvimde işaretlenmesi gereken bir saattir; Ekonomik Takvim üzerinden bu tür açıklamaların saatlerini önceden not etmek, sürprizle karşılaşma ihtimalini azaltır."
+        ],
+      },
+      {
+        "heading": "Kaldıraçlı kripto pozisyonlarında likidasyon neden bu kadar hızlı gelir?",
+        "paragraphs": [
+          "Yukarıdaki mekanizmanın tamamı, kaldıracın var olmasıyla mümkün oluyor. Bu yüzden risk yönetimi kripto tarafında teorik bir başlık değil, doğrudan hayatta kalma meselesi. Dikkat edilmesi gereken yapısal noktalar şunlar:",
+          "Bu listedeki maddelerin ortak noktası, hiçbirinin fiyat tahminiyle ilgili olmaması. Hepsi pozisyonun yapısıyla ilgili. Doğru pozisyon büyüklüğünü hesaplamak için Pozisyon Hesaplayıcı gibi araçlardan yararlanmak, işlem öncesi bu hesabı yapmayı alışkanlık haline getirmenin en kolay yolu. Kaldıraç ve stop-loss konularının detaylarını ayrıca ele aldığımız içeriklerde bulabilirsiniz.",
+          "Aracı kurum tarafında da bakılması gereken iki teknik ayrıntı var: negatif bakiye koruması ve minimum lot adımı. Negatif bakiye koruması, sert bir boşluk sonrası hesabın eksiye düşmesi durumunda bakiyenin sıfırlanmasını sağlar; bu, teorik bir detay değil, sıçramalı hareketlerin sık olduğu bir piyasada somut bir farktır. Küçük lot adımı ise pozisyon büyüklüğünü riskinize göre ölçekleyebilmenizi sağlar. Örneğin XM tarafında negatif bakiye koruması mevcut ve düşük başlangıç tutarlarıyla küçük pozisyon boyutlarında çalışmak mümkün; benzer kontrolleri hangi kurumda kullandığınızı Broker Sorgulama aracıyla ve Broker Sıralamaları sayfasıyla karşılaştırarak doğrulamak yerinde olur."
+        ],
+        "list": [
+          "Piyasa 7/24 açık: Kripto, hafta sonu dahil kesintisiz işlem görür. Ekranın başında olmadığınız saatlerde tetiklenen bir likidasyon, uyandığınızda karşınıza çıkar.",
+          "Likidasyon kademeli değil ani gelir: Teminat eşiği geçildiği anda pozisyon otomatik kapanır; \"biraz daha bekleyeyim\" seçeneği yoktur.",
+          "Boşluklar (gap) stop seviyelerini atlayabilir: Sıçramalı hareketlerde emriniz belirlediğiniz fiyattan değil, bulunan ilk fiyattan gerçekleşebilir.",
+          "Kaldıraç likidasyon mesafesini kısaltır: Kaldıraç arttıkça, pozisyonu bitirmek için gereken ters yönlü fiyat hareketi orantılı olarak küçülür.",
+          "Squeeze anlarında volatilite spreadi genişletir: İşlem maliyeti tam da en hareketli anlarda artar; hesabınızda buna yer bırakmak gerekir.",
+          "Pozisyon büyüklüğü tek gerçek kontroldür: Fiyatı yönetemezsiniz, kaldıracı ve lot büyüklüğünü yönetebilirsiniz. Tek işlemde riske atılan tutarı sabit bir yüzdeyle sınırlamak, bu kontrolün pratik hali."
+        ],
+      },
+      {
+        "heading": "Sonuç: fiyatı değil, hareketin kaynağını okuyun",
+        "paragraphs": [
+          "Bitcoin'in sekiz günde 68-69 bin dolar bandından 79.027 dolara gelmesi, arada 81.000 doları aşıp geri çekilmesi tek başına bir yön göstergesi değil. Bu hareketin içinde en az iki farklı güç var: gerçek talep ve zorunlu kapanış akışı. Tek günde 1,4 milyar doların üzerinde düşüş yönlü pozisyonun tasfiye edilmesi, ikinci gücün ne kadar belirleyici olabildiğini gösteriyor.",
+          "Short squeeze mekanizmasının öğrettiği asıl şey şu: Yükselişin kaynağı, yükselişin sürdürülebilirliği hakkında bilgi taşır. Zorunlu alımla üretilen bir zirve, o zorunluluk bittiğinde savunmasız kalır. Fonlama oranları, açık pozisyon ve likidasyon yoğunlaşmaları, bu ayrımı yapmaya çalışan bir trader için fiyat grafiğinin tek başına söyleyemediğini söyler.",
+          "Bugün 14:00 GMT'de Warsh'ın konuşması, mekanizmanın ters yönde de çalışabileceğini hatırlatan bir katalizör adayı. Eylül'de artırım olasılığının %33.9, Aralık'a kadar en az bir artırım olasılığının %74 olduğu bir fiyatlamada, kaldıraçlı pozisyon taşımanın maliyeti sadece spread değil; haber riskidir. Pozisyon büyüklüğünü ona göre ayarlamak, tahmin yapmaktan daha kontrol edilebilir bir iştir.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz."
+        ],
+      },
+    ],
+  },
+  {
+    "slug": "eylul-ilk-hafta-takvim-nfp-ism-fomc",
+    "coverImage": "/blog/eylul-ilk-hafta-takvim-nfp-ism-fomc-cover.png",
+    "title": "Eylül'ün İlk Haftası: İki Merkez Bankası, İki ISM ve 16 Eylül'ü Belirleyecek İstihdam Raporu",
+    "excerpt": "31 Ağustos - 4 Eylül haftası, 16 Eylül FOMC öncesindeki iki veri haftasının ilki ve en yoğunu. Çin PMI'larından ABD tarım dışı istihdamına kadar her başlığın karara nasıl bağlandığını sırayla ele alıyoruz.",
+    "publishedAt": "2026-08-28",
+    "readingMinutes": 10,
+    "lang": "tr",
+    "sections": [
+      {
+        "heading": "Güncelleme — 1 Eylül 2026",
+        "paragraphs": [
+          "Bu yazı 28 Ağustos'ta, anlattığı hafta başlamadan önce yazıldı. Warsh konuşmasını 28 Ağustos'ta yaptı ve ton şahin çıktı: enflasyonun hâlâ çok yüksek olduğunu, bu yazın daha iyi gelen enflasyon okumalarının altta yatan eğilimin anlamlı biçimde düzeldiğini göstermediğini ve önümüzdeki aylarda faiz artırımı gerekebileceğini söyledi. Metindeki %33,9'luk Eylül fiyatlaması konuşmanın ardından belirgin biçimde yukarı kaydı; bu satırlar o günkü tabloyu gösterdiği haliyle bırakıldı. Haftanın ilk günleri geride kaldı; 4 Eylül'deki istihdam raporu ve 16 Eylül'deki FOMC hâlâ önümüzde. Eylül'ün tamamının takvimi için ayrı bir yazımız var."
+        ],
+      },
+      {
+        "paragraphs": [
+          "Jackson Hole'da Kevin Warsh'ın Fed Başkanı olarak ilk açılış konuşması bugün 14:00 GMT'de yapılıyor. Sempozyum konuşmaları piyasaya yön verir, ama yön verdikleri şey çoğu zaman bir çerçevedir: para politikasının hangi değişkenlere bakacağını, hangi riski daha ciddiye aldığını anlatırlar. Rakamı ise konuşmalar değil, veriler getirir. Bu hafta sona eren sempozyumun ardından sıra tam olarak buna geliyor.",
+          "16 Eylül FOMC kararına kadar iki tam veri haftası var ve ilki açık ara en yoğunu. 31 Ağustos - 4 Eylül haftasında iki merkez bankası kararı (RBNZ ve Kanada Merkez Bankası), ECB'yi yakından ilgilendiren Euro Bölgesi enflasyonu, iki ABD ISM anketi ve haftanın ana olayı olan ABD tarım dışı istihdam raporu sıraya giriyor.",
+          "Fiyatlamanın bugünkü hali şu: CME FedWatch'a göre Eylül toplantısında 25 baz puan artırım olasılığı %33.9, Aralık'a kadar en az bir artırım olasılığı ise %74. Faiz indirimi fiyatlamada neredeyse hiç yok. Bu iki rakam arasındaki mesafe, piyasanın \"artırım gelecek ama bu ay değil\" dediği anlamına geliyor. Önümüzdeki haftanın verileri bu iki oranı birbirine yaklaştırabilir ya da daha da açabilir. Aşağıda takvimi gün gün, ama liste olarak değil, her başlığın 16 Eylül'e nasıl bağlandığını göstererek ele alacağız."
+        ],
+      },
+      {
+        "heading": "Pazartesi ve Salı: Çin PMI'ları ile Avrupa enflasyonu haftayı açıyor",
+        "paragraphs": [
+          "Hafta 31 Ağustos 01:30 GMT'de Çin resmi imalat ve hizmet PMI verileriyle başlıyor. Önceki okumalar imalatta 49.2, hizmette 49.0. PMI anketlerinde 50 seviyesi büyüme ile daralma arasındaki eşiktir; her iki serinin de eşiğin altında olması, Çin ekonomisinin iki ana ayağının da bir önceki aya göre daralma bildirdiği anlamına geliyor. 1 Eylül 01:45 GMT'de gelen Caixin imalat PMI'ı (önceki 50.9) resmi seriden farklı bir örneklem kullanır ve daha çok özel sektör ile ihracatçı firmaları kapsar; ikisi arasındaki ayrışma tek başına önemli bir bilgidir.",
+          "Çin verisi neden Avrupa ve ABD seansındaki fiyatları ilgilendiriyor? Aktarım kanalı doğrudan değil, emtia talebi üzerinden işliyor. Çin sanayi üretimi yavaşladığında bakır, demir cevheri ve enerji talebi beklentisi geriler; bu da emtia ihracatçısı ekonomilerin para birimlerine, yani Avustralya doları ve Yeni Zelanda dolarına baskı olarak yansır. AUD ve NZD, Asya seansında Çin verisine en hızlı tepki veren majör pariteler arasındadır. Aynı zincirin ikinci halkası, zayıf emtia talebinin küresel mal enflasyonunu düşürücü yönde çalışmasıdır - ki bu, ABD enflasyon tartışmasında zayıf da olsa bir dezenflasyon argümanıdır.",
+          "31 Ağustos 12:00 GMT'de Almanya öncü uyumlaştırılmış TÜFE geliyor (önceki +%2.8). 1 Eylül 06:00 GMT'de Almanya perakende satışlar (önceki -%1.1), 09:00 GMT'de ise Euro Bölgesi öncü TÜFE ve çekirdek TÜFE açıklanacak (önceki yıllık +%2.9 ve +%2.5). Almanya verisi bölge geneli için öncü sinyaldir; ulusal veriler bir gün önceden geldiği için Euro Bölgesi rakamı çoğu zaman piyasada zaten kısmen fiyatlanmış olur.",
+          "Buradaki asıl mesele seviyedir. ECB'nin orta vadeli hedefi %2. Manşette +%2.9, çekirdekte +%2.5 okuması, hedefin üzerinde ama panik yaratacak bir uzaklıkta olmayan bir noktayı işaret ediyor. Çekirdek enflasyonun manşetin altında kalması, fiyat baskısının bir bölümünün enerji ve gıda gibi oynak kalemlerden geldiğini düşündürür; bunun tersi, yani çekirdeğin yapışkan kalması, merkez bankalarının en sevmediği tablodur. EUR/USD tarafında bu veri, 26 Ağustos'taki ABD PCE sonrası 1.1650 civarına gerileyen paritenin toparlanma denemesi için ilk gerçek zemin testi olacak."
+        ],
+      },
+      {
+        "heading": "Salı ISM imalat: \"Ekonomi çökmüyor\" argümanının en somut dayanağı",
+        "paragraphs": [
+          "1 Eylül 14:00 GMT'de ABD ISM imalat PMI açıklanıyor; önceki okuma 55.6. Bu rakamın neden bu haftanın en az takdir edilen başlığı olduğunu anlamak için Temmuz FOMC'deki tartışmayı hatırlamak gerekiyor. Toplantıda faiz %3.50-3.75 aralığında sabit tutuldu, ancak Logan, Hammack ve Kashkari 25 baz puan artırım yönünde muhalefet şerhi düştü. Yani kurul içinde \"enflasyon hâlâ yüksek, ekonomi de bunu taşıyabilecek durumda\" diyen görünür bir azınlık var.",
+          "ISM imalat 55.6 seviyesinde, yani 50 eşiğinin epey üstünde. Bu, resesyon anlatısını doğrudan zayıflatan bir veridir. İmalat sektörü ABD ekonomisinin görece küçük bir parçasıdır ama çevrimsel olarak en hassas parçasıdır: faiz artışlarına, stok döngüsüne ve küresel talebe hızlı tepki verir. Faiz artırımlarının ekonomiyi kırdığı bir ortamda ilk bozulanlardan biri olur. 55'in üzerinde bir imalat anketi, bu kırılmanın henüz görünmediği anlamına gelir.",
+          "Buradan artırım beklentisine giden mantık şu: eğer büyüme tarafı dayanıyorsa, çekirdek PCE'nin yıllık %3.3'te yapışkan kalması karşısında Fed'in elini tutan gerekçelerden biri zayıflar. 26 Ağustos verilerinde manşet PCE yıllık %3.7 ile beklentinin (%3.6) üzerinde geldi ve dolar genelinde güçlendi, Hazine getirileri yükseldi. Güçlü bir ISM imalat okuması bu tepkiyi pekiştirecek, zayıf bir okuma ise Eylül'deki %33.9'luk artırım olasılığını aşağı çekecek yönde çalışır. İkinci çeyrek GSYH'nin yıllıklandırılmış %1.5 ile birinci çeyreğin %2.1'inin altında kalması, tabloyu tek yönlü olmaktan çıkaran karşı ağırlıktır."
+        ],
+      },
+      {
+        "heading": "Çarşamba: İki faiz kararı, bir GSYH ve NFP'nin kusurlu habercisi",
+        "paragraphs": [
+          "2 Eylül günü takvim yoğunlaşıyor. 01:30 GMT'de Avustralya ikinci çeyrek GSYH verisi geliyor (önceki çeyreklik +%0.3, yıllık +%2.5). Bir gün önceki Çin PMI'larıyla birlikte okunduğunda AUD için tutarlı ya da çelişkili bir hikâye ortaya çıkacak; emtia talebinin zayıfladığı bir dönemde Avustralya büyümesinin nasıl davrandığı, RBA beklentileri açısından bilgi taşır.",
+          "02:00 GMT'de RBNZ faiz kararını açıklıyor; mevcut politika faizi %2.50. Kararın kendisinden çok eşlik eden metin ve varsa faiz patikası projeksiyonu önemlidir - küçük ekonomilerde merkez bankası iletişimi, karardan daha büyük fiyat hareketi yaratabilir. 13:45 GMT'de Kanada Merkez Bankası kararı geliyor; mevcut faiz %2.25. Kanada kararı, iki gün sonra 12:30 GMT'de açıklanacak Kanada işsizlik oranıyla (önceki %6.4) birlikte USD/CAD üzerinde haftanın ikinci yarısına yayılan bir baskı yaratabilir.",
+          "Ancak günün ABD tarafındaki başlığı 12:15 GMT'de gelen ADP özel sektör istihdam raporu (önceki 44.000). ADP hakkında dürüst olmak gerekiyor: bu veri, Cuma günkü resmi tarım dışı istihdam rakamının güvenilir bir tahmincisi değildir. Farklı bir metodolojiyle, bordro işleme verisinden üretilir; kamu istihdamını kapsamaz ve geçmişte resmi rakamla arasında ciddi sapmalar görülmüştür.",
+          "Peki neden herkes izliyor? Çünkü Cuma öncesindeki tek somut istihdam sinyali odur ve piyasa, elindeki tek sayıya orantısız tepki verme eğilimindedir. ADP'nin pratik değeri, tahmin gücünden çok, Cuma öncesi beklentileri kaydırarak NFP anındaki sürpriz büyüklüğünü değiştirmesinde yatar. Çok güçlü bir ADP, NFP beklentisini yukarı çeker ve aynı NFP rakamının \"hayal kırıklığı\" olarak fiyatlanmasına yol açabilir. Bu veriyi tahmin aracı olarak değil, beklenti göstergesi olarak okumak daha doğrudur."
+        ],
+      },
+      {
+        "heading": "Perşembe: ISM hizmet neden imalattan daha ağır basar?",
+        "paragraphs": [
+          "3 Eylül 01:45 GMT'de Çin Caixin hizmet PMI ile başlıyoruz (önceki 50.1) - eşiğin hemen üzerinde, yani neredeyse yatay bir hizmet sektörü. 06:30 GMT'de İsviçre TÜFE geliyor (önceki aylık -%0.1, yıllık +%0.4). İsviçre enflasyonunun sıfıra bu kadar yakın seyretmesi, İsviçre frangını diğer majörlerden yapısal olarak ayıran unsurdur; güvenli liman talebi geldiğinde CHF'nin neden tercih edildiğinin arka planında bu düşük enflasyon rejimi vardır.",
+          "Günün ağırlığı ise 14:00 GMT'de gelen ABD ISM hizmet PMI'sında (önceki 54.1). Hizmet sektörü ABD ekonomisinin imalattan çok daha büyük bir bölümünü oluşturur. Bu tek gerçek, ISM hizmet anketini ISM imalattan daha belirleyici hale getirir - ama piyasa alışkanlıkları nedeniyle imalat verisi çoğu zaman daha çok manşet olur.",
+          "ISM hizmetin enflasyon tartışması açısından ayrı bir önemi daha var. Hizmet enflasyonu, mal enflasyonuna göre çok daha yapışkandır; ücretlere bağlıdır ve bir kez yerleştiğinde inmesi uzun sürer. Fed'in çekirdek PCE'de %3.3'lük seviyeyi neden bu kadar ciddiye aldığının cevabının önemli bir kısmı hizmet kaleminde saklıdır. Anketin alt bileşenleri arasındaki ödenen fiyatlar ve istihdam kalemleri, bu yüzden manşet rakamdan daha fazla bilgi taşır ve ISM hizmetin istihdam alt endeksi, ertesi gün gelecek NFP için ADP'den daha anlamlı bir ipucu olabilir."
+        ],
+      },
+      {
+        "heading": "Cuma: Üç rakamın birbiriyle çelişebileceği istihdam raporu",
+        "paragraphs": [
+          "4 Eylül 12:30 GMT, haftanın ve muhtemelen 16 Eylül'e kadar olan dönemin en belirleyici anı. ABD tarım dışı istihdam, ortalama saatlik kazanç ve işsizlik oranı aynı anda açıklanıyor. Önceki okumalar: 57.000 bordro, aylık +%0.1 kazanç artışı, %4.2 işsizlik.",
+          "Bu rapora ekstra ağırlık veren şey son dönemin geçmişi. Temmuz tarım dışı istihdam -23.000 geldi, yani ekonomi o ay net iş kaybetti; ayrıca önceki aylarda ciddi aşağı yönlü revizyonlar yapıldı. Revizyon meselesi kritiktir: piyasa manşet rakama anında tepki verir, oysa aynı bültende önceki iki ayın verisi büyük ölçüde aşağı çekilmiş olabilir. Bu nedenle 4 Eylül'de sadece yeni rakama değil, Temmuz ve Haziran revizyonlarına da bakmak gerekiyor.",
+          "Asıl zorluk şu: rapordaki üç bileşen birbiriyle çelişebilir ve genellikle çelişir. Bordro sayısı zayıf, ortalama saatlik kazanç güçlü gelebilir - bu durumda işgücü piyasası soğuyor ama ücret enflasyonu inatçı demektir ve Fed için en rahatsız edici kombinasyondur; ne kesin bir gevşeme gerekçesi ne de rahat bir sıkılaştırma gerekçesi verir. Ya da bordro güçlü, işsizlik oranı yükselmiş olabilir; bunun nedeni çoğu zaman iş bulma umuduyla işgücüne geri dönen kişilerin katılım oranını artırmasıdır, ki bu aslında olumlu bir gelişmedir ama manşette kötü görünür.",
+          "Fiyatlama açısından bağlantı doğrudan: Eylül'de artırım olasılığı %33.9, Aralık'a kadar %74. Güçlü bordro ve güçlü kazanç birlikte gelirse, piyasanın Eylül olasılığını Aralık olasılığına doğru itmesi beklenir - yani \"artırım gelecek\" fikri korunurken zamanlaması öne çekilir. Zayıf bordro ve yumuşak kazanç ise iki oranı birden aşağı çeker; ancak indirim fiyatlamasının bugün neredeyse sıfır olduğu düşünülürse, aşağı yöndeki hareket alanı yukarı yöndekinden daha dar görünüyor.",
+          "Aynı gün 09:00 GMT'de Euro Bölgesi perakende satışlar (önceki aylık -%0.3, yıllık +%0.7) ve 12:30 GMT'de Kanada işsizlik oranı (önceki %6.4) açıklanıyor. Kanada verisinin ABD raporuyla aynı dakikaya denk gelmesi, USD/CAD'de o an iki ekonominin istihdam verisinin aynı anda fiyatlanması anlamına gelir; bu paritede o dakikadaki oynaklık, tek taraflı verilere göre daha yüksek olabilir.",
+          "Rapor yayımlandığında bakılacak sıra şu:"
+        ],
+        "list": [
+          "Bordro sayısı - manşet rakam, ama tek başına en yanıltıcı olanı",
+          "Temmuz ve Haziran revizyonları - manşetin anlamını tamamen değiştirebilir",
+          "Ortalama saatlik kazanç - Fed için enflasyon tarafının asıl göstergesi",
+          "İşsizlik oranı ve katılım oranı - oranın neden değiştiğini katılım açıklar",
+          "Açıklama sonrası ilk beş dakikadaki fiyat değil, ilk saatin kapanışı - ilk tepki sık sık geri alınır",
+        ],
+      },
+      {
+        "heading": "Bu haftayı nasıl işlemeli?",
+        "paragraphs": [
+          "Yoğun veri haftalarında kaybedilen paranın büyük kısmı yanlış yön tahmininden değil, doğru yön tahmininin yanlış pozisyon büyüklüğüyle taşınmasından gelir. Aşağıdaki maddeler bir strateji önerisi değil, takvimi olan bir haftada kontrol edilmesi gereken teknik başlıklar listesidir:"
+        ],
+        "list": [
+          "Veri saatlerinden önce açık pozisyonların büyüklüğünü gözden geçirin. 1 Eylül 14:00, 2 Eylül 12:15, 3 Eylül 14:00 ve özellikle 4 Eylül 12:30 GMT bu haftanın işaretlenmesi gereken dört anı.",
+          "Marjin seviyenizi veri öncesinde kontrol edin, veri sırasında değil. Ani hareket anında hesap özetini açıp hesap yapmaya çalışmak, kararın en kötü zamanda alınması demektir. Pozisyon Hesaplayıcı ile gerekli teminatı önceden çıkarmak bu işi sadeleştirir.",
+          "ISM ve NFP dakikalarında spread genişlemesi beklemek gerçekçidir. Bu, bir aracı kurum sorunu değil, likidite sağlayıcıların risk azaltmasının doğal sonucudur; normal koşullarda dar spread veren hesap türlerinde de görülür.",
+          "Stop mesafesini genişletip lot büyüklüğünü düşürmek, dar stop ile büyük lot taşımaktan daha tutarlı bir yaklaşımdır. Aynı risk tutarı korunurken, veri anındaki gürültünün pozisyonu erken kapatma ihtimali azalır.",
+          "Kayan emir gerçekleşmesi (slippage) ihtimalini hesaba katın: veri anında stop emri, belirlediğiniz fiyattan değil bir sonraki geçerli fiyattan gerçekleşebilir. Negatif bakiye koruması olan hesaplar bu riskin uç noktasını sınırlar ama kaybı ortadan kaldırmaz.",
+          "Haftanın saatlerini kendi saat diliminize önceden çevirin. Buradaki tüm saatler GMT; yanlış saat hesabı yüzünden pozisyonun veri anında açık kalması, sık görülen ve tamamen önlenebilir bir hatadır.",
+          "Verinin kendisini değil, verinin beklentiye göre konumunu izleyin. Piyasayı hareket ettiren rakamın mutlak değeri değil, konsensüsten sapmasıdır."
+        ],
+      },
+      {
+        "heading": "Takvimi nereden takip etmeli?",
+        "paragraphs": [
+          "Bu haftanın başlıklarını ve saatlerini tek yerde görmek için FXPARTNER'ın Ekonomik Takvim sayfası yeterli bir başlangıç noktası; verilerin önem derecesi ve önceki okumaları burada listeleniyor. Takvimi nasıl okuyacağınız konusunda daha önce yayımladığımız içerikler de FXPARTNER Akademi altında duruyor.",
+          "Aracı kurum tarafında ise XM'in interaktif ekonomik takvimi, veri açıklandığı anda beklenti-gerçekleşen karşılaştırmasını platform içinde göstermesi bakımından pratik bir araç. XM'in eğitim tarafında 23 dilde günlük canlı webinar ve Tradepedia video kütüphanesi de bulunuyor. Bunlar takvim takibini kolaylaştıran araçlar; işlem kararının yerine geçmezler ve tek başlarına bir avantaj kaynağı değildir. XM'in kendi sınırları da var: raw-spread hesap seçenekleri sınırlı, kaldıraç bölgeye ve tüzel kişiliğe göre değişiyor ve cTrader desteklenmiyor.",
+          "Aracı kurum seçimini bu haftaya bakarak yapmak yerine, Broker Sorgulama aracı ve Broker Sıralamaları üzerinden lisans, maliyet ve çekim koşullarını karşılaştırmak daha sağlıklı bir yol. Yoğun veri haftaları, bir kurumun icra kalitesini gözlemlemek için iyi bir fırsattır - ama bunu gerçek parayla test etmek zorunda değilsiniz."
+        ],
+      },
+      {
+        "heading": "Sonuç: İki oranın arasındaki mesafe daralacak mı?",
+        "paragraphs": [
+          "Bu haftaya tek bir soruyla bakmak mümkün: piyasanın Eylül için verdiği %33.9 ile Aralık için verdiği %74 arasındaki mesafe kapanacak mı, açılacak mı? Güçlü ISM okumaları ve dirençli bir istihdam raporu bu mesafeyi daraltır, yani 16 Eylül'ü canlı bir toplantı haline getirir. Zayıf veri seti ise mesafeyi korur ya da açar; artırım beklentisi ortadan kalkmaz, sadece takvimde ileri kayar.",
+          "Fed'in içinde zaten artırım yönünde muhalefet şerhi düşmüş üç isim var ve çekirdek PCE %3.3'te duruyor. Buna karşılık Temmuz istihdamı eksi geldi, perakende satışlar -%0.6 oldu ve ikinci çeyrek büyümesi birinci çeyreğin altında kaldı. Yani hem sıkılaştırma hem de bekleme lehine somut veri var - bu haftanın işlevi, terazinin hangi kefesine ağırlık ekleyeceğini göstermek olacak.",
+          "Pratik açıdan söylenebilecek en yararlı şey belki de şu: bu tür haftalarda doğru tahmin etmek, hayatta kalmaktan daha az önemlidir. Dört ayrı veri anının olduğu bir haftada pozisyon büyüklüğünü ve marjin seviyesini yönetmek, hangi rakamın geleceğini bilmekten daha yüksek getirili bir uğraştır.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz."
+        ],
+      },
+    ],
+  },
+  {
+    "slug": "negatif-bakiye-korumasi-nedir-xm",
+    "coverImage": "/blog/negatif-bakiye-korumasi-nedir-xm-cover.png",
+    "title": "Negatif Bakiye Koruması: Hesabınız Eksiye Düşerse Borçlanır mısınız?",
+    "excerpt": "Stop out bir tasfiye mekanizmasıdır ama her zaman zamanında çalışmaz. Fiyat boşlukları hesabı sıfırın altına itebilir; negatif bakiye korumasının ne yaptığını ve neyi yapmadığını inceliyoruz.",
+    "publishedAt": "2026-08-28",
+    "readingMinutes": 9,
+    "lang": "tr",
+    "adBrokerSlug": "xm",
+    "sections": [
+      {
+        "paragraphs": [
+          "Kaldıraçlı işlem yapan hemen herkes marjin seviyesini, margin call'u ve stop out'u bir şekilde duymuştur. Anlatılan hikâye basittir: hesabınızdaki öz sermaye kullanılan teminata göre belirli bir orana düştüğünde platform pozisyonlarınızı otomatik olarak kapatır ve zarar orada durur. Bu mekanizma gerçekten vardır ve çoğu zaman da amacına uygun çalışır.",
+          "Ancak stop out bir koruma sözü değil, bir tasfiye kuralıdır. Sistem, öz sermayeniz eşiğe geldiğinde pozisyonu piyasada bulabildiği ilk fiyattan kapatır. Buradaki kritik ayrıntı şudur: piyasada o anda bir fiyat bulunması gerekir. Fiyatın olmadığı, alıcı ile satıcı arasındaki mesafenin açıldığı anlarda tasfiye istediğiniz seviyede değil, işlemin fiilen gerçekleştiği seviyede olur.",
+          "Bu noktada yeni yatırımcıların çoğunun hiç sormadığı bir soru devreye girer: hesabım sıfırın altına düşerse ne olur? Yatırdığım paranın tamamını kaybetmekle kalmayıp brokera borçlu mu kalırım? Bu yazı tam olarak bu soruyu, nasıl oluştuğunu ve negatif bakiye korumasının bu tabloda nereye oturduğunu ele alıyor.",
+        ],
+      },
+      {
+        "heading": "Fiyat boşluğu nedir ve stop emrinizi neden ıskalar?",
+        "paragraphs": [
+          "Fiyat boşluğu, yani gap, bir enstrümanın iki fiyat seviyesi arasında hiç işlem görmeden atlaması demektir. Grafikte mumlar arasında görünür bir kopukluk oluşur. Bunun sebebi karmaşık değil: o aralıkta emirleri karşılayacak likidite yoktur.",
+          "En bilinen örneği hafta sonudur. Forex piyasası cuma kapanışı ile pazartesi açılışı arasında büyük ölçüde durur, ama dünya durmaz. Hafta sonu gelen bir haber, bir siyasi gelişme veya bir merkez bankası açıklaması, pazartesi açılışında fiyatın cuma kapanışından belirgin biçimde uzakta başlamasına yol açabilir. Aradaki seviyelerde tek bir işlem bile gerçekleşmemiştir.",
+          "İkinci ve daha sık karşılaşılan örnek, yüksek etkili veri ve konuşma anlarıdır. 4 Eylül 12:30 GMT'de ABD tarım dışı istihdam raporunun ya da 16 Eylül 18:00 GMT'de Fed faiz kararının açıklanması gibi anlarda piyasa yapıcılar risk almamak için emir defterini geçici olarak inceltir. Spread açılır, derinlik kaybolur ve fiyat birkaç saniye içinde ara seviyeleri atlayarak yeni bir bölgeye taşınabilir.",
+          "Buradan çıkan sonuç teknik ama hayati: stop-loss emriniz kesinleşmiş bir çıkış fiyatı değil, bir tetikleyicidir. Fiyat sizin belirlediğiniz seviyeye ulaştığında emir aktif olur ve piyasadaki mevcut ilk fiyattan gerçekleşir. Boşluk varsa bu fiyat, sizin yazdığınız seviyeden çok daha kötü olabilir. Aynı mantık stop out için de aynen geçerlidir; platform eşiği görür, ama tasfiyeyi ancak boşluğun bittiği yerde yapabilir.",
+        ],
+      },
+      {
+        "heading": "Somut bir senaryo: 1.000 dolarlık hesap nasıl eksiye düşer?",
+        "paragraphs": [
+          "Rakamlarla bakalım. Diyelim ki hesabınızda 1.000 $ var ve brokerınızın stop out seviyesi %20. EUR/USD üzerinde 0,60 lotluk bir pozisyon açtınız. Standart lotta 1 pip 10 $ ettiğine göre bu pozisyonda pip başına değer 6 $.",
+          "1:500 kaldıraçla 0,60 lotun gerektirdiği teminat, 1,1650 civarındaki kurda yaklaşık 140 $ olur. Stop out %20'de tetiklendiğine göre, öz sermayeniz bu teminatın %20'sine, yani 28 $'a indiğinde sistem pozisyonu kapatmaya çalışacaktır. Bu da 1.000 $'dan 28 $'a inmek için yaklaşık 972 $ zarara, pip başına 6 $ üzerinden kabaca 162 pipe karşılık gelir.",
+          "Normal bir piyasada senaryo burada biter. Fiyat aleyhinize 163 pip hareket eder, sistem pozisyonu kapatır, hesapta birkaç dolar kalır. Acı ama sınırlı bir sonuç.",
+          "Şimdi pozisyonu hafta sonuna taşıdığınızı ve pazartesi açılışında fiyatın aleyhinize 200 pip boşlukla açtığını varsayalım. 200 pip × 6 $ = 1.200 $ zarar. Hesabınızda 1.000 $ vardı. Sonuç: öz sermaye eksi 200 $. Stop out seviyesi olan 162 pip ile açılış fiyatı arasındaki bölgede hiç işlem gerçekleşmediği için sistemin devreye girebileceği bir an olmadı.",
+          "Bu tablo teorik bir kurgu değil, kaldıraçlı piyasaların yapısal bir sonucudur. Sadece boyutu değişir: aynı boşluk daha küçük bir pozisyonda hesabın bir kısmını götürür, aşırı büyük bir pozisyonda ise eksi bakiyeyi çok daha derin hale getirir.",
+        ],
+      },
+      {
+        "heading": "Negatif bakiye koruması tam olarak ne yapar, ne yapmaz?",
+        "paragraphs": [
+          "Negatif bakiye koruması, yukarıdaki senaryonun sonundaki eksi 200 $'ı brokerın silmesi ve hesabı sıfıra çekmesi anlamına gelir. Yani yatırdığınız paranın tamamını kaybedebilirsiniz, ama yatırdığınızdan fazlasını kaybetmezsiniz ve kuruma borçlu kalmazsınız.",
+          "Bu ayrımı net koymak gerekir, çünkü isimden dolayı sık sık yanlış anlaşılıyor. Negatif bakiye koruması bir zarar sigortası değildir. Kâr ile ilgili hiçbir vaadi yoktur. Kötü giden bir pozisyonu kurtarmaz, stop-loss'unuzun yerine geçmez, kaldıraç riskinizi azaltmaz. Yaptığı tek şey, zararın hesap bakiyenizin ötesine geçmesini engellemektir.",
+          "Kısaca özetlemek gerekirse:",
+        ],
+        "list": [
+          "Yaptığı: eksiye düşen bakiyeyi sıfırlar, brokera borç doğmasını engeller.",
+          "Yaptığı: kaldıraçlı işlemin azami zararını yatırdığınız tutarla sınırlar.",
+          "Yapmadığı: sermayenizin tamamını kaybetmenizi engellemez.",
+          "Yapmadığı: kötü pozisyon büyüklüğünün, plansız işlemin veya aşırı kaldıracın sonucunu değiştirmez.",
+          "Yapmadığı: kâr veya belirli bir sonuç konusunda herhangi bir taahhüt içermez.",
+        ],
+      },
+      {
+        "heading": "XM tarafında durum ne?",
+        "paragraphs": [
+          "XM, negatif bakiye koruması sunan brokerlar arasında. Yani yukarıdaki gibi bir boşluk senaryosunda hesabın eksiye düşmesi durumunda müşteriden bu farkın talep edilmemesi öngörülüyor.",
+          "Bunu kurumun genel yapısıyla birlikte değerlendirmek daha doğru olur. XM Global 2009'dan beri faaliyette; merkezi Kıbrıs ve Avustralya. Regülasyon tarafında ASIC (443670), CySEC (120/10), DFSA (F003484) ve FSC (Belize) lisansları bulunuyor. Yani birden fazla tüzel kişilik ve birden fazla denetim rejimi söz konusu.",
+          "Tam olarak bu çokluk nedeniyle önemli bir uyarı gerekiyor: negatif bakiye koruması dahil pek çok koşul, hesabınızı hangi tüzel kişilik altında açtığınıza göre farklılaşabilir. Aynı marka altında farklı ülkelerdeki iştirakler farklı kurallara tabidir; azami kaldıraç oranının bölgeye göre değişmesi de aynı sebeptendir. Dolayısıyla korumanın sizin hesabınız için geçerli olduğunu varsaymak yerine, hesap açılışında imzaladığınız müşteri sözleşmesinden ve ilgili iştirakin şartlarından doğrudan teyit etmek gerekir.",
+          "XM'in bu konudaki tablosunu değerlendirirken zayıf yönlerini de görmezden gelmemek gerekir: raw-spread hesap seçenekleri sınırlıdır, kaldıraç bölgeye göre değişir ve cTrader desteklenmez. Negatif bakiye korumasının varlığı bir brokerı tek başına doğru seçim yapmaz; sadece kontrol listesindeki maddelerden biridir.",
+        ],
+      },
+      {
+        "heading": "Düzenleyici çerçeve: bu koruma her yerde aynı değil",
+        "paragraphs": [
+          "Negatif bakiye koruması bazı yerlerde brokerın ticari tercihi, bazı yerlerde ise düzenleyici zorunluluğudur. Genel çerçevesi şöyle özetlenebilir: sıkı denetim rejimlerine sahip bazı Tier-1 düzenleyiciler, perakende sınıfındaki müşteriler için bu korumayı zorunlu tutar. Bu rejimlerde koruma brokerın inisiyatifinde değildir, kuralın kendisidir.",
+          "Buna karşılık offshore lisanslar altında yürütülen faaliyetlerde durum daha değişkendir. Kurum korumayı sunabilir de sunmayabilir de; sunuyorsa da bunu bir zorunluluk olarak değil, kendi ticari politikası olarak yapıyordur. Politika ise değişebilir.",
+          "Burada ülke ülke veya kural kural kesin iddialarda bulunmak doğru olmaz; düzenlemeler zaman içinde ve rejim bazında farklılaşır. Yatırımcı açısından pratik yaklaşım şudur: markanın tanıtım sayfasında yazana değil, kendi hesabınızın bağlı olduğu tüzel kişiliğe ve o kişiliğin tabi olduğu düzenlemeye bakın. Hangi lisans numarasıyla, hangi ülkedeki şirketle sözleşme imzaladığınız, korumanın sizin için geçerli olup olmadığını belirleyen asıl unsurdur.",
+          "Bir brokerın hangi lisanslara sahip olduğunu ve bu lisansların hangi tüzel kişiliklere ait olduğunu karşılaştırmalı biçimde görmek istiyorsanız, sitedeki Broker Sorgulama aracı bu bilgileri tek ekranda derliyor. Aynı kriterleri farklı kurumlar arasında yan yana görmek için Broker Sıralamaları sayfası da işinizi kolaylaştırır.",
+        ],
+      },
+      {
+        "heading": "Bu korumaya güvenmek neden yanlış bir strateji?",
+        "paragraphs": [
+          "Negatif bakiye koruması son savunma hattıdır. Bir hesabın bu korumaya ihtiyaç duyduğu noktaya gelmesi, o hesabın zaten sermayesinin tamamını kaybetmiş olması demektir. Yani koruma devreye girdiğinde kurtardığı şey paranız değil, sadece bir borç ilişkisinin doğmasıdır.",
+          "Bu yüzden \"nasılsa negatif bakiye koruması var\" düşüncesiyle pozisyon büyütmek, mantık olarak \"nasılsa airbag var\" diye hızlanmaya benzer. Airbag kazayı önlemez, sadece en kötü sonucun bir kısmını hafifletir.",
+          "Asıl koruma pozisyon büyüklüğüdür. Yukarıdaki senaryoyu hatırlayın: 200 piplik boşluk 0,60 lotta hesabı 200 $ eksiye itiyordu. Aynı boşluk çok daha küçük bir pozisyonda hesabın yalnızca bir bölümünü götürür ve hesap ayakta kalır. Boşluğun büyüklüğünü kontrol edemezsiniz; ona maruz kaldığınız tutarı kontrol edebilirsiniz. Pozisyon büyüklüğünü işlem öncesinde hesaplamak için sitedeki Pozisyon Hesaplayıcı bu işi somutlaştırır.",
+          "İkinci nokta, marjin seviyesini olabildiğince geniş tutmaktır. Stop out eşiğine yakın çalışan bir hesapta, normal bir dalgalanma bile tasfiyeye yol açar; boşluk geldiğinde ise arada tampon kalmaz. Kullanılmayan teminat, boşluk riskine karşı sahip olduğunuz tek gerçek yastıktır.",
+        ],
+      },
+      {
+        "heading": "Boşluk riskini azaltmanın pratik yolları",
+        "paragraphs": [
+          "Fiyat boşluğunu ortadan kaldırmak mümkün değil, ama ona maruz kalma derecenizi belirgin biçimde düşürmek mümkün. Aşağıdaki maddeler karmaşık bir sistem değil, çoğu deneyimli yatırımcının rutin haline getirdiği basit alışkanlıklar:",
+        ],
+        "list": [
+          "Hafta sonuna yüksek kaldıraçlı pozisyon taşımamak; taşınacaksa pozisyonu belirgin biçimde küçültmek.",
+          "Yüksek etkili veri ve konuşma saatlerinde pozisyon büyüklüğünü azaltmak veya o pencerede yeni pozisyon açmamak. Hangi saatlerin yüksek etkili olduğunu görmek için Ekonomik Takvim'i işlem öncesi kontrol etmek.",
+          "Marjin seviyesini stop out eşiğinden uzak tutmak; kullanılmayan teminatı bir israf değil, tampon olarak görmek.",
+          "Tek bir enstrümana veya birbiriyle yüksek korelasyonlu enstrümanlara yoğunlaşmamak; aynı yönde açılmış birden çok pozisyon tek bir pozisyon gibi davranır.",
+          "Stop-loss'u bir kesinlik olarak değil, senaryonun beklenen halinde çalışacak bir araç olarak görmek ve en kötü durumda ne kaybedeceğinizi ayrıca hesaplamak.",
+          "Aynı anda hem büyük pozisyon hem de dar marjin tamponu ile çalışmamak; bu ikisinin birleşimi boşluk riskinin en yoğun olduğu durumdur.",
+        ],
+      },
+      {
+        "heading": "Sonuç: koruma bir zemin, plan değil",
+        "paragraphs": [
+          "Negatif bakiye koruması, kaldıraçlı işlemde yatırımcı ile brokerin ilişkisine bir zemin koyar: kayıp, yatırılan tutarın ötesine geçmez. Bu, özellikle piyasanın seyrek ama sert biçimde boşluk verdiği anlarda anlamlı bir farktır ve broker seçerken kontrol edilmesi gereken maddelerden biridir.",
+          "Ama bu koruma hiçbir zaman bir strateji yerine geçmez. Onun devreye girdiği nokta, planın çoktan başarısız olduğu noktadır. Pozisyon büyüklüğünü doğru belirlemek, marjin tamponunu korumak ve boşluk ihtimali yüksek zaman pencerelerinde riski azaltmak, hiçbir brokerın sunamayacağı asıl korumadır.",
+          "Kendi hesabınızın hangi tüzel kişilik altında açıldığını, hangi düzenlemeye tabi olduğunu ve negatif bakiye korumasının sözleşmenizde nasıl tanımlandığını mutlaka teyit edin. Bu üç bilgi, hesabınızın en kötü senaryoda nerede duracağını belirler.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz.",
+        ],
+      },
+    ],
+  },
+  {
+    "slug": "emir-turleri-market-limit-stop-trailing",
+    "coverImage": "/blog/emir-turleri-market-limit-stop-trailing-cover.png",
+    "title": "Emir Türleri: Market, Limit, Stop ve Trailing Stop Ne Zaman Kullanılır?",
+    "excerpt": "Market, limit, stop, stop limit ve trailing stop emirleri arasındaki farklar, her birinin gizli maliyeti ve hangi piyasa koşulunda hangisinin daha uygun olduğu üzerine sakin bir rehber.",
+    "publishedAt": "2026-08-28",
+    "readingMinutes": 10,
+    "lang": "tr",
+    "sections": [
+      {
+        "paragraphs": [
+          "Yeni başlayan bir yatırımcıya \"nasıl işlem açıyorsun\" diye sorduğunuzda alacağınız cevap genellikle tektir: ekrandaki al ya da sat düğmesine basıyorum. Bu, market emridir ve platformların varsayılan davranışıdır. Sorun, bu tercihin bir tercih olarak bile fark edilmemesidir.",
+          "Oysa emir türü seçimi, \"hangi yöne gireceğim\" sorusu kadar belirleyici bir karardır. Yönünüz doğru olsa bile yanlış emir türü, girişinizi beklediğinizden kötü bir fiyattan gerçekleştirebilir, çıkışınızı hiç gerçekleştirmeyebilir ya da koruma sandığınız bir talimatı volatilite anında işlevsiz bırakabilir. Aynı fikir, farklı emir türleriyle uygulandığında farklı sonuçlar üretir.",
+          "Bu yazıda beş temel emir türünü — market, limit, stop, stop limit ve trailing stop — ne yaptıkları, neyi vaat ettikleri ve neyi vaat etmedikleri üzerinden ele alacağız. Ayrıca pozisyona bağlı koruyucu emirler olan stop-loss ve take-profit'in ne kadarını üstlenebileceğine dair dürüst bir çerçeve çizeceğiz. Amaç bir emir türünü diğerinden üstün ilan etmek değil; her birinin hangi takası yaptığını görünür kılmak."
+        ],
+      },
+      {
+        "heading": "Market emri: hız vardır, fiyat kesinliği yoktur",
+        "paragraphs": [
+          "Market emri en basit talimattır: \"şu anda mevcut en iyi fiyattan al ya da sat.\" Karşılığında size hız verir. Emriniz likidite bulduğu anda gerçekleşir ve pozisyonunuz açılır. Çoğu durumda da beklediğiniz fiyata çok yakın bir seviyeden dolar.",
+          "Ancak market emrinin verdiği söz gerçekleşmedir, fiyat değildir. Düğmeye bastığınız anda ekranda gördüğünüz fiyat ile emrin doldurulduğu fiyat aynı olmak zorunda değildir. Aradaki farka kayma (slippage) denir. Kayma her zaman aleyhinize olmaz; lehinize de çalışabilir. Fakat sistematik olarak sizi rahatsız edeceği anlar bellidir: spread'in açıldığı, derinliğin inceldiği, fiyatın saniyeler içinde birkaç seviye atladığı anlar.",
+          "Bu anlar tahmin edilemez değildir. 4 Eylül 12:30 GMT'de ABD tarım dışı istihdam verisi, 16 Eylül 18:00 GMT'de Fed faiz kararı geliyor. Bu tür başlıkların yayımlandığı ilk saniyelerde emir defteri hızla incelir; market emri veren kişi, kendisine sunulan her fiyatı kabul etmiş olur. Tam da bu yüzden haber anında market emriyle girmek, yönü tutturmuş olsanız bile girişinizi birkaç pip kötüleştirebilir.",
+          "Market emrinin doğru kullanım alanı, gerçekleşmenin fiyattan daha önemli olduğu durumlardır: bir pozisyondan derhal çıkmak, bir hatayı kapatmak, likit bir seansta sakin bir piyasada işlem açmak. Ekrandaki fiyata birkaç pip yakınlıkla girmek sizi rahatsız edecekse, market emri sizin aracınız değildir."
+        ],
+      },
+      {
+        "heading": "Limit emri: fiyatı siz seçersiniz, gerçekleşmeyi seçemezsiniz",
+        "paragraphs": [
+          "Limit emri, market emrinin tam tersi bir takas yapar. \"Şu fiyattan ya da daha iyisinden işlem yap, aksi halde bekle\" der. Fiyat konusunda net bir sınır çizer; buna karşılık emrin dolacağına dair bir söz vermez. Fiyat sizin seviyenize hiç gelmezse emir asılı kalır ve o hareketi kaçırırsınız.",
+          "Mantığı yön üzerinden düşünmek en kolayı. Alım tarafında \"daha iyi fiyat\" daha ucuz demektir; bu yüzden buy limit mevcut fiyatın altına konulur. Satış tarafında \"daha iyi fiyat\" daha pahalı demektir; sell limit mevcut fiyatın üstüne konulur. Yani limit emri, fiyatın size doğru gelmesini beklemek anlamına gelir.",
+          "Bu, geri çekilmede alım ya da yükselişte satım mantığıyla çalışan yaklaşımlarla doğal biçimde uyuşur. EUR/USD'nin 26 Ağustos'taki PCE verisi sonrasında 1.1650 civarına gerilediği türden hareketlerde, bir seviyenin test edilmesini bekleyen yatırımcı fiyatın peşinden koşmak yerine limit emriyle o seviyeye emrini bırakır. Fiyat gelirse belirlediği yerden girer; gelmezse hiçbir şey olmaz ve sermayesi boşa bir işleme bağlanmaz.",
+          "Limit emrinin gizli maliyeti de buradadır: gerçekleşmeme riski bir maliyettir. Güçlü bir trendde fiyat hiç geri gelmeden yoluna devam ederse, doğru okumanıza rağmen dışarıda kalırsınız. Ayrıca limit emri hızlı hareketlerde atlanabilir; fiyat seviyenizin içinden geçip gitse bile emrinizin tamamı dolmayabilir."
+        ],
+      },
+      {
+        "heading": "Stop emri neden kırılım işlemlerinin emri sayılır?",
+        "paragraphs": [
+          "Stop emri, limit emrinin ayna görüntüsüdür. Mevcut fiyatın ötesinde bir seviyeye konur ve fiyat o seviyeye ulaştığında tetiklenir. Buy stop mevcut fiyatın üstünde, sell stop altında durur. Yani \"fiyat benim istediğim yöne doğru şu eşiği aşarsa beni içeri al\" der.",
+          "Kritik ayrıntı şudur: tetiklendiği anda stop emri bir market emrine dönüşür. Bu yüzden stop emirleri de kaymaya açıktır. Emrin tetiklendiği seviye ile doldurulduğu seviye aynı olmayabilir; hatta tetiklenmeyi sağlayan hareket ne kadar sertse, aradaki fark o kadar büyür. Stop emri kullanan biri, gerçekleşme kesinliğini fiyat kesinliğine tercih etmiş olur.",
+          "Kırılım işlemlerinde tercih edilmesinin nedeni de tam olarak budur. Bir direncin ya da destek bölgesinin aşılmasını bekleyen yatırımcı, o anda ekran başında olmak zorunda kalmak istemez ve kırılımın hızlı gelişebileceğini bilir. Buy stop emrini direncin biraz üstüne bırakır; fiyat oraya ulaşırsa pozisyon otomatik açılır. Üzerinde 4.700 $ direnci, ardından 4.800-4.900 $ bandı bulunan altın gibi seviyeleri net enstrümanlarda bu yaklaşım yaygındır.",
+          "Bunun bedeli, yanlış kırılımlardır. Fiyat seviyeyi kısa süreliğine aşıp geri dönerse pozisyonunuz açılmış olur ve tam da en kötü noktadan girmiş olabilirsiniz. Stop emri, kırılımın devam edeceğine dair bir varsayım içerir; bu varsayım her zaman doğru çıkmaz."
+        ],
+      },
+      {
+        "heading": "Stop limit: kaymayı sınırlar, gerçekleşmeyi riske atar",
+        "paragraphs": [
+          "Stop limit emri, stop emrinin kayma sorununa verilen cevaptır. İki seviye tanımlarsınız: tetikleme seviyesi ve limit seviyesi. Fiyat tetikleme seviyesine geldiğinde emir aktif olur, ancak market emrine değil limit emrine dönüşür. Yani \"beni şu eşikten sonra içeri al, ama şu fiyattan kötüsüne razı değilim\" demiş olursunuz.",
+          "Bu, kabul edeceğiniz en kötü fiyata bir tavan koyar. Karşılığında ise klasik limit riskini geri getirir: fiyat tetikleme seviyesini aşıp limit seviyenizin ötesine sıçrarsa emir hiç dolmaz. Kaymadan korunmak isterken hareketi tamamen kaçırmış olursunuz.",
+          "Bu takas ne zaman mantıklı olur? Kabaca, kötü bir fiyattan girmenin işlem fikrini bozduğu durumlarda. Dar bir aralıkta çalışan, hedefi girişe yakın olan ve birkaç pip kaymanın risk-getiri oranını anlamsızlaştırdığı kurgularda stop limit korumacı bir seçimdir. Buna karşılık, girmenin girmemeye kesinlikle tercih edildiği durumlarda — örneğin zararı kesmek amacıyla — stop limit kullanmak tehlikelidir, çünkü koruma emriniz hiç çalışmayabilir."
+        ],
+      },
+      {
+        "heading": "Stop-loss ve take-profit bir söz değil, bir talimattır",
+        "paragraphs": [
+          "Yukarıdakiler giriş emirleriydi. Stop-loss ve take-profit ise açık bir pozisyona bağlanan koruyucu emirlerdir. Stop-loss, fiyat aleyhinize belirli bir seviyeye ulaştığında pozisyonu kapatır; take-profit, lehinize belirlenen hedefe ulaştığında kârı realize eder. İkisi de sizin ekran başında olmanızı gerektirmez ve karar anını, kararın soğukkanlı verildiği ana taşır.",
+          "Ancak burada net olmakta fayda var: stop-loss bir söz değildir, bir talimattır. Çoğu stop-loss tetiklendiğinde market emrine dönüşür ve dolayısıyla kaymaya tabidir. Daha önemlisi, fiyat boşlukla (gap) hareket ederse stop seviyeniz hiç işlem görmeden atlanabilir. Hafta sonu kapanışından sonraki açılış boşlukları, beklenmedik başlıklar ve düşük likiditeli saatler bunun tipik örnekleridir.",
+          "Bu, stop-loss kullanmayı anlamsız kılmaz; tam tersine, sınırlarını bilerek kullanmayı gerektirir. Stop-loss'un görevi zararı sıfırlamak değil, zararı yönetilebilir bir aralıkta tutmaktır. Negatif bakiye koruması gibi mekanizmalar da bakiyenin eksiye düşmesini engellemeye yöneliktir; pozisyonun beklenenden kötü bir yerde kapanmasını engellemez. Bu ikisini birbirine karıştırmamak gerekir."
+        ],
+      },
+      {
+        "heading": "Trailing stop nasıl çalışır ve nerede tuzağı vardır?",
+        "paragraphs": [
+          "Trailing stop, sabit bir seviye yerine fiyattan belirli bir mesafede duran ve fiyat lehinize gittikçe onu takip eden bir stop'tur. Fiyat aleyhinize döndüğünde ise yerinde kalır. Böylece kâr biriktikçe koruma seviyesi de yukarı taşınır, ama kazanılan zemin geri verilmez.",
+          "Sayısal bir örnek en açıklayıcısı. Diyelim 1.1650'den alım yaptınız ve 50 pip trailing stop tanımladınız. Başlangıçta stop 1.1600'dedir. Fiyat 1.1730'a, yani lehinize 80 pip yükselirse trailing stop da onu takip eder ve 1.1680'e taşınır. Bu noktada pozisyon geri dönse bile giriş fiyatınızın 30 pip üzerinde kapanır. Fiyat 1.1730'dan geri çekilirse stop 1.1680'de sabit kalır; yeniden yükselirse takip devam eder.",
+          "Buraya kadarı kulağa çok iyi geliyor ve tam da bu yüzden en yanlış anlaşılan emir türüdür. Kritik nokta şudur: çoğu platformda trailing stop terminal tarafında çalışır. Yani takip mantığını sizin bilgisayarınızdaki program yürütür. Platformu kapattığınızda, bilgisayar uyku moduna geçtiğinde ya da internet bağlantınız koptuğunda trailing stop takip etmeyi bırakır; sunucuda yalnızca en son taşınmış olduğu seviye kalır.",
+          "Bu, gece boyunca kârının korunduğunu sanan yatırımcı için gerçek bir tuzaktır. Sunucu tarafında çalışan bir çözüm kullanmıyorsanız — bir VPS, brokerın sunucu tarafı trailing desteği ya da bunu kendisi yöneten bir uzman danışman — trailing stop yalnızca siz ekran başındayken güvenilirdir. Kâr korumasını uzun süreli olarak trailing stop'a devretmek istiyorsanız, önce bunun nerede çalıştığını doğrulayın. Alternatif olarak, belirli kâr seviyelerinde stop'u elle taşımak daha yavaş ama daha öngörülebilir bir yöntemdir."
+        ],
+      },
+      {
+        "heading": "Hangi durumda hangi emir?",
+        "paragraphs": [
+          "Emir türlerini soyut tanımlar olarak değil, tekrar eden senaryolara verilen cevaplar olarak düşünmek daha faydalıdır. Aşağıdaki eşleştirmeler kural değil, başlangıç noktasıdır; kendi işlem tarzınıza göre değişir."
+        ],
+        "list": [
+          "Haber anı: Veri yayımlanmadan hemen önce ve sonra spread genişler, kayma büyür. 4 Eylül 12:30 GMT tarım dışı istihdam ya da 16 Eylül 18:00 GMT Fed kararı gibi anlarda ya işlemden uzak durmak ya da fiyatı önceden bağlayan emirler kullanmak, market emriyle içeri dalmaktan daha öngörülebilirdir.",
+          "Kırılım: Bir seviyenin aşılmasını bekliyorsanız buy stop veya sell stop, seviyenin ötesine yerleştirilir. Ekran başında olmanızı gerektirmez, ancak kaymayı ve yanlış kırılımı kabul etmiş olursunuz.",
+          "Geri çekilmede alım: Fiyatın size gelmesini bekliyorsanız buy limit desteğin, sell limit direncin üzerinde konumlanır. Fiyat gelmezse işlem olmaz; bu bir kayıp değil, kaçırılmış bir ihtimaldir.",
+          "Kâr koruma: Pozisyon lehinize açıldıkça stop'u başabaşa ve sonra kâra taşımak. Trailing stop bunu otomatikleştirir, ama nerede çalıştığını bilmek şartıyla.",
+          "Kademeli çıkış: Tek bir take-profit yerine hedefi bölmek. Pozisyonun bir kısmını ilk hedefte kapatıp kalanına daha geniş bir stop bırakmak, doğru çıkış seviyesini tek seferde bilme zorunluluğunu ortadan kaldırır.",
+          "Acil çıkış: Fikir bozulduysa ve pozisyondan çıkmak fiyattan önemliyse market emri en doğrudan araçtır. Burada birkaç pip kayma, kararsız kalmanın maliyetinden düşüktür."
+        ],
+      },
+      {
+        "heading": "Emir kullanımında en sık görülen hatalar",
+        "paragraphs": [
+          "Emir türlerini bilmek ile doğru kullanmak farklı şeylerdir. Aşağıdaki hataların ortak yanı, teknik bir bilgi eksikliğinden değil, emrin ne vaat ettiğinin yanlış anlaşılmasından kaynaklanmalarıdır."
+        ],
+        "list": [
+          "Stop'u analizin gerektirdiği yere değil, \"içine sinen\" yere koymak. Kaybetmeye razı olduğunuz tutar pozisyon büyüklüğüyle ayarlanır; stop seviyesi ise fiyatın nerede sizi yanılttığıyla belirlenir. Bu ikisini karıştırmak, teknik olarak anlamsız yerlerde stop yemenize yol açar.",
+          "Take-profit'i stop'tan dar tutmak. Hedefiniz riskinizden küçükse, isabet oranınızın sürekli yüksek kalması gerekir. Bu, uzun vadede sürdürmesi zor bir beklentidir.",
+          "Önemli veri öncesinde dar stop bırakmak. Volatilitenin arttığı anda normal bir dalgalanma bile stop'a değebilir; yön doğru çıksa dahi pozisyondan çıkmış olursunuz.",
+          "Trailing stop'u platform kapalıyken çalışıyor sanmak. Terminal tarafında çalışan bir trailing stop, siz uyurken kârınızı takip etmez.",
+          "Limit emri koyup unutmak. Günler sonra tamamen değişmiş bir piyasada, artık geçerli olmayan bir tezle kurulmuş emir dolabilir. Emirlerin de bir son kullanma tarihi olmalıdır.",
+          "Aynı anda çok sayıda bekleyen emir bırakmak. Birkaçının aynı anda dolması, planladığınızdan çok daha büyük bir toplam riske yol açabilir."
+        ],
+      },
+      {
+        "heading": "Pratikte: platform, hesaplama ve son söz",
+        "paragraphs": [
+          "Bu emir türlerinin tamamı MT4 ve MT5'te standart olarak bulunur; XM her iki platformu da destekler, dolayısıyla emir yapısı açısından hesap seçiminden çok kullanım alışkanlığınız belirleyici olur. Emir türü kararını verirken ikinci adım her zaman pozisyon büyüklüğüdür: stop mesafeniz genişledikçe aynı risk tutarını korumak için lot küçülmelidir. FXPARTNER'daki Pozisyon Hesaplayıcı bu ilişkiyi işlem öncesinde görmenizi kolaylaştırır; hangi haberin ne zaman geleceğini planlamak içinse Ekonomik Takvim işinizi görür.",
+          "Emir türleri arasında üstünlük sıralaması yoktur; yalnızca farklı takaslar vardır. Market emri gerçekleşmeyi satın alır, fiyattan feragat eder. Limit emri fiyatı satın alır, gerçekleşmeden feragat eder. Stop emri yönün teyidini satın alır, kaymayı kabul eder. Stop limit kaymayı sınırlar, dolmama riskini üstlenir. Trailing stop kâr korumasını otomatikleştirir, bunun karşılığında nerede çalıştığını bilmenizi şart koşar.",
+          "Yapılabilecek en somut şey, bir sonraki işleminizden önce şu iki soruyu sormaktır: bu emir bana neyi kesin olarak veriyor, neyi vermiyor? Cevabı netse, emir türü seçiminiz artık varsayılan bir alışkanlık değil, bilinçli bir karardır.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz."
+        ],
+      },
+    ],
+  },
+  {
+    "slug": "parite-korelasyonu-gizli-risk-yogunlasmasi",
+    "coverImage": "/blog/parite-korelasyonu-gizli-risk-yogunlasmasi-cover.png",
+    "title": "Üç Ayrı Pozisyon, Tek Bir Bahis: Parite Korelasyonu ve Gizli Risk Yoğunlaşması",
+    "excerpt": "Her pozisyonda %1 risk aldığını sanan bir trader, üç korele parite açtığında aslında tek bir yönde %3 risk taşıyor olabilir. Korelasyonun neden sabit olmadığını ve pozisyonları para birimi bazında saymayı ele alıyoruz.",
+    "publishedAt": "2026-08-28",
+    "readingMinutes": 10,
+    "lang": "tr",
+    "sections": [
+      {
+        "paragraphs": [
+          "Bir trader sabah ekranını açıyor. EUR/USD'de long, GBP/USD'de long, AUD/USD'de long pozisyon alıyor. Üç farklı parite, üç farklı grafik, üç ayrı işlem kaydı. Hesap özetinde üç satır görünüyor ve her birinde risk aynı: sermayenin %1'i. Zihninde yaptığı hesap basit — üç pozisyon, toplam %3 değil, çeşitlendirilmiş bir portföy.",
+          "Ama bu üç işlemin karşı tarafında duran şey aynı: ABD doları. Üçünde de dolar satılmış durumda. Grafikler farklı, isimler farklı, ama bahis tek: dolar zayıflayacak. Trader üç ayrı fikri test ettiğini sanırken, aslında aynı fikri üç kez, üç kat büyüklükte oynuyor.",
+          "Bu, hesapları sessizce eriten hataların en yaygınlarından biri. Sessiz olmasının nedeni, hiçbir aşamada bir kural ihlali gibi görünmemesi. Pozisyon büyüklükleri doğru hesaplanmış, stoplar yerleştirilmiş, her işlemde risk sınırı korunmuş. Sorun tek tek işlemlerde değil, işlemlerin birbirine olan ilişkisinde — ve o ilişki hiçbir platformun pozisyon ekranında yazmıyor.",
+          "Bu yazıda korelasyonun ne olduğunu, neden sabit olmadığını, pozisyonların para birimi bazında nasıl sayılacağını ve gerçek yön riskinin nasıl hesaplanacağını ele alıyoruz."
+        ],
+      },
+      {
+        "heading": "Korelasyon nedir ve neden sabit bir sayı değildir?",
+        "paragraphs": [
+          "Korelasyon, iki varlığın fiyat hareketlerinin birbirine ne kadar benzediğini ölçen istatistiksel bir katsayıdır. Değer aralığı -1 ile +1 arasındadır.",
+          "Katsayı +1'e yaklaştıkça iki enstrüman aynı yönde, benzer ölçüde hareket ediyor demektir. -1'e yaklaştıkça ters yönde hareket ederler: biri yükselirken diğeri düşer. Sıfıra yakın bir katsayı ise iki varlığın hareketleri arasında anlamlı bir bağ olmadığını gösterir.",
+          "Buraya kadarı ders kitabı bilgisi. Asıl önemli olan, çoğu trader'ın atladığı ikinci kısım: korelasyon katsayısı sabit değildir. Bir dönem 0.60 olan bir ilişki, piyasa rejimi değiştiğinde 0.90'a çıkabilir ya da 0.20'ye düşebilir. Katsayı, hangi dönem üzerinden ve hangi zaman diliminde hesapladığınıza göre de değişir — 20 günlük korelasyon ile 200 günlük korelasyon aynı çifti çok farklı gösterebilir.",
+          "Ve en kritik nokta şu: korelasyonlar özellikle stres anlarında yükselir. Piyasa sakinken her paritenin kendi hikâyesi vardır — Avrupa'nın enflasyon verisi euroyu, İngiltere'nin istihdam rakamı sterlini, Çin'in PMI'ı Avustralya dolarını hareket ettirir. Ama tek bir büyük sürücü devreye girdiğinde bu ayrı hikâyeler susar ve her şey aynı anda aynı yöne döner.",
+          "Yani çeşitlendirme, tam ona en çok ihtiyacınız olduğu anda kaybolur. Portföyünüzün farklı parçalarının birbirini dengelemesini beklediğiniz sert hareket gününde, o parçalar birbirini dengelemek yerine üst üste biner. Sakin piyasada gerçek görünen çeşitlendirme, sert piyasada bir yanılsamaya dönüşür."
+        ],
+      },
+      {
+        "heading": "Ortak payda mantığı: pariteleri değil, para birimlerini sayın",
+        "paragraphs": [
+          "Forex'te her enstrüman iki para biriminden oluşur. EUR/USD tek bir varlık değil, euro ile dolar arasındaki bir orandır. Bu yüzden bir parite pozisyonu almak, aslında aynı anda iki pozisyon almaktır: bir para biriminde long, diğerinde short.",
+          "EUR/USD'de long olmak, euro long ve dolar short demektir. Bu basit çeviriyi tüm açık pozisyonlarınıza uyguladığınızda, hesabınızın gerçek yapısı ortaya çıkar.",
+          "Baştaki örneğe dönelim:"
+        ],
+        "list": [
+          "EUR/USD long = EUR long + USD short",
+          "GBP/USD long = GBP long + USD short",
+          "AUD/USD long = AUD long + USD short",
+          "Toplam: üç farklı para biriminde birer birim long, ABD dolarında üç birim short."
+        ],
+      },
+      {
+        "heading": "Aynı hata karşı tarafta da olur: iki kat EUR örneği",
+        "paragraphs": [
+          "Yoğunlaşma yalnızca dolar tarafında oluşmaz. Ana para biriminde de aynı şey yaşanır.",
+          "EUR/USD long ve EUR/GBP long pozisyonlarını aynı anda taşıyan biri, iki farklı parite açtığını düşünür. Oysa dökümü çıkardığınızda tablo şudur: birinci pozisyon EUR long + USD short, ikinci pozisyon EUR long + GBP short. Ortak payda euro ve euroda iki birim long taşınıyor.",
+          "Bu yapının davranışı da buna göredir. Euro Bölgesi tarafından gelen tek bir haber — örneğin 30 Eylül'de açıklanacak Euro Bölgesi öncü TÜFE verisi — iki pozisyonu birden aynı yöne iter. Beklentiden zayıf bir enflasyon, hem EUR/USD'yi hem EUR/GBP'yi aşağı çekebilir. Trader iki farklı fikrin bağımsız sonuçlarını beklerken, tek bir verinin çift etkisini alır.",
+          "Bunun tersi de mümkündür ve daha da sinsidir: EUR/USD long ile GBP/USD short aynı anda açıldığında dolar tarafı büyük ölçüde birbirini götürür, geriye kalan net pozisyon esas olarak EUR long + GBP short olur. Yani trader farkında olmadan bir EUR/GBP işlemi taşıyor demektir. Bu bazen kasıtlı ve makul bir tercih olabilir — ama kasıtsızsa, taşınan riskin ne olduğu bilinmiyor demektir."
+        ],
+      },
+      {
+        "heading": "Gerçek risk hesabı: %1 nasıl sessizce %3 olur?",
+        "paragraphs": [
+          "Şimdi sayılara geçelim. 10.000 dolarlık bir hesap düşünün. Trader disiplinli davranıyor ve her pozisyonda sermayesinin %1'ini, yani 100 doları riske atıyor. Üç pozisyon açıyor: EUR/USD long, GBP/USD long, AUD/USD long. Her birinde stop seviyesi belirlenmiş, her birinde risk 100 dolar.",
+          "Hesabın zihnindeki hali: üç bağımsız işlem, her biri kendi kaderini yaşayacak. Bazıları kazanacak, bazıları kaybedecek, ortalamada risk dağılmış olacak.",
+          "Hesabın gerçek hali: dolar sert şekilde güçlenirse üç pozisyon da aynı anda zarara geçer. Stoplar peş peşe değil, neredeyse aynı dakikalar içinde tetiklenir. Toplam kayıp 300 dolar — yani sermayenin %3'ü.",
+          "Bu sonuç, tek bir işlemde doğrudan %3 risk almakla büyük ölçüde aynı şeydir. Aradaki tek fark, trader'ın bunu hiç öyle planlamamış olması. Kimse sabah oturup \"bugün sermayemin %3'ünü tek bir dolar bahsine yatırıyorum\" demedi. O karar, üç ayrı ekranda üç ayrı defa, her seferinde masum görünen %1'lik adımlarla alındı.",
+          "Bunu tetikleyecek katalizör bulmak da zor değil. 4 Eylül 12:30 GMT'de ABD tarım dışı istihdam verisi, 16 Eylül 18:00 GMT'de Fed faiz kararı açıklanacak. Bu tür olaylarda dolar tek başına yön belirler ve o yön, üç pozisyonun üçünü birden aynı anda vurur.",
+          "Korelasyonun tam +1 olmadığını, dolayısıyla üç stopun her zaman birlikte tetiklenmeyeceğini söyleyebilirsiniz — bu doğru. Ama planlama yaparken gerçekçi varsayım en kötü senaryodur, ortalama senaryo değil. Korelasyonun zaten yükseldiği stres günlerinde üç stopun birlikte gitmesi istisna değil, beklenen durumdur."
+        ],
+      },
+      {
+        "heading": "Altın, endeks ve kripto: yoğunlaşma sadece parite tarafında değil",
+        "paragraphs": [
+          "Bu sorunun döviz pariteleriyle sınırlı olduğunu düşünmek yaygın bir yanılgı. XAU/USD, US100 gibi enstrümanlar da isim olarak farklı sınıflarda yer alsa bile, dolar ve risk iştahı kanallarından döviz pozisyonlarınızla ilişkili hale gelebilir.",
+          "Altın zaten dolar cinsinden fiyatlanır; XAU/USD'de long olmak, tanımı gereği dolara karşı bir pozisyondur. Bir endeks pozisyonu ise doğrudan dolar bahsi olmasa bile, genel risk iştahı üzerinden AUD gibi yüksek betalı para birimleriyle aynı tarafa düşebilir.",
+          "Bu haftanın verisi bunun somut örneğini verdi. 26 Ağustos'ta açıklanan PCE verilerinin ardından dolar genelinde güçlendi ve ABD Hazine getirileri yükseldi. Sonuç, üç farklı parite grafiğinde eşzamanlı olarak göründü: EUR/USD birkaç günün dibine, 1.1650 civarına geriledi; GBP/USD 1.3600'ün altına çekildi; USD/JPY yukarı yöne döndü. Üç ayrı ekran, üç ayrı hikâye gibi görünen ama tek bir sürücüsü olan hareket.",
+          "Kripto tarafında ilişki daha gevşek ve daha az öngörülebilir. Bitcoin aynı veride kısa süreli geri çekildi, ancak ardından toparlandı ve 27 Ağustos'u 79.027 dolardan, günlük bazda +%0.59 ile kapattı. Yani makro sürücü orada da bir etki yarattı, ama etkinin kalıcılığı farklı oldu. Bu tam olarak korelasyonun neden \"var ya da yok\" değil \"ne kadar ve ne zaman\" sorusu olduğunu gösteriyor.",
+          "Pratik çıkarım şu: portföyünüzü varlık sınıfına göre değil, sürücüye göre gruplayın. \"Bir forex, bir altın, bir endeks pozisyonum var\" cümlesi kulağa çeşitlendirilmiş geliyor. \"Üçü de doların yönüne duyarlı\" cümlesi ise gerçeği anlatıyor."
+        ],
+      },
+      {
+        "heading": "Ters yöndeki hata: negatif korele pozisyonlarla risk sıfırlanmaz",
+        "paragraphs": [
+          "Korelasyonu fark eden bazı trader'lar sorunu ters yönde çözmeye çalışır: madem aynı yönde pozisyon yığmak riski büyütüyor, ters yönde pozisyon açarak dengeleyelim.",
+          "Klasik örnek EUR/USD long ile USD/CHF long pozisyonunu aynı anda taşımaktır. Bu iki enstrüman tarihsel olarak ters yönde hareket etme eğilimindedir, çünkü ikisinin de bir tarafında dolar vardır ve dolar zıt konumdadır. EUR/USD long dolar short demektir; USD/CHF long ise dolar long. İki pozisyon, dolar tarafında büyük ölçüde birbirini götürür.",
+          "Sonuç, riskin sıfırlanması değil, maliyetin ikiye katlanmasıdır. Net yön riski büyük ölçüde nötrleşirken, iki pozisyonun da spreadi ödenir ve pozisyonlar gecelik taşınırsa iki ayrı swap işler. Yani hesap, hiçbir yöne bahis yapmadan işlem maliyeti üretmeye devam eder.",
+          "Üstelik bu nötrleşme de tam değildir. EUR/USD ile USD/CHF arasındaki ilişki mükemmel bir -1 değildir ve zaman içinde değişir. Geriye kalan artık risk — esasen EUR ile CHF arasındaki ilişki — trader'ın bilinçli olarak seçmediği bir pozisyondur. Yani ödediğiniz iki kat maliyetin karşılığında, aslında ne olduğunu bilmediğiniz üçüncü bir bahis taşırsınız.",
+          "Bir pozisyonun yönünden emin değilseniz, doğru hamle onu ters bir pozisyonla örtmek değil, pozisyonu küçültmek veya kapatmaktır. Bu daha az heyecanlı, ama çok daha ucuz bir çözümdür."
+        ],
+      },
+      {
+        "heading": "Ne yapmalı: yoğunlaşmayı görünür kılan beş uygulama",
+        "paragraphs": [
+          "Korelasyon riskini yönetmek karmaşık istatistik gerektirmez. Gereken şey, pozisyon defterini farklı bir gözle okumaktır. Aşağıdaki beş adım, çoğu trader için gizli yoğunlaşmayı ortaya çıkarmaya yeter:"
+        ],
+        "list": [
+          "Pozisyonları parite değil para birimi bazında sayın. Her açık işlemi iki satıra bölün (long bacak ve short bacak), sonra para birimlerini toplayın. Ortaya çıkan tablo, gerçek pozisyonunuzdur.",
+          "Toplam yön riskine bir üst sınır koyun. Örneğin tek bir para biriminde net maruziyetinizin belirli bir eşiği aşmamasını kural haline getirin. Sınırın büyüklüğünden çok, bir sınırın var olması önemlidir.",
+          "Korele pozisyonlarda lotu bölün. Aynı sürücüye bağlı üç pozisyon açacaksanız, her birinde %1 değil yaklaşık %0.33 risk alın. Böylece üç stop birlikte tetiklense bile toplam kayıp planladığınız tek birim riskte kalır.",
+          "Gerçekten farklı sürücüsü olan enstrümanlar arayın. Çeşitlendirme, farklı sembol açmak değil, farklı haber akışına duyarlı olmaktır. Örneğin 2 Eylül'deki RBNZ kararı ile aynı gün açıklanacak Kanada Merkez Bankası kararı, birbirinden bağımsız sürücülerdir.",
+          "Korelasyonu düzenli aralıklarla yeniden kontrol edin. Üç ay önce hesapladığınız katsayı bugünü anlatmayabilir. Özellikle merkez bankası kararları ve büyük veri açıklamaları çevresinde ilişkiler hızla değişir."
+        ],
+      },
+      {
+        "heading": "Hesaplamayı kolaylaştıran araçlar ve pratik detaylar",
+        "paragraphs": [
+          "Bu adımların en zahmetli görünen kısmı, korele pozisyonlarda lot bölmektir. %1'lik riski üçe bölüp her pozisyon için ayrı lot büyüklüğü çıkarmak, elle yapıldığında hem yavaş hem hataya açıktır. Sitedeki Pozisyon Hesaplayıcı bu noktada işe yarar: hesap büyüklüğü, risk yüzdesi ve stop mesafesini girip her bir bacak için lot değerini ayrı ayrı üretebilirsiniz. Portföyünüzün para birimi dökümünü çıkarırken ya da iki enstrümanın aynı sürücüye bağlı olup olmadığını sorgularken AI Asistan'a danışmak da bu analizi hızlandırır. Hangi haberin hangi pozisyon grubunu vuracağını görmek için ise Ekonomik Takvim, tarihleri para birimlerine eşlemenin en doğrudan yoludur.",
+          "Uygulama tarafında küçük ama önemli bir ayrıntı var: pozisyonu üçe bölmek, hesabınızın izin verdiği minimum lot adımına bağlıdır. Küçük hesaplarda %1'lik riski üç parçaya böldüğünüzde çıkan lot değeri, standart hesap adımlarının altına düşebilir ve bölme fiilen imkânsız hale gelir. Bu yüzden mikro lot destekleyen hesap türleri bu yöntemi uygulanabilir kılar. XM tarafında Micro ve Standard hesapların 5 dolarlık minimum yatırımla açılabilmesi ve mikro lot bazlı işlem desteği, küçük sermayelerde korele pozisyonları bölmeyi pratikte mümkün kılan bir detaydır. Broker tarafındaki koşulları karşılaştırmak isteyenler için Broker Sorgulama aracı ve Broker Sıralamaları sayfaları başlangıç noktası olabilir.",
+          "Bir uyarı da yerinde olur: lot bölme, kötü bir fikri iyi bir fikre dönüştürmez. Sadece aynı fikrin hesabınızda kapladığı yeri planladığınız ölçüde tutar. Analizinizin kalitesi ayrı bir konudur; korelasyon yönetimi onun yerine geçmez."
+        ],
+      },
+      {
+        "heading": "Sonuç: risk, pozisyon sayısıyla değil sürücü sayısıyla ölçülür",
+        "paragraphs": [
+          "Bir hesabın taşıdığı gerçek risk, açık pozisyon sayısına bakarak anlaşılmaz. Beş pozisyonun tamamı tek bir makro sürücüye bağlıysa, o hesap beş fikir değil bir fikir taşıyor demektir — sadece beş kat büyüklükte.",
+          "Bu yüzden pozisyon defterine bakarken sorulacak soru \"kaç işlemim var\" değil, \"kaç farklı sürücüye bağlıyım\" olmalı. 4 Eylül'de ABD tarım dışı istihdamı, 10 Eylül'de ECB faiz kararı, 16 Eylül'de Fed faiz kararı gibi olayların her biri, portföyünüzdeki hangi pozisyonları aynı anda hareket ettireceğini önceden söyleyebilir. O eşlemeyi yapmak, olaydan sonra sürprizle karşılaşmaktan çok daha ucuzdur.",
+          "Korelasyon riski, teknik bir ayrıntı değil, risk yönetiminin ölçü biriminin doğru seçilmesi meselesidir. İşlem başına risk yüzdesi tek başına eksik bir ölçüdür; onu tamamlayan şey, aynı sürücüye bağlı toplam maruziyettir. Bu ikisini birlikte takip eden bir trader, en azından ne kadar risk aldığını bilir — ki bu, sonucu bilmenin mümkün olmadığı bir işte kontrol edilebilen az sayıdaki şeyden biridir.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz."
+        ],
+      },
+    ],
+  },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
