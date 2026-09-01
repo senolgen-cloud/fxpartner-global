@@ -32,6 +32,133 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    // Written off the site's own calendar feed — the same TradingView
+    // endpoint src/lib/economicCalendar.ts reads for /ekonomik-takvim —
+    // pulled for the whole of 1-30 September 2026 and filtered to the 66
+    // high-impact rows, rather than off a third-party list. Every time
+    // below is TSİ, converted from the feed's UTC by hand.
+    //
+    // Deliberately carries NO market-implied probabilities. Those move
+    // daily, none in circulation could be verified when this was written,
+    // and a schedule piece that quotes a stale percentage reads as
+    // analysis while ageing into a plain wrong number. Previous readings
+    // appear only where the feed itself carried them, and are labelled as
+    // the calendar's previous value rather than as current fact.
+    //
+    // The 31 Ağustos-4 Eylül week already has its own long piece; this one
+    // links to it instead of repeating it, and spends its length on the
+    // three weeks nothing else on the site covers.
+    slug: "eylul-2026-ekonomik-takvimi",
+    coverImage: "/blog/eylul-2026-ekonomik-takvimi-cover.png",
+    lang: "tr",
+    title:
+      "Eylül 2026 Ekonomik Takvimi: Yedi Merkez Bankası Kararı ve Otuz Üç Saatlik Pencere",
+    excerpt:
+      "Eylül'de otuz gün içinde yedi merkez bankası faiz kararı açıklıyor ve üçü aynı otuz üç saate sığıyor. Ayın tamamını, tarih ve saatleriyle, hangi paritenin nerede hareket edeceğini göstererek ele alıyoruz.",
+    publishedAt: "2026-09-01",
+    readingMinutes: 9,
+    sections: [
+      {
+        paragraphs: [
+          "Eylül 2026, forex takviminde alışılmadık biçimde yoğun bir ay. Otuz gün içinde yedi merkez bankası faiz kararı açıklıyor: Kanada Merkez Bankası (2 Eylül), TCMB ve Avrupa Merkez Bankası (10 Eylül), Fed (16 Eylül), İngiltere Merkez Bankası (17 Eylül), Japonya Merkez Bankası (18 Eylül) ve Avustralya Merkez Bankası (29 Eylül). Bunların üçü aynı otuz üç saatlik pencereye sığıyor.",
+          "Bu yazı bir tahmin listesi değil. Aşağıdaki tarih ve saatlerin tamamı, FXPARTNER'ın Ekonomik Takvim sayfasını besleyen kaynaktan 1-30 Eylül aralığı için çekildi ve yüksek etkili olaylara göre filtrelendi — ay genelinde 66 başlık. Saatlerin tamamı Türkiye saatidir (TSİ).",
+          "Takvimde bilinçli olarak yer vermediğimiz tek şey, piyasa fiyatlamasından türetilen olasılık oranları. Bu oranlar günlük değişir; bir ay boyunca okunacak bir takvim yazısında dondurulduklarında analiz gibi görünüp yanlış bir rakama dönüşürler. Aşağıda yalnızca takvimin kendisi ve takvimin taşıdığı önceki okumalar var.",
+        ],
+      },
+      {
+        heading: "Ayın omurgası: üç tarih",
+        paragraphs: [
+          "Eylül'ün tamamını üç tarih çerçeveliyor ve bunların sırası tek başına bilgi taşıyor:",
+        ],
+        list: [
+          "4 Eylül 15:30 — ABD tarım dışı istihdam, işsizlik oranı ve ortalama saatlik kazanç aynı anda.",
+          "11 Eylül 15:30 — ABD tüketici enflasyonu (manşet ve çekirdek, aylık ve yıllık dört seri birden).",
+          "16 Eylül 21:00 — Fed faiz kararı, beraberinde ekonomik projeksiyonlar; 21:30'da basın toplantısı.",
+        ],
+      },
+      {
+        paragraphs: [
+          "Sıralamanın kendisi önemli: Fed kararını, ayın iki ana verisini gördükten sonra veriyor. Yani 4 ve 11 Eylül'de gelen rakamlar 16 Eylül'e girerken tabloyu değiştirmiş olacak. Bu üç tarih arasındaki günlerde piyasanın yaptığı şey, çoğunlukla bu iki veriyi karara doğru yeniden fiyatlamaktır.",
+          "16 Eylül toplantısına ekonomik projeksiyonların eşlik etmesi ayrıca not edilmeli. Projeksiyonlar yılda dört toplantıda yayımlanır; kurul üyelerinin faiz patikasına dair beklentilerini gösterdiği için, kararın kendisi beklendiği gibi çıksa bile fiyat hareketi yaratabilen ikinci bir başlıktır.",
+        ],
+      },
+      {
+        heading: "1-4 Eylül: Ay istihdam raporuyla açılıyor",
+        paragraphs: [
+          "Ayın ilk haftası tek başına ele alınmayı hak edecek kadar yoğun ve bu haftayı FXPARTNER Akademi'de ayrı bir yazıda gün gün inceledik. Burada yalnızca çerçeveyi bırakıyoruz: 1 Eylül 17:00'de ABD ISM imalat PMI ve JOLTS açık pozisyon verisi, aynı gün 12:00'de Euro Bölgesi öncü enflasyonu; 2 Eylül 16:45'te Kanada Merkez Bankası kararı; 3 Eylül 17:00'de ISM hizmet PMI; 4 Eylül 15:30'da ABD ve Kanada istihdam raporları aynı dakikada.",
+          "Kanada ile ABD istihdam verilerinin aynı dakikaya denk gelmesi USD/CAD için özel bir durum yaratıyor: o dakikada iki ekonominin işgücü verisi aynı anda fiyatlanır ve paritedeki oynaklık tek taraflı verilere göre daha yüksek olabilir.",
+        ],
+      },
+      {
+        heading: "7-11 Eylül: 105 dakikada dört başlık, ertesi gün ABD enflasyonu",
+        paragraphs: [
+          "Haftanın ilk yarısı Asya verisiyle geçiyor: 8 Eylül 06:00'da Çin dış ticaret dengesi, ihracat ve ithalat; 9 Eylül 04:30'da Çin tüketici enflasyonu. Çin verisi Avrupa seansındaki fiyatları emtia talebi üzerinden ilgilendirir — sanayi talebine dair zayıf bir okuma, önce AUD ve NZD üzerinde görülür.",
+          "Asıl yoğunluk 10 Eylül öğleden sonrasında. Yüz beş dakika içinde dört başlık arka arkaya geliyor: 14:00'te TCMB faiz kararı, 15:15'te ECB faiz kararı ve mevduat faizi, 15:30'da ABD üretici enflasyonu, 15:45'te ECB basın toplantısı. Aynı gün 10:00'da Türkiye sanayi üretimi de açıklanıyor.",
+          "Bu birleşim, TRY ve EUR pozisyonlarını aynı anda taşıyan bir hesap için ayın en dikkat isteyen öğleden sonrası. İki karar arasında yalnızca 75 dakika var; ilk karara verilen tepki henüz oturmadan ikincisi geliyor ve ECB'de asıl hareket çoğu zaman kararda değil, 45 dakika sonraki basın toplantısında çıkar.",
+          "11 Eylül ise ayın ikinci kritik tarihi. 15:30'da ABD tüketici enflasyonunun dört serisi birden açıklanıyor: manşet ve çekirdek, aylık ve yıllık. Aynı gün 09:00'da İngiltere aylık büyüme verisi, 17:00'de ABD Michigan tüketici güveni öncü okuması var.",
+          "Enflasyon verisinde bakılacak sıra manşet değil çekirdektir. Manşet rakam enerji ve gıda fiyatlarındaki oynaklığı taşır; merkez bankalarının politika kararında ağırlık verdiği seri, bu kalemlerin dışarıda bırakıldığı çekirdek enflasyondur. İkisinin birbirinden ayrıştığı aylarda piyasanın ilk tepkisi sık sık geri alınır.",
+        ],
+      },
+      {
+        heading: "14-18 Eylül: Otuz üç saatte üç merkez bankası",
+        paragraphs: [
+          "Ayın en yoğun penceresi burada. 16 Eylül 21:00'de Fed kararı ve ekonomik projeksiyonlar, 21:30'da basın toplantısı. On yedi saat sonra, 17 Eylül 14:00'te İngiltere Merkez Bankası kararı. Onun da on altı saat ardından, 18 Eylül 06:00'da Japonya Merkez Bankası kararı. Üç merkez bankası, otuz üç saat.",
+          "Bu pencereyi hazırlayan veriler de dikkat çekici biçimde önüne yerleşmiş. İngiltere enflasyonu 16 Eylül 09:00'da, yani BoE kararından yirmi dokuz saat önce açıklanıyor. Japonya enflasyonu 18 Eylül 02:30'da, BoJ kararından yalnızca üç buçuk saat önce geliyor. Her iki durumda da karar, enflasyon rakamı piyasada tazeyken veriliyor.",
+          "Haftanın geri kalanı da boş değil: 14 Eylül 15:30'da Kanada enflasyonu; 15 Eylül 05:00'te Çin sanayi üretimi ve perakende satışları, 09:00'da İngiltere işsizlik oranı, 12:00'de Almanya ZEW ekonomik beklenti endeksi; 16 Eylül 15:30'da ABD perakende satışları; 17 Eylül 15:30'da ABD konut başlangıçları ve inşaat izinleri; 18 Eylül 09:00'da İngiltere perakende satışları.",
+          "Pratik açıdan bu haftanın en gözden kaçan riski BoJ'un saati. Karar Cuma sabahı 06:00'da, yani Avrupa seansı açılmadan geliyor. Japon yeni içeren bir pozisyonu Perşembe kapanışında taşımak, kararı uyurken karşılamak anlamına gelebilir; JPY paritelerinde o sabahki ilk hareket, likiditenin ince olduğu bir saatte gerçekleşir.",
+        ],
+      },
+      {
+        heading: "21-25 Eylül: Ayın tek sakin haftası",
+        paragraphs: [
+          "Bu hafta ayın tek merkez bankası kararı olmayan ve ABD'den ne enflasyon ne istihdam verisi gelen haftası. Takvimde 23 Eylül 10:30'da Euro Bölgesi öncü imalat PMI, 11:30'da İngiltere öncü imalat ve hizmet PMI verileri; 24 Eylül 11:00'de Almanya Ifo iş dünyası güven endeksi; 25 Eylül 09:00'da Almanya GfK tüketici güveni ve 15:30'da ABD dayanıklı mal siparişleri var.",
+          "Öncü PMI verileri anket temellidir ve resmi istatistiklerden önce gelir; bu yüzden yön değişimlerini erken gösterme eğilimindedirler. Ancak tek bir ayın PMI okuması, kendisinden sonra gelen sert verilerle sık sık çelişir.",
+          "Bir ayın sakin haftası, işlem yapılmayacak hafta demek değil; ama takvimi olan üç haftanın arasındaki bu boşluk, pozisyon büyüklüğünü ve açık riski gözden geçirmek için ayın en uygun aralığı.",
+        ],
+      },
+      {
+        heading: "28 Eylül-2 Ekim: Ay çekirdek PCE ile kapanıyor",
+        paragraphs: [
+          "29 Eylül 07:30'da Avustralya Merkez Bankası kararı, aynı gün 17:00'de ABD JOLTS açık pozisyon verisi geliyor.",
+          "30 Eylül ise ayın son yoğun günü. 04:30 ve 04:45'te Çin imalat PMI'larının iki farklı serisi, ardından Euro Bölgesi öncü enflasyon okumaları ve 15:30'da ABD'den dört veri birden: ikinci çeyrek büyümesinin kesin okuması, çekirdek PCE fiyat endeksi, kişisel gelir ve kişisel harcamalar.",
+          "Bu dördü arasında Fed açısından ağırlığı olan çekirdek PCE'dir. Fed'in enflasyon hedefini takip ettiği seri, 11 Eylül'de gelen TÜFE değil bu endekstir; ikisi farklı sepetler ve farklı ağırlıklar kullandığı için aynı ayda birbirinden ayrışabilirler. Ayın ABD enflasyonuyla açılıp yine ABD enflasyonuyla kapanması, Eylül'ü bir enflasyon ayı yapıyor.",
+          "Aynı gün Türkiye'de de işsizlik oranı ve kesin dış ticaret verileri açıklanıyor.",
+        ],
+      },
+      {
+        heading: "Türkiye takvimi: 3 ve 10 Eylül",
+        paragraphs: [
+          "Türkiye tarafında ayın iki belirleyici tarihi var. 3 Eylül 10:00'da tüketici ve üretici enflasyonu açıklanıyor; takvimdeki önceki okumalar TÜFE'de yıllık %31,75 ve aylık %1,78, ÜFE'de yıllık %27,83. Aynı gün 11:00'de öncü dış ticaret verileri geliyor.",
+          "10 Eylül 14:00'te TCMB faiz kararı var; takvimin gösterdiği önceki politika faizi %37, gecelik borç verme faizi %40, gecelik borçlanma faizi %35,5. Karardan dört saat önce, 10:00'da sanayi üretimi açıklanıyor. Toplantı özeti 17 Eylül 14:00'te yayımlanacak — kararın gerekçesini okumak isteyenler için asıl metin budur.",
+          "Ayın geri kalanındaki Türkiye başlıkları: 11 Eylül 10:00'da perakende satışlar ve cari işlemler dengesi; 21 Eylül 10:00'da kapasite kullanım oranı ve reel kesim güven endeksi; 22 Eylül 10:00'da tüketici güven endeksi; 29 Eylül 10:00'da ekonomik güven endeksi; 30 Eylül 10:00'da işsizlik oranı ve kesin dış ticaret rakamları.",
+          "TCMB kararının ECB kararıyla aynı öğleden sonraya denk gelmesi, EUR/TRY taşıyan bir hesap için ayın en yoğun 75 dakikası anlamına geliyor: paritenin iki tarafı da aynı öğleden sonra fiyatlanıyor.",
+        ],
+      },
+      {
+        heading: "Bu takvimi nasıl kullanmalı?",
+        paragraphs: [
+          "Aylık takvimin haftalık takvimden farkı, tek tek verilere değil aralara bakmayı mümkün kılmasıdır. Aşağıdakiler bir strateji önerisi değil, ayın yapısından çıkan teknik başlıklar:",
+        ],
+        list: [
+          "Üç tarihi şimdiden işaretleyin: 4 Eylül 15:30, 11 Eylül 15:30, 16 Eylül 21:00. Ayın geri kalanı büyük ölçüde bu üçünün etrafında şekilleniyor.",
+          "10 Eylül öğleden sonrasını tek bir olay gibi planlayın. TCMB 14:00, ECB 15:15, ABD ÜFE 15:30 ve ECB basın toplantısı 15:45 — dört başlık, 105 dakika.",
+          "18 Eylül 06:00'daki BoJ kararı Avrupa açılmadan geliyor. JPY pozisyonlarını Perşembe kapanışında taşıma kararını, bu saati bilerek verin.",
+          "21-25 Eylül haftasında merkez bankası kararı yok. Ayın bakım aralığı burası: açık riski, marjin seviyesini ve pozisyon büyüklüğünü gözden geçirmek için üç yoğun haftanın arasındaki tek boşluk.",
+          "Veri dakikalarında spread genişlemesi ve kayan emir gerçekleşmesi beklemek gerçekçidir; bu bir aracı kurum sorunu değil, likidite sağlayıcıların risk azaltmasının sonucudur. Gerekli teminatı önceden çıkarmak için Pozisyon Hesaplayıcı'yı veri saatinden önce kullanın, veri anında değil.",
+          "Saatleri kendi takviminize yazarken TSİ olduklarını not edin. Yanlış saat hesabı yüzünden pozisyonun veri anında açık kalması, sık görülen ve tamamen önlenebilir bir hatadır.",
+        ],
+      },
+      {
+        heading: "Saatler değişebilir",
+        paragraphs: [
+          "Bu takvim 1 Eylül 2026 itibarıyla geçerli olan programı gösteriyor. Kurumlar veri yayın saatlerini zaman zaman değiştirir, bazı başlıklar takvime sonradan eklenir ve merkez bankası toplantı tarihleri istisnai durumlarda kaydırılabilir. Ay içinde teyit için Ekonomik Takvim sayfasını kullanın; orada aynı başlıklar beklenti ve gerçekleşen değerleriyle birlikte canlı olarak listeleniyor.",
+          "Takvimdeki verilerin hangisinin gerçekten önemli olduğunu ve beklenti-gerçekleşen farkının neden mutlak rakamdan daha belirleyici olduğunu daha önce ayrı bir yazıda ele almıştık; bu takvimi ilk kez okuyorsanız oradan başlamak işe yarar.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir; kaldıraçlı işlemler yüksek risk içerir ve sermayenizin tamamını kaybedebilirsiniz.",
+        ],
+      },
+    ],
+  },
+  {
     // Second signed piece on the site, and the same rule applies as on the
     // TIO one: this is one trader's opinion, not a checked figure, and the
     // reader has to be able to tell which is which. Signed by Nilüfer
