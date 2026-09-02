@@ -460,7 +460,7 @@ automation: "active",
     expert: {
       name: "Sena Yıldırım",
       title: "Büyüme ve Reklam Direktörü",
-      focus: "Kampanya küratörlüğü, haftalık özet, referral copy",
+      focus: "Kampanya küratörlüğü, haftalık özet, referral copy, tanıtım programı (docs/tanitim-reklam-programi.md)",
       voice: "Net, kar vaadi yok, her zaman 'şartlar değişebilir' notu var",
     },
     team: [
