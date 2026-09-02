@@ -41,6 +41,55 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-02-0900",
+    title: "FXPARTNER Piyasa Özeti | 02.09.2026 Sabah Güncellemesi",
+    excerpt:
+      "Asya seansında altın dört haftanın en düşük seviyesine gerileyerek 4.300 doların altına sarktı; ABD 10 yıllık tahvil getirisi Kasım 2023'ten bu yana en yüksek seviye olan %4,81'e çıktı ve Fed'in 15-16 Eylül toplantısında faiz artıracağına dair piyasa fiyatlaması, Başkan Kevin Warsh'ın Jackson Hole'daki şahin konuşmasının ardından %66-67'ye yükseldi.",
+    publishedAt: "2026-09-02",
+    readingMinutes: 3,
+    intro:
+      "Asya seansında gündeme, Fed Başkanı Kevin Warsh'ın geçen hafta Jackson Hole'da yaptığı şahin konuşmanın piyasalarda yarattığı dalga dalmaya devam etti. Çekirdek PCE enflasyonunun %3,7 ile hedefin belirgin üzerinde seyrettiğini vurgulayan Warsh'ın açıklamaları, Eylül ayı faiz artırımı beklentisini bir haftada neredeyse iki katına çıkardı. Yükselen tahvil getirileri ve güçlenen dolar, altın üzerindeki baskıyı artırırken, Hürmüz Boğazı'ndaki jeopolitik gerilim de piyasalardaki temkinli havayı besliyor.",
+    news: [
+      {
+        icon: "🥇",
+        heading: "Altın Dört Haftanın En Düşük Seviyesinde: 4.300 Doların Altına Sarktı",
+        body: "**XAU/USD**, Asya seansında **4.300 doların altına** gerileyerek yaklaşık **dört haftanın en düşük seviyesini** gördü. Yükselen ABD tahvil getirileri ve güçlenen dolar, faiz getirisi olmayan külçe altını daha az cazip hale getirirken, Fed'in Eylül'de faiz artıracağına dair güçlenen beklentiler düşüşü hızlandırdı.",
+      },
+      {
+        icon: "📊",
+        heading: "ABD 10 Yıllık Tahvil Getirisi Kasım 2023'ten Bu Yana En Yüksek Seviyede: %4,81",
+        body: "**ABD 10 yıllık tahvil getirisi**, Asya seansında **%4,81** ile **Kasım 2023'ten bu yana** en yüksek seviyesine ulaştı. Yükseliş, Fed'in yakın vadede faiz artıracağına dair güçlenen beklentiler ve Hürmüz Boğazı'ndaki gerilimin körüklediği enflasyon endişeleriyle besleniyor.",
+      },
+      {
+        icon: "🏦",
+        heading: "Warsh'ın Jackson Hole Çıkışı Sonrası Eylül Faiz Artırımı İhtimali %66-67'ye Yükseldi",
+        body: "CME FedWatch verilerine göre, **15-16 Eylül FOMC toplantısında** **25 baz puanlık faiz artırımı** ihtimali, Fed Başkanı **Kevin Warsh**'ın geçen hafta Jackson Hole'daki konuşmasının ardından **%66-67**'ye yükseldi; bu oran konuşma öncesinde **%35-57** bandındaydı. Warsh, konuşmasında Fed'in tercih ettiği enflasyon göstergesi olan **çekirdek PCE'nin %3,7** ile hedefin belirgin üzerinde seyrettiğine dikkat çekerek enflasyonla mücadelenin öncelik olduğunu vurgulamıştı.",
+      },
+      {
+        icon: "💶",
+        heading: "EUR/USD 1,16 Bandında, USD/TRY 48,20-48,30 TL Bandında Seyrediyor",
+        body: "EUR/USD, güçlenen dolara rağmen **1,1600 bandında** yatay seyrini sürdürüyor. USD/TRY ise **48,20-48,30 TL bandında** işlem görerek yükseliş trendini korudu.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "Bugün (ABD seansı)",
+        icon: "🇺🇸",
+        title: "ABD ADP Özel Sektör İstihdamı (Ağustos)",
+        note: "Cuma günkü tarım dışı istihdam verisi öncesi işgücü piyasasına dair ilk önemli sinyal; Fed'in 15-16 Eylül toplantısı öncesi faiz beklentilerini yeniden fiyatlayabilir.",
+      },
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Fed'in Eylül faiz kararı öncesi işgücü piyasasına dair son büyük veri; güçlenen faiz artırım beklentileri ışığında sürpriz bir sonuç piyasa fiyatlamasını belirgin şekilde etkileyebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-01-2100",
     title: "FXPARTNER Piyasa Özeti | 01.09.2026 Gece Güncellemesi",
     excerpt:
