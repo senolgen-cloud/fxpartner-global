@@ -2,13 +2,12 @@ import { ImageResponse } from "next/og";
 import { splitPair } from "@/lib/ogIcons";
 import {
   ResultPoster,
-  ResultInstrument,
+  Instrument,
   Pill,
-  ResultCell,
+  ResultFigure,
+  ResultDetail,
   WIDTH,
   HEIGHT,
-  LABEL,
-  VALUE,
   UP,
   DOWN,
   NEUTRAL,
@@ -16,20 +15,18 @@ import {
 
 export const runtime = "edge";
 
-// The close, painted over the filled design's two panels. Geometry, colours
-// and the shared pieces live in lib/ogPoster.
+// The close, written into its own empty template: the instrument up top, in
+// the same box the opening call uses, and the result in the wide box under it.
+// Geometry, colours and the shared pieces live in lib/ogPoster.
 //
-// It runs on its own design file, not the empty template the opening call
-// uses: that template prints "Price / Take Profit / Stop Loss" under its
-// boxes, and a close has an exit price and a result to show, not a take
-// profit. The filled design leaves its labels to us, so this card can name
-// its own columns.
+// Two pills would be one too many. The outcome is what this card is for, so it
+// is the only coloured one; the direction rides in the head box in grey, as a
+// statement of what was traded rather than of how it went.
 //
-// It used to be a square 1080 card of its own, built to double as an
-// Instagram post. It follows /api/og/trade-signal onto a poster so that a
-// call and its result arrive in a thread as one pair rather than two
-// products — which is the same reason it was square before, pointing the
-// other way. Both posters are square, so it is both.
+// It used to be a square 1080 card of its own, built to double as an Instagram
+// post. It follows /api/og/trade-signal onto a template so that a call and its
+// result arrive in a thread as one pair rather than two products — which is
+// the same reason it was square before, pointing the other way.
 
 type Outcome = "WIN" | "LOSS" | "BE";
 
@@ -76,11 +73,10 @@ export async function GET(request: Request) {
 
   const outcome = resolveOutcome(searchParams.get("outcome"), pips, profit);
   const outcomeColor = outcome === "LOSS" ? DOWN : outcome === "WIN" ? UP : NEUTRAL;
-  // "BERABERE" rather than "BE": the head panel holds the instrument and this
-  // pill inside 429px, and the long word only fits at the smaller size.
+  // "BERABERE" rather than "BE": the box has the room and the two letters
+  // read as an abbreviation nobody outside the desk knows.
   const outcomeLabel =
     outcome === "WIN" ? "WIN" : outcome === "LOSS" ? "LOSS" : outcome === "BE" ? "BERABERE" : "KAPANDI";
-  const outcomeSize = outcome === "WIN" || outcome === "LOSS" ? 30 : 22;
 
   // A zero here is a real breakeven result, not the "EA hadn't read it yet"
   // zero that isRealLevel guards against on a price — so a negative or zero
@@ -89,9 +85,9 @@ export async function GET(request: Request) {
   const hasProfit = profit !== null && !Number.isNaN(parseFloat(profit));
 
   // Pips lead when both are sent: they are the same number for every reader,
-  // while a dollar figure silently assumes the account's lot size. The strip
-  // has one line per column, so when both arrive the USD figure rides in the
-  // caption rather than under the pips.
+  // while a dollar figure silently assumes the account's lot size. The box
+  // holds one figure, so when both arrive the USD one stays in the Telegram
+  // caption, which carries it in full.
   const resultValue = hasPips
     ? `${signed(pips as string)} pip`
     : hasProfit
@@ -103,28 +99,11 @@ export async function GET(request: Request) {
   return new ImageResponse(
     (
       <ResultPoster
-        instrument={<ResultInstrument label={pairLabel} />}
-        pill={<Pill label={outcomeLabel} color={outcomeColor} size={outcomeSize} />}
-        strip={
-          <div style={{ display: "flex", width: "100%", height: "100%" }}>
-            {/* The direction rides in the entry column's label: the head
-                panel's pill is what the outcome is for, and two pills side by
-                side make the reader work out which one is the result. */}
-            <ResultCell
-              label={directionLabel ? `GİRİŞ FİYATI · ${directionLabel}` : "GİRİŞ FİYATI"}
-              value={entry}
-              color={VALUE}
-              index={0}
-            />
-            <ResultCell
-              label="ÇIKIŞ FİYATI"
-              value={closeIsReal ? close : "—"}
-              color={closeIsReal ? VALUE : LABEL}
-              index={1}
-            />
-            <ResultCell label="SONUÇ" value={resultValue} color={outcomeColor} index={2} />
-          </div>
-        }
+        instrument={<Instrument label={pairLabel} />}
+        pill={directionLabel ? <Pill label={directionLabel} color={NEUTRAL} /> : null}
+        outcome={<Pill label={outcomeLabel} color={outcomeColor} size={22} />}
+        figure={<ResultFigure value={resultValue} color={outcomeColor} />}
+        detail={<ResultDetail text={`${entry} → ${closeIsReal ? close : "—"}`} />}
       />
     ),
     { width: WIDTH, height: HEIGHT }
