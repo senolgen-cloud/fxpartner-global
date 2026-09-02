@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-02-1200",
+    title: "FXPARTNER Piyasa Özeti | 02.09.2026 Öğle Güncellemesi",
+    excerpt:
+      "CENTCOM, İran'da IRGC'ye ait hava savunma, radar ve mayınlama kapasitesini hedef alan vuruş dalgasını tamamladığını duyurdu; İran karşılığında Ürdün, Bahreyn, Irak ve Kuveyt'teki ABD üslerine füze ve İHA saldırısı düzenledi. Petrol sert yükseldi (Brent %2'nin üzerinde 96,59 dolara, WTI %1,73 artışla 91,78 dolara), altın ise yükselen getiriler ve faiz artırım beklentileri nedeniyle jeopolitik riske rağmen toparlanamadı.",
+    publishedAt: "2026-09-02",
+    readingMinutes: 3,
+    intro:
+      "Öğle seansında gündeme, Hürmüz Boğazı'ndaki gerilimin yeni ve daha sert bir aşamaya taşınması damga vurdu. ABD Merkez Kuvvetler Komutanlığı (CENTCOM), 1 Eylül'de İran Devrim Muhafızları Ordusu'na (IRGC) ait hava savunma sistemleri, radarlar, deniz varlıkları ve mayınlama kapasitesini hedef alan vuruş dalgasını tamamladığını duyurdu. İran ise karşılığında bölgedeki ABD üslerine füze ve İHA saldırıları düzenledi. Gelişme petrol fiyatlarını sert şekilde yukarı taşırken, altın yükselen tahvil getirileri ve güçlenen faiz artırım beklentileri karşısında jeopolitik risk primine rağmen toparlanamadı.",
+    news: [
+      {
+        icon: "🎯",
+        heading: "CENTCOM İran'da IRGC Hedeflerini Vurdu, Tahran Karşılık Verdi",
+        body: "**ABD Merkez Kuvvetler Komutanlığı (CENTCOM)**, **1 Eylül**'de İran Devrim Muhafızları Ordusu'na (**IRGC**) ait **hava savunma sistemleri, radarlar, deniz varlıkları ve tesisleri, mayınlama kapasitesi ve haberleşme merkezlerini** hedef alan vuruş dalgasını tamamladığını açıkladı. Saldırılar, IRGC'nin Hürmüz Boğazı'nda ticari gemilere yönelik girişimlerine karşılık olarak gerçekleştirildi. İran ise aynı gün karşılık olarak **Ürdün, Bahreyn, Irak ve Kuveyt**'teki ABD üsleri ve varlıklarına füze ve İHA saldırıları düzenledi; İran ordusu ABD'ye karşı **\"ezici ve yıkıcı darbeler\"** indireceği yönünde açıklamalarda bulundu.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol Sert Yükseldi: Brent %2'nin Üzerinde 96,59 Dolarda",
+        body: "Karşılıklı vuruşların ardından **Brent petrol %2'nin üzerinde artışla 96,59 dolara**, **WTI ham petrolü ise %1,73 artışla 91,78 dolara** yükseldi. Piyasa katılımcıları, İran-ABD çatışmasının uzaması halinde petrol fiyatlarının yüksek ve oynak seyrini koruyacağı görüşünde; Hürmüz Boğazı'nın yeniden açılmasına yönelik müzakereler ise büyük ölçüde durma noktasına geldi.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın Jeopolitik Riske Rağmen Toparlanamadı",
+        body: "Tırmanan Orta Doğu geriliminin geleneksel güvenli liman talebini artırması beklenirken, **XAU/USD** **4.300 dolar** civarındaki baskılı seyrini korudu. Yükselen petrol fiyatları ve ABD tahvil getirilerinin yanı sıra, Fed Başkanı **Kevin Warsh**'ın Jackson Hole sonrası güçlenen **Eylül faiz artırımı** beklentileri, jeopolitik risk priminin altına sağladığı desteği büyük ölçüde dengeledi.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Fed'in Eylül faiz kararı öncesi işgücü piyasasına dair son büyük veri; jeopolitik gerilimin sürdüğü bir ortamda sürpriz bir sonuç faiz artırım beklentisini yeniden fiyatlayabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-02-0900",
     title: "FXPARTNER Piyasa Özeti | 02.09.2026 Sabah Güncellemesi",
     excerpt:
