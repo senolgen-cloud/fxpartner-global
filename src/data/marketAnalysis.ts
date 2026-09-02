@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-02-2100",
+    title: "FXPARTNER Piyasa Özeti | 02.09.2026 Gece Güncellemesi",
+    excerpt:
+      "İran'ın devlet yayın kurumu IRIB, Sağlık Bakanlığı'na dayandırarak Salı günkü ABD saldırılarında ülke genelinde ölü sayısının 18'e, yaralı sayısının 108'e yükseldiğini duyurdu; Kaşm Adası, Bender Abbas, Sirik, Chabahar ve Konarak'ta patlamalar bildirildi. BM Genel Sekreteri Guterres, düğün töreninin vurulduğu iddiası dahil sivil kayıplardan 'derin alarm' duyduğunu belirterek taraflara diplomasiye acil dönüş çağrısında bulundu.",
+    publishedAt: "2026-09-02",
+    readingMinutes: 2,
+    intro:
+      "Gece seansında gündemi, Salı günkü ABD vuruşlarının İran genelindeki toplam bilançosuna dair güncellenen resmi rakamlar ve Birleşmiş Milletler'in konuya ilişkin ilk resmi tepkisi belirledi. İran makamları, önceki raporlarda yalnızca Kuhestak (Sirik) bölgesine ait olarak açıklanan can kaybı rakamlarını, ülke genelindeki tüm vuruş noktalarını kapsayacak şekilde güncelledi.",
+    news: [
+      {
+        icon: "⚰️",
+        heading: "İran: Salı Günkü ABD Saldırılarında Ülke Genelinde Bilanço 18 Ölü, 108 Yaralı",
+        body: "İran'ın devlet yayın kurumu **IRIB**, Sağlık Bakanı **Muhammed Rıza Zafergandi**'ye dayandırdığı haberinde, Salı günü düzenlenen ABD saldırılarında ülke genelindeki ölü sayısının **18**'e, yaralı sayısının **108**'e yükseldiğini duyurdu. İran medyası, **Kaşm Adası, Bender Abbas, Sirik, Chabahar ve Konarak** bölgelerinde patlamalar meydana geldiğini bildirdi; bu rakam, önceki raporlarda yalnızca Kuhestak (Sirik) bölgesi için açıklanan **\"en az 4 ölü, 60'tan fazla yaralı\"** bilançosunun ülke genelini kapsayacak şekilde güncellenmiş hali.",
+      },
+      {
+        icon: "🇺🇳",
+        heading: "BM Genel Sekreteri Guterres: Sivil Kayıplardan 'Derin Alarm' Duyuyorum",
+        body: "**BM Genel Sekreteri António Guterres**, sözcüsü aracılığıyla yaptığı açıklamada, ABD ile İran arasında gece yaşanan yeni çatışmadan **\"derin endişe\"**, düğün töreninin vurulduğu iddiası dahil bildirilen sivil kayıplardan ise **\"derin alarm\"** duyduğunu belirtti. Guterres, tüm tarafları uluslararası insancıl hukuka uymaya çağırırken, askeri eylemlerin derhal sona erdirilmesi ve diplomasiye acil dönüş yönündeki çağrısını yineledi.",
+      },
+      {
+        icon: "⚔️",
+        heading: "IRGC: Düğün Vuruşuna 'Pişmanlık Duyulacak Bir Karşılık' Verilecek",
+        body: "**İran Devrim Muhafızları Ordusu (IRGC)**, Kuhestak'taki düğün töreninin vurulmasına ilişkin, saldırganların **\"pişmanlık duyacağı bir karşılık\"** vereceği yönünde açıklama yaptı. Açıklama, İran'ın Ürdün, Bahreyn, Irak ve Kuveyt'teki ABD üslerine yönelik füze ve İHA saldırılarının ardından geldi ve bölgedeki gerilimin kısa vadede yatışmayacağına işaret ediyor.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Piyasa beklentisi +53 bin; zayıf gelen ADP verisinin (+38 bin) ardından sürpriz bir sonuç Fed'in Eylül faiz kararı öncesi beklentileri yeniden fiyatlayabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-02-1800",
     title: "FXPARTNER Piyasa Özeti | 02.09.2026 Akşam Güncellemesi",
     excerpt:
