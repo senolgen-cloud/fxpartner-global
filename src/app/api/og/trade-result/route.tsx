@@ -1,28 +1,35 @@
 import { ImageResponse } from "next/og";
-import { TICK_UP, TICK_DOWN } from "@/lib/ogAssets";
 import { splitPair } from "@/lib/ogIcons";
 import {
-  PosterCard,
-  Badge,
+  ResultPoster,
+  ResultInstrument,
   Pill,
-  Column,
-  pct,
+  ResultCell,
   WIDTH,
   HEIGHT,
   LABEL,
   VALUE,
+  UP,
+  DOWN,
+  NEUTRAL,
 } from "@/lib/ogPoster";
 
 export const runtime = "edge";
 
-// The close, drawn into the same poster box as the opening call. Geometry,
-// colours and the shared pieces live in lib/ogPoster.
+// The close, painted over the filled design's two panels. Geometry, colours
+// and the shared pieces live in lib/ogPoster.
+//
+// It runs on its own design file, not the empty template the opening call
+// uses: that template prints "Price / Take Profit / Stop Loss" under its
+// boxes, and a close has an exit price and a result to show, not a take
+// profit. The filled design leaves its labels to us, so this card can name
+// its own columns.
 //
 // It used to be a square 1080 card of its own, built to double as an
-// Instagram post. It follows /api/og/trade-signal onto the poster so that a
+// Instagram post. It follows /api/og/trade-signal onto a poster so that a
 // call and its result arrive in a thread as one pair rather than two
 // products — which is the same reason it was square before, pointing the
-// other way.
+// other way. Both posters are square, so it is both.
 
 type Outcome = "WIN" | "LOSS" | "BE";
 
@@ -65,17 +72,15 @@ export async function GET(request: Request) {
 
   const [base, quote] = splitPair(pair);
   const pairLabel = quote ? `${base}/${quote}` : pair;
-  const badge = base.slice(0, 4);
   const directionLabel = direction === "SELL" ? "SELL" : direction === "BUY" ? "BUY" : "";
 
   const outcome = resolveOutcome(searchParams.get("outcome"), pips, profit);
-  const outcomeColor =
-    outcome === "LOSS" ? TICK_DOWN : outcome === "WIN" ? TICK_UP : LABEL;
-  // "BERABERE" rather than "BE": the row has to hold the badge, the pair and
-  // this pill inside 678px, and the long word only fits at the smaller size.
+  const outcomeColor = outcome === "LOSS" ? DOWN : outcome === "WIN" ? UP : NEUTRAL;
+  // "BERABERE" rather than "BE": the head panel holds the instrument and this
+  // pill inside 429px, and the long word only fits at the smaller size.
   const outcomeLabel =
     outcome === "WIN" ? "WIN" : outcome === "LOSS" ? "LOSS" : outcome === "BE" ? "BERABERE" : "KAPANDI";
-  const outcomeSize = outcome === "WIN" || outcome === "LOSS" ? 30 : 24;
+  const outcomeSize = outcome === "WIN" || outcome === "LOSS" ? 30 : 22;
 
   // A zero here is a real breakeven result, not the "EA hadn't read it yet"
   // zero that isRealLevel guards against on a price — so a negative or zero
@@ -84,66 +89,43 @@ export async function GET(request: Request) {
   const hasProfit = profit !== null && !Number.isNaN(parseFloat(profit));
 
   // Pips lead when both are sent: they are the same number for every reader,
-  // while a dollar figure silently assumes the account's lot size.
+  // while a dollar figure silently assumes the account's lot size. The strip
+  // has one line per column, so when both arrive the USD figure rides in the
+  // caption rather than under the pips.
   const resultValue = hasPips
     ? `${signed(pips as string)} pip`
     : hasProfit
       ? `${signed(profit as string)} USD`
       : "—";
-  const resultDelta = hasPips && hasProfit ? `${signed(profit as string)} USD` : "";
 
-  const entryNum = parseFloat(entry);
   const closeIsReal = isRealLevel(close);
 
   return new ImageResponse(
     (
-      <PosterCard>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <Badge code={badge} />
-          <span
-            style={{
-              display: "flex",
-              marginLeft: 30,
-              fontSize: 58,
-              fontWeight: 700,
-              color: VALUE,
-              letterSpacing: -1,
-            }}
-          >
-            {pairLabel}
-          </span>
-          <div style={{ display: "flex", marginLeft: 28 }}>
-            <Pill label={outcomeLabel} color={outcomeColor} size={outcomeSize} />
+      <ResultPoster
+        instrument={<ResultInstrument label={pairLabel} />}
+        pill={<Pill label={outcomeLabel} color={outcomeColor} size={outcomeSize} />}
+        strip={
+          <div style={{ display: "flex", width: "100%", height: "100%" }}>
+            {/* The direction rides in the entry column's label: the head
+                panel's pill is what the outcome is for, and two pills side by
+                side make the reader work out which one is the result. */}
+            <ResultCell
+              label={directionLabel ? `GİRİŞ FİYATI · ${directionLabel}` : "GİRİŞ FİYATI"}
+              value={entry}
+              color={VALUE}
+              index={0}
+            />
+            <ResultCell
+              label="ÇIKIŞ FİYATI"
+              value={closeIsReal ? close : "—"}
+              color={closeIsReal ? VALUE : LABEL}
+              index={1}
+            />
+            <ResultCell label="SONUÇ" value={resultValue} color={outcomeColor} index={2} />
           </div>
-        </div>
-
-        <div style={{ display: "flex" }}>
-          {/* The direction rides under the entry rather than beside the pair:
-              the outcome pill is what row one is for, and two pills side by
-              side make the reader work out which one is the result. */}
-          <Column
-            label="GİRİŞ FİYATI"
-            value={entry}
-            delta={directionLabel}
-            color={VALUE}
-            ruled={false}
-          />
-          <Column
-            label="ÇIKIŞ FİYATI"
-            value={closeIsReal ? close : "—"}
-            delta={closeIsReal ? pct(entryNum, parseFloat(close)) : ""}
-            color={closeIsReal ? VALUE : LABEL}
-            ruled
-          />
-          <Column
-            label="SONUÇ"
-            value={resultValue}
-            delta={resultDelta}
-            color={outcomeColor}
-            ruled
-          />
-        </div>
-      </PosterCard>
+        }
+      />
     ),
     { width: WIDTH, height: HEIGHT }
   );

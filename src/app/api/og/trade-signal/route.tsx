@@ -1,30 +1,33 @@
 import { ImageResponse } from "next/og";
-import { TICK_UP, TICK_DOWN } from "@/lib/ogAssets";
 import { splitPair } from "@/lib/ogIcons";
 import {
-  PosterCard,
-  Badge,
+  CallPoster,
+  Instrument,
   Pill,
-  Column,
-  pct,
+  BoxValue,
   WIDTH,
   HEIGHT,
-  GOLD,
   LABEL,
   VALUE,
+  UP,
+  DOWN,
 } from "@/lib/ogPoster";
 
 export const runtime = "edge";
 
-// The opening call, drawn into the poster's box. Geometry, colours and the
-// shared pieces live in lib/ogPoster — see the header there for what the
-// design file carries and what this route is responsible for.
+// The opening call, written into the empty template's boxes. Geometry, colours
+// and the shared pieces live in lib/ogPoster — see the header there for what
+// each design file carries and what this route is responsible for.
+//
+// The template prints its own level names under the boxes, so this route draws
+// no labels at all. It also fixes their order, which is NOT the order the
+// close uses: Price, Take Profit, Stop Loss.
 //
 // This replaces a version that drew the whole card from the trade data. That
 // one carried more of the trade — signal confidence, the rolling record, the
-// lot ladder — because it had the room. The poster does not: between the box
-// and the laptop mockup there are about twenty-five pixels. Those numbers now
-// live only in the Telegram caption, which still carries them.
+// lot ladder — because it had the room. The template does not: three boxes,
+// one number each. Those numbers now live only in the Telegram caption, which
+// still carries them.
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -52,87 +55,40 @@ export async function GET(request: Request) {
   const hasTarget1 = !locked && isRealLevel(target1);
   const hasStop = !locked && isRealLevel(stop);
 
-  const entryNum = entry ? parseFloat(entry) : 0;
   // "EUR/USD" for an FX pair, "GOLD" for everything else — splitPair returns
   // an empty quote for the instruments that are not two currencies, and a
   // trailing slash on GOLD would read as a typo.
   const [base, quote] = splitPair(pair);
   const pairLabel = quote ? `${base}/${quote}` : pair;
-  // The design file's badge holds a gold-bars glyph, which is only true of
-  // one instrument. The base code is the generic version of the same thing.
-  const badge = base.slice(0, 4);
 
-  // The draft draws BUY in gold. SELL is not drawn in the draft at all, and a
-  // sell that looks exactly like a buy is the one difference on this card a
-  // reader cannot afford to miss — so the pill keeps the drafted shape and
-  // takes the direction's colour.
   const isSell = direction === "SELL";
   const directionLabel = isSell ? "SELL" : direction === "BUY" ? "BUY" : "";
 
+  // A withheld level says so in every box: the template's labels are printed
+  // into it, so there is no way to relabel the row as a whole.
+  const withheld = <BoxValue value="Üyelere özel" color={LABEL} />;
+
   return new ImageResponse(
     (
-      <PosterCard>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <Badge code={badge} />
-          <span
-            style={{
-              display: "flex",
-              marginLeft: 30,
-              fontSize: 58,
-              fontWeight: 700,
-              color: VALUE,
-              letterSpacing: -1,
-            }}
-          >
-            {pairLabel}
-          </span>
-          {directionLabel && (
-            <div style={{ display: "flex", marginLeft: 32 }}>
-              <Pill label={directionLabel} color={isSell ? TICK_DOWN : GOLD} />
-            </div>
-          )}
-        </div>
-
-        {locked ? (
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ display: "flex", fontSize: 20, letterSpacing: 2, color: LABEL }}>
-              GİRİŞ · ZARAR DURDUR · KÂR AL
-            </span>
-            <span
-              style={{ display: "flex", marginTop: 14, fontSize: 38, fontWeight: 700, color: GOLD }}
-            >
-              Seviyeler üyelere özel
-            </span>
-            <span style={{ display: "flex", marginTop: 8, fontSize: 21, color: LABEL }}>
-              fxpartner.global/paketler
-            </span>
-          </div>
-        ) : (
-          <div style={{ display: "flex" }}>
-            <Column
-              label="GİRİŞ FİYATI"
-              value={entry as string}
-              delta=""
-              color={VALUE}
-              ruled={false}
-            />
-            <Column
-              label="ZARAR DURDUR"
-              value={hasStop ? (stop as string) : "—"}
-              delta={hasStop ? pct(entryNum, parseFloat(stop as string)) : ""}
-              color={hasStop ? TICK_DOWN : LABEL}
-              ruled
-            />
-            <Column
-              label="KÂR AL"
-              value={hasTarget1 ? (target1 as string) : "—"}
-              delta={hasTarget1 ? pct(entryNum, parseFloat(target1 as string)) : ""}
-              color={hasTarget1 ? TICK_UP : LABEL}
-              ruled
-            />
-          </div>
-        )}
-      </PosterCard>
+      <CallPoster
+        instrument={<Instrument label={pairLabel} />}
+        pill={directionLabel ? <Pill label={directionLabel} color={isSell ? DOWN : UP} /> : null}
+        price={locked ? withheld : <BoxValue value={entry as string} color={VALUE} />}
+        takeProfit={
+          locked ? (
+            withheld
+          ) : (
+            <BoxValue value={hasTarget1 ? (target1 as string) : "—"} color={hasTarget1 ? UP : LABEL} />
+          )
+        }
+        stopLoss={
+          locked ? (
+            withheld
+          ) : (
+            <BoxValue value={hasStop ? (stop as string) : "—"} color={hasStop ? DOWN : LABEL} />
+          )
+        }
+      />
     ),
     { width: WIDTH, height: HEIGHT }
   );
