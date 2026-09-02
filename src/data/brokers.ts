@@ -504,12 +504,15 @@ export const brokers: Broker[] = [
     // (litefinance-tr.org/?uid=…) and the banner would advertise one address
     // while navigating to another.
     adUrl: "https://bit.ly/litefinance-vip",
-    // The right rail creative. 821x1915 is the artwork's own size — the
+    // The right rail creative. 742x2120 is the artwork's own size — the
     // rail renders it at w-40 (160px) and the browser scales it, so the
-    // ratio is what matters here, not the pixel count.
-    adImageTall: "/reklam/lite-banner-fxpartner77.png",
-    adImageTallWidth: 821,
-    adImageTallHeight: 1915,
+    // ratio is what matters here, not the pixel count. This one is taller
+    // than the creative it replaced (0.35 against 0.43): both cap out at the
+    // rail's 208px, so it renders 594px tall instead of 485 and fills the
+    // 600px slot almost exactly.
+    adImageTall: "/reklam/lite-banner-fxpartner72.png",
+    adImageTallWidth: 742,
+    adImageTallHeight: 2120,
     adUrlTall: "https://bit.ly/litefinance-vip",
     tagline: "10 dolardan başlayan cent hesap, 0.0 pipten ECN",
     rating: 4.5,
