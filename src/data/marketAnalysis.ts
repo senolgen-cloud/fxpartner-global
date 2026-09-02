@@ -41,6 +41,54 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-02-1800",
+    title: "FXPARTNER Piyasa Özeti | 02.09.2026 Akşam Güncellemesi",
+    excerpt:
+      "İran Dışişleri Bakanlığı, Kuhestak'ta düzenlenen ABD vuruşunun bir düğün törenini hedef aldığını ve bunu 'savaş suçu' olarak nitelendirdiğini açıkladı; Hormozgan valiliği en az 4 ölü, 60'tan fazla yaralı bildirdi. ABD'de ADP özel sektör istihdamı Ağustos'ta beklentilerin altında sadece 38 bin arttı. Wall Street'te Dow Jones %0,8, S&P 500 %0,6 yükselirken, 10 yıllık tahvil getirisi gün içinde Kasım 2023'ten bu yana en yüksek seviye olan %4,814'e çıktı.",
+    publishedAt: "2026-09-02",
+    readingMinutes: 3,
+    intro:
+      "Akşam seansında gündeme, Hürmüz Boğazı çatışmasının sivil can kaybına yol açtığı iddiasıyla gelen yeni bir diplomatik kriz damga vurdu. İran Dışişleri Bakanlığı, Kuhestak'ta (Sirik) düzenlenen bir ABD vuruşunun düğün törenini hedef aldığını duyururken, ABD tarafında gün içinde açıklanan zayıf istihdam verisi ve Enerji Bakanı Chris Wright'ın Hürmüz'den geçen petrol miktarına ilişkin açıklamaları da takip edildi. Wall Street, jeopolitik gerilime ve yükselen tahvil getirilerine rağmen günü yükselişle tamamladı.",
+    news: [
+      {
+        icon: "🕯️",
+        heading: "İran: ABD Vuruşu Kuhestak'ta Bir Düğünü Vurdu, 'Savaş Suçu'",
+        body: "**İran Dışişleri Bakanlığı**, Salı akşamı **Kuhestak (Sirik)** bölgesinde düzenlenen bir ABD hava saldırısının bir düğün törenini hedef aldığını açıkladı ve bunu **\"savaş suçu\"** olarak nitelendirdi. **Hürmüzgan Valiliği**, aralarında 4 ve 16 yaşlarında iki kişinin de bulunduğu **en az 4 kişinin öldüğünü, 60'tan fazla kişinin yaralandığını** duyurdu. CENTCOM sözcüsü **Tim Hawkins**, iddiayı doğrudan yanıtlamayarak **\"ABD ordusu, IRGC'nin aksine sivilleri hedef almaz\"** açıklamasını yaptı.",
+      },
+      {
+        icon: "📉",
+        heading: "ABD ADP İstihdamı Ağustos'ta Beklentilerin Altında: Sadece 38 Bin Artış",
+        body: "**ADP** verilerine göre ABD özel sektörü **Ağustos**'ta yalnızca **38 bin** istihdam yarattı; bu rakam Temmuz'daki **46 bin**'in ve piyasa beklentisi olan **47 bin**'in belirgin altında kalarak **Ocak ayından bu yana en zayıf** aylık artışa işaret etti. Üretimde **17 bin** kişilik istihdam kaybı yaşanırken, saatlik ücretlerde yıllık artış **%3,2** (temel ücret) ile **%4,7** (toplam ücret) seviyesinde gerçekleşti. Veri, Cuma günkü resmi tarım dışı istihdam raporu (beklenti: **+53 bin**) öncesi işgücü piyasasındaki yavaşlamaya işaret ediyor.",
+      },
+      {
+        icon: "🛢️",
+        heading: "ABD Enerji Bakanı Wright: Hürmüz'den Geçen Petrol Savaş Öncesi Seviyeyi Aştı",
+        body: "ABD Enerji Bakanı **Chris Wright**, CNBC'ye yaptığı açıklamada Pazartesi günü **Hürmüz Boğazı**'ndan **17 milyon varilin üzerinde** petrolün geçtiğini ve bunun **28 Şubat**'ta başlayan savaştan bu yana görülen **en yüksek seviye** olduğunu belirtti. Wright, Suudi Arabistan ve BAE'nin boğazı by-pass eden boru hatları da dahil edildiğinde bölgeden yapılan toplam petrol ihracatının **savaş öncesi seviyeleri** aştığını sözlerine ekledi. Buna karşın **Brent petrol %0,55 artışla 95,17 dolara** yükselerek yüksek seyrini korudu.",
+      },
+      {
+        icon: "📈",
+        heading: "Wall Street Yükselişle Kapandı, Tahvil Getirisi Kasım 2023'ten Bu Yana Zirvede",
+        body: "Jeopolitik gerilime ve yükselen getirilere rağmen **Dow Jones %0,8**, **S&P 500 %0,6** ve **Nasdaq Composite %0,5** yükselişle güne devam etti. **ABD 10 yıllık tahvil getirisi** ise gün içinde **%4,814** ile **Kasım 2023'ten bu yana en yüksek** seviyesini gördü.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altında Baskı Sürüyor: XAU/USD 4.335 Dolar Civarında",
+        body: "**XAU/USD**, üç ayın zirvesi olan **4.697 dolardan** yaklaşık **%9** geri çekilerek **4.335 dolar** civarında işlem gördü; bu seviye Salı kapanışındaki **4.350 dolar**'ın da altında. Aralık vadeli altın kontratı ise **%0,4** düşüşle **4.377,20 dolardan** açıldı. Yükselen tahvil getirileri ve güçlü dolar, jeopolitik risk priminin altına sağladığı desteği dengelemeye devam ediyor.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Piyasa beklentisi +53 bin; zayıf gelen ADP verisinin (+38 bin) ardından sürpriz bir sonuç Fed'in Eylül faiz kararı öncesi beklentileri yeniden fiyatlayabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-02-1200",
     title: "FXPARTNER Piyasa Özeti | 02.09.2026 Öğle Güncellemesi",
     excerpt:
