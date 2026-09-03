@@ -41,6 +41,61 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-03-1500",
+    title: "FXPARTNER Piyasa Özeti | 03.09.2026 Öğleden Sonra Güncellemesi",
+    excerpt:
+      "İran'ın saldırı dalgası Perşembe sabahı BAE'ye de sıçradı; Kuveyt'teki Ahmed El-Cabir Hava Üssü'nün yanı sıra BAE'deki El-Minhad Hava Üssü de füze ve İHA saldırısına uğradı. İsrail Savunma Bakanı Israel Katz, olası bir İran saldırısının Tahran'ı 'Taş Devri'ne göndereceği tehdidinde bulundu. Trump, Hürmüz Boğazı'ndan petrol akışının günde 18 milyon varile 'geri döndüğünü' duyururken JPMorgan bu rakama itiraz ediyor. Altın 4.430, USD/TRY 48,32 TL ile öğle seviyelerini büyük ölçüde koruyor.",
+    publishedAt: "2026-09-03",
+    readingMinutes: 3,
+    intro:
+      "Perşembe öğleden sonra gündeme, İran'ın karşılık saldırılarının coğrafi olarak genişlemesi ve İsrail cephesinden gelen sert bir tehdit damga vurdu. İran ordusu, Kuveyt'in ardından ilk kez Birleşik Arap Emirlikleri'ndeki bir ABD üssünü de hedef alırken, İsrail Savunma Bakanı Israel Katz Roş Aşana kutlaması sırasında Tahran'a yönelik olağanüstü sert bir uyarıda bulundu. Bu arada Beyaz Saray'ın Hürmüz Boğazı'ndaki petrol akışına ilişkin iyimser açıklaması piyasa analistlerince sorgulanıyor. Fiyat tarafında altın ve USD/TRY öğle seansındaki seviyelerini büyük ölçüde korurken, piyasanın gözü akşam saatlerinde açıklanacak ABD işgücü verilerinde.",
+    news: [
+      {
+        icon: "🎯",
+        heading: "İran'ın Saldırı Dalgası BAE'ye Sıçradı: Kuveyt ve BAE'deki Üsler Vuruldu",
+        body: "**İran Ordusu**, \"Saeqeh (Yıldırım) Operasyonu\"nun 31. safhası kapsamında Perşembe sabahı erken saatlerde **Kuveyt'teki Ahmed El-Cabir Hava Üssü**'ndeki uydu haberleşme tesisleri, depolar ve savaş uçağı hangarlarını, **Birleşik Arap Emirlikleri'ndeki El-Minhad Hava Üssü**'nde ise radar sistemlerini ve ABD güçlerince kullanılan noktaları füze ve İHA'larla hedef aldığını duyurdu. **Kuveyt**, saldırıya uğradığını doğrulayarak hava savunma sistemlerinin gelen tehditlere karşılık verdiğini açıkladı ve saldırıyı egemenliğinin ihlali olarak nitelendirip en sert şekilde kınadı; can kaybı ya da hasara dair henüz resmi bir açıklama yapılmadı.",
+      },
+      {
+        icon: "⚠️",
+        heading: "İsrail Savunma Bakanı Katz'dan İran'a: 'Sizi Taş Devri'ne Göndeririz'",
+        body: "İsrail Savunma Bakanı **Israel Katz**, 3 Eylül'de Savunma Bakanlığı'ndaki Roş Aşana kutlamasında yaptığı konuşmada, **\"İran'ın İsrail'e yönelik bir saldırısı, İsrail'i İran'a yönelik vuruşlar konusundaki tüm kısıtlardan azade kılacaktır\"** dedi. Katz, **\"Enerji altyapısı dahil olmak üzere İran'ın tüm ulusal, askeri ve sivil altyapısını vuracak ve İran'ı Taş Devri'nin karanlığına geri göndereceğiz\"** ifadelerini kullanarak, İran rejiminin ağır ekonomik baskı ve olası bir iç ayaklanma korkusuyla \"çaresiz adımlara\" yönelebileceğine dair işaretler gördüklerini belirtti.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Trump: Hürmüz'den Petrol Akışı 'Geri Döndü', JPMorgan İtiraz Ediyor",
+        body: "ABD Başkanı **Donald Trump**, Truth Social hesabından paylaştığı bir grafikle **Hürmüz Boğazı**'ndan geçen petrol hacminin savaş öncesi seviye olan günlük **20 milyon varile** kıyasla **18 milyon varile** \"geri döndüğünü\" duyurdu. Ancak **JPMorgan** analistleri, boğazdan fiilen çıkan petrol miktarının günde yaklaşık **4 milyon varil** civarında olduğunu savunuyor; gemi takip verileri de geçişlerin savaş öncesi seviyelerin belirgin altında kaldığına ve son günlerdeki yeni vuruşlarla daha da gerilediğine işaret ediyor.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın ve USD/TRY Öğle Seviyelerini Koruyor",
+        body: "**XAU/USD**, öğleden sonra seansında **4.430 dolar** civarında işlem görerek öğle raporundaki **4.424-4.427 dolar** bandına yakın, sınırlı bir hareket sergiliyor. **USD/TRY** ise **48,32 TL** seviyesinde yatay seyrini sürdürüyor. Piyasalar, İran-ABD/İsrail hattındaki gerilimin coğrafi olarak genişlemesini fiyatlamakla birlikte, akşam saatlerinde açıklanacak **ABD haftalık işsizlik başvuruları** ve **ISM Hizmet Sektörü PMI** verileri öncesi net bir yön belirlemiş değil.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "Bugün 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Haftalık İşsizlik Başvuruları",
+        note: "Piyasa beklentisi yaklaşık 205 bin; veriler henüz açıklanmadı.",
+      },
+      {
+        time: "Bugün 17:00 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD ISM Hizmet Sektörü PMI (Ağustos)",
+        note: "Piyasa beklentisi 54,3 (Temmuz: 54,1); Cuma günkü NFP öncesi hizmet sektörü aktivitesine dair önemli bir sinyal, veriler henüz açıklanmadı.",
+      },
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Fed'in Eylül faiz kararı öncesi işgücü piyasasına dair son büyük veri; jeopolitik gerilimin sürdüğü bir ortamda sürpriz bir sonuç faiz artırım beklentisini yeniden fiyatlayabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-03-1200",
     title: "FXPARTNER Piyasa Özeti | 03.09.2026 Öğle Güncellemesi",
     excerpt:
