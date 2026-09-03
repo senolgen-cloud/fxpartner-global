@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-03-0900",
+    title: "FXPARTNER Piyasa Özeti | 03.09.2026 Sabah Güncellemesi",
+    excerpt:
+      "Altın, Asya seansında 4.400 doların üzerine geri dönerek gün içinde 4.435 dolara kadar yükseldi; zayıf ADP verisi ve gerileyen ABD tahvil getirileri dolar endeksini (DXY) üç haftanın zirvesinden 99,50'nin altına çekti. USD/TRY ise 48,3420 TL ile son bir ayın en yüksek seviyesini gördü. Piyasaların gözü Cuma günkü ABD tarım dışı istihdam verisinde.",
+    publishedAt: "2026-09-03",
+    readingMinutes: 3,
+    intro:
+      "Perşembe sabahı Asya seansında gündeme, Çarşamba günü açıklanan zayıf ADP istihdam verisinin piyasalardaki yansımaları ve gerileyen ABD tahvil getirileri damga vurdu. Altın, üç ayın zirvesinden başlayan sert düzeltmenin ardından 4.400 dolar seviyesinin üzerine geri dönerken, dolar endeksi de haftanın zirvesinden geriledi. Piyasaların gözü Cuma günü açıklanacak ABD tarım dışı istihdam (NFP) verisinde; Hürmüz Boğazı'ndaki gerilim ise enerji fiyatları üzerindeki risk primini canlı tutmaya devam ediyor.",
+    news: [
+      {
+        icon: "🥇",
+        heading: "Altın 4.400 Doların Üzerine Geri Döndü",
+        body: "**XAU/USD**, Asya seansında **4.400 doların üzerine** geri dönerek gün içinde **%1'in üzerinde değer kazanıp 4.435 dolar** seviyesine kadar yükseldi. Yükselişte, **ABD 10 yıllık tahvil getirisinin** Çarşamba günkü **%4,81** zirvesinden gerilemesi ve zayıf gelen ADP istihdam verisinin (Ağustos: **38 bin**) dolar üzerindeki baskıyı artırması etkili oldu. Piyasalar, Cuma günkü tarım dışı istihdam (NFP) verisi öncesi altındaki toparlanmanın sürdürülebilirliğini yakından izliyor.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar Endeksi (DXY) 99,50'nin Altına Geriledi",
+        body: "**ABD Dolar Endeksi (DXY)**, Çarşamba günü gördüğü ve yaklaşık üç haftanın zirvesi olan **99,70** seviyesinin ardından Perşembe sabahı **99,50'nin altına**, **99,51** seviyesine geriledi. Gerilemede, ABD tahvil getirilerindeki düşüş ile zayıf ADP verisinin ardından piyasada azalan Fed şahinliği beklentisi belirleyici oldu.",
+      },
+      {
+        icon: "💴",
+        heading: "USD/TRY Son Bir Ayın Zirvesinde: 48,34 TL",
+        body: "**USD/TRY**, Perşembe sabahı **48,30-48,32 TL bandında** işlem görürken, gün içinde **48,3420 TL** ile **son bir ayın en yüksek seviyesini** gördü. Küresel dolar zayıflığına rağmen kur, yükseliş trendini korumaya devam ediyor.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "Bugün (ABD seansı)",
+        icon: "🇺🇸",
+        title: "ABD ISM Hizmet Sektörü PMI & Haftalık İşsizlik Başvuruları",
+        note: "Cuma günkü NFP öncesi işgücü piyasası ve hizmet sektörü aktivitesine dair önemli sinyaller; piyasa beklentisi ISM Hizmet PMI için yaklaşık 54,5, haftalık işsizlik başvuruları için yaklaşık 205 bin.",
+      },
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Fed'in Eylül faiz kararı öncesi işgücü piyasasına dair son büyük veri; zayıf ADP verisinin ardından sürpriz bir sonuç faiz artırım beklentisini yeniden fiyatlayabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-02-1800",
     title: "FXPARTNER Piyasa Özeti | 02.09.2026 Akşam Güncellemesi",
     excerpt:
