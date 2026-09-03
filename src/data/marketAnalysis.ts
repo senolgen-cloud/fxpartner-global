@@ -41,6 +41,49 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-03-2100",
+    title: "FXPARTNER Piyasa Özeti | 03.09.2026 Akşam Güncellemesi",
+    excerpt:
+      "ABD'de haftalık işsizlik başvuruları 206 bine yükselirken ISM Hizmet Sektörü PMI Ağustos'ta beklentilerin belirgin üzerinde 55,4'e çıktı. Suudi Arabistan, Hürmüz'de vurulan süper tanker Sidr'deki saldırıda 2 Filipinli denizcinin öldüğünü doğruladı. Altın dolar ve tahvil getirilerindeki gerilemeyle 4.400 doların üzerinde tutunurken, USD/TRY akşam saatlerinde 48,31 TL civarında yatay seyrediyor.",
+    publishedAt: "2026-09-03",
+    readingMinutes: 3,
+    intro:
+      "Perşembe akşamı gündeme, gün içinde açıklanan iki önemli ABD verisi ile Hürmüz Boğazı'ndaki tanker saldırılarına ilişkin acı bir doğrulama damga vurdu. ISM Hizmet Sektörü PMI beklentilerin belirgin üzerinde gelerek hizmet sektöründeki ivmenin sürdüğüne işaret ederken, haftalık işsizlik başvuruları hafif bir artış kaydetti. Bu arada Suudi Arabistan, hafta başında Hürmüz'de vurulan süper tanker Sidr'deki saldırıda can kaybı yaşandığını resmen doğruladı. Fiyat tarafında altın yükselişini korurken, USD/TRY öğleden bu yana büyük ölçüde yatay bir seyir izliyor. Piyasaların gözü artık Cuma günü açıklanacak ABD tarım dışı istihdam verisinde.",
+    news: [
+      {
+        icon: "📊",
+        heading: "ISM Hizmet Sektörü PMI Beklentileri Aştı: 55,4",
+        body: "**ISM Hizmet Sektörü PMI**, Ağustos'ta **55,4** ile Temmuz'daki **54,1** seviyesinin ve piyasa beklentisi olan **54,2-54,3**'ün belirgin üzerinde gelerek sektördeki genişlemenin hız kazandığını gösterdi. Rapordaki **Yeni Siparişler Endeksi**, **60,9** ile yaklaşık **3,5 yılın zirvesine** çıkarak talep tarafındaki gücü teyit etti. Aynı gün açıklanan **haftalık işsizlik başvuruları** ise önceki haftanın güncellenmiş **204 bin** rakamından **206 bine** yükseldi; piyasa beklentisi yaklaşık **205 bin** civarındaydı.",
+      },
+      {
+        icon: "🕯️",
+        heading: "Suudi Arabistan Doğruladı: Sidr Saldırısında 2 Filipinli Denizci Öldü",
+        body: "**Suudi Arabistan**, hafta başında (1 Eylül) Hürmüz Boğazı'nda vurulan **Bahri** şirketine ait süper tanker **Sidr**'deki saldırıda **2 Filipinli denizcinin** hayatını kaybettiğini resmen doğruladı. Gemide toplam **16 Filipinli denizci** bulunuyordu. Suudi Arabistan saldırıdan İran'ı sorumlu tutarken, İran Devrim Muhafızları Ordusu (IRGC) daha önce iki tankerin ABD ordusunun yönlendirmesiyle \"yetkisiz bir güzergahtan\" geçmeye çalışırken mayına çarptığını öne sürmüştü.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın 4.400 Doların Üzerinde Tutunuyor",
+        body: "**XAU/USD**, dolar endeksi ve ABD tahvil getirilerindeki gerilemenin desteğiyle **4.400 doların üzerindeki** seyrini koruyor. New York Fed Başkanı **John Williams**'ın, uzun vadeli tahvil getirilerindeki yükselişin enflasyon endişelerinden değil güçlü ekonomiye dair beklentilerden kaynaklandığı yönündeki değerlendirmesi de piyasada takip edildi.",
+      },
+      {
+        icon: "💵",
+        heading: "DXY 99,51'de, USD/TRY Akşam Saatlerinde 48,31 TL Civarında",
+        body: "**ABD Dolar Endeksi (DXY)**, günü **%0,05** hafif bir gerilemeyle **99,51** seviyesinde tamamlamaya hazırlanıyor. **USD/TRY** ise akşam saatlerinde **48,31 TL** civarında, gün içinde **48,27-48,37 TL bandında** işlem görerek öğleden bu yana büyük ölçüde yatay bir seyir izliyor.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Fed'in Eylül faiz kararı öncesi işgücü piyasasına dair son büyük veri; beklentilerin üzerinde gelen ISM Hizmet PMI'nin ardından sürpriz bir sonuç faiz artırım beklentisini yeniden fiyatlayabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-03-1500",
     title: "FXPARTNER Piyasa Özeti | 03.09.2026 Öğleden Sonra Güncellemesi",
     excerpt:
