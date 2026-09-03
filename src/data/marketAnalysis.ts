@@ -41,6 +41,55 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-03-1200",
+    title: "FXPARTNER Piyasa Özeti | 03.09.2026 Öğle Güncellemesi",
+    excerpt:
+      "İran, Perşembe sabahı erken saatlerde Kuveyt, Bahreyn ve Ürdün'deki ABD üslerini füze ve İHA'larla vurdu; Kuveyt hava savunması saldırıyı püskürttüğünü açıkladı, Ürdün'de Amerikan kayıplarının olmadığı bildirildi. Gelişme sonrası petrol fiyatları başlangıçta 2 dolara varan sıçramanın ardından geriledi (Brent 95,25, WTI 90,63 dolar); altın 4.424 dolar civarında, dolar endeksi (DXY) 99,51 seviyesinde ve USD/TRY 48,32 TL bandında yatay seyrediyor.",
+    publishedAt: "2026-09-03",
+    readingMinutes: 3,
+    intro:
+      "Perşembe öğle seansında gündeme, İran'ın Kuveyt, Bahreyn ve Ürdün'deki ABD üslerine yönelik yeni bir füze ve İHA saldırı dalgası damga vurdu. Saldırı, ABD'nin 1 Eylül'de İran Devrim Muhafızları Ordusu'na (IRGC) yönelik vuruşlarına karşılık olarak gerçekleştirildi. Kuveyt ordusu hava savunma sistemlerinin saldırıyı püskürttüğünü duyururken, Ürdün'de Amerikan kayıplarının bulunmadığı bildirildi. Gelişme petrol fiyatlarını gün içinde geçici olarak yukarı çekse de, tırmanmanın yatışabileceğine dair sinyallerle fiyatlar geri çekildi.",
+    news: [
+      {
+        icon: "🎯",
+        heading: "İran, Kuveyt, Bahreyn ve Ürdün'deki ABD Üslerini Vurdu",
+        body: "**Kuveyt Genelkurmayı**, Perşembe sabahı erken saatlerde hava savunma sistemlerinin ülkeye yönelik füze ve İHA saldırılarını püskürttüğünü açıkladı. İran Devrim Muhafızları Ordusu (**IRGC**), Kuveyt'teki **Ali El-Selim Hava Üssü**'nü hedef aldığını ve bir komuta merkezi ile İHA tesislerini vurduğunu iddia etti. Ürdün'de ise IRGC, **Camp Titin** üssünün **\"yoğun bir balistik füze saldırısına\"** uğradığını duyurdu; iki ABD yetkilisi Reuters'a yaptığı açıklamada Ürdün'deki saldırılarda **Amerikan kaybı olmadığını** belirtti. Bahreyn'de de hava saldırısı sirenleri çaldı. İranlı askeri sözcü **İbrahim Zülfikari**, **\"Bahreyn ve Kuveyt konusunda artık kendimizi tutmayacağız\"** açıklamasını yaptı.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol Sıçramanın Ardından Geri Çekildi: Brent 95,25, WTI 90,63 Dolar",
+        body: "Saldırı haberinin ardından **Brent petrol ve WTI ham petrolü gün içinde 2 dolara varan** sıçramalar yaşadı; ancak Hürmüz Boğazı'ndan geçişin günlük yaklaşık **8 milyon varil** ile büyük ölçüde sürmesi ve tırmanmanın yatışabileceğine dair sinyallerle fiyatlar geriledi. **Brent %0,40 düşüşle 95,25 dolara**, **WTI ise 38 sent gerileyerek 90,63 dolara** indi.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın 4.424 Dolar Civarında",
+        body: "**XAU/USD**, Çarşamba kapanışındaki **4.377 dolar** seviyesinin üzerinde, **4.424-4.427 dolar** bandında işlem görüyor. Zayıf ADP verisi ve gerileyen ABD tahvil getirilerinin sağladığı destek, jeopolitik gerilimin yeniden tırmanmasıyla güçlenmeye devam ediyor.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar Endeksi (DXY) 99,51'de, USD/TRY 48,32 TL Bandında",
+        body: "**ABD Dolar Endeksi (DXY)**, bir önceki seansa göre **%0,05** hafif gerileyerek **99,51** seviyesinde yatay seyrediyor. **USD/TRY** ise **%0,03** hafif düşüşle **48,3171 TL** seviyesinde, sabah seansındaki **48,34 TL**'lik zirvenin hemen altında dengeleniyor.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "Bugün (ABD seansı)",
+        icon: "🇺🇸",
+        title: "ABD ISM Hizmet Sektörü PMI & Haftalık İşsizlik Başvuruları",
+        note: "Cuma günkü NFP öncesi işgücü piyasası ve hizmet sektörü aktivitesine dair önemli sinyaller; veriler henüz açıklanmadı.",
+      },
+      {
+        time: "4 Eylül Cuma",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Fed'in Eylül faiz kararı öncesi işgücü piyasasına dair son büyük veri; jeopolitik gerilimin sürdüğü bir ortamda sürpriz bir sonuç faiz artırım beklentisini yeniden fiyatlayabilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-03-0900",
     title: "FXPARTNER Piyasa Özeti | 03.09.2026 Sabah Güncellemesi",
     excerpt:
