@@ -41,6 +41,49 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-04-1230",
+    title: "FXPARTNER Piyasa Özeti | 04.09.2026 Öğle Güncellemesi",
+    excerpt:
+      "USD/TRY, Cuma öğle seansında 48,44 TL'ye yükselerek Perşembe günü görülen ve son bir ayın zirvesi olan 48,34 TL'yi de aştı. Altın, Waller'ın güvercin yorumları sonrası yaşadığı yükselişin ardından %0,07 gerileyerek 4.470,66 dolara indi ve 4.500 doların altında konsolide olmayı sürdürüyor. Brent petrol %0,31 düşüşle 95,23 dolara gerilerken, dolar endeksi (DXY) 98,99 ile yatay seyrediyor. Piyasaların gözü TSİ 15:30'da açıklanacak ABD tarım dışı istihdam verisinde; Eylül faiz artırım ihtimali CME FedWatch'a göre %54 civarında.",
+    publishedAt: "2026-09-04",
+    readingMinutes: 3,
+    intro:
+      "Cuma öğle seansında gündeme, ABD tarım dışı istihdam (NFP) verisi öncesi USD/TRY'nin yeni bir zirve kaydetmesi damga vurdu. Dolar kuru, TSİ 12:20 itibarıyla 48,44 TL'ye yükselerek Perşembe günü görülen ve son bir ayın zirvesi olarak kaydedilen 48,34 TL seviyesini de geride bıraktı. Bu arada altın, Fed Guvernörü Waller'ın Perşembe akşamki güvercin yorumlarının ardından yaşadığı yükselişin bir kısmını geri vererek 4.470 dolara gerilerken, Brent petrol de Hürmüz Boğazı'ndan geçen tanker trafiğinin artmasına dair haberlerle hafif bir düşüş kaydetti. Dolar endeksi (DXY) ise 98,99 ile büyük ölçüde yatay seyrediyor. Piyasaların tüm gözü artık TSİ 15:30'da açıklanacak ve Fed'in Eylül kararına dair son büyük ipucunu verecek ABD tarım dışı istihdam (NFP) verisinde.",
+    news: [
+      {
+        icon: "💴",
+        heading: "USD/TRY Yeni Zirvede: 48,44 TL",
+        body: "**USD/TRY**, Cuma öğle seansında **48,44 TL** seviyesine yükselerek, Perşembe günü görülen ve son bir ayın zirvesi olarak kaydedilen **48,34 TL** seviyesini de aştı. Kur, TSİ 12:20 itibarıyla **48,4367-48,4480 TL bandında** işlem görerek bir önceki güne göre **%0,25** değer kazandı.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın 4.470 Dolara Geriledi, 4.500 Doların Altında Konsolide Sürüyor",
+        body: "**XAU/USD**, Fed Guvernörü Waller'ın güvercin yorumları sonrası yaşadığı yükselişin ardından Cuma günü **%0,07** hafif bir gerilemeyle **4.470,66 dolara** indi. Altın, geçtiğimiz iki seansta kaydettiği kazanımların büyük bölümünü korumaya devam ederek **4.500 doların altında** konsolide oluyor.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Brent Petrol 95,23 Dolara Geriledi",
+        body: "**Brent petrol**, Cuma sabahı **%0,31** düşüşle **95,23 dolara** geriledi. Japonya'nın en büyük tanker operatörlerinden biri, Hürmüz Boğazı'ndaki aksaklıkların önceki beklentilerden daha uzun süreceğini öngörürken, Orta Doğu ve Rusya'daki hasarlı rafineriler küresel yakıt fiyatlarını yüksek seviyelerde tutmaya devam ediyor.",
+      },
+      {
+        icon: "🇺🇸",
+        heading: "Piyasaların Gözü NFP'de: Eylül Faiz Artırım İhtimali %54 Civarında",
+        body: "**CME FedWatch** verilerine göre **Eylül ayı faiz artırım ihtimali**, Perşembe sabahki **%63**'ten Cuma sabahı **%54**'e geriledi. Piyasa beklentisi Ağustos tarım dışı istihdamı için yaklaşık **+53 bin** (Temmuz: **-23 bin**); TSİ **15:30**'da açıklanacak veri, Fed'in **15-16 Eylül** toplantısı öncesi işgücü piyasasına dair son büyük ipucu olacak.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "Bugün 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Piyasa beklentisi Ağustos için +53 bin; Temmuz'da sürpriz bir şekilde 23 bin daralan istihdamın ardından, Eylül faiz artırım beklentilerini yeniden fiyatlayabilecek kritik bir veri, henüz açıklanmadı.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-04-0900",
     title: "FXPARTNER Piyasa Özeti | 04.09.2026 Sabah Güncellemesi",
     excerpt:
