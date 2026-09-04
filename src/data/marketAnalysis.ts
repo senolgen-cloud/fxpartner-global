@@ -41,6 +41,55 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-04-1900",
+    title: "FXPARTNER Piyasa Özeti | 04.09.2026 Akşam Güncellemesi",
+    excerpt:
+      "ABD'de Ağustos ayı tarım dışı istihdamı, 53-58 bin kişilik piyasa beklentisinin çok üzerinde 162 bin arttı; işsizlik oranı %4,1'de sabit kaldı ve Temmuz verisi -23 binden +21 bine yukarı revize edildi. Güçlü rapor, Eylül ayı faiz artırım ihtimalini %52-55'ten %59'a taşıdı. Altın 4.470-4.500 dolar bandından %2'ye yakın gerileyerek 4.400 doların altını test etti, 10 yıllık tahvil getirisi %4,78'e, 2 yıllık getiri %4,39'a yükseldi ve dolar endeksi (DXY) günün zirvesi 99,39'a çıktı.",
+    publishedAt: "2026-09-04",
+    readingMinutes: 3,
+    intro:
+      "Cuma günü TSİ 15:30'da açıklanan ABD tarım dışı istihdam (NFP) raporu, sabah saatlerindeki güvercin Fed algısını tersine çevirdi. Ağustos'ta istihdam, Dow Jones'un 53 bin ve Reuters anketinin 56-58 bin kişilik beklentilerinin çok üzerinde 162 bin arttı; işsizlik oranı %4,1'de sabit kaldı, saatlik ortalama kazançlar aylık %0,3 ve yıllık %3,1 arttı, işgücüne katılım oranı %61,6'ya yükseldi. Temmuz verisi de -23 binden +21 bine yukarı revize edilerek Haziran-Temmuz toplamında 55 bin ek istihdam ortaya çıktı. Güçlü rapor, bir gün önce Fed Guvernörü Waller'ın güvercin yorumlarıyla gerileyen Eylül faiz artırım ihtimalini yeniden yükseltti; tahvil getirileri ve dolar sertleşirken altın sabahki kazanımlarının önemli bir bölümünü geri verdi.",
+    news: [
+      {
+        icon: "💼",
+        heading: "ABD İstihdamı Beklentileri Ezip Geçti: Ağustos'ta +162 Bin",
+        body: "ABD Çalışma Bakanlığı verilerine göre **tarım dışı istihdam**, Ağustos'ta piyasa beklentisi olan **53-58 bin** kişinin çok üzerinde **162 bin** arttı. **İşsizlik oranı %4,1**'de sabit kalırken, **saatlik ortalama kazançlar** aylık **%0,3**, yıllık bazda **%3,1** yükseldi ve **işgücüne katılım oranı %61,6**'ya çıktı. Temmuz ayı istihdam verisi de önceki **-23 bin** rakamından **+21 bine** yukarı revize edildi; Haziran-Temmuz toplamında **55 bin** ek istihdam ortaya çıktı.",
+      },
+      {
+        icon: "🏦",
+        heading: "Fed Eylül Faiz Artırım İhtimali %59'a Yükseldi",
+        body: "Güçlü istihdam raporunun ardından **CME FedWatch** ve vadeli işlem fiyatlamalarına göre **15-16 Eylül FOMC** toplantısında faiz artırım ihtimali, veri öncesindeki **%52-55** bandından **%59**'a yükseldi; bazı hesaplamalarda bu oran gün içinde **%65** seviyesine kadar çıktı. Böylece rapor, bir gün önce Fed Guvernörü Waller'ın güvercin yorumlarıyla gerileyen faiz artırım beklentilerini büyük ölçüde tersine çevirmiş oldu. Piyasaların gözü artık **11 Eylül**'de açıklanacak Ağustos ayı ABD TÜFE verisinde.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın 4.400 Doların Altını Test Etti",
+        body: "**XAU/USD**, güçlü istihdam verisinin ardından tahvil getirileri ve dolarındaki yükselişle bir ara **%2'ye yakın** değer kaybederek Perşembe günü ulaştığı **4.470-4.500 dolar** bandından **4.400 doların altına** geriledi; altın öğleden sonra saatlerinde **4.420 dolar** civarında seyrediyor. Teknik olarak **4.400 dolar** kritik destek olarak izlenirken, bu seviyenin altında kalıcı bir kapanış **4.300 dolar** bölgesini gündeme getirebilir; **4.500 doların** üzerine dönüş ise baskıyı hafifletecek.",
+      },
+      {
+        icon: "📈",
+        heading: "Tahvil Getirileri ve Dolar Endeksi Yükseldi",
+        body: "**ABD 10 yıllık tahvil getirisi %4,78**'e, **2 yıllık tahvil getirisi ise %4,39**'a yükseldi. **Dolar endeksi (DXY)**, Perşembe günkü haftanın dip seviyesi **98,83**'ten toparlanarak veri sonrası günün zirvesi **99,39**'a çıktı, günü **99,20** civarında değerlendiriyor. **USD/TRY** ise gün içinde **48,27-48,45 TL** bandında hareket ederek Perşembe kapanışı olan **48,33 TL**'nin hafif üzerine çıktı.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "Türkiye Cumhuriyet Merkez Bankası Para Politikası Kurulu, politika faizini son toplantısında %37'de sabit tutmuştu.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; güçlü istihdam raporunun ardından Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-04-0900",
     title: "FXPARTNER Piyasa Özeti | 04.09.2026 Sabah Güncellemesi",
     excerpt:
