@@ -41,6 +41,49 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-04-0900",
+    title: "FXPARTNER Piyasa Özeti | 04.09.2026 Sabah Güncellemesi",
+    excerpt:
+      "Fed Guvernörü Christopher Waller'ın Perşembe akşamı yaptığı güvercin yorumlar sonrası Eylül faiz artırım ihtimali %66'dan %54,6'ya geriledi; altın %2'nin üzerinde yükselerek 4.487 dolara çıktıktan sonra Cuma sabahı 4.500 doların altında konsolide oluyor. ABD 10 yıllık tahvil getirisi %4,761'e, 2 yıllık %4,322'ye gerilerken, dolar endeksi (DXY) 98,98'e indi ve USD/TRY 48,25-48,30 TL bandına hafifçe geriledi. Piyasaların gözü bugün TSİ 15:30'da açıklanacak ABD tarım dışı istihdam verisinde.",
+    publishedAt: "2026-09-04",
+    readingMinutes: 3,
+    intro:
+      "Cuma sabahı gündeme, Fed Guvernörü Christopher Waller'ın bir önceki akşam yaptığı ve piyasalarda güvercin olarak okunan açıklamalar damga vurdu. Waller, dezenflasyon sürecinin önümüzdeki iki haftada da sürmesi koşuluyla 15-16 Eylül'deki FOMC toplantısında faizleri sabit tutmaya hazır olduğunu belirtirken, Ağustos enflasyonunun sıcak gelmesi halinde faiz artırımının hâlâ masada olduğunu da vurguladı. Açıklamalar sonrası tahvil getirileri geriledi, dolar zayıfladı ve altın günü %2'nin üzerinde bir yükselişle kapattı. Cuma sabahı Asya seansında altın kazanımlarını büyük ölçüde korurken, USD/TRY hafif bir gerileme kaydediyor. Piyasaların odağı artık bugün TSİ 15:30'da açıklanacak ve Fed'in Eylül kararına dair son büyük ipucunu verecek ABD tarım dışı istihdam (NFP) verisinde.",
+    news: [
+      {
+        icon: "🏦",
+        heading: "Fed'in Waller'dan Güvercin Sinyal: Eylül Faiz Artırım İhtimali %54,6'ya Geriledi",
+        body: "Fed Guvernörü **Christopher Waller**, Perşembe günü yaptığı konuşmada, dezenflasyon sürecinin önümüzdeki iki hafta içinde açıklanacak verilerle teyit edilmesi koşuluyla **15-16 Eylül FOMC toplantısında** faiz oranını sabit tutmaya hazır olduğunu söyledi. Enflasyonun Fed'in **%2** hedefinin hâlâ **\"belirgin şekilde üzerinde\"** olduğunu ancak son verilerin dezenflasyona işaret ettiğini belirten Waller, buna karşın **Ağustos enflasyonunun sıcak gelmesi** halinde bir faiz artırımının masada kalacağını da sözlerine ekledi. Açıklamaların ardından **CME FedWatch** verilerine göre Eylül ayı faiz artırım ihtimali dakikalar içinde yaklaşık **12 puan** gerileyerek **%54,6**'ya indi; bu oran Fed Başkanı Kevin Warsh'ın şahin Jackson Hole konuşmasının ardından **%66-67** seviyesine kadar yükselmişti.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın %2'nin Üzerinde Yükseldi, Cuma Sabahı 4.500 Doların Altında Konsolide Oluyor",
+        body: "**XAU/USD**, Waller'ın güvercin yorumlarının ardından Perşembe günü **%2'nin üzerinde** değer kazanarak **28 Ağustos'tan bu yana en yüksek seviyesi** olan **4.487 dolara** kadar yükseldi. Cuma sabahı Asya seansında ise altın bu kazanımların büyük bölümünü korurken **4.500 doların altında** konsolide oluyor; yatırımcılar bugün açıklanacak ABD tarım dışı istihdam verisinin Fed'in politika patikasına dair vereceği ipuçlarını bekliyor.",
+      },
+      {
+        icon: "📉",
+        heading: "Tahvil Getirileri Geriledi: 10 Yıllık %4,761, 2 Yıllık %4,322",
+        body: "Waller'ın açıklamaları sonrası **ABD tahvil getirileri** geriledi: **2 yıllık tahvil getirisi %4,322**'ye, **10 yıllık tahvil getirisi ise %4,761**'e indi. Getirilerdeki gerileme, piyasanın Fed'in Eylül toplantısında faizleri sabit bırakma ihtimaline daha fazla ağırlık vermeye başladığının bir yansıması olarak okunuyor.",
+      },
+      {
+        icon: "💵",
+        heading: "DXY 98,98'e Geriledi, USD/TRY 48,25-48,30 TL Bandında",
+        body: "**ABD Dolar Endeksi (DXY)**, Waller'ın güvercin tonu ve gerileyen tahvil getirilerinin etkisiyle Perşembe akşamki **99,51** seviyesinden Cuma sabahı **98,98**'e geriledi. **USD/TRY** ise sabah saatlerinde **48,25-48,30 TL bandında** işlem görerek, Perşembe günü gördüğü ve son bir ayın zirvesi olan **48,34 TL**'nin hafif altına sarktı.",
+      },
+    ],
+    calendarLabel: "31 Ağustos - 5 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "Bugün 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "Dow Jones piyasa beklentisi Ağustos için +53 bin; Temmuz'da sürpriz bir şekilde 23 bin daralan istihdamın ardından, Waller'ın güvercin çıkışıyla düşen faiz artırım beklentilerini yeniden fiyatlayabilecek kritik bir veri.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-03-2100",
     title: "FXPARTNER Piyasa Özeti | 03.09.2026 Akşam Güncellemesi",
     excerpt:
