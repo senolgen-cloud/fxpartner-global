@@ -41,6 +41,55 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-05-2100",
+    title: "FXPARTNER Piyasa Özeti | 05.09.2026 Gece Güncellemesi",
+    excerpt:
+      "Cumartesi akşamı İran çatışmasında sert bir tırmanma yaşandı: ABD Merkez Kuvvetler Komutanlığı (CENTCOM), İran Devrim Muhafızları Ordusu'na (IRGC) bağlı unsurların bölgede devriye gezen bir ABD uçak gemisi ile bir destroyere balistik füze fırlattığını, her iki geminin de saldırılardan kaçındığını ve ABD personelinin yaralanmadığını açıkladı. ABD karşılığında Kharg Adası açıklarındaki M/T Downy ile Jask yakınlarındaki M/T Stark 1'i devre dışı bırakırken Umman Körfezi'ndeki boş M/T Kylo'yu imha etti; İran devlet televizyonu ise Kharg açıklarında bir tankere dört ABD füzesinin isabet ettiğini, can kaybı olmadığını duyurdu.",
+    publishedAt: "2026-09-05",
+    readingMinutes: 3,
+    intro:
+      "Cumartesi akşamı İran çatışmasında sert bir tırmanma yaşandı. ABD Merkez Kuvvetler Komutanlığı (CENTCOM), İran Devrim Muhafızları Ordusu'na (IRGC) bağlı unsurların bölgede devriye gezen bir ABD uçak gemisi ve bir destroyere balistik füze fırlattığını, her iki geminin de \"kışkırtılmamış çoklu İran saldırılarından\" kaçındığını ve hiçbir ABD personelinin yaralanmadığını açıkladı. ABD buna karşılık üç İran petrol tankerini vurdu: Kharg Adası açıklarındaki M/T Downy ile Jask yakınlarındaki M/T Stark 1 \"kalıcı olarak devre dışı\" bırakılırken, Umman Körfezi'ndeki yükünü boşaltmış M/T Kylo, tayfası gemiyi tahliye ettikten sonra imha edildi. ABD, vurulan tankerlerin IRGC ve bölgedeki vekil güçlerini finanse eden \"gölge filo\" ağının parçası olduğunu savundu. Eş zamanlı olarak İran devlet televizyonuna bağlı Tasnim ajansı, Kharg Adası'na yaklaşık 10 kilometre uzaklıkta bir tankerin dört ABD füzesiyle vurulduğunu, can kaybı olmadığını ve tayfanın tahliye edildiğini duyurdu. Döviz, altın ve emtia piyasaları hafta sonu tatilinde kapalı olduğundan gelişmenin fiyatlara yansıması Pazartesi/Pazar akşamı yeniden açılışta izlenecek; haftanın odağı 10 Eylül'deki TCMB kararı ve 11 Eylül'deki ABD TÜFE verisinde olmayı sürdürüyor.",
+    news: [
+      {
+        icon: "🚀",
+        heading: "IRGC, İki ABD Savaş Gemisine Balistik Füze Fırlattı",
+        body: "ABD Merkez Kuvvetler Komutanlığı (**CENTCOM**), Cumartesi günü yaptığı açıklamada, **İran Devrim Muhafızları Ordusu'na (IRGC)** bağlı unsurların bölgede devriye gezen bir **ABD uçak gemisi** ile bir **destroyere balistik füze fırlattığını** duyurdu. Açıklamaya göre her iki gemi de **\"kışkırtılmamış çoklu İran saldırılarından\"** başarıyla kaçındı ve **hiçbir ABD personeli yaralanmadı**.",
+      },
+      {
+        icon: "🛢️",
+        heading: "ABD Misilleme Olarak Üç İran Petrol Tankerini Vurdu",
+        body: "CENTCOM, saldırıya karşılık **üç İran petrol tankerini** hedef aldığını açıkladı: **Kharg Adası** açıklarındaki **M/T Downy** ile **Jask** yakınlarındaki **M/T Stark 1** \"kalıcı olarak devre dışı\" bırakılırken, **Umman Körfezi**'ndeki yükünü boşaltmış **M/T Kylo**, tayfasına gemiyi tahliye etme talimatı verildikten sonra imha edildi. ABD, vurulan tankerlerin IRGC ve bölgedeki vekil güçlerini finanse eden \"gölge filo\" ağının parçası olduğunu öne sürdü.",
+      },
+      {
+        icon: "🗣️",
+        heading: "CENTCOM Komutanı Cooper'dan IRGC'ye Sert Mesaj",
+        body: "CENTCOM Komutanı Tümamiral **Brad Cooper**, saldırının ardından yaptığı açıklamada IRGC'ye şu mesajı verdi: **\"IRGC'ye mesajımız açık olsun: Bizim iki gemimize ateş açarsanız, sizin üç geminizi etkisiz hale getirerek daha da yüksek bir ekonomik bedel ödetiriz.\"**",
+      },
+      {
+        icon: "🇮🇷",
+        heading: "İran Devlet TV'si: Kharg Açıklarında Tankere 4 Füze İsabet Etti",
+        body: "İran devlet televizyonuna bağlı **Tasnim** ajansı, **Kharg Adası**'na yaklaşık **10 kilometre (6 mil)** uzaklıkta seyreden bir tankere **dört ABD füzesinin** isabet ettiğini, saldırıda **can kaybı yaşanmadığını** ve gemi tayfasının tahliye edildiğini bildirdi. Kharg Adası, İran'ın ham petrol ihracatının **yaklaşık %90-95'ini** karşılayan ana ihracat terminaline ev sahipliği yapıyor.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "Türkiye Cumhuriyet Merkez Bankası Para Politikası Kurulu, politika faizini son toplantısında %37'de sabit tutmuştu.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; güçlü istihdam raporunun ardından Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-05-1200",
     title: "FXPARTNER Piyasa Özeti | 05.09.2026 Hafta Sonu Güncellemesi",
     excerpt:
