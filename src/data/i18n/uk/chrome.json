@@ -2813,8 +2813,6 @@
   "Her sinyal giriş, zarar durdur ve kâr al seviyesiyle yayınlanır; kapandığında sonucu — kazanç ya da kayıp — panoda kalır. Aynı ekranda ayrıca yapay zeka analizi, ekonomik takvim ve güvenilir broker karşılaştırmaları.": "Кожен сигнал публікується з точкою входу, стоп-лоссом і тейк-профітом; після закриття результат — прибуток чи збиток — залишається на дошці. На тому ж екрані: ШІ-аналіз, економічний календар і порівняння надійних брокерів.",
   "FXPARTNER'ın takip edilen MT5 hesabında kapanan gerçek işlemler. Geçmiş sonuçlar gelecekteki sonuçları garanti etmez; kaldıraçlı işlemlerde sermayenizin tamamını kaybedebilirsiniz.": "Реальні угоди, закриті на відстежуваному рахунку MT5 FXPARTNER. Минулі результати не гарантують майбутніх; торгівля з кредитним плечем може коштувати вам усього капіталу.",
   "Tüm işlem geçmişini gör →": "Переглянути всю історію угод →",
-  "Şu anda açık sinyal yok. Bir sonraki sinyal, açıldığı anda hem bu panoda hem Telegram kanalımızda yayınlanır.": "Наразі немає відкритих сигналів. Наступний буде опубліковано тут і на нашому каналі Telegram у момент відкриття.",
-  "Bu arada aşağıdaki kapanmış işlemlerin tamamı — kazançlar ve kayıplar — incelemenize açık.": "Тим часом усі закриті угоди нижче — і прибуткові, і збиткові — відкриті для перевірки.",
   "Telegram kanalına katıl": "Приєднатися до каналу Telegram",
   "Sinyaller ücretsiz ve üyeliksiz. Üyelik, onları kaçırmamanızı sağlıyor.": "Сигнали безкоштовні й не потребують акаунта. Акаунт потрібен, щоб їх не пропустити.",
   "İşlem açıldığı anda telefonunuza bildirim, işlem hacminizden nakit iade için hesap bağlama ve tüm kapanmış işlem geçmişi — ücretsiz hesapla.": "Push-сповіщення в момент відкриття угоди, прив’язка рахунку для кешбеку з вашого обсягу торгів і повна історія закритих угод — на безкоштовному акаунті.",
@@ -2868,5 +2866,10 @@
   "Diğer brokerlar için oranlar teyit bekliyor — koşulların tamamı": "Ставки для інших брокерів очікують підтвердження — усі умови на",
   "cashback sayfasında": "сторінці кешбеку",
   "Bilgilerimin cashback kurulumu için işlenmesini ve benimle iletişime geçilmesini kabul ediyorum.": "Погоджуюся на обробку моїх даних для налаштування кешбеку та на звʼязок зі мною щодо нього.",
-  "KVKK Aydınlatma Metni": "Повідомлення про конфіденційність"
+  "KVKK Aydınlatma Metni": "Повідомлення про конфіденційність",
+  "Bu Ay": "Цей місяць",
+  "Açık pozisyon yok": "Немає відкритих позицій",
+  "Bir sonraki işlem açıldığı anda, saniyesinde burada.": "Наступна угода зʼявиться тут у ту ж секунду, коли відкриється.",
+  "Beklerken bakılacak bir şey var: kapanmış işlemlerin tamamı aşağıda duruyor — kazançlar da, kayıplar da.": "Поки чекаєте, є що почитати: усі закриті угоди нижче — і прибуткові, і збиткові.",
+  "Kapanan işlemlere bak": "Переглянути закриті угоди"
 }

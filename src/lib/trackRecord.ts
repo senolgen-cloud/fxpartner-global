@@ -141,6 +141,17 @@ export type AccountRecord = {
   allTime: PeriodTotals;
   today: PeriodTotals;
   week: PeriodTotals;
+  month: PeriodTotals;
+  /**
+   * Midnight on the first of the current month in SIGNAL_TZ.
+   *
+   * Carried alongside the totals so the strip can name the month it is
+   * reporting — "Eylül 2026" — without a second date being computed on the
+   * client, where it would disagree with the server across a midnight or a
+   * month boundary and produce a hydration mismatch on the one component
+   * both pages share.
+   */
+  monthStart: number;
 };
 
 type ClosedRow = {
@@ -191,6 +202,8 @@ export async function getAccountRecord(): Promise<AccountRecord | null> {
     allTime: totals(rows, 0),
     today: totals(rows, periods.dayStart),
     week: totals(rows, periods.weekStart),
+    month: totals(rows, periods.monthStart),
+    monthStart: periods.monthStart,
   };
 }
 

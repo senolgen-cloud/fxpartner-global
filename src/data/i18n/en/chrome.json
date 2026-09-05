@@ -2813,8 +2813,6 @@
   "Her sinyal giriş, zarar durdur ve kâr al seviyesiyle yayınlanır; kapandığında sonucu — kazanç ya da kayıp — panoda kalır. Aynı ekranda ayrıca yapay zeka analizi, ekonomik takvim ve güvenilir broker karşılaştırmaları.": "Every signal is published with its entry, stop loss and take profit; once it closes, the outcome — win or loss — stays on the board. On the same screen: AI analysis, an economic calendar and trusted broker comparisons.",
   "FXPARTNER'ın takip edilen MT5 hesabında kapanan gerçek işlemler. Geçmiş sonuçlar gelecekteki sonuçları garanti etmez; kaldıraçlı işlemlerde sermayenizin tamamını kaybedebilirsiniz.": "Real trades closed on FXPARTNER's tracked MT5 account. Past results do not guarantee future results; leveraged trading can cost you your entire capital.",
   "Tüm işlem geçmişini gör →": "See the full trade history →",
-  "Şu anda açık sinyal yok. Bir sonraki sinyal, açıldığı anda hem bu panoda hem Telegram kanalımızda yayınlanır.": "There are no open signals right now. The next one is published here and on our Telegram channel the moment it opens.",
-  "Bu arada aşağıdaki kapanmış işlemlerin tamamı — kazançlar ve kayıplar — incelemenize açık.": "In the meantime, every closed trade below — wins and losses alike — is open for you to examine.",
   "Telegram kanalına katıl": "Join the Telegram channel",
   "Sinyaller ücretsiz ve üyeliksiz. Üyelik, onları kaçırmamanızı sağlıyor.": "The signals are free and need no account. An account is what keeps you from missing them.",
   "İşlem açıldığı anda telefonunuza bildirim, işlem hacminizden nakit iade için hesap bağlama ve tüm kapanmış işlem geçmişi — ücretsiz hesapla.": "A push notification the moment a trade opens, account linking for cashback on your trading volume, and the full closed-trade history — on the free account.",
@@ -2868,5 +2866,10 @@
   "Diğer brokerlar için oranlar teyit bekliyor — koşulların tamamı": "Rates for other brokers are awaiting confirmation — the full conditions are on the",
   "cashback sayfasında": "cashback page",
   "Bilgilerimin cashback kurulumu için işlenmesini ve benimle iletişime geçilmesini kabul ediyorum.": "I agree to my details being processed to set up cashback, and to being contacted about it.",
-  "KVKK Aydınlatma Metni": "Privacy notice"
+  "KVKK Aydınlatma Metni": "Privacy notice",
+  "Bu Ay": "This Month",
+  "Açık pozisyon yok": "No open positions",
+  "Bir sonraki işlem açıldığı anda, saniyesinde burada.": "The next trade appears here the second it opens.",
+  "Beklerken bakılacak bir şey var: kapanmış işlemlerin tamamı aşağıda duruyor — kazançlar da, kayıplar da.": "There is something to read while you wait: every closed trade is below — the wins and the losses alike.",
+  "Kapanan işlemlere bak": "See the closed trades"
 }

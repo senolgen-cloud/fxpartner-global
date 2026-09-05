@@ -200,6 +200,8 @@ function PeriodSummary({ closed, periods }: { closed: Signal[]; periods: SignalP
       realised={realised}
       today={periodTotals(closed, periods.dayStart)}
       week={periodTotals(closed, periods.weekStart)}
+      month={periodTotals(closed, periods.monthStart)}
+      monthStart={periods.monthStart}
     />
   );
 }
@@ -1428,21 +1430,42 @@ export default function SignalsBoard({
           // Bir de: burada okuyacak bir şey yok demek doğru değil. Açık
           // sinyal yoksa bile kapanmışların tamamı aşağıda duruyor, ve
           // sayfanın ikna gücü zaten orada.
-          <div className="text-text-on-ink-muted">
-            <p>
-              {tr("Şu anda açık sinyal yok. Bir sonraki sinyal, açıldığı anda hem bu panoda hem Telegram kanalımızda yayınlanır.")}
+          // Ortalanmış, çünkü üstündeki her şey ortalı: başlık, canlı
+          // rozeti, künye satırı ve hesap şeridi. Blok sola dayalı
+          // olduğu için, sayfanın ilk ekranında tek başına hizasız duran
+          // eleman buydu — hem de sinyal yokken en çok bakılan yer burası.
+          //
+          // Bekleyen bir okuyucuya verilecek en iyi şey, beklemesi
+          // gerekmediğini söylemek: kapanmışların tamamı hemen aşağıda.
+          // Telegram butonu ikinci sırada duruyor, çünkü siteden
+          // çıkarıyor.
+          <div className="mx-auto max-w-xl text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-hairline bg-ink-soft/40 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-text-on-ink-muted/60" />
+              {tr("Açık pozisyon yok")}
+            </span>
+            <p className="mt-4 text-[15px] leading-relaxed text-text-on-ink">
+              {tr("Bir sonraki işlem açıldığı anda, saniyesinde burada.")}
             </p>
-            <p className="mt-2 text-sm">
-              {tr("Bu arada aşağıdaki kapanmış işlemlerin tamamı — kazançlar ve kayıplar — incelemenize açık.")}
+            <p className="mx-auto mt-2 max-w-lg text-sm leading-relaxed text-text-on-ink-muted">
+              {tr("Beklerken bakılacak bir şey var: kapanmış işlemlerin tamamı aşağıda duruyor — kazançlar da, kayıplar da.")}
             </p>
-            <a
-              href="https://t.me/fxpartnerglobal"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-block rounded-full bg-signal px-4 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
-            >
-              {tr("Telegram kanalına katıl")}
-            </a>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="#kapanan"
+                className="rounded-full bg-signal px-5 py-2.5 text-sm font-semibold text-on-signal transition-colors hover:bg-signal-strong"
+              >
+                {tr("Kapanan işlemlere bak")}
+              </a>
+              <a
+                href="https://t.me/fxpartnerglobal"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-hairline px-5 py-2.5 text-sm font-semibold text-text-on-ink transition-colors hover:border-signal hover:text-signal"
+              >
+                {tr("Telegram kanalına katıl")}
+              </a>
+            </div>
           </div>
         ) : (
           // One card in a two-column grid sits in the left half with a hole
@@ -1484,7 +1507,9 @@ export default function SignalsBoard({
           a result is one object carrying its own levels and outcome, not a
           row to scan across — so the table is gone rather than kept as a
           second way to render the same thing. */}
-      <section className="border-b border-hairline">
+      {/* id: the empty state above links here — when there is nothing
+          open, the closed record is the thing worth reading. */}
+      <section id="kapanan" className="scroll-mt-24 border-b border-hairline">
         <div className="mx-auto max-w-6xl px-6 py-16">
           <div className="text-center">
             <h2 className="font-display text-2xl font-semibold">{tr("Son Sinyaller")}</h2>

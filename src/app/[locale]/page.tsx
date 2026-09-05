@@ -507,6 +507,8 @@ export default async function Home({
                   realised={accountRecord.realised}
                   today={accountRecord.today}
                   week={accountRecord.week}
+                  month={accountRecord.month}
+                  monthStart={accountRecord.monthStart}
                 />
                 <p className="mx-auto mt-3 max-w-2xl text-center text-[11px] leading-relaxed text-text-on-ink-muted">
                   {tr("FXPARTNER'ın takip edilen MT5 hesabında kapanan gerçek işlemler. Geçmiş sonuçlar gelecekteki sonuçları garanti etmez; kaldıraçlı işlemlerde sermayenizin tamamını kaybedebilirsiniz.")}{" "}

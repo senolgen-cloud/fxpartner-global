@@ -2813,8 +2813,6 @@
   "Her sinyal giriş, zarar durdur ve kâr al seviyesiyle yayınlanır; kapandığında sonucu — kazanç ya da kayıp — panoda kalır. Aynı ekranda ayrıca yapay zeka analizi, ekonomik takvim ve güvenilir broker karşılaştırmaları.": "تُنشر كل إشارة مع سعر الدخول ووقف الخسارة وجني الأرباح؛ وعند إغلاقها تبقى النتيجة — ربحاً كانت أم خسارة — على اللوحة. وعلى الشاشة نفسها: تحليل بالذكاء الاصطناعي وتقويم اقتصادي ومقارنات لوسطاء موثوقين.",
   "FXPARTNER'ın takip edilen MT5 hesabında kapanan gerçek işlemler. Geçmiş sonuçlar gelecekteki sonuçları garanti etmez; kaldıraçlı işlemlerde sermayenizin tamamını kaybedebilirsiniz.": "صفقات حقيقية أُغلقت على حساب MT5 المتتبَّع لدى FXPARTNER. النتائج السابقة لا تضمن النتائج المستقبلية؛ وقد يؤدي التداول بالرافعة المالية إلى خسارة رأس مالك بالكامل.",
   "Tüm işlem geçmişini gör →": "اطّلع على سجل الصفقات الكامل ←",
-  "Şu anda açık sinyal yok. Bir sonraki sinyal, açıldığı anda hem bu panoda hem Telegram kanalımızda yayınlanır.": "لا توجد إشارات مفتوحة حالياً. تُنشر الإشارة التالية هنا وعلى قناتنا على تيليجرام فور فتحها.",
-  "Bu arada aşağıdaki kapanmış işlemlerin tamamı — kazançlar ve kayıplar — incelemenize açık.": "في غضون ذلك، كل صفقة مغلقة أدناه — الرابحة والخاسرة على حد سواء — متاحة لك للفحص.",
   "Telegram kanalına katıl": "انضم إلى قناة تيليجرام",
   "Sinyaller ücretsiz ve üyeliksiz. Üyelik, onları kaçırmamanızı sağlıyor.": "الإشارات مجانية ولا تتطلب حساباً. الحساب هو ما يمنعك من تفويتها.",
   "İşlem açıldığı anda telefonunuza bildirim, işlem hacminizden nakit iade için hesap bağlama ve tüm kapanmış işlem geçmişi — ücretsiz hesapla.": "إشعار فوري على هاتفك لحظة فتح الصفقة، وربط الحساب لاسترداد نقدي على حجم تداولك، وسجل الصفقات المغلقة كاملاً — مع الحساب المجاني.",
@@ -2868,5 +2866,10 @@
   "Diğer brokerlar için oranlar teyit bekliyor — koşulların tamamı": "لا تزال نسب الوسطاء الآخرين بانتظار التأكيد — الشروط كاملةً في",
   "cashback sayfasında": "صفحة الاسترداد النقدي",
   "Bilgilerimin cashback kurulumu için işlenmesini ve benimle iletişime geçilmesini kabul ediyorum.": "أوافق على معالجة بياناتي لإعداد الاسترداد النقدي وعلى التواصل معي بشأنه.",
-  "KVKK Aydınlatma Metni": "إشعار الخصوصية"
+  "KVKK Aydınlatma Metni": "إشعار الخصوصية",
+  "Bu Ay": "هذا الشهر",
+  "Açık pozisyon yok": "لا توجد مراكز مفتوحة",
+  "Bir sonraki işlem açıldığı anda, saniyesinde burada.": "تظهر الصفقة التالية هنا في اللحظة التي تُفتح فيها.",
+  "Beklerken bakılacak bir şey var: kapanmış işlemlerin tamamı aşağıda duruyor — kazançlar da, kayıplar da.": "وثمة ما تطالعه في الأثناء: كل صفقة مغلقة موجودة أدناه — الرابحة والخاسرة على حد سواء.",
+  "Kapanan işlemlere bak": "اطّلع على الصفقات المغلقة"
 }

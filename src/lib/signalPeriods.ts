@@ -14,6 +14,7 @@ export const SIGNAL_TZ = "Europe/Istanbul";
 export type SignalPeriods = {
   dayStart: number;
   weekStart: number;
+  monthStart: number;
 };
 
 // Midnight in SIGNAL_TZ, expressed as a UTC epoch. Intl gives the wall
@@ -32,6 +33,15 @@ function startOfDayInTz(instant: Date, timeZone: string): number {
   const hour = get("hour") % 24;
   const elapsed = ((hour * 60 + get("minute")) * 60 + get("second")) * 1000;
   return instant.getTime() - elapsed;
+}
+
+// Day of the month in SIGNAL_TZ. The calendar month is the window a reader
+// already thinks in — it is how a broker statement is cut and how anyone
+// asks "how did September go" — so it gets its own boundary rather than a
+// rolling thirty days, which would answer a question nobody asked.
+function dayOfMonthInTz(instant: Date, timeZone: string): number {
+  const day = new Intl.DateTimeFormat("en-US", { timeZone, day: "numeric" }).format(instant);
+  return Number(day);
 }
 
 // Weekday index in SIGNAL_TZ, Monday = 0. The trading week starts Monday,
@@ -53,6 +63,13 @@ export function getSignalPeriods(now: Date = new Date()): SignalPeriods {
     // subtracting 7*24h from now, so a DST change inside the week cannot
     // shift the boundary off midnight.
     weekStart: startOfDayInTz(new Date(dayStart - daysSinceMonday * 86_400_000), SIGNAL_TZ),
+    // Same construction as the week, for the same DST reason: step back
+    // whole days from this morning's midnight and re-anchor, rather than
+    // subtracting N*24h from now.
+    monthStart: startOfDayInTz(
+      new Date(dayStart - (dayOfMonthInTz(now, SIGNAL_TZ) - 1) * 86_400_000),
+      SIGNAL_TZ
+    ),
   };
 }
 
