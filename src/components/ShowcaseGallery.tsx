@@ -3,34 +3,26 @@ import { trData } from "@/lib/localizeContent";
 const slides = [
   {
     eyebrow: "01 · Regülasyon",
-    title: "Her lisans,\ndoğrulandı.",
-    body: "FCA, ASIC, CySEC ve offshore kayıtlar, bir broker listeye girmeden önce kamuya açık sicillerle çapraz kontrol edilir.",
-    stat: "9",
-    statLabel: "Takip Edilen Regülatör",
+    title: "Lisans numarası,\nkartta.",
+    body: "Bağımsız doğrulayabildiğimiz lisans numaraları inceleme sayfasında numarasıyla görünür; numarasını henüz doğrulayamadığımız bir lisans, brokerın beyanı olarak numarasız listelenir.",
     tone: "signal" as const,
   },
   {
     eyebrow: "02 · Maliyet",
     title: "Spread ve swap,\nyan yana.",
     body: "Komisyon, spread ve gecelik swap birlikte — tek başına değil — değerlendirilir; böylece bir pozisyonu tutmanın gerçek maliyeti görünür.",
-    stat: "0.0",
-    statLabel: "Pip'ten İtibaren (Ham)",
     tone: "gold" as const,
   },
   {
     eyebrow: "03 · Platform",
     title: "MT4, MT5,\ncTrader test edildi.",
     body: "Herhangi bir platform puanlanmadan önce, canlı bir demoda işlem hızı, emir türleri ve mobil eşdeğerlik kontrol edilir.",
-    stat: "3",
-    statLabel: "Karşılaştırılan Platform",
     tone: "signal" as const,
   },
   {
     eyebrow: "04 · Para Çekme",
     title: "İlk ödeme,\ngerçek testtir.",
     body: "Küçük bir depozit, gerçek bir para çekme talebi ve bir kronometre — güven varsayılmaz, ölçülür.",
-    stat: "24 sa",
-    statLabel: "Görülen En Hızlı Ödeme",
     tone: "gold" as const,
   },
 ];
@@ -84,20 +76,6 @@ export default function ShowcaseGallery() {
               </p>
             </div>
 
-            <div className="relative flex items-end justify-between border-t border-hairline pt-5">
-              <div>
-                <p
-                  className={`font-display text-4xl font-semibold tabular-stat ${
-                    slide.tone === "signal" ? "text-signal" : "text-gold"
-                  }`}
-                >
-                  {slide.stat}
-                </p>
-                <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                  {slide.statLabel}
-                </p>
-              </div>
-            </div>
           </article>
         ))}
       </div>

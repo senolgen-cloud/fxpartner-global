@@ -6,6 +6,7 @@ import {
   Pill,
   ResultFigure,
   ResultDetail,
+  RecordLine,
   WIDTH,
   HEIGHT,
   UP,
@@ -63,6 +64,21 @@ export async function GET(request: Request) {
   const profit = searchParams.get("profit");
   const direction = (searchParams.get("direction") ?? "").toUpperCase(); // BUY | SELL
 
+  // The running record, formatted and scoped by the caller — the same
+  // contract /api/og/trade-signal uses, so a call and its close carry the
+  // identical line in the identical place. All four parts or none.
+  const statScope = searchParams.get("statScope");
+  const statDays = Number(searchParams.get("statDays"));
+  const statTrades = Number(searchParams.get("statTrades"));
+  const statWins = Number(searchParams.get("statWins"));
+  const hasRecord =
+    !!statScope &&
+    Number.isFinite(statDays) &&
+    Number.isFinite(statTrades) &&
+    Number.isFinite(statWins) &&
+    statTrades > 0 &&
+    statWins <= statTrades;
+
   if (!pair || !entry || !close) {
     return new Response("Missing required params: pair, entry, close", { status: 400 });
   }
@@ -101,6 +117,17 @@ export async function GET(request: Request) {
       <ResultPoster
         instrument={<Instrument label={pairLabel} />}
         pill={directionLabel ? <Pill label={directionLabel} color={NEUTRAL} /> : null}
+        record={
+          hasRecord ? (
+            <RecordLine
+              scope={statScope as string}
+              days={statDays}
+              trades={statTrades}
+              wins={statWins}
+              losses={statTrades - statWins}
+            />
+          ) : null
+        }
         outcome={<Pill label={outcomeLabel} color={outcomeColor} size={22} />}
         figure={<ResultFigure value={resultValue} color={outcomeColor} />}
         detail={<ResultDetail text={`${entry} → ${closeIsReal ? close : "—"}`} />}

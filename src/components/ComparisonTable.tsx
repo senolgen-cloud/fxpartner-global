@@ -1,18 +1,34 @@
 "use client";
-import { useTr } from "@/components/useTr";
+import { useTr, useTrf } from "@/components/useTr";
 
 import React, { useState } from "react";
 import Link from "@/components/LocaleLink";
 import {
   brokers,
   brokerCategories,
+  categoryInfo,
   getBrokerScores,
   type BrokerCategory,
 } from "@/data/brokers";
 import { COMPARISON_CRITERIA } from "@/lib/comparisonCriteria";
 
+// The Turkish name for each column. COMPARISON_CRITERIA itself stays in
+// English and stays the source of truth for how many criteria the table
+// covers (page.tsx counts its length), so this maps rather than renames.
+// Plain data at module scope — the tr() call happens at render, which is
+// what check-module-scope-tr.mjs requires.
+const CRITERION_LABEL: Record<(typeof COMPARISON_CRITERIA)[number], string> = {
+  Index: "Endeks",
+  Rating: "Puan",
+  "Min. Deposit": "Min. Depozit",
+  "Max. Leverage": "Maks. Kaldıraç",
+  Regulation: "Regülasyon",
+  Platform: "Platform",
+};
+
 export default function ComparisonTable() {
   const tr = useTr();
+  const trf = useTrf();
   const [activeCategory, setActiveCategory] = useState<BrokerCategory | "All">(
     "All"
   );
@@ -37,7 +53,7 @@ export default function ComparisonTable() {
                 : "border-hairline text-text-on-ink-muted hover:border-text-on-ink hover:text-text-on-ink"
             }`}
           >
-            {cat}
+            {cat === "All" ? tr("Tümü") : tr(categoryInfo[cat].label)}
           </button>
         ))}
       </div>
@@ -56,7 +72,7 @@ export default function ComparisonTable() {
                     label === "Index" ? "text-gold" : "text-text-on-ink-muted"
                   }`}
                 >
-                  {label}
+                  {tr(CRITERION_LABEL[label])}
                 </th>
               ))}
               <th className="px-5 py-4" />
@@ -120,7 +136,7 @@ export default function ComparisonTable() {
                     <td className="px-5 py-4 text-end">
                       <Link
                         href={`/brokers/${b.slug}`}
-                        title={`${b.name} tam inceleme`}
+                        title={trf("{broker} tam inceleme", { broker: b.name })}
                         className="font-mono text-xs text-signal transition-colors hover:text-text-on-ink"
                       >
                         {tr("Görüntüle →")}
@@ -157,7 +173,7 @@ export default function ComparisonTable() {
                             </ul>
                           </div>
                           <p className="sm:col-span-2 font-mono text-xs text-text-on-ink-muted">
-                            En iyi: {b.bestFor}
+                            {tr("En iyi:")} {b.bestFor}
                           </p>
                         </div>
                       </td>

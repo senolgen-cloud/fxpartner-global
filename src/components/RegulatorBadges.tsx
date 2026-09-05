@@ -67,7 +67,7 @@ const regulators = [
 
 export default function RegulatorBadges() {
   return (
-    <section id="trData(regulators)" className="relative overflow-hidden bg-ink-soft">
+    <section id="regulators" className="relative overflow-hidden bg-ink-soft">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-hairline to-transparent"
@@ -81,7 +81,7 @@ export default function RegulatorBadges() {
             {tr("Çapraz kontrol ettiğimiz regülatörler")}
           </h2>
           <p className="mt-4 text-text-on-ink-muted">
-            {tr("Listelediğimiz her lisans, bir broker sıralamalarda yer almadan önce bu otoritelerden birinin kamuya açık siciline karşı doğrulanır.")}
+            {tr("Bağımsız doğrulayabildiğimiz lisans numaraları, ilgili brokerın inceleme sayfasında numarasıyla gösterilir; numarası henüz doğrulanmamış bir lisans yalnızca brokerın beyanına dayanır.")}
           </p>
         </Reveal>
 

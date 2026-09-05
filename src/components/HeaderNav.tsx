@@ -178,7 +178,7 @@ export default function HeaderNav({
           // they are two doors into the same room.
           <Link
             href="/account/register"
-            className="inline-flex h-9 items-center gap-1.5 whitespace-nowrap rounded-lg border-s-[3px] border-s-tick-down bg-ink-soft/70 px-3 text-sm font-semibold text-text-on-ink transition-colors hover:bg-ink-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tick-down focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            className="inline-flex h-9 items-center gap-1.5 whitespace-nowrap rounded-lg bg-signal px-3.5 text-sm font-semibold text-on-signal transition-colors hover:bg-signal-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
             <svg
               width="18"

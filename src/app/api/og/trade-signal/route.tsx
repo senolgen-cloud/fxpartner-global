@@ -5,6 +5,7 @@ import {
   Instrument,
   Pill,
   BoxValue,
+  RecordLine,
   WIDTH,
   HEIGHT,
   LABEL,
@@ -36,6 +37,22 @@ export async function GET(request: Request) {
   const target1 = searchParams.get("target1");
   const stop = searchParams.get("stop");
   const direction = (searchParams.get("direction") ?? "").toUpperCase(); // BUY | SELL
+
+  // The running record, formatted and scoped by the caller — see the note
+  // on `opened` below for why anything needing a locale or the database is
+  // computed there rather than here. All four numeric parts have to arrive
+  // together or the row is not drawn: a partial record is worse than none.
+  const statScope = searchParams.get("statScope");
+  const statDays = Number(searchParams.get("statDays"));
+  const statTrades = Number(searchParams.get("statTrades"));
+  const statWins = Number(searchParams.get("statWins"));
+  const hasRecord =
+    !!statScope &&
+    Number.isFinite(statDays) &&
+    Number.isFinite(statTrades) &&
+    Number.isFinite(statWins) &&
+    statTrades > 0 &&
+    statWins <= statTrades;
 
   if (!pair) {
     return new Response("Missing required param: pair", { status: 400 });
@@ -73,6 +90,17 @@ export async function GET(request: Request) {
       <CallPoster
         instrument={<Instrument label={pairLabel} />}
         pill={directionLabel ? <Pill label={directionLabel} color={isSell ? DOWN : UP} /> : null}
+        record={
+          hasRecord ? (
+            <RecordLine
+              scope={statScope as string}
+              days={statDays}
+              trades={statTrades}
+              wins={statWins}
+              losses={statTrades - statWins}
+            />
+          ) : null
+        }
         price={locked ? withheld : <BoxValue value={entry as string} color={VALUE} />}
         takeProfit={
           locked ? (

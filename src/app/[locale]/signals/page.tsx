@@ -178,7 +178,6 @@ export default async function SignalsPage({
           </h1>
         </div>
 
-        <HeroProductShot priority />
         {signalsUnavailable && (
           <div className="mx-auto max-w-3xl px-6 pt-6">
             <DataUnavailable what={tr("Sinyal panosu")} />
@@ -222,6 +221,23 @@ export default async function SignalsPage({
             <p className="text-center font-mono text-xs leading-relaxed text-text-on-ink-muted">
               {tr("Bunlar FXPARTNER'ın kendi takip edilen MT5 hesabında açılan gerçek işlemlerdir; yalnızca bilgilendirme amacıyla paylaşılmaktadır — yatırım tavsiyesi değildir. Geçmiş sonuçlar gelecekteki sonuçları garanti etmez; pozisyon büyüklüğünü ve zarar durdur seviyelerini her zaman kendi risk toleransınıza göre belirleyin.")}
             </p>
+          </div>
+        </section>
+
+        {/* The product shot, moved down from the top of the page.
+
+            It used to sit between the h1 and the board — a full screen of
+            artwork before the first real number, on the one page a reader
+            opens in order to check the numbers. Down here it closes the
+            page instead of delaying it.
+
+            No `priority`: it is below the fold now, so preloading it would
+            take bandwidth from whatever is actually painting first. The
+            flag is the caller's call precisely because it depends on where
+            the image lands — see the note in HeroProductShot. */}
+        <section className="border-t border-hairline">
+          <div className="mx-auto max-w-6xl px-6 py-6">
+            <HeroProductShot />
           </div>
         </section>
 

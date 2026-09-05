@@ -14,14 +14,10 @@ import LotLadder from "./LotLadder";
 import TradeNowButton from "./TradeNowButton";
 import { useLiveQuotes, type LiveQuote } from "./useLiveQuotes";
 import { useCountUp } from "@/components/useCountUp";
+import AccountSummary, { type PeriodTotals } from "@/components/AccountSummary";
 import { favorableMove } from "@/lib/contractSizes";
 import { playChime, unlockAudio } from "@/lib/chime";
-import {
-  MIN_TRADES_FOR_RATE,
-  SIGNALS_EPOCH,
-  SIGNALS_START_BALANCE,
-  type SignalPeriods,
-} from "@/lib/signalPeriods";
+import type { SignalPeriods } from "@/lib/signalPeriods";
 import type { SignalJson } from "@/lib/cachedReads";
 
 type Signal = typeof tradeSignals.$inferSelect;
@@ -165,28 +161,18 @@ function formatDuration(ms: number) {
   return `${minutes}dk`;
 }
 
-// Bugün ve bu hafta kapanan işlemler.
+// Bugün ve bu hafta kapanan işlemler, ve hesabın bakiyesi.
 //
-// Kazanma oranı BİLEREK yalnızca haftada, o da yeterli işlem varsa
-// gösteriliyor. signalStats.ts'in koyduğu kural burada da geçerli: ince bir
-// örneklem üzerinde oran, kanıt kılığında gürültüdür. Bir günde iki işlem
-// kapanıp ikisi de kazançsa "%100 isabet" yazmak, sayfanın geri kalanının
-// özenle kaçındığı şeydir. Gün için sayılar ve gerçekleşen tutar veriliyor —
-// bunlar oran değil, olgu.
-function PeriodBox({
-  label,
-  since,
-  closed,
-  showRate,
-}: {
-  label: string;
-  since: number;
-  closed: Signal[];
-  showRate: boolean;
-}) {
-  const tr = useTr();
-  const trf = useTrf();
-
+// Kutuların kendisi artık components/AccountSummary.tsx içinde: ana sayfa
+// da aynı şeridi gösteriyor ve iki sayfanın tasarımı ayrışmasın diye tek
+// yerde duruyor. Burada kalan iş, o bileşenin beklediği sayıları bu
+// sayfanın zaten yokladığı satırlardan çıkarmak — ana sayfa aynı sayıları
+// sunucu tarafında topluyor (lib/trackRecord.ts getAccountRecord).
+//
+// Sayma kuralları oradaki yorumla birebir aynı olmak zorunda: bakiye,
+// sonucu ve tutarı olan her kapanışı (berabere dahil) sayar; dönem
+// kutuları yalnızca kazanç/kayıpla kapananları.
+function periodTotals(closed: Signal[], since: number): PeriodTotals {
   const decisive = closed.filter(
     (x) =>
       (x.outcome === "WIN" || x.outcome === "LOSS") &&
@@ -194,124 +180,27 @@ function PeriodBox({
       (x.closedAt?.getTime() ?? 0) >= since
   );
   const wins = decisive.filter((x) => x.outcome === "WIN").length;
-  const losses = decisive.length - wins;
-  const total = decisive.reduce((sum, x) => sum + parseFloat(x.profit as string), 0);
-  const positive = total >= 0;
-  const rate = decisive.length > 0 ? Math.round((wins / decisive.length) * 100) : 0;
-
-  return (
-    <div className="rounded-xl border border-hairline px-5 py-4">
-      <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-        {label}
-      </div>
-
-      {decisive.length === 0 ? (
-        // Sıfır işlemi "+$0.00" diye göstermek, işlem yapılıp başa baş
-        // çıkılmış gibi okunur. Kapanan işlem olmaması ayrı bir durum ve
-        // öyle yazılıyor.
-        <p className="mt-2 text-sm text-text-on-ink-muted">{tr("Kapanan işlem yok")}</p>
-      ) : (
-        <>
-          <div
-            className="mt-2 font-display text-3xl font-bold tabular-stat"
-            style={{ color: positive ? TICK_UP : TICK_DOWN }}
-          >
-            {positive ? "+" : "−"}${Math.abs(total).toFixed(2)}
-          </div>
-          <div className="mt-1.5 flex items-center gap-2 font-mono text-xs text-text-on-ink-muted">
-            <span>{trf("{count} işlem", { count: decisive.length })}</span>
-            <span aria-hidden="true">·</span>
-            <span>
-              <span style={{ color: TICK_UP }}>{wins}</span>
-              <span> / </span>
-              <span style={{ color: TICK_DOWN }}>{losses}</span>
-            </span>
-            {showRate && decisive.length >= MIN_TRADES_FOR_RATE && (
-              <>
-                <span aria-hidden="true">·</span>
-                <span>{trf("%{rate} isabet", { rate })}</span>
-              </>
-            )}
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
-
-// The account balance, stated rather than implied.
-//
-// Every other number on this page is a delta — "+$2.40 bugün" says nothing
-// about whether that is a good day without the size of the account it was
-// made on. The record restarted on a $100 account (SIGNALS_START_BALANCE),
-// so the balance is start + everything realised since, and the percentage
-// beside it is the honest headline: the same $2.40 is 2.4% here and noise
-// on an account whose size was never given.
-//
-// Summing `closed` is exactly right and not an approximation: the rows
-// reaching this component are already filtered to the reset (see
-// cachedReads.ts), so this is the whole realised record, not a window of it.
-function BalanceBox({ closed }: { closed: Signal[] }) {
-  const tr = useTr();
-  const trf = useTrf();
-
-  const realised = closed
-    .filter((x) => x.profit !== null && x.outcome !== null)
-    .reduce((sum, x) => sum + parseFloat(x.profit as string), 0);
-  const balance = SIGNALS_START_BALANCE + realised;
-  const positive = realised >= 0;
-  const changePct = (realised / SIGNALS_START_BALANCE) * 100;
-
-  return (
-    <div className="rounded-xl border border-hairline bg-ink-soft/40 px-5 py-4">
-      <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-        {tr("Bakiye")}
-      </div>
-      <div className="mt-2 font-display text-3xl font-bold tabular-stat">
-        ${balance.toFixed(2)}
-      </div>
-      <div className="mt-1.5 flex flex-wrap items-center gap-2 font-mono text-xs text-text-on-ink-muted">
-        <span>{trf("Başlangıç ${amount}", { amount: SIGNALS_START_BALANCE.toFixed(2) })}</span>
-        {realised !== 0 && (
-          <>
-            <span aria-hidden="true">·</span>
-            <span style={{ color: positive ? TICK_UP : TICK_DOWN }}>
-              {positive ? "+" : "−"}%{Math.abs(changePct).toFixed(2)}
-            </span>
-          </>
-        )}
-      </div>
-    </div>
-  );
+  return {
+    trades: decisive.length,
+    wins,
+    losses: decisive.length - wins,
+    profit: decisive.reduce((sum, x) => sum + parseFloat(x.profit as string), 0),
+  };
 }
 
 function PeriodSummary({ closed, periods }: { closed: Signal[]; periods: SignalPeriods }) {
-  const tr = useTr();
-  const trf = useTrf();
-  const intl = useIntlLocale();
-  const startedOn = new Intl.DateTimeFormat(intl, {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "Europe/Istanbul",
-  }).format(SIGNALS_EPOCH);
+  // Satırlar cachedReads tarafından zaten sıfırlama anına göre süzülmüş
+  // olarak geliyor, yani bu toplam kaydın tamamı — bir penceresi değil.
+  const realised = closed
+    .filter((x) => x.profit !== null && x.outcome !== null)
+    .reduce((sum, x) => sum + parseFloat(x.profit as string), 0);
 
   return (
-    <div>
-      <div className="grid gap-4 sm:grid-cols-3">
-        <BalanceBox closed={closed} />
-        <PeriodBox label={tr("Bugün")} since={periods.dayStart} closed={closed} showRate={false} />
-        <PeriodBox label={tr("Bu Hafta")} since={periods.weekStart} closed={closed} showRate />
-      </div>
-      {/* Said out loud, because a track record that quietly starts somewhere
-          is the thing readers are right to distrust. */}
-      <p className="mt-3 text-center text-[11px] text-text-on-ink-muted">
-        {trf("Bu kayıt {date} tarihinde ${amount} bakiyeyle başladı; öncesindeki işlemler bu tabloya dahil değildir.", {
-          date: startedOn,
-          amount: SIGNALS_START_BALANCE.toFixed(2),
-        })}
-      </p>
-    </div>
+    <AccountSummary
+      realised={realised}
+      today={periodTotals(closed, periods.dayStart)}
+      week={periodTotals(closed, periods.weekStart)}
+    />
   );
 }
 
@@ -1522,13 +1411,39 @@ export default function SignalsBoard({
           <ProvenanceNote />
         </div>
         {active.length === 0 ? (
-          <p className="text-text-on-ink-muted">
-            {tr("Şu anda açık sinyal yok — bir sonrakini paylaşıldığı anda almak için")}{" "}
-            <a href="https://t.me/fxpartnerglobal" className="text-signal hover:text-signal-strong">
-              {tr("Telegram kanalımızı")}
-            </a>{" "}
-            takip edin.
-          </p>
+          // Boş durum, üç ayrı hatasıyla birlikte düzeltildi.
+          //
+          // 1. Bağlantı sekmede açılıyordu. Sitedeki diğer sekiz Telegram
+          //    bağlantısının hepsi target="_blank" ile açılıyor; bu tek
+          //    istisna okuyucuyu panodan tamamen çıkarıyordu — üstelik
+          //    mobilde t.me bağlantısı uygulamaya atlayıp tarayıcıyı geride
+          //    bıraktığı için geri dönmek büsbütün zorlaşıyordu.
+          // 2. "takip edin." çeviri dışındaydı. İngilizce, Arapça ve
+          //    Ukraynaca sitelerde cümlenin sonu Türkçe kalıyordu.
+          // 3. Cümle bir bağlantının etrafına bölünmüştü, yani çevirmen
+          //    kelime sırasını değiştiremiyordu — İngilizcede "...as soon
+          //    as it is shared our Telegram channel takip edin." çıkıyordu.
+          //    İki bağımsız cümle, her dilde kendi sırasına yerleşir.
+          //
+          // Bir de: burada okuyacak bir şey yok demek doğru değil. Açık
+          // sinyal yoksa bile kapanmışların tamamı aşağıda duruyor, ve
+          // sayfanın ikna gücü zaten orada.
+          <div className="text-text-on-ink-muted">
+            <p>
+              {tr("Şu anda açık sinyal yok. Bir sonraki sinyal, açıldığı anda hem bu panoda hem Telegram kanalımızda yayınlanır.")}
+            </p>
+            <p className="mt-2 text-sm">
+              {tr("Bu arada aşağıdaki kapanmış işlemlerin tamamı — kazançlar ve kayıplar — incelemenize açık.")}
+            </p>
+            <a
+              href="https://t.me/fxpartnerglobal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block rounded-full bg-signal px-4 py-2.5 text-sm font-medium text-on-signal transition-colors hover:bg-signal-strong"
+            >
+              {tr("Telegram kanalına katıl")}
+            </a>
+          </div>
         ) : (
           // One card in a two-column grid sits in the left half with a hole
           // beside it, which reads as a layout that failed rather than as a

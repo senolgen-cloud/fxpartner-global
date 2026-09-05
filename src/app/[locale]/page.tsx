@@ -12,7 +12,6 @@ import HeroVideo from "@/components/HeroVideo";
 import HeroSpotlight from "@/components/HeroSpotlight";
 import TradingVideo from "@/components/TradingVideo";
 import HeroCashbackForm from "@/components/HeroCashbackForm";
-import HeroFeatureRow from "@/components/HeroFeatureRow";
 import InstallAppButtons from "@/components/InstallAppButtons";
 import HeroProductShot from "@/components/HeroProductShot";
 import HeroEcosystemMockups from "@/components/HeroEcosystemMockups";
@@ -26,7 +25,14 @@ import { propFirms, propFirmsByScore, getPropFirmScores } from "@/data/propFirms
 import { lookupBrokers } from "@/data/brokerLookup";
 import { faqSchema } from "@/lib/schema";
 import type { BrokerReviewStats } from "@/lib/brokerReviews";
-import { cachedLatestSignal, cachedBrokerReviewStats, type SignalJson } from "@/lib/cachedReads";
+import type { AccountRecord } from "@/lib/trackRecord";
+import AccountSummary from "@/components/AccountSummary";
+import {
+  cachedLatestSignal,
+  cachedBrokerReviewStats,
+  cachedAccountRecord,
+  type SignalJson,
+} from "@/lib/cachedReads";
 import { maskLockedActiveSignal } from "@/lib/signalAccess";
 import { loadOptional } from "@/lib/dbOptional";
 import { setServerLocale } from "@/lib/serverLocale";
@@ -45,6 +51,144 @@ const lowestMinDeposit = Math.min(
     return Number.isNaN(n) ? Infinity : n;
   })
 );
+
+type StatTile = { label: string; value: number; prefix?: string; suffix?: string };
+
+// The fallback row: what the site can say about itself without the
+// database. Kept as data rather than inline JSX because the record row
+// below replaces it wholesale when there is a record to show.
+const inventoryStats: StatTile[] = [
+  { label: "Takip Edilen Broker", value: trackedBrokerCount },
+  { label: "Regülasyon Otoritesi", value: trackedRegulatorCount, suffix: "+" },
+  { label: "En Düşük Giriş", value: lowestMinDeposit, prefix: "$" },
+  { label: "Karşılaştırma Kriteri", value: COMPARISON_CRITERIA.length },
+];
+
+// The four cards under the hero, and the four points in "Neden FXPARTNER".
+//
+// Both rows come from the comp. Both were edited for claims we can actually
+// stand behind — see the note at each render site. The icon is named rather
+// than embedded so this stays plain data that trData() can walk.
+type PillarIconName =
+  | "eye"
+  | "bolt"
+  | "shield"
+  | "wallet"
+  | "chart"
+  | "scale"
+  | "people";
+
+type Pillar = { icon: PillarIconName; title: string; body: string };
+
+const heroPillars: Pillar[] = [
+  {
+    icon: "eye",
+    title: "Şeffaf Sonuçlar",
+    body: "Her işlem giriş, hedef ve stop seviyesiyle yayınlanır; kapandığında sonucu panoda kalır.",
+  },
+  {
+    icon: "bolt",
+    title: "Gerçek Zamanlı",
+    body: "Sinyal, takip edilen MT5 hesabında açıldığı anda siteye ve Telegram'a düşer.",
+  },
+  {
+    icon: "shield",
+    title: "Bağımsız Broker Verisi",
+    body: "{count} broker regülatör uyarı listelerine karşı tarandı; riskliler açıkça işaretlendi.",
+  },
+  {
+    icon: "wallet",
+    title: "Komisyon Paylaşımı",
+    body: "Partner brokerdan aldığımız komisyonun bir kısmı cashback olarak size döner.",
+  },
+];
+
+// "Neden FXPARTNER?" — the four reasons, one step deeper than the cards
+// above. Where the hero row says what the site does, these say why any of
+// it should be believed.
+const whyPillars: Pillar[] = [
+  {
+    icon: "chart",
+    title: "Doğrulanmış Performans",
+    body: "Kayıp da kazanç da aynı panoda duruyor; sıfırlama tarihi ve başlangıç bakiyesi tablonun altında açıkça yazılı. İsabet oranı yeterli örneklem yoksa hiç yayınlanmıyor.",
+  },
+  {
+    icon: "eye",
+    title: "Açık Ticari İlişki",
+    body: "Brokerlardan komisyon aldığımızı her kartta yazıyoruz — ve ortağımız olan brokerları da risk uyarısı listesine koyuyoruz.",
+  },
+  {
+    icon: "scale",
+    title: "Risk Yönetimi",
+    body: "Her sinyalde zarar durdur seviyesi var; pozisyon hesaplayıcı, riskinize göre lot büyüklüğünü siz belirleyesiniz diye ücretsiz.",
+  },
+  {
+    icon: "people",
+    title: "Topluluk",
+    body: "Broker yorumları gerçek kullanıcılardan geliyor ve düzeltilmeden yayınlanıyor — olumsuz olanlar dahil.",
+  },
+];
+
+function PillarIcon({ name }: { name: PillarIconName }) {
+  const p = {
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.5,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    className: "h-5 w-5 text-signal",
+  };
+  switch (name) {
+    case "eye":
+      return (
+        <svg {...p}>
+          <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" />
+          <circle cx="12" cy="12" r="2.6" />
+        </svg>
+      );
+    case "bolt":
+      return (
+        <svg {...p}>
+          <path d="M13 2.5 4.5 13.5H11l-.5 8L19.5 10.5H13l0-8Z" />
+        </svg>
+      );
+    case "shield":
+      return (
+        <svg {...p}>
+          <path d="M12 3l7 3v5c0 4.6-3 8.4-7 9.9-4-1.5-7-5.3-7-9.9V6l7-3z" />
+          <path d="M9 12l2 2 4-4" />
+        </svg>
+      );
+    case "wallet":
+      return (
+        <svg {...p}>
+          <rect x="3" y="6" width="18" height="13" rx="2.5" />
+          <path d="M3 10h18M16.5 14.5h.01" />
+        </svg>
+      );
+    case "chart":
+      return (
+        <svg {...p}>
+          <path d="M4 19.5V9M10 19.5V4.5M16 19.5v-7M21 19.5H3" />
+        </svg>
+      );
+    case "scale":
+      return (
+        <svg {...p}>
+          <path d="M12 3.5v17M5 20.5h14M7 7.5 3.5 14h7L7 7.5ZM17 7.5 13.5 14h7L17 7.5ZM4 7.5h16" />
+        </svg>
+      );
+    case "people":
+      return (
+        <svg {...p}>
+          <circle cx="9" cy="8" r="3.2" />
+          <path d="M2.5 19.5c0-3.1 2.9-5.6 6.5-5.6s6.5 2.5 6.5 5.6" />
+          <path d="M16.5 6.2a3.2 3.2 0 0 1 0 6M17.5 14.4c2.4.5 4 2.4 4 4.6" />
+        </svg>
+      );
+  }
+}
 
 const steps = [
   {
@@ -93,8 +237,8 @@ const faqs = [
     a: "Regülasyon kalitesi, maliyet şeffaflığı, platform çeşitliliği ve yatırımcı profiline uygunluk gibi genel kriterlere dayalı bir değerlendirmedir. FXPARTNER, listelenen brokerların bazılarıyla ortaklık/referans ilişkisine sahiptir ve hesap açılışlarından komisyon kazanabilir; bu durum her broker kartında ayrıca belirtilir.",
   },
   {
-    q: "Yeni başlayanlar için en iyi broker hangisi?",
-    a: "Düşük minimum depozit ve kapsamlı eğitim içeriği için XM genellikle daha kolay bir başlangıç sunar; Lite Finance de düşük giriş bariyeriyle öne çıkar.",
+    q: "Yeni başlayanlar için hangi brokerlar düşük giriş bariyeri sunuyor?",
+    a: "Tek bir “en iyi” broker yok. Düşük minimum depozit ve eğitim içeriği arıyorsanız XM ve Lite Finance düşük giriş bariyeriyle öne çıkar. Her ikisi de FXPARTNER’ın ortaklık bağlantısı bulunan brokerlardır; hesap açılışından komisyon kazanabiliriz ve bu gelir sıralamayı etkilemez. Bu bir yatırım tavsiyesi değildir — kendi ihtiyaçlarınıza göre karşılaştırın.",
   },
   {
     q: "Kaldıraç oranları ülkeye göre neden değişir?",
@@ -106,7 +250,7 @@ const faqs = [
   },
   {
     q: "İşlem sinyalleri nasıl oluşturuluyor ve ne kadar doğru?",
-    a: "Sinyaller, önde gelen paritelerde trend, momentum ve volatilite göstergelerini içeren otomatik teknik taramayı, yayından önce yapılan manuel bir incelemeyle birleştirir. Her sinyalde giriş, zarar durdur ve kâr al seviyesi bulunur; böylece sonucu nesnel olarak kontrol edilebilir — kapanan sinyaller, kazanç veya kayıp sonucuyla birlikte sinyaller sayfasında görünür kalır. Geçmiş performans gelecekteki sonuçları garanti etmez ve sinyaller kişiselleştirilmiş tavsiye değil, eğitim amaçlıdır.",
+    a: "Sinyaller, FXPARTNER'ın takip edilen MT5 hesabında çalışan otomatik bir işlem motorundan gelir: motor trend, momentum ve volatilite koşullarının uyuşmasını arar ve hesapta bir pozisyon açıldığı anda sinyal otomatik olarak yayınlanır. Araya insan eli girmez — sinyaller seçilerek yayınlanmaz, açılan her işlem panoya düşer. Her sinyalde giriş, zarar durdur ve kâr al seviyesi bulunur; böylece sonucu nesnel olarak kontrol edilebilir — kapanan sinyaller, kazanç veya kayıp sonucuyla birlikte sinyaller sayfasında görünür kalır. Geçmiş performans gelecekteki sonuçları garanti etmez ve sinyaller kişiselleştirilmiş tavsiye değil, eğitim amaçlıdır.",
   },
   {
     q: "Forex ticaretinin riskleri nelerdir?",
@@ -166,6 +310,17 @@ export default async function Home({
     ? maskLockedActiveSignal(rawLatestSignal, null)
     : null;
 
+  // Optional like the other two, and for the same reason — but the
+  // fallback matters more here, because this one is load-bearing copy: the
+  // headline and the stat row both change when it is null. The page then
+  // says what it said before the record existed rather than a claim with a
+  // hole in it.
+  const { data: accountRecord } = await loadOptional(
+    "home: account record",
+    null as AccountRecord | null,
+    cachedAccountRecord
+  );
+
   const { data: brokerReviewStats } = await loadOptional(
     "home: broker review stats",
     {} as Record<string, BrokerReviewStats>,
@@ -192,74 +347,275 @@ export default async function Home({
           <HeroVideo />
           <HeroSpotlight />
 
-          {/* Claim, then proof, then the detail: the headline says what this
-              is for, the product shot shows it, and only then does the
-              paragraph explain. The copy used to sit in a column beside a
-              420px panel with the artwork below the fold; stacked and
-              centred, each part lands where the eye already is and the gap
-              the image used to leave under itself is gone. */}
-          <div className="relative mx-auto max-w-4xl px-6 pt-8 text-center md:pt-8">
-            <Reveal>
-              <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-signal">
-                <span
-                  aria-hidden="true"
-                  className="signal-dot h-1.5 w-1.5 rounded-full bg-signal"
-                />
-                {tr("Öğren · İşlem Yap · Büyü")}
-              </span>
-            </Reveal>
+          {/* Two columns: the argument on the left, what it is an argument
+              about on the right.
 
-            <Reveal delay={90}>
-              <h1 className="mx-auto mt-4 max-w-4xl bg-gradient-to-b from-[var(--text-on-ink)] via-[var(--text-on-ink)] to-[var(--text-on-ink-muted)] bg-clip-text font-poppins text-[2rem] font-bold leading-[1.12] tracking-[-0.02em] text-balance text-transparent sm:text-5xl lg:text-6xl">
+              The centred stack this replaces put the copy, then a product
+              shot, then the install buttons, then the dashboard cards, then
+              the feature row — five things down one column, so a visitor
+              scrolled past four before reaching anything they could act on.
+              Side by side, the claim and its evidence are on one screen and
+              the buttons sit in the first of them.
+
+              The right column is HeroEcosystemMockups, unchanged and
+              deliberately so: it draws the newest real signal, masked as if
+              nobody were signed in. The comp this follows had a decorative
+              panel there reading "TOTAL PROFIT +$23,458.72" and "WIN RATE
+              85%" over a stock photograph — invented figures, sitting a
+              hand's width above the real ones, which say $4,641.52 and 63%.
+              Two win rates on one screen means one of them is a lie, and a
+              page whose headline is about not hiding losses cannot be the
+              page that ships it. Real cards, real numbers, same job. */}
+          <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-6 pt-10 lg:grid-cols-2 lg:gap-12 lg:pt-14">
+            <div className="text-center lg:text-start">
+              {/* The record, not a slogan. A visitor who reads this line and
+                  clicks it lands on the board it was counted from — the claim
+                  and its evidence are one tap apart on purpose, because the
+                  claim is only worth making if it survives being checked. */}
+              <Reveal eager>
+                {accountRecord ? (
+                  <Link
+                    href="/signals"
+                    className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-mono text-xs uppercase tracking-[0.2em] text-signal transition-colors hover:text-signal-strong lg:justify-start"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="signal-dot h-1.5 w-1.5 rounded-full bg-signal"
+                    />
+                    {trf("{trades} işlem · {wins} kazanç · {losses} kayıp · hiçbiri silinmedi", {
+                      trades: accountRecord.allTime.trades,
+                      wins: accountRecord.allTime.wins,
+                      losses: accountRecord.allTime.losses,
+                    })}
+                  </Link>
+                ) : (
+                  <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-signal">
+                    <span
+                      aria-hidden="true"
+                      className="signal-dot h-1.5 w-1.5 rounded-full bg-signal"
+                    />
+                    {tr("Öğren · İşlem Yap · Büyü")}
+                  </span>
+                )}
+              </Reveal>
+
+              <Reveal eager delay={90}>
                 {/* No hard break. At 60px it lands on two lines by itself,
                     and a forced one left "şey" stranded alone on a 375px
                     phone. text-balance lets the browser even the lines out
-                    at whatever width it is given. */}
-                {tr("İhtiyacınız olan her şey tek bir ekranda")}
-              </h1>
-            </Reveal>
+                    at whatever width it is given.
 
-            <Reveal delay={150}>
-              <p className="mx-auto mt-5 max-w-xl text-[15px] font-light leading-relaxed tracking-[0.01em] text-text-on-ink-muted md:text-base">
-                {tr("FXPARTNER, daha akıllı işlem yapmanız için hepsi bir arada platformdur. Sinyaller, yapay zeka içgörüleri, ekonomik takvim, güvenilir brokerlar ve küresel bir topluluk.")}
-              </p>
+                    NO LONGER CONDITIONAL ON THE RECORD. The headline it
+                    replaces was a claim about the trading account, so it
+                    could only stand while there were numbers under it to
+                    check; this one is a claim about the product and holds
+                    whether or not the database answers. The record still
+                    leads the column — it is the line directly above, and
+                    that line still steps aside when there is nothing to
+                    count.
+
+                    TWO SPANS RATHER THAN ONE STRING, because the second
+                    half is coloured. They are separate catalogue entries so
+                    each locale can put its own emphasis in the second half
+                    rather than having Turkish word order imposed on it —
+                    the English pair reads "Not just a signal." / "Something
+                    smarter.", which is not a word-for-word translation and
+                    is not meant to be. Same pattern as the "Neden
+                    FXPARTNER?" heading further down.
+
+                    The gradient is dropped here. bg-clip-text paints the
+                    parent's background through every descendant's glyphs,
+                    so a coloured child inside it is fighting the fill it
+                    sits in; a flat colour and one accent is what the
+                    two-tone headline actually wants. */}
+                <h1 className="mt-4 font-poppins text-[2rem] font-bold leading-[1.12] tracking-[-0.02em] text-balance text-text-on-ink sm:text-5xl">
+                  {tr("Bir sinyalden")}{" "}
+                  <span className="bg-gradient-to-r from-[#0891b2] via-[#22b8d6] to-[#7dd3fc] bg-clip-text text-transparent">
+                    {tr("daha akıllısı…")}
+                  </span>
+                </h1>
+              </Reveal>
+
+              <Reveal eager delay={150}>
+                <p className="mx-auto mt-5 max-w-xl text-[15px] font-light leading-relaxed tracking-[0.01em] text-text-on-ink-muted md:text-base lg:mx-0">
+                  {accountRecord
+                    ? tr("Her sinyal giriş, zarar durdur ve kâr al seviyesiyle yayınlanır; kapandığında sonucu — kazanç ya da kayıp — panoda kalır. Aynı ekranda ayrıca yapay zeka analizi, ekonomik takvim ve güvenilir broker karşılaştırmaları.")
+                    : tr("FXPARTNER, daha akıllı işlem yapmanız için hepsi bir arada platformdur. Sinyaller, yapay zeka içgörüleri, ekonomik takvim, güvenilir brokerlar ve küresel bir topluluk.")}
+                </p>
+              </Reveal>
+
+              {/* The ask, in the first screen rather than under it.
+
+                  WHAT IT MAY AND MAY NOT PROMISE. FX signals are public —
+                  no account, no payment, and they go out openly on Telegram
+                  besides (lib/signalAccess.ts). So an account cannot be sold
+                  as the way to see them; /paketler's free tier had to be
+                  corrected for exactly that once, and doing it here, under a
+                  headline about not hiding things, would be worse than doing
+                  it there. The line under the buttons says what an account
+                  actually adds.
+
+                  Rendered for everybody, signed in or not. This page
+                  deliberately does not read the session — that query was
+                  taken off the busiest page on the site on purpose — and the
+                  header two inches above already says "Hesabım" to a member,
+                  so nobody is left confused about which state they are in. */}
+              <Reveal eager delay={210}>
+                <div className="mt-7 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+                  <Link
+                    href="/account/register"
+                    className="rounded-full bg-signal px-7 py-3.5 text-sm font-semibold text-on-signal transition-colors hover:bg-signal-strong"
+                  >
+                    {tr("Ücretsiz Üye Ol")}
+                  </Link>
+                  <Link
+                    href="/paketler"
+                    className="rounded-full border border-hairline px-7 py-3.5 text-sm font-semibold text-text-on-ink transition-colors hover:border-signal hover:text-signal"
+                  >
+                    {tr("Paketleri İncele")}
+                  </Link>
+                </div>
+              </Reveal>
+
+              <Reveal eager delay={260}>
+                <p className="mt-4 text-xs text-text-on-ink-muted">
+                  {tr("Forex sinyalleri üyeliksiz ve ücretsiz. Hesap; anlık bildirim ve cashback hesap bağlama ekler.")}
+                </p>
+              </Reveal>
+            </div>
+
+            <Reveal eager delay={200}>
+              <HeroEcosystemMockups latestSignal={latestSignal} />
             </Reveal>
           </div>
 
-          {/* Width, not height. The previous artwork was 1672x941 and at
-              full width stood taller than the room under the headline, so
-              height was the thing to constrain. This one is 939x377: wide
-              and short, and a height cap only made it small. */}
-          <HeroProductShot
-            priority
-            src="/fxpartner-trading-yatay.webp"
-            width={939}
-            height={377}
-            alt={tr("FXPARTNER uygulamasında EUR/USD grafiği")}
-            maxWidthClassName="max-w-3xl"
-          />
+          {/* The account, directly under the claim it is evidence for.
 
-          <div className="relative mx-auto max-w-4xl px-6 pb-10 text-center md:pb-12">
-            <Reveal delay={290}>
-              <InstallAppButtons />
+              This is the same strip /signals carries above its board, from
+              the same component, and that is the point: a reader who taps
+              through from the headline finds the identical figures rather
+              than a marketing version of them. The two pages reach those
+              figures differently — the board adds up the rows it is already
+              polling, this reads a server-side aggregate over the whole
+              post-reset record — so the markup is shared and never copied.
+
+              The risk line is not fine print and is not placed like it. */}
+          {accountRecord && (
+            <Reveal eager delay={220}>
+              <div className="relative mx-auto mt-12 max-w-6xl px-6">
+                <AccountSummary
+                  realised={accountRecord.realised}
+                  today={accountRecord.today}
+                  week={accountRecord.week}
+                />
+                <p className="mx-auto mt-3 max-w-2xl text-center text-[11px] leading-relaxed text-text-on-ink-muted">
+                  {tr("FXPARTNER'ın takip edilen MT5 hesabında kapanan gerçek işlemler. Geçmiş sonuçlar gelecekteki sonuçları garanti etmez; kaldıraçlı işlemlerde sermayenizin tamamını kaybedebilirsiniz.")}{" "}
+                  <Link href="/signals" className="text-signal hover:text-signal-strong">
+                    {tr("Tüm işlem geçmişini gör →")}
+                  </Link>
+                </p>
+              </div>
             </Reveal>
-          </div>
+          )}
 
-          <div className="relative mx-auto max-w-6xl px-6 pb-12 md:pb-16">
-            <Reveal delay={200}>
-              <HeroEcosystemMockups brokers={localBrokers} latestSignal={latestSignal} />
-            </Reveal>
-          </div>
+          {/* Four things the site does, as cards rather than one line.
 
-          {/* Moved out of the hero column and down here: in the hero it was
-              two rows of bordered cards between the headline and everything
-              else. As one line under the fold it says the same thing without
-              being a section of its own. */}
+              WHAT THE COMP ASKED FOR, AND WHY TWO OF THEM CHANGED. It listed
+              "Güvenli & Korumalı — verileriniz ve yatırımlarınız en üst
+              düzeyde güvende" and "7/24 Uzman Destek". We do not hold
+              anybody's investments: the money is at the reader's own broker,
+              which is the whole point of the broker section further down. So
+              that card would have claimed custody we do not have and a
+              protection we could not provide. And support is "öncelikli" on
+              the paid tiers, not staffed around the clock. Both are replaced
+              with things that are true and, as it happens, more specific. */}
           <Reveal delay={320}>
-            <div className="relative mx-auto max-w-5xl border-t border-hairline px-6 py-8">
-              <HeroFeatureRow />
+            <div className="relative mx-auto max-w-6xl px-6 pb-14 pt-12 md:pb-20">
+              <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {trData(heroPillars).map((pillar) => (
+                  <li
+                    key={pillar.title}
+                    className="rounded-2xl border border-hairline bg-ink-soft/40 p-5"
+                  >
+                    <PillarIcon name={pillar.icon} />
+                    <h3 className="mt-3 font-poppins text-sm font-semibold uppercase tracking-[0.08em] text-text-on-ink">
+                      {pillar.title}
+                    </h3>
+                    <p className="mt-1.5 text-[13px] leading-relaxed text-text-on-ink-muted">
+                      {/* trData() has already translated the body, so the count is
+                          interpolated here rather than through a second trf()
+                          lookup that would miss on every non-Turkish locale. */}
+                      {pillar.body.replace("{count}", String(trackedBrokerCount))}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </div>
           </Reveal>
+        </section>
+
+        {/* Neden FXPARTNER — the reasons, beside the thing itself.
+
+            The comp put four points on the left and a phone on the right,
+            which is where the product shot and the install buttons went when
+            they came out of the hero: a picture of the app belongs next to
+            the argument for using it, not stacked under a headline where it
+            pushed everything else below the fold.
+
+            The four points are not the four in the row above. Those say what
+            the site does; these say why any of it should be believed, which
+            is a different question and the only one worth a section. */}
+        <section id="neden" className="relative overflow-hidden bg-ink">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-hairline to-transparent"
+          />
+          <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 lg:grid-cols-2">
+            <div>
+              <Reveal>
+                <h2 className="font-poppins text-3xl font-semibold text-text-on-ink md:text-4xl">
+                  {tr("Neden")}{" "}
+                  <span className="text-signal">FXPARTNER</span>?
+                </h2>
+              </Reveal>
+              <ul className="mt-8 space-y-6">
+                {trData(whyPillars).map((pillar, i) => (
+                  <Reveal key={pillar.title} delay={i * 80}>
+                    <li className="flex gap-4">
+                      <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-hairline bg-ink-soft/60">
+                        <PillarIcon name={pillar.icon} />
+                      </span>
+                      <div>
+                        <h3 className="font-poppins text-base font-semibold uppercase tracking-[0.06em] text-text-on-ink">
+                          {pillar.title}
+                        </h3>
+                        <p className="mt-1 text-sm leading-relaxed text-text-on-ink-muted">
+                          {pillar.body}
+                        </p>
+                      </div>
+                    </li>
+                  </Reveal>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <Reveal delay={120}>
+                <HeroProductShot
+                  src="/fxpartner-trading-yatay.webp"
+                  width={939}
+                  height={377}
+                  alt={tr("FXPARTNER uygulamasında EUR/USD grafiği")}
+                  maxWidthClassName="max-w-xl"
+                />
+              </Reveal>
+              <Reveal delay={200}>
+                <div className="mt-6 text-center">
+                  <InstallAppButtons />
+                </div>
+              </Reveal>
+            </div>
+          </div>
         </section>
 
         {/* Ranked broker list */}
@@ -274,7 +630,7 @@ export default async function Home({
                 {tr("Sıralamalar")}
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-on-ink md:text-4xl">
-                {trf("{year}’nın en çok tercih edilen {count} forex brokeri", {
+                {trf("FXPARTNER’ın {year} forex broker sıralaması: {count} broker", {
                   year: 2026,
                   count: brokers.length,
                 })}
@@ -323,7 +679,7 @@ export default async function Home({
                 {tr("Prop Firmalar")}
               </span>
               <h2 className="mt-3 font-poppins text-3xl font-semibold text-text-on-ink md:text-4xl">
-                {tr("Kendi sermayenizi riske atmadan işlem yapın")}
+                {tr("Firmanın sermayesiyle işlem yapın; riskiniz challenge ücretiyle sınırlı")}
               </h2>
               <p className="mt-4 text-text-on-ink-muted">
                 {trf(
@@ -342,9 +698,10 @@ export default async function Home({
                 {trData(propFirmsByScore())
                   .slice(0, 3)
                   .map((firm, i) => (
-                    <div
+                    <Link
                       key={firm.slug}
-                      className="rounded-2xl border border-hairline bg-ink-soft/60 p-5"
+                      href={`/prop-firmalar/${firm.slug}`}
+                      className="block rounded-2xl border border-hairline bg-ink-soft/60 p-5 transition-colors hover:border-text-on-ink"
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-text-on-ink-muted">
@@ -358,7 +715,7 @@ export default async function Home({
                         {firm.name}
                         {firm.isPartner && (
                           <span className="rounded-full border border-gold/40 bg-gold/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-gold">
-                            Ortak
+                            {tr("Ortak")}
                           </span>
                         )}
                       </h3>
@@ -375,7 +732,7 @@ export default async function Home({
                           <dd className="text-text-on-ink">{firm.challengeFeeFrom}</dd>
                         </div>
                       </dl>
-                    </div>
+                    </Link>
                   ))}
               </div>
             </Reveal>
@@ -402,43 +759,31 @@ export default async function Home({
 
         <RegulatorBadges />
 
-        {/* At-a-glance stats */}
+        {/* At-a-glance stats: what the site covers.
+
+            These four are about our shelf rather than the reader's
+            outcome, which is why they no longer open the page — the
+            account strip in the hero does that. Down here, next to the
+            ranking and the comparison table they describe, they are
+            answering the question that section actually raises. */}
         <section className="bg-ink">
           <div className="mx-auto max-w-6xl px-6 py-16">
             <Reveal>
               <dl className="mx-auto grid max-w-3xl grid-cols-2 gap-8 text-center sm:grid-cols-4">
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    {tr("Takip Edilen Broker")}
-                  </dt>
-                  <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
-                    <AnimatedStat value={trackedBrokerCount} />
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    {tr("Regülasyon Otoritesi")}
-                  </dt>
-                  <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
-                    <AnimatedStat value={trackedRegulatorCount} suffix="+" />
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    {tr("En Düşük Giriş")}
-                  </dt>
-                  <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
-                    <AnimatedStat value={lowestMinDeposit} prefix="$" />
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
-                    {tr("Karşılaştırma Kriteri")}
-                  </dt>
-                  <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
-                    <AnimatedStat value={COMPARISON_CRITERIA.length} />
-                  </dd>
-                </div>
+                {trData(inventoryStats).map((stat) => (
+                  <div key={stat.label}>
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+                      {stat.label}
+                    </dt>
+                    <dd className="mt-1 font-display text-3xl font-semibold text-text-on-ink">
+                      <AnimatedStat
+                        value={stat.value}
+                        prefix={stat.prefix}
+                        suffix={stat.suffix}
+                      />
+                    </dd>
+                  </div>
+                ))}
               </dl>
             </Reveal>
           </div>
@@ -600,6 +945,55 @@ export default async function Home({
             </div>
           </div>
         </section>
+        {/* The closing ask.
+
+            The page has spent everything above this making one argument and
+            never once asked for anything after the hero. This is the second
+            and last ask, at the point where a reader who has gone all the way
+            through the ranking, the guides and the FAQ has either been
+            convinced or has not.
+
+            Same rule as the hero's button: it sells the account, not the
+            signals, because the signals are already free and saying otherwise
+            here would undo the section directly above it. */}
+        <section className="relative overflow-hidden bg-ink">
+          <div
+            aria-hidden="true"
+            className="hero-glow-signal pointer-events-none absolute left-1/2 top-0 h-[320px] w-[520px] -translate-x-1/2 rounded-full bg-signal/15 blur-[110px]"
+          />
+          <div className="relative mx-auto max-w-3xl px-6 py-20 text-center">
+            <Reveal>
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
+                {tr("Hazır mısın?")}
+              </span>
+            </Reveal>
+            <Reveal delay={90}>
+              <h2 className="mt-4 font-poppins text-2xl font-semibold uppercase leading-tight tracking-[-0.01em] text-text-on-ink md:text-3xl">
+                {tr("İşlem açıldığı anda haberiniz olsun.")}
+              </h2>
+            </Reveal>
+            <Reveal delay={140}>
+              <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-text-on-ink-muted">
+                {tr("Sinyalleri izlemek için hesaba gerek yok. Hesap; işlem açıldığı anda bildirim, cashback hesap bağlama ve kişisel işlem takibi için.")}
+              </p>
+            </Reveal>
+            <Reveal delay={200}>
+              <Link
+                href="/account/register"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-signal px-8 py-4 text-sm font-semibold text-on-signal transition-colors hover:bg-signal-strong"
+              >
+                {tr("Ücretsiz Üye Ol")}
+                <span aria-hidden="true">→</span>
+              </Link>
+            </Reveal>
+            <Reveal delay={250}>
+              <p className="mt-5 text-xs leading-relaxed text-text-on-ink-muted">
+                {tr("Forex ticareti kaldıraçlıdır ve sermayenizi hızla kaybetme riski taşır. İçerik yatırım tavsiyesi değildir.")}
+              </p>
+            </Reveal>
+          </div>
+        </section>
+
       </main>
 
       <Footer />

@@ -45,6 +45,14 @@ export const DOWN = "#ee4f55";
 export const UP = "#30c76c";
 export const NEUTRAL = "#8b9096";
 
+// The band between the logo and the instrument box. Measured the same way
+// as everything else here: scanned across the full width of both PNGs,
+// y=156..248 comes back with zero pixels above the map on either one. It
+// is the only strip on these templates wide enough for a sentence, and it
+// is in the same place on both — which is what lets the record read as a
+// standing header over the pair of cards rather than as something bolted
+// onto one of them.
+const RECORD = { left: 60, top: 186, width: 960 };
 // The instrument box, identical in both templates.
 const HEAD = { left: 398, top: 250, width: 284, height: 86 };
 
@@ -84,11 +92,13 @@ function Frame({
   poster,
   instrument,
   pill,
+  record,
   children,
 }: {
   poster: string;
   instrument: ReactNode;
   pill: ReactNode;
+  record: ReactNode;
   children: ReactNode;
 }) {
   return (
@@ -109,6 +119,8 @@ function Frame({
         alt=""
         style={{ position: "absolute", left: 0, top: 0 }}
       />
+
+      {record}
 
       <div
         style={{
@@ -138,6 +150,79 @@ function Frame({
   );
 }
 
+/**
+ * The running record, drawn over both cards.
+ *
+ * WHY THE LOSSES ARE ON THE CARD. Every signal account on Telegram posts
+ * its wins; the number that separates this one is the one beside it. A
+ * card that travels without it is a screenshot of a win, indistinguishable
+ * from everybody else's and worth about as much. So the loss count rides
+ * along on every card — the winning ones included, which is the only way
+ * it means anything.
+ *
+ * Coloured rather than flat: the eye reads a green figure and a red one
+ * side by side as a ledger, and reads a grey run of digits as small print.
+ * Same palette as the rings on the template.
+ *
+ * Drawn only when the caller has a record to draw — under
+ * MIN_TRADES_FOR_RATE the stats query returns nothing and this renders
+ * null, so a thin sample leaves the band empty instead of putting a
+ * three-trade record on a poster.
+ */
+export function RecordLine({
+  scope,
+  days,
+  trades,
+  wins,
+  losses,
+}: {
+  scope: string;
+  days: number;
+  trades: number;
+  wins: number;
+  losses: number;
+}) {
+  // Satori counts a fragment as one flex child, so every piece of this row
+  // is its own element — the same trap the instrument box carries a note
+  // about above.
+  const dot = (key: string) => (
+    <span key={key} style={{ display: "flex", color: NEUTRAL }}>
+      ·
+    </span>
+  );
+  const piece = (key: string, text: string, color: string) => (
+    <span key={key} style={{ display: "flex", color, whiteSpace: "nowrap" }}>
+      {text}
+    </span>
+  );
+  return (
+    <div
+      style={{
+        position: "absolute",
+        left: RECORD.left,
+        top: RECORD.top,
+        width: RECORD.width,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 12,
+        fontSize: 24,
+        letterSpacing: 1.5,
+        textShadow: OVER_MAP_SHADOW,
+      }}
+    >
+      {piece("scope", scope, LABEL)}
+      {dot("d1")}
+      {piece("days", `SON ${days} GÜN`, LABEL)}
+      {dot("d2")}
+      {piece("trades", `${trades} İŞLEM`, VALUE)}
+      {dot("d3")}
+      {piece("wins", `${wins} KAZANÇ`, UP)}
+      {dot("d4")}
+      {piece("losses", `${losses} KAYIP`, DOWN)}
+    </div>
+  );
+}
 /** A name drawn under a box, where the design file used to print one. */
 function BoxLabel({ text, left, top, width }: { text: string; left: number; top: number; width: number }) {
   return (
@@ -170,19 +255,26 @@ function BoxLabel({ text, left, top, width }: { text: string; left: number; top:
 export function CallPoster({
   instrument,
   pill,
+  record,
   price,
   takeProfit,
   stopLoss,
 }: {
   instrument: ReactNode;
   pill: ReactNode;
+  record: ReactNode;
   price: ReactNode;
   takeProfit: ReactNode;
   stopLoss: ReactNode;
 }) {
   const cells = [price, takeProfit, stopLoss];
   return (
-    <Frame poster="trade-card-poster.png" instrument={instrument} pill={pill}>
+    <Frame
+      poster="trade-card-poster.png"
+      instrument={instrument}
+      pill={pill}
+      record={record}
+    >
       {CALL_BOXES.map((box, i) => (
         <div
           key={i}
@@ -219,18 +311,25 @@ export function CallPoster({
 export function ResultPoster({
   instrument,
   pill,
+  record,
   outcome,
   figure,
   detail,
 }: {
   instrument: ReactNode;
   pill: ReactNode;
+  record: ReactNode;
   outcome: ReactNode;
   figure: ReactNode;
   detail: ReactNode;
 }) {
   return (
-    <Frame poster="trade-card-result-poster.png" instrument={instrument} pill={pill}>
+    <Frame
+      poster="trade-card-result-poster.png"
+      instrument={instrument}
+      pill={pill}
+      record={record}
+    >
       <div
         style={{
           position: "absolute",

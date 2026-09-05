@@ -195,6 +195,15 @@ function CardBody({
           ))}
         </div>
       )}
+
+      {/* The disclosure the rest of the site promises is made here:
+          the home page pillar, the FAQ and the footer all tell the
+          reader it is on the card, so it has to be on the card. */}
+      {broker.referralUrl && (
+        <p className="mt-3 font-mono text-[10px] uppercase leading-relaxed tracking-[0.12em] text-text-on-ink-muted">
+          {tr("Ortak bağlantı — hesap açılışından komisyon alırız; sıralamayı etkilemez.")}
+        </p>
+      )}
     </div>
   );
 }

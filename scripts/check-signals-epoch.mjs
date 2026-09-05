@@ -19,7 +19,7 @@
 // Run: node scripts/check-signals-epoch.mjs
 
 import { readFileSync, readdirSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { join, sep } from "node:path";
 
 const ROOT = "src";
 
@@ -39,12 +39,20 @@ const EXEMPT = new Map([
     "src/app/api/trade-update/route.ts",
     "updates a row by ticket, same reasoning as trade-result",
   ],
+  [
+    "src/components/SignalsBoard.tsx",
+    "a client component: it names the table only in `typeof tradeSignals.$inferSelect` to type its props and cannot issue a query at all. The rows it renders are filtered to the epoch upstream, in cachedReads.ts, which this check does cover. It used to pass by accident — it imported SIGNALS_EPOCH for the balance box, and stopped when that box moved to components/AccountSummary.tsx.",
+  ],
 ]);
 
 function walk(dir) {
   const out = [];
   for (const entry of readdirSync(dir)) {
-    const path = join(dir, entry);
+    // Forward slashes whatever the platform: EXEMPT is keyed by the paths as
+    // they are written in source, and join() hands back backslashes on
+    // Windows — so every exemption missed and the check failed on four files
+    // it was told to ignore, for anyone running it there.
+    const path = join(dir, entry).split(sep).join("/");
     if (statSync(path).isDirectory()) out.push(...walk(path));
     else if (/\.(ts|tsx)$/.test(path)) out.push(path);
   }

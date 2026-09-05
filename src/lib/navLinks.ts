@@ -3,7 +3,7 @@
 // or the mobile bottom nav's "Daha Fazla" tab) so both always list the
 // same set of pages instead of drifting out of sync.
 export const primaryLinks = [
-  { href: "/brokerlar", label: "Broker Sıralaması" },
+  { href: "/brokerlar", label: "Brokerlar" },
   { href: "/prop-firmalar", label: "Prop Firmalar" },
   { href: "/signals", label: "Sinyaller" },
   { href: "/ai-asistan", label: "AI Asistan" },

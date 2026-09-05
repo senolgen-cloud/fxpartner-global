@@ -3,7 +3,7 @@ import { sendSignalPhoto, mainServicesKeyboard } from "@/lib/telegram";
 import { formatMessage } from "@/lib/chrome";
 import { localePath, type Locale } from "@/lib/i18n";
 import { sendPushToMembers } from "@/lib/push";
-import { getRecentSignalStats, statsLineTr } from "@/lib/signalStats";
+import { getRecentSignalStats, scopeLabelForCard, statsLineTr } from "@/lib/signalStats";
 import { shouldAlertForSignal } from "@/lib/signalAlertPace";
 import { SIGNAL_TZ } from "@/lib/signalPeriods";
 import { requiredTierForPair } from "@/lib/signalAccess";
@@ -129,9 +129,14 @@ export async function GET(req: NextRequest) {
     // would drift away from the trade it describes — and formatting in a time
     // zone needs ICU data the edge runtime does not promise.
     cardParams.set("opened", openedLabel);
+    // Wins and losses rather than the rate: the card draws them as a
+    // ledger, and a rate on its own is the number every signal account
+    // publishes. The scope label is built here because the card cannot
+    // uppercase Turkish safely — see scopeLabelForCard.
     if (stats) {
+      cardParams.set("statScope", scopeLabelForCard(stats.scope));
       cardParams.set("statTrades", String(stats.trades));
-      cardParams.set("statWinRate", String(stats.winRate));
+      cardParams.set("statWins", String(stats.wins));
       cardParams.set("statDays", String(stats.windowDays));
     }
     return `${siteUrl}/api/og/trade-signal?${cardParams.toString()}`;

@@ -99,6 +99,16 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
               {tr("Tam İnceleme →")}
             </Link>
           </div>
+
+          {/* Same disclosure as RankedBrokerCard, for the same reason: the
+              footer promises it on "ilgili kart" site-wide, and this is the
+              card the category and list pages render. Light-surface tokens
+              here — this card sits on paper, not on ink. */}
+          {broker.referralUrl && (
+            <p className="mt-3 font-mono text-[10px] uppercase leading-relaxed tracking-[0.12em] text-text-muted">
+              {tr("Ortak bağlantı — hesap açılışından komisyon alırız; sıralamayı etkilemez.")}
+            </p>
+          )}
         </div>
       </div>
     </article>

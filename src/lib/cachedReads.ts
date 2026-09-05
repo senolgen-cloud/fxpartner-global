@@ -3,6 +3,7 @@ import { db } from "@/db";
 import { tradeSignals, newsBulletins, educationPosts, comments, users } from "@/db/schema";
 import { and, asc, desc, eq, gte } from "drizzle-orm";
 import { getBrokerReviewStats } from "@/lib/brokerReviews";
+import { getAccountRecord } from "@/lib/trackRecord";
 import { SIGNALS_EPOCH } from "@/lib/signalPeriods";
 
 /**
@@ -154,6 +155,25 @@ export const cachedLatestSignal = cachedRead(
     return row ? signalToJson(row) : null;
   },
   { revalidate: 60, tags: [CACHE_TAGS.signals] }
+);
+
+/**
+ * The account behind the signals: balance, today, this week, and the
+ * win/loss counts since the reset.
+ *
+ * The home page leads on this, so it is read on the busiest page on the
+ * site and has to be shared like everything else here. It changes only when
+ * a trade closes, which is exactly when the signals tag is cleared, so the
+ * five-minute TTL is only the floor.
+ *
+ * Note what this is NOT: it is not the signal board. The board is rows, and
+ * the home page has no use for rows — it wants six numbers, and reading them
+ * as numbers keeps a few hundred trades out of that page's payload.
+ */
+export const cachedAccountRecord = cachedRead(
+  ["signal-account-record"],
+  getAccountRecord,
+  { revalidate: 300, tags: [CACHE_TAGS.signals] }
 );
 
 /**

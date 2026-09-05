@@ -164,6 +164,16 @@ button {
 }
 
 /* --- Scroll-reveal --- */
+/* Above the fold: the same arrival, without waiting for JavaScript.
+   .reveal below starts invisible and is only revealed by an observer in a
+   React effect, which is correct for a section further down the page and
+   wrong for the hero — it made the headline, the CTAs and the account
+   strip blank until hydration. This paints on the first frame. */
+.reveal-eager {
+  animation: signals-hero-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -518,6 +528,14 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* Same reasoning as .signals-hero-visual just below: `both` would leave
+     the element parked on its invisible 0% frame, so the animation is
+     replaced rather than dropped. */
+  .reveal-eager {
+    animation: none;
+    opacity: 1;
+  }
+
   /* Someone who asked their system for less motion gets the image, not the
      arrival. `both` on the entrance means removing it would leave the
      element at its 0% frame — invisible — so it is replaced, not dropped. */

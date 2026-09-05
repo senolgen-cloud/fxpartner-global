@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendSignalPhoto, mainServicesKeyboard } from "@/lib/telegram";
 import { sendPushToMembers } from "@/lib/push";
-import { getRecentSignalStats, statsLineTr } from "@/lib/signalStats";
+import { getRecentSignalStats, scopeLabelForCard, statsLineTr } from "@/lib/signalStats";
 import { requiredTierForPair } from "@/lib/signalAccess";
 import { revalidateTag } from "next/cache";
 import { CACHE_TAGS } from "@/lib/cachedReads";
@@ -74,21 +74,10 @@ export async function GET(req: NextRequest) {
               : "BE"
           : null;
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
-  const cardParams = new URLSearchParams({ pair, entry, close });
-  if (direction) cardParams.set("direction", direction);
-  if (pips) cardParams.set("pips", pips);
-  if (profit) cardParams.set("profit", profit);
-  if (outcome) cardParams.set("outcome", outcome);
-  const imageUrl = `${siteUrl}/api/og/trade-result?${cardParams.toString()}`;
-
-  const outcomeEmoji = outcome === "WIN" ? "✅" : outcome === "LOSS" ? "❌" : outcome === "BE" ? "➖" : "📌";
-  const outcomeWord = outcome === "WIN" ? "WIN" : outcome === "LOSS" ? "LOSS" : outcome === "BE" ? "BREAKEVEN" : "CLOSED";
-  const resultLine = pips ? `${parseFloat(pips) > 0 ? "+" : ""}${pips} pips` : profit ? `${parseFloat(profit) > 0 ? "+" : ""}${profit} USD` : null;
-
-  // Read after the DB update below would be ideal (so this trade counts
-  // itself), but the update happens further down — close enough, and a
-  // stats failure must never block the result post.
+  // Read before the card URL is built, because the card carries the record
+  // now as well as the caption. Reading it after the DB update below would
+  // be ideal — this trade would then count itself — but that update happens
+  // further down, and a stats failure must never block the result post.
   let stats = null;
   try {
     stats = await getRecentSignalStats(requiredTierForPair(pair));
@@ -96,6 +85,27 @@ export async function GET(req: NextRequest) {
     console.error("Signal stats lookup failed:", err);
   }
   const trStats = statsLineTr(stats);
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";
+  const cardParams = new URLSearchParams({ pair, entry, close });
+  if (direction) cardParams.set("direction", direction);
+  if (pips) cardParams.set("pips", pips);
+  if (profit) cardParams.set("profit", profit);
+  if (outcome) cardParams.set("outcome", outcome);
+  // Same four params the opening call sends, so the pair of cards carries
+  // the identical record line in the identical place.
+  if (stats) {
+    cardParams.set("statScope", scopeLabelForCard(stats.scope));
+    cardParams.set("statTrades", String(stats.trades));
+    cardParams.set("statWins", String(stats.wins));
+    cardParams.set("statDays", String(stats.windowDays));
+  }
+  const imageUrl = `${siteUrl}/api/og/trade-result?${cardParams.toString()}`;
+
+  const outcomeEmoji = outcome === "WIN" ? "✅" : outcome === "LOSS" ? "❌" : outcome === "BE" ? "➖" : "📌";
+  const outcomeWord = outcome === "WIN" ? "WIN" : outcome === "LOSS" ? "LOSS" : outcome === "BE" ? "BREAKEVEN" : "CLOSED";
+  const resultLine = pips ? `${parseFloat(pips) > 0 ? "+" : ""}${pips} pips` : profit ? `${parseFloat(profit) > 0 ? "+" : ""}${profit} USD` : null;
+
 
   // Short, matching the opening call — see the caption comment in
   // /api/trade-signal for the reasoning. Two lines here are not just noise
