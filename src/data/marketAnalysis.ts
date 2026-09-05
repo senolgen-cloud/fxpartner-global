@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-05-1200",
+    title: "FXPARTNER Piyasa Özeti | 05.09.2026 Hafta Sonu Güncellemesi",
+    excerpt:
+      "Döviz ve altın piyasaları hafta sonu kapalıyken gündeme, Trump'ın İran'la süregelen çatışmayı '18 Amerikalı askerin öldüğü küçük bir mesele' anlamına gelecek şekilde 'small potatoes' sözleriyle küçümsemesi damga vurdu. ABD'de motorin fiyatı AAA verilerine göre Cuma günü 5,85 dolar/galon ile 2022 Haziran'daki 5,81 dolarlık rekoru kırarak tarihi zirveye çıktı; Brent haftayı %6,6, WTI ise %8,8 kazançla tamamlamaya hazırlanıyor.",
+    publishedAt: "2026-09-05",
+    readingMinutes: 3,
+    intro:
+      "Cumartesi günü döviz ve altın piyasaları hafta sonu tatilinde kapalıyken, gündemi İran çatışmasına dair siyasi açıklamalar ve enerji piyasasındaki tarihi rekor belirledi. Başkan Trump, Oval Ofis'te gazetecilerin sorularını yanıtlarken altı aydır süren ve 18 Amerikalı askerin hayatını kaybettiği İran çatışmasını 'small potatoes' (küçük bir mesele) olarak nitelendirerek, bir gün önce Başkan Yardımcısı JD Vance'in çatışmayı 'savaş' olarak adlandırmayı reddeden sözlerine katıldığını belirtti. Açıklamalar, çatışmanın enerji piyasalarına verdiği zararın somut bir göstergesi niteliğindeki motorin fiyatlarındaki tarihi rekorla aynı güne denk geldi. Piyasalar Pazartesi/Pazar akşamı yeniden açılana kadar, haftanın odağı 10 Eylül'deki TCMB kararı ve 11 Eylül'deki ABD TÜFE verisinde olacak.",
+    news: [
+      {
+        icon: "🗣️",
+        heading: "Trump İran Çatışmasını 'Small Potatoes' Diye Nitelendirdi",
+        body: "Başkan **Donald Trump**, Cuma günü Oval Ofis'te düzenlenen bir soru-cevap sırasında, altı aydır süren ve **18 Amerikalı askerin** hayatını kaybettiği İran çatışması için **\"Ben buna askeri çatışma diyorum çünkü bizim için small potatoes (küçük bir mesele). Büyük bir şey değil\"** dedi ve **\"şu an aktif bir çatışma yok, ara sıra vuruşlar yapıyoruz\"** ifadelerini kullandı. Trump böylece bir gün önce Başkan Yardımcısı **JD Vance**'in basın toplantısında **\"Buna savaş demezdim... şu anda aktif bir çatışma yok\"** sözleriyle çatışmayı 'savaş' olarak adlandırmayı reddetmesine destek vermiş oldu. Vance, İran'ın gemilere ateş açmayı ne zaman durduracağına dair bir takvim veremeyeceğini de sözlerine ekledi. Açıklamalar, ölen askerlerin ailelerini ve muhalefeti sert tepkilere sevk etti.",
+      },
+      {
+        icon: "⛽",
+        heading: "ABD'de Motorin Fiyatı Tarihi Zirveye Çıktı: 5,85 Dolar/Galon",
+        body: "**AAA** verilerine göre ABD'de ulusal ortalama **motorin (dizel) fiyatı**, Cuma günü **5,85 dolar/galona** yükselerek **Haziran 2022**'de görülen ve Rusya'nın Ukrayna'yı işgalinin ardından oluşan önceki rekor olan **5,81 dolar/galonu** aşıp tarihi bir zirveye ulaştı. Bu seviye, bir yıl öncesine kıyasla **yaklaşık %60** daha yüksek. Rekor, altı aydır süren İran çatışmasının küresel yakıt akışını bozmaya devam ettiği bir dönemde geldi; Arkansas ve Missouri gibi bazı eyaletlerde motorin fiyatları kendi tüm zamanların rekorlarını kırdı.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol Haftayı Güçlü Kazançla Kapatıyor: Brent %6,6, WTI %8,8",
+        body: "**Brent petrol**, Cuma günü **94,86-95,23 dolar** bandına hafif bir gerilemeyle haftayı yine de **%6,6** kazançla tamamlamaya hazırlanırken, **WTI** **91,20 dolar** civarında işlem görerek haftalık bazda **%8,8** değer kazandı. Yükseliş, Hürmüz Boğazı'ndan geçen ticari gemi trafiğindeki belirgin düşüş ve bölgedeki düşmanlıkların yeniden alevlenmesiyle destekleniyor; dünyanın en büyük tanker operatörlerinden Japon **Mitsui O.S.K. Lines**, boğazdaki aksamaların önceki beklentilerden daha uzun süreceğini ve yıl sonuna kadar normalleşme öngörmediğini açıkladı.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "Türkiye Cumhuriyet Merkez Bankası Para Politikası Kurulu, politika faizini son toplantısında %37'de sabit tutmuştu.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; güçlü istihdam raporunun ardından Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-04-1900",
     title: "FXPARTNER Piyasa Özeti | 04.09.2026 Akşam Güncellemesi",
     excerpt:
