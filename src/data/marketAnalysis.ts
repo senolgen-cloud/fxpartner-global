@@ -41,6 +41,55 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-06-1500",
+    title: "FXPARTNER Piyasa Özeti | 06.09.2026 Öğleden Sonra Güncellemesi",
+    excerpt:
+      "Pazar günü İran çatışmasında tırmanma sürdü: IRGC, Cumartesi günü ABD'nin üç İran petrol tankerini vurmasına karşılık Hürmüz Boğazı'nda altı gemiyi -üç tanker, üç ABD bağlantılı gemiyi- hedef aldığını, bunun çatışma boyunca gerçekleştirdiği en büyük eşgüdümlü saldırı olduğunu duyurdu; CENTCOM iddiaları henüz doğrulamadı. ABD Savunma Bakanı Pete Hegseth ise X hesabından 'ateş ederlerse tankerlerini batıracaklarını' söyledi.",
+    publishedAt: "2026-09-06",
+    readingMinutes: 3,
+    intro:
+      "Pazar günü İran çatışmasında tırmanma sürdü. İran Devrim Muhafızları Ordusu (IRGC), Cumartesi günü ABD'nin üç İran petrol tankerini (M/T Downy, M/T Stark 1, M/T Kylo) vurmasına karşılık Hürmüz Boğazı'nda altı gemiyi -boğazdan \"yetkisiz\" rotalarla geçtiğini öne sürdüğü üç tankeri ve üç ABD bağlantılı gemiyi- hedef aldığını, bunun çatışma boyunca gerçekleştirdiği en büyük eşgüdümlü saldırı olduğunu duyurdu; ABD Merkez Kuvvetler Komutanlığı (CENTCOM) bu iddiaları henüz doğrulamadı. Gerilimin ardından ABD Savunma Bakanı Pete Hegseth, X hesabından İran'a ateş açması halinde tankerlerini batıracakları uyarısında bulundu. İran Meclis Başkanı Muhammed Bakır Galibaf ise 'orantılı yanıt döneminin sona erdiğini' ve gelecekteki saldırılara 'daha hızlı, daha yoğun ve daha acı verici' karşılık verileceğini açıkladı. Döviz ve altın piyasaları hafta sonu tatilinde kapalı olmayı sürdürüyor; gelişmelerin fiyatlara yansıması Pazar akşamı yeniden açılışta izlenecek. Haftanın odağı 10 Eylül'deki TCMB kararı ve 11 Eylül'deki ABD TÜFE verisinde olmayı sürdürüyor.",
+    news: [
+      {
+        icon: "🎯",
+        heading: "IRGC: 'Hürmüz'de Tek Seferde 6 Gemi Vurduk' İddiası",
+        body: "**İran Devrim Muhafızları Ordusu (IRGC)**, Cumartesi günü ABD'nin üç İran petrol tankerini vurmasına karşılık **Hürmüz Boğazı**'nda **altı gemiyi** hedef aldığını, bunun çatışma boyunca yaptığı **\"en büyük eşgüdümlü saldırı\"** olduğunu duyurdu. İddiaya göre İran deniz kuvvetleri, boğazdan **\"yetkisiz\"** rotalarla geçtiğini öne sürdüğü **üç petrol tankerini** ve bölgede bulunan **üç ABD bağlantılı gemiyi** anti-gemi füzeleriyle vurdu. **ABD Merkez Kuvvetler Komutanlığı (CENTCOM)**, bu iddiaları henüz doğrulamadı.",
+      },
+      {
+        icon: "🗣️",
+        heading: "ABD Savunma Bakanı Hegseth: 'Ateş Ederseniz Tankerlerinizi Batırırız'",
+        body: "ABD Savunma Bakanı **Pete Hegseth**, X hesabından yaptığı paylaşımda İran'a sert bir uyarıda bulundu: **\"Basit: İran ABD gemilerine ateş açarsa, petrol tankerlerini yok edip batırırız. Tek yapmaları gereken ABD Donanması'na ateş açmamak.\"** Hegseth, CENTCOM Komutanı Tümamiral **Brad Cooper**'ın önceki uyarısına atıfta bulunarak İran'ın tanker filosunu **\"savunmasız\"** olarak nitelendirdi ve ABD uçak, savaş gemisi ve denizaltılarının CENTCOM ile Hint-Pasifik Komutanlığı sorumluluk alanındaki İran tankerlerini vurabileceğini belirtti.",
+      },
+      {
+        icon: "📢",
+        heading: "Meclis Başkanı Galibaf: 'Orantılı Yanıt Dönemi Sona Erdi'",
+        body: "İran Meclis Başkanı **Muhammed Bakır Galibaf**, ABD'nin tankerlere yönelik saldırısının ardından yaptığı açıklamada **\"Orantılı yanıt dönemi artık sona ermiştir\"** dedi ve **\"İran'ın çıkarlarına ve güvenliğine yönelik her saldırı, daha hızlı, daha yoğun ve daha acı verici bir karşılıkla yanıtlanacaktır\"** ifadelerini kullandı. Galibaf, ABD'nin İran'a karşı savaşın kurallarının değiştiğini **\"iş işten geçmeden\"** anlaması gerektiğini de sözlerine ekledi.",
+      },
+      {
+        icon: "⚠️",
+        heading: "İran Donanması'ndan Ablukaya Karşı Sertleşme Sinyali",
+        body: "İran ordusunun **Hatemü'l-Enbiya Merkez Karargahı** sözcüsü, ABD'nin İran gemilerine yönelik **\"taciz\"** ve deniz **ablukasının** sürmesi halinde, İran silahlı kuvvetlerinin ABD askeri gemilerine yönelik saldırılarının **\"öncekinden daha şiddetli olacağını ve genişleme ihtimali taşıdığını\"** belirtti. Ayrı bir açıklamada **IRGC Donanması**, ABD gemilerine **\"'Terörist' ABD ordusuna kanmayın ve yetkisiz su yollarından geçme girişiminde bulunmayın. Aksi halde hedef alınırsınız\"** uyarısında bulundu.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "Türkiye Cumhuriyet Merkez Bankası Para Politikası Kurulu, politika faizini son toplantısında %37'de sabit tutmuştu.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; güçlü istihdam raporunun ardından Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-05-2100",
     title: "FXPARTNER Piyasa Özeti | 05.09.2026 Gece Güncellemesi",
     excerpt:
