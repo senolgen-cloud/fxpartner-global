@@ -41,6 +41,45 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-06-2100",
+    title: "FXPARTNER Piyasa Özeti | 06.09.2026 Gece Güncellemesi",
+    excerpt:
+      "Pazar akşamı CENTCOM, İran ablukasını uygulamak için Hürmüz Boğazı'nda bugüne kadar 92 ticari gemiyi yönlendirdiğini, 3'ünü devre dışı bıraktığını ve 2'sine bindirme yaptığını açıkladı; paylaşımda bir F-35A savaş uçağının bölgesel sularda devriye görüntülerine de yer verildi. Aynı gün OPEC+, İran çatışmasının Hürmüz üzerinden petrol ihracatını aksatmaya devam ettiği bir ortamda Ekim ayı üretim politikasını sabit tutarak art arda gelen aylık artışlara ara verdi; grup bir sonraki toplantısını 4 Ekim'de yapacak.",
+    publishedAt: "2026-09-06",
+    readingMinutes: 2,
+    intro:
+      "Pazar akşamı gündeme İran ablukasının uygulanmasına ve küresel petrol arzına dair iki ayrı gelişme damga vurdu. ABD Merkez Kuvvetler Komutanlığı (CENTCOM), resmi X hesabından yaptığı paylaşımda, İran'a yönelik deniz ablukasını uygulamak amacıyla ABD güçlerinin Hürmüz Boğazı'nda bugüne kadar 92 ticari gemiyi yönlendirdiğini, 3'ünü devre dışı bıraktığını ve 2'sine bindirme yaptığını açıkladı; paylaşımda ayrıca bir ABD Hava Kuvvetleri F-35A savaş uçağının bölgesel sularda devriye görüntülerine yer verildi. Aynı gün OPEC+'a bağlı sekiz ülke, İran çatışmasının Hürmüz Boğazı üzerinden petrol ihracatını aksatmaya devam ettiği ve bunun grubun arz kararlarıyla fiyatları etkileme kabiliyetini sınırladığı bir dönemde, art arda gelen aylık üretim artışlarının ardından Ekim ayı üretim politikasını sabit tutma kararı aldı; grubun bir sonraki toplantısı 4 Ekim 2026'da gerçekleştirilecek. Döviz ve altın piyasaları hafta sonu tatilinde kapalı olmayı sürdürüyor; haftanın odağı 10 Eylül'deki TCMB kararı ve 11 Eylül'deki ABD TÜFE verisinde olmayı sürdürüyor.",
+    news: [
+      {
+        icon: "🚢",
+        heading: "CENTCOM: Hürmüz Ablukasında 92 Ticari Gemi Yönlendirildi",
+        body: "**ABD Merkez Kuvvetler Komutanlığı (CENTCOM)**, resmi X hesabından Pazar günü yaptığı paylaşımda, İran'a yönelik deniz ablukasını uygulamak amacıyla ABD güçlerinin Hürmüz Boğazı'nda bugüne kadar **92 ticari gemiyi** yönlendirdiğini, **3'ünü devre dışı bıraktığını** ve **2'sine bindirme** yaptığını açıkladı. Paylaşımda ayrıca bir **ABD Hava Kuvvetleri F-35A** savaş uçağının bölgesel sularda devriye görüntülerine yer verildi; rakam, önceki haftalarda açıklanan 62 ve 82 gemilik bildirimlere kıyasla ablukanın kapsamının genişlemeye devam ettiğine işaret ediyor.",
+      },
+      {
+        icon: "🛢️",
+        heading: "OPEC+ Ekim Ayı Üretim Politikasını Sabit Tuttu",
+        body: "**OPEC+**'a bağlı sekiz ülke, Pazar günü yaptığı toplantıda **Ekim ayı üretim politikasını değiştirmeme** kararı aldı; böylece art arda gelen aylık üretim artışlarının ardından ilk kez bir **duraklama** yaşandı. Karar, İran çatışmasının Hürmüz Boğazı üzerinden petrol ihracatını aksatmaya devam ettiği ve bunun grubun arz kararlarıyla küresel fiyatları ve pazar payını etkileme kabiliyetini sınırladığı bir döneme denk geldi. Sekiz ülkenin Ekim için toplam gerekli üretimi yaklaşık günlük **31,01 milyon varil** olarak belirlenirken, grubun bir sonraki toplantısı **4 Ekim 2026**'da gerçekleştirilecek.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "Türkiye Cumhuriyet Merkez Bankası Para Politikası Kurulu, politika faizini son toplantısında %37'de sabit tutmuştu.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; güçlü istihdam raporunun ardından Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-06-1500",
     title: "FXPARTNER Piyasa Özeti | 06.09.2026 Öğleden Sonra Güncellemesi",
     excerpt:
