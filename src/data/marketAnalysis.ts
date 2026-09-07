@@ -41,6 +41,55 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-07-2100",
+    title: "FXPARTNER Piyasa Özeti | 07.09.2026 Gece Güncellemesi",
+    excerpt:
+      "Pazartesi günü BIST 100 endeksi %0,99 yükselişle 14.151,59 puandan, BIST 30 ise %1,73 artışla 16.730,66 puandan kapandı. ABD'de Wall Street borsaları ve tahvil piyasası Emek Bayramı (Labor Day) nedeniyle tam gün kapalıyken altın, Cuma günkü 4.470-4.500 dolar bandından gerileyerek 4.400 dolar civarına indi; dolar/TL ise sabah saatlerindeki tarihi zirvesi 48,44 TL civarındaki seyrini korudu. İran Dışişleri Bakanlığı ise Umman ile Hürmüz Boğazı'nda güvenli rota anlaşmasının son aşamaya geldiğini duyurdu.",
+    publishedAt: "2026-09-07",
+    readingMinutes: 3,
+    intro:
+      "Pazartesi akşamı kapanışta yurt içi borsa güçlü bir görüntü çizdi: BIST 100 endeksi günü %0,99 artışla 14.151,59 puandan, BIST 30 endeksi ise %1,73 yükselişle 16.730,66 puandan tamamladı. ABD'de Wall Street borsaları ve SIFMA tavsiyesiyle tahvil piyasası Emek Bayramı (Labor Day) tatili nedeniyle tam gün kapalı kalırken, bu durum küresel işlem hacmini sınırladı ve dolar/TL'nin sabah saatlerinde gördüğü tarihi zirve olan 48,44 TL civarındaki seyrini korumasında etkili oldu. Altın tarafında ise XAU/USD, güçlü ABD istihdam verisinin ardından süregelen dolar ve tahvil getirisi baskısıyla Cuma günkü 4.470-4.500 dolar bandından gerileyerek 4.400 dolar civarına indi; yurt içinde gram altın da akşam saatlerinde benzer bir geri çekilme sergiledi. Jeopolitik cephede İran Dışişleri Bakanlığı Sözcüsü İsmail Bakaei, Umman ile Hürmüz Boğazı'nda güvenli denizcilik rotası belirlenmesine yönelik anlaşmanın son aşamaya geldiğini ve mutabakatın yakında Uluslararası Denizcilik Örgütü'ne kaydedilmesinin beklendiğini açıkladı. Haftanın odağı 10 Eylül'deki TCMB kararı ve 11 Eylül'deki ABD TÜFE verisinde olmaya devam ediyor.",
+    news: [
+      {
+        icon: "📈",
+        heading: "BIST 100 Günü Yükselişle Tamamladı: 14.151,59 Puan",
+        body: "**BIST 100 endeksi**, Pazartesi günü **139,17 puan (%0,99)** artışla **14.151,59** puandan kapandı; gün içinde **14.000,94-14.169,80** puan bandında hareket etti. **BIST 30 endeksi** ise **285,25 puan (%1,73)** yükselişle **16.730,66** puandan günü tamamladı.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın Cuma'dan Bu Yana Kazanımlarının Bir Kısmını Geri Verdi",
+        body: "**XAU/USD**, güçlü ABD istihdam verisinin ardından dolar ve tahvil getirilerindeki yükselişin baskısıyla Cuma günkü **4.470-4.500 dolar** bandından gerileyerek Pazartesi günü **4.400 dolar** civarına indi. Yurt içinde de gram altın bu geri çekilmeyi yansıttı; **Kapalıçarşı**'da gram altın akşam **18:30** itibarıyla günü yaklaşık **%0,4** düşüşle **6.870 TL** seviyesi civarında tamamlamaya hazırlanıyor.",
+      },
+      {
+        icon: "🇺🇸",
+        heading: "ABD Borsaları ve Tahvil Piyasası Emek Bayramı Nedeniyle Kapalı",
+        body: "ABD'de **Emek Bayramı (Labor Day)** tatili nedeniyle Wall Street'teki hisse senedi borsaları ile **SIFMA** tavsiyesi doğrultusunda tahvil piyasası Pazartesi günü tam gün kapalı kaldı; işlemler Salı günü yeniden başlayacak. Tatil, küresel piyasalarda işlem hacmini sınırlandırırken dolar/TL'nin sabah saatlerinde gördüğü **48,44 TL**'lik tarihi zirve civarındaki seyrini korumasında da etkili oldu.",
+      },
+      {
+        icon: "🇮🇷",
+        heading: "İran-Umman: Hürmüz'de Güvenli Rota Anlaşması Son Aşamada",
+        body: "İran Dışişleri Bakanlığı Sözcüsü **İsmail Bakaei**, Pazartesi günü yaptığı açıklamada, İran ile Umman arasında Hürmüz Boğazı'nda güvenli denizcilik rotası belirlenmesine yönelik anlaşmanın **son aşamaya geldiğini** ve mutabakatın önümüzdeki günlerde **Uluslararası Denizcilik Örgütü (IMO)**'ne kaydedilmesinin beklendiğini açıkladı. Bakaei, geçtiğimiz hafta Umman ve Pakistan heyetlerinin de Tahran'a gelerek İranlı yetkililerle görüştüğünü belirtti.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "Türkiye Cumhuriyet Merkez Bankası Para Politikası Kurulu, politika faizini son toplantısında %37'de sabit tutmuştu.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; güçlü istihdam verisinin ardından Fed'in 15-16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-07-1400",
     title: "FXPARTNER Piyasa Özeti | 07.09.2026 Öğleden Sonra Güncellemesi",
     excerpt:
