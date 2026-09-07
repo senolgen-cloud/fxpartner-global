@@ -41,6 +41,55 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-07-0900",
+    title: "FXPARTNER Piyasa Özeti | 07.09.2026 Sabah Güncellemesi",
+    excerpt:
+      "Haftanın ilk işlem gününde dolar, Cuma günü açıklanan beklentilerin çok üzerindeki ABD Ağustos istihdam verisinin Fed'in Eylül'de faiz artırımı ihtimalini güçlendirmesiyle küresel çapta değer kazandı; dolar endeksi 99,175 puana, dolar/TL ise tüm zamanların rekoru olan 48,44 TL'ye yükseldi. Enerji tarafında Brent petrol haftaya yükselişle başlayıp 97 dolara yaklaşırken, İran'ın üst düzey güvenlik yetkilisi Muhsin Rızai, Hürmüz Boğazı yakınında önümüzdeki günlerde yeni bir 'kısıtlı bölge' ilan edileceğini duyurdu.",
+    publishedAt: "2026-09-07",
+    readingMinutes: 3,
+    intro:
+      "Pazartesi sabahı piyasaların gündemine, Cuma günü açıklanan ve beklentilerin çok üzerinde gelen ABD Ağustos istihdam verisinin küresel para birimleri üzerindeki etkisi damga vurdu. Güçlü veri, Fed'in 15-16 Eylül toplantısında faiz artırımına gideceği beklentisini belirgin şekilde güçlendirdi; bu durum dolar endeksini yükseltirken dolar/TL de tüm zamanların en yüksek seviyesine çıktı. Jeopolitik cephede ise İran, Hürmüz Boğazı'na dair yeni bir adım attı: Yüksek Ulusal Güvenlik Konseyi Sekreteri Muhsin Rızai, boğaz yakınında önümüzdeki günlerde yeni bir 'kısıtlı bölge' ilan edileceğini ve Umman ile üzerinde anlaşılan yeni bir geçiş güzergahının haritalarının da yakında imzalanacağını açıkladı. Gelişme, hafta sonu yaşanan ABD-İran tanker çatışmasının ardından geldi ve Brent petrolün haftaya yükselişle başlayıp 97 dolara yaklaşmasında etkili oldu. Haftanın odağı 10 Eylül'deki TCMB kararı ve 11 Eylül'deki ABD TÜFE verisinde olmaya devam ediyor.",
+    news: [
+      {
+        icon: "📊",
+        heading: "ABD Ağustos İstihdamı Beklentilerin Çok Üzerinde Geldi: +162 Bin",
+        body: "ABD'de tarım dışı istihdam Ağustos'ta **162.000** kişi artarak, Dow Jones anketine katılan ekonomistlerin beklentisi olan **53.000** kişilik artışın çok üzerinde geldi ve Mart ayından bu yana en güçlü aylık artışı kaydetti. İşsizlik oranı **%4,1**'de sabit kalırken, ortalama saatlik kazançlar **10 sent (%0,3)** artışla **37,75 dolara** yükseldi. Veri, Fed'in **15-16 Eylül** toplantısında faiz artırımına gitme ihtimalini CME FedWatch verilerine göre veri öncesindeki yaklaşık **%55**'ten **%60-62** bandına taşıdı.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar/TL Tarihi Zirveyi Tazeledi: 48,44 TL",
+        body: "Güçlü istihdam verisinin Fed'in faiz artırımı beklentilerini yeniden alevlendirmesiyle **Dolar Endeksi (DXY)**, haftanın ilk işlem gününde **99,175** puana kadar yükseldi. Küresel dolar güçlenmesi yurt içi piyasaya da yansıdı; **dolar/TL**, Pazartesi işlemlerinde **48,44 TL** ile **tüm zamanların rekorunu** tazeledi.",
+      },
+      {
+        icon: "🇮🇷",
+        heading: "İran'dan Hürmüz'de Yeni 'Kısıtlı Bölge' Sinyali",
+        body: "İran Yüksek Ulusal Güvenlik Konseyi Sekreteri **Muhsin Rızai**, Hürmüz Boğazı yakınında **önümüzdeki günlerde** yeni bir **'kısıtlı bölge'** ilan edileceğini duyurdu. Rızai'ye göre bölge, ABD'nin deniz ablukası hattından başlayıp Basra Körfezi'ne doğru uzanacak ve bu alana giren her gemi **yaptırım listesine** eklenecek. Rızai ayrıca Umman ile üzerinde anlaşılan ve İran yönetiminde işleyecek yeni geçiş güzergahının haritalarının da **önümüzdeki günlerde imzalanacağını** belirtti.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Brent Petrol Haftaya Yükselişle Başladı: 97 Dolara Yaklaştı",
+        body: "**Brent petrol**, ABD ve İran'ın hafta sonu tankerlere yönelik karşılıklı saldırılarının ardından enerji akışına dair süregelen endişelerle Pazartesi günü yükselişini sürdürerek **97 dolar/varil** seviyesine yaklaştı. ABD Enerji Bakanı **Chris Wright**, ABD Donanması'nın İran tutumunu değiştirene kadar Hürmüz'deki refakat ve abluka operasyonlarını sürdüreceğini yineledi.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "Türkiye Cumhuriyet Merkez Bankası Para Politikası Kurulu, politika faizini son toplantısında %37'de sabit tutmuştu.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; güçlü istihdam verisinin ardından Fed'in 15-16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-06-2100",
     title: "FXPARTNER Piyasa Özeti | 06.09.2026 Gece Güncellemesi",
     excerpt:
