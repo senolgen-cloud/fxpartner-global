@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-07-1400",
+    title: "FXPARTNER Piyasa Özeti | 07.09.2026 Öğleden Sonra Güncellemesi",
+    excerpt:
+      "Pazartesi günü Cumhurbaşkan Yardımcısı Cevdet Yılmaz, 2027-2029 dönemini kapsayan yeni Orta Vadeli Program'ı (OVP) açıkladı: 2026 yıl sonu enflasyon tahmini %28,4'e revize edilirken enflasyonun 2027'de %21'e, 2028'de %13,5'e ve 2029'da %9'a gerilemesi hedeflendi. Programda resmi bir döviz kuru hedefi yer almasa da GSYH'nin TL ve dolar bazlı rakamlarından türetilen örtük hesaplamaya göre yıllık ortalama dolar/TL kurunun 2026'da 46,87 TL'den 2029'da 68,83 TL'ye çıkması bekleniyor; piyasa katılımcıları bu tahmini 'iddialı' olarak değerlendiriyor.",
+    publishedAt: "2026-09-07",
+    readingMinutes: 3,
+    intro:
+      "Pazartesi günü yurt içi piyasaların gündemine, Cumhurbaşkanı Yardımcısı Cevdet Yılmaz tarafından açıklanan ve 2027-2029 dönemini kapsayan yeni Orta Vadeli Program (OVP) damga vurdu. Resmi Gazete'de yayımlanan programda enflasyon, büyüme, bütçe açığı ve istihdama dair üç yıllık yeni hedefler ortaya konuldu; 2026 yıl sonu enflasyon tahmini yukarı yönlü revize edilirken enflasyonun izleyen üç yılda kademeli olarak tek haneye gerilemesi öngörüldü. Programda ayrı bir döviz kuru tablosu yer almasa da GSYH'nin TL ve dolar bazlı rakamlarından türetilen örtük hesaplama, piyasada dolar/TL'nin orta vadeli seyrine dair tartışmaları yeniden gündeme getirdi. Haftanın odağı ise 10 Eylül'deki TCMB kararı ve 11 Eylül'deki ABD TÜFE verisinde olmaya devam ediyor.",
+    news: [
+      {
+        icon: "📑",
+        heading: "Yeni Orta Vadeli Program (2027-2029) Resmi Gazete'de Yayımlandı",
+        body: "Cumhurbaşkanı Yardımcısı **Cevdet Yılmaz** tarafından açıklanan ve **2027-2029** dönemini kapsayan yeni **Orta Vadeli Program (OVP)**, Resmi Gazete'de yayımlandı. Programda **2026 yıl sonu enflasyon tahmini %28,4**'e revize edilirken, yıllık enflasyonun **2027'de %21'e, 2028'de %13,5'e ve 2029'da %9'a** gerilemesi hedeflendi. Büyüme tarafında ise ekonominin **2026'da %3,3, 2027'de %4,2, 2028'de %4,6 ve 2029'da %5,0** oranında genişlemesi öngörülüyor.",
+      },
+      {
+        icon: "📊",
+        heading: "Bütçe Açığı, İstihdam ve Milli Gelir Hedefleri",
+        body: "Programa göre bütçe açığının **GSYH'ye oranı 2026'da %3,1**, program dönemi sonunda ise **%2,8** olarak gerçekleşmesi hedefleniyor. İşsizlik oranının **2026'da %8,1**'den **2029'da %7,6**'ya gerilemesi öngörülen OVP'de, dönem boyunca **2,1 milyon ilave istihdam** oluşturulması, kişi başına milli gelirin ilk kez **2,2 trilyon doların üzerine**, mal ve hizmet ihracatının ise **450 milyar dolara** çıkarılması hedefleniyor.",
+      },
+      {
+        icon: "💵",
+        heading: "OVP'de Resmi Kur Hedefi Yok, 'Örtük Hesap' Piyasada 'İddialı' Bulundu",
+        body: "OVP metninde ayrı bir döviz kuru tablosu yer almazken, **GSYH'nin** TL ve dolar bazlı rakamlarının birbirine bölünmesiyle elde edilen **örtük hesaplamaya** göre yıllık ortalama dolar/TL kurunun **2026'da 46,87 TL**, **2027'de 56,05 TL**, **2028'de 63,69 TL** ve **2029'da 68,83 TL** seviyesinde oluşması bekleniyor; bu da kurdaki yıllık artış hızının **2026'da %18,7**'den **2029'da %8,1**'e kademeli olarak yavaşlayacağı anlamına geliyor. Cevdet Yılmaz, bu hesaplamanın bir **döviz kuru hedefi** değil, enflasyon farkına dayalı **\"hesabi bir proje\"** olduğunu vurgularken, piyasa katılımcıları yüksek faiz ortamı ve kurdaki oynaklığı göz önünde bulundurarak tahmini **\"iddialı\"** olarak değerlendiriyor.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "Türkiye Cumhuriyet Merkez Bankası Para Politikası Kurulu, politika faizini son toplantısında %37'de sabit tutmuştu.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; güçlü istihdam verisinin ardından Fed'in 15-16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-07-0900",
     title: "FXPARTNER Piyasa Özeti | 07.09.2026 Sabah Güncellemesi",
     excerpt:
