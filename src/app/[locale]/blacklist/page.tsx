@@ -141,7 +141,7 @@ export default async function BlacklistPage({
                 {tr("Şikayet bildirin, doğrulanmış ve tekrarlayan örüntüleri bu sayfaya ve puanlamamıza yansıtalım.")}
               </p>
               <Link
-                href="/complaint"
+                href="/forex-sikayetleri"
                 className="mt-4 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
               >
                 {tr("Şikayet Gönder")}

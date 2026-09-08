@@ -3,7 +3,7 @@ import { useTr } from "@/components/useTr";
 
 import { useActionState, useState } from "react";
 import Link from "@/components/LocaleLink";
-import { submitComplaint, type ComplaintFormState } from "@/app/[locale]/complaint/actions";
+import { submitComplaint, type ComplaintFormState } from "@/app/[locale]/forex-sikayetleri/actions";
 
 const initialState: ComplaintFormState = { ok: false };
 const OTHER_VALUE = "other";

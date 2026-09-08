@@ -226,7 +226,7 @@ export default function Footer({
                 </Link>
               </li>
               <li>
-                <Link href="/complaint" className="transition-colors hover:text-text-on-ink">
+                <Link href="/forex-sikayetleri" className="transition-colors hover:text-text-on-ink">
                   {tr("Şikayet Bildir")}
                 </Link>
               </li>

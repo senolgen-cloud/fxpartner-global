@@ -299,7 +299,7 @@ export default async function InstagramLandingPage({
                 {tr("Hakkımızda")}
               </Link>{" "}
               {tr("sayfasında açıklıyoruz. Bir aracı kurumla sorun yaşadıysanız")}{" "}
-              <Link href="/complaint" className="text-signal underline-offset-4 hover:underline">
+              <Link href="/forex-sikayetleri" className="text-signal underline-offset-4 hover:underline">
                 {tr("şikayet kaydı")}
               </Link>{" "}
               {tr("açabilirsiniz.")}

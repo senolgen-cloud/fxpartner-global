@@ -46,12 +46,19 @@ export const blogPosts: BlogPost[] = [
     // Written off LiteFinance's own promo-code terms page
     // (litefinance.org/promo/codes/?code=NonStopBonus), read 8 Eylül 2026,
     // not off the Turkish campaign creative — and the two disagree in
-    // three places that matter. The creative says Klasik hesaplar; the
-    // terms say CENT and CLASSIC. The creative prints bonus caps of 30.000
-    // and 4.000 USD; the terms page states no cap at all. And neither the
-    // creative nor the campaign copy we were given mentions the 26.09.2026
-    // activation deadline, the three-month validity, or what the volume
-    // condition actually costs in lots.
+    // three places that matter.
+    //
+    // ACCOUNT TYPES: the terms page lists CENT and CLASSIC; the campaign
+    // as actually run through FXPARTNER is Classic only, which is what
+    // this article says (owner's call, 9 Eylül 2026). Telling a Cent
+    // holder they qualify when the bonus will not be paid is the worse of
+    // the two possible errors, so the narrower statement wins.
+    //
+    // The creative prints bonus caps of 30.000 and 4.000 USD; the terms
+    // page states no cap at all. And neither the creative nor the campaign
+    // copy we were given mentions the 26.09.2026 activation deadline, the
+    // three-month validity, or what the volume condition actually costs in
+    // lots.
     //
     // That last one is the article. Every affiliate page in Turkish for
     // this campaign prints "%30 BONUS" and stops. The condition is 30% of
@@ -89,7 +96,7 @@ export const blogPosts: BlogPost[] = [
           "Promosyon kodu: NONSTOPBONUS (yatırım sırasında girilmezse yatırım kampanyaya dahil olmaz)",
           "İlk yatırım: 1.000 USD ve üzeri → %30 bonus",
           "İkinci yatırım: 300 USD ve üzeri → %15 bonus",
-          "Uygun hesaplar: CENT ve CLASSIC. ECN hesapları ve Pips Back sistemiyle açılan hesaplar kampanya dışında",
+          "Uygun hesaplar: yalnızca Klasik (Classic). ECN ve Pips Back hesapları kampanya dışında",
           "Bonusun bakiyeye geçme şartı: bonus tutarının %30'u kadar lot hacmi ve en az 50 işlem",
           "Bonus geçerlilik süresi: bonusun yatırıldığı tarihten itibaren 3 ay",
           "Promosyon kodunun aktive edilebileceği son tarih: 26.09.2026",
@@ -111,7 +118,7 @@ export const blogPosts: BlogPost[] = [
       {
         paragraphs: [
           "90 lot EURUSD, yaklaşık 9 milyon dolarlık nominal işlem hacmi demek. Bunu tek seferde değil, aylara yayılmış onlarca işlemle yaparsınız; ama yine de bu, ayda birkaç işlem açan bir yatırımcının 3 ay içinde ulaşabileceği bir sayı değil. Kampanyanın kimin için tasarlandığı tam olarak burada belli oluyor.",
-          "Bir de para birimi çevrimi var: bir enstrümanın bir puanının değeri EURUSD'nin bir puanından farklıysa, o enstrümanda yapılan hacim EURUSD hacmine çevrilerek sayılıyor. Cent hesaplarında ise hacim 100 katı ölçekle değerlendiriliyor. Yani \"90 lot\" rakamı EURUSD üzerinden bir referans; altında veya endekste işlem yapıyorsanız sayılan hacim farklı çıkar.",
+          "Bir de para birimi çevrimi var: bir enstrümanın bir puanının değeri EURUSD'nin bir puanından farklıysa, o enstrümanda yapılan hacim EURUSD hacmine çevrilerek sayılıyor. Yani \"90 lot\" rakamı EURUSD üzerinden bir referans; altında veya endekste işlem yapıyorsanız sayılan hacim farklı çıkar.",
         ],
       },
       {
@@ -165,7 +172,7 @@ export const blogPosts: BlogPost[] = [
           "Kampanyaya katılmak beş adım; üçüncüsü atlanırsa yatırım kampanyaya hiç girmez.",
         ],
         list: [
-          "CENT veya CLASSIC hesap açın; ECN ve Pips Back hesapları kampanya dışında.",
+          "Klasik (Classic) hesap açın; kampanya yalnızca Klasik hesaplarda geçerli, ECN ve Pips Back hesapları dışarıda.",
           "Yatırım ekranında NONSTOPBONUS promosyon kodunu girin — kod girilmeden yapılan yatırım kampanyaya dahil edilmez.",
           "İlk yatırımı 1.000 USD ve üzeri yapın (%30), ikinciyi 300 USD ve üzeri yapın (%15).",
           "Bonus tutarının %30'u kadar lot hacmini ve en az 50 işlemi, bonusun yatırıldığı tarihten itibaren 3 ay içinde tamamlayın.",
@@ -196,7 +203,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         q: "Bonus için kaç lot işlem yapmam gerekiyor?",
-        a: "Gereken lot, bonus tutarının 0,30 ile çarpımıdır. 300 USD bonus için 90 lot, 900 USD bonus için 270 lot, 45 USD bonus için 13,5 lot. Bir enstrümanın puan değeri EURUSD'den farklıysa hacim EURUSD'ye çevrilerek sayılır; Cent hesaplarında hacim 100 katı ölçekle değerlendirilir.",
+        a: "Gereken lot, bonus tutarının 0,30 ile çarpımıdır. 300 USD bonus için 90 lot, 900 USD bonus için 270 lot, 45 USD bonus için 13,5 lot. Bir enstrümanın puan değeri EURUSD'den farklıysa hacim EURUSD'ye çevrilerek sayılır.",
       },
       {
         q: "Hangi işlemler bonus hacmine sayılmaz?",
@@ -204,7 +211,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         q: "Non-Stop Bonus hangi hesap türlerinde geçerli?",
-        a: "CENT ve CLASSIC hesaplar kampanyaya katılabilir. ECN hesapları ve Pips Back sistemiyle açılan hesaplar kampanya dışındadır. Bonuslu hesaplar ayrıca sosyal işlem sisteminde trader hesabı olarak kaydedilemez.",
+        a: "Kampanya yalnızca Klasik (Classic) hesaplarda geçerlidir. ECN ve Pips Back sistemiyle açılan hesaplar kampanya dışındadır. Bonuslu hesaplar ayrıca sosyal işlem sisteminde trader hesabı olarak kaydedilemez.",
       },
       {
         q: "Para çekersem bonusum ne olur?",

@@ -75,7 +75,7 @@ export default function RegulatorBadges() {
       <div className="mx-auto max-w-6xl px-6 py-20">
         <Reveal className="max-w-2xl">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-            Denetim
+            {tr("Denetim")}
           </span>
           <h2 className="mt-3 font-display text-3xl font-semibold text-text-on-ink md:text-4xl">
             {tr("Çapraz kontrol ettiğimiz regülatörler")}

@@ -61,7 +61,9 @@ export default function BrokerCard({ broker }: { broker: Broker }) {
                 <span className="notranslate">{broker.name}</span>
               </h3>
               <p className="mt-1 truncate text-sm text-text-muted">
-                En iyi {broker.bestFor.charAt(0).toLowerCase() + broker.bestFor.slice(1)}
+                {trf("En iyi {what}", {
+                  what: broker.bestFor.charAt(0).toLowerCase() + broker.bestFor.slice(1),
+                })}
               </p>
               <div className="mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-1">
                 <div className="flex gap-0.5" aria-hidden="true">

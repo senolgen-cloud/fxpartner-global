@@ -114,7 +114,7 @@ export const resourceLinks: {
     group: "Araçlar ve Güven",
   },
   {
-    href: "/complaint",
+    href: "/forex-sikayetleri",
     label: "Şikayet",
     description: "Bir brokerla ilgili sorun bildirin",
     group: "Araçlar ve Güven",

@@ -562,7 +562,7 @@ automation: "active",
       "src/app/[locale]/terms",
       "src/app/[locale]/privacy",
       "src/app/[locale]/blacklist",
-      "src/app/[locale]/complaint",
+      "src/app/[locale]/forex-sikayetleri",
       // Akif Tuncel'in görev tanımı zaten bunları anıyordu; departman
       // dosyalara sahip değildi.
       "src/lib/consent.ts",

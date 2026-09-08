@@ -188,7 +188,7 @@ const GROUPS: Group[] = [
     links: [
       { href: "/blog", label: "Blog", icon: "blog" },
       { href: "/blacklist", label: "Risk Uyarıları", icon: "warning" },
-      { href: "/complaint", label: "Şikayet Bildir", icon: "complaint" },
+      { href: "/forex-sikayetleri", label: "Şikayet Bildir", icon: "complaint" },
       { href: "/about", label: "Hakkımızda", icon: "info" },
     ],
   },

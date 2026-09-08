@@ -47,7 +47,7 @@ export async function GET() {
   lines.push(
     `- [Haber Bülteni](${SITE_URL}/haber-bulteni): Turkish-language daily news bulletin — original synthesis of the day's market-moving headlines from multiple publishers, credited by name at the bottom of each bulletin rather than linked out to directly.`
   );
-  lines.push(`- [File a Complaint](${SITE_URL}/complaint): Submit a documented complaint about a broker.`);
+  lines.push(`- [File a Complaint](${SITE_URL}/forex-sikayetleri): Submit a documented complaint about a broker.`);
   lines.push(
     `- [Regulation Report](${SITE_URL}/raporlar/forex-broker-duzenleme-raporu): Turkish-language, auto-computed report on Tier-1/offshore license distribution and category breakdown across all ${reviewedCount} reviewed brokers — recomputed from the same data on every request, not a hand-maintained statistic.`
   );

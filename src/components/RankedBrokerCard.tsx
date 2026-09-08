@@ -141,7 +141,9 @@ function CardBody({
                 </span>
               </h3>
               <p className="mt-1 truncate text-sm text-text-on-ink-muted">
-                En iyi {broker.bestFor.charAt(0).toLowerCase() + broker.bestFor.slice(1)}
+                {trf("En iyi {what}", {
+                  what: broker.bestFor.charAt(0).toLowerCase() + broker.bestFor.slice(1),
+                })}
               </p>
               <div className="mt-2">
                 <RatingRow broker={broker} reviewStats={reviewStats} />

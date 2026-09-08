@@ -140,7 +140,7 @@ export default function HeroEcosystemMockups({
       {/* Forex Signals */}
       <Link href="/signals" className="block h-full transition-opacity hover:opacity-90">
         <CardShell
-          label="Forex Sinyalleri"
+          label={tr("Forex Sinyalleri")}
           icon={
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
               <circle cx="12" cy="12" r="2.2" />

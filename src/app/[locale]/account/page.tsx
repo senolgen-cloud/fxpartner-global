@@ -467,7 +467,7 @@ export default async function AccountPage({
             {myComplaints.length === 0 ? (
               <p className="mt-4 text-sm text-text-on-ink-muted">
                 {tr("Henüz bir şikayet göndermediniz. Bir brokerla ilgili sorun mu yaşıyorsunuz?")}{" "}
-                <Link href="/complaint" className="text-signal hover:text-signal-strong">
+                <Link href="/forex-sikayetleri" className="text-signal hover:text-signal-strong">
                   {tr("Şikayet gönderin")}
                 </Link>
                 .

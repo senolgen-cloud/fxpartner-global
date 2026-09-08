@@ -21,6 +21,17 @@ const nextConfig: NextConfig = {
       // only here so a URL people read off a picture resolves.
       { source: "/akademi", destination: "/egitim", permanent: true },
       { source: "/:locale(tr|en|ua|ar)/akademi", destination: "/:locale/egitim", permanent: true },
+
+      // /complaint moved to /forex-sikayetleri: the audience searches
+      // "forex şikayet", and the URL is the part of a search result they
+      // read before the title. The old path is indexed and linked from
+      // creative, so it resolves permanently rather than 404ing.
+      { source: "/complaint", destination: "/forex-sikayetleri", permanent: true },
+      {
+        source: "/:locale(tr|en|ua|ar)/complaint",
+        destination: "/:locale/forex-sikayetleri",
+        permanent: true,
+      },
     ];
   },
 };

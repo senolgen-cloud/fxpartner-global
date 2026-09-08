@@ -1,5 +1,6 @@
 "use client";
 import { useTr, useTrf } from "@/components/useTr";
+import { useLocalizedData } from "@/components/useLocalizedData";
 import Link from "@/components/LocaleLink";
 import { getLiveCashbackProgram } from "@/data/cashback";
 import { brokers } from "@/data/brokers";
@@ -22,7 +23,10 @@ export default function HeroCashbackForm() {
   const tr = useTr();
   const trf = useTrf();
   const [state, formAction, pending] = useActionState(submitCashbackLead, initialState);
-  const program = getLiveCashbackProgram(LIVE_SLUG);
+  // The programme's own words go through the translator too. Without
+  // this the Arabic heading read as an Arabic sentence with a Turkish
+  // rate ("%50'ye kadar nakit iade") spliced into the middle of it.
+  const program = useLocalizedData(getLiveCashbackProgram(LIVE_SLUG));
   const brokerName = brokers.find((b) => b.slug === LIVE_SLUG)?.name ?? LIVE_SLUG;
 
   return (
@@ -77,7 +81,12 @@ export default function HeroCashbackForm() {
           </p>
 
           <form action={formAction} className="mt-6 flex flex-col gap-3.5">
-            <input name="fullName" placeholder="Ad Soyad" required className={fieldClass} />
+            <input
+              name="fullName"
+              placeholder={tr("Ad Soyad")}
+              required
+              className={fieldClass}
+            />
             <input
               name="phone"
               type="tel"
@@ -87,7 +96,7 @@ export default function HeroCashbackForm() {
             <input
               name="email"
               type="email"
-              placeholder="E-posta adresi"
+              placeholder={tr("E-posta adresi")}
               required
               className={fieldClass}
             />
@@ -117,7 +126,7 @@ export default function HeroCashbackForm() {
               disabled={pending}
               className="lift-on-hover mt-1 rounded-full bg-gradient-to-b from-signal to-signal-strong px-6 py-3 text-sm font-medium text-on-signal shadow-[inset_0_1px_0_0_rgba(255,255,255,0.25)] transition-shadow hover:shadow-lg hover:shadow-signal/30 disabled:opacity-60"
             >
-              {pending ? "Gönderiliyor…" : "Cashback'imi Al"}
+              {pending ? tr("Gönderiliyor…") : tr("Cashback'imi Al")}
             </button>
           </form>
 
