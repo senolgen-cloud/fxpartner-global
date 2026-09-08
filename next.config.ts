@@ -32,6 +32,21 @@ const nextConfig: NextConfig = {
         destination: "/:locale/forex-sikayetleri",
         permanent: true,
       },
+
+      // The Non-Stop Bonus piece gained a year in its slug for the "2026"
+      // queries. It had been live for about an hour and the Telegram
+      // announcement links to the old address, so that address keeps
+      // resolving rather than 404ing on everyone who taps the post.
+      {
+        source: "/blog/litefinance-non-stop-bonus-sartlari",
+        destination: "/blog/litefinance-non-stop-bonus-2026",
+        permanent: true,
+      },
+      {
+        source: "/:locale(tr|en|ua|ar)/blog/litefinance-non-stop-bonus-sartlari",
+        destination: "/:locale/blog/litefinance-non-stop-bonus-2026",
+        permanent: true,
+      },
     ];
   },
 };

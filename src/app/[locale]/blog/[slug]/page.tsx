@@ -148,7 +148,19 @@ export default async function BlogPostPage({
           <div className="mx-auto flex max-w-[68rem] justify-center gap-8">
             <article className="w-full max-w-3xl px-6 py-16">
               {post.coverImage && (
-                <div className="relative mb-12 aspect-square w-full overflow-hidden rounded-2xl border border-hairline-light">
+                // The box takes the artwork's own shape when the post states
+                // it, and falls back to square — which is what the house
+                // covers are drawn at. Without this a wide cover was cropped
+                // to a square and lost its sides.
+                <div
+                  className="relative mb-12 w-full overflow-hidden rounded-2xl border border-hairline-light"
+                  style={{
+                    aspectRatio:
+                      post.coverWidth && post.coverHeight
+                        ? `${post.coverWidth} / ${post.coverHeight}`
+                        : "1 / 1",
+                  }}
+                >
                   <Image
                     src={post.coverImage}
                     alt={post.title}

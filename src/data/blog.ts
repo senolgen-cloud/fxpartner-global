@@ -12,6 +12,12 @@ export interface BlogPost {
   updatedAt?: string;
   readingMinutes: number;
   coverImage?: string;
+  // The cover's real pixel size. Optional: without it the cover renders in
+  // a square box, which is what the 1024x1024 house covers want. Set both on
+  // any cover that is not square, or object-cover crops it to a square and
+  // takes the sides off.
+  coverWidth?: number;
+  coverHeight?: number;
   // A genuine language signal for crawlers/screen readers/translate
   // tooling — used to set <main lang="..."> on the post page, since the
   // rest of the site (and the <html> default) is English. Omit for
@@ -70,8 +76,10 @@ export const blogPosts: BlogPost[] = [
     //
     // Numbers to re-check when the campaign is renewed: the activation
     // deadline, the percentages, and whether a cap appears in the terms.
-    slug: "litefinance-non-stop-bonus-sartlari",
+    slug: "litefinance-non-stop-bonus-2026",
     coverImage: "/campaigns/litefinance-nonstop-bonus.png",
+    coverWidth: 1672,
+    coverHeight: 941,
     lang: "tr",
     adBrokerSlug: "lite-finance",
     title:
@@ -374,6 +382,8 @@ export const blogPosts: BlogPost[] = [
     publishedAt: "2026-08-26",
     readingMinutes: 9,
     coverImage: "/blog/nilufer-litefinance.png",
+    coverWidth: 1536,
+    coverHeight: 1024,
     lang: "tr",
     adBrokerSlug: "lite-finance",
     sections: [
