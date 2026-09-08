@@ -41,6 +41,55 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-08-1400",
+    title: "FXPARTNER Piyasa Özeti | 08.09.2026 Öğleden Sonra Güncellemesi",
+    excerpt:
+      "Salı günü Orta Doğu'da tırmanma yeniden hız kazandı: Yemen'deki İran destekli Husi hareketi, Suudi Arabistan'ın güneyinde Aramco'ya ait Necran, Abha ve Cizan'daki enerji tesisleri ile Hamis Muşeyt Hava Üssü'nü ve Abha Uluslararası Havalimanı'nı füze ve insansız hava araçlarıyla vurduğunu duyurdu; Suudi makamları saldırılarda 73 kişinin yaralandığını açıkladı. Gelişme sonrası Brent petrol %1,5 yükselişle altı haftanın zirvesi olan 98,47 dolara çıkarken, BIST 100 endeksi Orta Doğu kaynaklı risk algısıyla gün ortasında %0,35 düşüşle 14.102,43 puana geriledi. Dolar/TL 48,46 TL sınırındaki seyrini korurken, ons altın sabahki kazanımlarının bir kısmını geri vererek %0,1 düşüşle 4.402 dolar civarına indi.",
+    publishedAt: "2026-09-08",
+    readingMinutes: 3,
+    intro:
+      "Salı öğleden sonra piyasaların gündemine Orta Doğu'da yeniden hızlanan tırmanma damga vurdu: Yemen'deki İran destekli Husi hareketinin askeri sözcüsü Tuğgeneral Yahya Saree, Suudi Arabistan'ın güneyinde onlarca balistik füze ve insansız hava aracıyla düzenledikleri saldırıda devlete ait petrol devi Aramco'nun Necran, Abha ve Cizan'daki tesislerini, Hamis Muşeyt Hava Üssü'nü ve Abha Uluslararası Havalimanı'nı vurduklarını duyurdu; Suudi Basın Ajansı (SPA) saldırılarda 73 kişinin yaralandığını, bazı tesislerde çıkan yangınlar nedeniyle operasyonların geçici olarak durdurulduğunu açıkladı. Husiler, saldırıyı Suudi Arabistan'ın son günlerdeki hava operasyonlarına karşılık olarak nitelendirirken 'gerilimi azaltma döneminin sona erdiğini' duyurdu. Gelişme, enerji arzına yönelik endişeleri tazeleyerek Brent petrolün Londra'da %1,5 yükselişle altı haftanın zirvesi olan 98,47 dolara çıkmasına yol açtı; BIST 100 endeksi de bu risk algısıyla gün ortasında (saat 13.00 itibarıyla) önceki kapanışa göre 49,15 puan ve %0,35 düşüşle 14.102,43 puana geriledi, teknoloji ve bilişim hisseleri en çok değer kaybeden sektörler oldu. Döviz tarafında dolar/TL öğle saatlerinde 48,46 TL sınırındaki tarihi zirve seyrini korurken, euro/TL uluslararası parite hareketleriyle 56,32 TL'ye geriledi; ons altın ise sabahki %0,6'lık yükselişinin ardından öğle saatlerinde hafif geri çekilerek %0,1 düşüşle 4.402 dolar civarına indi, yurt içinde gram altın da 6.853-6.854 TL bandına geriledi. Haftanın odağı 10 Eylül'deki TCMB kararı ve 11 Eylül'deki ABD TÜFE verisinde olmaya devam ediyor.",
+    news: [
+      {
+        icon: "🎯",
+        heading: "Husiler Suudi Arabistan'ın Enerji Tesislerini Vurdu: 73 Yaralı",
+        body: "Yemen'deki İran destekli **Husi hareketinin** askeri sözcüsü Tuğgeneral **Yahya Saree**, Salı günü Suudi Arabistan'ın güneyinde onlarca **balistik füze ve insansız hava aracıyla** düzenledikleri saldırıda, devlete ait petrol devi **Aramco**'nun **Necran, Abha ve Cizan**'daki tesislerini, **Hamis Muşeyt Hava Üssü**'nü ve **Abha Uluslararası Havalimanı**'nı hedef aldıklarını duyurdu. **Suudi Basın Ajansı (SPA)**, saldırılarda **73 kişinin yaralandığını** ve bazı tesislerde çıkan yangınlar nedeniyle operasyonların geçici olarak durdurulduğunu, uzman ekiplerin yangınları kontrol altına almaya çalıştığını açıkladı. Saree, saldırıyı Suudi Arabistan'ın son günlerdeki hava operasyonlarına karşılık olarak nitelendirirken **\"gerilimi azaltma döneminin sona erdiğini\"** duyurdu.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Brent Petrol Altı Haftanın Zirvesinde: 98,47 Dolar",
+        body: "**Brent petrol**, Hürmüz Boğazı'ndaki arz güvenliği endişelerinin Husilerin Suudi enerji tesislerine yönelik saldırısıyla derinleşmesinin ardından Salı günü **%1,5** yükselişle **98,47 dolara** çıkarak **altı haftanın zirvesini** gördü; petrol bir önceki gün **97,31 dolardan** kapanmıştı. Yükselişte, Hürmüz üzerinden ticari gemi geçişlerinin son günlerde belirgin şekilde gerilemesi ve bölgeden küresel piyasalara ulaşan petrol akışında daha büyük bir kesinti ihtimalinin fiyatlanması da etkili oldu.",
+      },
+      {
+        icon: "📉",
+        heading: "BIST 100 Orta Doğu Riskiyle Gün Ortasında Geriledi: 14.102,43 Puan",
+        body: "**BIST 100 endeksi**, Orta Doğu'daki jeopolitik risklerin ve petrol fiyatlarındaki yükselişin etkisiyle Salı günü **saat 13.00** itibarıyla önceki kapanışa göre **49,15 puan (%0,35)** düşüşle **14.102,43 puana** geriledi. Gün ortası itibarıyla **54 hisse** yükselirken **41 hisse** değer kaybetti; sektör endeksleri arasında en çok kaybeden **%2,54** ile bilişim ve **%1,63** ile teknoloji hisseleri olurken, **%1,48** ile gayrimenkul yatırım ortaklıkları endeksi en çok kazandıran sektör oldu.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar/TL Zirvede Yatay, Ons Altın Öğle Saatlerinde Geriledi",
+        body: "**Dolar/TL**, öğle saatlerinde **48,46 TL** civarındaki sabahki tarihi zirve seyrini korurken, saat **13.00** itibarıyla **48,4598 TL**'den satılıyordu; **euro/TL** ise uluslararası **euro/dolar paritesinin 1,1614**'e gerilemesiyle **56,32 TL**'ye indi. **Ons altın (XAU/USD)**, sabah saatlerindeki **%0,6**'lık yükselişinin ardından öğle saatlerinde **%0,1** düşüşle **4.402 dolar** civarına geriledi; yurt içinde **gram altın** da **BigPara** verilerine göre saat **13.31** itibarıyla **6.853-6.854 TL** bandında işlem gördü.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "Beklenti anketine katılan 20 ekonomistin 18'i politika faizinin %37'de sabit tutulmasını, 2'si ise 100 baz puan indirim yapılmasını bekliyor.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; Fed'in 15-16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-08-0900",
     title: "FXPARTNER Piyasa Özeti | 08.09.2026 Sabah Güncellemesi",
     excerpt:
