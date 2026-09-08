@@ -41,6 +41,60 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-08-2100",
+    title: "FXPARTNER Piyasa Özeti | 08.09.2026 Gece Güncellemesi",
+    excerpt:
+      "Salı günü öğleden sonra Orta Doğu kaynaklı satış baskısıyla %0,35 gerileyen BIST 100 endeksi, bankacılık hisselerinin öncülüğünde sert bir toparlanmayla günü %1,79 yükselişle 14.405,25 puandan tamamladı; BIST 30 endeksi de %1,73 artışla günü kapattı. Suudi Arabistan öncülüğündeki Arap Koalisyonu, sabah saatlerinde 73 kişinin yaralandığı Husi saldırılarına karşı gerekli operasyonel önlemleri alacağını açıkladı. Akşam saatlerinde Brent petrol 98,47 dolarlık zirvesinden 97 dolar civarına, ons altın ise %1,10 düşüşle 4.395 dolara geriledi; dolar/TL 48,46 TL civarında dengeli seyretti.",
+    publishedAt: "2026-09-08",
+    readingMinutes: 3,
+    intro:
+      "Salı akşamı piyasaların gündemine, öğleden sonra Orta Doğu kaynaklı satış baskısıyla değer kaybeden BIST 100 endeksinin bankacılık hisselerinin öncülüğünde sert bir toparlanmayla günü yükselişle kapatması damga vurdu: endeks günü **253,66 puan (%1,79)** artışla **14.405,25** puandan tamamlarken, **BIST 30 endeksi de %1,73** yükselişle günü tamamladı; toplam işlem hacmi **254,6 milyar TL**'ye ulaştı. Aynı saatlerde Suudi Arabistan öncülüğündeki Arap Koalisyonu Sözcüsü Tuğgeneral **Turki el-Maliki**, sabah saatlerinde 73 kişinin yaralandığı Husi saldırılarına ilişkin sert bir açıklama yaparak koalisyon güçlerinin gerekli tüm operasyonel önlemleri alacağını duyurdu. Emtia ve döviz tarafında ise günün ilk yarısındaki hareketlerin bir kısmı akşama doğru geri alındı: **Brent petrol**, sabahki **98,47 dolarlık** zirvesinden **97 dolar** civarına gerilerken, **ons altın** akşam saatlerinde **%1,10** düşüşle **4.395 dolara** indi ve yurt içinde gram altın da benzer bir geri çekilme sergiledi; **dolar/TL** ise akşam saatlerinde **48,46 TL** civarında dengeli bir seyir izledi. Haftanın odağı 10 Eylül'deki TCMB kararı ve 11 Eylül'deki ABD TÜFE verisinde olmaya devam ediyor.",
+    news: [
+      {
+        icon: "📈",
+        heading: "BIST 100 Sert Toparlanmayla Günü Yükselişle Kapattı: 14.405,25 Puan",
+        body: "Salı günü öğle saatlerinde Orta Doğu kaynaklı satış baskısıyla **%0,35** gerileyen **BIST 100 endeksi**, günü **253,66 puan (%1,79)** artışla **14.405,25** puandan tamamladı; gün içinde **14.075,91-14.405,25** puan bandında hareket etti ve toplam işlem hacmi **254,6 milyar TL**'ye ulaştı. Yükselişte **bankacılık endeksinin %4,32** ile öncülük ettiği rallide **BIST 30 endeksi de %1,73** artışla yaklaşık **16.731** puandan kapanırken, sektör endeksleri arasında **bilişim endeksi %2,39** ile en çok değer kaybeden oldu.",
+      },
+      {
+        icon: "🛡️",
+        heading: "Arap Koalisyonu'ndan Husi Saldırılarına Sert Tepki",
+        body: "Suudi Arabistan öncülüğündeki Arap Koalisyonu Sözcüsü Tuğgeneral **Turki el-Maliki**, Husilerin Ebha, Hamis Muşeyt, Cizan ve Necran'daki saldırılarının **\"sorumsuzca ve düşmanca bir tavrı\"** yansıttığını belirterek, koalisyon güçlerinin saldırıları bertaraf etmek ve bu tutuma karşı kararlılıkla karşılık vermek için gerekli tüm **\"operasyonel\"** önlemleri alacağını açıkladı. Açıklama, sabah saatlerinde **73 kişinin yaralandığı** saldırının ardından geldi.",
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın Akşam Saatlerinde Geri Çekilmesini Derinleştirdi",
+        body: "**XAU/USD**, sabah saatlerindeki yükselişinin ardından akşam saatlerine doğru **%1,10** düşüşle **4.395 dolar** civarına geriledi. Yurt içinde **gram altın**, sabah **6.910-6.921 TL** bandına kadar çıktıktan sonra akşam saatlerinde **Kapalıçarşı**'da **6.780,66-6.861,09 TL** bandına indi; **çeyrek altın** ise **11.060-11.194 TL** aralığında işlem gördü.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Brent Petrol Kapanışta Kazanımlarının Bir Kısmını Geri Verdi",
+        body: "**Brent petrol**, Husi saldırılarının ardından gün içinde **%1,5** yükselişle **98,47 dolara** kadar çıktıktan sonra akşam saatlerinde kazanımlarının bir kısmını geri vererek **97 dolar/varil** civarına geriledi.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar/TL Akşam Saatlerinde 48,46 TL'de Dengelendi",
+        body: "**Dolar/TL**, gün içinde **48,50 TL**'yi test ettikten sonra akşam saat **17.40** itibarıyla **48,4613 TL**'den işlem görürken, **euro/TL 56,40 TL** satış fiyatına ulaştı.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "Beklenti anketine katılan 20 ekonomistin 18'i politika faizinin %37'de sabit tutulmasını, 2'si ise 100 baz puan indirim yapılmasını bekliyor.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; Fed'in 15-16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-08-1400",
     title: "FXPARTNER Piyasa Özeti | 08.09.2026 Öğleden Sonra Güncellemesi",
     excerpt:
