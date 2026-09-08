@@ -41,6 +41,55 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-08-0900",
+    title: "FXPARTNER Piyasa Özeti | 08.09.2026 Sabah Güncellemesi",
+    excerpt:
+      "Salı sabahı dolar/TL, küresel çapta dolar zayıflarken bile 48,46 TL ile tarihi zirvesini yeniden tazeledi; euro/TL 57,38 TL'ye, sterlin/TL ise 65,66 TL'ye yaklaştı. Ons altın %0,6 yükselişle 4.429,89 dolara çıkarken yurt içinde gram altın 6.900 TL'nin üzerine yerleşti. TCMB'nin 10 Eylül'deki kararına iki gün kala ekonomistlerin büyük çoğunluğu politika faizinin %37'de sabit kalmasını bekliyor. İran'da ise eski Cumhurbaşkanı Hasan Ruhani'nin Hürmüz Boğazı'nı 'canlandırma' ve savaşı 'onurla' bitirme çağrısı, ülke içinde sert eleştirilere yol açtı.",
+    publishedAt: "2026-09-08",
+    readingMinutes: 3,
+    intro:
+      "Salı sabahı piyasaların gündemine dolar/TL'deki yeni tarihi zirve damga vurdu: kur, küresel çapta doların zayıflamasına ve Dolar Endeksi'nin (DXY) 98,815 puana gerilemesine rağmen 48,46 TL seviyesine çıkarak rekorunu bir kez daha tazeledi; euro/TL 57,38 TL'ye, sterlin/TL ise 65,66 TL sınırına yaklaştı. Altın tarafında ise ons altın, doların uluslararası düzeyde değer kaybetmesinin desteğiyle %0,6 yükselişle 4.429,89 dolara çıktı ve yurt içinde gram altın 6.900 TL'nin üzerine yerleşti; piyasaların gözü Perşembe günkü ABD ÜFE ve Cuma günkü ABD TÜFE verilerinde, zira bu veriler Fed'in 16 Eylül'deki faiz kararına dair son büyük ipuçlarını verecek. Yurt içinde ise TCMB'nin 10 Eylül'deki Para Politikası Kurulu toplantısına iki gün kala yapılan beklenti anketinde ekonomistlerin büyük çoğunluğu politika faizinin %37'de sabit tutulmasını öngörüyor. Jeopolitik cephede ise eski Cumhurbaşkanı Hasan Ruhani'nin Hürmüz Boğazı'nın yeniden 'canlandırılması' gerektiği ve savaşın 'onurla' bitirilip kamuoyuna danışılması çağrısı, İran'ın siyasi çevrelerinde ülkenin caydırıcılık kozunun zımnen terk edildiği yönünde sert eleştirilere yol açtı.",
+    news: [
+      {
+        icon: "💵",
+        heading: "Dolar/TL Tarihi Zirveyi Yeniden Tazeledi: 48,46 TL",
+        body: "**Dolar/TL**, küresel çapta doların zayıflamasına rağmen Salı sabahı **48,46 TL** seviyesine çıkarak **tarihi zirvesini** bir kez daha tazeledi; kur gün içinde **48,43-48,47 TL** bandında hareket etti ve bir önceki kapanış olan **48,425 TL**'nin üzerine çıktı. Aynı saatlerde **euro/TL 57,38 TL**'ye yükselirken, **sterlin/TL** ise **65,66 TL** sınırını test etti. **Dolar Endeksi (DXY)** ise uluslararası piyasalarda **98,815** puana gerileyerek doların küresel çapta zayıfladığına işaret etti.",
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın %0,6 Yükseldi, Gram Altın 6.900 TL Üzerinde",
+        body: "**XAU/USD**, doların uluslararası düzeyde zayıflamasının desteğiyle Salı sabahı **%0,6** artışla **4.429,89 dolara** yükseldi; ons altın gün içinde **4.404-4.443 dolar** bandında hareket etti. Yurt içinde **gram altın**, sabah saatlerinde **6.909-6.918 TL** seviyesinde işlem görürken, **çeyrek altın 11.259 TL**'den, **yarım altın** ise **22.481 TL**'den alıcı buluyor.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "TCMB Kararına 2 Gün Kala: Ekonomistlerin Büyük Çoğunluğu 'Sabit' Bekliyor",
+        body: "**TCMB Para Politikası Kurulu**'nun **10 Eylül** Perşembe günü saat **14.00**'te açıklayacağı faiz kararına ilişkin yapılan beklenti anketinde, tahmin veren **20 ekonomistin 18'i** haftalık repo faizinin **%37**'de **sabit tutulmasını** beklerken, **2 ekonomist** ise **100 baz puanlık bir indirime** gidilebileceği görüşünde. TCMB, temmuz ayındaki son toplantısında politika faizini **%37**'de sabit bırakmıştı.",
+      },
+      {
+        icon: "🇮🇷",
+        heading: "Ruhani'nin Hürmüz Çağrısına İran'da Sert Tepki",
+        body: "Eski Cumhurbaşkanı **Hasan Ruhani**, Hürmüz Boğazı'nın yeniden **'canlandırılması'** gerektiğini ve İran'ın küresel ticareti aksatmak istemediğini belirterek **\"Gemisiz bir boğaz ne işe yarar?\"** ifadelerini kullandı; Ruhani ayrıca savaşın **'onurla'** bitirilmesi ve sürecin kamuoyuna danışılması çağrısında bulundu. Açıklamalar, İran'ın siyasi çevrelerinde boğazın geçiş ve sevkiyat kontrolündeki kararlı tutumunun zımnen eleştirildiği ve ülkenin **caydırıcılık kozunun** zayıflatıldığı yönünde sert tepkilere yol açtı.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "Beklenti anketine katılan 20 ekonomistin 18'i politika faizinin %37'de sabit tutulmasını, 2'si ise 100 baz puan indirim yapılmasını bekliyor.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; Fed'in 15-16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-07-2100",
     title: "FXPARTNER Piyasa Özeti | 07.09.2026 Gece Güncellemesi",
     excerpt:
