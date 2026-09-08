@@ -30,7 +30,7 @@ export const GET = withCronErrorAlert("campaign-digest", async (req: NextRequest
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const campaigns = brokers.filter((b) => b.promotion);
+  const campaigns = brokers.filter((b) => b.promotions?.length);
   if (campaigns.length === 0) {
     return NextResponse.json({ ok: true, posted: false, reason: "no active campaigns" });
   }
@@ -53,7 +53,12 @@ export const GET = withCronErrorAlert("campaign-digest", async (req: NextRequest
   const lines = campaigns.map((b) => {
     const cashback = getCashbackProgram(b.slug);
     const cashbackLine = cashback ? `\nCashback: ${cashback.rateLabel}` : "";
-    return `<b>${b.name}</b> — ${b.promotion!.tag}: ${b.promotion!.title}${cashbackLine}`;
+    // One line per campaign, not per broker — a broker running two would
+    // otherwise have the second one silently dropped from the digest.
+    const promos = b
+      .promotions!.map((p) => `${p.tag}: ${p.title}`)
+      .join("\n");
+    return `<b>${b.name}</b> — ${promos}${cashbackLine}`;
   });
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global";

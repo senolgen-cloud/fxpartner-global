@@ -2871,5 +2871,6 @@
   "Açık pozisyon yok": "No open positions",
   "Bir sonraki işlem açıldığı anda, saniyesinde burada.": "The next trade appears here the second it opens.",
   "Beklerken bakılacak bir şey var: kapanmış işlemlerin tamamı aşağıda duruyor — kazançlar da, kayıplar da.": "There is something to read while you wait: every closed trade is below — the wins and the losses alike.",
-  "Kapanan işlemlere bak": "See the closed trades"
+  "Kapanan işlemlere bak": "See the closed trades",
+  "{count} aktif kampanya": "{count} active campaigns"
 }

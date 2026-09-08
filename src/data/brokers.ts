@@ -1,3 +1,25 @@
+/** One campaign a broker is running. See Broker.promotions. */
+export interface Promotion {
+  tag: string;
+  title: string;
+  intro: string;
+  steps: string[];
+  note: string;
+  contactEmail?: string;
+  // Optional designed creative for this campaign (e.g. a stats/announcement
+  // banner), shown above the campaign copy on /campaigns. Falls back to the
+  // broker logo + text layout when omitted, same as adImage does for
+  // BrokerAdBanner.
+  image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  // Optional campaign-specific CTA that overrides referralUrl for this
+  // promotion's primary button — e.g. an existing-client panel login link
+  // instead of the standard new-account referral link.
+  ctaUrl?: string;
+  ctaLabel?: string;
+}
+
 export interface Broker {
   rank: number;
   slug: string;
@@ -42,29 +64,14 @@ export interface Broker {
   // EU entity while onboarding Turkish clients to an offshore one. The
   // formula can't see that distinction; this field spells it out.
   regulationNote?: string;
-  // An optional time-limited campaign (e.g. refer-a-friend), rendered as
-  // a highlighted banner on the broker's review page. Distinct from the
-  // standing referralUrl/partnerCode, which is always active.
-  promotion?: {
-    tag: string;
-    title: string;
-    intro: string;
-    steps: string[];
-    note: string;
-    contactEmail?: string;
-    // Optional designed creative for this campaign (e.g. a stats/announcement
-    // banner), shown above the campaign copy on /campaigns. Falls back to the
-    // broker logo + text layout when omitted, same as adImage does for
-    // BrokerAdBanner.
-    image?: string;
-    imageWidth?: number;
-    imageHeight?: number;
-    // Optional campaign-specific CTA that overrides referralUrl for this
-    // promotion's primary button — e.g. an existing-client panel login link
-    // instead of the standard new-account referral link.
-    ctaUrl?: string;
-    ctaLabel?: string;
-  };
+  // Time-limited campaigns (a refer-a-friend, a deposit bonus), rendered
+  // on /campaigns and linked from the broker's review page. Distinct from
+  // the standing referralUrl/partnerCode, which is always active.
+  //
+  // A LIST, because a broker can genuinely run more than one at a time.
+  // Order is editorial: the first entry is the one the review page and the
+  // ranked card surface when there is only room for one.
+  promotions?: Promotion[];
   // Optional designed social-share preview image for this broker's review
   // page, overriding the auto-generated opengraph-image for that route.
   ogImage?: string;
@@ -335,23 +342,25 @@ export const brokers: Broker[] = [
       education:
         "23 dilde günlük canlı webinarlar, Tradepedia video kütüphanesi, interaktif ekonomik takvim ve XM Traders Club sadakat programı (Bronz'dan Elite'e kadar seviyeler, kapanan pozisyonlarda XM Coin kazanımı).",
     },
-    promotion: {
-      tag: "Aktif Kampanya",
-      title: "XM Nakit İadesi Kampanyası — Şimdiye Kadar 17.369$ Ödendi",
-      intro:
-        "Aynı işlemler, aynı piyasa — ama neden nakit iadesi olmasın? XM Global'de FXPARTNER ortak kodu ile işlem yapan yatırımcılar bugüne kadar toplam 17.369$ nakit iadesi aldı ve iade gün sonunda hesaba geçiyor, ay sonu beklenmiyor. XM hesabın zaten varsa, avantajdan yararlanmak için mevcut hesabını kapatmana ya da işlemlerini değiştirmen gerekmiyor.",
-      steps: [
-        "FXPARTNER ortak kodu ile EK HESAP aç.",
-        "İşlemlerine bu hesap üzerinden devam et.",
-        "Hepsi bu — yaptığın işlemlerden nakit iadesi almaya başla.",
-      ],
-      note: "Kampanya koşulları değişebilir; güncel şartları katılmadan önce XM'in resmi sitesinden teyit edin. Yatırım yapmak risk içerir, sermayeniz risk altında olabilir.",
-      image: "/campaigns/XM-cashback.png",
-      imageWidth: 1672,
-      imageHeight: 941,
-      ctaUrl: "https://bit.ly/xm-panel",
-      ctaLabel: "XM Üye Paneline Giriş Yap",
-    },
+    promotions: [
+      {
+        tag: "Aktif Kampanya",
+        title: "XM Nakit İadesi Kampanyası — Şimdiye Kadar 17.369$ Ödendi",
+        intro:
+          "Aynı işlemler, aynı piyasa — ama neden nakit iadesi olmasın? XM Global'de FXPARTNER ortak kodu ile işlem yapan yatırımcılar bugüne kadar toplam 17.369$ nakit iadesi aldı ve iade gün sonunda hesaba geçiyor, ay sonu beklenmiyor. XM hesabın zaten varsa, avantajdan yararlanmak için mevcut hesabını kapatmana ya da işlemlerini değiştirmen gerekmiyor.",
+        steps: [
+          "FXPARTNER ortak kodu ile EK HESAP aç.",
+          "İşlemlerine bu hesap üzerinden devam et.",
+          "Hepsi bu — yaptığın işlemlerden nakit iadesi almaya başla.",
+        ],
+        note: "Kampanya koşulları değişebilir; güncel şartları katılmadan önce XM'in resmi sitesinden teyit edin. Yatırım yapmak risk içerir, sermayeniz risk altında olabilir.",
+        image: "/campaigns/XM-cashback.png",
+        imageWidth: 1672,
+        imageHeight: 941,
+        ctaUrl: "https://bit.ly/xm-panel",
+        ctaLabel: "XM Üye Paneline Giriş Yap",
+      },
+    ],
   },
   {
     rank: 12,
@@ -642,30 +651,52 @@ export const brokers: Broker[] = [
       education:
         "Yeni başlayanlar için adım adım rehberler, teknik ve temel analiz blogu, günlük piyasa yorumları, ekonomik takvim ve sınırsız süreli demo hesap. Kendi sosyal işlem platformu üzerinden başkalarının işlemlerini kopyalayarak veya kendi işlemlerini kopyalanmaya açarak öğrenme/gelir modeli sunar.",
     },
-    // The invite-a-friend promo this replaced is still a live Lite Finance
-    // offer, but a broker can only carry one `promotion` and the %20 margin
-    // bonus is the campaign we're actually running creative behind. If both
-    // need to show on /campaigns, the field has to become an array first.
-    promotion: {
-      tag: "FXPARTNER'a Özel",
-      title: "%20 Teminat Bonusu — Koşulsuz, Şartsız",
-      intro:
-        "FXPARTNER üzerinden açılan Lite Finance hesaplarına, yatırdığınız tutarın %20'si teminat bonusu olarak tanımlanır. Bu bir trade bonusu değildir: bakiyenize eklenip hacim şartına bağlanmaz, teminatınıza eklenir ve hesabınızın dalgalanmaya dayanma payını doğrudan büyütür. Kazancınız size aittir, hacim şartı yoktur.",
-      steps: [
-        "FXPARTNER bağlantısı üzerinden Lite Finance hesabını aç.",
-        "Hesap doğrulamanı (KYC) tamamla.",
-        "Yatırımını yap — teminat bonusu yatırdığın tutarın %20'si oranında tanımlanır.",
-        "İşlemlerine devam et; bonus teminat tarafında durur, kârın kendi bakiyende birikir.",
-      ],
-      note: "Teminat bonusu çekilebilir bir bakiye değildir; hesabın teminat tabanını büyütür ve çekim yapıldığında hesaptan düşülebilir. Bonus daha büyük pozisyon açmak için değil, mevcut pozisyonun nefes payını genişletmek için tasarlanmıştır. Kampanya koşulları değişebilir; katılmadan önce güncel şartları FXPARTNER veya Lite Finance'in Türkiye destek hattından teyit edin. Kaldıraçlı işlemler yüksek risk içerir.",
-      image: "/reklam/lite-banner-fxpartner775.png",
-      imageWidth: 1672,
-      imageHeight: 941,
-      ctaUrl: "https://bit.ly/litefinance-vip",
-      // No ctaLabel: falls back to the standard "{broker} - Siteye Git"
-      // label, which is localized and matches every other broker CTA.
-      contactEmail: "turkiye@litefinance.com",
-    },
+    // Two at once, in editorial order: the FXPARTNER-only margin bonus
+    // first because it is ours and has no volume condition, then the
+    // broker-wide Non-Stop deposit bonus, which pays more but only after
+    // fifty trades. The review page and the ranked card show the first.
+    promotions: [
+      {
+        tag: "FXPARTNER'a Özel",
+        title: "%20 Teminat Bonusu — Koşulsuz, Şartsız",
+        intro:
+          "FXPARTNER üzerinden açılan Lite Finance hesaplarına, yatırdığınız tutarın %20'si teminat bonusu olarak tanımlanır. Bu bir trade bonusu değildir: bakiyenize eklenip hacim şartına bağlanmaz, teminatınıza eklenir ve hesabınızın dalgalanmaya dayanma payını doğrudan büyütür. Kazancınız size aittir, hacim şartı yoktur.",
+        steps: [
+          "FXPARTNER bağlantısı üzerinden Lite Finance hesabını aç.",
+          "Hesap doğrulamanı (KYC) tamamla.",
+          "Yatırımını yap — teminat bonusu yatırdığın tutarın %20'si oranında tanımlanır.",
+          "İşlemlerine devam et; bonus teminat tarafında durur, kârın kendi bakiyende birikir.",
+        ],
+        note: "Teminat bonusu çekilebilir bir bakiye değildir; hesabın teminat tabanını büyütür ve çekim yapıldığında hesaptan düşülebilir. Bonus daha büyük pozisyon açmak için değil, mevcut pozisyonun nefes payını genişletmek için tasarlanmıştır. Kampanya koşulları değişebilir; katılmadan önce güncel şartları FXPARTNER veya Lite Finance'in Türkiye destek hattından teyit edin. Kaldıraçlı işlemler yüksek risk içerir.",
+        image: "/reklam/lite-banner-fxpartner775.png",
+        imageWidth: 1672,
+        imageHeight: 941,
+        ctaUrl: "https://bit.ly/litefinance-vip",
+        // No ctaLabel: falls back to the standard "{broker} - Siteye Git"
+        // label, which is localized and matches every other broker CTA.
+        contactEmail: "turkiye@litefinance.com",
+      },
+      {
+        tag: "Lite Finance Kampanyası",
+        title: "Non-Stop Bonus — İlk yatırıma %30, ikinciye %15",
+        intro:
+          "Lite Finance'in Non-Stop Bonus kampanyasında 1.000 USD ve üzeri ilk yatırımınıza %30, 300 USD ve üzeri ikinci yatırımınıza %15 bonus tanımlanır (üst sınırlar: sırasıyla 30.000 USD ve 4.000 USD). Bu bir işlem bonusudur, teminat bonusu değildir: hesabınıza tanımlanır ama bakiyenize geçmesi için kampanyanın işlem hacmi şartını ve en az 50 işlemi tamamlamanız gerekir. Yatırım sırasında promosyon kodunu girmeyi unutmayın.",
+        steps: [
+          "FXPARTNER bağlantısı üzerinden Lite Finance Klasik hesabını aç — kampanya yalnızca Klasik hesaplarda geçerli.",
+          "Yatırım ekranında NONSTOPBONUS promosyon kodunu gir; kod girilmeden yapılan yatırım kampanyaya dahil olmaz.",
+          "İlk yatırımını 1.000 USD ve üzeri yap — %30 bonus tanımlanır (en fazla 30.000 USD).",
+          "İkinci yatırımını 300 USD ve üzeri yap — %15 bonus tanımlanır (en fazla 4.000 USD).",
+          "Bonusun bakiyene geçmesi için kampanyanın hacim şartını ve en az 50 işlemi tamamla.",
+        ],
+        note:
+          "Bonus, tanımlandığı anda çekilebilir bir bakiye değildir: kampanyanın işlem hacmi şartı ve en az 50 işlem tamamlanana kadar bakiyeye aktarılmaz, şartlar tamamlanmazsa bonus düşer. Yalnızca Klasik hesaplar için geçerlidir ve yatırım sırasında NONSTOPBONUS kodunun girilmesini gerektirir. Kampanya koşulları Lite Finance tarafından değiştirilebilir; katılmadan önce güncel şartları Lite Finance'in Türkiye destek hattından teyit edin. Kaldıraçlı işlemler yüksek risk içerir ve yatırdığınız tutarın tamamını kaybedebilirsiniz.",
+        image: "/campaigns/litefinance-nonstop-bonus.png",
+        imageWidth: 1672,
+        imageHeight: 941,
+        ctaUrl: "https://bit.ly/litefinance-vip",
+        contactEmail: "turkiye@litefinance.com",
+      },
+    ],
   },
   {
     rank: 9,
@@ -803,18 +834,20 @@ export const brokers: Broker[] = [
         a: "FxPro, FCA ve CySEC gibi düzenleyiciler altında faaliyet gösterdiği için, müşteri talep ettiğinde çekim işlemlerini gereksiz gecikme olmadan işleme alma yükümlülüğü altındadır. Kesin çekim süreleri ve yöntemleri (e-cüzdan, kart, banka havalesi) hesap türüne ve bölgeye göre değişebileceğinden, güncel bilgiyi FxPro'nun resmi sitesinden veya müşteri destek ekibinden teyit etmenizi öneririz.",
       },
     ],
-    promotion: {
-      tag: "Yeni Hesap Fırsatı",
-      title: "%100 Hoş Geldin Bonusu",
-      intro:
-        "FxPro, FXPARTNER referans linki üzerinden açılan yeni hesaplar için %100 hoş geldin bonusu sunuyor — ilk yatırımlar için güçlü bir başlangıç.",
-      steps: [
-        "FXPARTNER referans linki üzerinden yeni bir FxPro hesabı aç.",
-        "Uygun bir ilk yatırım yap.",
-        "Bonusun hesabına uygulandığını teyit et — kesin oran ve uygunluk hesap türüne ve bölgeye göre değişir.",
-      ],
-      note: "Bonus şart ve koşulları geçerlidir ve önceden haber verilmeksizin değişebilir; canlı hesabına para yatırmadan önce güncel uygunluğu FxPro'nun resmi sitesinden teyit edin. İşlem yapmak zarar riski içerir.",
-    },
+    promotions: [
+      {
+        tag: "Yeni Hesap Fırsatı",
+        title: "%100 Hoş Geldin Bonusu",
+        intro:
+          "FxPro, FXPARTNER referans linki üzerinden açılan yeni hesaplar için %100 hoş geldin bonusu sunuyor — ilk yatırımlar için güçlü bir başlangıç.",
+        steps: [
+          "FXPARTNER referans linki üzerinden yeni bir FxPro hesabı aç.",
+          "Uygun bir ilk yatırım yap.",
+          "Bonusun hesabına uygulandığını teyit et — kesin oran ve uygunluk hesap türüne ve bölgeye göre değişir.",
+        ],
+        note: "Bonus şart ve koşulları geçerlidir ve önceden haber verilmeksizin değişebilir; canlı hesabına para yatırmadan önce güncel uygunluğu FxPro'nun resmi sitesinden teyit edin. İşlem yapmak zarar riski içerir.",
+      },
+    ],
   },
   {
     rank: 15,

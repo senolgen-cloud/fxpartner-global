@@ -2871,5 +2871,6 @@
   "Açık pozisyon yok": "Немає відкритих позицій",
   "Bir sonraki işlem açıldığı anda, saniyesinde burada.": "Наступна угода зʼявиться тут у ту ж секунду, коли відкриється.",
   "Beklerken bakılacak bir şey var: kapanmış işlemlerin tamamı aşağıda duruyor — kazançlar da, kayıplar da.": "Поки чекаєте, є що почитати: усі закриті угоди нижче — і прибуткові, і збиткові.",
-  "Kapanan işlemlere bak": "Переглянути закриті угоди"
+  "Kapanan işlemlere bak": "Переглянути закриті угоди",
+  "{count} aktif kampanya": "{count} активні кампанії"
 }

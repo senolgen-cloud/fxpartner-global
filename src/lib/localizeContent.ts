@@ -46,12 +46,12 @@ export function localizeBroker(broker: Broker, locale: Locale): Broker {
     summary: pick(o, `${s}.summary`, broker.summary),
     bestFor: pick(o, `${s}.bestFor`, broker.bestFor),
     accentNote: pick(o, `${s}.accentNote`, broker.accentNote),
-    promotion: broker.promotion && {
-      ...broker.promotion,
-      tag: pick(o, `${s}.promo.tag`, broker.promotion.tag),
-      title: pick(o, `${s}.promo.title`, broker.promotion.title),
-      intro: pick(o, `${s}.promo.intro`, broker.promotion.intro),
-    },
+    promotions: broker.promotions?.map((promo, i) => ({
+      ...promo,
+      tag: pick(o, `${s}.promo.${i}.tag`, promo.tag),
+      title: pick(o, `${s}.promo.${i}.title`, promo.title),
+      intro: pick(o, `${s}.promo.${i}.intro`, promo.intro),
+    })),
     pros: pickList(o, `${s}.pros`, broker.pros),
     cons: pickList(o, `${s}.cons`, broker.cons),
     extraFaqs: broker.extraFaqs?.map((faq, i) => ({

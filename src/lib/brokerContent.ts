@@ -133,12 +133,15 @@ export function brokerFaqs(broker: Broker): { q: string; a: string }[] {
       a: `${broker.platforms.join(", ")}.`,
     },
   ];
-  if (broker.promotion) {
+  if (broker.promotions?.length) {
     faqs.push({
       q: trf("{broker}’ın aktif bir kampanyası var mı?", { broker: broker.name }),
       a: trf(
         "Evet — aşağıdaki {promotion} kampanyasına bakın veya tüm partner brokerlardaki güncel teklifler için Kampanyalar sayfamızı kontrol edin.",
-        { promotion: broker.promotion.title }
+        // Every campaign by name: this answer is serialised into the
+        // page's FAQ schema, where a reader may meet it detached from the
+        // list it is describing.
+        { promotion: broker.promotions.map((p) => p.title).join(", ") }
       ),
     });
   }

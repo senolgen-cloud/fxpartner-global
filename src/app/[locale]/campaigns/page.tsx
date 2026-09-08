@@ -52,7 +52,7 @@ export default async function CampaignsPage({
   setServerLocale(isLocale(pageLocale) ? pageLocale : defaultLocale);
 
   const locale: Locale = isLocale(pageLocale) ? pageLocale : defaultLocale;
-  const campaigns = localizeBrokers(brokers, locale).filter((b) => b.promotion);
+  const campaigns = localizeBrokers(brokers, locale).filter((b) => b.promotions?.length);
 
   return (
     <>
@@ -105,76 +105,100 @@ export default async function CampaignsPage({
                         </div>
                       )}
                       <div>
-                        <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-gold">
-                          {broker.promotion!.tag}
-                        </span>
                         <h2 className="notranslate font-display text-2xl font-semibold text-text-dark">
                           {broker.name}
                         </h2>
-                      </div>
-                    </div>
-
-                    {broker.promotion!.image && (
-                      <div className="relative mt-6 aspect-[1672/941] w-full max-w-2xl overflow-hidden rounded-2xl border border-hairline-light">
-                        <Image
-                          src={broker.promotion!.image}
-                          alt={broker.promotion!.title}
-                          fill
-                          sizes="(min-width: 768px) 672px, 100vw"
-                          className="object-cover"
-                        />
-                      </div>
-                    )}
-
-                    <h3 className="mt-5 font-display text-xl font-semibold text-text-dark">
-                      {broker.promotion!.title}
-                    </h3>
-                    <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-text-dark/90">
-                      {broker.promotion!.intro}
-                    </p>
-
-                    <ol className="mt-5 space-y-3">
-                      {broker.promotion!.steps.map((step, i) => (
-                        <li key={i} className="flex gap-3 text-[15px] text-text-dark/90">
-                          <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold/15 font-mono text-xs text-text-dark">
-                            {i + 1}
+                        {broker.promotions!.length > 1 && (
+                          <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">
+                            {trf("{count} aktif kampanya", {
+                              count: broker.promotions!.length,
+                            })}
                           </span>
-                          {step}
-                        </li>
-                      ))}
-                    </ol>
-
-                    <div className="mt-6 flex flex-wrap gap-3">
-                      <a
-                        href={broker.promotion!.ctaUrl ?? broker.referralUrl}
-                        target="_blank"
-                        rel="noopener noreferrer sponsored"
-                        className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
-                      >
-                        {broker.promotion!.ctaLabel ??
-                          trf("{broker} - Siteye Git", { broker: broker.name })}
-                      </a>
-                      {broker.promotion!.contactEmail && (
-                        <a
-                          href={`mailto:${broker.promotion!.contactEmail}`}
-                          className="rounded-full border border-hairline-light px-5 py-2.5 text-sm font-medium text-text-dark transition-colors hover:border-text-dark"
-                        >
-                          {trf("Referans Linkiniz İçin {broker}’a E-posta Gönderin", {
-                            broker: broker.name,
-                          })}
-                        </a>
-                      )}
-                      <Link
-                        href={`/brokers/${broker.slug}`}
-                        className="rounded-full border border-hairline-light px-5 py-2.5 text-sm font-medium text-text-dark transition-colors hover:border-text-dark"
-                      >
-                        {trf("{broker} Tam İnceleme →", { broker: broker.name })}
-                      </Link>
+                        )}
+                      </div>
                     </div>
 
-                    <p className="mt-5 text-xs leading-relaxed text-text-muted">
-                      {broker.promotion!.note}
-                    </p>
+                    {/* One block per campaign. The broker keeps the #slug
+                        anchor above — every link into this page uses it —
+                        and the tag moved down here, where it belongs now
+                        that a broker can be running more than one offer
+                        with different terms. */}
+                    {broker.promotions!.map((promo, pi) => (
+                      <div
+                        key={promo.title}
+                        className={
+                          pi === 0
+                            ? "mt-6"
+                            : "mt-10 border-t border-hairline-light pt-10"
+                        }
+                      >
+                        <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-gold">
+                          {promo.tag}
+                        </span>
+
+                        {promo.image && (
+                          <div className="relative mt-4 aspect-[1672/941] w-full max-w-2xl overflow-hidden rounded-2xl border border-hairline-light">
+                            <Image
+                              src={promo.image}
+                              alt={promo.title}
+                              fill
+                              sizes="(min-width: 768px) 672px, 100vw"
+                              className="object-cover"
+                            />
+                          </div>
+                        )}
+
+                        <h3 className="mt-5 font-display text-xl font-semibold text-text-dark">
+                          {promo.title}
+                        </h3>
+                        <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-text-dark/90">
+                          {promo.intro}
+                        </p>
+
+                        <ol className="mt-5 space-y-3">
+                          {promo.steps.map((step, i) => (
+                            <li key={i} className="flex gap-3 text-[15px] text-text-dark/90">
+                              <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold/15 font-mono text-xs text-text-dark">
+                                {i + 1}
+                              </span>
+                              {step}
+                            </li>
+                          ))}
+                        </ol>
+
+                        <div className="mt-6 flex flex-wrap gap-3">
+                          <a
+                            href={promo.ctaUrl ?? broker.referralUrl}
+                            target="_blank"
+                            rel="noopener noreferrer sponsored"
+                            className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:bg-ink-soft"
+                          >
+                            {promo.ctaLabel ??
+                              trf("{broker} - Siteye Git", { broker: broker.name })}
+                          </a>
+                          {promo.contactEmail && (
+                            <a
+                              href={`mailto:${promo.contactEmail}`}
+                              className="rounded-full border border-hairline-light px-5 py-2.5 text-sm font-medium text-text-dark transition-colors hover:border-text-dark"
+                            >
+                              {trf("Referans Linkiniz İçin {broker}’a E-posta Gönderin", {
+                                broker: broker.name,
+                              })}
+                            </a>
+                          )}
+                          <Link
+                            href={`/brokers/${broker.slug}`}
+                            className="rounded-full border border-hairline-light px-5 py-2.5 text-sm font-medium text-text-dark transition-colors hover:border-text-dark"
+                          >
+                            {trf("{broker} Tam İnceleme →", { broker: broker.name })}
+                          </Link>
+                        </div>
+
+                        <p className="mt-5 text-xs leading-relaxed text-text-muted">
+                          {promo.note}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 ))}
               </div>

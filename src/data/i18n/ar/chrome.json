@@ -2871,5 +2871,6 @@
   "Açık pozisyon yok": "لا توجد مراكز مفتوحة",
   "Bir sonraki işlem açıldığı anda, saniyesinde burada.": "تظهر الصفقة التالية هنا في اللحظة التي تُفتح فيها.",
   "Beklerken bakılacak bir şey var: kapanmış işlemlerin tamamı aşağıda duruyor — kazançlar da, kayıplar da.": "وثمة ما تطالعه في الأثناء: كل صفقة مغلقة موجودة أدناه — الرابحة والخاسرة على حد سواء.",
-  "Kapanan işlemlere bak": "اطّلع على الصفقات المغلقة"
+  "Kapanan işlemlere bak": "اطّلع على الصفقات المغلقة",
+  "{count} aktif kampanya": "{count} حملات نشطة"
 }

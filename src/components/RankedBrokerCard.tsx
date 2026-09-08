@@ -77,13 +77,16 @@ function CardBody({
   const categories = useLocalizedData(categoryInfo);
   return (
     <div className={featured ? "featured-card-depth-sm" : ""}>
-      {broker.promotion && (
+      {/* The first campaign only. This badge is one line inside a card
+          that is already dense; a broker running two gets the second on
+          /campaigns, which is where the badge points. */}
+      {broker.promotions?.[0] && (
         <div className="mb-4 flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3.5 py-1.5">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="shrink-0 text-gold" aria-hidden="true">
             <path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7L2 9.2l7.1-.6L12 2z" />
           </svg>
           <span className="truncate font-mono text-[10px] uppercase tracking-[0.15em] text-gold">
-            {broker.promotion.tag}
+            {broker.promotions[0].tag}
           </span>
         </div>
       )}

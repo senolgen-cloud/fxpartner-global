@@ -729,13 +729,17 @@ export default async function BrokerDetailPage({
               </div>
             </div>
 
-            {broker.promotion && (
+            {broker.promotions?.[0] && (
               <Link
                 href={`/campaigns#${broker.slug}`}
                 className="mt-10 flex items-center justify-between gap-4 rounded-2xl border border-gold/30 bg-gold/10 px-6 py-4 transition-colors hover:border-gold/50"
               >
                 <span className="text-sm font-medium text-text-dark">
-                  🎁 {broker.promotion.title}
+                  {/* One line of room, so: the first campaign by name, and
+                      the rest by count rather than a truncated list. */}
+                  🎁 {broker.promotions[0].title}
+                  {broker.promotions.length > 1 &&
+                    ` + ${broker.promotions.length - 1} kampanya`}
                 </span>
                 <span className="shrink-0 font-mono text-xs uppercase tracking-[0.15em] text-gold">
                   {broker.name} Kampanyaları için tıklayın →
@@ -746,7 +750,7 @@ export default async function BrokerDetailPage({
             {cashback && (
               <Link
                 href={`/cashback/${broker.slug}/setup`}
-                className={`${broker.promotion ? "mt-6" : "mt-10"} flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-tick-up/30 bg-tick-up/10 px-6 py-4 transition-colors hover:border-tick-up/50`}
+                className={`${broker.promotions?.length ? "mt-6" : "mt-10"} flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-tick-up/30 bg-tick-up/10 px-6 py-4 transition-colors hover:border-tick-up/50`}
               >
                 <span className="text-sm text-text-dark">
                   <strong className="font-semibold">
@@ -761,7 +765,7 @@ export default async function BrokerDetailPage({
             )}
 
             <div
-              className={`${broker.promotion || cashback ? "mt-6" : "mt-14"} rounded-2xl border border-hairline-light bg-paper p-6`}
+              className={`${broker.promotions?.length || cashback ? "mt-6" : "mt-14"} rounded-2xl border border-hairline-light bg-paper p-6`}
             >
               <p className="text-sm leading-relaxed text-text-muted">
                 <strong className="text-text-dark">Not:</strong> Yukarıdaki
