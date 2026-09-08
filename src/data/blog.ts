@@ -28,9 +28,194 @@ export interface BlogPost {
   // Unknown slugs fall back to the normal rotation.
   adBrokerSlug?: string;
   sections: BlogSection[];
+  // Optional Q&A, rendered as an accordion under the article and
+  // emitted as FAQPage structured data.
+  //
+  // This is the one addition to a post that a search engine and an
+  // answer engine both read directly: Google can surface the pairs on the
+  // result itself, and an LLM answering "what are the conditions of X"
+  // gets a question already matched to an answer instead of having to
+  // infer one out of running prose. Worth it only where the questions are
+  // real ones a reader types — a post that invents six questions to earn
+  // the markup has bought a rich result with the reader's trust.
+  faqs?: { q: string; a: string }[];
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    // Written off LiteFinance's own promo-code terms page
+    // (litefinance.org/promo/codes/?code=NonStopBonus), read 8 Eylül 2026,
+    // not off the Turkish campaign creative — and the two disagree in
+    // three places that matter. The creative says Klasik hesaplar; the
+    // terms say CENT and CLASSIC. The creative prints bonus caps of 30.000
+    // and 4.000 USD; the terms page states no cap at all. And neither the
+    // creative nor the campaign copy we were given mentions the 26.09.2026
+    // activation deadline, the three-month validity, or what the volume
+    // condition actually costs in lots.
+    //
+    // That last one is the article. Every affiliate page in Turkish for
+    // this campaign prints "%30 BONUS" and stops. The condition is 30% of
+    // the bonus amount in lots — a 300 dolarlık bonus is 90 lots — and a
+    // reader who learns that here rather than after depositing is the
+    // reader who comes back. It is also the only version of this page an
+    // answer engine can usefully cite, because it is the only one that
+    // answers the question people actually type.
+    //
+    // Numbers to re-check when the campaign is renewed: the activation
+    // deadline, the percentages, and whether a cap appears in the terms.
+    slug: "litefinance-non-stop-bonus-sartlari",
+    coverImage: "/campaigns/litefinance-nonstop-bonus.png",
+    lang: "tr",
+    adBrokerSlug: "lite-finance",
+    title:
+      "LiteFinance Non-Stop Bonus Şartları: %30 Bonusu Çekmek İçin Ne Gerekiyor?",
+    excerpt:
+      "NonStopBonus kodu ilk yatırıma %30, ikinciye %15 bonus veriyor. Asıl soru bonusun nasıl çekileceği: 300 dolarlık bonus için 90 lot hacim gerekiyor. Koşulların tamamı.",
+    publishedAt: "2026-09-08",
+    readingMinutes: 8,
+    sections: [
+      {
+        paragraphs: [
+          "LiteFinance'in Non-Stop Bonus kampanyası, NonStopBonus promosyon koduyla yapılan ilk yatırıma %30, ikinci yatırıma %15 bonus tanımlıyor. Türkçe kaynakların çoğu bu iki oranı yazıp duruyor. Oysa bir depozito bonusunda oran, cevabın küçük kısmı: asıl soru o paranın hangi şartla sizin olduğu.",
+          "Bu yazı, LiteFinance'in kendi promosyon kodu şartları sayfasındaki koşulları (8 Eylül 2026'da okundu) tek tek açıyor ve şart metnindeki hacim formülünü somut lot sayısına çeviriyor. Sonuç kısaca şu: 1.000 dolarlık bir yatırımın 300 dolarlık bonusunu bakiyeye geçirmek için yaklaşık 90 lot işlem hacmi gerekiyor. Bu, kampanyayı kötü yapmaz — ama kimin için mantıklı olduğunu tamamen değiştirir.",
+        ],
+      },
+      {
+        heading: "Kampanya tek bakışta",
+        paragraphs: [
+          "Kampanyanın tamamı yedi maddede. Ayrıntılar ve her maddenin pratikte ne anlama geldiği aşağıda.",
+        ],
+        list: [
+          "Promosyon kodu: NONSTOPBONUS (yatırım sırasında girilmezse yatırım kampanyaya dahil olmaz)",
+          "İlk yatırım: 1.000 USD ve üzeri → %30 bonus",
+          "İkinci yatırım: 300 USD ve üzeri → %15 bonus",
+          "Uygun hesaplar: CENT ve CLASSIC. ECN hesapları ve Pips Back sistemiyle açılan hesaplar kampanya dışında",
+          "Bonusun bakiyeye geçme şartı: bonus tutarının %30'u kadar lot hacmi ve en az 50 işlem",
+          "Bonus geçerlilik süresi: bonusun yatırıldığı tarihten itibaren 3 ay",
+          "Promosyon kodunun aktive edilebileceği son tarih: 26.09.2026",
+        ],
+      },
+      {
+        heading: "Bonusu çekmenin gerçek bedeli: %30 kuralı",
+        paragraphs: [
+          "Şart metninin en önemli cümlesi şu: bonus fonlarının hesap bakiyesine eklenmesi için, bonus tutarının en az %30'u kadar hacimde en az 50 işlem gerekiyor. Buradaki \"%30\" bir yüzde değil, lot sayısına dönüşen bir çarpan gibi çalışıyor — LiteFinance'in kendi örneği bunu açıkça gösteriyor: 1.000 dolarlık yatırım 300 dolarlık bonus üretir ve bu bonus için 90 lotluk işlem hacmi istenir.",
+          "Yani formül basit: gereken lot = bonus tutarı × 0,30. Rakamlara dökelim.",
+        ],
+        list: [
+          "1.000 USD yatırım → 300 USD bonus → 90 lot hacim",
+          "3.000 USD yatırım → 900 USD bonus → 270 lot hacim",
+          "10.000 USD yatırım → 3.000 USD bonus → 900 lot hacim",
+          "İkinci yatırım 300 USD → 45 USD bonus → 13,5 lot hacim",
+        ],
+      },
+      {
+        paragraphs: [
+          "90 lot EURUSD, yaklaşık 9 milyon dolarlık nominal işlem hacmi demek. Bunu tek seferde değil, aylara yayılmış onlarca işlemle yaparsınız; ama yine de bu, ayda birkaç işlem açan bir yatırımcının 3 ay içinde ulaşabileceği bir sayı değil. Kampanyanın kimin için tasarlandığı tam olarak burada belli oluyor.",
+          "Bir de para birimi çevrimi var: bir enstrümanın bir puanının değeri EURUSD'nin bir puanından farklıysa, o enstrümanda yapılan hacim EURUSD hacmine çevrilerek sayılıyor. Cent hesaplarında ise hacim 100 katı ölçekle değerlendiriliyor. Yani \"90 lot\" rakamı EURUSD üzerinden bir referans; altında veya endekste işlem yapıyorsanız sayılan hacim farklı çıkar.",
+        ],
+      },
+      {
+        heading: "Her işlem sayılmıyor: 120 saniye ve 30 pip filtresi",
+        paragraphs: [
+          "Bu, kampanyanın en kolay gözden kaçan maddesi ve hacmi doldurmayı planlayan biri için en pahalısı. Şart metnine göre hacim hesabına şunlar dahil edilmiyor:",
+        ],
+        list: [
+          "120 saniyeden kısa süren işlemler",
+          "30 pipten az kâr ya da zararla kapanan pozisyonlar",
+        ],
+      },
+      {
+        paragraphs: [
+          "Bunun pratik anlamı şu: hacmi hızlıca kapatmak için scalping yapamazsınız. İki dakikadan kısa tuttuğunuz ya da küçük hareketlerle kapattığınız işlemler sayaca hiç yazılmaz. Sayılabilmesi için pozisyonun hem zamana hem de mesafeye yayılması, yani gerçek bir piyasa riski taşıması gerekiyor.",
+          "50 işlem şartı ile hacim şartı ayrı ayrı sağlanmalı; ama pratikte bağlayıcı olan neredeyse her zaman hacim oluyor. 90 lotu 50 işleme bölerseniz işlem başına ortalama 1,8 lot düşer — ve bunların her birinin 30 pipi geçmesi gerekir.",
+        ],
+      },
+      {
+        heading: "Para çekerseniz bonusa ne olur?",
+        paragraphs: [
+          "Şart metni burada net: müşteri kendi parasını hesabından çektiğinde ya da başka bir hesaba aktardığında, bonus tutarı hesapta kalan bakiyeyle orantılı olarak azaltılıyor. Yani bonus, paranızı hesapta tuttuğunuz sürece duran bir teşvik.",
+          "İki madde daha var: bonus fonlarından elde edilen kâr anında çekilebiliyor, ve müşteri kendi parasının tamamını kaybederse bonus iptal ediliyor. Bonus tek başına işlem sermayesi olarak kullanılamıyor. Ayrıca bonuslu hesaplar sosyal işlem sisteminde \"trader hesabı\" olarak kaydedilemiyor — CopyTrade tarafında sinyal veren taraf olmayı düşünüyorsanız bu madde sizi ilgilendirir.",
+        ],
+      },
+      {
+        heading: "Süreler: 26 Eylül 2026 ve 3 ay",
+        paragraphs: [
+          "İki ayrı süre var ve karıştırılmaları kolay. Promosyon kodunun aktive edilebileceği son tarih 26.09.2026. Bonusun kendisi ise yatırıldığı tarihten itibaren 3 ay geçerli — yani hacim şartını doldurmak için elinizde takvim olarak üç ay var, kampanyanın bitişine kalan süre değil.",
+          "Bu iki tarihi birlikte okumak gerekiyor: kodu son günlerde aktive eden biri de bonusu için tam üç ay kazanır, ama üç ayda 90 lot yapıp yapamayacağı ayrı bir sorudur.",
+        ],
+      },
+      {
+        heading: "Kampanya görselindeki üst sınırlar",
+        paragraphs: [
+          "LiteFinance'in Türkçe kampanya görselinde ilk yatırım için 30.000 USD, ikinci yatırım için 4.000 USD maksimum bonus yazıyor. Bu rakamlar promosyon kodu şartları sayfasında geçmiyor — orada herhangi bir üst sınır belirtilmemiş. İkisi çelişmiyor olabilir (görsel, ülkeye özel bir sınırı yansıtıyor olabilir) ama farklı kaynaklardan geldikleri için burada ayrı ayrı yazıyoruz.",
+          "Yüksek tutarlı bir yatırım planlıyorsanız üst sınırı katılmadan önce LiteFinance'in Türkiye destek hattından yazılı olarak teyit edin. 30.000 USD sınırı 100.000 USD'lik bir yatırımda %30'un %30 olmadığı anlamına gelir.",
+        ],
+      },
+      {
+        heading: "Bu kampanya kimin için mantıklı?",
+        paragraphs: [
+          "Dürüst cevap: zaten yüksek hacimle işlem yapan biri için. 90 lotu üç ayda doğal akışında dolduracak bir yatırımcı için bonus, hiçbir davranışını değiştirmeden gelen bir ek. Bu kişi için kampanya gerçekten iyi.",
+          "Ayda birkaç işlem açan bir yatırımcı içinse durum tersine dönüyor. Bonusu hak etmek için normalde yapmayacağı hacmi yapması gerekir — ve bir bonusu hak etmek için işlem sayısını artırmak, forex'te para kaybetmenin en bilinen yollarından biridir. 300 dolarlık bonus uğruna 90 lotluk maruziyet almak, matematiksel olarak bonusun kendisinden çok daha büyük bir risktir.",
+          "Üçüncü bir grup daha var: bonusu teminat tamponu olarak görmek isteyenler. Bu kampanya onun için uygun değil, çünkü bonus şartlar tamamlanana kadar bakiyeye geçmiyor. Teminat tarafını büyüten, hacim şartı olmayan bir yapı arıyorsanız LiteFinance'in FXPARTNER'a özel %20 teminat bonusu farklı bir mekanizmayla çalışıyor; ikisini Kampanyalar sayfasında yan yana görebilirsiniz.",
+        ],
+      },
+      {
+        heading: "Katılım adımları",
+        paragraphs: [
+          "Kampanyaya katılmak beş adım; üçüncüsü atlanırsa yatırım kampanyaya hiç girmez.",
+        ],
+        list: [
+          "CENT veya CLASSIC hesap açın; ECN ve Pips Back hesapları kampanya dışında.",
+          "Yatırım ekranında NONSTOPBONUS promosyon kodunu girin — kod girilmeden yapılan yatırım kampanyaya dahil edilmez.",
+          "İlk yatırımı 1.000 USD ve üzeri yapın (%30), ikinciyi 300 USD ve üzeri yapın (%15).",
+          "Bonus tutarının %30'u kadar lot hacmini ve en az 50 işlemi, bonusun yatırıldığı tarihten itibaren 3 ay içinde tamamlayın.",
+          "120 saniyeden kısa ve 30 pipten küçük hareketle kapanan işlemlerin hacme sayılmadığını hesaba katın.",
+        ],
+      },
+      {
+        heading: "Şeffaflık notu",
+        paragraphs: [
+          "FXPARTNER'ın LiteFinance ile ortaklık ilişkisi var ve bu bağlantılar üzerinden açılan hesaplardan komisyon kazanabiliriz. Bu, yukarıdaki değerlendirmeyi değiştirmiyor: kampanyanın hacim şartını ve kimin için uygun olmadığını, komisyon almadığımız bir kampanyada yazacağımız gibi yazdık.",
+          "Buradaki bilgiler 8 Eylül 2026'da LiteFinance'in promosyon kodu şartları sayfasından alınmıştır. Kampanya koşulları broker tarafından önceden haber verilmeden değiştirilebilir; katılmadan önce güncel şartları LiteFinance'in kendi sayfasından veya Türkçe destek hattından teyit edin.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Kaldıraçlı işlemler yüksek risk taşır ve yatırdığınız tutarın tamamını kaybedebilirsiniz.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "LiteFinance Non-Stop Bonus promosyon kodu nedir?",
+        a: "Promosyon kodu NONSTOPBONUS'tur. Kodun yatırım işlemi sırasında girilmesi gerekir; kod girilmeden yapılan bir yatırım kampanyaya dahil edilmez. Kodun aktive edilebileceği son tarih 26.09.2026'dır.",
+      },
+      {
+        q: "LiteFinance Non-Stop Bonus'ta ne kadar bonus veriliyor?",
+        a: "1.000 USD ve üzeri ilk yatırıma %30, 300 USD ve üzeri ikinci yatırıma %15 bonus tanımlanıyor. LiteFinance'in Türkçe kampanya görselinde ayrıca ilk yatırım için 30.000 USD, ikinci yatırım için 4.000 USD üst sınır belirtiliyor; bu üst sınırlar promosyon kodu şartları sayfasında yer almıyor.",
+      },
+      {
+        q: "LiteFinance bonusu nasıl çekilir?",
+        a: "Bonusun bakiyeye geçmesi için bonus tutarının en az %30'u kadar lot hacminde ve en az 50 işlem yapılması gerekir. LiteFinance'in kendi örneğinde 1.000 dolarlık yatırımın 300 dolarlık bonusu için 90 lot hacim isteniyor. Bonus bakiyeye geçtikten sonra çekilebilir; bonus fonlarından elde edilen kâr ise anında çekilebilir.",
+      },
+      {
+        q: "Bonus için kaç lot işlem yapmam gerekiyor?",
+        a: "Gereken lot, bonus tutarının 0,30 ile çarpımıdır. 300 USD bonus için 90 lot, 900 USD bonus için 270 lot, 45 USD bonus için 13,5 lot. Bir enstrümanın puan değeri EURUSD'den farklıysa hacim EURUSD'ye çevrilerek sayılır; Cent hesaplarında hacim 100 katı ölçekle değerlendirilir.",
+      },
+      {
+        q: "Hangi işlemler bonus hacmine sayılmaz?",
+        a: "120 saniyeden kısa süren işlemler ve 30 pipten az kâr veya zararla kapanan pozisyonlar hacim hesabına dahil edilmez. Bu nedenle hacim şartı scalping ile hızlıca kapatılamaz.",
+      },
+      {
+        q: "Non-Stop Bonus hangi hesap türlerinde geçerli?",
+        a: "CENT ve CLASSIC hesaplar kampanyaya katılabilir. ECN hesapları ve Pips Back sistemiyle açılan hesaplar kampanya dışındadır. Bonuslu hesaplar ayrıca sosyal işlem sisteminde trader hesabı olarak kaydedilemez.",
+      },
+      {
+        q: "Para çekersem bonusum ne olur?",
+        a: "Kendi paranızı hesaptan çektiğinizde veya başka bir hesaba aktardığınızda, bonus tutarı hesapta kalan bakiyeyle orantılı olarak azaltılır. Kendi paranızın tamamını kaybetmeniz durumunda bonus iptal edilir. Bonus tek başına işlem sermayesi olarak kullanılamaz.",
+      },
+      {
+        q: "Bonusun geçerlilik süresi ne kadar?",
+        a: "Bonus, yatırıldığı tarihten itibaren 3 ay geçerlidir. Hacim ve işlem sayısı şartlarının bu süre içinde tamamlanması gerekir. Promosyon kodunun aktive edilebileceği son tarih ise 26.09.2026'dır; bu iki süre birbirinden bağımsızdır.",
+      },
+    ],
+  },
   {
     // Written off the site's own calendar feed — the same TradingView
     // endpoint src/lib/economicCalendar.ts reads for /ekonomik-takvim —

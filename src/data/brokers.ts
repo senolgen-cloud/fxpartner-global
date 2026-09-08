@@ -682,14 +682,14 @@ export const brokers: Broker[] = [
         intro:
           "Lite Finance'in Non-Stop Bonus kampanyasında 1.000 USD ve üzeri ilk yatırımınıza %30, 300 USD ve üzeri ikinci yatırımınıza %15 bonus tanımlanır (üst sınırlar: sırasıyla 30.000 USD ve 4.000 USD). Bu bir işlem bonusudur, teminat bonusu değildir: hesabınıza tanımlanır ama bakiyenize geçmesi için kampanyanın işlem hacmi şartını ve en az 50 işlemi tamamlamanız gerekir. Yatırım sırasında promosyon kodunu girmeyi unutmayın.",
         steps: [
-          "FXPARTNER bağlantısı üzerinden Lite Finance Klasik hesabını aç — kampanya yalnızca Klasik hesaplarda geçerli.",
+          "FXPARTNER bağlantısı üzerinden Lite Finance CENT veya CLASSIC hesabı aç — ECN ve Pips Back hesapları kampanya dışında.",
           "Yatırım ekranında NONSTOPBONUS promosyon kodunu gir; kod girilmeden yapılan yatırım kampanyaya dahil olmaz.",
           "İlk yatırımını 1.000 USD ve üzeri yap — %30 bonus tanımlanır (en fazla 30.000 USD).",
           "İkinci yatırımını 300 USD ve üzeri yap — %15 bonus tanımlanır (en fazla 4.000 USD).",
-          "Bonusun bakiyene geçmesi için kampanyanın hacim şartını ve en az 50 işlemi tamamla.",
+          "Bonusun bakiyene geçmesi için bonus tutarının %30'u kadar lot hacmini (300 USD bonus = 90 lot) ve en az 50 işlemi, bonusun yatırıldığı tarihten itibaren 3 ay içinde tamamla.",
         ],
         note:
-          "Bonus, tanımlandığı anda çekilebilir bir bakiye değildir: kampanyanın işlem hacmi şartı ve en az 50 işlem tamamlanana kadar bakiyeye aktarılmaz, şartlar tamamlanmazsa bonus düşer. Yalnızca Klasik hesaplar için geçerlidir ve yatırım sırasında NONSTOPBONUS kodunun girilmesini gerektirir. Kampanya koşulları Lite Finance tarafından değiştirilebilir; katılmadan önce güncel şartları Lite Finance'in Türkiye destek hattından teyit edin. Kaldıraçlı işlemler yüksek risk içerir ve yatırdığınız tutarın tamamını kaybedebilirsiniz.",
+          "Bonus, tanımlandığı anda çekilebilir bir bakiye değildir: bonus tutarının %30'u kadar lot hacmi ve en az 50 işlem tamamlanana kadar bakiyeye aktarılmaz. 120 saniyeden kısa süren ve 30 pipten az hareketle kapanan işlemler bu hacme sayılmaz. Bonus 3 ay geçerlidir ve promosyon kodu 26.09.2026'ya kadar aktive edilebilir. Kendi paranızı çektiğinizde bonus, kalan bakiyeyle orantılı olarak azalır. Görselde belirtilen 30.000 / 4.000 USD üst sınırları LiteFinance'in promosyon kodu şartları sayfasında yer almaz; yüksek tutarlarda katılmadan önce teyit edin. Kaldıraçlı işlemler yüksek risk içerir ve yatırdığınız tutarın tamamını kaybedebilirsiniz.",
         image: "/campaigns/litefinance-nonstop-bonus.png",
         imageWidth: 1672,
         imageHeight: 941,

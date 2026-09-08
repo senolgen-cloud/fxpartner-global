@@ -107,6 +107,10 @@ export function localizeBlogPost(post: BlogPost, locale: Locale): BlogPost {
       paragraphs: section.paragraphs.map((p, j) => pick(o, `${s}.s${i}.p${j}`, p)),
       list: section.list?.map((item, j) => pick(o, `${s}.s${i}.l${j}`, item)),
     })),
+    faqs: post.faqs?.map((faq, i) => ({
+      q: pick(o, `${s}.faq${i}.q`, faq.q),
+      a: pick(o, `${s}.faq${i}.a`, faq.a),
+    })),
   };
 }
 

@@ -12,7 +12,7 @@ import XmInlineAd from "@/components/XmInlineAd";
 import TopBrokersStrip from "@/components/TopBrokersStrip";
 import { blogPosts, getBlogPostBySlug } from "@/data/blog";
 import { getBrokerBySlug, getSponsoredBroker, getSkyscraperBroker } from "@/data/brokers";
-import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
+import { blogPostingSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { setServerLocale } from "@/lib/serverLocale";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
@@ -94,6 +94,14 @@ export default async function BlogPostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema(post)) }}
       />
+      {/* Emitted only when the post actually carries questions — an empty
+          FAQPage is a structured-data error, not a neutral no-op. */}
+      {post.faqs?.length ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(post.faqs)) }}
+        />
+      ) : null}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -184,6 +192,32 @@ export default async function BlogPostPage({
                   )}
                 </div>
               ))}
+
+              {/* Before the closing ad unit, not after: the questions are
+                  part of the article, and a reader who scrolled this far is
+                  looking for the one that is still unanswered. */}
+              {post.faqs?.length ? (
+                <section className="mt-14">
+                  <h2 className="font-poppins text-2xl font-semibold text-text-dark">
+                    {tr("Sıkça Sorulan Sorular")}
+                  </h2>
+                  <div className="mt-6 divide-y divide-hairline-light border-t border-hairline-light">
+                    {post.faqs.map((faq) => (
+                      <details key={faq.q} className="group py-5">
+                        <summary className="flex cursor-pointer list-none items-start justify-between gap-4 font-poppins text-[17px] font-medium text-text-dark transition-colors group-open:text-signal">
+                          {faq.q}
+                          <span className="mt-1 shrink-0 font-mono text-sm text-text-muted transition-transform group-open:rotate-45">
+                            +
+                          </span>
+                        </summary>
+                        <p className="mt-3 text-[16px] leading-relaxed text-text-dark/90">
+                          {faq.a}
+                        </p>
+                      </details>
+                    ))}
+                  </div>
+                </section>
+              ) : null}
 
               <XmInlineAd variant="final" brokerSlug={post.adBrokerSlug} />
 
