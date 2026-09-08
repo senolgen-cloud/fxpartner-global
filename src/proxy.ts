@@ -4,8 +4,20 @@ import type { NextRequest } from "next/server";
 import { optionalSession } from "@/lib/optionalSession";
 import { COUNTRY_TO_LANG } from "@/lib/countryLanguages";
 import { CONSENT_COOKIE, parseDecision, type Decision } from "@/lib/consent";
+import { isUnknownSlug } from "@/lib/knownSlugs";
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "senolgen@gmail.com";
+
+// Matches no route, on purpose. An address that matches nothing under
+// [locale] is answered with a real 404 and, since not-found.tsx lives in
+// that segment, with the site's own 404 page inside the normal layout.
+// Rewriting an unknown slug here gives it the identical treatment any
+// other dead link gets. Do not create a route at this path.
+//
+// The locale prefix is kept: without it the rewrite lands outside the
+// [locale] tree, which renders Next's bare error document instead —
+// no header, no fonts, and no dir="rtl" for an Arabic reader.
+const NOT_FOUND_PATH = "/_bulunamadi";
 
 // Auto-selects a translated language on a visitor's first request, based
 // on their country (from Vercel's x-vercel-ip-country header). Sets the
@@ -215,7 +227,31 @@ export default async function proxy(request: NextRequest) {
     }
   }
 
-  const response = localeRedirect(request) ?? NextResponse.next();
+  const redirect = localeRedirect(request);
+  if (redirect) {
+    applyCookies(request, redirect);
+    return redirect;
+  }
+
+  // A slug that does not exist, answered before the body starts.
+  //
+  // The page's own notFound() cannot do this. Everything under [locale]
+  // renders dynamically because the layout reads the session, a dynamic
+  // response is streamed, and the headers are gone by the time the page
+  // looks the slug up — so notFound() draws the right page under a 200.
+  // Next's docs prescribe exactly this check, here, for that reason. The
+  // notFound() calls stay where they are: this is the door, they are the
+  // wall behind it, and only sections whose slugs live in the repository
+  // are guarded. See src/lib/knownSlugs.ts.
+  if (!isStaticFile(request.nextUrl.pathname) && isUnknownSlug(path)) {
+    const url = request.nextUrl.clone();
+    url.pathname = localePath(locale, NOT_FOUND_PATH);
+    const missing = NextResponse.rewrite(url);
+    applyCookies(request, missing);
+    return missing;
+  }
+
+  const response = NextResponse.next();
   applyCookies(request, response);
   return response;
 }
