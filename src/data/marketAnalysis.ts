@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-08-1800",
+    title: "FXPARTNER Piyasa Özeti | 08.09.2026 Akşam Güncellemesi",
+    excerpt:
+      "Salı akşamı Orta Doğu'daki tırmanmanın etkisiyle Brent petrol günün ikinci yarısında yeniden hızlanarak 99,46 dolara çıktı ve 24 Temmuz'dan bu yana en yüksek seviyesini gördü; WTI ham petrol ise %2,5'in üzerinde yükselişle 94,73 dolara ulaşarak 8 Haziran'dan bu yana en yüksek seviyesine çıktı. Gelişme üzerine Goldman Sachs, 2026 Aralık ve 2027 Brent/WTI tahminlerini 5'er dolar artırarak sırasıyla 85/80 ve 80/75 dolara çekerken, HSBC de 2026 ve 2027 Brent tahminlerini 90 ve 85 dolara yükseltti. Öte yandan Bloomberg HT'nin Eylül ayı TCMB anketine katılan 25 ekonomistin 24'ü 10 Eylül'deki toplantıda politika faizinin %37'de sabit tutulmasını bekliyor.",
+    publishedAt: "2026-09-08",
+    readingMinutes: 3,
+    intro:
+      "Salı akşamı piyasaların gündemine, Husilerin Suudi Arabistan'ın güneyindeki enerji tesislerine düzenlediği ve 73 kişinin yaralanmasıyla sonuçlanan saldırının ardından yeniden hızlanan petrol fiyatları damga vurdu: Brent petrol, günün ilk yarısındaki 98,47 dolarlık seviyesinden günün ikinci yarısında yeniden yükselerek **99,46 dolara** çıktı ve **24 Temmuz'dan bu yana en yüksek seviyesini** gördü; WTI ham petrol de **%2,5'in üzerinde** bir yükselişle **94,73 dolara** çıkarak **8 Haziran'dan bu yana en yüksek seviyesine** ulaştı. Gelişme üzerine başta **Goldman Sachs** ve **HSBC** olmak üzere küresel bankalar petrol fiyat tahminlerini yukarı yönlü revize etti. Yurt içinde ise **Bloomberg HT**'nin Eylül ayı **TCMB** anketine katılan ekonomistler arasında **10 Eylül**'deki karara ilişkin 'sabit faiz' beklentisi bir önceki ankete kıyasla daha da güçlendi. Haftanın odağı 10 Eylül'deki TCMB kararı ve 11 Eylül'deki ABD TÜFE verisinde olmaya devam ediyor.",
+    news: [
+      {
+        icon: "🛢️",
+        heading: "Brent Petrol 99,46 Dolara Çıktı: 24 Temmuz'dan Bu Yana Zirve",
+        body: "**Brent petrol**, Husilerin Suudi Arabistan'ın güneyindeki enerji tesislerine yönelik saldırısının ardından süregelen arz güvenliği endişeleriyle Salı günü ikinci yarıda yeniden hızlanarak **99,46 dolara** çıktı ve **24 Temmuz'dan bu yana en yüksek seviyesini** gördü; petrol günün ilk yarısında **98,47 dolardan** işlem görmüştü. **WTI ham petrol** ise **%2,5'in üzerinde** bir artışla **94,73 dolara** yükselerek **8 Haziran'dan bu yana en yüksek seviyesine** ulaştı.",
+      },
+      {
+        icon: "🏦",
+        heading: "Goldman Sachs ve HSBC Petrol Tahminlerini Yukarı Çekti",
+        body: "**Goldman Sachs**, Orta Doğu'daki sevkiyat aksaklıklarının 2027'ye kadar süreceği beklentisiyle **Brent/WTI** tahminlerini **5'er dolar** artırarak **2026 Aralık** için **85/80 dolara**, **2027** için ise **80/75 dolara** yükseltti; banka, Körfez üretiminin savaş öncesi seviyenin **4 milyon varil/gün** altında kalması durumunda Brent'in **120 doların üzerine** çıkabileceğini belirtti. **HSBC** ise 'Boğazın ne tam kapalı ne tam açık, kalıcı şekilde bozulmuş bir yeni normale' uyum sağlandığını belirterek **2026 ve 2027 Brent** tahminlerini sırasıyla **90 ve 85 dolara** yükseltti.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "TCMB Anketinde 'Sabit Faiz' Beklentisi Güçlendi",
+        body: "**Bloomberg HT**'nin Eylül ayı **TCMB** faiz kararı anketine katılan **25 ekonomistin 24'ü**, **10 Eylül**'deki Para Politikası Kurulu toplantısında politika faizinin **%37**'de **sabit tutulmasını** beklerken, yalnızca **1 ekonomist 100 baz puanlık bir indirim** öngörüyor; bir önceki ankette bu oran 20 ekonomistin 18'i şeklindeydi. Piyasanın **2026 yıl sonu** politika faizi beklentisi ise bir önceki anket dönemine göre değişmeyerek **%35** seviyesinde kaldı.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "Bloomberg HT'nin Eylül ankete katılan 25 ekonomistin 24'ü politika faizinin %37'de sabit tutulmasını, 1'i ise 100 baz puan indirim yapılmasını bekliyor.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; Fed'in 15-16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-08-1400",
     title: "FXPARTNER Piyasa Özeti | 08.09.2026 Öğleden Sonra Güncellemesi",
     excerpt:
