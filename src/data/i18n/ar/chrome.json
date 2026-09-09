@@ -2948,5 +2948,7 @@
   "Koşulları oku": "اقرأ الشروط",
   "Yukarıdaki bilgiler genel bilgilendirme amaçlıdır; şartlar hesap türüne ve ülkenize göre değişebilir. İşlem yapmadan önce güncel koşulları {broker} resmi sitesinden doğrulamanızı öneririz.": "المعلومات المذكورة أعلاه هي لأغراض معلوماتية عامة فقط؛ قد تختلف الشروط وفقًا لنوع الحساب وبلدك. نوصي بالتحقق من الشروط الحالية من الموقع الرسمي لـ {broker} قبل التداول.",
   "Not:": "ملاحظة:",
-  "Yok": "لا يوجد"
+  "Yok": "لا يوجد",
+  "{count} değerlendirmeye dayanmaktadır": "استناداً إلى {count} تقييم",
+  "{broker} incelemesinin tamamını okuyun": "اقرأ مراجعة {broker} بالكامل"
 }

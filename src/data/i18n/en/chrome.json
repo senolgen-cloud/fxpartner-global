@@ -2948,5 +2948,7 @@
   "Koşulları oku": "Read the terms",
   "Yukarıdaki bilgiler genel bilgilendirme amaçlıdır; şartlar hesap türüne ve ülkenize göre değişebilir. İşlem yapmadan önce güncel koşulları {broker} resmi sitesinden doğrulamanızı öneririz.": "The above information is for general informational purposes; terms may vary depending on account type and your country. Before trading, we recommend verifying current conditions on the official {broker} website.",
   "Not:": "Note:",
-  "Yok": "None"
+  "Yok": "None",
+  "{count} değerlendirmeye dayanmaktadır": "Based on {count} reviews",
+  "{broker} incelemesinin tamamını okuyun": "Read the full {broker} review"
 }

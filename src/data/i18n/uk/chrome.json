@@ -2948,5 +2948,7 @@
   "Koşulları oku": "Прочитайте умови",
   "Yukarıdaki bilgiler genel bilgilendirme amaçlıdır; şartlar hesap türüne ve ülkenize göre değişebilir. İşlem yapmadan önce güncel koşulları {broker} resmi sitesinden doğrulamanızı öneririz.": "Інформація вище призначена лише для загального ознайомлення; умови можуть змінюватися залежно від типу рахунку та вашої країни. Перед здійсненням угод рекомендуємо перевірити актуальні умови на офіційному сайті {broker}.",
   "Not:": "Примітка:",
-  "Yok": "Немає"
+  "Yok": "Немає",
+  "{count} değerlendirmeye dayanmaktadır": "На основі {count} оцінок",
+  "{broker} incelemesinin tamamını okuyun": "Прочитайте повний огляд {broker}"
 }

@@ -660,7 +660,7 @@ export default async function BrokerDetailPage({
                     href={`/blog/${reviewPost.slug}`}
                     className="mt-4 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal"
                   >
-                    {broker.name} incelemesinin tamamını okuyun →
+                    {trf("{broker} incelemesinin tamamını okuyun", { broker: broker.name })} →
                   </Link>
                 )}
               </div>

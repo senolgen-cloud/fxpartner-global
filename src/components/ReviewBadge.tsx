@@ -1,4 +1,4 @@
-import { tr } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 function wordForRating(rating: number): string {
   if (rating >= 4.5) return "Mükemmel";
   if (rating >= 3.5) return "Çok İyi";
@@ -55,7 +55,7 @@ export default function ReviewBadge({
           {rating.toFixed(1)}
         </span>
         <span className="text-xs text-text-on-ink-muted">
-          {count} değerlendirmeye dayanmaktadır
+          {trf("{count} değerlendirmeye dayanmaktadır", { count })}
         </span>
       </div>
 
