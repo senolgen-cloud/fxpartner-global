@@ -1818,8 +1818,7 @@ export const blogPosts: BlogPost[] = [
           "2. Exness — 1-2 dakika",
           "3. XM — 3-5 dakika",
           "4. FxPro — 15-30 dakika",
-          "5. markets.com — 15-45 dakika",
-          "6. AvaTrade — 1 saat ve üzeri",
+          "5. AvaTrade — 1 saat ve üzeri",
         ],
       },
       {

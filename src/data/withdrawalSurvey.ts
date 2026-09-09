@@ -38,19 +38,17 @@ export const withdrawalReports: WithdrawalReport[] = [
   { slug: "exness", label: "1-2 dakika" },
   { slug: "xm", label: "3-5 dakika" },
   { slug: "fxpro", label: "15-30 dakika" },
-  { slug: "markets-com", label: "15-45 dakika" },
   { slug: "avatrade", label: "1 saat ve üzeri" },
 ];
 
 /**
  * The reports in the order the table shows them.
  *
- * The array order IS the ranking. An earlier version carried a
- * `sortMinutes` field and sorted on it, which forced a fake precision:
- * FxPro and markets.com both start at 15 minutes, so one of them had to be
- * given a number it was never reported with in order to hold its place.
- * The order the reports arrived in is the finding; nothing is gained by
- * deriving it a second time from invented numbers.
+ * The array order IS the ranking, because the ranking is the finding. An
+ * earlier version carried a `sortMinutes` field and re-derived the order
+ * from it, which forced a fake precision: two brokers reported the same
+ * lower bound, so one had to be given a number nobody reported in order to
+ * hold its place. Nothing was gained by deriving twice what was known once.
  */
 export function rankedWithdrawalReports(): WithdrawalReport[] {
   return withdrawalReports;
