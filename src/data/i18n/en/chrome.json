@@ -2950,5 +2950,9 @@
   "Not:": "Note:",
   "Yok": "None",
   "{count} değerlendirmeye dayanmaktadır": "Based on {count} reviews",
-  "{broker} incelemesinin tamamını okuyun": "Read the full {broker} review"
+  "{broker} incelemesinin tamamını okuyun": "Read the full {broker} review",
+  "{broker}, {firm} funded account programını destekliyor": "{broker} supports the {firm} funded account program",
+  "{firm}, {broker} fiyatlama ve emir gerçekleştirme altyapısını kullanan bir prop firmadır. Kendi sermayenizi yatırmadan, bir değerlendirme sürecini geçerek fonlanmış hesapla işlem yapmayı sağlar.": "{firm} is a prop firm that uses {broker}'s pricing and order execution infrastructure. It allows you to trade with a funded account by passing an evaluation process, without depositing your own capital.",
+  "Prop firmalar broker gibi lisanslanmaz. {broker} bu sayfada listelenen lisansları {firm} üzerindeki fonlanmış hesabınızı kapsamaz; iki hizmet ayrı değerlendirilir ve sitemizde ayrı rubriklerle puanlanır.": "Prop firms are not licensed like brokers. The licenses of {broker} listed on this page do not cover your funded account on {firm}; the two services are evaluated separately and scored with separate rubrics on our site.",
+  "{firm} değerlendirmesi ({score})": "{firm} review ({score})"
 }

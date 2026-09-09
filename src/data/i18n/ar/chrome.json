@@ -2950,5 +2950,9 @@
   "Not:": "ملاحظة:",
   "Yok": "لا يوجد",
   "{count} değerlendirmeye dayanmaktadır": "استناداً إلى {count} تقييم",
-  "{broker} incelemesinin tamamını okuyun": "اقرأ مراجعة {broker} بالكامل"
+  "{broker} incelemesinin tamamını okuyun": "اقرأ مراجعة {broker} بالكامل",
+  "{broker}, {firm} funded account programını destekliyor": "{broker} يدعم برنامج الحساب الممول لـ {firm}",
+  "{firm}, {broker} fiyatlama ve emir gerçekleştirme altyapısını kullanan bir prop firmadır. Kendi sermayenizi yatırmadan, bir değerlendirme sürecini geçerek fonlanmış hesapla işlem yapmayı sağlar.": "{firm} هي شركة prop firm تستخدم البنية التحتية للتسعير وتنفيذ الأوامر الخاصة بـ {broker}. وتتيح التداول بحساب ممول من خلال اجتياز مرحلة التقييم، دون الحاجة لاستثمار رأس مالك الخاص.",
+  "Prop firmalar broker gibi lisanslanmaz. {broker} bu sayfada listelenen lisansları {firm} üzerindeki fonlanmış hesabınızı kapsamaz; iki hizmet ayrı değerlendirilir ve sitemizde ayrı rubriklerle puanlanır.": "لا تُصرّح شركات الـ prop firm كشركات الوساطة. التراخيص المدرجة لـ {broker} في هذه الصفحة لا تغطي حسابك الممول لدى {firm}؛ حيث تُقيّم الخدمتان بشكل منفصل وبفئات تقييم مستقلة على موقعنا.",
+  "{firm} değerlendirmesi ({score})": "تقييم {firm} ({score})"
 }

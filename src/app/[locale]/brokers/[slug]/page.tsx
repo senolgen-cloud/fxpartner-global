@@ -677,29 +677,34 @@ export default async function BrokerDetailPage({
                     {tr("İlgili — Prop Firma")}
                   </span>
                   <h2 className="mt-3 font-display text-xl font-semibold text-text-dark">
-                    {broker.name}, {backedPropFirm.name} funded account programını
-                    destekliyor
+                    {trf("{broker}, {firm} funded account programını destekliyor", {
+                      broker: broker.name,
+                      firm: backedPropFirm.name,
+                    })}
                   </h2>
                   <p className="mt-3 max-w-2xl text-sm leading-relaxed text-text-muted">
-                    {backedPropFirm.name}, {broker.name}&apos;ın fiyatlama ve emir
-                    gerçekleştirme altyapısını kullanan bir prop firmadır. Kendi
-                    sermayenizi yatırmadan, bir değerlendirme sürecini geçerek
-                    fonlanmış hesapla işlem yapmayı sağlar.
+                    {trf(
+                      "{firm}, {broker} fiyatlama ve emir gerçekleştirme altyapısını kullanan bir prop firmadır. Kendi sermayenizi yatırmadan, bir değerlendirme sürecini geçerek fonlanmış hesapla işlem yapmayı sağlar.",
+                      { firm: backedPropFirm.name, broker: broker.name }
+                    )}
                   </p>
                   <p className="mt-3 max-w-2xl text-xs leading-relaxed text-text-muted">
-                    <strong className="text-text-dark">{tr("Önemli:")}</strong> Prop firmalar
-                    broker gibi lisanslanmaz. {broker.name}&apos;ın bu sayfada listelenen
-                    lisansları {backedPropFirm.name}&apos;daki fonlanmış hesabınızı
-                    kapsamaz; iki hizmet ayrı değerlendirilir ve sitemizde ayrı
-                    rubriklerle puanlanır.
+                    <strong className="text-text-dark">{tr("Önemli:")}</strong>{" "}
+                    {trf(
+                      "Prop firmalar broker gibi lisanslanmaz. {broker} bu sayfada listelenen lisansları {firm} üzerindeki fonlanmış hesabınızı kapsamaz; iki hizmet ayrı değerlendirilir ve sitemizde ayrı rubriklerle puanlanır.",
+                      { broker: broker.name, firm: backedPropFirm.name }
+                    )}
                   </p>
                   <div className="mt-5 flex flex-wrap items-center gap-5">
                     <Link
                       href="/prop-firmalar"
                       className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
                     >
-                      {backedPropFirm.name} değerlendirmesi (
-                      {getPropFirmScores(backedPropFirm).composite.toFixed(1)}) →
+                      {trf("{firm} değerlendirmesi ({score})", {
+                        firm: backedPropFirm.name,
+                        score: getPropFirmScores(backedPropFirm).composite.toFixed(1),
+                      })}{" "}
+                      →
                     </Link>
                     <span className="font-mono text-[11px] text-text-muted">
                       {tr("Prop firma puanı, broker puanından bağımsızdır")}

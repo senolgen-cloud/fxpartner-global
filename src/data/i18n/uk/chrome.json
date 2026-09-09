@@ -2950,5 +2950,9 @@
   "Not:": "Примітка:",
   "Yok": "Немає",
   "{count} değerlendirmeye dayanmaktadır": "На основі {count} оцінок",
-  "{broker} incelemesinin tamamını okuyun": "Прочитайте повний огляд {broker}"
+  "{broker} incelemesinin tamamını okuyun": "Прочитайте повний огляд {broker}",
+  "{broker}, {firm} funded account programını destekliyor": "{broker} підтримує програму фінансованих рахунків {firm}",
+  "{firm}, {broker} fiyatlama ve emir gerçekleştirme altyapısını kullanan bir prop firmadır. Kendi sermayenizi yatırmadan, bir değerlendirme sürecini geçerek fonlanmış hesapla işlem yapmayı sağlar.": "{firm} — це проп-компанія, яка використовує інфраструктуру ціноутворення та виконання ордерів {broker}. Вона дозволяє торгувати на фінансованому рахунку після проходження процесу оцінювання, без інвестування власного капіталу.",
+  "Prop firmalar broker gibi lisanslanmaz. {broker} bu sayfada listelenen lisansları {firm} üzerindeki fonlanmış hesabınızı kapsamaz; iki hizmet ayrı değerlendirilir ve sitemizde ayrı rubriklerle puanlanır.": "Проп-компанії не ліцензуються як брокери. Ліцензії {broker}, перелічені на цій сторінці, не поширюються на ваш фінансований рахунок у {firm}; ці дві послуги оцінюються окремо та отримують бали в окремих рубриках на нашому сайті.",
+  "{firm} değerlendirmesi ({score})": "Оцінка {firm} ({score})"
 }
