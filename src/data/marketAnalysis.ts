@@ -41,6 +41,60 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-09-1200",
+    title: "FXPARTNER Piyasa Özeti | 09.09.2026 Öğle Güncellemesi",
+    excerpt:
+      "Çarşamba günü İran-ABD çatışmasında sert bir tırmanma yaşandı: CENTCOM, 8 Eylül'de İran Devrim Muhafızları Ordusu'nun (IRGC) bir ABD savaş gemisine iki gün içinde iki kez balistik füze fırlatmasına karşılık beş İran petrol tankerini vurarak etkisiz hale getirdiğini açıklarken, İran karşılık olarak Ürdün'deki Prens Hasan Hava Üssü'ne füze saldırısı düzenlediğini duyurdu. Gelişme sonrası Brent petrol %1,6 yükselişle 99,49 dolara çıkarak 100 dolar sınırına iyice yaklaştı. Ons altın 4.400 dolar seviyesinde tutunurken yurt içinde gram altın günü önceki güne göre yaklaşık %1,06 artışla 6.858 TL civarında açtı. BIST 100 endeksi ise Salı günkü %1,79'luk yükselişin ardından Çarşamba gününe %0,17 düşüşle 14.381,24 puandan başladı. TCMB'nin yarınki faiz kararına ilişkin yeni bir ankette de ekonomistlerin büyük çoğunluğu politika faizinin %37'de sabit kalmasını bekliyor.",
+    publishedAt: "2026-09-09",
+    readingMinutes: 3,
+    intro:
+      "Çarşamba günü piyasaların gündemine İran-ABD çatışmasında yaşanan sert tırmanma damga vurdu: ABD Merkez Kuvvetler Komutanlığı (CENTCOM), 8 Eylül'de İran Devrim Muhafızları Ordusu'nun (IRGC) bölgede devriye gezen bir ABD savaş gemisine iki gün içinde iki kez balistik füze fırlattığını, buna karşılık dördü Umman Körfezi'nde (M/T Kaviz, M/T Charminar, M/T Horizon 1, M/T Riesco) biri de Harg Adası açıklarında (M/T Derya) olmak üzere beş İran petrol tankerini vurarak etkisiz hale getirdiklerini açıkladı; ABD güçleri saldırıdan önce tayfaya gemiyi terk etme talimatı verdi, ABD savaş gemisi İran'ın saldırılarından kaçındı ve hiçbir ABD personeli yaralanmadı. İran ise karşılık olarak Ürdün'deki Prens Hasan Hava Üssü'nde ABD'ye ait RQ-4 ve MQ-9 insansız hava araçlarının bulunduğu bir hangarı balistik füzelerle vurduğunu duyururken, IRGC deniz kuvvetleri ayrıca Kuveyt ve Bahreyn limanları çevresindeki tüm petrol tankeri mürettebatını gemilerini derhal tahliye etmeleri yönünde uyardı. Gelişme, enerji arzına yönelik endişeleri yeniden alevlendirerek Brent petrolün Çarşamba sabahı %1,6 yükselişle 99,49 dolara çıkmasına ve 100 dolar sınırına iyice yaklaşmasına yol açtı. Altın tarafında ons altın 4.400 dolar seviyesinde tutunurken, yurt içinde gram altın saat 10.00 itibarıyla 6.857,85-6.858,84 TL bandında işlem görerek bir önceki güne göre yaklaşık %1,06 değer kazandı. Borsa tarafında BIST 100 endeksi, Salı günü %1,79 değer kazanarak 14.405,25 puandan kapanmasının ardından Çarşamba gününe %0,17 düşüşle 14.381,24 puandan başladı. Yurt içinde ise TCMB'nin yarın (10 Eylül) saat 14.00'te açıklayacağı faiz kararı öncesi yapılan yeni bir ankette de ekonomistlerin büyük çoğunluğunun beklentisi politika faizinin %37'de sabit kalması yönünde şekillendi.",
+    news: [
+      {
+        icon: "🚢",
+        heading: "ABD 5 İran Tankerini Vurdu, İran Ürdün'deki Üsse Füze Attı",
+        body: "**CENTCOM**, 8 Eylül'de **İran Devrim Muhafızları Ordusu'nun (IRGC)** iki gün içinde bir ABD savaş gemisine iki kez balistik füze fırlatmasının ardından, dördü Umman Körfezi'nde (**M/T Kaviz, M/T Charminar, M/T Horizon 1, M/T Riesco**) biri de **Harg Adası** açıklarında (**M/T Derya**) olmak üzere **beş İran petrol tankerini** vurarak etkisiz hale getirdiğini açıkladı; ABD güçleri saldırıdan önce tayfaya gemiyi terk etme talimatı verdi ve hiçbir ABD personeli yaralanmadı. Buna karşılık İran, **Ürdün'deki Prens Hasan Hava Üssü**'nde ABD'ye ait **RQ-4 ve MQ-9** insansız hava araçlarının bulunduğu bir hangarı balistik füzelerle vurduğunu duyururken, **IRGC deniz kuvvetleri** de Kuveyt ve Bahreyn limanları çevresindeki tüm petrol tankeri mürettebatını gemilerini derhal tahliye etmeleri yönünde uyardı.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Brent Petrol 99,49 Dolara Çıktı, 100 Dolar Sınırına Yaklaştı",
+        body: "Kasım vadeli **Brent petrol**, Çarşamba sabahı saat **09.48** itibarıyla bir önceki kapanışa göre **%1,6** yükselişle **99,49 dolara** çıkarak 100 dolar sınırına iyice yaklaştı; ekim vadeli **WTI** ham petrol de aynı saatlerde **94,34 dolardan** işlem gördü. Yükselişte, ABD ile İran arasında Hürmüz Boğazı çevresinde tırmanan çatışmanın küresel petrol arzını kesintiye uğratabileceğine yönelik artan endişeler etkili oldu.",
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın 4.400 Dolarda, Gram Altın Günü Yükselişle Açtı",
+        body: "**XAU/USD**, Çarşamba günü **4.400 dolar** seviyesinde işlem görürken, yurt içinde **gram altın** saat **10.00** itibarıyla **6.857,85-6.858,84 TL** bandında alıcı buldu; gram altın fiyatı böylece bir önceki güne göre yaklaşık **%1,06** artış kaydetti. **Çeyrek altın 11.200 TL**'den, **Cumhuriyet altını** ise **44.719,66 TL**'den işlem gördü.",
+      },
+      {
+        icon: "📉",
+        heading: "BIST 100 Güne Düşüşle Başladı: 14.381 Puan",
+        body: "**BIST 100 endeksi**, Salı günü **%1,79** değer kazanarak **14.405,25 puandan** kapanmasının ardından Çarşamba gününe **%0,17** düşüşle **14.381,24 puandan** başladı; açılışta **bankacılık endeksi %0,16**, **holding endeksi %0,21** değer kaybederken, **madencilik** hisseleri **%0,69** ile en çok yükselen, **bilişim** hisseleri ise **%3,03** ile en çok gerileyen sektör oldu.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "TCMB Kararına 1 Gün Kala: Yeni Ankette de Ağırlık 'Sabit Faiz'de",
+        body: "TCMB Para Politikası Kurulu'nun yarın (**10 Eylül**) saat **14.00**'te açıklayacağı faiz kararı öncesi **Matriks Haber**'in **27 ekonomistle** yaptığı ankete göre **21 ekonomist** politika faizinin **%37**'de **sabit tutulmasını** beklerken, **6 ekonomist** indirim öngörüyor: **5 ekonomist 100 baz puanlık** indirimle faizin **%36**'ya, **1 ekonomist** ise **300 baz puanlık** indirimle **%34**'e çekilmesini bekliyor. İlk faiz indiriminin zamanlamasına ilişkin görüş bildiren **16 ekonomistin medyan beklentisi** ise **Ekim 2026**'da **%36**'ya inilmesi yönünde.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "AA Finans anketinde 25 ekonomistin 24'ü, Matriks Haber anketinde ise 27 ekonomistin 21'i politika faizinin %37'de sabit tutulmasını bekliyor; azınlıkta kalan ekonomistler 100-300 baz puan indirim öngörüyor.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-09-0800",
     title: "FXPARTNER Piyasa Özeti | 09.09.2026 Sabah Güncellemesi",
     excerpt:
