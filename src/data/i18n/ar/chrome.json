@@ -2978,5 +2978,6 @@
   "Stop Loss (pip)": "وقف الخسارة (pip)",
   "Kopyalandı": "تم النسخ",
   "Kopyalamak için tıklayın": "انقر للنسخ",
-  "En hızlı para çekimi yapan forex brokerları — 2026 karşılaştırması": "شركات وساطة الفوركس الأسرع في السحب — مقارنة 2026"
+  "En hızlı para çekimi yapan forex brokerları — 2026 karşılaştırması": "شركات وساطة الفوركس الأسرع في السحب — مقارنة 2026",
+  "Bu sıralama bir ölçüm değil, {responses} yatırımcının geri dönüşünün özeti — {date} tarihinde derlendi. Süreler çekim yöntemine, hesap doğrulamasının tamamlanmış olmasına ve tutara göre değişir; kripto çekimler genelde en hızlısıdır.": "هذا الترتيب ليس قياسًا، بل ملخص لآراء {responses} مستثمر — تم تجميعه بتاريخ {date}. تختلف المدد بحسب طريقة السحب، وإتمام توثيق الحساب، والمبلغ؛ وتكون السحوبات بالعملات الرقمية هي الأسرع عادةً."
 }

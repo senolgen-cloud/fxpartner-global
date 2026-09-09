@@ -33,6 +33,17 @@ export interface WithdrawalReport {
 /** When these reports were last collected, for the line under the table. */
 export const WITHDRAWAL_SURVEY_DATE = "2026-09-09";
 
+/**
+ * How many investors the reports come from.
+ *
+ * A ranking with a sample size behind it is a different claim from one
+ * without: it is the number that lets a reader decide how much weight the
+ * order deserves, and it is the number competing sites do not publish.
+ * Written as given rather than rounded to a precise-looking figure we do
+ * not have.
+ */
+export const WITHDRAWAL_SURVEY_RESPONSES = "500+";
+
 export const withdrawalReports: WithdrawalReport[] = [
   { slug: "lite-finance", label: "Anlık — 1 saniyeden az" },
   { slug: "exness", label: "1-2 dakika" },

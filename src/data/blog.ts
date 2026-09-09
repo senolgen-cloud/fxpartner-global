@@ -1811,7 +1811,7 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "Diğer brokerlara göre nerede duruyor?",
         paragraphs: [
-          "Süreleri tek başına okumak yanıltıcı olabilir — \"dakikalar içinde\" her brokerın kendi sitesinde yazan bir ifade. Anlamlı olan karşılaştırma. FXPARTNER'a ulaşan yatırımcı geri dönüşlerine göre çekim süresi sıralaması şöyle:",
+          "Süreleri tek başına okumak yanıltıcı olabilir — \"dakikalar içinde\" her brokerın kendi sitesinde yazan bir ifade. Anlamlı olan karşılaştırma. FXPARTNER anketine katılan 500'den fazla yatırımcının geri dönüşüne göre çekim süresi sıralaması şöyle:",
         ],
         list: [
           "1. LiteFinance — anlık, bir saniyeden az",
@@ -1823,7 +1823,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         paragraphs: [
-          "Bu bir ölçüm değil, bize ulaşan geri dönüşlerin özeti — ve yalnızca hakkında yeterli geri dönüş olan brokerları kapsıyor. Listede olmayan bir broker yavaş olduğu için değil, elimizde yeterli veri olmadığı için orada yok. Süreler yönteme, doğrulamanın tamamlanmış olmasına ve tutara göre de değişir; yukarıdaki sıralama kripto ve e-cüzdan gibi hızlı kanallardaki tipik deneyimi yansıtıyor.",
+          "Bu bir ölçüm değil, 500'den fazla yatırımcının bildirdiklerinin özeti — ve yalnızca hakkında yeterli geri dönüş olan brokerları kapsıyor. Listede olmayan bir broker yavaş olduğu için değil, elimizde yeterli veri olmadığı için orada yok. Süreler yönteme, doğrulamanın tamamlanmış olmasına ve tutara göre de değişir; yukarıdaki sıralama kripto ve e-cüzdan gibi hızlı kanallardaki tipik deneyimi yansıtıyor.",
           "Kendi hesabınızda doğrulamanın en pratik yolu değişmedi: hesabı açtıktan sonra küçük bir tutarla bir çekim testi yapın. Bir brokerın çekim davranışını, parayı geri isteyene kadar gerçekten bilemezsiniz.",
         ],
       },

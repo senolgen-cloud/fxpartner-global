@@ -3,7 +3,11 @@ import Link from "@/components/LocaleLink";
 import { tr, trf, trLocale } from "@/lib/chrome";
 import { getBrokerBySlug } from "@/data/brokers";
 import { trData } from "@/lib/localizeContent";
-import { rankedWithdrawalReports, WITHDRAWAL_SURVEY_DATE } from "@/data/withdrawalSurvey";
+import {
+  rankedWithdrawalReports,
+  WITHDRAWAL_SURVEY_DATE,
+  WITHDRAWAL_SURVEY_RESPONSES,
+} from "@/data/withdrawalSurvey";
 import { getServerLocale } from "@/lib/serverLocale";
 
 /**
@@ -88,8 +92,9 @@ export default function WithdrawalSpeedTable() {
 
       <p className="mt-4 text-xs leading-relaxed text-text-on-ink-muted">
         {trf(
-          "Bu sıralama bir ölçüm değil, yatırımcı geri dönüşlerinin özeti — {date} tarihinde derlendi. Süreler çekim yöntemine, hesap doğrulamasının tamamlanmış olmasına ve tutara göre değişir; kripto çekimler genelde en hızlısıdır.",
+          "Bu sıralama bir ölçüm değil, {responses} yatırımcının geri dönüşünün özeti — {date} tarihinde derlendi. Süreler çekim yöntemine, hesap doğrulamasının tamamlanmış olmasına ve tutara göre değişir; kripto çekimler genelde en hızlısıdır.",
           {
+            responses: WITHDRAWAL_SURVEY_RESPONSES,
             date: surveyDate.toLocaleDateString(trLocale(), {
               day: "numeric",
               month: "long",
