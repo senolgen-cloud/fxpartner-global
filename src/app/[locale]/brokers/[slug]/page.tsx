@@ -779,12 +779,16 @@ export default async function BrokerDetailPage({
             <div
               className={`${broker.promotions?.length || cashback ? "mt-6" : "mt-14"} rounded-2xl border border-hairline-light bg-paper p-6`}
             >
+              {/* Split across JSX around the broker name, so tr() had
+                  nothing to key on and this disclaimer stayed Turkish in
+                  every language — on the one paragraph that tells a reader
+                  to go and check the terms themselves. */}
               <p className="text-sm leading-relaxed text-text-muted">
-                <strong className="text-text-dark">Not:</strong> Yukarıdaki
-                bilgiler genel bilgilendirme amaçlıdır; şartlar hesap türüne
-                ve ülkenize göre değişebilir. İşlem yapmadan önce güncel
-                koşulları {broker.name}&apos;ın resmi sitesinden doğrulamanızı
-                öneririz.
+                <strong className="text-text-dark">{tr("Not:")}</strong>{" "}
+                {trf(
+                  "Yukarıdaki bilgiler genel bilgilendirme amaçlıdır; şartlar hesap türüne ve ülkenize göre değişebilir. İşlem yapmadan önce güncel koşulları {broker} resmi sitesinden doğrulamanızı öneririz.",
+                  { broker: broker.name }
+                )}
               </p>
             </div>
           </div>

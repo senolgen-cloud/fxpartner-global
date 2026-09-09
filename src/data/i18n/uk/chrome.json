@@ -2945,5 +2945,8 @@
   "{broker}, {count} regülasyon lisansı taşıyor: {list}. {tier1} Tier-1 otoritesi — bunlar müşteri fonlarının ayrılmasını ve minimum sermaye rezervini şart koşar, bazı ülkelerde broker iflas ederse bir tazminat şemasını da destekler. Kalan lisans offshore’dur; bu genellikle daha hafif sermaye şartları ve arkasında bir yatırımcı tazminat şeması olmaması anlamına gelir.": "{broker} має {count} регуляторних ліцензій: {list}. {tier1} — це регулятор Tier-1, який вимагає сегрегації коштів клієнтів і мінімального резерву капіталу, а також у деяких країнах підтримує схему компенсації на випадок банкрутства брокера. Решта — офшорна ліцензія; це зазвичай означає м'якші вимоги до капіталу та відсутність схеми компенсації інвесторам.",
   "Canlı Destek": "Онлайн-підтримка",
   "{broker} kampanyaları": "Акції {broker}",
-  "Koşulları oku": "Прочитайте умови"
+  "Koşulları oku": "Прочитайте умови",
+  "Yukarıdaki bilgiler genel bilgilendirme amaçlıdır; şartlar hesap türüne ve ülkenize göre değişebilir. İşlem yapmadan önce güncel koşulları {broker} resmi sitesinden doğrulamanızı öneririz.": "Інформація вище призначена лише для загального ознайомлення; умови можуть змінюватися залежно від типу рахунку та вашої країни. Перед здійсненням угод рекомендуємо перевірити актуальні умови на офіційному сайті {broker}.",
+  "Not:": "Примітка:",
+  "Yok": "Немає"
 }

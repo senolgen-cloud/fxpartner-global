@@ -2945,5 +2945,8 @@
   "{broker}, {count} regülasyon lisansı taşıyor: {list}. {tier1} Tier-1 otoritesi — bunlar müşteri fonlarının ayrılmasını ve minimum sermaye rezervini şart koşar, bazı ülkelerde broker iflas ederse bir tazminat şemasını da destekler. Kalan lisans offshore’dur; bu genellikle daha hafif sermaye şartları ve arkasında bir yatırımcı tazminat şeması olmaması anlamına gelir.": "{broker} holds {count} regulatory licenses: {list}. {tier1} Tier-1 authority — these require segregation of client funds and minimum capital reserves, and in some countries also support a compensation scheme if the broker goes bankrupt. The remaining license is offshore; this usually means lighter capital requirements and no investor compensation scheme behind it.",
   "Canlı Destek": "Live Support",
   "{broker} kampanyaları": "{broker} campaigns",
-  "Koşulları oku": "Read the terms"
+  "Koşulları oku": "Read the terms",
+  "Yukarıdaki bilgiler genel bilgilendirme amaçlıdır; şartlar hesap türüne ve ülkenize göre değişebilir. İşlem yapmadan önce güncel koşulları {broker} resmi sitesinden doğrulamanızı öneririz.": "The above information is for general informational purposes; terms may vary depending on account type and your country. Before trading, we recommend verifying current conditions on the official {broker} website.",
+  "Not:": "Note:",
+  "Yok": "None"
 }
