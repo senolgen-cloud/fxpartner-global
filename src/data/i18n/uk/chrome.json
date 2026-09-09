@@ -2954,5 +2954,19 @@
   "{broker}, {firm} funded account programını destekliyor": "{broker} підтримує програму фінансованих рахунків {firm}",
   "{firm}, {broker} fiyatlama ve emir gerçekleştirme altyapısını kullanan bir prop firmadır. Kendi sermayenizi yatırmadan, bir değerlendirme sürecini geçerek fonlanmış hesapla işlem yapmayı sağlar.": "{firm} — це проп-компанія, яка використовує інфраструктуру ціноутворення та виконання ордерів {broker}. Вона дозволяє торгувати на фінансованому рахунку після проходження процесу оцінювання, без інвестування власного капіталу.",
   "Prop firmalar broker gibi lisanslanmaz. {broker} bu sayfada listelenen lisansları {firm} üzerindeki fonlanmış hesabınızı kapsamaz; iki hizmet ayrı değerlendirilir ve sitemizde ayrı rubriklerle puanlanır.": "Проп-компанії не ліцензуються як брокери. Ліцензії {broker}, перелічені на цій сторінці, не поширюються на ваш фінансований рахунок у {firm}; ці дві послуги оцінюються окремо та отримують бали в окремих рубриках на нашому сайті.",
-  "{firm} değerlendirmesi ({score})": "Оцінка {firm} ({score})"
+  "{firm} değerlendirmesi ({score})": "Оцінка {firm} ({score})",
+  "Yatırımcı anketi": "Опитування інвесторів",
+  "Para çekme ne kadar sürüyor? Yatırımcıların bildirdiği süreler": "Скільки часу займає виведення коштів? Терміни, про які повідомляють інвестори",
+  "Spreadi ve kaldıracı brokerın kendi sitesinde bulursunuz; paranın hesaptan ne kadar sürede çıktığını yalnızca çekim yapmış olanlar bilir. Aşağıdaki sıralama bize ulaşan geri dönüşlerin özeti.": "Спред і леверидж ви знайдете на власному сайті брокера; скільки часу гроші виводяться з рахунку, знають лише ті, хто здійснював виведення. Наведений нижче рейтинг — це підсумок отриманих нами відгуків.",
+  "Bu sıralama bir ölçüm değil, yatırımcı geri dönüşlerinin özeti — {date} tarihinde derlendi. Süreler çekim yöntemine, hesap doğrulamasının tamamlanmış olmasına ve tutara göre değişir; kripto çekimler genelde en hızlısıdır.": "Цей рейтинг є не вимірюванням, а підсумком відгуків інвесторів — зібрано {date}. Терміни залежать від способу виведення, проходження верифікації облікового запису та суми; виведення в криптовалюті зазвичай найшвидше.",
+  "Listede olmayan bir broker yavaş olduğu için değil, hakkında yeterli geri dönüş olmadığı için burada yok — {ranked} broker sıralanabildi.": "Брокер відсутній у списку не через повільну роботу, а через те, що про нього немає достатньо відгуків — вдалося відранжувати {ranked} брокерів.",
+  "Yatırımcı anketi: {rank}/{total}": "Опитування інвесторів: {rank}/{total}",
+  "{broker} — Sponsorlu, Siteye Git": "{broker} — Спонсоровано, Перейти на сайт",
+  "Sponsorlu — {broker}": "Спонсоровано — {broker}",
+  "Anlık — 1 saniyeden az": "Миттєво — менше 1 секунди",
+  "1-2 dakika": "1-2 хвилини",
+  "3-5 dakika": "3-5 хвилин",
+  "15-30 dakika": "15-30 хвилин",
+  "15-45 dakika": "15-45 хвилин",
+  "1 saat ve üzeri": "1 година і більше"
 }

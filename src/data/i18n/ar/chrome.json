@@ -2954,5 +2954,19 @@
   "{broker}, {firm} funded account programını destekliyor": "{broker} يدعم برنامج الحساب الممول لـ {firm}",
   "{firm}, {broker} fiyatlama ve emir gerçekleştirme altyapısını kullanan bir prop firmadır. Kendi sermayenizi yatırmadan, bir değerlendirme sürecini geçerek fonlanmış hesapla işlem yapmayı sağlar.": "{firm} هي شركة prop firm تستخدم البنية التحتية للتسعير وتنفيذ الأوامر الخاصة بـ {broker}. وتتيح التداول بحساب ممول من خلال اجتياز مرحلة التقييم، دون الحاجة لاستثمار رأس مالك الخاص.",
   "Prop firmalar broker gibi lisanslanmaz. {broker} bu sayfada listelenen lisansları {firm} üzerindeki fonlanmış hesabınızı kapsamaz; iki hizmet ayrı değerlendirilir ve sitemizde ayrı rubriklerle puanlanır.": "لا تُصرّح شركات الـ prop firm كشركات الوساطة. التراخيص المدرجة لـ {broker} في هذه الصفحة لا تغطي حسابك الممول لدى {firm}؛ حيث تُقيّم الخدمتان بشكل منفصل وبفئات تقييم مستقلة على موقعنا.",
-  "{firm} değerlendirmesi ({score})": "تقييم {firm} ({score})"
+  "{firm} değerlendirmesi ({score})": "تقييم {firm} ({score})",
+  "Yatırımcı anketi": "استطلاع رأي المستثمرين",
+  "Para çekme ne kadar sürüyor? Yatırımcıların bildirdiği süreler": "كم تستغرق عملية السحب؟ الأوقات التي أفاد بها المستثمرون",
+  "Spreadi ve kaldıracı brokerın kendi sitesinde bulursunuz; paranın hesaptan ne kadar sürede çıktığını yalnızca çekim yapmış olanlar bilir. Aşağıdaki sıralama bize ulaşan geri dönüşlerin özeti.": "تجد الفارق السعري والرافعة المالية على موقع الوسيط نفسه؛ بينما لا يعرف المدة التي تستغرقها الأموال للخروج من الحساب إلا من قاموا بالسحب بالفعل. الترتيب أدناه هو ملخص للتقييمات التي وردتنا.",
+  "Bu sıralama bir ölçüm değil, yatırımcı geri dönüşlerinin özeti — {date} tarihinde derlendi. Süreler çekim yöntemine, hesap doğrulamasının tamamlanmış olmasına ve tutara göre değişir; kripto çekimler genelde en hızlısıdır.": "هذا الترتيب ليس قياساً دقيقاً، بل هو ملخص لآراء المستثمرين — تم جمعه بتاريخ {date}. تختلف المدة حسب طريقة السحب واكتمال توثيق الحساب والمبلغ؛ وتعد عمليات السحب عبر الكريبتو هي الأسرع عادةً.",
+  "Listede olmayan bir broker yavaş olduğu için değil, hakkında yeterli geri dönüş olmadığı için burada yok — {ranked} broker sıralanabildi.": "الوسيط غير المدرج في القائمة ليس بالضرورة بطيئاً، بل لعدم توفر تقييمات كافية عنه — تم ترتيب {ranked} وسيطاً.",
+  "Yatırımcı anketi: {rank}/{total}": "استطلاع رأي المستثمرين: {rank}/{total}",
+  "{broker} — Sponsorlu, Siteye Git": "{broker} — برعاية، زيارة الموقع",
+  "Sponsorlu — {broker}": "برعاية — {broker}",
+  "Anlık — 1 saniyeden az": "فوري — أقل من ثانية واحدة",
+  "1-2 dakika": "1-2 دقيقة",
+  "3-5 dakika": "3-5 دقائق",
+  "15-30 dakika": "15-30 دقيقة",
+  "15-45 dakika": "15-45 دقيقة",
+  "1 saat ve üzeri": "ساعة واحدة أو أكثر"
 }

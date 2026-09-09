@@ -6,6 +6,7 @@ import Image from "next/image";
 // the client bundle — where the per-request locale store does not exist and
 // tr() would quietly return Turkish to every reader.
 import { useTr, useTrf } from "@/components/useTr";
+import { useLocale } from "@/components/LocaleProvider";
 import type { Broker } from "@/data/brokers";
 
 function getMonogram(name: string): string {
@@ -24,7 +25,16 @@ function getMonogram(name: string): string {
 export default function BrokerAdBanner({ broker }: { broker: Broker }) {
   const tr = useTr();
   const trf = useTrf();
-  if (broker.adImage) {
+  const locale = useLocale();
+  // A banner's headline lives in its pixels, so it cannot be translated
+  // on read like the rest of the page. Where the partner has supplied
+  // artwork in the reader's language it is used; otherwise the default
+  // creative stands, which is what every broker did before this existed.
+  const localeAd = broker.adImageByLocale?.[locale];
+  const adImage = localeAd?.src ?? broker.adImage;
+  const adImageWidth = localeAd?.width ?? broker.adImageWidth ?? 1376;
+  const adImageHeight = localeAd?.height ?? broker.adImageHeight ?? 768;
+  if (adImage) {
     // Two anchors rather than two <source>s in one: where a partner's media
     // kit tags each banner size with its own tracking link, the click has to
     // carry the link belonging to the creative that was actually on screen.
@@ -41,17 +51,17 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
         href={broker.adUrl ?? broker.referralUrl}
         target="_blank"
         rel="noopener noreferrer sponsored"
-        aria-label={`${broker.name} — Sponsorlu, Siteye Git`}
+        aria-label={trf("{broker} — Sponsorlu, Siteye Git", { broker: broker.name })}
         className={`overflow-hidden rounded-2xl border border-hairline transition-opacity hover:opacity-90 ${
           broker.adImageMobile ? "hidden @[560px]:block" : "block"
         }`}
       >
-        <span className="sr-only">Sponsorlu — {broker.name}</span>
+        <span className="sr-only">{trf("Sponsorlu — {broker}", { broker: broker.name })}</span>
         <Image
-          src={broker.adImage}
+          src={adImage}
           alt={trf("{broker} reklamı", { broker: broker.name })}
-          width={broker.adImageWidth ?? 1376}
-          height={broker.adImageHeight ?? 768}
+          width={adImageWidth}
+          height={adImageHeight}
           sizes="(min-width: 768px) 768px, 100vw"
           className="h-auto w-full"
         />
@@ -67,10 +77,10 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
           href={broker.adUrlMobile ?? broker.adUrl ?? broker.referralUrl}
           target="_blank"
           rel="noopener noreferrer sponsored"
-          aria-label={`${broker.name} — Sponsorlu, Siteye Git`}
+          aria-label={trf("{broker} — Sponsorlu, Siteye Git", { broker: broker.name })}
           className="mx-auto block w-fit overflow-hidden rounded-2xl border border-hairline transition-opacity hover:opacity-90 @[560px]:hidden"
         >
-          <span className="sr-only">Sponsorlu — {broker.name}</span>
+          <span className="sr-only">{trf("Sponsorlu — {broker}", { broker: broker.name })}</span>
           <Image
             src={broker.adImageMobile}
             alt={trf("{broker} reklamı", { broker: broker.name })}

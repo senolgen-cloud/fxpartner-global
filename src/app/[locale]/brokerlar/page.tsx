@@ -7,6 +7,7 @@ import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import BrokerList from "@/components/BrokerList";
 import ComparisonTable from "@/components/ComparisonTable";
+import WithdrawalSpeedTable from "@/components/WithdrawalSpeedTable";
 import HeroBrokerSearch from "@/components/HeroBrokerSearch";
 import { brokers, brokerCategories, categoryInfo, getBrokerScores } from "@/data/brokers";
 import { lookupBrokers } from "@/data/brokerLookup";
@@ -278,6 +279,26 @@ export default async function BrokerlarPage({
                 <p className="mt-2 text-[15px] leading-relaxed text-text-on-ink-muted">
                   {tr("MT4, MT5, cTrader veya brokerın kendi platformu. Kullandığınız EA veya gösterge varsa platform desteği belirleyici olur.")}
                 </p>
+              </div>
+            </div>
+
+            {/* The withdrawal question, answered as far as we can answer
+                it. Sits under the paragraph that raises it rather than in
+                its own section: a reader who has just been told to test
+                withdrawals with a small amount is exactly the reader who
+                wants to know what other people found. */}
+            <div id="cekim-hizi" className="mt-10 scroll-mt-8">
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-signal">
+                {tr("Yatırımcı anketi")}
+              </span>
+              <h3 className="mt-3 font-poppins text-xl font-semibold">
+                {tr("Para çekme ne kadar sürüyor? Yatırımcıların bildirdiği süreler")}
+              </h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-text-on-ink-muted">
+                {tr("Spreadi ve kaldıracı brokerın kendi sitesinde bulursunuz; paranın hesaptan ne kadar sürede çıktığını yalnızca çekim yapmış olanlar bilir. Aşağıdaki sıralama bize ulaşan geri dönüşlerin özeti.")}
+              </p>
+              <div className="mt-6">
+                <WithdrawalSpeedTable />
               </div>
             </div>
 

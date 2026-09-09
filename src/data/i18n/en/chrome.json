@@ -2954,5 +2954,19 @@
   "{broker}, {firm} funded account programını destekliyor": "{broker} supports the {firm} funded account program",
   "{firm}, {broker} fiyatlama ve emir gerçekleştirme altyapısını kullanan bir prop firmadır. Kendi sermayenizi yatırmadan, bir değerlendirme sürecini geçerek fonlanmış hesapla işlem yapmayı sağlar.": "{firm} is a prop firm that uses {broker}'s pricing and order execution infrastructure. It allows you to trade with a funded account by passing an evaluation process, without depositing your own capital.",
   "Prop firmalar broker gibi lisanslanmaz. {broker} bu sayfada listelenen lisansları {firm} üzerindeki fonlanmış hesabınızı kapsamaz; iki hizmet ayrı değerlendirilir ve sitemizde ayrı rubriklerle puanlanır.": "Prop firms are not licensed like brokers. The licenses of {broker} listed on this page do not cover your funded account on {firm}; the two services are evaluated separately and scored with separate rubrics on our site.",
-  "{firm} değerlendirmesi ({score})": "{firm} review ({score})"
+  "{firm} değerlendirmesi ({score})": "{firm} review ({score})",
+  "Yatırımcı anketi": "Investor survey",
+  "Para çekme ne kadar sürüyor? Yatırımcıların bildirdiği süreler": "How long does withdrawal take? Times reported by investors",
+  "Spreadi ve kaldıracı brokerın kendi sitesinde bulursunuz; paranın hesaptan ne kadar sürede çıktığını yalnızca çekim yapmış olanlar bilir. Aşağıdaki sıralama bize ulaşan geri dönüşlerin özeti.": "You can find the spread and leverage on the broker's own website; only those who have made a withdrawal know how long it takes for the money to leave the account. The ranking below is a summary of the feedback we received.",
+  "Bu sıralama bir ölçüm değil, yatırımcı geri dönüşlerinin özeti — {date} tarihinde derlendi. Süreler çekim yöntemine, hesap doğrulamasının tamamlanmış olmasına ve tutara göre değişir; kripto çekimler genelde en hızlısıdır.": "This ranking is not a measurement, but a summary of investor feedback — compiled on {date}. Times vary depending on the withdrawal method, whether account verification is completed, and the amount; crypto withdrawals are generally the fastest.",
+  "Listede olmayan bir broker yavaş olduğu için değil, hakkında yeterli geri dönüş olmadığı için burada yok — {ranked} broker sıralanabildi.": "A broker not on the list is not here because it is slow, but because there is not enough feedback about it — {ranked} brokers could be ranked.",
+  "Yatırımcı anketi: {rank}/{total}": "Investor survey: {rank}/{total}",
+  "{broker} — Sponsorlu, Siteye Git": "{broker} — Sponsored, Go to Site",
+  "Sponsorlu — {broker}": "Sponsored — {broker}",
+  "Anlık — 1 saniyeden az": "Instant — less than 1 second",
+  "1-2 dakika": "1-2 minutes",
+  "3-5 dakika": "3-5 minutes",
+  "15-30 dakika": "15-30 minutes",
+  "15-45 dakika": "15-45 minutes",
+  "1 saat ve üzeri": "1 hour and above"
 }

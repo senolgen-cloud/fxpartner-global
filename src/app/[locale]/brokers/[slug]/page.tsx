@@ -24,6 +24,7 @@ import {
   RISK_LEVEL_LABEL,
   type BrokerCategory,
 } from "@/data/brokers";
+import { withdrawalRank, withdrawalReportFor } from "@/data/withdrawalSurvey";
 import TrustIndex from "@/components/TrustIndex";
 import CommentForm from "@/components/CommentForm";
 import BrokerReviewCard from "@/components/BrokerReviewCard";
@@ -169,6 +170,12 @@ export default async function BrokerDetailPage({
   // appears as a promise on a review page.
   const cashback = trData(getLiveCashbackProgram(broker.slug));
   const backedPropFirm = trData(getPropFirmByBackingBroker(broker.slug));
+
+  // Null for the thirteen brokers we do not have enough withdrawal reports
+  // for; the block below then renders nothing rather than an empty rank.
+  const wdRank = withdrawalRank(broker.slug);
+  const wdReport = withdrawalReportFor(broker.slug);
+  const withdrawalStanding = wdRank && wdReport ? { rank: wdRank, report: wdReport } : null;
 
   const tier1Regulators = broker.regulators.filter((r) => TIER1_REGULATORS.has(r));
   const offshoreRegulators = broker.regulators.filter((r) => !TIER1_REGULATORS.has(r));
@@ -617,6 +624,27 @@ export default async function BrokerDetailPage({
                     <p className="mt-3 text-[15px] leading-relaxed text-text-dark/90">
                       {broker.deepDive.withdrawals}
                     </p>
+                    {/* Where this broker sits in the reader survey, when we
+                        have enough reports for it. Shown here rather than in
+                        the hero: it is a reported figure, not a measured one,
+                        and it belongs beside the paragraph that explains how
+                        this broker actually processes a withdrawal. */}
+                    {withdrawalStanding && (
+                      <Link
+                        href="/brokerlar#cekim-hizi"
+                        className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-signal/30 bg-signal/5 px-4 py-3 transition-colors hover:border-signal/60"
+                      >
+                        <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-signal">
+                          {trf("Yatırımcı anketi: {rank}/{total}", {
+                            rank: withdrawalStanding.rank.rank,
+                            total: withdrawalStanding.rank.total,
+                          })}
+                        </span>
+                        <span className="text-right font-mono text-xs text-text-dark">
+                          {trData(withdrawalStanding.report).label}
+                        </span>
+                      </Link>
+                    )}
                   </div>
                   <div className="rounded-2xl border border-hairline-light p-5">
                     <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted">

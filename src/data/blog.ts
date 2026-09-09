@@ -1775,7 +1775,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "LiteFinance'te çekim talepleri anlık işlenebiliyor — ama otomatik olarak değil. Anlık çekimin üç şartını, hangi yöntemin ne kadar sürdüğünü ve en sık yapılan beş hatayı anlatıyoruz.",
     publishedAt: "2026-08-19",
-    readingMinutes: 7,
+    readingMinutes: 8,
     sections: [
       {
         paragraphs: [
@@ -1803,9 +1803,29 @@ export const blogPosts: BlogPost[] = [
         list: [
           "E-cüzdan (otomatik akışta): anlık — çoğunlukla dakikalar içinde. Günlük 5.000 dolarlık otomatik limit bu kanalda en anlamlı hale gelir.",
           "Banka/kredi kartı: broker tarafında anlık işlenir, ancak kart ağının iade sürecine bağlı olarak hesabınıza yansıması 1-5 iş günü sürebilir. Bu gecikme brokerdan değil, kart şemasından kaynaklanır.",
-          "Kripto transferi: ağ onay süresine bağlı, genellikle dakikalar. Ağ ücreti size aittir.",
+          "Kripto transferi: yatırımcıların bildirdiği en hızlı kanal. Hesap doğrulaması tamamlanmışsa çekim talebi anında işleniyor ve tutar cüzdana geçiyor — arada manuel onay sırası yok. Kalan tek bekleme ağın kendi onay süresi. Ağ ücreti size aittir.",
           "Banka havalesi: 1-3 iş günü. Otomatik akışın dışındadır.",
           "5.000 doların üzerindeki talepler ve otomatik akış dışında kalan her şey: çoğunlukla 24 saat içinde, manuel işleme alınarak.",
+        ],
+      },
+      {
+        heading: "Diğer brokerlara göre nerede duruyor?",
+        paragraphs: [
+          "Süreleri tek başına okumak yanıltıcı olabilir — \"dakikalar içinde\" her brokerın kendi sitesinde yazan bir ifade. Anlamlı olan karşılaştırma. FXPARTNER'a ulaşan yatırımcı geri dönüşlerine göre çekim süresi sıralaması şöyle:",
+        ],
+        list: [
+          "1. LiteFinance — anlık, bir saniyeden az",
+          "2. Exness — 1-2 dakika",
+          "3. XM — 3-5 dakika",
+          "4. FxPro — 15-30 dakika",
+          "5. markets.com — 15-45 dakika",
+          "6. AvaTrade — 1 saat ve üzeri",
+        ],
+      },
+      {
+        paragraphs: [
+          "Bu bir ölçüm değil, bize ulaşan geri dönüşlerin özeti — ve yalnızca hakkında yeterli geri dönüş olan brokerları kapsıyor. Listede olmayan bir broker yavaş olduğu için değil, elimizde yeterli veri olmadığı için orada yok. Süreler yönteme, doğrulamanın tamamlanmış olmasına ve tutara göre de değişir; yukarıdaki sıralama kripto ve e-cüzdan gibi hızlı kanallardaki tipik deneyimi yansıtıyor.",
+          "Kendi hesabınızda doğrulamanın en pratik yolu değişmedi: hesabı açtıktan sonra küçük bir tutarla bir çekim testi yapın. Bir brokerın çekim davranışını, parayı geri isteyene kadar gerçekten bilemezsiniz.",
         ],
       },
       {

@@ -83,6 +83,15 @@ export interface Broker {
   adImage?: string;
   adImageWidth?: number;
   adImageHeight?: number;
+  // A creative whose headline is baked into the pixels cannot be
+  // translated at read time the way the rest of the page is, so the
+  // artwork carries its own language. A locale listed here gets its own
+  // file; a locale that is not listed falls back to adImage above, and a
+  // broker with no entry at all behaves exactly as it did.
+  //
+  // Keyed by locale rather than by a per-language field so that a new
+  // language is one line of data and no change to the component.
+  adImageByLocale?: Record<string, { src: string; width: number; height: number }>;
   // Optional narrow-screen creative. A leaderboard squeezed into a 375px
   // phone is unreadable, so a broker whose media kit ships a square or
   // portrait size can supply it here and the banner swaps at the sm
@@ -508,6 +517,15 @@ export const brokers: Broker[] = [
     adImage: "/reklam/lite-banner-fxpartner775.png",
     adImageWidth: 1672,
     adImageHeight: 941,
+    // The instant-withdrawal creative, one per language: the headline is
+    // part of the image, so a Turkish banner would stay Turkish for an
+    // Arabic reader. All four trees have their own file.
+    adImageByLocale: {
+      tr: { src: "/blog/litefinance-anlik-para-cekme-co.png", width: 1672, height: 941 },
+      en: { src: "/blog/litefinance-withla-flash.png", width: 1672, height: 941 },
+      ar: { src: "/blog/litefinance-anlik-para-cekme-ar.png", width: 1672, height: 941 },
+      ua: { src: "/blog/litefinance-anlik-para-cekme-ua.png", width: 1672, height: 941 },
+    },
     // The creative prints bit.ly/litefinance-vip on itself, so that is where
     // clicking it goes. Without adUrl the slot falls through to referralUrl
     // (litefinance-tr.org/?uid=…) and the banner would advertise one address
