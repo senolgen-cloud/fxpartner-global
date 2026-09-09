@@ -133,7 +133,7 @@ export default function BrokerLookupSearch({ initialQuery = "" }: { initialQuery
                 {b.relatedSlug && (
                   <Link
                     href={`/brokers/${b.relatedSlug}`}
-                    title={`${b.name} tam incelemesi`}
+                    title={trf("{broker} tam incelemesi", { broker: b.name })}
                     className="mt-3 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal transition-colors hover:text-signal-strong"
                   >
                     {tr("Tam incelemeyi gör →")}

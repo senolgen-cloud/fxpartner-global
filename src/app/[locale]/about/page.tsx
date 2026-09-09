@@ -156,7 +156,7 @@ export default async function AboutPage({
               </div>
               <div className="rounded-2xl border border-hairline-light bg-paper p-6">
                 <h3 className="font-poppins text-lg font-semibold text-text-dark">
-                  Cashback ve kampanyalar
+                  {tr("Cashback ve kampanyalar")}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-text-muted">
                   {tr("Zaten yaptığınız işlem hacminden cashback programımız ve broker kampanyalarıyla daha fazlasını kazanın; her şey kendi ortaklık kayıtlarımıza karşı açıkça takip edilir.")}
@@ -164,7 +164,7 @@ export default async function AboutPage({
               </div>
               <div className="rounded-2xl border border-hairline-light bg-paper p-6">
                 <h3 className="font-poppins text-lg font-semibold text-text-dark">
-                  Sinyaller ve piyasa analizi
+                  {tr("Sinyaller ve piyasa analizi")}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-text-muted">
                   {tr("Piyasaları neyin hareket ettirdiğine dair bağlam için piyasa analizlerimizi ve Telegram topluluklarımızı takip edin — bunlar asla garanti tavsiye olarak sunulmaz.")}

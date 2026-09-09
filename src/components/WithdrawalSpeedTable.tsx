@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "@/components/LocaleLink";
-import { trf, trLocale } from "@/lib/chrome";
+import { tr, trf, trLocale } from "@/lib/chrome";
 import { getBrokerBySlug } from "@/data/brokers";
 import { trData } from "@/lib/localizeContent";
 import { rankedWithdrawalReports, WITHDRAWAL_SURVEY_DATE } from "@/data/withdrawalSurvey";
+import { getServerLocale } from "@/lib/serverLocale";
 
 /**
  * Withdrawal speed, ranked, as investors report it.
@@ -35,8 +37,24 @@ export default function WithdrawalSpeedTable() {
 
   const surveyDate = new Date(WITHDRAWAL_SURVEY_DATE);
 
+  // The designed summary of this table. Its headline is Turkish and lives
+  // in the pixels, so it is shown on /tr only — the other trees get the
+  // table alone, which says the same thing in their language.
+  const showPoster = getServerLocale() === "tr";
+
   return (
     <div>
+      {showPoster && (
+        <Image
+          src="/reklam/en-hizli-para-cekimi-forex-brokers-2026-2027-fxpartner.png"
+          alt={tr("En hızlı para çekimi yapan forex brokerları — 2026 karşılaştırması")}
+          width={1672}
+          height={941}
+          sizes="(min-width: 768px) 768px, 100vw"
+          className="mb-6 h-auto w-full rounded-2xl border border-hairline"
+        />
+      )}
+
       <ol className="divide-y divide-hairline overflow-hidden rounded-2xl border border-hairline">
         {rows.map(({ report, broker }, i) => (
           <li key={broker.slug}>

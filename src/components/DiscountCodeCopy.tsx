@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTr } from "@/components/useTr";
 
 /**
  * Kopyalanabilir indirim kodu bloğu.
@@ -18,6 +19,7 @@ export default function DiscountCodeCopy({
   percent?: number;
 }) {
   const [copied, setCopied] = useState(false);
+  const tr = useTr();
 
   return (
     <div className="mt-3 flex flex-wrap items-center gap-4">
@@ -46,7 +48,7 @@ export default function DiscountCodeCopy({
         aria-live="polite"
         className="font-mono text-[11px] uppercase tracking-[0.1em] text-text-on-ink-muted"
       >
-        {copied ? "Kopyalandı" : "Kopyalamak için tıklayın"}
+        {copied ? tr("Kopyalandı") : tr("Kopyalamak için tıklayın")}
       </span>
     </div>
   );

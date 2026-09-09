@@ -92,16 +92,9 @@ export default async function BrokerLookupPage({
             <div className="mt-14 rounded-2xl border border-hairline-light bg-paper p-6">
               <p className="text-sm leading-relaxed text-text-muted">
                 <strong className="text-text-dark">{tr("Bunu nasıl okumalı:")}</strong>{" "}
-                Değerlendirmeler resmi düzenleyici uyarı listelerinden (FCA,
-                CySEC, BaFin, CONSOB, FINMA, Türkiye&apos;nin SPK&apos;sı),
-                bağımsız güven puanı kaynaklarından ve kendi editoryal
-                incelemelerimizden oluşturulur.
-                &ldquo;Yüksek Risk&rdquo; etiketi somut, belgelenmiş bir
-                bulguyu yansıtır — bir düzenleyici uyarısı, doğrulanmış
-                lisanssız durum veya tekrarlayan bir şikayet örüntüsü —
-                cezai dolandırıcılık suçlaması değildir. Düzenleyici uyarı
-                listeleri haftalık olarak değişir; işlem yapmadan önce her
-                {tr("zaman bir aracı kurumun güncel durumunu ilgili düzenleyicinin resmi web sitesinden teyit edin.")}{" "}
+                {tr(
+                  "Değerlendirmeler resmi düzenleyici uyarı listelerinden (FCA, CySEC, BaFin, CONSOB, FINMA, Türkiye'nin SPK'sı), bağımsız güven puanı kaynaklarından ve kendi editoryal incelemelerimizden oluşturulur. “Yüksek Risk” etiketi somut, belgelenmiş bir bulguyu yansıtır — bir düzenleyici uyarısı, doğrulanmış lisanssız durum veya tekrarlayan bir şikayet örüntüsü — cezai dolandırıcılık suçlaması değildir. Düzenleyici uyarı listeleri haftalık olarak değişir; işlem yapmadan önce her zaman bir aracı kurumun güncel durumunu ilgili düzenleyicinin resmi web sitesinden teyit edin."
+                )}{" "}
                 {trf("Şu anda yüksek risk olarak işaretlenmiş {count} aracı kurumu takip ediyoruz.", {
                   count: highRiskCount,
                 })}

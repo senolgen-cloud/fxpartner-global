@@ -2968,5 +2968,15 @@
   "3-5 dakika": "3-5 хвилин",
   "15-30 dakika": "15-30 хвилин",
   "15-45 dakika": "15-45 хвилин",
-  "1 saat ve üzeri": "1 година і більше"
+  "1 saat ve üzeri": "1 година і більше",
+  "{broker} tam incelemesi": "Повний огляд {broker}",
+  "{firm} tam incelemesi": "Повний огляд {firm}",
+  "Değerlendirmeler resmi düzenleyici uyarı listelerinden (FCA, CySEC, BaFin, CONSOB, FINMA, Türkiye'nin SPK'sı), bağımsız güven puanı kaynaklarından ve kendi editoryal incelemelerimizden oluşturulur. “Yüksek Risk” etiketi somut, belgelenmiş bir bulguyu yansıtır — bir düzenleyici uyarısı, doğrulanmış lisanssız durum veya tekrarlayan bir şikayet örüntüsü — cezai dolandırıcılık suçlaması değildir. Düzenleyici uyarı listeleri haftalık olarak değişir; işlem yapmadan önce her zaman bir aracı kurumun güncel durumunu ilgili düzenleyicinin resmi web sitesinden teyit edin.": "Оцінки формуються на основі офіційних списків попереджень регуляторів (FCA, CySEC, BaFin, CONSOB, FINMA, SPK Туреччини), незалежних джерел оцінки довіри та наших власних редакційних оглядів. Мітка «Високий ризик» відображає конкретний, задокументований факт — попередження регулятора, підтверджений безліцензійний статус або регулярні скарги — і не є звинуваченням у кримінальному шахрайстві. Списки попереджень регуляторів оновлюються щотижня; перед здійсненням торгівлі завжди перевіряйте актуальний статус брокера на офіційному вебсайті відповідного регулятора.",
+  "Cashback ve kampanyalar": "Кешбек та акції",
+  "Sinyaller ve piyasa analizi": "Сигнали та аналіз ринку",
+  "Hesap Bakiyesi": "Баланс рахунку",
+  "Stop Loss (pip)": "Stop Loss (піп)",
+  "Kopyalandı": "Скопійовано",
+  "Kopyalamak için tıklayın": "Натисніть, щоб скопіювати",
+  "En hızlı para çekimi yapan forex brokerları — 2026 karşılaştırması": "Форекс-брокери з найшвидшим виведенням коштів — порівняння 2026 року"
 }

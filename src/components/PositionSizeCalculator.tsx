@@ -50,7 +50,7 @@ export default function PositionSizeCalculator({
     <div className="rounded-2xl border border-hairline bg-ink-soft p-6 md:p-8">
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <label className={labelClass}>Hesap Bakiyesi</label>
+          <label className={labelClass}>{tr("Hesap Bakiyesi")}</label>
           <div className="mt-2 flex gap-2">
             <input
               value={balance}
@@ -88,7 +88,7 @@ export default function PositionSizeCalculator({
         </div>
 
         <div>
-          <label className={labelClass}>Stop Loss (pip)</label>
+          <label className={labelClass}>{tr("Stop Loss (pip)")}</label>
           <input
             value={stopLoss}
             onChange={(e) => setStopLoss(e.target.value)}

@@ -2968,5 +2968,15 @@
   "3-5 dakika": "3-5 minutes",
   "15-30 dakika": "15-30 minutes",
   "15-45 dakika": "15-45 minutes",
-  "1 saat ve üzeri": "1 hour and above"
+  "1 saat ve üzeri": "1 hour and above",
+  "{broker} tam incelemesi": "{broker} full review",
+  "{firm} tam incelemesi": "{firm} full review",
+  "Değerlendirmeler resmi düzenleyici uyarı listelerinden (FCA, CySEC, BaFin, CONSOB, FINMA, Türkiye'nin SPK'sı), bağımsız güven puanı kaynaklarından ve kendi editoryal incelemelerimizden oluşturulur. “Yüksek Risk” etiketi somut, belgelenmiş bir bulguyu yansıtır — bir düzenleyici uyarısı, doğrulanmış lisanssız durum veya tekrarlayan bir şikayet örüntüsü — cezai dolandırıcılık suçlaması değildir. Düzenleyici uyarı listeleri haftalık olarak değişir; işlem yapmadan önce her zaman bir aracı kurumun güncel durumunu ilgili düzenleyicinin resmi web sitesinden teyit edin.": "Ratings are compiled from official regulatory warning lists (FCA, CySEC, BaFin, CONSOB, FINMA, Turkey's CMB), independent trust score sources, and our own editorial reviews. The “High Risk” label reflects a concrete, documented finding — a regulatory warning, verified unlicensed status, or a recurring pattern of complaints — not an accusation of criminal fraud. Regulatory warning lists change weekly; always confirm a broker's current status on the relevant regulator's official website before trading.",
+  "Cashback ve kampanyalar": "Cashback and promotions",
+  "Sinyaller ve piyasa analizi": "Signals and market analysis",
+  "Hesap Bakiyesi": "Account Balance",
+  "Stop Loss (pip)": "Stop Loss (pip)",
+  "Kopyalandı": "Copied",
+  "Kopyalamak için tıklayın": "Click to copy",
+  "En hızlı para çekimi yapan forex brokerları — 2026 karşılaştırması": "Forex brokers with the fastest withdrawals — 2026 comparison"
 }

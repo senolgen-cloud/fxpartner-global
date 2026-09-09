@@ -284,7 +284,7 @@ export default async function IndirimKoduPage({
                 href={`/prop-firmalar/${firm.slug}`}
                 className="font-mono text-xs uppercase tracking-[0.15em] text-signal hover:text-signal-strong"
               >
-                {firm.name} tam incelemesi →
+                {trf("{firm} tam incelemesi", { firm: firm.name })} →
               </Link>
             </div>
           </div>

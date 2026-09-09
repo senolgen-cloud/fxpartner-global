@@ -1,4 +1,4 @@
-import { tr } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 import Link from "@/components/LocaleLink";
 import { lookupBrokers, type LookupVerdict } from "@/data/brokerLookup";
 import { trData } from "@/lib/localizeContent";
@@ -81,10 +81,10 @@ export default function BrokerLookupFullIndex() {
                       {b.relatedSlug && (
                         <Link
                           href={`/brokers/${b.relatedSlug}`}
-                          title={`${b.name} tam incelemesi`}
+                          title={trf("{broker} tam incelemesi", { broker: b.name })}
                           className="font-mono uppercase tracking-[0.1em] text-signal transition-colors hover:text-signal-strong"
                         >
-                          Tam inceleme →
+                          {tr("Tam inceleme")} →
                         </Link>
                       )}
                     </dd>

@@ -177,7 +177,7 @@ function CardBody({
             </a>
             <Link
               href={`/brokers/${broker.slug}`}
-              title={`${broker.name} tam inceleme`}
+              title={trf("{broker} tam inceleme", { broker: broker.name })}
               className="inline-flex h-11 shrink-0 items-center gap-1 rounded-xl px-3 text-[13px] font-medium text-text-on-ink-muted transition-colors hover:bg-ink-soft hover:text-text-on-ink"
             >
               {tr("İnceleme")}

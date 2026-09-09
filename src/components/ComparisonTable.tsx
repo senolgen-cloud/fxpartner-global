@@ -11,6 +11,7 @@ import {
   type BrokerCategory,
 } from "@/data/brokers";
 import { COMPARISON_CRITERIA } from "@/lib/comparisonCriteria";
+import { useLocalizedData } from "@/components/useLocalizedData";
 
 // The Turkish name for each column. COMPARISON_CRITERIA itself stays in
 // English and stays the source of truth for how many criteria the table
@@ -34,10 +35,17 @@ export default function ComparisonTable() {
   );
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
 
+  // The table read the raw broker records, so every value in it —
+  // minimum deposit, maximum leverage, the tagline in the expanded row —
+  // rendered Turkish in all four languages even though the catalogue had
+  // translated them. useLocalizedData is the client-side trData(): the
+  // same walk, reading the locale from context instead of the request.
+  const localized = useLocalizedData(brokers);
+
   const filtered =
     activeCategory === "All"
-      ? brokers
-      : brokers.filter((b) => b.categories.includes(activeCategory));
+      ? localized
+      : localized.filter((b) => b.categories.includes(activeCategory));
 
   return (
     <div>
