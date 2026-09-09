@@ -41,6 +41,56 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-09-1500",
+    title: "FXPARTNER Piyasa Özeti | 09.09.2026 Öğleden Sonra Güncellemesi",
+    excerpt:
+      "Çarşamba günü Brent petrol, ABD-İran çatışmasının Hürmüz Boğazı çevresinde tırmanmaya devam etmesiyle saat 10.15 itibarıyla %2,31 yükselişle 100,19 dolara çıkarak 26 Mayıs'tan bu yana ilk kez psikolojik 100 dolar sınırını aştı. Gelişme yurt içinde akaryakıt zammı beklentilerini de canlandırdı: 10 Eylül için benzin ve motorine kesinleşmiş bir zam bulunmasa da, petrolün bu seviyelerde kalıcı olması halinde önümüzdeki günlerde zam ihtimalinin güçlenebileceği değerlendiriliyor. Öte yandan Fed'in Eylül ayı toplantı takvimi de netleşti: FOMC'nin 15-16 Eylül'deki toplantısının ardından faiz kararı 16 Eylül TSİ 21.00'de açıklanacak, Powell'ın basın toplantısı ise 21.30'da başlayacak.",
+    publishedAt: "2026-09-09",
+    readingMinutes: 3,
+    intro:
+      "Çarşamba günü piyasaların odağında yeniden petrol fiyatları oldu: Kasım vadeli Brent petrol, ABD-İran çatışmasının Hürmüz Boğazı çevresinde tırmanmaya devam etmesi ve bölgeden küresel piyasalara ulaşan arza yönelik endişelerin derinleşmesiyle saat 10.15 itibarıyla bir önceki kapanışa göre %2,31 yükselişle 100,19 dolara çıkarak 26 Mayıs'tan bu yana ilk kez psikolojik 100 dolar sınırını aştı. Gelişme, yurt içinde akaryakıt fiyatlarına ilişkin beklentileri de canlandırdı: 10 Eylül için benzin ve motorine kesinleşmiş yeni bir zam bulunmasa da, petrolün bu seviyelerde kalıcı olması halinde önümüzdeki günlerde zam ihtimalinin güçlenebileceği değerlendiriliyor; piyasa değerlendirmelerine göre Borsa İstanbul'da ise gündem yarınki TCMB faiz kararı beklentisinde yoğunlaşmış durumda. Öte yandan Fed'in Eylül ayı takvimi de netleşti: FOMC'nin 15-16 Eylül'deki toplantısının ardından faiz kararı 16 Eylül Çarşamba TSİ 21.00'de açıklanacak, Fed Başkanı Jerome Powell'ın basın toplantısı ise TSİ 21.30'da başlayacak. Piyasaların bir sonraki büyük gündem maddesi ise yarın (10 Eylül) saat 14.00'te açıklanacak TCMB faiz kararı olmaya devam ediyor.",
+    news: [
+      {
+        icon: "🛢️",
+        heading: "Brent Petrol 100 Dolar Sınırını Aştı: 26 Mayıs'tan Bu Yana İlk Kez",
+        body: "Kasım vadeli **Brent petrol**, Çarşamba günü saat **10.15** itibarıyla bir önceki kapanışa göre **%2,31** yükselişle **100,19 dolara** çıkarak **26 Mayıs**'tan bu yana ilk kez psikolojik **100 dolar** sınırını aştı. Yükselişte, **ABD-İran çatışmasının** Hürmüz Boğazı çevresinde tırmanmaya devam etmesi ve bölgeden küresel piyasalara ulaşan petrol arzına yönelik endişelerin derinleşmesi etkili oldu.",
+      },
+      {
+        icon: "⛽",
+        heading: "Akaryakıtta Zam Sinyali: Petrolün 100 Doları Aşması Beklentileri Güçlendirdi",
+        body: "Türkiye'de **10 Eylül** için benzin ve motorine kesinleşmiş yeni bir zam bulunmuyor; ancak **Brent petrolün 100 dolar** sınırını aşması, petrol bu seviyelerde kalıcı olması halinde önümüzdeki günlerde akaryakıta zam ihtimalinin güçlenebileceği yönündeki beklentileri artırdı. Piyasa değerlendirmelerine göre Borsa İstanbul'da ise gündem, yarınki **TCMB faiz kararı** beklentisinde yoğunlaşmış durumda.",
+      },
+      {
+        icon: "🇺🇸",
+        heading: "Fed'in Eylül Toplantı Takvimi Netleşti: Karar 16 Eylül'de",
+        body: "**ABD Merkez Bankası (Fed) Açık Piyasa Komitesi (FOMC)**'nin Eylül ayı toplantısı **15-16 Eylül** tarihlerinde gerçekleştirilecek; faiz kararı **16 Eylül Çarşamba günü TSİ 21.00**'de açıklanacak, Fed Başkanı **Jerome Powell**'ın basın toplantısı ise **TSİ 21.30**'da başlayacak. Karar; dolar, altın, ABD borsaları ve gelişmekte olan piyasa para birimlerinde volatiliteye yol açması beklenen önemli bir gündem maddesi olarak izleniyor.",
+      },
+    ],
+    calendarLabel: "7-16 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "Matriks Haber anketinde 27 ekonomistin 21'i, AA Finans anketinde ise 25 ekonomistin 24'ü politika faizinin %37'de sabit tutulmasını bekliyor.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+      {
+        time: "16 Eylül 2026, 21:00 (TSİ)",
+        icon: "🏦",
+        title: "Fed (FOMC) Faiz Kararı",
+        note: "Karar TSİ 21.00'de açıklanacak, Powell'ın basın toplantısı TSİ 21.30'da başlayacak.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-09-1200",
     title: "FXPARTNER Piyasa Özeti | 09.09.2026 Öğle Güncellemesi",
     excerpt:
