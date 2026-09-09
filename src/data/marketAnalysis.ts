@@ -41,6 +41,55 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-09-1800",
+    title: "FXPARTNER Piyasa Özeti | 09.09.2026 Akşam Güncellemesi",
+    excerpt:
+      "Çarşamba günü Brent petrol, Salı kapanışı 97,89 doların ardından erken saatlerde 100,29 dolara kadar yükselerek yaklaşık altı haftadır ilk kez 100 dolar sınırını aştı. BIST 100 endeksi güne düşüşle başlamasına rağmen kapanışta %0,70 değer kazanarak 14.505,48 puana çıktı. ABD Hazine Bakanlığı ise Salı günü OFAC aracılığıyla İran'ın kalan tüm hava yollarını (27 şirket) ve bunlara destek sağladığı belirtilen 36 hedefi yaptırım listesine aldığını duyurdu. Dolar/TL akşam saatlerinde 48,47-48,48 TL bandında yatay seyrini korudu.",
+    publishedAt: "2026-09-09",
+    readingMinutes: 3,
+    intro:
+      "Çarşamba akşamı piyasaların gündeminde petroldeki 100 dolar eşiği ve İran'a yönelik yeni ABD yaptırımları öne çıktı. Brent petrol, Salı günü 97,89 dolardan kapanmasının ardından Çarşamba sabahı erken saatlerde 100,29 dolara kadar yükselerek yaklaşık altı haftadır ilk kez üç haneli seviyeyi gördü; yükselişte ABD-İran arasında Hürmüz Boğazı çevresinde süren çatışmanın enerji arzına yönelik endişeleri canlı tutması etkili oldu. Borsa tarafında BIST 100 endeksi, güne %0,17 düşüşle başlamasına rağmen gün içindeki toparlanmayla kapanışta bir önceki güne göre %0,70 değer kazanarak 14.505,48 puana yükseldi; endeks gün içinde 14.357,04-14.673,07 puan bandında hareket ederek 316 puanlık bir makas oluşturdu, kapanışta işlem gören hisselerin 52'si değer kazanırken 44'ü geriledi. Jeopolitik cephede ABD Hazine Bakanlığı, Salı günü Dış Varlıkları Kontrol Ofisi (OFAC) aracılığıyla İran'ın kalan tüm hava yollarını -toplam 27 şirketi- ve bu şirketlere parça ile lojistik desteği sağladığı belirtilen Türkiye, BAE, Kazakistan ve Malezya merkezli firmalar dahil 36 hedefi 'Operation Economic Outcast' kapsamında yaptırım listesine aldığını duyurdu. Döviz tarafında dolar/TL, akşam saat 18.10 itibarıyla 48,4713-48,4833 TL bandında günlük bazda sınırlı bir yükselişle yatay seyrini korudu.",
+    news: [
+      {
+        icon: "🛢️",
+        heading: "Brent Petrol Altı Haftada İlk Kez 100 Doları Aştı",
+        body: "**Brent petrol**, Salı günü **97,89 dolardan** kapanmasının ardından Çarşamba sabahı erken saatlerde **100,29 dolara** kadar yükselerek yaklaşık **altı haftadır ilk kez** üç haneli seviyeyi gördü. Yükselişte, ABD ile İran arasında **Hürmüz Boğazı** çevresinde süren çatışmanın küresel petrol arzına yönelik endişeleri diri tutması etkili oldu.",
+      },
+      {
+        icon: "📈",
+        heading: "BIST 100 Günü Yükselişle Kapattı: 14.505,48 Puan",
+        body: "**BIST 100 endeksi**, güne **%0,17** düşüşle başlamasına rağmen Çarşamba kapanışında bir önceki güne göre **%0,70** değer kazanarak **14.505,48 puana** yükseldi; endeks gün içinde **14.357,04-14.673,07 puan** bandında hareket ederek **316 puanlık** bir makas oluşturdu. Kapanışta işlem gören hisselerin **52'si** değer kazanırken **44'ü** geriledi, **4'ü** ise yatay tamamladı.",
+      },
+      {
+        icon: "✈️",
+        heading: "ABD, İran'ın Kalan Tüm Hava Yollarını Yaptırım Listesine Aldı",
+        body: "**ABD Hazine Bakanlığı**, Salı günü **OFAC** aracılığıyla İran'ın kalan tüm hava yollarını -toplam **27 şirketi**- ve bu şirketlere parça ile lojistik desteği sağladığı belirtilen **Türkiye, BAE, Kazakistan ve Malezya** merkezli firmalar dahil **36 hedefi** 'Operation Economic Outcast' kapsamında yaptırım listesine aldığını açıkladı. Hazine Bakanı **Scott Bessent**, kalan İran hava yollarıyla iş yapan kesimlerin küresel finansal sistemden dışlanma riskiyle karşı karşıya olduğu uyarısında bulundu.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar/TL Akşam Saatlerinde Yatay: 48,47-48,48 TL",
+        body: "**Dolar/TL**, Çarşamba akşamı saat **18.10** itibarıyla **48,4713-48,4833 TL** bandında, bir önceki seviyeye göre **%0,03** gibi sınırlı bir değişimle yatay seyrini korudu.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "Matriks Haber anketinde 27 ekonomistin 21'i, AA Finans anketinde ise 25 ekonomistin 24'ü politika faizinin %37'de sabit tutulmasını bekliyor; azınlıkta kalan ekonomistler 100-300 baz puan indirim öngörüyor.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-09-1200",
     title: "FXPARTNER Piyasa Özeti | 09.09.2026 Öğle Güncellemesi",
     excerpt:
