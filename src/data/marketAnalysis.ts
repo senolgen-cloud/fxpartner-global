@@ -41,6 +41,55 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-09-0800",
+    title: "FXPARTNER Piyasa Özeti | 09.09.2026 Sabah Güncellemesi",
+    excerpt:
+      "Çarşamba sabahı Brent petrol, ABD ile İran arasında hafta sonundan bu yana süren karşılıklı tanker saldırılarının tırmanmasıyla %1,55 yükselerek 99,44 dolara çıktı ve Temmuz sonundan bu yana en yüksek seviyeyi gördü. Dolar/TL sabah saatlerinde 48,4855 TL'den işlem görerek tarihi zirvesine yakın seyrini sürdürdü, euro/TL ise 56,46 TL'ye çıktı. Ons altın Fed'in faiz kararına ilişkin belirsizlik ile daha zayıf dolar arasında sıkışarak 4.380-4.395 dolar bandına gerilerken, yurt içinde gram altın 6.821,36 TL'ye indi. Piyasaların gözü artık yarın (10 Eylül) saat 14.00'te açıklanacak TCMB faiz kararında.",
+    publishedAt: "2026-09-09",
+    readingMinutes: 3,
+    intro:
+      "Çarşamba sabahı piyasaların gündemine Orta Doğu'da yeniden tırmanan ABD-İran gerilimi damga vurdu: geçtiğimiz hafta sonu Hürmüz Boğazı çevresinde ABD üç İran petrol tankerini, İran ise karşılık olarak üç gemiyi vurmuş, bu karşılıklı 'tanker savaşı' haftaya sarkarak sürmüştü; gelişme sonrası Brent petrol Çarşamba günü %1,55 yükselişle 99,44 dolara çıkarak Temmuz sonundan bu yana en yüksek seviyeyi gördü ve 100 dolar sınırına yaklaştı. Döviz tarafında dolar/TL sabah saat 07.18 itibarıyla 48,4855 TL'den işlem görerek tarihi zirvesine yakın seyrini korudu, kur gün içinde 48,2680-48,5183 TL bandında hareket etti; euro/TL ise 56,46 TL'ye yükseldi. Altın tarafında ons altın (XAU/USD), Fed'in 16 Eylül'deki faiz kararına ilişkin süregelen belirsizlik ile uluslararası düzeyde zayıflayan dolar arasında sıkışarak 4.380-4.395 dolar bandına geriledi; yurt içinde gram altın da bu geri çekilmeyi yansıtarak 6.821,36 TL'ye, çeyrek altın 11.139 TL'ye, yarım altın ise 22.271 TL'ye indi. Piyasaların odağı artık yarın (10 Eylül) saat 14.00'te açıklanacak TCMB faiz kararında.",
+    news: [
+      {
+        icon: "🛢️",
+        heading: "Brent Petrol 100 Dolara Yaklaştı: ABD-İran Tanker Savaşı Tırmanıyor",
+        body: "**Brent petrol** vadeli işlemleri, ABD ile İran arasında **Hürmüz Boğazı** çevresinde süren karşılıklı tanker saldırılarının etkisiyle Çarşamba günü **%1,55** yükselişle **99,44 dolara** çıkarak **Temmuz sonundan bu yana en yüksek seviyeyi** gördü. Geçtiğimiz hafta sonu ABD, üç İran petrol tankerini vurduğunu (birini imha ettiğini) açıklarken, İran da karşılık olarak Hürmüz'den yetkisiz güzergahtan geçen üç gemiyi hedef aldığını duyurmuştu; bir ABD yetkilisi Axios'a, Trump yönetiminin onayladığı yeni bir **'tanker-için-tanker'** karşılık politikasından söz etti.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar/TL Tarihi Zirveye Yakın: 48,4855 TL",
+        body: "**Dolar/TL**, Çarşamba sabahı saat **07.18** itibarıyla **48,4855 TL**'den işlem görerek son günlerdeki tarihi zirvesine yakın seyrini sürdürdü; kur gün içinde **48,2680-48,5183 TL** bandında hareket etti ve günün açılışını **48,3137 TL**'den yapmıştı. Aynı saatlerde **euro/TL 56,4582 TL**'ye yükseldi.",
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın Geriledi, Gram Altın 6.821 TL'ye İndi",
+        body: "**XAU/USD**, Fed'in faiz artırımı ihtimaline yönelik artan bahisler ile uluslararası düzeyde zayıflayan dolar arasında sıkışarak Çarşamba günü **4.380-4.395 dolar** bandına geriledi. Yurt içinde **gram altın 6.821,36 TL**'ye, **çeyrek altın 11.139 TL**'ye, **yarım altın** ise **22.271 TL**'ye indi.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "TCMB Kararına 1 Gün Kala: Sabit Faiz Bekleniyor",
+        body: "**TCMB Para Politikası Kurulu**'nun yarın, **10 Eylül** Perşembe günü saat **14.00**'te açıklayacağı faiz kararı öncesi **AA Finans**'ın **25 ekonomistle** yaptığı ankete göre **24 ekonomist** politika faizinin **%37**'de **sabit tutulmasını** bekliyor; **S&P Global Market Intelligence** de aynı yönde tahminde bulunuyor. Ekonomistlerin **yıl sonu** politika faizi beklentisinin medyanı ise **%35** olarak hesaplandı.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "AA Finans anketine katılan 25 ekonomistin 24'ü politika faizinin %37'de sabit tutulmasını bekliyor; yıl sonu medyan beklentisi %35.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-08-1400",
     title: "FXPARTNER Piyasa Özeti | 08.09.2026 Öğleden Sonra Güncellemesi",
     excerpt:
