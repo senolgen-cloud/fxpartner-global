@@ -47,7 +47,26 @@ export async function generateMetadata({
     // "forex aracı kurumları". Türkçe aramada hem "broker" hem "aracı kurum"
     // kullanılıyor — ikisi de başlıkta/gövdede geçiyor.
     openGraph: {
+      title: t["page.brokerlar.title"].replace("{year}", String(YEAR)),
+      description: t["page.brokerlar.description"].replace("{count}", String(brokers.length)),
       url: `${SITE_URL}/brokerlar`,
+      type: "website",
+      // The page shared as a bare link until now. The withdrawal-speed
+      // ranking is the one thing on it somebody would forward, so that is
+      // what the card shows. Turkish artwork on a Turkish-first page; the
+      // headline is in the pixels and cannot be translated at read time,
+      // which is the same trade-off adImageByLocale documents.
+      images: [
+        {
+          url: `${SITE_URL}/reklam/en-hizli-para-cekimi-forex-brokers-2026-2027-fxpartner-1.png`,
+          width: 1672,
+          height: 941,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [`${SITE_URL}/reklam/en-hizli-para-cekimi-forex-brokers-2026-2027-fxpartner-1.png`],
     },
   };
 }

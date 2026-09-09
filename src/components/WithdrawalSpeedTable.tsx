@@ -48,15 +48,29 @@ export default function WithdrawalSpeedTable() {
 
   return (
     <div>
+      {/* Two crops of the same poster. The 1672x941 leaderboard is
+          unreadable at phone width — the five broker rows collapse to a few
+          pixels each — so the square runs below sm and the wide one above,
+          the same swap adImageMobile exists for on the ad banners. */}
       {showPoster && (
-        <Image
-          src="/reklam/en-hizli-para-cekimi-forex-brokers-2026-2027-fxpartner.png"
-          alt={tr("En hızlı para çekimi yapan forex brokerları — 2026 karşılaştırması")}
-          width={1672}
-          height={941}
-          sizes="(min-width: 768px) 768px, 100vw"
-          className="mb-6 h-auto w-full rounded-2xl border border-hairline"
-        />
+        <>
+          <Image
+            src="/reklam/en-hizli-para-cekimi-forex-brokers-2026-2027-fxpartner-2.png"
+            alt={tr("En hızlı para çekimi yapan forex brokerları — 2026 karşılaştırması")}
+            width={1254}
+            height={1254}
+            sizes="100vw"
+            className="mb-6 h-auto w-full rounded-2xl border border-hairline sm:hidden"
+          />
+          <Image
+            src="/reklam/en-hizli-para-cekimi-forex-brokers-2026-2027-fxpartner.png"
+            alt={tr("En hızlı para çekimi yapan forex brokerları — 2026 karşılaştırması")}
+            width={1672}
+            height={941}
+            sizes="(min-width: 768px) 768px, 100vw"
+            className="mb-6 hidden h-auto w-full rounded-2xl border border-hairline sm:block"
+          />
+        </>
       )}
 
       <ol className="divide-y divide-hairline overflow-hidden rounded-2xl border border-hairline">
