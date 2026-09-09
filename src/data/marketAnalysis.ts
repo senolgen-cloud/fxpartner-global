@@ -41,6 +41,56 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-09-1500",
+    title: "FXPARTNER Piyasa Özeti | 09.09.2026 Öğleden Sonra Güncellemesi",
+    excerpt:
+      "İran'ın müttefiki Husiler, dron ve balistik füzelerle Suudi Arabistan'ın güneyinde Abha, Khamis Mushait, Necran kentlerini ve günlük 400 bin varil kapasiteli Jizan rafinerisi dahil Suudi Aramco tesislerini vurdu; saldırılarda 70'in üzerinde kişi yaralandı ve birden fazla tesiste yangın çıktı. Gelişme Brent petrolün temmuz sonundan bu yana en yüksek seviyesi olan 99,46 dolara çıkmasına yol açtı. Dolar endeksi (DXY) ise Fed, ECB ve BoJ'un bu hafta vereceği faiz kararları öncesinde iki haftanın en düşük seviyesine gerileyerek 98,70'in altına indi, dolar/yen paritesi de altı buçuk ayın dibini gördü. BIST 100 endeksi, güne %0,17 düşüşle başlamasının ardından öğleden sonra toparlanarak saat 13.00 itibarıyla %0,81 artışla 14.522,59 puana yükseldi.",
+    publishedAt: "2026-09-09",
+    readingMinutes: 3,
+    intro:
+      "Çarşamba günü öğleden sonra piyasaların gündemine Yemen merkezli Husilerin Suudi Arabistan'a yönelik saldırıları damga vurdu: İran'ın müttefiki Husiler, dron ve balistik füzelerle Suudi Arabistan'ın güneyinde Abha, Khamis Mushait, Necran kentlerini ve günlük 400 bin varil kapasiteli Jizan rafinerisinin de bulunduğu Cizan'daki Suudi Aramco tesislerini hedef aldı; saldırılarda 70'in üzerinde kişi yaralanırken, birden fazla enerji tesisinde yangın çıktı ve üretim geçici olarak durduruldu. Gelişme, İran-ABD arasında süren tanker çatışmasının yarattığı arz endişelerinin üzerine binerek Brent petrolün gün içinde 99,46 dolara kadar yükselmesine ve temmuz sonundan bu yana en yüksek seviyesini görmesine yol açtı. Döviz piyasalarında ise dolar endeksi (DXY), Fed'in gelecek hafta açıklayacağı faiz kararı, ECB'nin yarın (10 Eylül) saat 14.15 CET'te (TSİ 15.15) vereceği karar ve Japonya Merkez Bankası'na (BoJ) yönelik şahin beklentiler öncesinde iki haftanın en düşük seviyesine gerileyerek 98,70 sınırının altına indi; ABD Hazine Bakanı Scott Bessent'ın yenin daha fazla zayıflamasına karşı yatırımcıları uyarmasının ardından dolar/yen paritesi de yaklaşık 154,40 seviyesiyle altı buçuk ayın en düşüğünü gördü. Borsa tarafında BIST 100 endeksi, Çarşamba gününe önceki kapanışa (14.405,25 puan) göre %0,17 düşüşle 14.381,24 puandan başlamasının ardından öğleden sonra gelen alımlarla toparlandı ve saat 13.00 itibarıyla 117,34 puan ve %0,81 artışla 14.522,59 puana yükseldi.",
+    news: [
+      {
+        icon: "🔥",
+        heading: "Husiler Suudi Aramco Tesislerini Vurdu: Brent 99,46 Dolara Çıktı",
+        body: "İran'ın müttefiki **Husiler**, dron ve balistik füzelerle Suudi Arabistan'ın güneyinde **Abha, Khamis Mushait, Necran** kentlerini ve günlük **400 bin varil** kapasiteli **Jizan rafinerisi** dahil **Suudi Aramco**'ya ait enerji tesislerini hedef aldı; saldırılarda **70'in üzerinde kişi yaralandı**, birden fazla tesiste yangın çıktı ve üretim geçici olarak durduruldu. Gelişme, İran-ABD tanker çatışmasının yarattığı arz endişelerini derinleştirerek **Brent petrolün** gün içinde **99,46 dolara** kadar yükselmesine ve **temmuz sonundan bu yana en yüksek seviyesini** görmesine yol açtı.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar Endeksi İki Haftanın Dibinde: Yen 6,5 Ayın Zirvesinde",
+        body: "**Dolar endeksi (DXY)**, Fed'in gelecek hafta açıklayacağı faiz kararı, **ECB'nin** yarın vereceği karar ve **Japonya Merkez Bankası'na (BoJ)** yönelik şahin beklentiler öncesinde **iki haftanın en düşük seviyesine** gerileyerek **98,70** sınırının altına indi. **Dolar/yen** paritesi de ABD Hazine Bakanı **Scott Bessent'ın** yenin daha fazla zayıflamasına karşı yatırımcıları uyarmasının ardından yaklaşık **154,40** seviyesiyle **altı buçuk ayın en düşüğünü** gördü; piyasalar Fed'in gelecek hafta **%60 olasılıkla 25 baz puanlık** bir faiz artışına gideceğini fiyatlıyor.",
+      },
+      {
+        icon: "📈",
+        heading: "BIST 100 Öğleden Sonra Toparlandı: %0,81 Artışla 14.522 Puan",
+        body: "**BIST 100 endeksi**, Çarşamba gününe önceki kapanışa (**14.405,25 puan**) göre **%0,17** düşüşle **14.381,24 puandan** başlamasının ardından öğleden sonra gelen alımlarla toparlandı ve saat **13.00** itibarıyla bir önceki kapanışa göre **117,34 puan** ve **%0,81** artışla **14.522,59 puana** yükseldi.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "AA Finans anketinde 25 ekonomistin 24'ü, Matriks Haber anketinde ise 27 ekonomistin 21'i politika faizinin %37'de sabit tutulmasını bekliyor; azınlıkta kalan ekonomistler 100-300 baz puan indirim öngörüyor.",
+      },
+      {
+        time: "10 Eylül 2026, 15:15 (TSİ)",
+        icon: "🇪🇺",
+        title: "ECB Faiz Kararı",
+        note: "Avrupa Merkez Bankası kararını 14.15 CET'te (TSİ 15.15) açıklayacak, ardından 14.45 CET'te (TSİ 15.45) Başkan'ın basın toplantısı gerçekleşecek.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-09-1200",
     title: "FXPARTNER Piyasa Özeti | 09.09.2026 Öğle Güncellemesi",
     excerpt:
