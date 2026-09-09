@@ -231,7 +231,7 @@ export default function QuickAccessHub({ topBrokers }: { topBrokers: Broker[] })
         type="button"
         onClick={toggle}
         aria-expanded={open}
-        aria-label={open ? "Hızlı erişim panelini kapat" : "Hızlı erişim panelini aç"}
+        aria-label={open ? tr("Hızlı erişim panelini kapat") : tr("Hızlı erişim panelini aç")}
         className="flex h-14 w-14 items-center justify-center rounded-full bg-signal text-on-signal shadow-2xl shadow-signal/30 transition-transform hover:scale-105"
       >
         <Icon name="plus" className={`h-5 w-5 transition-transform duration-200 ${open ? "rotate-45" : ""}`} />

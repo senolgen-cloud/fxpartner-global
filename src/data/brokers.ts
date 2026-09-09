@@ -551,11 +551,12 @@ export const brokers: Broker[] = [
     headquarters: "Kıbrıs (AB) / Saint Vincent (global)",
     referralUrl: "https://litefinance-tr.org/?uid=667827970",
     summary:
-      "Lite Finance 2005'ten beri çalışıyor ve 10 dolarlık cent hesabıyla 0.0 pipten ECN hesabını aynı çatı altında sunan az sayıdaki brokerdan biri — küçük bir hesapla pratik yapıp hazır olduğunuzda ham spreade geçmek için kurum değiştirmeniz gerekmiyor. Günlük kullanımda en çok hissedilen tarafı çekim hızı: doğrulanmış bir hesapta otomatik çekim açıkken talepler anlık işleniyor, günde 5.000 dolara kadar, kimsenin onayını beklemeden. MT4, MT5, cTrader ve tarayıcıdan çalışan WebTerminal'in dördü de var; üstüne kendi copytrade platformu ve Türkçe destek hattı. Bilmeniz gereken tek yapısal nokta hesabınızın grubun hangi şirketine bağlandığı: Türkiye Avrupa Ekonomik Alanı dışında olduğu için buradan açılan hesaplar CySEC'li AB şirketine değil offshore tarafa bağlanıyor — regülasyon puanını sınırlayan da bu.",
+      "Lite Finance'i listenin üst sırasında tutan şey çekim hızı: yatırımcı geri dönüşlerine göre paranın hesaptan çıkma süresi bakımından listedeki en hızlı broker. Kriptoda doğrulama tamamlandıktan sonra talep anında işleniyor ve para cüzdana geçiyor; doğrulanmış hesapta otomatik çekim açıkken günde 5.000 dolara kadar, kimsenin onayını beklemeden. 2005'ten beri çalışıyor ve 10 dolarlık cent hesabıyla 0.0 pipten ECN hesabını aynı çatı altında sunan az sayıdaki brokerdan biri — küçük bir hesapla pratik yapıp hazır olduğunuzda ham spreade geçmek için kurum değiştirmeniz gerekmiyor. MT4, MT5, cTrader ve tarayıcıdan çalışan WebTerminal'in dördü de var; üstüne kendi copytrade platformu ve Türkçe destek hattı. Bilmeniz gereken tek yapısal nokta hesabınızın grubun hangi şirketine bağlandığı: Türkiye Avrupa Ekonomik Alanı dışında olduğu için buradan açılan hesaplar CySEC'li AB şirketine değil offshore tarafa bağlanıyor — regülasyon puanını sınırlayan da bu.",
     pros: [
       "2005'ten beri faaliyette — yirmi yıllık işletme geçmişi",
       "Cent hesapta 10 dolarla, ECN hesapta 50 dolarla başlama imkanı",
       "ECN hesabında 0.0 pipten spread, lot başına 0,25 dolardan komisyon",
+      "Kripto çekimlerde doğrulama biter bitmez para cüzdana geçiyor — listedeki en hızlı çekim, yatırımcı geri dönüşlerine göre",
       "Doğrulanmış hesaplarda anlık para çekme — günde 5.000 dolara kadar otomatik",
       "FXPARTNER üzerinden %50'ye kadar nakit iade",
       "MT4, MT5, cTrader ve tarayıcıdan çalışan WebTerminal",
@@ -580,7 +581,7 @@ export const brokers: Broker[] = [
     cons: [
       "Türkiye'den açılan hesaplar CySEC'li AB şirketine değil offshore şirkete bağlanır — CySEC'in yatırımcı tazmin fonu bu hesaplar için geçerli olmaz",
       "1:1000'e varan kaldıraç, deneyimsiz bir hesapta çok hızlı zarar üretebilir",
-      "Çekim, paranın yatırıldığı yönteme ve para birimine geri yapılır — yatırma yöntemini buna göre seçmek gerekir",
+      "Çekim, paranın yatırıldığı yönteme ve para birimine geri yapılır — hızlı kripto çekimi için yatırımı da kriptoyla yapmak gerekir",
     ],
     bestFor: "Küçük sermayeyle başlayıp ECN'e geçmeyi planlayan bireysel yatırımcılar",
     accentNote: "En düşük giriş bariyeri",
@@ -645,7 +646,7 @@ export const brokers: Broker[] = [
       deposits:
         "Banka kartı, banka havalesi, e-cüzdan (Skrill, Neteller ve bölgesel sağlayıcılar) ve kripto para transferi kabul edilir. Lite Finance yatırma işlemlerinden ücret almaz; kart ve e-cüzdan yatırımları genellikle anında, banka havaleleri 1-3 iş gününde hesaba geçer. Cent hesapta minimum 10, Classic ve ECN hesapta 50 dolar.",
       withdrawals:
-        "Doğrulanmış hesapta otomatik çekim açıkken talepler anlık işlenir — desteklenen yöntemlerde günde 5.000 dolara kadar, gün içinde tekrar tekrar, manuel onay beklemeden. Bu limitin üzerindeki ve otomatik akış dışındaki talepler çoğunlukla 24 saat içinde, banka havaleleri 1-3 iş gününde tamamlanır. İki kısıt var: para yalnızca yatırıldığı yönteme ve aynı para birimine çekilebilir, ve yönteme göre %0-2 arası masraf uygulanabilir.",
+        "Çekim tarafı Lite Finance'in en güçlü olduğu yer ve bize gelen yatırımcı geri dönüşlerine göre listedeki en hızlısı. Kriptoda hesap doğrulaması tamamlandıktan sonra çekim talebi anında işleniyor ve para cüzdana geçiyor — arada manuel onay sırası yok. Doğrulanmış hesapta otomatik çekim açıkken desteklenen yöntemlerde günde 5.000 dolara kadar, gün içinde tekrar tekrar çekebiliyorsunuz. Bu limitin üzerindeki ve otomatik akış dışındaki talepler çoğunlukla 24 saat içinde, banka havaleleri 1-3 iş gününde tamamlanır. Bilmeniz gereken iki kısıt: para yalnızca yatırıldığı yönteme ve aynı para birimine çekilebilir, ve yönteme göre %0-2 arası masraf uygulanabilir.",
       support:
         "7/24 canlı destek ve e-posta desteğinin yanı sıra Türkiye'ye özel bir destek hattı (turkiye@litefinance.com) ve Türkçe kişisel kabin arayüzü. Hesap doğrulama (KYC) süreci kimlik ve adres belgesiyle kabinden yürütülür.",
       education:

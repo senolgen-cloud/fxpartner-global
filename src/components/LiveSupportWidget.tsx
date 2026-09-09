@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useScrollIdle } from "@/components/useScrollIdle";
+import { useTr } from "@/components/useTr";
 
 const WHATSAPP_NUMBER = "380930071903";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
@@ -47,6 +48,7 @@ function TelegramIcon() {
 export default function LiveSupportWidget() {
   const [open, setOpen] = useState(false);
   const scrolling = useScrollIdle();
+  const tr = useTr();
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -103,7 +105,7 @@ export default function LiveSupportWidget() {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        aria-label={open ? "Canlı destek panelini kapat" : "Canlı destek panelini aç"}
+        aria-label={open ? tr("Canlı destek panelini kapat") : tr("Canlı destek panelini aç")}
         className="flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xl shadow-[#25D366]/30 transition-transform hover:scale-105"
       >
         {open ? (

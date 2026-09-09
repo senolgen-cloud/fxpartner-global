@@ -729,22 +729,34 @@ export default async function BrokerDetailPage({
               </div>
             </div>
 
-            {broker.promotions?.[0] && (
-              <Link
-                href={`/campaigns#${broker.slug}`}
-                className="mt-10 flex items-center justify-between gap-4 rounded-2xl border border-gold/30 bg-gold/10 px-6 py-4 transition-colors hover:border-gold/50"
-              >
-                <span className="text-sm font-medium text-text-dark">
-                  {/* One line of room, so: the first campaign by name, and
-                      the rest by count rather than a truncated list. */}
-                  🎁 {broker.promotions[0].title}
-                  {broker.promotions.length > 1 &&
-                    ` + ${broker.promotions.length - 1} kampanya`}
-                </span>
-                <span className="shrink-0 font-mono text-xs uppercase tracking-[0.15em] text-gold">
-                  {broker.name} Kampanyaları için tıklayın →
-                </span>
-              </Link>
+            {broker.promotions && broker.promotions.length > 0 && (
+              <section className="mt-10">
+                <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-gold">
+                  {trf("{broker} kampanyaları", { broker: broker.name })}
+                </h2>
+                <div className="mt-4 grid gap-4">
+                  {broker.promotions.map((promo) => (
+                    <Link
+                      key={promo.title}
+                      href={`/campaigns#${broker.slug}`}
+                      className="group rounded-2xl border border-gold/30 bg-gold/10 px-6 py-5 transition-colors hover:border-gold/60"
+                    >
+                      <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-gold">
+                        {promo.tag}
+                      </span>
+                      <p className="mt-2 text-base font-semibold text-text-dark">
+                        🎁 {promo.title}
+                      </p>
+                      <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-text-muted">
+                        {promo.intro}
+                      </p>
+                      <span className="mt-3 inline-block font-mono text-xs uppercase tracking-[0.15em] text-gold">
+                        {tr("Koşulları oku")} →
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
             )}
 
             {cashback && (
@@ -785,7 +797,9 @@ export default async function BrokerDetailPage({
               {/* No count while the list is unreachable: "Yorumlar (0)" on a
                   broker with forty reviews is a worse answer than no number
                   at all. */}
-              {commentsUnavailable ? tr("Yorumlar") : `Yorumlar (${brokerComments.length})`}
+              {commentsUnavailable
+                ? tr("Yorumlar")
+                : trf("Yorumlar ({count})", { count: brokerComments.length })}
             </h2>
 
             {commentsUnavailable && <DataUnavailable what={tr("Yorumlar")} className="mt-6" />}

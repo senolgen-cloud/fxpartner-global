@@ -95,8 +95,15 @@ function baseRegulationParagraph(broker: Broker): string {
 
 export function verdictParagraph(broker: Broker): string {
   const strengths = broker.pros.slice(0, 2);
+  // A template literal here meant this sentence could never be keyed, so it
+  // stayed Turkish in every language while the paragraph around it was
+  // translated — the reader got an Arabic verdict with a Turkish clause
+  // spliced into the middle of it. The leading space moves inside the
+  // translated string so a translator can place it as their language needs.
   const tradeoff = broker.cons[0]
-    ? ` En önemli ödünü ${broker.cons[0]} — bunu yukarıdaki güçlü yönlerle birlikte değerlendirmekte fayda var.`
+    ? trf(" En önemli ödünü {con} — bunu yukarıdaki güçlü yönlerle birlikte değerlendirmekte fayda var.", {
+        con: broker.cons[0],
+      })
     : "";
   return trf(
     "{bestFor} için {broker} güçlü bir uyum sağlıyor: {strengths}.{tradeoff} Herhangi bir brokerda olduğu gibi, canlı bir hesaba para yatırmadan önce güncel spreadleri, kaldıracı ve bölgesel kullanılabilirliği {broker}’ın resmi sitesinden doğrulayın.",

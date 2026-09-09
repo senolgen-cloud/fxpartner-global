@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { tr } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 import type { Broker } from "@/data/brokers";
 
 // The right rail: a skyscraper beside long-form content on wide screens,
@@ -44,7 +44,7 @@ export default function BrokerSkyscraperAd({ broker }: { broker: Broker }) {
           <span className="sr-only">Sponsorlu — {broker.name}</span>
           <Image
             src={broker.adImageTall}
-            alt={`${broker.name} reklamı`}
+            alt={trf("{broker} reklamı", { broker: broker.name })}
             width={w}
             height={h}
             sizes={`${railWidth}px`}

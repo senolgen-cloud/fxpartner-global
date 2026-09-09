@@ -49,7 +49,7 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
         <span className="sr-only">Sponsorlu — {broker.name}</span>
         <Image
           src={broker.adImage}
-          alt={`${broker.name} reklamı`}
+          alt={trf("{broker} reklamı", { broker: broker.name })}
           width={broker.adImageWidth ?? 1376}
           height={broker.adImageHeight ?? 768}
           sizes="(min-width: 768px) 768px, 100vw"
@@ -73,7 +73,7 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
           <span className="sr-only">Sponsorlu — {broker.name}</span>
           <Image
             src={broker.adImageMobile}
-            alt={`${broker.name} reklamı`}
+            alt={trf("{broker} reklamı", { broker: broker.name })}
             width={broker.adImageMobileWidth ?? 300}
             height={broker.adImageMobileHeight ?? 250}
             sizes="300px"
