@@ -41,6 +41,49 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-10-1500",
+    title: "FXPARTNER Piyasa Özeti | 10.09.2026 Öğleden Sonra Güncellemesi",
+    excerpt:
+      "Perşembe günü TCMB Para Politikası Kurulu, saat 14.00'te açıkladığı kararda politika faizini piyasadaki hakim beklentiyle uyumlu şekilde %37'de sabit tuttu. Karar sonrasında dolar/TL 48,51 TL'ye, euro/TL ise 56,58 TL'ye çıkarak tarihi zirvelerini yeniden tazeledi. Gram altın gün içinde %0,56 yükselişle 6.903 TL'ye çıkarken, BIST 100 endeksi bir önceki günkü %0,70'lik yükselişin ardından güne %0,31 artışla 14.550,67 puandan başladı. Piyasaların gözü artık 11 Eylül'de açıklanacak ABD TÜFE verisinde.",
+    publishedAt: "2026-09-10",
+    readingMinutes: 3,
+    intro:
+      "Perşembe günü piyasaların gündemine TCMB'nin faiz kararı damga vurdu: Para Politikası Kurulu, saat 14.00'te açıkladığı kararda politika faizini (bir hafta vadeli repo faizi) **%37**'de sabit tuttu; karar, AA Finans'ın anketine katılan 25 ekonomistin 24'ünün beklentisiyle örtüşürken yalnızca 1 ekonomist 100 baz puanlık indirim öngörmüştü. Gecelik borç verme faizi %40, gecelik borçlanma faizi ise %35,5 seviyesinde korundu; TCMB, temmuz ayındaki son toplantısında da faizi %37'de sabit bırakmıştı. Karar sonrasında döviz tarafında dolar/TL tarihi zirvesini bir kez daha tazeleyerek 48,49-48,51 TL bandına çıktı; resmi kurlarda alış 48,4885 TL, satış 48,5007 TL olarak kaydedilirken serbest piyasada satış fiyatı 48,51 TL'ye ulaştı. Euro/TL de kendi rekorunu yenileyerek 56,57-56,58 TL bandına yükseldi. Altın tarafında sabah saatlerinde 6.875,78 TL'den işlem gören gram altın, gün içinde 6.897-6.903 TL bandına çıkarak günü %0,56 artışla tamamladı; uluslararası piyasalarda ons altın (XAU/USD) 4.407,66 dolar seviyesinde seyretti. Borsa tarafında BIST 100 endeksi, bir önceki günü (9 Eylül Çarşamba) %0,70 artışla 14.505,48 puandan tamamlamasının ardından Perşembe gününe %0,31 yükselişle 14.550,67 puandan başladı. Piyasaların odağı artık 11 Eylül'de açıklanacak ABD TÜFE (Ağustos) verisinde; bu veri Fed'in 16 Eylül'deki faiz kararına dair son büyük ipucu olacak.",
+    news: [
+      {
+        icon: "🇹🇷",
+        heading: "TCMB Politika Faizini %37'de Sabit Tuttu",
+        body: "**TCMB Para Politikası Kurulu**, Perşembe günü saat **14.00**'te açıkladığı kararda politika faizini (bir hafta vadeli repo faizi) **%37**'de sabit tuttu; karar, AA Finans'ın anketine katılan **25 ekonomistin 24'ünün** beklentisiyle örtüşürken yalnızca **1 ekonomist 100 baz puanlık** bir indirim öngörmüştü. **Gecelik borç verme faizi %40**, **gecelik borçlanma faizi** ise **%35,5** seviyesinde korundu. TCMB, temmuz ayındaki son toplantısında da politika faizini **%37**'de sabit bırakmıştı.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar/TL ve Euro/TL Tarihi Zirvelerini Yeniden Tazeledi",
+        body: "**Dolar/TL**, TCMB kararının ardından tarihi zirvesini bir kez daha tazeleyerek **48,49-48,51 TL** bandına çıktı; resmi kurlarda alış **48,4885 TL**, satış **48,5007 TL** olarak kaydedilirken serbest piyasada satış fiyatı **48,51 TL**'ye ulaştı. **Euro/TL** de kendi rekorunu yenileyerek **56,57-56,58 TL** bandına yükseldi; alış **56,5617 TL**, satış **56,5848 TL** seviyesinde işlem gördü.",
+      },
+      {
+        icon: "🥇",
+        heading: "Gram Altın Günü Yükselişle Tamamladı: 6.903 TL",
+        body: "Sabah saatlerinde **6.875,78 TL**'den işlem gören **gram altın**, gün içinde **6.897-6.903 TL** bandına çıkarak günü **%0,56** artışla tamamladı; uluslararası piyasalarda **ons altın (XAU/USD)** ise **4.407,66 dolar** seviyesinde seyretti.",
+      },
+      {
+        icon: "📈",
+        heading: "BIST 100 Güne Yükselişle Başladı: 14.550,67 Puan",
+        body: "**BIST 100 endeksi**, bir önceki günü (9 Eylül Çarşamba) **%0,70** artışla **14.505,48 puandan** tamamlamasının ardından Perşembe gününe **%0,31** yükselişle **14.550,67 puandan** başladı.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-10-0900",
     title: "FXPARTNER Piyasa Özeti | 10.09.2026 Sabah Güncellemesi",
     excerpt:
