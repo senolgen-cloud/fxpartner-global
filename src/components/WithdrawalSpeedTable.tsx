@@ -122,6 +122,17 @@ export default function WithdrawalSpeedTable() {
           { ranked: rows.length }
         )}
       </p>
+
+      {/* The same ranking as a stand-alone article: the method, each broker
+          in turn, and why the fastest is not the safest. The table is the
+          answer; the article is the reasoning behind it, and the reader who
+          wants the second should not have to find it through the blog index. */}
+      <Link
+        href="/blog/en-hizli-para-cekimi-forex-brokerlari-2026"
+        className="mt-4 inline-block font-mono text-xs uppercase tracking-[0.15em] text-signal transition-colors hover:text-signal-strong active:text-signal-strong"
+      >
+        {tr("Sıralamanın ayrıntılı değerlendirmesini okuyun")} →
+      </Link>
     </div>
   );
 }
