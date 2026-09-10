@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-10-1700",
+    title: "FXPARTNER Piyasa Özeti | 10.09.2026 Akşam Güncellemesi",
+    excerpt:
+      "Perşembe günü ECB, saat 14.15 CET'te (15.15 TSİ) açıkladığı kararda üç ana faiz oranını da 25 baz puan artırarak mevduat faizini %2,50'ye, ana refinansman faizini %2,65'e, marjinal fonlama faizini ise %2,90'a yükseltti; karar 16 Eylül'de yürürlüğe girecek ve ECB'nin bu yılki ikinci faiz artışı oldu. Aynı gün ABD'de haftalık işsizlik maaşı başvuruları 206.000 ile piyasa beklentisinin hafif üzerinde açıklanırken, BIST 100 endeksi açılıştaki %0,31'lik yükselişini koruyamayarak öğleye doğru %0,48 düşüşle 14.436,10 puana geriledi. Piyasaların gözü artık yarın açıklanacak ABD TÜFE verisi ile 16 Eylül'deki Fed faiz kararında.",
+    publishedAt: "2026-09-10",
+    readingMinutes: 3,
+    intro:
+      "Perşembe günü piyasaların gündemine **Avrupa Merkez Bankası (ECB)**'nin faiz kararı damga vurdu: ECB, saat **14.15 CET (15.15 TSİ)**'te açıkladığı kararda üç ana faiz oranını da **25 baz puan** artırdı; **mevduat faizi %2,50**'ye, **ana refinansman faizi %2,65**'e, **marjinal fonlama faizi** ise **%2,90**'a yükseltilirken yeni oranlar **16 Eylül 2026** itibarıyla yürürlüğe girecek. Karar, ECB'nin bu yılki **ikinci faiz artışı** oldu; kurul, Orta Doğu'daki çatışmanın enflasyonu uzun süre hedefin belirgin şekilde üzerinde tutmaya devam ettiğini belirtirken, yeni personel projeksiyonlarına göre enflasyonun **2026'da ortalama %3,0**, **2027'de %2,5**, **2028'de ise %2,1** olması bekleniyor. Aynı gün ABD tarafında **Çalışma Bakanlığı**'nın açıkladığı verilere göre haftalık **yeni işsizlik maaşı başvuruları 206.000** oldu; rakam piyasa beklentisi olan **205.000**'in hafif üzerinde, bir önceki haftanın yukarı yönlü revize edilen **207.000** rakamının ise altında kaldı ve **dört haftalık hareketli ortalama 206.000** seviyesinde yatay seyretti; veri, işgücü piyasasının Fed'in **16 Eylül**'deki faiz kararı öncesinde nispeten istikrarlı kaldığına işaret etti. Borsa tarafında **BIST 100 endeksi**, güne açılışta **%0,31** yükselişle **14.550,67 puandan** başlamasının ardından günün ilk yarısında yön değiştirdi ve saat **13.00** itibarıyla bir önceki kapanışa göre **%0,48** düşüşle **14.436,10 puana** geriledi. Piyasaların odağı artık yarın (**11 Eylül**) açıklanacak **ABD TÜFE** verisi ile **16 Eylül**'deki **Fed** faiz kararında.",
+    news: [
+      {
+        icon: "🇪🇺",
+        heading: "ECB Faiz Kararı: Üç Ana Faiz de 25 Baz Puan Artırıldı",
+        body: "**Avrupa Merkez Bankası (ECB)**, Perşembe günü saat **14.15 CET (15.15 TSİ)**'te açıkladığı kararda üç ana faiz oranını da **25 baz puan** artırdı: **mevduat faizi %2,50**'ye, **ana refinansman faizi %2,65**'e, **marjinal fonlama faizi** ise **%2,90**'a yükseltildi; yeni oranlar **16 Eylül 2026** itibarıyla yürürlüğe girecek. Karar, ECB'nin bu yılki **ikinci faiz artışı** oldu; kurul, Orta Doğu'daki çatışmanın enflasyonu uzun süre hedefin belirgin şekilde üzerinde tutmaya devam ettiğini belirtti. Yeni ECB personel projeksiyonlarına göre enflasyonun **2026'da ortalama %3,0**, **2027'de %2,5**, **2028'de ise %2,1** olması bekleniyor.",
+      },
+      {
+        icon: "🇺🇸",
+        heading: "ABD'de Haftalık İşsizlik Maaşı Başvuruları 206 Bin Oldu",
+        body: "**ABD Çalışma Bakanlığı**'nın Perşembe günü açıkladığı verilere göre haftalık **yeni işsizlik maaşı başvuruları 206.000** oldu; bu rakam piyasa beklentisi olan **205.000**'in hafif üzerinde, ancak bir önceki haftanın yukarı yönlü revize edilen **207.000** rakamının altında kaldı. Devam eden başvurular **1.774.000**'e gerilerken, dört haftalık hareketli ortalama **206.000** seviyesinde yatay seyretti; veri, işgücü piyasasının Fed'in **16 Eylül**'deki faiz kararı öncesinde nispeten istikrarlı kaldığına işaret etti.",
+      },
+      {
+        icon: "📉",
+        heading: "BIST 100 Günün İlk Yarısında Kazancını Sildi",
+        body: "**BIST 100 endeksi**, Perşembe gününe açılışta **%0,31** yükselişle **14.550,67 puandan** başlamasının ardından günün ilk yarısında yön değiştirdi; endeks saat **13.00** itibarıyla bir önceki kapanışa göre **%0,48** düşüşle **14.436,10 puana** geriledi.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-10-1500",
     title: "FXPARTNER Piyasa Özeti | 10.09.2026 Öğleden Sonra Güncellemesi",
     excerpt:
