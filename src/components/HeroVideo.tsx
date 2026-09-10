@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// The video is a 7MB purely decorative background loop (opacity-20,
+// The video is a 1.5MB purely decorative background loop (opacity-40,
 // blend-screen) — not content, so it must never compete with the page's
 // actual critical resources (fonts, hero copy, above-the-fold images) for
 // bandwidth during first paint. Deferring the `src` assignment until after
@@ -47,7 +47,7 @@ export default function HeroVideo() {
           round so XM stays red and LiteFinance green — only lighter. */}
       <video
         ref={videoRef}
-        className="h-full w-full object-cover opacity-25 mix-blend-screen [filter:invert(1)_hue-rotate(180deg)]"
+        className="h-full w-full object-cover opacity-40 mix-blend-screen [filter:invert(1)_hue-rotate(180deg)]"
         src={shouldLoad ? "/videos/fxpartner-partners-intro.mp4" : undefined}
         autoPlay={shouldLoad}
         muted
