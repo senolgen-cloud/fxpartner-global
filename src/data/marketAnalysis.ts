@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-10-2300",
+    title: "FXPARTNER Piyasa Özeti | 10.09.2026 Gece Güncellemesi",
+    excerpt:
+      "Perşembe günü ABD Çalışma Bakanlığı'nın açıkladığı Ağustos ayı Üretici Fiyat Endeksi (ÜFE) aylık %0,4, yıllık %5,4 artış gösterdi; çekirdek ÜFE ise aylık %0,3, yıllık %4,7 yükseldi. Veri sonrası Wall Street'te üç ana endeks de günü düşüşle kapattı: Dow Jones %0,77 düşüşle 52.380,66 puana, Nasdaq Composite %0,64 düşüşle 26.253,34 puana, S&P 500 ise %0,45 düşüşle 7.638,95 puana geriledi. Brent petrol, Çarşamba günü %3,4 yükselişle kaydettiği 22 Mayıs'tan bu yana en yüksek kapanış seviyesi olan 101,21 doların üzerindeki seyrini korurken, ABD 10 yıllık tahvil getirisi 2023'ten bu yana en yüksek seviyesine çıktı. Piyasaların gözü artık yarın açıklanacak ABD TÜFE verisi ile 16 Eylül'deki Fed faiz kararında.",
+    publishedAt: "2026-09-10",
+    readingMinutes: 3,
+    intro:
+      "Perşembe akşamı ABD tarafında açıklanan enflasyon verisi ve Wall Street kapanışı piyasaların gündemine damga vurdu: **ABD Çalışma Bakanlığı**'nın saat **08.30 (ET)**'de açıkladığı **Ağustos ayı Üretici Fiyat Endeksi (ÜFE)**, bir önceki aya göre **%0,4** artarak piyasa beklentisiyle uyumlu geldi; mevsimsel düzeltilmemiş bazda yıllık ÜFE artışı ise **%5,4** olarak kaydedildi. Gıda, enerji ve toptan satış hizmetleri hariç tutulan **çekirdek ÜFE**, aylık **%0,3**, yıllık **%4,7** yükseldi; artışın dörtte üçünden fazlası enerji fiyatlarındaki **%4,2**'lik sıçramadan, mal fiyatlarındaki artışın önemli bir kısmı ise **%24,1** yükselen dizel yakıt fiyatlarından kaynaklandı. Veri, Hürmüz Boğazı'ndaki çatışmanın enerji fiyatları üzerinden enflasyona sızdığına işaret ederken, Fed'in **16 Eylül**'deki faiz kararı öncesinde piyasalarda temkinli bir hava yarattı. Yükselen enflasyon endişeleri ve **100 doların üzerinde** seyreden petrol fiyatlarının baskısıyla Wall Street'te üç ana endeks de günü kayıpla tamamladı: **Dow Jones Sınai Ortalaması**, **405,41 puan (%0,77)** değer kaybederek **52.380,66** puandan kapanırken, **Nasdaq Composite** **168,07 puan (%0,64)** gerileyerek **26.253,34** puana indi ve **S&P 500** **%0,45** düşüşle **7.638,95** puandan günü tamamladı. Emtia tarafında **Brent petrol**, Çarşamba günü **%3,4** yükselişle **101,21 dolara** çıkarak **22 Mayıs'tan bu yana en yüksek kapanış** seviyesini kaydetmişti; Perşembe günü de **101 doların üzerindeki** seyrini korudu. Aynı baskı tahvil piyasasına da yansıdı; **ABD 10 yıllık tahvil getirisi**, yükselen enflasyon endişeleriyle **2023'ten bu yana en yüksek seviyesine** çıktı. Piyasaların odağı artık yarın (**11 Eylül**) açıklanacak **ABD TÜFE** verisi ile **16 Eylül**'deki **Fed** faiz kararında.",
+    news: [
+      {
+        icon: "🇺🇸",
+        heading: "ABD Ağustos ÜFE Verisi: Aylık %0,4, Yıllık %5,4 Arttı",
+        body: "**ABD Çalışma Bakanlığı**, Perşembe günü saat **08.30 (ET)**'de açıkladığı verilere göre **nihai talep Üretici Fiyat Endeksi (ÜFE)**, Ağustos'ta bir önceki aya göre **%0,4** arttı; bu artış piyasa beklentisiyle uyumlu geldi. Mevsimsel düzeltilmemiş bazda yıllık ÜFE artışı **%5,4** olarak kaydedildi. Gıda, enerji ve toptan satış hizmetleri hariç tutulan **çekirdek ÜFE** ise aylık **%0,3**, yıllık **%4,7** yükseldi. Artışın dörtte üçünden fazlası enerji fiyatlarındaki **%4,2**'lik yükselişten kaynaklanırken, mal fiyatlarındaki artışın önemli bir bölümü **%24,1** sıçrayan dizel yakıt fiyatlarından geldi.",
+      },
+      {
+        icon: "📉",
+        heading: "Wall Street'te Üç Ana Endeks de Günü Düşüşle Kapattı",
+        body: "ABD'de **ÜFE** verisinin ardından yükselen tahvil getirileri ve **100 doların üzerinde** seyreden petrol fiyatlarının baskısıyla Wall Street'te üç ana endeks de günü kayıpla tamamladı: **Dow Jones Sınai Ortalaması**, **405,41 puan (%0,77)** değer kaybederek **52.380,66** puandan kapandı; **Nasdaq Composite** **168,07 puan (%0,64)** gerileyerek **26.253,34** puana indi; **S&P 500** ise **%0,45** düşüşle **7.638,95** puandan günü tamamladı.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Brent Petrol 101 Doların Üzerinde Kaldı, Tahvil Getirileri 2023'ten Bu Yana Zirvede",
+        body: "**Brent petrol**, Çarşamba günü **%3,4** yükselişle **101,21 dolara** çıkarak **22 Mayıs'tan bu yana en yüksek kapanış** seviyesini kaydetmişti; Perşembe günü de **101 doların üzerindeki** seyrini korudu. Hürmüz Boğazı'ndaki gerginliğin sürmesiyle enerji arzına yönelik endişelerin canlı kalması fiyatları destekledi. Aynı baskı tahvil piyasasına da yansıdı; **ABD 10 yıllık tahvil getirisi**, yükselen enflasyon endişeleriyle **2023'ten bu yana en yüksek seviyesine** çıktı.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-10-1700",
     title: "FXPARTNER Piyasa Özeti | 10.09.2026 Akşam Güncellemesi",
     excerpt:
