@@ -49,6 +49,138 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    // The withdrawal-speed survey as a stand-alone post, so the ranking has
+    // an address of its own for search and for sharing rather than living
+    // only as a section of /brokerlar.
+    //
+    // Every broker claim here is lifted from data the site already
+    // publishes (src/data/brokers.ts and src/data/withdrawalSurvey.ts); none
+    // is new. The survey is quoted as a survey — dated, sized, and never as a
+    // measurement — the same two brakes the table on /brokerlar carries.
+    //
+    // The "speed is not safety" section is the part that keeps this honest:
+    // the fastest broker on the list has the lightest regulation of the five,
+    // the slowest one of the heaviest. Leaving that out would make the ranking
+    // read as a safety ranking, which it is not.
+    //
+    // No adBrokerSlug. It is for posts that argue for one broker; this is a
+    // comparison, and a ranking that opens with the first-placed partner's
+    // banner reads as bought.
+    slug: "en-hizli-para-cekimi-forex-brokerlari-2026",
+    coverImage: "/blog/en-hizli-para-cekimi-forex-brokerlari-2026.png",
+    coverWidth: 1254,
+    coverHeight: 1254,
+    lang: "tr",
+    title:
+      "En Hızlı Para Çekimi Yapan Forex Brokerları 2026: 500+ Yatırımcının Bildirdiği Süreler",
+    excerpt:
+      "Hangi forex brokerı parayı en hızlı öder? 500'den fazla yatırımcının geri dönüşüne göre Top 5 sıralama: LiteFinance anlık, Exness 1-2 dakika, XM 3-5 dakika. Sürenin neye bağlı olduğu ve hızın neden tek başına yetmediği.",
+    publishedAt: "2026-09-10",
+    readingMinutes: 7,
+    sections: [
+      {
+        paragraphs: [
+          "Bir forex brokerı seçerken spreadi, kaldıracı ve minimum yatırımı brokerın kendi sitesinde bulursunuz. Bulamadığınız tek sayı, paranın hesaptan ne kadar sürede çıktığıdır — ve şikayetlerin büyük çoğunluğu tam oradan gelir. Her broker “dakikalar içinde” yazar; o cümle bir karşılaştırma değildir.",
+          "Bu yazı o sayıyı, çekim yapmış olanların kendisinden topluyor. FXPARTNER anketine katılan 500'den fazla yatırımcının bildirdiği çekim sürelerini sıraladık, her birinin neden orada olduğunu ve bu sıralamanın neyi söyleyip neyi söylemediğini açıkladık.",
+        ],
+      },
+      {
+        heading: "Sıralama: yatırımcıların bildirdiği çekim süreleri",
+        paragraphs: [
+          "9 Eylül 2026'da derlenen, 500'den fazla yatırımcının geri dönüşüne dayanan sıralama — paranın hesaptan çıkıp yatırımcıya ulaşma süresine göre:",
+        ],
+        list: [
+          "1. LiteFinance — anlık, 1 saniyeden az",
+          "2. Exness — 1-2 dakika",
+          "3. XM — 3-5 dakika",
+          "4. FxPro — 15-30 dakika",
+          "5. AvaTrade — 1 saat ve üzeri",
+        ],
+      },
+      {
+        heading: "Bu bir ölçüm değil — ne olduğunu bilerek okuyun",
+        paragraphs: [
+          "Bu sıralama yatırımcıların bize bildirdiği sürelerin özeti; brokerları kronometreyle test etmedik. Bir yatırımcının hafta sonu yaptığı çekim, kullandığı yöntem ya da hesabının doğrulanma durumu bildirdiği süreyi etkiler. Yine de 500'den fazla bildirimin aynı yöne işaret etmesi, tek bir kişinin deneyiminden çok daha fazlasını söyler.",
+          "Listede olmayan bir broker yavaş olduğu için değil, hakkında yeterli geri dönüş olmadığı için yok. Beş broker sıralanabilecek kadar bildirim aldı; diğerleri için henüz sağlıklı bir sonuç çıkaracak kadar veri yok.",
+        ],
+      },
+      {
+        heading: "Brokerlar tek tek",
+        paragraphs: [
+          "LiteFinance (anlık): Çekim, LiteFinance'in en güçlü olduğu taraf. Kriptoda hesap doğrulaması tamamlandıktan sonra çekim talebi anında işleniyor ve para cüzdana geçiyor; doğrulanmış hesapta otomatik çekim açıkken günde 5.000 dolara kadar, manuel onay beklemeden çekilebiliyor.",
+          "Exness (1-2 dakika): Yatırımcı bildirimlerinde ikinci sırada. FCA, CySEC, FSCA ve FSC (Mauritius) lisanslarına sahip bir grup; hesabınızın bu şirketlerden hangisine bağlandığını hesap açarken kontrol etmenizi öneririz.",
+          "XM (3-5 dakika): Yatırımcıların bildirdiği süre kısa, ancak XM'in kendi açıkladığı işlem penceresi daha temkinli: taleplerin çoğu 24 saat içinde işleme alınıyor, e-cüzdan ödemeleri genellikle aynı gün ulaşıyor, kart ve banka çekimleri 2-5 iş günü sürebiliyor. XM çekim ücreti almıyor. Aradaki fark büyük ölçüde yöntemden kaynaklanıyor: anket sonuçları ağırlıklı olarak hızlı yöntemleri yansıtıyor.",
+          "FxPro (15-30 dakika): FCA, CySEC, FSCA ve SCB (Bahamalar) lisanslı. Yatırımcı bildirimlerinde orta sırada.",
+          "AvaTrade (1 saat ve üzeri): İrlanda Merkez Bankası, ASIC, FSCA ve ADGM lisanslı. Beşi arasında en uzun süre bildirilen broker — ve bir sonraki başlığın konusu tam olarak bu.",
+        ],
+      },
+      {
+        heading: "Hız ve güvenlik aynı şey değil",
+        paragraphs: [
+          "Sıralamaya regülasyon gözüyle bakınca dikkat çeken bir desen var: en hızlı çeken LiteFinance, beşi arasında en hafif regülasyona sahip olan — FSC (Mauritius) ve yalnızca şirket kaydı niteliğinde SVG. En uzun süre bildirilen AvaTrade ise en güçlü denetimlerden birinin altında: İrlanda Merkez Bankası ve ASIC.",
+          "Bu bir tesadüf değil. Sıkı regülasyon, her çekimde ek uyum kontrolleri, kara para aklamayla mücadele incelemeleri ve onay adımları demektir; bunlar süreyi uzatır ama paranın güvencesini artırır. Hafif regülasyon ise daha hızlı ödeme ve daha zayıf bir güvenlik ağı anlamına gelebilir.",
+          "Yani “en hızlı” ile “en güvenli” farklı sorular. Hangisinin sizin için daha önemli olduğu, ne kadar parayla işlem yaptığınıza ve ne sıklıkla çekim yaptığınıza bağlı. Her brokerın regülasyon değerlendirmesini inceleme sayfalarında ayrıca bulabilirsiniz.",
+        ],
+      },
+      {
+        heading: "Çekim süresini ne belirler?",
+        paragraphs: [
+          "Aynı brokerda iki yatırımcının çok farklı süreler bildirmesinin sebebi genellikle şu beş etkenden biridir:",
+        ],
+        list: [
+          "Yöntem: Kripto çekimler neredeyse her zaman en hızlısıdır; banka havalesi ve kart çekimleri bankanın işlem süresine bağlıdır ve günler sürebilir.",
+          "Hesap doğrulaması (KYC): Kimlik ve adres doğrulaması tamamlanmamış bir hesapta çekim bekler. Bu adımı ilk yatırımdan önce bitirmek en büyük gecikmeyi ortadan kaldırır.",
+          "Aynı yöntem kuralı: Çoğu broker parayı yatırıldığı yönteme ve para birimine geri gönderir. Hızlı çekim istiyorsanız yatırımı da o yöntemle yapmanız gerekir.",
+          "Tutar ve limitler: Otomatik çekimin günlük bir üst sınırı olabilir; bu sınırın üzerindeki talepler manuel incelemeye düşer.",
+          "Zamanlama: Hafta sonu ve resmi tatillerde bankacılık tarafı çalışmaz; kripto dışındaki yöntemlerde bu süreyi uzatır.",
+        ],
+      },
+      {
+        heading: "Büyük yatırım yapmadan önce: küçük bir çekim testi",
+        paragraphs: [
+          "Bir brokerın çekim sürecini anlamanın en güvenilir yolu, onu kendiniz denemektir. Önerdiğimiz sıra şu:",
+        ],
+        list: [
+          "Hesabınızı açın ve doğrulamayı ilk yatırımdan önce tamamlayın.",
+          "Çekmeyi planladığınız yöntemle küçük bir tutar yatırın.",
+          "İşlem yapmadan ya da küçük bir işlemden sonra o tutarın bir kısmını çekin ve süreyi not edin.",
+          "Süre ve ücret beklediğiniz gibiyse sermayenizi kademeli olarak artırın.",
+        ],
+      },
+      {
+        paragraphs: [
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Kaldıraçlı işlemler yüksek risk içerir ve yatırdığınız paranın tamamını kaybedebilirsiniz. Çekim süreleri yöntem, hesap durumu ve broker politikasına göre değişebilir; güncel koşulları her zaman brokerın resmi sitesinden teyit edin.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "En hızlı para çeken forex broker hangisi?",
+        a: "FXPARTNER anketine katılan 500'den fazla yatırımcının geri dönüşüne göre en hızlı çekim LiteFinance'te bildiriliyor: kriptoda doğrulanmış bir hesapta çekim talebi anında işleniyor. Onu Exness (1-2 dakika) ve XM (3-5 dakika) izliyor. Bu bir ölçüm değil, yatırımcı bildirimlerinin özeti.",
+      },
+      {
+        q: "Forex brokerından para çekme ne kadar sürer?",
+        a: "Brokera ve yönteme göre değişir. Yatırımcı bildirimlerinde süreler anlık ile 1 saatin üzeri arasında dağılıyor. Kripto çekimler genellikle dakikalar içinde tamamlanırken banka havalesi ve kart çekimleri birkaç iş günü sürebilir.",
+      },
+      {
+        q: "Kripto ile para çekmek neden daha hızlı?",
+        a: "Kripto transferleri bankacılık sisteminin işlem saatlerine ve aracı bankalara bağlı değildir; broker talebi onayladığı anda ağa gönderilir. Banka havalesi ve kart çekimleri ise bankanın kendi işlem süresine takılır.",
+      },
+      {
+        q: "Hızlı para çekme brokerın güvenilir olduğu anlamına gelir mi?",
+        a: "Hayır. Hız ve güvenlik farklı şeylerdir. Sıkı regülasyon her çekimde ek uyum kontrolleri gerektirir ve bu süreyi uzatabilir; hafif regülasyon daha hızlı ödeme ama daha zayıf bir güvenlik ağı anlamına gelebilir. Bir brokeru değerlendirirken çekim hızını regülasyonla birlikte düşünmek gerekir.",
+      },
+      {
+        q: "Para çekme neden gecikir?",
+        a: "En sık sebepler: tamamlanmamış hesap doğrulaması (KYC), paranın yatırıldığı yöntemden farklı bir yöntemle çekilmek istenmesi, otomatik çekim limitinin aşılması ve hafta sonu ya da tatil günlerinde yapılan banka çekimleri.",
+      },
+      {
+        q: "Bu sıralama nasıl hazırlandı?",
+        a: "Sıralama, FXPARTNER anketine katılan 500'den fazla yatırımcının bildirdiği çekim sürelerinin özetidir ve 9 Eylül 2026'da derlenmiştir. Brokerlar kronometreyle test edilmedi. Yalnızca yeterli bildirim alan beş broker sıralamaya girdi; listede olmayan bir broker yavaş olduğu için değil, yeterli veri olmadığı için yer almıyor.",
+      },
+    ],
+  },
+  {
     // Written off LiteFinance's own promo-code terms page
     // (litefinance.org/promo/codes/?code=NonStopBonus), read 8 Eylül 2026,
     // not off the Turkish campaign creative — and the two disagree in
