@@ -41,6 +41,60 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-10-0900",
+    title: "FXPARTNER Piyasa Özeti | 10.09.2026 Sabah Güncellemesi",
+    excerpt:
+      "Perşembe sabahı İran-ABD çatışmasında gerilim yeni bir boyuta taşındı: İran Devrim Muhafızları Ordusu (IRGC), ABD'nin beş İran petrol tankerini vurmasına karşılık Hürmüz Boğazı'nda USS Delbert D. Black ve USS John Paul Jones adlı iki ABD muhribini balistik füzelerle vurduğunu, ayrıca sekiz tanker ile yasaklı bölgeden geçmeye çalışan on gemiyi daha hedef aldığını duyurdu; CENTCOM ise ABD gemilerinin isabet aldığı iddiasını reddetti. Gelişme sonrası Brent petrol Temmuz sonundan bu yana ilk kez 100 dolar sınırını aşarak 101 dolara, WTI ise 96 dolara yükseldi. Döviz tarafında dolar/TL sabah saatlerinde 48,50 TL'ye çıkarak tarihi zirvesini yeniden tazelerken euro/TL 56,57 TL'ye yükseldi. Ons altın 4.407,66 dolar seviyesinde işlem görürken yurt içinde gram altın 6.875,78 TL'den alıcı buldu. Piyasaların gözü artık bugün saat 14.00'te açıklanacak TCMB faiz kararında.",
+    publishedAt: "2026-09-10",
+    readingMinutes: 3,
+    intro:
+      "Perşembe sabahı piyasaların gündemine İran-ABD çatışmasında yaşanan yeni tırmanma damga vurdu: İran Devrim Muhafızları Ordusu (IRGC), ABD'nin 8 Eylül'de beş İran petrol tankerini vurarak etkisiz hale getirmesine karşılık Hürmüz Boğazı'nda ABD Donanması'na ait USS Delbert D. Black (DDG-119) ve USS John Paul Jones (DDG-53) muhriplerini balistik füzelerle vurduğunu ve her iki Aegis savaş gemisinde de 'önemli hasar' oluştuğunu iddia etti; IRGC ayrıca sekiz tankeri ve ABD'nin teşvikiyle boğazın yasaklı bölgesinden geçmeye çalışan on gemiyi daha hedef aldığını duyurdu. ABD Merkez Kuvvetler Komutanlığı (CENTCOM) ise ABD savaş gemilerinin isabet aldığı iddiasını reddederken, gemilerdeki hasara ilişkin bağımsız bir doğrulama şu ana kadar yapılamadı. Gelişme, enerji arzına yönelik endişeleri yeniden alevlendirerek Brent petrolün Perşembe sabahı Temmuz sonundan bu yana ilk kez 100 dolar sınırını aşmasına ve 101 dolara çıkmasına yol açtı; ekim vadeli WTI ham petrol de 96 dolar seviyesine yükseldi. Döviz tarafında dolar/TL sabah saat 07.17 itibarıyla 48,50 TL sınırına çıkarak tarihi zirvesini bir kez daha tazeledi, serbest piyasada ise saat 09.30 itibarıyla 48,47-48,48 TL bandında seyretti; euro/TL de 56,57 TL'ye çıkarak kendi tarihi zirvesini yeniledi. Altın tarafında ons altın (XAU/USD) 4.407,66 dolar seviyesinde işlem görürken, yurt içinde gram altın 6.875,78 TL'den alıcı buldu. Piyasaların odağı artık bugün (10 Eylül) saat 14.00'te açıklanacak TCMB faiz kararında; ekonomistlerin büyük çoğunluğu politika faizinin %37'de sabit kalmasını bekliyor.",
+    news: [
+      {
+        icon: "🎯",
+        heading: "İran Hürmüz'de İki ABD Muhribini Vurduğunu Açıkladı, CENTCOM Reddetti",
+        body: "**İran Devrim Muhafızları Ordusu (IRGC)**, ABD'nin 8 Eylül'de beş İran petrol tankerini vurmasına karşılık Hürmüz Boğazı'nda ABD Donanması'na ait **USS Delbert D. Black (DDG-119)** ve **USS John Paul Jones (DDG-53)** güdümlü füze muhriplerini balistik füzelerle vurduğunu ve her iki gemide de **'önemli hasar'** oluştuğunu iddia etti; ayrıca **sekiz tankeri** ve boğazın yasaklı bölgesinden geçmeye çalışan **on gemiyi** daha hedef aldığını duyurdu. **CENTCOM**, ABD savaş gemilerinin isabet aldığı iddiasını reddederken, iddialara ilişkin bağımsız bir doğrulama şu ana kadar yapılamadı.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Brent Petrol Temmuz'dan Bu Yana İlk Kez 100 Doları Aştı",
+        body: "**Brent petrol**, Hürmüz Boğazı'ndaki karşılıklı saldırıların tırmanmasının ardından Perşembe sabahı **Temmuz sonundan bu yana ilk kez 100 dolar sınırını aşarak 101 dolara** çıktı; **WTI ham petrol** de aynı saatlerde **96 dolar** seviyesine yükseldi. Yükselişte, çatışmanın Hürmüz üzerinden geçen küresel petrol arzını kesintiye uğratabileceğine yönelik endişelerin derinleşmesi etkili oldu.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar/TL ve Euro/TL Tarihi Zirvelerini Yeniden Tazeledi",
+        body: "**Dolar/TL**, Perşembe sabahı saat **07.17** itibarıyla **48,50 TL** sınırına çıkarak tarihi zirvesini bir kez daha tazeledi; serbest piyasada kur saat **09.30** itibarıyla **48,47-48,48 TL** bandında işlem gördü. **Euro/TL** ise **56,57 TL**'ye yükselerek kendi tarihi zirvesini yeniledi.",
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın 4.407 Dolarda, Gram Altın 6.875 TL'den Alıcı Buldu",
+        body: "**XAU/USD**, Orta Doğu'daki tırmanma ve zayıflayan dolar desteğiyle Perşembe sabahı **4.407,66 dolar** seviyesinde işlem gördü; yurt içinde **gram altın** da bu seyri yansıtarak **6.875,78 TL**'den alıcı buldu.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "Piyasaların Gözü Bugünkü TCMB Faiz Kararında",
+        body: "**TCMB Para Politikası Kurulu**'nun bugün (**10 Eylül**) saat **14.00**'te açıklayacağı faiz kararı öncesi piyasadaki hakim beklenti, politika faizinin **%37**'de **sabit tutulması** yönünde; **20 ekonomistin 18'i** bu görüşte olup **2 ekonomist 100 baz puanlık** bir indirim öngörüyor. TCMB, temmuz ayındaki son toplantısında da politika faizini **%37**'de sabit bırakmıştı.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "10 Eylül 2026, 14:00 (TSİ)",
+        icon: "🇹🇷",
+        title: "TCMB Faiz Kararı",
+        note: "Piyasadaki hakim beklenti politika faizinin %37'de sabit tutulması yönünde; 20 ekonomistin 18'i bu görüşte, 2 ekonomist ise 100 baz puanlık indirim öngörüyor.",
+      },
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-09-1200",
     title: "FXPARTNER Piyasa Özeti | 09.09.2026 Öğle Güncellemesi",
     excerpt:
