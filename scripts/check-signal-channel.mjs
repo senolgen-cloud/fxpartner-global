@@ -1,15 +1,18 @@
-// Signals go to one place, and only one place.
+// Signals go where src/lib/telegram.ts decides, and nowhere else.
 //
-// As of 2026-09-01 a trade signal is published to the paid VIP group's
-// SIGNALS topic and nowhere else. It used to go out to the public channel,
-// the Arabic mirror, X and a push to every anonymous subscriber — four
-// simultaneous giveaways of the thing members pay for.
+// History: until 2026-09-01 a signal went out to the public channel, the
+// Arabic mirror, X and a push to every anonymous subscriber. On 2026-09-01
+// it was restricted to the paid VIP group's SIGNALS topic. On 2026-09-10
+// the owner reopened the public Telegram channel (@fxpartnerglobal) — and
+// only that: X, the Arabic mirror and the anonymous push stay closed.
 //
-// The routes that publish signals therefore must not call the general-purpose
-// senders (sendTelegramMessage / sendTelegramPhoto) or the X posters, because
-// those default to the public channel. They go through sendSignalMessage /
-// sendSignalPhoto, which resolve the destination in one place and have no
-// public fallback at all.
+// What this guard protects is not "one destination" any more but ONE PLACE
+// THAT DECIDES the destinations. The signal routes must not call the
+// general-purpose senders (sendTelegramMessage / sendTelegramPhoto) or the X
+// and push senders, because each of those would add an audience behind the
+// routing's back. They go through sendSignalMessage / sendSignalPhoto, where
+// the full list — VIP topic plus the public channel mirror — lives in one
+// function and can be read, and changed, in one place.
 //
 // This is checked rather than trusted for the usual reason: a public post is
 // not an error. Nothing throws, nothing turns red — the signal simply reaches

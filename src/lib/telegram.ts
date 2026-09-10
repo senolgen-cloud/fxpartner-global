@@ -72,20 +72,20 @@ export function arabicChatId(): string | null {
 }
 
 /**
- * Where a trade signal goes: the VIP group's SIGNALS topic, or nowhere.
+ * Where a trade signal goes in the VIP group: its SIGNALS topic.
  *
- * THIS IS THE ONLY DESTINATION, as of 2026-09-01. Signals used to go to the
- * public channel, mirrored to the Arabic channel, tweeted, and pushed to
- * everyone with the app installed, with the VIP group added last as an
- * extra. Owner's call: they now go to the paid group and nowhere else. A
- * signal is the product members pay for, and it was being given away in
- * four places at once.
+ * DESTINATIONS, as of 2026-09-10: this VIP topic plus the public channel
+ * @fxpartnerglobal (see publicSignalMirror below). History: until 2026-09-01
+ * signals went to the public channel, the Arabic mirror, X and a push to
+ * every anonymous subscriber; on 2026-09-01 the owner restricted them to the
+ * paid group; on 2026-09-10 the owner reopened the public Telegram channel,
+ * and only that. X, the Arabic mirror and the push stay closed.
  *
- * Which is why there is no fallback here and none in the senders below. If
- * this returns null the signal is not posted at all — publishing it to the
- * public channel "so it does not get lost" would be exactly the leak this
- * change exists to close, and a silent leak is worse than a silent gap. The
- * row is still written either way, so /signals keeps the record.
+ * This function still has no fallback. If the VIP chat id is unset it
+ * returns null and the VIP copy is simply not sent — it never substitutes
+ * another chat for the group. The public mirror is a separate, intended
+ * destination, not a fallback for this one. The row is written either way,
+ * so /signals keeps the record.
  *
  * THE TOPIC MATTERS. The group is a forum, so a message without
  * message_thread_id does not land in SIGNALS — it lands in General, beside
@@ -205,10 +205,15 @@ async function sendToSignalChannel(
   body: Record<string, unknown>,
   replyToMessageId?: string
 ) {
+  // The public channel copy goes first-in-code but is fully isolated: it is
+  // awaited for its own logging and nothing it does — a failure, a slow
+  // response — can change what the VIP send returns. See publicSignalMirror.
+  await publicSignalMirror(method, body);
+
   const target = signalDestination();
   if (!target) {
     console.error(
-      "No signal destination configured (TELEGRAM_VIP_CHAT_ID is unset) — signal not posted."
+      "No signal destination configured (TELEGRAM_VIP_CHAT_ID is unset) — signal not posted to VIP."
     );
     return null;
   }
@@ -219,6 +224,10 @@ async function sendToSignalChannel(
     ...forumTopic(target.threadId),
   };
 
+  // The return value is the VIP message, and only the VIP message: callers
+  // store its message_id as trade_signal.telegram_message_id, and every later
+  // result replies to that id inside the VIP group. The public copy has a
+  // different id in a different chat and is deliberately never stored.
   return callTelegram(method, {
     ...base,
     ...(replyToMessageId
@@ -230,6 +239,41 @@ async function sendToSignalChannel(
         }
       : {}),
   });
+}
+
+/**
+ * The public channel's copy of every signal, as of 2026-09-10.
+ *
+ * Owner's call, reversing the 2026-09-01 VIP-only rule: signals go to
+ * @fxpartnerglobal again, alongside the VIP SIGNALS topic. The Telegram
+ * channel only — X, the Arabic mirror and the anonymous push stay off, and
+ * check-signal-channel.mjs still forbids the signal routes from reaching
+ * them.
+ *
+ * NO REPLY THREADING HERE, on purpose. The only message id the database
+ * holds is the VIP one. Message ids are per chat, so passing it to the
+ * channel would thread a take-profit under whatever unrelated channel post
+ * happens to carry the same number — a result glued to the wrong trade,
+ * which is worse than a result standing on its own. Result posters name the
+ * pair and direction, so they read correctly unthreaded. Threading them
+ * properly would need a second id column; that is a schema change, not a
+ * routing one.
+ *
+ * Never throws. The VIP group is the paid product: a channel outage, a
+ * revoked bot permission or a rate limit here must not cost a member their
+ * signal.
+ */
+async function publicSignalMirror(
+  method: "sendMessage" | "sendPhoto",
+  body: Record<string, unknown>
+): Promise<void> {
+  const chatId = process.env.TELEGRAM_CHAT_ID?.trim();
+  if (!chatId) return;
+  try {
+    await callTelegram(method, { ...body, chat_id: chatId });
+  } catch (err) {
+    console.error("Public channel signal mirror failed (VIP send unaffected):", err);
+  }
 }
 
 export async function sendSignalMessage(
