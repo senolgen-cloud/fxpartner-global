@@ -135,6 +135,13 @@ const STRUCTURAL_KEYS = new Set([
   "regulators", "status", "outcome", "tier", "verdict", "unit",
   "drawdownUnit", "direction", "scope", "role",
   "symbol", "ticker", "currency", "date", "updatedAt", "publishedAt",
+  // Technical-analysis posts. `bias` is the Bias enum ("BULLISH" /
+  // "BEARISH") and the card branches on it; the 2026-09-10 market backfill
+  // produced "БИЧИЙ" and "صعودي" for it, which would have turned every
+  // Ukrainian and Arabic card's direction wrong the moment the catalogue
+  // shipped. `chartImage` is a /public path — a translated path is a broken
+  // image. Neither is prose.
+  "bias", "chartImage",
 ]);
 
 /**

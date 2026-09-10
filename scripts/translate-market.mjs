@@ -40,7 +40,17 @@ const STRUCT = new Set([
   "categories","category","segment","segments","models","platforms","regulators","status",
   "outcome","tier","verdict","unit","drawdownUnit","direction","scope","role",
   "symbol","ticker","currency","date","updatedAt","publishedAt",
+  // Mirrors the 2026-09-10 additions to STRUCTURAL_KEYS: the Bias enum and
+  // the chart path. Translating either breaks the card.
+  "bias","chartImage",
 ]);
+
+// Values that are identifiers even under a prose-looking key: a /public
+// path, a URL, or an instrument pair like EUR/USD. The first backfill sent
+// all three to the model; the paths and pairs came back unchanged, but only
+// by luck.
+// A bare time like "17:00 (GMT+3)" is the same in every language too.
+const NOT_PROSE = [/^\//, /^https?:/i, /^[A-Z0-9]{2,6}\/[A-Z0-9]{2,6}$/, /^[\d:.\s()+\-–]*(GMT|UTC)?[\d:.\s()+\-–]*$/];
 
 function readArray(file, name) {
   const s = fs.readFileSync(file, "utf8");
@@ -60,7 +70,7 @@ function readArray(file, name) {
 function collect(v, out, k) {
   if (typeof v === "string") {
     if (k && STRUCT.has(k)) return;
-    if (v.trim().length > 2 && /\p{L}/u.test(v) && !/^https?:/.test(v)) out.add(v);
+    if (v.trim().length > 2 && /\p{L}/u.test(v) && !NOT_PROSE.some((re) => re.test(v.trim()))) out.add(v);
     return;
   }
   if (Array.isArray(v)) { for (const x of v) collect(x, out, k); return; }
@@ -75,6 +85,17 @@ function collect(v, out, k) {
 const source = new Set();
 collect(readArray("src/data/marketAnalysis.ts", "marketAnalysisPosts"), source);
 collect(readArray("src/data/technicalAnalysis.ts", "technicalAnalysisPosts"), source);
+
+// The per-day bulletin titles live in a separate date -> title map
+// (bulletinTitles), rendered through trData() on /teknik-analiz. The first
+// version of this script only walked the posts array and missed them, so
+// "01.09.2026 - Gün İçi Teknik Analiz Bülteni" stayed Turkish on /en.
+{
+  const src = fs.readFileSync("src/data/technicalAnalysis.ts", "utf8");
+  const start = src.indexOf("export const bulletinTitles");
+  const block = src.slice(start, src.indexOf("};", start));
+  for (const m of block.matchAll(/"\d{4}-\d{2}-\d{2}":\s*"([^"]+)"/g)) source.add(m[1]);
+}
 
 // Catalogue files keep CRLF like the rest of the repo; JSON.stringify emits
 // LF, so line endings are restored on write to keep the diff to real changes.
@@ -121,6 +142,9 @@ for (const locale of LOCALES) {
 fs.rmSync(tmp, { recursive: true, force: true });
 
 if (!DRY && total) {
+  // Dates and units the model left in Turkish ("4 Eylül", "4.487 dolara")
+  // are a closed set; fix them by rule before the check below sees them.
+  execFileSync(process.execPath, ["scripts/fix-turkish-residue.mjs"], { stdio: "inherit" });
   // Fails loudly if the model echoed any of it back in Turkish.
   execFileSync(process.execPath, ["scripts/check-echoed-translations.mjs"], { stdio: "inherit" });
 }

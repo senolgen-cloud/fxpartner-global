@@ -53,7 +53,7 @@ export default function TechnicalAnalysisCard({ post }: { post: TechnicalAnalysi
           <strong className="text-text-on-ink">Alternatif senaryo:</strong> {post.alternative}
         </p>
         <p className="mt-2 text-[15px] leading-relaxed text-text-on-ink-muted">
-          <strong className="text-text-on-ink">Yorum:</strong> {post.comment}
+          <strong className="text-text-on-ink">{tr("Yorum:")}</strong> {post.comment}
         </p>
         <p className="mt-4 text-xs text-text-on-ink-muted">
           {tr("Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.")}

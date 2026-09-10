@@ -47,6 +47,15 @@ const FILES = ["blog", "brokers", "chrome", "ui"];
 const TURKISH_SENTENCE =
   /(^|[^\p{L}])(ve|ile|için|bir|bu|değildir|değil|olarak|içerir|amaçlıdır|tavsiyesi|başına|kaybedebilirsiniz|hesabınızın|olabilir|gerekir|bulunur|yapılır)([^\p{L}]|$)/iu;
 
+// Month and weekday names, and the two words every market-summary title
+// carries. Added after the 2026-09-10 market backfill, where a title like
+// "FXPARTNER Piyasa Özeti | 07.09.2026 Öğleden Sonra Güncellemesi" came back
+// untranslated and English sentences kept "9 Eylül" — none of it has a
+// function word, so TURKISH_SENTENCE could not see it. These words have no
+// business in an English, Ukrainian or Arabic value.
+const TURKISH_MARKER =
+  /(^|[^\p{L}])(Ocak|Şubat|Nisan|Mayıs|Haziran|Temmuz|Ağustos|Eylül|Ekim|Kasım|Aralık|Pazartesi|Salı|Çarşamba|Perşembe|Cumartesi|Özeti|Güncellemesi|Öğleden)([^\p{L}]|$)/u;
+
 const findings = [];
 
 for (const locale of LOCALES) {
@@ -57,7 +66,7 @@ for (const locale of LOCALES) {
 
     for (const [key, value] of Object.entries(catalogue)) {
       const text = String(value);
-      if (!TURKISH_SENTENCE.test(text)) continue;
+      if (!TURKISH_SENTENCE.test(text) && !TURKISH_MARKER.test(text)) continue;
       findings.push({ locale, file, key, text });
     }
   }
