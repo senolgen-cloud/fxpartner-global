@@ -39,10 +39,16 @@ export default function HeroVideo() {
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_35%,black_75%,transparent)]"
     >
+      {/* The partner intro (owner's choice, 2026-09-10) is a wall of broker
+          logos on WHITE, unlike the dark clips before it. Under
+          mix-blend-screen a white frame would wash the whole ink hero grey,
+          so it is inverted first: white becomes black, which screen drops
+          entirely, and hue-rotate(180deg) turns the inverted hues back
+          round so XM stays red and LiteFinance green — only lighter. */}
       <video
         ref={videoRef}
-        className="h-full w-full object-cover opacity-20 mix-blend-screen"
-        src={shouldLoad ? "/videos/yapay-zeka-intro.mp4" : undefined}
+        className="h-full w-full object-cover opacity-25 mix-blend-screen [filter:invert(1)_hue-rotate(180deg)]"
+        src={shouldLoad ? "/videos/fxpartner-partners-intro.mp4" : undefined}
         autoPlay={shouldLoad}
         muted
         loop
