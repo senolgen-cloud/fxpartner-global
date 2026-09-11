@@ -154,7 +154,7 @@ export default async function IndirimKodlariPage({
                             </Link>
                             {firm.isPartner && (
                               <span className="rounded-full border border-gold/40 bg-gold/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-gold">
-                                Ortak
+                                {tr("Ortak")}
                               </span>
                             )}
                           </h3>

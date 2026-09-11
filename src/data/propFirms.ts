@@ -1310,6 +1310,150 @@ export const propFirms: PropFirm[] = [
   },
   {
     rank: 13,
+    slug: "moneta-funded",
+    name: "Moneta Funded",
+    tagline: "Moneta Markets bağlantılı, %88 kâr paylaşımlı yeni firma",
+    segment: "cfd",
+    // Şirket tescili 2025-00532 (Saint Lucia), alan adı Mayıs 2025. Kaynaklarda
+    // 2020 / Ocak 2025 / Aralık 2025 / 2026 gibi farklı tarihler dolaşıyor;
+    // tescil numarası en somut veri olduğu için 2025 alındı.
+    founded: 2025,
+    headquarters: "Saint Lucia (tescil) · Dubai (operasyon)",
+    backedBy: "Moneta Markets",
+    // Moneta Markets sitede incelenen bir broker değil, bu yüzden
+    // backedByBrokerSlug bilinçli olarak boş.
+    backingNote:
+      "Moneta Funded ile Moneta Markets, firmanın kendi şartlarında ayrı tüzel " +
+      "kişilikler olarak tanımlanıyor; bağ ortak kurucu (David Bily) ve marka " +
+      "üzerinden. Brokerın FCA/FSCA gibi lisansları fonlanmış hesabınızı kapsamaz " +
+      "ve Moneta Funded'ı regüle bir kuruluş yapmaz.",
+    // FXPARTNER'ın dördüncü prop ortağı (11.09.2026).
+    //
+    // SÜREÇ NOTU: Skorlar ortaklık linkinden bağımsız, yalnızca rubrikle
+    // verildi ve firma 6.0 ile listenin alt sıralarında. Diğer ortaklarda
+    // olduğu gibi, ortaklık sıralamayı satın almıyor.
+    isPartner: true,
+    // Saf takip linki (bta=). İndirim taşıdığına dair bir teyit yok, bu
+    // yüzden `discount` boş. Link monetafunded.com/checkout'a yönleniyor.
+    referralUrl: "https://go.monetafunded.com/visit/?bta=36195&brand=monetafunded",
+    linkActive: true,
+    models: ["1-step", "2-step", "instant"],
+    // $5K-$100K aralığı kaynaklarda tutarlı; ara boyutlar checkout'ta
+    // doğrulanacak.
+    accountSizes: ["$5.000", "$10.000", "$25.000", "$50.000", "$100.000"],
+    // İki kaynak $42 (1-Step $5K) diyor, bir kaynak $40. Ayrı bir ürün olan
+    // Sprint Challenge $10K'da $30 ama farklı kural setine tabi.
+    challengeFeeFrom: "$42",
+    // Kaynaklar $780 ile $950 arasında dağılıyor (1-Step ~$840, 2-Step
+    // ~$950). Checkout'ta teyit edilene kadar aralık yazılıyor.
+    fee100k: "~$780-950",
+    profitSplit: "%88 (Sprint Challenge'da %100)",
+    maxAllocation: "$2.000.000 (Phoenix ölçekleme)",
+    payoutCycle: "14 günde bir · 24-48 saat işleme · min. $100",
+    platforms: ["MT5", "Match-Trader"],
+    rules: [
+      {
+        name: "2-Step Challenge",
+        model: "2-step",
+        // ⚠️ Sıra kasıtlı: üç bağımsız kaynak Faz 1 %5, Faz 2 %10 diyor —
+        // sektördeki olağan sıranın tersi. Checkout'ta teyit edilecek.
+        profitTargets: [5, 10],
+        drawdownUnit: "percent",
+        dailyDrawdown: 5,
+        maxDrawdown: 10,
+        drawdownType: "static",
+        minTradingDays: 3,
+        feeFrom: "$45",
+        extraRule:
+          "Faz 1 hedefi %5, Faz 2 hedefi %10 — sektördeki olağan sıranın tersi. Daha ucuz bir seçenekte limitler %4 günlük / %8 maksimum; seçilen yapılandırma iki fazda ve fonlanmış hesapta aynı kalır. 1-Step ve 2-Step'te yüksek etkili haberlerde işlem kısıtlı; firmanın iki yardım sayfası bu konuda birbiriyle çelişiyor.",
+      },
+      {
+        name: "1-Step Challenge",
+        model: "1-step",
+        // Üç kaynak %10, iki kaynak %12 diyor. Çoğunluk alındı; teyit edilecek.
+        profitTargets: [10],
+        drawdownUnit: "percent",
+        dailyDrawdown: 3,
+        maxDrawdown: 6,
+        // Kaynakların bir kısmı statik, bir kısmı "başa baş noktasında
+        // kilitlenen trailing" diyor. Doğrulanana kadar unknown.
+        drawdownType: "unknown",
+        minTradingDays: 3,
+        feeFrom: "$42",
+        extraRule:
+          "Kâr hedefi bazı kaynaklarda %12 olarak geçiyor; drawdown'ın statik mi yoksa başa baş noktasında kilitlenen trailing mi olduğu kaynaklar arasında çelişiyor. İkisi de firmadan teyit edilecek.",
+      },
+      {
+        name: "Instant Funding",
+        model: "instant",
+        profitTargets: [],
+        drawdownUnit: "percent",
+        dailyDrawdown: 3,
+        // 2 Temmuz 2026 ve sonrasında alınan hesaplarda %5; öncekilerde %6.
+        maxDrawdown: 5,
+        drawdownType: "trailing",
+        minTradingDays: null,
+        feeFrom: "$85",
+        extraRule:
+          "Değerlendirme yoktur. 2 Temmuz 2026 ve sonrasında alınan hesaplarda maksimum kayıp %5 (öncekilerde %6) ve trailing. Tutarlılık kuralı yalnızca bu programda var: tek bir günün kârı toplam kârın %15 veya %20'sini geçemez — ve bu kural sözleşmede değil, yardım merkezinde yazıyor.",
+      },
+    ],
+    // Yalnızca kişinin KENDİ hesapları arasında kopyalamaya izin var —
+    // FXPARTNER CopyTrade bu şartı sağlamaz.
+    copyTradingAllowed: "restricted",
+    signalServiceAllowed: "unknown",
+    // EA'lara izin var; HFT, martingale, grid, latency arbitrajı yasak.
+    eaAllowed: "restricted",
+    payoutProof: {
+      // "warning" değil: bir düzine şikayet, 200+ yorumluk genç bir firmada
+      // tek başına bir başarısızlık oranı değil. Ama aşağıdaki şeffaflık
+      // eksikleri promote edilmesinin önünde duruyor.
+      status: "monitored",
+      lastCheckedAt: "2026-09-11",
+      sources: [
+        "Trustpilot: 4,5 puan, 200+ değerlendirme (Eylül 2026)",
+        "Firma beyanı: aylık 200.000 doların üzerinde ödeme — denetlenmiş veri yayımlanmıyor",
+        "Ödeme yöntemleri: kripto, Rise, Wise ve broker transferi; 14 günlük döngü, $100 minimum",
+        "Bağımsız inceleme (4 Eylül 2026): ödeme şartları sayfası şifreyle kilitli",
+      ],
+      note:
+        "Ödeme şartlarının yer aldığı sayfa satın alma öncesinde okunamıyor (şifreli). " +
+        "Trustpilot'ta yaklaşık bir düzine yorum, ödeme ALINDIKTAN sonra hesabın " +
+        "kapatıldığını anlatıyor; firma bunu Telegram gruplarından gelen koordineli " +
+        "şikayetlere bağlıyor. Sözleşme, 'tespit edilen davranışları açıklamama' ve bu " +
+        "durumda ücret iadesi yapmama hakkı tanıyor. 'verified' için şartlar metninin " +
+        "açık erişimde olması ve kaynağı kayıtlı 3 bağımsız ödeme kanıtı gerekiyor.",
+    },
+    scoreRules: 3.5, // 2-Step %5/%10 statik makul; 1-Step ve haber kuralları belirsiz.
+    scoreCost: 3, // $42 giriş ucuz, ama $100k'da ~$780-950 listenin en pahalıları arasında.
+    scorePayout: 3, // %88 paylaşım ve 14 günlük döngü iyi; ödeme sonrası kapatma şikayetleri ağır basıyor.
+    scoreTransparency: 2.5, // Şifreli ödeme şartları, sözleşme dışı kurallar, açıklanmayan ihlal gerekçeleri.
+    summary:
+      "Moneta Funded, Moneta Markets ile aynı kurucuya dayanan ve 2025'te tescil edilen " +
+      "genç bir prop firma. %88 kâr paylaşımı, 14 günde bir ödeme ve MT5 / Match-Trader " +
+      "desteği kâğıt üzerinde rekabetçi. Ancak ödeme şartları sayfası satın alma öncesinde " +
+      "şifreyle kilitli, bazı kurallar sözleşmede değil yardım merkezinde duruyor ve " +
+      "ödeme sonrası hesap kapatma şikayetleri var. Şeffaflık düzelene kadar temkinli yaklaşıyoruz.",
+    pros: [
+      "%88 kâr paylaşımı; Sprint Challenge'da %100",
+      "Moneta Markets ile ortak kurucu — tamamen bağımsız bir startup değil",
+      "2-Step'te statik %5 günlük / %10 maksimum drawdown",
+      "$42'den başlayan giriş, $100 minimum ödeme",
+      "EA ve kendi hesapları arasında copy trading'e izin var",
+    ],
+    cons: [
+      "Ödeme şartları sayfası satın alma öncesinde şifreyle kilitli",
+      "Ödeme alındıktan sonra hesabın kapatıldığını anlatan şikayetler var",
+      "Tutarlılık ve haber kuralları sözleşmede değil, yardım merkezinde — ve kısmen çelişkili",
+      "$100k hesap ~$780-950 ile listenin en pahalıları arasında",
+      "2025 kuruluşlu — ödeme sicili henüz çok kısa",
+    ],
+    bestFor:
+      "Kuralları satın almadan önce destek ekibinden yazılı olarak teyit ettirecek ve " +
+      "genç bir firmanın riskini bilerek alan deneyimli trader.",
+  },
+  {
+    rank: 14,
     slug: "goat-funded-trader",
     name: "Goat Funded Trader",
     tagline: "En ucuz giriş — ama ciddi güven soruları var",

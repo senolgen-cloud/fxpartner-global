@@ -277,7 +277,7 @@ export default async function PropFirmDetailPage({
             <div className="mt-6 flex flex-wrap items-center gap-3">
               {firm.isPartner && (
                 <span className="rounded-full border border-gold/40 bg-gold/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-gold">
-                  Ortak
+                  {tr("Ortak")}
                 </span>
               )}
               <span className="rounded-full border border-hairline bg-ink-soft px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
@@ -286,7 +286,7 @@ export default async function PropFirmDetailPage({
             </div>
 
             <h1 className="mt-4 font-poppins text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              {firm.name} incelemesi
+              {trf("{firm} incelemesi", { firm: firm.name })}
             </h1>
             <p className="mt-3 font-mono text-sm text-gold">{firm.tagline}</p>
 
@@ -337,7 +337,7 @@ export default async function PropFirmDetailPage({
                     rel="nofollow sponsored noopener noreferrer"
                     className="rounded-full bg-signal px-5 py-2.5 font-mono text-xs uppercase tracking-[0.1em] text-ink transition-colors hover:bg-signal-strong"
                   >
-                    {firm.name}&apos;a git →
+                    {trf("{firm}'a git →", { firm: firm.name })}
                   </a>
                 )}
                 {discountLive && d.code && (
@@ -421,13 +421,13 @@ export default async function PropFirmDetailPage({
                         <td className="px-4 py-3 font-semibold text-text-dark">{r.name}</td>
                         <td className="px-4 py-3 text-text-muted">
                           {r.profitTargets.length === 0
-                            ? "Yok"
+                            ? tr("Yok")
                             : `%${r.profitTargets.join(" → %")}`}
                         </td>
                         <td className="px-4 py-3 text-text-muted">{formatDrawdown(r.dailyDrawdown, r.drawdownUnit)}</td>
                         <td className="px-4 py-3 text-text-muted">{formatDrawdown(r.maxDrawdown, r.drawdownUnit)}</td>
                         <td className="px-4 py-3 text-text-muted">
-                          {r.minTradingDays ?? "Yok"}
+                          {r.minTradingDays ?? tr("Yok")}
                         </td>
                         <td className="px-4 py-3 text-text-muted">{r.feeFrom}</td>
                       </tr>
@@ -440,9 +440,10 @@ export default async function PropFirmDetailPage({
                   hesap büyüklüğüyle ölçekleniyor. */}
               {firm.rules.some((r) => r.refAccountSize) && (
                 <p className="mt-3 font-mono text-[11px] text-text-muted">
-                  Dolar cinsinden limitler{" "}
-                  {firm.rules.find((r) => r.refAccountSize)?.refAccountSize} hesap
-                  içindir ve hesap büyüklüğüne göre ölçeklenir.
+                  {trf(
+                    "Dolar cinsinden limitler {size} hesap içindir ve hesap büyüklüğüne göre ölçeklenir.",
+                    { size: firm.rules.find((r) => r.refAccountSize)?.refAccountSize ?? "" }
+                  )}
                 </p>
               )}
 
@@ -458,7 +459,7 @@ export default async function PropFirmDetailPage({
                         className="rounded-xl border border-hairline-light bg-paper p-4"
                       >
                         <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted">
-                          {r.name} — ek kurallar
+                          {trf("{name} — ek kurallar", { name: r.name })}
                         </p>
                         <p className="mt-1.5 text-sm leading-relaxed text-text-dark/90">
                           {r.extraRule}
@@ -567,7 +568,9 @@ export default async function PropFirmDetailPage({
               </p>
               {firm.backingNote && (
                 <p className="mt-3 rounded-xl border border-hairline-light bg-paper p-4 text-sm leading-relaxed text-text-muted">
-                  <strong className="text-text-dark">{firm.backedBy} desteği:</strong>{" "}
+                  <strong className="text-text-dark">
+                    {trf("{broker} desteği:", { broker: firm.backedBy ?? "" })}
+                  </strong>{" "}
                   {firm.backingNote}
                   {firm.backedByBrokerSlug && (
                     <>
@@ -576,7 +579,7 @@ export default async function PropFirmDetailPage({
                         href={`/brokers/${firm.backedByBrokerSlug}`}
                         className="text-signal hover:text-signal-strong"
                       >
-                        {firm.backedBy} broker incelemesi →
+                        {trf("{broker} broker incelemesi →", { broker: firm.backedBy ?? "" })}
                       </Link>
                     </>
                   )}

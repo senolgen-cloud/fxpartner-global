@@ -1,6 +1,6 @@
 "use client";
 import { useLocalizedData } from "@/components/useLocalizedData";
-import { useTr } from "@/components/useTr";
+import { useTr, useTrf } from "@/components/useTr";
 
 import React, { useState } from "react";
 import Link from "@/components/LocaleLink";
@@ -177,6 +177,7 @@ const RANKED_FIRMS = propFirmsByScore();
 
 export default function PropFirmComparisonTable() {
   const tr = useTr();
+  const trf = useTrf();
   const firms = useLocalizedData(RANKED_FIRMS);
   const criteria = PROP_CRITERIA.map((c) => tr(c));
   const [activeSegment, setActiveSegment] = useState<SegmentFilter>("cfd");
@@ -282,12 +283,14 @@ export default function PropFirmComparisonTable() {
                             değiştirmez. Bkz. propFirms.ts dosya başı notu. */}
                         {firm.isPartner && (
                           <span className="rounded-full border border-gold/40 bg-gold/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.1em] text-gold">
-                            Ortak
+                            {tr("Ortak")}
                           </span>
                         )}
                       </div>
                       <div className="mt-1 font-mono text-[11px] text-text-on-ink-muted">
-                        {firm.backedBy ? `${firm.backedBy} destekli` : `${firm.founded}`}
+                        {firm.backedBy
+                          ? trf("{broker} destekli", { broker: firm.backedBy })
+                          : `${firm.founded}`}
                       </div>
                     </td>
 
@@ -311,7 +314,7 @@ export default function PropFirmComparisonTable() {
                     </td>
                     <td className="px-5 py-4 font-mono text-sm text-text-on-ink">
                       {rule?.minTradingDays === null || rule?.minTradingDays === undefined
-                        ? "Yok"
+                        ? tr("Yok")
                         : rule.minTradingDays}
                     </td>
                     <td className="px-5 py-4">
