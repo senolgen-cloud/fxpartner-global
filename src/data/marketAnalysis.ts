@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-11-2100",
+    title: "FXPARTNER Piyasa Özeti | 11.09.2026 Gün Sonu Güncellemesi",
+    excerpt:
+      "Cuma günü Wall Street, TSİ 15.30'da açıklanan ve piyasa beklentisiyle uyumlu gelen ABD Ağustos TÜFE verisinin ardından günü yükselişle kapattı: S&P 500 %0,96, Dow Jones %1,15, Nasdaq Composite %0,88, Russell 2000 ise %1,04 değer kazandı. Petrol tarafında Brent %2,3 düşüşle 105,15 dolara, WTI %2,73 düşüşle 99,68 dolara geriledi; düşüşte, altı üyeli Körfez İşbirliği Konseyi ülkelerinin gelecek hafta Pazartesi Umman'da İran ile Hürmüz Boğazı'nın geleceğini görüşmek üzere bir araya gelmeyi değerlendirdiği yönündeki haberler etkili oldu. BIST 100 endeksi ise günü bir önceki kapanışa göre %0,51 yükselişle 14.467,25 puandan tamamladı.",
+    publishedAt: "2026-09-11",
+    readingMinutes: 3,
+    intro:
+      "Cuma günü küresel piyasalarda gündem, TSİ **15.30**'da açıklanan **ABD Ağustos TÜFE** verisinin ardından **Wall Street**'in toparlanması ve **Hürmüz Boğazı**'na yönelik yeni bir diplomasi sinyaliyle **petrol** fiyatlarının gerilemesi oldu. Piyasa beklentisiyle uyumlu gelen enflasyon verisinin ardından ABD'de üç ana endeks de günü kazançla kapattı: **S&P 500 %0,96**, **Dow Jones Sınai Ortalaması %1,15**, **Nasdaq Composite %0,88** yükselirken, küçük ölçekli şirketleri temsil eden **Russell 2000 endeksi** de **%1,04** değer kazandı. Emtia tarafında **Brent petrol**, Cuma günü **%2,3** düşüşle **105,15 dolara**, **WTI ham petrolü** ise **%2,73** düşüşle **99,68 dolara** geriledi; düşüşte, altı üyeli **Körfez İşbirliği Konseyi (GCC)** ülkelerinin gelecek hafta **Pazartesi** günü Umman'ın **Selale (Salalah)** kentinde **İran** ile **Hürmüz Boğazı**'nın geleceğini görüşmek üzere bir araya gelmeyi değerlendirdiği yönündeki haberler etkili oldu; toplantı henüz teyit edilmemiş olsa da, savaşın Şubat sonunda başlamasından bu yana İran ile yapılacak ilk görüşme olma özelliği taşıyor. Borsa İstanbul'da **BIST 100 endeksi**, bir önceki kapanış olan **14.393,85 puanın** üzerinde **73,40 puan (%0,51)** değer kazanarak günü **14.467,25 puandan** tamamladı; gün içinde endeks **14.354,12-14.540,01 puan** bandında hareket ederken, **BIST 30 endeksi** **%0,89** yükseldi. Piyasaların odağı artık gelecek hafta **15-16 Eylül**'deki **Fed FOMC** toplantısında.",
+    news: [
+      {
+        icon: "📊",
+        heading: "Wall Street TÜFE Sonrası Günü Yükselişle Kapattı",
+        body: "TSİ **15.30**'da açıklanan ve piyasa beklentisiyle uyumlu gelen **ABD Ağustos TÜFE** verisinin ardından **Wall Street**'te üç ana endeks de günü kazançla tamamladı: **S&P 500 %0,96**, **Dow Jones Sınai Ortalaması %1,15**, **Nasdaq Composite** ise **%0,88** yükseldi. Küçük ölçekli şirketleri temsil eden **Russell 2000 endeksi** de **%1,04** değer kazanarak günü tamamladı.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol, Hürmüz İçin Umman'da Planlanan Görüşme Haberiyle Geriledi",
+        body: "**Brent petrol**, Cuma günü **%2,3** düşüşle **105,15 dolara**, **WTI ham petrolü** ise **%2,73** düşüşle **99,68 dolara** geriledi. Düşüşte, altı üyeli **Körfez İşbirliği Konseyi (GCC)** ülkelerinin gelecek hafta **Pazartesi** günü Umman'ın **Selale (Salalah)** kentinde **İran** ile **Hürmüz Boğazı**'nın geleceğini görüşmek üzere bir araya gelmeyi değerlendirdiği yönündeki haberler etkili oldu; toplantı henüz teyit edilmedi, ancak gerçekleşmesi halinde savaşın başlamasından bu yana İran ile yapılacak ilk görüşme olacak.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "BIST 100 Günü %0,51 Yükselişle 14.467 Puandan Kapattı",
+        body: "**BIST 100 endeksi**, bir önceki kapanış olan **14.393,85 puanın** üzerinde **73,40 puan (%0,51)** değer kazanarak Cuma gününü **14.467,25 puandan** tamamladı; gün içinde endeks **14.354,12-14.540,01 puan** bandında hareket etti. **BIST 30 endeksi %0,89**, finans endeksi **%0,76**, sınai endeks ise **%0,36** yükseldi.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "14 Eylül 2026 (TSİ, beklenen)",
+        icon: "🛢️",
+        title: "Umman'da Körfez Ülkeleri-İran Hürmüz Görüşmesi (Beklenen)",
+        note: "Altı üyeli Körfez İşbirliği Konseyi'nin, İran ile Hürmüz Boğazı'nın geleceğini görüşmek üzere Umman'ın Selale kentinde bir araya gelmesi planlanıyor; toplantı henüz resmen teyit edilmedi.",
+      },
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-11-1600",
     title: "FXPARTNER Piyasa Özeti | 11.09.2026 TÜFE Sonrası Güncelleme",
     excerpt:
