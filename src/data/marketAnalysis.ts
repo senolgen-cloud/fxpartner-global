@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-11-1500",
+    title: "FXPARTNER Piyasa Özeti | 11.09.2026 Öğleden Sonra Güncellemesi",
+    excerpt:
+      "Ortadoğu'daki çatışmanın tırmanmasıyla Brent petrol, Perşembe günü varil başına 108 doların üzerine çıkarak 19 Mayıs'tan bu yana en yüksek seviyesini gördükten sonra Cuma günü %1,41 düşüşle 106,11 dolara geriledi; WTI ham petrolü ise %0,11 artışla 102,59 dolar seviyesinde işlem gördü. Yükselen enerji fiyatları ve güçlü ÜFE verisinin baskısıyla ABD 10 yıllık tahvil getirisi bu hafta 18 baz puan yükselerek 2023'ten bu yana en yüksek seviyesi olan %4,96'ya çıktı. BIST 100 endeksi ise saat 13.00 itibarıyla %0,19 yükselişle 14.420,91 puana çıktı. Piyasaların gözü artık bugün TSİ 15.30'da açıklanacak ABD Ağustos TÜFE verisinde.",
+    publishedAt: "2026-09-11",
+    readingMinutes: 3,
+    intro:
+      "Cuma günü küresel piyasalarda gündem, Ortadoğu'daki çatışmanın tırmanmasıyla yükselen petrol fiyatları ve ABD tahvil getirilerindeki sert artış oldu. **Brent petrol**, Suudi Arabistan'ın enerji tesislerine yönelik bu haftaki Husi saldırılarının ardından tırmanan jeopolitik risklerle Perşembe günü varil başına **108 doların** üzerine çıkarak **19 Mayıs'tan bu yana en yüksek seviyesini** gördü; Cuma günü ise kazancının bir kısmını geri vererek **%1,41** düşüşle **106,11 dolar** seviyesine geriledi. **WTI ham petrolü** ise **%0,11** artışla **102,59 dolar** seviyesinde işlem gördü. Aynı baskı tahvil piyasasına da yansıdı: **ABD 10 yıllık tahvil getirisi**, güçlü **ÜFE** verisi ve yükselen enerji fiyatlarının beslediği enflasyon endişeleriyle bu hafta **18 baz puan** yükselerek **2023'ten bu yana en yüksek seviyesi** olan **%4,96**'ya çıktı ve psikolojik açıdan önemli **%5** eşiğine yaklaştı. Borsa tarafında **BIST 100 endeksi**, bir önceki kapanış olan **14.393,85 puanın** üzerinde güne **14.400,98 puandan** başladıktan sonra saat **13.00** itibarıyla **%0,19** yükselişle **14.420,91 puana** çıktı; gün içinde endeks **14.354,12-14.458,26 puan** bandında hareket etti. Piyasaların odağı artık bugün TSİ **15.30**'da açıklanacak **ABD Ağustos TÜFE** verisinde; bu veri **Fed**'in **16 Eylül**'deki faiz kararı öncesindeki son büyük ipucu olacak.",
+    news: [
+      {
+        icon: "🛢️",
+        heading: "Brent Petrol Ortadoğu Geriliminde 108 Doları Gördü, Cuma Günü Geriledi",
+        body: "Suudi Arabistan'ın enerji tesislerine yönelik bu haftaki Husi saldırılarının ardından tırmanan Ortadoğu geriliminin etkisiyle **Brent petrol**, Perşembe günü varil başına **108 doların** üzerine çıkarak **19 Mayıs'tan bu yana en yüksek seviyesini** gördü. Cuma günü ise kazancının bir kısmını geri vererek **%1,41** düşüşle **106,11 dolar** seviyesine geriledi; **WTI ham petrolü** ise **%0,11** artışla **102,59 dolar** seviyesinde işlem gördü.",
+      },
+      {
+        icon: "📈",
+        heading: "ABD 10 Yıllık Tahvil Getirisi 2023'ten Bu Yana Zirvede, %5 Eşiğine Yaklaştı",
+        body: "Yükselen enerji fiyatları ve güçlü **ÜFE** verisinin beslediği enflasyon endişeleriyle **ABD 10 yıllık tahvil getirisi**, bu hafta **18 baz puan** yükselerek **2023'ten bu yana en yüksek seviyesi** olan **%4,96**'ya çıktı ve psikolojik açıdan önemli **%5** eşiğine yaklaştı. Piyasalar, bugün açıklanacak **ABD Ağustos TÜFE** verisini yakından izliyor.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "BIST 100 Öğleden Sonra %0,19 Yükselişte: 14.420,91 Puan",
+        body: "**BIST 100 endeksi**, bir önceki kapanış olan **14.393,85 puanın** üzerinde güne **14.400,98 puandan** başladıktan sonra saat **13.00** itibarıyla **%0,19** yükselişle **14.420,91 puana** çıktı; gün içinde endeks **14.354,12-14.458,26 puan** bandında hareket etti.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+      {
+        time: "11 Eylül 2026, 17:00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Michigan Tüketici Güveni (Öncü, Eylül)",
+        note: "Ağustos ayı nihai okuması 51,7 olarak açıklanmıştı; tüketici enflasyon beklentileri yakından izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-11-1200",
     title: "FXPARTNER Piyasa Özeti | 11.09.2026 Öğle Güncellemesi",
     excerpt:
