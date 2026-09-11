@@ -41,6 +41,49 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-11-1600",
+    title: "FXPARTNER Piyasa Özeti | 11.09.2026 TÜFE Sonrası Güncelleme",
+    excerpt:
+      "TSİ 15.30'da açıklanan ABD Ağustos ayı Tüketici Fiyat Endeksi (TÜFE) aylık %0,4, yıllık %3,4 artışla piyasa beklentisiyle uyumlu geldi; çekirdek TÜFE ise aylık %0,3 ile beklentinin 0,1 puan üzerinde, yıllık %2,4 ile beklentiyle uyumlu açıklandı. CME FedWatch verilerine göre Fed'in 15-16 Eylül toplantısında faiz artırma ihtimali veri öncesindeki yaklaşık %70 seviyesinden %90'a kadar yükseldikten sonra %82 civarına yerleşti. Beklenti üzerindeki çekirdek veriye rağmen Wall Street'te satış görülmedi; Nasdaq Composite ve S&P 500 endeksleri %0,8 yükselirken, ABD 10 yıllık tahvil getirisi gün içinde gördüğü 2023'ten bu yana en yüksek seviye olan %4,98'den %4,92'ye geriledi. Ons altın ise günü %1,65 yükselişle 4.380 dolar civarında işlem gördü.",
+    publishedAt: "2026-09-11",
+    readingMinutes: 3,
+    intro:
+      "Cuma günü piyasaların odağındaki **ABD Ağustos ayı Tüketici Fiyat Endeksi (TÜFE)** verisi TSİ **15.30**'da açıklandı: endeks aylık bazda **%0,4**, yıllık bazda **%3,4** artışla piyasa beklentisiyle uyumlu geldi. Gıda ve enerji fiyatları hariç tutulan **çekirdek TÜFE** ise aylık **%0,3** artışla beklentinin **0,1 puan** üzerinde gelirken, yıllık çekirdek TÜFE **%2,4** ile beklentiyle uyumlu açıklandı. Veri sonrası **CME FedWatch** verilerine göre **Fed**'in **15-16 Eylül** toplantısında faiz artırma ihtimali, veri öncesindeki yaklaşık **%70** seviyesinden **%90**'a kadar yükseldikten sonra **%82** civarına yerleşti. Beklentinin hafif üzerinde gelen çekirdek veriye rağmen Wall Street'te satış baskısı görülmedi; **Nasdaq Composite** ve **S&P 500** endeksleri veri sonrası **%0,8** yükseldi. Tahvil piyasasında **ABD 10 yıllık tahvil getirisi**, gün içinde gördüğü ve **2023'ten bu yana en yüksek seviyesi** olan **%4,98**'den veri sonrası **%4,92**'ye gerilerken, **ABD 2 yıllık tahvil getirisi** **4,4 baz puan** yükselişle **%4,59** seviyesine çıktı. Emtia tarafında **ons altın (XAU/USD)**, gün içinde gördüğü **4.300 dolar** civarındaki dip seviyeden toparlanarak günü **%1,65** yükselişle **4.380 dolar** civarında tamamladı. Piyasaların odağı artık **16 Eylül**'deki **Fed** faiz kararında.",
+    news: [
+      {
+        icon: "🇺🇸",
+        heading: "ABD Ağustos TÜFE Verisi Açıklandı: Aylık %0,4, Yıllık %3,4",
+        body: "TSİ **15.30**'da açıklanan **ABD Ağustos ayı Tüketici Fiyat Endeksi (TÜFE)**, aylık bazda **%0,4**, yıllık bazda **%3,4** artışla piyasa beklentisiyle uyumlu geldi. Gıda ve enerji fiyatları hariç tutulan **çekirdek TÜFE** ise aylık **%0,3** artışla beklentinin **0,1 puan** üzerinde gelirken, yıllık çekirdek TÜFE **%2,4** ile beklentiyle uyumlu açıklandı.",
+      },
+      {
+        icon: "🏦",
+        heading: "Fed Faiz Artırım İhtimali TÜFE Sonrası %82'ye Yerleşti",
+        body: "**CME FedWatch** verilerine göre, **Fed**'in **15-16 Eylül** toplantısında faiz artırma ihtimali, TÜFE verisi öncesindeki yaklaşık **%70** seviyesinden veri sonrası **%90**'a kadar yükseldikten sonra **%82** civarına yerleşti.",
+      },
+      {
+        icon: "📊",
+        heading: "Wall Street TÜFE Sonrası Yükseldi, Tahvil Getirileri Zirveden Geriledi",
+        body: "Beklentinin hafif üzerinde gelen çekirdek TÜFE verisine rağmen Wall Street'te satış görülmedi; **Nasdaq Composite** ve **S&P 500** endeksleri veri sonrası **%0,8** yükseldi. **ABD 10 yıllık tahvil getirisi**, gün içinde gördüğü ve **2023'ten bu yana en yüksek seviyesi** olan **%4,98**'den veri sonrası **%4,92**'ye gerilerken, **ABD 2 yıllık tahvil getirisi** **4,4 baz puan** yükselişle **%4,59** seviyesine çıktı.",
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın TÜFE Sonrası Toparlandı: 4.380 Dolar Civarında",
+        body: "**Ons altın (XAU/USD)**, gün içinde gördüğü **4.300 dolar** civarındaki dip seviyeden toparlanarak günü **%1,65** yükselişle **4.380 dolar** civarında tamamladı; yükselen **Fed** faiz artırım beklentilerine rağmen tahvil getirilerindeki ve petrol fiyatlarındaki gerileme metale destek verdi.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "11 Eylül 2026, 17:00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Michigan Tüketici Güveni (Öncü, Eylül)",
+        note: "Ağustos ayı nihai okuması 51,7 olarak açıklanmıştı; tüketici enflasyon beklentileri yakından izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-11-1500",
     title: "FXPARTNER Piyasa Özeti | 11.09.2026 Öğleden Sonra Güncellemesi",
     excerpt:
