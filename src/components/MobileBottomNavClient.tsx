@@ -19,12 +19,6 @@ const ICONS = {
     </>
   ),
   analysis: <path d="m3 17 5-5 4 4 8-9M14 7h6v6" />,
-  profile: (
-    <>
-      <circle cx="12" cy="8" r="3.5" />
-      <path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6" />
-    </>
-  ),
   more: (
     <>
       <circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none" />
@@ -47,7 +41,7 @@ function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export default function MobileBottomNavClient({ accountHref }: { accountHref: string }) {
+export default function MobileBottomNavClient() {
   const pathname = useLocalePathname();
   const { open: moreOpen, setOpen: setMoreOpen } = useMoreMenu();
   const tr = useTr();
@@ -62,13 +56,13 @@ export default function MobileBottomNavClient({ accountHref }: { accountHref: st
     // satırı /piyasa-analizi + icon "markets" ile değiştirmek yeterli.
     { href: "/prop-firmalar", label: "Prop", icon: "prop" },
     { href: "/ai-asistan", label: "Analiz", icon: "analysis" },
-    { href: accountHref, label: "Profil", icon: "profile" },
+    // "Profil" sekmesi kaldırıldı (11.09.2026): hesap girişi üst menüde zaten var.
   ];
 
   return (
     <nav
       aria-label={tr("Mobil gezinme")}
-      className="grid grid-cols-6 border-t border-hairline bg-ink pb-[env(safe-area-inset-bottom)] sm:hidden"
+      className="grid grid-cols-5 border-t border-hairline bg-ink pb-[env(safe-area-inset-bottom)] sm:hidden"
     >
       {tabs.map((tab) => {
         const active = isActive(pathname, tab.href);

@@ -15,7 +15,9 @@ const DEPTH_KEY = "fxp:navDepth";
 // middle of it. Without this the button sat on the home screen offering to
 // undo the tab switch, which is not what a back chevron means to anyone.
 // Kept in sync with MobileBottomNavClient's tabs by hand; both lists are
-// short and neither moves often.
+// short and neither moves often. /account and /account/login are no longer
+// bottom tabs (the header's profile icon is the only way in now) but stay
+// here: reaching them is still a lateral jump, not a push.
 const TAB_ROOTS = new Set([
   "/",
   "/signals",
