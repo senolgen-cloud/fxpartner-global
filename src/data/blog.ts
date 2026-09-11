@@ -63,9 +63,13 @@ export const blogPosts: BlogPost[] = [
     // the slowest one of the heaviest. Leaving that out would make the ranking
     // read as a safety ranking, which it is not.
     //
-    // No adBrokerSlug. It is for posts that argue for one broker; this is a
-    // comparison, and a ranking that opens with the first-placed partner's
-    // banner reads as bought.
+    // adBrokerSlug pinned to Lite Finance on the owner's call (11.09.2026):
+    // the post's subject is withdrawal speed and Lite's instant-withdrawal
+    // creative is the natural ad for it. This was deliberately left unpinned
+    // at first — a ranking that opens with the first-placed partner's banner
+    // can read as bought — so the slots stay visibly labelled "Sponsorlu"
+    // and the ranking itself is unchanged; the survey, not the ad, decides it.
+    adBrokerSlug: "lite-finance",
     slug: "en-hizli-para-cekimi-forex-brokerlari-2026",
     coverImage: "/blog/en-hizli-para-cekimi-forex-brokerlari-2026.png",
     coverWidth: 1254,
