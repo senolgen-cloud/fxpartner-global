@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-11-1200",
+    title: "FXPARTNER Piyasa Özeti | 11.09.2026 Öğle Güncellemesi",
+    excerpt:
+      "Cuma günü dolar/TL, TCMB'nin faizi %37'de sabit tutmasının ardından yükselişini sürdürerek 48,60 TL ile yeni bir rekor daha kırdı; euro/TL ise 56,45 TL'ye hafif gerileyerek işlem gördü. Ons altın, haftanın en düşük seviyesi olan 4.300 doları test ettikten sonra 4.330-4.350 dolar bandına toparlandı. Dolar endeksi (DXY) 99,00 seviyesi civarında yatay seyrederken euro, ECB'nin faiz artışının ardından 1,16 dolar civarında zayıf bir seyir izliyor ve dolar/yen 154,00 üzerinde konsolide oldu. Piyasaların gözü artık bugün TSİ 15.30'da açıklanacak ABD Ağustos TÜFE verisinde.",
+    publishedAt: "2026-09-11",
+    readingMinutes: 3,
+    intro:
+      "Haftanın son işlem günü Cuma, piyasaların gözü bugün TSİ **15.30**'da açıklanacak **ABD Ağustos ayı Tüketici Fiyat Endeksi (TÜFE)** verisinde; bu veri, **Fed**'in **16 Eylül**'deki faiz kararı öncesindeki son büyük enflasyon göstergesi olacak. Veri öncesinde Türk lirası tarafında **dolar/TL**, **TCMB**'nin Perşembe günü politika faizini **%37**'de sabit tutmasının ardından yükselişini sürdürerek yeni bir rekor daha kırdı; serbest piyasada saat **11.37** itibarıyla alış **48,60 TL**, satış **48,61 TL** seviyesine çıkarak günlük bazda **%0,17** değer kazandı. **Euro/TL** ise aynı saatlerde alış **56,44 TL**, satış **56,46 TL** seviyesinde işlem görerek günlük **%0,06** hafif geriledi; **TCMB** gösterge kurlarında dolar alış **48,39 TL**, euro alış **56,31 TL** olarak açıklandı. Küresel piyasalarda **ons altın (XAU/USD)**, Cuma sabahı erken saatlerde bir haftanın en düşük seviyesi olan **4.300 dolara** kadar geriledikten sonra toparlanarak **4.330-4.350 dolar** bandına yükseldi. Döviz piyasasında **dolar endeksi (DXY)**, Perşembe günü açıklanan güçlü **ÜFE** verisinin ardından kazandığı değeri koruyarak Cuma günü **99,00** seviyesi civarında yatay seyrederken, **euro/dolar** paritesi **ECB**'nin Perşembe günü açıkladığı faiz artışının ardından **1,16 dolar** seviyesi civarında zayıf bir seyir izliyor; **dolar/yen** paritesi ise Perşembe günkü **%0,5**'in üzerindeki yükselişinin ardından Cuma günü **154,00** seviyesinin üzerinde konsolide oluyor. Piyasaların odağı artık bugünkü **TÜFE** verisi ile **16 Eylül**'deki **Fed** faiz kararında.",
+    news: [
+      {
+        icon: "🇹🇷",
+        heading: "Dolar/TL Yeniden Rekor Tazeledi, Euro/TL Hafif Geriledi",
+        body: "Cuma günü **dolar/TL**, **TCMB**'nin Perşembe günü politika faizini **%37**'de sabit tutmasının ardından yükselişini sürdürerek yeni bir rekor daha kırdı; serbest piyasada saat **11.37** itibarıyla alış **48,60 TL**, satış **48,61 TL** seviyesine çıkarak günlük bazda **%0,17** değer kazandı. **Euro/TL** ise aynı saatlerde alış **56,44 TL**, satış **56,46 TL** seviyesinde işlem görerek günlük **%0,06** hafif geriledi; **TCMB** gösterge kurlarında dolar alış **48,39 TL**, euro alış **56,31 TL** olarak açıklandı.",
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın CPI Öncesi Haftanın Dibinden Toparlandı",
+        body: "**Ons altın (XAU/USD)**, Cuma sabahı erken saatlerde bir haftanın en düşük seviyesi olan **4.300 dolara** kadar geriledikten sonra toparlanarak **4.330-4.350 dolar** bandına yükseldi. Fiyatlar, bugün açıklanacak **ABD Ağustos TÜFE** verisi öncesinde dar bir aralıkta hareket ediyor; veri, **Fed**'in **16 Eylül**'deki faiz kararı öncesindeki son büyük enflasyon göstergesi olacak.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar Endeksi CPI Öncesi 99 Civarında Yatay, Euro ve Yen Baskı Altında",
+        body: "**Dolar endeksi (DXY)**, Perşembe günü açıklanan güçlü **ÜFE** verisinin ardından kazandığı değeri koruyarak Cuma günü **99,00** seviyesi civarında yatay seyrediyor. **Euro/dolar** paritesi, **ECB**'nin Perşembe günü açıkladığı faiz artışının ardından **1,16 dolar** seviyesi civarında zayıf bir seyir izlerken, **dolar/yen** paritesi Perşembe günkü **%0,5**'in üzerindeki yükselişinin ardından Cuma günü **154,00** seviyesinin üzerinde konsolide oluyor.",
+      },
+    ],
+    calendarLabel: "7-13 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "11 Eylül 2026, 15:30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD TÜFE (Ağustos)",
+        note: "Bir önceki ay yıllık enflasyon %3,4 açıklanmıştı; Fed'in 16 Eylül kararına dair son büyük veri olarak izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-10-2300",
     title: "FXPARTNER Piyasa Özeti | 10.09.2026 Gece Güncellemesi",
     excerpt:
