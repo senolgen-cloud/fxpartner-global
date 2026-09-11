@@ -18,6 +18,13 @@ const ICONS = {
       <path d="M9 12.5l2 2 4-4.5" />
     </>
   ),
+  // Blog: köşesi kıvrık sayfa + satırlar
+  blog: (
+    <>
+      <path d="M6 3.5h8.5L19 8v11.5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1Z" />
+      <path d="M14 3.5V8h5M8.5 12h7M8.5 15.5h7M8.5 19h4" />
+    </>
+  ),
   analysis: <path d="m3 17 5-5 4 4 8-9M14 7h6v6" />,
   more: (
     <>
@@ -28,9 +35,9 @@ const ICONS = {
   ),
 } as const;
 
-function TabIcon({ name }: { name: keyof typeof ICONS }) {
+function TabIcon({ name, size = 22 }: { name: keyof typeof ICONS; size?: number }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       {ICONS[name]}
     </svg>
   );
@@ -46,17 +53,16 @@ export default function MobileBottomNavClient() {
   const { open: moreOpen, setOpen: setMoreOpen } = useMoreMenu();
   const tr = useTr();
 
-  const tabs: { href: string; label: string; icon: keyof typeof ICONS }[] = [
+  // Sıra ve öne çıkan sekme (11.09.2026, site sahibinin isteği): Sinyaller
+  // ortada ve yükseltilmiş büyük bir butonla — sitenin ana ürünü. "Prop"
+  // (/prop-firmalar) yerine "Blog" geldi; prop firmalar üst menüde ve "Daha
+  // Fazla" menüsünde erişilebilir. "Profil" sekmesi de kaldırıldı — hesap
+  // girişi üst menüde zaten var. "Daha Fazla" butonu şeridin 5. sütunu.
+  const tabs: { href: string; label: string; icon: keyof typeof ICONS; featured?: boolean }[] = [
     { href: "/", label: "Anasayfa", icon: "home" },
-    { href: "/signals", label: "Sinyaller", icon: "signals" },
-    // Prop firmalar ana dikey oldu (19.08.2026). Şerit 6 sütunda kalsın diye
-    // "Piyasalar" (/piyasa-analizi) buradan çıkarıldı — 7. sütun 360px'lik bir
-    // ekranda etiketleri kırıyor. /piyasa-analizi hâlâ üst menüdeki Kaynaklar
-    // grubunda ve "Daha Fazla" menüsünde erişilebilir. Geri almak için bu
-    // satırı /piyasa-analizi + icon "markets" ile değiştirmek yeterli.
-    { href: "/prop-firmalar", label: "Prop", icon: "prop" },
+    { href: "/blog", label: "Blog", icon: "blog" },
+    { href: "/signals", label: "Sinyaller", icon: "signals", featured: true },
     { href: "/ai-asistan", label: "Analiz", icon: "analysis" },
-    // "Profil" sekmesi kaldırıldı (11.09.2026): hesap girişi üst menüde zaten var.
   ];
 
   return (
@@ -66,6 +72,28 @@ export default function MobileBottomNavClient() {
     >
       {tabs.map((tab) => {
         const active = isActive(pathname, tab.href);
+        if (tab.featured) {
+          // Yükseltilmiş orta buton: daire şeridin üst kenarından taşar,
+          // ink rengi kenarlık onu şeritten ayırır. Etiket diğerleriyle
+          // aynı hizada kalsın diye yalnızca daire yukarı kaydırılıyor.
+          return (
+            <Link
+              key={tab.href}
+              href={tab.href}
+              aria-current={active ? "page" : undefined}
+              className="flex flex-col items-center gap-1 pb-2.5 text-[11px] font-semibold text-text-on-ink"
+            >
+              <span
+                className={`-mt-7 flex h-[3.75rem] w-[3.75rem] items-center justify-center rounded-full border-4 border-ink bg-signal text-on-signal shadow-[0_6px_18px_rgba(0,0,0,0.45)] transition-transform ${
+                  active ? "scale-105" : ""
+                }`}
+              >
+                <TabIcon name={tab.icon} size={28} />
+              </span>
+              <span className={active ? "text-signal" : ""}>{tr(tab.label)}</span>
+            </Link>
+          );
+        }
         return (
           <Link
             key={tab.href}

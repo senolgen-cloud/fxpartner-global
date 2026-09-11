@@ -21,7 +21,7 @@ const DEPTH_KEY = "fxp:navDepth";
 const TAB_ROOTS = new Set([
   "/",
   "/signals",
-  "/prop-firmalar",
+  "/blog",
   "/ai-asistan",
   "/account",
   "/account/login",
