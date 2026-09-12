@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-12-1500",
+    title: "FXPARTNER Piyasa Özeti | 12.09.2026 Öğleden Sonra Güncellemesi",
+    excerpt:
+      "Suudi Arabistan, 10 Eylül Perşembe sabahı Irak topraklarından fırlatılan dronlarla vurulan Doğu-Batı Ham Petrol Boru Hattı'nı, Riyad ve Medine bölgelerindeki pompa istasyonlarının hasar görmesinin ardından güvenlik önlemi olarak durdurdu; hat normalde günlük yaklaşık 5 milyon varil ham petrolü Kızıldeniz'deki Yenbu limanına taşıyor. Uluslararası Enerji Ajansı (IEA), Eylül ayı Petrol Piyasası Raporu'nda 2026 küresel petrol arzı tahminini bir kez daha 1,4 milyon varil/gün düşürerek yıllık düşüşü 5,7 milyon varile çıkardı ve Körfez'deki üretimin normale dönüşünü 2027'ye erteledi. ABD Başkanı Donald Trump ise Cumartesi günü gazetecilere İran savaşının Kasım ayındaki ara seçimlerin hemen ardından sona erebileceğini düşündüğünü söyleyerek petrol fiyatlarının o zaman keskin biçimde düşeceğini öngördü; İran Cumhurbaşkanı Mesud Pezeşkiyan ise ülkesinin \"zorbaca kibre boyun eğmeyeceğini\" belirterek yanıt verdi.",
+    publishedAt: "2026-09-12",
+    readingMinutes: 3,
+    intro:
+      "Cumartesi günü küresel piyasaların gündeminde, **Suudi Arabistan**'ın **Irak** kaynaklı drone saldırısının ardından **Doğu-Batı Ham Petrol Boru Hattı**'nı durdurması, **Uluslararası Enerji Ajansı (IEA)**'nın küresel petrol arzı tahminini bir kez daha aşağı çekmesi ve **ABD Başkanı Donald Trump**'ın İran savaşının seyrine ilişkin yeni açıklamaları öne çıktı. **10 Eylül Perşembe** sabahı **Riyad** ve **Medine** bölgelerinde, **Al Mesba'ah** ve **Al Dhekra** yakınındaki pompa istasyonlarını hedef alan drone saldırılarında birkaç kişi yaralanırken, Suudi Arabistan hattı güvenlik önlemi olarak durdurdu; söz konusu hat normalde Körfez kıyısından **Kızıldeniz**'deki **Yenbu** limanına günlük yaklaşık **5 milyon varil** ham petrol taşıyor ve **Hürmüz Boğazı** kısıtlı kalırken Suudi Arabistan'ın başlıca alternatif ihracat güzergahını oluşturuyor. **Irak** hükümeti, saldırıların kendi topraklarından yapıldığını doğrulayarak soruşturma başlattığını ve iki üst düzey yetkiliyi görevden aldığını açıkladı; Suudi Arabistan saldırıyı \"en güçlü şekilde kınadığını\" belirtirken, Bağdat'ın talebi üzerine şimdilik misilleme yapmayacağını duyurdu. **IEA**, Eylül ayı **Petrol Piyasası Raporu**'nda 2026 küresel petrol arzı tahminini bir kez daha **1,4 milyon varil/gün** düşürerek yıllık arz düşüşünü, bir önceki rapordaki **4,3 milyon varil/gün**'den **5,7 milyon varil/güne** yükseltti ve Körfez üretiminin normale dönüşünü **2027**'ye erteledi; küresel talebin de 2026'da **2,5 milyon varil/gün** gerilemesi bekleniyor. **Trump**, Cumartesi günü gazetecilere İran savaşının **Kasım** ayındaki ara seçimlerin hemen ardından sona erebileceğini düşündüğünü söyleyerek, bu gerçekleştiğinde petrol fiyatlarının \"çakılacağını\" öngördü; İran Cumhurbaşkanı **Mesud Pezeşkiyan** ise ülkesinin **İsrail** ve **ABD**'ye karşı başarıyla direndiğini ve \"zorbaca kibre boyun eğmeyeceklerini\" söyleyerek yanıt verdi.",
+    news: [
+      {
+        icon: "🛢️",
+        heading: "Suudi Arabistan Doğu-Batı Petrol Boru Hattını Irak Kaynaklı Saldırı Sonrası Durdurdu",
+        body: "**Suudi Arabistan**, **10 Eylül Perşembe** sabahı **Irak** topraklarından fırlatılan dronlarla **Riyad** ve **Medine** bölgelerinde, **Al Mesba'ah** ve **Al Dhekra** yakınındaki pompa istasyonlarının vurulmasının ardından **Doğu-Batı Ham Petrol Boru Hattı**'nı güvenlik önlemi olarak durdurdu; saldırılarda birkaç kişi yaralandı. Söz konusu hat, normalde Körfez kıyısından **Kızıldeniz**'deki **Yenbu** limanına günlük yaklaşık **5 milyon varil** ham petrol taşıyarak, **Hürmüz Boğazı** kısıtlı kalırken Suudi Arabistan'ın başlıca alternatif ihracat güzergahını oluşturuyor. **Irak** hükümeti saldırıların kendi topraklarından yapıldığını doğrulayarak soruşturma başlattığını ve iki üst düzey yetkiliyi görevden aldığını açıkladı; Suudi Arabistan saldırıyı \"en güçlü şekilde kınadığını\" belirtirken, Bağdat'ın talebi üzerine şimdilik misilleme yapmayacağını duyurdu.",
+      },
+      {
+        icon: "📉",
+        heading: "IEA 2026 Küresel Petrol Arzı Tahminini Yeniden Aşağı Çekti",
+        body: "**Uluslararası Enerji Ajansı (IEA)**, Eylül ayı **Petrol Piyasası Raporu**'nda 2026 küresel petrol arzı tahminini bir kez daha **1,4 milyon varil/gün** aşağı çekti; 2026'da dünya petrol arzının bir önceki yıla göre **5,7 milyon varil/gün** gerileyeceğini öngören kurum, bunu bir ay önceki **4,3 milyon varil/gün**'lük düşüş tahmininden yukarı revize etti. IEA, Ortadoğulu üreticilerdeki arzın normale dönüşünü **2027**'ye ertelerken, küresel petrol talebinin de 2026'da **2,5 milyon varil/gün** gerilemesini bekliyor.",
+      },
+      {
+        icon: "🇺🇸",
+        heading: "Trump: Savaş Ara Seçimlerden Sonra Bitebilir, Petrol Fiyatları Düşer",
+        body: "**ABD Başkanı Donald Trump**, Cumartesi günü gazetecilere İran savaşının **Kasım** ayındaki ara seçimlerin hemen ardından sona erebileceğini düşündüğünü söyledi; Trump, bu gerçekleştiğinde petrol fiyatlarının \"çakılacağını\" öngördü. Yedinci ayına giren savaş, ABD'de benzin ve dizel fiyatlarını yukarı çekerken stratejik petrol rezervini de zorluyor. **İran Cumhurbaşkanı Mesud Pezeşkiyan** ise açıklamaya, ülkesinin **İsrail** ve **ABD**'ye karşı başarıyla direndiğini ve \"zorbaca kibre boyun eğmeyeceklerini\" söyleyerek yanıt verdi.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "14 Eylül 2026, Pazartesi (TSİ)",
+        icon: "🛢️",
+        title: "Umman'ın Selale Kentinde Körfez Ülkeleri-İran Hürmüz Görüşmesi",
+        note: "Altı üyeli Körfez İşbirliği Konseyi ülkelerinin dışişleri bakanları, gemilerin Hürmüz Boğazı'ndan geçişini düzenleyen geçici bir anlaşmayı görüşmek üzere Umman'ın Selale kentinde İranlı mevkidaşlarıyla bir araya gelecek; görüşme resmen teyit edildi.",
+      },
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-12-0900",
     title: "FXPARTNER Piyasa Özeti | 12.09.2026 Hafta Sonu Güncellemesi",
     excerpt:
