@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-12-0900",
+    title: "FXPARTNER Piyasa Özeti | 12.09.2026 Hafta Sonu Güncellemesi",
+    excerpt:
+      "İran Meclisi Ulusal Güvenlik ve Dış Politika Komisyonu üyesi Mohammadreza Mohseni-Sani, Tahran merkezli Didban Iran'a yaptığı açıklamada, Tahran'ın Nükleer Silahların Yayılmasını Önleme Antlaşması'nı (NPT) artık \"gerek kalarak gerek çıkarak\" bağlayıcı görmediğini söyledi. Açıklama, altı üyeli Körfez İşbirliği Konseyi (GCC) ülkelerinin dışişleri bakanlarının, savaşın 28 Şubat'ta başlamasından bu yana İran ile yapılacak ilk üst düzey görüşme için Umman'ın Selale (Salalah) kentinde 14 Eylül Pazartesi günü bir araya geleceği haberiyle aynı güne denk geldi. Kitco verilerine göre ons altın, Cuma günü öğleden sonra (TSİ 19.19) günlük 46,70 dolarlık yükselişle 4.362,40 dolara ulaştıktan sonra, Cumartesi sabahı TSİ 08.45 itibarıyla 4.362,28 dolar seviyesinde yatay seyrediyor.",
+    publishedAt: "2026-09-12",
+    readingMinutes: 3,
+    intro:
+      "Cumartesi günü küresel piyasaların gündeminde, İran'ın nükleer diplomasideki sert çıkışı ve gelecek hafta başında Umman'da gerçekleşecek kritik Hürmüz Boğazı görüşmesi öne çıktı. İran Meclisi Ulusal Güvenlik ve Dış Politika Komisyonu üyesi **Mohammadreza Mohseni-Sani**, Tahran merkezli **Didban Iran**'a yaptığı açıklamada, Tahran'ın **Nükleer Silahların Yayılmasını Önleme Antlaşması (NPT)**'nı artık \"gerek kalarak gerek çıkarak\" bağlayıcı görmediğini söyledi; Mohseni-Sani, mart ayında da olası bir çekilme yasa tasarısının Meclis'te güçlü destek bulabileceğini belirtmişti. Piyasa gözlemcileri, resmi bir çekilme başvurusunun **BM Güvenlik Konseyi**'nde bir oturumu tetikleyebileceğini ve **İsrail** ile **ABD**'nin zenginleştirme tesislerine yönelik adımlarını hızlandırabileceğini, ancak tek bir milletvekilinin açıklamasının şimdilik gürültüden öteye geçmediğini değerlendiriyor. Açıklama, altı üyeli **Körfez İşbirliği Konseyi (GCC)** ülkelerinin dışişleri bakanlarının, savaşın **28 Şubat**'ta başlamasından bu yana **İran** ile yapılacak ilk üst düzey görüşme için Umman'ın **Selale (Salalah)** kentinde **14 Eylül Pazartesi** günü bir araya geleceği haberiyle aynı güne denk geldi; görüşmede, gemilerin **Hürmüz Boğazı**'ndan geçişini düzenleyen geçici bir anlaşma masaya yatırılacak. Emtia tarafında **ons altın (XAU/USD)**, **Kitco** verilerine göre Cuma günü öğleden sonra (TSİ **19.19**) günlük **46,70 dolarlık** yükselişle **4.362,40 dolara** ulaştıktan sonra, Cumartesi sabahı TSİ **08.45** itibarıyla **4.362,28 dolar** seviyesinde yatay seyrediyor. Piyasaların odağı artık gelecek hafta **15-16 Eylül**'deki **Fed FOMC** toplantısı ile Pazartesi günkü Hürmüz görüşmesinde.",
+    news: [
+      {
+        icon: "☢️",
+        heading: "İran: NPT Artık Bizi Bağlamıyor",
+        body: "İran Meclisi Ulusal Güvenlik ve Dış Politika Komisyonu üyesi **Mohammadreza Mohseni-Sani**, Tahran merkezli **Didban Iran**'a yaptığı açıklamada, Tahran'ın **Nükleer Silahların Yayılmasını Önleme Antlaşması (NPT)**'nı artık \"gerek kalarak gerek çıkarak\" bağlayıcı görmediğini söyledi. Nükleer politikadan sorumlu komisyonda görev yapan Mohseni-Sani, mart ayında da olası bir çekilme yasa tasarısının Meclis'te güçlü destek bulabileceğini belirtmişti. Piyasa gözlemcileri, resmi bir çekilme başvurusunun **BM Güvenlik Konseyi**'nde bir oturumu tetikleyebileceğini ve **İsrail** ile **ABD**'nin zenginleştirme tesislerine yönelik adımlarını hızlandırabileceğini, ancak tek bir milletvekilinin açıklamasının şimdilik gürültüden öteye geçmediğini değerlendiriyor.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Körfez Ülkeleri ile İran, Hürmüz İçin Pazartesi Umman'da Buluşuyor",
+        body: "Altı üyeli **Körfez İşbirliği Konseyi (GCC)** ülkelerinin (Bahreyn, Katar, Kuveyt, BAE, Umman ve Suudi Arabistan) dışişleri bakanları, **14 Eylül Pazartesi** günü Umman'ın **Selale (Salalah)** kentinde İranlı mevkidaşlarıyla bir araya gelerek gemilerin **Hürmüz Boğazı**'ndan geçişini düzenleyen geçici bir anlaşmayı görüşecek. Görüşme, savaşın **28 Şubat**'ta başlamasından bu yana Körfez ülkeleri ile İran arasındaki ilk üst düzey diplomatik temas olma özelliği taşıyor; taraflar geçtiğimiz ay sonunda, Körfez'e giren gemilerin İran karasularını, çıkan gemilerin ise Umman karasularını kullanacağı bir güzergah konusunda ilke düzeyinde anlaşmaya varmıştı.",
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın Hafta Sonuna 4.362 Dolar Civarında Girdi",
+        body: "**Kitco** verilerine göre **ons altın (XAU/USD)**, Cuma günü öğleden sonra (TSİ **19.19**) günlük **46,70 dolarlık** yükselişle **4.362,40 dolara** ulaştı; Cumartesi sabahı TSİ **08.45** itibarıyla ise **4.362,28 dolar** seviyesinde yatay seyrediyor. Metal, gelecek hafta **15-16 Eylül**'deki **Fed FOMC** toplantısı ve Hürmüz Boğazı görüşmesi öncesinde dar bir bantta hareket ediyor.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "14 Eylül 2026, Pazartesi (TSİ)",
+        icon: "🛢️",
+        title: "Umman'ın Selale Kentinde Körfez Ülkeleri-İran Hürmüz Görüşmesi",
+        note: "Altı üyeli Körfez İşbirliği Konseyi ülkelerinin dışişleri bakanları, gemilerin Hürmüz Boğazı'ndan geçişini düzenleyen geçici bir anlaşmayı görüşmek üzere Umman'ın Selale kentinde İranlı mevkidaşlarıyla bir araya gelecek; görüşme resmen teyit edildi.",
+      },
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-11-2100",
     title: "FXPARTNER Piyasa Özeti | 11.09.2026 Gün Sonu Güncellemesi",
     excerpt:
