@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-13-1800",
+    title: "FXPARTNER Piyasa Özeti | 13.09.2026 Pazar Akşam Güncellemesi",
+    excerpt:
+      "BRICS liderleri, Hindistan'ın başkenti Yeni Delhi'de düzenlenen zirvede 12 Eylül Cumartesi günü oy birliğiyle kabul ettikleri ortak bildiride Orta Doğu'da azami itidal çağrısı yaparak sivil altyapı ile barışçıl nükleer tesislere yönelik saldırıların uluslararası hukuku ihlal ettiğini vurguladı; BRICS dışişleri bakanları Mayıs ayında İran savaşına ilişkin ortak bir bildiride uzlaşamamıştı. Zirvenin kulisinde İran Cumhurbaşkanı Mesud Pezeşkiyan, savaşın 28 Şubat'ta başlamasından bu yana ilk kez üst düzey bir Birleşik Arap Emirlikleri yetkilisiyle bir araya gelerek Abu Dabi Veliaht Prensi Şeyh Halid bin Muhammed bin Zayed Al Nahyan ile görüştü; Pezeşkiyan ayrıca ABD ve İsrail'i kastederek İran'ın teslim olmayacağını söyledi. Bu arada İran Dışişleri Bakanlığı, Pazartesi günü Umman'ın Selale kentinde yapılacak Körfez-İran Hürmüz görüşmesine bu kez Irak temsilcilerinin de katılacağını duyurdu.",
+    publishedAt: "2026-09-13",
+    readingMinutes: 3,
+    intro:
+      "Pazar akşamı küresel piyasaların gündeminde, **BRICS** liderlerinin **Yeni Delhi**'deki zirvede kabul ettiği Orta Doğu'ya ilişkin ortak bildiri, İran Cumhurbaşkanı **Mesud Pezeşkiyan**'ın **Birleşik Arap Emirlikleri** ile savaş başladığından bu yana ilk üst düzey teması ve Pazartesi günkü **Selale** görüşmesine **Irak**'ın da katılacağının açıklanması öne çıktı. **BRICS** liderleri, **12 Eylül Cumartesi** günü zirvede oy birliğiyle kabul ettikleri ortak bildiride Orta Doğu'da azami itidal çağrısı yaparak sivil altyapı ile barışçıl nükleer tesislere yönelik kasıtlı saldırıların uluslararası hukuku ve **Uluslararası Atom Enerjisi Ajansı (IAEA)** kararlarını ihlal ettiğini vurguladı; bu, **BRICS** dışişleri bakanlarının Mayıs ayında İran savaşına ilişkin ortak bir bildiride uzlaşamayıp ev sahibi Hindistan'ı yalnızca bir başkanlık özeti yayımlamak zorunda bırakmasının ardından gelen önemli bir uzlaşı olarak değerlendiriliyor. Zirvenin kulisinde **Pezeşkiyan**, **Cumartesi** günü Abu Dabi Veliaht Prensi **Şeyh Halid bin Muhammed bin Zayed Al Nahyan** ile bir araya gelerek bölgesel ve uluslararası konuları, gerilimin azaltılmasını ve istikrarı görüştü; Abu Dabi Medya Ofisi'nin açıklamasına göre bu, savaşın **28 Şubat**'ta başlamasından bu yana iki ülke arasındaki ilk üst düzey temas oldu. Aynı ziyarette **Pezeşkiyan**, ABD ve İsrail'i kastederek \"Halkımız zorbalıkla teslim alınamaz, İran teslim olmayacak\" dedi. Diplomasi cephesinde bir başka gelişme de Pazartesi günü Umman'ın **Selale** kentinde yapılacak **Körfez-İran Hürmüz görüşmesi**ne ilişkin geldi: İran Dışişleri Bakanlığı, toplantıya altı üyeli **Körfez İşbirliği Konseyi** ülkelerinin yanı sıra **Irak** temsilcilerinin de katılacağını, görüşmenin \"bölge ülkeleri arasında daha iyi bir anlayışı teşvik etmeyi ve ortak bölgesel güvenliği güçlendirmeye yardımcı olmayı\" amaçladığını açıkladı. Piyasaların odağı artık Pazartesi günkü **Selale** görüşmesi ile **16 Eylül**'deki **Fed FOMC** kararında.",
+    news: [
+      {
+        icon: "🌍",
+        heading: "BRICS Liderlerinden Orta Doğu'da Azami İtidal Çağrısı İçeren Ortak Bildiri",
+        body: "**BRICS** liderleri, **Yeni Delhi**'de düzenlenen zirvede **12 Eylül Cumartesi** günü oy birliğiyle kabul ettikleri ortak bildiride Orta Doğu'da azami itidal çağrısı yaptı; bildiride sivil altyapı ile barışçıl nükleer tesislere yönelik kasıtlı saldırıların uluslararası hukuku ve **Uluslararası Atom Enerjisi Ajansı (IAEA)** kararlarını ihlal ettiği vurgulandı. Bu, **BRICS** dışişleri bakanlarının Mayıs ayında İran savaşına ilişkin ortak bir bildiride uzlaşamayıp ev sahibi Hindistan'ı yalnızca bir başkanlık özeti yayımlamak zorunda bırakmasının ardından gelen önemli bir uzlaşı olarak değerlendiriliyor.",
+      },
+      {
+        icon: "🇦🇪",
+        heading: "Pezeşkiyan, Savaş Başladığından Bu Yana İlk Kez Üst Düzey Bir BAE Yetkilisiyle Görüştü",
+        body: "İran Cumhurbaşkanı **Mesud Pezeşkiyan**, **BRICS** zirvesinin kulisinde **Cumartesi** günü Abu Dabi Veliaht Prensi **Şeyh Halid bin Muhammed bin Zayed Al Nahyan** ile bir araya gelerek bölgesel ve uluslararası konuları, gerilimin azaltılmasını ve istikrarı görüştü; Abu Dabi Medya Ofisi'nin açıklamasına göre bu, savaşın **28 Şubat**'ta başlamasından bu yana İran ile **Birleşik Arap Emirlikleri** arasındaki ilk üst düzey temas oldu. Aynı ziyarette **Pezeşkiyan**, ABD ve İsrail'i kastederek \"Halkımız zorbalıkla teslim alınamaz, İran teslim olmayacak\" dedi.",
+      },
+      {
+        icon: "🇴🇲",
+        heading: "Selale'deki Pazartesi Görüşmesine Irak da Katılacak",
+        body: "İran Dışişleri Bakanlığı, Pazartesi günü Umman'ın **Selale** kentinde yapılacak **Körfez-İran Hürmüz görüşmesi**ne altı üyeli **Körfez İşbirliği Konseyi** ülkelerinin yanı sıra **Irak** temsilcilerinin de katılacağını duyurdu; Bakanlık, toplantının \"bölge ülkeleri arasında daha iyi bir anlayışı teşvik etmeyi ve ortak bölgesel güvenliği güçlendirmeye yardımcı olmayı\" amaçladığını belirtti. Görüşme, savaşın başlamasından bu yana **Körfez İşbirliği Konseyi** üyeleri ile İran'ın üst düzey diplomatları arasındaki ilk buluşma olma özelliğini koruyor.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "14 Eylül 2026, Pazartesi (TSİ)",
+        icon: "🛢️",
+        title: "Umman'ın Selale Kentinde Körfez Ülkeleri-İran Hürmüz Görüşmesi",
+        note: "Umman'ın girişimiyle düzenlenen görüşmeye Körfez İşbirliği Konseyi ülkelerinin yanı sıra Irak temsilcileri de katılacak; üst düzey bir İranlı yetkili imzalı bir anlaşma beklenmediğini söylerken, Bahreyn görüşmeye katılmayacağını açıklamıştı.",
+      },
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-13-1500",
     title: "FXPARTNER Piyasa Özeti | 13.09.2026 Pazar Öğleden Sonra Güncellemesi",
     excerpt:
