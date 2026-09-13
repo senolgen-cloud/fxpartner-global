@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-13-2200",
+    title: "FXPARTNER Piyasa Özeti | 13.09.2026 Pazar Gece Güncellemesi",
+    excerpt:
+      "ABD Başkanı Donald Trump, İrlanda'daki bir golf turnuvasında yaptığı açıklamada Pazartesi günü Umman'ın Selale kentinde yapılacak Körfez ülkeleri-İran Hürmüz görüşmesi için \"Umurumda değil, bu onlara kalmış\" dedi; savaşın Kasım ayındaki ara seçimlerin hemen ardından sona erebileceğini yineleyerek benzin fiyatlarının o zaman \"taş gibi düşeceğini\" ve İran'ın bir anlaşma yapmak için \"sürekli aradığını\" söyledi. Bloomberg'in haberine göre İran, Pazartesi günkü görüşmede Hürmüz Boğazı'nda geçici bir gemi trafiği güzergahına ilişkin anlaşmayı Körfez ülkelerine resmen sunmayı planlıyor; Suudi Arabistan destekli güçler ile Husiler arasında tırmanan çatışmalar nedeniyle Körfez İşbirliği Konseyi üyelerinin tamamının görüşmeye katılıp katılmayacağı belirsizliğini koruyor. TCMB'nin 7-9 Eylül tarihleri arasında 67 katılımcıyla gerçekleştirdiği Eylül ayı Piyasa Katılımcıları Anketi'nde yıl sonu enflasyon beklentisi %29,43'ten %29,61'e yükselirken, yıl sonu dolar/TL beklentisi 51,66 TL'den 51,57 TL'ye geriledi, 12 ay sonrası dolar/TL beklentisi ise 57,43 TL'den 58,60 TL'ye çıktı.",
+    publishedAt: "2026-09-13",
+    readingMinutes: 3,
+    intro:
+      "Pazar gecesi küresel piyasaların gündeminde, ABD Başkanı **Donald Trump**'ın **İrlanda**'da yaptığı açıklamalar, **İran**'ın Pazartesi günkü **Selale** görüşmesinde bir Hürmüz anlaşmasını resmen sunmayı planladığına ilişkin haberler ve **TCMB**'nin Eylül ayı **Piyasa Katılımcıları Anketi** sonuçları öne çıktı. **Trump**, **Amgen İrlanda Açık** golf turnuvasını izlediği **Doonbeg**'deki Trump International Golf Links'te gazetecilere konuşurken, Pazartesi günü Umman'ın **Selale** kentinde yapılacak **Körfez ülkeleri-İran Hürmüz görüşmesi** hakkında **\"Umurumda değil, bu onlara kalmış\"** dedi; savaşın **Kasım** ayındaki ara seçimlerin hemen ardından sona erebileceğini bir kez daha yineleyerek bu durumda benzin fiyatlarının **\"taş gibi düşeceğini\"** öngördü ve **İran**'ın bir anlaşma yapmak için **\"sürekli aradığını\"**, ancak **\"doğru anlaşmayı yapmaları gerektiğini\"** söyledi; **Trump** ayrıca ABD'nin İran'da kalıp petrolü elde tutabileceğini öne sürerek bunu Venezuela'nın petrol rezervlerine yönelik girişimle kıyasladı. Diplomasi tarafında **Bloomberg**'in haberine göre **İran**, Pazartesi günkü görüşmede **Hürmüz Boğazı**'nda geçici bir gemi trafiği güzergahına ilişkin anlaşmayı altı üyeli **Körfez İşbirliği Konseyi** ülkelerine resmen sunmayı planlıyor; ancak Suudi Arabistan destekli güçler ile Yemenli **Husiler** arasında tırmanan çatışmalar nedeniyle Konsey üyelerinin tamamının görüşmeye katılıp katılmayacağı belirsizliğini koruyor. Türkiye tarafında **TCMB**'nin **7-9 Eylül** tarihleri arasında **52**'si finans, **15**'i reel sektör temsilcisi olmak üzere toplam **67 katılımcı** ile gerçekleştirdiği Eylül ayı **Piyasa Katılımcıları Anketi**'nde yıl sonu enflasyon beklentisi **%29,43**'ten **%29,61**'e yükselirken, yıl sonu dolar/TL beklentisi **51,66 TL**'den **51,57 TL**'ye geriledi; buna karşılık 12 ay sonrası dolar/TL beklentisi **57,43 TL**'den **58,60 TL**'ye çıktı ve **2026** büyüme beklentisi **%3,1**'den **%3,0**'a indirildi. Piyasaların odağı artık Pazartesi günkü **Selale görüşmesi** ile **16 Eylül**'deki **Fed FOMC** kararında.",
+    news: [
+      {
+        icon: "🇺🇸",
+        heading: "Trump: Selale Görüşmesi Bana Kalmış, Benzin Savaş Bitince Taş Gibi Düşecek",
+        body: "**Amgen İrlanda Açık** golf turnuvasını izlediği **Doonbeg**'deki Trump International Golf Links'te gazetecilere konuşan ABD Başkanı **Donald Trump**, Pazartesi günü Umman'ın **Selale** kentinde yapılacak **Körfez ülkeleri-İran Hürmüz görüşmesi** hakkında **\"Umurumda değil, bu onlara kalmış\"** dedi. **Trump**, İran savaşının **Kasım** ayındaki ara seçimlerin hemen ardından sona erebileceğini bir kez daha yineleyerek bu durumda benzin fiyatlarının **\"taş gibi düşeceğini\"** öngördü ve **İran**'ın bir anlaşma yapmak için **\"sürekli aradığını\"**, ancak **\"doğru anlaşmayı yapmaları gerektiğini\"** söyledi; ayrıca ABD'nin İran'da kalıp petrolü elde tutabileceğini öne sürerek bunu Venezuela'nın petrol rezervlerine yönelik girişimle kıyasladı.",
+      },
+      {
+        icon: "🇴🇲",
+        heading: "Bloomberg: İran Selale'de Hürmüz Anlaşmasını Körfez Ülkelerine Resmen Sunacak",
+        body: "**Bloomberg**'in haberine göre **İran**, Pazartesi günü Umman'ın **Selale** kentinde yapılacak görüşmede **Hürmüz Boğazı**'nda geçici bir gemi trafiği güzergahına ilişkin anlaşmayı altı üyeli **Körfez İşbirliği Konseyi** ülkelerine resmen sunmayı planlıyor. Ancak Suudi Arabistan destekli güçler ile Yemenli **Husiler** arasında tırmanan çatışmalar nedeniyle Konsey üyelerinin tamamının görüşmeye katılıp katılmayacağı belirsizliğini koruyor.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "TCMB Anketi: Yıl Sonu Enflasyon Beklentisi %29,61'e Yükseldi",
+        body: "**TCMB**'nin **7-9 Eylül** tarihleri arasında **52**'si finans, **15**'i reel sektör temsilcisi toplam **67 katılımcı** ile gerçekleştirdiği Eylül ayı **Piyasa Katılımcıları Anketi**'nde yıl sonu tüketici enflasyonu beklentisi **%29,43**'ten **%29,61**'e yükseldi; **12 ay sonrası TÜFE** beklentisi **%23,69**'dan **%23,70**'e, **24 ay sonrası** beklenti ise **%18,03**'ten **%18,32**'ye çıktı. Yıl sonu dolar/TL beklentisi **51,66 TL**'den **51,57 TL**'ye gerilerken, **12 ay sonrası dolar/TL** beklentisi **57,43 TL**'den **58,60 TL**'ye yükseldi; katılımcıların **2026** büyüme beklentisi de **%3,1**'den **%3,0**'a indirildi.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "14 Eylül 2026, Pazartesi (TSİ)",
+        icon: "🛢️",
+        title: "Umman'ın Selale Kentinde Körfez Ülkeleri-İran Hürmüz Görüşmesi",
+        note: "Umman'ın girişimiyle düzenlenen görüşmeye Körfez İşbirliği Konseyi ülkelerinin yanı sıra Irak temsilcileri de katılacak; üst düzey bir İranlı yetkili imzalı bir anlaşma beklenmediğini söylerken, Bahreyn görüşmeye katılmayacağını açıklamıştı.",
+      },
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-13-1800",
     title: "FXPARTNER Piyasa Özeti | 13.09.2026 Pazar Akşam Güncellemesi",
     excerpt:
