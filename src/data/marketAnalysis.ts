@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-13-1200",
+    title: "FXPARTNER Piyasa Özeti | 13.09.2026 Pazar Güncellemesi",
+    excerpt:
+      "Kışm Adası açıklarında Cumartesi gecesi İran ordu birlikleriyle \"düşman\" arasında yaşanan çatışma sırasında yeni patlamalar duyuldu; İran Cumhurbaşkanı Mesud Pezeşkiyan Pazar günü ABD'yi savaş suçu işlemekle suçlayarak \"Eğer Amerikalılar savaşçıysa, güçlü ordumuzla yüzleşsinler\" dedi. Yemenli Husiler'in Suudi Arabistan'ın güneyindeki Cizan bölgesinin Tuvâl idari bölgesine attığı mermi iki kişiyi yaraladı, bir cami ile çok sayıda bina ve araca hasar verdi; Husiler hedefin Necran'daki Şurura askeri üssü olduğunu iddia etti. Bu arada Pazartesi günü Umman'ın Selale kentinde yapılacak Körfez-İran görüşmesine ilişkin belirsizlik sürüyor: adını açıklamayan üst düzey bir İranlı yetkili görüşmeden imzalı bir anlaşma çıkmasının henüz beklenmediğini söylerken, Bahreyn görüşmeye katılmayacağını duyurdu.",
+    publishedAt: "2026-09-13",
+    readingMinutes: 3,
+    intro:
+      "Pazar günü küresel piyasaların gündeminde, **Kışm Adası** açıklarındaki yeni patlamalar ve İran Cumhurbaşkanı **Mesud Pezeşkiyan**'ın ABD'yi savaş suçuyla suçlaması, Yemenli **Husiler**'in Suudi Arabistan'ın **Cizan** bölgesine düzenlediği saldırı ve Pazartesi günü Umman'ın **Selale** kentinde yapılacak **Körfez-İran Hürmüz görüşmesi**ne ilişkin çelişkili sinyaller öne çıktı. **Kışm Adası**'nın **Hürmüz Boğazı** kıyısında Cumartesi gecesi, İran ordu birlikleri ile \"düşman\" arasında yaşanan çatışma sırasında yeni patlamalar duyuldu; resmi haber ajansı **IRNA** olayı doğrularken, devlet yayıncısı **IRIB** patlamaların **Bahman İskelesi** civarında meydana geldiğini bildirdi ve olası hedef, hasar veya can kaybına dair resmi bir açıklama henüz yapılmadı. **Pezeşkiyan**, Pazar günü yaptığı açıklamada ABD'yi sivil hedefleri vurmak ve savaş suçu işlemekle suçlayarak, \"Eğer Amerikalılar savaşçıysa, güçlü ordumuzla yüzleşsinler\" dedi. Aynı gün Yemenli **Husiler**'in fırlattığı bir mermi, Suudi Arabistan'ın güneyindeki **Cizan** bölgesine bağlı **Tuvâl** idari bölgesine düştü; Suudi Sivil Savunması iki kişinin yaralandığını, bir caminin ve çok sayıda bina ile aracın hasar gördüğünü açıkladı, **Husiler** ise hedefin **Necran** bölgesindeki **Şurura** askeri üssü olduğunu ileri sürdü. Diplomasi tarafında, Pazartesi günü Umman'ın **Selale** kentinde yapılacak **Körfez-İran Hürmüz görüşmesi** öncesinde belirsizlik sürüyor: adını açıklamayan üst düzey bir İranlı yetkili, görüşmeden imzalı bir anlaşma çıkmasının henüz beklenmediğini ve toplantının Umman'ın girişimiyle düzenlendiğini söylerken, **Bahreyn** Cumartesi günü görüşmeye katılmayacağını açıkladı. Piyasaların odağı artık Pazartesi günkü Selale görüşmesi ile gelecek hafta **16 Eylül**'deki **Fed FOMC** kararında.",
+    news: [
+      {
+        icon: "💥",
+        heading: "Kışm Adası Açıklarında Yeni Patlamalar, Pezeşkiyan ABD'yi Savaş Suçuyla Suçladı",
+        body: "İran'ın **Hürmüz Boğazı** kıyısındaki **Kışm Adası** açıklarında Cumartesi gecesi, İran ordu birlikleri ile \"düşman\" arasında yaşanan çatışma sırasında yeni patlamalar duyuldu; resmi haber ajansı **IRNA** olayı doğrularken, devlet yayıncısı **IRIB** patlamaların **Bahman İskelesi** civarında meydana geldiğini bildirdi, olası hedef, hasar veya can kaybına dair resmi bir açıklama henüz yapılmadı. İran Cumhurbaşkanı **Mesud Pezeşkiyan**, Pazar günü yaptığı açıklamada ABD'yi sivil hedefleri vurmakla ve savaş suçu işlemekle suçlayarak, \"Eğer Amerikalılar savaşçıysa, güçlü ordumuzla yüzleşsinler\" dedi.",
+      },
+      {
+        icon: "🕌",
+        heading: "Husi Saldırısında Suudi Arabistan'ın Cizan Bölgesinde 2 Kişi Yaralandı",
+        body: "Yemenli **Husiler**'in fırlattığı bir mermi, Cumartesi günü Suudi Arabistan'ın güneyindeki **Cizan** bölgesine bağlı **Tuvâl** idari bölgesine düştü; Suudi Sivil Savunması iki kişinin yaralandığını, bir caminin ve çok sayıda bina ile aracın hasar gördüğünü açıkladı. **Husiler**, saldırının hedefinin **Necran** bölgesindeki **Şurura** askeri üssü olduğunu iddia etti; Sivil Savunma yetkilileri ise sivil hedeflerin vurulmasını \"uluslararası insancıl hukukun açık ihlali\" olarak nitelendirdi.",
+      },
+      {
+        icon: "🇴🇲",
+        heading: "Selale Görüşmesi Öncesi Belirsizlik: Bahreyn Katılmayacak, İmzalı Anlaşma Beklenmiyor",
+        body: "Pazartesi günü Umman'ın **Selale** kentinde yapılacak **Körfez-İran Hürmüz görüşmesi** öncesinde çelişkili sinyaller sürüyor. Adını açıklamayan üst düzey bir İranlı yetkili, Cumartesi günü görüşmeden imzalı bir anlaşma çıkmasının henüz beklenmediğini, toplantının Umman'ın girişimiyle düzenlendiğini ve Hürmüz'ün yanı sıra bölgesel diğer konuların da ele alınacağını söyledi. **Bahreyn** ise Cumartesi günü İran ile yapılacak görüşmelere katılmayacağını açıkladı.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "14 Eylül 2026, Pazartesi (TSİ)",
+        icon: "🛢️",
+        title: "Umman'ın Selale Kentinde Körfez Ülkeleri-İran Hürmüz Görüşmesi",
+        note: "Umman'ın girişimiyle düzenlenen görüşmeye Körfez İşbirliği Konseyi ülkeleri katılacak; üst düzey bir İranlı yetkili imzalı bir anlaşma beklenmediğini söylerken, Bahreyn görüşmeye katılmayacağını açıkladı.",
+      },
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-12-1500",
     title: "FXPARTNER Piyasa Özeti | 12.09.2026 Öğleden Sonra Güncellemesi",
     excerpt:
