@@ -41,6 +41,55 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-13-1500",
+    title: "FXPARTNER Piyasa Özeti | 13.09.2026 Pazar Öğleden Sonra Güncellemesi",
+    excerpt:
+      "Hürmüz Boğazı'nda Kışm ve Hengam adaları açığında Pazar sabahı saat 05.00 (TSİ 08.30) sıralarında bir ticari gemi bilinmeyen bir cisimle vuruldu; resmi haber ajansı IRNA, Kışm Valiliği'ne dayandırarak 10 kişilik mürettebattan 1'inin öldüğünü, 4'ünün yaralandığını bildirdi, UKMTO ise gemide yangın çıktığını ve tahliyenin sürdüğünü doğruladı. Yemenli Husiler'in 11 Eylül Cuma günü Kızıldeniz'deki Muha limanı ile Bab-ül Mendeb Boğazı'ndaki Meyyun (Perim) ve Haniş adalarını ele geçirdiği bildirildi; Suudi Arabistan buna karşılık Muha Havalimanı'nı vurdu. ABD'de AAA verilerine göre ulusal ortalama motorin fiyatı 11 Eylül'de 6,06 dolar/galona çıkarak tarihi bir rekor kırdı. CME FedWatch verilerine göre 12 Eylül itibarıyla Fed'in 16 Eylül'deki FOMC kararında 25 baz puanlık faiz artırımı olasılığı %85,5'e yükseldi.",
+    publishedAt: "2026-09-13",
+    readingMinutes: 3,
+    intro:
+      "Pazar günü küresel piyasaların gündeminde, **Hürmüz Boğazı**'nda bir ticari gemiye düzenlenen ve can kaybına yol açan saldırı, Yemenli **Husiler**'in Kızıldeniz'de **Bab-ül Mendeb Boğazı** çevresinde kazandığı yeni toprak kontrolü, ABD'de motorin fiyatlarının tarihi bir rekora ulaşması ve **Fed**'in **16 Eylül**'deki faiz kararına ilişkin yükselen artırım beklentileri öne çıktı. Pazar sabahı yerel saat **05.00** (TSİ **08.30**) sıralarında, İran'ın **Kışm** ve **Hengam** adaları açığında seyreden ve **10 kişilik** mürettebata sahip bir ticari gemi bilinmeyen bir cisimle vuruldu; resmi haber ajansı **IRNA**, **Kışm Valiliği**'ne dayandırarak mürettebattan **1 kişinin öldüğünü, 4 kişinin yaralandığını** ve saldırının sorumlusunun **\"terörist düşman\"** olarak nitelendirildiğini bildirdi, projektilin türü ise henüz belirlenmedi. **UKMTO**, geminin bir projektille vurulduğunu, ardından yangın çıktığını ve yerel yetkililerin mürettebatı tahliye ettiğini doğruladı. Kızıldeniz tarafında, İran destekli Yemenli **Husiler**'in **11 Eylül Cuma** günü Kızıldeniz kıyısındaki **Muha (Mokha)** liman kentini, **Bab-ül Mendeb Boğazı**'ndaki **Meyyun (Perim) Adası**'nı ve **Büyük ile Küçük Haniş adaları**'nı ele geçirdiği bildirildi; gelişme, dünya ticaretinin yaklaşık **%12**'sinin geçtiği boğaz üzerindeki Husi kontrolünü güçlendirdi ve **Suudi Arabistan**'ın **Muha Havalimanı**'nı hava saldırılarıyla vurmasına yol açtı. Enerji tarafında, **AAA** verilerine göre ABD'de ulusal ortalama **motorin (dizel) fiyatı**, **11 Eylül** itibarıyla **6,06 dolar/galona** çıkarak ilk kez **6 doları** aştı; **GasBuddy**'ye göre bu, son bir hafta içinde kırılan **üçüncü rekor**. Para politikası tarafında, **CME FedWatch** verilerine göre **12 Eylül** itibarıyla Fed'in **15-16 Eylül**'deki FOMC toplantısında politika faizini **25 baz puan** artırma olasılığı **%85,5**'e yükseldi; beklentilerdeki bu sıçrama, Fed Başkanı **Kevin Warsh**'ın **Jackson Hole** sempozyumundaki şahin açıklamalarının ve Ağustos ayı enflasyon verilerinin beklentilerin üzerinde gelmesinin ardından hız kazandı. Piyasaların odağı artık Pazartesi günkü **Selale görüşmesi** ile **16 Eylül**'deki **Fed FOMC** kararında.",
+    news: [
+      {
+        icon: "🚢",
+        heading: "Hürmüz Boğazı'nda Ticari Gemiye Saldırı: 1 Ölü, 4 Yaralı",
+        body: "Pazar sabahı yerel saat **05.00** (TSİ **08.30**) sıralarında, İran'ın **Kışm** ve **Hengam** adaları açığında seyreden **10 kişilik** mürettebata sahip bir ticari gemi bilinmeyen bir cisimle vuruldu. Resmi haber ajansı **IRNA**, **Kışm Valiliği**'ne dayandırarak mürettebattan **1 kişinin öldüğünü, 4 kişinin yaralandığını** bildirdi ve saldırıyı, projektilin türü henüz belirlenmeden **\"terörist düşman\"**a bağladı. **UKMTO (Birleşik Krallık Deniz Ticareti Operasyonları)**, geminin bir projektille vurulduğunu, ardından gemide yangın çıktığını ve yerel yetkililerin mürettebatı tahliye ettiğini doğruladı.",
+      },
+      {
+        icon: "🇾🇪",
+        heading: "Husiler Kızıldeniz'de Muha Limanı ile Meyyun Adası'nı Ele Geçirdi",
+        body: "İran destekli Yemenli **Husiler**'in, **11 Eylül Cuma** günü Kızıldeniz kıyısındaki **Muha (Mokha)** liman kentini, **Bab-ül Mendeb Boğazı**'ndaki **Meyyun (Perim) Adası**'nı ve **Büyük ile Küçük Haniş adaları**'nı ele geçirdiği bildirildi; gelişme, dünya ticaretinin yaklaşık **%12**'sinin geçtiği boğaz üzerindeki Husi kontrolünü güçlendirdi. **Suudi Arabistan**, Husilerin ele geçirdiği **Muha Havalimanı**'nı hava saldırılarıyla vurarak karşılık verdi.",
+      },
+      {
+        icon: "⛽",
+        heading: "ABD'de Motorin Fiyatı Tarihi Rekor Kırdı: Galon 6,06 Dolar",
+        body: "**AAA** verilerine göre ABD'de ulusal ortalama **motorin (dizel) fiyatı**, **11 Eylül** itibarıyla **6,06 dolar/galona** çıkarak ilk kez **6 doları** aştı; **GasBuddy**'ye göre bu, son bir hafta içinde kırılan **üçüncü rekor**. Fiyat artışı, İran ile ABD arasındaki çatışmanın **Hürmüz Boğazı**'nda yol açtığı istikrarsızlığa bağlanıyor; **Kaliforniya**'da motorin Cuma günü **7,98 dolara** kadar çıkarken, **Oklahoma**'da **5,60 dolar** ile ülkenin en düşük seviyesinde kaldı.",
+      },
+      {
+        icon: "🇺🇸",
+        heading: "CME FedWatch: Eylül'de Faiz Artırım Olasılığı %85,5'e Çıktı",
+        body: "**CME FedWatch** verilerine göre **12 Eylül** itibarıyla, Fed'in **15-16 Eylül**'deki FOMC toplantısında politika faizini **25 baz puan** artırma olasılığı **%85,5**'e yükseldi. Beklentilerdeki sıçrama, Fed Başkanı **Kevin Warsh**'ın **Jackson Hole** sempozyumundaki şahin açıklamalarının ve Ağustos ayı enflasyon verilerinin beklentilerin üzerinde gelmesinin ardından hız kazandı; Warsh'ın konuşmasından önce piyasalar faizin sabit kalması yönünde yaklaşık **%70** olasılık fiyatlıyordu.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "14 Eylül 2026, Pazartesi (TSİ)",
+        icon: "🛢️",
+        title: "Umman'ın Selale Kentinde Körfez Ülkeleri-İran Hürmüz Görüşmesi",
+        note: "Umman'ın girişimiyle düzenlenen görüşmeye Körfez İşbirliği Konseyi ülkeleri katılacak; üst düzey bir İranlı yetkili imzalı bir anlaşma beklenmediğini söylerken, Bahreyn görüşmeye katılmayacağını açıkladı.",
+      },
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-13-1200",
     title: "FXPARTNER Piyasa Özeti | 13.09.2026 Pazar Güncellemesi",
     excerpt:
