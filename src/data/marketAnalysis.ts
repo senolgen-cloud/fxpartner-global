@@ -41,6 +41,49 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-14-1330",
+    title: "FXPARTNER Piyasa Özeti | 14.09.2026 Pazartesi Öğle Güncellemesi",
+    excerpt:
+      "Anthropic CEO'su Dario Amodei, OpenAI CEO'su Sam Altman ve Elon Musk'ın birbirinden bağımsız açıklamalarla 72 saat içinde yapay zeka geliştirme hızının yavaşlatılması çağrısında bulunması, Pazartesi günü Asya ve ABD vadeli işlem piyasalarında teknoloji ve çip hisselerinde sert satışa yol açtı; Japonya'da SoftBank %13,2, Kioxia %9,8, Güney Kore'de SK Hynix %5,3 değer kaybederken, Nasdaq 100 vadeli işlemleri %1'in üzerinde, S&P 500 vadeli işlemleri %0,6 geriledi. Bloomberg'in haberine göre Suudi Arabistan'ın saldırılar sonrası durdurduğu ve Hürmüz Boğazı'nı bypas etmek için kullanılan Doğu-Batı Petrol Boru Hattı'ndaki kesintinin derinleşmesiyle Brent petrol 108 dolara yaklaşırken, WTI 103 dolar civarında seyretti. Borsa İstanbul ise haftaya, küresel risk iştahındaki azalma ve jeopolitik gerginliklerin etkisiyle %0,88 düşüşle 14.339,28 puandan başladı.",
+    publishedAt: "2026-09-14",
+    readingMinutes: 3,
+    intro:
+      "Pazartesi öğle saatlerinde küresel piyasaların gündeminde, **Anthropic** CEO'su **Dario Amodei**, **OpenAI** CEO'su **Sam Altman** ve **Elon Musk**'ın birbirinden bağımsız açıklamalarla **72 saat** içinde yapay zeka geliştirme hızının yavaşlatılması çağrısında bulunması sonucu teknoloji ve çip hisselerinde yaşanan sert satış, Suudi Arabistan kaynaklı boru hattı kesintisiyle petrolün yükselişini sürdürmesi ve **Borsa İstanbul**'un haftaya düşüşle başlaması öne çıktı. **Amodei**'nin öncülük ettiği ve olası kötüye kullanım risklerine dikkat çeken çağrının ardından Pazartesi günü Asya seansında yapay zekayla bağlantılı hisseler sert düştü: Japonya'da **OpenAI** yatırımcısı **SoftBank** **%13,2**'ye varan kayıpla gerilerken, çip üreticisi **Kioxia** **%9,8**, **Tokyo Electron** **%3,7**, **Taiwan Semiconductor (TSMC)** **%1,2**, Güney Kore'de **SK Hynix** **%5,3** ve **Samsung Electronics** **%3,7** değer kaybetti; **MSCI Asya Pasifik** endeksi ise **%0,5** geriledi. Satış dalgası ABD vadeli işlem piyasalarına da yansıdı: **Nasdaq 100** vadeli işlemleri **%1**'in üzerinde, **S&P 500** vadeli işlemleri **%0,6**, **Dow Jones** vadeli işlemleri ise yaklaşık **53 puan (%0,24)** geriledi. Enerji tarafında **Bloomberg**'in haberine göre **Suudi Arabistan**'ın saldırılar sonrası durdurduğu ve savaş boyunca **Hürmüz Boğazı**'nı bypas etmek için kullanılan **Doğu-Batı Petrol Boru Hattı**'ndaki kesintinin derinleşmesi petrol fiyatlarını desteklemeyi sürdürdü; geçen hafta yaklaşık **%9** yükselen **Brent** petrol **108 dolara** yaklaşırken, **WTI** **103 dolar** civarında seyretti. Türkiye tarafında **Borsa İstanbul**, küresel risk iştahındaki azalma ve jeopolitik gerginliklerin etkisiyle haftaya **%0,88** düşüşle **14.339,28** puandan başladı; bankacılık endeksi **%1,07**, holding endeksi ise **%0,68** değer kaybetti; Cuma günü endeks **%0,51** yükselişle **14.467,25** puandan kapanmıştı. Piyasaların odağı artık **16 Eylül**'deki **Fed FOMC** kararında.",
+    news: [
+      {
+        icon: "🤖",
+        heading: "Amodei, Altman ve Musk'tan Yapay Zeka Gelişiminde Yavaşlama Çağrısı",
+        body: "**Anthropic** CEO'su **Dario Amodei**, **OpenAI** CEO'su **Sam Altman** ve **Elon Musk**, birbirinden bağımsız açıklamalarla **72 saat** içinde daha güçlü yapay zeka modellerinin geliştirilme hızının yavaşlatılması çağrısında bulundu; **Amodei** çağrısını olası kötüye kullanım risklerine dikkat çekerek yaptı. Açıklamalar, bu yılki hisse senedi ralisinin önemli sürükleyicilerinden biri olan yapay zeka sektörüne yönelik endişeleri artırdı.",
+      },
+      {
+        icon: "📉",
+        heading: "Teknoloji ve Çip Hisselerinde Sert Satış: SoftBank %13,2 Geriledi",
+        body: "Yavaşlama çağrısının ardından Pazartesi günü Asya seansında yapay zekayla bağlantılı hisseler sert düştü: **OpenAI** yatırımcısı **SoftBank** Japonya'da **%13,2**'ye varan kayıpla gerilerken, çip üreticisi **Kioxia** **%9,8**, **Tokyo Electron** **%3,7**, **Taiwan Semiconductor (TSMC)** **%1,2**, Güney Kore'de **SK Hynix** **%5,3** ve **Samsung Electronics** **%3,7** değer kaybetti; **MSCI Asya Pasifik** endeksi **%0,5** geriledi. Satış dalgası ABD vadeli işlem piyasalarına da yansıyarak **Nasdaq 100** vadeli işlemlerini **%1**'in üzerinde, **S&P 500** vadeli işlemlerini **%0,6**, **Dow Jones** vadeli işlemlerini ise yaklaşık **53 puan (%0,24)** geriletti.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol, Suudi Boru Hattı Kesintisiyle Yükselişini Sürdürüyor",
+        body: "**Bloomberg**'in haberine göre **Suudi Arabistan**'ın saldırılar sonrası durdurduğu ve savaş boyunca **Hürmüz Boğazı**'nı bypas etmek için kullanılan **Doğu-Batı Petrol Boru Hattı**'ndaki kesintinin derinleşmesi petrol fiyatlarını desteklemeyi sürdürdü. Geçen hafta yaklaşık **%9** yükselen **Brent** petrol **108 dolara** yaklaşırken, **WTI** **103 dolar** civarında seyretti.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "Borsa İstanbul Haftaya %0,88 Düşüşle Başladı",
+        body: "**BIST 100**, küresel risk iştahındaki azalma ve jeopolitik gerginliklerin etkisiyle haftaya **%0,88** düşüşle **14.339,28** puandan başladı; bankacılık endeksi **%1,07**, holding endeksi ise **%0,68** değer kaybetti. Endeks, Cuma günü **%0,51** yükselişle **14.467,25** puandan kapanmıştı.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-14-0900",
     title: "FXPARTNER Piyasa Özeti | 14.09.2026 Pazartesi Sabah Güncellemesi",
     excerpt:
