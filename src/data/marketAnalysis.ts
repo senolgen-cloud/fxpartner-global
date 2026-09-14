@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-14-0900",
+    title: "FXPARTNER Piyasa Özeti | 14.09.2026 Pazartesi Sabah Güncellemesi",
+    excerpt:
+      "Umman Dışişleri Bakanı Bedr el-Busaidi, Pazartesi günü Selale'de yapılması planlanan Körfez ülkeleri-İran Hürmüz görüşmesinin mutabakat sağlanması amacıyla ertelendiğini açıkladı; İran Dışişleri Bakanlığı yetkilisi Muhammed Alibek ertelemenin İran ile Umman'ın ortak kararı olduğunu doğrularken, Bahreyn'in katılmayacağını açıklaması ve Suudi Arabistan'ın çekinceleri belirleyici oldu, yeni bir tarih henüz duyurulmadı. Geçen hafta %9'un üzerinde yükselen ham petrol Cuma kapanışında WTI'da yaklaşık 100 dolar, Brent'te yaklaşık 104 dolar seviyesinde çok aylık zirvelere yakın seyrederken, ons altın Fed'in 16 Eylül'deki faiz kararı öncesinde Pazartesi sabahı 4.350 doların altına, 4.340 dolar civarına geriledi.",
+    publishedAt: "2026-09-14",
+    readingMinutes: 3,
+    intro:
+      "Pazartesi sabahı küresel piyasaların gündeminde, Umman'ın **Selale** kentinde yapılması planlanan **Körfez ülkeleri-İran Hürmüz görüşmesi**nin ertelenmesi, petrol fiyatlarının çok aylık zirvelere yakın seyretmeyi sürdürmesi ve ons altının **Fed**'in yaklaşan faiz kararı öncesinde gerilemesi öne çıktı. Umman Dışişleri Bakanı **Bedr el-Busaidi**, Pazartesi günü yapılması planlanan görüşmenin **\"mutabakat sağlanması amacıyla\"** ertelendiğini duyurarak Umman'ın bölgede istikrarı destekleyen ve kalıcı iş birliğini teşvik eden diyaloğu güçlendirme taahhüdünün sürdüğünü belirtti. İran Dışişleri Bakanlığı Basra Körfezi Dairesi Genel Müdürü **Muhammed Alibek**, ertelemenin İran ile Umman'ın ortak kararı olduğunu ve bazı bölge ülkelerinin talebi üzerine alındığını doğruladı; **Bahreyn**'in görüşmeye katılmayacağını daha önce açıklaması ve **Suudi Arabistan**'ın öneriye ilişkin çekinceleri belirleyici oldu, yeni bir tarih henüz açıklanmadı. Enerji tarafında, geçen hafta **%9**'un üzerinde yükselen ham petrol Cuma günü kapanışta **WTI**'da varil başına yaklaşık **100 dolar**, **Brent**'te ise yaklaşık **104 dolar** seviyesinde çok aylık zirvelere yakın seyretti; fiyatlar, **Suudi Arabistan**'ın Irak kaynaklı dron saldırıları sonrası **Doğu-Batı Petrol Boru Hattı**'nı durdurmasının ve Hürmüz'de geçici bir gemi trafiği düzenlemesine yönelik diplomatik girişimin şimdilik sonuçsuz kalmasının etkisiyle yüksek seyrini koruyor. Kıymetli madenler tarafında **FXStreet** verilerine göre ons altın (**XAU/USD**), **Fed**'in **16 Eylül**'deki faiz kararı öncesinde Pazartesi sabahı Asya seansında **4.350 dolarının** altına gerileyerek **4.340 dolar** civarında işlem gördü. Piyasaların odağı artık **16 Eylül**'deki **Fed FOMC** kararında.",
+    news: [
+      {
+        icon: "🇴🇲",
+        heading: "Umman: Selale'deki Hürmüz Görüşmesi Ertelendi",
+        body: "Umman Dışişleri Bakanı **Bedr el-Busaidi**, Pazartesi günü Umman'ın **Selale** kentinde yapılması planlanan **Körfez ülkeleri-İran Hürmüz görüşmesi**nin **\"mutabakat sağlanması amacıyla\"** ertelendiğini duyurdu; Umman'ın bölgede istikrarı destekleyen ve kalıcı iş birliğini teşvik eden diyaloğu güçlendirme taahhüdünün sürdüğünü belirtti. İran Dışişleri Bakanlığı Basra Körfezi Dairesi Genel Müdürü **Muhammed Alibek**, ertelemenin İran ile Umman'ın ortak kararı olduğunu ve bazı bölge ülkelerinin talebi üzerine alındığını doğruladı; **Bahreyn**'in görüşmeye katılmayacağını daha önce açıklaması ve **Suudi Arabistan**'ın öneriye ilişkin çekinceleri belirleyici oldu. Yeni bir tarih henüz açıklanmadı.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol, Hürmüz Diplomasisindeki Tıkanma ile Çok Aylık Zirveye Yakın",
+        body: "Geçen hafta **%9**'un üzerinde yükselen ham petrol, Cuma günü kapanışta **WTI**'da varil başına yaklaşık **100 dolar**, **Brent**'te ise yaklaşık **104 dolar** seviyesindeydi. Fiyatlar, **Suudi Arabistan**'ın Irak kaynaklı dron saldırıları sonrası **Doğu-Batı Petrol Boru Hattı**'nı durdurmasının ve Hürmüz Boğazı'nda geçici bir gemi trafiği düzenlemesine yönelik diplomatik girişimin şimdilik sonuçsuz kalmasının etkisiyle çok aylık zirvelere yakın seyrini koruyor.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın, Fed Kararı Öncesi 4.350 Doların Altına Geriledi",
+        body: "**FXStreet** verilerine göre ons altın (**XAU/USD**), **Fed**'in **16 Eylül**'deki faiz kararı öncesinde Pazartesi sabahı Asya seansında **4.350 dolarının** altına gerileyerek **4.340 dolar** civarında işlem gördü.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-13-2200",
     title: "FXPARTNER Piyasa Özeti | 13.09.2026 Pazar Gece Güncellemesi",
     excerpt:
