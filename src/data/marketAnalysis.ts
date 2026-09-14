@@ -41,6 +41,61 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-14-1500",
+    title: "FXPARTNER Piyasa Özeti | 14.09.2026 Pazartesi Öğleden Sonra Güncellemesi",
+    excerpt:
+      "ABD Çalışma Bakanlığı'nın 11 Eylül'de açıkladığı Ağustos ayı enflasyon verilerinin beklentilerin üzerinde gelmesi (yıllık %3,4, çekirdek yıllık %2,4) CME FedWatch verilerine göre Fed'in 16 Eylül'deki toplantıda faiz artırma ihtimalini %85'in üzerine taşıdı; dolar endeksi 99,3-99,4 bandına yükselirken euro/dolar %0,25 düşüşle 1,1570 seviyesine geriledi. FXStreet verilerine göre ons altın (XAU/USD) %0,4 değer kaybederek 4.331,84 dolara geriledi. Borsa İstanbul öğleden sonra kayıplarını derinleştirerek saat 13.00 itibarıyla %1,56 düşüşle 14.241,06 puana geriledi; bilişim endeksi %2,95 ile en sert değer kaybeden endeks oldu. Bu hafta Fed'in ardından Bank of England Perşembe, Bank of Japan ise Cuma günü faiz kararını açıklayacak.",
+    publishedAt: "2026-09-14",
+    readingMinutes: 3,
+    intro:
+      "Pazartesi öğleden sonra küresel piyasaların gündeminde, ABD'de **Ağustos ayı** enflasyon verilerinin beklentilerin üzerinde gelmesiyle **Fed** faiz artırım beklentilerinin belirginleşmesi, ons altının güçlenen dolar karşısında gerilemesi ve **Borsa İstanbul**'un öğleden sonra kayıplarını derinleştirmesi öne çıktı. ABD Çalışma Bakanlığı'nın **11 Eylül**'de açıkladığı verilere göre yıllık tüketici enflasyonu **%3,4**'e yükselirken, çekirdek enflasyon aylık bazda **%0,3** artışla yıllık **%2,4** oldu; beklentilerin üzerinde gelen veri **CME FedWatch** verilerine göre **Fed**'in **16 Eylül**'deki toplantıda faizi **25 baz puan** artırma ihtimalini **%85**'in üzerine taşıdı. Bu gelişmeyle dolar endeksi (**DXY**) **%0,3**'ün üzerinde yükselişle **99,3-99,4** bandına çıkarken, **euro/dolar (EUR/USD)** **%0,25** düşüşle bir haftanın en düşük seviyelerine yakın **1,1570** seviyesine geriledi. **FXStreet** verilerine göre ons altın (**XAU/USD**), güçlenen dolar ve yükselen faiz artırım beklentilerinin baskısıyla Pazartesi günü **%0,4** değer kaybederek **4.331,84 dolara** geriledi ve **4.300 dolar** sınırının hemen üzerinde tutunmaya çalıştı. Türkiye tarafında **BIST 100**, küresel teknoloji hisselerindeki satış dalgasının da etkisiyle öğleden sonra kayıplarını derinleştirerek saat **13.00** itibarıyla **226,1 puan (%1,56)** düşüşle **14.241,06** puana geriledi; işlem hacmi **67,1 milyar TL**'ye ulaştı, bilişim endeksi **%2,95** ile en sert değer kaybeden endeks olurken bankacılık endeksi **%0,64**, holding endeksi ise **%0,55** geriledi. Piyasaların gözü artık bu haftaki merkez bankası kararlarında: **Fed**'in ardından **Bank of England** **Perşembe**, **Bank of Japan** ise **Cuma** günü faiz kararını açıklayacak.",
+    news: [
+      {
+        icon: "💵",
+        heading: "ABD Enflasyonu Fed Faiz Artışı Beklentisini %85'in Üzerine Taşıdı",
+        body: "ABD Çalışma Bakanlığı'nın **11 Eylül**'de açıkladığı **Ağustos ayı** enflasyon verilerine göre yıllık tüketici enflasyonu **%3,4**'e, çekirdek enflasyon aylık bazda **%0,3** artışla yıllık **%2,4**'e yükseldi. Beklentilerin üzerinde gelen veri, **CME FedWatch** verilerine göre **Fed**'in **16 Eylül**'deki toplantıda faizi **25 baz puan** artırma ihtimalini **%85**'in üzerine taşıdı; dolar endeksi (**DXY**) **%0,3**'ün üzerinde yükselişle **99,3-99,4** bandına çıkarken, **euro/dolar (EUR/USD)** **%0,25** düşüşle bir haftanın en düşük seviyelerine yakın **1,1570** seviyesine geriledi.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın, Güçlenen Dolar ve Faiz Artırım Beklentileriyle 4.300 Dolar Sınırında",
+        body: "**FXStreet** verilerine göre ons altın (**XAU/USD**), güçlenen dolar ve **Fed**'in bu hafta faiz artırabileceğine dair yükselen beklentilerin baskısıyla Pazartesi günü **%0,4** değer kaybederek **4.331,84 dolara** geriledi; ons altın, üç haftadır süren düşüş eğiliminin ardından **4.300 dolar** sınırının hemen üzerinde tutunmaya çalışıyor.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "BIST 100 Öğleden Sonra Kayıplarını Derinleştirdi: %1,56 Düşüşle 14.241 Puana Geriledi",
+        body: "**BIST 100** endeksi, küresel teknoloji hisselerindeki satış dalgasının ve dolar/TL üzerindeki baskının etkisiyle öğleden sonra kayıplarını derinleştirerek saat **13.00** itibarıyla **226,1 puan (%1,56)** düşüşle **14.241,06** puana geriledi; işlem hacmi **67,1 milyar TL**'ye ulaştı. Bilişim endeksi **%2,95** ile en sert değer kaybeden endeks olurken, bankacılık endeksi **%0,64**, holding endeksi ise **%0,55** geriledi.",
+      },
+      {
+        icon: "🏦",
+        heading: "Merkez Bankaları Haftası: Fed'in Ardından BoE Perşembe, BoJ Cuma Kararını Açıklayacak",
+        body: "**Fed**'in **16 Eylül Çarşamba** günkü kararının ardından **Bank of England (BoE)**, **17 Eylül Perşembe** günü İngiltere saatiyle **12.00**'de faiz kararını açıklayacak; **%3,75**'te tutulan faizin sabit kalması bekleniyor, ancak piyasa fiyatlamasına göre yaklaşık üçte bir olasılıkla **25 baz puan**lık bir artış da fiyatlanıyor. **Bank of Japan (BoJ)** ise iki günlük toplantının ardından **18 Eylül Cuma** günü kararını duyuracak; **Bloomberg**'in anketine katılan **52 BoJ** gözlemcisinin tamamı toplantıda bir faiz artışı öngörüyor.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+      {
+        time: "17 Eylül 2026, 14.00 (TSİ)",
+        icon: "🇬🇧",
+        title: "Bank of England (BoE) Faiz Kararı",
+        note: "İngiltere saatiyle 12.00'de (TSİ 14.00) açıklanacak kararda faizin %3,75'te sabit tutulması bekleniyor; piyasa fiyatlamasına göre yaklaşık üçte bir olasılıkla 25 baz puanlık bir artış öngörülüyor.",
+      },
+      {
+        time: "18 Eylül 2026 (TSİ öğleden sonra)",
+        icon: "🇯🇵",
+        title: "Bank of Japan (BoJ) Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak kararda, Bloomberg'in anketine katılan 52 BoJ gözlemcisinin tamamı bir faiz artışı öngörüyor.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-14-1330",
     title: "FXPARTNER Piyasa Özeti | 14.09.2026 Pazartesi Öğle Güncellemesi",
     excerpt:
