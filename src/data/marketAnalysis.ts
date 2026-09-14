@@ -41,6 +41,56 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-14-2330",
+    title: "FXPARTNER Piyasa Özeti | 14.09.2026 Pazartesi Gün Sonu Güncellemesi",
+    excerpt:
+      "Borsa İstanbul, küresel risk iştahındaki bozulma ve dolar/TL üzerindeki baskının etkisiyle günü %1,60 düşüşle 14.235,83 puandan tamamladı; işlem hacmi 155,7 milyar TL'ye ulaşırken bilişim endeksi %4,04 ile en sert değer kaybeden endeks oldu. Ons altın (XAU/USD), yükselen petrol fiyatları ve bu haftaki Fed toplantısına ilişkin faiz artırım beklentilerinin baskısıyla günü %1,5'in üzerinde düşüşle Ağustos ayından bu yana en düşük seviyesi olan yaklaşık 4.285 dolara geriledi. Dolar/TL ise akşam saatlerinde %0,20 yükselişle 48,63 TL seviyesine çıktı.",
+    publishedAt: "2026-09-14",
+    readingMinutes: 3,
+    intro:
+      "Pazartesi gününü kapatan piyasaların gündeminde, **Borsa İstanbul**'un günü sert kayıpla tamamlaması, ons altının **Ağustos ayından bu yana en düşük seviyesine** gerilemesi ve **dolar/TL**'nin akşam saatlerinde yükselişini sürdürmesi öne çıktı. **BIST 100** endeksi, küresel risk iştahındaki bozulma, yükselen ABD tahvil getirileri ve dolar/TL üzerindeki baskının etkisiyle günü **231,42 puan (%1,60)** düşüşle **14.235,83** puandan tamamladı; işlem hacmi **155,7 milyar TL**'ye ulaştı. Sektörler arasında **bilişim endeksi %4,04** ile en sert değer kaybeden endeks olurken, **bankacılık endeksi %0,85**, **holding endeksi %0,29** geriledi; en çok kazandıran sektör ise **%2,73** ile finansal kiralama ve faktoring oldu. Ons altın (**XAU/USD**), yükselen petrol fiyatlarının beslediği enflasyon endişeleri ve **Fed**'in bu haftaki toplantısında faiz artırabileceğine dair güçlenen beklentilerin baskısıyla günü **%1,5**'in üzerinde düşüşle **Ağustos ayından bu yana en düşük seviyesi** olan yaklaşık **4.285 dolara** geriledi; üç haftadır süren düşüş eğilimini sürdüren altın, gün içinde **4.300 dolar** sınırının altına sarktı. **Dolar/TL** ise akşam saatlerinde önceki güne göre **%0,20** yükselişle **48,63 TL** seviyesine çıktı; kur, geçen haftaya göre **%0,39** artış kaydetti. Piyasaların odağı artık **16 Eylül**'deki **Fed FOMC** kararında.",
+    news: [
+      {
+        icon: "🇹🇷",
+        heading: "BIST 100 Günü %1,60 Düşüşle 14.235 Puandan Kapattı",
+        body: "**BIST 100** endeksi, küresel risk iştahındaki bozulma, yükselen ABD tahvil getirileri ve dolar/TL üzerindeki baskının etkisiyle günü **231,42 puan (%1,60)** düşüşle **14.235,83** puandan tamamladı; işlem hacmi **155,7 milyar TL**'ye ulaştı. Sektörler arasında **bilişim endeksi %4,04** ile en sert değer kaybeden endeks olurken, **bankacılık endeksi %0,85**, **holding endeksi %0,29** geriledi; en çok kazandıran sektör ise **%2,73** ile finansal kiralama ve faktoring oldu.",
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın Ağustos'tan Bu Yana En Düşük Seviyesine Geriledi",
+        body: "Ons altın (**XAU/USD**), yükselen petrol fiyatlarının beslediği enflasyon endişeleri ve **Fed**'in bu haftaki toplantısında faiz artırabileceğine dair güçlenen beklentilerin baskısıyla günü **%1,5**'in üzerinde düşüşle **Ağustos ayından bu yana en düşük seviyesi** olan yaklaşık **4.285 dolara** geriledi. Üç haftadır süren düşüş eğilimini sürdüren altın, gün içinde **4.300 dolar** sınırının altına sarktı.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar/TL Akşam Saatlerinde 48,63 TL'ye Yükseldi",
+        body: "**Dolar/TL**, önceki güne göre **%0,20** yükselişle akşam saatlerinde **48,63 TL** seviyesine çıktı; kur, geçen haftaya göre **%0,39** artış kaydetti.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+      {
+        time: "17 Eylül 2026, 14.00 (TSİ)",
+        icon: "🇬🇧",
+        title: "Bank of England (BoE) Faiz Kararı",
+        note: "İngiltere saatiyle 12.00'de (TSİ 14.00) açıklanacak kararda faizin %3,75'te sabit tutulması bekleniyor; piyasa fiyatlamasına göre yaklaşık üçte bir olasılıkla 25 baz puanlık bir artış öngörülüyor.",
+      },
+      {
+        time: "18 Eylül 2026 (TSİ öğleden sonra)",
+        icon: "🇯🇵",
+        title: "Bank of Japan (BoJ) Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak kararda, Bloomberg'in anketine katılan 52 BoJ gözlemcisinin tamamı bir faiz artışı öngörüyor.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-14-2300",
     title: "FXPARTNER Piyasa Özeti | 14.09.2026 Pazartesi Gece Güncellemesi",
     excerpt:
