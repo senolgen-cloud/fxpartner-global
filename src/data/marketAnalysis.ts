@@ -41,6 +41,56 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-14-2300",
+    title: "FXPARTNER Piyasa Özeti | 14.09.2026 Pazartesi Gece Güncellemesi",
+    excerpt:
+      "ABD 10 yıllık tahvil getirisi, yükselen petrol fiyatlarının beslediği enflasyon endişeleri ve Fed'in bu haftaki toplantısı öncesinde Pazartesi günü gün içinde %5,01'e kadar yükselerek 2023'ten bu yana ilk kez %5 eşiğini aştı. Yükselen getirilere ve sabah saatlerindeki yapay zeka kaynaklı satışa rağmen Wall Street günü kazançla kapattı: S&P 500 %0,9 yükselişle 7.657 puandan, Dow Jones 509,19 puan (%1) artışla 52.573,29 puandan, Nasdaq Composite ise 251,31 puan (%1) yükselişle 26.333,04 puandan günü tamamladı. Bloomberg'in haberine göre İran ile Körfez ülkeleri arasında Umman'da yapılması planlanan Hürmüz Boğazı görüşmesi Suudi Arabistan'ın talebi üzerine ertelendi; erteleme, Suudi Arabistan'ın İran destekli Husi gruplarının topraklarına yönelik saldırılarına karşılık vermesiyle bağlantılı.",
+    publishedAt: "2026-09-14",
+    readingMinutes: 3,
+    intro:
+      "Pazartesi gecesi küresel piyasaların gündeminde, **ABD 10 yıllık tahvil getirisinin** **2023'ten bu yana ilk kez** **%5** eşiğini aşması, sabah saatlerindeki yapay zeka kaynaklı satışa rağmen **Wall Street**'in günü kazançla kapatması ve **Hürmüz Boğazı** görüşmesinin yeniden ertelenmesi öne çıktı. Yükselen petrol fiyatlarının beslediği enflasyon endişeleri ve **Fed**'in bu haftaki toplantısı öncesindeki temkinli havayla **ABD 10 yıllık tahvil getirisi**, Pazartesi günü gün içinde **%5,01**'e kadar yükselerek **2023'ten bu yana ilk kez** **%5** eşiğini aştı. Yükselen getirilere ve **Anthropic** CEO'su **Dario Amodei**'nin yapay zeka geliştirme hızının yavaşlatılması çağrısının tetiklediği sabah satışına rağmen **Wall Street**'te üç ana endeks de günü kazançla tamamladı: **S&P 500** **%0,9** yükselişle **7.657** puandan, **Dow Jones Sınai Ortalaması** **509,19 puan (%1)** artışla **52.573,29** puandan, **Nasdaq Composite** ise **251,31 puan (%1)** yükselişle **26.333,04** puandan günü kapattı. Enerji ve jeopolitik tarafta **Bloomberg**'in haberine göre **İran** ile **Körfez ülkeleri** arasında Umman'da yapılması planlanan ve **Hürmüz Boğazı**'nın geleceğini ele alacak görüşme, **Suudi Arabistan**'ın talebi üzerine yeniden ertelendi; erteleme, **Suudi Arabistan**'ın İran destekli **Husi** gruplarının kendi topraklarına yönelik saldırılarına karşılık vermesiyle bağlantılı. Piyasaların odağı artık **16 Eylül**'deki **Fed FOMC** kararında.",
+    news: [
+      {
+        icon: "📈",
+        heading: "ABD 10 Yıllık Tahvil Getirisi 2023'ten Bu Yana İlk Kez %5'i Aştı",
+        body: "Yükselen petrol fiyatlarının beslediği enflasyon endişeleri ve **Fed**'in bu haftaki toplantısı öncesindeki temkinli havayla **ABD 10 yıllık tahvil getirisi**, Pazartesi günü gün içinde **%5,01**'e kadar yükselerek **2023'ten bu yana ilk kez** psikolojik açıdan önemli **%5** eşiğini aştı.",
+      },
+      {
+        icon: "🇺🇸",
+        heading: "Wall Street, Sabah Satışına Rağmen Günü Kazançla Kapattı",
+        body: "**Anthropic** CEO'su **Dario Amodei**'nin yapay zeka geliştirme hızının yavaşlatılması çağrısının tetiklediği sabah satışına ve yükselen tahvil getirilerine rağmen **Wall Street**'te üç ana endeks de günü kazançla tamamladı: **S&P 500**, **65,28 puan (%0,9)** yükselişle **7.657** puandan; **Dow Jones Sınai Ortalaması**, **509,19 puan (%1)** artışla **52.573,29** puandan; **Nasdaq Composite** ise **251,31 puan (%1)** yükselişle **26.333,04** puandan günü kapattı.",
+      },
+      {
+        icon: "🇴🇲",
+        heading: "Hürmüz Boğazı Görüşmesi Suudi Arabistan'ın Talebiyle Yeniden Ertelendi",
+        body: "**Bloomberg**'in haberine göre **İran** ile **Körfez ülkeleri** arasında Umman'da yapılması planlanan ve **Hürmüz Boğazı**'nın geleceğini ele alacak görüşme, **Suudi Arabistan**'ın talebi üzerine yeniden ertelendi. Erteleme, **Suudi Arabistan**'ın İran destekli **Husi** gruplarının kendi topraklarına yönelik saldırılarına karşılık vermesiyle bağlantılı; görüşme için yeni bir tarih henüz açıklanmadı.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+      {
+        time: "17 Eylül 2026, 14.00 (TSİ)",
+        icon: "🇬🇧",
+        title: "Bank of England (BoE) Faiz Kararı",
+        note: "İngiltere saatiyle 12.00'de (TSİ 14.00) açıklanacak kararda faizin %3,75'te sabit tutulması bekleniyor; piyasa fiyatlamasına göre yaklaşık üçte bir olasılıkla 25 baz puanlık bir artış öngörülüyor.",
+      },
+      {
+        time: "18 Eylül 2026 (TSİ öğleden sonra)",
+        icon: "🇯🇵",
+        title: "Bank of Japan (BoJ) Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak kararda, Bloomberg'in anketine katılan 52 BoJ gözlemcisinin tamamı bir faiz artışı öngörüyor.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-14-1500",
     title: "FXPARTNER Piyasa Özeti | 14.09.2026 Pazartesi Öğleden Sonra Güncellemesi",
     excerpt:
