@@ -109,7 +109,10 @@ export default function BrokerAdBanner({ broker }: { broker: Broker }) {
           <p className="notranslate mt-0.5 truncate font-poppins text-base font-semibold text-text-on-ink">
             {broker.name}
           </p>
-          <p className="truncate text-[13px] text-text-on-ink-muted">{broker.tagline}</p>
+          {/* Blog posts pass the raw catalogue broker, so the tagline arrives
+              in Turkish; the chrome catalogue already carries every
+              tagline, and an already-localized one is simply not a key. */}
+          <p className="truncate text-[13px] text-text-on-ink-muted">{tr(broker.tagline)}</p>
         </div>
       </div>
       <a

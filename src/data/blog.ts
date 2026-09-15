@@ -49,6 +49,265 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    // Written for the search terms people actually type — "bonus vurdurma",
+    // "bonus arbitrajı", "bonusu nakite çevirme" — which is to say for a
+    // reader who arrives hoping for a trick. The post does not sell one,
+    // because there is none that survives a broker's terms, and a partner
+    // site teaching bonus abuse would be teaching readers to get their
+    // accounts closed at the brokers it is paid by.
+    //
+    // So the forum methods are named and explained at the level needed to
+    // see why they fail — never as a recipe — and the second half is the
+    // part a reader can use: the break-even arithmetic on a real volume
+    // condition, and the three instruments that are cash or protect cash
+    // without a volume chase (teminat bonusu, nakit iadesi, withdrawal
+    // order).
+    //
+    // Every broker figure is one the site already publishes: NonStopBonus
+    // (bonus × 0,30 lot, ≥50 işlem, 3 ay, Classic only) from
+    // litefinance-non-stop-bonus-2026; the %20 teminat bonusu and its
+    // 180 → 220 pip arithmetic from teminat-bonusu-nedir-trade-bonusu-farki;
+    // the 1,8 pip ≈ 18 $/lot cost assumption from forex-bonus-tuzagi-hacim-sarti.
+    // The arbitrage example uses a hypothetical %50 bonus and says so.
+    //
+    // Unpinned ad slot on purpose: this is a general guide that mentions both
+    // Lite Finance and XM, and neither should own its opening banner.
+    slug: "bonus-vurdurma-bonus-arbitraji-bonusu-nakite-cevirme",
+    // House style (1080x1080, sharp): a coin ring split along the diagonal,
+    // the two halves drifting apart — the hedge that never closes.
+    coverImage: "/blog/bonus-vurdurma-bonus-arbitraji-bonusu-nakite-cevirme-cover.png",
+    lang: "tr",
+    title:
+      "Bonus Vurdurma ve Bonus Arbitrajı: Forex Bonusunu Nakite Çevirmenin Gerçek Yolları (2026)",
+    excerpt:
+      "Bonus vurdurma, iki hesap arası hedge, bonus arbitrajı… Forumlarda anlatılan yöntemler neden hesap kapatmayla bitiyor ve bonusu kurallara uygun şekilde nakde çevirmenin hesabı nasıl yapılır? Rakamlarla.",
+    publishedAt: "2026-09-15",
+    readingMinutes: 15,
+    sections: [
+      {
+        paragraphs: [
+          "Telegram gruplarında, forumlarda, YouTube yorumlarında dönüp dolaşan bir cümle var: “Bonusu vurdurdum, çektim.” Arkasından genellikle bir ekran görüntüsü gelir, sonra da “yöntemi DM'den anlatıyorum” mesajı. Bonus vurdurma, bonus arbitrajı, bonusu nakite çevirme — isimler değişiyor ama hayal hep aynı: brokerın verdiği bonusu risk almadan cebe indirmek.",
+          "Baştan dürüst olalım: bu yazıda size gizli bir yöntem satmayacağız. Çünkü brokerın şart metnine takılmadan işleyen bir “bedava bonus” formülü yok — olsaydı o grupta anlatılmazdı, sessizce kullanılırdı. Ama bonusu gerçekten nakde çevirmenin, üstelik hesabınızı kapattırmadan, hesaplanabilir yolları var.",
+          "Önce forumlarda anlatılan dört yöntemi açacağız ve her birinin nerede çöktüğünü rakamlarla göstereceğiz. Sonra işin kullanılabilir tarafına geçeceğiz: bir bonusun size para kazandırıp kazandırmayacağını tek bir hesapla nasıl anlayacağınızı ve bonusa hiç ihtiyaç duymadan aynı parayı nereden alabileceğinizi.",
+        ],
+      },
+      {
+        heading: "Bonus vurdurma, bonus arbitrajı, nakite çevirme: kim neyi kastediyor?",
+        paragraphs: [
+          "Bu üç terim çoğu zaman birbirinin yerine kullanılıyor ama aslında farklı şeyleri anlatıyor. Kafamız karışmasın diye önce isimleri netleştirelim:",
+        ],
+        list: [
+          "Bonus vurdurma: Bonuslu bir hesapta yüksek riskli işlemlerle ya da hacim şartını hızla doldurarak bonusu kâra dönüştürüp çekmeye çalışmak. Genelde “ya hesap uçar ya katlanır” mantığıyla yapılır.",
+          "Bonus arbitrajı: İki hesap ya da iki broker arasında birbirine zıt pozisyonlar açarak piyasa riskini sıfırlamaya çalışmak; kaybeden tarafın zararını bonusa, kazanan tarafın kârını cebe yazmak. İngilizcede “bonus abuse” başlığı altında geçen yöntemlerin en bilineni.",
+          "Bonusu nakite çevirme: Genel hedefin adı. Hem yukarıdaki kural dışı yöntemleri hem de şartları gerçekten tamamlayıp bonusu çekilebilir bakiyeye geçirmeyi kapsıyor. Bu yazının ikinci yarısı tamamen bu meşru tarafla ilgili.",
+        ],
+      },
+      {
+        heading: "Önce temel: bonus neden doğrudan çekilemiyor?",
+        paragraphs: [
+          "Bir brokerın bonus bütçesi pazarlama bütçesidir ve karşılığında beklediği şey işlem hacmidir; çünkü brokerın geliri sizin ödediğiniz spread ve komisyondan gelir. Bu yüzden trade bonusu (yatırım bonusu, kredi bonusu) hesabınıza para olarak değil, belirli bir hacim tamamlanana kadar çekilemeyen koşullu bir marjin kredisi olarak eklenir.",
+          "Terminalde 1.500 dolar görmeniz, 1.500 doların sizin olduğu anlamına gelmez. 1.000'i sizin, 500'ü brokerın “şu kadar işlem yaparsan senin olur” sözü. Bu sözün fiyatı hacim şartında yazılıdır — mekanizmanın ayrıntılı matematiğini “Bonusunuzu Neden Çekemiyorsunuz? Hacim Şartının Matematiği” yazımızda adım adım anlattık.",
+          "Bonus vurdurma yöntemlerinin hepsi aslında aynı şeyi dener: bu sözü, karşılığında istenen hacmi vermeden bozdurmak. Broker da şart metnini tam olarak buna karşı yazar. Şimdi bu yöntemlere tek tek bakalım.",
+        ],
+      },
+      {
+        heading: "Yöntem 1: İki hesap arasında hedge — “bonus arbitrajı”nın kâğıt üzerindeki hali",
+        paragraphs: [
+          "Forumlarda anlatılan versiyon kabaca şöyle: İki farklı brokerda iki hesap açıyorsunuz, ikisine de 1.000 dolar yatırıp %50 bonus alıyorsunuz (bu oran örnek için seçildi). Her iki terminalde de 1.500 dolar görünüyor. Birinde 1 lot EUR/USD alış, diğerinde 1 lot satış açıyorsunuz. Piyasa hangi yöne giderse gitsin bir hesap kazanıyor, diğeri kaybediyor.",
+          "Teorideki hesap: 1 lotta 1 pip 10 dolar. Fiyat A hesabına karşı 140 pip giderse A'nın öz sermayesi 1.500 − 1.400 = 100 dolara düşer ve stop out olur. Siz 1.000 dolarınızı kaybetmiş, bonusun 400 dolarını da “brokera yedirmiş” olursunuz. B hesabı ise +1.400 dolar kârdadır. Net sonuç: +400 dolar. Kulağa hoş geliyor, değil mi?",
+          "Kâğıt üzerindeki bu tablonun dört ayrı yerden çöktüğünü görelim.",
+        ],
+        list: [
+          "Bonus zararı taşımıyor: Birçok kampanyanın şart metninde, öz sermaye bonus tutarına indiğinde bonusun hesaptan silineceği yazar. Yani A hesabı 140 pipte değil, sizin 1.000 dolarınız bittiğinde — 100 pipte — kapanır. O anda B'nin kârı da tam 1.000 dolardır. Net: sıfır. Bonus zararın hiçbir kısmını üstlenmedi.",
+          "Maliyetler iki kez ödeniyor: İki pozisyonun spreadini ayrı ayrı ödersiniz. 1,8 pip spread varsayımıyla lot başına yaklaşık 18 dolar, iki lot için 36 dolar. Pozisyon gece taşınırsa iki taraftan swap da işler. Net sıfırdan maliyetleri düşünce sonuç eksiye döner.",
+          "Kazanan taraftaki kâr serbest değil: B hesabında da bonus var ve o bonusun hacim şartı tamamlanmadı. Çekim talebi çoğu brokerda bonusu iptal eder; bazı şart metinleri bonuslu hesapta elde edilen kârı da şart tamamlanana kadar kilitli sayar. 1 lot, 150 lotluk bir şartın yanında hiçbir şeydir.",
+          "Kayma ve fiyat farkı: İki broker aynı fiyatı yayınlamaz. Haber anında A hesabı stop out seviyesinin altında kapanabilirken B'deki kâr aynı pipi göremeyebilir. Hedge'in “risksiz” olduğu varsayımı tam da en hızlı hareketlerde bozulur.",
+        ],
+      },
+      {
+        heading: "Hedge ile ilgili en önemli satır: şart metni",
+        paragraphs: [
+          "Matematik bir şekilde tutsa bile ikinci duvar sözleşmedir. Bonus veren brokerların şart metinlerinin neredeyse tamamında aynı hesap içinde, bağlantılı hesaplar arasında ya da başka bir brokerla zıt pozisyon açarak bonustan yararlanmanın kötüye kullanım sayılacağı yazar ve bu durumda bonusu, bonustan doğan kârı iptal etme ve hesabı kapatma yetkisi brokera bırakılır.",
+          "“Ama karşı brokerdaki hesabımı göremez ki” itirazı akla gelebilir. Doğru, göremez. Görmesi de gerekmez: sizin tarafınızdaki desen tek başına yeterince konuşur. Bonus yüklendikten hemen sonra hesap büyüklüğüne göre aşırı yüksek lot, tek yönlü tek işlem, birkaç saat içinde stop out ya da tam tersine hızlı büyük kâr ve hemen ardından çekim talebi — bu, risk ekiplerinin ilk baktığı tablodur. Şart metni çoğu zaman “kötüye kullanım şüphesi” ifadesini kullanır; kanıt değil, şüphe yeterlidir.",
+        ],
+      },
+      {
+        heading: "Yöntem 2: Çoklu hesap ve “akrabanın adına” hesap",
+        paragraphs: [
+          "İkinci popüler yöntem, “hoş geldin bonusu” gibi hesap başına bir kez verilen kampanyaları birden fazla hesapla tekrar tekrar almak. Kendi adınıza ikinci hesap olmuyorsa eşin, kardeşin, arkadaşın kimliğiyle hesap açılıyor.",
+          "Bu yöntemin ömrü genellikle ilk çekim talebine kadar sürer. Brokerlar hesapları yalnızca kimlikle değil; IP adresi, cihaz bilgisi, ev adresi, ödeme kartı ve kripto cüzdanı üzerinden de eşleştirir. Kampanya şartlarında sık görülen “hane, IP adresi ya da cihaz başına bir bonus” maddesi tam olarak bunun içindir. Aynı modemden bağlanan, aynı kartla para yatıran ve aynı saatlerde benzer işlemler açan üç hesap, sistem için üç müşteri değil bir müşteridir.",
+          "Burada bir çizgiyi de net çizmek gerekiyor: Başkasının kimliğiyle ya da onun adına ama sizin paranızla hesap açmak, artık yalnızca bir kampanya kuralı ihlali değildir. Kimlik doğrulama (KYC) süreçleri kara para aklamayla mücadele mevzuatına dayanır; bu süreçte yanlış beyan, hesap kapatmanın ötesinde sonuçlar doğurabilir. Kaldı ki para o hesapta sıkıştığında hukuken sahibi siz değil, kimliği kullanılan kişidir.",
+        ],
+      },
+      {
+        heading: "Yöntem 3: Bonusla “all-in” — hesabı ya uçur ya katla",
+        paragraphs: [
+          "Üçüncü yöntem en eskisi ve en az “yöntem” olanı: Bonusu yükleyip hesabın kaldırabileceği en büyük pozisyonu önemli bir veri öncesinde açmak. Tutarsa hesap katlanır, tutmazsa “zaten bonus parasıydı” denir.",
+          "İki sorun var. Birincisi, kaybedilen para bonus parası değildir: yukarıda gördüğümüz gibi pek çok kampanyada bonus, öz sermaye bonus tutarına indiğinde silinir ve zararı önce sizin paranız öder. İkincisi, kazandığınızda bile hacim şartı yerinde durur. 1.000 dolar yatırıp 300 dolar bonus aldığınız bir hesapta tek işlemle 2.000 dolar kazanmanız, 90 lotluk şartı ortadan kaldırmaz; o hacmi tamamlarken piyasaya ne kadar geri vereceğiniz ise ayrı bir sorudur.",
+          "Kısacası bu bir yöntem değil, kaldıraçlı bir yazı-tura. Beklenen değeri de spread yüzünden sıfırın altındadır. Gruplarda paylaşılan ekran görüntüleri, turayı atıp kazananlardır; kaybedenler ekran görüntüsü paylaşmaz.",
+        ],
+      },
+      {
+        heading: "Yöntem 4: Hacim robotları, gecikme arbitrajı ve “bonus EA”ları",
+        paragraphs: [
+          "Dördüncü grup teknik görünümlü olduğu için daha ikna edici geliyor: hacim şartını kendi kendine dolduran robotlar, brokerın fiyat akışındaki gecikmeden yararlanan “latency arbitrage” yazılımları ve Telegram'da satılan “bonus vurdurma EA”ları.",
+          "Hacim robotunun matematiği değişmez: 90 lotluk şart, robot da açsa 90 lotluk spread demektir. Robot maliyeti ortadan kaldırmaz, sadece hızlandırır. Stratejisi olmayan bir robotun lot biriktirmek için açtığı işlemler, sizin elle açacağınız anlamsız işlemlerle aynı negatif beklenen değeri taşır.",
+          "Gecikme arbitrajı ve tick scalping ise bonus veren brokerların hemen hepsinin şart metninde ayrıca yasaklanır ve işlem sunucusu tarafında en kolay tespit edilen desenlerdendir: saniyelerle ölçülen tutma süreleri, fiyat güncellemesinin hemen öncesinde açılan pozisyonlar. Sonuç genellikle işlemlerin geçersiz sayılması ve o işlemlerden doğan kârın silinmesidir.",
+          "“Bonus EA”larına gelince: Sattığı robot gerçekten risksiz para basıyor olsaydı, satıcı onu size 50 dolara satmak yerine kendi hesabında çalıştırırdı. Bu ürünlerin önemli kısmı ya hesabı haber anında riske atan kılık değiştirmiş martingale sistemleri ya da doğrudan dolandırıcılıktır.",
+        ],
+      },
+      {
+        heading: "Yakalanınca tam olarak ne oluyor?",
+        paragraphs: [
+          "Şart metinleri brokerdan brokera değişse de kötüye kullanım tespitinde uygulanan yaptırımlar büyük ölçüde aynı listeden seçilir:",
+        ],
+        list: [
+          "Bonusun hesaptan silinmesi.",
+          "Bonuslu dönemde elde edilen kârın kısmen ya da tamamen iptali.",
+          "Şüpheli görülen işlemlerin geçersiz sayılması ve bakiyenin buna göre düzeltilmesi.",
+          "Hesabın kapatılması; genellikle yalnızca yatırılan anaparanın, yatırıldığı yönteme iadesi.",
+          "Aynı kişiye ve bağlantılı hesaplara gelecekteki kampanyaların kapatılması.",
+        ],
+      },
+      {
+        heading: "Şikayet etsem hakkımı alamaz mıyım?",
+        paragraphs: [
+          "Çoğu zaman hayır — ve bu, bilinmesi gereken en can sıkıcı gerçek. Bonusu kabul ettiğiniz anda kampanya şartlarını da kabul etmiş olursunuz. Broker bir şikayet sürecinde elinde imzalı şart metni ve işlem geçmişiyle karşınıza çıkar; siz ise “yöntemi Telegram'dan öğrenmiştim” savunmasıyla.",
+          "Şunu da ayırmak gerekiyor: Gerçekten haksız yere bonusu ya da kârı silinen yatırımcılar var ve bu durumda şikayet süreci anlamlıdır. Ama o şikayetin güçlü olması, hesabınızın bonus şartlarına uygun kullanıldığını gösterebilmenize bağlıdır. Kural dışı bir yöntemi denediyseniz, pozisyonunuz en baştan zayıftır.",
+        ],
+      },
+      {
+        heading: "Asıl soru: Bonusu nakite çevirmenin meşru yolları",
+        paragraphs: [
+          "İyi haber şu: Bonus vurdurmaya çalışmadan da bonustan ya da bonusun yerine geçen araçlardan gerçek para çıkarmak mümkün. Bunun için gereken şey bir yöntem değil, bir hesap makinesi ve biraz dürüstlük — özellikle ne kadar işlem yaptığınız konusunda kendinize karşı.",
+          "Aşağıdaki beş yolun ortak noktası, hiçbirinin brokerla kavga etmenizi gerektirmemesi. Hepsi brokerın şart metninin içinden geçer.",
+        ],
+      },
+      {
+        heading: "Yol 1: Hacim şartını hesapla, sonra karar ver",
+        paragraphs: [
+          "Bir trade bonusunun size para kazandırıp kazandırmayacağı tek bir soruya bağlıdır: Şartı doldurmak için, zaten yapacağınız işlemlerin dışında kaç lot açmanız gerekiyor? Formül şu:",
+          "Bonusun net değeri = Bonus tutarı − (Eksik lot × Lot başına işlem maliyeti)",
+          "Gerçek bir kampanya üzerinden gidelim. LiteFinance'in Non-Stop Bonus kampanyasında (Classic hesap) şart, bonus tutarının 0,30 katı kadar lot ve en az 50 işlem; bonusun geçerlilik süresi 3 ay. 1.000 dolarlık yatırım 300 dolar bonus üretir ve bu bonus için 90 lot gerekir. Lot başına maliyeti 1,8 pip spread varsayımıyla yaklaşık 18 dolar alalım.",
+        ],
+        list: [
+          "Profil A — ayda 30 lot işlem yapan yatırımcı: 3 ayda zaten 90 lot yapıyor. Eksik lot: 0. Bonusun net değeri: +300 dolar. Davranışını hiç değiştirmeden bonusu bakiyeye geçiriyor.",
+          "Profil B — ayda 10 lot işlem yapan yatırımcı: 3 ayda 30 lot yapıyor. Eksik lot: 60. Maliyeti: 60 × 18 = 1.080 dolar. Bonusun net değeri: 300 − 1.080 = −780 dolar.",
+          "Başa baş noktası: 300 ÷ 18 ≈ 16,7 lot. Bu kampanyada eksik hacminiz 16-17 lotu aşıyorsa, bonus size para kazandırmaz; para kaybettirir.",
+        ],
+      },
+      {
+        heading: "Hacim şartında kimse size söylemeyen kısım",
+        paragraphs: [
+          "Profil B'nin kaybı aslında 780 dolardan büyük olabilir. Çünkü eksik 60 lotu açarken stratejinizin sinyal vermediği işlemlere de girersiniz; hedef artık iyi işlem yapmak değil, lot biriktirmektir. Bu işlemlerin spread dışında piyasaya bıraktığı zarar yukarıdaki hesapta bile yok.",
+          "O yüzden kural basit: Kendi işlem geçmişinize bakın, son üç ayda kaç lot yaptığınızı bulun ve kampanyanın şartıyla karşılaştırın. Tahmin değil, geçmiş. “Bonus alırsam daha çok işlem yaparım” düşüncesi, bonusun size maliyet olacağının en güvenilir işaretidir.",
+        ],
+      },
+      {
+        heading: "Yol 2: Hacim şartı olmayan teminat bonusu",
+        paragraphs: [
+          "Bonusu nakde çevirmenin en sessiz yolu, zaten nakde çevrilmesi gerekmeyen bir bonus seçmektir. Teminat bonusu bakiyenize değil teminatınıza eklenir, hacim şartı taşımaz ve kârınız kendi bakiyenizde birikir.",
+          "FXPARTNER üzerinden açılan Lite Finance hesaplarında tanımlanan %20 teminat bonusu bu türden. 1.000 dolarlık bir hesapta 200 dolar teminat bonusu, 0,5 lotluk bir EUR/USD pozisyonunda stop out'a olan mesafeyi 180 pipten 220 pipe çıkarır. Yani bu bonusun kendisi çekilmez; çekilen şey, bonusun ayakta tuttuğu pozisyonun kârıdır.",
+          "Tek şartı sizin koymanız gereken bir şart: Ekstra teminatı daha büyük lot açmak için kullanmamak. Pozisyonu bonus oranında büyüttüğünüzde o 40 piplik nefes payı sıfırlanır. Ayrıntılı hesap “Teminat Bonusu Nedir? Trade Bonusundan Farkı — Rakamlarla” yazımızda. Çekim yaptığınızda teminat bonusunun çekilen tutarla orantılı olarak düşüldüğünü de baştan bilin.",
+        ],
+      },
+      {
+        heading: "Yol 3: Nakit iade — zaten nakit olan “bonus”",
+        paragraphs: [
+          "Bonus arayanların çoğunun aslında aradığı şey nakit iadedir (cashback), sadece adını bilmezler. Nakit iade, yaptığınız her işlemin maliyetinin bir kısmını size geri öder: brokerın iş ortağına ödediği payın bir bölümü, işlemi fiilen yapan kişiye döner. Ödediğiniz spread değişmez, kampanyaya katılmak için stratejinizi de değiştirmezsiniz.",
+          "Trade bonusundan farkı tam da bonus vurdurmaya çalışanların aradığı şey: Beklenmesi gereken bir hacim hedefi yok, her lotta ödeniyor ve kazandığınız işlemde de kaybettiğiniz işlemde de geliyor. XM nakit iadesi kampanyasında iade gün sonunda hesaba dönüyor. Oran hesap türüne ve enstrümana göre değişiyor; örnek olarak lot başına 3 dolarlık bir iade, ayda 20 lot işlem yapan birine yılda 720 dolar eder.",
+          "Tek uyarı, bonusla aynı: İade kazanmak için işlem açmayın. Nakit iade yapacağınız işlemlerin maliyetini düşürmek içindir, yapmayacağınız işlemleri yapmak için değil. Kendi oranınızı sitemizdeki nakit iadesi sayfasından öğrenebilirsiniz.",
+        ],
+      },
+      {
+        heading: "Yol 4: Çekim sırasını ve zamanlamayı doğru yönetin",
+        paragraphs: [
+          "Bonusunu şartları tamamlayarak hak eden pek çok yatırımcı, son adımda sıralamayı karıştırdığı için kaybediyor. Şart metinlerindeki çekim maddeleri, bonusu nakde çevirme sürecinin en az okunan ama en çok para kaybettiren kısmıdır.",
+        ],
+        list: [
+          "Hacmi tamamlamadan çekim yapmayın: Trade bonuslarında çekim talebi çoğu brokerda aktif bonusu iptal eder. LiteFinance'in Non-Stop Bonus şartlarında ise çekilen tutarla orantılı olarak bonus azaltılır. İki durumda da yarıda yapılan çekim, o ana kadar biriktirdiğiniz hacmi değersizleştirebilir.",
+          "Süreyi takvime yazın: Şart süresi (Non-Stop Bonus'ta 3 ay) dolduğunda tamamlanmamış bonus silinir. Hacim takibini sona bırakmayın; ayın sonunda eksik lotu kapatmak için anlamsız işlem açmaya itilirsiniz.",
+          "Bonus bakiyeye geçtikten sonra teyit edin: Şart tamamlandığında bonusun gerçekten çekilebilir bakiyeye aktarıldığını kabinden kontrol edin, sonra çekim talebi verin.",
+          "Kimlik doğrulamasını baştan bitirin: Çekim anında KYC bekleyen bir hesap günlerce bekler. Doğrulamayı ilk yatırımdan önce tamamlamak, çekim sürecindeki en büyük gecikmeyi ortadan kaldırır.",
+          "Aynı yöntem kuralını unutmayın: Çoğu broker parayı yatırıldığı yönteme geri gönderir. Hızlı çekmek istediğiniz yöntemle yatırım yapın.",
+        ],
+      },
+      {
+        heading: "Yol 5: Depozitosuz bonuslar — küçük ama gerçek",
+        paragraphs: [
+          "Hiç para yatırmadan verilen depozitosuz (no-deposit) bonuslar, bonusu nakde çevirmenin en masum yolu gibi görünür, çünkü kaybedecek paranız yoktur. Kısmen doğru. Ama bu bonusların neredeyse hepsinde çekilebilir kâra bir üst sınır, bir hacim şartı ve çekimden önce çoğu zaman küçük bir para yatırma koşulu bulunur.",
+          "Doğru beklenti şu: Depozitosuz bonus, gerçek emir iletimini ve brokerın çekim sürecini risksiz denemek için iyi bir araçtır; gelir kaynağı değildir. Kârın üst sınırı genellikle bonusun kendisi kadar küçüktür. Asıl değeri, büyük bir yatırım yapmadan önce brokerı tanımanızı sağlamasıdır. Bu tür kampanyaların varlığı ve koşulları dönemden döneme değişir; güncel koşulu brokerın resmi sayfasından okuyun.",
+        ],
+      },
+      {
+        heading: "Bir bonusu kabul etmeden önce 7 soruluk kontrol listesi",
+        paragraphs: [
+          "Kampanya sayfasındaki büyük yüzdeye değil, şart metnindeki şu yedi satıra bakın. Hepsinin cevabını bulamadıysanız bonusu henüz kabul etmeyin:",
+        ],
+        list: [
+          "Bonus bakiyeye mi, teminata mı ekleniyor? Hacim şartı var mı?",
+          "Şart kaç lot? Formülü bonus tutarıyla çarparak lot sayısına çevirin.",
+          "Son üç ayda gerçekte kaç lot işlem yaptım? Eksik lotun maliyeti bonustan büyük mü?",
+          "Şartın süresi ne kadar ve bu sürede normal temponla tamamlayabilir miyim?",
+          "Çekim talebi bonusu iptal mi ediyor, orantılı olarak mı azaltıyor?",
+          "Bonuslu hesapta elde edilen kâr şart tamamlanmadan çekilebiliyor mu?",
+          "Hangi işlem türleri yasak? Hedge, scalping, haber işlemleri, EA kullanımı şart metninde nasıl geçiyor?",
+        ],
+      },
+      {
+        heading: "Telegram'da “bonus vurdurma grubu” görürseniz",
+        paragraphs: [
+          "Bonus vurdurma aramasının en tehlikeli sonuçları brokerlarda değil, bu aramanın sizi yönlendirdiği gruplarda çıkar. Aşağıdaki işaretlerden birini gördüğünüz anda durun:",
+        ],
+        list: [
+          "Ücretli “VIP bonus yöntemi” satışı: Çalışan bir yöntem satılmaz, kullanılır.",
+          "“Hesabını ben yöneteyim, kârı yarı yarıya bölüşelim” teklifi: Şifrenizi paylaştığınız anda hesabınızın ve paranızın kontrolü sizde değildir; üstelik bu, neredeyse her brokerın şartlarına göre ayrıca bir ihlaldir.",
+          "Belirli bir linkten hesap açma zorunluluğu ve ardından “bonus için önce şu cüzdana yatır” talebi.",
+          "Sadece kazanan ekran görüntüleri, hiç doğrulanabilir hesap geçmişi yok.",
+          "“Risksiz”, “garantili”, “%100 çalışıyor” ifadeleri. Kaldıraçlı piyasada bu kelimelerin karşılığı yoktur.",
+        ],
+      },
+      {
+        heading: "Özet",
+        paragraphs: [
+          "Bonus vurdurma ve bonus arbitrajı yöntemlerinin hepsi aynı duvara çarpar: Ya matematik tutmaz — çünkü bonus zararı taşımaz ve maliyetler iki kez ödenir — ya da şart metni tutmaz, çünkü broker bu yöntemleri tam olarak adıyla yasaklar ve kararı “şüphe” üzerinden verme yetkisini elinde tutar. En iyi ihtimalle bonus silinir; en kötü ihtimalle hesap kapanır ve kârın tamamı gider.",
+          "Bonusu gerçekten nakde çevirmek istiyorsanız yol, şartı delmekten değil şartı hesaplamaktan geçer. Zaten yapacağınız hacim şartı karşılıyorsa trade bonusu bedavadır; karşılamıyorsa bir maliyettir. Hacim kovalamak istemiyorsanız teminat bonusu ve nakit iade, bonusun vaat ettiği şeyi hacim şartı olmadan verir. Ve her durumda broker seçimi bonusla değil; regülasyon, maliyet, platform ve para çekme üzerinden yapılır.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım ya da hukuki tavsiye değildir. Kaldıraçlı işlemler yüksek risk içerir ve yatırdığınız paranın tamamını kaybedebilirsiniz. Kampanya koşulları değişebilir; bir bonusu kabul etmeden önce güncel şartları brokerın resmi sitesinden okuyun.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Bonus vurdurma nedir?",
+        a: "Bonus vurdurma, forex brokerlarının verdiği bonusu yüksek riskli işlemlerle, hacim şartını hızla doldurarak ya da hesaplar arası hedge gibi yöntemlerle kâra çevirip çekmeye çalışmanın halk arasındaki adıdır. Bu yöntemlerin büyük kısmı brokerların kampanya şartlarında kötüye kullanım olarak tanımlanır ve bonusun, bonustan doğan kârın iptali ya da hesabın kapatılmasıyla sonuçlanabilir.",
+      },
+      {
+        q: "Bonus arbitrajı yasal mı?",
+        a: "Bonus arbitrajı çoğu durumda bir suç tanımından çok sözleşme meselesidir: bonusu kabul ettiğinizde kampanya şartlarını da kabul etmiş olursunuz ve bu şartlar hesaplar ya da brokerlar arası hedge ile bonustan yararlanmayı genellikle açıkça yasaklar. Başkasının kimliğiyle hesap açmak ise kural ihlalinin ötesine geçer ve hukuki sorumluluk doğurabilir. Bu bir hukuki tavsiye değildir.",
+      },
+      {
+        q: "İki broker arasında hedge yaparak bonus kazanılır mı?",
+        a: "Kâğıt üzerinde görünen kâr genellikle gerçekleşmez. Birçok kampanyada öz sermaye bonus tutarına indiğinde bonus silinir, yani kaybeden hesaptaki zararı bonus değil sizin paranız öder; kazanan hesaptaki kâr da aynı büyüklükte kalır. Üstüne iki taraflı spread ve swap maliyeti eklenince net sonuç eksiye döner. Ayrıca kazanan taraftaki bonusun hacim şartı tamamlanmadığı için kâr çoğu zaman serbestçe çekilemez.",
+      },
+      {
+        q: "Forex bonusu çekilebilir mi?",
+        a: "Trade bonusu (yatırım bonusu) doğrudan çekilemez; kampanyanın hacim şartı tamamlandığında bonus çekilebilir bakiyeye geçer. Örneğin LiteFinance'in Non-Stop Bonus kampanyasında 300 dolarlık bonus için 90 lot ve en az 50 işlem gerekir. Teminat bonusu ise kendisi çekilmez ama hacim şartı taşımaz ve bu hesaptaki kârınız çekilebilir.",
+      },
+      {
+        q: "Bonus hacim şartı nasıl hesaplanır?",
+        a: "Kampanyanın formülündeki çarpanı bonus tutarıyla çarparak gereken lot sayısını bulursunuz. Sonra son üç aydaki gerçek işlem hacminizle karşılaştırın. Bonusun net değeri = bonus tutarı − (eksik lot × lot başına işlem maliyeti). Lot başına yaklaşık 18 dolar maliyetle 300 dolarlık bir bonusta başa baş noktası yaklaşık 16,7 eksik lottur; bunun üzerinde bonus size para kaybettirir.",
+      },
+      {
+        q: "Bonuslu hesaptan para çekersem ne olur?",
+        a: "Brokera ve kampanyaya göre değişir. Trade bonuslarında çekim talebi çoğu brokerda aktif bonusu iptal eder ve bazı kampanyalarda bonustan doğan kâr da kaybedilir. Bazı kampanyalarda ise bonus çekilen tutarla orantılı olarak azaltılır; teminat bonuslarında da genellikle bu uygulanır. Çekimden önce şart metnindeki çekim maddesini okuyun.",
+      },
+      {
+        q: "Bonus yerine ne tercih edilmeli?",
+        a: "Hacim şartını zaten yapacağınız işlemlerle karşılayamıyorsanız, hacim şartı olmayan araçlar daha mantıklıdır: teminat bonusu hesabın dalgalanmaya dayanma payını artırır, nakit iade (cashback) ise her işlemin maliyetinin bir kısmını kazanç ya da zarar fark etmeksizin geri öder. İkisi de sizi fazladan işlem açmaya zorlamaz.",
+      },
+    ],
+  },
+  {
     // The withdrawal-speed survey as a stand-alone post, so the ranking has
     // an address of its own for search and for sharing rather than living
     // only as a section of /brokerlar.
