@@ -41,6 +41,61 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-15-1500",
+    title: "FXPARTNER Piyasa Özeti | 15.09.2026 Salı Öğleden Sonra Güncellemesi",
+    excerpt:
+      "ABD 10 yıllık tahvil getirisi Salı günü %5,02'ye çıkarak 2023'teki zirvesini aştı ve 2007'den bu yana en yüksek seviyesine ulaştı. CME FedWatch verilerine göre Fed'in yarın açıklanacak kararında 25 baz puanlık faiz artışı ihtimali, sabah saatlerindeki %86 seviyesinden %93'e yükseldi. Yükselen getiriler ve enerji fiyatlarının baskısıyla Wall Street vadeli işlemleri geriledi: Dow Jones vadelileri %0,5, S&P 500 vadelileri %0,4, Nasdaq 100 vadelileri ise %0,3 değer kaybetti. Borsa İstanbul'da BIST 100 endeksi de Salı gününe %0,11 düşüşle 14.219,98 puandan başladı; bilişim endeksi %2,22 ile en sert değer kaybeden endeks oldu.",
+    publishedAt: "2026-09-15",
+    readingMinutes: 3,
+    intro:
+      "Salı öğleden sonrası küresel piyasaların gündeminde, ABD 10 yıllık tahvil getirisinin 2007'den bu yana en yüksek seviyesine çıkması, Fed'in yarınki faiz kararına ilişkin artırım ihtimalinin daha da yükselmesi ve bu baskıyla Wall Street vadeli işlemleri ile Borsa İstanbul'un güne düşüşle başlaması öne çıktı. **ABD 10 yıllık tahvil getirisi**, Salı günü gün içinde **%5,02**'ye kadar yükselerek **2023'teki zirvesini** aştı ve **2007'den bu yana en yüksek seviyesine** ulaştı. **CME FedWatch** verilerine göre, **Fed**'in yarın açıklanacak kararında **25 baz puanlık** bir faiz artışı ihtimali, sabah saatlerindeki **%86** seviyesinden **%93**'e yükseldi. Yükselen tahvil getirileri ve enerji fiyatlarının baskısıyla **Wall Street** vadeli işlemleri geriledi: **Dow Jones** vadelileri **%0,5**, **S&P 500** vadelileri **%0,4**, **Nasdaq 100** vadelileri ise **%0,3** değer kaybetti. **Borsa İstanbul**'da **BIST 100** endeksi de Salı gününe **%0,11** düşüşle **14.219,98** puandan başladı; **bilişim endeksi %2,22** ile en sert değer kaybeden endeks oldu.",
+    news: [
+      {
+        icon: "🏦",
+        heading: "Fed Faiz Artırım İhtimali CME FedWatch'ta %93'e Yükseldi",
+        body: "**CME FedWatch** verilerine göre, **Fed**'in yarın açıklanacak kararında **25 baz puanlık** bir faiz artışı ihtimali, sabah saatlerindeki **%86** seviyesinden **%93**'e yükseldi; bu, **2023**'ten bu yana ilk faiz artışı anlamına gelecek.",
+      },
+      {
+        icon: "📈",
+        heading: "ABD 10 Yıllık Tahvil Getirisi 2007'den Bu Yana En Yüksek Seviyeye Çıktı",
+        body: "**ABD 10 yıllık tahvil getirisi**, Salı günü gün içinde **4 baz puan** yükselerek **%5,02**'ye çıktı; bu seviye, **2023**'teki zirvesini aşarak **2007**'den bu yana görülen en yüksek seviyeyi işaret ediyor.",
+      },
+      {
+        icon: "🇺🇸",
+        heading: "Wall Street Vadeli İşlemleri Fed Kararı Öncesi Geriliyor",
+        body: "Yükselen tahvil getirileri ve petrol fiyatlarının baskısıyla **Wall Street** vadeli işlemleri Salı günü geriledi: **Dow Jones** vadelileri **266 puan (%0,5)**, **S&P 500** vadelileri **28 puan (%0,4)**, **Nasdaq 100** vadelileri ise **90 puan (%0,3)** değer kaybetti.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "BIST 100 Salı Gününe %0,11 Düşüşle Başladı",
+        body: "**BIST 100** endeksi, küresel risk iştahındaki bozulmanın etkisiyle Salı gününe **%0,11** düşüşle **14.219,98** puandan başladı. Sektörler arasında **bilişim endeksi %2,22** ile en sert değer kaybeden endeks olurken, **bankacılık endeksi %0,11**, **holding endeksi %0,06** yükseldi.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+      {
+        time: "17 Eylül 2026, 14.00 (TSİ)",
+        icon: "🇬🇧",
+        title: "Bank of England (BoE) Faiz Kararı",
+        note: "İngiltere saatiyle 12.00'de (TSİ 14.00) açıklanacak kararda faizin %3,75'te sabit tutulması bekleniyor; piyasa fiyatlamasına göre yaklaşık üçte bir olasılıkla 25 baz puanlık bir artış öngörülüyor.",
+      },
+      {
+        time: "18 Eylül 2026 (TSİ öğleden sonra)",
+        icon: "🇯🇵",
+        title: "Bank of Japan (BoJ) Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak kararda, Bloomberg'in anketine katılan 52 BoJ gözlemcisinin tamamı bir faiz artışı öngörüyor.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-15-0900",
     title: "FXPARTNER Piyasa Özeti | 15.09.2026 Salı Sabah Güncellemesi",
     excerpt:
