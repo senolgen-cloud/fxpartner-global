@@ -41,6 +41,61 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-15-0900",
+    title: "FXPARTNER Piyasa Özeti | 15.09.2026 Salı Sabah Güncellemesi",
+    excerpt:
+      "Fed'in 16 Eylül'de sonuçlanacak iki günlük FOMC toplantısı Salı günü başlarken, CME FedWatch verilerine göre 25 baz puanlık faiz artışı ihtimali %86'ya yükseldi. Ons altın (XAU/USD), altı haftanın en düşük seviyelerine yaklaştıktan sonra Salı sabahı Asya seansında toparlanarak yeniden 4.300 dolar sınırının üzerine, yaklaşık 4.298-4.304 dolar bandına çıktı. Hürmüz Boğazı'ndaki arz kesintisinin ve Suudi Arabistan'ın Doğu-Batı Petrol Boru Hattı durdurmasının sürmesiyle ham petrol yükselişini sürdürdü: WTI 102,81 dolara, Brent ise 107,70 dolara çıktı. Dolar/TL ise Pazartesi akşamki 48,63 TL seviyesinin ardından Salı sabahı da 48,6 TL bandında yatay seyrediyor.",
+    publishedAt: "2026-09-15",
+    readingMinutes: 3,
+    intro:
+      "Salı sabahı küresel piyasaların gündeminde, **Fed**'in **16 Eylül**'de sonuçlanacak iki günlük **FOMC** toplantısının başlaması, ons altının altı haftanın en düşük seviyelerine yaklaştıktan sonra toparlanması ve Hürmüz kaynaklı arz endişeleriyle petrolün yükselişini sürdürmesi öne çıktı. **Fed**'in **16 Eylül**'deki kararla sonuçlanacak iki günlük **FOMC** toplantısı Salı günü başladı; **CME FedWatch** verilerine göre **25 baz puanlık** bir faiz artışı ihtimali **%86**'ya yükseldi. Ons altın (**XAU/USD**), Pazartesi günü **Ağustos ayından bu yana en düşük seviyesi** olan yaklaşık **4.285 dolara** gerilemesinin ve altı haftanın en düşük seviyelerine yaklaşmasının ardından Salı sabahı Asya seansında toparlanarak yeniden **4.300 dolar** sınırının üzerine, yaklaşık **4.298-4.304 dolar** bandına çıktı. Enerji tarafında, **Hürmüz Boğazı**'ndaki arz kesintisinin ve **Suudi Arabistan**'ın **Doğu-Batı Petrol Boru Hattı**'nı durdurmasının sürmesiyle ham petrol Salı günü yükselişini sürdürdü: **WTI** **102,81 dolara**, **Brent** ise **107,70 dolara** çıktı. **Dolar/TL** ise Pazartesi akşamki **48,63 TL** seviyesinin ardından Salı sabahı da **48,6 TL** bandında yatay seyrini sürdürüyor.",
+    news: [
+      {
+        icon: "🏦",
+        heading: "Fed'in İki Günlük Toplantısı Bugün Başladı, Faiz Artırım İhtimali %86'ya Yükseldi",
+        body: "**Fed**'in **16 Eylül**'deki kararla sonuçlanacak iki günlük **FOMC** toplantısı Salı günü başladı. **CME FedWatch** verilerine göre **25 baz puanlık** bir faiz artışı ihtimali, veri öncesindeki seviyelerden yükselerek **%86**'ya çıktı.",
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın Toparlanarak Yeniden 4.300 Doların Üzerine Çıktı",
+        body: "Pazartesi günü **Ağustos ayından bu yana en düşük seviyesi** olan yaklaşık **4.285 dolara** gerileyen ve altı haftanın en düşük seviyelerine yaklaşan ons altın (**XAU/USD**), Salı sabahı Asya seansında toparlanarak yeniden **4.300 dolar** sınırının üzerine, yaklaşık **4.298-4.304 dolar** bandına yükseldi.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol Hürmüz Kesintisiyle Yükselişini Sürdürdü: WTI 102,81, Brent 107,70 Dolar",
+        body: "**Hürmüz Boğazı**'ndaki arz kesintisinin ve **Suudi Arabistan**'ın saldırılar sonrası durdurduğu **Doğu-Batı Petrol Boru Hattı**'ndaki kesintinin sürmesiyle ham petrol Salı günü yükselişini sürdürdü: **WTI** **102,81 dolara**, **Brent** ise **107,70 dolara** çıktı.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar/TL Salı Sabahı 48,6 TL Bandında Yatay Seyrediyor",
+        body: "**Dolar/TL**, Pazartesi akşamki **48,63 TL** seviyesinin ardından Salı sabahı da **48,6 TL** bandında yatay seyrini sürdürüyor.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+      {
+        time: "17 Eylül 2026, 14.00 (TSİ)",
+        icon: "🇬🇧",
+        title: "Bank of England (BoE) Faiz Kararı",
+        note: "İngiltere saatiyle 12.00'de (TSİ 14.00) açıklanacak kararda faizin %3,75'te sabit tutulması bekleniyor; piyasa fiyatlamasına göre yaklaşık üçte bir olasılıkla 25 baz puanlık bir artış öngörülüyor.",
+      },
+      {
+        time: "18 Eylül 2026 (TSİ öğleden sonra)",
+        icon: "🇯🇵",
+        title: "Bank of Japan (BoJ) Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak kararda, Bloomberg'in anketine katılan 52 BoJ gözlemcisinin tamamı bir faiz artışı öngörüyor.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-14-2330",
     title: "FXPARTNER Piyasa Özeti | 14.09.2026 Pazartesi Gün Sonu Güncellemesi",
     excerpt:
