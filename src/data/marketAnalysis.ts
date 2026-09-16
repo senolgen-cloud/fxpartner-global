@@ -41,6 +41,61 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-16-1800",
+    title: "FXPARTNER Piyasa Özeti | 16.09.2026 Çarşamba Öğleden Sonra Güncellemesi",
+    excerpt:
+      "Borsa İstanbul'da BIST 100 endeksi, Pusula Portföy Yönetimi'nin bazı yatırım fonlarında temerrüde düşmesinin tetiklediği satış dalgasıyla gün içinde %6'yı aşan kayıpla mayıs ayından bu yana en düşük seviyesi olan 13.075 puana geriledi; TSİ 16.04'te devreye giren Endekse Bağlı Devre Kesici Sistemi, işlemleri yaklaşık 20 dakika durdurduktan sonra TSİ 16.24'te yeniden başladı. ABD'de ağustos ayı perakende satışları %0,8'lik beklentinin üzerinde %1,2 arttı. Suudi Arabistan'ın hasarlı Doğu-Batı Petrol Boru Hattı'nın 'günler içinde' onarılacağı açıklamasının ardından petrol geriledi: WTI %2,5 düşüşle 103,19 dolara, Brent %1,7 düşüşle 106,93 dolara indi. Wall Street'te S&P 500 %0,25, Dow Jones %0,15, Nasdaq Composite %0,44 yükselirken, Russell 2000 %0,76 değer kaybetti.",
+    publishedAt: "2026-09-16",
+    readingMinutes: 3,
+    intro:
+      "Çarşamba öğleden sonrasında küresel piyasaların gündeminde, **Borsa İstanbul**'da **Pusula Portföy** fonlarındaki temerrüdün tetiklediği satış dalgasıyla **BIST 100**'ün devre kesiciye yakalanması, **ABD**'de **ağustos** ayı perakende satışlarının beklentilerin oldukça üzerinde artması, **Suudi Arabistan**'ın hasarlı boru hattının **\"günler içinde\"** onarılacağı açıklamasıyla petrolün gerilemesi ve **Wall Street**'in bugünkü **Fed** kararı öncesinde hafif yükselişle seyretmesi öne çıktı. **Pusula Portföy Yönetimi**, **KAP**'a yaptığı açıklamada **Pusula Portföy Para Piyasası (TL) Fonu** ile **Pusula Portföy İkinci Para Piyasası (TL) Fonu**'nun katılma payı geri alım ödemelerinde temerrüde düşüldüğünü bildirdi; gelişme, hisseleri **Tera Grup**'a satılması planlanan ancak devri henüz tamamlanmayan şirket üzerinden yayılırken, **Tera Grup** fonların yönetiminden sorumlu olmadığını duyurdu. Haberin ardından **BIST 100** endeksi gün içinde **%6**'yı aşan kayıpla **mayıs** ayından bu yana en düşük seviyesi olan **13.075** puana kadar geriledi; **bankacılık endeksi %4,92**, **sınai endeks** ise **%5,13** değer kaybetti. Borsa İstanbul, kayıpların **%6**'yı aşmasıyla TSİ **16.04**'te **Endekse Bağlı Devre Kesici Sistemi**'ni (EBDK) devreye aldı; işlemler yaklaşık **20 dakika** durduktan sonra TSİ **16.24**'te yeniden başladı. **ABD**'de **ağustos** ayı perakende satışları, **%0,8** beklentisinin oldukça üzerinde **%1,2** artarak **773,9 milyar dolara** yükseldi; çekirdek grup ise **%0,4** beklentiye karşın **%1,4** yükseldi. Enerji tarafında, ABD Enerji Bakanı **Chris Wright**'ın **Suudi Arabistan**'ın **Doğu-Batı Petrol Boru Hattı**'nın **\"günler içinde\"** yeniden devreye alınacağı yönündeki açıklamasının ardından ham petrol geriledi: **WTI** **%2,5** düşüşle **103,19 dolara**, **Brent** ise **%1,7** düşüşle **106,93 dolara** indi. **Wall Street**'te ise **S&P 500** **%0,25**, **Dow Jones** **%0,15**, **Nasdaq Composite** **%0,44** yükselirken, **Russell 2000** **%0,76** geriledi. Piyasaların odağı bugün TSİ **21.00**'de açıklanacak **Fed FOMC** kararında.",
+    news: [
+      {
+        icon: "🇹🇷",
+        heading: "BIST 100 Devre Kesiciye Yakalandı: Pusula Portföy Fonlarında Temerrüt",
+        body: "**Pusula Portföy Yönetimi**, Kamuyu Aydınlatma Platformu'na (**KAP**) yaptığı açıklamada yönettiği **Pusula Portföy Para Piyasası (TL) Fonu** ile **Pusula Portföy İkinci Para Piyasası (TL) Fonu**'nun katılma payı geri alım ödemelerinde temerrüde düşüldüğünü bildirdi; şirket, aracı kurumlar ve likidite yönetimi süreçlerinin sürdüğünü açıkladı. Gelişme, hisseleri **Tera Grup**'a satılması planlanan ancak devri henüz hukuken tamamlanmayan **Pusula Portföy** üzerinden yayılırken, **Tera Grup** yönettiği fonların likidite ve portföy yönetiminden sorumlu olmadığını duyurdu. Haberin ardından **BIST 100** endeksi gün içinde **%6**'yı aşan kayıpla **mayıs** ayından bu yana en düşük seviyesi olan **13.075** puana kadar geriledi; **bankacılık endeksi %4,92**, **sınai endeks** ise **%5,13** değer kaybetti. Borsa İstanbul, kayıpların **%6**'yı aşmasıyla TSİ **16.04**'te **Endekse Bağlı Devre Kesici Sistemi**'ni (EBDK) devreye aldı; Pay Piyasası'ndaki tüm işlemler yaklaşık **20 dakika** durduktan sonra TSİ **16.24**'te yeniden başladı.",
+      },
+      {
+        icon: "🇺🇸",
+        heading: "ABD Ağustos Ayı Perakende Satışları Beklentilerin Oldukça Üzerinde Arttı",
+        body: "**ABD**'de **ağustos** ayı perakende satışları, **%0,8**'lik piyasa beklentisinin oldukça üzerinde **%1,2** artarak **773,9 milyar dolara** yükseldi; bu, son beş ayın en yüksek aylık artışı oldu ve **temmuz** ayındaki (revize edilen) **%0,5**'lik düşüşün ardından geldi. Otomobil, benzin, inşaat malzemeleri ve yemek hizmetlerini dışlayan çekirdek grup ise **%0,4** beklentiye karşın **%1,4** yükseldi. Güçlü veri, bugün TSİ **21.00**'de açıklanacak **Fed FOMC** kararında **25 baz puanlık** bir faiz artışı beklentisini destekledi.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol, Suudi Boru Hattının 'Günler İçinde' Onarılacağı Açıklamasıyla Geriledi",
+        body: "ABD Enerji Bakanı **Chris Wright**'ın, **Suudi Arabistan**'ın hasar gören ve günlük **7 milyon varil** taşıma kapasitesine sahip **Doğu-Batı Petrol Boru Hattı**'nın **\"günler içinde\"** yeniden devreye alınacağı yönündeki açıklamasının ardından ham petrol çarşamba günü geriledi: **WTI** **%2,5** düşüşle varil başına **103,19 dolara**, **Brent** ise **%1,7** düşüşle **106,93 dolara** indi. Bazı bağımsız analistler, uydu görüntülerinde pompa istasyonunda görülen hasarın onarımının haftalar sürebileceğini öngörüyor.",
+      },
+      {
+        icon: "📈",
+        heading: "Wall Street Fed Kararı Öncesi Hafif Yükselişle Seyrediyor",
+        body: "**Wall Street**'te üç ana endeks, bugün TSİ **21.00**'de açıklanacak **Fed FOMC** kararı öncesinde çarşamba günü hafif yükselişle seyretti: **S&P 500** **%0,25**, **Dow Jones** **%0,15**, **Nasdaq Composite** ise **%0,44** değer kazandı. Küçük ölçekli şirketleri temsil eden **Russell 2000** endeksi ise **%0,76** değer kaybetti.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+      {
+        time: "17 Eylül 2026, 14.00 (TSİ)",
+        icon: "🇬🇧",
+        title: "Bank of England (BoE) Faiz Kararı",
+        note: "İngiltere saatiyle 12.00'de (TSİ 14.00) açıklanacak kararda faizin %3,75'te sabit tutulması bekleniyor; piyasa fiyatlamasına göre yaklaşık üçte bir olasılıkla 25 baz puanlık bir artış öngörülüyor.",
+      },
+      {
+        time: "18 Eylül 2026 (TSİ öğleden sonra)",
+        icon: "🇯🇵",
+        title: "Bank of Japan (BoJ) Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak kararda, Bloomberg'in anketine katılan 52 BoJ gözlemcisinin tamamı bir faiz artışı öngörüyor.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-16-1130",
     title: "FXPARTNER Piyasa Özeti | 16.09.2026 Çarşamba Öğle Öncesi Güncellemesi",
     excerpt:
