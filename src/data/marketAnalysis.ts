@@ -41,6 +41,56 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-16-0900",
+    title: "FXPARTNER Piyasa Özeti | 16.09.2026 Çarşamba Sabah Güncellemesi",
+    excerpt:
+      "Borsa İstanbul'da BIST 100 endeksi, küresel risk iştahındaki bozulma ve yükselen petrol fiyatlarının baskısıyla Salı gününü %2,41 düşüşle 13.892,30 puandan tamamladı; işlem hacmi 177,4 milyar TL'ye ulaştı. Wall Street'te Dow Jones %0,63, S&P 500 %0,45, Nasdaq Composite ise %0,78 değer kaybederek günü düşüşle kapattı. ABD 10 yıllık tahvil getirisi beşinci ardışık yükseliş gününde %5,04'e çıkarak 2007'den bu yana en yüksek seviyesine ulaşırken, piyasaların odağı bugün TSİ 21.00'de açıklanacak Fed FOMC kararına çevrildi; CME FedWatch verilerine göre 25 baz puanlık faiz artışı ihtimali %92 civarında seyrediyor.",
+    publishedAt: "2026-09-16",
+    readingMinutes: 3,
+    intro:
+      "Çarşamba sabahı küresel piyasaların gündeminde, **Borsa İstanbul**'un Salı gününü sert kayıpla tamamlaması, **Wall Street**'in **Fed**'in bugünkü kararı öncesinde düşüşle kapanması ve **ABD 10 yıllık tahvil getirisinin** **2007**'den bu yana en yüksek seviyesine çıkması öne çıktı. **BIST 100** endeksi, küresel risk iştahındaki bozulma, Orta Doğu kaynaklı jeopolitik gerginliklerin yükselttiği petrol fiyatları ve tahvil piyasalarındaki satış baskısının etkisiyle Salı gününü **343,53 puan (%2,41)** düşüşle **13.892,30** puandan tamamladı; işlem hacmi **177,4 milyar TL**'ye ulaştı. Sektörler arasında **bankacılık endeksi %4,15**, **holding endeksi %2,29** değer kaybederken, endeks iki günde yaklaşık **%4**'e yakın kayıp verdi. **Wall Street**, yükselen tahvil getirilerinin baskısıyla Salı gününü düşüşle tamamladı: **Dow Jones** endeksi **328,09 puan (%0,63)** düşüşle **52.093,11**, **S&P 500** endeksi **%0,45** düşüşle **7.585,73**, **Nasdaq Composite** endeksi ise **%0,78** düşüşle **25.981,57** puandan kapandı. **ABD 10 yıllık tahvil getirisi**, beşinci ardışık yükseliş gününde **%5,04**'e çıkarak **2007**'den bu yana en yüksek seviyesine ulaştı. Piyasaların odağı artık bugün TSİ **21.00**'de açıklanacak **Fed FOMC** kararında; **CME FedWatch** verilerine göre **25 baz puanlık** bir faiz artışı ihtimali **%92** civarında seyrediyor.",
+    news: [
+      {
+        icon: "🇹🇷",
+        heading: "BIST 100 Salı Gününü %2,41 Düşüşle 13.892 Puandan Tamamladı",
+        body: "**BIST 100** endeksi, küresel risk iştahındaki bozulma, Orta Doğu kaynaklı jeopolitik gerginliklerin yükselttiği petrol fiyatları ve tahvil piyasalarındaki satış baskısının etkisiyle Salı gününü **343,53 puan (%2,41)** düşüşle **13.892,30** puandan tamamladı; işlem hacmi **177,4 milyar TL**'ye ulaştı. Sektörler arasında **bankacılık endeksi %4,15**, **holding endeksi %2,29** değer kaybederken, endeks iki günde yaklaşık **%4**'e yakın kayıp verdi.",
+      },
+      {
+        icon: "🇺🇸",
+        heading: "Wall Street Fed Kararı Öncesi Salı Gününü Düşüşle Kapattı",
+        body: "**Wall Street**, **Fed**'in bugünkü faiz kararı öncesinde yükselen tahvil getirilerinin baskısıyla Salı gününü düşüşle tamamladı: **Dow Jones** endeksi **328,09 puan (%0,63)** düşüşle **52.093,11**, **S&P 500** endeksi **%0,45** düşüşle **7.585,73**, **Nasdaq Composite** endeksi ise **%0,78** düşüşle **25.981,57** puandan kapandı.",
+      },
+      {
+        icon: "📈",
+        heading: "ABD 10 Yıllık Tahvil Getirisi Salı Günü %5,04'e Çıkarak 2007'den Bu Yana Zirveyi Yeniledi",
+        body: "**ABD 10 yıllık tahvil getirisi**, beşinci ardışık yükseliş gününde Salı günü **%5,04**'e çıkarak **2007**'den bu yana en yüksek seviyesine ulaştı. Piyasaların odağı artık bugün TSİ **21.00**'de açıklanacak **Fed FOMC** kararında; **CME FedWatch** verilerine göre **25 baz puanlık** bir faiz artışı ihtimali **%92** civarında seyrediyor.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+      {
+        time: "17 Eylül 2026, 14.00 (TSİ)",
+        icon: "🇬🇧",
+        title: "Bank of England (BoE) Faiz Kararı",
+        note: "İngiltere saatiyle 12.00'de (TSİ 14.00) açıklanacak kararda faizin %3,75'te sabit tutulması bekleniyor; piyasa fiyatlamasına göre yaklaşık üçte bir olasılıkla 25 baz puanlık bir artış öngörülüyor.",
+      },
+      {
+        time: "18 Eylül 2026 (TSİ öğleden sonra)",
+        icon: "🇯🇵",
+        title: "Bank of Japan (BoJ) Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak kararda, Bloomberg'in anketine katılan 52 BoJ gözlemcisinin tamamı bir faiz artışı öngörüyor.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-15-1500",
     title: "FXPARTNER Piyasa Özeti | 15.09.2026 Salı Öğleden Sonra Güncellemesi",
     excerpt:
