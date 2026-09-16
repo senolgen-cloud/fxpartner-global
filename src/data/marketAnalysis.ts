@@ -41,6 +41,61 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-16-1130",
+    title: "FXPARTNER Piyasa Özeti | 16.09.2026 Çarşamba Öğle Öncesi Güncellemesi",
+    excerpt:
+      "Borsa İstanbul'da BIST 100 endeksi, Fed'in bugünkü faiz kararı öncesinde çarşamba gününe %0,17 düşüşle 13.868,17 puandan başladı; bankacılık endeksi %0,28 yükselirken holding endeksi %0,52 değer kaybetti. Asya borsalarında Nikkei 225 %0,07 düşüşle 63.415,20 puana gerilerken, Hang Seng Salı gününü %1 düşüşle 24.667,24 puandan tamamlayarak 17 Temmuz'dan bu yana en düşük kapanışını gördü; Kospi ise %0,10 yükselişle 6.634,09 puana çıktı. Altın, iki günlük gerilemenin ardından ons başına 4.300 doların üzerine çıkarken, dolar/TL kuru 48,6802 ile son bir ayın en yüksek seviyesine ulaştı.",
+    publishedAt: "2026-09-16",
+    readingMinutes: 3,
+    intro:
+      "Çarşamba öğle öncesinde küresel piyasaların gündeminde, **Borsa İstanbul**'un güne hafif düşüşle başlaması, **Asya borsaları**nın bugün açıklanacak **Fed** kararı öncesinde karışık bir seyir izlemesi, **altın**ın ons başına **4.300 doların** üzerine çıkması ve **dolar/TL** kurunun bir aylık zirvesini tazelemesi öne çıktı. **BIST 100** endeksi, **Fed**'in bugünkü faiz kararı öncesinde çarşamba gününe **%0,17** düşüşle **13.868,17** puandan başladı; sektörler arasında **bankacılık endeksi %0,28** yükselirken, **holding endeksi %0,52** değer kaybetti. Asya'da **Nikkei 225** endeksi, Salı günkü **63.484,10** puanlık kapanışının ardından sabah saatlerinde **%0,07** düşüşle **63.415,20** puana gerilerken, **Hang Seng** endeksi Salı gününü **%1** düşüşle **24.667,24** puandan tamamlayarak **17 Temmuz**'dan bu yana en düşük kapanışını gördü; **Kospi** endeksi ise Salı günkü **%0,9**'luk düşüşün ardından sabah **%0,10** yükselişle **6.634,09** puana çıktı. **Altın**, petrol fiyatları ve tahvil getirilerindeki yükselişin ivme kaybetmesiyle iki günlük gerilemenin ardından çarşamba günü ons başına **4.300 doların** üzerine çıkarken, bir önceki gün altı haftanın en düşük seviyesi olan **4.263 dolara** kadar gerilemişti. **Dolar/TL** kuru ise **48,6802** seviyesine çıkarak son bir ayın en yüksek seviyesine ulaştı. Piyasaların odağı bugün TSİ **21.00**'de açıklanacak **Fed FOMC** kararında.",
+    news: [
+      {
+        icon: "🇹🇷",
+        heading: "BIST 100 Güne %0,17 Düşüşle 13.868 Puandan Başladı",
+        body: "**BIST 100** endeksi, **Fed**'in bugünkü faiz kararı öncesinde çarşamba gününe **%0,17** düşüşle **13.868,17** puandan başladı. Sektörler arasında **bankacılık endeksi %0,28** yükselirken, **holding endeksi %0,52** değer kaybetti; **finansal kiralama ve faktoring endeksi %0,71** ile en çok yükselen, **menkul kıymet yatırım fonları endeksi** ise **%2,18** ile en çok gerileyen endeks oldu. Teknik olarak **13.700** ve **13.600** puan destek, **14.000** ve **14.100** puan direnç seviyeleri izleniyor.",
+      },
+      {
+        icon: "🌏",
+        heading: "Asya Piyasaları Fed Kararı Öncesi Karışık Seyretti",
+        body: "Asya borsaları, bugün açıklanacak **Fed** kararı öncesinde karışık bir seyir izledi. Japonya'da **Nikkei 225** endeksi, Salı günkü **63.484,10** puanlık kapanışının ardından sabah saatlerinde **%0,07** düşüşle **63.415,20** puana geriledi. Hong Kong'da **Hang Seng** endeksi Salı gününü **%1** düşüşle **24.667,24** puandan tamamlayarak **17 Temmuz**'dan bu yana en düşük kapanışını gördü; **HSBC %3,2**, **CATL %6** değer kaybetti. Güney Kore'de **Kospi** endeksi ise Salı günkü **%0,9**'luk düşüşün ardından sabah **%0,10** yükselişle **6.634,09** puana çıktı.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın Fed Kararı Öncesi Ons Başına 4.300 Doların Üzerine Çıktı",
+        body: "**Altın** fiyatları, petrol fiyatları ve tahvil getirilerindeki yükselişin ivme kaybetmesiyle iki günlük gerilemenin ardından çarşamba günü ons başına **4.300 doların** üzerine çıktı. Metal, güçlü dolar ve yükselen **ABD tahvil getirileri** baskısıyla bir önceki gün altı haftanın en düşük seviyesi olan **4.263 dolara** kadar gerilemişti.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar/TL Bir Aylık Zirvesini Tazeledi",
+        body: "**Dolar/TL** kuru çarşamba günü **48,6802** seviyesine çıkarak son bir ayın en yüksek seviyesine ulaştı; kur gün içinde **48,5392-48,6513** bandında işlem gördü ve açılışını **48,6252** seviyesinden yaptı.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "16 Eylül 2026, 21.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Fed FOMC Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak karar TSİ 21.00'de, Fed Başkanı Kevin Warsh'ın basın toplantısı ise TSİ 21.30'da izlenecek.",
+      },
+      {
+        time: "17 Eylül 2026, 14.00 (TSİ)",
+        icon: "🇬🇧",
+        title: "Bank of England (BoE) Faiz Kararı",
+        note: "İngiltere saatiyle 12.00'de (TSİ 14.00) açıklanacak kararda faizin %3,75'te sabit tutulması bekleniyor; piyasa fiyatlamasına göre yaklaşık üçte bir olasılıkla 25 baz puanlık bir artış öngörülüyor.",
+      },
+      {
+        time: "18 Eylül 2026 (TSİ öğleden sonra)",
+        icon: "🇯🇵",
+        title: "Bank of Japan (BoJ) Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak kararda, Bloomberg'in anketine katılan 52 BoJ gözlemcisinin tamamı bir faiz artışı öngörüyor.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-16-0900",
     title: "FXPARTNER Piyasa Özeti | 16.09.2026 Çarşamba Sabah Güncellemesi",
     excerpt:
