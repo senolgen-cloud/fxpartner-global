@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-17-1500",
+    title: "FXPARTNER Piyasa Özeti | 17.09.2026 Perşembe Öğleden Sonra Güncellemesi",
+    excerpt:
+      "Bank of England (BoE), perşembe günü faiz kararında politika faizini altıya üç oyla %3,75'te sabit tuttu; muhalif kalan üç üye Huw Pill, Megan Greene ve Catherine Mann faizin %4'e çıkarılmasını istedi. İngiltere'de enflasyon ağustos ayında %3,1'e yükselerek beş ayın zirvesine çıkarken, BoE enflasyonun 2026 sonunda %3,75'e, 2027 başında ise %4'ün üzerine çıkabileceğini öngördü. Fed'in çarşamba günü yeni başkan Kevin Warsh'ın da dahil olduğu oybirliğiyle faizi %3,75-4,00 aralığına yükseltmesinin ardından dolar endeksi (DXY), 31 Temmuz'dan sonra ilk kez 100 seviyesinin üzerine çıkarak yedi haftanın en yüksek seviyesine ulaştı. Sterlin ise ABD faizinin bu yıl ilk kez İngiltere faizinin üzerine çıkmasıyla dolar karşısında %0,1 değer kaybederek 1,3369'a geriledi; bu seviye 30 Temmuz'dan beri en düşük seviyeyi işaret etti.",
+    publishedAt: "2026-09-17",
+    readingMinutes: 3,
+    intro:
+      "Perşembe öğleden sonrasında küresel piyasaların gündeminde, **Bank of England (BoE)**'in faiz kararında politika faizini sabit tutması, **Fed**'in çarşamba günkü faiz artışının ardından **dolar endeksi (DXY)**'nin **100** seviyesinin üzerine çıkması ve **sterlin**in bu gelişmelerin ardından yedi haftanın en düşük seviyesine gerilemesi öne çıktı. **BoE** Para Politikası Komitesi (**MPC**), **17 Eylül 2026** günü aldığı kararda politika faizini **altıya üç** oyla **%3,75**'te sabit tuttu; muhalif kalan üç üye **Huw Pill**, **Megan Greene** ve **Catherine Mann**, enerji fiyatlarındaki yükselişin enflasyonu daha kalıcı hale getirebileceği görüşüyle faizin **%4**'e çıkarılmasını istedi. İngiltere'de enflasyon **ağustos** ayında **%3,1**'e yükselerek beş ayın en yüksek seviyesine çıkarken, **BoE** enflasyonun **2026** yılı sonunda **%3,75**'e, **2027** yılı başında ise **%4**'ün üzerine çıkabileceğini öngördü. Dolar tarafında, **Fed**'in çarşamba günü yeni başkan **Kevin Warsh**'ın da dahil olduğu oybirliğiyle faizi **25 baz puan** artışla **%3,75-4,00** aralığına yükseltmesi ve yetkililerin **2026** yılı içinde bir artış daha sinyali vermesi, **dolar endeksi (DXY)**'nin **31 Temmuz**'dan sonra ilk kez **100** seviyesinin üzerine çıkarak yedi haftanın en yüksek seviyesine ulaşmasını sağladı. **Sterlin**, **ABD** faizinin bu yıl ilk kez **İngiltere** faizinin üzerine çıkmasıyla dolar karşısında **%0,1** değer kaybederek **1,3369**'a geriledi; bu seviye **30 Temmuz**'dan beri görülen en düşük seviyeyi ve dört gündür süren düşüş serisinin devamını işaret etti. Piyasaların odağı şimdi TSİ **15.30**'da açıklanacak **ABD** haftalık işsizlik maaşı başvuruları ile yarın sonuçlanacak **Bank of Japan (BoJ)** faiz kararında.",
+    news: [
+      {
+        icon: "🇬🇧",
+        heading: "BoE Faizi %3,75'te Sabit Tuttu: Komite 6-3 Oyla Bölündü",
+        body: "**Bank of England (BoE)** Para Politikası Komitesi (**MPC**), **17 Eylül 2026** günü aldığı kararda politika faizini **altıya üç** oyla **%3,75**'te sabit tuttu. Muhalif kalan üç üye **Huw Pill**, **Megan Greene** ve **Catherine Mann**, enerji fiyatlarındaki yükselişin enflasyonu daha kalıcı hale getirebileceği görüşüyle faizin **%4**'e çıkarılmasını istedi. İngiltere'de enflasyon **ağustos** ayında **%3,1**'e yükselerek beş ayın en yüksek seviyesine çıkarken, **BoE** enflasyonun **2026** yılı sonunda **%3,75**'e, **2027** yılı başında ise **%4**'ün üzerine çıkabileceğini öngördü.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar Endeksi Fed Sonrası 100 Seviyesinin Üzerine Çıktı",
+        body: "**Fed**'in çarşamba günü yeni başkan **Kevin Warsh**'ın da dahil olduğu oybirliğiyle politika faizini **25 baz puan** artışla **%3,75-4,00** aralığına yükseltmesi ve yetkililerin **2026** yılı içinde bir artış daha sinyali vermesinin ardından **dolar endeksi (DXY)**, **31 Temmuz**'dan sonra ilk kez **100** seviyesinin üzerine çıkarak yedi haftanın en yüksek seviyesine ulaştı.",
+      },
+      {
+        icon: "📉",
+        heading: "Sterlin, ABD Faizinin İngiltere'yi Geçmesiyle Yedi Haftanın Dibinde",
+        body: "**Sterlin**, **ABD** faizinin bu yıl ilk kez **İngiltere** faizinin üzerine çıkmasıyla dolar karşısında **%0,1** değer kaybederek **1,3369**'a geriledi. Bu seviye, **30 Temmuz**'dan beri görülen en düşük seviyeyi ve dört gündür süren düşüş serisinin devamını işaret etti.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "17 Eylül 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Haftalık İşsizlik Maaşı Başvuruları",
+        note: "Fed'in faiz kararının ardından işgücü piyasasındaki seyri değerlendirmek amacıyla haftalık başvuru verileri TSİ 15.30'da açıklanacak; bir önceki hafta başvurular 206.000 düzeyinde gerçekleşmişti.",
+      },
+      {
+        time: "18 Eylül 2026 (TSİ öğleden sonra)",
+        icon: "🇯🇵",
+        title: "Bank of Japan (BoJ) Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak kararda, Bloomberg'in anketine katılan 52 BoJ gözlemcisinin tamamı bir faiz artışı öngörüyor.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-17-0900",
     title: "FXPARTNER Piyasa Özeti | 17.09.2026 Perşembe Sabah Güncellemesi",
     excerpt:
