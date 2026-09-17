@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-17-1800",
+    title: "FXPARTNER Piyasa Özeti | 17.09.2026 Perşembe Akşam Güncellemesi",
+    excerpt:
+      "ABD'de haftalık işsizlik maaşı başvuruları, 12 Eylül'de sona eren haftada piyasa beklentisi olan 208.000'in oldukça altında, bir önceki haftanın 206.000 düzeyinden 10.000 azalarak 196.000'e geriledi; bu, Temmuz ortasından bu yana en düşük seviyeyi işaret etti. Altın, verinin ardından ABD tahvil getirilerinin gerilemesiyle ons başına yaklaşık 4.285 dolara yükselerek üç işlem gününe yayılan kayıp serisini kırdı. Dolar endeksi (DXY), Fed'in çarşamba günkü faiz artışının ardından çıktığı 100 seviyesinin üzerindeki zirveden bir miktar geri çekilirken, sterlin dolar karşısında yedi haftanın en düşük seviyelerinden biri olan 1,3371 civarında işlem gördü.",
+    publishedAt: "2026-09-17",
+    readingMinutes: 3,
+    intro:
+      "Perşembe akşamına doğru küresel piyasaların gündeminde, **ABD**'de açıklanan haftalık işsizlik maaşı başvurularının beklentilerin oldukça altında kalması, **altın**ın bu verinin ardından **ABD tahvil getirilerinin** gerilemesiyle üç günlük kayıp serisini kırması ve **dolar endeksi (DXY)**'nin **Fed**'in çarşamba günkü faiz artışının ardından çıktığı **100** seviyesinin üzerindeki zirveden bir miktar geri çekilmesi öne çıktı. ABD Çalışma Bakanlığı verilerine göre, **12 Eylül**'de sona eren haftaya ilişkin haftalık işsizlik maaşı başvuruları, piyasa beklentisi olan **208.000**'in oldukça altında, bir önceki haftanın (revize edilen) **206.000** düzeyinden **10.000** azalarak **196.000**'e geriledi; bu, **Temmuz ortası**'ndan bu yana görülen en düşük seviyeyi işaret etti. **5 Eylül**'de sona eren haftaya ilişkin devam eden işsizlik maaşı başvuruları ise **39.000** azalarak **1,73 milyona** geriledi. **Altın**, güçlü seyreden bu verinin ardından **2 yıllık** ABD tahvil getirisinin **%4,72**, **10 yıllık** getirinin ise **%5,00** civarına gerilemesiyle ons başına yaklaşık **4.285 dolara** yükselerek üç işlem gününe yayılan kayıp serisini kırdı. **Dolar endeksi (DXY)** ise **Fed**'in çarşamba günü yeni başkan **Kevin Warsh**'ın da dahil olduğu oybirliğiyle faizi **%3,75-4,00** aralığına yükseltmesinin ardından çıktığı **100** seviyesinin üzerindeki zirveden bir miktar geri çekilirken, **sterlin** dolar karşısında yedi haftanın en düşük seviyelerinden biri olan **1,3371** civarında işlem gördü. Piyasaların odağı şimdi yarın açıklanacak **Bank of Japan (BoJ)** faiz kararında.",
+    news: [
+      {
+        icon: "🇺🇸",
+        heading: "ABD İşsizlik Maaşı Başvuruları Beklentilerin Oldukça Altında Kaldı: 196.000",
+        body: "ABD Çalışma Bakanlığı verilerine göre, **12 Eylül**'de sona eren haftaya ilişkin haftalık işsizlik maaşı başvuruları, piyasa beklentisi olan **208.000**'in oldukça altında, bir önceki haftanın (revize edilen) **206.000** düzeyinden **10.000** azalarak **196.000**'e geriledi; bu, **Temmuz ortası**'ndan bu yana görülen en düşük seviyeyi işaret etti. **5 Eylül**'de sona eren haftaya ilişkin devam eden işsizlik maaşı başvuruları ise **39.000** azalarak **1,73 milyona** geriledi.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın, Tahvil Getirilerinin Gerilemesiyle Üç Günlük Kayıp Serisini Kırdı",
+        body: "**Altın**, perşembe günü açıklanan güçlü işsizlik maaşı verisinin ardından **2 yıllık** ABD tahvil getirisinin **%4,72**, **10 yıllık** getirinin ise **%5,00** civarına gerilemesiyle ons başına yaklaşık **4.285 dolara** yükseldi ve **Fed**'in çarşamba günkü şahin faiz artışının ardından yaşadığı üç işlem gününe yayılan kayıp serisini kırdı.",
+      },
+      {
+        icon: "📉",
+        heading: "Dolar Zirveden Geriledi, Sterlin Yedi Haftanın Dibinde Tutunuyor",
+        body: "**Dolar endeksi (DXY)**, **Fed**'in çarşamba günü yeni başkan **Kevin Warsh**'ın da dahil olduğu oybirliğiyle faizi **%3,75-4,00** aralığına yükseltmesinin ardından çıktığı **100** seviyesinin üzerindeki zirveden bir miktar geri çekildi. **Sterlin** ise dolar karşısında yedi haftanın en düşük seviyelerinden biri olan **1,3371** civarında işlem görmeye devam etti.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "18 Eylül 2026 (TSİ öğleden sonra)",
+        icon: "🇯🇵",
+        title: "Bank of Japan (BoJ) Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak kararda, Bloomberg'in anketine katılan 52 BoJ gözlemcisinin tamamı bir faiz artışı öngörüyor.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-17-1500",
     title: "FXPARTNER Piyasa Özeti | 17.09.2026 Perşembe Öğleden Sonra Güncellemesi",
     excerpt:
