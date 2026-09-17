@@ -41,6 +41,61 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-17-0900",
+    title: "FXPARTNER Piyasa Özeti | 17.09.2026 Perşembe Sabah Güncellemesi",
+    excerpt:
+      "SPK, Pusula Portföy'ün tetiklediği BIST 100 satış dalgasına ilişkin yaptırım kararlarını açıkladı: Katılımevim, Gündoğdu Gıda ve Destek Finans Faktoring paylarındaki işlemlere ilişkin incelemeler sonucunda 38 kişi hakkında suç duyurusunda bulunulurken, bu kişiler ile Pusula Portföy Yönetimi'ne borsada 2 yıl işlem yasağı getirildi. Petrol, Suudi Arabistan'ın hasarlı boru hattı onarılırken ham petrolü Umman üzerinden ihraç etmeye başlamasıyla perşembe günü geriledi: WTI %0,2 düşüşle 102,14 dolara, Brent ise 105,81 dolara indi. Altın, Fed'in çarşamba günkü şahin faiz artışının güçlendirdiği dolar baskısıyla ons başına 4.296 dolar civarında seyretti. Wall Street'te Fed kararı sonrası çarşambayı %1,21 düşüşle kapatan Dow Jones başta olmak üzere endeksler, perşembe sabahı vadeli işlemlerde toparlanma sinyali verdi.",
+    publishedAt: "2026-09-17",
+    readingMinutes: 3,
+    intro:
+      "Perşembe sabahında küresel piyasaların gündeminde, **SPK**'nın **Pusula Portföy** kriziyle ilgili yaptırım kararlarını açıklaması, petrol fiyatlarının **Suudi Arabistan**'ın ham petrolü **Umman** üzerinden ihraç etmeye başlamasıyla gerilemesi, **altın**ın **Fed**'in çarşamba günkü şahin faiz artışının ardından kayıplarını koruması ve **Wall Street** vadeli işlemlerinin çarşambaki sert düşüşün ardından toparlanma sinyali vermesi öne çıktı. **SPK**, **16 Eylül 2026** tarihli ve **2026/59** sayılı bülteninde, **Katılımevim Tasarruf Finansman** (**KTLEV**), **Gündoğdu Gıda** (**GUNDG**) ve **Destek Finans Faktoring** (**DSTKF**) paylarındaki işlemlere ilişkin incelemeler sonucunda toplam **38 kişi** hakkında suç duyurusunda bulunulmasına ve bu kişiler ile **Pusula Portföy Yönetimi**'ne borsada ve diğer teşkilatlanmış piyasalarda **2 yıl** süreyle işlem yasağı uygulanmasına karar verdiğini açıkladı; yasak kapsamındaki **38 kişiden** lisans sahibi olan **10 kişinin** tüm lisansları da yasak süresince iptal edildi. Petrol tarafında, **Suudi Arabistan**'ın hasar gören **Doğu-Batı Petrol Boru Hattı**'nın onarımı sürerken ham petrolü **Umman** üzerinden ihraç etmeye başlaması arz endişelerini hafifletti; **WTI** perşembe günü yaklaşık **%0,2** düşüşle **102,14 dolara**, **Brent** ise **105,81 dolara** geriledi. **Saudi Aramco**'nun hasarlı hattın kapasitesinin yarısını günler içinde, tamamını ise yaklaşık **altı hafta** içinde yeniden devreye almayı hedeflediği bildirildi. **Altın**, **Fed**'in çarşamba günü gerçekleştirdiği **25 baz puanlık** şahin faiz artışının güçlendirdiği dolar ve **ABD tahvil getirileri** baskısıyla perşembe sabahı ons başına **4.296 dolar** civarında işlem gördü. **Wall Street**'te ise **Dow Jones** endeksi **Fed** kararının ardından çarşamba günü **631,21 puan (%1,21)** düşüşle **51.461,90**, **S&P 500** endeksi **%0,45** düşüşle **7.551,81**, **Nasdaq Composite** endeksi ise **%0,01** düşüşle **25.978,42** puandan kapanırken; perşembe sabahı **Dow Jones** vadeli işlemleri **331 puan (%0,64)**, **S&P 500** vadeli işlemleri **%0,61**, **Nasdaq 100** vadeli işlemleri ise **%0,71** yükseldi. Piyasaların odağı bugün TSİ **14.00**'te açıklanacak **Bank of England** faiz kararında.",
+    news: [
+      {
+        icon: "🇹🇷",
+        heading: "SPK'dan Pusula Portföy Krizine Yaptırım: 38 Kişiye İşlem Yasağı",
+        body: "**Sermaye Piyasası Kurulu** (**SPK**), **16 Eylül 2026** tarihli ve **2026/59** sayılı haftalık bülteninde, **Pusula Portföy**'ün fonlarındaki temerrütle tetiklenen **BIST 100** satış dalgasına ilişkin yaptırım kararlarını açıkladı. **Katılımevim Tasarruf Finansman** (**KTLEV**), **Gündoğdu Gıda** (**GUNDG**) ve **Destek Finans Faktoring** (**DSTKF**) paylarındaki işlemlere yönelik incelemeler sonucunda toplam **38 kişi** hakkında suç duyurusunda bulunulmasına ve bu kişiler ile **Pusula Portföy Yönetimi**'ne borsada ve diğer teşkilatlanmış piyasalarda **2 yıl** süreyle işlem yasağı uygulanmasına karar verildi; yasak kapsamındaki **38 kişiden** lisans sahibi olan **10 kişinin** tüm lisansları da yasak süresince iptal edildi.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol, Suudi Arabistan'ın Umman Üzerinden İhracatı Artırmasıyla Geriledi",
+        body: "Ham petrol fiyatları, **Suudi Arabistan**'ın hasar gören **Doğu-Batı Petrol Boru Hattı**'nın onarımı sürerken ham petrolü **Umman** üzerinden ihraç etmeye başlamasıyla perşembe günü çarşambanın ardından ikinci gerileme gününü yaşadı: **WTI** yaklaşık **%0,2** düşüşle **102,14 dolara**, **Brent** ise **105,81 dolara** geriledi. **Saudi Aramco**'nun hasarlı hattın kapasitesinin yaklaşık yarısını günler içinde, tamamını ise yaklaşık **altı hafta** içinde yeniden devreye almayı hedeflediği bildirildi.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın, Fed'in Şahin Faiz Artışının Ardından Kayıplarını Koruyor",
+        body: "**Altın**, çarşamba günü **Fed**'in **şahin** bir üslupla gerçekleştirdiği **25 baz puanlık** faiz artışının güçlendirdiği dolar ve **ABD tahvil getirileri** baskısıyla perşembe sabahı ons başına **4.296 dolar** civarında işlem gördü ve önceki günkü kayıplarını korudu.",
+      },
+      {
+        icon: "📈",
+        heading: "Wall Street Vadeli İşlemleri Fed Sonrası Düşüşün Ardından Toparlanıyor",
+        body: "**Wall Street**'te çarşamba günü **Fed**'in faiz artışı kararının ardından **Dow Jones** endeksi **631,21 puan (%1,21)** düşüşle **51.461,90**, **S&P 500** endeksi **%0,45** düşüşle **7.551,81**, **Nasdaq Composite** endeksi ise **%0,01** düşüşle **25.978,42** puandan kapandı. Perşembe sabahı vadeli işlemler toparlanma sinyali verdi: **Dow Jones** vadeli işlemleri **331 puan (%0,64)**, **S&P 500** vadeli işlemleri **%0,61**, **Nasdaq 100** vadeli işlemleri ise **%0,71** yükseldi.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "17 Eylül 2026, 14.00 (TSİ)",
+        icon: "🇬🇧",
+        title: "Bank of England (BoE) Faiz Kararı",
+        note: "İngiltere'de ağustos ayı TÜFE enflasyonu %3,1'e yükseldi; Para Politikası Komitesi'nin İngiltere saatiyle 12.00'de (TSİ 14.00) açıklayacağı kararda faizin %3,75'te sabit tutulması bekleniyor, ancak komite içinde artış yönünde baskı arttı.",
+      },
+      {
+        time: "17 Eylül 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Haftalık İşsizlik Maaşı Başvuruları",
+        note: "Fed'in faiz kararının ardından işgücü piyasasındaki seyri değerlendirmek amacıyla haftalık başvuru verileri TSİ 15.30'da açıklanacak; bir önceki hafta başvurular 206.000 düzeyinde gerçekleşmişti.",
+      },
+      {
+        time: "18 Eylül 2026 (TSİ öğleden sonra)",
+        icon: "🇯🇵",
+        title: "Bank of Japan (BoJ) Faiz Kararı",
+        note: "İki günlük toplantının ardından açıklanacak kararda, Bloomberg'in anketine katılan 52 BoJ gözlemcisinin tamamı bir faiz artışı öngörüyor.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-16-1800",
     title: "FXPARTNER Piyasa Özeti | 16.09.2026 Çarşamba Öğleden Sonra Güncellemesi",
     excerpt:
