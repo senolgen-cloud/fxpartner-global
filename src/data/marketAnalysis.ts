@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-18-1300",
+    title: "FXPARTNER Piyasa Özeti | 18.09.2026 Cuma Öğle Güncellemesi",
+    excerpt:
+      "Japonya Merkez Bankası (BoJ), cuma günü aldığı kararla politika faizini 25 baz puan artışla %1,25'e yükseltti; bu, 1995'ten bu yana görülen en yüksek seviyeyi işaret etti. Karar yediye iki oyla alındı, muhalif kalan Toichiro Asada ve Ayano Sato faizin sabit tutulmasından yana oy kullandı. Kararın ardından dolar/yen paritesi %0,45 değer kaybeden yenle 156,64 seviyesine yükselirken, 10 yıllık Japon devlet tahvili getirisi 4,9 baz puan gerileyerek %2,947'ye indi. Petrol fiyatları ise cuma günü geriledi: WTI günlük bazda %0,69 düşüşle 101,21 dolara indi.",
+    publishedAt: "2026-09-18",
+    readingMinutes: 3,
+    intro:
+      "Cuma öğle saatlerine doğru küresel piyasaların gündeminde, **Japonya Merkez Bankası (BoJ)**'nin politika faizini **25 baz puan** artışla **%1,25**'e yükseltmesi, kararın ardından **yen**in zayıflaması ve **Japon** tahvil getirilerinin gerilemesi ile petrol fiyatlarının cuma günü kayıpla seyretmesi öne çıktı. **BoJ**, cuma günü aldığı kararla politika faizini **%1,25**'e yükseltti; bu, **1995**'ten bu yana görülen en yüksek seviyeyi işaret etti ve **Haziran** ayındaki son artışın ardından geldi. Karar komitede **yediye iki** oyla alınırken, muhalif kalan üyeler **Toichiro Asada** ve **Ayano Sato**, faizin sabit tutulmasından yana oy kullandı; **BoJ**, enflasyonun **%2** hedefinin üzerine çıkma riskine karşı adım attığını belirtti. Kararın ardından **dolar/yen (USD/JPY)** paritesi, **%0,45** değer kaybeden **yen** ile **156,64** seviyesine yükselirken, **10 yıllık** Japon devlet tahvili getirisi **4,9 baz puan** gerileyerek **%2,947**'ye indi. Petrol tarafında ise ham petrol fiyatları cuma günü geriledi: **WTI** günlük bazda **%0,69** düşüşle **101,21 dolara** indi. Piyasaların odağı şimdi bugün TSİ **15.15**'te açıklanacak **ABD** sanayi üretimi verisinde.",
+    news: [
+      {
+        icon: "🇯🇵",
+        heading: "BoJ Faizi %1,25'e Yükseltti: 1995'ten Bu Yana En Yüksek Seviye",
+        body: "**Japonya Merkez Bankası (BoJ)**, cuma günü aldığı kararla politika faizini **25 baz puan** artışla **%1,25**'e yükseltti; bu, **1995**'ten bu yana görülen en yüksek seviyeyi işaret etti ve **Haziran** ayındaki son artışın ardından geldi. Karar komitede **yediye iki** oyla alınırken, muhalif kalan üyeler **Toichiro Asada** ve **Ayano Sato**, faizin sabit tutulmasından yana oy kullandı; **BoJ**, enflasyonun **%2** hedefinin üzerine çıkma riskine karşı adım attığını belirtti.",
+      },
+      {
+        icon: "💴",
+        heading: "Yen Kararın Ardından Zayıfladı, Japon Tahvil Getirisi Geriledi",
+        body: "**BoJ**'un faiz artışı kararının ardından **dolar/yen (USD/JPY)** paritesi, **%0,45** değer kaybeden **yen** ile **156,64** seviyesine yükseldi. **10 yıllık** Japon devlet tahvili getirisi ise **4,9 baz puan** gerileyerek **%2,947**'ye indi.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol Fiyatları Cuma Günü Geriledi",
+        body: "Ham petrol fiyatları cuma günü kayıpla seyretti: **WTI** günlük bazda **%0,69** düşüşle **101,21 dolara** indi.",
+      },
+    ],
+    calendarLabel: "14-20 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "18 Eylül 2026, 15.15 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Sanayi Üretimi Verisi",
+        note: "ABD'de imalat, madencilik ve kamu hizmetleri sektörlerindeki toplam üretimdeki aylık değişimi ölçen sanayi üretimi verisi TSİ 15.15'te açıklanacak.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-17-1800",
     title: "FXPARTNER Piyasa Özeti | 17.09.2026 Perşembe Akşam Güncellemesi",
     excerpt:
