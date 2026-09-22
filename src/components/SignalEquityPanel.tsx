@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useIntlLocale, useTr, useTrf } from "@/components/useTr";
 import { SIGNAL_TZ } from "@/lib/signalPeriods";
 import type { CalendarTrade } from "@/components/SignalCalendar";
+import Link from "@/components/LocaleLink";
+import { favorableMove, moneyForMove } from "@/lib/contractSizes";
 
 // The right-hand column beside the trading calendar on /signals: the equity
 // curve and the latest closed trades, the two things a trading journal puts
@@ -228,46 +230,203 @@ export function EquityCurve({ trades }: { trades: CalendarTrade[] }) {
     </div>
   );
 }
+// An open signal as the Open Positions tab needs it. `locked` rows carry an
+// empty entry and no volume — maskLockedActiveSignal strips them on the
+// server — and the tab computes nothing for them: a live percentage between
+// the public price and the entry would hand the entry back, which is the
+// same reason LivePriceCell in SignalsBoard hides it.
+export type OpenPosition = {
+  id: string;
+  pair: string;
+  direction: string | null;
+  entry: string;
+  volume: string | null;
+  openedAt: Date;
+  quote?: { bid: string; ask: string };
+  lock: { href: string; badge: string } | null;
+};
 
-export function RecentTrades({ trades, limit = 8 }: { trades: CalendarTrade[]; limit?: number }) {
+// Dollars when the lot size and the instrument's contract spec are both
+// known, the move since entry in percent when only the price is, and nothing
+// without a quote. A BUY closes at the bid and a SELL at the ask, so each is
+// marked at the price it would actually close at.
+function floatingPnl(p: OpenPosition): { usd: number } | { pct: number } | null {
+  if (p.lock || !p.quote || !p.direction) return null;
+  const exit = parseFloat(p.direction === "SELL" ? p.quote.ask : p.quote.bid);
+  const entry = parseFloat(p.entry);
+  if (!Number.isFinite(exit) || !Number.isFinite(entry) || entry === 0) return null;
+  const move = favorableMove(entry, exit, p.direction);
+  if (move === null) return null;
+  const lots = p.volume ? parseFloat(p.volume) : NaN;
+  const usd = Number.isFinite(lots) ? moneyForMove(p.pair, move, lots) : null;
+  return usd !== null ? { usd } : { pct: (move / entry) * 100 };
+}
+
+const th = "pb-2 font-normal";
+
+function RecentTable({ trades, limit }: { trades: CalendarTrade[]; limit: number }) {
   const tr = useTr();
   const intl = useIntlLocale();
   const rows = trades.slice(-limit).reverse();
-
   return (
-    <div className="rounded-xl border border-hairline bg-ink/40 p-4">
-      <h3 className="font-display text-sm font-semibold text-text-on-ink">{tr("Son İşlemler")}</h3>
-      <table className="mt-3 w-full text-sm">
-        <thead>
-          <tr className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
-            <th className="pb-2 text-start font-normal">{tr("Kapanış")}</th>
-            <th className="pb-2 text-start font-normal">{tr("Sembol")}</th>
-            <th className="pb-2 text-end font-normal">{tr("Sonuç")}</th>
+    <table className="w-full text-sm">
+      <thead>
+        <tr className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
+          <th className={`${th} text-start`}>{tr("Kapanış")}</th>
+          <th className={`${th} text-start`}>{tr("Sembol")}</th>
+          <th className={`${th} text-end`}>{tr("Sonuç")}</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-hairline">
+        {rows.map((t, i) => (
+          <tr key={`${t.closedAt.getTime()}-${t.pair}-${i}`}>
+            <td className="py-2 font-mono text-[12px] text-text-on-ink-muted">
+              {t.closedAt.toLocaleDateString(intl, {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                timeZone: SIGNAL_TZ,
+              })}
+            </td>
+            <td className="py-2 font-display font-semibold text-text-on-ink">{t.pair}</td>
+            <td
+              dir="ltr"
+              className="py-2 text-end font-mono font-semibold tabular-stat rtl:text-start"
+              style={{ color: t.profit >= 0 ? TICK_UP : TICK_DOWN }}
+            >
+              {formatUsd(t.profit, Math.abs(t.profit) < 100 ? 2 : 0)}
+            </td>
           </tr>
-        </thead>
-        <tbody className="divide-y divide-hairline">
-          {rows.map((t, i) => (
-            <tr key={`${t.closedAt.getTime()}-${t.pair}-${i}`}>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+function OpenTable({ open }: { open: OpenPosition[] }) {
+  const tr = useTr();
+  const intl = useIntlLocale();
+  if (open.length === 0) {
+    return (
+      <p className="py-6 text-center font-mono text-[12px] text-text-on-ink-muted">
+        {tr("Şu an açık pozisyon yok")}
+      </p>
+    );
+  }
+  return (
+    <table className="w-full text-sm">
+      <thead>
+        <tr className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
+          <th className={`${th} text-start`}>{tr("Açılış")}</th>
+          <th className={`${th} text-start`}>{tr("Sembol")}</th>
+          <th className={`${th} text-end`}>{tr("Anlık K/Z")}</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-hairline">
+        {open.map((p) => {
+          const pnl = floatingPnl(p);
+          const value = pnl ? ("usd" in pnl ? pnl.usd : pnl.pct) : 0;
+          return (
+            <tr key={p.id}>
               <td className="py-2 font-mono text-[12px] text-text-on-ink-muted">
-                {t.closedAt.toLocaleDateString(intl, {
+                {p.openedAt.toLocaleString(intl, {
                   day: "2-digit",
                   month: "2-digit",
-                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
                   timeZone: SIGNAL_TZ,
                 })}
               </td>
-              <td className="py-2 font-display font-semibold text-text-on-ink">{t.pair}</td>
-              <td
-                dir="ltr"
-                className="py-2 text-end font-mono font-semibold tabular-stat rtl:text-start"
-                style={{ color: t.profit >= 0 ? TICK_UP : TICK_DOWN }}
-              >
-                {formatUsd(t.profit, Math.abs(t.profit) < 100 ? 2 : 0)}
+              <td className="py-2">
+                <span className="font-display font-semibold text-text-on-ink">{p.pair}</span>
+                {p.direction && (
+                  <span
+                    className="ms-1.5 font-mono text-[10px] font-semibold"
+                    style={{ color: p.direction === "SELL" ? TICK_DOWN : TICK_UP }}
+                  >
+                    {p.direction}
+                  </span>
+                )}
+              </td>
+              <td className="py-2 text-end rtl:text-start">
+                {p.lock ? (
+                  <Link
+                    href={p.lock.href}
+                    className="rounded-full border border-hairline px-2 py-0.5 font-mono text-[10px] text-gold transition-colors hover:bg-ink"
+                  >
+                    🔒 {p.lock.badge}
+                  </Link>
+                ) : pnl ? (
+                  <span
+                    dir="ltr"
+                    className="font-mono font-semibold tabular-stat"
+                    style={{ color: value >= 0 ? TICK_UP : TICK_DOWN }}
+                  >
+                    {"usd" in pnl
+                      ? formatUsd(pnl.usd, Math.abs(pnl.usd) < 100 ? 2 : 0)
+                      : `${pnl.pct > 0 ? "+" : pnl.pct < 0 ? "−" : ""}${Math.abs(pnl.pct).toFixed(2)}%`}
+                  </span>
+                ) : (
+                  // No quote right now — the market is closed or the feed is
+                  // quiet. An em dash, never a zero (see LivePriceCell).
+                  <span className="font-mono text-text-on-ink-muted">—</span>
+                )}
               </td>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+}
+
+// Recent Trades / Open Positions, as tabs in one box — the journal layout.
+export function TradesTabs({
+  trades,
+  open,
+  limit = 8,
+}: {
+  trades: CalendarTrade[];
+  open: OpenPosition[];
+  limit?: number;
+}) {
+  const tr = useTr();
+  const [tab, setTab] = useState<"recent" | "open">("recent");
+  const tabClass = (on: boolean) =>
+    `-mb-px border-b-2 pb-2 font-display text-sm font-semibold transition-colors ${
+      on ? "border-signal text-text-on-ink" : "border-transparent text-text-on-ink-muted hover:text-text-on-ink"
+    }`;
+
+  return (
+    <div className="rounded-xl border border-hairline bg-ink/40 p-4">
+      <div role="tablist" className="flex gap-5 border-b border-hairline">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "recent"}
+          onClick={() => setTab("recent")}
+          className={tabClass(tab === "recent")}
+        >
+          {tr("Son İşlemler")}
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "open"}
+          onClick={() => setTab("open")}
+          className={tabClass(tab === "open")}
+        >
+          {tr("Açık Pozisyonlar")}
+          {open.length > 0 && (
+            <span className="ms-1.5 rounded-full bg-signal/20 px-1.5 py-0.5 font-mono text-[10px] text-signal">
+              {open.length}
+            </span>
+          )}
+        </button>
+      </div>
+      <div role="tabpanel" className="mt-3">
+        {tab === "recent" ? <RecentTable trades={trades} limit={limit} /> : <OpenTable open={open} />}
+      </div>
     </div>
   );
 }

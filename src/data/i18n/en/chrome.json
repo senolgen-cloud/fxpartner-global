@@ -3753,5 +3753,8 @@
   "Sermaye Eğrisi": "Equity Curve",
   "Son İşlemler": "Recent Trades",
   "Sembol": "Symbol",
-  "Kapanan işlemlerin gerçekleşen kâr/zararının, kapanış sırasıyla kümülatif toplamı": "Cumulative realised profit/loss of closed trades, in closing order"
+  "Kapanan işlemlerin gerçekleşen kâr/zararının, kapanış sırasıyla kümülatif toplamı": "Cumulative realised profit/loss of closed trades, in closing order",
+  "Açık Pozisyonlar": "Open Positions",
+  "Anlık K/Z": "Floating P/L",
+  "Şu an açık pozisyon yok": "No open positions right now"
 }

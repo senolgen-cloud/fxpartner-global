@@ -3753,5 +3753,8 @@
   "Sermaye Eğrisi": "منحنى رأس المال",
   "Son İşlemler": "أحدث الصفقات",
   "Sembol": "الرمز",
-  "Kapanan işlemlerin gerçekleşen kâr/zararının, kapanış sırasıyla kümülatif toplamı": "إجمالي الربح/الخسارة المحققة التراكمي للصفقات المغلقة حسب ترتيب الإغلاق"
+  "Kapanan işlemlerin gerçekleşen kâr/zararının, kapanış sırasıyla kümülatif toplamı": "إجمالي الربح/الخسارة المحققة التراكمي للصفقات المغلقة حسب ترتيب الإغلاق",
+  "Açık Pozisyonlar": "المراكز المفتوحة",
+  "Anlık K/Z": "الربح/الخسارة العائمة",
+  "Şu an açık pozisyon yok": "لا توجد مراكز مفتوحة حالياً"
 }

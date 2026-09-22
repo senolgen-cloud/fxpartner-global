@@ -3753,5 +3753,8 @@
   "Sermaye Eğrisi": "Крива капіталу",
   "Son İşlemler": "Останні угоди",
   "Sembol": "Символ",
-  "Kapanan işlemlerin gerçekleşen kâr/zararının, kapanış sırasıyla kümülatif toplamı": "Накопичений реалізований прибуток/збиток закритих угод у порядку закриття"
+  "Kapanan işlemlerin gerçekleşen kâr/zararının, kapanış sırasıyla kümülatif toplamı": "Накопичений реалізований прибуток/збиток закритих угод у порядку закриття",
+  "Açık Pozisyonlar": "Відкриті позиції",
+  "Anlık K/Z": "Поточний P/L",
+  "Şu an açık pozisyon yok": "Зараз немає відкритих позицій"
 }

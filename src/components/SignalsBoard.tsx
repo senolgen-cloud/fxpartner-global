@@ -16,7 +16,7 @@ import { useLiveQuotes, type LiveQuote } from "./useLiveQuotes";
 import { useCountUp } from "@/components/useCountUp";
 import AccountSummary, { type PeriodTotals } from "@/components/AccountSummary";
 import SignalCalendar from "@/components/SignalCalendar";
-import { EquityCurve, RecentTrades } from "@/components/SignalEquityPanel";
+import { EquityCurve, TradesTabs, type OpenPosition } from "@/components/SignalEquityPanel";
 import { favorableMove } from "@/lib/contractSizes";
 import { playChime, unlockAudio } from "@/lib/chime";
 import type { SignalPeriods } from "@/lib/signalPeriods";
@@ -211,11 +211,41 @@ function PeriodSummary({ closed, periods }: { closed: Signal[]; periods: SignalP
   );
 }
 
-function PipsStats({ closed, dayStart }: { closed: Signal[]; dayStart: number }) {
+function PipsStats({
+  closed,
+  dayStart,
+  active,
+  quotes,
+  viewerTier,
+}: {
+  closed: Signal[];
+  dayStart: number;
+  active: Signal[];
+  quotes: Record<string, LiveQuote | undefined>;
+  viewerTier: AccessTier | null;
+}) {
   const tr = useTr();
   const locale = useLocale();
   const trf = useTrf();
   const intl = useIntlLocale();
+
+  // "Açık Pozisyonlar" sekmesi. Kilit kararı kartlarla aynı yerden
+  // (canViewSignal) veriliyor; kilitli satırın giriş ve lotu zaten sunucuda
+  // silinmiş geliyor ve sekme onlar için hesap yapmıyor.
+  const openPositions: OpenPosition[] = active.map((s) => {
+    const locked = !canViewSignal(viewerTier, s.pair);
+    const lock = locked ? lockPrompt(s.pair, trf) : null;
+    return {
+      id: s.id,
+      pair: s.pair,
+      direction: s.direction,
+      entry: s.entry,
+      volume: s.volume,
+      openedAt: s.createdAt,
+      quote: quotes[s.pair],
+      lock: lock ? { href: lock.href, badge: lock.badge } : null,
+    };
+  });
   const decisive = closed
     .filter((s) => (s.outcome === "WIN" || s.outcome === "LOSS") && s.profit !== null)
     .slice()
@@ -416,7 +446,7 @@ function PipsStats({ closed, dayStart }: { closed: Signal[]; dayStart: number })
               <EquityCurve trades={calendarTrades} />
             </div>
             <div className="min-w-0 flex-1">
-              <RecentTrades trades={calendarTrades} />
+              <TradesTabs trades={calendarTrades} open={openPositions} />
             </div>
           </div>
         </div>
@@ -1487,7 +1517,13 @@ export default function SignalsBoard({
 
       <section className="border-b border-hairline">
         <div className="mx-auto max-w-6xl px-6 pb-16">
-          <PipsStats closed={closed} dayStart={periods.dayStart} />
+          <PipsStats
+            closed={closed}
+            dayStart={periods.dayStart}
+            active={active}
+            quotes={quotes}
+            viewerTier={viewerTier}
+          />
         </div>
       </section>
 
