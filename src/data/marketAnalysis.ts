@@ -41,6 +41,49 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-22-1400",
+    title: "FXPARTNER Piyasa Özeti | 22.09.2026 Salı Öğleden Sonra Güncellemesi",
+    excerpt:
+      "Altın, Fed yetkililerinin şahin açıklamalarının ilave faiz artışı beklentilerini güçlendirmesiyle salı günü ons başına 4.300 dolar seviyesine doğru gerilerken, dolar endeksi (DXY) 100,40 civarında işlem görerek yedi haftanın zirvesine yaklaştı. Brent petrol, ABD Başkanı Donald Trump'ın İran Cumhurbaşkanı Mesud Pezeşkiyan ile Birleşmiş Milletler Genel Kurulu marjında görüşmeye açık olduğunu açıklamasının ardından pazartesi günü 100 dolar seviyesine doğru gerileyerek dördüncü günlük kayıp seansını yaşadı. Yurt içinde dolar/TL kuru 48,82 TL ile tarihi zirvesini yenilerken, BIST 100 endeksi salı sabahı %0,76 düşüşle 13.236,57 puana geriledi.",
+    publishedAt: "2026-09-22",
+    readingMinutes: 3,
+    intro:
+      "Salı öğleden sonrasına doğru küresel piyasaların gündeminde, **altın**ın **Fed** yetkililerinin şahin açıklamalarının ardından ons başına **4.300 dolar** seviyesine gerilemesi, **dolar endeksi (DXY)**'nin yedi haftanın zirvesine yaklaşması, **Brent petrol**ün **İran-ABD** diplomatik yakınlaşma umutlarıyla dördüncü günlük kayıp seansını yaşaması ve yurt içinde **dolar/TL** kurunun tarihi zirvesini yenilerken **BIST 100** endeksinin düşüşle açılması öne çıktı. **Altın**, salı günü **Fed** yetkililerinin şahin açıklamalarının ilave faiz artışı beklentilerini güçlendirmesiyle ons başına **4.300 dolar** seviyesine doğru geriledi ve önceki günden gelen kayıplarını derinleştirdi; **dolar endeksi (DXY)** ise **100,40** civarında işlem görerek yedi haftanın zirvesine yaklaştı, **100,56** üzerine kalıcı bir çıkış endekste yeni bir yükseliş bacağı açabilir. **Brent petrol**, pazartesi günü **100 dolar** seviyesine doğru gerileyerek art arda dördüncü günlük kayıp seansını yaşadı; gerilemede **ABD Başkanı Donald Trump**'ın pazar günü **İran Cumhurbaşkanı Mesud Pezeşkiyan** ile Birleşmiş Milletler Genel Kurulu marjında görüşmeye açık olduğunu açıklaması ve **ABD Merkezi Kuvvetler Komutanlığı (CENTCOM)**'nun **Hürmüz Boğazı**'ndan geçen ham petrol ve **LNG** akışının altı ayın en yüksek seviyesine ulaştığını bildirmesi etkili oldu; **Pezeşkiyan**, **22-26** ve **28 Eylül**'de New York'ta düzenlenecek BM Genel Kurulu'na katılmak üzere salı günü yola çıkarken, İranlı bir yetkili iki liderin doğrudan görüşmesine yönelik bir planın bulunmadığını, ancak İran heyetinin görüşmeleri canlandırma konusunda tam yetkiye sahip olduğunu belirtti. Yurt içinde, **dolar/TL** kuru salı günü yükselişini sürdürerek **48,82 TL** ile tarihi zirvesini bir basamak daha yukarı taşıdı; **TCMB**, doların bir önceki günkü efektif kurunu alışta **48,6790**, satışta **48,8741** lira olarak açıkladı. **BIST 100** endeksi ise salı sabahı **%0,76** düşüşle **13.236,57** puana gerilerken, endeks pazartesi günü **%0,40** yükselişle **13.337,69** puandan kapanmıştı; bankacılık endeksi **%0,10** yükselirken holding endeksi **%2,41** değer kaybetti. Piyasaların odağı şimdi yarın TSİ **16.45**'te açıklanacak **ABD S&P Global** öncü **PMI** verilerinde.",
+    news: [
+      {
+        icon: "🥇",
+        heading: "Altın 4.300 Dolara Geriledi, Dolar Endeksi Yedi Haftanın Zirvesine Yaklaştı",
+        body: "**Altın**, salı günü **Fed** yetkililerinin şahin açıklamalarının ilave faiz artışı beklentilerini güçlendirmesiyle ons başına **4.300 dolar** seviyesine doğru geriledi ve önceki günden gelen kayıplarını derinleştirdi. **Dolar endeksi (DXY)** ise **100,40** civarında işlem görerek yedi haftanın zirvesine yaklaştı; **100,56** üzerine kalıcı bir çıkış endekste yeni bir yükseliş bacağı açabilir.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol, İran-ABD Diplomatik Yakınlaşma Umutlarıyla Dördüncü Güne Kayıpla Devam Ediyor",
+        body: "**Brent petrol**, pazartesi günü **100 dolar** seviyesine doğru gerileyerek art arda dördüncü günlük kayıp seansını yaşadı. Gerilemede, **ABD Başkanı Donald Trump**'ın pazar günü **İran Cumhurbaşkanı Mesud Pezeşkiyan** ile Birleşmiş Milletler Genel Kurulu marjında görüşmeye açık olduğunu açıklaması ve **ABD Merkezi Kuvvetler Komutanlığı (CENTCOM)**'nun **Hürmüz Boğazı**'ndan geçen ham petrol ve **LNG** akışının altı ayın en yüksek seviyesine ulaştığını bildirmesi etkili oldu. **Pezeşkiyan**, **22-26** ve **28 Eylül**'de New York'ta düzenlenecek BM Genel Kurulu'na katılmak üzere salı günü yola çıkarken, İranlı bir yetkili iki liderin doğrudan görüşmesine yönelik bir planın bulunmadığını, ancak İran heyetinin görüşmeleri canlandırma konusunda tam yetkiye sahip olduğunu belirtti.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "Dolar/TL Tarihi Zirvesini Yeniledi: 48,82 TL",
+        body: "**Dolar/TL** kuru salı günü yükselişini sürdürerek **48,82 TL** ile tarihi zirvesini bir basamak daha yukarı taşıdı; serbest piyasada kur **48,81-48,83 TL** aralığında işlem gördü. **TCMB**, doların bir önceki günkü efektif kurunu alışta **48,6790**, satışta **48,8741** lira olarak açıkladı.",
+      },
+      {
+        icon: "📉",
+        heading: "BIST 100 Güne Düşüşle Başladı",
+        body: "**BIST 100** endeksi salı sabahı **%0,76** düşüşle **13.236,57** puana geriledi; endeks pazartesi günü **%0,40** yükselişle **13.337,69** puandan kapanmıştı. Bankacılık endeksi **%0,10** yükselirken, holding endeksi **%2,41** değer kaybetti.",
+      },
+    ],
+    calendarLabel: "21-27 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "23 Eylül 2026, 16.45 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD S&P Global İmalat ve Hizmet PMI Öncü Verileri",
+        note: "İmalat ve hizmet sektörlerindeki iş koşullarına dair öncü PMI verileri TSİ 16.45'te açıklanacak; veriler Fed'in faiz patikasına ilişkin beklentiler açısından yakından izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-18-1300",
     title: "FXPARTNER Piyasa Özeti | 18.09.2026 Cuma Öğle Güncellemesi",
     excerpt:
