@@ -3749,5 +3749,9 @@
   "Bu ay": "Цей місяць",
   "Ay toplamı": "Підсумок місяця",
   "{green}/{days} kârlı gün": "{green}/{days} прибуткових днів",
-  "Hafta {n}": "Тиждень {n}"
+  "Hafta {n}": "Тиждень {n}",
+  "Sermaye Eğrisi": "Крива капіталу",
+  "Son İşlemler": "Останні угоди",
+  "Sembol": "Символ",
+  "Kapanan işlemlerin gerçekleşen kâr/zararının, kapanış sırasıyla kümülatif toplamı": "Накопичений реалізований прибуток/збиток закритих угод у порядку закриття"
 }

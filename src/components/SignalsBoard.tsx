@@ -16,6 +16,7 @@ import { useLiveQuotes, type LiveQuote } from "./useLiveQuotes";
 import { useCountUp } from "@/components/useCountUp";
 import AccountSummary, { type PeriodTotals } from "@/components/AccountSummary";
 import SignalCalendar from "@/components/SignalCalendar";
+import { EquityCurve, RecentTrades } from "@/components/SignalEquityPanel";
 import { favorableMove } from "@/lib/contractSizes";
 import { playChime, unlockAudio } from "@/lib/chime";
 import type { SignalPeriods } from "@/lib/signalPeriods";
@@ -239,27 +240,7 @@ function PipsStats({ closed, dayStart }: { closed: Signal[]; dayStart: number })
   const bestCount = useCountUp(bestTrade, 1200, 2);
   const worstCount = useCountUp(Math.abs(worstTrade), 1200, 2);
 
-  // Kümülatif 1-lot-başına P/L serisi (sparkline).
-  let running = 0;
-  const cumulative = perLotValues.map((p) => (running += p));
-  const points = cumulative.length > 0 ? cumulative : [0];
-  const minY = Math.min(0, ...points);
-  const maxY = Math.max(0, ...points);
-  const rangeY = maxY - minY || 1;
-  const W = 600;
-  const H = 140;
-  const stepX = points.length > 1 ? W / (points.length - 1) : 0;
-  const coords = points.map((p, i) => {
-    const x = points.length > 1 ? i * stepX : W / 2;
-    const y = H - ((p - minY) / rangeY) * H;
-    return [x, y] as const;
-  });
-  const linePath = coords.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
-  const areaPath =
-    coords.length > 0
-      ? `${linePath} L${coords[coords.length - 1][0].toFixed(1)} ${H} L${coords[0][0].toFixed(1)} ${H} Z`
-      : "";
-  const zeroY = H - ((0 - minY) / rangeY) * H;
+  // Kümülatif seri artık SignalEquityPanel'deki sermaye eğrisinde çiziliyor.
   const isPositive = totalPips >= 0;
   const lineColor = isPositive ? TICK_UP : TICK_DOWN;
 
@@ -418,58 +399,25 @@ function PipsStats({ closed, dayStart }: { closed: Signal[]; dayStart: number })
         </div>
       </div>
 
-      <div className="mt-6">
-        <svg viewBox={`0 0 ${W} ${H}`} className="h-32 w-full md:h-40" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="pipsFade" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={lineColor} stopOpacity="0.35" />
-              <stop offset="100%" stopColor={lineColor} stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <line
-            x1="0"
-            y1={zeroY}
-            x2={W}
-            y2={zeroY}
-            stroke="var(--text-on-ink-muted)"
-            strokeOpacity="0.25"
-            strokeDasharray="4 4"
-          />
-          {areaPath && (
-            <path d={areaPath} fill="url(#pipsFade)" className="pips-area-in" />
-          )}
-          {linePath && (
-            <path
-              d={linePath}
-              fill="none"
-              stroke={lineColor}
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="pips-line-in"
-              pathLength={1}
-            />
-          )}
-          {coords.length > 0 && (
-            <circle cx={coords[coords.length - 1][0]} cy={coords[coords.length - 1][1]} r="4" fill={lineColor} />
-          )}
-        </svg>
-        <div className="mt-2 flex justify-between font-mono text-[10px] text-text-on-ink-muted">
-          <span>{decisive[0]?.closedAt?.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" })}</span>
-          <span>{trf("{count} işlem", { count: decisive.length })}</span>
-          <span>
-            {decisive[decisive.length - 1]?.closedAt?.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" })}
-          </span>
-        </div>
-      </div>
-
+      {/* Takvim solda; sermaye eğrisi ve son işlemler sağda — bir işlem
+          günlüğünün düzeni. xl altında alt alta. */}
       {calendarTrades.length > 0 && (
-        <div className="mt-8 border-t border-hairline pt-6">
-          <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
-            {tr("İşlem Takvimi")}
-          </span>
-          <div className="mt-4">
-            <SignalCalendar trades={calendarTrades} dayStart={dayStart} />
+        <div className="mt-8 grid gap-6 border-t border-hairline pt-6 xl:grid-cols-[minmax(0,1fr)_20rem]">
+          <div className="min-w-0">
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
+              {tr("İşlem Takvimi")}
+            </span>
+            <div className="mt-4">
+              <SignalCalendar trades={calendarTrades} dayStart={dayStart} />
+            </div>
+          </div>
+          <div className="flex min-w-0 flex-col gap-6 md:flex-row xl:flex-col">
+            <div className="min-w-0 flex-1">
+              <EquityCurve trades={calendarTrades} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <RecentTrades trades={calendarTrades} />
+            </div>
           </div>
         </div>
       )}

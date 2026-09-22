@@ -3749,5 +3749,9 @@
   "Bu ay": "This month",
   "Ay toplamı": "Month total",
   "{green}/{days} kârlı gün": "{green}/{days} profitable days",
-  "Hafta {n}": "Week {n}"
+  "Hafta {n}": "Week {n}",
+  "Sermaye Eğrisi": "Equity Curve",
+  "Son İşlemler": "Recent Trades",
+  "Sembol": "Symbol",
+  "Kapanan işlemlerin gerçekleşen kâr/zararının, kapanış sırasıyla kümülatif toplamı": "Cumulative realised profit/loss of closed trades, in closing order"
 }

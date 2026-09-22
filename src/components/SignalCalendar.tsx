@@ -314,13 +314,13 @@ export default function SignalCalendar({
               key={`w${weekNo}-${monday.y}`}
               className="col-span-7 mb-1.5 flex items-center justify-between rounded-md border border-hairline bg-ink/60 px-3 py-1.5 md:col-span-1 md:mb-0 md:flex-col md:items-start md:justify-center md:gap-1.5 md:rounded-lg md:p-3"
             >
-              <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-on-ink-muted">
+              <span className="whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.1em] text-text-on-ink-muted">
                 {trf("Hafta {n}", { n: weekNo })}
               </span>
               <span className="flex items-baseline gap-2 md:flex-col md:gap-1">
                 <span
                   dir="ltr"
-                  className="font-display text-sm font-semibold tabular-stat md:text-base"
+                  className="whitespace-nowrap font-display text-sm font-semibold tabular-stat"
                   style={{ color: weekCount ? tone(weekTotal).color : undefined }}
                 >
                   {weekCount ? formatUsd(weekTotal) : "—"}
