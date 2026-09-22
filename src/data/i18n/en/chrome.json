@@ -3742,5 +3742,12 @@
   "Ham petrol fiyatları cuma günü kayıpla seyretti: **WTI** günlük bazda **%0,69** düşüşle **101,21 dolara** indi.": "Crude oil prices traded lower on Friday: **WTI** dropped **0.69%** on the day to **$101.21**.",
   "18 Eylül 2026, 15.15 (TSİ)": "18 September 2026, 15.15 (TSİ)",
   "ABD Sanayi Üretimi Verisi": "US Industrial Production Data",
-  "ABD'de imalat, madencilik ve kamu hizmetleri sektörlerindeki toplam üretimdeki aylık değişimi ölçen sanayi üretimi verisi TSİ 15.15'te açıklanacak.": "Industrial production data, which measures the monthly change in total output from the manufacturing, mining and utilities sectors in the US, will be released at 15.15 (TSİ)."
+  "ABD'de imalat, madencilik ve kamu hizmetleri sektörlerindeki toplam üretimdeki aylık değişimi ölçen sanayi üretimi verisi TSİ 15.15'te açıklanacak.": "Industrial production data, which measures the monthly change in total output from the manufacturing, mining and utilities sectors in the US, will be released at 15.15 (TSİ).",
+  "İşlem Takvimi": "Trading Calendar",
+  "Önceki ay": "Previous month",
+  "Sonraki ay": "Next month",
+  "Bu ay": "This month",
+  "Ay toplamı": "Month total",
+  "{green}/{days} kârlı gün": "{green}/{days} profitable days",
+  "Hafta {n}": "Week {n}"
 }

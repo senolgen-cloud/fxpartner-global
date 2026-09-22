@@ -15,6 +15,7 @@ import TradeNowButton from "./TradeNowButton";
 import { useLiveQuotes, type LiveQuote } from "./useLiveQuotes";
 import { useCountUp } from "@/components/useCountUp";
 import AccountSummary, { type PeriodTotals } from "@/components/AccountSummary";
+import SignalCalendar from "@/components/SignalCalendar";
 import { favorableMove } from "@/lib/contractSizes";
 import { playChime, unlockAudio } from "@/lib/chime";
 import type { SignalPeriods } from "@/lib/signalPeriods";
@@ -35,6 +36,9 @@ const TICK_DOWN = "#e5484d";
 // the moment a tab comes back into view, so nobody is ever looking at a
 // board that is a poll period behind.
 const POLL_MS = 30000;
+// How many closed trades the board holds on to — the same number the page
+// loads (cachedSignalBoard(250) in signals/page.tsx). Polls only top it up.
+const CLOSED_KEEP = 250;
 
 function toSignal(s: SignalJson): Signal {
   return { ...s, createdAt: new Date(s.createdAt), closedAt: s.closedAt ? new Date(s.closedAt) : null };
@@ -206,7 +210,7 @@ function PeriodSummary({ closed, periods }: { closed: Signal[]; periods: SignalP
   );
 }
 
-function PipsStats({ closed }: { closed: Signal[] }) {
+function PipsStats({ closed, dayStart }: { closed: Signal[]; dayStart: number }) {
   const tr = useTr();
   const locale = useLocale();
   const trf = useTrf();
@@ -266,16 +270,10 @@ function PipsStats({ closed }: { closed: Signal[] }) {
   const avgDurationMs = durations.length ? durations.reduce((a, b) => a + b, 0) / durations.length : 0;
   const avgDurationLabel = formatDuration(avgDurationMs);
 
-  // Aylık 1-lot-başına P/L dağılımı.
-  const monthlyMap = new Map<string, number>();
-  for (const s of decisive) {
-    const d = s.closedAt ?? s.createdAt;
-    if (!d) continue;
-    const key = d.toLocaleDateString("en-US", { month: "short", year: "2-digit", timeZone: "UTC" });
-    monthlyMap.set(key, (monthlyMap.get(key) ?? 0) + parseFloat(s.profit ?? "0"));
-  }
-  const monthly = Array.from(monthlyMap.entries());
-  const monthlyMax = Math.max(1, ...monthly.map(([, v]) => Math.abs(v)));
+  // Günlük takvim — eski aylık çubukların yerini aldı (SignalCalendar.tsx).
+  const calendarTrades = decisive
+    .filter((s) => s.closedAt)
+    .map((s) => ({ closedAt: s.closedAt!, profit: parseFloat(s.profit as string), pair: s.pair }));
 
   // Per-pair breakdown.
   // Parite kırılımında toplamın yanına MEDYAN ve AYKIRI DEĞER işareti de
@@ -465,34 +463,13 @@ function PipsStats({ closed }: { closed: Signal[] }) {
         </div>
       </div>
 
-      {monthly.length > 1 && (
+      {calendarTrades.length > 0 && (
         <div className="mt-8 border-t border-hairline pt-6">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-text-on-ink-muted">
-            {tr("Aylık Fiyat Farkı")}
+            {tr("İşlem Takvimi")}
           </span>
-          <div className="mt-4 flex items-end gap-3">
-            {monthly.map(([month, value], i) => {
-              const barColor = value >= 0 ? TICK_UP : TICK_DOWN;
-              const heightPct = Math.max(4, (Math.abs(value) / monthlyMax) * 100);
-              return (
-                <div key={month} className="flex flex-1 flex-col items-center gap-2">
-                  <span className="font-mono text-[11px] font-medium" style={{ color: barColor }}>
-                    {formatPerLot(value)}
-                  </span>
-                  <div className="flex h-24 w-full items-end justify-center">
-                    <div
-                      className="w-full max-w-10 rounded-t-md monthly-bar-in"
-                      style={{
-                        height: `${heightPct}%`,
-                        background: barColor,
-                        animationDelay: `${i * 80}ms`,
-                      }}
-                    />
-                  </div>
-                  <span className="font-mono text-[10px] text-text-on-ink-muted">{month}</span>
-                </div>
-              );
-            })}
+          <div className="mt-4">
+            <SignalCalendar trades={calendarTrades} dayStart={dayStart} />
           </div>
         </div>
       )}
@@ -1348,7 +1325,20 @@ export default function SignalsBoard({
         const hasNewActiveSignal = data.active.some((s) => !knownIds.current.has(s.id));
         if (hasNewActiveSignal) playChime();
         setActive(data.active.map(toSignal));
-        setClosed(data.closed.map(toSignal));
+        // Merged, not replaced. The page renders with the last 250 closed
+        // trades (signals/page.tsx) but this route answers with 30 — it is
+        // the site's largest CPU consumer and runs every POLL_MS in every
+        // open tab. Replacing the list shrank the P/L total, the win rate,
+        // the pair breakdown and the trading calendar to 30 trades on the
+        // first tick after load. The 30 newest win on id (a result can be
+        // corrected); everything older is kept from what the page loaded.
+        setClosed((prev) => {
+          const fresh = data.closed.map(toSignal);
+          const freshIds = new Set(fresh.map((s) => s.id));
+          return [...fresh, ...prev.filter((s) => !freshIds.has(s.id))]
+            .sort((a, b) => (b.closedAt?.getTime() ?? 0) - (a.closedAt?.getTime() ?? 0))
+            .slice(0, CLOSED_KEEP);
+        });
         for (const s of [...data.active, ...data.closed]) knownIds.current.add(s.id);
       } catch {
         // Transient fetch failure — next poll tick will retry.
@@ -1549,7 +1539,7 @@ export default function SignalsBoard({
 
       <section className="border-b border-hairline">
         <div className="mx-auto max-w-6xl px-6 pb-16">
-          <PipsStats closed={closed} />
+          <PipsStats closed={closed} dayStart={periods.dayStart} />
         </div>
       </section>
 

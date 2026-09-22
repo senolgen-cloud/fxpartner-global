@@ -3742,5 +3742,12 @@
   "Ham petrol fiyatları cuma günü kayıpla seyretti: **WTI** günlük bazda **%0,69** düşüşle **101,21 dolara** indi.": "Ціни на сиру нафту в п'ятницю торгувалися нижче: **WTI** за день впала на **0,69%** до **101,21 долара**.",
   "18 Eylül 2026, 15.15 (TSİ)": "18 вересня 2026, 15.15 (TSİ)",
   "ABD Sanayi Üretimi Verisi": "Дані про промислове виробництво в США",
-  "ABD'de imalat, madencilik ve kamu hizmetleri sektörlerindeki toplam üretimdeki aylık değişimi ölçen sanayi üretimi verisi TSİ 15.15'te açıklanacak.": "Дані про промислове виробництво, які вимірюють щомісячну зміну загального обсягу випуску в обробній промисловості, видобувному секторі та комунальних підприємствах США, вийдуть о 15.15 (TSİ)."
+  "ABD'de imalat, madencilik ve kamu hizmetleri sektörlerindeki toplam üretimdeki aylık değişimi ölçen sanayi üretimi verisi TSİ 15.15'te açıklanacak.": "Дані про промислове виробництво, які вимірюють щомісячну зміну загального обсягу випуску в обробній промисловості, видобувному секторі та комунальних підприємствах США, вийдуть о 15.15 (TSİ).",
+  "İşlem Takvimi": "Торговий календар",
+  "Önceki ay": "Попередній місяць",
+  "Sonraki ay": "Наступний місяць",
+  "Bu ay": "Цей місяць",
+  "Ay toplamı": "Підсумок місяця",
+  "{green}/{days} kârlı gün": "{green}/{days} прибуткових днів",
+  "Hafta {n}": "Тиждень {n}"
 }

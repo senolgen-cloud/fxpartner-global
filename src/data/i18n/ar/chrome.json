@@ -3742,5 +3742,12 @@
   "Ham petrol fiyatları cuma günü kayıpla seyretti: **WTI** günlük bazda **%0,69** düşüşle **101,21 dolara** indi.": "تراجعت أسعار النفط الخام يوم الجمعة: حيث هبط خام **WTI** بنسبة **0.69%** خلال اليوم إلى **101.21 دولار**.",
   "18 Eylül 2026, 15.15 (TSİ)": "18 سبتمبر 2026، 15.15 (TSİ)",
   "ABD Sanayi Üretimi Verisi": "بيانات الإنتاج الصناعي الأمريكي",
-  "ABD'de imalat, madencilik ve kamu hizmetleri sektörlerindeki toplam üretimdeki aylık değişimi ölçen sanayi üretimi verisi TSİ 15.15'te açıklanacak.": "تصدر بيانات الإنتاج الصناعي، التي تقيس التغير الشهري في إجمالي الإنتاج في قطاعات الصناعة التحويلية والتعدين والمرافق في الولايات المتحدة، عند الساعة 15.15 (TSİ)."
+  "ABD'de imalat, madencilik ve kamu hizmetleri sektörlerindeki toplam üretimdeki aylık değişimi ölçen sanayi üretimi verisi TSİ 15.15'te açıklanacak.": "تصدر بيانات الإنتاج الصناعي، التي تقيس التغير الشهري في إجمالي الإنتاج في قطاعات الصناعة التحويلية والتعدين والمرافق في الولايات المتحدة، عند الساعة 15.15 (TSİ).",
+  "İşlem Takvimi": "تقويم التداول",
+  "Önceki ay": "الشهر السابق",
+  "Sonraki ay": "الشهر التالي",
+  "Bu ay": "هذا الشهر",
+  "Ay toplamı": "إجمالي الشهر",
+  "{green}/{days} kârlı gün": "{green}/{days} أيام رابحة",
+  "Hafta {n}": "الأسبوع {n}"
 }
