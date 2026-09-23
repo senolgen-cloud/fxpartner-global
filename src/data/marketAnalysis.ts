@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-23-1500",
+    title: "FXPARTNER Piyasa Özeti | 23.09.2026 Çarşamba Öğleden Sonra Güncellemesi",
+    excerpt:
+      "Dolar endeksi (DXY), çarşamba öğleden sonra Fed yetkililerinin şahin açıklamalarının etkisiyle yükselişini sürdürerek 100,90 civarına çıktı; bu, iki ayın en yüksek seviyesini işaret etti. Bu baskı altında altın, günlük bazda yaklaşık %1 değer kaybederek ons başına 4.315 dolar civarına geriledi. Richmond Fed Başkanı Thomas Barkin, geçen haftaki faiz artışının fiyat istikrarına katkı sağlayacağını ancak enflasyonun düşüşünün uzun sürebileceğini belirtirken, Boston Fed Başkanı Susan Collins enflasyonun %2 hedefinin belirgin şekilde üzerinde kalma olasılığının arttığını ve bu yıl bir faiz artışı daha gerektiğini söyledi. CME FedWatch verilerine göre piyasalar, ekim ayındaki toplantıda bir faiz artışı ihtimalini %53,1 olarak fiyatlıyor.",
+    publishedAt: "2026-09-23",
+    readingMinutes: 3,
+    intro:
+      "Çarşamba öğleden sonrasına doğru küresel piyasaların gündeminde, **dolar endeksi (DXY)**'nin **Fed** yetkililerinin şahin açıklamalarının ve piyasaların ek faiz artışı beklentilerinin etkisiyle yükselişini sürdürerek **100,90** civarına çıkması ve böylece iki ayın en yüksek seviyesine yaklaşması, bu baskı altında **altın**ın günlük bazda yaklaşık **%1** değer kaybederek ons başına **4.315 dolar** civarına gerilemesi ve **Richmond Fed Başkanı Thomas Barkin** ile **Boston Fed Başkanı Susan Collins**'in salı günü yaptıkları konuşmalarda şahin mesajlarını sürdürmesi öne çıktı. **Dolar endeksi (DXY)**, öğle saatlerindeki **100,70** seviyesinin üzerine çıkarak çarşamba öğleden sonra **100,90** civarına yükseldi; bu, iki ayın en yüksek seviyesini işaret etti ve yükselişte **Fed** yetkililerinin şahin açıklamalarının güçlendirdiği ilave faiz artışı beklentileri etkili oldu. Güçlenen dolar karşısında **altın**, günlük bazda yaklaşık **%1** değer kaybederek ons başına **4.315 dolar** civarına geriledi; önceki kapanış **4.363,74 dolar** seviyesindeydi. **Richmond Fed Başkanı Thomas Barkin**, salı günü yaptığı konuşmada geçen haftaki faiz artışının fiyat istikrarının yeniden tesis edilmesine katkı sağlayacağını, ancak enflasyonu besleyen arz şoklarının sönmesinin uzun sürebileceğini belirtti; Barkin, enflasyona yönelik risklerin istihdama yönelik risklerden daha ağır bastığını ve bu nedenle faiz artırdıklarını söyledi. **Boston Fed Başkanı Susan Collins** ise geçen haftaki faiz artışı kararını desteklediğini yinelerken, enflasyonun **%2** hedefinin belirgin şekilde üzerinde kalma olasılığının arttığını uyardı ve bu yıl içinde bir faiz artışı daha gerektiğini söyledi. **CME FedWatch** verilerine göre piyasalar, ekim ayındaki **Fed** toplantısında bir faiz artışı ihtimalini **%53,1** olarak fiyatlıyor. Piyasaların odağı şimdi bugün TSİ **16.45**'te açıklanacak **ABD S&P Global** öncü **PMI** verilerinde.",
+    news: [
+      {
+        icon: "💵",
+        heading: "Dolar İki Ayın Zirvesine Yaklaştı: DXY 100,90 Civarında",
+        body: "**Dolar endeksi (DXY)**, öğle saatlerindeki **100,70** seviyesinin üzerine çıkarak çarşamba öğleden sonra **100,90** civarına yükseldi; bu, iki ayın en yüksek seviyesini işaret etti. Yükselişte **Fed** yetkililerinin şahin açıklamalarının güçlendirdiği ilave faiz artışı beklentileri etkili oldu.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın Baskı Altında: Ons 4.315 Dolara Geriledi",
+        body: "Güçlenen dolar karşısında **altın**, günlük bazda yaklaşık **%1** değer kaybederek ons başına **4.315 dolar** civarına geriledi; önceki kapanış **4.363,74 dolar** seviyesindeydi. **CME FedWatch** verilerine göre piyasalar, ekim ayındaki **Fed** toplantısında bir faiz artışı ihtimalini **%53,1** olarak fiyatlıyor.",
+      },
+      {
+        icon: "🏦",
+        heading: "Fed'den Barkin ve Collins: Şahin Mesajlar Sürüyor",
+        body: "**Richmond Fed Başkanı Thomas Barkin**, salı günü yaptığı konuşmada geçen haftaki faiz artışının fiyat istikrarının yeniden tesis edilmesine katkı sağlayacağını, ancak enflasyonu besleyen arz şoklarının sönmesinin uzun sürebileceğini belirtti; enflasyona yönelik risklerin istihdama yönelik risklerden daha ağır bastığını söyledi. **Boston Fed Başkanı Susan Collins** ise geçen haftaki faiz artışı kararını desteklediğini yinelerken, enflasyonun **%2** hedefinin belirgin şekilde üzerinde kalma olasılığının arttığını uyardı ve bu yıl içinde bir faiz artışı daha gerektiğini söyledi.",
+      },
+    ],
+    calendarLabel: "21-27 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "23 Eylül 2026, 16.45 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD S&P Global İmalat ve Hizmet PMI Öncü Verileri",
+        note: "İmalat ve hizmet sektörlerindeki iş koşullarına dair öncü PMI verileri TSİ 16.45'te açıklanacak; veriler Fed'in faiz patikasına ilişkin beklentiler açısından yakından izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-23-1200",
     title: "FXPARTNER Piyasa Özeti | 23.09.2026 Çarşamba Öğle Güncellemesi",
     excerpt:
