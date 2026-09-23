@@ -41,6 +41,49 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-23-2100",
+    title: "FXPARTNER Piyasa Özeti | 23.09.2026 Çarşamba Gece Güncellemesi",
+    excerpt:
+      "ABD S&P Global öncü PMI verilerinin güçlü gelmesinin ardından enflasyon endişeleri yeniden fiyatlanırken, ABD 10 yıllık Hazine tahvili getirisi 13 baz puan birden yükselerek %5,10 seviyesine çıktı; bu, 2007 yılından bu yana görülen en yüksek seviyeyi işaret ediyor. Fed Guvernörü Michael Barr, Chicago'da bir konut konferansı için hazırladığı konuşmada, geçen haftaki çeyrek puanlık faiz artışının ardından bile yapılacak daha çok iş olduğunu belirterek enflasyonun zamanında hedefe düşürülmesi için ilave politika ayarlamalarına ihtiyaç duyulabileceğini söyledi; açıklamalar, piyasalarda ekim ayı FOMC toplantısında yeni bir faiz artışı beklentisini güçlendirdi. Yükselen tahvil getirileri ve petrol fiyatlarının baskısıyla Wall Street'te Nasdaq Bileşik Endeksi ve Russell 2000 endeksi %1'in üzerinde değer kaybetti. Piyasaların gözü şimdi, Çin Devlet Başkanı Xi Jinping'in Washington'daki resmi ziyareti kapsamında Başkan Trump ile perşembe günü gerçekleştireceği zirvede; görüşmede yapay zeka, tarifeler, nadir toprak elementleri ve İran savaşının ele alınması bekleniyor.",
+    publishedAt: "2026-09-23",
+    readingMinutes: 3,
+    intro:
+      "Çarşamba gece saatlerine doğru küresel piyasaların gündeminde, **ABD S&P Global** öncü **PMI** verilerinin güçlü gelmesinin ardından enflasyon endişelerinin yeniden fiyatlanmasıyla **ABD 10 yıllık Hazine tahvili** getirisinin **13 baz puan** birden yükselerek **%5,10** seviyesine çıkması ve böylece **2007** yılından bu yana en yüksek seviyesine ulaşması, **Fed Guvernörü Michael Barr**'ın **Chicago**'da bir konut konferansı için hazırladığı konuşmada şahin bir ton sergilemesi, bu gelişmelerin baskısıyla **Wall Street**'te **Nasdaq Bileşik Endeksi** ve **Russell 2000** endeksinin **%1**'in üzerinde değer kaybetmesi ve piyasaların gözünün şimdi **Çin Devlet Başkanı Xi Jinping**'in **Washington**'daki resmi ziyareti kapsamında **Başkan Trump** ile perşembe günü gerçekleştireceği zirveye çevrilmesi öne çıktı. **ABD 10 yıllık Hazine tahvili** getirisi, güçlü **PMI** verisinin körüklediği enflasyon endişeleriyle **13 baz puan** birden yükselerek **%5,10** seviyesine çıktı; bu, **2007** yılından bu yana görülen en yüksek seviyeyi işaret ediyor. **Fed Guvernörü Michael Barr**, **Chicago**'da bir konut konferansı için hazırladığı konuşmada, **Fed**'in geçen haftaki çeyrek puanlık faiz artışının ardından bile yapılacak daha çok iş olduğunu belirterek enflasyonun zamanında hedefe düşürülmesi için ilave politika ayarlamalarına ihtiyaç duyulabileceğini söyledi; Barr, geçen haftaki artışı önemli bir adım olarak nitelendirirken, komitenin bu adımdan önce faiz konusunda geride kaldığını ifade etti. Açıklamaların ardından piyasalarda **ekim ayı FOMC toplantısında** yeni bir faiz artışı beklentisi güçlendi. Yükselen tahvil getirileri ve petrol fiyatlarının baskısıyla **Wall Street**'te **Dow Jones**, **S&P 500** ve **Nasdaq** endeksleri günü düşüşle tamamladı; **Nasdaq Bileşik Endeksi** ve küçük ölçekli şirketleri temsil eden **Russell 2000** endeksi **%1**'in üzerinde değer kaybetti. Satışlar, yarın **Washington**'da gerçekleşecek **Trump-Xi zirvesi** öncesinde risk iştahının zayıflamasıyla da örtüştü. **Çin Devlet Başkanı Xi Jinping**'in **23-25 Eylül** tarihleri arasındaki resmi **Washington** ziyareti kapsamında, **Başkan Trump** ile perşembe günü gerçekleştireceği zirve öncesinde piyasalarda temkinli bir iyimserlik hakim; görüşmede **yapay zeka**, tarifeler, **nadir toprak elementleri** ve **İran** savaşının ele alınması bekleniyor, piyasalar ise geçen sonbahar varılan ticaret ateşkesinin uzatılmasını umuyor. Piyasaların odağı şimdi yarın TSİ **15.30**'da açıklanacak **ABD haftalık işsizlik başvuruları** verisinde ve **Trump-Xi zirvesi**nden çıkacak sonuçlarda.",
+    news: [
+      {
+        icon: "📈",
+        heading: "ABD 10 Yıllık Tahvil Getirisi 2007'den Bu Yana Zirvede: %5,10'a Sıçradı",
+        body: "Güçlü **ABD S&P Global PMI** verisinin körüklediği enflasyon endişeleriyle **ABD 10 yıllık Hazine tahvili** getirisi **13 baz puan** birden yükselerek **%5,10** seviyesine çıktı; bu, **2007** yılından bu yana görülen en yüksek seviyeyi işaret ediyor. Getirilerdeki sert yükseliş, **Fed**'in **ekim ayında** ilave bir faiz artışına gidebileceği beklentilerini pekiştirdi.",
+      },
+      {
+        icon: "🏦",
+        heading: "Fed Guvernörü Barr'dan Şahin Mesaj: Daha Fazla Faiz Artışına İhtiyaç Var",
+        body: "**Fed Guvernörü Michael Barr**, **Chicago**'da bir konut konferansı için hazırladığı konuşmada, **Fed**'in geçen haftaki çeyrek puanlık faiz artışının ardından bile yapılacak daha çok iş olduğunu belirterek enflasyonun zamanında hedefe düşürülmesi için ilave politika ayarlamalarına ihtiyaç duyulabileceğini söyledi. Barr, geçen haftaki artışı önemli bir adım olarak nitelendirirken, komitenin bu adımdan önce faiz konusunda geride kaldığını ifade etti; açıklamaların ardından piyasalarda **ekim ayı FOMC toplantısında** yeni bir faiz artışı beklentisi güçlendi.",
+      },
+      {
+        icon: "📉",
+        heading: "Wall Street Geriledi: Nasdaq ve Russell 2000 %1'in Üzerinde Değer Kaybetti",
+        body: "Yükselen tahvil getirileri ve petrol fiyatlarının baskısıyla **Wall Street**'te **Dow Jones**, **S&P 500** ve **Nasdaq** endeksleri günü düşüşle tamamladı; **Nasdaq Bileşik Endeksi** ve küçük ölçekli şirketleri temsil eden **Russell 2000** endeksi **%1**'in üzerinde değer kaybetti. Satışlar, yarın **Washington**'da gerçekleşecek **Trump-Xi zirvesi** öncesinde risk iştahının zayıflamasıyla da örtüştü.",
+      },
+      {
+        icon: "🤝",
+        heading: "Trump-Xi Zirvesi Yarın Washington'da: Gündemde Ticaret, Yapay Zeka ve Nadir Toprak Elementleri Var",
+        body: "**Çin Devlet Başkanı Xi Jinping**'in **23-25 Eylül** tarihleri arasındaki resmi **Washington** ziyareti kapsamında, **Başkan Trump** ile perşembe günü gerçekleştireceği zirve öncesinde piyasalarda temkinli bir iyimserlik hakim. Görüşmede **yapay zeka**, tarifeler, **nadir toprak elementleri** ve **İran** savaşının ele alınması bekleniyor; piyasalar geçen sonbahar varılan ticaret ateşkesinin uzatılmasını umuyor.",
+      },
+    ],
+    calendarLabel: "21-27 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "24 Eylül 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Haftalık İşsizlik Başvuruları",
+        note: "ABD Çalışma Bakanlığı'nın haftalık işsizlik maaşı başvuru verileri TSİ 15.30'da açıklanacak; veriler işgücü piyasasının gücüne dair güncel bir gösterge sunacak ve Fed'in faiz patikası beklentilerini etkileyebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-23-1800",
     title: "FXPARTNER Piyasa Özeti | 23.09.2026 Çarşamba Akşam Güncellemesi",
     excerpt:
