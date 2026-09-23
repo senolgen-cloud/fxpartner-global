@@ -353,6 +353,39 @@ export const brokers: Broker[] = [
     },
     promotions: [
       {
+        // XM's OWN promotion, off the campaign mail sent 22.09.2026 and the
+        // registration confirmation that followed. Not to be confused with
+        // the FXPARTNER cashback below it: that one is our IB rebate, pays
+        // every day and needs no sign-up; this one is XM's, runs for four
+        // weeks, and pays nothing at all unless the client registers first.
+        //
+        // The $8 figure is from the confirmation mail ("400.000$'lık her
+        // işlem hacmi için 8$'a kadar"); the announcement mail only said
+        // "daha fazla". The ceiling wording — "kadar" — is kept because XM
+        // keeps it: the rate rises with volume and the mail never publishes
+        // the ladder, so a flat "8$ per 400K" would be our invention.
+        //
+        // Ends 20.10.2026: this entry has to come out (or move behind the
+        // evergreen one) when it does, or the site is advertising a closed
+        // promotion.
+        tag: "Süreli Kampanya",
+        title: "XM Sınırsız Nakit İadesi: 22 Eylül – 20 Ekim 2026",
+        intro:
+          "XM'in sınırsız nakit iadesi promosyonu geri döndü ve bu kez tüm varlıklarda geçerli. 22 Eylül – 20 Ekim 2026 arasında Standard ve Micro hesaplarınızda yaptığınız uygun işlemler hacme sayılıyor: 1.200.000 dolarlık işlem hacminde ilk 3 dolarlık iade, sonrasında her 400.000 dolarlık hacim için 8 dolara kadar iade. Toplam iadede üst sınır yok — ne kadar çok işlem yaparsanız iade oranınız da o kadar artıyor. Tek şart, işlem yapmadan önce promosyona kaydolmak.",
+        steps: [
+          "XM üye panelinden promosyona kaydol — kayıttan önceki işlemler hacme sayılmıyor.",
+          "Standard veya Micro hesabında istediğin varlıkta işlem yap; 1.200.000 $ hacimde ilk 3 $ iadeni al.",
+          "Her ek 400.000 $ hacim için 8 $'a kadar iade kazan; toplamda üst sınır yok.",
+          "Promosyon 20 Ekim'de bitince iadeni hesabından çek ya da yatırım için kullan.",
+        ],
+        note: "Promosyon kapsamında yalnızca Standard ve Micro hesaplardaki uygun işlemler sayılır ve bir işlemin sayılması için açılış ile kapanış fiyatı arasında en az %0,05 fark olması gerekir; her işlemin hacmi, pozisyon açıldığı andaki net varlıktan bonus kredisi çıkarılarak bulunan değerin net varlığa oranıyla belirlenir. Koşullar ve uygunluk ülkeye göre değişebilir; katılmadan önce güncel şartları XM'in resmi sitesinden teyit edin. Yatırım yapmak risk içerir, sermayeniz risk altında olabilir.",
+        image: "/campaigns/xmcashback720x400.png",
+        imageWidth: 1681,
+        imageHeight: 936,
+        ctaUrl: "https://bit.ly/xm-panel",
+        ctaLabel: "XM Üye Paneline Giriş Yap",
+      },
+      {
         tag: "Aktif Kampanya",
         title: "XM Nakit İadesi Kampanyası — Şimdiye Kadar 17.369$ Ödendi",
         intro:
