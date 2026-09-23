@@ -41,6 +41,49 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-23-1200",
+    title: "FXPARTNER Piyasa Özeti | 23.09.2026 Çarşamba Öğle Güncellemesi",
+    excerpt:
+      "Dolar endeksi (DXY), çarşamba öğle saatlerinde Fed'in bu yıl içinde en az bir faiz artışı daha yapacağına yönelik beklentilerle %0,15 yükselerek 100,70 seviyesine ulaştı; bu, yedi haftadan uzun süredir görülen en yüksek seviyeyi işaret etti. Bu baskı altında altın, %0,57 değer kaybederek ons başına 4.339,01 dolara geriledi. Euro bölgesinde açıklanan öncü PMI verileri beklentilerin üzerinde gelirken, bileşik endeks ağustostaki 52,0'den 53,1'e yükseldi. Brent petrol, İran'ın Hürmüz Boğazı'nı yeniden açmaya hazır olduğunu sinyal vermesi ve Suudi Arabistan'ın hasarlı boru hattını yeniden devreye almasıyla 100 doların altına inerek 98 dolar civarına gerilerken, BIST 100 endeksi salı gününü %1,04 düşüşle kapattıktan sonra çarşamba sabahı %0,35 daha geriledi.",
+    publishedAt: "2026-09-23",
+    readingMinutes: 3,
+    intro:
+      "Çarşamba öğle saatlerine doğru küresel piyasaların gündeminde, **dolar endeksi (DXY)**'nin **Fed**'in bu yıl içinde en az bir faiz artışı daha yapacağına yönelik beklentilerle **100,70** seviyesine yükselerek yedi haftanın en güçlü seviyesine ulaşması, bu baskı altında **altın**ın ons başına **4.339,01 dolara** gerilemesi, **euro bölgesi** ve **Almanya**'da açıklanan öncü **PMI** verilerinin beklentilerin üzerinde gelmesi, **Brent petrol**ün **İran**'ın **Hürmüz Boğazı**'nı yeniden açmaya hazır olduğunu sinyal vermesi ve **Suudi Aramco**'nun hasarlı boru hattını yeniden devreye almasıyla **100 doların** altına inmesi ve yurt içinde **BIST 100** endeksinin ikinci güne de düşüşle başlaması öne çıktı. **Dolar endeksi (DXY)**, çarşamba günü **%0,15** yükselerek **100,70** seviyesine ulaştı; bu, yedi haftadan uzun süredir görülen en yüksek seviyeyi işaret etti ve yükselişte **Fed** yetkililerinin şahin açıklamalarının güçlendirdiği ilave faiz artışı beklentileri etkili oldu. Güçlenen dolar karşısında **altın**, **%0,57** değer kaybederek ons başına **4.339,01 dolara** geriledi; önceki kapanış **4.363,74 dolar** seviyesindeydi. **Euro bölgesi**nde açıklanan öncü **HCOB PMI** verilerine göre bileşik endeks, **51,5** olan piyasa beklentisinin üzerinde, **ağustos**taki **52,0** seviyesinden **53,1**'e yükseldi; hizmet PMI'ı **51,7** beklentisinin ve önceki **51,6** okumasının üzerinde **53,0**'e sıçrarken, imalat PMI'ı **52,6**'ya gerilemesi beklenirken **52,7**'de yatay kaldı. **Almanya**'da ise imalat PMI'ı **54,5** beklentisinin ve önceki **54,3** okumasının altında **53,8**'e gerilerken, hizmet PMI'ı **ağustos**taki **49,7**'den **52,9**'a belirgin bir sıçrama kaydetti. **Brent petrol**, **İran**'ın **ABD**'nin askeri baskıyı hafifletip İran limanlarındaki ablukayı kaldırması halinde **Hürmüz Boğazı**'nı bir hafta içinde yeniden açmaya hazır olduğunu sinyal vermesi ve **Suudi Aramco**'nun **13 Eylül**'de drone saldırılarında hasar gören **Doğu-Batı Petrol Boru Hattı**'nı salı günü düşük kapasiteyle yeniden devreye almasıyla **100 doların** altına inerek **98 dolar** civarına geriledi; **Suudi Aramco**, hattın kapasitesini günlük yaklaşık **4 milyon varile** çıkarmayı hedefliyor. Yurt içinde, **BIST 100** endeksi salı gününü **%1,04** düşüşle **13.198,84** puandan kapattıktan sonra çarşamba sabahı **%0,35** düşüşle **13.152,37** puana geriledi; bankacılık endeksi **%0,19** yükselirken, holding endeksi **%1,56**, finansal kiralama ve faktoring endeksi ise **%8,59** değer kaybetti. Piyasaların odağı şimdi bugün TSİ **16.45**'te açıklanacak **ABD S&P Global** öncü **PMI** verilerinde.",
+    news: [
+      {
+        icon: "💵",
+        heading: "Dolar Endeksi Yedi Haftanın Zirvesinde: 100,70",
+        body: "**Dolar endeksi (DXY)**, çarşamba günü **Fed**'in bu yıl içinde en az bir faiz artışı daha yapacağına yönelik güçlü beklentilerle **%0,15** yükselerek **100,70** seviyesine ulaştı; bu, yedi haftadan uzun süredir görülen en yüksek seviyeyi işaret etti. Güçlenen dolar karşısında **altın**, **%0,57** değer kaybederek ons başına **4.339,01 dolara** geriledi; önceki kapanış **4.363,74 dolar** seviyesindeydi.",
+      },
+      {
+        icon: "📊",
+        heading: "Euro Bölgesi ve Almanya'da Öncü PMI Verileri Beklentileri Aştı",
+        body: "**Euro bölgesi**nde açıklanan öncü **HCOB PMI** verilerine göre bileşik endeks, **51,5** olan piyasa beklentisinin üzerinde, **ağustos**taki **52,0** seviyesinden **53,1**'e yükseldi; hizmet PMI'ı **51,7** beklentisinin ve önceki **51,6** okumasının üzerinde **53,0**'e sıçrarken, imalat PMI'ı **52,6**'ya gerilemesi beklenirken **52,7**'de yatay kaldı. **Almanya**'da ise imalat PMI'ı **54,5** beklentisinin ve önceki **54,3** okumasının altında **53,8**'e gerilerken, hizmet PMI'ı **ağustos**taki **49,7**'den **52,9**'a belirgin bir sıçrama kaydetti.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol 100 Doların Altına İndi: Hürmüz Sinyali ve Suudi Boru Hattı",
+        body: "**Brent petrol**, **İran**'ın **ABD**'nin askeri baskıyı hafifletip İran limanlarındaki ablukayı kaldırması halinde **Hürmüz Boğazı**'nı bir hafta içinde yeniden açmaya hazır olduğunu sinyal vermesi ve **Suudi Aramco**'nun **13 Eylül**'de drone saldırılarında hasar gören **Doğu-Batı Petrol Boru Hattı**'nı salı günü düşük kapasiteyle yeniden devreye almasıyla **100 doların** altına inerek **98 dolar** civarına geriledi. **Suudi Aramco**, hattın kapasitesini günlük yaklaşık **4 milyon varile** çıkarmayı hedefliyor.",
+      },
+      {
+        icon: "📉",
+        heading: "BIST 100 İkinci Güne de Düşüşle Başladı",
+        body: "**BIST 100** endeksi, salı gününü **%1,04** düşüşle **13.198,84** puandan kapattıktan sonra çarşamba sabahı **%0,35** düşüşle **13.152,37** puana geriledi. Bankacılık endeksi **%0,19** yükselirken, holding endeksi **%1,56**, finansal kiralama ve faktoring endeksi ise **%8,59** değer kaybetti.",
+      },
+    ],
+    calendarLabel: "21-27 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "23 Eylül 2026, 16.45 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD S&P Global İmalat ve Hizmet PMI Öncü Verileri",
+        note: "İmalat ve hizmet sektörlerindeki iş koşullarına dair öncü PMI verileri TSİ 16.45'te açıklanacak; veriler Fed'in faiz patikasına ilişkin beklentiler açısından yakından izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-23-0900",
     title: "FXPARTNER Piyasa Özeti | 23.09.2026 Çarşamba Sabah Güncellemesi",
     excerpt:
