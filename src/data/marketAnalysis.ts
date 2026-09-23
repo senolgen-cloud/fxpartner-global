@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-23-0900",
+    title: "FXPARTNER Piyasa Özeti | 23.09.2026 Çarşamba Sabah Güncellemesi",
+    excerpt:
+      "Altın, salı günkü sert düşüşün ardından çarşamba sabahı ons başına yaklaşık 4.360 dolara toparlanırken, dolar endeksi (DXY) 100,43 ile iki ayın en güçlü seviyesine yakın seyrini korudu. Yurt içinde dolar/TL, TCMB'nin efektif satış kurunu 48,8934 liraya yükseltmesiyle tarihi zirvesini yenilemeye devam etti; serbest piyasada kur 48,82-48,85 TL bandında işlem gördü. Fed Başkan Yardımcısı Philip Jefferson ise salı günü New York Fed'de düzenlenen Hazine Piyasası Konferansı'nda reeskont penceresinin modernizasyonuna ilişkin değerlendirmelerde bulundu.",
+    publishedAt: "2026-09-23",
+    readingMinutes: 3,
+    intro:
+      "Çarşamba sabahına doğru küresel piyasaların gündeminde, **altın**ın salı günkü sert gerilemenin ardından ons başına **4.360 dolar** seviyesine toparlanması, **dolar endeksi (DXY)**'nin **100,43** ile iki ayın en güçlü seviyesine yakın seyrini koruması, yurt içinde **dolar/TL** kurunun **TCMB**'nin efektif satış kurunu **48,8934** liraya yükseltmesiyle tarihi zirvesini yenilemesi ve **Fed Başkan Yardımcısı Philip Jefferson**'ın salı günü **New York Fed**'de düzenlenen Hazine Piyasası Konferansı'nda reeskont penceresi modernizasyonuna ilişkin açıklamaları öne çıktı. **Altın**, salı günü **Fed** yetkililerinin şahin açıklamalarının ardından ons başına **4.300 dolar** seviyesine kadar gerilemişti; çarşamba sabahı ise toparlanarak **4.360 dolar** civarına yükseldi, gram altının satış fiyatı **6.852,11 TL**'ye, çeyrek altının satış fiyatı ise **11.203,20 TL**'ye çıktı. Buna karşın **dolar endeksi (DXY)**, **100,43** seviyesinde işlem görerek iki ayın en güçlü seviyesine yakın seyrini korudu ve doların güçlü kalması altın üzerindeki baskının tamamen kalkmadığına işaret etti. Yurt içinde, **TCMB** çarşamba günü doların gösterge kurunu alışta **48,7323**, satışta **48,8201** lira, efektif kurunu ise alışta **48,6982**, satışta **48,8934** lira olarak açıkladı; serbest piyasada **dolar/TL** **48,82-48,85 TL** bandında işlem görerek tarihi zirvesini yenilemeye devam etti. **ABD**'de, **Fed Başkan Yardımcısı Philip Jefferson**, salı günü **New York Fed**'de düzenlenen **2026 ABD Hazine Piyasası Konferansı**'nda yaptığı konuşmada, reeskont penceresindeki modernizasyon çalışmalarının bankalara daha güvenilir bir likidite kaynağı sağladığını ve Hazine tahvillerinin zorunlu satışı riskini azaltarak piyasa stresi dönemlerinde bir şok emici görevi gördüğünü belirtti; kendi kendine hizmet portalı **Discount Window Direct**'in artık reeskont penceresi kredilerinin **%60**'ını işlediğini aktardı. Piyasaların odağı şimdi bugün TSİ **16.45**'te açıklanacak **ABD S&P Global** öncü **PMI** verilerinde.",
+    news: [
+      {
+        icon: "🥇",
+        heading: "Altın Toparlandı: Ons 4.360 Dolara Yükseldi",
+        body: "**Altın**, salı günü **Fed** yetkililerinin şahin açıklamalarının ardından ons başına **4.300 dolar** seviyesine kadar gerilemişti; çarşamba sabahı ise toparlanarak **4.360 dolar** civarına yükseldi. Gram altının satış fiyatı **6.852,11 TL**'ye, çeyrek altının satış fiyatı ise **11.203,20 TL**'ye çıktı. Buna karşın **dolar endeksi (DXY)**, **100,43** seviyesinde işlem görerek iki ayın en güçlü seviyesine yakın seyrini korudu.",
+      },
+      {
+        icon: "🇹🇷",
+        heading: "Dolar/TL Zirvesini Yeniliyor: TCMB Efektif Satış Kuru 48,8934 Liraya Çıktı",
+        body: "**TCMB**, çarşamba günü doların gösterge kurunu alışta **48,7323**, satışta **48,8201** lira, efektif kurunu ise alışta **48,6982**, satışta **48,8934** lira olarak açıkladı. Serbest piyasada **dolar/TL** **48,82-48,85 TL** bandında işlem görerek tarihi zirvesini yenilemeye devam etti.",
+      },
+      {
+        icon: "🏦",
+        heading: "Fed'den Jefferson: Reeskont Penceresi Modernizasyonu Hazine Piyasasını Güçlendiriyor",
+        body: "**Fed Başkan Yardımcısı Philip Jefferson**, salı günü **New York Fed**'de düzenlenen **2026 ABD Hazine Piyasası Konferansı**'nda yaptığı konuşmada, reeskont penceresindeki modernizasyon çalışmalarının bankalara daha güvenilir bir likidite kaynağı sağladığını ve Hazine tahvillerinin zorunlu satışı riskini azaltarak piyasa stresi dönemlerinde bir şok emici görevi gördüğünü belirtti. **Jefferson**, kendi kendine hizmet portalı **Discount Window Direct**'in artık reeskont penceresi kredilerinin **%60**'ını işlediğini aktardı.",
+      },
+    ],
+    calendarLabel: "21-27 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "23 Eylül 2026, 16.45 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD S&P Global İmalat ve Hizmet PMI Öncü Verileri",
+        note: "İmalat ve hizmet sektörlerindeki iş koşullarına dair öncü PMI verileri TSİ 16.45'te açıklanacak; veriler Fed'in faiz patikasına ilişkin beklentiler açısından yakından izlenecek.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-22-1400",
     title: "FXPARTNER Piyasa Özeti | 22.09.2026 Salı Öğleden Sonra Güncellemesi",
     excerpt:
