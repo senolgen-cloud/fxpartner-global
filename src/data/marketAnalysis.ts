@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-23-1800",
+    title: "FXPARTNER Piyasa Özeti | 23.09.2026 Çarşamba Akşam Güncellemesi",
+    excerpt:
+      "ABD'de açıklanan Eylül ayı S&P Global öncü PMI verileri beklentilerin oldukça üzerinde geldi: bileşik PMI ağustostaki 56,0'dan 58,4'e yükselirken, imalat PMI'ı 53,6 beklentisinin üzerinde 57,0'a, hizmet PMI'ı ise 56,0 beklentisinin üzerinde 58,7'ye çıktı; S&P Global Baş İş Ekonomisti Chris Williamson, üretimin beş yılı aşkın sürenin en hızlı temposunda büyüdüğünü belirtti. Güçlü veri ve Fed'in şahin duruşu dolar endeksini (DXY) 30 Temmuz'dan bu yana en yüksek seviyesine, 101,00 civarına taşırken, 10 yıllık ABD tahvil getirisi %5'in üzerine çıktı. Altın ise güçlü dolar baskısı altında ons başına yaklaşık 4.314 dolar civarında, çarşamba öğleden sonraki seviyelerine yakın bir seyir izledi.",
+    publishedAt: "2026-09-23",
+    readingMinutes: 3,
+    intro:
+      "Çarşamba akşamına doğru küresel piyasaların gündeminde, **ABD**'de açıklanan Eylül ayı **S&P Global** öncü **PMI** verilerinin beklentilerin oldukça üzerinde gelmesi, bu güçlü verinin **Fed**'in şahin duruşuyla birleşerek **dolar endeksi (DXY)**'ni **30 Temmuz**'dan bu yana en yüksek seviyesine taşıması ve **10 yıllık ABD tahvil getirisi**nin **%5** üzerine çıkması, buna karşın **altın**ın günün önceki saatlerindeki seviyelerine yakın bir seyir izlemesi öne çıktı. **ABD S&P Global** bileşik **PMI** endeksi, **ağustos**taki **56,0** seviyesinden **58,4**'e yükseldi; imalat **PMI**'ı **53,6** olan piyasa beklentisinin ve önceki **53,9** okumasının üzerinde **57,0**'e, hizmet **PMI**'ı ise **56,0** beklentisinin ve önceki **56,5** okumasının üzerinde **58,7**'ye çıktı. **S&P Global Baş İş Ekonomisti Chris Williamson**, verilerin ardından yaptığı değerlendirmede **ABD** iş dünyasının büyümeyi sürdürdüğünü ve üretimin beş yılı aşkın bir sürenin en hızlı temposunda arttığını belirtirken, girdi maliyetlerindeki belirgin artışın **Fed**'in enflasyonla mücadelesini zorlaştırabilecek bir unsur olarak öne çıktığına dikkat çekti. Güçlü **PMI** verisi ve **Fed** yetkililerinin şahin açıklamaları, **dolar endeksi (DXY)**'ni **30 Temmuz**'dan bu yana en yüksek seviyesine, **101,00** civarına taşıdı; aynı dönemde **10 yıllık ABD Hazine tahvili** getirisi de **%5** eşiğinin üzerine çıktı. Buna karşın **altın**, güçlü dolar baskısı altında ons başına yaklaşık **4.314 dolar** civarında, çarşamba öğleden sonraki seviyelerine yakın bir seyir izledi. Piyasaların odağı şimdi yarın TSİ **15.30**'da açıklanacak **ABD haftalık işsizlik başvuruları** verisinde.",
+    news: [
+      {
+        icon: "📊",
+        heading: "ABD PMI Verileri Beklentileri Fena Halde Aştı: Bileşik Endeks 58,4'e Yükseldi",
+        body: "**ABD S&P Global** bileşik **PMI** endeksi, **ağustos**taki **56,0** seviyesinden **58,4**'e yükseldi; imalat **PMI**'ı **53,6** olan piyasa beklentisinin ve önceki **53,9** okumasının üzerinde **57,0**'e, hizmet **PMI**'ı ise **56,0** beklentisinin ve önceki **56,5** okumasının üzerinde **58,7**'ye çıktı. **S&P Global Baş İş Ekonomisti Chris Williamson**, **ABD** iş dünyasının büyümeyi sürdürdüğünü ve üretimin beş yılı aşkın bir sürenin en hızlı temposunda arttığını belirtirken, girdi maliyetlerindeki belirgin artışın **Fed**'in enflasyonla mücadelesini zorlaştırabilecek bir unsur olduğuna dikkat çekti.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar 30 Temmuz'dan Bu Yana En Yüksek Seviyede: Tahvil Getirisi %5'i Aştı",
+        body: "Güçlü **PMI** verisi ve **Fed** yetkililerinin şahin açıklamalarının etkisiyle **dolar endeksi (DXY)**, **30 Temmuz**'dan bu yana en yüksek seviyesine, **101,00** civarına yükseldi. Aynı dönemde **10 yıllık ABD Hazine tahvili** getirisi de **%5** eşiğinin üzerine çıkarak güçlü büyüme ve süregelen faiz artırım beklentilerinin fiyatlamalara yansıdığına işaret etti.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın Baskı Altında Yatay: Ons 4.314 Dolar Civarında",
+        body: "**Altın**, güçlenen dolar ve yükselen tahvil getirileri karşısında baskı altında kalmayı sürdürerek ons başına yaklaşık **4.314 dolar** civarında, çarşamba öğleden sonraki seviyelerine yakın bir seyir izledi. Güçlü **PMI** verisinin ardından pekişen **Fed** şahin algısı, kıymetli metaldeki toparlanma girişimlerini sınırlıyor.",
+      },
+    ],
+    calendarLabel: "21-27 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "24 Eylül 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Haftalık İşsizlik Başvuruları",
+        note: "ABD Çalışma Bakanlığı'nın haftalık işsizlik maaşı başvuru verileri TSİ 15.30'da açıklanacak; veriler işgücü piyasasının gücüne dair güncel bir gösterge sunacak ve Fed'in faiz patikası beklentilerini etkileyebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-23-1500",
     title: "FXPARTNER Piyasa Özeti | 23.09.2026 Çarşamba Öğleden Sonra Güncellemesi",
     excerpt:
