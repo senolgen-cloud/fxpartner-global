@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-24-2100",
+    title: "FXPARTNER Piyasa Özeti | 24.09.2026 Perşembe Gece Güncellemesi",
+    excerpt:
+      "Perşembe gecesine doğru ABD'de haftalık işsizlik başvurularının piyasa beklentisinin altında kalarak 197 bine gerilemesi dolar endeksini (DXY) yaklaşık iki ayın zirvesi olan 101,30 seviyesine taşıdı. Bu arada Avrupa Merkez Bankası (ECB) Yürütme Kurulu üyesi Isabel Schnabel, IMF'de üstleneceği yeni görev nedeniyle 3 Ocak 2027 itibarıyla görevinden ayrılacağını duyurdu; gelişme, Başkan Christine Lagarde ve Baş Ekonomist Philip Lane'in de gelecek yıl ayrılacak olmasıyla ECB üst yönetiminde geniş bir değişim dönemine işaret ediyor. Öte yandan, Çin Devlet Başkanı Xi Jinping'in on yılı aşkın süredir Washington'a gerçekleştirdiği ilk ziyareti kapsamında Başkan Trump ile Beyaz Saray'da gerçekleştirdiği ikili görüşme ortak bir bildiri olmadan sona erdi; Xi, Perşembe akşamı düzenlenecek resmi akşam yemeğinde de Trump'ın konuğu olacak.",
+    publishedAt: "2026-09-24",
+    readingMinutes: 3,
+    intro:
+      "Perşembe gece saatlerine doğru küresel piyasaların gündeminde, ABD'de haftalık işsizlik başvurularının piyasa beklentisi olan **201 bin** seviyesinin altında kalarak **197 bin**e gerilemesi ve bu güçlü işgücü piyasası verisinin **dolar endeksi (DXY)**'ni art arda dördüncü günde de yükselterek yaklaşık iki ayın en yüksek seviyesi olan **101,30** seviyesine taşıması öne çıktı. ABD'de haftalık işsizlik maaşı başvuruları son **57 yılın** en düşük seviyelerine yakın seyrini sürdürerek **197 bin**e geriledi; bu, ekonomistlerin **201 bin** olan beklentisinin altında kaldı ve **Fed**'in faiz artışı patikasını sürdürebileceği beklentilerini güçlendirdi. Bu arada **Avrupa Merkez Bankası (ECB)** Yürütme Kurulu üyesi **Isabel Schnabel**, Başkan **Christine Lagarde**'a **3 Ocak 2027** itibarıyla görevinden ayrılacağını bildirdi; **IMF** Genel Direktörü **Kristalina Georgieva**, Schnabel'i Fon'un Mali Danışmanı ve Parasal ve Sermaye Piyasaları Departmanı Direktörü olarak **4 Ocak 2027**'den itibaren atamayı planladığını duyurdu. Gelişme, Başkan **Lagarde**'ın görev süresinin gelecek **Ekim**'de sona erecek olması ve Baş Ekonomist **Philip Lane**'in de gelecek **Mayıs**'ta ayrılacak olmasıyla **ECB** üst yönetiminde geniş çaplı bir değişim döneminin kapıda olduğuna işaret ediyor. Öte yandan, **Çin Devlet Başkanı Xi Jinping**'in on yılı aşkın süredir **Washington**'a gerçekleştirdiği ilk ziyareti kapsamında **Başkan Trump** ile **Beyaz Saray**'da gerçekleştirdiği ikili görüşme, ortak bir basın toplantısı veya bildiri olmadan sona erdi; taraflar yerine ayrı ayrı açıklama yapacaklarını belirtti. **Xi**, Perşembe akşamı **East Room**'da düzenlenecek resmi akşam yemeğinde de **Trump**'ın konuğu olacak ve iki liderin açılış konuşmalarında **yapay zeka** güvenliğine özel önem verdiği görüldü; **Trump**, **Xi**'yi cuma günü **ABD**'nin kuruluşunun **250.** yıl dönümü kapsamında **Bağımsızlık Bildirgesi** ve **Anayasa**'nın sergilendiği **Ulusal Arşivler**'e de davet edeceğini açıkladı. Piyasaların odağı şimdi yarın TSİ **17.00**'de açıklanacak **Michigan Üniversitesi Tüketici Güven Endeksi**'nin nihai **Eylül** okumasında.",
+    news: [
+      {
+        icon: "💵",
+        heading: "Haftalık İşsizlik Başvuruları 197 Bine Düştü: Dolar Endeksi İki Ayın Zirvesinde",
+        body: "ABD'de haftalık işsizlik maaşı başvuruları, ekonomistlerin **201 bin** olan beklentisinin altında kalarak **197 bin**e geriledi ve son **57 yılın** en düşük seviyelerine yakın seyrini sürdürdü. Güçlü seyreden işgücü piyasası verisi **Fed**'in faiz artışı patikasını sürdürebileceği beklentilerini güçlendirirken, **dolar endeksi (DXY)** art arda dördüncü günde de yükselerek yaklaşık iki ayın en yüksek seviyesi olan **101,30** seviyesine çıktı.",
+      },
+      {
+        icon: "🏦",
+        heading: "ECB'de Üst Düzey Ayrılık: Isabel Schnabel IMF'ye Geçiyor",
+        body: "**Avrupa Merkez Bankası (ECB)** Yürütme Kurulu üyesi **Isabel Schnabel**, Başkan **Christine Lagarde**'a **3 Ocak 2027** itibarıyla görevinden ayrılacağını bildirdi. **IMF** Genel Direktörü **Kristalina Georgieva**, Schnabel'i Fon'un Mali Danışmanı ve Parasal ve Sermaye Piyasaları Departmanı Direktörü olarak **4 Ocak 2027**'den itibaren atamayı planladığını duyurdu. Gelişme, Başkan **Lagarde**'ın görev süresinin gelecek **Ekim**'de sona erecek olması ve Baş Ekonomist **Philip Lane**'in de gelecek **Mayıs**'ta ayrılacak olmasıyla **ECB** üst yönetiminde geniş çaplı bir değişim döneminin kapıda olduğuna işaret ediyor.",
+      },
+      {
+        icon: "🤝",
+        heading: "Trump-Xi Zirvesi Ortak Bildiri Olmadan Sona Erdi: Odak Akşam Yemeğine Kaydı",
+        body: "**Çin Devlet Başkanı Xi Jinping**'in on yılı aşkın süredir **Washington**'a gerçekleştirdiği ilk ziyareti kapsamında **Başkan Trump** ile **Beyaz Saray**'da gerçekleştirdiği ikili görüşme, ortak bir basın toplantısı veya bildiri olmadan sona erdi; taraflar yerine ayrı ayrı açıklama yapacaklarını belirtti. **Xi**, Perşembe akşamı **East Room**'da düzenlenecek resmi akşam yemeğinde de **Trump**'ın konuğu olacak; **Trump**, **Xi**'yi cuma günü **ABD**'nin kuruluşunun **250.** yıl dönümü kapsamında **Bağımsızlık Bildirgesi** ve **Anayasa**'nın sergilendiği **Ulusal Arşivler**'e de davet edeceğini açıkladı.",
+      },
+    ],
+    calendarLabel: "21-27 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "25 Eylül 2026, 17.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Michigan Üniversitesi Tüketici Güven Endeksi (Nihai)",
+        note: "Michigan Üniversitesi'nin Eylül ayına ilişkin nihai tüketici güveni ve enflasyon beklentileri verisi TSİ 17.00'de açıklanacak; veri, hanehalkının enflasyon algısına dair güncel bir gösterge sunarak Fed'in faiz patikası beklentilerini etkileyebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-24-1800",
     title: "FXPARTNER Piyasa Özeti | 24.09.2026 Perşembe Akşam Güncellemesi",
     excerpt:
