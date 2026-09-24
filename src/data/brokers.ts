@@ -292,9 +292,15 @@ export const brokers: Broker[] = [
     logo: "/brokers/xm.png",
     // Share preview runs the current campaign creative, same as Lite Finance.
     ogImage: "/campaigns/XM-cashback.png",
-    adImage: "/campaigns/xm-100bonus-reklam.png",
-    adImageWidth: 1672,
-    adImageHeight: 941,
+    // Owner's new cashback creative (24.09.2026), replacing the %100 bonus
+    // one. It is 4:3 rather than the 16:9 the other banners are, and it is
+    // used at its own ratio: the logo lockup sits at the top edge and the
+    // fxpartner.global button at the bottom, so a 16:9 crop would cut off
+    // both. The old creative stays in public/campaigns for the bonus
+    // campaign's own use.
+    adImage: "/reklam/xm-nakit-iadesi-fxpartner-2026.png",
+    adImageWidth: 1448,
+    adImageHeight: 1086,
     tagline: "MT4, MT5 ve XM App üzerinden işlem yapın",
     rating: 4.8,
     founded: 2009,
@@ -379,9 +385,14 @@ export const brokers: Broker[] = [
           "Promosyon 20 Ekim'de bitince iadeni hesabından çek ya da yatırım için kullan.",
         ],
         note: "Promosyon kapsamında yalnızca Standard ve Micro hesaplardaki uygun işlemler sayılır ve bir işlemin sayılması için açılış ile kapanış fiyatı arasında en az %0,05 fark olması gerekir; her işlemin hacmi, pozisyon açıldığı andaki net varlıktan bonus kredisi çıkarılarak bulunan değerin net varlığa oranıyla belirlenir. Koşullar ve uygunluk ülkeye göre değişebilir; katılmadan önce güncel şartları XM'in resmi sitesinden teyit edin. Yatırım yapmak risk içerir, sermayeniz risk altında olabilir.",
-        image: "/campaigns/xmcashback720x400.png",
-        imageWidth: 1681,
-        imageHeight: 936,
+        // No creative on purpose. This entry first carried
+        // /campaigns/xmcashback720x400.png, which is the FXPARTNER partner-code
+        // cashback artwork — it reads "gün sonunda geri iade alın" and "FXPARTNER
+        // ortak kodu ile açılan hesaplara özel", and both claims are false of THIS
+        // promotion: XM's runs on registration in XM's own panel and pays when the
+        // promotion closes on 20.10.2026. A campaign whose picture contradicts its
+        // terms is worse than one with no picture, so it renders in the logo+text
+        // layout until XM supplies artwork for this promotion.
         ctaUrl: "https://bit.ly/xm-panel",
         ctaLabel: "XM Üye Paneline Giriş Yap",
       },
