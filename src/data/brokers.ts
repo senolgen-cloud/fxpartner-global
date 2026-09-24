@@ -301,6 +301,18 @@ export const brokers: Broker[] = [
     adImage: "/reklam/xm-nakit-iadesi-fxpartner-2026.png",
     adImageWidth: 1448,
     adImageHeight: 1086,
+    // The same creative in two languages. Ukrainian and Arabic have no
+    // artwork of their own yet, and they are pointed at the English one
+    // rather than left on the Turkish fallback: a reader in Kyiv or Cairo
+    // is far likelier to read "Trade with XM. Earn cashback." than
+    // "İşlem yapın. Nakit iadesi alın." Swap them to their own creative
+    // the moment one exists — the pattern is Lite Finance's below.
+    adImageByLocale: {
+      tr: { src: "/reklam/xm-nakit-iadesi-fxpartner-2026.png", width: 1448, height: 1086 },
+      en: { src: "/reklam/xm-global-cashback-2026-fxpartner-en.png", width: 1448, height: 1086 },
+      ua: { src: "/reklam/xm-global-cashback-2026-fxpartner-en.png", width: 1448, height: 1086 },
+      ar: { src: "/reklam/xm-global-cashback-2026-fxpartner-en.png", width: 1448, height: 1086 },
+    },
     tagline: "MT4, MT5 ve XM App üzerinden işlem yapın",
     rating: 4.8,
     founded: 2009,
