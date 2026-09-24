@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-24-1200",
+    title: "FXPARTNER Piyasa Özeti | 24.09.2026 Perşembe Öğle Güncellemesi",
+    excerpt:
+      "ABD Hazine Bakanı Scott Bessent, Çin Devlet Başkanı Xi Jinping'in resmi Washington ziyareti kapsamındaki zirve öncesinde, kasım ayında sona ermesi planlanan ABD-Çin ticaret ateşkesinin 10 Ocak'a kadar uzatıldığını açıkladı; Bessent, bu ekonomik yatışmayı \"Busan Anlaşması\" olarak nitelendirdi. Gelişme, Bessent ile Çin Başbakan Yardımcısı He Lifeng arasında gerçekleşen plan dışı bir görüşmenin ardından geldi ve Xi'nin Washington'a inişiyle eşzamanlı olarak duyuruldu. Bu arada, çarşamba günkü güçlü ABD PMI verisinin etkisi sürerken CME FedWatch verilerine göre piyasaların ekim ayı FOMC toplantısında bir faiz artışı bekleme olasılığı %53'ten yaklaşık %70'e sıçradı; bu baskı altında altın bir haftanın en düşük seviyesi olan ons başına 4.275 dolara gerilerken, euro dolar karşısında yaklaşık iki ayın en düşük seviyesine yakın 1,1379 seviyesine indi.",
+    publishedAt: "2026-09-24",
+    readingMinutes: 3,
+    intro:
+      "Perşembe öğle saatlerine doğru küresel piyasaların gündeminde, **ABD Hazine Bakanı Scott Bessent**'in **Çin Devlet Başkanı Xi Jinping**'in resmi **Washington** ziyareti kapsamındaki zirve öncesinde **kasım** ayında sona ermesi planlanan **ABD-Çin ticaret ateşkesi**nin **10 Ocak**'a kadar uzatıldığını açıklaması ve bu arada **CME FedWatch** verilerine göre piyasaların **ekim ayı FOMC toplantısı**nda bir faiz artışı bekleme olasılığının **%53**'ten yaklaşık **%70**'e sıçraması öne çıktı. **Bessent**, **Çin Başbakan Yardımcısı He Lifeng** ile gerçekleştirdiği plan dışı bir görüşmenin ardından yaptığı açıklamada, kasım ayında sona ermesi planlanan ticaret ateşkesinin **10 Ocak**'a kadar uzatıldığını duyurdu ve bu ekonomik yatışmayı **\"Busan Anlaşması\"** olarak nitelendirdi; gelişme, **Xi Jinping**'in devlet ziyareti için **Washington**'a inişiyle eşzamanlı olarak duyuruldu. Bu arada, çarşamba günü açıklanan güçlü **ABD S&P Global PMI** verisinin etkisi piyasalarda sürerken, **CME FedWatch** verilerine göre piyasaların **ekim ayı FOMC toplantısı**nda bir faiz artışı bekleme olasılığı sabah saatlerindeki **%53** seviyesinden yaklaşık **%70**'e sıçradı. Yükselen faiz artışı beklentileri karşısında **altın**, bir haftanın en düşük seviyesi olan ons başına **4.275 dolar**a gerilerken, **euro** da dolar karşısında yaklaşık iki ayın en düşük seviyesine yakın **1,1379** seviyesine indi. Piyasaların odağı şimdi yarın TSİ **17.00**'de açıklanacak **Michigan Üniversitesi Tüketici Güven Endeksi**'nin nihai **Eylül** okumasında ve **Trump-Xi zirvesi**nden çıkacak sonuçlarda.",
+    news: [
+      {
+        icon: "🤝",
+        heading: "ABD-Çin Ticaret Ateşkesi 10 Ocak'a Uzatıldı: Xi Washington'da",
+        body: "**ABD Hazine Bakanı Scott Bessent**, **Çin Başbakan Yardımcısı He Lifeng** ile gerçekleştirdiği plan dışı bir görüşmenin ardından, **kasım** ayında sona ermesi planlanan **ABD-Çin ticaret ateşkesi**nin **10 Ocak**'a kadar uzatıldığını açıkladı ve bu ekonomik yatışmayı **\"Busan Anlaşması\"** olarak nitelendirdi. Gelişme, **Çin Devlet Başkanı Xi Jinping**'in resmi devlet ziyareti için **Washington**'a inişiyle eşzamanlı olarak duyuruldu; **Xi**, **Başkan Trump** ile perşembe günü bir araya gelecek.",
+      },
+      {
+        icon: "🥇",
+        heading: "Ekim Faiz Artışı İhtimali %70'e Sıçradı: Altın Bir Haftanın Dibinde",
+        body: "Çarşamba günü açıklanan güçlü **ABD S&P Global PMI** verisinin etkisiyle **CME FedWatch** verilerine göre piyasaların **ekim ayı FOMC toplantısı**nda bir faiz artışı bekleme olasılığı sabah saatlerindeki **%53** seviyesinden yaklaşık **%70**'e sıçradı. Yükselen faiz artışı beklentileri karşısında **altın**, bir haftanın en düşük seviyesi olan ons başına **4.275 dolar**a geriledi.",
+      },
+      {
+        icon: "💶",
+        heading: "Euro İki Ayın Dibine Yaklaştı: EUR/USD 1,1379 Seviyesinde",
+        body: "Güçlenen **ekim ayı faiz artışı** beklentileri ve **Fed**'in şahin duruşunun sürmesiyle **euro**, dolar karşısındaki değer kaybını derinleştirerek yaklaşık iki ayın en düşük seviyesine yakın **1,1379** seviyesine indi. **Dolar endeksi (DXY)**, çarşamba akşamki **101,00** civarındaki güçlü seviyesine yakın seyrini sürdürüyor.",
+      },
+    ],
+    calendarLabel: "21-27 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "25 Eylül 2026, 17.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Michigan Üniversitesi Tüketici Güven Endeksi (Nihai)",
+        note: "Michigan Üniversitesi'nin Eylül ayına ilişkin nihai tüketici güveni ve enflasyon beklentileri verisi TSİ 17.00'de açıklanacak; veri, hanehalkının enflasyon algısına dair güncel bir gösterge sunarak Fed'in faiz patikası beklentilerini etkileyebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-24-0900",
     title: "FXPARTNER Piyasa Özeti | 24.09.2026 Perşembe Sabah Güncellemesi",
     excerpt:
