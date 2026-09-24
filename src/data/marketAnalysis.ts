@@ -41,6 +41,49 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-24-1800",
+    title: "FXPARTNER Piyasa Özeti | 24.09.2026 Perşembe Akşam Güncellemesi",
+    excerpt:
+      "Perşembe akşamına doğru küresel piyasalarda tahvil getirilerindeki sert yükseliş öne çıktı: ABD 10 yıllık Hazine tahvili getirisi %5,142 ile Temmuz 2007'den bu yana en yüksek seviyesine çıkarken, 30 yıllık tahvil getirisi %5,438 ile 2004 sonrası zirvesini gördü ve 2 yıllık tahvil getirisi 2023'ten bu yana en yüksek seviyesi olan %4,897'ye yükseldi. Yükselen getirilerin baskısıyla Wall Street'te S&P 500 endeksi %0,51, Dow Jones Endeksi %0,32, Nasdaq Bileşik Endeksi ise %0,78 değer kaybetti. Bu arada Suudi Arabistan'ın Doğu-Batı Boru Hattı'nı yeniden devreye almasının ve BM Genel Kurulu kapsamındaki İran-ABD görüşmelerinin ortak bildiri olmadan sona ermesinin ardından Brent petrol varil başına 4,77 dolar gerileyerek 96,84 dolara indi. Altın ise güne başladığı seviyeden 31,7 dolar kayıpla ons başına 4.254,3 dolara geriledi.",
+    publishedAt: "2026-09-24",
+    readingMinutes: 3,
+    intro:
+      "Perşembe akşam saatlerine doğru küresel piyasaların gündeminde **tahvil getirilerindeki** sert yükseliş öne çıktı. **ABD 10 yıllık Hazine tahvili** getirisi **%5,142** seviyesine tırmanarak **Temmuz 2007**'den bu yana en yüksek seviyesine ulaşırken, **30 yıllık tahvil** getirisi **%5,438** ile **2004** sonrası zirvesini gördü ve **2 yıllık tahvil** getirisi **2023**'ten bu yana en yüksek seviyesi olan **%4,897**'ye yükseldi. Güçlü **ABD PMI** verisiyle beslenen enflasyon endişeleri ve **Fed**'in sıkılaşma patikasını sürdüreceğine dair beklentiler, getirilerdeki yükselişin arkasındaki temel etken. Yükselen getirilerin baskısıyla **Wall Street**'te **S&P 500** endeksi **%0,51**, **Dow Jones Endeksi** **%0,32**, **Nasdaq Bileşik Endeksi** ise **%0,78** değer kaybetti. Emtia tarafında, **Suudi Arabistan**'ın drone saldırıları nedeniyle durdurulan **Doğu-Batı Boru Hattı**'nı yeniden devreye almasının ve **BM Genel Kurulu** kapsamındaki **İran-ABD** görüşmelerinin ortak bildiri olmadan sona ermesinin ardından **Brent petrol**, varil başına **4,77 dolar** gerileyerek **96,84 dolar**a indi; **İran Cumhurbaşkanı Mesud Pezeşkiyan**, yaptırımlar ve ablukanın sürmesi halinde **Hürmüz Boğazı**'ndan geçişi kısıtlayacaklarını yineledi. **Altın** ise yükselen tahvil getirileri ve güçlenen **dolar** baskısıyla güne başladığı seviyeden **31,7 dolar** kayıpla ons başına **4.254,3 dolar**a geriledi. Piyasaların odağı şimdi yarın TSİ **17.00**'de açıklanacak **Michigan Üniversitesi Tüketici Güven Endeksi**'nin nihai **Eylül** okumasında.",
+    news: [
+      {
+        icon: "📉",
+        heading: "Tahvil Getirilerinde Sert Yükseliş: 10 Yıllık %5,14'e, 30 Yıllık 2004 Sonrası Zirvede",
+        body: "**ABD 10 yıllık Hazine tahvili** getirisi perşembe günü **%5,142** seviyesine tırmanarak **Temmuz 2007**'den bu yana en yüksek seviyesine ulaştı. **30 yıllık tahvil** getirisi **%5,438** ile **2004** sonrası zirvesini görürken, **2 yıllık tahvil** getirisi **2023**'ten bu yana en yüksek seviyesi olan **%4,897**'ye yükseldi. Güçlü **ABD PMI** verisiyle beslenen enflasyon endişeleri ve **Fed**'in sıkılaşma patikasını sürdüreceğine dair beklentiler, getirilerdeki yükselişin arkasındaki temel etken.",
+      },
+      {
+        icon: "📊",
+        heading: "Wall Street Perşembe'yi de Kayıpla Kapattı: S&P 500 %0,51, Nasdaq %0,78 Geriledi",
+        body: "Yükselen tahvil getirilerinin baskısıyla **Wall Street**'te **S&P 500** endeksi **%0,51**, **Dow Jones Endeksi** **%0,32**, **Nasdaq Bileşik Endeksi** ise **%0,78** değer kaybetti. Yatırımcılar, yüksek petrol fiyatlarının enflasyonu canlı tutarak **Fed**'i faiz artışına zorlayabileceği endişesiyle risk iştahını kısıtlı tutuyor.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Brent Petrol Sert Geriledi: Suudi Boru Hattı Yeniden Devrede, İran Görüşmeleri Sonuçsuz",
+        body: "**Brent petrol**, **Suudi Arabistan**'ın drone saldırıları nedeniyle durdurulan **Doğu-Batı Boru Hattı**'nı yeniden devreye almasının ve **BM Genel Kurulu** kapsamındaki **İran-ABD** görüşmelerinin ortak bildiri olmadan sona ermesinin ardından varil başına **4,77 dolar** gerileyerek **96,84 dolar**a indi. **İran Cumhurbaşkanı Mesud Pezeşkiyan**, yaptırımlar ve ablukanın sürmesi halinde **Hürmüz Boğazı**'ndan geçişi kısıtlayacaklarını yineledi.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altında Kayıplar Derinleşti: Ons 4.254,3 Dolara Geriledi",
+        body: "**Altın**, yükselen tahvil getirileri ve güçlenen **dolar** baskısıyla güne başladığı seviyeden **31,7 dolar** kayıpla ons başına **4.254,3 dolar**a geriledi. Yatırımcılar, **ekim ayı FOMC toplantısı**nda faiz artışı olasılığının yüksek seyretmesini fiyatlamaya devam ediyor.",
+      },
+    ],
+    calendarLabel: "21-27 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "25 Eylül 2026, 17.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Michigan Üniversitesi Tüketici Güven Endeksi (Nihai)",
+        note: "Michigan Üniversitesi'nin Eylül ayına ilişkin nihai tüketici güveni ve enflasyon beklentileri verisi TSİ 17.00'de açıklanacak; veri, hanehalkının enflasyon algısına dair güncel bir gösterge sunarak Fed'in faiz patikası beklentilerini etkileyebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-24-1200",
     title: "FXPARTNER Piyasa Özeti | 24.09.2026 Perşembe Öğle Güncellemesi",
     excerpt:
