@@ -41,6 +41,49 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-24-0900",
+    title: "FXPARTNER Piyasa Özeti | 24.09.2026 Perşembe Sabah Güncellemesi",
+    excerpt:
+      "Çarşamba günü New York seansının kapanışında Wall Street geriledi: S&P 500 %0,75 düşüşle 7.706,03 puana, Nasdaq Bileşik Endeksi %1,13 düşüşle 26.936,04 puana, Dow Jones Endeksi ise 352,10 puan (%0,68) kayıpla 51.511,59 puana geriledi. Düşüşün arkasında, zayıf geçen bir ihale talebi ve güçlü ABD PMI verisinin etkisiyle 5 yıllık ABD Hazine tahvili getirisinin 20 baz puan birden yükselerek %5,03 seviyesine çıkması ve böylece 2007 yılından bu yana ilk kez %5 eşiğini aşması var; bu, 2023'te görülen %4,99'luk önceki zirveyi de geride bıraktı. Yükselen getiriler ve süregelen Fed şahinliğiyle dolar endeksi (DXY) yaklaşık yedi haftanın en yüksek seviyesi olan 101,00 civarına yükselirken, CME verilerine göre piyasalar ekim ayında yeni bir faiz artışına dönük olasılığı %53'e taşıdı. Petrol fiyatları ise Basra Körfezi bölgesindeki arz endişeleriyle 100 doların üzerinde kalmaya devam ederek Brent varil fiyatını 102,03 dolara taşıdı ve enflasyon baskılarını canlı tuttu.",
+    publishedAt: "2026-09-24",
+    readingMinutes: 3,
+    intro:
+      "Perşembe sabahına doğru küresel piyasaların gündeminde, çarşamba günü **New York** seansının kapanışında **Wall Street**'in gerilemesi, düşüşün arkasında zayıf geçen bir ihale talebi ve güçlü **ABD PMI** verisinin etkisiyle **5 yıllık ABD Hazine tahvili** getirisinin **20 baz puan** birden yükselerek **%5,03** seviyesine çıkması ve böylece **2007** yılından bu yana ilk kez **%5** eşiğini aşması, yükselen getiriler ve süregelen **Fed** şahinliğiyle **dolar endeksi (DXY)**'nin yaklaşık yedi haftanın en yüksek seviyesine yükselmesi ve **Basra Körfezi** bölgesindeki arz endişeleriyle **petrol** fiyatlarının **100 dolar**ın üzerinde kalmaya devam etmesi öne çıktı. **Wall Street**'te **S&P 500** endeksi **%0,75** düşüşle **7.706,03** puana, **Nasdaq Bileşik Endeksi** **%1,13** düşüşle **26.936,04** puana, **Dow Jones Endeksi** ise **352,10** puan (**%0,68**) kayıpla **51.511,59** puana geriledi. Düşüşün arkasındaki temel etken, **5 yıllık ABD Hazine tahvili** getirisinin zayıf geçen bir ihale talebi ve güçlü **ABD PMI** verisinin birleşik etkisiyle **20 baz puan** birden yükselerek **%5,03** seviyesine çıkması; bu, **2007** yılından bu yana görülen en yüksek seviyeyi işaret ediyor ve **2023**'te kaydedilen **%4,99**'luk önceki zirveyi de geride bırakıyor. Yükselen tahvil getirileri ve **Fed** yetkililerinin şahin duruşunun sürmesiyle **dolar endeksi (DXY)**, yaklaşık yedi haftanın en yüksek seviyesi olan **101,00** civarına yükseldi; **CME** verilerine göre piyasalar **ekim ayında** yeni bir faiz artışına dönük olasılığı **%53**'e taşıdı. **Petrol** fiyatları ise **Basra Körfezi** bölgesindeki arz endişeleriyle **100 dolar**ın üzerinde kalmaya devam ederek **Brent** varil fiyatını **102,03 dolar**a taşıdı ve enflasyon baskılarını canlı tuttu. Piyasaların odağı şimdi yarın TSİ **17.00**'de açıklanacak **Michigan Üniversitesi Tüketici Güven Endeksi**'nin nihai **Eylül** okumasında.",
+    news: [
+      {
+        icon: "📉",
+        heading: "Wall Street Çarşamba'yı Düşüşle Kapattı: S&P 500 %0,75, Nasdaq %1,13 Geriledi",
+        body: "**Wall Street**'te **S&P 500** endeksi **%0,75** düşüşle **7.706,03** puana, **Nasdaq Bileşik Endeksi** **%1,13** düşüşle **26.936,04** puana, **Dow Jones Endeksi** ise **352,10** puan (**%0,68**) kayıpla **51.511,59** puana geriledi. Satışların arkasında yükselen tahvil getirileri ve güçlenen dolar baskısı var.",
+      },
+      {
+        icon: "📈",
+        heading: "5 Yıllık Tahvil Getirisi 2007'den Bu Yana İlk Kez %5'i Aştı",
+        body: "**5 yıllık ABD Hazine tahvili** getirisi, zayıf geçen bir ihale talebi ve güçlü **ABD PMI** verisinin etkisiyle **20 baz puan** birden yükselerek **%5,03** seviyesine çıktı; bu, **2007** yılından bu yana görülen en yüksek seviyeyi işaret ediyor ve **2023**'te kaydedilen **%4,99**'luk önceki zirveyi de geride bırakıyor.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar Endeksi Yedi Haftanın Zirvesinde: Ekim Faiz Artışı Olasılığı %53'e Çıktı",
+        body: "Yükselen tahvil getirileri ve **Fed** yetkililerinin şahin duruşunun sürmesiyle **dolar endeksi (DXY)**, yaklaşık yedi haftanın en yüksek seviyesi olan **101,00** civarına yükseldi. **CME** verilerine göre piyasalar, **ekim ayı FOMC toplantısında** yeni bir faiz artışına dönük olasılığı **%53**'e taşıdı.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol 100 Doların Üzerinde: Basra Körfezi Endişeleri Enflasyon Baskısını Canlı Tutuyor",
+        body: "**Petrol** fiyatları, **Basra Körfezi** bölgesindeki arz endişeleriyle **100 dolar**ın üzerinde kalmaya devam ederek **Brent** varil fiyatını **102,03 dolar**a taşıdı. Yüksek enerji fiyatları, **Fed**'in enflasyonla mücadelesini zorlaştırabilecek bir unsur olarak öne çıkıyor.",
+      },
+    ],
+    calendarLabel: "21-27 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "25 Eylül 2026, 17.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "Michigan Üniversitesi Tüketici Güven Endeksi (Nihai)",
+        note: "Michigan Üniversitesi'nin Eylül ayına ilişkin nihai tüketici güveni ve enflasyon beklentileri verisi TSİ 17.00'de açıklanacak; veri, hanehalkının enflasyon algısına dair güncel bir gösterge sunarak Fed'in faiz patikası beklentilerini etkileyebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-23-2100",
     title: "FXPARTNER Piyasa Özeti | 23.09.2026 Çarşamba Gece Güncellemesi",
     excerpt:
