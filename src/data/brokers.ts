@@ -301,17 +301,20 @@ export const brokers: Broker[] = [
     adImage: "/reklam/xm-nakit-iadesi-fxpartner-2026.png",
     adImageWidth: 1448,
     adImageHeight: 1086,
-    // The same creative in two languages. Ukrainian and Arabic have no
-    // artwork of their own yet, and they are pointed at the English one
-    // rather than left on the Turkish fallback: a reader in Kyiv or Cairo
-    // is far likelier to read "Trade with XM. Earn cashback." than
-    // "İşlem yapın. Nakit iadesi alın." Swap them to their own creative
-    // the moment one exists — the pattern is Lite Finance's below.
+    // One creative per language, all four supplied by the owner. tr and en
+    // are the 4:3 build; ua and ar came as 16:9, so each carries its own
+    // size and none of them is cropped.
+    //
+    // ARABIC COPY: the sub-headline reads "افتح حسابك ادى XM" where it should
+    // read "لدى" — the lam is missing, and "ادى" is not a word in that
+    // sentence. Flagged to the owner on 24.09.2026; running it meanwhile on
+    // the owner's call. Replace the file when a corrected export arrives —
+    // the path stays the same, so nothing here changes.
     adImageByLocale: {
       tr: { src: "/reklam/xm-nakit-iadesi-fxpartner-2026.png", width: 1448, height: 1086 },
       en: { src: "/reklam/xm-global-cashback-2026-fxpartner-en.png", width: 1448, height: 1086 },
-      ua: { src: "/reklam/xm-global-cashback-2026-fxpartner-en.png", width: 1448, height: 1086 },
-      ar: { src: "/reklam/xm-global-cashback-2026-fxpartner-en.png", width: 1448, height: 1086 },
+      ua: { src: "/reklam/xm-global-cashback-2026-fxpartner-ua.png", width: 1672, height: 941 },
+      ar: { src: "/reklam/xm-global-cashback-2026-fxpartner-ar.png", width: 1672, height: 941 },
     },
     tagline: "MT4, MT5 ve XM App üzerinden işlem yapın",
     rating: 4.8,
