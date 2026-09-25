@@ -1,22 +1,22 @@
 name: Daily report
 
-# Gün sonu raporu — TSİ 00:00'da biten günün kaydı kanala düşer.
+# ZAMANLAMA VERCEL'E TAŞINDI (26.09.2026) — bkz. vercel.json.
 #
-# 21:00 UTC = 00:00 TSİ. Türkiye 2016'dan beri yıl boyu UTC+3, yaz saati
-# uygulaması yok, o yüzden tek bir saat yeterli.
+# Neden: iş akışı 25 Eylül 20:13 UTC'de main'e girdi, gönderim slotları
+# 21:00 ve 21:30 UTC'ydi ve ikisinde de hiç çalışma olmadı. Aynı gece
+# diğer zamanlanmış işler saatinde çalıştı (21:46, 22:30, 22:46), yani
+# sorun yeni bir cron tanımının GitHub tarafında geç devreye girmesiydi.
+# Depodaki eski not da aynı yöne işaret ediyor: buradaki */5 tanımlı bir iş
+# ortalama 55 dakikada bir çalışmış, arada 226 dakikaya kadar boşluk olmuş.
+# Raporun anlamı saatinde olmasında olduğu için zamanlama Vercel cron'una
+# alındı; Vercel isteği doğrudan üretim dağıtımına, CRON_SECRET'i Bearer
+# başlığıyla gönderiyor ve rota zaten tam olarak onu doğruluyor.
 #
-# GitHub cron'u ilan edilen dakikada çalışmaz: bu depoda */5 tanımlı bir iş
-# ortalama 55 dakikada bir çalıştı, arada 226 dakikaya kadar boşluk oldu.
-# Bu yüzden iki koruma var ve ikisi de rotanın içinde:
-#   • Tarihi rota kendisi hesaplıyor (lastCompletedDay), workflow'dan
-#     gelmiyor — 00:50'de çalışsa da doğru günü raporluyor.
-#   • Gönderim anahtarı tarihe bağlı, yani aynı gün için ikinci mesaj çıkmaz.
-# İkinci bir slot (21:30 UTC) ilkinin kaçtığı durumu kapatıyor; ilk mesaj
-# gitmişse ikinci çalışma "already posted" deyip çıkıyor.
+# Bu dosya elle tetikleme için duruyor: geçmiş bir günü yeniden yayınlamak
+# ya da Vercel bir gece atlarsa aynı akşam telafi etmek için. Rota tarihe
+# bağlı bir gönderim anahtarı tuttuğu için iki kanaldan da tetiklense aynı
+# gün için ikinci mesaj çıkmaz.
 on:
-  schedule:
-    - cron: "0 21 * * *"
-    - cron: "30 21 * * *"
   workflow_dispatch:
     inputs:
       date:
