@@ -3958,5 +3958,15 @@
   "Yatırımcıların bildirdiği süre — ölçüm değil, anket sonucu.": "Час, про який повідомляють інвестори — результат опитування, а не вимірювання.",
   "Bu broker için yeterli yatırımcı bildirimi yok.": "Недостатньо повідомлень інвесторів щодо цього брокера.",
   "{broker} özet bilgileri": "Ключові дані {broker}",
-  "Nakit İade": "Кешбек"
+  "Nakit İade": "Кешбек",
+  "Toplulukla güçlendirilmiş": "Створено спільнотою",
+  "Broker'ınızı göremiyor musunuz?": "Не бачите свого брокера?",
+  "Bir tane önerin.": "Запропонуйте його.",
+  "Broker ağımızı yatırımcı talebine göre genişletiyoruz. Kiminle işlem yaptığınızı söyleyin, listeye almak için inceleyelim.": "Ми розширюємо мережу брокерів за запитами інвесторів. Скажіть, з ким ви торгуєте, і ми розглянемо додавання до списку.",
+  "Hangi brokerı eklemeliyiz?": "Якого брокера нам додати?",
+  "Öneriniz doğrudan ekibimize ulaşır ve bir sonraki ortaklık görüşmelerimizi şekillendirir.": "Ваша пропозиція надходить напряму до нашої команди й визначає, які партнерства ми розглядатимемо далі.",
+  "Broker Öner": "Запропонувати брокера",
+  "ya da Telegram'dan yazın:": "або напишіть у Telegram:",
+  "Broker önerisi": "Пропозиція брокера",
+  "Hangi brokerla işlem yapıyorsunuz? Broker adı ve varsa hesap türünüzü yazmanız yeterli.": "З яким брокером ви торгуєте? Достатньо назви брокера та типу рахунку, якщо він є."
 }

@@ -5,6 +5,7 @@ import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales
 import { localizeBlogPost, localizeBlogPosts, localizeBrokers, trData } from "@/lib/localizeContent";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
+import SuggestBrokerCta from "@/components/SuggestBrokerCta";
 import BrokerList from "@/components/BrokerList";
 import ComparisonTable from "@/components/ComparisonTable";
 import WithdrawalSpeedTable from "@/components/WithdrawalSpeedTable";
@@ -375,6 +376,11 @@ export default async function BrokerlarPage({
             </div>
           </div>
         </section>
+
+        {/* Listenin sonu: brokerı listede olmayan ziyaretçi buraya kadar
+            gelip çıkıyordu. Sorduğumuz tek şey, ortaklık hattını besleyen
+            bilgi — kiminle işlem yaptığı. */}
+        <SuggestBrokerCta />
       </main>
       <Footer />
     </>

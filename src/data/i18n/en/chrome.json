@@ -3958,5 +3958,15 @@
   "Yatırımcıların bildirdiği süre — ölçüm değil, anket sonucu.": "The time investors report — a survey result, not a measurement.",
   "Bu broker için yeterli yatırımcı bildirimi yok.": "Not enough investor reports for this broker.",
   "{broker} özet bilgileri": "{broker} key facts",
-  "Nakit İade": "Cashback"
+  "Nakit İade": "Cashback",
+  "Toplulukla güçlendirilmiş": "Community powered",
+  "Broker'ınızı göremiyor musunuz?": "Cannot see your broker?",
+  "Bir tane önerin.": "Suggest one.",
+  "Broker ağımızı yatırımcı talebine göre genişletiyoruz. Kiminle işlem yaptığınızı söyleyin, listeye almak için inceleyelim.": "We expand our broker network based on investor demand. Tell us who you trade with and we will review them for the list.",
+  "Hangi brokerı eklemeliyiz?": "Which broker should we add?",
+  "Öneriniz doğrudan ekibimize ulaşır ve bir sonraki ortaklık görüşmelerimizi şekillendirir.": "Your suggestion reaches our team directly and shapes which partnerships we pursue next.",
+  "Broker Öner": "Suggest a Broker",
+  "ya da Telegram'dan yazın:": "or message us on Telegram:",
+  "Broker önerisi": "Broker suggestion",
+  "Hangi brokerla işlem yapıyorsunuz? Broker adı ve varsa hesap türünüzü yazmanız yeterli.": "Which broker do you trade with? Just the broker name and your account type, if you have one."
 }

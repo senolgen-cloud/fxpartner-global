@@ -3958,5 +3958,15 @@
   "Yatırımcıların bildirdiği süre — ölçüm değil, anket sonucu.": "المدة التي يبلّغ عنها المستثمرون — نتيجة استطلاع وليست قياساً.",
   "Bu broker için yeterli yatırımcı bildirimi yok.": "لا توجد بلاغات كافية من المستثمرين لهذا الوسيط.",
   "{broker} özet bilgileri": "المعلومات الأساسية لـ {broker}",
-  "Nakit İade": "استرداد نقدي"
+  "Nakit İade": "استرداد نقدي",
+  "Toplulukla güçlendirilmiş": "مدعوم بالمجتمع",
+  "Broker'ınızı göremiyor musunuz?": "ألا ترى وسيطك؟",
+  "Bir tane önerin.": "اقترح واحداً.",
+  "Broker ağımızı yatırımcı talebine göre genişletiyoruz. Kiminle işlem yaptığınızı söyleyin, listeye almak için inceleyelim.": "نوسّع شبكة الوسطاء لدينا وفقاً لطلب المستثمرين. أخبرنا مع من تتداول وسنراجع إضافته إلى القائمة.",
+  "Hangi brokerı eklemeliyiz?": "أي وسيط ينبغي أن نضيف؟",
+  "Öneriniz doğrudan ekibimize ulaşır ve bir sonraki ortaklık görüşmelerimizi şekillendirir.": "يصل اقتراحك إلى فريقنا مباشرةً ويحدّد الشراكات التي سنسعى إليها لاحقاً.",
+  "Broker Öner": "اقترح وسيطاً",
+  "ya da Telegram'dan yazın:": "أو راسلنا على Telegram:",
+  "Broker önerisi": "اقتراح وسيط",
+  "Hangi brokerla işlem yapıyorsunuz? Broker adı ve varsa hesap türünüzü yazmanız yeterli.": "مع أي وسيط تتداول؟ يكفي اسم الوسيط ونوع حسابك إن وُجد."
 }
