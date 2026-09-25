@@ -3909,5 +3909,19 @@
   "Aylık iade": "الاسترداد الشهري",
   "Yıllık iade": "الاسترداد السنوي",
   "{lots} lot": "{lots} لوت",
-  "Hesap: {lot} lot × günde {trades} işlem × ayda {days} işlem günü. Lot başına {rate} iade, 1 lotta 1 pip ≈ 10 $ varsayımıyla işlem maliyetinizi yaklaşık {pips} pip düşürür — nakit iadesi kâr değil, maliyet geri dönüşüdür ve kaybettiğiniz işlemde de ödenir.": "الحساب: {lot} لوت × {trades} صفقة يومياً × {days} يوم تداول شهرياً. وبمعدل {rate} لكل لوت، وبافتراض أن 1 نقطة ≈ 10$ على لوت واحد، تنخفض تكلفة تداولك بنحو {pips} نقطة — الاسترداد النقدي ليس ربحاً بل استرجاع للتكلفة، ويُدفع حتى عن الصفقات الخاسرة."
+  "Hesap: {lot} lot × günde {trades} işlem × ayda {days} işlem günü. Lot başına {rate} iade, 1 lotta 1 pip ≈ 10 $ varsayımıyla işlem maliyetinizi yaklaşık {pips} pip düşürür — nakit iadesi kâr değil, maliyet geri dönüşüdür ve kaybettiğiniz işlemde de ödenir.": "الحساب: {lot} لوت × {trades} صفقة يومياً × {days} يوم تداول شهرياً. وبمعدل {rate} لكل لوت، وبافتراض أن 1 نقطة ≈ 10$ على لوت واحد، تنخفض تكلفة تداولك بنحو {pips} نقطة — الاسترداد النقدي ليس ربحاً بل استرجاع للتكلفة، ويُدفع حتى عن الصفقات الخاسرة.",
+  "Takip Etseydiniz": "لو كنت قد تابعت",
+  "Yayınlanmış kapanmış sinyallerin hepsini sabit lotla alsaydınız bakiyeniz ne olurdu? Her işlemin sonucu kendi lotuna bölünüp sizin seçtiğiniz lotla yeniden çarpılıyor; komisyon, swap ve kayma hesaba katılmıyor.": "ماذا كان سيصبح رصيدك لو نفّذت كل إشارة مغلقة منشورة بحجم لوت ثابت؟ تُقسَّم نتيجة كل صفقة على حجم لوتها ثم تُضرب في الحجم الذي تختاره؛ العمولة ورسوم التبييت والانزلاق السعري غير محتسبة.",
+  "Başlangıç bakiyesi ($)": "الرصيد الابتدائي ($)",
+  "İşlem başına lot": "اللوت لكل صفقة",
+  "Hangi sinyaller": "أي إشارات",
+  "Ücretsiz forex": "فوركس مجاني",
+  "Bu seçimde kapanmış sinyal yok.": "لا توجد إشارات مغلقة في هذا التحديد.",
+  "Bugünkü bakiye": "الرصيد اليوم",
+  "Getiri": "العائد",
+  "En derin düşüş": "أعمق تراجع",
+  "İşlem": "الصفقات",
+  "Bu lot büyüklüğünde hesap {date} tarihinde sıfırlanırdı — {taken}. işlemde. Daha küçük lot ya da daha yüksek başlangıç bakiyesi deneyin; bu, sinyallerin değil pozisyon büyüklüğünün sonucudur.": "بهذا الحجم من اللوت كان الحساب سيُصفَّر في {date} — عند الصفقة {taken}. جرّب حجم لوت أصغر أو رصيداً ابتدائياً أعلى؛ فهذه نتيجة حجم المركز وليست نتيجة الإشارات.",
+  "{first} – {last} arasında yayınlanmış {count} kapanmış sinyal, işlem başına sabit {lot} lot. En düşük bakiye {low}. Komisyon, swap, kayma ve teminat gereksinimi hesaba katılmadı; her sinyalin yayınlandığı seviyeden alınıp kapandığı seviyede kapatıldığı varsayıldı. Geçmiş performans gelecekteki sonuçların garantisi değildir.": "{count} إشارة مغلقة نُشرت بين {first} و{last}، بحجم ثابت {lot} لوت لكل صفقة. أدنى رصيد {low}. العمولة ورسوم التبييت والانزلاق ومتطلبات الهامش غير محتسبة؛ ويُفترض الدخول في كل إشارة عند مستواها المنشور والخروج عند مستوى إغلاقها. الأداء السابق ليس ضماناً للنتائج المستقبلية.",
+  "Bu seçimde yalnızca {count} kapanmış işlem var. Bu kadar küçük bir örneklem bir sonuç değil, tesadüf de olabilir — {min} işlemin altındaki getiriyi ölçü olarak kullanmayın.": "لا توجد سوى {count} صفقة مغلقة في هذا التحديد. العينة بهذا الصغر قد تكون مصادفة لا نتيجة — لا تعتبر عائداً مبنياً على أقل من {min} صفقة مقياساً."
 }

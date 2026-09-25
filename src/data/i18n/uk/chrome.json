@@ -3909,5 +3909,19 @@
   "Aylık iade": "Кешбек за місяць",
   "Yıllık iade": "Кешбек за рік",
   "{lots} lot": "{lots} лотів",
-  "Hesap: {lot} lot × günde {trades} işlem × ayda {days} işlem günü. Lot başına {rate} iade, 1 lotta 1 pip ≈ 10 $ varsayımıyla işlem maliyetinizi yaklaşık {pips} pip düşürür — nakit iadesi kâr değil, maliyet geri dönüşüdür ve kaybettiğiniz işlemde de ödenir.": "Розрахунок: {lot} лота × {trades} угод на день × {days} торгових днів на місяць. За {rate} за лот і за умови, що 1 піп ≈ 10 $ на 1 лоті, ваші торгові витрати зменшуються приблизно на {pips} піпа — кешбек це не прибуток, а повернення витрат, і його виплачують навіть за збиткові угоди."
+  "Hesap: {lot} lot × günde {trades} işlem × ayda {days} işlem günü. Lot başına {rate} iade, 1 lotta 1 pip ≈ 10 $ varsayımıyla işlem maliyetinizi yaklaşık {pips} pip düşürür — nakit iadesi kâr değil, maliyet geri dönüşüdür ve kaybettiğiniz işlemde de ödenir.": "Розрахунок: {lot} лота × {trades} угод на день × {days} торгових днів на місяць. За {rate} за лот і за умови, що 1 піп ≈ 10 $ на 1 лоті, ваші торгові витрати зменшуються приблизно на {pips} піпа — кешбек це не прибуток, а повернення витрат, і його виплачують навіть за збиткові угоди.",
+  "Takip Etseydiniz": "Якби ви слідували",
+  "Yayınlanmış kapanmış sinyallerin hepsini sabit lotla alsaydınız bakiyeniz ne olurdu? Her işlemin sonucu kendi lotuna bölünüp sizin seçtiğiniz lotla yeniden çarpılıyor; komisyon, swap ve kayma hesaba katılmıyor.": "Яким був би ваш баланс, якби ви взяли кожен опублікований закритий сигнал фіксованим лотом? Результат кожної угоди ділиться на її власний лот і множиться на обраний вами; комісія, своп і прослизання не враховані.",
+  "Başlangıç bakiyesi ($)": "Початковий баланс ($)",
+  "İşlem başına lot": "Лотів на угоду",
+  "Hangi sinyaller": "Які сигнали",
+  "Ücretsiz forex": "Безкоштовні форекс",
+  "Bu seçimde kapanmış sinyal yok.": "У цій вибірці немає закритих сигналів.",
+  "Bugünkü bakiye": "Баланс сьогодні",
+  "Getiri": "Дохідність",
+  "En derin düşüş": "Найглибша просадка",
+  "İşlem": "Угоди",
+  "Bu lot büyüklüğünde hesap {date} tarihinde sıfırlanırdı — {taken}. işlemde. Daha küçük lot ya da daha yüksek başlangıç bakiyesi deneyin; bu, sinyallerin değil pozisyon büyüklüğünün sonucudur.": "За такого розміру лота рахунок був би обнулений {date} — на угоді {taken}. Спробуйте менший лот або більший початковий баланс; це наслідок розміру позиції, а не сигналів.",
+  "{first} – {last} arasında yayınlanmış {count} kapanmış sinyal, işlem başına sabit {lot} lot. En düşük bakiye {low}. Komisyon, swap, kayma ve teminat gereksinimi hesaba katılmadı; her sinyalin yayınlandığı seviyeden alınıp kapandığı seviyede kapatıldığı varsayıldı. Geçmiş performans gelecekteki sonuçların garantisi değildir.": "{count} закритих сигналів, опублікованих між {first} і {last}, фіксованим лотом {lot} на угоду. Найнижчий баланс {low}. Комісія, своп, прослизання та вимоги до маржі не враховані; припускається, що кожен сигнал відкрито за опублікованим рівнем і закрито за рівнем закриття. Минулі результати не гарантують майбутніх.",
+  "Bu seçimde yalnızca {count} kapanmış işlem var. Bu kadar küçük bir örneklem bir sonuç değil, tesadüf de olabilir — {min} işlemin altındaki getiriyi ölçü olarak kullanmayın.": "У цій вибірці лише {count} закритих угод. Така мала вибірка може бути випадковістю, а не результатом — не сприймайте дохідність менш ніж за {min} угод як показник."
 }

@@ -17,6 +17,7 @@ import { useCountUp } from "@/components/useCountUp";
 import AccountSummary, { type PeriodTotals } from "@/components/AccountSummary";
 import SignalCalendar from "@/components/SignalCalendar";
 import { EquityCurve, TradesTabs, type OpenPosition } from "@/components/SignalEquityPanel";
+import SignalFollowSimulator, { type SimTrade } from "@/components/SignalFollowSimulator";
 import { favorableMove } from "@/lib/contractSizes";
 import { playChime, unlockAudio } from "@/lib/chime";
 import type { SignalPeriods } from "@/lib/signalPeriods";
@@ -286,6 +287,18 @@ function PipsStats({
     .filter((s) => s.closedAt)
     .map((s) => ({ closedAt: s.closedAt!, profit: parseFloat(s.profit as string), pair: s.pair }));
 
+  // "Takip etseydiniz" simülasyonu için lot başına sonuç. Hesabın gerçek
+  // lotu 0,10 ile 10 arasında değişiyor; dolar sütununu doğrudan küçük bir
+  // bakiyeye uygulamak, o bakiyenin 10 lotluk pozisyon açabileceğini iddia
+  // etmek olurdu. Lotu bilinmeyen işlem simülasyona girmiyor.
+  const simTrades: SimTrade[] = decisive
+    .filter((s) => s.closedAt && s.volume && parseFloat(s.volume) > 0)
+    .map((s) => ({
+      closedAt: s.closedAt!,
+      pair: s.pair,
+      perLot: parseFloat(s.profit as string) / parseFloat(s.volume as string),
+    }));
+
   // Per-pair breakdown.
   // Parite kırılımında toplamın yanına MEDYAN ve AYKIRI DEĞER işareti de
   // hesaplanıyor.
@@ -451,6 +464,8 @@ function PipsStats({
           </div>
         </div>
       )}
+
+      <SignalFollowSimulator trades={simTrades} />
 
       {pairStats.length > 0 && (
         <div className="mt-8 border-t border-hairline pt-6">

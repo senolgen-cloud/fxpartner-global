@@ -3909,5 +3909,19 @@
   "Aylık iade": "Monthly rebate",
   "Yıllık iade": "Yearly rebate",
   "{lots} lot": "{lots} lots",
-  "Hesap: {lot} lot × günde {trades} işlem × ayda {days} işlem günü. Lot başına {rate} iade, 1 lotta 1 pip ≈ 10 $ varsayımıyla işlem maliyetinizi yaklaşık {pips} pip düşürür — nakit iadesi kâr değil, maliyet geri dönüşüdür ve kaybettiğiniz işlemde de ödenir.": "The maths: {lot} lots × {trades} trades a day × {days} trading days a month. At {rate} per lot, and assuming 1 pip ≈ $10 on 1 lot, your trading cost drops by roughly {pips} pips — cashback is not profit but a return of cost, and it is paid on losing trades too."
+  "Hesap: {lot} lot × günde {trades} işlem × ayda {days} işlem günü. Lot başına {rate} iade, 1 lotta 1 pip ≈ 10 $ varsayımıyla işlem maliyetinizi yaklaşık {pips} pip düşürür — nakit iadesi kâr değil, maliyet geri dönüşüdür ve kaybettiğiniz işlemde de ödenir.": "The maths: {lot} lots × {trades} trades a day × {days} trading days a month. At {rate} per lot, and assuming 1 pip ≈ $10 on 1 lot, your trading cost drops by roughly {pips} pips — cashback is not profit but a return of cost, and it is paid on losing trades too.",
+  "Takip Etseydiniz": "If You Had Followed",
+  "Yayınlanmış kapanmış sinyallerin hepsini sabit lotla alsaydınız bakiyeniz ne olurdu? Her işlemin sonucu kendi lotuna bölünüp sizin seçtiğiniz lotla yeniden çarpılıyor; komisyon, swap ve kayma hesaba katılmıyor.": "What would your balance be if you had taken every published closed signal at a fixed lot size? Each trade’s result is divided by its own lot size and multiplied again by the lot size you pick; commission, swap and slippage are not included.",
+  "Başlangıç bakiyesi ($)": "Starting balance ($)",
+  "İşlem başına lot": "Lots per trade",
+  "Hangi sinyaller": "Which signals",
+  "Ücretsiz forex": "Free forex",
+  "Bu seçimde kapanmış sinyal yok.": "No closed signals in this selection.",
+  "Bugünkü bakiye": "Balance today",
+  "Getiri": "Return",
+  "En derin düşüş": "Deepest drawdown",
+  "İşlem": "Trades",
+  "Bu lot büyüklüğünde hesap {date} tarihinde sıfırlanırdı — {taken}. işlemde. Daha küçük lot ya da daha yüksek başlangıç bakiyesi deneyin; bu, sinyallerin değil pozisyon büyüklüğünün sonucudur.": "At this lot size the account would have been wiped out on {date} — on trade {taken}. Try a smaller lot size or a higher starting balance; this is the result of position size, not of the signals.",
+  "{first} – {last} arasında yayınlanmış {count} kapanmış sinyal, işlem başına sabit {lot} lot. En düşük bakiye {low}. Komisyon, swap, kayma ve teminat gereksinimi hesaba katılmadı; her sinyalin yayınlandığı seviyeden alınıp kapandığı seviyede kapatıldığı varsayıldı. Geçmiş performans gelecekteki sonuçların garantisi değildir.": "{count} closed signals published between {first} and {last}, at a fixed {lot} lots per trade. Lowest balance {low}. Commission, swap, slippage and margin requirements are not included; every signal is assumed to be entered at its published level and closed at its closing level. Past performance is no guarantee of future results.",
+  "Bu seçimde yalnızca {count} kapanmış işlem var. Bu kadar küçük bir örneklem bir sonuç değil, tesadüf de olabilir — {min} işlemin altındaki getiriyi ölçü olarak kullanmayın.": "There are only {count} closed trades in this selection. A sample that small may be chance rather than a result — do not treat a return based on fewer than {min} trades as a measure."
 }
