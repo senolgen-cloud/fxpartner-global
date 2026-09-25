@@ -76,9 +76,38 @@ export const LITERAL_ROUTES: Record<string, Set<string>> = {
   "prop-firmalar": new Set(["indirim-kodlari"]),
 };
 
+/**
+ * Sections whose slugs come from the database but have a fixed SHAPE.
+ *
+ * /gun-sonu/<YYYY-MM-DD> is the day's report, built from the trades closed
+ * that day, so the full set of slugs cannot live in this file. The shape
+ * can: anything that is not a date, and any date that has not finished yet,
+ * is knowably not a page and gets a real 404 before the body streams.
+ *
+ * A valid past date with no closed trades still falls through to the
+ * streamed 404 page, exactly like the other database-fed sections above.
+ * Next marks that page noindex, so it is not indexed either way.
+ */
+const DATE_SHAPED_SECTIONS = new Set(["gun-sonu"]);
+
+const ISTANBUL_DAY = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Europe/Istanbul",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
+
 export function isUnknownSlug(path: string): boolean {
   const [, section, slug] = path.split("/");
   if (!section || !slug) return false;
+
+  if (DATE_SHAPED_SECTIONS.has(section)) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(slug)) return true;
+    // Bugün ve sonrası: gün bitmeden raporu olamaz. Karşılaştırma dizgi
+    // üzerinde, çünkü YYYY-MM-DD biçiminde sözlük sırası takvim sırasıdır.
+    return slug >= ISTANBUL_DAY.format(new Date());
+  }
+
   const known = KNOWN_SLUGS[section];
   if (!known) return false;
   if (LITERAL_ROUTES[section]?.has(slug)) return false;

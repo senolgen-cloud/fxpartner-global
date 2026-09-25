@@ -7,6 +7,7 @@ import { cashbackPrograms } from "@/data/cashback";
 import { marketAnalysisPosts } from "@/data/marketAnalysis";
 import { db } from "@/db";
 import { loadOptional } from "@/lib/dbOptional";
+import { getRecentReportDays } from "@/lib/dailyReport";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://fxpartner.global";
 
@@ -143,11 +144,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.5,
   }));
 
+  // Gün sonu raporları da satırlardan üretiliyor ve dizin sayfası dışında
+  // onlara işaret eden bir şey yok. Son 60 gün: daha eskisi kaydın kendisi
+  // için değerli ama tarama bütçesi için değil, ve dizin sayfasından
+  // ulaşılabilir kalıyorlar.
+  const { data: reportDays } = await loadOptional("sitemap: daily reports", [], () =>
+    getRecentReportDays(60)
+  );
+  const dailyReportRoutes: MetadataRoute.Sitemap = reportDays.map((d) => ({
+    url: `${SITE_URL}/gun-sonu/${d.date}`,
+    lastModified: new Date(`${d.date}T21:00:00Z`),
+    changeFrequency: "never",
+    priority: 0.5,
+  }));
+
   const turkishRoutes = [
     ...staticRoutes,
     ...brokerRoutes,
     ...propFirmRoutes,
     ...discountRoutes,
+    ...dailyReportRoutes,
     ...categoryRoutes,
     ...blogRoutes,
     ...cashbackSetupRoutes,

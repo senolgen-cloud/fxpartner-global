@@ -35,6 +35,11 @@ const DB_BACKED = new Set([
   "egitim", // lessons are rows in the education tables
   "haber-bulteni", // bulletins are generated and stored, not committed
   "cashback", // programmes are configured per broker at runtime
+  // Günün kapanan işlemlerinden üretiliyor. Slug listesi veritabanında ama
+  // BİÇİMİ sabit, o yüzden knownSlugs.ts'teki DATE_SHAPED_SECTIONS kuralı
+  // tarih olmayan ve henüz bitmemiş günleri gövde akmadan 404'lüyor; geriye
+  // yalnızca işlemsiz geçmiş günler kalıyor ve onlar da noindex.
+  "gun-sonu",
 ]);
 
 function sections(dir) {

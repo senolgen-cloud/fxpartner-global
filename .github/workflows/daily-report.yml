@@ -1,0 +1,38 @@
+name: Daily report
+
+# Gün sonu raporu — TSİ 00:00'da biten günün kaydı kanala düşer.
+#
+# 21:00 UTC = 00:00 TSİ. Türkiye 2016'dan beri yıl boyu UTC+3, yaz saati
+# uygulaması yok, o yüzden tek bir saat yeterli.
+#
+# GitHub cron'u ilan edilen dakikada çalışmaz: bu depoda */5 tanımlı bir iş
+# ortalama 55 dakikada bir çalıştı, arada 226 dakikaya kadar boşluk oldu.
+# Bu yüzden iki koruma var ve ikisi de rotanın içinde:
+#   • Tarihi rota kendisi hesaplıyor (lastCompletedDay), workflow'dan
+#     gelmiyor — 00:50'de çalışsa da doğru günü raporluyor.
+#   • Gönderim anahtarı tarihe bağlı, yani aynı gün için ikinci mesaj çıkmaz.
+# İkinci bir slot (21:30 UTC) ilkinin kaçtığı durumu kapatıyor; ilk mesaj
+# gitmişse ikinci çalışma "already posted" deyip çıkıyor.
+on:
+  schedule:
+    - cron: "0 21 * * *"
+    - cron: "30 21 * * *"
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Raporlanacak gün (YYYY-MM-DD). Boş bırakılırsa biten gün."
+        required: false
+        type: string
+
+jobs:
+  # Sosyal Medya & Topluluk Departmanı'na ait — src/lib/departments.ts.
+  daily-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger daily-report
+        run: |
+          URL="https://fxpartner.global/api/cron/daily-report"
+          if [ -n "${{ inputs.date }}" ]; then
+            URL="$URL?date=${{ inputs.date }}"
+          fi
+          curl -sf -w "\nHTTP %{http_code}\n" -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" "$URL"

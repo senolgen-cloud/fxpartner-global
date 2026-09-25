@@ -3968,5 +3968,22 @@
   "Broker Öner": "Suggest a Broker",
   "ya da Telegram'dan yazın:": "or message us on Telegram:",
   "Broker önerisi": "Broker suggestion",
-  "Hangi brokerla işlem yapıyorsunuz? Broker adı ve varsa hesap türünüzü yazmanız yeterli.": "Which broker do you trade with? Just the broker name and your account type, if you have one."
+  "Hangi brokerla işlem yapıyorsunuz? Broker adı ve varsa hesap türünüzü yazmanız yeterli.": "Which broker do you trade with? Just the broker name and your account type, if you have one.",
+  "Gün Sonu": "End of Day",
+  "Gün Sonu Raporları": "End-of-Day Reports",
+  "Gün Sonu Raporları | FXPARTNER": "End-of-Day Reports | FXPARTNER",
+  "{date} — Gün Sonu Raporu": "{date} — End-of-Day Report",
+  "{date} Gün Sonu Raporu — {total}": "{date} End-of-Day Report — {total}",
+  "{count} işlem kapandı, {wins} kazanç / {losses} kayıp. Günün tamamı: her işlemin paritesi, yönü ve sonucu.": "{count} trades closed, {wins} wins / {losses} losses. The whole day: every trade's instrument, direction and result.",
+  "Takip edilen MT5 hesabında gerçekleşen kâr/zarar — {count} kapanmış işlem.": "Realised profit/loss on the tracked MT5 account — {count} closed trades.",
+  "Günün özeti": "Summary of the day",
+  "{date} günü {count} işlem kapandı: {wins} kazanç, {losses} kayıp (başarı oranı %{rate}). Günün sonucu {total}. En iyi işlem {bestPair} üzerinde {best}, en kötüsü {worstPair} üzerinde {worst}.": "On {date}, {count} trades closed: {wins} wins, {losses} losses ({rate}% win rate). The day finished at {total}. The best trade was {best} on {bestPair}, the worst {worst} on {worstPair}.",
+  "Kapanan işlemler": "Closed trades",
+  "Saatler TSİ. Tutarlar, takip edilen hesabın o işlemde kullandığı lot büyüklüğüyle gerçekleşen kâr/zarardır; kendi lotunuzla sonuç farklı olur. Geçmiş performans gelecekteki sonuçların garantisi değildir.": "Times are Istanbul time. Amounts are the realised profit/loss at the lot size the tracked account actually used; your own lot size gives a different result. Past performance is no guarantee of future results.",
+  "Her gün TSİ 00:00'da o günün kaydı burada yayınlanır: kapanan her işlem, günün kâr/zararı ve başarı oranı. Kazanan gün de kaybeden gün de aynı yerde durur.": "Every day at midnight Istanbul time the day's record is published here: every closed trade, the day's profit or loss and the win rate. Winning days and losing days sit in the same place.",
+  "Takip edilen MT5 hesabında her gün kapanan işlemler, günlük kâr/zarar ve başarı oranı — gün gün, tek tek işlem listesiyle.": "Trades closed each day on the tracked MT5 account, the daily profit or loss and the win rate — day by day, with every single trade listed.",
+  "Yayınlanan gün": "Days published",
+  "Kârlı gün": "Profitable days",
+  "Toplam": "Total",
+  "Henüz yayınlanmış gün sonu raporu yok.": "No end-of-day report has been published yet."
 }

@@ -3968,5 +3968,22 @@
   "Broker Öner": "Запропонувати брокера",
   "ya da Telegram'dan yazın:": "або напишіть у Telegram:",
   "Broker önerisi": "Пропозиція брокера",
-  "Hangi brokerla işlem yapıyorsunuz? Broker adı ve varsa hesap türünüzü yazmanız yeterli.": "З яким брокером ви торгуєте? Достатньо назви брокера та типу рахунку, якщо він є."
+  "Hangi brokerla işlem yapıyorsunuz? Broker adı ve varsa hesap türünüzü yazmanız yeterli.": "З яким брокером ви торгуєте? Достатньо назви брокера та типу рахунку, якщо він є.",
+  "Gün Sonu": "Підсумок дня",
+  "Gün Sonu Raporları": "Підсумкові звіти дня",
+  "Gün Sonu Raporları | FXPARTNER": "Підсумкові звіти дня | FXPARTNER",
+  "{date} — Gün Sonu Raporu": "{date} — підсумковий звіт дня",
+  "{date} Gün Sonu Raporu — {total}": "Підсумковий звіт дня {date} — {total}",
+  "{count} işlem kapandı, {wins} kazanç / {losses} kayıp. Günün tamamı: her işlemin paritesi, yönü ve sonucu.": "Закрито {count} угод, {wins} прибуткових / {losses} збиткових. Весь день: інструмент, напрям і результат кожної угоди.",
+  "Takip edilen MT5 hesabında gerçekleşen kâr/zarar — {count} kapanmış işlem.": "Реалізований прибуток/збиток на відстежуваному рахунку MT5 — {count} закритих угод.",
+  "Günün özeti": "Підсумок дня",
+  "{date} günü {count} işlem kapandı: {wins} kazanç, {losses} kayıp (başarı oranı %{rate}). Günün sonucu {total}. En iyi işlem {bestPair} üzerinde {best}, en kötüsü {worstPair} üzerinde {worst}.": "{date} закрито {count} угод: {wins} прибуткових, {losses} збиткових (вінрейт {rate}%). Підсумок дня: {total}. Найкраща угода — {best} на {bestPair}, найгірша — {worst} на {worstPair}.",
+  "Kapanan işlemler": "Закриті угоди",
+  "Saatler TSİ. Tutarlar, takip edilen hesabın o işlemde kullandığı lot büyüklüğüyle gerçekleşen kâr/zarardır; kendi lotunuzla sonuç farklı olur. Geçmiş performans gelecekteki sonuçların garantisi değildir.": "Час за Стамбулом. Суми — реалізований прибуток/збиток за розміром лота, який фактично використав відстежуваний рахунок; з вашим лотом результат буде іншим. Минулі результати не гарантують майбутніх.",
+  "Her gün TSİ 00:00'da o günün kaydı burada yayınlanır: kapanan her işlem, günün kâr/zararı ve başarı oranı. Kazanan gün de kaybeden gün de aynı yerde durur.": "Щодня опівночі за Стамбулом тут публікується запис дня: кожна закрита угода, прибуток чи збиток дня та вінрейт. Прибуткові й збиткові дні стоять поруч.",
+  "Takip edilen MT5 hesabında her gün kapanan işlemler, günlük kâr/zarar ve başarı oranı — gün gün, tek tek işlem listesiyle.": "Угоди, закриті щодня на відстежуваному рахунку MT5, денний прибуток чи збиток і вінрейт — день за днем, з переліком кожної угоди.",
+  "Yayınlanan gün": "Опубліковано днів",
+  "Kârlı gün": "Прибуткові дні",
+  "Toplam": "Разом",
+  "Henüz yayınlanmış gün sonu raporu yok.": "Підсумкових звітів дня ще не опубліковано."
 }

@@ -3968,5 +3968,22 @@
   "Broker Öner": "اقترح وسيطاً",
   "ya da Telegram'dan yazın:": "أو راسلنا على Telegram:",
   "Broker önerisi": "اقتراح وسيط",
-  "Hangi brokerla işlem yapıyorsunuz? Broker adı ve varsa hesap türünüzü yazmanız yeterli.": "مع أي وسيط تتداول؟ يكفي اسم الوسيط ونوع حسابك إن وُجد."
+  "Hangi brokerla işlem yapıyorsunuz? Broker adı ve varsa hesap türünüzü yazmanız yeterli.": "مع أي وسيط تتداول؟ يكفي اسم الوسيط ونوع حسابك إن وُجد.",
+  "Gün Sonu": "نهاية اليوم",
+  "Gün Sonu Raporları": "تقارير نهاية اليوم",
+  "Gün Sonu Raporları | FXPARTNER": "تقارير نهاية اليوم | FXPARTNER",
+  "{date} — Gün Sonu Raporu": "{date} — تقرير نهاية اليوم",
+  "{date} Gün Sonu Raporu — {total}": "تقرير نهاية اليوم {date} — {total}",
+  "{count} işlem kapandı, {wins} kazanç / {losses} kayıp. Günün tamamı: her işlemin paritesi, yönü ve sonucu.": "أُغلقت {count} صفقة، {wins} رابحة / {losses} خاسرة. اليوم كاملاً: أداة كل صفقة واتجاهها ونتيجتها.",
+  "Takip edilen MT5 hesabında gerçekleşen kâr/zarar — {count} kapanmış işlem.": "الربح/الخسارة المحققة على حساب MT5 المتابَع — {count} صفقة مغلقة.",
+  "Günün özeti": "ملخص اليوم",
+  "{date} günü {count} işlem kapandı: {wins} kazanç, {losses} kayıp (başarı oranı %{rate}). Günün sonucu {total}. En iyi işlem {bestPair} üzerinde {best}, en kötüsü {worstPair} üzerinde {worst}.": "في {date} أُغلقت {count} صفقة: {wins} رابحة و{losses} خاسرة (نسبة نجاح {rate}%). نتيجة اليوم {total}. أفضل صفقة {best} على {bestPair}، وأسوأها {worst} على {worstPair}.",
+  "Kapanan işlemler": "الصفقات المغلقة",
+  "Saatler TSİ. Tutarlar, takip edilen hesabın o işlemde kullandığı lot büyüklüğüyle gerçekleşen kâr/zarardır; kendi lotunuzla sonuç farklı olur. Geçmiş performans gelecekteki sonuçların garantisi değildir.": "التوقيت بتوقيت إسطنبول. المبالغ هي الربح/الخسارة المحققة بحجم اللوت الذي استخدمه الحساب المتابَع فعلياً؛ وبحجم لوتك ستختلف النتيجة. الأداء السابق ليس ضماناً للنتائج المستقبلية.",
+  "Her gün TSİ 00:00'da o günün kaydı burada yayınlanır: kapanan her işlem, günün kâr/zararı ve başarı oranı. Kazanan gün de kaybeden gün de aynı yerde durur.": "كل يوم عند منتصف الليل بتوقيت إسطنبول يُنشر سجل اليوم هنا: كل صفقة مغلقة، وربح اليوم أو خسارته، ونسبة النجاح. الأيام الرابحة والخاسرة في المكان نفسه.",
+  "Takip edilen MT5 hesabında her gün kapanan işlemler, günlük kâr/zarar ve başarı oranı — gün gün, tek tek işlem listesiyle.": "الصفقات المغلقة يومياً على حساب MT5 المتابَع، وربح اليوم أو خسارته، ونسبة النجاح — يوماً بيوم مع سرد كل صفقة.",
+  "Yayınlanan gün": "الأيام المنشورة",
+  "Kârlı gün": "الأيام الرابحة",
+  "Toplam": "الإجمالي",
+  "Henüz yayınlanmış gün sonu raporu yok.": "لم يُنشر أي تقرير نهاية يوم بعد."
 }
