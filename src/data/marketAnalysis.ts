@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-25-2300",
+    title: "FXPARTNER Piyasa Özeti | 25.09.2026 Cuma Gece Güncellemesi",
+    excerpt:
+      "Cuma gecesine doğru Wall Street haftanın son işlem gününü karışık kapattı: Dow Jones Endeksi %0,31 (161,61 puan) değer kaybıyla 51.349,98 puandan, S&P 500 %0,02 düşüşle 7.704,13 puandan kapanırken, Nasdaq Bileşik Endeksi %0,01 hafif yükselişle 26.939,37 puana çıktı; petrol fiyatlarındaki gerileme haftanın büyük bölümüne damga vuran küresel tahvil satışını cuma günü durdurdu. Bu arada Japonya'da 10 yıllık devlet tahvili (JGB) getirisi 8 baz puan artışla Ağustos 1996'dan bu yana en yüksek seviye olan %3,055'e çıkarken, 30 yıllık getiri %4,134'e, 5 yıllık getiri ise rekor seviye olan %2,345'e yükseldi; zayıflayan yen dolar/yen paritesini psikolojik 160 eşiğine yaklaştırdı, dolar perşembe New York seansında 2 Eylül'den bu yana en zayıf seviyesi olan 159,04'e geriledi. Teknoloji tarafında ise Oracle, New Mexico'daki 165 milyar dolarlık Project Jupiter veri merkezi projesinde mücbir sebep bildirimi göndermesinin ardından perşembe günü hisseleri %3'ün üzerinde değer kaybetti; gelişme, yapay zeka veri merkezi yatırımlarının finansman ve borç yükü riskine dair endişeleri yeniden gündeme taşıdı.",
+    publishedAt: "2026-09-25",
+    readingMinutes: 3,
+    intro:
+      "Cuma gece saatlerine doğru küresel piyasaların gündeminde **Wall Street**'in haftanın son işlem gününü karışık bir kapanışla tamamlaması öne çıktı. **Dow Jones Endeksi**, **161,61 puan** (**%0,31**) değer kaybıyla **51.349,98** puandan kapanırken, **S&P 500** endeksi **%0,02** düşüşle **7.704,13** puandan, **Nasdaq Bileşik Endeksi** ise **%0,01** hafif yükselişle **26.939,37** puandan seansı tamamladı; haftanın büyük bölümüne damga vuran küresel tahvil satışının cuma günü petrol fiyatlarındaki gerilemeyle birlikte durulması, endekslerdeki kayıpları sınırlı tuttu. Tahvil piyasalarında asıl dikkat çeken gelişme ise **Japonya**'dan geldi: **10 yıllık Japon devlet tahvili (JGB)** getirisi 8 baz puan artışla **Ağustos 1996**'dan bu yana, yani yaklaşık **30 yılın** en yüksek seviyesi olan **%3,055**'e çıkarken, **30 yıllık JGB** getirisi yaklaşık 7 baz puan artışla **%4,134**'e, **5 yıllık JGB** getirisi ise rekor seviye olan **%2,345**'e yükseldi; yükselişte, **ABD tahvil getirilerindeki** sıçramanın Japonya'ya sirayet etmesi ve zayıflayan **yen** etkili oldu. **Dolar/yen** paritesi bu ortamda psikolojik **160** eşiğine yaklaşarak perşembe günü New York seansında **2 Eylül**'den bu yana en zayıf seviyesi olan **159,04**'e geriledi; **Japonya Merkez Bankası (BOJ)**'nın geçtiğimiz hafta piyasa katılımcılarıyla bir kur kontrolü (rate check) gerçekleştirdiği bildirilirken, yatırımcılar **160** seviyesine yaklaşılması halinde resmi müdahale riskini yakından izliyor. Teknoloji tarafında ise **Oracle**, **New Mexico** eyaletinde inşa ettiği ve **165 milyar dolar** değerindeki **Project Jupiter** veri merkezi kampüsü projesinde geliştirici **Blue Owl Capital**'a mücbir sebep (force majeure) bildirimi göndermesinin ardından perşembe günü hisseleri **%3**'ün üzerinde değer kaybetti; şirket, **18 milyar dolar**lık inşaat kredisiyle finanse edilen projenin devreye alınmasının, **New Mexico Eyalet Arazi Dairesi**'nin arazi geçiş izinlerini reddetmesi nedeniyle **Ağustos 2026** hedefinden **Şubat 2027**'ye ertelendiğini bildirdi; gelişme, **yapay zeka** temalı veri merkezi yatırımlarının finansman ve borç yükü riskine dair endişeleri yeniden piyasaların gündemine taşıdı. Piyasaların odağı şimdi pazartesi günü **Umman**'da gerçekleşecek **Körfez-İran** görüşmesinde ve gelecek hafta TSİ **15.30**'da açıklanacak **Eylül ayı ABD tarım dışı istihdam (NFP)** raporunda.",
+    news: [
+      {
+        icon: "📊",
+        heading: "Wall Street Haftayı Karışık Kapattı: Dow %0,31, S&P 500 %0,02 Geriledi, Nasdaq Hafif Yükseldi",
+        body: "**Wall Street**, haftanın son işlem gününü karışık bir kapanışla tamamladı. **Dow Jones Endeksi**, **161,61 puan** (**%0,31**) değer kaybıyla **51.349,98** puandan kapanırken, **S&P 500** endeksi **%0,02** düşüşle **7.704,13** puandan, **Nasdaq Bileşik Endeksi** ise **%0,01** hafif yükselişle **26.939,37** puandan seansı tamamladı. Haftanın büyük bölümüne damga vuran küresel tahvil satışının cuma günü petrol fiyatlarındaki gerilemeyle birlikte durulması, endekslerdeki kayıpları sınırlı tuttu.",
+      },
+      {
+        icon: "🇯🇵",
+        heading: "Japon Tahvil Getirileri 30 Yılın Zirvesinde: Yen 160'a Yaklaştı, Müdahale Riski Artıyor",
+        body: "**10 yıllık Japon devlet tahvili (JGB)** getirisi 8 baz puan artışla **Ağustos 1996**'dan bu yana en yüksek seviyesi olan **%3,055**'e çıkarken, **30 yıllık JGB** getirisi yaklaşık 7 baz puan artışla **%4,134**'e, **5 yıllık JGB** getirisi ise rekor seviye olan **%2,345**'e yükseldi; yükselişte **ABD tahvil getirilerindeki** sıçramanın Japonya'ya sirayet etmesi ve zayıflayan **yen** etkili oldu. **Dolar/yen** paritesi psikolojik **160** eşiğine yaklaşarak perşembe günü New York seansında **2 Eylül**'den bu yana en zayıf seviyesi olan **159,04**'e geriledi; **Japonya Merkez Bankası (BOJ)**'nın geçtiğimiz hafta piyasa katılımcılarıyla bir kur kontrolü gerçekleştirdiği bildirilirken, yatırımcılar resmi müdahale riskini yakından izliyor.",
+      },
+      {
+        icon: "💻",
+        heading: "Oracle'da Mücbir Sebep Şoku: Project Jupiter Veri Merkezinde Hisseler %3 Üzerinde Değer Kaybetti",
+        body: "**Oracle**, **New Mexico** eyaletinde inşa ettiği ve **165 milyar dolar** değerindeki **Project Jupiter** veri merkezi kampüsü projesinde geliştirici **Blue Owl Capital**'a mücbir sebep (force majeure) bildirimi göndermesinin ardından perşembe günü hisseleri **%3**'ün üzerinde değer kaybetti. Şirket, **18 milyar dolar**lık inşaat kredisiyle finanse edilen projenin devreye alınmasının, **New Mexico Eyalet Arazi Dairesi**'nin arazi geçiş izinlerini reddetmesi nedeniyle **Ağustos 2026** hedefinden **Şubat 2027**'ye ertelendiğini bildirdi; gelişme, **yapay zeka** temalı veri merkezi yatırımlarının finansman ve borç yükü riskine dair endişeleri yeniden piyasaların gündemine taşıdı.",
+      },
+    ],
+    calendarLabel: "28 Eylül - 2 Ekim 2026",
+    calendarEvents: [
+      {
+        time: "28 Eylül 2026 (Pazartesi)",
+        icon: "🇴🇲",
+        title: "Körfez Ülkeleri-İran Hürmüz Görüşmesi (Umman)",
+        note: "Körfez İşbirliği Konseyi (GCC) üyesi ülkelerin üst düzey diplomatları, Hürmüz Boğazı'ndan geçen deniz taşımacılığına yönelik geçici bir düzenleme ihtimalini görüşmek üzere Umman'da İranlı mevkidaşlarıyla bir araya gelecek; görüşme sonucu petrol fiyatları açısından yakından izleniyor.",
+      },
+      {
+        time: "2 Ekim 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-25-1700",
     title: "FXPARTNER Piyasa Özeti | 25.09.2026 Cuma Akşam Güncellemesi",
     excerpt:
