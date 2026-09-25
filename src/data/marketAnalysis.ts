@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-25-2200",
+    title: "FXPARTNER Piyasa Özeti | 25.09.2026 Cuma Gün Sonu Güncellemesi",
+    excerpt:
+      "Cuma günü New York seansının ardından küresel piyasaların gündeminde Michigan Üniversitesi'nin eylül ayı nihai tüketici güven endeksi öne çıktı: endeks ön veriye göre hafif yükselişle 47,8'den 48,1'e çıkarken, bir yıllık enflasyon beklentileri haziran ayından bu yana en yüksek seviye olan %4,6'ya, beş yıllık beklentiler ise %3,4'e yükseldi; tüketicilerin mevcut ve gelecek yıla dönük kişisel mali durum algısı ise bu ay yaklaşık %10 zayıfladı. Yükselen enflasyon beklentileri ekim ayı Fed faiz artışı beklentilerini pekiştirirken altın baskı altında kaldı: ons altın 4.270 dolar civarına gerileyerek haftayı %2'nin üzerinde kayıpla, yaklaşık dört haftanın en kötü performansıyla kapatmaya hazırlanıyor. Dolar tarafında ise dolar endeksi (DXY) haftayı %1'in üzerinde kazançla tamamlamaya hazırlanırken euro üst üste üçüncü haftalık düşüşüyle 1,1370 seviyesinde yaklaşık iki ayın dibine yaklaştı, sterlin ise 1,3220 civarında yaklaşık üç ayın dibine yakın seyrederek son dört ayın en kötü haftasını yaşıyor.",
+    publishedAt: "2026-09-25",
+    readingMinutes: 3,
+    intro:
+      "Cuma günü **New York** seansının ardından küresel piyasaların gündeminde **Michigan Üniversitesi**'nin eylül ayı nihai tüketici güven endeksi verisi öne çıktı. Endeks, ay başında açıklanan ön veride kaydedilen **47,8** seviyesinden hafif yükselişle **48,1**'e çıktı; ancak asıl dikkat çeken gelişme enflasyon beklentilerinde yaşandı. Bir yıllık enflasyon beklentileri **haziran** ayından bu yana en yüksek seviye olan **%4,6**'ya, beş yıllık enflasyon beklentileri ise **%3,4**'e yükselirken, tüketicilerin mevcut ve gelecek yıla dönük kişisel mali durumlarına ilişkin algısı bu ay yaklaşık **%10** zayıfladı. Yükselen enflasyon beklentileri, piyasalarda ekim ayı **FOMC** toplantısında ek bir faiz artışına yönelik bahisleri pekiştirdi. Bu ortamda **altın**, güçlenen dolar ve yükselen reel getirilerin de baskısıyla ons başına **4.270 dolar** civarına geriledi; sarı metal haftayı **%2**'nin üzerinde kayıpla, yaklaşık dört haftanın en kötü performansıyla kapatmaya hazırlanıyor, **gümüş** de aynı ortamda değer kaybetti. Döviz piyasalarında ise **dolar endeksi (DXY)**, cuma günü yaklaşık iki ayın zirvesi olan **101,40** seviyesine dokunduktan sonra **101,00** civarına gerilese de haftayı **%1**'in üzerinde bir kazançla tamamlamaya hazırlanıyor; bu ortamda **euro**, dolar karşısında **1,1370** seviyesine gerileyerek yaklaşık iki ayın dibine yaklaştı ve üst üste üçüncü haftasını düşüşle kapatmak üzere, **sterlin** ise **1,3220** civarında yaklaşık üç ayın dibine yakın seyrederek son dört ayın en kötü haftasını yaşıyor. Piyasaların odağı şimdi pazartesi günü **Umman**'da gerçekleşecek **Körfez-İran** görüşmesinde ve gelecek hafta TSİ **15.30**'da açıklanacak **Eylül ayı ABD tarım dışı istihdam (NFP)** raporunda.",
+    news: [
+      {
+        icon: "📉",
+        heading: "Michigan Tüketici Güveni Nihai Verisi Hafif Yükseldi, Enflasyon Beklentileri Haziran'dan Bu Yana Zirvede",
+        body: "**Michigan Üniversitesi**'nin eylül ayı nihai tüketici güven endeksi, ön veride açıklanan **47,8** seviyesinden hafif yükselişle **48,1**'e çıktı. Öte yandan bir yıllık enflasyon beklentileri **haziran** ayından bu yana en yüksek seviye olan **%4,6**'ya, beş yıllık enflasyon beklentileri ise **%3,4**'e yükselirken, tüketicilerin mevcut ve gelecek yıla dönük kişisel mali durumlarına ilişkin algısı bu ay yaklaşık **%10** zayıfladı. Yükselen enflasyon beklentileri, piyasalarda ekim ayı **FOMC** toplantısında ek bir faiz artışına yönelik bahisleri pekiştirdi.",
+      },
+      {
+        icon: "🥇",
+        heading: "Altın 4.270 Dolara Geriledi: Yaklaşık Dört Haftanın En Kötü Haftası Yaşanıyor",
+        body: "**Michigan Üniversitesi** verisinin ardından yükselen enflasyon beklentileri ve güçlenen dolar, **altın** üzerindeki baskıyı artırdı. Ons altın **4.270 dolar** civarına gerileyerek haftayı **%2**'nin üzerinde kayıpla, yaklaşık dört haftanın en kötü performansıyla kapatmaya hazırlanıyor; **gümüş** de aynı ortamda değer kaybetti. Gerilemede güçlü dolar, yükselen reel getiriler ve şahin **Fed** beklentileri etkili oldu.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar Haftayı %1'in Üzerinde Kazançla Kapatıyor: Euro Üst Üste Üçüncü Haftasını Düşüşle Tamamlıyor",
+        body: "**Dolar endeksi (DXY)**, cuma günü yaklaşık iki ayın zirvesi olan **101,40** seviyesine dokunduktan sonra **101,00** civarına gerilese de haftayı **%1**'in üzerinde bir kazançla tamamlamaya hazırlanıyor. Bu ortamda **euro**, dolar karşısında **1,1370** seviyesine gerileyerek yaklaşık iki ayın dibine yaklaştı ve üst üste üçüncü haftasını düşüşle kapatmak üzere; **sterlin** ise **1,3220** civarında yaklaşık üç ayın dibine yakın seyrederek son dört ayın en kötü haftasını yaşıyor. Haftanın genelinde dolardaki güç, **Fed** yetkililerinin şahin açıklamaları ve ekim ayı faiz artışı beklentilerinin güçlenmesinden besleniyor.",
+      },
+    ],
+    calendarLabel: "28 Eylül - 2 Ekim 2026",
+    calendarEvents: [
+      {
+        time: "28 Eylül 2026 (Pazartesi)",
+        icon: "🇴🇲",
+        title: "Körfez Ülkeleri-İran Hürmüz Görüşmesi (Umman)",
+        note: "Körfez İşbirliği Konseyi (GCC) üyesi ülkelerin üst düzey diplomatları, Hürmüz Boğazı'ndan geçen deniz taşımacılığına yönelik geçici bir düzenleme ihtimalini görüşmek üzere Umman'da İranlı mevkidaşlarıyla bir araya gelecek; görüşme sonucu petrol fiyatları açısından yakından izleniyor.",
+      },
+      {
+        time: "2 Ekim 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-25-2300",
     title: "FXPARTNER Piyasa Özeti | 25.09.2026 Cuma Gece Güncellemesi",
     excerpt:
