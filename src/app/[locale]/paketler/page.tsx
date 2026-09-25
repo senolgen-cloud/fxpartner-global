@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
+import JoinSteps from "@/components/JoinSteps";
 import { createNowPaymentsCheckout } from "./checkout-actions";
 import { lookupBrokers } from "@/data/brokerLookup";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -272,6 +273,10 @@ export default async function PaketlerPage({
             ))}
           </div>
         </section>
+
+        {/* Fiyatlardan hemen sonra: paketi gören okurun bir sonraki sorusu
+            "peki nasıl başlıyorum" oluyordu ve sayfada cevabı yoktu. */}
+        <JoinSteps />
 
         {/* Trust bar — only real, verifiable figures, no invented stats */}
         <section className="border-y border-hairline bg-ink-soft">
