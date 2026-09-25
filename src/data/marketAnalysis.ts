@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-25-0900",
+    title: "FXPARTNER Piyasa Özeti | 25.09.2026 Cuma Sabah Güncellemesi",
+    excerpt:
+      "Cuma sabahına doğru küresel piyasaların gündeminde, Suudi Arabistan'a yönelik Husi füze saldırısının ardından petrol fiyatlarındaki sert yükseliş öne çıktı: Brent petrol %3,4 artışla varil başına 106,60 dolardan kapanırken, ABD tipi ham petrol (WTI) %2,7 yükselişle 94,61 dolardan seansı tamamladı; Brent seans içinde 108,23 dolara kadar tırmandı. New York'ta sürdürülen ABD-İran görüşmelerinde Hürmüz Boğazı'nın aşamalı olarak yeniden açılması ihtimalinin gündeme gelmesi kazançların bir kısmının geri verilmesine yol açtı. Bu arada Wall Street perşembe gününü karışık kapattı: S&P 500 %0,06, Dow Jones Endeksi %0,31 değer kaybederken Nasdaq 100 %0,03 yükseldi; ABD 10 yıllık tahvil getirisi 8,9 baz puan artışla %5,20 ile Temmuz 2007'den bu yana en yüksek seviyesine çıktı. Dolar endeksi (DXY) yaklaşık iki ayın zirvesi olan 101,3 seviyesini korurken altın ons başına yaklaşık 4.264 dolara geriledi.",
+    publishedAt: "2026-09-25",
+    readingMinutes: 3,
+    intro:
+      "Cuma sabahı saatlerine doğru küresel piyasaların gündeminde, **Suudi Arabistan**'a yönelik **Husi** füze saldırısının ardından petrol fiyatlarında yaşanan sert yükseliş öne çıktı. **Suudi öncülüğündeki koalisyon**, Kızıldeniz kıyısındaki **Yanbu** limanı ve **Taif** şehrini hedef alan altı balistik füzeyi düşürdüğünü açıkladı; saldırının ardından **Brent petrol** seans içinde yaklaşık **%5** yükselerek varil başına **108,23 dolar**a kadar tırmandı. New York'ta sürdürülen **ABD-İran** görüşmelerinde **Hürmüz Boğazı**'nın aşamalı olarak yeniden açılması ve karşılığında Washington'ın **İran**'a uyguladığı ekonomik ablukayı gevşetmesi ihtimalinin gündeme gelmesiyle kazançların bir kısmı geri verildi; **Brent petrol** günü **%3,4** artışla **106,60 dolar**dan, **WTI** ise **%2,7** yükselişle **94,61 dolar**dan kapattı. Yükselen enerji fiyatlarının baskısıyla **ABD tahvil getirileri** yeniden ivmelendi: **2 yıllık tahvil** getirisi 7,8 baz puan artışla **%4,93**'e, **10 yıllık tahvil** getirisi 8,9 baz puan artışla **Temmuz 2007**'den bu yana en yüksek seviyesi olan **%5,20**'ye, **30 yıllık tahvil** getirisi ise 8,2 baz puan artışla **2004** sonrası zirvesi olan **%5,48**'e yükseldi. Yükselen getiriler ve enerji fiyatlarının baskısıyla **Wall Street** perşembe gününü karışık tamamladı: **S&P 500** endeksi **%0,06**, **Dow Jones Endeksi** **%0,31** (162 puan) değer kaybederken, **Nasdaq 100** endeksi **%0,03** ile hafif yükseldi. Bu arada **dolar endeksi (DXY)**, güçlü seyreden **ABD** verileri ve **Fed**'in sıkılaşma patikasını sürdürebileceği beklentileriyle yaklaşık iki ayın zirvesi olan **101,3** seviyesini korurken, **altın** güne başladığı **4.287,3 dolar** seviyesinden ons başına yaklaşık **4.264 dolar**a geriledi. Piyasaların odağı şimdi gelecek hafta TSİ **17.00**'de açıklanacak **ISM İmalat Sanayi PMI** verisi ve TSİ **15.30**'da açıklanacak **Eylül ayı ABD tarım dışı istihdam (NFP)** raporunda.",
+    news: [
+      {
+        icon: "🛢️",
+        heading: "Suudi Arabistan'a Husi Saldırısı Petrolü Fırlattı: Brent %3,4 Yükselişle 106,60 Dolara Çıktı",
+        body: "**Suudi öncülüğündeki koalisyon**, Kızıldeniz kıyısındaki **Yanbu** limanı ve **Taif** şehrini hedef alan **Husi** kaynaklı altı balistik füzeyi düşürdüğünü açıkladı. Saldırının ardından **Brent petrol** seans içinde yaklaşık **%5** yükselerek varil başına **108,23 dolar**a kadar tırmandı; New York'ta sürdürülen **ABD-İran** görüşmelerinde **Hürmüz Boğazı**'nın aşamalı olarak yeniden açılması ihtimalinin gündeme gelmesiyle kazançların bir kısmı geri verilse de **Brent petrol** günü **%3,4** artışla **106,60 dolar**dan, **WTI** ise **%2,7** yükselişle **94,61 dolar**dan kapattı.",
+      },
+      {
+        icon: "📉",
+        heading: "Tahvil Getirileri Yeniden Sıçradı: 10 Yıllık %5,20 ile 2007 Sonrası Zirvede",
+        body: "Yükselen enerji fiyatlarının enflasyon endişelerini canlandırmasıyla **ABD tahvil getirileri** perşembe günü yeniden ivmelendi. **2 yıllık tahvil** getirisi 7,8 baz puan artışla **%4,93**'e, **10 yıllık tahvil** getirisi 8,9 baz puan artışla **Temmuz 2007**'den bu yana en yüksek seviyesi olan **%5,20**'ye, **30 yıllık tahvil** getirisi ise 8,2 baz puan artışla **2004** sonrası zirvesi olan **%5,48**'e yükseldi. Yükselen getirilerin baskısıyla **Wall Street** günü karışık kapattı: **S&P 500** endeksi **%0,06**, **Dow Jones Endeksi** **%0,31** (162 puan) değer kaybederken, **Nasdaq 100** endeksi **%0,03** ile hafif yükseldi.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar İki Ayın Zirvesinde Güçlü Kalıyor, Altın 4.264 Dolara Geriledi",
+        body: "**Dolar endeksi (DXY)**, güçlü seyreden **ABD** ekonomik verileri ve **Fed**'in sıkılaşma patikasını sürdürebileceği beklentileriyle yaklaşık iki ayın zirvesi olan **101,3** seviyesini korumaya devam ediyor. Güçlü **dolar**ın baskısıyla **altın**, güne başladığı **4.287,3 dolar** seviyesinden ons başına yaklaşık **4.264 dolar**a geriledi.",
+      },
+    ],
+    calendarLabel: "28 Eylül - 4 Ekim 2026",
+    calendarEvents: [
+      {
+        time: "1 Ekim 2026, 17.00 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD ISM İmalat Sanayi PMI (Eylül)",
+        note: "ABD'de imalat sanayi aktivitesine ilişkin Eylül ayı ISM anketi TSİ 17.00'de açıklanacak; veri, ekonomik büyüme ve Fed'in faiz patikası beklentileri açısından yakından izleniyor.",
+      },
+      {
+        time: "2 Ekim 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in sıkılaşma patikasını sürdürmesi beklentilerini pekiştirebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-24-2100",
     title: "FXPARTNER Piyasa Özeti | 24.09.2026 Perşembe Gece Güncellemesi",
     excerpt:
