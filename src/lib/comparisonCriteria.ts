@@ -10,4 +10,10 @@ export const COMPARISON_CRITERIA = [
   "Max. Leverage",
   "Regulation",
   "Platform",
+  // The two a reader cannot get off the broker's own site. Both come with a
+  // caveat the table has to carry (see ComparisonTable): withdrawal is what
+  // investors report, not a measurement, and cashback only ever shows a
+  // confirmed rate — never an estimate.
+  "Withdrawal",
+  "Cashback",
 ] as const;

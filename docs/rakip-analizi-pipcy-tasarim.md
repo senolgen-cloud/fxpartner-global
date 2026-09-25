@@ -46,9 +46,11 @@ Bugün `RankedBrokerCard` daha çok puan ve rozet gösteriyor; sayılar kartın 
 (Standard / ECN / Cent / Zero). Seçim değişince spread, komisyon ve nakit iade satırı güncellenir.
 Bu bilgi elimizde zaten var; şu an tek bir satırda özetleniyor.
 
-**3) Broker karşılaştırma tablosu.** Satır = özellik, sütun = broker; bizim sitede prop firmalar
-için benzeri var (`PropFirmComparisonTable`) ama brokerlar için yok. Elimizdeki veriyle
-(regülasyon, min yatırım, kaldıraç, çekim süresi, iade) doğrudan kurulabilir.
+**3) Broker karşılaştırma tablosu.** ~~brokerlar için yok~~ — **DÜZELTME (25.09.2026):** var.
+`ComparisonTable` bileşeni `/brokerlar`, ana sayfa ve `/prop-firmalar` sayfalarında zaten
+çalışıyor; ilk notta gözden kaçtı. Eksik olan sütunlar aynı gün eklendi: **para çekme** (anket) ve
+**nakit iade** (yalnızca teyitli oran). Kriter sayısı 6'dan 8'e çıktı ve ana sayfadaki
+"karşılaştırma kriteri" sayacı bu listeden beslendiği için kendiliğinden güncellendi.
 
 **4) Kampanya geri sayımı.** Onlarda sahte aciliyet riski taşıyan bir sayaç var; bizde **gerçek
 tarihli** bir kampanya duruyor: XM Sınırsız Nakit İadesi 20 Ekim'de bitiyor. Bitiş tarihi olan

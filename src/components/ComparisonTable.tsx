@@ -11,6 +11,8 @@ import {
   type BrokerCategory,
 } from "@/data/brokers";
 import { COMPARISON_CRITERIA } from "@/lib/comparisonCriteria";
+import { withdrawalReportFor } from "@/data/withdrawalSurvey";
+import { getLiveCashbackProgram } from "@/data/cashback";
 import { useLocalizedData } from "@/components/useLocalizedData";
 
 // The Turkish name for each column. COMPARISON_CRITERIA itself stays in
@@ -25,6 +27,8 @@ const CRITERION_LABEL: Record<(typeof COMPARISON_CRITERIA)[number], string> = {
   "Max. Leverage": "Maks. Kaldıraç",
   Regulation: "Regülasyon",
   Platform: "Platform",
+  Withdrawal: "Para Çekme",
+  Cashback: "Nakit İade",
 };
 
 export default function ComparisonTable() {
@@ -67,7 +71,9 @@ export default function ComparisonTable() {
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-hairline">
-        <table className="w-full min-w-[840px] border-collapse text-start">
+        {/* İki sütun eklendi (para çekme, nakit iade): 840px'te "Anlık —
+            1 saniyeden az" gibi değerler üç satıra bölünüyordu. */}
+        <table className="w-full min-w-[1040px] border-collapse text-start">
           <thead>
             <tr className="border-b border-hairline bg-ink-soft">
               <th className="px-5 py-4 font-mono text-[11px] font-normal uppercase tracking-[0.15em] text-text-on-ink-muted">
@@ -141,6 +147,32 @@ export default function ComparisonTable() {
                     <td className="px-5 py-4 font-mono text-xs text-text-on-ink-muted">
                       {b.platforms.join(" / ")}
                     </td>
+                    {/* Anket sonucu: bildirimi olmayan broker tire gösteriyor,
+                        yavaş olduğu için değil, verimiz olmadığı için
+                        (withdrawalSurvey.ts bunu özellikle söylüyor). */}
+                    <td
+                      className="px-5 py-4 font-mono text-xs text-text-on-ink-muted"
+                      title={
+                        withdrawalReportFor(b.slug)
+                          ? tr("Yatırımcıların bildirdiği süre — ölçüm değil, anket sonucu.")
+                          : tr("Bu broker için yeterli yatırımcı bildirimi yok.")
+                      }
+                    >
+                      {withdrawalReportFor(b.slug)
+                        ? tr(withdrawalReportFor(b.slug)!.label)
+                        : "—"}
+                    </td>
+                    {/* Yalnızca teyitli oran; "tahmini" olan /cashback dışında
+                        tanıtılmıyor (cashback.ts). */}
+                    <td className="px-5 py-4 font-mono text-xs">
+                      {getLiveCashbackProgram(b.slug) ? (
+                        <span className="text-tick-up">
+                          {tr(getLiveCashbackProgram(b.slug)!.rateLabel)}
+                        </span>
+                      ) : (
+                        <span className="text-text-on-ink-muted">—</span>
+                      )}
+                    </td>
                     <td className="px-5 py-4 text-end">
                       <Link
                         href={`/brokers/${b.slug}`}
@@ -158,7 +190,7 @@ export default function ComparisonTable() {
                         i % 2 === 0 ? "bg-ink" : "bg-ink-soft"
                       }`}
                     >
-                      <td colSpan={8} className="px-5 pb-6 pt-1">
+                      <td colSpan={10} className="px-5 pb-6 pt-1">
                         <div className="grid gap-4 rounded-xl border border-hairline bg-ink-soft/60 p-5 sm:grid-cols-2">
                           <div>
                             <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-signal">
