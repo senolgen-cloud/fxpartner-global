@@ -3899,5 +3899,15 @@
   "28 Eylül 2026 (Pazartesi)": "28 سبتمبر 2026 (الاثنين)",
   "Körfez Ülkeleri-İran Hürmüz Görüşmesi (Umman)": "محادثات دول الخليج وإيران بشأن هرمز (عُمان)",
   "Körfez İşbirliği Konseyi (GCC) üyesi ülkelerin üst düzey diplomatları, Hürmüz Boğazı'ndan geçen deniz taşımacılığına yönelik geçici bir düzenleme ihtimalini görüşmek üzere Umman'da İranlı mevkidaşlarıyla bir araya gelecek; görüşme sonucu petrol fiyatları açısından yakından izleniyor.": "سيجتمع كبار دبلوماسيي دول مجلس التعاون الخليجي (GCC) مع نظرائهم الإيرانيين في عُمان لمناقشة ترتيب مؤقت محتمل لحركة الشحن عبر مضيق هرمز؛ وتُتابع نتيجة الاجتماع عن كثب نظراً لتأثيرها المحتمل على أسعار النفط.",
-  "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.": "سيصدر تقرير وزارة العمل الأمريكية للوظائف غير الزراعية لشهر سبتمبر عند الساعة 15:30 (TSİ)؛ وقد تُشكّل بيانات سوق العمل القوية توقعات قرار Fed بشأن الفائدة في أكتوبر."
+  "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.": "سيصدر تقرير وزارة العمل الأمريكية للوظائف غير الزراعية لشهر سبتمبر عند الساعة 15:30 (TSİ)؛ وقد تُشكّل بيانات سوق العمل القوية توقعات قرار Fed بشأن الفائدة في أكتوبر.",
+  "İade Hesaplayıcı": "حاسبة الاسترداد النقدي",
+  "Kendi işlem temponuzu girin, iadenin ayda ve yılda ne ettiğini görün. Oran hesap türüne, enstrümana ve aylık hacminize göre değişir; buradaki rakamlar örnek hesaptır, taahhüt değildir.": "أدخل وتيرة تداولك لترى ما يبلغه الاسترداد النقدي شهرياً وسنوياً. تختلف النسبة حسب نوع الحساب والأداة وحجم التداول الشهري؛ والأرقام هنا مثال حسابي وليست التزاماً.",
+  "Lot başına iade ($)": "الاسترداد لكل لوت ($)",
+  "Ortalama lot büyüklüğü": "متوسط حجم اللوت",
+  "Günlük işlem sayısı": "عدد الصفقات يومياً",
+  "Aylık hacim": "الحجم الشهري",
+  "Aylık iade": "الاسترداد الشهري",
+  "Yıllık iade": "الاسترداد السنوي",
+  "{lots} lot": "{lots} لوت",
+  "Hesap: {lot} lot × günde {trades} işlem × ayda {days} işlem günü. Lot başına {rate} iade, 1 lotta 1 pip ≈ 10 $ varsayımıyla işlem maliyetinizi yaklaşık {pips} pip düşürür — nakit iadesi kâr değil, maliyet geri dönüşüdür ve kaybettiğiniz işlemde de ödenir.": "الحساب: {lot} لوت × {trades} صفقة يومياً × {days} يوم تداول شهرياً. وبمعدل {rate} لكل لوت، وبافتراض أن 1 نقطة ≈ 10$ على لوت واحد، تنخفض تكلفة تداولك بنحو {pips} نقطة — الاسترداد النقدي ليس ربحاً بل استرجاع للتكلفة، ويُدفع حتى عن الصفقات الخاسرة."
 }

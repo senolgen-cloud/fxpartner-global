@@ -3899,5 +3899,15 @@
   "28 Eylül 2026 (Pazartesi)": "28 вересня 2026 (понеділок)",
   "Körfez Ülkeleri-İran Hürmüz Görüşmesi (Umman)": "Переговори країн Затоки з Іраном щодо Ормузької протоки (Оман)",
   "Körfez İşbirliği Konseyi (GCC) üyesi ülkelerin üst düzey diplomatları, Hürmüz Boğazı'ndan geçen deniz taşımacılığına yönelik geçici bir düzenleme ihtimalini görüşmek üzere Umman'da İranlı mevkidaşlarıyla bir araya gelecek; görüşme sonucu petrol fiyatları açısından yakından izleniyor.": "Старші дипломати країн-членів Ради співробітництва країн Перської затоки (GCC) зустрінуться з іранськими колегами в Омані для обговорення можливої тимчасової домовленості щодо судноплавства через Ормузьку протоку; результат переговорів уважно відстежується з огляду на вплив на ціни на нафту.",
-  "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.": "Звіт Міністерства праці США про зайнятість у несільськогосподарському секторі за вересень буде опубліковано о 15.30 (TSİ); сильні дані ринку праці можуть вплинути на очікування щодо жовтневого рішення Fed по ставці."
+  "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.": "Звіт Міністерства праці США про зайнятість у несільськогосподарському секторі за вересень буде опубліковано о 15.30 (TSİ); сильні дані ринку праці можуть вплинути на очікування щодо жовтневого рішення Fed по ставці.",
+  "İade Hesaplayıcı": "Калькулятор кешбеку",
+  "Kendi işlem temponuzu girin, iadenin ayda ve yılda ne ettiğini görün. Oran hesap türüne, enstrümana ve aylık hacminize göre değişir; buradaki rakamlar örnek hesaptır, taahhüt değildir.": "Введіть свій темп торгівлі й подивіться, скільки кешбек дає на місяць і на рік. Ставка залежить від типу рахунку, інструмента та місячного обсягу; наведені цифри — приклад розрахунку, а не зобов’язання.",
+  "Lot başına iade ($)": "Кешбек за лот ($)",
+  "Ortalama lot büyüklüğü": "Середній розмір лота",
+  "Günlük işlem sayısı": "Угод на день",
+  "Aylık hacim": "Місячний обсяг",
+  "Aylık iade": "Кешбек за місяць",
+  "Yıllık iade": "Кешбек за рік",
+  "{lots} lot": "{lots} лотів",
+  "Hesap: {lot} lot × günde {trades} işlem × ayda {days} işlem günü. Lot başına {rate} iade, 1 lotta 1 pip ≈ 10 $ varsayımıyla işlem maliyetinizi yaklaşık {pips} pip düşürür — nakit iadesi kâr değil, maliyet geri dönüşüdür ve kaybettiğiniz işlemde de ödenir.": "Розрахунок: {lot} лота × {trades} угод на день × {days} торгових днів на місяць. За {rate} за лот і за умови, що 1 піп ≈ 10 $ на 1 лоті, ваші торгові витрати зменшуються приблизно на {pips} піпа — кешбек це не прибуток, а повернення витрат, і його виплачують навіть за збиткові угоди."
 }

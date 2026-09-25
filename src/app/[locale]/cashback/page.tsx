@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "@/components/LocaleLink";
 import ChevronRight from "@/components/ChevronRight";
 import Footer from "@/components/Footer";
+import CashbackCalculator from "@/components/CashbackCalculator";
 import { cashbackPrograms } from "@/data/cashback";
 import { getBrokerBySlug } from "@/data/brokers";
 import { getMonogram } from "@/lib/monogram";
@@ -278,6 +279,10 @@ export default async function CashbackPage({
                 );
               })}
             </div>
+
+            {/* Under the rates, not above them: the rate rows are the fact,
+                the calculator is what a reader does with it. */}
+            <CashbackCalculator />
 
             <div className="mt-14 rounded-2xl border border-hairline-light bg-paper p-6">
               <h3 className="font-poppins text-lg font-semibold text-text-dark">

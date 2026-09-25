@@ -3899,5 +3899,15 @@
   "28 Eylül 2026 (Pazartesi)": "September 28, 2026 (Monday)",
   "Körfez Ülkeleri-İran Hürmüz Görüşmesi (Umman)": "Gulf States-Iran Hormuz Talks (Oman)",
   "Körfez İşbirliği Konseyi (GCC) üyesi ülkelerin üst düzey diplomatları, Hürmüz Boğazı'ndan geçen deniz taşımacılığına yönelik geçici bir düzenleme ihtimalini görüşmek üzere Umman'da İranlı mevkidaşlarıyla bir araya gelecek; görüşme sonucu petrol fiyatları açısından yakından izleniyor.": "Senior diplomats from Gulf Cooperation Council (GCC) member states will meet their Iranian counterparts in Oman to discuss a possible temporary arrangement for shipping through the Strait of Hormuz; the outcome is being closely watched for its impact on oil prices.",
-  "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.": "The US Department of Labor's September non-farm payrolls report will be released at 15:30 (TSİ); a strong labor market reading could shape expectations for the Fed's October rate decision."
+  "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.": "The US Department of Labor's September non-farm payrolls report will be released at 15:30 (TSİ); a strong labor market reading could shape expectations for the Fed's October rate decision.",
+  "İade Hesaplayıcı": "Rebate Calculator",
+  "Kendi işlem temponuzu girin, iadenin ayda ve yılda ne ettiğini görün. Oran hesap türüne, enstrümana ve aylık hacminize göre değişir; buradaki rakamlar örnek hesaptır, taahhüt değildir.": "Enter your own trading pace and see what the rebate comes to per month and per year. The rate varies by account type, instrument and monthly volume; the figures here are a worked example, not a commitment.",
+  "Lot başına iade ($)": "Rebate per lot ($)",
+  "Ortalama lot büyüklüğü": "Average lot size",
+  "Günlük işlem sayısı": "Trades per day",
+  "Aylık hacim": "Monthly volume",
+  "Aylık iade": "Monthly rebate",
+  "Yıllık iade": "Yearly rebate",
+  "{lots} lot": "{lots} lots",
+  "Hesap: {lot} lot × günde {trades} işlem × ayda {days} işlem günü. Lot başına {rate} iade, 1 lotta 1 pip ≈ 10 $ varsayımıyla işlem maliyetinizi yaklaşık {pips} pip düşürür — nakit iadesi kâr değil, maliyet geri dönüşüdür ve kaybettiğiniz işlemde de ödenir.": "The maths: {lot} lots × {trades} trades a day × {days} trading days a month. At {rate} per lot, and assuming 1 pip ≈ $10 on 1 lot, your trading cost drops by roughly {pips} pips — cashback is not profit but a return of cost, and it is paid on losing trades too."
 }
