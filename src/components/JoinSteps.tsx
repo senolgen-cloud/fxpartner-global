@@ -64,7 +64,17 @@ function Step({
   );
 }
 
-export default function JoinSteps() {
+export default function JoinSteps({
+  // On /paketler the prices are on the same page, so step 2 scrolls to them.
+  // Anywhere else that anchor does not exist and the step has to travel.
+  packagesHref = "#paketler",
+  // The last step's link is "go and look at the live signals", which is a
+  // no-op on the signals page itself.
+  showSignalsLink = true,
+}: {
+  packagesHref?: string;
+  showSignalsLink?: boolean;
+} = {}) {
   const pro = PACKAGE_TIER_INFO.pro;
   const vip = PACKAGE_TIER_INFO.vip;
 
@@ -93,15 +103,15 @@ export default function JoinSteps() {
               "Pro ({proPrice} $/ay) GOLD, gümüş ve endeks sinyallerini, günlük teknik analizi ve Telegram VIP kanalını açar. VIP ({vipPrice} $/ay) bunlara kripto ve enerji sinyalleri ile CopyTrade erişimini ekler. Ödeme kripto para ile alınır; kart ile ödeme seçeneği yoktur.",
               { proPrice: pro.price, vipPrice: vip.price }
             )}
-            href="#paketler"
+            href={packagesHref}
             cta={tr("Paketleri karşılaştır")}
           />
           <Step
             n="03"
             title={tr("Sinyaller gelmeye başlasın")}
             body={tr("Sinyal açıldığı anda bildirim düşer; seviyeleri sitedeki panodan ve Telegram VIP kanalından takip edersin. Kurulum için MT5 ve broker desteği verilir. Kapanan her işlem, sonucuyla birlikte herkese açık geçmişte kalır — kazanç da kayıp da.")}
-            href="/signals"
-            cta={tr("Canlı sinyalleri gör")}
+            href={showSignalsLink ? "/signals" : undefined}
+            cta={showSignalsLink ? tr("Canlı sinyalleri gör") : undefined}
           />
         </ol>
       </div>

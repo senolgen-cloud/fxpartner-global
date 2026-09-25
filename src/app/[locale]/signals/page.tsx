@@ -6,6 +6,7 @@ import LiveMarketsGrid from "@/components/LiveMarketsGrid";
 import RotatingBrokerAd from "@/components/RotatingBrokerAd";
 import SponsoredLeaderboard from "@/components/SponsoredLeaderboard";
 import VipCtaBanner from "@/components/VipCtaBanner";
+import JoinSteps from "@/components/JoinSteps";
 import { db } from "@/db";
 import { vipSubscriptions } from "@/db/schema";
 import { getSponsoredBrokerPool } from "@/data/brokers";
@@ -190,6 +191,11 @@ export default async function SignalsPage({
           viewerTier={viewerTier}
           periods={getSignalPeriods()}
         />
+
+        {/* Panonun hemen altı: kapanmış sonuçları gören okurun sırdaki
+            sorusu "ben nasıl katılıyorum" oluyor. Paket bağlantısı burada
+            /paketler'e gidiyor; #paketler çapası bu sayfada yok. */}
+        <JoinSteps packagesHref="/paketler" showSignalsLink={false} />
 
         <section className="border-t border-hairline">
           <div className="mx-auto max-w-3xl px-6 py-14">
