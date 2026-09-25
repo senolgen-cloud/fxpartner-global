@@ -34,6 +34,7 @@ import { cachedBrokerComments, type BrokerCommentJson } from "@/lib/cachedReads"
 import DataUnavailable from "@/components/DataUnavailable";
 import { flagEmoji } from "@/lib/country";
 import { getLiveCashbackProgram } from "@/data/cashback";
+import CashbackCalculator from "@/components/CashbackCalculator";
 // Tek yönlü bağımlılık: brokers.ts prop dikeyinden habersiz kalır, çapraz link
 // sunum katmanında kurulur. Skor bağlantısı YOK — bkz. propFirms.ts.
 import { getPropFirmByBackingBroker, getPropFirmScores } from "@/data/propFirms";
@@ -807,6 +808,16 @@ export default async function BrokerDetailPage({
                   {tr("Nakit iadeyi başlat →")}
                 </span>
               </Link>
+            )}
+
+            {/* Oranın altında, oranı ne ettiğini gösteren hesap. Programın
+                kendi biçiminde açılıyor: Lite Finance'in oranı yüzde,
+                başkasınınki lot başına dolar olabilir (cashback.ts). */}
+            {cashback && (
+              <CashbackCalculator
+                mode={cashback.calcMode ?? "perLot"}
+                initialRate={cashback.calcRate}
+              />
             )}
 
             <div

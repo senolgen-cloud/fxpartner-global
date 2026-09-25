@@ -13,6 +13,18 @@ export interface CashbackProgram {
   // and in campaign copy. Kept next to the rate so the number and the claim
   // can never drift apart.
   pitch?: string;
+  // What the rate above means in arithmetic, for the calculator on the
+  // broker page. Two shapes exist in this file and they are not
+  // interchangeable: a dollar amount per lot ("lot başına 5 dolara kadar")
+  // and a share of what the trade already costs ("%50'ye kadar nakit
+  // iade"). A calculator that assumed the first would ask a Lite Finance
+  // reader for a number their rate is not quoted in.
+  //
+  // calcRate is the SAME number as the one written in rateLabel — the label
+  // stays the source of truth for the reader, this is only its machine
+  // form. Change one and change the other.
+  calcMode?: "perLot" | "percent";
+  calcRate?: number;
 }
 
 // Only brokers with a real, confirmed volume-based rev-share/IB agreement
@@ -51,6 +63,9 @@ export const cashbackPrograms: CashbackProgram[] = [
     status: "live",
     pitch:
       "Mevcut hesabınızı kapatmanıza gerek yok; iade, işlem hacminize göre Lite Finance tarafından doğrudan işlem hesabınıza yatırılır.",
+    // "%50'ye kadar" — bir üstteki rateLabel'ın makine hali.
+    calcMode: "percent",
+    calcRate: 50,
   },
 ];
 
