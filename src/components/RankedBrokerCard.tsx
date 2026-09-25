@@ -9,6 +9,8 @@ import { useTr, useTrf } from "@/components/useTr";
 import Link from "@/components/LocaleLink";
 import ChevronRight from "@/components/ChevronRight";
 import { categoryInfo, type Broker, type BrokerCategory } from "@/data/brokers";
+import { withdrawalReportFor } from "@/data/withdrawalSurvey";
+import { getLiveCashbackProgram } from "@/data/cashback";
 import TiltWrapper from "./TiltWrapper";
 import MiniScoreRings from "./MiniScoreRings";
 import type { BrokerReviewStats } from "@/lib/brokerReviews";
@@ -60,6 +62,91 @@ function RatingRow({ broker, reviewStats }: { broker: Broker; reviewStats?: Brok
         </span>
       )}
     </div>
+  );
+}
+
+// The specs every card carries, in the same order on every card.
+//
+// This is the point of the block: a reader comparing four brokers should be
+// able to read down a column, not hunt for the same fact in four different
+// sentences. The card used to carry the rating, the score rings and a
+// "best for" line — all verdicts of ours — and none of the numbers a reader
+// checks a broker on.
+//
+// Two of the six are not facts in the same sense as the rest, and are
+// labelled accordingly:
+//   • Para çekme comes from the investor survey (withdrawalSurvey.ts), which
+//     is reported, not measured — the title says so, and a broker with no
+//     reports shows an em dash rather than a guess. An unlisted broker is
+//     one we lack reports for, NOT a slow one.
+//   • Nakit iade only ever shows a confirmed program (getLiveCashbackProgram);
+//     an estimated rate is never promoted off /cashback.
+function SpecRows({ broker }: { broker: Broker }) {
+  const tr = useTr();
+  const trf = useTrf();
+
+  const withdrawal = withdrawalReportFor(broker.slug);
+  const cashback = getLiveCashbackProgram(broker.slug);
+  const extraRegulators = broker.regulators.length - 1;
+  const extraPlatforms = broker.platforms.length - 2;
+
+  const specs: { label: string; value: string; title?: string }[] = [
+    { label: tr("Min. yatırım"), value: broker.minDeposit },
+    { label: tr("Kaldıraç"), value: broker.maxLeverage },
+    {
+      label: tr("Regülasyon"),
+      value:
+        broker.regulators.length === 0
+          ? "—"
+          : extraRegulators > 0
+            ? `${tr(broker.regulators[0])} +${extraRegulators}`
+            : tr(broker.regulators[0]),
+      title: broker.regulators.map((r) => tr(r)).join(" · "),
+    },
+    {
+      label: tr("Platform"),
+      value:
+        broker.platforms.length === 0
+          ? "—"
+          : extraPlatforms > 0
+            ? `${broker.platforms.slice(0, 2).join(", ")} +${extraPlatforms}`
+            : broker.platforms.join(", "),
+      title: broker.platforms.join(" · "),
+    },
+    {
+      label: tr("Para çekme"),
+      value: withdrawal ? tr(withdrawal.label) : "—",
+      title: withdrawal
+        ? tr("Yatırımcıların bildirdiği süre — ölçüm değil, anket sonucu.")
+        : tr("Bu broker için yeterli yatırımcı bildirimi yok."),
+    },
+    {
+      label: tr("Nakit iade"),
+      value: cashback ? tr(cashback.rateLabel) : "—",
+      title: cashback ? tr(cashback.rateNote) : undefined,
+    },
+  ];
+
+  return (
+    <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-hairline pt-4 sm:grid-cols-3 lg:grid-cols-6">
+      {specs.map((s) => (
+        <div key={s.label} className="min-w-0" title={s.title}>
+          <dt className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-on-ink-muted">
+            {s.label}
+          </dt>
+          <dd
+            className={`mt-1 truncate text-[13px] font-semibold ${
+              s.value === "—" ? "text-text-on-ink-muted" : "text-text-on-ink"
+            }`}
+          >
+            {s.value}
+          </dd>
+        </div>
+      ))}
+      <span className="sr-only">
+        {trf("{broker} özet bilgileri", { broker: broker.name })}
+      </span>
+    </dl>
   );
 }
 
@@ -186,6 +273,8 @@ function CardBody({
           </div>
         </div>
       </div>
+
+      <SpecRows broker={broker} />
 
       {broker.categories.length > 0 && (
         <div className="mt-4 flex flex-wrap gap-1.5 border-t border-hairline pt-4">

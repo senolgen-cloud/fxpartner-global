@@ -52,19 +52,29 @@ export default function BrokerList({
         ))}
       </div>
 
-      <div className="mt-8 flex flex-col gap-5">
+      {/* key={active}: filtre değişince liste yeniden monte oluyor ve kartlar
+          sırayla tekrar beliriyor. Aynı kartlar sessizce yer değiştirdiğinde
+          okur neyin filtrelendiğini göremiyordu. */}
+      <div key={active ?? "all"} className="mt-8 flex flex-col gap-5">
         {filtered.length === 0 ? (
           <p className="py-10 text-sm text-text-on-ink-muted">
             {tr("Bu kategoride henüz broker yok.")}
           </p>
         ) : (
           filtered.map((broker, i) => (
-            <RankedBrokerCard
+            <div
               key={broker.slug}
-              broker={broker}
-              featured={active === null && i === 0}
-              reviewStats={reviewStats?.[broker.slug]}
-            />
+              className="broker-card-in"
+              // Basamaklı gecikme, ama sekizinci karttan sonra sabit: yirmi
+              // brokerli bir listede son kart yarım saniye bekletilmemeli.
+              style={{ animationDelay: `${Math.min(i, 8) * 55}ms` }}
+            >
+              <RankedBrokerCard
+                broker={broker}
+                featured={active === null && i === 0}
+                reviewStats={reviewStats?.[broker.slug]}
+              />
+            </div>
           ))
         )}
       </div>
