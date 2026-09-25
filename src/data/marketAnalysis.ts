@@ -41,6 +41,50 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-25-1700",
+    title: "FXPARTNER Piyasa Özeti | 25.09.2026 Cuma Akşam Güncellemesi",
+    excerpt:
+      "Cuma akşamına doğru küresel piyasaların gündeminde, New York Fed Başkanı John Williams'ın Londra'da sergilediği şahin ton öne çıktı: Williams, yıl sonuna kadar bir faiz artışı daha beklenmesinin makul olduğunu söyleyerek Fed'in ileriye dönük yönlendirme dönemini geride bıraktığını belirtti; CME FedWatch verilerine göre ekim ayı faiz artışı ihtimali %70'in üzerine yükseldi. Bu arada Brent petrol, perşembe günkü Husi saldırısı kaynaklı sıçramanın ardından cuma günü varil başına 105 doların altına geriledi; gerilemede Körfez İşbirliği Konseyi üyesi ülkelerin pazartesi günü Umman'da İranlı mevkidaşlarıyla Hürmüz Boğazı'na dair geçici bir düzenlemeyi görüşeceği haberleri etkili oldu. Uluslararası Enerji Ajansı ise eylül ayı raporunda 2026 küresel petrol talebinin 2,5 milyon varil/gün daralacağını, bunun Covid-19 sonrası en sert ikinci yıllık düşüş olacağını öngördü. Dolar endeksi (DXY) iki ayın zirvesi olan 101,40 seviyesine dokunduktan sonra 101,00 civarına gerilerken, euro 1,1384, sterlin ise 1,3200 üzerinde işlem gördü.",
+    publishedAt: "2026-09-25",
+    readingMinutes: 3,
+    intro:
+      "Cuma akşamı saatlerine doğru küresel piyasaların gündeminde, **New York Fed Başkanı John Williams**'ın perşembe günü **Londra**'da katıldığı bir konferansta sergilediği şahin ton öne çıktı. **Williams**, piyasaların yıl sonuna kadar bir faiz artışı daha beklemesinin \"makul\" olduğunu söylerken, ekim ayı toplantısına dönük net bir taahhütte bulunmadı ve **Fed**'in ileriye dönük yönlendirme (forward guidance) dönemini geride bıraktığını belirtti. Açıklamaların ardından **CME FedWatch** verilerine göre ekim ayı **FOMC** toplantısında yeni bir faiz artışı ihtimali **%70**'in üzerine yükseldi. Bu arada petrol piyasalarında **Brent petrol**, perşembe günkü **Husi** saldırısı kaynaklı sıçramanın ardından cuma günü varil başına **105 dolar**ın altına geriledi; gerilemede, **Körfez İşbirliği Konseyi (GCC)** üyesi ülkelerin üst düzey diplomatlarının **Hürmüz Boğazı**'ndan geçen deniz taşımacılığına yönelik geçici bir düzenlemeyi görüşmek üzere pazartesi günü **Umman**'da İranlı mevkidaşlarıyla bir araya geleceği haberleri etkili oldu. Öte yandan **Uluslararası Enerji Ajansı (IEA)**, eylül ayı Petrol Piyasası Raporu'nda 2026 yılı küresel petrol talebinin **2,5 milyon varil/gün** daralacağını öngördü; bu, son 60 yılın **Covid-19 salgını**ndan sonraki en sert ikinci yıllık düşüşe işaret ediyor ve bir önceki rapora kıyasla yaklaşık **940 bin varil/gün** daha derin bir daralmayı yansıtıyor. Dolar tarafında, **dolar endeksi (DXY)** cuma günü yaklaşık iki ayın zirvesi olan **101,40** seviyesine kadar yükseldikten sonra **101,00** civarına gerileyerek konsolide oldu; bu ortamda **euro**, dolar karşısında **1,1384** seviyesinde işlem görürken, **sterlin** haftanın başından bu yana yaşadığı **%1**'in üzerindeki değer kaybının ardından **1,3200** seviyesinin üzerinde tutunmayı sürdürdü. Piyasaların odağı şimdi pazartesi günü **Umman**'da gerçekleşecek **Körfez-İran** görüşmesinde ve gelecek hafta TSİ **15.30**'da açıklanacak **Eylül ayı ABD tarım dışı istihdam (NFP)** raporunda.",
+    news: [
+      {
+        icon: "🏦",
+        heading: "Fed'in Williams'ından Şahin Mesaj: 'Yıl Sonu Faiz Artışı Makul', İleriye Dönük Yönlendirme Sona Erdi",
+        body: "**New York Fed Başkanı John Williams**, perşembe günü **Londra**'da katıldığı bir konferansta piyasaların yıl sonuna kadar bir faiz artışı daha beklemesinin \"makul\" olduğunu söyledi; ancak ekim ayı toplantısına dönük net bir taahhütte bulunmaktan kaçındı ve verilerin izlenmeye devam edileceğini vurguladı. Williams ayrıca **Fed**'in ileriye dönük yönlendirme (forward guidance) dönemini geride bıraktığını belirtti. Açıklamaların ardından **CME FedWatch** verilerine göre ekim ayı **FOMC** toplantısında yeni bir faiz artışı ihtimali **%70**'in üzerine yükseldi.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Brent 105 Doların Altına Geriledi: Umman'da Körfez-İran Görüşmesi Bekleniyor, IEA Talep Tahminini Düşürdü",
+        body: "**Brent petrol**, perşembe günkü **Husi** saldırısı kaynaklı sıçramanın ardından cuma günü varil başına **105 dolar**ın altına geriledi. Gerilemede, **Körfez İşbirliği Konseyi (GCC)** üyesi ülkelerin üst düzey diplomatlarının, **Hürmüz Boğazı**'ndan geçen deniz taşımacılığına yönelik geçici bir düzenlemeyi görüşmek üzere pazartesi günü **Umman**'da İranlı mevkidaşlarıyla bir araya geleceği haberleri etkili oldu. Bu arada **Uluslararası Enerji Ajansı (IEA)**, eylül ayı Petrol Piyasası Raporu'nda 2026 yılı küresel petrol talebinin **2,5 milyon varil/gün** daralacağını öngördü; bu, son 60 yılın **Covid-19 salgını**ndan sonraki en sert ikinci yıllık düşüşe işaret ediyor ve bir önceki rapora kıyasla yaklaşık **940 bin varil/gün** daha derin bir daralmayı yansıtıyor.",
+      },
+      {
+        icon: "💵",
+        heading: "Dolar İki Ayın Zirvesine Dokundu, Ardından Geriledi: Euro 1,1384'te, Sterlin 1,3200 Üzerinde",
+        body: "**Dolar endeksi (DXY)**, cuma günü yaklaşık iki ayın zirvesi olan **101,40** seviyesine kadar yükseldikten sonra **101,00** civarına gerileyerek konsolide oldu. Bu ortamda **euro**, dolar karşısında **1,1384** seviyesinde işlem görürken, **sterlin** haftanın başından bu yana yaşadığı **%1**'in üzerindeki değer kaybının ardından **1,3200** seviyesinin üzerinde tutunmayı sürdürdü.",
+      },
+    ],
+    calendarLabel: "28 Eylül - 2 Ekim 2026",
+    calendarEvents: [
+      {
+        time: "28 Eylül 2026 (Pazartesi)",
+        icon: "🇴🇲",
+        title: "Körfez Ülkeleri-İran Hürmüz Görüşmesi (Umman)",
+        note: "Körfez İşbirliği Konseyi (GCC) üyesi ülkelerin üst düzey diplomatları, Hürmüz Boğazı'ndan geçen deniz taşımacılığına yönelik geçici bir düzenleme ihtimalini görüşmek üzere Umman'da İranlı mevkidaşlarıyla bir araya gelecek; görüşme sonucu petrol fiyatları açısından yakından izleniyor.",
+      },
+      {
+        time: "2 Ekim 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-25-0900",
     title: "FXPARTNER Piyasa Özeti | 25.09.2026 Cuma Sabah Güncellemesi",
     excerpt:
