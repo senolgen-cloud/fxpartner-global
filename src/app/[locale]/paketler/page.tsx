@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "@/components/LocaleLink";
 import Footer from "@/components/Footer";
 import JoinSteps from "@/components/JoinSteps";
+import ArcText from "@/components/ArcText";
 import { createNowPaymentsCheckout } from "./checkout-actions";
 import { lookupBrokers } from "@/data/brokerLookup";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -310,8 +311,16 @@ export default async function PaketlerPage({
 
         {/* CTA banner */}
         <section className="mx-auto max-w-5xl px-6 py-16">
-          <div className="flex flex-col items-center justify-between gap-8 rounded-2xl border border-hairline bg-ink-soft p-8 text-center md:flex-row md:text-start">
-            <div>
+          <div className="relative flex flex-col items-center justify-between gap-8 overflow-hidden rounded-2xl border border-hairline bg-ink-soft p-8 text-center md:flex-row md:text-start">
+            {/* Dönen halka sağ kenardan yarısı dışarıda duruyor; kutunun
+                overflow-hidden'ı onu kırpıyor, sayfayı genişletmiyor.
+                Telefonda gizli: 8 punto metnin üstüne binerdi. */}
+            <ArcText
+              text={tr("İŞLEME HAZIR MISIN")}
+              className="pointer-events-none absolute -end-24 top-1/2 hidden -translate-y-1/2 opacity-70 lg:block"
+              size={300}
+            />
+            <div className="relative">
               <p className="font-display text-2xl font-semibold">
                 {tr("Piyasayı takip etmek yerine,")}{" "}
                 <span className="text-signal">sistemli takip edin.</span>

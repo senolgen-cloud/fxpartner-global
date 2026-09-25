@@ -755,3 +755,25 @@ body[data-sheet="modal"] [data-behind-sheet] {
     animation: none;
   }
 }
+
+/* Dönen kavisli yazı (ArcText). Süs; hareketi kapatan okur halkayı yine
+   görür, sadece dönmez. */
+.arc-text-spin {
+  animation: arc-text-spin 34s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes arc-text-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arc-text-spin {
+    animation: none;
+  }
+}
