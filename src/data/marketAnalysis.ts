@@ -41,6 +41,49 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-26-1800",
+    title: "FXPARTNER Piyasa Özeti | 26.09.2026 Cumartesi Akşam Güncellemesi",
+    excerpt:
+      "Cumartesi akşamına doğru küresel piyasaların gündeminde ABD 10 yıllık tahvil getirisinin hafta içinde %5,13'e kadar yükselerek 2007'nin temmuz ayından bu yana en yüksek seviyesine ulaşması öne çıktı; yükseliş, Fed'in eylül ayında yaptığı faiz artışının ardından Fed Guvernörü Michael Barr'ın enflasyonun yüzde 2 hedefine zamanında inmesi için ek faiz artışlarının gerekebileceğini söylemesiyle hızlandı. Barr, eylül ayındaki çeyrek puanlık artışı \"önemli bir adım\" olarak nitelendirirken, komitenin faizler konusunda uzun süre \"pozisyon dışı\" kaldığını belirtti. Bu arada BM Genel Kurulu kulislerinde ABD ve İran'ın Hürmüz Boğazı'nı kademeli olarak yeniden açmaya yönelik bir anlaşmayı görüştüğüne dair sinyaller, aylardır petrol fiyatlarına yerleşen jeopolitik risk primini hızla eritti; Brent petrol gün içi 107,17 dolarlık zirvesinden %2,2 gerileyerek 104,16 dolara indi. Güçlenen dolar ve yükselen tahvil getirileri karşısında ons altın baskı altında kalarak 4.285 dolar seviyesine geriledi.",
+    publishedAt: "2026-09-26",
+    readingMinutes: 2,
+    intro:
+      "Cumartesi akşamına doğru küresel piyasaların gündeminde **ABD** 10 yıllık tahvil getirisinin hafta içinde **%5,13**'e kadar yükselerek **2007**'nin temmuz ayından bu yana en yüksek seviyesine ulaşması öne çıktı; yükseliş, **Fed**'in eylül ayında yaptığı faiz artışının ardından **Fed Guvernörü Michael Barr**'ın enflasyonun yüzde 2 hedefine zamanında inmesi için ek faiz artışlarının gerekebileceğini söylemesiyle hızlandı. Barr, eylül ayındaki çeyrek puanlık artışı \"önemli bir adım\" olarak nitelendirirken, komitenin faizler konusunda uzun süre \"pozisyon dışı\" kaldığını belirtti. Bu arada **BM Genel Kurulu** kulislerinde **ABD** ve **İran**'ın **Hürmüz Boğazı**'nı kademeli olarak yeniden açmaya yönelik bir anlaşmayı görüştüğüne dair sinyaller, aylardır petrol fiyatlarına yerleşen jeopolitik risk primini hızla eritti; **Brent petrol** gün içi **107,17 dolar**lık zirvesinden **%2,2** gerileyerek **104,16 dolar**a indi. Güçlenen dolar ve yükselen tahvil getirileri karşısında ons altın baskı altında kalarak **4.285 dolar** seviyesine geriledi. Piyasaların odağı şimdi gelecek hafta TSİ **15.30**'da açıklanacak **Eylül ayı ABD tarım dışı istihdam (NFP)** raporunda.",
+    news: [
+      {
+        icon: "🇺🇸",
+        heading: "ABD 10 Yıllık Tahvil Getirisi 2007'den Bu Yana En Yüksek Seviyesinde",
+        body: "**ABD**'de 10 yıllık hazine tahvili getirisi hafta içinde **%5,13**'e kadar yükselerek **2007**'nin temmuz ayından bu yana en yüksek seviyesine ulaştı. Yükselişte enflasyonun beklenenden yapışkan seyretmesi, güçlü büyüme verileri ve yapay zeka yatırımlarıyla bağlantılı kurumsal ve kamu tahvil ihraçlarındaki artış etkili oldu.",
+      },
+      {
+        icon: "🏦",
+        heading: "Fed Guvernörü Barr: Enflasyon İçin Ek Faiz Artışları Gerekebilir",
+        body: "**Fed Guvernörü Michael Barr**, enflasyonun **%2** hedefine zamanında inmesi için ek faiz artışlarının gerekebileceğini söyledi. Barr, eylül ayında yapılan çeyrek puanlık faiz artışını \"önemli bir adım\" olarak nitelendirirken, komitenin faizler konusunda uzun süre \"pozisyon dışı\" kaldığını belirtti.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Brent Petrol, Hürmüz'e Dair Diplomatik Sinyallerle %2,2 Geriledi",
+        body: "**BM Genel Kurulu** kulislerinde **ABD** ve **İran**'ın **Hürmüz Boğazı**'nı kademeli olarak yeniden açmaya yönelik bir anlaşmayı görüştüğüne dair sinyaller, aylardır petrol fiyatlarına yerleşen jeopolitik risk primini hızla eritti. **Brent petrol**, gün içi **107,17 dolar**lık zirvesinden **%2,2** gerileyerek **104,16 dolar**a kadar indi.",
+      },
+      {
+        icon: "🥇",
+        heading: "Güçlenen Dolar ve Yükselen Getiriler Ons Altını Baskılıyor",
+        body: "**Dolar endeksi (DXY)**, güçlü **ABD** verileri ve **Fed**'in faiz artırımına devam edebileceği beklentileriyle **101** puanın üzerine çıkarak yaklaşık iki aylık zirvesine yaklaştı. Güçlenen dolar ve yükselen tahvil getirileri karşısında ons altın baskı altında kalarak **4.285 dolar** seviyesine geriledi; ons altın son bir ayda geri çekilse de yıllık bazda hâlâ belirgin şekilde yükseklerde seyrediyor.",
+      },
+    ],
+    calendarLabel: "28 Eylül - 2 Ekim 2026",
+    calendarEvents: [
+      {
+        time: "2 Ekim 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-26-1600",
     title: "FXPARTNER Piyasa Özeti | 26.09.2026 Cumartesi Öğleden Sonra Güncellemesi",
     excerpt:
