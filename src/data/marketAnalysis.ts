@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-26-1600",
+    title: "FXPARTNER Piyasa Özeti | 26.09.2026 Cumartesi Öğleden Sonra Güncellemesi",
+    excerpt:
+      "Cumartesi öğleden sonrasına doğru küresel piyasaların gündeminde ABD Başkanı Donald Trump'ın Truth Social hesabından Hürmüz Boğazı'nı \"Trump Boğazı\" olarak adlandıran bir harita paylaşması öne çıktı; paylaşım, Trump'ın İran'ın boğazı yedi gün içinde yeniden açmayı öngören teklifini reddettiği yönündeki haberlerin ardından geldi ve ağustos ayında boğazı \"yeni ABD toprağı\" ilan ederek \"tam kontrol\" iddiasında bulunduğu önceki paylaşımlarının bir devamı niteliğinde. Bu arada Suudi öncülüğündeki koalisyon, cumartesi sabahı erken saatlerde İran destekli Husiler tarafından fırlatılan iki balistik füzeyi güneybatıdaki Khamis Mushait kentine yönelirken imha ettiğini, başkent Riyad'a yönelen iki insansız hava aracını da düşürdüğünü açıkladı; saldırılar, temmuz ayında çökme noktasına gelen ateşkesin ardından tırmanan Husi saldırıları dizisinin en sonuncusu oldu. Öte yandan İran Cumhurbaşkanı Mesud Pezeşkiyan, BM Genel Kurulu görüşmelerinin ardından New York'tan ayrıldı; Tahran, Washington'dan teklifine ilişkin resmi bir yanıt beklemeyi sürdürüyor.",
+    publishedAt: "2026-09-26",
+    readingMinutes: 2,
+    intro:
+      "Cumartesi öğleden sonrasına doğru küresel piyasaların gündeminde **ABD Başkanı Donald Trump**'ın **Truth Social** hesabından **Hürmüz Boğazı**'nı \"**Trump Boğazı**\" olarak adlandıran bir harita paylaşması öne çıktı; paylaşım, Trump'ın **İran**'ın boğazı yedi gün içinde yeniden açmayı öngören teklifini reddettiği yönündeki haberlerin ardından geldi ve **ağustos** ayında boğazı \"yeni ABD toprağı\" ilan ederek \"tam kontrol\" iddiasında bulunduğu önceki paylaşımlarının bir devamı niteliğinde. Bu arada **Suudi öncülüğündeki koalisyon**, cumartesi sabahı erken saatlerde **İran destekli Husiler** tarafından fırlatılan iki balistik füzeyi güneybatıdaki **Khamis Mushait** kentine yönelirken imha ettiğini, başkent **Riyad**'a yönelen iki insansız hava aracını da düşürdüğünü açıkladı; saldırılar, **temmuz** ayında çökme noktasına gelen ateşkesin ardından tırmanan Husi saldırıları dizisinin en sonuncusu oldu. Öte yandan **İran Cumhurbaşkanı Mesud Pezeşkiyan**, **BM Genel Kurulu** görüşmelerinin ardından **New York**'tan ayrıldı; Tahran, Washington'dan teklifine ilişkin resmi bir yanıt beklemeyi sürdürüyor. Piyasaların odağı şimdi gelecek hafta TSİ **15.30**'da açıklanacak **Eylül ayı ABD tarım dışı istihdam (NFP)** raporunda.",
+    news: [
+      {
+        icon: "🇺🇸",
+        heading: "Trump, Truth Social'da Hürmüz Boğazı'nı \"Trump Boğazı\" Olarak Gösteren Harita Paylaştı",
+        body: "**ABD Başkanı Donald Trump**, **Truth Social** hesabından **Hürmüz Boğazı**'nı \"**Trump Boğazı**\" olarak adlandıran bir harita paylaştı. Paylaşım, Trump'ın **İran**'ın boğazı yedi gün içinde yeniden açmayı öngören teklifini reddettiği yönündeki haberlerin ardından geldi ve **ağustos** ayında boğazı \"yeni ABD toprağı\" ilan ederek bölgede \"tam kontrol\" iddiasında bulunduğu önceki paylaşımlarının bir devamı niteliğinde.",
+      },
+      {
+        icon: "🇸🇦",
+        heading: "Suudi Koalisyonu Riyad ve Khamis Mushait'i Hedef Alan Husi Füze ve Dronlarını İmha Ettiğini Açıkladı",
+        body: "**Suudi öncülüğündeki koalisyon**, cumartesi sabahı erken saatlerde **İran destekli Husiler** tarafından fırlatılan iki balistik füzeyi güneybatıdaki **Khamis Mushait** kentine yönelirken imha ettiğini, başkent **Riyad**'a yönelen iki insansız hava aracını da düşürdüğünü duyurdu. Saldırılar, **temmuz** ayında çökme noktasına gelen ateşkesin ardından tırmanan Husi saldırıları dizisinin en sonuncusu oldu.",
+      },
+      {
+        icon: "🇮🇷",
+        heading: "İran Cumhurbaşkanı Pezeşkiyan BM Görüşmelerinin Ardından New York'tan Ayrıldı",
+        body: "**İran Cumhurbaşkanı Mesud Pezeşkiyan**, **BM Genel Kurulu** görüşmelerinin ve **ABD** ile yürütülen dolaylı temasların ardından **New York**'tan ayrıldı. Tahran, Washington'dan **Hürmüz Boğazı** teklifine ilişkin resmi bir yanıt beklemeyi sürdürürken, Trump yönetiminin tutumu belirsizliğini koruyor.",
+      },
+    ],
+    calendarLabel: "28 Eylül - 2 Ekim 2026",
+    calendarEvents: [
+      {
+        time: "2 Ekim 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-26-1200",
     title: "FXPARTNER Piyasa Özeti | 26.09.2026 Cumartesi Güncellemesi",
     excerpt:
