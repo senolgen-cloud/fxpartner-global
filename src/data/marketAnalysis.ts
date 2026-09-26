@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-26-1200",
+    title: "FXPARTNER Piyasa Özeti | 26.09.2026 Cumartesi Güncellemesi",
+    excerpt:
+      "Cumartesi günü küresel piyasaların gündeminde Wall Street Journal'ın haberine göre ABD Başkanı Donald Trump'ın, İran'ın Hürmüz Boğazı'nı yedi gün içinde yeniden açmayı ve bölgesel çatışmaları durdurmayı öngören teklifini reddettiği ve yardımcılarına kasım ayındaki ara seçimlerin ardından İran'a yönelik bombalama harekâtını yeniden başlatmayı beklediğini söylediği iddiası öne çıktı. İran Dışişleri Bakanı Abbas Erakçi'nin BM Genel Kurulu'nun New York'taki toplantısı sırasında Katar arabuluculuğuyla ABD'ye ilettiği teklife göre Tahran, ABD'nin İran limanlarına uyguladığı ablukayı kaldırması, dondurulmuş varlıkları serbest bırakması ve petrol yaptırımlarını askıya alması karşılığında Hürmüz Boğazı'nı yeniden açacak ve Lübnan dahil tüm cephelerde çatışmaları durduracaktı. Tahran cumartesi günü ABD'den resmi bir yanıt beklerken, Reuters WSJ haberini bağımsız kaynaklarla doğrulayamadığını bildirdi.",
+    publishedAt: "2026-09-26",
+    readingMinutes: 2,
+    intro:
+      "Cumartesi günü küresel piyasaların gündeminde **Wall Street Journal**'ın haberine göre **ABD Başkanı Donald Trump**'ın, **İran**'ın **Hürmüz Boğazı**'nı yedi gün içinde yeniden açmayı ve bölgesel çatışmaları durdurmayı öngören teklifini reddettiği ve yardımcılarına **kasım** ayındaki ara seçimlerin ardından İran'a yönelik bombalama harekâtını yeniden başlatmayı beklediğini söylediği iddiası öne çıktı. **İran Dışişleri Bakanı Abbas Erakçi**'nin BM Genel Kurulu'nun **New York**'taki toplantısı sırasında **Katar** arabuluculuğuyla ABD'ye ilettiği teklife göre Tahran, ABD'nin İran limanlarına uyguladığı ablukayı kaldırması, dondurulmuş varlıkları serbest bırakması ve petrol yaptırımlarını askıya alması karşılığında Hürmüz Boğazı'nı yeniden açacak ve **Lübnan** dahil tüm cephelerde çatışmaları durduracaktı. Tahran cumartesi günü ABD'den resmi bir yanıt beklerken, **Reuters** WSJ haberini bağımsız kaynaklarla doğrulayamadığını bildirdi; gelişme, savaşın yedinci ayına yaklaşırken taraflar arasındaki güvensizliğin sürdüğüne işaret ediyor. Piyasaların gündeminde şimdi gelecek hafta TSİ **15.30**'da açıklanacak **Eylül ayı ABD tarım dışı istihdam (NFP)** raporu var.",
+    news: [
+      {
+        icon: "🇺🇸",
+        heading: "WSJ: Trump, İran'ın Hürmüz Teklifini Reddetti; Bombalamanın Ara Seçimler Sonrası Yeniden Başlaması Bekleniyor",
+        body: "**Wall Street Journal**'ın ABD'li yetkililere dayandırdığı haberine göre **ABD Başkanı Donald Trump**, **İran**'ın **Hürmüz Boğazı**'nı yedi gün içinde yeniden açmayı öngören teklifini reddetti ve yardımcılarına **kasım** ayındaki ara seçimlerin ardından İran'a yönelik bombalama harekâtını yeniden başlatmayı beklediğini söyledi. Habere göre Trump, Tahran'ın kendi taleplerini karşılayacağı konusunda şüpheci; ancak görüşünün değişebileceğini ve ara seçim sonuçlarından etkilenebileceğini de belirtiyor.",
+      },
+      {
+        icon: "🇮🇷",
+        heading: "İran'ın Yedi Günlük Teklifi: Hürmüz'ün Açılması Karşılığında Abluka ve Yaptırımların Kaldırılması İsteniyor",
+        body: "**İran Dışişleri Bakanı Abbas Erakçi**, BM Genel Kurulu'nun **New York**'taki toplantısı sırasında **Katar** arabuluculuğuyla ABD'ye iletilen teklifi özel bir toplantıda aktardı. Teklife göre Tahran, ABD'nin İran limanlarına uyguladığı ablukayı kaldırması, dondurulmuş İran varlıklarını serbest bırakması ve petrol yaptırımlarını askıya alması karşılığında **Hürmüz Boğazı**'nı yeniden açacak ve **Lübnan** dahil tüm cephelerde çatışmaları durduracak.",
+      },
+      {
+        icon: "⚠️",
+        heading: "İran Resmi Yanıt Bekliyor: Reuters WSJ Haberini Bağımsız Olarak Doğrulayamadı",
+        body: "Tahran, cumartesi günü ABD'den teklifine ilişkin resmi bir yanıt beklerken, **Reuters** WSJ'nin Trump'ın teklifi reddettiği yönündeki haberini bağımsız kaynaklarla doğrulayamadığını bildirdi. Gelişme, savaşın yedinci ayına yaklaşırken taraflar arasındaki güvensizliğin sürdüğüne işaret ediyor ve haftaya jeopolitik risk primi yüksek başlayacak olan petrol piyasaları açısından yakından izleniyor.",
+      },
+    ],
+    calendarLabel: "28 Eylül - 2 Ekim 2026",
+    calendarEvents: [
+      {
+        time: "2 Ekim 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-25-2200",
     title: "FXPARTNER Piyasa Özeti | 25.09.2026 Cuma Gün Sonu Güncellemesi",
     excerpt:
