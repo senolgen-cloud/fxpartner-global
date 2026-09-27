@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-27-1800",
+    title: "FXPARTNER Piyasa Özeti | 27.09.2026 Pazar Akşam Güncellemesi",
+    excerpt:
+      "Pazar akşamına doğru küresel piyasaların gündeminde ABD Başkanı Donald Trump'ın İran'ın Hürmüz Boğazı'nı yedi gün içinde yeniden açmayı öngören teklifini doğrudan reddettiğini açıklaması öne çıktı; Trump gazetecilere İran'ın teklifi hemen kabul etmek istemesinin nedeninin savaşı ağır kaybediyor olması olduğunu söyledi. İran Dışişleri Bakanı Abbas Erakçi ise Tahran'ın Hürmüz Boğazı'nın yeniden açılması karşılığında ABD'nin ablukayı kaldırması, dondurulmuş varlıkları serbest bırakması ve petrol yaptırımlarını askıya alması yönündeki taleplerini yumuşatmayacağını, Katar ve Pakistan arabulucuları üzerinden Washington'dan henüz resmi bir yanıt alınmadığını belirtti. BM Genel Kurulu görüşmelerinin New York'ta somut bir ilerleme sağlayamamasının ardından analistler, sürecin bir sonraki dönüm noktası olarak kasım ayındaki ABD ara seçimlerini işaret ediyor.",
+    publishedAt: "2026-09-27",
+    readingMinutes: 2,
+    intro:
+      "Pazar akşamına doğru küresel piyasaların gündeminde **ABD Başkanı Donald Trump**'ın **İran**'ın **Hürmüz Boğazı**'nı yedi gün içinde yeniden açmayı öngören teklifini doğrudan reddettiğini açıklaması öne çıktı; Trump gazetecilere İran'ın teklifi hemen kabul etmek istemesinin nedeninin savaşı ağır kaybediyor olması olduğunu söyledi. **İran Dışişleri Bakanı Abbas Erakçi** ise Tahran'ın **Hürmüz Boğazı**'nın yeniden açılması karşılığında ABD'nin ablukayı kaldırması, dondurulmuş varlıkları serbest bırakması ve petrol yaptırımlarını askıya alması yönündeki taleplerini yumuşatmayacağını, **Katar** ve **Pakistan** arabulucuları üzerinden Washington'dan henüz resmi bir yanıt alınmadığını belirtti. **BM Genel Kurulu** görüşmelerinin **New York**'ta somut bir ilerleme sağlayamamasının ardından analistler, sürecin bir sonraki dönüm noktası olarak **kasım** ayındaki **ABD** ara seçimlerini işaret ediyor. Piyasaların odağı şimdi gelecek hafta TSİ **15.30**'da açıklanacak **Eylül ayı ABD tarım dışı istihdam (NFP)** raporunda.",
+    news: [
+      {
+        icon: "🇺🇸",
+        heading: "Trump Hürmüz Teklifini Reddettiğini Doğrudan Açıkladı: \"Kabul Edilemez\"",
+        body: "**ABD Başkanı Donald Trump**, **İran**'ın **Hürmüz Boğazı**'nı yedi gün içinde yeniden açmayı öngören teklifini kabul edilemez bulduğunu doğrudan açıkladı. Trump gazetecilere, İran'ın boğazı hemen açmak istemesinin nedeninin savaşı ağır kaybediyor olması olduğunu söyledi; bu açıklama, cumartesi günü **WSJ**'nin aktardığı reddetme haberini doğruladı ve **Reuters**'ın bağımsız olarak teyit edemediği iddiayı Trump'ın kendi ağzından resmileştirdi.",
+      },
+      {
+        icon: "🇮🇷",
+        heading: "İran Dışişleri Bakanı Erakçi: Taleplerimizi Yumuşatmayacağız, Resmi Yanıt Hâlâ Yok",
+        body: "**İran Dışişleri Bakanı Abbas Erakçi**, Trump'ın reddine karşın Tahran'ın **Hürmüz Boğazı**'nın yeniden açılması karşılığında ABD'nin ablukayı kaldırması, dondurulmuş varlıkları serbest bırakması ve petrol yaptırımlarını askıya alması yönündeki taleplerini yumuşatmayacağını söyledi. Erakçi, **Katar** ve **Pakistan** arabulucuları üzerinden Washington'dan henüz resmi bir yanıt alınmadığını belirtti.",
+      },
+      {
+        icon: "🗽",
+        heading: "New York'ta İlerleme Yok: Gözler Kasım Ara Seçimleri Sonrasına Çevrildi",
+        body: "**BM Genel Kurulu** görüşmelerinin **New York**'ta somut bir ilerleme sağlayamamasının ardından analistler, **Trump** yönetiminin İran'a yönelik askeri harekâtı **kasım** ayındaki ara seçimlerin ardından yeniden başlatmayı planladığı yönündeki sinyallere dikkat çekiyor. Bu ortamda petrol piyasalarında jeopolitik risk primi yeni haftaya taşınırken, yatırımcılar sürecin bir sonraki dönüm noktası olarak ara seçim sonrasını izliyor.",
+      },
+    ],
+    calendarLabel: "28 Eylül - 2 Ekim 2026",
+    calendarEvents: [
+      {
+        time: "2 Ekim 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-26-1800",
     title: "FXPARTNER Piyasa Özeti | 26.09.2026 Cumartesi Akşam Güncellemesi",
     excerpt:
