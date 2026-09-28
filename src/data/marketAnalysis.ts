@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-28-1200",
+    title: "FXPARTNER Piyasa Özeti | 28.09.2026 Pazartesi Öğle Güncellemesi",
+    excerpt:
+      "Pazartesi öğle saatlerine doğru küresel piyasaların gündeminde ons altının haftaya sert satışla başlaması öne çıktı; ABD Başkanı Donald Trump'ın İran'ın Hürmüz Boğazı teklifini reddetmesinin ardından yükselen petrol fiyatları enflasyon endişelerini ve Fed'in ekim ayı faiz artırımı beklentilerini güçlendirdi. Ons altın gün içinde 4.179,42 dolara kadar gerileyerek ağustos başından bu yana en düşük seviyesini gördü ve kayıplarını derinleştirerek TSİ 10.10 itibarıyla yaklaşık 4.160 dolar seviyesine kadar indi; piyasalarda ekim ayı faiz artışı olasılığı ise yaklaşık %68'e yükseldi. Bu gelişmelerin gölgesinde Borsa İstanbul'da BIST 100 endeksi haftaya %1,62 değer kaybıyla 12.689,87 puandan başladı; dolar/TL ise 48,98 lira seviyesinde seyretti.",
+    publishedAt: "2026-09-28",
+    readingMinutes: 2,
+    intro:
+      "Pazartesi öğle saatlerine doğru küresel piyasaların gündeminde **ons altın**ın haftaya sert satışla başlaması öne çıktı; **ABD Başkanı Donald Trump**'ın **İran**'ın **Hürmüz Boğazı** teklifini reddetmesinin ardından yükselen petrol fiyatları enflasyon endişelerini ve **Fed**'in **ekim ayı** faiz artırımı beklentilerini güçlendirdi. **Ons altın**, gün içinde **4.179,42 dolar**a kadar gerileyerek **ağustos** başından bu yana en düşük seviyesini gördü ve kayıplarını derinleştirerek TSİ **10.10** itibarıyla yaklaşık **4.160 dolar** seviyesine kadar indi; piyasalarda **ekim ayı** faiz artışı olasılığı ise yaklaşık **%68**'e yükseldi. Bu gelişmelerin gölgesinde **Borsa İstanbul**'da **BIST 100** endeksi haftaya **%1,62** değer kaybıyla **12.689,87** puandan başladı; **dolar/TL** ise **48,98** lira seviyesinde seyretti. Piyasaların odağı şimdi bu hafta TSİ **15.30**'da açıklanacak **Eylül ayı ABD tarım dışı istihdam (NFP)** raporunda.",
+    news: [
+      {
+        icon: "🥇",
+        heading: "Ons Altın 8 Haftanın Düşüğünde: Kayıplar Derinleşiyor",
+        body: "**Ons altın**, yükselen petrol fiyatlarının güçlendirdiği enflasyon endişeleri ve **Fed**'in **ekim ayı**nda faiz artırabileceği beklentileriyle gün içinde **4.179,42 dolar**a kadar geriledi; bu seviye **ağustos** başından bu yana görülen en düşük seviyeyi işaret etti. **Ons altın**, kayıplarını derinleştirerek TSİ **10.10** itibarıyla yaklaşık **4.160 dolar**a kadar indi.",
+      },
+      {
+        icon: "🏦",
+        heading: "Ekim Ayı Faiz Artışı Olasılığı %68'e Yükseldi",
+        body: "Yükselen petrol fiyatlarının enflasyon görünümüne yönelik endişeleri artırmasıyla piyasalarda **Fed**'in **ekim ayı**nda faiz artırma olasılığı yaklaşık **%68**'e yükseldi. Güçlenen faiz artışı beklentileri, **dolar** ve **ABD tahvil getirileri** üzerindeki yukarı yönlü baskıyı sürdürdü.",
+      },
+      {
+        icon: "📉",
+        heading: "BIST 100 Haftaya Kayıpla Başladı: Endeks %1,62 Geriledi",
+        body: "**Borsa İstanbul**'da **BIST 100** endeksi haftaya **%1,62** değer kaybıyla **12.689,87** puandan başladı; endeks cuma günü kapanışta **%0,09** yükselişle **12.899,35** puana çıkmıştı. Aynı saatlerde **dolar/TL** **48,98** lira seviyesinde, **ons altın** ise yaklaşık **4.160 dolar**da işlem görüyordu.",
+      },
+    ],
+    calendarLabel: "28 Eylül - 2 Ekim 2026",
+    calendarEvents: [
+      {
+        time: "2 Ekim 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-28-0900",
     title: "FXPARTNER Piyasa Özeti | 28.09.2026 Pazartesi Sabah Güncellemesi",
     excerpt:
