@@ -41,6 +41,49 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-28-1800",
+    title: "FXPARTNER Piyasa Özeti | 28.09.2026 Pazartesi Akşam Güncellemesi",
+    excerpt:
+      "Pazartesi akşamına doğru küresel piyasaların gündeminde Borsa İstanbul'da BIST 100 endeksinin fon krizinin etkisiyle sert değer kaybetmesi öne çıktı; endeks öğleden sonra günün düşüğü olan 12.457,34 puana (%3,42) kadar geriledi ve TSİ 15.00 itibarıyla %3,20 kayıpla 12.486,84 puandan işlem gördü. Sermaye Piyasası Kurulu (SPK), 17 Eylül'de TERA, PUSULA, HEDEF, ATLAS, A1, PARDUS ve BULLS Portföy'e ait 131 yatırım fonu için aldığı tasfiye kararının 455.758 tekil yatırımcıyı etkilediğini açıkladı; İşbank ve Ziraat Bankası tasfiye sürecinin altı ay süreceğini duyurdu. Aynı saatlerde petrol fiyatları yükselişini sürdürdü; Brent petrol %2,46 artışla 106,89 dolara, ABD tipi ham petrol (WTI) ise %2,30 artışla 94,54 dolara çıktı. Ons altın ise güne göre %3,17 değer kaybıyla 4.149,19 dolara kadar geriledi.",
+    publishedAt: "2026-09-28",
+    readingMinutes: 3,
+    intro:
+      "Pazartesi akşamına doğru küresel piyasaların gündeminde **Borsa İstanbul**'da **BIST 100** endeksinin fon krizinin etkisiyle sert değer kaybetmesi öne çıktı; endeks öğleden sonra günün düşüğü olan **12.457,34** puana (**%3,42**) kadar geriledi ve TSİ **15.00** itibarıyla **%3,20** kayıpla **12.486,84** puandan işlem gördü. **Sermaye Piyasası Kurulu (SPK)**, **17 Eylül**'de **TERA**, **PUSULA**, **HEDEF**, **ATLAS**, **A1**, **PARDUS** ve **BULLS Portföy**'e ait **131** yatırım fonu için aldığı tasfiye kararının **455.758** tekil yatırımcıyı etkilediğini açıkladı; **İşbank** ve **Ziraat Bankası** tasfiye sürecinin **altı ay** süreceğini duyurdu. Aynı saatlerde petrol fiyatları yükselişini sürdürdü; **Brent petrol** **%2,46** artışla **106,89 dolar**a, **ABD tipi ham petrol (WTI)** ise **%2,30** artışla **94,54 dolar**a çıktı. **Ons altın** ise güne göre **%3,17** değer kaybıyla **4.149,19 dolar**a kadar geriledi. Piyasaların odağı şimdi bu hafta TSİ **15.30**'da açıklanacak **Eylül ayı ABD tarım dışı istihdam (NFP)** raporunda.",
+    news: [
+      {
+        icon: "📉",
+        heading: "BIST 100 Fon Krizinin Etkisiyle Sert Düştü: Endeks 12.500 Sınırının Altına Geriledi",
+        body: "**BIST 100** endeksi, haftaya **%1,62** kayıpla **12.689,87** puandan başlamasının ardından öğleden sonra satışların hızlanmasıyla günün düşüğü olan **12.457,34** puana (**%3,42**) kadar geriledi; TSİ **15.00** itibarıyla endeks **%3,20** kayıpla **12.486,84** puandan işlem görüyordu. Endeks gün içinde en yüksek **12.750,45** puana (**%1,16**) kadar yükselmişti.",
+      },
+      {
+        icon: "🏛️",
+        heading: "SPK: Tasfiye Edilen 131 Fondaki Yatırımcı Sayısı 455.758 Kişi",
+        body: "**Sermaye Piyasası Kurulu (SPK)**, **17 Eylül**'de **TERA**, **PUSULA**, **HEDEF**, **ATLAS**, **A1**, **PARDUS** ve **BULLS Portföy**'e ait toplam **131** yatırım fonu için aldığı tasfiye kararının **455.758** tekil yatırımcıyı etkilediğini açıkladı. **İşbank** ve **Ziraat Bankası**, tasfiye sürecinin **altı ay** süreceğini duyurdu; fon krizinin etkileri **Borsa İstanbul**'daki satış baskısında belirleyici olmayı sürdürüyor.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol Fiyatları Yükselişini Sürdürdü: Brent 106,89, WTI 94,54 Dolara Çıktı",
+        body: "**Hürmüz Boğazı** krizine yönelik belirsizliğin sürmesiyle petrol fiyatları günün ilerleyen saatlerinde yükselişini korudu; **Brent petrol** **%2,46** artışla **106,89 dolar**a, **ABD tipi ham petrol (WTI)** ise **%2,30** artışla **94,54 dolar**a yükseldi.",
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın Günü %3,17 Kayıpla Kapatmaya Yakın: 4.149,19 Dolar",
+        body: "**Ons altın**, güçlenen **dolar** ve yükselen **ABD tahvil getirileri**nin baskısıyla güne göre **%3,17** değer kaybıyla **4.149,19 dolar**a kadar geriledi; bazı veri sağlayıcılarına göre fiyat **4.146,98 dolar** seviyesinde seyrediyordu.",
+      },
+    ],
+    calendarLabel: "28 Eylül - 2 Ekim 2026",
+    calendarEvents: [
+      {
+        time: "2 Ekim 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-28-1200",
     title: "FXPARTNER Piyasa Özeti | 28.09.2026 Pazartesi Öğle Güncellemesi",
     excerpt:
