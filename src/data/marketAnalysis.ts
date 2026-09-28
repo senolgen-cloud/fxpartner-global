@@ -41,6 +41,49 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-28-2100",
+    title: "FXPARTNER Piyasa Özeti | 28.09.2026 Pazartesi Gece Güncellemesi",
+    excerpt:
+      "Pazartesi gecesine doğru küresel piyasaların gündeminde Borsa İstanbul'da BIST 100 endeksinin günü %2,38 kayıpla 12.592,76 puandan kapatması öne çıktı. ABD Başkanı Donald Trump'ın İran'ın Hürmüz Boğazı teklifini reddetmesinin ardından görüşmelerin sekteye uğramasıyla petrol fiyatları yükselişini sürdürdü; Brent petrol %3,29 artışla 107,75 dolara çıkarken, ABD tipi ham petrol (WTI) 95 dolar seviyesine yaklaştı. Güçlenen dolar ve yükselen tahvil getirilerinin baskısıyla ons altın kayıplarını derinleştirerek akşam saatlerinde 4.124 dolara kadar geriledi. Aynı gelişmelerin gölgesinde Wall Street'te ana endeksler haftaya düşüşle başladı; Dow Jones %0,7, S&P 500 %0,8 ve Nasdaq %0,9 değer kaybetti.",
+    publishedAt: "2026-09-28",
+    readingMinutes: 3,
+    intro:
+      "Pazartesi gecesine doğru küresel piyasaların gündeminde **Borsa İstanbul**'da **BIST 100** endeksinin günü **%2,38** kayıpla **12.592,76** puandan kapatması öne çıktı. **ABD Başkanı Donald Trump**'ın **İran**'ın **Hürmüz Boğazı** teklifini reddetmesinin ardından görüşmelerin sekteye uğramasıyla petrol fiyatları yükselişini sürdürdü; **Brent petrol** **%3,29** artışla **107,75 dolar**a çıkarken, **ABD tipi ham petrol (WTI)** **95 dolar** seviyesine yaklaştı. Güçlenen **dolar** ve yükselen tahvil getirilerinin baskısıyla **ons altın** kayıplarını derinleştirerek akşam saatlerinde **4.124 dolar**a kadar geriledi. Aynı gelişmelerin gölgesinde **Wall Street**'te ana endeksler haftaya düşüşle başladı; **Dow Jones** **%0,7**, **S&P 500** **%0,8** ve **Nasdaq** **%0,9** değer kaybetti. Piyasaların odağı şimdi bu hafta TSİ **15.30**'da açıklanacak **Eylül ayı ABD tarım dışı istihdam (NFP)** raporunda.",
+    news: [
+      {
+        icon: "📉",
+        heading: "BIST 100 Günü %2,38 Kayıpla Kapattı: Endeks 12.592,76 Puana Geriledi",
+        body: "**BIST 100** endeksi, gün içinde en yüksek **12.750,45** puana kadar yükseldikten sonra günü **%2,38** kayıpla **12.592,76** puandan kapattı; endeks, **TSİ 15.00** itibarıyla görülen günün düşüğünden bir miktar toparlanarak haftanın ilk işlem gününü tamamladı.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol Yükselişini Sürdürdü: Brent 107 Doların Üzerine Çıktı",
+        body: "**ABD Başkanı Donald Trump**'ın **İran**'ın **Hürmüz Boğazı**'nı yeniden açma teklifini reddetmesinin ardından görüşmelerin sekteye uğraması petrol fiyatlarındaki yükselişi akşam saatlerinde de sürdürdü. **Brent petrol** **%3,29** artışla **107,75 dolar**a yükselirken, **ABD tipi ham petrol (WTI)** **95 dolar** seviyesine yaklaştı.",
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın Kayıplarını Derinleştirdi: Akşam Saatlerinde 4.124 Dolara Geriledi",
+        body: "Güçlenen **dolar** ve yükselen **ABD tahvil getirileri**nin baskısıyla **ons altın**, güne göre süren düşüşünü akşam saatlerinde de sürdürerek **4.124 dolar**a kadar geriledi. **Kapalıçarşı**'da gram altın ise önceki kapanışa göre **%3,68** düşüşle **6.492,49 lira**dan işlem gördü.",
+      },
+      {
+        icon: "📊",
+        heading: "Wall Street Haftaya Düşüşle Başladı: Dow %0,7, S&P 500 %0,8, Nasdaq %0,9 Geriledi",
+        body: "**ABD** borsalarında ana endeksler, **İran** ile gerginliğin sürmesi ve yükselen tahvil getirilerinin baskısıyla haftaya düşüşle başladı; **Dow Jones Sanayi Endeksi** **%0,7**, **S&P 500** **%0,8** ve **Nasdaq** endeksi **%0,9** değer kaybetti.",
+      },
+    ],
+    calendarLabel: "28 Eylül - 2 Ekim 2026",
+    calendarEvents: [
+      {
+        time: "2 Ekim 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-28-1800",
     title: "FXPARTNER Piyasa Özeti | 28.09.2026 Pazartesi Akşam Güncellemesi",
     excerpt:
