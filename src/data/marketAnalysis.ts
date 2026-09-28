@@ -41,6 +41,49 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-28-0900",
+    title: "FXPARTNER Piyasa Özeti | 28.09.2026 Pazartesi Sabah Güncellemesi",
+    excerpt:
+      "Pazartesi sabahı saatlerine doğru küresel piyasaların gündeminde, ABD Başkanı Donald Trump'ın İran'ın Hürmüz Boğazı teklifini reddetmesinin ardından haftaya petrol fiyatlarındaki yükselişle başlanması öne çıktı; Brent petrol 106 doların üzerine çıkarken, ABD tipi ham petrol (WTI) %1,83 artışla 94,10 dolar seviyesine yükseldi. Yükselen enerji fiyatları Fed'in ekim ayı faiz artışı beklentilerini güçlendirirken, dolar endeksi (DXY) yaklaşık iki ayın zirvesine yakın 101 puan civarında seyrediyor. Güçlenen dolar ve yükselen tahvil getirilerinin baskısıyla ons altın, teknik açıdan önemli 4.246 dolar desteğinin altına inerek 4.197 dolara kadar geriledi; sonraki destek seviyeleri olarak 4.185 dolar ve 4.121 dolar izleniyor. ABD 10 yıllık tahvil getirisi ise %5,21'e yükselerek Temmuz 2007'den bu yana en yüksek seviyesini yeniledi. Cleveland Fed Başkanı Beth Hammack, yükselen getirilerin güçlü büyüme görünümü, kamu borcuna ilişkin endişeler ve ek faiz artışı beklentilerinden kaynaklandığını belirterek reel faizlerin enflasyon beklentilerinden daha fazla yükseldiğini söyledi; piyasalarda ekim ayı faiz artışı olasılığı yaklaşık %65 seviyesinde seyrediyor.",
+    publishedAt: "2026-09-28",
+    readingMinutes: 3,
+    intro:
+      "Pazartesi sabahı saatlerine doğru küresel piyasaların gündeminde, **ABD Başkanı Donald Trump**'ın **İran**'ın **Hürmüz Boğazı** teklifini reddetmesinin ardından haftaya petrol fiyatlarındaki yükselişle başlanması öne çıktı; **Brent petrol** **106 dolar**ın üzerine çıkarken, **ABD tipi ham petrol (WTI)** **%1,83** artışla **94,10 dolar** seviyesine yükseldi. Yükselen enerji fiyatları **Fed**'in **ekim ayı** faiz artışı beklentilerini güçlendirirken, **dolar endeksi (DXY)** yaklaşık iki ayın zirvesine yakın **101** puan civarında seyrediyor. Güçlenen dolar ve yükselen tahvil getirilerinin baskısıyla **ons altın**, teknik açıdan önemli **4.246 dolar** desteğinin altına inerek **4.197 dolar**a kadar geriledi; sonraki destek seviyeleri olarak **4.185 dolar** ve **4.121 dolar** izleniyor. **ABD 10 yıllık tahvil** getirisi ise **%5,21**'e yükselerek **Temmuz 2007**'den bu yana en yüksek seviyesini yeniledi. **Cleveland Fed Başkanı Beth Hammack**, yükselen getirilerin güçlü büyüme görünümü, kamu borcuna ilişkin endişeler ve ek faiz artışı beklentilerinden kaynaklandığını belirterek reel faizlerin enflasyon beklentilerinden daha fazla yükseldiğini söyledi; piyasalarda **ekim ayı** faiz artışı olasılığı yaklaşık **%65** seviyesinde seyrediyor. Piyasaların odağı şimdi bu hafta TSİ **15.30**'da açıklanacak **Eylül ayı ABD tarım dışı istihdam (NFP)** raporunda.",
+    news: [
+      {
+        icon: "🛢️",
+        heading: "Hürmüz Teklifinin Reddi Petrolü Yükseltti: Brent 106 Doların Üzerinde",
+        body: "**ABD Başkanı Donald Trump**'ın **İran**'ın **Hürmüz Boğazı**'nı yeniden açma teklifini reddettiğini doğrulamasının ardından petrol fiyatları haftaya yükselişle başladı. **Brent petrol** varil başına **106 dolar**ın üzerine çıkarken, **ABD tipi ham petrol (WTI)** **%1,83** artışla **94,10 dolar** seviyesine yükseldi; **Hürmüz Boğazı**'ndan petrol akışının yeniden tesisinin gecikmesine yönelik endişeler fiyatları destekliyor.",
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın 4.246 Dolar Desteğini Kırdı: Sırada 4.185 ve 4.121 Dolar Var",
+        body: "Güçlenen **dolar** ve yükselen tahvil getirilerinin baskısıyla **ons altın**, teknik açıdan önemli **4.246 dolar** desteğinin altına inerek **4.197 dolar**a kadar geriledi. Analistler, bu seviyenin de kırılması hâlinde sırasıyla **4.185 dolar** ve **4.121 dolar** destek seviyelerinin gündeme gelebileceğini belirtiyor.",
+      },
+      {
+        icon: "📈",
+        heading: "ABD 10 Yıllık Tahvil Getirisi %5,21 ile 2007 Sonrası Zirvede",
+        body: "**ABD 10 yıllık hazine tahvili** getirisi **%5,21**'e yükselerek **Temmuz 2007**'den bu yana en yüksek seviyesini yeniledi. Yükselişte, güçlü seyreden **ABD** büyüme görünümü, artan kamu borcuna ilişkin endişeler ve **Fed**'in ek faiz artışı yapabileceği beklentileri etkili oluyor; bu ortamda **dolar endeksi (DXY)** de yaklaşık iki ayın zirvesine yakın **101** puan civarında seyrediyor.",
+      },
+      {
+        icon: "🏦",
+        heading: "Cleveland Fed Başkanı Hammack: Getirilerdeki Yükseliş Büyüme ve Borç Kaygılarını Yansıtıyor",
+        body: "**Cleveland Fed Başkanı Beth Hammack**, uzun vadeli tahvil getirilerindeki yükselişin güçlü büyüme görünümü, kamu borcuna ilişkin endişeler ve **Fed**'den beklenen ek faiz artışlarından kaynaklandığını söyledi; Hammack, reel faizlerin enflasyon beklentilerinden daha fazla yükseldiğini vurguladı. Bu açıklamaların ardından piyasalarda **ekim ayı** faiz artışı olasılığı yaklaşık **%65** seviyesinde seyrediyor.",
+      },
+    ],
+    calendarLabel: "28 Eylül - 2 Ekim 2026",
+    calendarEvents: [
+      {
+        time: "2 Ekim 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-27-1800",
     title: "FXPARTNER Piyasa Özeti | 27.09.2026 Pazar Akşam Güncellemesi",
     excerpt:
