@@ -49,6 +49,115 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    // Bir FXStreet haberinden yola çıkan yorum yazısı (28.09.2026 tarihli
+    // "Bitcoin vs Gold outlook" analizi). Çeviri DEĞİL: oradan alınan şey
+    // olgular — fiyat seviyeleri, hareketli ortalamalar, ETF akışı ve
+    // görüşme takvimi — ve hepsi kaynağına atfen veriliyor. Yorum, açı ve
+    // kurgu bize ait; haberin cümleleri hiçbir yerde tekrarlanmıyor.
+    //
+    // Açı, kaynağın kendi manşetinin bir adım ötesi: iki "güvenli liman"
+    // aynı gün birlikte düştüyse, o gün ikisi de güvenli liman gibi
+    // davranmamış demektir. Yazının omurgası bu çelişki ve okurun bundan
+    // ne çıkarması gerektiği.
+    //
+    // Seviyeler tarihli veriliyor ve "bugün şu fiyat" denmiyor: yazı
+    // yayınlandıktan bir hafta sonra okunduğunda da yanlış olmasın diye.
+    slug: "bitcoin-altin-birlikte-dustu-abd-iran-gorusmeleri",
+    lang: "tr",
+    title:
+      "Bitcoin ve Altın Aynı Gün Düştü: Güvenli Liman Hikâyesine Ne Oldu?",
+    excerpt:
+      "28 Eylül 2026'da Bitcoin 83.000 doların altına, altın 4.122 dolara geriledi. İkisi birlikte düşünce \"dijital altın\" tezi tartışmaya açıldı. ABD-İran görüşmeleri, ETF'lere giren 2,25 milyar dolar ve izlenecek seviyeler.",
+    publishedAt: "2026-09-28",
+    readingMinutes: 6,
+    sections: [
+      {
+        paragraphs: [
+          "Piyasada en çok tekrarlanan cümlelerden biri şudur: \"Bitcoin dijital altındır.\" Cümlenin arkasındaki fikir basit — belirsizlik arttığında insanlar devletlerin basamadığı varlıklara kaçar, altın da Bitcoin de bu tarife uyar.",
+          "28 Eylül 2026 o cümleyi sınayan günlerden biri oldu. FXStreet'in aynı gün yayınladığı analize göre Bitcoin 87.000 doların üzerindeki seviyelerden 83.000 dolar civarına, altın ise 4.122 dolara geriledi ve 4.100 dolarlık desteğe doğru yöneldi. İkisi birden. Aynı gün, aynı yönde.",
+          "Peki iki güvenli liman aynı anda düşüyorsa, o gün hangisi güvenli limandı?",
+        ],
+      },
+      {
+        heading: "Aynı yöne düşmek neden dikkat çekici?",
+        paragraphs: [
+          "Güvenli liman fikrinin işe yaraması için varlığın, kaçtığınız şeyden farklı davranması gerekir. Portföyünüzdeki hisse düşerken altın duruyorsa ya da yükseliyorsa, altın işini yapıyordur. Ama ikisi birlikte düşüyorsa elinizde çeşitlendirme değil, aynı riskin iki kopyası vardır.",
+          "Bitcoin'in kısa vadede altınla değil, risk iştahıyla hareket ettiğini gösteren günler tam olarak böyle görünür. Teknoloji hissesi gibi işlem gören, likidite daraldığında satılan bir varlık. Uzun vadede \"dijital altın\" tezi doğru çıkabilir; ama o tezi kısa vadeli bir işlemin gerekçesi yapan yatırımcı, çoğu zaman tezi değil zamanlamayı satın almış olur.",
+          "Bunu söylerken bir günü bütün bir teze delil saymıyoruz. Tek günlük korelasyon, kalıcı ilişki demek değildir. Ama portföyünüzü \"altın da var, Bitcoin de var, çeşitlendirdim\" diye kurduysanız, böyle günler o varsayımı gözden geçirmeniz için iyi bir sebep.",
+        ],
+      },
+      {
+        heading: "Fiyatı aşağı çeken şey: masaya dönen görüşmeler",
+        paragraphs: [
+          "Analizin işaret ettiği tetikleyici jeopolitik: ABD ile İran'ın dolaylı görüşmelere yeniden başlaması bekleniyor. Masadaki konu, İran'ın deniz ablukasının kaldırılması ve yaptırımların gevşetilmesine dair yedi günlük önerisi.",
+          "Piyasanın bu tür haberlere tepkisi genellikle şu mantıkla işler: gerilim primi fiyatın içine girer, gerilimin azalma ihtimali belirdiğinde o prim geri çıkar. Altının son aylarda yükselmesinin bir kısmı jeopolitik primse, görüşme ihtimalinin güçlenmesi o kısmın bir bölümünü geri alır. Bitcoin de son dönemde aynı gerilim hikâyesinden besleniyorsa, aynı anda geri çekilmesi şaşırtıcı olmaz.",
+          "Buradaki kritik nokta şu: bu bir haber fiyatlaması, bir eğilim değişikliği değil. Görüşmeler tıkanırsa çıkan prim geri girer. Yani bu tür bir düşüşü \"trend döndü\" diye okumak, haberi trendle karıştırmaktır.",
+        ],
+      },
+      {
+        heading: "Fiyat düşerken kurumlar alıyordu",
+        paragraphs: [
+          "Yazının en çok konuşulması gereken rakamı fiyatlarda değil, akışlarda. Analize göre spot Bitcoin ETF'lerine perşembeye kadar 2,25 milyar dolar net giriş oldu — Ekim 2025'ten bu yana en yüksek haftalık giriş.",
+          "Bu iki şeyi aynı anda söylüyor: fiyat geriliyor ve kurumsal para giriyor. Kulağa çelişkili geliyor ama değil. Fiyatı belirleyen şey o anki alıcı-satıcı dengesidir; ETF akışı ise daha yavaş hareket eden, haftalık ölçekte bakan bir paranın yönünü gösterir.",
+          "Yatırımcı için buradaki ders bir yön tahmini değil, bir ölçüt: fiyat ve akış birbirinden ayrıştığında, hangisine baktığınıza karar vermeniz gerekir. Günlük mum size \"düşüyor\" der, haftalık akış \"biriktiriliyor\" der. İkisi de doğrudur; farklı sorulara cevap verirler.",
+        ],
+      },
+      {
+        heading: "İzlenecek seviyeler (28 Eylül itibarıyla)",
+        paragraphs: [
+          "Aşağıdaki seviyeler FXStreet'in o günkü analizinden; fiyatlar hareket ettikçe değişirler ve bir hedef değil, tepkinin ölçüleceği referans noktalarıdır.",
+        ],
+        list: [
+          "Bitcoin — aşağıda ilk referans 78.352 dolardaki SuperTrend desteği; altında 77.311 (50 günlük EMA), 74.592 (200 günlük EMA) ve 73.939 (100 günlük EMA) kümesi var. RSI 60 civarında, yani momentum hâlâ negatif bölgeye geçmiş değil.",
+          "Altın — 4.100 ve ardından 4.000 dolar psikolojik destekler. Yukarıda 4.316 (200 günlük EMA), 4.329 (50 günlük) ve 4.352 (100 günlük) direnç kümesi, üstünde 4.482 dolardaki trend çizgisi.",
+          "Altında RSI 35'e yaklaşmış, MACD sıfırın altında: ikisi birlikte, satıcının kontrolde olduğu ama aşırı satım bölgesine yaklaşıldığı bir tabloyu anlatıyor.",
+          "Bitcoin'de üç hareketli ortalamanın 73.900-77.300 aralığında sıkışması önemli: tek bir çizgi değil, bir bant. Böyle bantlar kırıldığında hareket genellikle sert olur, çünkü aynı anda birden çok stop seviyesi devreye girer.",
+        ],
+      },
+      {
+        heading: "Bu tabloyu nasıl okumalı?",
+        paragraphs: [
+          "Üç pratik çıkarım:",
+        ],
+        list: [
+          "Çeşitlendirmenizi test edin. Elinizde altın ve Bitcoin varsa ve ikisi de aynı gün aynı yöne gidiyorsa, riskiniz düşündüğünüzün iki katı olabilir. Çeşitlendirme varlık sayısıyla değil, varlıkların birbirinden bağımsız davranmasıyla ölçülür.",
+          "Haberi trendden ayırın. Görüşme takvimi fiyatı birkaç gün oynatır; bunu kalıcı bir yön değişimi sanmak, haber bittiğinde ters tarafta kalmak demektir.",
+          "Pozisyon büyüklüğünü seviyeye göre değil, zarara göre belirleyin. 78.352 gibi bir seviyeyi referans almak iyi; ama asıl soru o seviye kırıldığında hesabınızın ne kadarını kaybedeceğiniz. Bu hesabı işlemden önce yapmak, sonra yapmaktan her zaman ucuzdur.",
+        ],
+      },
+      {
+        heading: "Özet",
+        paragraphs: [
+          "28 Eylül'ün özeti şu: iki güvenli liman birlikte geriledi, sebep büyük ölçüde jeopolitik primin geri çıkması, ama kurumsal para aynı hafta rekor seviyede ETF'lere girdi. Fiyat ve akış farklı şeyler söylüyor, ikisi de doğru.",
+          "Böyle günlerde en pahalı hata, tek bir günü bir teze delil saymak: ne \"dijital altın bitti\" ne de \"kurumlar alıyorsa dip burası\" demek için yeterli veri var. Elinizde olan şey birkaç seviye, bir haber takvimi ve kendi risk kurallarınız.",
+          "Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Seviyeler ve akış verileri FXStreet'in 28 Eylül 2026 tarihli Bitcoin-altın analizinden alınmıştır ve o güne aittir. Kaldıraçlı işlemler yüksek risk içerir; sermayenizin tamamını kaybedebilirsiniz.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Bitcoin gerçekten dijital altın mı?",
+        a: "Uzun vadeli tez bu yönde ama kısa vadede Bitcoin çoğu zaman altın gibi değil, riskli varlıklar gibi hareket ediyor. 28 Eylül 2026 bunun örneklerinden biri: Bitcoin 83.000 dolar civarına, altın 4.122 dolara aynı gün geriledi. İki varlığı da güvenli liman diye aynı portföyde tutuyorsanız, aynı yöne hareket ettikleri günlerde çeşitlendirme beklediğiniz korumayı sağlamaz.",
+      },
+      {
+        q: "ABD-İran görüşmeleri altını neden düşürür?",
+        a: "Jeopolitik gerilim altın fiyatına bir prim ekler. Görüşme ihtimali güçlendiğinde piyasa o primin bir kısmını geri alır. Bu genellikle haber kaynaklı ve geçici bir hareketi anlatır; görüşmeler tıkanırsa prim geri girebilir. Bu yüzden bu tür düşüşleri kalıcı bir eğilim değişikliğiyle karıştırmamak gerekir.",
+      },
+      {
+        q: "Fiyat düşerken ETF'lere para girmesi ne anlama geliyor?",
+        a: "Farklı zaman ölçekleri farklı şeyler söyler. Günlük fiyat, o anki alıcı-satıcı dengesini gösterir; ETF akışı ise haftalık ölçekte hareket eden kurumsal paranın yönünü. FXStreet'in aktardığı veriye göre spot Bitcoin ETF'lerine perşembeye kadar 2,25 milyar dolar net giriş oldu — Ekim 2025'ten bu yana en yüksek haftalık giriş. Bu bir alım sinyali değildir; fiyatın tek gösterge olmadığını hatırlatan bir veridir.",
+      },
+      {
+        q: "Bitcoin'de hangi seviyeler izleniyor?",
+        a: "28 Eylül 2026 analizine göre aşağıda 78.352 dolardaki SuperTrend desteği, ardından 77.311 (50 günlük EMA), 74.592 (200 günlük EMA) ve 73.939 (100 günlük EMA) kümesi. RSI 60 civarındaydı. Bu seviyeler o güne aittir ve fiyat hareket ettikçe değişir; hedef değil, tepkinin ölçüleceği referanslardır.",
+      },
+      {
+        q: "Altında hangi destek ve dirençler var?",
+        a: "Aynı analizde destekler 4.100 ve 4.000 dolar; dirençler 4.316 (200 günlük EMA), 4.329 (50 günlük), 4.352 (100 günlük) ve 4.482 dolardaki trend çizgisi. RSI 35'e yaklaşmış, MACD sıfırın altındaydı — satıcının kontrolde olduğu ama aşırı satıma yaklaşan bir tablo.",
+      },
+    ],
+  },
+  {
     // Written for the search terms people actually type — "bonus vurdurma",
     // "bonus arbitrajı", "bonusu nakite çevirme" — which is to say for a
     // reader who arrives hoping for a trick. The post does not sell one,
