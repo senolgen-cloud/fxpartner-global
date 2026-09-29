@@ -41,6 +41,47 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-29-1800",
+    title: "FXPARTNER Piyasa Özeti | 29.09.2026 Salı Akşam Güncellemesi",
+    excerpt: "ABD 10 yıllık Hazine tahvili getirisi dün %5,244 seviyesinde kapanarak 2007'den bu yana en yüksek düzeyini gördü; piyasalar ekim ayında Fed'den yeni bir faiz artışı için yaklaşık %70 ihtimal fiyatlıyor. Güçlü dolar ve yükselen getirilerin baskısıyla ons altın bir önceki seansta yaklaşık %4 değer kaybederek 4.100 doların hemen üzerine, yedi haftanın en düşük seviyesine geriledi. ABD seansında Tüketici Güven Endeksi ve JOLTS Açık İş Sayısı verileri izlenecek.",
+    publishedAt: "2026-09-29",
+    readingMinutes: 2,
+    intro: "Salı akşamına doğru küresel piyasaların gündeminde, **ABD 10 yıllık Hazine tahvili** getirisinin **%5,244** seviyesinde kapanarak **2007** yılından bu yana en yüksek düzeyine ulaşması, piyasaların **Fed**'den ekim ayında yeni bir faiz artışı için yaklaşık **%70** ihtimal fiyatlaması ve bu gelişmelerin baskısıyla **altın** fiyatlarındaki sert geri çekilme öne çıkıyor.",
+    news: [
+      {
+        icon: "📈",
+        heading: "ABD 10 Yıllık Tahvil Getirisi %5,244'te: 2007'den Bu Yana En Yüksek Kapanış",
+        body: "**ABD 10 yıllık Hazine tahvili** getirisi **%5,244** seviyesinde kapanarak **2007** yılından bu yana görülen en yüksek düzeye ulaştı. Yükselen getiriler, **ABD doları**nın başlıca rakipleri karşısında güçlü seyrini korumasını destekledi."
+      },
+      {
+        icon: "🏦",
+        heading: "Ekim Ayı Fed Faiz Artışı İhtimali Yaklaşık %70'e Yükseldi",
+        body: "Piyasalar, **Fed**'in ekim ayındaki toplantısında yeni bir faiz artışına gitmesi için yaklaşık **%70** ihtimal fiyatlıyor. Bu beklenti, hem getirilerdeki yükselişin hem de dolar tarafındaki güçlü görünümün başlıca destekçisi olarak öne çıkıyor."
+      },
+      {
+        icon: "🥇",
+        heading: "Altın Sert Düştü: Ons Fiyatı Yedi Haftanın En Düşüğüne İndi",
+        body: "Güçlü dolar, yükselen **ABD Hazine** getirileri ve daha yüksek ham petrol fiyatlarının baskısıyla **ons altın** bir önceki seansta yaklaşık **%4** değer kaybetti ve **4.100 dolar** seviyesinin hemen üzerine, yedi haftanın en düşük düzeyine geriledi."
+      }
+    ],
+    calendarLabel: "29 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "29 Eylül 2026, ABD seansı",
+        icon: "🇺🇸",
+        title: "ABD Tüketici Güven Endeksi (Eylül)",
+        note: "Eylül ayı **Tüketici Güven Endeksi** verisi ABD seansının ikinci yarısında açıklanacak."
+      },
+      {
+        time: "29 Eylül 2026, ABD seansı",
+        icon: "🇺🇸",
+        title: "ABD JOLTS Açık İş Sayısı (Ağustos)",
+        note: "Ağustos ayı **JOLTS** açık iş sayısı verisi ABD seansının ikinci yarısında açıklanacak; veri, işgücü piyasasının gücüne dair bir gösterge sunacak."
+      }
+    ],
+    closing: "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir."
+  },
+  {
     slug: "piyasa-ozeti-2026-09-29-1200",
     title: "FXPARTNER Piyasa Özeti | 29.09.2026 Salı Öğle Güncellemesi",
     excerpt:
