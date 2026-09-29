@@ -90,6 +90,14 @@ export const LITERAL_ROUTES: Record<string, Set<string>> = {
  */
 const DATE_SHAPED_SECTIONS = new Set(["gun-sonu"]);
 
+/**
+ * /signals/<ticket> is one trade, addressed by its MT5 position ticket —
+ * digits only (see lib/signalLink.ts). Anything else is knowably not a
+ * trade and gets a real 404 before the body streams; a well-formed ticket
+ * with no row falls through to the page's own notFound(), like gun-sonu.
+ */
+const TICKET_SHAPED_SECTIONS = new Set(["signals"]);
+
 const ISTANBUL_DAY = new Intl.DateTimeFormat("en-CA", {
   timeZone: "Europe/Istanbul",
   year: "numeric",
@@ -100,6 +108,8 @@ const ISTANBUL_DAY = new Intl.DateTimeFormat("en-CA", {
 export function isUnknownSlug(path: string): boolean {
   const [, section, slug] = path.split("/");
   if (!section || !slug) return false;
+
+  if (TICKET_SHAPED_SECTIONS.has(section)) return !/^\d{1,20}$/.test(slug);
 
   if (DATE_SHAPED_SECTIONS.has(section)) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(slug)) return true;

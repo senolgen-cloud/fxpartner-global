@@ -40,6 +40,10 @@ const DB_BACKED = new Set([
   // tarih olmayan ve henüz bitmemiş günleri gövde akmadan 404'lüyor; geriye
   // yalnızca işlemsiz geçmiş günler kalıyor ve onlar da noindex.
   "gun-sonu",
+  // Tek işlem sayfası: /signals/<MT5 ticket>. Numaralar veritabanında,
+  // biçim sabit — knownSlugs.ts'teki TICKET_SHAPED_SECTIONS rakam olmayan
+  // her adresi gövde akmadan 404'lüyor. Sayfalar zaten noindex.
+  "signals",
 ]);
 
 function sections(dir) {

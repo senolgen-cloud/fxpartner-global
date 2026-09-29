@@ -22,6 +22,7 @@ import { favorableMove } from "@/lib/contractSizes";
 import { playChime, unlockAudio } from "@/lib/chime";
 import type { SignalPeriods } from "@/lib/signalPeriods";
 import type { SignalJson } from "@/lib/cachedReads";
+import { isTicket, signalPath } from "@/lib/signalLink";
 
 type Signal = typeof tradeSignals.$inferSelect;
 
@@ -42,7 +43,7 @@ const POLL_MS = 30000;
 // loads (cachedSignalBoard(250) in signals/page.tsx). Polls only top it up.
 const CLOSED_KEEP = 250;
 
-function toSignal(s: SignalJson): Signal {
+export function toSignal(s: SignalJson): Signal {
   return { ...s, createdAt: new Date(s.createdAt), closedAt: s.closedAt ? new Date(s.closedAt) : null };
 }
 
@@ -575,34 +576,26 @@ function relativeAge(date: Date | null, intlLocale: string, tr: (t: string) => s
   return date.toLocaleDateString(intlLocale, { day: "numeric", month: "short", year: "numeric" });
 }
 
-/** The closed card's row: opening price, closing price, result. */
-function ClosedCell({
-  label,
-  value,
-  color,
-  strong,
-}: {
-  label: string;
-  value: string | null;
-  color?: string;
-  strong?: boolean;
-}) {
-  return (
-    <div className="min-w-0 text-start">
-      <div className="text-[10px] leading-none text-text-on-ink-muted">{label}</div>
-      <div
-        className={`mt-1 truncate font-mono leading-none tabular-stat ${
-          strong ? "text-[15px] font-bold" : "text-[13px] font-semibold"
-        }`}
-        style={{ color: color ?? "var(--text-on-ink)" }}
-      >
-        {value ?? "—"}
-      </div>
-    </div>
-  );
+/**
+ * One boxed price on the card face — the "Giriş / Kâr Al / Zarar Durdur"
+ * tiles of the signal graphics we post to Telegram and X. Number first and
+ * large, label underneath, the box tinted in the level's own colour so stop
+ * and target can be told apart before either number is read.
+ *
+ * color-mix rather than a hex alpha suffix: the colour is sometimes a CSS
+ * variable (a closed card's neutral result), and "var(--x)26" is not a colour.
+ */
+// Stepped by length rather than one size for all: a phone box has ~80px of
+// room, which holds "4165.05" at 17px but not "+$1,421.40" — and a result
+// that truncates to "+$1,42…" is worse than one set a little smaller.
+function sizeFor(value: string | null): string {
+  const n = value?.length ?? 1;
+  if (n <= 8) return "text-[17px] sm:text-[26px]";
+  if (n <= 10) return "text-[14px] sm:text-[24px]";
+  return "text-[12px] sm:text-[21px]";
 }
 
-function LevelCell({
+function PriceBox({
   label,
   value,
   color,
@@ -615,18 +608,21 @@ function LevelCell({
   locked?: boolean;
   ariaLocked?: string;
 }) {
+  const tone = color ?? "var(--text-on-ink)";
   return (
-    <div className="min-w-0 text-start">
-      <div className="text-[11px] leading-none text-text-on-ink-muted">{label}</div>
+    <div
+      className="flex min-w-0 flex-col items-center justify-center rounded-xl border px-1 py-3 text-center sm:px-3 sm:py-4"
+      style={{
+        borderColor: color ? `color-mix(in srgb, ${tone} 45%, transparent)` : "var(--hairline)",
+        background: color
+          ? `color-mix(in srgb, ${tone} 7%, transparent)`
+          : "rgba(255,255,255,0.03)",
+      }}
+    >
       {locked ? (
-        // A redaction plate, not a row of dots and not a grey block. Four
-        // dots at 14px read as a value that failed to load; flat grey reads
-        // as a page that broke. Gold is the package colour everywhere else
-        // on this card, and the slow sheen says something is behind this
-        // rather than missing from it.
         <span
           aria-label={ariaLocked}
-          className="relative mt-2 block h-[15px] w-16 overflow-hidden rounded border border-gold/25 bg-gold/10"
+          className="relative block h-[22px] w-16 overflow-hidden rounded border border-gold/25 bg-gold/10 sm:h-7 sm:w-24"
         >
           <span
             aria-hidden="true"
@@ -634,13 +630,16 @@ function LevelCell({
           />
         </span>
       ) : (
-        <div
-          className="mt-1.5 truncate font-mono text-[17px] font-semibold leading-none tabular-stat"
-          style={{ color: color ?? "var(--text-on-ink)" }}
+        <span
+          className={`max-w-full truncate font-mono font-bold leading-none tabular-stat ${sizeFor(value)}`}
+          style={{ color: tone }}
         >
           {value ?? "—"}
-        </div>
+        </span>
       )}
+      <span className="mt-2 truncate text-[11px] font-medium leading-none text-text-on-ink-muted sm:text-[13px]">
+        {label}
+      </span>
     </div>
   );
 }
@@ -693,8 +692,8 @@ function LivePriceCell({
       : null;
 
   return (
-    <div className="min-w-0 text-start">
-      <div className="flex items-center gap-1.5 text-[11px] leading-none text-text-on-ink-muted">
+    <div className="flex min-w-0 items-center justify-center gap-2 text-[12px] leading-none">
+      <span className="flex items-center gap-1.5 text-text-on-ink-muted">
         {quote && (
           <span
             aria-hidden="true"
@@ -702,24 +701,19 @@ function LivePriceCell({
           />
         )}
         {label}
-      </div>
-      <div className="mt-1.5 flex min-w-0 items-baseline gap-1.5">
-        <span
-          className="truncate font-mono text-[17px] font-semibold leading-none tabular-stat"
-          style={{ color: quote ? color : "var(--text-on-ink-muted)" }}
-        >
-          {quote ? quote.bid : "—"}
+      </span>
+      <span
+        className="truncate font-mono text-[14px] font-semibold tabular-stat"
+        style={{ color: quote ? color : "var(--text-on-ink-muted)" }}
+      >
+        {quote ? quote.bid : "—"}
+      </span>
+      {pct !== null && (
+        <span className="shrink-0 font-mono font-semibold tabular-stat" style={{ color }}>
+          {pct >= 0 ? "+" : ""}
+          {pct.toFixed(2)}%
         </span>
-        {pct !== null && (
-          <span
-            className="shrink-0 font-mono text-[11px] font-semibold leading-none tabular-stat"
-            style={{ color }}
-          >
-            {pct >= 0 ? "+" : ""}
-            {pct.toFixed(2)}%
-          </span>
-        )}
-      </div>
+      )}
     </div>
   );
 }
@@ -961,19 +955,25 @@ function groupSignals(signals: Signal[]): Signal[][] {
     Math.max(...g.map((x) => (x.closedAt ?? x.createdAt).getTime()));
   return [...byKey.values()].sort((a, b) => newest(b) - newest(a));
 }
-function SignalCard({
+export function SignalCard({
   signal,
   viewerTier,
   quote,
+  defaultOpen = false,
+  linkToPage = true,
 }: {
   signal: Signal;
   viewerTier: AccessTier | null;
   quote?: LiveQuote;
+  /** The signal's own page opens with the chart already showing. */
+  defaultOpen?: boolean;
+  /** Off on the signal's own page, where the number would link to itself. */
+  linkToPage?: boolean;
 }) {
   const tr = useTr();
   const trf = useTrf();
   const intl = useIntlLocale();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(defaultOpen);
   const lock = lockPrompt(signal.pair, trf);
   const isBuy = signal.direction === "BUY";
   const isSell = signal.direction === "SELL";
@@ -1021,14 +1021,14 @@ function SignalCard({
           to compare. */}
       <div className="flex flex-col gap-4 p-4 sm:p-5">
         <div className="flex min-w-0 items-center justify-between gap-3">
-          <div className="flex min-w-0 items-center gap-2.5">
+          <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
             <InstrumentMark pair={signal.pair} />
-            <span className="notranslate truncate font-display text-[17px] font-semibold tracking-[-0.01em] text-text-on-ink">
+            <span className="notranslate min-w-0 truncate font-display text-[19px] font-bold leading-none tracking-[-0.02em] text-text-on-ink sm:text-[28px]">
               {prettyPair(signal.pair)}
             </span>
             {(isBuy || isSell) && (
               <span
-                className="shrink-0 rounded-md px-1.5 py-0.5 text-[11px] font-bold leading-none"
+                className="shrink-0 rounded-lg px-2 py-1 text-[12px] font-extrabold uppercase leading-none tracking-wide sm:px-3.5 sm:py-1.5 sm:text-[15px]"
                 // Neutral once closed, for the same reason as the rail: on a
                 // finished card the only thing red and green are allowed to
                 // mean is won and lost. The word SELL still says which side
@@ -1036,7 +1036,7 @@ function SignalCard({
                 style={
                   isClosed
                     ? { background: "rgba(255,255,255,0.08)", color: "var(--text-on-ink-muted)" }
-                    : { background: `${directionColor}26`, color: directionColor }
+                    : { background: directionColor, color: "#fff" }
                 }
               >
                 {signal.direction}
@@ -1055,6 +1055,20 @@ function SignalCard({
               </span>
             )}
             {age && <span>{age}</span>}
+            {/* The trade's number — its MT5 ticket, the same one the
+                Telegram post carries — and on the board, the way into its
+                own page. See lib/signalLink.ts. */}
+            {isTicket(signal.ticket) &&
+              (linkToPage ? (
+                <Link
+                  href={signalPath(signal.ticket)}
+                  className="notranslate font-mono text-text-on-ink-muted underline-offset-2 transition-colors hover:text-signal hover:underline"
+                >
+                  #{signal.ticket}
+                </Link>
+              ) : (
+                <span className="notranslate font-mono">#{signal.ticket}</span>
+              ))}
           </div>
         </div>
 
@@ -1062,28 +1076,48 @@ function SignalCard({
             "right now" is not a thing a finished trade has. Two-up below sm
             rather than four-across: at 375px a fourth column leaves about
             70px for a six-digit price. */}
+        {/* Three boxed prices, the same row as our posted signal graphics:
+            entry, target, stop — or, once closed, open, close, result.
+            Three across at every width; at 375px each box still has ~95px,
+            enough for a six-digit price at the phone size. */}
         {isClosed ? (
-          <div className="grid grid-cols-3 gap-3">
-            <ClosedCell label={tr("Açılış")} value={signal.entry} />
-            <ClosedCell label={tr("Kapanış")} value={signal.closePrice} />
-            <ClosedCell label={tr("Sonuç")} value={resultLine} color={resultColor} strong />
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
+            <PriceBox label={tr("Açılış")} value={signal.entry} />
+            <PriceBox label={tr("Kapanış")} value={signal.closePrice} />
+            <PriceBox label={tr("Sonuç")} value={resultLine} color={resultColor} />
           </div>
         ) : (
-        <div className="grid flex-1 grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-6">
-          <LevelCell
-            // Not just "Giriş": that word is also the site's word for signing
-            // in, and the shared catalogue entry translated this cell into
-            // "تسجيل الدخول" — a price labelled "log in".
-            label={tr("Giriş fiyatı")}
-            value={signal.entry}
-            locked={locked}
-            ariaLocked={tr("Pakete özel")}
-          />
-          {/* Deliberately not gated on `locked`. The entry, stop and target
-              are ours and are what a package pays for; the market price is
-              the market's, and masking public data would only make the page
-              look like it is hiding something it is not. */}
-          {!isClosed && (
+          <>
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              <PriceBox
+                // Not just "Giriş": that word is also the site's word for
+                // signing in, and the shared catalogue entry translated this
+                // cell into "تسجيل الدخول" — a price labelled "log in".
+                label={tr("Giriş fiyatı")}
+                value={signal.entry}
+                locked={locked}
+                ariaLocked={tr("Pakete özel")}
+              />
+              <PriceBox
+                label={tr("Kâr al")}
+                value={signal.target1}
+                color={TICK_UP}
+                locked={locked}
+                ariaLocked={tr("Pakete özel")}
+              />
+              <PriceBox
+                label={tr("Zarar durdur")}
+                value={signal.stop}
+                color={TICK_DOWN}
+                locked={locked}
+                ariaLocked={tr("Pakete özel")}
+              />
+            </div>
+            {/* The live price sits under the boxes rather than in a fourth
+                one: the three levels are the trade, the market price is how
+                it is going. Deliberately not gated on `locked` — the market
+                price is the market's, and masking public data would only make
+                the page look like it is hiding something it is not. */}
             <LivePriceCell
               label={tr("Şu an")}
               quote={quote}
@@ -1091,22 +1125,7 @@ function SignalCard({
               direction={signal.direction}
               locked={locked}
             />
-          )}
-          <LevelCell
-            label={tr("Zarar durdur")}
-            value={signal.stop}
-            color={TICK_DOWN}
-            locked={locked}
-            ariaLocked={tr("Pakete özel")}
-          />
-          <LevelCell
-            label={tr("Kâr al")}
-            value={signal.target1}
-            color={TICK_UP}
-            locked={locked}
-            ariaLocked={tr("Pakete özel")}
-          />
-        </div>
+          </>
         )}
 
         {/* A locked card used to be four blanks and a lock pill, which
