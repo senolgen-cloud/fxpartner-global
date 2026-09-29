@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-29-1200",
+    title: "FXPARTNER Piyasa Özeti | 29.09.2026 Salı Öğle Güncellemesi",
+    excerpt:
+      "Salı gününe doğru küresel piyasalarda petrol fiyatlarındaki yükseliş ve tahvil piyasasındaki satış baskısı öne çıkarken, Borsa İstanbul'da BIST 100 endeksi güne %0,61 düşüşle 12.516,00 puandan başladı. Brent petrol 100 doların hemen altında işlem görürken, ons altın 4.119 dolar civarında seyretti.",
+    publishedAt: "2026-09-29",
+    readingMinutes: 2,
+    intro:
+      "Salı gününe doğru küresel piyasalar, petrol fiyatlarındaki yükselişin ve tahvil piyasasındaki satış baskısının gölgesinde negatif seyrediyor. **Borsa İstanbul**'da **BIST 100** endeksi güne **%0,61** düşüşle **12.516,00** puandan başladı; **Brent petrol** **100 dolar**ın hemen altında işlem görürken, **ons altın** **4.119 dolar** civarında seyretti.",
+    news: [
+      {
+        icon: "📉",
+        heading: "BIST 100 Güne %0,61 Düşüşle Başladı: Endeks 12.516,00 Puanda",
+        body: "**BIST 100** endeksi, günün ilk işlem dakikalarında **%0,61** düşüşle **12.516,00** puandan işlem görmeye başladı; endeks önceki gün **%2,38** kayıpla **12.592,76** puandan kapanmıştı. Sektör endekslerinde bankacılık endeksi **%0,07** artarken, holding endeksi **%1,17** değer kaybetti.",
+      },
+      {
+        icon: "🛢️",
+        heading: "Petrol Fiyatları Yükselmeyi Sürdürüyor: Brent 100 Doların Hemen Altında",
+        body: "Küresel piyasalarda petrol fiyatlarındaki yükseliş ile tahvil piyasasındaki satış baskısı sürüyor. Aralık vadeli **Brent petrol**, günün ilk saatlerinde yaklaşık **%2,5** artışla varil başına **99,9 dolar** civarında işlem gördü.",
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın 4.119 Dolar Civarında Seyretti",
+        body: "Uluslararası piyasalarda **ons altın**, güne **4.119 dolar** seviyesinde başladı. Yurt içinde ise **dolar/TL** kuru **49** lira seviyesinde işlem gördü.",
+      },
+    ],
+    calendarLabel: "28 Eylül - 2 Ekim 2026",
+    calendarEvents: [
+      {
+        time: "2 Ekim 2026, 15.30 (TSİ)",
+        icon: "🇺🇸",
+        title: "ABD Tarım Dışı İstihdam (NFP)",
+        note: "ABD Çalışma Bakanlığı'nın Eylül ayı tarım dışı istihdam raporu TSİ 15.30'da açıklanacak; güçlü işgücü piyasası verisi Fed'in ekim ayı faiz kararına ilişkin beklentileri şekillendirebilir.",
+      },
+    ],
+    closing:
+      "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.",
+  },
+  {
     slug: "piyasa-ozeti-2026-09-28-2100",
     title: "FXPARTNER Piyasa Özeti | 28.09.2026 Pazartesi Gece Güncellemesi",
     excerpt:
