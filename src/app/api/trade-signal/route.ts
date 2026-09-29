@@ -11,6 +11,8 @@ import { revalidateTag } from "next/cache";
 import { CACHE_TAGS } from "@/lib/cachedReads";
 import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
+import { eq } from "drizzle-orm";
+import { isTicket, signalPath, signalUrl } from "@/lib/signalLink";
 
 // Called by the MT5 EA directly (not a scheduled cron) whenever it opens a
 // new trade. The EA already computes entry/TP/SL/confidence — this route
@@ -42,7 +44,10 @@ export async function GET(req: NextRequest) {
   // The MT5 position ticket, if the EA sends one. Optional — old EA builds
   // that don't pass it still work exactly as before, they just won't be
   // linkable to a later /api/trade-result reply.
-  const ticket = searchParams.get("ticket");
+  // Anything that is not a plain number is dropped rather than stored: the
+  // ticket is also the signal's URL (see lib/signalLink.ts).
+  const rawTicket = searchParams.get("ticket");
+  const ticket = isTicket(rawTicket) ? rawTicket : null;
 
   if (!pair || !entry || !stop) {
     return NextResponse.json(
@@ -173,7 +178,7 @@ export async function GET(req: NextRequest) {
   // What went, and where it went instead: /signals and the contact handle are
   // both buttons under the post already (mainServicesKeyboard), so in the
   // text they were a second copy of a tap the reader can already see.
-  const buildCaption = (locale: Locale) => {
+  const buildCaption = (locale: Locale, ticket: string | null) => {
     const t = (text: string, vars: Record<string, string | number> = {}) =>
       formatMessage(locale, text, vars);
     return (
@@ -187,34 +192,25 @@ export async function GET(req: NextRequest) {
         : "") +
       (confidence ? `💠 ${t("Sinyal güveni")}: <b>%${confidence}</b>\n` : "") +
       (trStats ? `${trStats}\n` : "") +
+      (ticket
+        ? `\n🔗 <a href="${signalUrl(ticket, locale)}">${t("İşlem #{no} · sitede canlı takip et", { no: ticket })}</a>\n`
+        : "") +
       `\n⚠️ ${t("Yatırım tavsiyesi değildir. Pozisyon büyüklüğünü kendi riskine göre belirle.")}`
     );
   };
 
-  const caption = buildCaption("tr");
-
-  // Posts either way; only the buzz is rationed. See signalAlertPace for the
-  // measurement behind the hour.
-  const alert = await shouldAlertForSignal();
-
-  // One destination: the paid group's SIGNALS topic. The public channel, the
-  // Arabic mirror and the tweet all used to fire here too; they are gone,
-  // and sendSignalPhoto is what makes that a fact of the code rather than a
-  // convention — there is no chat id in this file to fall back to.
+  // SITE FIRST, THEN TELEGRAM. The post links to the signal's own page
+  // (/signals/<ticket>), so the page has to exist before anyone can tap
+  // the link — a follower who opens it in the first second must land on
+  // the trade, not on a 404. The row used to be written after the post,
+  // only to remember the message id.
   //
-  // Null means no destination was configured. It is logged inside the
-  // sender, and it deliberately does not fail the request: the row below
-  // still has to be written, or /signals loses a trade that really happened.
-  const result = await sendSignalPhoto(cardUrl(true), caption, {
-    inlineKeyboard: mainServicesKeyboard(),
-    silent: !alert,
-  });
-
-  // Best-effort: only lets a later /api/trade-result reply to this post
-  // instead of standing alone. Never block/fail the signal itself over it.
+  // Best-effort, as before: a database failure must not cost the group the
+  // signal. The post then goes out without the link rather than not at all.
+  let stored = false;
   if (ticket) {
     try {
-      await db
+      const inserted = await db
         .insert(tradeSignals)
         .values({
           ticket,
@@ -226,15 +222,69 @@ export async function GET(req: NextRequest) {
           stop: hasStop ? stop : null,
           volume: volume || null,
           status: "active",
-          telegramMessageId: result?.message_id != null ? String(result.message_id) : null,
         })
-        .onConflictDoNothing();
+        .onConflictDoNothing()
+        .returning({ id: tradeSignals.id });
+      stored = true;
+
+      // The same ticket twice is the EA repeating a call it thinks failed.
+      // If the first one already reached the group, a second post would be
+      // the same trade announced twice — answer as done instead.
+      if (inserted.length === 0) {
+        const existing = await db.query.tradeSignals.findFirst({
+          where: eq(tradeSignals.ticket, ticket),
+          columns: { telegramMessageId: true },
+        });
+        if (existing?.telegramMessageId) {
+          return NextResponse.json({ ok: true, pair, ticket, duplicate: true, posted: false });
+        }
+      }
+
       // The board is read once and shared (lib/cachedReads.ts), so the row
       // that was just written has to clear it — otherwise the /signals poll
       // keeps answering from the copy taken before this trade existed.
       revalidateTag(CACHE_TAGS.signals, "max");
     } catch (err) {
-      console.error("Failed to store trade signal for later result linking:", err);
+      console.error("Failed to store trade signal before posting:", err);
+    }
+  }
+  const linkTicket = stored ? ticket : null;
+
+  // Posts either way; only the buzz is rationed. See signalAlertPace for the
+  // measurement behind the hour.
+  const alert = await shouldAlertForSignal();
+
+  // One destination: the paid group's SIGNALS topic. The public channel, the
+  // Arabic mirror and the tweet all used to fire here too; they are gone,
+  // and sendSignalPhoto is what makes that a fact of the code rather than a
+  // convention — there is no chat id in this file to fall back to.
+  //
+  // Null means no destination was configured. It is logged inside the
+  // sender, and it deliberately does not fail the request: the row above
+  // is already written, so /signals has the trade either way.
+  //
+  // The signal's own page is the first button, above the site-wide ones:
+  // getting the reader onto the site is what this post is for.
+  const result = await sendSignalPhoto(cardUrl(true), buildCaption("tr", linkTicket), {
+    inlineKeyboard: linkTicket
+      ? [
+          [{ text: `🔎 İşlem #${linkTicket} · Sitede aç`, url: signalUrl(linkTicket) }],
+          ...mainServicesKeyboard(),
+        ]
+      : mainServicesKeyboard(),
+    silent: !alert,
+  });
+
+  // Only lets a later /api/trade-result reply to this post instead of
+  // standing alone. Never fail the signal over it.
+  if (linkTicket && result?.message_id != null) {
+    try {
+      await db
+        .update(tradeSignals)
+        .set({ telegramMessageId: String(result.message_id) })
+        .where(eq(tradeSignals.ticket, linkTicket));
+    } catch (err) {
+      console.error("Failed to store Telegram message id for trade signal:", err);
     }
   }
 
@@ -260,12 +310,13 @@ export async function GET(req: NextRequest) {
         body: confidence
           ? p("Sinyal güveni %{confidence} · Giriş, TP ve SL için dokunun.", { confidence })
           : p("Giriş, TP ve SL seviyeleri için dokunun."),
-        url: localePath(loc, "/signals"),
+        // Straight to the trade when it has a page, the board otherwise.
+        url: localePath(loc, linkTicket ? signalPath(linkTicket) : "/signals"),
       };
     });
   } catch (err) {
     console.error("Push notification failed (members):", err);
   }
 
-  return NextResponse.json({ ok: true, pair, posted: result !== null, result });
+  return NextResponse.json({ ok: true, pair, ticket: linkTicket, posted: result !== null, result });
 }

@@ -22,6 +22,7 @@ import { favorableMove } from "@/lib/contractSizes";
 import { playChime, unlockAudio } from "@/lib/chime";
 import type { SignalPeriods } from "@/lib/signalPeriods";
 import type { SignalJson } from "@/lib/cachedReads";
+import { isTicket, signalPath } from "@/lib/signalLink";
 
 type Signal = typeof tradeSignals.$inferSelect;
 
@@ -42,7 +43,7 @@ const POLL_MS = 30000;
 // loads (cachedSignalBoard(250) in signals/page.tsx). Polls only top it up.
 const CLOSED_KEEP = 250;
 
-function toSignal(s: SignalJson): Signal {
+export function toSignal(s: SignalJson): Signal {
   return { ...s, createdAt: new Date(s.createdAt), closedAt: s.closedAt ? new Date(s.closedAt) : null };
 }
 
@@ -954,19 +955,25 @@ function groupSignals(signals: Signal[]): Signal[][] {
     Math.max(...g.map((x) => (x.closedAt ?? x.createdAt).getTime()));
   return [...byKey.values()].sort((a, b) => newest(b) - newest(a));
 }
-function SignalCard({
+export function SignalCard({
   signal,
   viewerTier,
   quote,
+  defaultOpen = false,
+  linkToPage = true,
 }: {
   signal: Signal;
   viewerTier: AccessTier | null;
   quote?: LiveQuote;
+  /** The signal's own page opens with the chart already showing. */
+  defaultOpen?: boolean;
+  /** Off on the signal's own page, where the number would link to itself. */
+  linkToPage?: boolean;
 }) {
   const tr = useTr();
   const trf = useTrf();
   const intl = useIntlLocale();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(defaultOpen);
   const lock = lockPrompt(signal.pair, trf);
   const isBuy = signal.direction === "BUY";
   const isSell = signal.direction === "SELL";
@@ -1048,6 +1055,20 @@ function SignalCard({
               </span>
             )}
             {age && <span>{age}</span>}
+            {/* The trade's number — its MT5 ticket, the same one the
+                Telegram post carries — and on the board, the way into its
+                own page. See lib/signalLink.ts. */}
+            {isTicket(signal.ticket) &&
+              (linkToPage ? (
+                <Link
+                  href={signalPath(signal.ticket)}
+                  className="notranslate font-mono text-text-on-ink-muted underline-offset-2 transition-colors hover:text-signal hover:underline"
+                >
+                  #{signal.ticket}
+                </Link>
+              ) : (
+                <span className="notranslate font-mono">#{signal.ticket}</span>
+              ))}
           </div>
         </div>
 

@@ -51,6 +51,7 @@ const CHROME = [
 const MAY_FAIL = new Map([
   ["src/app/[locale]/egitim/[slug]/page.tsx", "the lesson IS the row"],
   ["src/app/[locale]/haber-bulteni/[slug]/page.tsx", "the bulletin IS the row"],
+  ["src/app/[locale]/signals/[ticket]/page.tsx", "the trade IS the row"],
   ["src/app/[locale]/account/page.tsx", "every line of it is this member's own data"],
   ["src/app/[locale]/admin/cashback/page.tsx", "an admin table with nothing behind it"],
   ["src/app/[locale]/admin/ai-sorulari/page.tsx", "an admin table with nothing behind it"],

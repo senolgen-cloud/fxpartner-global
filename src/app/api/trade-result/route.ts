@@ -8,6 +8,7 @@ import { CACHE_TAGS } from "@/lib/cachedReads";
 import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { signalPath, signalUrl } from "@/lib/signalLink";
 
 // Called by the MT5 EA whenever a trade it previously reported to
 // /api/trade-signal closes. Looks up that original post by `ticket` so the
@@ -125,6 +126,9 @@ export async function GET(req: NextRequest) {
     // on consecutive lines looking like one repeated bullet.
     (resultLine ? `\n💰 Sonuç: <b>${resultLine}</b>` : "") +
     (trStats ? `\n${trStats}` : "") +
+    // Only when the trade has a page: a result for an untracked ticket has
+    // no row, and a link to it would be a 404.
+    (original ? `\n\n🔗 <a href="${signalUrl(original.ticket)}">İşlem #${original.ticket} · sonucu sitede gör</a>` : "") +
     `\n\n⚠️ Geçmiş sonuçlar gelecekteki sonuçları garanti etmez.`;
 
   // Best-effort: record the real close data against the original row so
@@ -165,7 +169,12 @@ export async function GET(req: NextRequest) {
   // loss; a result never published is the promise this site is built on.
   const result = await sendSignalPhoto(imageUrl, caption, {
     replyToMessageId: original?.telegramMessageId ?? undefined,
-    inlineKeyboard: mainServicesKeyboard(),
+    inlineKeyboard: original
+      ? [
+          [{ text: `🔎 İşlem #${original.ticket} · Sitede aç`, url: signalUrl(original.ticket) }],
+          ...mainServicesKeyboard(),
+        ]
+      : mainServicesKeyboard(),
     silent: true,
   });
 
@@ -175,7 +184,7 @@ export async function GET(req: NextRequest) {
     await sendPushToMembers({
       title: `${pair.toUpperCase()} ${outcomeEmoji} ${outcomeWord}`,
       body: resultLine ? `Entry ${entry} → Close ${close} · ${resultLine}` : `Entry ${entry} → Close ${close}`,
-      url: "/signals",
+      url: original ? signalPath(original.ticket) : "/signals",
     });
   } catch (err) {
     console.error("Push notification failed:", err);
