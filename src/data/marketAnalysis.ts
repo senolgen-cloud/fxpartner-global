@@ -41,6 +41,46 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-30-0900",
+    title: "FXPARTNER Piyasa Özeti | 30.09.2026 Çarşamba Sabah Güncellemesi",
+    excerpt: "ABD Tüketici Güven Endeksi 81,9 ile 2014'ten bu yana en düşük seviyeye geriledi, JOLTS açık iş sayısı 7,08 milyona düştü; buna rağmen enflasyon ve borç arzı endişeleri öne çıkıyor. ABD 10 yıllık tahvil getirisi yaklaşık yirmi yılın en yüksek düzeylerine yakın seyrederken ons altın 4.180 dolar civarında test ediliyor. Gün içinde ABD PCE enflasyon verisi izlenecek.",
+    publishedAt: "2026-09-30",
+    readingMinutes: 2,
+    intro: "Çarşamba gününe girilirken piyasaların gündeminde, **ABD** verilerindeki zayıflamaya rağmen enflasyon ve borç arzı endişelerinin öne çıkması, **ABD 10 yıllık Hazine tahvili** getirisinin uzun vadeli zirvelerine yakın seyretmesi ve bugün açıklanması beklenen **PCE** enflasyon verisi yer alıyor.",
+    news: [
+      {
+        icon: "📉",
+        heading: "ABD Tüketici Güveni 81,9'a Geriledi, JOLTS 7,08 Milyona Düştü",
+        body: "**Conference Board Tüketici Güven Endeksi** 81,9 seviyesine gerileyerek 2014'ten bu yana en düşük düzeye indi; **JOLTS** açık iş sayısı ise 7,08 milyona düştü. Buna rağmen piyasalarda büyüme endişelerinden çok enflasyon ve borç arzı kaygıları belirleyici olmaya devam ediyor."
+      },
+      {
+        icon: "📈",
+        heading: "ABD Tahvil Getirileri İki On Yılın Zirvelerine Yakın",
+        body: "**ABD 10 yıllık Hazine tahvili** getirisi **%5,2** seviyelerinin üzerinde, 30 yıllık getiri ise **%5,5** üzerinde seyrediyor; her ikisi de yaklaşık yirmi yılın en yüksek düzeylerine yakın. Getirilerdeki yükseliş, **ABD doları**nın eylül ayında yaklaşık **%2** değer kazanmasını ve haziran ayından bu yana en güçlü aylık performansına ilerlemesini destekliyor."
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın 4.180 Dolar Civarında Test Ediliyor",
+        body: "**Ons altın**, önceki seanstaki sert düşüşün ardından **4.180 dolar** seviyesini test ediyor. Yüksek reel getiriler ve güçlü dolar, altın üzerindeki temel baskıyı sürdürüyor."
+      },
+      {
+        icon: "⛽",
+        heading: "Enerji Fiyatları ve Enflasyon Kaygısı Piyasaların Odağında",
+        body: "ABD hisse senedi piyasaları, yüksek enerji fiyatları ve yüksek tahvil getirileri arasında dar bir bantta hareket ediyor. **Cleveland Fed** tahmin modeli, ağustos ayı PCE enflasyonunun yıllık bazda yaklaşık **%3,8**, çekirdek PCE'nin ise yaklaşık **%3,4** olacağına işaret ediyor."
+      }
+    ],
+    calendarLabel: "30 Eylül 2026",
+    calendarEvents: [
+      {
+        time: "30 Eylül 2026, gün içinde",
+        icon: "🇺🇸",
+        title: "ABD PCE Enflasyonu (Ağustos)",
+        note: "Ağustos ayı **PCE** fiyat endeksi verisinin bugün açıklanması bekleniyor; veri, **Fed**'in faiz politikası beklentileri açısından yakından izlenecek."
+      }
+    ],
+    closing: "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir."
+  },
+  {
     slug: "piyasa-ozeti-2026-09-29-1800",
     title: "FXPARTNER Piyasa Özeti | 29.09.2026 Salı Akşam Güncellemesi",
     excerpt: "ABD 10 yıllık Hazine tahvili getirisi dün %5,244 seviyesinde kapanarak 2007'den bu yana en yüksek düzeyini gördü; piyasalar ekim ayında Fed'den yeni bir faiz artışı için yaklaşık %70 ihtimal fiyatlıyor. Güçlü dolar ve yükselen getirilerin baskısıyla ons altın bir önceki seansta yaklaşık %4 değer kaybederek 4.100 doların hemen üzerine, yedi haftanın en düşük seviyesine geriledi. ABD seansında Tüketici Güven Endeksi ve JOLTS Açık İş Sayısı verileri izlenecek.",
