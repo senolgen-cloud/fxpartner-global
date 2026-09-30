@@ -41,6 +41,39 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-09-30-2000",
+    title: "FXPARTNER Piyasa Özeti | 30.09.2026 Çarşamba Akşam Güncellemesi",
+    excerpt: "ABD'de ağustos ayı PCE enflasyonu yıllık %3,4 ile beklentilerin (%3,7) altında kaldı; çekirdek PCE yıllık %3,0 ile %3,3'lük beklentinin gerisinde açıklandı. Ons altın ise aylık bazda düşüş yönünde seyrediyor.",
+    publishedAt: "2026-09-30",
+    readingMinutes: 2,
+    intro: "Çarşamba günü piyasalarda öne çıkan gelişme, **ABD**'de açıklanan ağustos ayı **PCE** enflasyon verisinin beklentilerden daha yumuşak gelmesi oldu.",
+    news: [
+      {
+        icon: "📊",
+        heading: "ABD PCE Enflasyonu Beklentilerin Altında Kaldı",
+        body: "**PCE** fiyat endeksi ağustos ayında aylık **%0,3** arttı; yıllık enflasyon ise **%3,4** oldu. Dow Jones anketine katılan ekonomistler aylık **%0,3**, yıllık **%3,7** artış bekliyordu."
+      },
+      {
+        icon: "🧮",
+        heading: "Çekirdek PCE Yıllık %3,0 Seviyesinde",
+        body: "**Fed**'in tercih ettiği enflasyon göstergesi olan çekirdek **PCE**, ağustosta yıllık bazda **%3,0** arttı ve **%3,3**'lük piyasa beklentisinin altında kaldı."
+      },
+      {
+        icon: "📈",
+        heading: "S&P 500 Vadeli İşlemleri Yükseldi",
+        body: "Enflasyon verisinin beklentilerden düşük gelmesinin ardından **S&P 500** vadeli işlemleri yükseliş gösterdi."
+      },
+      {
+        icon: "🥇",
+        heading: "Ons Altın Aylık Düşüş Yönünde",
+        body: "**Ons altın**, yatırımcıların **ABD** enflasyon verisini beklediği bir ortamda eylül ayını aylık bazda düşüşle tamamlamaya yöneliyor."
+      }
+    ],
+    calendarLabel: "30 Eylül 2026",
+    calendarEvents: [],
+    closing: "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir."
+  },
+  {
     slug: "piyasa-ozeti-2026-09-30-0900",
     title: "FXPARTNER Piyasa Özeti | 30.09.2026 Çarşamba Sabah Güncellemesi",
     excerpt: "ABD Tüketici Güven Endeksi 81,9 ile 2014'ten bu yana en düşük seviyeye geriledi, JOLTS açık iş sayısı 7,08 milyona düştü; buna rağmen enflasyon ve borç arzı endişeleri öne çıkıyor. ABD 10 yıllık tahvil getirisi yaklaşık yirmi yılın en yüksek düzeylerine yakın seyrederken ons altın 4.180 dolar civarında test ediliyor. Gün içinde ABD PCE enflasyon verisi izlenecek.",
