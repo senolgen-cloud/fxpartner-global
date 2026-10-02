@@ -4,7 +4,8 @@ import type { NextRequest } from "next/server";
 import { optionalSession } from "@/lib/optionalSession";
 import { COUNTRY_TO_LANG } from "@/lib/countryLanguages";
 import { CONSENT_COOKIE, parseDecision, type Decision } from "@/lib/consent";
-import { isUnknownSlug } from "@/lib/knownSlugs";
+import { LITERAL_ROUTES, isUnknownSlug } from "@/lib/knownSlugs";
+import { isMissingRow } from "@/lib/rowExists";
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "senolgen@gmail.com";
 
@@ -241,7 +242,17 @@ export default async function proxy(request: NextRequest) {
   // notFound() calls stay where they are: this is the door, they are the
   // wall behind it, and only sections whose slugs live in the repository
   // are guarded. See src/lib/knownSlugs.ts.
-  if (!isStaticFile(request.nextUrl.pathname) && isUnknownSlug(path)) {
+  //
+  // Database-fed sections get the same door through rowExists.ts: one
+  // indexed lookup, GET and HEAD only (nothing else is a page view), and it
+  // lets the request through if the database cannot be asked.
+  const section = path.split("/")[1] ?? "";
+  if (
+    !isStaticFile(request.nextUrl.pathname) &&
+    (isUnknownSlug(path) ||
+      ((request.method === "GET" || request.method === "HEAD") &&
+        (await isMissingRow(path, LITERAL_ROUTES[section]))))
+  ) {
     const url = request.nextUrl.clone();
     url.pathname = localePath(locale, NOT_FOUND_PATH);
     const missing = NextResponse.rewrite(url);

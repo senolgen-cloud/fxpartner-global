@@ -1,4 +1,4 @@
-import { and, asc, eq, gte, lt } from "drizzle-orm";
+import { and, asc, eq, gte, inArray, isNotNull, lt } from "drizzle-orm";
 import { db } from "@/db";
 import { tradeSignals } from "@/db/schema";
 import { SIGNAL_TZ, SIGNALS_EPOCH } from "@/lib/signalPeriods";
@@ -93,19 +93,48 @@ export function lastCompletedDay(now: Date = new Date()): string {
   return istanbulDayKey(ref);
 }
 
+// O gün kapanan ve kayda giren işlemler. getDailyReport ile hasDailyReport
+// aynı koşulu buradan alıyor: proxy'nin "bu günün raporu var mı" cevabı
+// sayfanın kendi cevabından ayrışırsa ya gerçek bir rapor 404 alır ya da
+// boş bir gün yine 200 döner.
+function closedTradesOn(range: { start: Date; end: Date }) {
+  return and(
+    eq(tradeSignals.status, "closed"),
+    gte(tradeSignals.closedAt, range.start),
+    lt(tradeSignals.closedAt, range.end),
+    // Kayıt başlangıcından önceki işlemler siteye hiç girmiyor; rapor da
+    // /signals panosunun gösterdiği kaydı anlatır, ondan fazlasını değil.
+    gte(tradeSignals.createdAt, SIGNALS_EPOCH)
+  );
+}
+
+/**
+ * O gün için rapor sayfası var mı — getDailyReport'un trades dizisinin boş
+ * olmayacağı durum. Satırların hepsini değil tek bir satırı ister, çünkü
+ * proxy bunu gövde akmadan, her /gun-sonu/<tarih> isteğinde soruyor.
+ */
+export async function hasDailyReport(date: string): Promise<boolean> {
+  const range = istanbulDayRange(date);
+  if (!range) return false;
+  const row = await db.query.tradeSignals.findFirst({
+    columns: { id: true },
+    where: and(
+      closedTradesOn(range),
+      // getDailyReport'taki filtrenin aynısı: sonucu ve kârı olmayan kapanış
+      // rapora girmiyor, tek başına bir sayfa da açmıyor.
+      inArray(tradeSignals.outcome, ["WIN", "LOSS"]),
+      isNotNull(tradeSignals.profit)
+    ),
+  });
+  return Boolean(row);
+}
+
 export async function getDailyReport(date: string): Promise<DailyReport | null> {
   const range = istanbulDayRange(date);
   if (!range) return null;
 
   const rows = await db.query.tradeSignals.findMany({
-    where: and(
-      eq(tradeSignals.status, "closed"),
-      gte(tradeSignals.closedAt, range.start),
-      lt(tradeSignals.closedAt, range.end),
-      // Kayıt başlangıcından önceki işlemler siteye hiç girmiyor; rapor da
-      // /signals panosunun gösterdiği kaydı anlatır, ondan fazlasını değil.
-      gte(tradeSignals.createdAt, SIGNALS_EPOCH)
-    ),
+    where: closedTradesOn(range),
     orderBy: asc(tradeSignals.closedAt),
   });
 
