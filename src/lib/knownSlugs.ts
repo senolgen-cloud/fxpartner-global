@@ -1,5 +1,6 @@
 import { blogPosts } from "@/data/blog";
 import { brokers, categoryInfo } from "@/data/brokers";
+import { cashbackPrograms } from "@/data/cashback";
 import { marketAnalysisPosts } from "@/data/marketAnalysis";
 import { propFirms } from "@/data/propFirms";
 import { isoToBulletinSlug, technicalAnalysisPosts } from "@/data/technicalAnalysis";
@@ -33,12 +34,11 @@ import { isoToBulletinSlug, technicalAnalysisPosts } from "@/data/technicalAnaly
  * Reading the same arrays the pages read cannot drift.
  *
  * WHAT IS DELIBERATELY MISSING. Only sections whose full set of slugs lives
- * in the repository are listed. /egitim, /haber-bulteni and /cashback are
- * fed from the database, and a proxy cannot know their slugs without a query
- * on every request; guessing would 404 content published after the last
- * deploy. Those keep the streamed 404 page, which Next marks noindex, so
- * they are not indexed either way — see check-soft-404.mjs, which fails if a
- * new slug route appears in neither list.
+ * in the repository are listed. /egitim, /haber-bulteni, /signals and
+ * /gun-sonu are fed from the database; a list here would go stale the moment
+ * something is published, so those are asked row by row in
+ * src/lib/rowExists.ts instead. check-soft-404.mjs fails if a new slug route
+ * appears in neither place.
  */
 export const KNOWN_SLUGS: Record<string, Set<string>> = {
   blog: new Set(blogPosts.map((p) => p.slug)),
@@ -48,6 +48,12 @@ export const KNOWN_SLUGS: Record<string, Set<string>> = {
   // pay for. They are the untranslated slugs on purpose: the URL is the
   // same in every locale, only the page copy changes.
   categories: new Set(Object.values(categoryInfo).map((c) => c.slug)),
+  // /cashback/<broker>/setup. The programmes are a committed list in
+  // src/data/cashback.ts, not rows, and the page 404s a programme whose
+  // broker is not reviewed, so the set is the same intersection.
+  cashback: new Set(
+    cashbackPrograms.filter((p) => brokers.some((b) => b.slug === p.brokerSlug)).map((p) => p.brokerSlug)
+  ),
   "piyasa-analizi": new Set(marketAnalysisPosts.map((p) => p.slug)),
   "prop-firmalar": new Set(propFirms.map((f) => f.slug)),
   "teknik-analiz": new Set(technicalAnalysisPosts.map((p) => isoToBulletinSlug(p.publishedAt))),
@@ -74,6 +80,9 @@ export const KNOWN_SLUGS: Record<string, Set<string>> = {
  */
 export const LITERAL_ROUTES: Record<string, Set<string>> = {
   "prop-firmalar": new Set(["indirim-kodlari"]),
+  // Database-backed (lib/rowExists.ts), but the proxy checks it before the
+  // body streams just the same, so its sibling page has to be declared.
+  egitim: new Set(["gorsel-anlatimlar"]),
 };
 
 /**
@@ -84,9 +93,8 @@ export const LITERAL_ROUTES: Record<string, Set<string>> = {
  * can: anything that is not a date, and any date that has not finished yet,
  * is knowably not a page and gets a real 404 before the body streams.
  *
- * A valid past date with no closed trades still falls through to the
- * streamed 404 page, exactly like the other database-fed sections above.
- * Next marks that page noindex, so it is not indexed either way.
+ * A valid past date is asked of the database by lib/rowExists.ts, which
+ * 404s a day with no reportable trade before the body streams too.
  */
 const DATE_SHAPED_SECTIONS = new Set(["gun-sonu"]);
 
@@ -94,7 +102,7 @@ const DATE_SHAPED_SECTIONS = new Set(["gun-sonu"]);
  * /signals/<ticket> is one trade, addressed by its MT5 position ticket —
  * digits only (see lib/signalLink.ts). Anything else is knowably not a
  * trade and gets a real 404 before the body streams; a well-formed ticket
- * with no row falls through to the page's own notFound(), like gun-sonu.
+ * with no row is caught by lib/rowExists.ts, like gun-sonu.
  */
 const TICKET_SHAPED_SECTIONS = new Set(["signals"]);
 

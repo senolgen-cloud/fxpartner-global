@@ -18,7 +18,7 @@
 // What this catches: somebody adds src/app/[locale]/kurslar/[slug] and the
 // section silently starts serving 200 for every address anyone invents. The
 // fix is one line in KNOWN_SLUGS — or, when the slugs live in the database
-// rather than the repo, one line here saying so.
+// rather than the repo, one check in ROW_CHECKS in src/lib/rowExists.ts.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -26,25 +26,18 @@ import path from "node:path";
 const APP = "src/app/[locale]";
 const KNOWN_SLUGS_FILE = "src/lib/knownSlugs.ts";
 
-// Sections whose slugs are not in the repository. A proxy cannot check
-// these without a database query on every request, and guessing would 404
-// content published since the last deploy — worse than the soft 404 it
-// would be fixing. Next marks the streamed not-found page noindex, so these
-// are still kept out of search results; they just answer 200 while doing it.
-const DB_BACKED = new Set([
-  "egitim", // lessons are rows in the education tables
-  "haber-bulteni", // bulletins are generated and stored, not committed
-  "cashback", // programmes are configured per broker at runtime
-  // Günün kapanan işlemlerinden üretiliyor. Slug listesi veritabanında ama
-  // BİÇİMİ sabit, o yüzden knownSlugs.ts'teki DATE_SHAPED_SECTIONS kuralı
-  // tarih olmayan ve henüz bitmemiş günleri gövde akmadan 404'lüyor; geriye
-  // yalnızca işlemsiz geçmiş günler kalıyor ve onlar da noindex.
-  "gun-sonu",
-  // Tek işlem sayfası: /signals/<MT5 ticket>. Numaralar veritabanında,
-  // biçim sabit — knownSlugs.ts'teki TICKET_SHAPED_SECTIONS rakam olmayan
-  // her adresi gövde akmadan 404'lüyor. Sayfalar zaten noindex.
-  "signals",
-]);
+// Sections whose slugs are rows, not files. The proxy asks the database
+// about these one address at a time (src/lib/rowExists.ts), so they are
+// guarded too; this reads the keys of ROW_CHECKS so a section listed there
+// counts and one removed from there stops counting.
+const ROW_EXISTS_FILE = "src/lib/rowExists.ts";
+const DB_BACKED = new Set(
+  [
+    ...(fs.readFileSync(ROW_EXISTS_FILE, "utf8").split("export const ROW_CHECKS")[1] ?? "").matchAll(
+      /^\s{2}"?([a-z0-9-]+)"?:\s*(?:async\s*)?\(/gm
+    ),
+  ].map((m) => m[1])
+);
 
 function sections(dir) {
   const found = [];
@@ -86,7 +79,7 @@ const declaredLiteral = new Map();
 }
 
 const undeclared = [];
-for (const section of guarded) {
+for (const section of new Set([...guarded, ...DB_BACKED])) {
   const dir = path.join(APP, section);
   if (!fs.existsSync(dir)) continue;
   const declared = declaredLiteral.get(section) ?? new Set();
@@ -117,13 +110,13 @@ if (unguarded.length) {
   console.error(
     `\n  fix: add the section to KNOWN_SLUGS in ${KNOWN_SLUGS_FILE} so the proxy can` +
       `\n       reject unknown slugs before the response streams, or — if its slugs` +
-      `\n       come from the database rather than the repo — add it to DB_BACKED in` +
-      `\n       this file with a line saying where they come from.\n`
+      `\n       come from the database rather than the repo — add a check for it to` +
+      `\n       ROW_CHECKS in ${ROW_EXISTS_FILE}.\n`
   );
   process.exit(1);
 }
 
 console.log(
   `no soft 404s: ${guarded.size} section(s) checked in the proxy, ` +
-    `${DB_BACKED.size} database-backed section(s) exempt`
+    `${DB_BACKED.size} database-backed section(s) checked row by row`
 );
