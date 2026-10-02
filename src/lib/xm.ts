@@ -8,7 +8,7 @@
 // Change one string here to re-point every in-article slot for that broker.
 
 // XM affiliate destination used by the in-article ad slots on /blog/[slug].
-export const XM_AFFILIATE_URL = "https://affs.click/hbk5p";
+export const XM_AFFILIATE_URL = "https://affs.click/qmip5";
 
 // Short, checkable claims only — each one is sourced from the XM entry in
 // src/data/brokers.ts. Anything that changes there should change here too.
