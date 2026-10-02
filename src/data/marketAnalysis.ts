@@ -41,6 +41,44 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    slug: "piyasa-ozeti-2026-10-02-1800",
+    title: "FXPARTNER Piyasa Özeti | 02.10.2026 Cuma Akşam Güncellemesi",
+    excerpt: "ABD'de eylül ayında tarım dışı istihdam yalnızca 29 bin artarak beklentilerin altında kaldı, işsizlik oranı %4,2'ye yükseldi. Veri sonrası ABD Hazine tahvili getirileri geriledi, piyasaların ekimde Fed'den faiz artışı fiyatlaması %12'ye kadar düştü.",
+    publishedAt: "2026-10-02",
+    readingMinutes: 2,
+    intro: "Cuma günü piyasalarda öne çıkan gelişme, **ABD**'de açıklanan eylül ayı tarım dışı istihdam (**NFP**) verisinin beklentilerin belirgin biçimde altında gelmesi oldu.",
+    news: [
+      {
+        icon: "📊",
+        heading: "ABD Tarım Dışı İstihdam Eylülde 29 Bin Arttı",
+        body: "**ABD**'de tarım dışı istihdam eylül ayında **29 bin** arttı ve ekonomistlerin beklentisinin altında kaldı. İşsizlik oranı **%4,1**'den **%4,2**'ye yükseldi. Temmuz ve ağustos aylarına ait istihdam artışları toplamda **60 bin** aşağı yönlü revize edildi."
+      },
+      {
+        icon: "🏥",
+        heading: "Sağlık Sektörü İstihdam Artışına Öncülük Etti",
+        body: "Aylık istihdam artışının büyük bölümü sağlık sektöründen geldi; sektör **17 bin** kişilik istihdam ekledi. İşgücüne katılım oranı **0,2 puan** artarak **%61,8**'e çıktı."
+      },
+      {
+        icon: "📉",
+        heading: "ABD Hazine Tahvili Getirileri Geriledi",
+        body: "Veri sonrasında **ABD** 10 yıllık **Hazine** tahvili getirisi yaklaşık **6 baz puan** düşerek **%5,18**'e, 2 yıllık tahvil getirisi ise yaklaşık **6 baz puan** düşerek **%4,73**'e indi."
+      },
+      {
+        icon: "🏦",
+        heading: "Ekimde Fed Faiz Artışı Fiyatlaması Geriledi",
+        body: "Zayıf istihdam verisinin ardından piyasaların ekim ayında **Fed**'den faiz artışı ihtimali fiyatlaması **%12**'ye kadar geriledi."
+      },
+      {
+        icon: "🥇",
+        heading: "Altın ve Gümüş Yükselişte, Dolar Endeksi Zayıf",
+        body: "Zayıf istihdam verisi **ABD Hazine** getirilerini aşağı çekerken **ons altın** ve gümüş **ABD** seansının başında yükseliş kaydetti; **ABD Dolar Endeksi** ise daha zayıf seyretti."
+      }
+    ],
+    calendarLabel: "2 Ekim 2026",
+    calendarEvents: [],
+    closing: "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir."
+  },
+  {
     "slug": "piyasa-ozeti-2026-10-02-0900",
     "title": "FXPARTNER Piyasa Özeti | 02.10.2026 Cuma Sabah Güncellemesi",
     "excerpt": "ABD Dolar Endeksi perşembe günü 102,20 ile nisan 2025'ten bu yana en yüksek seviyesini gördü; piyasalar ekim ayında Fed'den faiz artışı ihtimalini yaklaşık %28'e indirdi. Ons altın 4.200 doların altında seyrederken gün içinde ABD tarım dışı istihdam (NFP) verisi izlenecek.",
