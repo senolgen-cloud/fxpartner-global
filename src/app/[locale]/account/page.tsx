@@ -26,7 +26,8 @@ import type { AccessTier } from "@/lib/signalAccess";
 import ProfileCard from "@/components/account/ProfileCard";
 import { getCountries } from "@/lib/country";
 import { brokers } from "@/data/brokers";
-import { type PackageTier } from "@/lib/vip";
+import { PERIOD_PRICE_USD, type PackageTier } from "@/lib/vip";
+import { isSubscriptionLive } from "@/lib/subscription";
 import { PACKAGE_TIER_INFO, PACKAGE_TIER_ORDER } from "@/data/packageTiers";
 import { createNowPaymentsCheckout } from "@/app/[locale]/paketler/checkout-actions";
 import { setServerLocale } from "@/lib/serverLocale";
@@ -134,7 +135,9 @@ export default async function AccountPage({
     .where(eq(tradeSignals.status, "active"));
 
   const subscriptionTier: PackageTier | null = (subscription?.tier as PackageTier | null) ?? null;
-  const isActiveVip = subscription?.status === "active";
+  // Same rule as the signal board (tierAccess.ts): a period that ran out
+  // no longer counts, even before the renewal cron flips the row.
+  const isActiveVip = !!subscription && isSubscriptionLive(subscription);
 
   const viewerTier: AccessTier = isActiveVip && subscriptionTier ? subscriptionTier : "free";
 
@@ -303,6 +306,14 @@ export default async function AccountPage({
                       className="rounded-full border border-hairline px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
                     >
                       ₿ Paketi Yenile
+                    </button>
+                  </form>
+                  <form action={createNowPaymentsCheckout.bind(null, subscriptionTier, "quarterly")}>
+                    <button
+                      type="submit"
+                      className="rounded-full border border-hairline px-5 py-2.5 text-sm font-medium text-text-on-ink transition-colors hover:border-signal hover:text-signal"
+                    >
+                      ₿ {trf("3 Ay Yenile — ${price}", { price: PERIOD_PRICE_USD.quarterly[subscriptionTier] })}
                     </button>
                   </form>
                   {subscriptionTier !== "vip" && (

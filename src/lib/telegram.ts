@@ -142,12 +142,40 @@ function getConfig() {
   return { token, chatId };
 }
 
+/**
+ * Every link back to the site, tagged utm_source=telegram.
+ *
+ * Telegram's apps open links without a Referer, so proxy.ts's referrer
+ * classifier records a reader who came from the channel as "direct" — and
+ * the channel, which is most of our distribution, looked like it sent no
+ * one. Done here, on the serialised request, so the text, the captions and
+ * every inline-keyboard button of every send are covered without touching
+ * the dozens of places that build them.
+ *
+ * Deliberately narrow: only page URLs without a query string are tagged.
+ * Adding a second parameter needs an "&", which Telegram's HTML parse mode
+ * reads as the start of an entity inside an href and rejects the message
+ * for. /api/ URLs (the OG images Telegram fetches) and files are left
+ * alone — a tag there would only split their cache.
+ */
+function tagSiteLinks(json: string): string {
+  const site = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://fxpartner.global").replace(/\/$/, "");
+  const escaped = site.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const pattern = new RegExp(`${escaped}(?![\\w.-])(/[^\\s"'<>\\\\)#?]*)?(\\?[^\\s"'<>\\\\)#]*)?(#[^\\s"'<>\\\\)]*)?`, "g");
+  return json.replace(pattern, (match, path: string = "", query: string = "", hash: string = "") => {
+    if (query) return match;
+    if (path.startsWith("/api/")) return match;
+    if (/\.[a-z0-9]{2,5}$/i.test(path)) return match;
+    return `${site}${path}?utm_source=telegram${hash}`;
+  });
+}
+
 async function callTelegram(method: string, body: Record<string, unknown>) {
   const { token } = getConfig();
   const res = await fetch(`${API_BASE}/bot${token}/${method}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
+    body: tagSiteLinks(JSON.stringify(body)),
   });
   const data = await res.json();
   if (!res.ok || !data.ok) {

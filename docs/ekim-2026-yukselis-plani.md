@@ -57,23 +57,28 @@ Analytics kapalı** (API, 1 Ekim'de "Web Analytics not found" döndü). Yani:
 
 ### Hamle 1: Ölçümü aç (1–2 Ekim) · *kurucu 10 dk, Claude 2 saat*
 - [ ] **Kurucu:** Vercel → fxpartner-global → Analytics → *Enable* (Web Analytics).
-- [ ] **Claude:** her referans linkine tıklamayı `track("affiliate_click", {broker, yer})`
-      ile kaydet (broker kartı, inceleme sayfası, makale içi reklam, prop tablosu, copytrade).
-- [ ] **Claude:** Telegram/X otomatik paylaşımlarındaki tüm site linklerine UTM ekle
-      (`utm_source=telegram&utm_campaign=ekim26`).
+- [x] **Claude:** siteden çıkan her link tıklaması `outbound_click` tablosuna yazılıyor
+      (`OutboundClickTracker`, `/api/click`); rapor: **`/tr/admin/tiklamalar`** (partner,
+      sayfa ve kaynak kırılımı). Vercel Analytics açıksa `outbound_click` olayı da gidiyor.
+- [x] **Claude:** Telegram'a giden her site linki `?utm_source=telegram` ile etiketleniyor
+      (`lib/telegram.ts → tagSiteLinks`). Telegram uygulaması referrer göndermediği için
+      bu okurlar önceden "direct" görünüyordu.
 - [ ] **Kurucu:** broker ve prop panellerinden **Eylül rakamlarını** tek tabloya yaz:
       kayıt, FTD, lot, komisyon. Bu, Ekim'in başlangıç çizgisi (baseline).
 
 ### Hamle 2: Paketleri gerçek bir aboneliğe çevir (2–9 Ekim) · *en hızlı nakit*
 NOWPayments yinelenen ödeme desteklemiyor, yani bugün Pro alan biri 30 gün sonra kendiliğinden
 kayboluyor. Ekim'in en hızlı parası, bu sızıntıyı kapatmak ve peşin satış yapmak:
-- [ ] **3 aylık peşin paket:** Pro 3 ay **$149** (normalde $177), VIP 3 ay **$249** (normalde $297).
+- [x] **3 aylık peşin paket:** Pro 3 ay **$149** (normalde $177), VIP 3 ay **$249** (normalde $297).
       Nakit bugün kasaya girer, müşteri 90 gün kalır.
-- [ ] **Yenileme hatırlatması:** süre bitiminden 5 gün ve 1 gün önce Resend ile e-posta,
-      ayrıca zil bildirimi. İçinde tek tık yenileme faturası olur.
+- [x] **Yenileme hatırlatması:** `/api/cron/subscription-renewal` her gün 09:10 TSİ'de;
+      bitişe 5 ve 1 gün kala e-posta, bitişten 2 gün sonra erişimi kapatıp "süren doldu"
+      e-postası. Erken yenileyenin kalan günleri artık kaybolmuyor.
+      **Not:** bu değişiklikten önce erişim hiç kapanmıyordu (`currentPeriodEnd` kontrol
+      edilmiyordu). Süresi geçmiş eski aboneler ilk çalışmada ücretsiz katmana düşer.
 - [ ] **"Ekim Kurucu Üye" fiyatı:** sadece 31 Ekim'e kadar geçerli, gerçek bir son tarih
       (sahte geri sayım yok). Ödeyenler fiyatı yenilemede de korur.
-- [ ] **IB köprüsü:** `hasVerifiedCashbackAccount()` zaten kodda var. Doğrulanmış LiteFinance
+- [x] **IB köprüsü:** `hasVerifiedCashbackAccount()` zaten kodda var. Doğrulanmış LiteFinance
       veya IC Funded hesabı açana **1 ay Pro ücretsiz.** Bu, $59'lık bir indirimi tekrarlayan
       bir IB gelirine çevirir. Planın en kârlı hamlesi bu.
 
@@ -170,9 +175,13 @@ Bunlar hız kazandırmaz. Markanın tek sermayesi olan güveni harcar.
 
 ## 7. İlk 48 saatin yapılacaklar listesi
 
+0. [ ] **Kurucu, yayından ÖNCE:** `drizzle/0014_october_revenue.sql`'i Neon SQL editöründe
+       çalıştır. Kod yeni kolonları okuyor; migration'sız yayın girişi bozar.
+       SQL `IF NOT EXISTS` ile yazıldı, mevcut koda zararı yok, iki kez çalıştırmak güvenli.
 1. [ ] **Kurucu:** Vercel'de Web Analytics'i aç
 2. [ ] **Kurucu:** Eylül baseline tablosunu doldur (broker panelleri, NOWPayments, Telegram üye sayısı)
-3. [ ] **Claude:** affiliate tıklama takibi ve UTM'ler
-4. [ ] **Claude:** 3 aylık paket ve "Ekim Kurucu Üye" fiyatı (kurucu onaylarsa)
+3. [x] **Claude:** affiliate tıklama takibi ve UTM'ler
+4. [x] **Claude:** 3 aylık paket ($149 / $249) ve 1 ay ücretsiz Pro. "Ekim Kurucu Üye"
+       fiyat kilidi henüz yok; ayrı bir karar.
 5. [ ] **Claude:** XM / Exness / AvaTrade e-posta taslakları
 6. [ ] **Kurucu:** Telegram'da Ekim duyurusu (metni Claude yazar, kurucu onaylar)

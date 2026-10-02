@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Geist, JetBrains_Mono, Noto_Sans_Arabic, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import OutboundClickTracker from "@/components/OutboundClickTracker";
 import NotificationOptIn from "@/components/NotificationOptIn";
 import ServiceWorkerRegistrar from "@/components/ServiceWorkerRegistrar";
 import ChromeGate from "@/components/ChromeGate";
@@ -266,6 +267,7 @@ export default async function RootLayout({
           </ChromeGate>
           <GoogleTranslateWidget />
           <Analytics />
+          <OutboundClickTracker />
           </NotificationProvider>
         </LocaleProvider>
       </body>

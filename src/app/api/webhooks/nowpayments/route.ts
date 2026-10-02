@@ -1,27 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyIpnSignature, NOWPAYMENTS_SUCCESS_STATUSES } from "@/lib/nowpayments";
 import { db } from "@/db";
-import { users, vipSubscriptions, nowpaymentsOrders } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { nowpaymentsOrders } from "@/db/schema";
+import { and, eq, isNull } from "drizzle-orm";
+import { PERIOD_DAYS } from "@/lib/vip";
+import { grantAccess } from "@/lib/subscription";
 
-// NOWPayments has no auto-renewing subscription — this grants exactly one
-// 30-day period of access per confirmed payment. A future cron (not built
-// yet) would need to prompt subscribers to pay again before it lapses.
-const PERIOD_DAYS = 30;
-
-// users.isVip is a cached read-only-for-UI flag, kept in lockstep with the
-// authoritative vipSubscriptions row — nothing else should write it.
-async function syncIsVipCache(userId: string) {
-  const [row] = await db
-    .select({ status: vipSubscriptions.status })
-    .from(vipSubscriptions)
-    .where(eq(vipSubscriptions.userId, userId))
-    .limit(1);
-  await db
-    .update(users)
-    .set({ isVip: row?.status === "active" })
-    .where(eq(users.id, userId));
-}
+// NOWPayments has no auto-renewing subscription — each confirmed payment
+// grants exactly the period its order was created for (30 or 90 days),
+// added on top of whatever the member still has left. The renewal cron
+// (/api/cron/subscription-renewal) reminds them before it runs out.
 
 export async function POST(req: NextRequest) {
   // Signature verification needs the exact raw bytes NOWPayments signed —
@@ -56,62 +44,36 @@ export async function POST(req: NextRequest) {
   }
 
   // Idempotency: a resent IPN callback for an order we already fulfilled
-  // must not extend the period a second time.
-  if (order.fulfilledAt) {
+  // must not extend the period a second time. The claim is a conditional
+  // UPDATE rather than a read-then-write, because grants are additive now:
+  // two callbacks for the same payment ("confirmed" then "finished") landing
+  // together would otherwise both see an unfulfilled order and both add days.
+  const [claimed] = await db
+    .update(nowpaymentsOrders)
+    .set({ fulfilledAt: new Date() })
+    .where(and(eq(nowpaymentsOrders.id, order.id), isNull(nowpaymentsOrders.fulfilledAt)))
+    .returning({ id: nowpaymentsOrders.id });
+  if (!claimed) {
     return NextResponse.json({ received: true, alreadyFulfilled: true });
   }
 
-  const currentPeriodEnd = new Date(Date.now() + PERIOD_DAYS * 24 * 60 * 60 * 1000);
-
-  // A webhook request carries NOWPayments' cookies, not the buyer's, so
-  // getAttribution() is useless here — the subscription inherits the
-  // first-touch source already recorded on the buyer's user row instead.
-  // Deliberately absent from the onConflictDoUpdate set below: a renewal
-  // must not rewrite what the first purchase recorded.
-  const [buyer] = await db
-    .select({
-      source: users.source,
-      campaign: users.campaign,
-      landingPath: users.landingPath,
-    })
-    .from(users)
-    .where(eq(users.id, order.userId))
-    .limit(1);
-
-  await db
-    .insert(vipSubscriptions)
-    .values({
+  try {
+    await grantAccess({
       userId: order.userId,
-      provider: "nowpayments",
       tier: order.tier,
-      nowpaymentsPaymentId: String(payload.payment_id),
-      status: "active",
+      days: PERIOD_DAYS[order.period] ?? PERIOD_DAYS.monthly,
+      provider: "nowpayments",
+      paymentId: String(payload.payment_id),
       discountAccountId: order.discountAccountId,
-      currentPeriodEnd,
-      source: buyer?.source ?? null,
-      campaign: buyer?.campaign ?? null,
-      landingPath: buyer?.landingPath ?? null,
-    })
-    .onConflictDoUpdate({
-      target: vipSubscriptions.userId,
-      set: {
-        provider: "nowpayments",
-        tier: order.tier,
-        nowpaymentsPaymentId: String(payload.payment_id),
-        status: "active",
-        discountAccountId: order.discountAccountId,
-        currentPeriodEnd,
-        cancelAtPeriodEnd: false,
-        updatedAt: new Date(),
-      },
     });
-
-  await db
-    .update(nowpaymentsOrders)
-    .set({ fulfilledAt: new Date() })
-    .where(eq(nowpaymentsOrders.id, order.id));
-
-  await syncIsVipCache(order.userId);
+  } catch (err) {
+    // Release the claim so NOWPayments' retry can grant what this one could not.
+    await db
+      .update(nowpaymentsOrders)
+      .set({ fulfilledAt: null })
+      .where(eq(nowpaymentsOrders.id, order.id));
+    throw err;
+  }
 
   return NextResponse.json({ received: true });
 }

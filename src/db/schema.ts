@@ -49,6 +49,11 @@ export const users = pgTable("user", {
   // than in localStorage so it follows them to their next device instead of
   // greeting them a second time on the phone they signed in on later.
   tourSeenAt: timestamp("tour_seen_at"),
+  // When this member was given the one free Pro month that comes with their
+  // first verified cashback account. Set once, never cleared: it is the only
+  // thing stopping a second verified account (or an admin re-verifying the
+  // same one) from handing out a second month.
+  proTrialGrantedAt: timestamp("pro_trial_granted_at"),
   ...attribution,
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
@@ -292,6 +297,8 @@ export const vipSubscriptions = pgTable("vip_subscription", {
 // purchasable tiers appear here — "free" is granted by having an account and
 // never goes through checkout, so it can never be an order's tier.
 type NowPaymentsTier = "pro" | "vip";
+// Same reasoning as NowPaymentsTier: duplicated from vip.ts's BillingPeriod.
+type NowPaymentsPeriod = "monthly" | "quarterly";
 
 // One row per NOWPayments checkout attempt, created right before redirecting
 // to the invoice page — the IPN webhook has no other way to know which user/
@@ -305,6 +312,10 @@ export const nowpaymentsOrders = pgTable("nowpayments_order", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   tier: text("tier").$type<NowPaymentsTier>().notNull(),
+  // How long a confirmed payment for this order grants. Recorded on the
+  // order rather than inferred from the amount paid, so a price change
+  // never changes what an already-paid invoice was worth.
+  period: text("period").$type<NowPaymentsPeriod>().notNull().default("monthly"),
   discountAccountId: text("discount_account_id").references(() => cashbackAccounts.id, {
     onDelete: "set null",
   }),
@@ -613,5 +624,29 @@ export const consentRecords = pgTable("consent_record", {
   locale: text("locale"),
   country: text("country"),
   userAgent: text("user_agent"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+// One row per click on a link that leaves the site — broker and prop-firm
+// referral links, the copytrade link, sponsored slots. This is the only
+// record of which page and which placement sends readers to a partner:
+// partner dashboards report signups, never where on our site they started.
+//
+// Nothing personal is stored. No visitor id, no IP, no user agent — only
+// what was clicked, from which page, and the first-touch source the reader
+// already consented to (null without consent).
+export const outboundClicks = pgTable("outbound_click", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+  href: text("href").notNull(),
+  host: text("host").notNull(),
+  // Path of the page the click happened on, locale prefix included.
+  path: text("path").notNull(),
+  // Optional data-placement on the link or its nearest ancestor, so the same
+  // URL in a card, a table and an in-article slot can be told apart.
+  placement: text("placement"),
+  source: text("source"),
+  campaign: text("campaign"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });

@@ -7,10 +7,11 @@ import ArcText from "@/components/ArcText";
 import { createNowPaymentsCheckout } from "./checkout-actions";
 import { lookupBrokers } from "@/data/brokerLookup";
 import { breadcrumbSchema } from "@/lib/schema";
-import type { PackageTier } from "@/lib/vip";
+import { PERIOD_PRICE_USD, type PackageTier } from "@/lib/vip";
+import { CASHBACK_TRIAL_DAYS } from "@/lib/subscription";
 import { PACKAGE_TIER_INFO, PACKAGE_TIER_ORDER, FREE_TIER_INFO } from "@/data/packageTiers";
 import { getDictionary } from "@/lib/dictionary";
-import { tr } from "@/lib/chrome";
+import { tr, trf } from "@/lib/chrome";
 import { defaultLocale, hreflangCode, isLocale, type Locale, localePath, locales } from "@/lib/i18n";
 import { setServerLocale } from "@/lib/serverLocale";
 import { trData } from "@/lib/localizeContent";
@@ -68,6 +69,8 @@ function buildTiers() {
     accent: TIER_ACCENT[tier],
     ctaLabel: cta[tier],
     featured: tier === "pro",
+    quarterlyPrice: PERIOD_PRICE_USD.quarterly[tier],
+    quarterlySaving: PERIOD_PRICE_USD.monthly[tier] * 3 - PERIOD_PRICE_USD.quarterly[tier],
   }));
 }
 
@@ -258,7 +261,7 @@ export default async function PaketlerPage({
                 {/* NOWPayments (crypto) is the only checkout rail — Stripe
                     doesn't operate in Turkey, so there is no card path to
                     offer alongside it. */}
-                <form action={createNowPaymentsCheckout.bind(null, t.tier)} className="mt-8">
+                <form action={createNowPaymentsCheckout.bind(null, t.tier, "monthly")} className="mt-8">
                   <button
                     type="submit"
                     className={`w-full rounded-full px-6 py-3 text-sm font-semibold transition-colors ${
@@ -270,8 +273,48 @@ export default async function PaketlerPage({
                     ₿ {t.ctaLabel} →
                   </button>
                 </form>
+                {/* 3 aylık peşin: NOWPayments otomatik yenilemediği için
+                    aylık üyenin her ay elle geri gelmesi gerekiyor. Peşin
+                    paket üyeye daha ucuz, işletmeye bir çeyrek garanti. */}
+                <form action={createNowPaymentsCheckout.bind(null, t.tier, "quarterly")} className="mt-3">
+                  <button
+                    type="submit"
+                    className="flex w-full items-center justify-between gap-3 rounded-full border border-hairline px-5 py-2.5 text-sm text-text-on-ink transition-colors hover:border-text-on-ink"
+                  >
+                    <span>
+                      <span className="font-semibold">{tr("3 Ay Peşin")}</span>{" "}
+                      <span className="text-text-on-ink-muted">${t.quarterlyPrice}</span>
+                    </span>
+                    <span className={`font-mono text-xs ${t.accent}`}>
+                      {trf("${amount} tasarruf", { amount: t.quarterlySaving })}
+                    </span>
+                  </button>
+                </form>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Ücretsiz Pro ayı: doğrulanmış ilk cashback hesabına bir kez.
+            Admin hesabı doğruladığı anda otomatik tanımlanıyor
+            (admin/cashback/actions.ts → grantCashbackProTrial). */}
+        <section className="mx-auto max-w-6xl px-6 pb-16">
+          <div className="flex flex-col items-start gap-4 rounded-2xl border border-signal/40 bg-ink-soft p-6 md:flex-row md:items-center md:justify-between md:p-8">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-signal">{tr("Cashback üyelerine")}</p>
+              <p className="mt-2 font-display text-xl font-semibold">
+                {trf("Cashback hesabını bağla, {days} gün Pro bizden.", { days: CASHBACK_TRIAL_DAYS })}
+              </p>
+              <p className="mt-1 text-sm text-text-on-ink-muted">
+                {tr("Partner brokerlarımızdan birinde açtığın işlem hesabı doğrulandığında Pro erişimin otomatik tanımlanır. Her üyeye bir kez.")}
+              </p>
+            </div>
+            <Link
+              href="/cashback"
+              className="shrink-0 rounded-full bg-signal px-6 py-3 text-sm font-semibold text-on-signal transition-colors hover:bg-signal-strong"
+            >
+              {tr("Cashback'e Başla →")}
+            </Link>
           </div>
         </section>
 

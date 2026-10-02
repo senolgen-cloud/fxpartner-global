@@ -11,6 +11,8 @@ import {
 import { auth } from "@/auth";
 import { eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { grantCashbackProTrial } from "@/lib/subscription";
+import { sendProTrialEmail } from "@/lib/subscriptionEmails";
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "senolgen@gmail.com";
 
@@ -27,6 +29,34 @@ export async function setAccountStatus(accountId: string, status: CashbackAccoun
     .update(cashbackAccounts)
     .set({ status, statusChangedAt: sql`now()` })
     .where(eq(cashbackAccounts.id, accountId));
+
+  // A member's first verified account earns one free Pro month
+  // (docs/ekim-2026-yukselis-plani.md, Hamle 2). The verification itself is
+  // already saved above; a failure to grant or to email must not undo it,
+  // and grantCashbackProTrial is once-per-member so re-verifying is safe.
+  if (status === "verified") {
+    const [account] = await db
+      .select({ userId: cashbackAccounts.userId })
+      .from(cashbackAccounts)
+      .where(eq(cashbackAccounts.id, accountId))
+      .limit(1);
+    if (account?.userId) {
+      try {
+        const granted = await grantCashbackProTrial(account.userId);
+        if (granted?.email) {
+          await sendProTrialEmail({
+            to: granted.email,
+            name: granted.name,
+            tier: granted.tier,
+            until: granted.currentPeriodEnd,
+          });
+        }
+      } catch (err) {
+        console.error("cashback Pro month could not be granted —", err);
+      }
+    }
+  }
+
   revalidatePath("/admin/cashback");
 }
 
