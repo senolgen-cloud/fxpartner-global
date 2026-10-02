@@ -5,6 +5,12 @@ import type { NextConfig } from "next";
 process.env.TZ = "UTC";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // The root layout is the [locale] segment, so a URL that matches no route
+    // has no layout to render [locale]/not-found.tsx in. This lets
+    // app/global-not-found.tsx answer it instead of Next's bare default.
+    globalNotFound: true,
+  },
   images: {
     // Only the Exclusive Markets logo (a static, self-authored asset in
     // public/brokers) needs this; sandboxed via CSP per Next.js guidance.
@@ -32,6 +38,13 @@ const nextConfig: NextConfig = {
         destination: "/:locale/forex-sikayetleri",
         permanent: true,
       },
+
+      // /brokers has only per-broker pages under it, no index; the hub is
+      // /brokerlar. The Instagram landing page linked the bare path, and
+      // "/brokers" is the address people guess from /brokers/<slug>, so it
+      // resolves to the hub instead of 404ing.
+      { source: "/brokers", destination: "/brokerlar", permanent: true },
+      { source: "/:locale(tr|en|ua|ar)/brokers", destination: "/:locale/brokerlar", permanent: true },
 
       // The Non-Stop Bonus piece gained a year in its slug for the "2026"
       // queries. It had been live for about an hour and the Telegram

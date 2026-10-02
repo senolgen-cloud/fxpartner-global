@@ -96,7 +96,7 @@ const tools = [
     body: "Haftanın veri açıklamaları, beklentiler ve önceki dönem rakamları tek ekranda.",
   },
   {
-    href: "/brokers",
+    href: "/brokerlar",
     icon: "📊",
     title: "Broker Karşılaştırma",
     body: "Regülasyon, spread, komisyon ve platform desteğine göre sıralanmış incelemeler.",

@@ -8,15 +8,13 @@ import { isUnknownSlug } from "@/lib/knownSlugs";
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "senolgen@gmail.com";
 
-// Matches no route, on purpose. An address that matches nothing under
-// [locale] is answered with a real 404 and, since not-found.tsx lives in
-// that segment, with the site's own 404 page inside the normal layout.
-// Rewriting an unknown slug here gives it the identical treatment any
-// other dead link gets. Do not create a route at this path.
+// Matches no route, on purpose. An address that matches nothing is
+// answered with a real 404 by app/global-not-found.tsx. Rewriting an
+// unknown slug here gives it the identical treatment any other dead link
+// gets. Do not create a route at this path.
 //
-// The locale prefix is kept: without it the rewrite lands outside the
-// [locale] tree, which renders Next's bare error document instead —
-// no header, no fonts, and no dir="rtl" for an Arabic reader.
+// The locale prefix is kept: global-not-found reads it from the address
+// to pick the reader's language and set dir="rtl" for an Arabic reader.
 const NOT_FOUND_PATH = "/_bulunamadi";
 
 // Auto-selects a translated language on a visitor's first request, based
