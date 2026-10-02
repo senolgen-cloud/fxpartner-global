@@ -24,6 +24,8 @@ import { getSignalPeriods } from "@/lib/signalPeriods";
 import { loadOptional } from "@/lib/dbOptional";
 import { cachedSignalBoard, type SignalJson } from "@/lib/cachedReads";
 import DataUnavailable from "@/components/DataUnavailable";
+import SignalStatsStrip from "@/components/SignalStatsStrip";
+import { getRecentSignalStats } from "@/lib/trackRecord";
 
 const sponsoredBrokers = getSponsoredBrokerPool("signals");
 
@@ -104,7 +106,7 @@ export default async function SignalsPage({
   // on its own, and a reader who came for signals is better served by a
   // page that says "back in a minute" than by an error screen that says
   // nothing and offers nowhere to go.
-  const [board, subscriptionRow] = await Promise.all([
+  const [board, subscriptionRow, stats] = await Promise.all([
     // 250 closed, not 30: the win rate and the P/L total on this page are
     // computed from that array, so the limit decides the published figure.
     // At 30 it showed 59% while the real rate over the whole history is
@@ -133,6 +135,12 @@ export default async function SignalsPage({
             return null;
           })
       : Promise.resolve(null),
+    // The "son 30 gün" strip under the heading: every tier, because this
+    // page is the whole account. Losing it loses one line, not the board.
+    getRecentSignalStats("all").catch((err) => {
+      console.error("signals: stats unavailable —", err);
+      return null;
+    }),
   ]);
 
   const { data: signals, unavailable: signalsUnavailable } = board;
@@ -177,6 +185,11 @@ export default async function SignalsPage({
           <h1 className="mx-auto mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
             {tr("Gerçek Zamanlı İşlem Sinyalleri")}
           </h1>
+          {stats && (
+            <div className="mx-auto mt-6 max-w-2xl">
+              <SignalStatsStrip stats={stats} />
+            </div>
+          )}
         </div>
 
         {signalsUnavailable && (

@@ -4089,5 +4089,17 @@
   "ABD Tüketici Güven Endeksi (Eylül)": "Індекс споживчої довіри США (вересень)",
   "Eylül ayı **Tüketici Güven Endeksi** verisi ABD seansının ikinci yarısında açıklanacak.": "Дані щодо **індексу споживчої довіри** за вересень будуть опубліковані в другій половині американської сесії.",
   "ABD JOLTS Açık İş Sayısı (Ağustos)": "Кількість вакансій JOLTS у США (серпень)",
-  "Ağustos ayı **JOLTS** açık iş sayısı verisi ABD seansının ikinci yarısında açıklanacak; veri, işgücü piyasasının gücüne dair bir gösterge sunacak.": "Дані **JOLTS** щодо кількості вакансій за серпень будуть опубліковані в другій половині американської сесії; вони стануть показником стану ринку праці."
+  "Ağustos ayı **JOLTS** açık iş sayısı verisi ABD seansının ikinci yarısında açıklanacak; veri, işgücü piyasasının gücüne dair bir gösterge sunacak.": "Дані **JOLTS** щодо кількості вакансій за серпень будуть опубліковані в другій половині американської сесії; вони стануть показником стану ринку праці.",
+  "{scope}, son {days} gün: {trades} işlem, {wins} kazanç, {losses} kayıp": "{scope}, останні {days} днів: {trades} угод, {wins} прибуткових, {losses} збиткових",
+  "Son {days} gün": "Останні {days} днів",
+  "işlem": "угод",
+  "kazanç": "прибуткових",
+  "kayıp": "збиткових",
+  "İşlem #{no}": "Угода #{no}",
+  "Açık işlem": "Відкрита угода",
+  "Kapandı": "Закрита",
+  "Tüm canlı sinyalleri gör": "Усі сигнали наживо",
+  "Bu işlem, takip edilen FXPARTNER MT5 hesabında açıldı ve siteye otomatik olarak kaydedildi. İşlem numarası, hesaptaki pozisyon numarasının aynısıdır. Yatırım tavsiyesi değildir.": "Цю угоду відкрито на відстежуваному рахунку FXPARTNER у MT5 і автоматично записано на сайті. Номер угоди збігається з номером позиції на рахунку. Не є інвестиційною порадою.",
+  "{name} işlemi kapandı. Giriş, kapanış ve gerçekleşen sonuç, takip edilen FXPARTNER MT5 hesabından.": "Угоду {name} закрито. Вхід, закриття та фактичний результат — з відстежуваного рахунку FXPARTNER у MT5.",
+  "{name} işlemi açık. Seviyeleri ve canlı fiyatı FXPARTNER'da takip et.": "Угода {name} відкрита. Стежте за рівнями та ціною наживо на FXPARTNER."
 }

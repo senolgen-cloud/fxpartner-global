@@ -4089,5 +4089,17 @@
   "ABD Tüketici Güven Endeksi (Eylül)": "US Consumer Confidence Index (September)",
   "Eylül ayı **Tüketici Güven Endeksi** verisi ABD seansının ikinci yarısında açıklanacak.": "The September **Consumer Confidence Index** will be released in the second half of the US session.",
   "ABD JOLTS Açık İş Sayısı (Ağustos)": "US JOLTS Job Openings (August)",
-  "Ağustos ayı **JOLTS** açık iş sayısı verisi ABD seansının ikinci yarısında açıklanacak; veri, işgücü piyasasının gücüne dair bir gösterge sunacak.": "The August **JOLTS** job openings data will be released in the second half of the US session; the data will offer an indicator of the strength of the labor market."
+  "Ağustos ayı **JOLTS** açık iş sayısı verisi ABD seansının ikinci yarısında açıklanacak; veri, işgücü piyasasının gücüne dair bir gösterge sunacak.": "The August **JOLTS** job openings data will be released in the second half of the US session; the data will offer an indicator of the strength of the labor market.",
+  "{scope}, son {days} gün: {trades} işlem, {wins} kazanç, {losses} kayıp": "{scope}, last {days} days: {trades} trades, {wins} wins, {losses} losses",
+  "Son {days} gün": "Last {days} days",
+  "işlem": "trades",
+  "kazanç": "wins",
+  "kayıp": "losses",
+  "İşlem #{no}": "Trade #{no}",
+  "Açık işlem": "Open trade",
+  "Kapandı": "Closed",
+  "Tüm canlı sinyalleri gör": "See all live signals",
+  "Bu işlem, takip edilen FXPARTNER MT5 hesabında açıldı ve siteye otomatik olarak kaydedildi. İşlem numarası, hesaptaki pozisyon numarasının aynısıdır. Yatırım tavsiyesi değildir.": "This trade was opened on the tracked FXPARTNER MT5 account and recorded on the site automatically. The trade number is the same as the position number on the account. Not investment advice.",
+  "{name} işlemi kapandı. Giriş, kapanış ve gerçekleşen sonuç, takip edilen FXPARTNER MT5 hesabından.": "{name} trade closed. Entry, close and realised result, from the tracked FXPARTNER MT5 account.",
+  "{name} işlemi açık. Seviyeleri ve canlı fiyatı FXPARTNER'da takip et.": "{name} trade is open. Follow its levels and the live price on FXPARTNER."
 }

@@ -7,12 +7,14 @@ import Link from "@/components/LocaleLink";
 import JoinSteps from "@/components/JoinSteps";
 import VipCtaBanner from "@/components/VipCtaBanner";
 import SignalDetail from "@/components/SignalDetail";
+import SignalStatsStrip from "@/components/SignalStatsStrip";
+import { getRecentSignalStats } from "@/lib/trackRecord";
 import { db } from "@/db";
 import { tradeSignals, vipSubscriptions } from "@/db/schema";
 import type { SignalJson } from "@/lib/cachedReads";
 import { optionalSession } from "@/lib/optionalSession";
 import { type AccessTier } from "@/lib/vip";
-import { maskLockedActiveSignal } from "@/lib/signalAccess";
+import { maskLockedActiveSignal, requiredTierForPair } from "@/lib/signalAccess";
 import { SIGNALS_EPOCH } from "@/lib/signalPeriods";
 import { isTicket, signalPath } from "@/lib/signalLink";
 import { tr, trf } from "@/lib/chrome";
@@ -123,6 +125,13 @@ export default async function SignalPage({
   ]);
   if (!row) notFound();
 
+  // The record of this trade's own tier — the same line its Telegram post
+  // carried. Optional: a failed count loses the strip, never the page.
+  const stats = await getRecentSignalStats(requiredTierForPair(row.pair)).catch((err) => {
+    console.error("signal page: stats unavailable —", err);
+    return null;
+  });
+
   const viewerTier: AccessTier | null = session?.user?.id
     ? ((subscriptionRow?.tier as AccessTier | null) ?? "free")
     : null;
@@ -163,7 +172,13 @@ export default async function SignalPage({
             </h1>
           </div>
 
-          <div className="mt-6">
+          {stats && (
+            <div className="mt-6">
+              <SignalStatsStrip stats={stats} />
+            </div>
+          )}
+
+          <div className="mt-4">
             <SignalDetail signal={signal} viewerTier={viewerTier} />
           </div>
 

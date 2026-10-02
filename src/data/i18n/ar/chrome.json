@@ -4089,5 +4089,17 @@
   "ABD Tüketici Güven Endeksi (Eylül)": "مؤشر ثقة المستهلك الأمريكي (سبتمبر)",
   "Eylül ayı **Tüketici Güven Endeksi** verisi ABD seansının ikinci yarısında açıklanacak.": "سيصدر مؤشر **ثقة المستهلك** لشهر سبتمبر في النصف الثاني من الجلسة الأمريكية.",
   "ABD JOLTS Açık İş Sayısı (Ağustos)": "بيانات JOLTS لفرص العمل الشاغرة في الولايات المتحدة (أغسطس)",
-  "Ağustos ayı **JOLTS** açık iş sayısı verisi ABD seansının ikinci yarısında açıklanacak; veri, işgücü piyasasının gücüne dair bir gösterge sunacak.": "ستصدر بيانات **JOLTS** لفرص العمل الشاغرة لشهر أغسطس في النصف الثاني من الجلسة الأمريكية؛ وستقدم البيانات مؤشرًا على قوة سوق العمل."
+  "Ağustos ayı **JOLTS** açık iş sayısı verisi ABD seansının ikinci yarısında açıklanacak; veri, işgücü piyasasının gücüne dair bir gösterge sunacak.": "ستصدر بيانات **JOLTS** لفرص العمل الشاغرة لشهر أغسطس في النصف الثاني من الجلسة الأمريكية؛ وستقدم البيانات مؤشرًا على قوة سوق العمل.",
+  "{scope}, son {days} gün: {trades} işlem, {wins} kazanç, {losses} kayıp": "{scope}، آخر {days} يومًا: {trades} صفقة، {wins} رابحة، {losses} خاسرة",
+  "Son {days} gün": "آخر {days} يومًا",
+  "işlem": "صفقة",
+  "kazanç": "رابحة",
+  "kayıp": "خاسرة",
+  "İşlem #{no}": "الصفقة #{no}",
+  "Açık işlem": "صفقة مفتوحة",
+  "Kapandı": "مغلقة",
+  "Tüm canlı sinyalleri gör": "عرض جميع الإشارات المباشرة",
+  "Bu işlem, takip edilen FXPARTNER MT5 hesabında açıldı ve siteye otomatik olarak kaydedildi. İşlem numarası, hesaptaki pozisyon numarasının aynısıdır. Yatırım tavsiyesi değildir.": "فُتحت هذه الصفقة على حساب FXPARTNER المتابَع في MT5 وسُجّلت على الموقع تلقائيًا. رقم الصفقة هو نفسه رقم المركز في الحساب. ليست نصيحة استثمارية.",
+  "{name} işlemi kapandı. Giriş, kapanış ve gerçekleşen sonuç, takip edilen FXPARTNER MT5 hesabından.": "أُغلقت صفقة {name}. سعر الدخول والإغلاق والنتيجة الفعلية من حساب FXPARTNER المتابَع في MT5.",
+  "{name} işlemi açık. Seviyeleri ve canlı fiyatı FXPARTNER'da takip et.": "صفقة {name} مفتوحة. تابع مستوياتها والسعر المباشر على FXPARTNER."
 }
