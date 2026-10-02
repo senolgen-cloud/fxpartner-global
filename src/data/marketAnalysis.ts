@@ -41,6 +41,46 @@ export function getMarketAnalysisCoverImage(post: MarketAnalysisPost): string {
 
 export const marketAnalysisPosts: MarketAnalysisPost[] = [
   {
+    "slug": "piyasa-ozeti-2026-10-02-0900",
+    "title": "FXPARTNER Piyasa Özeti | 02.10.2026 Cuma Sabah Güncellemesi",
+    "excerpt": "ABD Dolar Endeksi perşembe günü 102,20 ile nisan 2025'ten bu yana en yüksek seviyesini gördü; piyasalar ekim ayında Fed'den faiz artışı ihtimalini yaklaşık %28'e indirdi. Ons altın 4.200 doların altında seyrederken gün içinde ABD tarım dışı istihdam (NFP) verisi izlenecek.",
+    "publishedAt": "2026-10-02",
+    "readingMinutes": 2,
+    "intro": "Cuma gününe girilirken piyasaların odağında, bugün açıklanacak **ABD** tarım dışı istihdam (**NFP**) verisi, güçlü seyrini koruyan **ABD doları** ve **Fed**'in faiz yoluna ilişkin beklentiler yer alıyor.",
+    "news": [
+      {
+        "icon": "💵",
+        "heading": "ABD Dolar Endeksi Nisan 2025'ten Bu Yana En Yüksek Seviyede",
+        "body": "**ABD Dolar Endeksi**, yükselen **ABD Hazine** tahvili getirilerinin desteğiyle perşembe günü **102,20** ile nisan 2025'ten bu yana en yüksek düzeyini gördü. Endeks, cuma günü Avrupa seansının başında **102,00**'ın altında seyretti."
+      },
+      {
+        "icon": "🏦",
+        "heading": "Ekimde Fed Faiz Artışı Fiyatlaması %28'e Geriledi",
+        "body": "Piyasaların ekim ayında **Fed**'den faiz artışı ihtimali fiyatlaması bir hafta önceki **%70** seviyesinden **%28**'e düştü; piyasa bir sonraki artışı aralık ayında bekliyor. Bugün **Fed** üyesi Logan'ın da konuşması bekleniyor."
+      },
+      {
+        "icon": "🥇",
+        "heading": "Ons Altın 4.200 Doların Altında",
+        "body": "**Ons altın**, bugün **4.189,50 dolar** seviyesinde işlem gördü ve **4.200 dolar** altında kalmaya devam ediyor. Yatırımcılar **NFP** verisini ve bunun **Fed** beklentilerine etkisini bekliyor."
+      },
+      {
+        "icon": "💴",
+        "heading": "USD/JPY 158 Seviyesini Koruyamadı",
+        "body": "**USD/JPY**, **158,00** üzerindeki hareketini sürdüremeyerek **157,00** seviyelerinin alt bölgesine geri çekildi."
+      }
+    ],
+    "calendarLabel": "2 Ekim 2026",
+    "calendarEvents": [
+      {
+        "time": "2 Ekim 2026, gün içinde",
+        "icon": "🇺🇸",
+        "title": "ABD Tarım Dışı İstihdam (NFP), İşsizlik Oranı ve Fabrika Siparişleri",
+        "note": "**NFP**, işsizlik oranı ve fabrika siparişleri verilerinin bugün açıklanması bekleniyor; veriler **Fed**'in faiz politikası beklentileri açısından yakından izlenecek."
+      }
+    ],
+    "closing": "⚠️ CFD'ler ve döviz ticareti önemli bir kayıp riski taşır ve her yatırımcı için uygun olmayabilir. **FXPARTNER** ile küresel piyasaları takip edin, ekonomik gelişmeleri anlık analizlerle değerlendirin ve bilinçli işlem kararları alın. Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir."
+  },
+  {
     slug: "piyasa-ozeti-2026-09-30-2000",
     title: "FXPARTNER Piyasa Özeti | 30.09.2026 Çarşamba Akşam Güncellemesi",
     excerpt: "ABD'de ağustos ayı PCE enflasyonu yıllık %3,4 ile beklentilerin (%3,7) altında kaldı; çekirdek PCE yıllık %3,0 ile %3,3'lük beklentinin gerisinde açıklandı. Ons altın ise aylık bazda düşüş yönünde seyrediyor.",
