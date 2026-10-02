@@ -44,8 +44,15 @@ const FILES = ["blog", "brokers", "chrome", "ui"];
 // registered name: "the real, SPK-regulated QNB Yatırım Menkul Değerler".
 // A noun travels into other languages inside proper names; "için" and
 // "değildir" do not travel anywhere.
+//
+// AN APOSTROPHE IS NOT A LEFT BOUNDARY. On 2026-09-15 two correct English
+// values in en/blog.json were flagged because "you've" and "we've" read as
+// "you" + "'" + "ve". The left side therefore treats ' and ’ as part of the
+// word. Turkish only puts an apostrophe before a case suffix ("XM'in",
+// "MT5'e"), never before a function word, so no real Turkish sentence is
+// lost — it still has a bare "ve" or "için" somewhere else in it.
 const TURKISH_SENTENCE =
-  /(^|[^\p{L}])(ve|ile|için|bir|bu|değildir|değil|olarak|içerir|amaçlıdır|tavsiyesi|başına|kaybedebilirsiniz|hesabınızın|olabilir|gerekir|bulunur|yapılır)([^\p{L}]|$)/iu;
+  /(^|[^\p{L}'’])(ve|ile|için|bir|bu|değildir|değil|olarak|içerir|amaçlıdır|tavsiyesi|başına|kaybedebilirsiniz|hesabınızın|olabilir|gerekir|bulunur|yapılır)([^\p{L}]|$)/iu;
 
 // Month and weekday names, and the two words every market-summary title
 // carries. Added after the 2026-09-10 market backfill, where a title like
