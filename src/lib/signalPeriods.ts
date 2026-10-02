@@ -84,8 +84,8 @@ export const MIN_TRADES_FOR_RATE = 15;
 // The reset.
 //
 // The published record starts here and nothing before it is on the board.
-// Owner's call; this is the second time it has moved, and both moves are
-// worth remembering because they were for opposite reasons.
+// Owner's call; this is the third time it has moved, and the first two moves
+// are worth remembering because they were for opposite reasons.
 //
 // 31 Aug 2026, 16:08:41 — the board carried the whole history of the tracked
 // MT5 account, which mixed the period when the account was being wired up
@@ -103,6 +103,14 @@ export const MIN_TRADES_FOR_RATE = 15;
 // in ninety seconds, taking the record to −132.29 and the published balance
 // below zero. September starts fresh from a fresh account.
 //
+// 1 Oct 2026, 00:00 — the owner restarted the account on $1,000 for
+// October, and the record restarts with it. Owner-chosen as the start of
+// the month rather than the refund's exact time in the terminal history,
+// so September's trades leave the board, the statistics, their own
+// /signals/<ticket> pages and the /gun-sonu reports, the same way August's
+// did. A position opened before midnight and closed after it is outside
+// the record by the same rule: the cutoff is on createdAt.
+//
 // The instant is placed just after that last close (11:24:19) rather than
 // at "now" when this was written, so no trade could fall into the gap
 // between the two — and no position was open at the time, so nothing was
@@ -119,14 +127,14 @@ export const MIN_TRADES_FOR_RATE = 15;
 //
 // Written in SIGNAL_TZ, which is also the terminal's server time (UTC+3),
 // so this string is a timestamp from the account history read literally.
-export const SIGNALS_EPOCH = new Date("2026-09-01T11:25:00+03:00");
+export const SIGNALS_EPOCH = new Date("2026-10-01T00:00:00+03:00");
 
 // What the account starts the new record with, in USD. The board reports its
 // balance against this, so a $24 day reads as what it is on a $1,000 account
 // rather than as a number on an unstated one.
 //
 // Owner-set to 1000 on 2026-09-01, replacing the 100 the September record
-// opened on.
+// opened on, and the amount October restarted on as well.
 //
 // CHANGE THIS THE DAY THE ACCOUNT IS REFUNDED WITH A DIFFERENT AMOUNT. It
 // is a published claim about real money, not a display default: every
