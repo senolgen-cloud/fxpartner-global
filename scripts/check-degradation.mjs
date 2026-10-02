@@ -55,6 +55,7 @@ const MAY_FAIL = new Map([
   ["src/app/[locale]/account/page.tsx", "every line of it is this member's own data"],
   ["src/app/[locale]/admin/cashback/page.tsx", "an admin table with nothing behind it"],
   ["src/app/[locale]/admin/ai-sorulari/page.tsx", "an admin table with nothing behind it"],
+  ["src/app/[locale]/admin/tiklamalar/page.tsx", "an admin table with nothing behind it"],
 ]);
 
 const read = (p) => fs.readFileSync(p, "utf8");

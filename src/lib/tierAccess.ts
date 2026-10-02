@@ -3,6 +3,7 @@ import { db } from "@/db";
 import { vipSubscriptions } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { type AccessTier } from "@/lib/vip";
+import { isSubscriptionLive } from "@/lib/subscription";
 
 export type ViewerAccess = {
   signedIn: boolean;
@@ -34,7 +35,9 @@ export async function getViewerAccess(): Promise<ViewerAccess> {
       console.error("subscription unavailable, treating the reader as free —", err);
       return null;
     });
-  if (!subscription || subscription.status !== "active") {
+  // isSubscriptionLive, not just status: a paid period that ran out must
+  // stop granting its tier even before the renewal cron marks the row.
+  if (!subscription || !isSubscriptionLive(subscription)) {
     return { signedIn: true, tier: "free", userId: session.user.id };
   }
   return {

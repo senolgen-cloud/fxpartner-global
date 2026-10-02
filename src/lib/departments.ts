@@ -178,14 +178,21 @@ export const departments: Department[] = [
       "src/data/packageTiers.ts",
       // Abonelik ödemesi.
       "src/lib/nowpayments.ts",
+      // Abonelik süresi: dönem ekleme, bitiş, ücretsiz Pro ayı ve yenileme
+      // hatırlatması (docs/ekim-2026-yukselis-plani.md, Hamle 2).
+      "src/lib/subscription.ts",
+      "src/app/api/cron/subscription-renewal",
       // Üyeye giden e-postalar.
       "src/lib/email.ts",
       "src/lib/welcomeEmail.ts",
+      "src/lib/subscriptionEmails.ts",
       // Zilin sesi.
       "src/lib/chime.ts",
     ],
-    // Kayıt, giriş ve panel istek anında çalışıyor; zamanlanmış hiçbir iş
-    // yok ve olması da gerekmiyor.
+    // Kayıt, giriş ve panel istek anında çalışıyor. Tek zamanlanmış iş
+    // subscription-renewal (günde bir, vercel.json): yalnızca üyenin kendi
+    // aboneliği hakkında e-posta gönderiyor, kanala bir şey yayınlamıyor.
+    // Bayrak "manual" kalıyor — "active" onayı Uyumluluk'un.
     automation: "manual",
   },
   // Üyelikten sonra, içerik departmanlarından önce: bu üçü (sinyal, üyelik,
@@ -446,6 +453,10 @@ automation: "active",
       "src/data/cashback.ts",
       "src/app/[locale]/cashback",
       "src/app/[locale]/admin/cashback",
+      // Partner linki tıklama kaydı: hangi sayfa hangi brokera okur yolluyor.
+      "src/components/OutboundClickTracker.tsx",
+      "src/app/api/click",
+      "src/app/[locale]/admin/tiklamalar",
       "src/app/[locale]/partners",
       "src/data/partnerProgram.ts",
       "src/components/partners",

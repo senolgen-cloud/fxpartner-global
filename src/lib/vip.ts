@@ -53,3 +53,27 @@ export const TIER_PRICE_USD: Record<PackageTier, number> = {
   pro: 59,
   vip: 99,
 };
+
+// How long one payment buys. NOWPayments cannot charge a card every month,
+// so a monthly member has to come back and pay again by hand — and many
+// don't. The quarterly option takes three months up front for less than
+// three monthly payments: the member saves, and the business gets paid for
+// a quarter instead of hoping for two renewals.
+export const BILLING_PERIODS = ["monthly", "quarterly"] as const;
+export type BillingPeriod = (typeof BILLING_PERIODS)[number];
+
+export const PERIOD_DAYS: Record<BillingPeriod, number> = {
+  monthly: 30,
+  quarterly: 90,
+};
+
+// Full USD price for a tier over a period. Monthly is TIER_PRICE_USD itself,
+// so the number on /paketler and the amount charged can never disagree.
+export const PERIOD_PRICE_USD: Record<BillingPeriod, Record<PackageTier, number>> = {
+  monthly: TIER_PRICE_USD,
+  quarterly: { pro: 149, vip: 249 },
+};
+
+export function isBillingPeriod(value: unknown): value is BillingPeriod {
+  return typeof value === "string" && (BILLING_PERIODS as readonly string[]).includes(value);
+}
